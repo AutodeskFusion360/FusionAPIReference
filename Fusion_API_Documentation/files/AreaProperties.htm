@@ -1,0 +1,155 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/AreaProperties.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="24/3/2016">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="AreaProperties">
+    <meta name="description" content="AreaProperties Object">
+    <meta name="topicid" content="GUID-28947558-3DF6-4ABB-BA04-9417CF622817">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>AreaProperties Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">AreaProperties Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Fusion/AreaProperties.h&gt;<h2 class="api">
+          Description
+        </h2>The Area properties of a sketch profile or planar surface.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="AreaProperties_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="AreaProperties_getCentroidMomentsOfInertia.htm">getCentroidMomentsOfInertia</a></td>
+        <td class="api-list">Method that returns the moments of inertia about the centroid. Unit for returned values is kg*cm^2.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="AreaProperties_getMomentsOfInertia.htm">getMomentsOfInertia</a></td>
+        <td class="api-list">Method that, for a sketch, returns the moments of inertia about the sketch origin. For a planar face, this method returns the moments about the world coordinate system origin. Unit for returned values is kg*cm^2.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="AreaProperties_getPrincipalAxes.htm">getPrincipalAxes</a></td>
+        <td class="api-list">Method that returns the principal axes.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="AreaProperties_getPrincipalMomentsOfInertia.htm">getPrincipalMomentsOfInertia</a></td>
+        <td class="api-list">Method that returns the moments of inertia about the principal axes. Unit for returned values is kg*cm^2.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="AreaProperties_getRadiusOfGyration.htm">getRadiusOfGyration</a></td>
+        <td class="api-list">Method that returns the radius of gyration about the principal axes. Unit for returned values is cm.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="AreaProperties_accuracy.htm">accuracy</a></td>
+        <td class="api-list">Returns the accuracy that was used for the calculation.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="AreaProperties_area.htm">area</a></td>
+        <td class="api-list">Gets the area in the square centimeters.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="AreaProperties_centroid.htm">centroid</a></td>
+        <td class="api-list">Gets the centroid where the units are centimeters. The Location is relative to the sketch origin for a profile or relative to the world coordinate system for a planar face.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="AreaProperties_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="AreaProperties_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="AreaProperties_perimeter.htm">perimeter</a></td>
+        <td class="api-list">Gets the perimeter in centimeters. The perimeter is the sum of the length of all the curves or edges of the profile or planar surface</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="AreaProperties_rotationToPrincipal.htm">rotationToPrincipal</a></td>
+        <td class="api-list">Gets the angle of rotation of the principal axes.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="Design_areaProperties.htm">Design.areaProperties</a>, <a href="FlatPatternProduct_areaProperties.htm">FlatPatternProduct.areaProperties</a>, <a href="Profile_areaProperties.htm">Profile.areaProperties</a>, <a href="WorkingModel_areaProperties.htm">WorkingModel.areaProperties</a><h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="AreaPropertiesSample_Sample.htm">API Sample for AreaProperties</a></td>
+        <td class="api-list">Demonstrates how to use AreaProperties</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PatchFeatureSample_Sample.htm">Patch Feature API Sample</a></td>
+        <td class="api-list">Demonstrates creating a new patch feature.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version March 2016<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(AreaProperties%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

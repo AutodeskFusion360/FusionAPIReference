@@ -1,0 +1,106 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/boundaryFillFeatures_add.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="boundaryFillFeatures_add_Sample">
+    <meta name="description" content="boundaryFillFeatures.add Sample">
+    <meta name="topicid" content="GUID-6391E9CD-4F91-435C-AF42-213BF5D4E0D1">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>boundaryFillFeatures.add</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">boundaryFillFeatures.add</h1>
+    <h2 class="api">
+          Description
+        </h2>Demonstrates the boundaryFill.add method. To use this sample you need to have two existing overlapping bodies. You'll be prompted to select the bodies when running the script.<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">def demo_boundaryFillFeatures_add(rootComp: adsk.fusion.Design.rootComponent):
+    <span style="color:blue"># Have the two bodies selected.</span>
+    filter = adsk.core.SelectionCommandInput.Bodies
+    body1 = _ui.selectEntity('Select tool body 1', filter).entity
+    body2 = _ui.selectEntity('Select tool body 2', filter).entity
+
+    <span style="color:blue"># Create an ObjectCollection to use the bodies as tools.</span>
+    tools = adsk.core.ObjectCollection.create()
+    tools.add(body1)
+    tools.add(body2)
+
+    <span style="color:blue"># Create the input object to provide the required input.</span>
+    boundaryFills = rootComp.features.boundaryFillFeatures
+    input = boundaryFills.createInput(tools, adsk.fusion.FeatureOperations.NewBodyFeatureOperation)
+
+    <span style="color:blue"># Arbitrarily specify the first volume as selected.</span>
+    input.bRepCells.item(0).isSelected = True  
+
+    <span style="color:blue"># Create the boundary fill feature.</span>
+    boundaryFill = boundaryFills.add(input)</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(boundaryFillFeatures_add%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

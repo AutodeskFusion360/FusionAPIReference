@@ -1,0 +1,423 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/Features.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="Features">
+    <meta name="description" content="Features Object">
+    <meta name="topicid" content="GUID-7bfd8596-4584-48b6-8b9b-1ea63e304d34">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>Features Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Features Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Features/Features.h&gt;<h2 class="api">
+          Description
+        </h2>The features collection which provides access to all existing features. This collection provides direct access to all features regardless of type. It also provides access to type specific collections where you can get features of a specific type and also create new features of that type.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_createPath.htm">createPath</a></td>
+        <td class="api-list">Method that creates a Path used to define the shape of a Sweep feature. A Path is a contiguous set of curves that can be a combination of sketch curves and model edges.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_item.htm">item</a></td>
+        <td class="api-list">Function that returns the specified feature using an index into the collection.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_itemByName.htm">itemByName</a></td>
+        <td class="api-list">Function that returns the specified feature using the name of the feature.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_arrangeFeatures.htm">arrangeFeatures</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Returns the collection that provides access to the Arrange features within the component and supports the creation of new Arrange features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_baseFeatures.htm">baseFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the existing base features and supports the creation of new base features. A base feature represents a body that is non-parametric.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_bossFeatures.htm">bossFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the boss features within the component and supports the creation of new boss features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_boundaryFillFeatures.htm">boundaryFillFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the Boundary Fill features within the component and supports the creation of new Boundary Fill features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_boxFeatures.htm">boxFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the existing box features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_chamferFeatures.htm">chamferFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the chamfer features within the component and supports the creation of new chamfer features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_circularPatternFeatures.htm">circularPatternFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the circular pattern features within the component and supports the creation of new circular pattern features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_coilFeatures.htm">coilFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the Coil Primitive features within the component.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_combineFeatures.htm">combineFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the combine features within the component and supports the creation of new combine features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_copyPasteBodies.htm">copyPasteBodies</a></td>
+        <td class="api-list">Returns the collection that provides access to the existing copy-paste features and supports the creation of new copy-paste features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_count.htm">count</a></td>
+        <td class="api-list">Returns the number of features in the collection.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_customFeatures.htm">customFeatures</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Returns the collection that provides access to the custom features within the component and supports the creation of new custom features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_cutPasteBodies.htm">cutPasteBodies</a></td>
+        <td class="api-list">Returns the collection that provides access to the existing cut-paste features and supports the creation of new cut-paste features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_cylinderFeatures.htm">cylinderFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the existing cylinder features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_deleteFaceFeatures.htm">deleteFaceFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the existing Delete Face features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_draftFeatures.htm">draftFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the draft features within the component and supports the creation of new draft features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_embossFeatures.htm">embossFeatures</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Returns the collection that provides access to the emboss features within the component and supports the creation of new emboss features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_extendFeatures.htm">extendFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the Extend features within the component and supports the creation of new Extend features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_extrudeFeatures.htm">extrudeFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the extrude features within the component and supports the creation of new extrude features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_filletFeatures.htm">filletFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the fillet features within the component and supports the creation of new fillet features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_flangeFeatures.htm">flangeFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the existing flange features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_formFeatures.htm">formFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the existing form features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_hemFeatures.htm">hemFeatures</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Returns the collection that provides access to the existing Hem features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_holeFeatures.htm">holeFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the hole features within the component and supports the creation of new hole features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_loftFeatures.htm">loftFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the existing loft features and supports the creation of new loft features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_mergeFacesFeatures.htm">mergeFacesFeatures</a></td>
+        <td class="api-list">Returns the collection object that supports the ability to merge faces. Merging faces is currently limited to a Direct Modeling design or a body in a base feature. The result of merging faces is a direct B-Rep modification, and the change is not represented as a feature in the browser.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_meshCombineFaceGroupsFeatures.htm">meshCombineFaceGroupsFeatures</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Returns the collection that provides access to the mesh combine face groups features within the component and supports the creation of new mesh combine face groups features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_meshCombineFeatures.htm">meshCombineFeatures</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Returns the collection that provides access to the mesh combine features within the component and supports the creation of new mesh combine features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_meshConvertFeatures.htm">meshConvertFeatures</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Returns the collection that provides access to the mesh convert features within the component and supports the creation of new mesh convert features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_meshGenerateFaceGroupsFeatures.htm">meshGenerateFaceGroupsFeatures</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Returns the collection that provides access to the mesh generate facegroup features within the component and supports the creation of new mesh generate facegroup features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_meshReduceFeatures.htm">meshReduceFeatures</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Returns the collection that provides access to the mesh reduce features within the component and supports the creation of new mesh reduce features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_meshRemeshFeatures.htm">meshRemeshFeatures</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Returns the collection that provides access to the mesh remesh features within the component and supports the creation of new mesh remesh features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_meshRepairFeatures.htm">meshRepairFeatures</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Returns the collection that provides access to the mesh repair features within the component and supports the creation of new mesh repair features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_meshReverseNormalFeatures.htm">meshReverseNormalFeatures</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Returns the collection that provides access to the mesh reverse normal features within the component and supports the creation of new mesh reverse normal features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_meshSeparateFeatures.htm">meshSeparateFeatures</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Returns the collection that provides access to the mesh separate features within the component and supports the creation of new mesh separate features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_meshShellFeatures.htm">meshShellFeatures</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Returns the collection that provides access to the mesh shell features within the component and supports the creation of new mesh shell features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_meshSmoothFeatures.htm">meshSmoothFeatures</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Returns the collection that provides access to the mesh smooth features within the component and supports the creation of new mesh smooth features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_mirrorFeatures.htm">mirrorFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the mirror features within the component and supports the creation of new mirror features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_moveFeatures.htm">moveFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the Move features within the component and supports the creation of new Move features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_offsetFacesFeatures.htm">offsetFacesFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the existing Offset Face features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_offsetFeatures.htm">offsetFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the Offset features within the component and supports the creation of new Offset features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_patchFeatures.htm">patchFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the Patch features within the component and supports the creation of new Patch features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_pathPatternFeatures.htm">pathPatternFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the path pattern features within the component and supports the creation of new path pattern features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_pipeFeatures.htm">pipeFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the existing pipe features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_rectangularPatternFeatures.htm">rectangularPatternFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the rectangular pattern features within the component and supports the creation of new rectangular pattern features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_refoldFeatures.htm">refoldFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the existing refold features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_removeFeatures.htm">removeFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the Remove features within the component and supports the creation of new Remove features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_replaceFaceFeatures.htm">replaceFaceFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the replaceFace features within the component and supports the creation of new replaceFace features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_reverseNormalFeatures.htm">reverseNormalFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the Reverse Normal features within the component and supports the creation of new Reverse Normal features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_revolveFeatures.htm">revolveFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the revolve features within the component and supports the creation of new revolved features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_ribFeatures.htm">ribFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the existing rib features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_ripFeatures.htm">ripFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the existing Rip features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_ruledSurfaceFeatures.htm">ruledSurfaceFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the Ruled Surface features within the component and supports the creation of new Ruled Surface features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_ruleFilletFeatures.htm">ruleFilletFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the existing form features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_scaleFeatures.htm">scaleFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the scale features within the component and supports the creation of new scale features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_shellFeatures.htm">shellFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the shell features within the component and supports the creation of new shell features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_silhouetteSplitFeatures.htm">silhouetteSplitFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the Parting Line Split features within the component and supports the creation of new Parting Line Split features</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_sphereFeatures.htm">sphereFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the existing sphere features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_splitBodyFeatures.htm">splitBodyFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the SplitBody features within the component and supports the creation of new SplitBody features</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_splitFaceFeatures.htm">splitFaceFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the SplitFace features within the component and supports the creation of new SplitFace features</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_stitchFeatures.htm">stitchFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the Stitch features within the component and supports the creation of new Stitch features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_surfaceDeleteFaceFeatures.htm">surfaceDeleteFaceFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the existing Surface Delete Face features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_sweepFeatures.htm">sweepFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the sweep features within the component and supports the creation of new sweep features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_tessellateFeatures.htm">tessellateFeatures</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Returns the collection that provides access to the tessellate features within the component and supports the creation of new tessellate features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_thickenFeatures.htm">thickenFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the Thicken features within the component and supports the creation of new Thicken features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_threadFeatures.htm">threadFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the thread features within the component and supports the creation of new thread features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_torusFeatures.htm">torusFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the existing torus features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_trimFeatures.htm">trimFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the Trim features within the component and supports the creation of new Trim features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_unfoldFeatures.htm">unfoldFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the existing unfold features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_unstitchFeatures.htm">unstitchFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the Unstitch features within the component and supports the creation of new Unstitch features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_untrimFeatures.htm">untrimFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the Untrim features within the component and supports the creation of new Untrim features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_volumetricCustomFeatures.htm">volumetricCustomFeatures</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Returns the collection that provides access to volumetric custom features within the component and supports the creation of new volumetric custom features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_volumetricModelToMeshFeatures.htm">volumetricModelToMeshFeatures</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Returns the collection that provides access to the Volumetric Model to Mesh features within the component and supports the creation of new Volumetric Model to Mesh features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Features_webFeatures.htm">webFeatures</a></td>
+        <td class="api-list">Returns the collection that provides access to the existing web features.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="Component_features.htm">Component.features</a>, <a href="FlatPatternComponent_features.htm">FlatPatternComponent.features</a><h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="LoftFeatureSample_Sample.htm">Loft Feature API Sample</a></td>
+        <td class="api-list">Demonstrates creating a new loft feature.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PatchFeatureSample_Sample.htm">Patch Feature API Sample</a></td>
+        <td class="api-list">Demonstrates creating a new patch feature.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(Features%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

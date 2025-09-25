@@ -1,0 +1,130 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/TemporaryBRepManager_createProjectedBodyOutline.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="08/10/2024">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="TemporaryBRepManager_createProjectedBodyOutline">
+    <meta name="description" content="TemporaryBRepManager.createProjectedBodyOutline Method">
+    <meta name="topicid" content="GUID-C5D8C00F-D6B6-41A6-99C2-9663C5113480">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>TemporaryBRepManager.createProjectedBodyOutline Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">TemporaryBRepManager.createProjectedBodyOutline Method</h1>
+
+          Parent Object: <a href="TemporaryBRepManager.htm">TemporaryBRepManager</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/BRep/TemporaryBRepManager.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Computes the approximate outline of a body. The outline is the loops formed from projecting the non-occluded silhouette curves of the body onto a plane. The outline is returned as a temporary BRepBody consisting of planar BRepFace objects whose boundaries form the outline.<br/><br/> The computed outline can be an approximation i.e. not precise. This is to make it useful in cases where robustness is more important than precision. For most cases, a precise analytical result is computed, but in some cases, the silhouette of a curved surface may be approximated by a series of straight lines. Even though it's an approximation you can control the tolerance of the approximation. A tighter tolerance will result in a longer compute time.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"temporaryBRepManager_var" is a variable referencing a <a href="TemporaryBRepManager.htm">TemporaryBRepManager</a> object.<br /><br /><code><pre class="api-code">(returnValue, containsApproximation) = temporaryBRepManager_var.<b>createProjectedBodyOutline</b>(body, projectionPlane, tolerance)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td><code><pre class="api-code"><br >#include &lt;Fusion/BRep/TemporaryBRepManager.h<br /><br /><span style="color:blue">// Declare the output arguments.</span><br />Ptr&lt;BRepBody&gt; body;<br />Ptr&lt;Plane&gt; projectionPlane;<br />double tolerance;<br />boolean containsApproximation;<br />Ptr&lt;BRepBody&gt; returnValue = temporaryBRepManager_var-&gt;<b>createProjectedBodyOutline</b>(body, projectionPlane, tolerance, containsApproximation);</pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;"><a href="BRepBody.htm">BRepBody</a></td>
+        <td class="api-list">Returns a BRepBody object consisting of planar BRepFace objects whose boundaries define the body's outline.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">body</td>
+        <td class="api-list"><a href="BRepBody.htm">BRepBody</a></td>
+        <td class="api-list">Input BRepBody object to calculate the projected outline for.</td>
+      </tr>
+      <tr>
+        <td class="api-list">projectionPlane</td>
+        <td class="api-list"><a href="Plane.htm">Plane</a></td>
+        <td class="api-list">Input Plane object that defines the position and orientation of the plane to project the body onto. The resulting body will lie on this plane.</td>
+      </tr>
+      <tr>
+        <td class="api-list">tolerance</td>
+        <td class="api-list">double</td>
+        <td class="api-list">Input value that specifies the tolerance in centimeters to use when approximating smooth surfaces with line segments. A negative tolerance uses the default value which is 0.001 times the length of the diagonal of the bounding box of the input body. A positive tolerance must be greater than the point tolerance (0.000001).</td>
+      </tr>
+      <tr>
+        <td class="api-list">containsApproximation</td>
+        <td class="api-list">boolean</td>
+        <td class="api-list">Output value that indicates if the result contains any silhouette curves that are an approximation of the true silhouette.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version November 2024<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(TemporaryBRepManager.createProjectedBodyOutline%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

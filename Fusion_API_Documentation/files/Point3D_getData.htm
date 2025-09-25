@@ -1,0 +1,125 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/Point3D_getData.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="Point3D_getData">
+    <meta name="description" content="Point3D.getData Method">
+    <meta name="topicid" content="GUID-57b77dcc-f8d5-41b7-bd05-39992824c70b">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Point3D.getData Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Point3D.getData Method</h1>
+
+          Parent Object: <a href="Point3D.htm">Point3D</a><br>Defined in namespace "adsk::core" and the header file is &lt;Core/Geometry/Point3D.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Gets the data defining the point.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"point3D_var" is a variable referencing a <a href="Point3D.htm">Point3D</a> object.<br /><br /><code><pre class="api-code">(returnValue, x, y, z) = point3D_var.<b>getData</b>()</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td><code><pre class="api-code"><br >#include &lt;Core/Geometry/Point3D.h<br /><br /><span style="color:blue">// Declare the output arguments.</span><br />double x;<br />double y;<br />double z;<br />boolean returnValue = point3D_var-&gt;<b>getData</b>(x, y, z);</pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;">boolean</td>
+        <td class="api-list">Returns true if successful.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">x</td>
+        <td class="api-list">double</td>
+        <td class="api-list">The output x coordinate of the point.</td>
+      </tr>
+      <tr>
+        <td class="api-list">y</td>
+        <td class="api-list">double</td>
+        <td class="api-list">The output y coordinate of the point.</td>
+      </tr>
+      <tr>
+        <td class="api-list">z</td>
+        <td class="api-list">double</td>
+        <td class="api-list">The output z coordinate of the point.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(Point3D.getData%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

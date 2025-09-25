@@ -1,0 +1,87 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/Command_selectionEvent.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="22/4/2015">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="Command_selectionEvent">
+    <meta name="description" content="Command.selectionEvent Event">
+    <meta name="topicid" content="GUID-3044adfb-f8b9-46ba-bb26-1b6316757537">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Command.selectionEvent Event</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Command.selectionEvent Event</h1>
+
+          Parent Object: <a href="Command.htm">Command</a><br>Defined in namespace "adsk::core" and the header file is &lt;Core/UserInterface/Command.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api"><mark>This function is retired. See more information in the 'Remarks' section below.</mark><br/><br/>Provides a notification when the mouse passes over an entity allowing you to determine if the entity should be available for selection or not.</p>
+    <h2 class="api">
+            Remarks
+          </h2>This event has been retired. Equivalent functionality is provide by the preSelect event.<h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#PythonUsingFusion360Utils">Python Using fusion360utils</a></li>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="PythonUsingFusion360Utils" class="api-code">
+        <table class="api-code">
+          <td><em>-------- Import ---------</em><br /><code><pre class="api-code"><span style="color:blue"># Import fusion360utils folder, which includes event_utils.py.</span><br />from ...lib import fusion360utils as futil</pre></code><br /><em>-------- Global variables ---------</em><br /><code><pre class="api-code"><span style="color:blue"># Global variable used to maintain a reference to all event handlers.</span><br />local_handlers = []<br /></pre></code><br /><em>-------- Connect the handler to the event. ---------</em><br /><code><pre class="api-code"><span style="color:blue"># "command_var" is a variable referencing a <a href="Command.htm">Command</a> object.</span><br /><span style="color:blue"># "command_selectionEvent" is the event handler function.</span><br />futil.add_handler(command_var.selectionEvent, command_selectionEvent, local_handlers=local_handlers)<br /></pre></code><br /><em>-------- Event handler function definition ---------</em><br /><code><pre class="api-code"><span style="color:blue"># Event handler for the selectionEvent event.</span><br />def command_selectionEvent(args: adsk.core.SelectionEventArgs):<br />    <span style="color:blue"># Code to react to the event.</span><br />    app.log('In command_selectionEvent event handler.')<br /></pre></code></td>
+        </table>
+      </div>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td><em>-------- Global variables ---------</em><br /><code><pre class="api-code"><span style="color:blue"># Global variable used to maintain a reference to all event handlers.</span><br />handlers = []<br /></pre></code><br /><em>-------- Connect the handler to the event. ---------</em><br /><code><pre class="api-code"><span style="color:blue"># "command_var" is a variable referencing a <a href="Command.htm">Command</a> object.</span><br /><span style="color:blue"># "MySelectionEventHandler" is the name of the class that handles the event.</span><br />onSelectionEvent = MySelectionEventHandler()<br />command_var.<b>selectionEvent</b>.add(onSelectionEvent)<br />handlers.append(onSelectionEvent)</pre></code><br /><em>-------- Event handler class definition ---------</em><br /><code><pre class="api-code"><span style="color:blue"># Event handler for the selectionEvent event.</span><br />class MySelectionEventHandler(adsk.core.SelectionEventHandler):<br />    def __init__(self):<br />        super().__init__()<br />    def notify(self, args: adsk.core.SelectionEventArgs):<br />        <span style="color:blue"># Code to react to the event.</span><br />        app.log('In MySelectionEventHandler event handler.')<br /></pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td><em>--------- Required include files. ---------</em><br /><code><pre class="api-code">#include &lt;Core/UserInterface/Command.h&gt;<br />#include &lt;Core/UserInterface/SelectionEvent.h&gt;<br />#include &lt;Core/UserInterface/SelectionEventHandler.h&gt;<br />#include &lt;Core/UserInterface/SelectionEventArgs.h&gt;<br /></pre></code><br /><br /><em>--------- Event handler class definition and global declaration. ---------<br /><code><pre class="api-code"><span style="color:blue">// Event handler for the selectionEvent event.</em></span><br />class MySelectionEventEventHandler : public adsk::core::SelectionEventHandler<br />{<br />public:<br />    void notify(const Ptr&lt;SelectionEventArgs&gt;& eventArgs) override<br />    {<br />        <span style="color:blue">// Code to react to the event.</span><br />        ui->messageBox("In MySelectionEventEventHandler event handler.");<br />    }<br />} _selectionEvent;<br /></pre></code><br /><em>--------- Connect the handler to the event. ---------</em><br /><code><pre class="api-code"><span style="color:blue">// "command_var" is a variable referencing a <a href="Command.htm">Command</a> object.</span><br /><span style="color:blue">// Connect the handler function to the event.</span><br />Ptr&lt;SelectionEvent&gt; selectionEventEvent = command_var-&gt;<b>selectionEvent</b>();<br />if (!selectionEventEvent)<br />    return;<br /><br />bool isOk = selectionEventEvent-&gt;add(&_selectionEvent);<br />if (!isOk)<br />    return;<br /></pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Property Value
+          </h2>This is an event property that returns a <a href="SelectionEvent.htm">SelectionEvent</a>.<h2 class="api">
+            Version
+          </h2>
+        Introduced in version June 2015<br>Retired in version July 2022<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(Command.selectionEvent%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

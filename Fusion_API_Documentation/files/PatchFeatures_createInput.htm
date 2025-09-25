@@ -1,0 +1,141 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/PatchFeatures_createInput.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="23/6/2016">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="PatchFeatures_createInput">
+    <meta name="description" content="PatchFeatures.createInput Method">
+    <meta name="topicid" content="GUID-36E1730E-C241-40AE-941A-7C7F7BDDAECD">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>PatchFeatures.createInput Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">PatchFeatures.createInput Method</h1>
+
+          Parent Object: <a href="PatchFeatures.htm">PatchFeatures</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Features/PatchFeatures.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Creates a PatchFeatureInput object. Use properties and methods on the returned PatchFeatureInput object to set other settings. The PatchFeatureInput object is used as input to the add method to create the patch feature.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"patchFeatures_var" is a variable referencing a <a href="PatchFeatures.htm">PatchFeatures</a> object.<code><pre class="api-code">returnValue = patchFeatures_var.<b>createInput</b>(boundaryCurve, operation)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"patchFeatures_var" is a variable referencing a <a href="PatchFeatures.htm">PatchFeatures</a> object.<br /><br /><code><pre class="api-code">#include &lt;Fusion/Features/PatchFeatures.h&gt;<br /><br />returnValue = patchFeatures_var-&gt;<b>createInput</b>(boundaryCurve, operation);<br /></pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;"><a href="PatchFeatureInput.htm">PatchFeatureInput</a></td>
+        <td class="api-list">Returns the newly created PatchFeatureInput object or null if the creation fails.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">boundaryCurve</td>
+        <td class="api-list"><a href="Base.htm">Base</a></td>
+        <td class="api-list">Defines the input geometry that will be used to define the boundary. This can be a sketch profile, a single sketch curve, a single B-Rep edge, an ObjectCollection, or a Path object.<br/><br/> If a single sketch curve or B-Rep edge is an input that is not closed; Fusion will automatically find connected sketch curves or B-Rep edges to define a closed loop.<br/><br/> If an ObjectCollection is an input, it must be a set of curves that define a closed shape.<br/><br/> If a Path is an input, it must define a closed shape.</td>
+      </tr>
+      <tr>
+        <td class="api-list">operation</td>
+        <td class="api-list"><a href="FeatureOperations.htm">FeatureOperations</a></td>
+        <td class="api-list">The feature operation to perform. Only 'NewBodyFeatureOperation' and 'NewComponentFeatureOperation' are valid operations for patch features.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="patchFeatures_add_Sample.htm">patchFeatures.add</a></td>
+        <td class="api-list">Demonstrates the patchFeatures.add method by creating a patch surface on the selected profile.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PatchFeatureSample_Sample.htm">Patch Feature API Sample</a></td>
+        <td class="api-list">Demonstrates creating a new patch feature.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version July 2016<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(PatchFeatures.createInput%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

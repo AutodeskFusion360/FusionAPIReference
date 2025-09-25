@@ -1,0 +1,327 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/OpeningFilesFromWebPage_UM.htm#!">
+    <meta name="contextid" content="OpeningFilesFromWebPage_UM">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="28/7/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="description" content="">
+    <meta name="topicid" content="GUID-8A2C4ECD-7D82-4E56-AFE8-4FA72464AE66">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Opening Files from a Web Page</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+	<link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"/>
+	<script type="text/javascript" src="/view/clientframework/client.js"><!--filler--></script> 
+	<script>
+	  // This turns on the display of the copyright notice which is not visible by default.
+	  // Because the head is removed when used in the web help, this function will only exists
+	  // when the chm help is being created.
+	  window.onload = function() {
+		copyrightElement = document.getElementById('CopyrightNotice');
+		copyrightElement.style.display = 'block';
+	  };
+	</script>
+	<style>
+	span.highlight {
+		background-color: yellow;
+	}
+	table.sample {
+     border: 1px solid black;
+	 padding: 15px;
+ 	}
+	</style>
+</head>
+<body>
+<link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+	
+<h2 class="api">Opening Files from a Web Page</h2>
+<p Class="api">It’s possible to initiate the opening of files in Fusion from an external web page. This is done by using a “protocol handler”.  Protocol handlers are used by web pages to perform a local action.  For example the mailto: link invokes a protocol handler that will open your email program.  When Fusion is installed it registers a protocol handler, which when referenced by a link in a webpage will open a specified file in Fusion. The file can be either opened as a new design or inserted as a new component into the currently open design.  The file can be either local or remote and if Fusion isn’t running it will be started.</p>
+
+<p Class="api">To use this protocol you create a link in your html that references the “fusion360” protocol hander.  The html code below is a simple example that creates a link that when clicked will open the specified local Fusion file.</p>
+
+<pre class="api-code">
+&lt;a href="fusion360://host/?command=open&file=c%3A%2Ftemp%2FSampleGear.f3d"&gt;Open a local file&lt;/a&gt;
+</pre>
+<br/>
+
+<p Class="api">When the user first clicks the link, the browser will display a security dialog, similar to the one shown below, asking them if they want to procede. Depending on how the user answers, they may nor may not be presented with the dialog the next time the protocol handler is invoked. The specific dialog displayed will vary depending on which browser is being used.</p>
+
+<div align="center"><img src="../images/ProtocolHandlerAllow.png" border=0 align="middle" alt="Protocol Handler Security"></div>
+<br><br>
+
+<p Class="api">To use the Fusion protocol handler you define a URI that begins with “fusion360://”, as highlighted in the example below.</p>
+
+<pre class="api-code">
+&lt;a href="<span class="highlight">fusion360://</span>host/?command=open&file=c%3A%2Ftemp%2FSampleGear.f3d"&gt;Open a local file&lt;/a&gt;
+</pre>
+
+<br/>
+<p Class="api">The "host/?" section is optional but is recommended. It defines an authority for the URL and resolves a problem that was found where using the protocol handler fails on some browsers if it is not included. The commonly used browsers haven't demonstrated any problems but it is possible in the future they may become more strict and require it. All of the samples below include it.</p>
+
+<pre class="api-code">
+&lt;a href="fusion360://host/?<span class="highlight">host/?</span>command=open&file=c%3A%2Ftemp%2FSampleGear.f3d"&gt;Open a local file&lt;/a&gt;
+</pre>
+
+<br/>
+<p Class="api">There are a series of name-value pairs in the URI that use the same format as query parameters in a URL.  The first of these is required and is the “command” argument, as highlighted below.</p>
+
+<pre class="api-code">
+&lt;a href="fusion360://host/?<span class="highlight">command=</span>open&file=c%3A%2Ftemp%2FSampleGear.f3d"&gt;Open a local file&lt;/a&gt;
+</pre>
+<br/>
+
+<h2 class="api">Commands</h2>
+<p Class="api">The value of the “command” argument specifies what type of command you want to invoke; “open” or “insert”.</p>
+
+<h3 class="api">open</h3>
+<p Class="api">The “open” command will open the specified file in Fusion. This has the same result as using the “New Design from File” command in that the specified file is used as a template when creating a new design.  The new file is completely independent of the original file and saving it will require you to specify a location and filename on A360. If Fusion is running, a new design is created inside the running session.  If Fusion is not running, it will be started and then the design is created.  The “file” argument is required when using the “open” command, as shown below. The filename is an encoded version of "c:/temp/SampleGear.f3d". See the "Encoding" section below for more information.</p>
+
+<pre class="api-code">
+&lt;a href="fusion360://host/?command=<span class="highlight">open</span>&file=c%3A%2Ftemp%2FSampleGear.f3d"&gt;Open a local file&lt;/a&gt;
+</pre>
+<br/>
+
+<p Class="api">The example below opens a file that's on the web. The filename is an encoded version of "http://help.autodesk.com/cloudhelp/ENU/Fusion-360-API/ExtraFiles/SampleGear.f3d".</p>
+
+<pre class="api-code">
+&lt;a href="fusion360://host/?command=<span class="highlight">open</span>&file=http%3A%2F%2Fhelp.autodesk.com%2Fcloudhelp%2FENU%2FFusion-360-API%2FExtraFiles%2FSampleGear.f3d"&gt;Open a web file&lt;/a&gt;
+</pre>
+<br/>
+
+<p Class="api">The types of files used can be f3d, STEP, IGES, SAT, SMT, STL, or OBJ format and the filename must have the correct file extension for Fusion to be able to know the file type and use the appropriate translator. (See the "Extension" argument below for an exception.) If an f3d file is use it will result in the full history of the model being copied in the design.  Using STEP, IGES, SAT, and SMT files will result in the creation of new bodies.  Using STL or OBJ files will result in the creation of a mesh body. When opening an STL or OBJ file the result will be a direct modeling design.</p>
+
+<h3 class="api">insert</h3>
+
+<p Class="api">The “insert” command will insert the specified file into the active design as a new component.  If Fusion is not running, it will be started and the file will be inserted into the initial empty design. Below is an example of inserting a local f3d file into the currently active design. The only difference from the earlier example that opens the file is the use of the “insert” command instead of “open”. Just like with open, files on the web can also be used and all of the same file formats are supported.</p>
+
+<pre class="api-code">
+&lt;a href="fusion360://host/?command=<span class="highlight">insert</span>&file=c%3A%2Ftemp%2FSampleGear.f3d"&gt;Insert a local file&lt;/a&gt;
+</pre>
+<br/>
+
+<h2 class="api">Encoding</h2>
+<p Class="api">The "c%3A%2Ftemp%2FSampleGear.f3d" you see in the samples above is the encoded version of "c:/temp/SampleGear.f3d".  Encoding the filename converts certain characters to their equivalent escape sequences. For example, a forward slash is converted to "%2F". You must encode parameters used in a URL or it can cause problems when the browser tries to interpret the URL. To encode a string using JavaScript you can use the built-in encodeURIComponent function. In Python you can use the urllib library as shown below. In C++ there are various libraries that support encoding.</p>
+
+<pre class="api-code">
+import urllib
+encodedURL = urllib.parse.quote_plus('c:/temp/SampleGear.f3d')
+</pre>
+<br/>
+
+<h2 class="api">Arguments</h2>
+<p Class="api">Besides the required "file" argument, there are also some additional optional arguments that can be used to control the behavior and to pass additional information into Fusion besides the file. Some of these are only applicable to either the open or insert command and others work with both. The arguments are listed below.</p>
+
+<h3 class="api">NoMove</h3>
+<p Class="api">The NoMove argument is optional and is only valid with the "insert" command.  By default, when you insert a file, Fusion will invoke the “Move” command so the user can reposition the component that was just created. By using this optional argument you can disable the invocation of the "Move" command. If you’re inserting an f3d file that contains any grounded components the “Move” command will not be invoked regardless of this argument. The code below demonstrates using the “NoMove” argument.</p>
+
+<pre class="api-code">
+&lt;a href="fusion360://host/?command=insert&file=c%3A%2Ftemp%2FSampleGear.f3d<span class="highlight">&NoMove=true</span>"&gt;Insert a local f3d file, NoMove&lt;/a&gt;
+</pre>
+<br/>
+
+<h3 class="api">NoFit</h3>
+<p Class="api">The NoFit argument is optional and is only valid with the "insert" command.  By default, when you insert a file, Fusion will fit the view so that all of the graphics are visible. By using this optional argument you can disable the view fit. The code below demonstrates using the “NoFit” argument.</p>
+
+<pre class="api-code">
+&lt;a href="fusion360://host/?command=insert&file=c%3A%2Ftemp%2FSampleGear.f3d<span class="highlight">&NoFit=true</span>"&gt;Insert a local f3d file, NoFit&lt;/a&gt;
+</pre>
+<br/>
+
+<h3 class="api">Extension</h3>
+<p Class="api">The Extension argument is valid for both "open" and "insert" and is used to tell Fusion what type of file is being inserted. By default, Fusion relies on the extension of the file and will automatically use the appropriate translator to import the data into the Fusion design. There are cases where the file might have a name that does not include an extension. In this case you need to tell Fusion what type the file is. The value of the “Extension” argument is the valid extension for that particular file type, including the “.”.  For example, for a STEP file you can use “.stp” or “.step”.  It is case insensitive so “.STP” and “.STEP” are also valid.  The code below demonstrates inserting a STEP file from the web without an extension. The filename is an encoded version of “http://help.autodesk.com/cloudhelp/ENU/Fusion-360-API/ExtraFiles/SampleGearNoExtension”.</p>
+
+<pre class="api-code">
+&lt;a href="fusion360://host/?command=insert&file=http%3A%2F%2Fhelp.autodesk.com%2Fcloudhelp%2FENU%2FFusion-360-API%2FExtraFiles%2FSampleGearNoExtension<span class="highlight">&Extension=.stp</span>"&gt;Insert STEP file from web&lt;/a&gt;.
+</pre>
+<br/>
+
+<h3 class="api">properties</h3>
+<p Class="api">This argument allows you to specify the property values for the newly created component. This works with both "open" and "insert" since a new component is created in both cases.  As of today, Fusion only supports the three component properties shown below; Part Number, Part Name, and Description. </p>
+
+<div align="center"><img src="../images/ComponentProperties.png" border=0 align="middle" alt="Component Properties"></div>
+<br><br>
+
+<p Class="api">Part Number and Description can be any arbitrary string, although Part Number defaults to the same value as Part Name.  Part Name is special in that for a root component it is the name of the file, which is also the name of the root component.  For an embedded component, it is the name of the component. The value of the "properties" parameter is an encoded JSON string that specifies the name and value of each property you want to set. The example belows shows the JSON to set the Part Number, Part Name, and Description properties.</p>
+
+<pre class="api-code">
+{
+   "PartName": "GearPart",
+   "PartNumber": "ABC",
+   "Description": "This is a Spur Gear" 
+}
+</pre>
+<br/>
+
+<p Class="api">Once encoded so it can be used successfully in a URL it becomes:<br/><br/>
+<code>%7B%22PartName%22%3A%22GearPart%22,%22PartNumber%22%3A%22ABC%22,%22Description%22%3A%22This%20is%20a%20SpurGear%22%7D</code></p>
+
+<p Class="api">And the full &lt;a&gt; link to use this to insert a file is:</p>
+<pre class="api-code">
+&lt;a href="fusion360://host/?command=insert&file=c%3A%2Ftemp%2FSampleGear.f3d<span class="highlight">&properties=%7B%22PartName%22%3A%22GearPart%22,<br/>%22PartNumber%22%3A%22ABC%22,%22Description%22%3A%22This%20is%20a%20SpurGear%22%7D</span>"&gt;Insert a local file&lt;/a&gt;
+</pre>
+<br/>
+
+<h3 class="api">privateInfo</h3>
+<p Class="api">This parameter allows you to pass any additional information to Fusion when a component is created with either "open" or "insert". Fusion doesn't read or save this data but passes it through to any add-ins that are listening to the "insertingFromURL", "insertedFromURL, "openingFromURL", or "openedFromURL" events, (which are discussed below). The add-in can use this information in any way it chooses. For example, because material data isn't provided in some of the formats, the material name could be passed through this parameter and an add-in can respond to the "openedFromURL" or "insertedFromURL" event, extract the material information from the privateInfo data, and assign it to the newly created component.  A common use will be to pass additional non-graphic information along with the part, i.e. manufacturer, url to additional information, cost, etc., which the add-in can then associate with the new component by adding this information as attributes on the component.</p>
+
+<p Class="api">The only requirement about the data passed through the privateInfo parameter is that it must be encoded to be valid in the URL.  You can choose to use JSON if you have more complex data or it can be a string in any format you choose.  Because you're the sender (in the html being invoked) and the receiver (through the Fusion event) the formatting of the data is completely up to you.</p>
+
+<h3 class="api">id</h3>
+<p Class="api">The id parameter is only used when inserting.  It contains a unique ID for the component being inserted.  The two requirements for this value are that it is a URL valid string which means if it contains any special characters it will need to be encoded.  And it needs to be unique with respect to all other parts.  This means a completely unique ID across all parts everywhere, not just what's already been inserted in this design. The use of a GUID is common but it can also be some other vendor specific identification. Whatever you use you need to make sure it is unique. Fusion uses this ID to avoid creating multiple components that all represent the same part.  Without an ID, if you insert the same file twice, two unique components are created with exactly the same geoemetry. This creates unnecessary geometry and also causes problems with the BOM because they'll be seen as two unique parts instead of two instances of the same part.</p>
+
+<p Class="api">
+<p Class="api">The ID solves this problem by Fusion doing some work whenever a component is inserted. When a component is inserted, Fusion checks to see if the ID parameter is being passed in and if it is it checks in the current design to see if there are any existing components with the same id.  If there is a component with the same id, the insert operation will be aborted and a copy operation of the existing component will be started.  This results in an additional instance of the existing component.</p>
+
+<h2 class="api">Events</h2>
+<p Class="api">To support other workflows in conjuction with inserting and opening files from a web page, Fusion also supports several events that are fired in reaction to a file being opened or inserted from a web page. All of the events are accessed through the Application object. The first set of events is "insertingFromURL" and "openingFromURL" which are fired when an insert or open from URL has been initiated by the user but before anything has actually happened in Fusion. The values of the various parameters passed through the URL as discussed above are provided through the events.  The add-in can look at this data and determine if they want the open or insert to continue or not.  The add-in can set the isCanceled property on the provided WebRequestEventArgs object to True to abort the open or insert.</p> 
+
+<p Class="api">The second set of events is "insertedFromURL" and "openedFromURL" which is fired after the component has been inserted or the new file created.  The "insertedFromURL" event also provides the add-in with the "properties", "id", and "privateInfo" data passed through the URL and it also provides the Occurrence that was just created.  This allows the add-in to perform any additional operations on the occurrence or the referenced component that was just created. For example, it can set the material or add attributes.  The "openedFromURL" event provides the document that was just created.</p>
+
+<h2 class="api">Size Limitations</h2>
+<p Class="api">An issue that developers need to be aware of is that there is a size limit to a URL.  Fusion doesn't have any control over the length of the URL because it will be coming from the HTML and the browser will be initially handling it and passing it to Fusion. The actual maximum length varies based on the browser used but staying under 2000 characters should generally be safe. You can read more information about it in this <a href="http://stackoverflow.com/questions/417142/what-is-the-maximum-length-of-a-url-in-different-browsers" target="_blank">disussion on Stack Overflow</a>. If that's not long enough to be able to pass all of the data you need on alternative is to provide a web service that your add-in can use. You can use the "privateInfo" argument to pass just enough information to enable your add-in to call your web service which can provide the complete set of information you need because it won't have any size limitations.</p>
+
+<h2 class="api">Example</h2>
+
+<p Class="api">Below is a small test program that lets you enter the filename and all of the various options available and then either open or insert the file into Fusion. The program looks at the various settings and  builds up the full URL that's needed to insert or open that file.  It also displays the full URL that is invoked. This can be useful for testing and understanding what the URL that you'll need to consruct will look like.</p>
+
+<script>
+// Gets the various settings from the html data and builds up the correct URL to copy or 
+// insert the file into Fusion.
+function buildURLAndDoAction(isInsert) {
+	var url = ''
+	if (isInsert)
+		url = 'fusion360://host/?command=insert';
+	else 
+		url = 'fusion360://host/?command=open';
+
+	// Add the filename to the url.
+	url += '&file=' + encodeURIComponent(document.getElementById('fileinput').value);
+
+	// Add the property information, if it was specified.
+	hasProperties = false;
+	jsonProps = new Object();
+	if (document.getElementById('partName').value != '')
+	{
+		jsonProps.PartName = document.getElementById('partName').value;
+		hasProperties = true;
+	}
+	
+	if (document.getElementById('partNumber').value != '')
+	{
+		jsonProps.PartNumber = document.getElementById('partNumber').value;
+		hasProperties = true;
+	}
+		
+	if (document.getElementById('partDescription').value != '')
+	{
+		jsonProps.Description = document.getElementById('partDescription').value;
+		hasProperties = true;
+	}
+	
+	if (hasProperties)
+		url += '&properties=' + encodeURIComponent(JSON.stringify(jsonProps));
+
+	// Add the private info, if it was specified.
+	if (document.getElementById('privateInfo').value != '')
+		url += '&privateInfo=' + encodeURIComponent(document.getElementById('privateInfo').value);
+	
+	// Handle insert specific settings.
+	if (isInsert)
+	{
+		// Add the ID, if it was specified.
+		if (document.getElementById('id').value != '')
+			url += '&id=' + encodeURIComponent(document.getElementById('id').value);
+			
+		// Set no move, if it was specified.
+		if (!document.getElementById('move').checked)
+			url += '&NoMove=true';
+			
+		// Set no fit, if it was specified.
+		if (!document.getElementById('fit').checked)
+			url += '&NoFit=true';
+	}
+	
+	document.getElementById('url').innerHTML = url
+	
+	if (!document.getElementById('doAction').checked)
+		window.location.href = url;
+
+	return;
+}
+</script>
+
+<div class="api-outline">
+	<b>Inputs:</b><br/>
+	<div style="padding-left:20px">
+		<! Create input field to get the urn or full path to a local file.>
+		URN or full path to a local file (required):<br/>
+		<input id='fileinput' type='text' style="width:98%"/> 
+
+		<! Button that populates field with a known good URN to a valid file.>
+		<button type='button' style="margin-top=6px" onclick='document.getElementById("fileinput").value="http://help.autodesk.com/cloudhelp/ENU/Fusion-360-API/ExtraFiles/SampleGear.f3d"'>Populate above with sample URN</button> <br/><br/>
+		
+		<input type="checkbox" id="move" value=true checked> Move after insert<br/>
+
+		<input type="checkbox" id="fit" value=true checked> Fit view after insert<br/><br/>
+
+		<! Create input field to get the part name.>
+		Part name (Optional):<br/><input id='partName' type='text' style="width:98%"/> <br/><br/>
+
+		<! Create input field to get the part number.>
+		Part number (Optional):<br/><input id='partNumber' type='text' style="width:98%"/> <br/> <br/>
+
+		<! Create input field to get the description.>
+		Part description (Optional):<br/><input id='partDescription' type='text' style="width:98%"/> <br/><br/>
+
+		<! Create input field to get the id.>
+		ID (Optional. Only used for Insert):<br/><input id='id' type='text' style="width:98%"/> <br/><br/>
+
+		<! Create input field to get the private info.>
+		Private info (Optional):<br/><input id='privateInfo' type='text' style="width:98%"/> <br/><br/>
+	</div>
+
+	<b>Actions:</b><br/>
+	<div style="padding-left:20px">
+		<! Create button for opening the file in Fusion.>
+		<button type='button' onclick='buildURLAndDoAction(false)' style="width:150px">Open in Fusion</button> <br/>	  
+															  
+		<! Create button for inserting the file in the active design.>
+		<button type='button' onclick='buildURLAndDoAction(true)' style="width:150px">Insert into Fusion</button> <br/><br/>
+
+		<! Create check box to allow only building the URL.>
+		<input type="checkbox" id="doAction" value=false>Don't perform the action but only show the URL.<br/><br/>
+	</div>
+
+	<! Create field for displaying the resulting url.>
+	<b>Result:</b><br/>
+	<div style="padding-left:20px">
+		<div style="border:1px solid rgb(187,187,187); border-radius:5px;background-color:rgb(245,245,240); padding:8px; font-family:monospace"><div id="url" style="width:100%">&nbsp;</div></div>
+	</div>
+	<br/>
+</div>
+
+<br />
+<br />
+<div id="CopyrightNotice" style="display:none;">
+  <hr />
+  <table width="100%" style="font-size:15">
+	<tr>
+	  <td align="left">
+		&copy; Copyright 2025 Autodesk, Inc.
+	  </td>
+	  <td align="right">
+		<a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(OpeningFilesFromWebPage_UM)">Comment on this page.</a>
+	  </td>
+	</tr>
+  </table>
+</div>
+</body>
+</html>

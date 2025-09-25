@@ -1,0 +1,411 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/GetPhysicalProperties.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="GetPhysicalProperties_Sample">
+    <meta name="description" content="Get Physical Properties API Sample Sample">
+    <meta name="topicid" content="GUID-ce341ee6-4490-11e5-b25b-f8b156d7cd97">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Get Physical Properties API Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Get Physical Properties API Sample</h1>
+    <h2 class="api">
+          Description
+        </h2>Script that demonstrates getting physical properties using the API. When this script is run it will create a new document, build a simple model, and get the various physical properties from the model.<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code"><span style="color:blue">#Author-</span>
+<span style="color:blue">#Description-</span>
+import adsk.core, adsk.fusion, traceback
+
+def run(context):
+    ui = None
+    try:
+        app = adsk.core.Application.get()
+        ui  = app.userInterface
+
+        <span style="color:blue"># Create a document.</span>
+        doc = app.documents.add(adsk.core.DocumentTypes.FusionDesignDocumentType)
+
+        product = app.activeProduct
+        design = adsk.fusion.Design.cast(product)
+
+        <span style="color:blue"># Get the root component of the active design.</span>
+        rootComp = design.rootComponent
+                
+        <span style="color:blue"># Create sub occurrence</span>
+        occurrences = rootComp.occurrences
+        subOcc = occurrences.addNewComponent(adsk.core.Matrix3D.create())
+        
+        <span style="color:blue"># Get features from sub component</span>
+        subComponent = subOcc.component
+        features = subComponent.features
+
+        <span style="color:blue"># Create sketch circle on the xz plane.</span>
+        sketches = subComponent.sketches
+        sketch = sketches.add(subComponent.xZConstructionPlane)
+        sketchCircles = sketch.sketchCurves.sketchCircles
+        centerPoint = adsk.core.Point3D.create(0, 0, 0)
+        sketchCircles.addByCenterRadius(centerPoint, 10)
+
+        <span style="color:blue"># Create a collection of entities for extrude</span>
+        entities0 = adsk.core.ObjectCollection.create()
+        entities0.add(sketch.profiles.item(0))
+
+        <span style="color:blue"># Create a cylinder with ExtrudeFeature using the profile above.</span>
+        extrudeFeats = features.extrudeFeatures
+        extrudeFeatureInput = extrudeFeats.createInput(entities0, adsk.fusion.FeatureOperations.NewBodyFeatureOperation)
+        extrudeFeatureInput.isSolid = True
+        extrudeFeatureInput.setDistanceExtent(False, adsk.core.ValueInput.createByReal(2.5))
+        extrudeFeature = extrudeFeats.add(extrudeFeatureInput)
+        
+        <span style="color:blue"># Get physical properties from body</span>
+        body = extrudeFeature.bodies[0]
+        physicalProperties = body.physicalProperties
+        
+        <span style="color:blue"># Get physical properties from occurrence</span>
+        physicalProperties = subOcc.physicalProperties
+        
+        <span style="color:blue"># Get physical properties from occurrence (low accuracy)</span>
+        physicalProperties = subOcc.getPhysicalProperties(adsk.fusion.CalculationAccuracy.LowCalculationAccuracy);
+        
+	    <span style="color:blue"># Get physical properties from occurrence (medium accuracy)</span>
+        physicalProperties = subOcc.getPhysicalProperties(adsk.fusion.CalculationAccuracy.MediumCalculationAccuracy);
+
+	    <span style="color:blue"># Get physical properties from occurrence (high accuracy)</span>
+        physicalProperties = subOcc.getPhysicalProperties(adsk.fusion.CalculationAccuracy.HighCalculationAccuracy);	    
+
+        <span style="color:blue"># Get physical properties from occurrence (very high accuracy)</span>
+        physicalProperties = subOcc.getPhysicalProperties(adsk.fusion.CalculationAccuracy.VeryHighCalculationAccuracy);
+        
+        <span style="color:blue"># Get physical properties from component</span>
+        physicalProperties = subComponent.physicalProperties
+        
+        <span style="color:blue"># Get physical properties from component (low accuracy)</span>
+        physicalProperties = subComponent.getPhysicalProperties(adsk.fusion.CalculationAccuracy.LowCalculationAccuracy);
+
+	    <span style="color:blue"># Get physical properties from component (medium accuracy)</span>
+        physicalProperties = subComponent.getPhysicalProperties(adsk.fusion.CalculationAccuracy.MediumCalculationAccuracy);
+        
+	    <span style="color:blue"># Get physical properties from component (high accuracy)</span>
+        physicalProperties = subComponent.getPhysicalProperties(adsk.fusion.CalculationAccuracy.HighCalculationAccuracy);
+        
+        <span style="color:blue"># Get physical properties from component (very high accuracy)</span>
+        physicalProperties = subComponent.getPhysicalProperties(adsk.fusion.CalculationAccuracy.VeryHighCalculationAccuracy);   
+        
+        <span style="color:blue"># Get data from physical properties</span>
+        area = physicalProperties.area
+        density = physicalProperties.density
+        mass = physicalProperties.mass
+        volume = physicalProperties.volume
+        
+        <span style="color:blue"># Get accuracy from physical properties</span>
+        accuracy = physicalProperties.accuracy
+
+        <span style="color:blue"># Get center of mass from physical properties</span>
+        cog = physicalProperties.centerOfMass
+
+        <span style="color:blue"># Get principal axes from physical properties</span>
+        (retVal, xAxis0, yAxis0, zAxis0) = physicalProperties.getPrincipalAxes()   
+        
+        <span style="color:blue"># Get the moments of inertia about the principal axes. Unit for returned values is kg/cm^2.</span>
+        (retVal,i1,i2,i3) = physicalProperties.getPrincipalMomentsOfInertia()
+
+        <span style="color:blue"># Get the radius of gyration about the principal axes. Unit for returned values is cm.</span>
+        (retVal, kx, ky, kz) = physicalProperties.getRadiusOfGyration()
+
+        <span style="color:blue"># Get the rotation from the world coordinate system of the target to the principal coordinate system.</span>
+        (retVal, rx, ry, rz) = physicalProperties.getRotationToPrincipal()
+
+        <span style="color:blue"># Get the moment of inertia about the world coordinate system.</span>
+        (retVal, xx, yy, zz, xy, yz, xz) = physicalProperties.getXYZMomentsOfInertia()
+        
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code">#include &lt;Core/Application/Application.h&gt;
+#include &lt;Core/Application/Documents.h&gt;
+#include &lt;Core/Application/Document.h&gt;
+#include &lt;Core/Application/Product.h&gt;
+#include &lt;Core/Application/ObjectCollection.h&gt;
+#include &lt;Core/Application/ValueInput.h&gt;
+#include &lt;Core/Geometry/Point3D.h&gt;
+#include &lt;Core/Geometry/Matrix3D.h&gt;
+#include &lt;Core/UserInterface/UserInterface.h&gt;
+#include &lt;Fusion/Sketch/SketchCircle.h&gt;
+#include &lt;Fusion/Fusion/Design.h&gt;
+#include &lt;Fusion/Fusion/PhysicalProperties.h&gt;
+#include &lt;Fusion/Components/Component.h&gt;
+#include &lt;Fusion/Components/Occurrence.h&gt;
+#include &lt;Fusion/Components/Occurrences.h&gt;
+#include &lt;Fusion/Construction/ConstructionPlane.h&gt;
+#include &lt;Fusion/Features/Features.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeature.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeatures.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeatureInput.h&gt;
+#include &lt;Fusion/BRep/BRepBodies.h&gt;
+#include &lt;Fusion/BRep/BRepBody.h&gt;
+#include &lt;Fusion/Sketch/Profile.h&gt;
+#include &lt;Fusion/Sketch/Profiles.h&gt;
+#include &lt;Fusion/Sketch/Sketch.h&gt;
+#include &lt;Fusion/Sketch/Sketches.h&gt;
+#include &lt;Fusion/Sketch/SketchCurves.h&gt;
+#include &lt;Fusion/Sketch/SketchCircles.h&gt;
+#include &lt;Fusion/Sketch/SketchPoint.h&gt;
+#include &lt;Fusion/Sketch/SketchPoints.h&gt;
+
+using namespace adsk::core;
+using namespace adsk::fusion;
+
+Ptr&lt;UserInterface&gt; ui;
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    Ptr&lt;Application&gt; app = Application::get();
+    if (!app)
+        return false;
+
+    ui = app-&gt;userInterface();
+    if (!ui)
+        return false;
+
+    Ptr&lt;Documents&gt; documents = app-&gt;documents();
+    if (!documents)
+        return false;
+
+    Ptr&lt;Document&gt; doc = documents-&gt;add(DocumentTypes::FusionDesignDocumentType);
+    if (!doc)
+        return false;
+
+    Ptr&lt;Product&gt; product = app-&gt;activeProduct();
+    if (!product)
+        return false;
+
+    Ptr&lt;Design&gt; design = product;
+    if (!design)
+        return false;
+
+    <span style="color:blue">// Get the root component of the active design</span>
+    Ptr&lt;Component&gt; rootComp = design-&gt;rootComponent();
+    if (!rootComp)
+        return false;
+
+    <span style="color:blue">// Create sub occurrence</span>
+    Ptr&lt;Occurrences&gt; occurrences = rootComp-&gt;occurrences();
+    if (!occurrences)
+        return false;
+    Ptr&lt;Occurrence&gt; subOcc = occurrences-&gt;addNewComponent(Matrix3D::create());
+    if (!subOcc)
+        return false;
+
+    <span style="color:blue">// Get features from sub component</span>
+    Ptr&lt;Component&gt; subComponent = subOcc-&gt;component();
+    if (!subComponent)
+        return false;
+    Ptr&lt;Features&gt; features = subComponent-&gt;features();
+    if (!features)
+        return false;
+
+    <span style="color:blue">// Create sketch circle on the xz plane.</span>
+    Ptr&lt;Sketches&gt; sketches = subComponent-&gt;sketches();
+    if (!sketches)
+        return false;
+    Ptr&lt;Sketch&gt; sketch = sketches-&gt;add(subComponent-&gt;xZConstructionPlane());
+    if (!sketch)
+        return false;
+    Ptr&lt;SketchCurves&gt; sketchCurves = sketch-&gt;sketchCurves();
+    if (!sketchCurves)
+        return false;
+    Ptr&lt;SketchCircles&gt; sketchCirles = sketchCurves-&gt;sketchCircles();
+    if (!sketchCirles)
+        return false;
+    Ptr&lt;Point3D&gt; centerPoint = Point3D::create(0, 0, 0);
+    if (!centerPoint)
+        return false;
+    Ptr&lt;SketchCircle&gt; sketchCircle = sketchCirles-&gt;addByCenterRadius(centerPoint, 10);
+    if (!sketchCircle)
+        return false;
+
+    <span style="color:blue">// Create a collection of entities for extrude</span>
+    Ptr&lt;ObjectCollection&gt; entities0 = ObjectCollection::create();
+    if (!entities0)
+        return false;
+    Ptr&lt;Profiles&gt; sketchProfiles = sketch-&gt;profiles();
+    if (!sketchProfiles)
+        return false;
+    Ptr&lt;Profile&gt; sketchProfile = sketchProfiles-&gt;item(0);
+    if (!sketchProfile)
+        return false;
+    entities0-&gt;add(sketchProfile);
+
+    <span style="color:blue">// Create a cylinder with ExtrudeFeature using the profile above.</span>
+    Ptr&lt;ExtrudeFeatures&gt; extrudeFeats = features-&gt;extrudeFeatures();
+    if (!extrudeFeats)
+        return false;
+    Ptr&lt;ExtrudeFeatureInput&gt; extrudeFeatureInput =
+        extrudeFeats-&gt;createInput(entities0, adsk::fusion::FeatureOperations::NewBodyFeatureOperation);
+    if (!extrudeFeatureInput)
+        return false;
+    Ptr&lt;ValueInput&gt; distance = adsk::core::ValueInput::createByReal(2.0);
+    if (!distance)
+        return false;
+    extrudeFeatureInput-&gt;isSolid(true);
+    extrudeFeatureInput-&gt;setDistanceExtent(false, distance);
+    Ptr&lt;ExtrudeFeature&gt; extrudeFeature = extrudeFeats-&gt;add(extrudeFeatureInput);
+    if (!extrudeFeature)
+        return false;
+
+    <span style="color:blue">// Get physical properties from body</span>
+    Ptr&lt;BRepBodies&gt; bodies = extrudeFeature-&gt;bodies();
+    if (!bodies)
+        return false;
+    Ptr&lt;BRepBody&gt; body = bodies-&gt;item(0);
+    Ptr&lt;PhysicalProperties&gt; physicalProperties = body-&gt;physicalProperties();
+
+    <span style="color:blue">// Get physical properties from occurrence</span>
+    physicalProperties = subOcc-&gt;physicalProperties();
+
+    <span style="color:blue">// Get physical properties from occurrence (low accuracy)</span>
+    physicalProperties = subOcc-&gt;getPhysicalProperties(LowCalculationAccuracy);
+
+    <span style="color:blue">// Get physical properties from occurrence (medium accuracy)</span>
+    physicalProperties = subOcc-&gt;getPhysicalProperties(MediumCalculationAccuracy);
+
+    <span style="color:blue">// Get physical properties from occurrence (high accuracy)</span>
+    physicalProperties = subOcc-&gt;getPhysicalProperties(HighCalculationAccuracy);
+
+    <span style="color:blue">// Get physical properties from occurrence (very high accuracy)</span>
+    physicalProperties = subOcc-&gt;getPhysicalProperties(VeryHighCalculationAccuracy);
+
+    <span style="color:blue">// Get physical properties from component</span>
+    physicalProperties = subComponent-&gt;physicalProperties();
+
+    <span style="color:blue">// Get physical properties from component (low accuracy)</span>
+    physicalProperties = subComponent-&gt;getPhysicalProperties(CalculationAccuracy::LowCalculationAccuracy);
+
+    <span style="color:blue">// Get physical properties from component (medium accuracy)</span>
+    physicalProperties = subComponent-&gt;getPhysicalProperties(CalculationAccuracy::MediumCalculationAccuracy);
+
+    <span style="color:blue">// Get physical properties from component (high accuracy)</span>
+    physicalProperties = subComponent-&gt;getPhysicalProperties(CalculationAccuracy::HighCalculationAccuracy);
+
+    <span style="color:blue">// Get physical properties from component (very high accuracy)</span>
+    physicalProperties = subComponent-&gt;getPhysicalProperties(CalculationAccuracy::VeryHighCalculationAccuracy);
+    if (!physicalProperties)
+        return false;
+
+    <span style="color:blue">// Get data from physical properties</span>
+    double area = physicalProperties-&gt;area();
+    double density = physicalProperties-&gt;density();
+    double mass = physicalProperties-&gt;mass();
+    double volume = physicalProperties-&gt;volume();
+
+    <span style="color:blue">// Get accuracy from physical properties</span>
+    CalculationAccuracy accuracy = physicalProperties-&gt;accuracy();
+
+    <span style="color:blue">// Get center of mass from physical properties</span>
+    Ptr&lt;Point3D&gt; cog = physicalProperties-&gt;centerOfMass();
+
+    <span style="color:blue">// Get principal axes from physical properties</span>
+    Ptr&lt;Vector3D&gt; xAxis;
+    Ptr&lt;Vector3D&gt; yAxis;
+    Ptr&lt;Vector3D&gt; zAxis;
+    physicalProperties-&gt;getPrincipalAxes(xAxis, yAxis, zAxis);
+
+    <span style="color:blue">// Get the moments of inertia about the principal axes. Unit for returned values is kg/cm^2.</span>
+    double i1 = 0, i2 = 0, i3 = 0;
+    physicalProperties-&gt;getPrincipalMomentsOfInertia(i1, i2, i3);
+
+    <span style="color:blue">// Get the radius of gyration about the principal axes. Unit for returned values is cm.</span>
+    double kx = 0, ky = 0, kz = 0;
+    physicalProperties-&gt;getRadiusOfGyration(kx, ky, kz);
+
+    <span style="color:blue">// Get the rotation from the world coordinate system of the target to the principal coordinate system.</span>
+    double rx = 0, ry = 0, rz = 0;
+    physicalProperties-&gt;getRotationToPrincipal(rx, ry, rz);
+
+    <span style="color:blue">// Get the moment of inertia about the world coordinate system.</span>
+    double xx = 0, yy = 0, zz = 0, xy = 0, yz = 0, xz = 0;
+    physicalProperties-&gt;getXYZMomentsOfInertia(xx, yy, zz, xy, yz, xz);
+
+
+    return true;
+}</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(GetPhysicalProperties%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

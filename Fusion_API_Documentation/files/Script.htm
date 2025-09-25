@@ -1,0 +1,190 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/Script.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="09/10/2023">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="Script">
+    <meta name="description" content="Script Object">
+    <meta name="topicid" content="GUID-6CE79190-488B-40F7-8E2B-44784588E048">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>Script Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Script Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::core" and the header file is &lt;Core/Application/Script.h&gt;<h2 class="api">
+          Description
+        </h2>Object that represents a script or add-in.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Script_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Script_edit.htm">edit</a></td>
+        <td class="api-list">Invokes the default edit behavior for this script or add-in.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Script_run.htm">run</a></td>
+        <td class="api-list">Runs this script or add-in, if it's not already running.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Script_stop.htm">stop</a></td>
+        <td class="api-list">If this script or add-in is running, this method will stop it. The isRunning property can be used to determine if it is running. If the script or add-in is not running and this method is called, there is no effect.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Script_unlink.htm">unlink</a></td>
+        <td class="api-list">Unlinks this script or add-in. This removes it from Fusion's list of linked scripts and add-ins, so it is no longer displayed in the dialog, and if it's an add-in, it will no longer run on startup.<br/><br/> This is only valid for a script or add-in that is linked; the sourceLocation property returns LinkedScriptSourceLocation.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Script_appStoreURL.htm">appStoreURL</a></td>
+        <td class="api-list">For an add-in installed from the Autodesk App Store, this property returns the URL on the store for the page of this app. This property returns an empty string for all scripts and add-ins not installed from the App Store and if there is a problem determining the URL for an App Store app.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Script_author.htm">author</a></td>
+        <td class="api-list">Returns the author information associated with this script or add-in.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Script_description.htm">description</a></td>
+        <td class="api-list">Gets the description of this script or add-in.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Script_folder.htm">folder</a></td>
+        <td class="api-list">Gets the full path of the folder that contains this script or add-in.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Script_helpFilename.htm">helpFilename</a></td>
+        <td class="api-list">Returns the filename of a local html file that serves as the help file for this script or add-in. This filename is defined in the manifest of the script or add-in using the "helpFilename" setting.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Script_iconFilename.htm">iconFilename</a></td>
+        <td class="api-list">Returns the filename of the image file that can be used as the icon for this script or add-in. This filename is defined in the manifest of the script or add-in using the "iconFilename" setting.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Script_id.htm">id</a></td>
+        <td class="api-list">Gets the ID of this script or add-in. This is typically a GUID and is assumed to be unique with respect to all other add-ins.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Script_isAddIn.htm">isAddIn</a></td>
+        <td class="api-list">Gets if this Script object represents a script or an add-in. Returns true if it is an add-in.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Script_isEditable.htm">isEditable</a></td>
+        <td class="api-list">Indicates if this script or add-in is blocked from being edited by the user in the "Scripts and Add-Ins" dialog.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Script_isFavorite.htm">isFavorite</a></td>
+        <td class="api-list">Gets and sets whether this script or add-in is a favorite of the user.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Script_isInternal.htm">isInternal</a></td>
+        <td class="api-list">Indicates if this is an internal script or add-in that is delivered with Fusion. Returns true if it is an internal script or add-in.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Script_isRunning.htm">isRunning</a></td>
+        <td class="api-list">Gets if this script or add-in is currently running.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Script_isRunOnStartup.htm">isRunOnStartup</a></td>
+        <td class="api-list">Gets and sets whether this add-in will automatically run when Fusion is started. This property is only valid when the isAddIn property returns true.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Script_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Script_isVisible.htm">isVisible</a></td>
+        <td class="api-list">Gets and sets whether the script or add-in is visible within the “Scripts and Add-Ins” dialog. By default, all scripts and add-ins are visible. Setting this to false will cause it to be hidden and unloaded if it is already running. Also, if it’s an add-in set to load on startup, it will no longer be loaded.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Script_location.htm">location</a></td>
+        <td class="api-list">Gets which standard location this script is located.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Script_manifestContent.htm">manifestContent</a></td>
+        <td class="api-list">Gets the full contents of the manifest file associated with this script or add-in. This is particularly useful if you have any custom information defined in the manifest. The manifest file uses JSON to format its content.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Script_name.htm">name</a></td>
+        <td class="api-list">Gets the name of this script or add-in.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Script_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Script_programmingLanguage.htm">programmingLanguage</a></td>
+        <td class="api-list">Returns the programming language this script or add-in is written in.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Script_targetOperatingSystem.htm">targetOperatingSystem</a></td>
+        <td class="api-list">Returns the operating systems this script or add-in is available for.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Script_version.htm">version</a></td>
+        <td class="api-list">Returns the version information associated with this script or add-in.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="Scripts_addExisting.htm">Scripts.addExisting</a>, <a href="Scripts_addNew.htm">Scripts.addNew</a>, <a href="Scripts_item.htm">Scripts.item</a>, <a href="Scripts_itemByPath.htm">Scripts.itemByPath</a>, <a href="Scripts_itemsByName.htm">Scripts.itemsByName</a><h2 class="api">
+            Version
+          </h2>
+        Introduced in version October 2023<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(Script%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

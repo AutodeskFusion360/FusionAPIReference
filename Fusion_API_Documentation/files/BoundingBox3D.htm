@@ -1,0 +1,143 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/BoundingBox3D.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="BoundingBox3D">
+    <meta name="description" content="BoundingBox3D Object">
+    <meta name="topicid" content="GUID-9ce5053e-72b6-4a47-8172-e4223fb4caff">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>BoundingBox3D Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">BoundingBox3D Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::core" and the header file is &lt;Core/Geometry/BoundingBox3D.h&gt;<h2 class="api">
+          Description
+        </h2>Transient object that represents a 3D bounding box. It defines a rectangular box whose sides are parallel to the model space x, y, and z planes. Because of the fixed orientation of the box it can be fully defined by two points at opposing corners; the min and max points. This object is usually used to provide a rough approximation of the volume in space that an entity occupies. It also provides some convenience function when working with the bounding box data. They are created statically using the create method of the BoundingBox3D class.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BoundingBox3D_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BoundingBox3D_combine.htm">combine</a></td>
+        <td class="api-list">Combines this bounding box with the input bounding box. If the input bounding box extends outside this bounding box then this bounding box will be extended to encompass both of the original bounding boxes.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BoundingBox3D_contains.htm">contains</a></td>
+        <td class="api-list">Determines if the specified point is within the bound box.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BoundingBox3D_copy.htm">copy</a></td>
+        <td class="api-list">Creates an independent copy of this bounding box.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BoundingBox3D_create.htm">create</a></td>
+        <td class="api-list">Creates a transient bounding box object. This object is created statically using the BoundingBox3D.create method.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BoundingBox3D_expand.htm">expand</a></td>
+        <td class="api-list">Expands the size of bounding box to include the specified point.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BoundingBox3D_intersects.htm">intersects</a></td>
+        <td class="api-list">Determines if the two bounding boxes intersect.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BoundingBox3D_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BoundingBox3D_maxPoint.htm">maxPoint</a></td>
+        <td class="api-list">Gets and sets the maximum point corner of the box.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BoundingBox3D_minPoint.htm">minPoint</a></td>
+        <td class="api-list">Gets and sets the minimum point corner of the box.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BoundingBox3D_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="Arrange3DResultEnvelope_boundingBox.htm">Arrange3DResultEnvelope.boundingBox</a>, <a href="BoundingBox3D_copy.htm">BoundingBox3D.copy</a>, <a href="BoundingBox3D_create.htm">BoundingBox3D.create</a>, <a href="BRepBody_boundingBox.htm">BRepBody.boundingBox</a>, <a href="BRepBody_preciseBoundingBox.htm">BRepBody.preciseBoundingBox</a>, <a href="BRepEdge_boundingBox.htm">BRepEdge.boundingBox</a>, <a href="BRepFace_boundingBox.htm">BRepFace.boundingBox</a>, <a href="BRepLoop_boundingBox.htm">BRepLoop.boundingBox</a>, <a href="BRepLump_boundingBox.htm">BRepLump.boundingBox</a>, <a href="BRepShell_boundingBox.htm">BRepShell.boundingBox</a>, <a href="Component_boundingBox.htm">Component.boundingBox</a>, <a href="Component_boundingBox2.htm">Component.boundingBox2</a>, <a href="Component_preciseBoundingBox.htm">Component.preciseBoundingBox</a>, <a href="CustomGraphicsBRepBody_boundingBox.htm">CustomGraphicsBRepBody.boundingBox</a>, <a href="CustomGraphicsCurve_boundingBox.htm">CustomGraphicsCurve.boundingBox</a>, <a href="CustomGraphicsEntity_boundingBox.htm">CustomGraphicsEntity.boundingBox</a>, <a href="CustomGraphicsGroup_boundingBox.htm">CustomGraphicsGroup.boundingBox</a>, <a href="CustomGraphicsLines_boundingBox.htm">CustomGraphicsLines.boundingBox</a>, <a href="CustomGraphicsMesh_boundingBox.htm">CustomGraphicsMesh.boundingBox</a>, <a href="CustomGraphicsPointSet_boundingBox.htm">CustomGraphicsPointSet.boundingBox</a>, <a href="CustomGraphicsText_boundingBox.htm">CustomGraphicsText.boundingBox</a>, <a href="FaceGroup_boundingBox.htm">FaceGroup.boundingBox</a>, <a href="FlatPatternComponent_boundingBox.htm">FlatPatternComponent.boundingBox</a>, <a href="FlatPatternComponent_boundingBox2.htm">FlatPatternComponent.boundingBox2</a>, <a href="FlatPatternComponent_preciseBoundingBox.htm">FlatPatternComponent.preciseBoundingBox</a>, <a href="MeshBody_boundingBox.htm">MeshBody.boundingBox</a>, <a href="Occurrence_boundingBox.htm">Occurrence.boundingBox</a>, <a href="Occurrence_boundingBox2.htm">Occurrence.boundingBox2</a>, <a href="Occurrence_preciseBoundingBox.htm">Occurrence.preciseBoundingBox</a>, <a href="Profile_boundingBox.htm">Profile.boundingBox</a>, <a href="ProfileCurve_boundingBox.htm">ProfileCurve.boundingBox</a>, <a href="Sketch_boundingBox.htm">Sketch.boundingBox</a>, <a href="SketchArc_boundingBox.htm">SketchArc.boundingBox</a>, <a href="SketchCircle_boundingBox.htm">SketchCircle.boundingBox</a>, <a href="SketchConicCurve_boundingBox.htm">SketchConicCurve.boundingBox</a>, <a href="SketchControlPointSpline_boundingBox.htm">SketchControlPointSpline.boundingBox</a>, <a href="SketchCurve_boundingBox.htm">SketchCurve.boundingBox</a>, <a href="SketchEllipse_boundingBox.htm">SketchEllipse.boundingBox</a>, <a href="SketchEllipticalArc_boundingBox.htm">SketchEllipticalArc.boundingBox</a>, <a href="SketchEntity_boundingBox.htm">SketchEntity.boundingBox</a>, <a href="SketchFittedSpline_boundingBox.htm">SketchFittedSpline.boundingBox</a>, <a href="SketchFixedSpline_boundingBox.htm">SketchFixedSpline.boundingBox</a>, <a href="SketchLine_boundingBox.htm">SketchLine.boundingBox</a>, <a href="SketchPoint_boundingBox.htm">SketchPoint.boundingBox</a>, <a href="SketchText_boundingBox.htm">SketchText.boundingBox</a><h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RenderSample_Sample.htm">Rendering Sample</a></td>
+        <td class="api-list"><p>Demonstrates using the Rendering capabilities in the API. This starts a series of local renderings to generate a series of frames, where the camera is repositioned and a parameter is modified for each frame to create a dynamic animation. To use the sample, have a design open that contains a parameter named "Length". It can be a user or model parameter. The sample will modify this parameter from a value of 0.1 cm to 15 cm, but you can change these values by editing the values of the paramStartVal and paramEndVal variables on lines 90 and 91 of the sample. It expects a folder named "C:\Temp\RenderSample" to exist, and will fail if it doesn't. The rendered frames will be written to that folder.</p><p>An example rendering is shown below where <a href="../ExtraFiles/RenderSample.f3d">this file</a> was used. The parameter is modifying a move feature which results in changing the shape of an extrusion. The parameter could be driving anything and you could modify the code to edit more than one parameter. The result of this sample is a folder containing all of the rendered frames. You can process these to create an animation. The sample animation was created using GIMP.</p><div align="center"><img src="../images/RenderAnimationSample.gif" border=0 align="middle" alt="Render Animation Sample"></div><br></td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(BoundingBox3D%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

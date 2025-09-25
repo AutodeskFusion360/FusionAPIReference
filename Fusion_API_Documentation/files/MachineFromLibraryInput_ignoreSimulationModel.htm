@@ -1,0 +1,81 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/MachineFromLibraryInput_ignoreSimulationModel.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="21/02/2023">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="MachineFromLibraryInput_ignoreSimulationModel">
+    <meta name="description" content="MachineFromLibraryInput.ignoreSimulationModel Property">
+    <meta name="topicid" content="GUID-262C66D6-7DF7-40A6-AFAC-CC2AC39F53C1">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>MachineFromLibraryInput.ignoreSimulationModel Property</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">MachineFromLibraryInput.ignoreSimulationModel Property</h1>
+
+          Parent Object: <a href="MachineFromLibraryInput.htm">MachineFromLibraryInput</a><br>Defined in namespace "adsk::cam" and the header file is &lt;Cam/Machine/MachineFromLibraryInput.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Gets and sets whether or not to ignore the simulation model when creating or loading the machine.&nbsp;If set to true the simulation model will not be set on the new machine.</p>
+    <h2 class="api">
+            Remarks
+          </h2>This can be useful if you don't have write access to the simulation machine. This can be the case if:<br/><br/> - The simulation machine is not in your local library.<br/><br/> - The simulation machine is not saved in your hub.<br/><br/> - You don't have write access to the hub or location where it was saved.<h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"machineFromLibraryInput_var" is a variable referencing a MachineFromLibraryInput object.</span><br /><br /><code><pre class="api-code"><span style="color:blue"># Get the value of the property.</span><br />propertyValue = machineFromLibraryInput_var.<b>ignoreSimulationModel<br /><br /><span style="color:blue"># Set the value of the property.</span><br />machineFromLibraryInput_var.<b>ignoreSimulationModel</b> = propertyValue</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"machineFromLibraryInput_var" is a variable referencing a MachineFromLibraryInput object.<br /><code><pre class="api-code">#include &lt;Cam/Machine/MachineFromLibraryInput.h&gt;<br /><br /><span style="color:blue">// Get the value of the property.</span><br />boolean propertyValue = machineFromLibraryInput_var-&gt;<b>ignoreSimulationModel</b>();<br /><br /><span style="color:blue">// Set the value of the property, where value_var is a boolean.</span><br />bool returnValue = machineFromLibraryInput_var-&gt;<b>ignoreSimulationModel</b>(value_var);</pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Property Value
+          </h2>This is a read/write property whose value is a boolean.<h2 class="api">
+            Version
+          </h2>
+        Introduced in version April 2023<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(MachineFromLibraryInput.ignoreSimulationModel%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

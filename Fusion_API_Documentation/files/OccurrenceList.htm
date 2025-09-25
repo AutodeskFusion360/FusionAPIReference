@@ -1,0 +1,135 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/OccurrenceList.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="OccurrenceList">
+    <meta name="description" content="OccurrenceList Object">
+    <meta name="topicid" content="GUID-6afa56a6-a922-4ef0-ac7e-53c9c3564015">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>OccurrenceList Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">OccurrenceList Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Components/OccurrenceList.h&gt;<h2 class="api">
+          Description
+        </h2>Provides a list of occurrences.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="OccurrenceList_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="OccurrenceList_item.htm">item</a></td>
+        <td class="api-list">Returns the specified occurrence using an index into the collection.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="OccurrenceList_itemByName.htm">itemByName</a></td>
+        <td class="api-list">Returns the specified occurrence using the name of the occurrence.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="OccurrenceList_count.htm">count</a></td>
+        <td class="api-list">Returns the number of occurrences in the collection.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="OccurrenceList_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="OccurrenceList_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="BaseComponent_allOccurrences.htm">BaseComponent.allOccurrences</a>, <a href="BaseComponent_allOccurrencesByComponent.htm">BaseComponent.allOccurrencesByComponent</a>, <a href="BaseComponent_occurrencesByComponent.htm">BaseComponent.occurrencesByComponent</a>, <a href="Component_allOccurrences.htm">Component.allOccurrences</a>, <a href="Component_allOccurrencesByComponent.htm">Component.allOccurrencesByComponent</a>, <a href="Component_occurrencesByComponent.htm">Component.occurrencesByComponent</a>, <a href="FlatPatternComponent_allOccurrences.htm">FlatPatternComponent.allOccurrences</a>, <a href="FlatPatternComponent_allOccurrencesByComponent.htm">FlatPatternComponent.allOccurrencesByComponent</a>, <a href="FlatPatternComponent_occurrencesByComponent.htm">FlatPatternComponent.occurrencesByComponent</a>, <a href="Occurrence_childOccurrences.htm">Occurrence.childOccurrences</a>, <a href="Occurrences_asList.htm">Occurrences.asList</a>, <a href="RigidGroup_occurrences.htm">RigidGroup.occurrences</a><h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="AssemblyTraversalUsingRecursion_Sample.htm">Assembly traversal using recursion API Sample</a></td>
+        <td class="api-list">Traverses the entire structure of the currently open assemlby using a recursive function and displays the result in a message box. This will match the occurrence structure seen in the browser.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CreateSetupsFromHoleRecognition_Sample.htm">Create Setups From Hole Recognition API Sample</a></td>
+        <td class="api-list"><p>This sample script demonstrates how to create a correctly oriented setup using Hole Recognition functionality.</p><p>The Fusion Manufacturing Extension is required for Hole Recognition.</p><p>The script starts by opening a sample model from the CAM Samples folder via its URN. The model comprises a 3 way coupling containing holes in various orientations and mounted on a fixture. A reference setup is created for the model using a simple stock mode and offsets. The Hole Recognition feature of the Fusion Manufacturing Extension creates 5 hole groups containing 11 holes between them. For each unique hole group vector captured, a new setup is created and its orientation transformed to match the vector.</p></td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="GetsVolumeOfActiveDesign_Sample.htm">Get Volume of Active Design API Sample</a></td>
+        <td class="api-list">Traverses through the active design and totals the volume of every body within the design.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SetViseOriginAsSetupWCSOrigin_Sample.htm">Set Vise Origin As Setup WCS Origin API Sample</a></td>
+        <td class="api-list"><p>This sample script demonstrates how to define our setup WCS origin relative to our vise origin from either a component, a sketch point or a joint origin.</p><p>The Work Coordinate System is a reference point set in our CAM workspace and on our machine. All machine coordinates are drawn from the WCS. This script demonstrates defining the WCS by each of 4 alternative methods:</p><p>Setup by default with no origin defined.</p><p>Setup using vise origin as WCS origin.</p><p>Setup using a sketch point as WCS origin.</p><p>Setup using a joint origin as WCS origin.</p></td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(OccurrenceList%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

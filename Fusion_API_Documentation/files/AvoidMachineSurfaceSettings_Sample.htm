@@ -1,0 +1,318 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/AvoidMachineSurfaceSettings.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="AvoidMachineSurfaceSettings_Sample">
+    <meta name="description" content="Avoid Machine Surface Settings API Sample Sample">
+    <meta name="topicid" content="GUID-a0cfe144-1a0f-4109-9125-8fbd3176ceed">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Avoid Machine Surface Settings API Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Avoid Machine Surface Settings API Sample</h1>
+    <h2 class="api">
+          Description
+        </h2><p>This sample script demonstrates how to use Machine/Avoid/Gouge/Fixture functionality.</p><p>The script starts by opening a sample model from the CAM Samples folder via its URN. The model comprises a curved surface with a through slot, a countersunk hole and a raised, circular and filleted upstand from the surface. The model is supported by two rectangular blocks, themselves mounted on a fixture plate. A setup is included with a single operation running a 3-axis diagonal raster over the model, supports and fixture. The operation machines the fixture, the supporting blocks, the upper surface of the upstand and the area within the slot and hole, something we would like to avoid.</p><p>The script duplicates the original operation and then proceeds to create a series of MachineAvoidGroups. These are labelled as either Machine in the case of 2 cap surfaces for the slot and hole, Fixture for the fixture plate, Gouge for the supporting blocks and Avoid for the top face of the upstand. Additionally, both AxialOffset and RadialOffset can be specified for the Machine, Avoid and Fixture passes.</p><h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">import adsk.core, adsk.fusion, adsk.cam, traceback
+
+dupName = 'Avoid/Machine using API'
+information = f"""
+This sample script demonstrates Machine/Avoid/Gouge/Fixture functionality. 
+Move this dialog to one side and notice the following about the default operation:
+
+    The existing operation machines the top face (yellow) and within the slot and hole.
+    The supporting blocks (red) and the fixture plate (purple) are needlessly machined.
+    We want it to avoid machining the top face, the fixture and within the slot and hole.
+    Cap surfaces are provided for the slot and hole (colored green when set to visible).
+    The mounting blocks are designated sacrificial so we can machine vertical walls fully.
+
+To achieve this, we duplicate the first operation and assign labels to surface groups.
+Both radial and axial “stock-to-leave” values can also be applied.
+
+Acknowledge this dialog and select the operation named "{dupName}" 
+to see the new improved tool path.
+"""
+
+<span style="color:blue">#################### Global Variables ####################</span>
+_app = adsk.core.Application.get()
+_ui = _app.userInterface
+_machineAvoidGroups: adsk.cam.MachineAvoidGroups = None
+_cam: adsk.cam.CAM = None
+_design: adsk.fusion.Design = None
+
+<span style="color:blue"># This URN should point to the project beneath the CAM Samples folder.</span>
+PROJECT_URN = 'urn:adsk.wipprod:fs.file:vf.rxjQ68iyTN2ui31aDQULDw?version=1' <span style="color:blue"># MachineAvoidAfter.</span>
+
+<span style="color:blue"># Map the strategies to surface colors for a clearer indication.</span>
+modes = ['Avoid', 'Machine', 'Gouge', 'Fixture']
+modeColor: dict[str, adsk.core.Color] = {
+    modes[adsk.cam.MachiningMode.Avoid_MachiningMode]:      adsk.core.Color.create(255, 255, 113, 30), <span style="color:blue"># Yellow</span>
+    modes[adsk.cam.MachiningMode.Machine_MachiningMode]:    adsk.core.Color.create(104, 255,   0, 30), <span style="color:blue"># Green</span>
+    modes[adsk.cam.MachiningMode.Gouge_MachiningMode]:      adsk.core.Color.create(204,  51,  51, 30), <span style="color:blue"># Red</span>
+    modes[adsk.cam.MachiningMode.Fixture_MachiningMode]:    adsk.core.Color.create(180, 120, 255, 30), <span style="color:blue"># Purple</span>
+}
+
+<span style="color:blue"># The main script function.</span>
+def run(context):
+    global _cam, _design, _machineAvoidGroups
+    try:
+
+        <span style="color:blue"># Load by URN a specific sample project that demonstrates machine/avoid/ignore/gouge.</span>
+        doc = loadProjectFromURN(PROJECT_URN)
+        if doc is None: 
+            return
+        products = doc.products
+
+        <span style="color:blue"># Switch to the manufacturing workspace (CAM environment).</span>
+        camWS = _app.userInterface.workspaces.itemById('CAMEnvironment') 
+        camWS.activate()
+        _cam = adsk.cam.CAM.cast(products.itemByProductType("CAMProductType"))
+
+        <span style="color:blue"># Get the CAD product.</span>
+        _design = products.itemByProductType('DesignProductType')
+
+        setups = _cam.setups
+
+        <span style="color:blue"># Ensure the document contains a Setup and then use the 1st setup in the document.</span>
+        if setups.count &gt; 0:
+            setup = setups.item(0) 
+        else:
+            userMessageBox('This script requires that there is a Setup in the Fusion Document', True)
+            return
+
+        operations = setup.operations
+
+        <span style="color:blue"># Remove all but the first operation as this script is not using the intended sample model</span>
+        for opNum in range(1,operations.count):
+            operations.item(opNum).deleteMe()
+
+        <span style="color:blue"># Duplicate the first operation in the setup.</span>
+        if operations.count &gt; 0:
+            opOriginal = operations.item(0)
+        else:
+            userMessageBox('This script requires that there is an existing operation in the Setup.', True)
+            return
+        
+        opOriginal.isLightBulbOn = True            
+        opOriginal.duplicate()
+        opDuplicate = operations.item(1)
+        opDuplicate.name = dupName
+        _app.log(f'The toolpath "{opOriginal.name}" has been duplicated and then renamed as "{opDuplicate.name}"')
+
+        <span style="color:blue"># Get the "checkSurfaceSelectionSets" parameter from the operation, which is a CadFaceGroups cad object.</span>
+        surfaceGroupsParam: adsk.cam.CadMachineAvoidGroupsParameterValue = opDuplicate.parameters.itemByName('checkSurfaceSelectionSets').value
+
+        <span style="color:blue"># Get the MachineAvoidGroups object from the CadFaceGroups cad object. This object manages the list of mutually exclusive groups.</span>
+        _machineAvoidGroups = surfaceGroupsParam.getMachineAvoidGroups() 
+
+        <span style="color:blue"># Create a Machine group comprising the two green coloured caps over the curved surface. Not visible by default.</span>
+        if not createMachineAvoidGroup('Selection Set3', adsk.cam.MachiningMode.Machine_MachiningMode, 0.2, 0.1):
+            return
+
+        <span style="color:blue"># Create an Avoid group comprising the yellow coloured uppermost horizontal face.</span>
+        if not createMachineAvoidGroup('Selection Set1', adsk.cam.MachiningMode.Avoid_MachiningMode, 0.05, 0.02):
+            return
+
+        <span style="color:blue"># Create a Fixture group comprising the purple coloured base block.</span>
+        if not createMachineAvoidGroup('fixture_base', adsk.cam.MachiningMode.Fixture_MachiningMode, 5.0, 0.6):
+            return
+
+        <span style="color:blue"># Create an Ignore/Gouge group comprising the 1st red colored sacrificial support block.</span>
+        if not createMachineAvoidGroup('sacrificial_block1', adsk.cam.MachiningMode.Gouge_MachiningMode):
+            return
+
+        <span style="color:blue"># Create an Ignore/Gouge group comprising the 2nd red colored sacrificial support block.</span>
+        if not createMachineAvoidGroup('sacrificial_block2', adsk.cam.MachiningMode.Gouge_MachiningMode):
+            return
+
+        <span style="color:blue"># Add the groups back to the parameter.</span>
+        surfaceGroupsParam.applyMachineAvoidGroups(_machineAvoidGroups)
+
+        <span style="color:blue"># Explain what has happened and how to see the result</span>
+        userMessageBox(information)
+
+        <span style="color:blue"># Generate the operation.</span>
+        _cam.generateToolpath(opDuplicate)
+
+        <span style="color:blue"># Display the new toolpath - this is ineffective - user needs to select the path themselves.</span>
+        opOriginal.isLightBulbOn = False
+        opDuplicate.isLightBulbOn = True
+        opDuplicate.isToolpathVisible = True
+
+        <span style="color:blue"># Give control back to Fusion so it can update the graphics.</span>
+        adsk.doEvents()
+        return
+
+    except Exception as e:
+        userMessageBox(f'Failed:: {e}\n{traceback.format_exc()}', True)
+
+<span style="color:blue">#################### Functions ####################</span>
+
+def createMachineAvoidGroup(name: str, mode: adsk.cam.MachiningMode, axialOffset: float = None, radialOffset: float = None):
+    '''Create a Machine/Avoid group of the specified mode and name using the stated offsets if applicable'''
+    machineAvoidGroup: adsk.cam.MachineAvoidDirectSelection = _machineAvoidGroups.createNewMachineAvoidDirectSelectionGroup()
+    machineAvoidGroup.machineMode = mode
+
+    <span style="color:blue"># Gouge groups require no offsets to be specified.</span>
+    if mode != adsk.cam.MachiningMode.Machine_MachiningMode:
+        if radialOffset is not None:
+            machineAvoidGroup.radialOffset = radialOffset
+        if axialOffset is not None:
+            machineAvoidGroup.axialOffset = axialOffset
+
+    if mode == adsk.cam.MachiningMode.Machine_MachiningMode or mode == adsk.cam.MachiningMode.Avoid_MachiningMode:
+        faceSelSet = _design.selectionSets.itemByName(name)
+        if faceSelSet:
+            machineAvoidGroup.inputGeometry = faceSelSet.entities
+        else:
+            userMessageBox(f'The Selection Set "{name}" does not exist in the current Fusion document', True)
+            return False
+    else:
+        <span style="color:blue"># Add the face/body/component to the exclusiveGroup selection.</span>
+        bodySelect = _cam.designRootOccurrence.bRepBodies.itemByName(name)       
+        if bodySelect:
+            machineAvoidGroup.inputGeometry = getFacesAll(bodySelect)
+        else:
+            userMessageBox(f'The Body "{name}" does not exist in the current Fusion document', True)
+            return False
+    colorFaces(machineAvoidGroup.inputGeometry, mode)
+    return True
+
+
+def getFacesAll(body: adsk.fusion.BRepBody):
+    ''' Adds all the faces in the selected body to a list '''
+    allFaces: list[adsk.fusion.BRepFace] = []                               
+    for face in body.faces:
+         allFaces.append(face)                 
+    return allFaces
+
+
+def userMessageBox(messageText: str, isWarning: bool = False):
+    ''' Keep messageBox calls informative but succinct'''
+    iconType = adsk.core.MessageBoxIconTypes.WarningIconType if isWarning else adsk.core.MessageBoxIconTypes.InformationIconType
+    _ui.messageBox(messageText, 'Fusion\t\t\t\t\t\t', adsk.core.MessageBoxButtonTypes.OKButtonType, iconType) <span style="color:blue"># Title tabs widen messageBox.</span>
+    
+
+def colorFaces(faces: list[adsk.fusion.BRepFace], mode: adsk.cam.MachiningMode):
+    ''' Color specified BRepFaces '''
+    modeName = modes[mode]
+    for face in faces:
+        <span style="color:blue"># Check if "colorAppearance" already exists, if not, create it.</span>
+        appearances = _design.appearances
+        colorAppearance = appearances.itemByName(modeName)
+
+        if not colorAppearance:
+            <span style="color:blue"># Create a new appearance.</span>
+            appearanceLib: adsk.core.MaterialLibrary = _app.materialLibraries.itemById('BA5EE55E-9982-449B-9D66-9F036540E140')
+
+            <span style="color:blue"># Get the appearance using itemById as unlike itemByName it is not locale dependent.</span>
+            genericAppearance: adsk.core.Appearance = appearanceLib.appearances.itemById('Prism-129')
+
+            <span style="color:blue"># Clone the generic appearance.</span>
+            colorAppearance: adsk.core.Appearance = appearances.addByCopy(genericAppearance, modeName)
+
+            <span style="color:blue"># Get the 'Color' property using itemById as unlike itemByName it is not locale dependent.</span>
+            colorProperty: adsk.core.Property = colorAppearance.appearanceProperties.itemById('opaque_albedo')
+
+            <span style="color:blue"># Set the color of the appearance.</span>
+            colorProperty.value = modeColor[modeName]
+
+        <span style="color:blue"># Apply the appearance to the body.</span>
+        face.appearance = colorAppearance
+
+    <span style="color:blue"># Give control back to Fusion so it can update the graphics.</span>
+    adsk.doEvents()
+
+def loadProjectFromURN(urn:str = None) -&gt; adsk.core.Document:
+    ''' Minimal self-contained function to load and return a document via URN or return None safely '''
+    doc: adsk.core.Document = None
+    app = adsk.core.Application.get()
+    if urn is not None:
+        try: <span style="color:blue"># File not found causes an exception</span>
+            project: adsk.core.DataFile = app.data.findFileById(urn)
+            if project:
+                doc = app.documents.open(project, True)
+            else:
+                app.userInterface.messageBox(f'File not found for URN: {urn}!')
+        except Exception as e:
+            if str(e)[0:38] == '3 : Design is located in another team.':
+                <span style="color:blue"># Although the document has been loaded, variable 'doc' may not be populated</span>
+                if doc is None:
+                    doc: adsk.core.Document = adsk.core.Application.get().activeDocument
+            elif str(e)[0:20] == '3 : file not found':
+                app.userInterface.messageBox(f'File not found for URN: {urn}!')
+            else:
+                <span style="color:blue"># Abandon for unhandled errors, displaying the error message.</span>
+                app.userInterface.messageBox(f'Failed:{str(e)}\n{traceback.format_exc()}')
+    return doc</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(AvoidMachineSurfaceSettings%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,398 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/TriadCommandInput.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="09/05/2022">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="TriadCommandInput">
+    <meta name="description" content="TriadCommandInput Object">
+    <meta name="topicid" content="GUID-A2DC02EE-2592-4139-AB1C-178F7D25A30D">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>TriadCommandInput Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">TriadCommandInput Object
+			</h1>
+              Derived from: <a href="CommandInput.htm">CommandInput</a> Object
+            <br>Defined in namespace "adsk::core" and the header file is &lt;Core/UserInterface/TriadCommandInput.h&gt;<h2 class="api">
+          Description
+        </h2>Represents a command input that displays a triad and allows the user to control translation rotation, and scaling. Using properties on the input you can choose which controls are available to the user. This displays inputs in the command dialog where the user can enter values and also displays a manipulator in the graphics window to allow them to graphically set the values. The input boxes are displayed in the dialog when the isVisible property of the command input is true. The manipulator is displayed in the graphics window when both the isVisible and isEnabled properties are true.<br/><br/> It will often be useful to first create a GroupCommandInput and then create the TriadCommandInput within the group so it's apparent to the user these items are related and they can be collapsed to reduce clutter in the dialog. This also allows you to label the set of displayed inputs by using the name of the GroupCommandInput.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_deleteMe.htm">deleteMe</a></td>
+        <td class="api-list">Deletes this Command input.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_hideAll.htm">hideAll</a></td>
+        <td class="api-list">Hides all controls.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_hideAllRotations.htm">hideAllRotations</a></td>
+        <td class="api-list">Sets all rotation related controls to be invisible. This is useful if you are only using translations or scaling.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_hideAllScaling.htm">hideAllScaling</a></td>
+        <td class="api-list">Sets all scaling related controls to be invisible. This is useful if you are only using translations or rotations.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_setFlipVisibility.htm">setFlipVisibility</a></td>
+        <td class="api-list">A convenience method to turn on and off the visibility of the horizontal and vertical flip controls.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_setFullVisibility.htm">setFullVisibility</a></td>
+        <td class="api-list">A convenience method to turn on and off the visibility of commonly used controls in a triad. These include the X, Y, and Z axis translations, the X, Y, and Z axis rotations, scaling in the X, Y, and Z directions, scaling on the X-Y, Y-Z and Z-X planes, translation on the X-Y, Y-Z, and Z-X planes, and the origin move.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_setPlanarMoveVisibility.htm">setPlanarMoveVisibility</a></td>
+        <td class="api-list">A convenience method to turn on and off the visibility of the X-Y, Y-Z, and Z-X planar translation controls.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_setRotateVisibility.htm">setRotateVisibility</a></td>
+        <td class="api-list">A convenience method to turn on and off the visibility of the X, Y, and Z axis rotation controls.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_setScaleVisibility.htm">setScaleVisibility</a></td>
+        <td class="api-list">A convenience method to turn on and off the visibility of the controls that define scaling in the X, Y, and Z direction and the X-Y, Y-Z, and Z-X planes.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_setTranslateVisibility.htm">setTranslateVisibility</a></td>
+        <td class="api-list">A convenience method to turn on and off the visibility of the X, Y, and Z translation controls.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_commandInputs.htm">commandInputs</a></td>
+        <td class="api-list">Gets the CommandInputs class of the parent, which can be a Command, GroupCommandInput or TabCommandInput.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_id.htm">id</a></td>
+        <td class="api-list">Gets the unique identifier for this input in the command's CommandInputs.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_isEnabled.htm">isEnabled</a></td>
+        <td class="api-list">Gets or sets if this input is currently enabled or disabled for user interaction.<br/><br/> Currently, the isEnabled property does not disable SelectionCommandInput objects but instead has the same effect as the SelectionCommandInput.hasFocus property.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_isFlippedHorizontal.htm">isFlippedHorizontal</a></td>
+        <td class="api-list">Gets and sets if the triad is flipped horizontally (around the around the Y-Z plane of the triad).</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_isFlippedVertical.htm">isFlippedVertical</a></td>
+        <td class="api-list">Gets and sets if the triad is flipped vertically (around the around the X-Z plane of the triad).</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_isFullWidth.htm">isFullWidth</a></td>
+        <td class="api-list">Gets or sets if this input fills the entire width of the dialog. If true, the name is ignored and the input control will fill the entire width of the command dialog. The default value for this property in a new command input if false, or not to fill the width. This property does not apply to GroupCommandInputs or TabCommandInputs.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_isHorizontalFlipVisible.htm">isHorizontalFlipVisible</a></td>
+        <td class="api-list">Gets and sets if the control that lets the user flip horizontally (around the Y-Z plane of the triad) is visible in both the graphical manipulator and the dialog.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_isOriginTranslationVisible.htm">isOriginTranslationVisible</a></td>
+        <td class="api-list">Gets and sets if the control that supports translation in the X, Y, and Z directions is visible in both the graphical manipulator and in the dialog. In the manipulator, this is the large dot at the origin or the triad.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_isUnifiedScalingVisible.htm">isUnifiedScalingVisible</a></td>
+        <td class="api-list">Gets and sets if the control that defines the scaling in all directions visible in both the graphical manipulator and in the dialog.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_isValidExpressions.htm">isValidExpressions</a></td>
+        <td class="api-list">Returns true if all of the input fields have valid expressions. If this property is false, the triad is incorrectly defined and the current values should not be used.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_isVerticalFlipVisible.htm">isVerticalFlipVisible</a></td>
+        <td class="api-list">Gets and sets if the control that lets the user flip vertical (around the X-Z plane of the triad) is visible in both the graphical manipulator and the dialog.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_isVisible.htm">isVisible</a></td>
+        <td class="api-list">Gets or sets if this input will be visible to the user.<br/><br/> Setting a SelectionCommandInput to be invisible will clear any selections it currently has.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_isXRotationVisible.htm">isXRotationVisible</a></td>
+        <td class="api-list">Gets and sets if the control that defines the rotation around the X axis is visible in both the graphical manipulator and in the dialog.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_isXScalingInXYVisible.htm">isXScalingInXYVisible</a></td>
+        <td class="api-list">Gets and sets if the control that defines the scaling along the X axis is visible in both the graphical manipulator and in the dialog. This control lies on the X-Y plane of the triad.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_isXScalingInXZVisible.htm">isXScalingInXZVisible</a></td>
+        <td class="api-list">Gets and sets if the control that defines the scaling along the X axis is visible in both the graphical manipulator and in the dialog. This control lies on the X-Z plane of the triad.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_isXTranslationVisible.htm">isXTranslationVisible</a></td>
+        <td class="api-list">Gets and sets if the control that supports X Translation is visible in both the graphical manipulator and in the dialog.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_isXYPlaneScalingVisible.htm">isXYPlaneScalingVisible</a></td>
+        <td class="api-list">Gets and sets if the control that defines the scaling in the X-Y plane is visible in both the graphical manipulator and in the dialog.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_isXYPlaneTranslationVisible.htm">isXYPlaneTranslationVisible</a></td>
+        <td class="api-list">Gets and sets if the control that defines the translation in the X-Y plane is visible in both the graphical manipulator and in the dialog.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_isXZPlaneScalingVisible.htm">isXZPlaneScalingVisible</a></td>
+        <td class="api-list">Gets and sets if the control that defines the scaling in the X-Z plane is visible in both the graphical manipulator and in the dialog.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_isXZPlaneTranslationVisible.htm">isXZPlaneTranslationVisible</a></td>
+        <td class="api-list">Gets and sets if the control that defines the translation in the X-Z plane is visible in both the graphical manipulator and in the dialog.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_isYRotationVisible.htm">isYRotationVisible</a></td>
+        <td class="api-list">Gets and sets if the control that defines the rotation around the Y axis is visible in both the graphical manipulator and in the dialog.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_isYScalingInXYVisible.htm">isYScalingInXYVisible</a></td>
+        <td class="api-list">Gets and sets if the control that defines the scaling along the Y axis is visible in both the graphical manipulator and in the dialog. This control lies on the X-Y plane of the triad.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_isYScalingInYZVisible.htm">isYScalingInYZVisible</a></td>
+        <td class="api-list">Gets and sets if the control that defines the scaling along the Y axis is visible in both the graphical manipulator and in the dialog. This control lies on the Y-Z plane of the triad.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_isYTranslationVisible.htm">isYTranslationVisible</a></td>
+        <td class="api-list">Gets and sets if the control that defines the Y Translation is visible in both the graphical manipulator and in the dialog.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_isYZPlaneScalingVisible.htm">isYZPlaneScalingVisible</a></td>
+        <td class="api-list">Gets and sets if the control that defines the scaling in the Y-Z plane is visible in both the graphical manipulator and in the dialog.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_isYZPlaneTranslationVisible.htm">isYZPlaneTranslationVisible</a></td>
+        <td class="api-list">Gets and sets if the control that defines the translation in the Y-Z plane is visible in both the graphical manipulator and in the dialog.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_isZRotationVisible.htm">isZRotationVisible</a></td>
+        <td class="api-list">Gets and sets if the control that defines the rotation around the Z axis is visible in both the graphical manipulator and in the dialog.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_isZScalingInXZVisible.htm">isZScalingInXZVisible</a></td>
+        <td class="api-list">Gets and sets if the control that defines the scaling along the Z axis is visible in both the graphical manipulator and in the dialog. This control lies on the X-Z plane of the triad.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_isZScalingInYZVisible.htm">isZScalingInYZVisible</a></td>
+        <td class="api-list">Gets and sets if the control that defines the scaling along the Z axis is visible in both the graphical manipulator and in the dialog. This control lies on the Y-Z plane of the triad.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_isZTranslationVisible.htm">isZTranslationVisible</a></td>
+        <td class="api-list">Gets and sets if the control that defines the Z Translation is visible in both the graphical manipulator and in the dialog.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_lastChangeMade.htm">lastChangeMade</a></td>
+        <td class="api-list">Returns which value was most recently changed. To determine the actual change made you need to compare the transforms returned by the transform and lastTransform properties. Having information about the specific type of change made makes it easier to compare the matrices because you know what to look for.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_lastTransform.htm">lastTransform</a></td>
+        <td class="api-list">Returns the transform of the triad before the latest change. Using the matrices returned by this property and the transform property you can determine what changed. The lastChangeMade property is also useful to help you know the type of change to look for when comparing the matrices.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_name.htm">name</a></td>
+        <td class="api-list">Gets the user visible name of this input.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_parentCommand.htm">parentCommand</a></td>
+        <td class="api-list">Gets the parent Command.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_parentCommandInput.htm">parentCommandInput</a></td>
+        <td class="api-list">Gets the parent CommandInput if this commandInput is the child of a TabCommandInput or GroupCommandInput. Returns null if there is no parent.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_positionTransform.htm">positionTransform</a></td>
+        <td class="api-list">Gets the current position and orientation of the triad using a transformation matrix. This transform does not include any scaling.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_toolClipFilename.htm">toolClipFilename</a></td>
+        <td class="api-list">Gets or sets the full filename of the image file (PNG) used for the tool clip. The tooltip is always shown but as the user hovers over the control it will progressively display the tool clip and description text.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_tooltip.htm">tooltip</a></td>
+        <td class="api-list">Gets or sets the base tooltip string. This is always shown for commands. If the tooltip description and/or tool clip are also specified then the tooltip will progressively display more information as the user hovers the mouse over the control.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_tooltipDescription.htm">tooltipDescription</a></td>
+        <td class="api-list">Gets or sets additional text to display progressively along with the tooltip. The text for the description can contain some basic HTML formatting tags to format the tags. For example the br tag can be used to create multiple paragraphs. The tooltip is always shown but as the user hovers over the control it will progressively display the tool clip and description text.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_transform.htm">transform</a></td>
+        <td class="api-list">Gets or sets the current position, orientation, and scale of the triad using a transformation matrix.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_unifiedeScaleFactor.htm">unifiedeScaleFactor</a></td>
+        <td class="api-list">Gets and sets the current value of the unified scale factor of the triad.<br/><br/> The isValidExpressions property should be checked before using the value within the command.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_unifiedScaleFactorExpression.htm">unifiedScaleFactorExpression</a></td>
+        <td class="api-list">Gets or sets the expression displayed in the input field for the unified scale. This can contain equations and references to parameters but must result in a valid unitless expression.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_xRotation.htm">xRotation</a></td>
+        <td class="api-list">Gets and sets the current value of the rotation around the X axis of the triad. The value is in radians but will be displayed to the user in degrees.<br/><br/> The isValidExpressions property should be checked before using the value within the command.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_xRotationExpression.htm">xRotationExpression</a></td>
+        <td class="api-list">Gets or sets the expression displayed in the input field for the X rotation. This can contain equations and references to parameters but must result in a valid distance expression. If units are not specified as part of the expression degrees are used.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_xScaleFactor.htm">xScaleFactor</a></td>
+        <td class="api-list">Gets and sets the current value of the scale factor along the X axis of the triad.<br/><br/> The isValidExpressions property should be checked before using the value within the command.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_xScaleFactorExpression.htm">xScaleFactorExpression</a></td>
+        <td class="api-list">Gets or sets the expression displayed in the input field for the X scale. This can contain equations and references to parameters but must result in a valid unitless expression.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_xTranslation.htm">xTranslation</a></td>
+        <td class="api-list">Gets and sets the current value of the translation along the X axis of the triad. The value is in centimeters but will be displayed to the user in default units for the design.<br/><br/> The isValidExpressions property should be checked before using the returned value.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_xTranslationExpression.htm">xTranslationExpression</a></td>
+        <td class="api-list">Gets or sets the expression displayed in the input field for the X translation. This can contain equations and references to parameters but must result in a valid distance expression. If units are not specified as part of the expression, the default user units of length are used.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_xYPlaneScaleFactor.htm">xYPlaneScaleFactor</a></td>
+        <td class="api-list">Gets and sets the current value of the scale factor on the X-Y plane of the triad.<br/><br/> The isValidExpressions property should be checked before using the value within the command.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_xYPlaneScaleFactorExpression.htm">xYPlaneScaleFactorExpression</a></td>
+        <td class="api-list">Gets or sets the expression displayed in the input field for the X-Y plane scale. This can contain equations and references to parameters but must result in a valid unitless expression.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_yRotation.htm">yRotation</a></td>
+        <td class="api-list">Gets and sets the current value of the rotation around the Y axis of the triad. The value is in radians but will be displayed to the user in degrees.<br/><br/> The isValidExpressions property should be checked before using the value within the command.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_yRotationExpression.htm">yRotationExpression</a></td>
+        <td class="api-list">Gets or sets the expression displayed in the input field for the Y rotation. This can contain equations and references to parameters but must result in a valid distance expression. If units are not specified as part of the expression degrees are used.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_yScaleFactor.htm">yScaleFactor</a></td>
+        <td class="api-list">Gets and sets the current value of the scale factor along the Y axis of the triad.<br/><br/> The isValidExpressions property should be checked before using the value within the command.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_yScaleFactorExpression.htm">yScaleFactorExpression</a></td>
+        <td class="api-list">Gets or sets the expression displayed in the input field for the Y scale. This can contain equations and references to parameters but must result in a valid unitless expression.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_yTranslation.htm">yTranslation</a></td>
+        <td class="api-list">Gets and sets the current value of the translation along the Y axis of the triad. The value is in centimeters but will be displayed to the user in default units for the design.<br/><br/> The isValidExpressions property should be checked before using the value within the command.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_yTranslationExpression.htm">yTranslationExpression</a></td>
+        <td class="api-list">Gets or sets the expression displayed in the input field for the Y translation. This can contain equations and references to parameters but must result in a valid distance expression. If units are not specified as part of the expression, the default user units of length are used.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_yZPlaneScaleFactor.htm">yZPlaneScaleFactor</a></td>
+        <td class="api-list">Gets and sets the current value of the scale factor on the Y-Z plane of the triad.<br/><br/> The isValidExpressions property should be checked before using the value within the command.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_yZPlaneScaleFactorExpression.htm">yZPlaneScaleFactorExpression</a></td>
+        <td class="api-list">Gets or sets the expression displayed in the input field for the Y-Z plane scale. This can contain equations and references to parameters but must result in a valid unitless expression.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_zRotation.htm">zRotation</a></td>
+        <td class="api-list">Gets and sets the current value of the rotation around the Z axis of the triad. The value is in radians but will be displayed to the user in degrees.<br/><br/> The isValidExpressions property should be checked before using the value within the command.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_zRotationExpression.htm">zRotationExpression</a></td>
+        <td class="api-list">Gets or sets the expression displayed in the input field for the Z rotation. This can contain equations and references to parameters but must result in a valid distance expression. If units are not specified as part of the expression degrees are used.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_zScaleFactor.htm">zScaleFactor</a></td>
+        <td class="api-list">Gets and sets the current value of the scale factor along the Z axis of the triad.<br/><br/> The isValidExpressions property should be checked before using the value within the command.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_zScaleFactorExpression.htm">zScaleFactorExpression</a></td>
+        <td class="api-list">Gets or sets the expression displayed in the input field for the Z scale. This can contain equations and references to parameters but must result in a valid unitless expression.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_zTranslation.htm">zTranslation</a></td>
+        <td class="api-list">Gets and sets the current value of the translation along the Z axis of the triad. The value is in centimeters but will be displayed to the user in default units for the design.<br/><br/> The isValidExpressions property should be checked before using the value within the command.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_zTranslationExpression.htm">zTranslationExpression</a></td>
+        <td class="api-list">Gets or sets the expression displayed in the input field for the Z translation. This can contain equations and references to parameters but must result in a valid distance expression. If units are not specified as part of the expression, the default user units of length are used.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_zXPlaneScaleFactor.htm">zXPlaneScaleFactor</a></td>
+        <td class="api-list">Gets and sets the current value of the scale factor on the Z-X plane of the triad.<br/><br/> The isValidExpressions property should be checked before using the value within the command.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TriadCommandInput_zXPlaneScaleFactorExpression.htm">zXPlaneScaleFactorExpression</a></td>
+        <td class="api-list">Gets or sets the expression displayed in the input field for the Z-X plane scale. This can contain equations and references to parameters but must result in a valid unitless expression.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="CommandInputs_addTriadCommandInput.htm">CommandInputs.addTriadCommandInput</a><h2 class="api">
+            Version
+          </h2>
+        Introduced in version May 2022<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(TriadCommandInput%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

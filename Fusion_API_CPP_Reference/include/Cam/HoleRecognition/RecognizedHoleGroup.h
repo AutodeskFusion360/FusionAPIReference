@@ -1,0 +1,146 @@
+//////////////////////////////////////////////////////////////////////////////
+//
+// Copyright 2025 Autodesk, Inc. All rights reserved.
+//
+// Use of this software is subject to the terms of the Autodesk license
+// agreement provided at the time of installation or download, or which
+// otherwise accompanies this software.
+//
+//////////////////////////////////////////////////////////////////////////////
+
+#pragma once
+#include "../../Core/Base.h"
+#include "../CamTypeDefs.h"
+#include <vector>
+
+// THIS CLASS WILL BE VISIBLE TO AN API CLIENT.
+// THIS HEADER FILE WILL BE GENERATED FROM NIDL.
+#include "../../Core/OSMacros.h"
+
+#ifdef CAMXINTERFACE_EXPORTS
+# ifdef __COMPILING_ADSK_CAM_RECOGNIZEDHOLEGROUP_CPP__
+# define ADSK_CAM_RECOGNIZEDHOLEGROUP_API XI_EXPORT
+# else
+# define ADSK_CAM_RECOGNIZEDHOLEGROUP_API
+# endif
+#else
+# define ADSK_CAM_RECOGNIZEDHOLEGROUP_API XI_IMPORT
+#endif
+
+namespace adsk { namespace cam {
+    class RecognizedHole;
+    class RecognizedHoleGroups;
+    class RecognizedHolesInput;
+}}
+
+namespace adsk { namespace cam {
+
+/// Object that represents a collection of holes that contain similar geometry. Holes have similar geometry if they contain the same segment types with the same segment heights, diameters, etc...
+class RecognizedHoleGroup : public core::Base {
+public:
+
+    /// !!!!! Warning !!!!!
+    /// ! This has been retired; please see the help for more info
+    /// !!!!! Warning !!!!!
+    /// 
+    /// Gets all recognized holes and returns them as hole groupings based on similar geometry.
+    /// bodies : Model bodies on which to recognize holes.
+    static core::Ptr<RecognizedHoleGroups> recognizeHoleGroups(const std::vector<core::Ptr<core::Base>>& bodies);
+
+    /// Returns the hole at the specified index from this hole group.
+    /// index : The index of the hole within this hole group to return. The first hole in this hole group has an index of 0.
+    core::Ptr<RecognizedHole> item(size_t index) const;
+
+    /// Returns the number of holes contained in this hole group.
+    size_t count() const;
+
+    /// Returns true if there are any warnings associated with this hole group.
+    bool hasWarnings() const;
+
+    /// Returns true if there are any errors associated with this hole group.
+    bool hasErrors() const;
+
+    /// Gets all recognized holes and returns them as hole groupings based on similar geometry.
+    /// bodies : Model bodies on which to recognize holes.
+    /// input : Input object that contains filtering settings
+    static core::Ptr<RecognizedHoleGroups> recognizeHoleGroupsWithInput(const std::vector<core::Ptr<core::Base>>& bodies, const core::Ptr<RecognizedHolesInput>& input);
+
+    typedef RecognizedHole iterable_type;
+    template <class OutputIterator> void copyTo(OutputIterator result);
+
+    ADSK_CAM_RECOGNIZEDHOLEGROUP_API static const char* classType();
+    ADSK_CAM_RECOGNIZEDHOLEGROUP_API const char* objectType() const override;
+    ADSK_CAM_RECOGNIZEDHOLEGROUP_API void* queryInterface(const char* id) const override;
+    ADSK_CAM_RECOGNIZEDHOLEGROUP_API static const char* interfaceId() { return classType(); }
+
+private:
+
+    // Raw interface
+    ADSK_CAM_RECOGNIZEDHOLEGROUP_API static RecognizedHoleGroups* recognizeHoleGroups_raw(core::Base** bodies, size_t bodies_size);
+    virtual RecognizedHole* item_raw(size_t index) const = 0;
+    virtual size_t count_raw() const = 0;
+    virtual bool hasWarnings_raw() const = 0;
+    virtual bool hasErrors_raw() const = 0;
+    ADSK_CAM_RECOGNIZEDHOLEGROUP_API static RecognizedHoleGroups* recognizeHoleGroupsWithInput_raw(core::Base** bodies, size_t bodies_size, RecognizedHolesInput* input);
+};
+
+// Inline wrappers
+
+inline core::Ptr<RecognizedHoleGroups> RecognizedHoleGroup::recognizeHoleGroups(const std::vector<core::Ptr<core::Base>>& bodies)
+{
+    core::Base** bodies_ = new core::Base*[bodies.size()];
+    for(size_t i=0; i<bodies.size(); ++i)
+        bodies_[i] = bodies[i].get();
+
+    core::Ptr<RecognizedHoleGroups> res = recognizeHoleGroups_raw(bodies_, bodies.size());
+    delete[] bodies_;
+    return res;
+}
+
+inline core::Ptr<RecognizedHole> RecognizedHoleGroup::item(size_t index) const
+{
+    core::Ptr<RecognizedHole> res = item_raw(index);
+    return res;
+}
+
+inline size_t RecognizedHoleGroup::count() const
+{
+    size_t res = count_raw();
+    return res;
+}
+
+inline bool RecognizedHoleGroup::hasWarnings() const
+{
+    bool res = hasWarnings_raw();
+    return res;
+}
+
+inline bool RecognizedHoleGroup::hasErrors() const
+{
+    bool res = hasErrors_raw();
+    return res;
+}
+
+inline core::Ptr<RecognizedHoleGroups> RecognizedHoleGroup::recognizeHoleGroupsWithInput(const std::vector<core::Ptr<core::Base>>& bodies, const core::Ptr<RecognizedHolesInput>& input)
+{
+    core::Base** bodies_ = new core::Base*[bodies.size()];
+    for(size_t i=0; i<bodies.size(); ++i)
+        bodies_[i] = bodies[i].get();
+
+    core::Ptr<RecognizedHoleGroups> res = recognizeHoleGroupsWithInput_raw(bodies_, bodies.size(), input.get());
+    delete[] bodies_;
+    return res;
+}
+
+template <class OutputIterator> inline void RecognizedHoleGroup::copyTo(OutputIterator result)
+{
+    for (size_t i = 0;i < count();++i)
+    {
+        *result = item(i);
+        ++result;
+    }
+}
+}// namespace cam
+}// namespace adsk
+
+#undef ADSK_CAM_RECOGNIZEDHOLEGROUP_API

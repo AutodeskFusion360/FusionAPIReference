@@ -1,0 +1,125 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/ConstructionPlaneThreePointsDefinition_redefine.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="ConstructionPlaneThreePointsDefinition_redefine">
+    <meta name="description" content="ConstructionPlaneThreePointsDefinition.redefine Method">
+    <meta name="topicid" content="GUID-ae3a5137-f95b-4b07-8e9b-460183a76e97">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>ConstructionPlaneThreePointsDefinition.redefine Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">ConstructionPlaneThreePointsDefinition.redefine Method</h1>
+
+          Parent Object: <a href="ConstructionPlaneThreePointsDefinition.htm">ConstructionPlaneThreePointsDefinition</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Construction/ConstructionPlaneThreePointsDefinition.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Redefines the input geometry of the construction plane.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"constructionPlaneThreePointsDefinition_var" is a variable referencing a <a href="ConstructionPlaneThreePointsDefinition.htm">ConstructionPlaneThreePointsDefinition</a> object.<code><pre class="api-code">returnValue = constructionPlaneThreePointsDefinition_var.<b>redefine</b>(pointEntityOne, pointEntityTwo, pointEntityThree)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"constructionPlaneThreePointsDefinition_var" is a variable referencing a <a href="ConstructionPlaneThreePointsDefinition.htm">ConstructionPlaneThreePointsDefinition</a> object.<br /><br /><code><pre class="api-code">#include &lt;Fusion/Construction/ConstructionPlaneThreePointsDefinition.h&gt;<br /><br />returnValue = constructionPlaneThreePointsDefinition_var-&gt;<b>redefine</b>(pointEntityOne, pointEntityTwo, pointEntityThree);<br /></pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;">boolean</td>
+        <td class="api-list">Returns true if the redefinition of the plane is successful.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">pointEntityOne</td>
+        <td class="api-list"><a href="Base.htm">Base</a></td>
+        <td class="api-list">Gets the first construction point, sketch point or vertex.</td>
+      </tr>
+      <tr>
+        <td class="api-list">pointEntityTwo</td>
+        <td class="api-list"><a href="Base.htm">Base</a></td>
+        <td class="api-list">Gets the second construction point, sketch point or vertex.</td>
+      </tr>
+      <tr>
+        <td class="api-list">pointEntityThree</td>
+        <td class="api-list"><a href="Base.htm">Base</a></td>
+        <td class="api-list">Gets the third construction point, sketch point or vertex.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(ConstructionPlaneThreePointsDefinition.redefine%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

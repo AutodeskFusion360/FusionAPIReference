@@ -1,0 +1,84 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/SweepSolidOrientationTypes.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="05/04/2024">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="SweepSolidOrientationTypes">
+    <meta name="description" content="The various orientation types when doing a solid sweep.">
+    <meta name="topicid" content="GUID-283117DC-CF09-4EF4-AA5F-0325421B0900">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>SweepSolidOrientationTypes Enumerator
+        </title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">SweepSolidOrientationTypes Enumerator
+        </h1>
+    <h2 class="api">
+          Description
+        </h2>The various orientation types when doing a solid sweep.<br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion\FusionTypeDefs.h&gt;<h2 class="api">
+          Methods
+        </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+              Name
+            </td>
+        <td class="api-list" style="width:1px;">
+              Value
+            </td>
+        <td class="api-list">
+              Description
+            </td>
+      </tr>
+      <tr>
+        <td class="api-list">AlignedSolidOrientationType</td>
+        <td class="api-list" align="right" style="padding-right:10px">2</td>
+        <td class="api-list">Keep the orientation of the tool body aligned to a direction vector. The tool may rotate around this vector as it is swept along the path.</td>
+      </tr>
+      <tr>
+        <td class="api-list">PerpendicularSolidOrientationType</td>
+        <td class="api-list" align="right" style="padding-right:10px">0</td>
+        <td class="api-list">Maintain the orientation of the tool body relative to the sweep path. As the tool body sweeps along the path, it will rotate to maintain the same relative angle to the path.</td>
+      </tr>
+      <tr>
+        <td class="api-list">RigidSolidOrientationType</td>
+        <td class="api-list" align="right" style="padding-right:10px">1</td>
+        <td class="api-list">The orientation of the tool body does not change as it is swept along the path. The tool will be translated but not rotated.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+          Version
+        </h2>
+        Introduced in version May 2024<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(SweepSolidOrientationTypes%20Enum%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

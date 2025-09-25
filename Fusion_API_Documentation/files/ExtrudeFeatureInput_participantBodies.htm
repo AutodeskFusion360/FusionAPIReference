@@ -1,0 +1,96 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/ExtrudeFeatureInput_participantBodies.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="6/1/2017">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="ExtrudeFeatureInput_participantBodies">
+    <meta name="description" content="ExtrudeFeatureInput.participantBodies Property">
+    <meta name="topicid" content="GUID-52654368-08B6-46CB-9911-3719638B34F5">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>ExtrudeFeatureInput.participantBodies Property</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">ExtrudeFeatureInput.participantBodies Property</h1>
+
+          Parent Object: <a href="ExtrudeFeatureInput.htm">ExtrudeFeatureInput</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Features/ExtrudeFeatureInput.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Gets and sets the list of bodies that will participate in the feature when the operation is a cut or intersection.<br/><br/> If this property has not been set, the default behavior is that all bodies that are intersected by the feature will participate.<br/><br/> This property can return null in the case where the feature has not been fully defined so that possible intersecting bodies can be computed.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"extrudeFeatureInput_var" is a variable referencing an ExtrudeFeatureInput object.</span><br /><br /><code><pre class="api-code"><span style="color:blue"># Get the value of the property.</span><br />propertyValue = extrudeFeatureInput_var.<b>participantBodies<br /><br /><span style="color:blue"># Set the value of the property.</span><br />extrudeFeatureInput_var.<b>participantBodies</b> = propertyValue</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"extrudeFeatureInput_var" is a variable referencing an ExtrudeFeatureInput object.<br /><code><pre class="api-code">#include &lt;Fusion/Features/ExtrudeFeatureInput.h&gt;<br /><br /><span style="color:blue">// Get the value of the property.</span><br />std::vector&lt;Ptr&lt;BRepBody&gt;&gt; propertyValue = extrudeFeatureInput_var-&gt;<b>participantBodies</b>();<br /><br /><span style="color:blue">// Set the value of the property, where value_var is a BRepBody.</span><br />bool returnValue = extrudeFeatureInput_var-&gt;<b>participantBodies</b>(value_var);</pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Property Value
+          </h2>This is a read/write property whose value is an array of type <a href="BRepBody.htm">BRepBody</a>.<h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ParticipantBodiesSample_Sample.htm">Manage Participant Bodies API Sample</a></td>
+        <td class="api-list">Demonstrates how to manage participant During Cut operation. Same API can be used to manage participants During intersection also.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version January 2017<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(ExtrudeFeatureInput.participantBodies%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

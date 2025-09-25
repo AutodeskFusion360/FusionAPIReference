@@ -1,0 +1,645 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/MarkingMenuSample.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="MarkingMenuSample_Sample">
+    <meta name="description" content="Marking Menu API Sample Sample">
+    <meta name="topicid" content="GUID-c90ce6a2-c282-11e6-a365-3417ebc87622">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Marking Menu API Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Marking Menu API Sample</h1>
+    <h2 class="api">
+          Description
+        </h2>Demonstrates how to customize marking menu and context menu. This sample is an add-in. To use it, create a new add-in using the "Scrips and Add-Ins" command. Use any name you would like for the add-in. In the folder where the add-in was created edit the <i>add-in name</i>.py file and replace it's entire contents with the sample code below. You can also delete all the other files that were created for the add-in except for <i>add-in name</i>.manifiest. Start the add-in from the "Scripts and Add-Ins" dialog. Now, with the add-in running, whenever you right-click in the Fusion window, you'll get an entirely customized context menu. The default marking menu has been modified by the add-in by removing the existing commands and adding some custom commands.<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#C++">C++</a></li>
+        <li><a href="#Python">Python</a></li>
+      </ul>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code">#include &lt;Core/Utils.h&gt;
+#include &lt;Core/Application/Application.h&gt;
+#include &lt;Core/Application/Product.h&gt;
+#include &lt;Core/Geometry/Point3D.h&gt;
+#include &lt;Core/Geometry/Vector3D.h&gt;
+#include &lt;Core/UserInterface/UserInterface.h&gt;
+#include &lt;Core/UserInterface/CommandCreatedEventHandler.h&gt;
+#include &lt;Core/UserInterface/CommandCreatedEvent.h&gt;
+#include &lt;Core/UserInterface/CommandCreatedEventArgs.h&gt;
+#include &lt;Core/UserInterface/CommandEvent.h&gt;
+#include &lt;Core/UserInterface/CommandEventArgs.h&gt;
+#include &lt;Core/UserInterface/CommandEventHandler.h&gt;
+#include &lt;Core/UserInterface/MarkingMenuEvent.h&gt;
+#include &lt;Core/UserInterface/MarkingMenuEventArgs.h&gt;
+#include &lt;Core/UserInterface/MarkingMenuEventHandler.h&gt;
+#include &lt;Core/UserInterface/RadialMarkingMenu.h&gt;
+#include &lt;Core/UserInterface/LinearMarkingMenu.h&gt;
+#include &lt;Core/UserInterface/Command.h&gt;
+#include &lt;Core/UserInterface/CommandDefinition.h&gt;
+#include &lt;Core/UserInterface/CommandDefinitions.h&gt;
+#include &lt;Core/UserInterface/ToolbarControls.h&gt;
+#include &lt;Core/UserInterface/DropDownControl.h&gt;
+#include &lt;Core/UserInterface/Selection.h&gt;
+#include &lt;Fusion/BRep/BRepFace.h&gt;
+#include &lt;Fusion/BRep/BRepEdge.h&gt;
+#include &lt;Fusion/BRep/BRepBody.h&gt;
+#include &lt;Fusion/BRep/BRepVertex.h&gt;
+#include &lt;Fusion/Sketch/Sketch.h&gt;
+#include &lt;Fusion/Sketch/Profile.h&gt;
+#include &lt;Fusion/Sketch/SketchEntity.h&gt;
+#include &lt;Fusion/Construction/ConstructionPlane.h&gt;
+
+using namespace adsk::core;
+using namespace adsk::fusion;
+
+Ptr&lt;Application&gt; app;
+Ptr&lt;UserInterface&gt; ui;
+std::vector&lt;Ptr&lt;Base&gt;&gt; entities;
+static void setLinearMarkingMenu(const Ptr&lt;MarkingMenuEventArgs&gt;& eventArgs)
+{
+    Ptr&lt;CommandDefinitions&gt; definitions = ui-&gt;commandDefinitions();
+    if (!definitions)
+        return;
+    Ptr&lt;CommandDefinition&gt; cmdDefSelectedEntities = definitions-&gt;itemById("PrintSelectedEntities");
+    Ptr&lt;CommandDefinition&gt; cmdDef = definitions-&gt;itemById("TestCommand");
+    if (!cmdDef || !cmdDefSelectedEntities)
+        return;
+
+    Ptr&lt;LinearMarkingMenu&gt; linearMenu = eventArgs-&gt;linearMarkingMenu();
+    if (!linearMenu)
+        return;
+    <span style="color:blue">// Clear current linear menu</span>
+    linearMenu-&gt;clear();
+
+    <span style="color:blue">// Add test command, add print-entity command</span>
+    Ptr&lt;ToolbarControls&gt; controls = linearMenu-&gt;controls();
+    controls-&gt;addCommand(cmdDef);
+    controls-&gt;addCommand(cmdDefSelectedEntities);
+    <span style="color:blue">// Add a separator line</span>
+    controls-&gt;addSeparator("LinearSeparator");
+    <span style="color:blue">// Add a sub linear menu</span>
+    Ptr&lt;DropDownControl&gt; dropdown = controls-&gt;addDropDown("Linear Sub Menu", "", "LinearSubMenu");
+    Ptr&lt;ToolbarControls&gt; subControls = dropdown-&gt;controls();
+    subControls-&gt;addCommand(cmdDef);
+    subControls-&gt;addCommand(cmdDefSelectedEntities);
+    <span style="color:blue">// Add a sub-sub linear menu</span>
+    if (!subControls)
+        return;
+    Ptr&lt;DropDownControl&gt; subDropdown = subControls-&gt;addDropDown("Linear sub-sub menu", "", "LinearSubSub");
+    Ptr&lt;ToolbarControls&gt; subsubControls = subDropdown-&gt;controls();
+    subsubControls-&gt;addCommand(cmdDef);
+    subsubControls-&gt;addCommand(cmdDefSelectedEntities);
+
+    <span style="color:blue">// Add some special command if selecting BRep/sketch entities.</span>
+    std::vector&lt;Ptr&lt;Base&gt;&gt; selectedEntities = eventArgs-&gt;selectedEntities();
+    if (selectedEntities.size())
+    {
+        Ptr&lt;Base&gt; sel0 = selectedEntities[0];
+        <span style="color:blue">// special command if BRep entity selected</span>
+        if (sel0-&gt;query&lt;BRepFace&gt;() || sel0-&gt;query&lt;BRepEdge&gt;() || sel0-&gt;query&lt;BRepBody&gt;() || sel0-&gt;query&lt;BRepVertex&gt;())
+        {
+            Ptr&lt;CommandDefinition&gt; cmdDefBRepSpecial = definitions-&gt;itemById("BrepCommand");
+            controls-&gt;addCommand(cmdDefBRepSpecial);
+        }
+        <span style="color:blue">// special command if sketch entity selected</span>
+        if (sel0-&gt;query&lt;Sketch&gt;() || sel0-&gt;query&lt;Profile&gt;() || sel0-&gt;query&lt;SketchEntity&gt;())
+        {
+            Ptr&lt;CommandDefinition&gt; cmdDefSketchSpecial = definitions-&gt;itemById("SketchCommand");
+            controls-&gt;addCommand(cmdDefSketchSpecial);
+        }
+    }
+}
+
+static void setRadialMarkingMenu(const Ptr&lt;MarkingMenuEventArgs&gt;& eventArgs)
+{
+    Ptr&lt;CommandDefinitions&gt; definitions = ui-&gt;commandDefinitions();
+    if (!definitions)
+        return;
+    Ptr&lt;CommandDefinition&gt; cmdDefSelectedEntities = definitions-&gt;itemById("PrintSelectedEntities");
+    Ptr&lt;CommandDefinition&gt; cmdDef = definitions-&gt;itemById("TestCommand");
+    if (!cmdDef || !cmdDefSelectedEntities)
+        return;
+
+    Ptr&lt;RadialMarkingMenu&gt; radialMenu = eventArgs-&gt;radialMarkingMenu();
+    if (!radialMenu)
+        return;
+
+    <span style="color:blue">// Clear current radial menu</span>
+    radialMenu-&gt;clear();
+
+    <span style="color:blue">// Create sub radial menu</span>
+    Ptr&lt;RadialMarkingMenu&gt; subRadial = radialMenu-&gt;create("test");
+    subRadial-&gt;text("sub");
+
+    <span style="color:blue">// Create sub-sub radial menu</span>
+    Ptr&lt;RadialMarkingMenu&gt; subsubRadial = subRadial-&gt;create("sub sub");
+
+    <span style="color:blue">// sub-sub radial menu layout</span>
+    subsubRadial-&gt;westCommand(cmdDef);
+    subsubRadial-&gt;northCommand(cmdDef);
+    subsubRadial-&gt;southCommand(cmdDefSelectedEntities);
+    subsubRadial-&gt;eastCommand(cmdDef);
+
+    <span style="color:blue">// sub radial menu layout</span>
+    subRadial-&gt;northwestCommand(subsubRadial);
+    subRadial-&gt;southeastCommand(cmdDef);
+    subRadial-&gt;southwestCommand(cmdDef);
+    subRadial-&gt;northeastCommand(cmdDefSelectedEntities);
+
+    <span style="color:blue">// root radial menu layout</span>
+    radialMenu-&gt;westCommand(cmdDef);
+    radialMenu-&gt;northCommand(cmdDef);
+    radialMenu-&gt;southCommand(cmdDef);
+    radialMenu-&gt;eastCommand(cmdDef);
+    radialMenu-&gt;northeastCommand(subRadial);
+    radialMenu-&gt;northwestCommand(cmdDefSelectedEntities);
+    radialMenu-&gt;southeastCommand(cmdDef);
+    radialMenu-&gt;southwestCommand(cmdDef);
+}
+
+class MyMarkingMenuHandler : public adsk::core::MarkingMenuEventHandler
+{
+  public:
+    void notify(const Ptr&lt;MarkingMenuEventArgs&gt;& eventArgs) override
+    {
+        setLinearMarkingMenu(eventArgs);
+        setRadialMarkingMenu(eventArgs);
+
+        entities.clear();
+        entities = eventArgs-&gt;selectedEntities();
+    }
+} onMarkingMenuDisplaying_;
+
+class CommandExecutedHandler : public adsk::core::CommandEventHandler
+{
+  public:
+    void notify(const Ptr&lt;CommandEventArgs&gt;& eventArgs) override
+    {
+        Ptr&lt;Event&gt; firingEvent = eventArgs-&gt;firingEvent();
+        if (!firingEvent)
+            return;
+
+        Ptr&lt;Command&gt; command = firingEvent-&gt;sender();
+        if (!command)
+            return;
+
+        Ptr&lt;CommandDefinition&gt; parentDefinition = command-&gt;parentCommandDefinition();
+        if (!parentDefinition)
+            return;
+
+        Ptr&lt;MarkingMenuEvent&gt; markingMenuEvent = ui-&gt;markingMenuDisplaying();
+        if (!markingMenuEvent)
+            return;
+
+        if (parentDefinition-&gt;id() == "PrintSelectedEntities")
+        {
+            if (!entities.empty())
+            {
+                std::string msg = "selected entities:";
+                for (Ptr&lt;Base&gt; obj : entities)
+                {
+                    msg += '\n' + obj-&gt;objectType();
+                }
+                ui-&gt;messageBox(msg);
+            }
+            else
+            {
+                ui-&gt;messageBox("No selected entity.");
+            }
+        }
+        else
+        {
+            ui-&gt;messageBox("command " + parentDefinition-&gt;id() + " triggered");
+        }
+    }
+};
+
+class CommandCreatedHandler : public adsk::core::CommandCreatedEventHandler
+{
+  public:
+    void notify(const Ptr&lt;CommandCreatedEventArgs&gt;& eventArgs) override
+    {
+        if (eventArgs)
+        {
+            Ptr&lt;Command&gt; command = eventArgs-&gt;command();
+            if (!command)
+                return;
+
+            Ptr&lt;CommandEvent&gt; exec = command-&gt;execute();
+            if (!exec)
+                return;
+            exec-&gt;add(&onCommandExecuted_);
+        }
+    }
+
+  private:
+    CommandExecutedHandler onCommandExecuted_;
+} onCommandCreated_;
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    app = Application::get();
+    if (!app)
+        return false;
+
+    ui = app-&gt;userInterface();
+    if (!ui)
+        return false;
+
+    <span style="color:blue">// Add customized handler for marking menu displaying</span>
+    Ptr&lt;MarkingMenuEvent&gt; markingMenuEvent = ui-&gt;markingMenuDisplaying();
+    if (!markingMenuEvent)
+        return false;
+    markingMenuEvent-&gt;add(&onMarkingMenuDisplaying_);
+
+    <span style="color:blue">// Add customized handler for marking menu displaying</span>
+    <span style="color:blue">// Create a command to print selected entities</span>
+    Ptr&lt;CommandDefinitions&gt; definitions = ui-&gt;commandDefinitions();
+    if (!definitions)
+        return false;
+    Ptr&lt;CommandDefinition&gt; cmdDefSelectedEntities = definitions-&gt;itemById("PrintSelectedEntities");
+    if (!cmdDefSelectedEntities)
+    {
+        cmdDefSelectedEntities =
+            definitions-&gt;addButtonDefinition("PrintSelectedEntities", "Print Entities", "Print selected entities.");
+        if (!cmdDefSelectedEntities)
+            return false;
+        Ptr&lt;CommandCreatedEvent&gt; printCmdCreatedEvent = cmdDefSelectedEntities-&gt;commandCreated();
+        if (!printCmdCreatedEvent)
+            return false;
+        printCmdCreatedEvent-&gt;add(&onCommandCreated_);
+    }
+
+    <span style="color:blue">// Create a test command</span>
+    Ptr&lt;CommandDefinition&gt; cmdDef = definitions-&gt;itemById("TestCommand");
+    if (!cmdDef)
+    {
+        cmdDef = definitions-&gt;addButtonDefinition("TestCommand", "Test Command", "Test Command");
+        if (!cmdDef)
+            return false;
+        Ptr&lt;CommandCreatedEvent&gt; testCmdCreatedEvent = cmdDef-&gt;commandCreated();
+        if (!testCmdCreatedEvent)
+            return false;
+        testCmdCreatedEvent-&gt;add(&onCommandCreated_);
+    }
+
+    <span style="color:blue">// Create special command for BRep entities</span>
+    Ptr&lt;CommandDefinition&gt; cmdDefBRepSpecial = definitions-&gt;itemById("BrepCommand");
+    if (!cmdDefBRepSpecial)
+    {
+        cmdDefBRepSpecial =
+            definitions-&gt;addButtonDefinition("BrepCommand", "Brep Command", "This is a command for BRep entities.");
+        if (!cmdDefBRepSpecial)
+            return false;
+        Ptr&lt;CommandCreatedEvent&gt; brepCmdCreatedEvent = cmdDefBRepSpecial-&gt;commandCreated();
+        if (!brepCmdCreatedEvent)
+            return false;
+        brepCmdCreatedEvent-&gt;add(&onCommandCreated_);
+    }
+
+    <span style="color:blue">// Create special command for sketch entities</span>
+    Ptr&lt;CommandDefinition&gt; cmdDefSketchSpecial = definitions-&gt;itemById("SketchCommand");
+    if (!cmdDefSketchSpecial)
+    {
+        cmdDefSketchSpecial = definitions-&gt;addButtonDefinition(
+            "SketchCommand", "Sketch Command", "This is a command for sketch entities.");
+        if (!cmdDefSketchSpecial)
+            return false;
+        Ptr&lt;CommandCreatedEvent&gt; sketchCmdCreatedEvent = cmdDefSketchSpecial-&gt;commandCreated();
+        if (!sketchCmdCreatedEvent)
+            return false;
+        sketchCmdCreatedEvent-&gt;add(&onCommandCreated_);
+    }
+
+    <span style="color:blue">// prevent this module from being terminate when the script returns, because we are waiting for event handlers to</span>
+    <span style="color:blue">// fire</span>
+    adsk::autoTerminate(false);
+
+    ui-&gt;messageBox("Right click to see the customized marking menu.");
+
+    return true;
+}
+
+extern "C" XI_EXPORT bool stop(const char* context)
+{
+    if (ui)
+    {
+        Ptr&lt;CommandDefinitions&gt; definitions = ui-&gt;commandDefinitions();
+        if (!definitions)
+            return false;
+
+        Ptr&lt;CommandDefinition&gt; cmdDefSelectedEntities = definitions-&gt;itemById("PrintSelectedEntities");
+        if (cmdDefSelectedEntities)
+            cmdDefSelectedEntities-&gt;deleteMe();
+
+        Ptr&lt;CommandDefinition&gt; cmdDef = definitions-&gt;itemById("TestCommand");
+        if (cmdDef)
+            cmdDef-&gt;deleteMe();
+
+        Ptr&lt;CommandDefinition&gt; cmdDefBRepSpecial = definitions-&gt;itemById("BrepCommand");
+        if (cmdDefBRepSpecial)
+            cmdDefBRepSpecial-&gt;deleteMe();
+
+        Ptr&lt;CommandDefinition&gt; cmdDefSketchSpecial = definitions-&gt;itemById("SketchCommand");
+        if (cmdDefSketchSpecial)
+            cmdDefSketchSpecial-&gt;deleteMe();
+
+        ui-&gt;messageBox("Stop addin");
+        ui = nullptr;
+    }
+
+    return true;
+}</pre>
+      </div>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code"><span style="color:blue">#Author-</span>
+<span style="color:blue">#Description-</span>
+
+import adsk.core, adsk.fusion, adsk.cam, traceback
+
+<span style="color:blue"># global mapping list of event handlers to keep them referenced for the duration of the command</span>
+<span style="color:blue">#handlers = {}</span>
+handlers = []
+cmdDefs = []
+entities = []
+
+def run(context):
+    ui = None
+    handlers.clear()
+    try:
+        app = adsk.core.Application.get()
+        ui  = app.userInterface
+        
+        def setLinearMarkingMenu(args):
+            try:
+                menuArgs = adsk.core.MarkingMenuEventArgs.cast(args)
+                cmdDefSelectedEntities = ui.commandDefinitions.itemById('PrintSelectedEntities')
+                cmdDef = ui.commandDefinitions.itemById('TestCommand')
+                
+                commands = []
+                commands.append(cmdDefSelectedEntities)
+                commands.append(cmdDef)
+                    
+                linearMenu = menuArgs.linearMarkingMenu                                        
+                <span style="color:blue"># linear</span>
+                linearMenu.clear()
+                linearMenu.controls.addCommand(cmdDef)
+                linearMenu.controls.addCommand(cmdDefSelectedEntities)
+                linearMenu.controls.addSeparator('LinearSeparator')
+                dropdown = linearMenu.controls.addDropDown('Linear Sub Menu', '', 'LinearSubMenu')
+                subDropDown = dropdown.controls.addDropDown('sub sub', '', 'Sub Sub')
+                for cmd in commands:
+                    dropdown.controls.addCommand(cmd)
+                    subDropDown.controls.addCommand(cmd)
+                
+                if args.selectedEntities:
+                    sel0 = args.selectedEntities[0]
+                    <span style="color:blue"># special command if brep entities selected</span>
+                    body = adsk.fusion.BRepBody.cast(sel0)
+                    face = adsk.fusion.BRepFace.cast(sel0)
+                    edge = adsk.fusion.BRepEdge.cast(sel0)
+                    vertex = adsk.fusion.BRepVertex.cast(sel0)
+                    if body or face or edge or vertex:
+                        cmdDefSpecial = ui.commandDefinitions.itemById('BrepCommand')
+                        linearMenu.controls.addCommand(cmdDefSpecial)
+                    
+                    <span style="color:blue"># special command if sketch entities selected</span>
+                    sketch = adsk.fusion.Sketch.cast(sel0)
+                    prof = adsk.fusion.Profile.cast(sel0)
+                    sketchEntity = adsk.fusion.SketchEntity.cast(sel0)
+                    if sketch or sketchEntity or prof:
+                        cmdDefSpecial = ui.commandDefinitions.itemById('SketchCommand')
+                        linearMenu.controls.addCommand(cmdDefSpecial)        
+            except:
+                if ui:
+                    ui.messageBox('setting linear menu failed: {}').format(traceback.format_exc())
+
+        def setRadialMarkingMenu(args):
+            try:
+                menuArgs = adsk.core.MarkingMenuEventArgs.cast(args)    
+                cmdDefSelectedEntities = ui.commandDefinitions.itemById('PrintSelectedEntities')
+                cmdDef = ui.commandDefinitions.itemById('TestCommand')
+                    
+                radialMenu = menuArgs.radialMarkingMenu            
+                <span style="color:blue"># radial</span>
+                radialMenu.clear()
+                
+                subRadial = radialMenu.create("test")
+                subRadial.text = "sub"
+                
+                subsubRadial = subRadial.create('sub sub')
+                <span style="color:blue"># sub sub</span>
+                subsubRadial.westCommand = cmdDef
+                subsubRadial.northCommand = cmdDef
+                subsubRadial.southCommand = cmdDefSelectedEntities
+                subsubRadial.eastCommand = cmdDef
+                
+                <span style="color:blue"># sub radial menu</span>
+                subRadial.northwestCommand = subsubRadial
+                subRadial.southeastCommand = cmdDef
+                subRadial.southwestCommand = cmdDef
+                subRadial.northeastCommand = cmdDefSelectedEntities
+                
+                <span style="color:blue"># root radial menu</span>
+                radialMenu.eastCommand = cmdDef
+                radialMenu.westCommand = cmdDef
+                radialMenu.northCommand = cmdDef
+                radialMenu.southCommand = cmdDef
+                radialMenu.northeastCommand = subRadial
+                radialMenu.northwestCommand = cmdDefSelectedEntities
+                radialMenu.southeastCommand = cmdDef
+                radialMenu.southwestCommand = cmdDef
+                
+            except:
+                if ui:
+                    ui.messageBox('setting radial menu failed: {}').format(traceback.format_exc())
+
+        class MyCommandCreatedEventHandler(adsk.core.CommandCreatedEventHandler):
+            def __init__(self):
+                super().__init__()
+            def notify(self, args):
+                try:
+                    command = args.command                                     
+                    onCommandExcute = MyCommandExecuteHandler()
+                    handlers.append(onCommandExcute)
+                    command.execute.add(onCommandExcute)
+                except:
+                    ui.messageBox('command created failed: {}').format(traceback.format_exc())
+        
+        class MyCommandExecuteHandler(adsk.core.CommandEventHandler):
+            def __init__(self):
+                super().__init__()
+            def notify(self, args):
+                try:
+                    command = args.firingEvent.sender
+                    cmdDef = command.parentCommandDefinition
+                    if cmdDef:
+                        if cmdDef.id == 'PrintSelectedEntities':
+                            if entities:
+                                entityList = 'selected entities:'
+                                for e in entities:
+                                    entityList += '\n' + str(e)
+                                ui.messageBox(entityList)
+                            else:
+                                ui.messageBox('No selected entity.')                                    
+                        else:
+                            ui.messageBox('command {} triggered.'.format(cmdDef.id))
+                    else:
+                        ui.messageBox('No CommandDefinition')
+                except:
+                    if ui:
+                        ui.messageBox('command executed failed: {}').format(traceback.format_exc())
+                        
+
+        class MyMarkingMenuHandler(adsk.core.MarkingMenuEventHandler):
+            def __init__(self):
+                super().__init__()
+            def notify(self, args):
+                try:                    
+                    setLinearMarkingMenu(args)
+                    setRadialMarkingMenu(args)
+                    
+                    <span style="color:blue"># selected entities</span>
+                    global entities
+                    entities.clear()
+                    entities = args.selectedEntities
+                except:
+                    if ui:
+                        ui.messageBox('Marking Menu Displaying event failed: {}'.format(traceback.format_exc()))
+        
+        <span style="color:blue"># Add customized handler for marking menu displaying</span>
+        onMarkingMenuDisplaying = MyMarkingMenuHandler()                   
+        handlers.append(onMarkingMenuDisplaying)                     
+        ui.markingMenuDisplaying.add(onMarkingMenuDisplaying)
+        
+        <span style="color:blue"># Add customized handler for commands creating</span>
+        onCommandCreated = MyCommandCreatedEventHandler()        
+        handlers.append(onCommandCreated)
+
+        <span style="color:blue"># Create a command to print selected entities</span>
+        cmdDefSelectedEntities = ui.commandDefinitions.itemById('PrintSelectedEntities')
+        if not cmdDefSelectedEntities:
+            cmdDefSelectedEntities = ui.commandDefinitions.addButtonDefinition('PrintSelectedEntities', 'Print Entities', 'Print selected entities.')     
+            cmdDefSelectedEntities.commandCreated.add(onCommandCreated) 
+            cmdDefs.append(cmdDefSelectedEntities)
+            
+        <span style="color:blue"># Create a test command</span>
+        cmdDef = ui.commandDefinitions.itemById('TestCommand')
+        if not cmdDef:
+            cmdDef = ui.commandDefinitions.addButtonDefinition('TestCommand', 'Test Command', 'Test Command')            
+            cmdDef.commandCreated.add(onCommandCreated)  
+            cmdDefs.append(cmdDef)         
+
+        <span style="color:blue"># Create special command for brep entities</span>
+        cmdDefBRepSpecial = ui.commandDefinitions.itemById('BrepCommand')
+        if not cmdDefBRepSpecial:
+            cmdDefBRepSpecial = ui.commandDefinitions.addButtonDefinition('BrepCommand', 'Brep Command', 'This is a command for brep entities.')            
+            cmdDefBRepSpecial.commandCreated.add(onCommandCreated)  
+            cmdDefs.append(cmdDefBRepSpecial)
+            
+        <span style="color:blue"># Create special command for sketch entities</span>
+        cmdDefSketchSpecial = ui.commandDefinitions.itemById('SketchCommand')
+        if not cmdDefSketchSpecial:
+            cmdDefSketchSpecial = ui.commandDefinitions.addButtonDefinition('SketchCommand', 'Sketch Command', 'This is a command for sketch entities.')            
+            cmdDefSketchSpecial.commandCreated.add(onCommandCreated)  
+            cmdDefs.append(cmdDefSketchSpecial)
+            
+        
+        ui.messageBox('Right click to see the customized marking menu.')        
+        
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
+
+def stop(context):
+    ui = None
+    try:
+        app = adsk.core.Application.get()
+        ui  = app.userInterface
+        
+        for obj in cmdDefs:
+            if obj.isValid:
+                obj.deleteMe()
+            else:
+                ui.messageBox(str(obj) + ' is not a valid object')
+
+        handlers.clear()
+        
+        ui.messageBox('Stop addin')
+
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(MarkingMenuSample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

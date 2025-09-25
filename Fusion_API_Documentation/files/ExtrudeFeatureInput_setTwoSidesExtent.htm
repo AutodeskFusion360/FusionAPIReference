@@ -1,0 +1,151 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/ExtrudeFeatureInput_setTwoSidesExtent.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/10/2016">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="ExtrudeFeatureInput_setTwoSidesExtent">
+    <meta name="description" content="ExtrudeFeatureInput.setTwoSidesExtent Method">
+    <meta name="topicid" content="GUID-C88D028E-E482-4E48-9DC3-FEF9E06BABC0">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>ExtrudeFeatureInput.setTwoSidesExtent Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">ExtrudeFeatureInput.setTwoSidesExtent Method</h1>
+
+          Parent Object: <a href="ExtrudeFeatureInput.htm">ExtrudeFeatureInput</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Features/ExtrudeFeatureInput.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Defines the extrusion to go in both directions from the profile. The extent is defined independently for each direction using the input arguments.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"extrudeFeatureInput_var" is a variable referencing an <a href="ExtrudeFeatureInput.htm">ExtrudeFeatureInput</a> object.<code><pre class="api-code"><span style="color:blue"># Uses no optional arguments.</span><br />returnValue = extrudeFeatureInput_var.<b>setTwoSidesExtent</b>(sideOneExtent, sideTwoExtent)<br /><br /><span style="color:blue"># Uses optional arguments.</span><br />returnValue = extrudeFeatureInput_var.<b>setTwoSidesExtent</b>(sideOneExtent, sideTwoExtent, sideOneTaperAngle, sideTwoTaperAngle)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"extrudeFeatureInput_var" is a variable referencing an <a href="ExtrudeFeatureInput.htm">ExtrudeFeatureInput</a> object.<br /><br /><code><pre class="api-code">#include &lt;Fusion/Features/ExtrudeFeatureInput.h&gt;<br /><br /><span style="color:blue">// Uses no optional arguments.</span><br />returnValue = extrudeFeatureInput_var-&gt;<b>setTwoSidesExtent</b>(sideOneExtent, sideTwoExtent);<br /><br /><span style="color:blue">// Uses optional arguments.</span><br />returnValue = extrudeFeatureInput_var-&gt;<b>setTwoSidesExtent</b>(sideOneExtent, sideTwoExtent, sideOneTaperAngle, sideTwoTaperAngle);</pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;">boolean</td>
+        <td class="api-list">Returns true is setting the extent was successful.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">sideOneExtent</td>
+        <td class="api-list"><a href="ExtentDefinition.htm">ExtentDefinition</a></td>
+        <td class="api-list">An ExtentDefinition object that defines how the extent of the extrusion towards side one is defined. This can be a specified distance (DistanceExtentDefinition), to an entity (ToEntityExtent), or through-all (AllExtentDefinition). These objects can be obtained by using the static create method on the appropriate class.</td>
+      </tr>
+      <tr>
+        <td class="api-list">sideTwoExtent</td>
+        <td class="api-list"><a href="ExtentDefinition.htm">ExtentDefinition</a></td>
+        <td class="api-list">An ExtentDefinition object that defines how the extent of the extrusion towards side two is defined. This can be a specified distance (DistanceExtentDefinition), to an entity (ToEntityExtent), or through-all (AllExtentDefinition). These objects can be obtained by using the static create method on the appropriate class.</td>
+      </tr>
+      <tr>
+        <td class="api-list">sideOneTaperAngle</td>
+        <td class="api-list"><a href="ValueInput.htm">ValueInput</a></td>
+        <td class="api-list">Optional argument that specifies the taper angle for side one. If omitted a taper angle of 0 is used.<br /><br /> This is an optional argument whose default value is null.</td>
+      </tr>
+      <tr>
+        <td class="api-list">sideTwoTaperAngle</td>
+        <td class="api-list"><a href="ValueInput.htm">ValueInput</a></td>
+        <td class="api-list">Optional argument that specifies the taper angle for side two. If omitted a taper angle of 0 is used.<br /><br /> This is an optional argument whose default value is null.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ExtrudeFeatureSample_Sample.htm">Extrude Feature API Sample</a></td>
+        <td class="api-list">Demonstrates creating a new extrude feature.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="extrudeFeaturesTwoSidesExtent_add_Sample.htm">extrudeFeatures.add using setTwoSidesExtent</a></td>
+        <td class="api-list">Demonstrates the extrudeFeatures.add method using the setTwoSidesExtent method. To use this sample have a design open that contains a profile and a body that is positioned away from the profile but is a size where when the profile is extruded it will intersect the body. When you run the script you will be prompted to select the profile that will be used to create the extrusion and the body to extrude to. The extrusion will be created up to the body with an offset and will also be offset from the sketch plane.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version November 2016<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(ExtrudeFeatureInput.setTwoSidesExtent%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

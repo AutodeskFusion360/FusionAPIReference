@@ -1,0 +1,140 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/SketchDimensions_addTangentDistanceDimension.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="30/06/2022">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="SketchDimensions_addTangentDistanceDimension">
+    <meta name="description" content="SketchDimensions.addTangentDistanceDimension Method">
+    <meta name="topicid" content="GUID-21159A48-5A3E-4BBA-B5DC-3056197ED991">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>SketchDimensions.addTangentDistanceDimension Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">SketchDimensions.addTangentDistanceDimension Method</h1>
+
+          Parent Object: <a href="SketchDimensions.htm">SketchDimensions</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Sketch/SketchDimensions.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Creates a new linear dimension from between a line and circle or arc and a second circle or arc where the dimension is to the tangent on the edge of the circle or arc.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"sketchDimensions_var" is a variable referencing a <a href="SketchDimensions.htm">SketchDimensions</a> object.<code><pre class="api-code"><span style="color:blue"># Uses no optional arguments.</span><br />returnValue = sketchDimensions_var.<b>addTangentDistanceDimension</b>(entityOne, isCloseToEnityTwo, entityTwo, isCloseToEnityOne, textPoint)<br /><br /><span style="color:blue"># Uses optional arguments.</span><br />returnValue = sketchDimensions_var.<b>addTangentDistanceDimension</b>(entityOne, isCloseToEnityTwo, entityTwo, isCloseToEnityOne, textPoint, isDriving)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"sketchDimensions_var" is a variable referencing a <a href="SketchDimensions.htm">SketchDimensions</a> object.<br /><br /><code><pre class="api-code">#include &lt;Fusion/Sketch/SketchDimensions.h&gt;<br /><br /><span style="color:blue">// Uses no optional arguments.</span><br />returnValue = sketchDimensions_var-&gt;<b>addTangentDistanceDimension</b>(entityOne, isCloseToEnityTwo, entityTwo, isCloseToEnityOne, textPoint);<br /><br /><span style="color:blue">// Uses optional arguments.</span><br />returnValue = sketchDimensions_var-&gt;<b>addTangentDistanceDimension</b>(entityOne, isCloseToEnityTwo, entityTwo, isCloseToEnityOne, textPoint, isDriving);</pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;"><a href="SketchTangentDistanceDimension.htm">SketchTangentDistanceDimension</a></td>
+        <td class="api-list">Returns the newly created dimension or null if the creation failed.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">entityOne</td>
+        <td class="api-list"><a href="SketchEntity.htm">SketchEntity</a></td>
+        <td class="api-list">The first entity to dimension to. This can be a SketchPoint, SketchLine, SketchCircle or SketchArc. If a circle or arc is provided then the tangentSideOne argument must be specified.</td>
+      </tr>
+      <tr>
+        <td class="api-list">isCloseToEnityTwo</td>
+        <td class="api-list">boolean</td>
+        <td class="api-list">If entityOne is a circle or arc this specifies which side of the circle or arc the dimension will be tangent to. If true, it will be on the side that is closer to entityTwo. If a SketchLine or SketchPoint was input for the entityOne argument this argument is ignored and any value can be used.</td>
+      </tr>
+      <tr>
+        <td class="api-list">entityTwo</td>
+        <td class="api-list"><a href="SketchCurve.htm">SketchCurve</a></td>
+        <td class="api-list">A SketchCircle or SketchArc entity that you will dimension to.</td>
+      </tr>
+      <tr>
+        <td class="api-list">isCloseToEnityOne</td>
+        <td class="api-list">boolean</td>
+        <td class="api-list">Specifies which side of the circle or arc input as the entityTwo argument the dimension will be tangent to. If true, it will be on the side that is closer to entityOne.</td>
+      </tr>
+      <tr>
+        <td class="api-list">textPoint</td>
+        <td class="api-list"><a href="Point3D.htm">Point3D</a></td>
+        <td class="api-list">A Point3D object that defines the position of the dimension text.</td>
+      </tr>
+      <tr>
+        <td class="api-list">isDriving</td>
+        <td class="api-list">boolean</td>
+        <td class="api-list">Optional argument that specifies if a driving (the dimension controls the geometry) or a driven (the geometry controls the dimension) dimension is created. If not provided a driving dimension will be created.<br /><br /> This is an optional argument whose default value is True.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version July 2022<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(SketchDimensions.addTangentDistanceDimension%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

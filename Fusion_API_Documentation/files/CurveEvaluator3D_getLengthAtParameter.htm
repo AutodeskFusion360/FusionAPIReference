@@ -1,0 +1,125 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/CurveEvaluator3D_getLengthAtParameter.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="CurveEvaluator3D_getLengthAtParameter">
+    <meta name="description" content="CurveEvaluator3D.getLengthAtParameter Method">
+    <meta name="topicid" content="GUID-d8e03d2d-89c2-463c-b4a8-0b998aa1c565">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>CurveEvaluator3D.getLengthAtParameter Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">CurveEvaluator3D.getLengthAtParameter Method</h1>
+
+          Parent Object: <a href="CurveEvaluator3D.htm">CurveEvaluator3D</a><br>Defined in namespace "adsk::core" and the header file is &lt;Core/Geometry/CurveEvaluator3D.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Get the length of the curve between two parameter positions on the curve.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"curveEvaluator3D_var" is a variable referencing a <a href="CurveEvaluator3D.htm">CurveEvaluator3D</a> object.<br /><br /><code><pre class="api-code">(returnValue, length) = curveEvaluator3D_var.<b>getLengthAtParameter</b>(fromParameter, toParameter)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td><code><pre class="api-code"><br >#include &lt;Core/Geometry/CurveEvaluator3D.h<br /><br /><span style="color:blue">// Declare the output arguments.</span><br />double fromParameter;<br />double toParameter;<br />double length;<br />boolean returnValue = curveEvaluator3D_var-&gt;<b>getLengthAtParameter</b>(fromParameter, toParameter, length);</pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;">boolean</td>
+        <td class="api-list">Returns true if the length was successfully returned.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">fromParameter</td>
+        <td class="api-list">double</td>
+        <td class="api-list">The parameter position to measure the curve length from. This value must be within the range of the parameter extents as provided by getParameterExtents.</td>
+      </tr>
+      <tr>
+        <td class="api-list">toParameter</td>
+        <td class="api-list">double</td>
+        <td class="api-list">The parameter position to measure the curve length to. This value must be within the range of the parameter extents as provided by getParameterExtents.</td>
+      </tr>
+      <tr>
+        <td class="api-list">length</td>
+        <td class="api-list">double</td>
+        <td class="api-list">The output curve length between the from and to parameter positions on the curve.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(CurveEvaluator3D.getLengthAtParameter%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

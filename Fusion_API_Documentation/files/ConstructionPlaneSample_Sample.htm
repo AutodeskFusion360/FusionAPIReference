@@ -1,0 +1,404 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/ConstructionPlaneSample.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="ConstructionPlaneSample_Sample">
+    <meta name="description" content="Construction Plane API Sample Sample">
+    <meta name="topicid" content="GUID-c4edd2d2-aea3-11e5-98bc-f8b156d7cd97">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Construction Plane API Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Construction Plane API Sample</h1>
+    <h2 class="api">
+          Description
+        </h2>Demonstrates creating construction plane by different ways.<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">import adsk.core, adsk.fusion, traceback
+
+def run(context):
+    ui = None
+    try:
+        app = adsk.core.Application.get()
+        ui = app.userInterface
+
+        <span style="color:blue"># Create a document.</span>
+        doc = app.documents.add(adsk.core.DocumentTypes.FusionDesignDocumentType)
+
+        product = app.activeProduct
+        design = adsk.fusion.Design.cast(product)
+
+        <span style="color:blue"># Get the root component of the active design</span>
+        rootComp = design.rootComponent
+
+        <span style="color:blue"># Create sketch</span>
+        sketches = rootComp.sketches
+        sketch = sketches.add(rootComp.xZConstructionPlane)
+        
+        <span style="color:blue"># Create sketch circle</span>
+        sketchCircles = sketch.sketchCurves.sketchCircles
+        centerPoint = adsk.core.Point3D.create(0, 0, 0)
+        sketchCircles.addByCenterRadius(centerPoint, 5.0)        
+        
+        <span style="color:blue"># Get the profile defined by the circle</span>
+        prof = sketch.profiles.item(0)
+
+        <span style="color:blue"># Create an extrusion input</span>
+        extrudes = rootComp.features.extrudeFeatures
+        extInput = extrudes.createInput(prof, adsk.fusion.FeatureOperations.NewBodyFeatureOperation)
+        
+        <span style="color:blue"># Define that the extent is a distance extent of 5 cm</span>
+        distance = adsk.core.ValueInput.createByReal(5)
+        <span style="color:blue"># Set the distance extent to be symmetric</span>
+        extInput.setDistanceExtent(True, distance)
+        <span style="color:blue"># Set the extrude to be a solid one</span>
+        extInput.isSolid = True
+        
+        <span style="color:blue"># Create an cylinder</span>
+        extrude = extrudes.add(extInput)
+
+        <span style="color:blue"># Create sketch line</span>
+        sketchLines = sketch.sketchCurves.sketchLines
+        startPoint = adsk.core.Point3D.create(5, 5, 0)
+        endPoint = adsk.core.Point3D.create(5, 10, 0)
+        sketchLineOne = sketchLines.addByTwoPoints(startPoint, endPoint)
+        endPointTwo = adsk.core.Point3D.create(10, 5, 0)
+        sketchLineTwo = sketchLines.addByTwoPoints(startPoint, endPointTwo)
+        
+        <span style="color:blue"># Create three sketch points</span>
+        sketchPoints = sketch.sketchPoints
+        positionOne = adsk.core.Point3D.create(0, 5.0, 0)
+        sketchPointOne = sketchPoints.add(positionOne)
+        positionTwo = adsk.core.Point3D.create(5.0, 0, 0)
+        sketchPointTwo = sketchPoints.add(positionTwo)
+        positionThree = adsk.core.Point3D.create(0, -5.0, 0)
+        sketchPointThree = sketchPoints.add(positionThree)
+        
+        <span style="color:blue"># Get the profile again since the sketch has been edit.</span>
+        prof = sketch.profiles.item(0)
+        
+        <span style="color:blue"># Get construction planes</span>
+        planes = rootComp.constructionPlanes
+        
+        <span style="color:blue"># Create construction plane input</span>
+        planeInput = planes.createInput()
+        
+        <span style="color:blue"># Add construction plane by offset</span>
+        offsetValue = adsk.core.ValueInput.createByReal(3.0)
+        planeInput.setByOffset(prof, offsetValue)
+        planeOne = planes.add(planeInput)
+        
+        <span style="color:blue"># Get the health state of the plane</span>
+        health = planeOne.healthState
+        if health == adsk.fusion.FeatureHealthStates.ErrorFeatureHealthState or health == adsk.fusion.FeatureHealthStates.WarningFeatureHealthState:
+            message = planeOne.errorOrWarningMessage
+        
+        <span style="color:blue"># Add construction plane by angle</span>
+        angle = adsk.core.ValueInput.createByString('30.0 deg')
+        planeInput.setByAngle(sketchLineOne, angle, prof)
+        planes.add(planeInput)
+        
+        <span style="color:blue"># Add construction plane by two planes</span>
+        planeInput.setByTwoPlanes(prof, planeOne)
+        planes.add(planeInput)
+        
+        <span style="color:blue"># Add construction plane by tangent</span>
+        cylinderFace = extrude.sideFaces.item(0)
+        planeInput.setByTangent(cylinderFace, angle, rootComp.xYConstructionPlane)
+        planes.add(planeInput)
+        
+        <span style="color:blue"># Add construction plane by two edges</span>
+        planeInput.setByTwoEdges(sketchLineOne, sketchLineTwo)
+        planes.add(planeInput)
+        
+        <span style="color:blue"># Add construction plane by three points</span>
+        planeInput.setByThreePoints(sketchPointOne, sketchPointTwo, sketchPointThree)
+        planes.add(planeInput)
+        
+        <span style="color:blue"># Add construction plane by tangent at point</span>
+        planeInput.setByTangentAtPoint(cylinderFace, sketchPointOne)
+        planes.add(planeInput)
+        
+        <span style="color:blue"># Add construction plane by distance on path</span>
+        distance = adsk.core.ValueInput.createByReal(1.0)
+        planeInput.setByDistanceOnPath(sketchLineOne, distance)
+        planes.add(planeInput)
+
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code">#include &lt;Core/Application/Application.h&gt;
+#include &lt;Core/Application/Document.h&gt;
+#include &lt;Core/Application/Documents.h&gt;
+#include &lt;Core/Application/ValueInput.h&gt;
+#include &lt;Core/Geometry/Point3D.h&gt;
+#include &lt;Core/Geometry/Vector3D.h&gt;
+#include &lt;Core/UserInterface/UserInterface.h&gt;
+#include &lt;Fusion/Components/Component.h&gt;
+#include &lt;Fusion/Construction/ConstructionPlane.h&gt;
+#include &lt;Fusion/Construction/ConstructionPlanes.h&gt;
+#include &lt;Fusion/Construction/ConstructionPlaneInput.h&gt;
+#include &lt;Fusion/Fusion/Design.h&gt;
+#include &lt;Fusion/Sketch/Sketch.h&gt;
+#include &lt;Fusion/Sketch/Sketches.h&gt;
+#include &lt;Fusion/Sketch/SketchPoints.h&gt;
+#include &lt;Fusion/Sketch/SketchPoint.h&gt;
+#include &lt;Fusion/Sketch/SketchCurves.h&gt;
+#include &lt;Fusion/Sketch/SketchCircles.h&gt;
+#include &lt;Fusion/Sketch/SketchCircle.h&gt;
+#include &lt;Fusion/Sketch/SketchLines.h&gt;
+#include &lt;Fusion/Sketch/SketchLine.h&gt;
+#include &lt;Fusion/Sketch/SketchPoints.h&gt;
+#include &lt;Fusion/Sketch/SketchPoint.h&gt;
+#include &lt;Fusion/Sketch/Profiles.h&gt;
+#include &lt;Fusion/Sketch/Profile.h&gt;
+#include &lt;Fusion/Features/Features.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeatures.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeatureInput.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeature.h&gt;
+#include &lt;Fusion/BRep/BRepFaces.h&gt;
+#include &lt;Fusion/BRep/BRepFace.h&gt;
+
+using namespace adsk::core;
+using namespace adsk::fusion;
+
+Ptr&lt;UserInterface&gt; ui;
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    Ptr&lt;Application&gt; app = Application::get();
+    if (!app)
+        return false;
+
+    ui = app-&gt;userInterface();
+    if (!ui)
+        return false;
+
+    Ptr&lt;Documents&gt; docs = app-&gt;documents();
+    if (!docs)
+        return false;
+
+    <span style="color:blue">// Create a document.</span>
+    Ptr&lt;Document&gt; doc = docs-&gt;add(DocumentTypes::FusionDesignDocumentType);
+    if (!doc)
+        return false;
+
+    Ptr&lt;Design&gt; design = app-&gt;activeProduct();
+    if (!design)
+        return false;
+
+    <span style="color:blue">// Get the root component of the active design</span>
+    Ptr&lt;Component&gt; rootComp = design-&gt;rootComponent();
+    if (!rootComp)
+        return false;
+
+    <span style="color:blue">// Create sketch</span>
+    Ptr&lt;Sketches&gt; sketches = rootComp-&gt;sketches();
+    if (!sketches)
+        return false;
+
+    Ptr&lt;Sketch&gt; sketch = sketches-&gt;add(rootComp-&gt;xYConstructionPlane());
+    if (!sketch)
+        return false;
+
+    <span style="color:blue">// Create sketch circle</span>
+    Ptr&lt;SketchCurves&gt; curves = sketch-&gt;sketchCurves();
+    if (!curves)
+        return false;
+
+    Ptr&lt;SketchCircles&gt; circles = curves-&gt;sketchCircles();
+    if (!circles)
+        return false;
+    Ptr&lt;Point3D&gt; centerPoint = Point3D::create(0, 0, 0);
+    circles-&gt;addByCenterRadius(centerPoint, 5.0);
+
+    <span style="color:blue">// Get the profile defined by the circle</span>
+    Ptr&lt;Profiles&gt; profs = sketch-&gt;profiles();
+    if (!profs)
+        return false;
+    Ptr&lt;Profile&gt; prof = profs-&gt;item(0);
+
+    <span style="color:blue">// Create an extrusion input</span>
+    Ptr&lt;Features&gt; features = rootComp-&gt;features();
+    if (!features)
+        return false;
+
+    Ptr&lt;ExtrudeFeatures&gt; extrudes = features-&gt;extrudeFeatures();
+    if (!extrudes)
+        return false;
+    Ptr&lt;ExtrudeFeatureInput&gt; extInput = extrudes-&gt;createInput(prof, FeatureOperations::NewBodyFeatureOperation);
+
+    <span style="color:blue">// Define that the extent is a distance extent of 5 cm</span>
+    Ptr&lt;ValueInput&gt; distance = ValueInput::createByReal(5.0);
+
+    <span style="color:blue">// Set the distance extent to be symmetric</span>
+    extInput-&gt;setDistanceExtent(true, distance);
+
+    <span style="color:blue">// Set the extrude to be a solid one</span>
+    extInput-&gt;isSolid(true);
+
+    <span style="color:blue">// Create an cylinder</span>
+    Ptr&lt;ExtrudeFeature&gt; extrude = extrudes-&gt;add(extInput);
+    if (!extrude)
+        return false;
+
+    <span style="color:blue">// Create sketch line</span>
+    Ptr&lt;SketchLines&gt; sketchLines = curves-&gt;sketchLines();
+    if (!sketchLines)
+        return false;
+    Ptr&lt;Point3D&gt; startPoint = Point3D::create(5.0, 5.0, 0);
+    Ptr&lt;Point3D&gt; endPoint = Point3D::create(5.0, 10.0, 0);
+    Ptr&lt;SketchLine&gt; sketchLineOne = sketchLines-&gt;addByTwoPoints(startPoint, endPoint);
+    Ptr&lt;Point3D&gt; endPointTwo = Point3D::create(10.0, 5.0, 0);
+    Ptr&lt;SketchLine&gt; sketchLineTwo = sketchLines-&gt;addByTwoPoints(startPoint, endPointTwo);
+
+    <span style="color:blue">// Create three sketch points</span>
+    Ptr&lt;SketchPoints&gt; sketchPoints = sketch-&gt;sketchPoints();
+    if (!sketchPoints)
+        return false;
+    Ptr&lt;Point3D&gt; positionOne = Point3D::create(0, 5.0, 0);
+    Ptr&lt;SketchPoint&gt; sketchPointOne = sketchPoints-&gt;add(positionOne);
+    Ptr&lt;Point3D&gt; positionTwo = Point3D::create(5.0, 0, 0);
+    Ptr&lt;SketchPoint&gt; sketchPointTwo = sketchPoints-&gt;add(positionTwo);
+    Ptr&lt;Point3D&gt; positionThree = Point3D::create(0, -5.0, 0);
+    Ptr&lt;SketchPoint&gt; sketchPointThree = sketchPoints-&gt;add(positionThree);
+
+    prof = profs-&gt;item(0);
+
+    <span style="color:blue">// Get construction planes</span>
+    Ptr&lt;ConstructionPlanes&gt; planes = rootComp-&gt;constructionPlanes();
+    if (!planes)
+        return false;
+
+    <span style="color:blue">// Create construction plane input</span>
+    Ptr&lt;ConstructionPlaneInput&gt; planeInput = planes-&gt;createInput();
+    if (!planeInput)
+        return false;
+
+    <span style="color:blue">// Add construction plane by offset</span>
+    Ptr&lt;ValueInput&gt; offsetValue = ValueInput::createByReal(3.0);
+    planeInput-&gt;setByOffset(prof, offsetValue);
+    Ptr&lt;ConstructionPlane&gt; planeOne = planes-&gt;add(planeInput);
+
+    <span style="color:blue">// Get the health state of a construction plane</span>
+    adsk::fusion::FeatureHealthStates health = planeOne-&gt;healthState();
+    if (health == adsk::fusion::FeatureHealthStates::ErrorFeatureHealthState ||
+        health == adsk::fusion::FeatureHealthStates::WarningFeatureHealthState)
+    {
+        std::string msg = planeOne-&gt;errorOrWarningMessage();
+    }
+
+    <span style="color:blue">// Add construction plane by angle</span>
+    Ptr&lt;ValueInput&gt; angle = ValueInput::createByString("30.0 deg");
+    planeInput-&gt;setByAngle(sketchLineOne, angle, prof);
+    planes-&gt;add(planeInput);
+
+    <span style="color:blue">// Add construction plane by two planes</span>
+    planeInput-&gt;setByTwoPlanes(prof, planeOne);
+    planes-&gt;add(planeInput);
+
+    <span style="color:blue">// Add construction plane by tangent</span>
+    Ptr&lt;BRepFaces&gt; extSideFaces = extrude-&gt;sideFaces();
+    if (!extSideFaces)
+        return false;
+    Ptr&lt;BRepFace&gt; cylinderFace = extSideFaces-&gt;item(0);
+    planeInput-&gt;setByTangent(cylinderFace, angle, rootComp-&gt;xZConstructionPlane());
+    planes-&gt;add(planeInput);
+
+    <span style="color:blue">// Add construction plane by two edges</span>
+    planeInput-&gt;setByTwoEdges(sketchLineOne, sketchLineTwo);
+    planes-&gt;add(planeInput);
+
+    <span style="color:blue">// Add construction plane by three points</span>
+    planeInput-&gt;setByThreePoints(sketchPointOne, sketchPointTwo, sketchPointThree);
+    planes-&gt;add(planeInput);
+
+    <span style="color:blue">// Add construction plane by tangent at point</span>
+    planeInput-&gt;setByTangentAtPoint(cylinderFace, sketchPointOne);
+    planes-&gt;add(planeInput);
+
+    <span style="color:blue">// Add construction plane by distance on path</span>
+    distance = ValueInput::createByReal(1.0);
+    planeInput-&gt;setByDistanceOnPath(sketchLineOne, distance);
+    planes-&gt;add(planeInput);
+
+    return true;
+}</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(ConstructionPlaneSample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

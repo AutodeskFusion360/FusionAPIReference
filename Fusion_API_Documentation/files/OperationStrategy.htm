@@ -1,0 +1,171 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/OperationStrategy.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="21/02/2023">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="OperationStrategy">
+    <meta name="description" content="OperationStrategy Object">
+    <meta name="topicid" content="GUID-24F84420-3F11-46D4-BA31-95252A70097B">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>OperationStrategy Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">OperationStrategy Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::cam" and the header file is &lt;Cam/Operations/OperationStrategy.h&gt;<h2 class="api">
+          Description
+        </h2>The OperationStrategy contains information about a strategy such as its name, title and description.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="OperationStrategy_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="OperationStrategy_createFromString.htm">createFromString</a></td>
+        <td class="api-list">Create an OperationStrategy for a given name.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="OperationStrategy_description.htm">description</a></td>
+        <td class="api-list">Get the localized description of the strategy.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="OperationStrategy_is2DStrategy.htm">is2DStrategy</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Gets whether given OperationStrategy is a 2D strategy.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="OperationStrategy_is3DStrategy.htm">is3DStrategy</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Gets whether given OperationStrategy is a 3D strategy.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="OperationStrategy_isAdditiveStrategy.htm">isAdditiveStrategy</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Gets whether given OperationStrategy is an additive strategy.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="OperationStrategy_isCuttingStrategy.htm">isCuttingStrategy</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Gets whether given OperationStrategy is a cutting strategy.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="OperationStrategy_isDrillingStrategy.htm">isDrillingStrategy</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Gets whether given OperationStrategy is a drilling strategy.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="OperationStrategy_isFinishingStrategy.htm">isFinishingStrategy</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Gets whether given OperationStrategy is a finishing strategy.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="OperationStrategy_isGenerationAllowed.htm">isGenerationAllowed</a></td>
+        <td class="api-list">Returns true if the strategy is allowed to be generated due to licensing and enabled preview features. Some strategies also require Active machining extension to be generated. Returns false otherwise.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="OperationStrategy_isMillingStrategy.htm">isMillingStrategy</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Gets whether given OperationStrategy is a milling strategy.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="OperationStrategy_isRotaryStrategy.htm">isRotaryStrategy</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Gets whether given OperationStrategy is a rotary strategy.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="OperationStrategy_isSupportStrategy.htm">isSupportStrategy</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Gets whether given OperationStrategy is an additive support strategy.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="OperationStrategy_isTurningStrategy.htm">isTurningStrategy</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Gets whether given OperationStrategy is a turning strategy.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="OperationStrategy_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="OperationStrategy_name.htm">name</a></td>
+        <td class="api-list">Get the name of the strategy. This is equivalent to the Operation's strategy property. Use as strategy parameter when creating a OperationInput.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="OperationStrategy_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="OperationStrategy_title.htm">title</a></td>
+        <td class="api-list">Get the localized title of the strategy.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="Operations_compatibleStrategies.htm">Operations.compatibleStrategies</a>, <a href="OperationStrategy_createFromString.htm">OperationStrategy.createFromString</a><h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ManufacturingWorkflowAPISample_Sample.htm">Manufacturing Workflow API Sample</a></td>
+        <td class="api-list">Manufacturing Workflow API Sample<p>This sample script starts by creating a simple component which is then used to describe a milling workflow. It creates a setup, a few operations, pick some tools from a Fusion sample tool library using loops and queries and ends up post-processing the operations out using an NC Program.</p></td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version April 2023<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(OperationStrategy%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

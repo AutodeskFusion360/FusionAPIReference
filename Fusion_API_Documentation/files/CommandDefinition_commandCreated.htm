@@ -1,0 +1,104 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/CommandDefinition_commandCreated.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="CommandDefinition_commandCreated">
+    <meta name="description" content="CommandDefinition.commandCreated Event">
+    <meta name="topicid" content="GUID-895ee146-8697-4ba0-98e7-4f72b74edb4f">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>CommandDefinition.commandCreated Event</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">CommandDefinition.commandCreated Event</h1>
+
+          Parent Object: <a href="CommandDefinition.htm">CommandDefinition</a><br>Defined in namespace "adsk::core" and the header file is &lt;Core/UserInterface/CommandDefinition.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">This event is fired when the associated control is manipulated by the user. A new Command object is created and passed back through this event which you can then use to interact with the user to get any input the command requires.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#PythonUsingFusion360Utils">Python Using fusion360utils</a></li>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="PythonUsingFusion360Utils" class="api-code">
+        <table class="api-code">
+          <td><em>-------- Import ---------</em><br /><code><pre class="api-code"><span style="color:blue"># Import fusion360utils folder, which includes event_utils.py.</span><br />from ...lib import fusion360utils as futil</pre></code><br /><em>-------- Global variables ---------</em><br /><code><pre class="api-code"><span style="color:blue"># Global variable used to maintain a reference to all event handlers.</span><br />local_handlers = []<br /></pre></code><br /><em>-------- Connect the handler to the event. ---------</em><br /><code><pre class="api-code"><span style="color:blue"># "commandDefinition_var" is a variable referencing a <a href="CommandDefinition.htm">CommandDefinition</a> object.</span><br /><span style="color:blue"># "commandDefinition_commandCreated" is the event handler function.</span><br />futil.add_handler(commandDefinition_var.commandCreated, commandDefinition_commandCreated, local_handlers=local_handlers)<br /></pre></code><br /><em>-------- Event handler function definition ---------</em><br /><code><pre class="api-code"><span style="color:blue"># Event handler for the commandCreated event.</span><br />def commandDefinition_commandCreated(args: adsk.core.CommandCreatedEventArgs):<br />    <span style="color:blue"># Code to react to the event.</span><br />    app.log('In commandDefinition_commandCreated event handler.')<br /></pre></code></td>
+        </table>
+      </div>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td><em>-------- Global variables ---------</em><br /><code><pre class="api-code"><span style="color:blue"># Global variable used to maintain a reference to all event handlers.</span><br />handlers = []<br /></pre></code><br /><em>-------- Connect the handler to the event. ---------</em><br /><code><pre class="api-code"><span style="color:blue"># "commandDefinition_var" is a variable referencing a <a href="CommandDefinition.htm">CommandDefinition</a> object.</span><br /><span style="color:blue"># "MyCommandCreatedHandler" is the name of the class that handles the event.</span><br />onCommandCreated = MyCommandCreatedHandler()<br />commandDefinition_var.<b>commandCreated</b>.add(onCommandCreated)<br />handlers.append(onCommandCreated)</pre></code><br /><em>-------- Event handler class definition ---------</em><br /><code><pre class="api-code"><span style="color:blue"># Event handler for the commandCreated event.</span><br />class MyCommandCreatedHandler(adsk.core.CommandCreatedEventHandler):<br />    def __init__(self):<br />        super().__init__()<br />    def notify(self, args: adsk.core.CommandCreatedEventArgs):<br />        <span style="color:blue"># Code to react to the event.</span><br />        app.log('In MyCommandCreatedHandler event handler.')<br /></pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td><em>--------- Required include files. ---------</em><br /><code><pre class="api-code">#include &lt;Core/UserInterface/CommandDefinition.h&gt;<br />#include &lt;Core/UserInterface/CommandCreatedEvent.h&gt;<br />#include &lt;Core/UserInterface/CommandCreatedEventHandler.h&gt;<br />#include &lt;Core/UserInterface/CommandCreatedEventArgs.h&gt;<br /></pre></code><br /><br /><em>--------- Event handler class definition and global declaration. ---------<br /><code><pre class="api-code"><span style="color:blue">// Event handler for the commandCreated event.</em></span><br />class MyCommandCreatedEventHandler : public adsk::core::CommandCreatedEventHandler<br />{<br />public:<br />    void notify(const Ptr&lt;CommandCreatedEventArgs&gt;& eventArgs) override<br />    {<br />        <span style="color:blue">// Code to react to the event.</span><br />        ui->messageBox("In MyCommandCreatedEventHandler event handler.");<br />    }<br />} _commandCreated;<br /></pre></code><br /><em>--------- Connect the handler to the event. ---------</em><br /><code><pre class="api-code"><span style="color:blue">// "commandDefinition_var" is a variable referencing a <a href="CommandDefinition.htm">CommandDefinition</a> object.</span><br /><span style="color:blue">// Connect the handler function to the event.</span><br />Ptr&lt;CommandCreatedEvent&gt; commandCreatedEvent = commandDefinition_var-&gt;<b>commandCreated</b>();<br />if (!commandCreatedEvent)<br />    return;<br /><br />bool isOk = commandCreatedEvent-&gt;add(&_commandCreated);<br />if (!isOk)<br />    return;<br /></pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Property Value
+          </h2>This is an event property that returns a <a href="CommandCreatedEvent.htm">CommandCreatedEvent</a>.<h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CommandInputsSample_Sample.htm">Command Inputs API Sample</a></td>
+        <td class="api-list"><p>Creates a command dialog that demonstrates all of the available command inputs.</p>
+
+<p>To use the sample, create a new Python or C++ script and copy and paste this code, replacing the default code.&nbsp;You also need to unpack this zip file which contains a <a href="../ExtraFiles/CommandInputsResources.zip">resource folder</a> into the same folder where the source code file (.py or .cpp) is.</p></td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(CommandDefinition.commandCreated%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

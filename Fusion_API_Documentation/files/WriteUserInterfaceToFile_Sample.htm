@@ -1,0 +1,264 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/WriteUserInterfaceToFile.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="WriteUserInterfaceToFile_Sample">
+    <meta name="description" content="Write user interface to a file API Sample Sample">
+    <meta name="topicid" content="GUID-d2b85a7e-fd08-11e4-9e07-3417ebd3d5be">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Write user interface to a file API Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Write user interface to a file API Sample</h1>
+    <h2 class="api">
+          Description
+        </h2>Writes out the full structure of the Fusion user interface. This information is useful when editing the user-interface, as discussed in the usre manual topic <a href="UserInterface_UM.htm">User-Interface Customization with Fusion's API</a><h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">import adsk.core, traceback
+import codecs
+
+def run(context):
+    ui = None
+    try:
+        app: adsk.core.Application = adsk.core.Application.get()
+        ui  = app.userInterface
+
+        fileDialog = ui.createFileDialog()
+        fileDialog.isMultiSelectEnabled = False
+        fileDialog.title = "Specify result filename"
+        fileDialog.filter = 'XML files (*.xml)'
+        fileDialog.filterIndex = 0
+        dialogResult = fileDialog.showSave()
+        if dialogResult == adsk.core.DialogResults.DialogOK:
+            filename = fileDialog.filename
+        else:
+            return
+
+        result = '&lt;UserInterface&gt;\n'
+        result += f'{TabSpace(1)}&lt;Workspaces count="{ui.workspaces.count}"&gt;\n'
+        for wsIndex in range(ui.workspaces.count):
+            try:
+                ws: adsk.core.Workspace = ui.workspaces.item(wsIndex)
+            except:
+                ws = None
+
+            if ws:
+                result += f'{TabSpace(2)}&lt;Workspace name="{ws.name}" id="{ws.id}"&gt;\n'
+                try:
+                    tabs = ws.toolbarTabs
+                except:
+                    tabs = None
+
+                if tabs:
+                    result += f'{TabSpace(3)}&lt;ToolbarTabs count="{tabs.count}"&gt;\n'
+                    for tab in tabs:
+                        result += f'{TabSpace(4)}&lt;ToolbarTab name="{tab.name}" id="{tab.id}"&gt;\n'
+
+                        result += GetPanelsXML(tab.toolbarPanels, 5)
+
+                        result += f'{TabSpace(4)}&lt;/ToolbarTab&gt;\n'
+
+                    result += f'{TabSpace(3)}&lt;/ToolbarTabs&gt;\n'
+                else:
+                    result += f'{TabSpace(3)}&lt;ToolbarTabs error="Failed to get toolbar tabs."&gt;\n'
+                    result += f'{TabSpace(3)}&lt;/ToolbarTabs&gt;\n'
+
+                result += f'{TabSpace(2)}&lt;/Workspace&gt;\n'
+
+        result += f'{TabSpace(1)}&lt;/Workspaces&gt;\n'
+
+        result += f'{TabSpace(1)}&lt;Toolbars count="{ui.toolbars.count}"&gt;\n'
+        toolbar: adsk.core.Toolbar
+        for toolbar in ui.toolbars:
+            result += f'{TabSpace(2)}&lt;Toolbar id="{toolbar.id}"&gt;\n'
+            result += f'{TabSpace(3)}&lt;ToolbarControls count="{toolbar.controls.count}"&gt;\n'
+            result += GetControls(toolbar.controls, 1, False)
+            result += f'{TabSpace(3)}&lt;/ToolbarControls&gt;\n'
+            result += f'{TabSpace(2)}&lt;/Toolbar&gt;\n'
+        result += f'{TabSpace(1)}&lt;/Toolbars&gt;\n'
+        result += '&lt;/UserInterface&gt;'
+
+        f = open(filename, 'w', -1, 'utf-8-sig')
+        f.write(result)
+        f.close()
+        ui.messageBox(f'Finished writing to:\n{filename}')
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
+
+
+<span style="color:blue"># Builds XML data for all of the panel information from the ToolbarPanels collection passed in.</span>
+def GetPanelsXML(panels: adsk.core.ToolbarPanels, tabs: int) -&gt; str:
+    result = f'{TabSpace(tabs)}&lt;ToolbarPanels count="{panels.count}"&gt;\n'
+    for panelIndex in range(panels.count):
+        try:
+            panel: adsk.core.ToolbarPanel = panels.item(panelIndex)
+        except:
+            panel = None
+
+        if panel:
+            result += f'{TabSpace(tabs + 1)}&lt;ToolbarPanel name="{panel.name}" id="{panel.id}"&gt;\n'
+            result += f'{TabSpace(tabs + 2)}&lt;ToolbarControls count="{panel.controls.count}"&gt;\n'
+            result += GetControls(panel.controls, tabs, True)
+            result += f'{TabSpace(tabs + 2)}&lt;/ToolbarControls&gt;\n'
+            result += f'{TabSpace(tabs + 1)}&lt;/ToolbarPanel&gt;\n'
+
+    result += f'{TabSpace(tabs + 1)}&lt;/ToolbarPanels&gt;\n'
+    return result
+
+
+<span style="color:blue"># Builds XML data for all of the controls in the ToolbarControls collection passed in.</span>
+def GetControls(controls: adsk.core.ToolbarControls, tabs: int, isPanel: bool) -&gt; str:
+    result = ''
+    for control in controls:
+        if control.objectType == adsk.core.DropDownControl.classType():
+            dropControl: adsk.core.DropDownControl = control
+
+            if isPanel:
+                try:
+                    dropName = dropControl.name
+                except:
+                    dropName = "**** Error getting name."
+
+                result += f'{TabSpace(tabs + 3)}&lt;DropDownControl name="{dropName}" id="{dropControl.id}" count="{dropControl.controls.count}"&gt;\n'
+            else:
+                result += f'{TabSpace(tabs + 3)}&lt;DropDownControl id="{dropControl.id}" count="{dropControl.controls.count}"&gt;\n'
+
+            result += GetControls(dropControl.controls, tabs + 1, isPanel)
+            result += f'{TabSpace(tabs + 3)}&lt;/DropDownControl&gt;\n'
+        elif control.objectType == adsk.core.SplitButtonControl.classType():
+            splitControl: adsk.core.SplitButtonControl = control
+            result += f'{TabSpace(tabs + 3)}&lt;SplitButtonControl&gt;\n'
+
+            try:
+                defaultCmdDef = splitControl.defaultCommandDefinition
+            except:
+                defaultCmdDef = None
+            
+            if defaultCmdDef:
+                result += f'{TabSpace(tabs + 4)}&lt;defaultCommandDefinition name="{defaultCmdDef.name}" id="{defaultCmdDef.id}"/&gt;\n'
+
+                additionalDefs = splitControl.additionalDefinitions
+                result += f'{TabSpace(tabs + 4)}&lt;additionalDefinitions count="{len(additionalDefs)}"&gt;\n'
+                for additionalDef in additionalDefs:
+                    result += f'{TabSpace(tabs + 5)}&lt;{ObjectName(additionalDef)} name="{additionalDef.name}" id="{additionalDef.id}"/&gt;\n'
+                result += f'{TabSpace(tabs + 4)}&lt;/additionalDefinitions&gt;\n'
+            else:
+                result += f'{TabSpace(tabs + 4)}&lt;defaultCommandDefinition error="**** Failed to get CommandDefinition"/&gt;\n'
+
+            result += f'{TabSpace(tabs + 3)}&lt;/SplitButtonControl&gt;\n'
+
+        else:
+            if control.objectType == adsk.core.SeparatorControl.classType():
+                result += f'{TabSpace(tabs + 3)}&lt;SeparatorControl id="{control.id}" /&gt;\n'
+            else:
+                cmdDef: adsk.core.CommandDefinition = None
+                try:                 
+                    cmdDef = control.commandDefinition
+                except:
+                    cmdDef = None
+
+                if cmdDef:
+                    try:
+                        commandType = ObjectName(cmdDef.controlDefinition)
+                    except:
+                        commandType = '**** Failed to get associated control.'
+
+                    isPromotedOK = True
+                    try:
+                        isPromoted = control.isPromoted
+                    except:
+                        isPromotedOK = False
+
+
+                    if isPanel and isPromotedOK:
+                        result += f'{TabSpace(tabs + 3)}&lt;{ObjectName(control)} name="{cmdDef.name}" id="{cmdDef.id}" commandType="{commandType}" isPromoted="{isPromoted}" /&gt;\n'
+                    else:
+                        result += f'{TabSpace(tabs + 3)}&lt;{ObjectName(control)} name="{cmdDef.name}" id="{cmdDef.id}" commandType="{commandType}" /&gt;\n'
+                else:
+                    result += f'{TabSpace(tabs + 3)}&lt;{ObjectName(control)} error="**** Failed to get CommandDefinition for {control.id}" /&gt;\n'
+
+    return result
+
+
+<span style="color:blue"># Return a string of spaces that can be used to prepend to a string to</span>
+<span style="color:blue"># represent the specified number of tabs. </span>
+def TabSpace(tabs: int) -&gt; str:
+    spacesPerTab = 4
+    return ' ' * (spacesPerTab * tabs)
+
+
+<span style="color:blue"># Splits out the object name from the full object name passed in.</span>
+def ObjectName(object: adsk.core.Base) -&gt; str:
+    parts = object.objectType.split('::')
+    return parts[len(parts)-1]</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(WriteUserInterfaceToFile%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

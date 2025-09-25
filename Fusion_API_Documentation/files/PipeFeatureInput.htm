@@ -1,0 +1,138 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/PipeFeatureInput.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="09/10/2023">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="PipeFeatureInput">
+    <meta name="description" content="PipeFeatureInput Object">
+    <meta name="topicid" content="GUID-0FEEA49A-8692-4FCB-BC63-1ACA3906C09B">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>PipeFeatureInput Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">PipeFeatureInput Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Features/PipeFeatureInput.h&gt;<h2 class="api">
+          Description
+        </h2>This class defines the methods and properties that pertain to the definition of a Pipe feature.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PipeFeatureInput_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PipeFeatureInput_creationOccurrence.htm">creationOccurrence</a></td>
+        <td class="api-list">In order for geometry to be transformed correctly, an Occurrence for creation needs to be specified when the Pipe is created based on geometry (e.g. a path) in another component AND (the Pipe) is not in the root component. The CreationOccurrence is analogous to the active occurrence in the UI</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PipeFeatureInput_distanceOne.htm">distanceOne</a></td>
+        <td class="api-list">Gets and sets the distance for the pipe created while following the path given as input, in the same order. This value defaults to 1.0 if not set.<br/><br/> If the path is open, setting this to a value between 0.0 and 1.0 decides the length of the created Pipe. If the path is closed, setting this value should not be higher than 1.0 - distanceTwo. Ex: Path is made of curves A-B-C-A. The distanceOne returns and sets the length of the pipe going from A-B-C-A.<br/><br/> This property returns null in the case where the feature is non-parametric.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PipeFeatureInput_distanceTwo.htm">distanceTwo</a></td>
+        <td class="api-list">Gets and sets the distance for the pipe created while following the reversed path given as input. Before setting this value, distanceOne must be set.<br/><br/> If the path is open, getting this value returns null, and setting the value is ignored. If the path is closed, setting this value should not be higher than 1.0 - distanceOne. Ex: Path is made of curves A-B-C-A. The distanceTwo returns and sets the length of the pipe going from A-C-B-A.<br/><br/> This property returns null in the case where the feature is non-parametric.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PipeFeatureInput_isHollow.htm">isHollow</a></td>
+        <td class="api-list">Specifies if the Pipe is hollow or not.<br/><br/> Setting this to true will default the sectionThickness to 0.1 cm.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PipeFeatureInput_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PipeFeatureInput_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PipeFeatureInput_operation.htm">operation</a></td>
+        <td class="api-list">Gets and sets the type of operation performed by the Pipe.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PipeFeatureInput_participantBodies.htm">participantBodies</a></td>
+        <td class="api-list">Gets and sets the list of bodies that will participate in the feature when the operation is a cut or intersection.<br/><br/> If this property has not been set, the default behavior is that all bodies that are intersected by the feature will participate.<br/><br/> This property can return null in the case where the feature has not been fully defined so that possible intersecting bodies can be computed.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PipeFeatureInput_path.htm">path</a></td>
+        <td class="api-list">Gets and sets the path to create the Pipe.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PipeFeatureInput_sectionSize.htm">sectionSize</a></td>
+        <td class="api-list">Gets and sets the section size of the Pipe.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PipeFeatureInput_sectionThickness.htm">sectionThickness</a></td>
+        <td class="api-list">Gets and sets the section thickness of the Pipe.<br/><br/> Setting this will also set the isHollow setting to true.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PipeFeatureInput_sectionType.htm">sectionType</a></td>
+        <td class="api-list">Gets and sets the section type of the Pipe. The type can be: Circular, Square, Triangular.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PipeFeatureInput_targetBaseFeature.htm">targetBaseFeature</a></td>
+        <td class="api-list">When creating a feature that is owned by a base feature, set this property to the base feature you want to associate the new feature with. By default, this is null, meaning it will not be associated with a base feature.<br/><br/> Because of a current limitation, if you want to create a feature associated with a base feature, you must set this property AND call the startEdit method of the base feature, create the feature, and then call the finishEdit method of the base feature. The base feature must be in an "edit" state to be able to add any additional items to it.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="PipeFeatures_createInput.htm">PipeFeatures.createInput</a><h2 class="api">
+            Version
+          </h2>
+        Introduced in version October 2023<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(PipeFeatureInput%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

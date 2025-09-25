@@ -1,0 +1,108 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/Application_log.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="29/06/2021">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="Application_log">
+    <meta name="description" content="Application.log Method">
+    <meta name="topicid" content="GUID-6A2353AC-6C89-4032-AE65-69D45AF815BF">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Application.log Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Application.log Method</h1>
+
+          Parent Object: <a href="Application.htm">Application</a><br>Defined in namespace "adsk::core" and the header file is &lt;Core/Application/Application.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Logs messages to either the TEXT COMMAND window or the Fusion app log file.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>This is a static method.<br /><code><pre class="api-code"><br ><span style="color:blue"># Uses no optional arguments.</span><br />returnValue = adsk.core.Application.<b>log</b>(message)<br /><br /><span style="color:blue"># Uses optional arguments.</span><br />returnValue = adsk.core.Application.<b>log</b>(message, level, type)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>This is a static method.<br /><code><pre class="api-code"><br >#include &lt;Core/Application/Application.h&gt;<br /><br /><span style="color:blue">// Uses no optional arguments.</span><br />returnValue = adsk::core::Application::<b>log</b>(message);<br /><br /><span style="color:blue">// Uses optional arguments.</span><br />returnValue = adsk::core::Application::<b>log</b>(message, level, type);</pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">message</td>
+        <td class="api-list">string</td>
+        <td class="api-list">The message to write to the log.</td>
+      </tr>
+      <tr>
+        <td class="api-list">level</td>
+        <td class="api-list"><a href="LogLevels.htm">LogLevels</a></td>
+        <td class="api-list">The log level. Default value is InfoLogLevel. This is only used when the log type is FileLogType where the log message will include the log level.<br /><br /> This is an optional argument whose default value is LogLevels.InfoLogLevel.</td>
+      </tr>
+      <tr>
+        <td class="api-list">type</td>
+        <td class="api-list"><a href="LogTypes.htm">LogTypes</a></td>
+        <td class="api-list">The log type. The default value is ConsoleLogType to write the message to the TEXT COMMAND window. When the type is FileLogType, the message is written to Fusion's app log file which is the same file where Fusion writes all of its log messages. You can get the path and filename of the current log file by using the TEXT COMMAND window. In the lower-right corner you can choose "Txt", "Py", or "Js". Choose the "Txt" option and type "paths.get" in the input field and press return. A list of all of the various paths used by Fusion will be displayed in the TEXT COMMAND window. The line for "AppLogFilePath" has the full path to the log file.<br /><br /> This is an optional argument whose default value is LogTypes.ConsoleLogType.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version July 2021<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(Application.log%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

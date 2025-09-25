@@ -1,0 +1,142 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/ToEntityExtentDefinition_create.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/10/2016">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="ToEntityExtentDefinition_create">
+    <meta name="description" content="ToEntityExtentDefinition.create Method">
+    <meta name="topicid" content="GUID-5FF92FA2-7CE0-4166-9122-9F620E6B96D0">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>ToEntityExtentDefinition.create Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">ToEntityExtentDefinition.create Method</h1>
+
+          Parent Object: <a href="ToEntityExtentDefinition.htm">ToEntityExtentDefinition</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Features/ToEntityExtentDefinition.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Statically creates a new ToEntityExtentDefinition object. This is used as input when defining the extents of a feature to be up to a construction plane or face.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>This is a static method.<br /><code><pre class="api-code"><br ><span style="color:blue"># Uses no optional arguments.</span><br />returnValue = adsk.fusion.ToEntityExtentDefinition.<b>create</b>(entity, isChained)<br /><br /><span style="color:blue"># Uses optional arguments.</span><br />returnValue = adsk.fusion.ToEntityExtentDefinition.<b>create</b>(entity, isChained, offset)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>This is a static method.<br /><code><pre class="api-code"><br >#include &lt;Fusion/Features/ToEntityExtentDefinition.h&gt;<br /><br /><span style="color:blue">// Uses no optional arguments.</span><br />returnValue = adsk::fusion::ToEntityExtentDefinition::<b>create</b>(entity, isChained);<br /><br /><span style="color:blue">// Uses optional arguments.</span><br />returnValue = adsk::fusion::ToEntityExtentDefinition::<b>create</b>(entity, isChained, offset);</pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;"><a href="ToEntityExtentDefinition.htm">ToEntityExtentDefinition</a></td>
+        <td class="api-list">Returns the newly created ToEntityExtentDefinition object or null if the creation failed.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">entity</td>
+        <td class="api-list"><a href="Base.htm">Base</a></td>
+        <td class="api-list">The construction plane or face that the feature extent it up to.</td>
+      </tr>
+      <tr>
+        <td class="api-list">isChained</td>
+        <td class="api-list">boolean</td>
+        <td class="api-list"></td>
+      </tr>
+      <tr>
+        <td class="api-list">offset</td>
+        <td class="api-list"><a href="ValueInput.htm">ValueInput</a></td>
+        <td class="api-list">A optional input value that defines an offset distance of the entity that will be used for the extent. Positive and negative values can be used to offset in both directions. If this argument is not provided a value of zero will be used.<br /><br /> This is an optional argument whose default value is null.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="extrudeFeaturesTwoSidesExtent_add_Sample.htm">extrudeFeatures.add using setTwoSidesExtent</a></td>
+        <td class="api-list">Demonstrates the extrudeFeatures.add method using the setTwoSidesExtent method. To use this sample have a design open that contains a profile and a body that is positioned away from the profile but is a size where when the profile is extruded it will intersect the body. When you run the script you will be prompted to select the profile that will be used to create the extrusion and the body to extrude to. The extrusion will be created up to the body with an offset and will also be offset from the sketch plane.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version November 2016<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(ToEntityExtentDefinition.create%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

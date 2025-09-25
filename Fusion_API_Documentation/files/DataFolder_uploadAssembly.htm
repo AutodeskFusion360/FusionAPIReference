@@ -1,0 +1,117 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/DataFolder_uploadAssembly.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="3/2/2015">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="DataFolder_uploadAssembly">
+    <meta name="description" content="DataFolder.uploadAssembly Method">
+    <meta name="topicid" content="GUID-e9a28174-267f-4c6a-8c0a-3da9e3cc6dae">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>DataFolder.uploadAssembly Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">DataFolder.uploadAssembly Method</h1>
+
+          Parent Object: <a href="DataFolder.htm">DataFolder</a><br>Defined in namespace "adsk::core" and the header file is &lt;Core/Dashboard/DataFolder.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Uploads a set of files that represent an assembly There should only be a single top-level assembly file but there can be any number of other files that represent sub-assemblies.</p>
+    <h2 class="api">
+            Remarks
+          </h2>Uploading an assembly is not supported within any of the Command related events. When a command is running, a transaction is open, and uploading files cannot be transacted and, as a result, cannot be contained within a command transaction.<h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"dataFolder_var" is a variable referencing a <a href="DataFolder.htm">DataFolder</a> object.<code><pre class="api-code">returnValue = dataFolder_var.<b>uploadAssembly</b>(filenames)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"dataFolder_var" is a variable referencing a <a href="DataFolder.htm">DataFolder</a> object.<br /><br /><code><pre class="api-code">#include &lt;Core/Dashboard/DataFolder.h&gt;<br /><br />returnValue = dataFolder_var-&gt;<b>uploadAssembly</b>(filenames);<br /></pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;"><a href="DataFileFuture.htm">DataFileFuture</a></td>
+        <td class="api-list">The upload process is asynchronous which means that this method will return before the upload process had completed. The returned DataFileFuture object can be used to check on the current state of the upload to determine if it is still uploading, is complete, or has failed. If it is complete the final DataFinal can be retrieved through the DataFileFuture object.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">filenames</td>
+        <td class="api-list">string[]</td>
+        <td class="api-list">An array of strings that contains the list of all of the files that are part of the assembly. The name of the top-level assembly file must be the first file in the array.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version March 2015<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(DataFolder.uploadAssembly%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

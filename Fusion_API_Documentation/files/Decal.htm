@@ -1,0 +1,158 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/Decal.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="09/08/2024">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="Decal">
+    <meta name="description" content="Decal Object">
+    <meta name="topicid" content="GUID-7D6BC8C5-0274-412C-A758-DF041B0D5076">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>Decal Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Decal Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Image/Decal.h&gt;<h2 class="api">
+          Description
+        </h2>Represents a Decal within a component.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Decal_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Decal_createForAssemblyContext.htm">createForAssemblyContext</a></td>
+        <td class="api-list">Creates or returns a proxy for the native object - i.e. a new object that represents this object but adds the assembly context defined by the input occurrence.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Decal_deleteMe.htm">deleteMe</a></td>
+        <td class="api-list">Deletes the decal from the component.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Decal_redefine.htm">redefine</a></td>
+        <td class="api-list">Redefines the position, orientation, and how the decal is applied to the body.<br/><br/> To call this method, you need to position the timeline marker to immediately before this decal. This can be accomplished using the following code: thisDecal.timelineObject.rollTo(True)</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Decal_saveImage.htm">saveImage</a></td>
+        <td class="api-list">Saves the image associated with the decal to the specified file. This is useful in cases where the original image file is no longer available but you need the image for some other purpose.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Decal_assemblyContext.htm">assemblyContext</a></td>
+        <td class="api-list">Returns the assembly occurrence (i.e. the occurrence) of this object in an assembly. This is only valid in the case where this is acting as a proxy in an assembly. Returns null in the case where the object is not in the context of an assembly but is already the native object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Decal_entityToken.htm">entityToken</a></td>
+        <td class="api-list">Returns a token for the Decal object. This can be saved and used at a later time with the Design.findEntityByToken method to get back the same Decal.<br/><br/> When using entity tokens it's important to understand that the token string returned for a specific entity can be different over time. However, even if you have two different token strings that were obtained from the same entity, when you use findEntityByToken they will both return the same entity. Because of that you should never compare entity tokens as way to determine what the token represents. Instead, you need to use the findEntityByToken method to get the two entities identified by the tokens and then compare them.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Decal_faces.htm">faces</a></td>
+        <td class="api-list">Gets the faces the decal is associated with. Typically, this is an array containing a single face. If the isChainFaces property is true, this will return the primary face. If the isChainFaces property is false, the decal is limited to the faces in this list.<br/><br/> If multiple faces have been provided, the first face in the list is the primary face, which is used to position and orient the decal.<br/><br/> To set the faces, use the redefine method.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Decal_imageFilename.htm">imageFilename</a></td>
+        <td class="api-list">Gets and sets the filename of the image used for the decal. When getting this property, the filename returned is the file that was used when the decal was initially created. it's possible the file may no longer exist.<br/><br/> When setting this property, it is the full filename to the image to use for the decal. PNG, JPEG, and TIFF files are supported.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Decal_isChainFaces.htm">isChainFaces</a></td>
+        <td class="api-list">Returns if the decal is limited to a specified set of faces or wraps onto all faces in the body. If this property is True, a single face has been specified and the decal can wrap onto other faces of the body. If False, the decal is limited to the set of specified faces.<br/><br/> To change this setting, use the redefine method.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Decal_isLightBulbOn.htm">isLightBulbOn</a></td>
+        <td class="api-list">Gets and sets if the light bulb of this decal as displayed in the browser is on or off.<br/><br/> A decal will only be visible if the light bulb is switched on. However, the light bulb can be on and the decal still invisible if the visibility of a higher level occurrence has its light bulb off or if the light bulb for the Decals folder is off to turn off all decals in a component.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Decal_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Decal_isVisible.htm">isVisible</a></td>
+        <td class="api-list">Returns if the decal is currently visible in the graphics window. The isLightBulbOn property of the decal controls if the decal should be displayed or not, but even when true, the decal may not be visible because the occurrence that references the component may not be visible. It's also possible to turn off the visibility of all the decals in a component. This property takes all of that into account when reporting if the decal is visible or not.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Decal_name.htm">name</a></td>
+        <td class="api-list">Gets and sets the name of the decal. This is the name seen in the browser and timeline.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Decal_nativeObject.htm">nativeObject</a></td>
+        <td class="api-list">The NativeObject is the object outside the context of an assembly and in the context of it's parent component. Returns null in the case where this object is not in the context of an assembly but is already the native object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Decal_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Decal_opacity.htm">opacity</a></td>
+        <td class="api-list">Gets and sets the opacity of the decal where 0 is completely transparent and 1.0 is completely opaque. Setting this property to a value outside the range of 0-1 will result in the value being set to the closest valid value.<br/><br/> Defaults to 1.0 when the input is created.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Decal_timelineObject.htm">timelineObject</a></td>
+        <td class="api-list">Returns the timeline object associated with the creation of this decal.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Decal_transform.htm">transform</a></td>
+        <td class="api-list">Gets the transform of the decal. The returned matrix defines the position, rotation, scaling, and flipping. This is done by providing a 3D matrix which defines a 3D coordinate system in model space. The origin of the matrix defines the center of the decal and must lie somewhere on the first face. The normal of the face defines the Z axis of the matrix and the X and Y axes define the orientation of the decal and must be both perpendicular to the Z axis and to each other. Reversing the direction of the X or Y axis will flip the decal in that direction. The magnitude of the X and Y axes controls the scale and the scale can be non-uniform, meaning the length of the X and Y vectors do not need to be the same.<br/><br/> To set the transform, use the redefine method.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="Decal_createForAssemblyContext.htm">Decal.createForAssemblyContext</a>, <a href="Decal_nativeObject.htm">Decal.nativeObject</a>, <a href="Decals_add.htm">Decals.add</a>, <a href="Decals_item.htm">Decals.item</a>, <a href="Decals_itemByName.htm">Decals.itemByName</a><h2 class="api">
+            Version
+          </h2>
+        Introduced in version September 2024<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(Decal%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,934 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/WritingDebugging_UM.htm#!">
+    <meta name="contextid" content="WritingDebugging_UM">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="28/7/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="description" content="Running and Creating Scripts and Add-Ins">
+    <meta name="topicid" content="GUID-9701BBA7-EC0E-4016-A9C8-964AA4838954">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+	<meta name="keywords" content="add on, addon, plug in, plugin, extension">
+    <title>Creating a Script or Add-In</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+	<link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"/>
+	<script type="text/javascript" src="/view/clientframework/client.js"><!--filler--></script> 
+	<script>
+	  // This turns on the display of the copyright notice which is not visible by default.
+	  // Because the head is removed when used in the web help, this function will only exists
+	  // when the chm help is being created.
+	  window.onload = function() {
+		copyrightElement = document.getElementById('CopyrightNotice');
+		copyrightElement.style.display = 'block';
+	  };
+	</script>
+	
+<style>
+	/* Style buttons */
+	.pageButton {
+	  background-color: #555;
+	  color: black;
+	  float: left;
+	  cursor: pointer;
+	  padding: 10px 10px;
+	  margin: 10px;
+	  font-size: 17px;
+	  width: 200px;
+	}
+	
+	ul.no-bullets {
+	list-style-type: none; /* Remove bullets */
+	padding: 0 px;
+	margin: 0 px; 
+	}
+</style>
+<style>
+	pre.line-numbers [aria-hidden=true]
+	{
+		display: block!important;
+	}
+</style>	
+</head>
+<body>
+<link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+<link rel="stylesheet" href="../Style/prism.css">
+<script src="../Scripts/prism.js"><!--filler--></script> 
+<br/>
+<button class="pageButton" onclick="changePage(2)" id="newButton">New Dialog</button>
+<button class="pageButton" onclick="changePage(1)" id="oldButton">Old Dialog</button>
+<br/>
+<br/>
+<br/>
+
+<div id="OldDialog">
+<h2 class="api">Creating a Script or Add-In Using the Old Dialog</h2>
+
+<h3 class="api">Creating, Editing, and Running Your First Script</h3>
+<p class="api">Technically, there is not much difference between a script and an add-in.  The process of creating, editing, and debugging them is mostly the same so the description below applies to both.  Before getting into the details, here are the basic steps to create, edit, and run a Python script or add-in. The process is very similar for creating a C++ script or add-in.</p>
+
+<ol>
+<li>
+<p class="api">Run the <b>Scripts and Add-Ins</b> command from the UTILITIES tab in the toolbar, as shown below.</p>
+
+<div align="center"><img src="../images/ScriptsAndAddInsCmd.png" border=0 align="middle" alt="Scripts command"></div>
+</li>
+
+<li>
+<p class="api">In the <b>Scripts and Add-Ins</b> dialog, click the “Create” button as shown below.</p>
+
+<div align="center"><img src="../images/CreateNewScript.png" border=0 align="middle" alt="Scripts command"></div>
+<br />
+</li>
+
+<li>
+<p class="api">In the “Create New Script or Add-In” dialog, choose “Script” and “Python” for the programming language, enter a name for the script name, and optionally enter some information in the “Description”, and “Author” fields and then click “Create”.  This will take you back to the “Scripts and Add-Ins” dialog.</p>
+
+<div align="center"><img src="../images/MyFirstScript.png" border=0 align="middle" alt="Scripts command"></div>
+<br />
+</li>
+
+<li>
+<p class="api">Now you have a script and will see it in the list of programs in the "Scripts" tab. To edit it, select it and click the "Edit" button, as shown below.</p>
+
+<div align="center"><img src="../images/MyFirstScriptEdit.png" border=0 align="middle" alt="Scripts command"></div>
+<br />
+</li>
+
+<p class="api">For Python programs, Fusion uses Visual Studio Code (VS Code) as the development environment. If it is not already installed when you try to edit or debug, Fusion will display the dialog below to install VS Code. You only need to do this the first time you edit any script or add-in. When VS Code finishes installing, do the Edit step again to open the script in VS Code.</p>
+
+<div align="center"><img src="../images/InstallVSCode.png" border=0 align="middle" alt="Scripts command"></div>
+<br />
+
+<p class="api">
+The first time you run VS Code from Fusion, you will see a window pop-up saying an extension is being installed. Fusion is installing the Python extension for VS Code. This also only needs to be done once. Finally, once everything is installed VS Code will open, as shown below.</p></li>
+
+<div align="center"><img src="../images/VSCodeEdit.png" border=0 align="middle" alt="Scripts command"></div>
+<br />
+
+<li>
+<p class="api">You can now use VS Code to edit your program. For this simple example, edit the text for the messageBox to any message you would like, such as shown below, and save the changes.</p>
+
+<div align="center"><img src="../images/MyFirstScriptModify.png" border=0 align="middle" alt="Scripts command"></div>
+<br />
+</li>
+
+<li>
+<p class="api">Congratulations, you have just written your first script. To run your script, run the <b>Scripts and Add-Ins</b> command, choose your script from the list, and then click “Run” as shown below.</p>
+
+<div align="center"><img src="../images/MyFirstScriptRun.png" border=0 align="middle" alt="Scripts command"></div>
+<br />
+
+<p class="api">The script will run and do whatever it is programmed to do. In this case it will display the message box shown below.</p>
+
+<div align="center"><img src="../images/HelloSample.png" border=0 align="middle" alt="Scripts command"></div>
+<br />
+<li>
+
+<p class="api">The most important feature of a development environment is the ability to debug your program. Debugging is very different between Python and C++. You can learn about debugging your <a href="PythonSpecific_UM.htm">Python</a> and <a href="CPPSpecific_UM.htm">C++</a> programs in the language specific topics.</p>
+</li>
+</ol>
+
+<h3 class="api">Script and Add-In Details</h3>
+
+<p class="api">Now that you have seen the basic process of creating and debugging a script, here is some more information about the details of both scripts and add-ins.</p>
+
+<p class="api">The <b>Scripts and Add-Ins</b> dialog is the main access point to scripts and add-ins for both users and programmers.  It contains two tabs; one where the available scripts are listed and the other where the available add-ins are listed.  From these lists you can select a script or add-in and then run or edit it. The "Debug" option in the drop-down under the "Run" button does the same thing as "Edit" so there's no reason to use it.</p>
+
+<div align="center"><img src="../images/ScriptsAndAddIns.png" border=0 align="middle" alt="Scripts command"></div>
+<br />
+
+<p class="api">When creating a new script or add-in, the “Create New Script or Add-In” dialog is displayed where you enter information about your script or add-in.</p>
+
+<div align="center"><img src="../images/PythonOrJavaScript.png" border=0 align="middle" alt="Scripts command"></div>
+<br />
+
+<p class="api">The various settings in the dialog are described below.</p>
+
+<ul>
+<li>
+<p class="api"><b>Programming Language</b> – Choose whether you want to create a Python or C++ script or add-in.  If you check the “Save my choice in Preferences” then this will be remembered and automatically set the next time you create a new script or add-in.</p>
+</li>
+
+<li>
+<p class="api"><b>Run on Startup</b> – This setting is add-in specific and indicates if the add-in should be run automatically when Fusion is started.  Most add-ins will want to take advantage of this capability so the commands they define will be available to the user as soon as Fusion starts.</p>
+</li>
+
+<li>
+<p class="api"><b>Script or Add-In Name</b> – This is the name of your script or add-in. This name will be used to create a new folder in the location specified by the “Folder Location” and this will also be used for the name of the script or add-in code files.</p>
+</li>
+
+<li>
+<p class="api"><b>Description</b> – An optional description of the script or add-in.</p>
+</li>
+
+<li>
+<p class="api"><b>Author</b> – An optional name of the author of the script or add-in.</p>
+</li>
+
+<li>
+<p class="api"><b>Version</b> – This is an optional setting that is add-in specific and is the version of the add-in. This is a string and can be any form of a version label, for example, “1.0.0”, “2016”, “R1”, “V2”, etc.</p>
+</li>
+
+<li>
+<p class="api"><b>Target Operating System</b> – Indicates which operating system(s) the script or add-in should be available in. For example, if your script or add-in uses Windows specific libraries you would set this to “Windows”, so Fusion won’t attempt to display or load it on a Mac.</p>
+</li>
+
+<li>
+<p class="api"><b>Folder Location</b> – The location where the script or add-in will be created. When you create a new script or add-in using the dialog, a new folder with the script or add-in name is created and the add-in files are created in that folder. The default locations for add-ins and scripts are shown below, but you can edit the default path in the "General" -> "API section" in the <b>Preferences</b> command to point to any location you want.
+
+<dl>
+<dt><b>Add-Ins</b></dt>
+<dd>Windows – %appdata%\Autodesk\Autodesk Fusion\API\AddIns</dd>
+<dd>Mac – $HOME/Library/Application Support/Autodesk/Autodesk Fusion/API/AddIns</dd>
+<dt><b>Scripts</b></dt>
+<dd>Windows – %appdata%\Autodesk\Autodesk Fusion\API\Scripts</dd>
+<dd>Mac – $HOME/Library/Application Support/Autodesk/Autodesk Fusion/API/Scripts</dd>
+</dl>
+</p>
+
+<p class="api">Scripts and add-ins can exist at any location on the machine but it’s only in the locations listed above where Fusion automatically searches for add-ins when it starts up. A script or add-in in any other location will need to be explicitly located using the green “+” icon near the top of the “Scripts and Add-Ins” dialog. When copying or installing an add-in onto another computer you should copy it to the location specified above so Fusion will find it automatically.</p>
+</li>
+</ul>
+
+
+<h3 class="api">Script and Add-In Files</h3>
+
+<p class="api">When a new script or add-in is created a new folder is created using the specified name and the code files (a .py file for Python and a .cpp and other related files for C++) are created. In addition to the code files, a .manifest file is also created that contains additional information about the script or add-in.  For example, if you create a Python add-in called MyAddIn, a MyAddIn folder with the files shown below is created in “…/Autodesk/Autodesk Fusion/API/AddIns”.  Additional files associated with the script or add-in (icons, for example) should be added to this folder so the add-in is completely self-contained and can be “installed” by simply copying this folder to the correct location.</p>
+
+<div align="center"><img src="../images/AddInFiles.png" border=0 align="middle" alt="Scripts command"></div>
+<br />
+
+<a name="Manifest"></a>
+<h3 class="api">The Manifest File</h3>
+
+<p class="api">The .manifest file contains the information that you specified in the “Create New Script or Add-In” dialog when you initially created the script or add-in.  It also contains additional information Fusion uses to determine when it should be displayed and loaded.  The manifest file has the same name as the add-in but has a .manifest extension. The file is a text file in JSON format. Shown below is an example of a typical manifest file for an add-in.</p>
+
+<pre><code class="language-python">{
+	"autodeskProduct":	"Fusion360",
+	"type":	"addin",
+	"id":	"62a9e55a-dbe4-408d-ad8b-cb802473725e",
+	"author":	"Brian Ekins",
+	"description":	{
+		"":	"This is a test add-in."
+	},
+	"version":	"V1",
+	"runOnStartup":	true,
+	"supportedOS":	"windows|mac"
+}</code></pre>
+<br />
+
+<p class="api">Below is a description of each of the items in the manifest.
+<ul>
+<li><b>autodeskProduct</b> – This property will always have the value “Fusion360”.</li>
+<li><b>type</b> – This property can be “addin” or “script” to indicate if this program is an add-in or script.</li>
+<li><b>id</b> – This property is a GUID that uniquely identifies this add-in. If you ever create a new add-in or script by copying an existing add-in or script you should replace this ID with a new GUID so the ID of each one is unique. This is not currently being used by Fusion but is likely to be used in the future.</li>
+<li><b>author</b> – This property is a string containing the name of the author. This is displayed in the “Scripts and Add-Ins” dialog.</li>
+<li><b>description</b> – This is a JSON object with properties that define the description of the add-in. Using the JSON format it is defined as an object with one or more properties so that descriptions can be specified in multiple languages. The example below has one property with an empty name, which is the default description and will be used for any language that does not have a specific description. The other properties define the text to use for the other languages supported by Fusion, using industry standard language codes.<br /><br />
+
+<pre><code class="language-json">"Description":{
+               "":"Default description",
+               "1028": "說明在中國",
+               "1031": "Beschreibung auf Deutsch",
+               "1033": "Description in English",
+               "1034": "Descripción en Español",
+               "1036": "Description en Français",
+               "1040": "Descrizione in Italiano",
+               "1041": "日本語での説明",
+               "1042": "한국어 설명"               
+}</code></pre>
+</li>
+<br />
+
+<li><b>version</b> – This property defines the version of the add-in and can be any string, i.e. “1.0.0”, “2016”, “R1”, “V2”, etc.</li>
+
+<li><b>runOnStartup</b> – This property can be true or false to indicate if this add-in should be automatically started by Fusion when Fusion is started.</li>
+
+<li><b>supportedOS</b> – This property can be “windows”, “mac”, or “windows|mac”. This defines which operating systems the add-in will load on. One example of where this is used is in the case where an add-in uses OS specific libraries, so the add-in won’t work on any other OS. For example, if I write an add-in that uses a Windows specific library, I can set the supportedOS to “windows” so that on a Mac, Fusion won’t display the add-in in the “Scripts and Add-Ins” dialog and also won’t attempt to run it on startup. Most Python scripts and add-ins should be compatible with both Mac and Windows so this should be set to “windows|mac” to indicate the add-in can be loaded for both operating systems.  C++ scripts and add-ins must be compiled separately for each platform so it is more likely they may use this option when the developer doesn't have access to both a Windows and Mac machine to compile.</li>
+
+<li><b>sourcewindows and sourcemac</b> – <p class="api">A C++ script or add-in has two additional properties that identify the filename of the project file for both Windows and Mac.  When you select the "Edit" option in the "Scripts and Add-Ins" dialog, Fusion opens the associated project file using whatever application is associated with that file type.  For example, in the example below a .vcxproj file is specified for the sourcewindows property so Visual Studio will be invoked since it is defined within Windows as the associated application for .vcxproj files.  By changing this file you can choose to use any code editor that you want.</p>
+
+<pre><code class="language-json">	"sourcewindows":	"NewCPPTest.vcxproj",
+	"sourcemac":	"NewCPPTest.xcodeproj"</code></pre>
+<br />
+</li>
+</ul>
+</p>
+
+<p class="api">Notice that, except for the sourcewindows and sourcemac properties, the name of the script or add-in is not specified in the manifest file.  The name is defined by the name used for the main directory and the files.  To change the name of a script or add-in, change the names of the directory and files to the new name.</p>
+
+<h3 class="api">Script Code</h3>
+<p class="api">Below is the code that is automatically written when a new Python script is created.  Notice the “run” function.  Fusion will automatically call the run function when the script is executed.  Fusion also passes in information through the “context” argument as to whether the script is being run at Fusion startup or is being loaded during a session.  For a script, this can be ignored because for a script it is always run during a Fusion session and never at startup.  The run function is the entry point into your script and once it is complete, the script is finished and Fusion unloads it.</p>
+
+<pre><code class="language-python">Import adsk.core, adsk.fusion, traceback
+
+def run(context):
+    ui = None
+    try:
+        app = adsk.core.Application.get()
+        ui  = app.userInterface
+        ui.messageBox('Hello script')
+
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</code></pre>
+<br />
+
+<h3 class="api">Add-In Code</h3>
+<p class="api">The code below is a minimal add-in.  Notice that it is exactly the same as a new script except that it also contains a “stop” function. When you create a new Python add-in using the <b>Scripts and Add-Ins</b> command, it creates much more than this to help you get started. You can read more about it in the <a href="PythonTemplate_UM.htm"</b>Python Add-in Template</a> topic.</p>
+
+<pre><code class="language-python">import adsk.core, adsk.fusion, traceback
+
+def run(context):
+    ui = None
+    try:
+        app = adsk.core.Application.get()
+        ui = app.userInterface
+        ui.messageBox('Hello addin')
+
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
+
+def stop(context):
+    ui = None
+    try:
+        app = adsk.core.Application.get()
+        ui  = app.userInterface
+        ui.messageBox('Stop addin')
+
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</code></pre>
+<br />
+
+<p class="api">The “stop” function is called by Fusion whenever the add-in is being stopped and unloaded. This can happen because the user is stopping it using the “Scripts and Add-Ins” dialog or more typically it is because Fusion is shutting down and all add-ins are being stopped. The stop function is where the add-in can perform any needed clean up, like removing any user-interface elements that it created.</p>
+
+<p class="api">Both the run and the stop functions have a single argument called “context” that is used to pass additional information to the add-in indicating the context of why the run or stop function is being called. Depending on the language, this information is passed using different types, but in all cases, it represents a set of name:value pairs. Python passes this in as a Dictionary object and C++ passes it in as a string in JSON format. The following name:value pairs are currently supported.</p>
+
+<p class="api">
+<b>run</b>
+<br />
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:10%;">
+                Value
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">IsApplicationStartup </td>
+        <td class="api-list">true or false</td>
+        <td class="api-list">Indicates the add-in is being started as a result automatic loading during Fusion startup (true) or is being loaded by the user through the “Scripts and Add-Ins” dialog (false).</td>
+      </tr>
+    </Table>
+</p> 
+
+<p class="api"><b>stop</b><br />
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:10%;">
+                Value
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">IsApplicationClosing </td>
+        <td class="api-list">true or false</td>
+        <td class="api-list">Indicates the add-in is being shut down as a result Fusion being shut down (true) or because the user stopped it through the “Scripts and Add-Ins” dialog (false).</td>
+      </tr>
+    </Table>
+</p> 
+
+<h3 class="api">Scripts vs. Add-Ins</h3>
+
+<p class="api">As was said earlier, there is very little technical difference between a script and an add-in.  The primary difference is how they are executed and their lifetime.  A script is executed by the user through the “Scripts and Add-Ins” command and stops immediately after the run function completes execution.  A script runs and then it is done.</p>
+
+<p class="api">An add-in is typically automatically loaded by Fusion when Fusion starts up.  An add-in also usually creates one or more custom commands and adds them to the user interface during start up.  The add-in continues to run throughout the Fusion session so it can react whenever any of its commands are executed by the user.  The add-in remains running until Fusion is shut down or the user explicitly stops it through the “Scripts and Add-Ins” dialog.  When it stops, it cleans up whatever user interface customization it created in its stop function.</p>
+
+<p class="api">How an add-in uses the Fusion API is not any different from a script. It is the same API and none of the API calls are limited to either scripts or add-ins. However, there are a couple of areas of the API that are more useful to an add-in than a script. The first is the portion of the API that deals with working with the Fusion user-interface and adding buttons or other controls to access your custom commands. For example, if you create a custom command that draws geometry in a sketch you will want to add a new button to the Sketch panel so it will be easy for the user to find. Because an add-in can be loaded at startup it can add its custom commands to the user interface whenever Fusion starts up so they are always available to the user and appear as a standard Fusion command. This is described in more detail in the <a href="UserInterface_UM.htm">User Interface</a> topic.</p> 
+
+<p class="api">A second area of the API that is useful for add-ins is commands. The use of commands is not limited to add-ins and there are sometimes reasons to use the command functionality within a script, but it is typically used and make more sense within an add-in. This is described in the <a href="Commands_UM.htm">Commands</a> topic.</p>
+
+<h3 class="api">Editing and Debugging</h3>
+<p class="api">For more detailed information about editing and debugging your scripts and add-ins see the language specific topics (<a href="PythonSpecific_UM.htm">Python</a> or <a href="CPPSpecific_UM.htm">C++</a>) because the process is different depending on which programming language you're using.</p>
+</div>
+
+
+<div id="NewDialog">
+
+<h1 class="api">Managing Scripts and Add-Ins</h1>
+<h2 class="api">Contents</h2>
+<p class="api">
+<ul>
+	<li><a href="#NewDialog">Managing, Running, and Creating Scripts and Add-Ins Using the New Dialog</a></li>
+	<li><a href="#Working">Working with Installed Scripts and Add-Ins</a></li>
+	<ul>
+		<li><a href="#Filters">Filtering the List of Displayed Scripts and Add-Ins</a></li>
+		<li><a href="#Installing">Installing, Linking, and Removing Scripts and Add-Ins</a></li>
+		<ul>
+			<li><a href="#DefaultFolders">Default Folders for Scripts and Add-Ins</a></li>
+			<li><a href="#UserDefinedFolders">User Defined Folder for Scripts and Add-Ins</a></li>
+			<li><a href="#Linking">Linking Scripts and Add-Ins</a></li>
+			<li><a href="#Uninstall">Uninstalling Scripts and Add-Ins</a></li>
+		</ul>
+		<li><a href="#Running">Running Scripts and Add-Ins</a></li>
+	</ul>
+	<li><a href="#CreatingEditingRunning">Creating, Editing, and Running Your First Script</a></li>
+	<li><a href="#Details">Script and Add-In Details</a></li>
+	<ul>
+		<li><a href="#Files">Script and Add-In Files</a></li>
+		<ul>
+			<li><a href="#Manifest">The Manifest File</a></li>
+			<li><a href="#ScriptCode">Script Code</a></li>
+			<li><a href="#AddInCode">Add-In Code</a></li>
+		</ul>
+	</ul>
+	<li><a href="#ScriptsVsAddIns">Scripts vs. Add-Ins</a></li>
+	<li><a href="#EditingDebugging">Editing and Debugging</a></li>
+	<li><a href="#KnownIssues">Known Issues</a></li>
+</ul>
+</p>
+
+<a name="NewDialog"></a>
+<h2 class="api">Managing, Running, and Creating Scripts and Add-Ins Using the New Dialog</h2>
+
+<p class="api">This release makes the new dialog for the "Scripts and Add-Ins" command the default dialog. Most of the known issues have been addressed, with a couple of other fixes coming in the next release. If, for some reason, you need to use the old dialog there is now a preference setting to switch back. If you're doing this, please let us know in the <a href="https://forums.autodesk.com/t5/fusion-api-and-scripts/bd-p/22">forum</a> why would prefer the old dialog.</p>
+
+<div align="center"><img src="../images/NewScriptDialogPreference.png" border=0 align="middle" alt="New Scripts Dialog Preference"></div>
+<br />
+</p>
+
+<a name="Working"></a>
+<h3 class="api">Working with Installed Scripts and Add-Ins</h3>
+<p class="api">The purpose of the Scripts and Add-Ins dialog is to provide the needed functionality to manage your scripts and add-ins. It provides the following capabilities:
+
+<ul>
+<li>List all the currently available scripts and add-ins and show additional related information.</li>
+<li>Search and filter that list in different ways.</li>
+<li>Run a script.</li>
+<li>Start an add-in, see if an add-in is running, and stop a running add-in.</li>
+<li>Specify if an add-in should start running automatically when Fusion starts.</li>
+<li>See where a script or add-in is located on your machine and open a new File Explorer or Finder window in that folder.</li>
+<li>Create new scripts and add-ins.</li>
+<li>Create links to scripts and add-ins that exist anywhere on your computer.</li>
+</ul>
+</p>
+
+<p class="api">Below is the Scripts and Add-Ins dialog with the three main sections highlighted. The section to the left provides the various filters to control which scripts and add-ins are displayed. The center section displays the list of scripts and add-ins. The section on the right displays detailed information for the selected script or add-in. Each of these is described in more detail below.</p>
+
+<div align="center"><img src="../images/NewScriptDialog.png" border=0 align="middle" alt="New Scripts Dialog"></div>
+<br />
+
+<a name="Filters"></a>
+<h4 class="api">Filtering the List of Scripts and Add-Ins</h4>
+<p class="api">The left side of the Scripts and Add-Ins dialog provides different filters for controlling what's displayed in the list in the center section of the dialog. If "Favorites" is selected, only scripts or add-ins that have been marked as a favorite will be displayed and the selected filters are applied to further filter the list. Clicking "Favorites again will show all scripts that meet the current filters. Clicking "All scripts and add-ins" clears all filters and "Favorites", so all scripts and add-ins will be displayed.</p>
+
+<p class="api">Selecting a filter displays the scripts and add-ins with that attribute. For example, if you select "Add-ins", only add-ins will be displayed, and then if you select "Running", it will combine the filters so only the currently running add-ins will be displayed. Any number of filters can be selected at once. You can deselect individual filters to remove that filter.</p>
+
+<p class="api">A powerful filtering feature is an ability to identify any script or add-in as a "Favorite". You can set a script or add-in to be a favorite by using its context menu or by clicking on the star beside its name in the right-hand section of the dialog, as shown below. Clicking the "Favorites" option at the top of the "Browse" section on the left panel will display your favorite scripts and add-ins. You can select other filters to filter the list of favorites further.</p>
+
+<div align="center"><img src="../images/AddAsFavoriteScript.png" border=0 align="middle" alt="Add as Favorite Script or Add-In"></div>
+<br />
+
+<p class="api">Selecting a script or add-in in the list of scripts and add-ins will display its details in the right-hand section of the dialog. In this dialog section, you can view current state information and perform various operations for the selected script or add-in using the associated context menu, as shown below.</p>
+
+<div align="center"><img src="../images/ScriptListFunctionality.png" border=0 align="middle" alt="List of Scripts Functionality"></div>
+<br />
+
+<p class="api">The first column displays the script or add-in's name. The second column indicates its current running state. From this, you can also infer whether the item is a script or an add-in. The four possible icons are shown below.</p>
+
+<ul class="no-bullets">
+	<li><img src="../images/ScriptDialogRunScriptIcon.png" border=0> - Indicates a script that is not running. Clicking this icon will run the script.</li>
+	<li><img src="../images/ScriptDialogRunningScriptIcon.png" border=0> - Indicates a script that is currently running. It is rare to see this state because scripts typically run and end. However, creating a script that doesn't end automatically when the run function finishes is possible.
+	<li><img src="../images/ScriptDialogNotRunningAddInIcon.png" border=0> - Indicates an add-in that is currently not running. Clicking this icon will start the add-in.
+	<li><img src="../images/ScriptDialogRunningAddInIcon.png" border=0> - Indicates an add-in that is running. Clicking this icon will stop the add-in.
+</ul>
+
+<p class="api">The third column indicates if the add-in is set to run automatically on start-up. If this is checked, the add-in will be automatically started by Fusion when Fusion starts and will remain running for the entire session or until you manually stop it. This setting is only available for add-ins. The fourth column shows the version of the add-in</p>
+
+<p class="api">The fourth column shows the version of the add-in.</p>
+
+<p class="api">A small toolbar with several commands is at the top of the list section. The button on the left displays a pop-up menu where you can go to the Autodesk App Store, add a local script or add-in to the list (linking), or create a new script or add-in. Linking and creation are discussed in more detail below. The command with the pencil icon will open the code editor for the currently selected script or add-in to allow you to edit and debug the script or add-in. The command with the folder icon will open the folder where the script or add-in is located using Window's File Explorer or Mac's Finder. The command with the broken paper clip will unlink a linked script or add-in.</p>
+
+<div align="center"><img src="../images/ScriptDialogToolbar.png" border=0 align="middle" alt="Scripts Dialog Toolbar"></div>
+<br />
+
+<a name="Installing"></a>
+<h3 class="api">Installing, Linking, and Removing Scripts and Add-Ins</h3>
+<p class="api">An "installed" script or add-in is one that exists locally on your computer and that Fusion is aware of. A script or add-in is a folder that contains the code and other associated files, like icon files. Fusion automatically searches several directories on your machine for scripts and add-ins.</p>
+
+<a name="DefaultFolders"></a>
+<h4 class="api">Default Folders for Scripts and Add-Ins</h4>
+Several default folders are always searched for scripts and add-ins when Fusion starts. These folders are listed below.</p>
+
+<ul>
+<dl>
+
+<li><dt>The default path when creating new scripts. As described below, the default path can be redefined by setting a user preference. However, even if the default path is changed, this path is still searched.</dt>
+<dd>Windows - <code>C:\Users\&lt;userName&gt;\AppData\Roaming\Autodesk\Autodesk Fusion 360\API\Scripts</code></dd>
+<dd>Mac - <code>~/Library/Application Support/Autodesk/Autodesk Fusion 360/API/Scripts</code></dd>
+</li><br>
+<li><dt>The default path when creating new add-ins. As described below, the default path can be redefined by setting a user preference. However, it is still searched even if the default path has changed.</dt>
+<dd>Windows - <code>C:\Users\&lt;userName&gt;\AppData\Roaming\Autodesk\Autodesk Fusion 360\API\AddIns</code></dd>
+<dd>Mac - <code>~/Library/Application Support/Autodesk/Autodesk Fusion 360/API/AddIns</code></dd>
+</li><br>
+<li><dt>This is the location where apps downloaded from the Autodesk App Store are installed. It is a shared location where apps for all Autodesk applications, not just Fusion apps, are installed. The folder structure of apps in this location is different. Each add-in is in a .bundle folder. Even though this location is intended for Autodesk App Store apps, other applications sometimes also install in it. Still, they have to follow the rules for having the .bundle folder and a PackageContents.xml file that identifies it as a Fusion app.</dt>
+<dd>Windows - <code>C:\Users\&lt;userName&gt;\AppData\Roaming\Autodesk\ApplicationPlugins</code><</dd>
+<dd>Mac - <code>~/Library/Application Support/Autodesk/ApplicationPlugins</code></code></dd>
+</li><br>
+<li><dt>The location is intended for apps to be installed that are not from the Autodesk App Store. Apps in this location are Fusion-specific and follow the standard folder structure, with each add-in in a folder with the same name as the add-in. You DO NOT need to use a .bundle folder for this location.</dt>
+<dd>Windows - <code>C:\Users\&lt;userName&gt;\AppData\Roaming\Autodesk\FusionAddins</code>code></dd>
+<dd>Mac - <code>~/Library/Application Support/Autodesk/FusionAddins</code></dd>
+</dl></ul>
+
+<a name="UserDefinedFolders"></a>
+<h4 class="api">User Defined Folder for Scripts and Add-Ins</h4>
+<p class="api">A user preference defines the path when creating a new script or add-in. The default path is shown above, but you can set this to any location using the preference shown below. Fusion will search for scripts and add-ins in this defined path in the "Scripts" and "AddIns" folders. If you change this path from the default, Fusion will continue to search the default location.</p>
+
+<div align="center"><img src="../images/PreferenceDefaultPath.png" border=0 align="middle" alt="Preference Default Path"></div>
+<br />
+
+<a name="Linking"></a>
+<h4 class="api">Linking Scripts and Add-Ins</h4>
+<p class="api">Fusion also supports using a script or add-in that can exist anywhere on your computer. This is done by adding a "link" to the script or add-in folder. You create a link using the "Script or add-in from device" option in the drop-down of the "+" plus command at the top of the list section, as shown below. When running the command, you can browse for any script or add-in folder on your computer. Fusion will remember it and add it to the list of scripts and add-ins. When a linked script or add-in is selected in the list, you can use the "Unlink" command at the top of the list section of the dialog to remove the script or add-in from the list and have Fusion forget about it. Unlinking does NOT delete the folder but only causes Fusion to forget about the script or add-in.</p>
+
+<div align="center"><img src="../images/ScriptDialogToolbarAddLink.png" border=0 align="middle" alt="Scripts Dialog Toolbar"></div>
+<br />
+
+<a name="Uninstall"></a>
+<h4 class="api">Uninstalling Scripts and Add-Ins</h4>
+<p class="api">To permanently remove a script or add-in, delete it from your computer. If it was installed on Windows using an installer, it's best to uninstall it using the uninstaller, if it has one. The installed app will often be in the Start menu where you will find a command to uninstall it or right-clicking on the app will show an "Uninstall" command. You can also use the "App and Features" tool in Window 10 or the "Installed Apps" in Windows 11 where the installed apps should be listed and you can choose to uninstall it.If an installer was not used, or you're using a Mac, you can delete the folder containing the add-in by browsing to it using Window's File Explorer or Mac's Finder and deleting or moving it to the trash.</p>
+
+<p class="api">To determine the location of a script or add-in, select it in the list and it's path is shown in the right-hand section of the dialog with other details about the selected script or add-in. You can also click the "Open File Location" link to open that folder in Window's File Explorer or Mac's Finder.</p>
+
+<div align="center"><img src="../images/RemovePathScript.png" border=0 align="middle" alt="Find path of script or add-in."></div>
+<br />
+
+<a name="Running"></a>
+<h3 class="api">Running Scripts and Add-Ins</h3>
+<p class="api">Through the "Scripts and Add-Ins" dialog, you can see your existing scripts and add-ins and run them. You do this by finding the script or add-in in the list and clicking either the <img src="../images/ScriptDialogRunScriptIcon.png" border=0> or <img src="../images/ScriptDialogNotRunningAddInIcon.png" border=0> icon beside it in the "Run" column. When running a script, the Scripts and Add-Ins dialog is immediately dismissed so the script can perform whatever action it does. When starting an add-in, the dialog remains open so you can continue to start other add-ins if desired.</p>
+
+<a name="CreatingEditingRunning"></a>
+<h3 class="api">Creating, Editing, and Running Your First Script</h3>
+<p class="api">Technically, there is not much difference between a script and an add-in. Creating, editing, and debugging them are mostly the same, so the description below applies to both. Before getting into the details, here are the basic steps to create, edit, and run a Python script or add-in. The process is very similar when creating a C++ script or add-in.</p>
+
+<ol>
+<li>
+<p class="api">Run the <b>Scripts and Add-Ins</b> command from the UTILITIES tab in the toolbar, as shown below.</p>
+
+<div align="center"><img src="../images/ScriptsAndAddInsCmd.png" border=0 align="middle" alt="Scripts command"></div>
+</li>
+
+<li>
+<p class="api">In the <b>Scripts and Add-Ins</b> dialog, click the “+” near the top of the dialog, and then choose "Create script or add-in" from the drop-down list, as shown below.</p>
+
+<div align="center"><img src="../images/CreateNewScript2.png" border=0 align="middle" alt="Scripts command"></div>
+<br />
+</li>
+
+<li>
+<p class="api">In the “New App” dialog, make sure “Script” and “Python” are selected. Enter a name for the script name, and optionally enter the “Description”, and “Author” fields and then click “Create”. This will take you back to the “Scripts and Add-Ins” dialog.</p>
+
+<div align="center"><img src="../images/MyFirstScript2.png" border=0 align="middle" alt="Scripts command"></div>
+<br />
+</li>
+
+<li>
+<p class="api">The new script will now be shown in the list. To edit it, use the "Edit in code editor" command from the toolbar at the top of the list section or the context menu, as shown below. </p>
+
+<div align="center"><img src="../images/MyFirstScriptEdit2.png" border=0 align="middle" alt="Scripts command"></div>
+<br />
+</li>
+
+<p class="api">For Python programs, Fusion uses Visual Studio Code (VS Code) as the development environment. If it is not already installed when you try to edit or debug, Fusion will display the dialog below to install VS Code. You only need to do this the first time you edit any script or add-in. When VS Code finishes installing, do the Edit step again to open the script in VS Code.</p>
+
+<div align="center"><img src="../images/InstallVSCode.png" border=0 align="middle" alt="Scripts command"></div>
+<br />
+
+<p class="api">
+The first time you run VS Code from Fusion, you will see a window pop-up saying an extension is being installed. Fusion is installing the Python extension for VS Code. This also only needs to be done once. Finally, once everything is installed VS Code will open, as shown below.</p></li>
+
+<div align="center"><img src="../images/VSCodeEdit2.png" border=0 align="middle" alt="Scripts command"></div>
+<br />
+
+<li>
+<p class="api">You can now use VS Code to edit your program. For this simple example, edit the text for the messageBox to any message you would like, such as what's shown below, and save the changes.</p>
+
+<div align="center"><img src="../images/MyFirstScriptModify2.png" border=0 align="middle" alt="Scripts command"></div>
+<br />
+
+<li>
+<p class="api">Congratulations, you have just written your first script. To run your script, run the <b>Scripts and Add-Ins</b> command, find your script in the list, and click the <img src="../images/ScriptDialogRunScriptIcon.png" border=0> icon beside it.</p>
+
+<div align="center"><img src="../images/MyFirstScriptRun2.png" border=0 align="middle" alt="Scripts command"></div>
+<br />
+
+<p class="api">The script will run and do whatever it is programmed to do. In this case it will display the message box shown below.</p>
+
+<div align="center"><img src="../images/HelloSample2.png" border=0 align="middle" alt="Scripts command"></div>
+<br />
+<li>
+
+<p class="api">A development environment provides two important capabilities; code hints as you write your code to speed up development and reduce mistakes and the ability to debug your program. Debugging is very different between Python and C++. You can learn about debugging your <a href="PythonSpecific_UM.htm">Python</a> and <a href="CPPSpecific_UM.htm">C++</a> programs in the language specific topics.</p>
+</li>
+</ol>
+
+<a name="Details"></a>
+<h3 class="api">Script and Add-In Details</h3>
+
+<p class="api">Now that you have seen the basic process of creating and debugging a script, here is some more information about the details of both scripts and add-ins.</p>
+
+<p class="api">The <b>Scripts and Add-Ins</b> dialog is the main access point to scripts and add-ins for both users and programmers. It lists all known scripts and add-ins. From the list you can select a script or add-in and run or edit it.
+
+<div align="center"><img src="../images/ScriptsAndAddIns2.png" border=0 align="middle" alt="Scripts command"></div>
+<br />
+<br />
+
+<p class="api">When creating a new script or add-in, the “New App” dialog is displayed where you enter information about the script or add-in you want to create.</p>
+
+<div align="center"><img src="../images/CreateScriptAddIn.png" border=0 align="middle" alt="Create New Script or Add-In"></div>
+<br />
+<br />
+
+<p class="api">The various settings in the dialog are described below.</p>
+
+<ul>
+<li>
+<p class="api"><b>Create a new</b> – Choose whether you want to create a script or add-in.</p>
+</li>
+
+<li>
+<p class="api"><b>Name</b> – This is the name of your script or add-in. This name will be used to create a new folder in the location specified by the "Folder Location", and will also be used to name the script or add-in code files.</p>
+</li>
+
+<li>
+<p class="api"><b>Description</b> – An optional description of the script or add-in. The description is shown in the properties section of the "Scripts and Add-Ins" dialog.</p>
+</li>
+
+<li>
+<p class="api"><b>Author</b> – You can optionally specify the author's name. The author is shown in the properties section of the "Scripts and Add-Ins" dialog.</p>
+</li>
+
+<li>
+<p class="api"><b>Programming Language</b> – Choose whether you want to create a Python or C++ script or add-in.</p>
+</li>
+
+<li>
+<p class="api"><b>Run on Startup</b> – This setting is add-in-specific and indicates if the add-in should be run automatically when Fusion is started.  Most add-ins will want to take advantage of this capability so the commands they define will be available to the user as soon as Fusion starts.</p>
+</li>
+
+<li>
+<p class="api"><b>Target Operating System</b> – Indicates which operating system(s) the script or add-in should be available in. For example, if your script or add-in uses Windows-specific libraries you would set this to “Windows”, so Fusion won’t attempt to display or load it on a Mac.</p>
+</li>
+
+<li>
+<p class="api"><b>Folder Location</b> – The location where the script or add-in will be created. When you create a new script or add-in using the dialog, a new folder with the script or add-in name is created, and the add-in files are created in that folder. By default, this uses the default location as described earlier. You can also browse to any folder, and the script or add-in will be created there, and a link will be created so Fusion will remember it and display it in the dialog.
+</p>
+
+<p class="api">Scripts and add-ins can exist at any location on the machine, but it's only in the locations listed above where Fusion automatically searches for add-ins when it starts up. A script or add-in in any other location must be explicitly located using the green "+" icon near the top of the "Scripts and Add-Ins" dialog. When copying or installing an add-in onto another computer you should copy it to the location specified above so Fusion will find it automatically.</p>
+</li>
+</ul>
+
+<a name="Files"></a>
+<h3 class="api">Script and Add-In Files</h3>
+
+<p class="api">When a new script or add-in is created a new folder is created using the specified name and the code files are created in that folder. In addition to the code files, a couple of other files are created; a.manifest file is also created that contains additional information about the script or add-in.  For example, if you create a Python add-in called MyAddIn, a MyAddIn folder with the files shown below is created in “…/Autodesk/Autodesk Fusion/API/AddIns”.  Additional files associated with the script or add-in (icons, for example) should be added to this folder so the add-in is completely self-contained and can be “installed” by simply copying this folder to the correct location.</p>
+
+<div align="center"><img src="../images/AddInFiles2.png" border=0 align="middle" alt="Scripts command"></div>
+<br />
+
+<a name="Manifest"></a>
+<h3 class="api">The Manifest File</h3>
+
+<p class="api">The .manifest file contains the information specified in the “Create New Script or Add-In” dialog when you initially created the script or add-in.  It also contains additional information Fusion uses to determine when it should be displayed and loaded.  The manifest file has the same name as the add-in but has a .manifest extension. The file is a text file in JSON format. Shown below is an example of a typical manifest file for an add-in.</p>
+
+<pre><code class="language-json">{
+	"autodeskProduct":	"Fusion",
+	"type":	"addin",
+	"id":	"",
+	"author":	"Roger Rabbit",
+	"description":	{
+		"":	"This is my first add-in"
+	},
+	"version":	"",
+	"runOnStartup":	true,
+	"supportedOS":	"windows|mac",
+	"editEnabled":	true,
+	"iconFilename":	"AddInIcon.svg"
+}</code></pre>
+<br />
+
+<p class="api">Below is a description of each of the items in the manifest.
+<ul>
+<li><b>autodeskProduct</b> – This property will always have the value “Fusion”.</li>
+<li><b>type</b> – This property can be “addin” or “script” to indicate if this program is an add-in or script.</li>
+<li><b>id</b> – This property is not used and can be left empty.</li>
+<li><b>author</b> – This property is a string containing the name of the author. This is displayed in the “Scripts and Add-Ins” dialog.</li>
+<li><b>description</b> – This is a JSON object with properties that define the add-in's description. Using the JSON format, it is defined as an object with one or more properties so that you can specify descriptions for more than one language. The example below has one property with an empty name, which is the default description and will be used for any language without a specific description. The other properties define the text for the other languages supported by Fusion using Microsoft-defined language codes.<br /><br />
+
+<pre><code class="language-json">"Description":{
+               "":"Default description",
+               "1028": "說明在中國",
+               "1031": "Beschreibung auf Deutsch",
+               "1033": "Description in English",
+               "1034": "Descripción en Español",
+               "1036": "Description en Français",
+               "1040": "Descrizione in Italiano",
+               "1041": "日本語での説明",
+               "1042": "한국어 설명"               
+}</code></pre>
+</li>
+<br />
+
+<p class="api">Below is a list of the language codes for the languages supported by Fusion.
+<dt>
+<dd>2052 : Peoples Republic of China Chinese</dd>
+<dd>1028 : Taiwan Chinese</dd>
+<dd>1029 : Czech</dd>
+<dd>1033 : English</dd>
+<dd>1036 : French</dd>
+<dd>1031 : German</dd>
+<dd>1038 : Hungarian</dd>
+<dd>1040 : Italian</dd>
+<dd>1041 : Japanese</dd>
+<dd>1042 : Korean</dd>
+<dd>1045 : Polish</dd>
+<dd>1046 : Brazilian Portuguese</dd>
+<dd>1049 : Russian</dd>
+<dd>1034 : Spanish</dd>
+<dd>1055 : Turkish</dd>
+</dt>
+<p>
+
+<li><b>version</b> – This property defines the version of the add-in and can be any string, i.e. “1.0.0”, “2016”, “R1”, “V2”, etc.</li>
+
+<li><b>runOnStartup</b> – This property can be true or false to indicate if Fusion should automatically start this add-in when Fusion is started. By default, this is false, which is the desired setting when writing and debugging your code. However, once developed, this value is typically true.</li>
+
+<li><b>supportedOS</b> – This property can be "windows", "mac", or "windows|mac". This defines which operating systems the add-in will load on. One example of where this is used is when an add-in uses OS-specific libraries so that the add-in won't work on any other OS. For example, if I write an add-in that uses a Windows-specific library, I can set the supportedOS to "windows" so that on a Mac, Fusion won't display the add-in in the "Scripts and Add-Ins" dialog and also won't attempt to run it on startup. Most Python scripts and add-ins should be compatible with both Mac and Windows, so this should be set to "Windows | Mac" to indicate the add-in can be loaded for both operating systems. C++ scripts and add-ins must be compiled separately for each platform, so they may more likely use this option when the developer doesn't have access to both a Windows and Mac machine to compile.</li>
+
+<li><b>sourcewindows and sourcemac</b> – <p class="api">A C++ script or add-in has two additional properties that identify the filename of the project file for both Windows and Mac. When you select the "Edit" option in the "Scripts and Add-Ins" dialog, Fusion opens the associated project file using the application associated with that file type. For example, in the example below, a .vcxproj file is specified for the sourcewindows property, so Visual Studio will be invoked since it is defined within Windows as the associated application for .vcxproj files. You can use any code editor you want by changing this file or the application associated with that file type on your computer.</p>
+
+<pre class="api-code">
+	"sourcewindows":	"NewCPPTest.vcxproj",
+	"sourcemac":	"NewCPPTest.xcodeproj"
+</pre>
+<br />
+</li>
+</ul>
+</p>
+
+<p class="api">Notice that, except for the sourcewindows and sourcemac properties, the script or add-in's name is not specified in the manifest file. The name is defined by the name used for the main directory. The primary source file, and the manifest file also have this name. To change the name of a script or add-in, change the names of the directory and files to the new name.</p>
+
+<a name="ScriptCode"></a>
+<h3 class="api">Script Code</h3>
+<p class="api">Below is the code automatically written when a new Python script is created. Notice the "run" function, which Fusion calls when executing the script. Fusion also passes in information through the "context" argument as to whether the script is being run at Fusion startup or is being loaded during a session. The context can be ignored for a script because it is always run during a Fusion session and never at startup. The run function is the entry point into your script, and once it is complete, the script is finished, and Fusion unloads it.</p>
+
+<pre><code class="language-python">"""This file acts as the main module for this script."""
+
+import traceback
+import adsk.core
+import adsk.fusion
+# import adsk.cam
+
+# Initialize the global variables for the Application and UserInterface objects.
+app = adsk.core.Application.get()
+ui  = app.userInterface
+
+
+def run(_context: str):
+    """This function is called by Fusion when the script is run."""
+
+    try:
+        # Your code goes here.
+        ui.messageBox(f'"{app.activeDocument.name}" is the active document.')
+    except:  #pylint:disable=bare-except
+        # Write the error message to the TEXT COMMANDS window.
+        app.log(f'Failed:\n{traceback.format_exc()}')</code></pre>
+<br />
+
+<a name="AddInCode"></a>
+<h3 class="api">Add-In Code</h3>
+<p class="api">The code below is a minimal add-in. Notice that it is the same as a new script except that it also contains a "stop" function. This code differs from what is created when you create a new Python add-in using the "Scripts and Add-Ins" command. That add-in has much more structure to support an add-in that supports different types of commands. You can read more about it in the <a href="PythonTemplate_UM.htm"</b>topic in the API User's Manual.</b></a></p>
+
+<pre><code class="language-python">"""This file acts as the main module for this add-in."""
+
+import traceback
+import adsk.core
+import adsk.fusion
+# import adsk.cam
+
+# Initialize the global variables for the Application and UserInterface objects.
+app = adsk.core.Application.get()
+ui  = app.userInterface
+
+
+def run(_context: str):
+    """This function is called by Fusion when the add-in is run."""
+
+    try:
+        # Your code goes here.
+        ui.messageBox(f'"{app.activeDocument.name}" is the active document.')
+    except:  #pylint:disable=bare-except
+        # Write the error message to the TEXT COMMANDS window.
+        app.log(f'Failed to run add-in:\n{traceback.format_exc()}')
+
+
+def stop(context):
+    """This function is called by Fusion when the add-in is terminated."""
+
+    try:
+        ui.messageBox('Stopping the add-in')
+
+    except:  #pylint:disable=bare-except
+        # Write the error message to the TEXT COMMANDS window.
+        app.log(f'Failed to stop add-in:\n{traceback.format_exc()}')</code></pre>
+<br />
+
+<p class="api">The “stop” function is called by Fusion whenever the add-in is stopped and unloaded. This can happen because the user is stopping it using the “Scripts and Add-Ins” dialog, or more typically, it is because Fusion is shutting down and all add-ins are stopped. The stop function is where the add-in can perform any needed cleanup, like removing any user-interface elements that it created.</p>
+
+<p class="api">Both the run and the stop functions have a single argument called “context” to pass additional information to the add-in, indicating the context of why the run or stop function is being called. Depending on the language, this information is passed using different types, but in all cases, it represents a set of name:value pairs. Python passes this as a  Dictionary object, and C++ passes it as a string in JSON format. The following name:value pairs are currently supported.</p>
+
+<p class="api">
+<b>run</b>
+<br />
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:10%;">
+                Value
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">IsApplicationStartup </td>
+        <td class="api-list">true or false</td>
+        <td class="api-list">Indicates the add-in is being started as a result of automatic loading during Fusion startup (true) or is being loaded by the user through the “Scripts and Add-Ins” dialog (false).</td>
+      </tr>
+    </Table>
+</p> 
+
+
+<p class="api"><b>stop</b><br />
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:10%;">
+                Value
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">IsApplicationClosing </td>
+        <td class="api-list">true or false</td>
+        <td class="api-list">Indicates the add-in is being shut down as a result Fusion being shut down (true) or because the user stopped it through the “Scripts and Add-Ins” dialog (false).</td>
+      </tr>
+    </Table>
+</p> 
+
+<a name="ScriptsVsAddIns"></a>
+<h3 class="api">Scripts vs. Add-Ins</h3>
+
+<p class="api">As was said earlier, there is very little technical difference between a script and an add-in. The primary difference is how they are executed and their lifetime. The user executes a script through the “Scripts and Add-Ins” command, and the execution stops immediately after the run function is complete. A script runs, and then it is done.</p>
+
+<p class="api">An add-in is typically automatically loaded by Fusion when Fusion starts up. An add-in also usually creates one or more custom commands and adds them to the user interface during startup. The add-in continues to run throughout the Fusion session, so it can react whenever the user executes any of its commands. The add-in remains running until Fusion is shut down or the user explicitly stops it through the “Scripts and Add-Ins” dialog. When it stops, it cleans up whatever user interface customization it created in its stop function.</p>
+
+<p class="api">How an add-in uses the Fusion API is not any different from a script. It is the same API, and none of the API calls are limited to scripts or add-ins. However, there are a few areas of the API that are more useful to an add-in than a script. The first is the portion that deals with working with the Fusion user interface and adding buttons or other controls to access your custom commands. For example, if you create a custom command that draws geometry in a sketch, you will want to add a new button to the Sketch panel so it will be easy for the user to find. Because an add-in can be loaded at startup, it can add its custom commands to the user interface whenever Fusion starts up, so they are always available to the user and appear as a standard Fusion command. This is described in more detail in the <a href="UserInterface_UM.htm">User Interface</a> topic.</p> 
+
+<p class="api">A second area of the API that is useful for add-ins is commands. Commands are not limited to add-ins, and there are sometimes reasons to use the command functionality within a script, but they are typically used and make more sense within an add-in. This is described in the <a href="Commands_UM.htm">Commands</a> topic.</p>
+
+<p class="api">A third area of the API that is useful for add-ins is events. Various events can be subscribed to, and then Fusion will fire the event when a specific action occurs within Fusion. Because the program needs to be running to receive the event, add-ins are the logical choice since they run throughout the Fusion session.</p>
+
+<a name="EditingDebugging"></a>
+<h3 class="api">Editing and Debugging</h3>
+<p class="api">For more detailed information about editing and debugging your scripts and add-ins, see the language-specific topics (<a href="PythonSpecific_UM.htm">Python</a> or <a href="CPPSpecific_UM.htm">C++</a>) . The process is different depending on which programming language you're using.</p>
+
+<a name="KnownIssues"></a>
+<h3 class="api">Known Issues</h3>
+<p class="api">Here's a list of known issues that couldn't be addressed in time for this release but will be in the next release.
+<ul>
+<li><p class="api">Sorting the list of names should not be case sensitive.</p>
+</p>
+</div>
+
+
+<br />
+<br />
+<div id="CopyrightNotice" style="display:none;">
+  <hr />
+  <table width="100%" style="font-size:15">
+	<tr>
+	  <td align="left">
+		&copy; Copyright 2025 Autodesk, Inc.
+	  </td>
+	  <td align="right">
+		<a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(WritingDebugging_UM)">Comment on this page.</a>
+	  </td>
+	</tr>
+  </table>
+</div>
+
+
+<script>
+function changePage(id) {
+  var oldDiv = document.getElementById("OldDialog");
+  var newDiv = document.getElementById("NewDialog");
+  
+  var oldButton = document.getElementById("oldButton");
+  var newButton = document.getElementById("newButton");
+  
+  if (id == 1)
+  {
+    oldButton.style.backgroundColor = "#07B";
+    newButton.style.backgroundColor = "white";
+    oldButton.style.color = "white";
+    newButton.style.color = "black";
+	
+    oldDiv.style.display = "block";
+    newDiv.style.display = "none";
+  }
+  else if (id == 2)
+  {
+    oldButton.style.backgroundColor = "white";
+    newButton.style.backgroundColor = "#07B";
+    oldButton.style.color = "black";
+    newButton.style.color = "white";
+	
+    oldDiv.style.display = "none";
+    newDiv.style.display = "block";
+  }
+}
+
+// Click on the old button to make it the default when the page is opened.
+//document.getElementById("oldButton").click();
+document.getElementById("newButton").click();
+</script>
+
+
+</body>
+</html>

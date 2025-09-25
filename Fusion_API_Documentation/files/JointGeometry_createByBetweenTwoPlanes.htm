@@ -1,0 +1,152 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/JointGeometry_createByBetweenTwoPlanes.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="9/12/2015">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="JointGeometry_createByBetweenTwoPlanes">
+    <meta name="description" content="JointGeometry.createByBetweenTwoPlanes Method">
+    <meta name="topicid" content="GUID-C9EE4802-4B5A-4A96-A21A-774FD40ABF49">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>JointGeometry.createByBetweenTwoPlanes Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">JointGeometry.createByBetweenTwoPlanes Method</h1>
+
+          Parent Object: <a href="JointGeometry.htm">JointGeometry</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Components/JointGeometry.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Creates a new transient JointGeometry object based on a plane bisecting the two input planes.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>This is a static method.<br /><code><pre class="api-code"><br >returnValue = adsk.fusion.JointGeometry.<b>createByBetweenTwoPlanes</b>(planeOne, planeTwo, entityOne, entityTwo, keyPointType)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>This is a static method.<br /><code><pre class="api-code"><br >#include &lt;Fusion/Components/JointGeometry.h&gt;<br /><br />returnValue = adsk::fusion::JointGeometry::<b>createByBetweenTwoPlanes</b>(planeOne, planeTwo, entityOne, entityTwo, keyPointType);<br /></pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;"><a href="JointGeometry.htm">JointGeometry</a></td>
+        <td class="api-list">Returns the transient JointGeometry object that can be used to create a joint or joint origin or null in case of a failure.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">planeOne</td>
+        <td class="api-list"><a href="Base.htm">Base</a></td>
+        <td class="api-list">The first planar entity that the joint origin will be created between. This can be a planar BRepFace or a ConstructionPlane object.</td>
+      </tr>
+      <tr>
+        <td class="api-list">planeTwo</td>
+        <td class="api-list"><a href="Base.htm">Base</a></td>
+        <td class="api-list">The second planar entity that the joint origin will be created between. This can be a planar BRepFace or a ConstructionPlane object.</td>
+      </tr>
+      <tr>
+        <td class="api-list">entityOne</td>
+        <td class="api-list"><a href="Base.htm">Base</a></td>
+        <td class="api-list">Specifies the entity that is used to define the keypoint. This can be many types of geometry including edges, planar and non-planar faces, profiles, and sketch geometry.</td>
+      </tr>
+      <tr>
+        <td class="api-list">entityTwo</td>
+        <td class="api-list"><a href="Base.htm">Base</a></td>
+        <td class="api-list">If the entityOne argument is a planar BRepFace or a Profile, then this argument specifies either an edge on the face or a sketch curve on the profile. For a planar face this argument is optional in the case where the keyPointType argument is CenterKeyPoint indicating the center of area of the face is to be used.</td>
+      </tr>
+      <tr>
+        <td class="api-list">keyPointType</td>
+        <td class="api-list"><a href="JointKeyPointTypes.htm">JointKeyPointTypes</a></td>
+        <td class="api-list">Specifies the position on the keyPointGeometry where the keypoint will be defined. This keypoint is then projected onto the plane to define the position of the joint geometry.<br/><br/> The values that are valid for this argument depend on the type of geometry specified for the geometry and edgeOrCurve arguments.<br/><br/> If the geometry argument is a planar face and the edgeOrCurve argument is an open BRepEdge object then this can be StartKeyPoint, MiddleKeyPoint, or EndKeyPoint. If the geometry argument is a planar face and the edgeOrCurve argument is a closed BRepEdge object (i.e. circles), it must be CenterKeyPoint. If the geometry argument is a planar face and the edgeOrCurve argument is null, then this must be CenterKeyPoint indicating the center of area of the face.<br/><br/> If the geometry argument is a non-planar face (cylinder, cone, sphere, or torus) this can be StartKeyPoint, MiddleKeyPoint, or EndKeyPoint for cylinders and cones but must be CenterKeyPoint for spheres and tori. The edgeOrCurve argument is ignored in this case.<br/><br/> If the geometry argument is a profile and the edgeOrCurve argument is null this can be CenterKeyPoint indicating the center of area of the profile. If the geometry argument is a profile and the edgeOrCurve argument is an open sketch curve on the profile then this can be StartKeyPoint, MiddleKeyPoint, or EndKeyPoint. If the geometry argument is a profile and the edgeOrCurve argument is a closed sketch curve (i.e. circles), it must be CenterKeyPoint.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="JointOrigin2Planes_Sample.htm">Joint Origin Between Two Faces Sample</a></td>
+        <td class="api-list">Demonstrates creating a new Joint Origin between two planes.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version January 2016<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(JointGeometry.createByBetweenTwoPlanes%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

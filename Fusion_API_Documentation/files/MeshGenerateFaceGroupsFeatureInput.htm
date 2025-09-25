@@ -1,0 +1,125 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/MeshGenerateFaceGroupsFeatureInput.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="17/12/2024">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="MeshGenerateFaceGroupsFeatureInput">
+    <meta name="description" content="MeshGenerateFaceGroupsFeatureInput Object">
+    <meta name="topicid" content="GUID-265D3D2C-E796-4EF2-AB81-9183802B5CC2">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>MeshGenerateFaceGroupsFeatureInput Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">MeshGenerateFaceGroupsFeatureInput Object <img src="../images/TestTubeLarge.png" alt="Preview"></h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/MeshBody/MeshGenerateFaceGroupsFeatureInput.h&gt;<p class="api-preview"><img src="../images/TestTubeSmall.png" alt="Preview">This functionality is provided as a preview
+				of intended future API capabilities. You are encouraged to use it and report any problems or suggestions using the
+				<a href="https://forums.autodesk.com/t5/fusion-360-api-and-scripts/bd-p/22">Fusion API and Scripts</a> forum.<br><br>
+	
+                Because this is a preview of future functionality, there is the possibility that it will change, which will possibly
+		        break any existing programs that use this functionality. Because of that, you should never deliver any programs that use
+		        any preview capabilities. For a distributed program, you should wait until it has moved from preview to released state.
+		    </p>
+    <h2 class="api">
+          Description
+        </h2>This class defines the methods and properties that pertain to the definition of a mesh generate face groups feature.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshGenerateFaceGroupsFeatureInput_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshGenerateFaceGroupsFeatureInput_angleThreshold.htm">angleThreshold</a></td>
+        <td class="api-list">Controls the angle threshold during the face group generation. The values can range between 0 and pi/2. The default value is 0.436. Only valid if meshGenerateFaceGroupsMethodType is FastGenerateFaceGroupsType.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshGenerateFaceGroupsFeatureInput_boundaryTolerance.htm">boundaryTolerance</a></td>
+        <td class="api-list">Gets and sets tolerance to define face group. This value is used during the fitting of the primitives. The values can range between 0 and 0.01. The default value is 0.001. Only valid if meshGenerateFaceGroupsMethodType is AccurateGenerateFaceGroupsType.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshGenerateFaceGroupsFeatureInput_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshGenerateFaceGroupsFeatureInput_mesh.htm">mesh</a></td>
+        <td class="api-list">Gets and sets the input mesh body.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshGenerateFaceGroupsFeatureInput_meshGenerateFaceGroupsMethodType.htm">meshGenerateFaceGroupsMethodType</a></td>
+        <td class="api-list">Gets and sets the type of mesh generate face groups, default value is FastGenerateFaceGroupsType.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshGenerateFaceGroupsFeatureInput_minimumFaceGroupSize.htm">minimumFaceGroupSize</a></td>
+        <td class="api-list">Gets and sets the fraction of the overall mesh area which determines the smallest face group. The value can range between 0 and 1. The default value is 0.02. Only valid if meshGenerateFaceGroupsMethodType is FastGenerateFaceGroupsType.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshGenerateFaceGroupsFeatureInput_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshGenerateFaceGroupsFeatureInput_targetBaseFeature.htm">targetBaseFeature</a></td>
+        <td class="api-list">When creating a feature that is owned by a base feature, set this property to the base feature you want to associate the new feature with. By default, this is null, meaning it will not be associated with a base feature.<br/><br/> Because of a current limitation, if you want to create a feature associated with a base feature, you must set this property AND call the startEdit method of the base feature, create the feature, and then call the finishEdit method of the base feature. The base feature must be in an "edit" state to be able to add any additional items to it.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="MeshGenerateFaceGroupsFeatures_createInput.htm">MeshGenerateFaceGroupsFeatures.createInput</a><h2 class="api">
+            Version
+          </h2>
+        Introduced in version January 2025<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(MeshGenerateFaceGroupsFeatureInput%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

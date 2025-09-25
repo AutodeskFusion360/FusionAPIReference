@@ -1,0 +1,156 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/ExtrudeFeatures_add.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="ExtrudeFeatures_add">
+    <meta name="description" content="ExtrudeFeatures.add Method">
+    <meta name="topicid" content="GUID-2b3f9fbf-4b60-479c-b4f3-bce9fa679ec2">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>ExtrudeFeatures.add Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">ExtrudeFeatures.add Method</h1>
+
+          Parent Object: <a href="ExtrudeFeatures.htm">ExtrudeFeatures</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Features/ExtrudeFeatures.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Creates a new extrude feature based on the information defined by the provided ExtrudeFeatureInput object. To create a new extrusion use the createInput function to create a new input object and use the methods and properties on that object to define the required input for an extrusion. Once the information is defined on the input object you can pass it to the Add method to create the extrusion.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"extrudeFeatures_var" is a variable referencing an <a href="ExtrudeFeatures.htm">ExtrudeFeatures</a> object.<code><pre class="api-code">returnValue = extrudeFeatures_var.<b>add</b>(input)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"extrudeFeatures_var" is a variable referencing an <a href="ExtrudeFeatures.htm">ExtrudeFeatures</a> object.<br /><br /><code><pre class="api-code">#include &lt;Fusion/Features/ExtrudeFeatures.h&gt;<br /><br />returnValue = extrudeFeatures_var-&gt;<b>add</b>(input);<br /></pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;"><a href="ExtrudeFeature.htm">ExtrudeFeature</a></td>
+        <td class="api-list">Returns the newly created ExtrudeFeature or null if the creation failed.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">input</td>
+        <td class="api-list"><a href="ExtrudeFeatureInput.htm">ExtrudeFeatureInput</a></td>
+        <td class="api-list">The ExtrudeFeatureInput object that specifies the input needed to create a new extrude feature.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ExtrudeFeatureSample_Sample.htm">Extrude Feature API Sample</a></td>
+        <td class="api-list">Demonstrates creating a new extrude feature.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="extrudeFeaturesOneSideExtent_add_Sample.htm">extrudeFeatures.add using setOneSideExtent</a></td>
+        <td class="api-list">Demonstrates the extrudeFeatures.add method using the setOneSideExtent method. To use this sample have a design open that contains a sketch with a profile. When you run the script you will be prompted to select the profile that will be used to create the extrusion.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="extrudeFeaturesSymmetricExtent_add_Sample.htm">extrudeFeatures.add using setSymmetricExtent</a></td>
+        <td class="api-list">Demonstrates the extrudeFeatures.add method using the setSymmetricExtent method. To use this sample have a design open that contains a sketch with a profile. When you run the script you will be prompted to select the profile that will be used to create the extrusion.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="extrudeFeaturesThin_add_Sample.htm">extrudeFeatures.add using thin extrude</a></td>
+        <td class="api-list">Demonstrates the extrudeFeatures.add method using the setThinExtrude method. To use this sample have a design open that contains a sketch with a profile. When you run the script you will be prompted to select the profile that will be used to create the thin extrusion.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="extrudeFeaturesThroughAllExtent_add_Sample.htm">extrudeFeatures.add using ThroughAllExtent</a></td>
+        <td class="api-list">Demonstrates the extrudeFeatures.add method using the ThroughAllExtent method.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="extrudeFeaturesTwoSidesExtent_add_Sample.htm">extrudeFeatures.add using setTwoSidesExtent</a></td>
+        <td class="api-list">Demonstrates the extrudeFeatures.add method using the setTwoSidesExtent method. To use this sample have a design open that contains a profile and a body that is positioned away from the profile but is a size where when the profile is extruded it will intersect the body. When you run the script you will be prompted to select the profile that will be used to create the extrusion and the body to extrude to. The extrusion will be created up to the body with an offset and will also be offset from the sketch plane.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ParticipantBodiesSample_Sample.htm">Manage Participant Bodies API Sample</a></td>
+        <td class="api-list">Demonstrates how to manage participant During Cut operation. Same API can be used to manage participants During intersection also.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(ExtrudeFeatures.add%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

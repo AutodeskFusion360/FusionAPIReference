@@ -1,0 +1,100 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/ProgressDialog_isCancelButtonShown.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="9/12/2015">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="ProgressDialog_isCancelButtonShown">
+    <meta name="description" content="ProgressDialog.isCancelButtonShown Property">
+    <meta name="topicid" content="GUID-308BE691-2505-4CA4-9A1E-D422C8456D13">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>ProgressDialog.isCancelButtonShown Property</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">ProgressDialog.isCancelButtonShown Property</h1>
+
+          Parent Object: <a href="ProgressDialog.htm">ProgressDialog</a><br>Defined in namespace "adsk::core" and the header file is &lt;Core/UserInterface/ProgressDialog.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Gets and sets if the cancel button is included in the dialog. This is false by default.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"progressDialog_var" is a variable referencing a ProgressDialog object.</span><br /><br /><code><pre class="api-code"><span style="color:blue"># Get the value of the property.</span><br />propertyValue = progressDialog_var.<b>isCancelButtonShown<br /><br /><span style="color:blue"># Set the value of the property.</span><br />progressDialog_var.<b>isCancelButtonShown</b> = propertyValue</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"progressDialog_var" is a variable referencing a ProgressDialog object.<br /><code><pre class="api-code">#include &lt;Core/UserInterface/ProgressDialog.h&gt;<br /><br /><span style="color:blue">// Get the value of the property.</span><br />boolean propertyValue = progressDialog_var-&gt;<b>isCancelButtonShown</b>();<br /><br /><span style="color:blue">// Set the value of the property, where value_var is a boolean.</span><br />bool returnValue = progressDialog_var-&gt;<b>isCancelButtonShown</b>(value_var);</pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Property Value
+          </h2>This is a read/write property whose value is a boolean.<h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="GenerateToolpaths_Sample_Sample.htm">Generate Toolpaths API Sample</a></td>
+        <td class="api-list">Demonstrates generating the toolpaths in the active document.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ProgressDialogSample_Sample.htm">Progress Dialog API Sample</a></td>
+        <td class="api-list">Demonstrates how to use progress dialog</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version January 2016<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(ProgressDialog.isCancelButtonShown%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

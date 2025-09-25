@@ -1,0 +1,323 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/GenerateSetupSheets_Sample.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="GenerateSetupSheets_Sample_Sample">
+    <meta name="description" content="Generate Setup Sheets API Sample Sample">
+    <meta name="topicid" content="GUID-CB5D574A-4719-4499-9988-AB2B815E867D">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Generate Setup Sheets API Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Generate Setup Sheets API Sample</h1>
+    <h2 class="api">
+          Description
+        </h2>Demonstrates generating the setup sheets for an existing toolpath..<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#C++">C++</a></li>
+        <li><a href="#Python">Python</a></li>
+      </ul>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code">#include &lt;Core/CoreAll.h&gt;
+#include &lt;CAM/CAMAll.h&gt;
+
+#ifdef _WINDOWS
+#include &lt;shlwapi.h&gt;
+#else
+#include &lt;stdlib.h&gt;
+#endif
+
+using namespace adsk::core;
+using namespace adsk::cam;
+
+Ptr&lt;UserInterface&gt; ui;
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    Ptr&lt;Application&gt; app = Application::get();
+    if (!app)
+        return false;
+
+    ui = app-&gt;userInterface();
+    if (!ui)
+        return false;
+
+    Ptr&lt;Document&gt; doc = app-&gt;activeDocument();
+    if (!doc)
+        return false;
+
+    Ptr&lt;Products&gt; products = doc-&gt;products();
+    if (!products)
+        return false;
+
+    Ptr&lt;CAM&gt; camProduct = products-&gt;itemByProductType("CAMProductType");
+    if (!camProduct)
+    {
+        ui-&gt;messageBox(
+            "There are no CAM operations in the active document. This script requires the active document to contain "
+            "at least one CAM operation.",
+            "No CAM Operations Exist",
+            MessageBoxButtonTypes::OKButtonType,
+            MessageBoxIconTypes::CriticalIconType);
+        return false;
+    }
+
+    std::string outputFolder = camProduct-&gt;temporaryFolder();
+    SetupSheetFormats sheetFormat = SetupSheetFormats::HTMLFormat;
+    DialogResults dlgResults = ui-&gt;messageBox(
+        "View setup sheets when done?",
+        "Generate Setup Sheets",
+        MessageBoxButtonTypes::YesNoButtonType,
+        MessageBoxIconTypes::QuestionIconType);
+    bool viewResults = dlgResults == DialogResults::DialogNo ? false : true;
+
+    int scenario = 3;
+    switch (scenario)
+    {
+    case 1:
+        {
+            ui-&gt;messageBox("Setup sheets for all operations will be generated.");
+            camProduct-&gt;generateAllSetupSheets(sheetFormat, outputFolder, viewResults);
+        }
+        break;
+    case 2:
+        {
+            ui-&gt;messageBox("Setup sheets for operations in the first setup will be generated.");
+            Ptr&lt;Setups&gt; setups = camProduct-&gt;setups();
+            if (!setups)
+                return false;
+
+            Ptr&lt;Setup&gt; setup = setups-&gt;item(0);
+            if (!setup)
+                return false;
+
+            camProduct-&gt;generateSetupSheet(setup, sheetFormat, outputFolder, viewResults);
+        }
+        break;
+    case 3:
+        {
+            ui-&gt;messageBox("A setup sheet for the first operation in the first setup will be generated.");
+            Ptr&lt;Setups&gt; setups = camProduct-&gt;setups();
+            if (!setups)
+                return false;
+
+            Ptr&lt;Setup&gt; setup = setups-&gt;item(0);
+            if (!setup)
+                return false;
+
+            <span style="color:blue">// It is a set of Operations, Folders and Patterns.</span>
+            Ptr&lt;ObjectCollection&gt; objects = setup-&gt;allOperations();
+            if (!objects)
+                return false;
+
+            if (objects-&gt;count() == 0)
+            {
+                ui-&gt;messageBox("There is not any operation in the first setup!");
+                return false;
+            }
+
+            Ptr&lt;Base&gt; baseObject = objects-&gt;item(0);
+            if (!baseObject)
+                return false;
+
+            Operation* pOperation = baseObject-&gt;query&lt;Operation&gt;();
+            if (!pOperation)
+                return false;
+
+            Ptr&lt;Operation&gt; operation(pOperation, false);
+            if (operation-&gt;hasToolpath())
+            {
+                camProduct-&gt;generateSetupSheet(operation, sheetFormat, outputFolder, viewResults);
+            }
+            else
+            {
+                ui-&gt;messageBox("This operation has no toolpath.  A valid toolpath must exist in order for a setup "
+                               "sheet to be generated.");
+                return false;
+            }
+        }
+        break;
+    default:
+        break;
+    }
+
+    <span style="color:blue">// Show output folder.</span>
+    ui-&gt;messageBox("Setup Sheets have been generated in '" + outputFolder + "'.");
+#ifdef _WINDOWS
+    ShellExecuteA(nullptr, "open", outputFolder.c_str(), nullptr, nullptr, SW_SHOWNORMAL);
+#else
+    std::string command = "open " + outputFolder;
+    system(command.c_str());
+#endif
+
+    <span style="color:blue">// Active CAM workspace if it is not the active one.</span>
+    if (ui-&gt;activeWorkspace()-&gt;name() != "CAM")
+    {
+        DialogResults result = ui-&gt;messageBox(
+            "Activate the CAM Workspace?",
+            "CAM Workspace Activate",
+            MessageBoxButtonTypes::YesNoButtonType,
+            MessageBoxIconTypes::QuestionIconType);
+        bool activeCAMWorkspace = result == DialogResults::DialogYes ? true : false;
+        if (activeCAMWorkspace)
+        {
+            Ptr&lt;Workspace&gt; camWorkspace = ui-&gt;workspaces()-&gt;itemById("CAMEnvironment");
+            camWorkspace-&gt;activate();
+        }
+    }
+
+    return true;
+}</pre>
+      </div>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code"><span style="color:blue"># For this sample script to run, the active Fusion document must contain at least one CAM operation.</span>
+
+import adsk.core, adsk.fusion, adsk.cam, traceback, os
+
+def run(context):
+    ui = None
+    try:
+        app = adsk.core.Application.get()
+        ui = app.userInterface
+        doc = app.activeDocument
+        products = doc.products
+        product = products.itemByProductType('CAMProductType')
+
+        <span style="color:blue"># check if the document has a CAMProductType.  It will not if there are no CAM operations in it.</span>
+        if not product:
+            ui.messageBox('There are no CAM operations in the active document.  This script requires the active document to contain at least one CAM operation.',
+                            'No CAM Operations Exist',
+                            adsk.core.MessageBoxButtonTypes.OKButtonType,
+                            adsk.core.MessageBoxIconTypes.CriticalIconType)
+            return
+
+        cam = adsk.cam.CAM.cast(product)
+
+        <span style="color:blue"># specify the output folder and format for the setup sheets</span>
+        outputFolder = cam.temporaryFolder
+        sheetFormat = adsk.cam.SetupSheetFormats.HTMLFormat
+        <span style="color:blue">#sheetFormat = adsk.cam.SetupSheetFormats.ExcelFormat (not currently supported on Mac)</span>
+
+        <span style="color:blue"># prompt the user with an option to view the resulting setup sheets.</span>
+        viewResults = ui.messageBox('View setup sheets when done?', 'Generate Setup Sheets',
+                                    adsk.core.MessageBoxButtonTypes.YesNoButtonType,
+                                    adsk.core.MessageBoxIconTypes.QuestionIconType)
+        if viewResults == adsk.core.DialogResults.DialogNo:
+            viewResult = False
+        else:
+            viewResult = True
+
+        <span style="color:blue"># set the value of scenario to 1, 2 or 3 to generate setup sheets for all, for the first setup, or for the first operation of the first setup.</span>
+        scenario = 1
+        if scenario == 1:
+            ui.messageBox('Setup sheets for all operations will be generated.')
+            cam.generateAllSetupSheets(sheetFormat, outputFolder, viewResult)
+        elif scenario == 2:
+            ui.messageBox('Setup sheets for operations in the first setup will be generated.')
+            setup = cam.setups.item(0)
+            cam.generateSetupSheet(setup, sheetFormat, outputFolder, viewResult)
+        elif scenario == 3:
+            ui.messageBox('A setup sheet for the first operation in the first setup will be generated.')
+            setup = cam.setups.item(0)
+            operations = setup.allOperations
+            operation = operations.item(0)
+            if operation.hasToolpath:
+                cam.generateSetupSheet(operation, sheetFormat, outputFolder, viewResult)
+            else:
+                ui.messageBox('This operation has no toolpath.  A valid toolpath must exist in order for a setup sheet to be generated.')
+                return
+
+        ui.messageBox('Setup Sheets have been generated in:\n' + outputFolder)
+
+        <span style="color:blue"># open the output folder in Finder on Mac or in Explorer on Windows</span>
+        if (os.name == 'posix'):
+            os.system('open "%s"' % outputFolder)
+        elif (os.name == 'nt'):
+            os.startfile(outputFolder)
+
+        <span style="color:blue"># Prompt user with an option to switch to the CAM workspace if it's not already active</span>
+        if ui.activeWorkspace.name != 'CAM':
+            activateCAMWorkspace = ui.messageBox('Activate the CAM Workspace?','CAM Workspace Activate',
+                                                 adsk.core.MessageBoxButtonTypes.YesNoButtonType,
+                                                 adsk.core.MessageBoxIconTypes.QuestionIconType)
+
+            if activateCAMWorkspace == adsk.core.DialogResults.DialogYes:
+                workspaces = ui.workspaces
+                camWorkspace = workspaces.itemById("CAMEnvironment")
+                camWorkspace.activate()
+
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(GenerateSetupSheets_Sample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

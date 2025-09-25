@@ -1,0 +1,387 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/MeshBodySample.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="MeshBodySample_Sample">
+    <meta name="description" content="Mesh Body Sample Sample">
+    <meta name="topicid" content="GUID-35fd691e-9dc0-11e7-9e72-3417ebc87622">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Mesh Body Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Mesh Body Sample</h1>
+    <h2 class="api">
+          Description
+        </h2>Mesh body related functions<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code"><span style="color:blue">#Author-</span>
+<span style="color:blue">#Description-</span>
+
+import adsk.core, adsk.fusion, traceback
+import os.path
+
+def run(context):
+    ui = None
+    try:
+        app = adsk.core.Application.get()
+        ui  = app.userInterface
+        
+        <span style="color:blue"># Create a document</span>
+        doc = app.documents.add(adsk.core.DocumentTypes.FusionDesignDocumentType)
+        
+        product = app.activeProduct
+        design = adsk.fusion.Design.cast(product)
+         
+        <span style="color:blue"># Get the root component</span>
+        rootComp = design.rootComponent
+        
+        <span style="color:blue"># Create a sub component under root component</span>
+        occs = rootComp.occurrences
+        transform = adsk.core.Matrix3D.create()
+        subOcc = occs.addNewComponent(transform)
+        
+        <span style="color:blue"># Insert a stl mesh body in the sub component</span>
+        subComp = subOcc.component
+        meshBodies = subComp.meshBodies
+        scriptDir = os.path.dirname(os.path.realpath(__file__))
+        stlFilePath = os.path.join(scriptDir, 'APIMeshFacetColors.stl')
+        meshBodies.add(stlFilePath, adsk.fusion.MeshUnits.InchMeshUnit)
+        stlMeshBody = meshBodies.item(0)
+        meshBodyPorxy = stlMeshBody.createForAssemblyContext(subOcc)
+        
+        <span style="color:blue"># Get and set mesh body name</span>
+        print("Get and set mesh body name.")
+        print(stlMeshBody.name)
+        stlMeshBody.name = "NewName"
+        print(stlMeshBody.name)
+        
+        <span style="color:blue"># Get and set mesh body selectable</span>
+        print("Get and set mesh body selectable.")
+        print(stlMeshBody.isSelectable)
+        stlMeshBody.isSelectable = False
+        print(stlMeshBody.isSelectable)
+        stlMeshBody.isSelectable = True
+        print(stlMeshBody.isSelectable)
+        
+        <span style="color:blue"># Get and set Mesh body bulb light and visibility</span>
+        print("Get and set Mesh body bulb light and visibility.")
+        print(stlMeshBody.isLightBulbOn)
+        stlMeshBody.isLightBulbOn = False
+        print(stlMeshBody.isLightBulbOn)
+        print(stlMeshBody.isVisible)
+        stlMeshBody.isLightBulbOn = True
+        print(stlMeshBody.isLightBulbOn)
+        print(stlMeshBody.isVisible) 
+        
+        <span style="color:blue"># Get and set mesh body Opacity</span>
+        print("Get and set mesh body Opacity.")
+        print(stlMeshBody.opacity)
+        subComp.opacity = 0.5
+        stlMeshBody.opacity = 0.6
+        print(stlMeshBody.opacity)
+        print(meshBodyPorxy.visibleOpacity)
+        
+        <span style="color:blue"># Get and set mesh body material</span>
+        print('Get and set meshbody material.')
+        print(stlMeshBody.material.name)
+        MaterialLib = app.materialLibraries.itemByName('Fusion Material Library')
+        material = MaterialLib.materials.itemByName("Glass, Bronze Glazing, Low E")
+        stlMeshBody.material = material
+        print(stlMeshBody.material.name)
+        
+        <span style="color:blue"># Get and set mesh body appearance</span>
+        print('Get and set meshbody appearance.')
+        print(stlMeshBody.appearance.name)
+        appearanceLib = app.materialLibraries.itemByName('Fusion Appearance Library')
+        appearance = appearanceLib.appearances.itemByName('Glass - Window')
+        stlMeshBody.appearance = appearance
+        print(stlMeshBody.appearance.name)
+		
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code">#include &lt;Core/Application/Application.h&gt;
+#include &lt;Core/UserInterface/UserInterface.h&gt;
+#include &lt;Core/Application/Documents.h&gt;
+#include &lt;Core/Application/Document.h&gt;
+#include &lt;Fusion/Fusion/Design.h&gt;
+#include &lt;Fusion/Components/Component.h&gt;
+#include &lt;Fusion/Components/Occurrences.h&gt;
+#include &lt;Fusion/Components/Occurrence.h&gt;
+#include &lt;Core/Geometry/Matrix3D.h&gt;
+#include &lt;Fusion/MeshBody/MeshBodies.h&gt;
+#include &lt;Fusion/MeshBody/MeshBody.h&gt;
+#include &lt;Fusion/MeshBody/MeshBodyList.h&gt;
+#include &lt;Fusion/FusionTypeDefs.h&gt;
+#include &lt;Core/Materials/MaterialLibraries.h&gt;
+#include &lt;Core/Materials/MaterialLibrary.h&gt;
+#include &lt;Core/Materials/Materials.h&gt;
+#include &lt;Core/Materials/Material.h&gt;
+#include &lt;Core/Materials/Appearances.h&gt;
+#include &lt;Core/Materials/Appearance.h&gt;
+
+
+using namespace adsk::core;
+using namespace adsk::fusion;
+
+Ptr&lt;Application&gt; app;
+Ptr&lt;UserInterface&gt; ui;
+
+std::string getDllPath();
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    app = Application::get();
+    if (!app)
+        return false;
+
+    ui = app-&gt;userInterface();
+    if (!ui)
+        return false;
+
+    <span style="color:blue">// Create a new document</span>
+    Ptr&lt;Documents&gt; docs = app-&gt;documents();
+    if (!docs)
+        return false;
+
+    Ptr&lt;Document&gt; doc = docs-&gt;add(DocumentTypes::FusionDesignDocumentType);
+    if (!doc)
+        return false;
+
+    <span style="color:blue">// Get the root component of the active design</span>
+    Ptr&lt;Design&gt; design = app-&gt;activeProduct();
+    if (!design)
+        return false;
+
+    Ptr&lt;Component&gt; rootComp = design-&gt;rootComponent();
+    if (!rootComp)
+        return false;
+
+    <span style="color:blue">// Create a new component</span>
+    Ptr&lt;Occurrences&gt; occs = rootComp-&gt;occurrences();
+    if (!occs)
+        return false;
+
+    Ptr&lt;Matrix3D&gt; transfrom = Matrix3D::create();
+    if (!transfrom)
+        return false;
+
+    Ptr&lt;Occurrence&gt; occ = occs-&gt;addNewComponent(transfrom);
+    if (!occ)
+        return false;
+
+    <span style="color:blue">// Insert a mesh body in the sub Component</span>
+    Ptr&lt;Component&gt; subComp = occ-&gt;component();
+    if (!subComp)
+        return false;
+
+    Ptr&lt;MeshBodies&gt; meshBodies = subComp-&gt;meshBodies();
+    if (!meshBodies)
+        return false;
+
+     std::string stlFilePath = getDllPath() + "/" + "APIMeshFacetColors.stl";
+
+    Ptr&lt;MeshBodyList&gt; meshBodyList = meshBodies-&gt;add(stlFilePath, MeshUnits::InchMeshUnit);
+    if (!meshBodyList)
+        return false;
+
+    Ptr&lt;MeshBody&gt; stlMeshBody = meshBodyList-&gt;item(0);
+    if (!stlMeshBody)
+        return false;
+
+    Ptr&lt;MeshBody&gt; meshBodyProxy = stlMeshBody-&gt;createForAssemblyContext(occ);
+    if (!meshBodyProxy)
+        return false;
+
+    <span style="color:blue">// Get and set mesh body name</span>
+    bool isSetNameTrue = stlMeshBody-&gt;name("NewName");
+
+    std::string newName = stlMeshBody-&gt;name();
+
+    <span style="color:blue">// Get and set mesh body selectable</span>
+    bool isSetSelectableTrue = stlMeshBody-&gt;isSelectable(false);
+
+    bool isSelectable = stlMeshBody-&gt;isSelectable();
+
+    isSetSelectableTrue = stlMeshBody-&gt;isSelectable(true);
+
+    isSelectable = stlMeshBody-&gt;isSelectable();
+
+    <span style="color:blue">// Get and set Mesh body bulb light and visibility</span>
+    bool isSetBulbTrue = stlMeshBody-&gt;isLightBulbOn(false);
+
+    bool isLightBulbOn = stlMeshBody-&gt;isLightBulbOn();
+
+    bool isVisible = stlMeshBody-&gt;isVisible();
+
+    isSetBulbTrue = stlMeshBody-&gt;isLightBulbOn(true);
+
+    isLightBulbOn = stlMeshBody-&gt;isLightBulbOn();
+
+    isVisible = stlMeshBody-&gt;isVisible();
+
+    <span style="color:blue">// Get and set mesh body Opacity</span>
+    bool isSetOpacityTrue = subComp-&gt;opacity(0.5);
+
+    isSetOpacityTrue = stlMeshBody-&gt;opacity(0.6);
+
+    double opacity = stlMeshBody-&gt;opacity();
+
+    double visibleOpacity = meshBodyProxy-&gt;visibleOpacity();
+
+    <span style="color:blue">// Get and set mesh body material</span>
+    Ptr&lt;MaterialLibraries&gt; materialLibraries = app-&gt;materialLibraries();
+    if (!materialLibraries)
+        return false;
+
+    Ptr&lt;MaterialLibrary&gt; materialLibrary = materialLibraries-&gt;itemByName("Fusion Material Library");
+    if (!materialLibrary)
+        return false;
+
+    Ptr&lt;Materials&gt; materials = materialLibrary-&gt;materials();
+    if (!materials)
+        return false;
+
+    Ptr&lt;Material&gt; newMaterial = materials-&gt;itemByName("Glass, Bronze Glazing, Low E");
+    if (!newMaterial)
+        return false;
+
+    bool isSetMaterialTrue = stlMeshBody-&gt;material(newMaterial);
+
+    Ptr&lt;Material&gt; material = stlMeshBody-&gt;material();
+    if (!material)
+        return false;
+
+    std::string materialName = material-&gt;name();
+
+    <span style="color:blue">// Get and set mesh body appearance</span>
+    Ptr&lt;MaterialLibrary&gt; appearanceLibrary = materialLibraries-&gt;itemByName("Fusion Appearance Library");
+    if (!appearanceLibrary)
+        return false;
+
+    Ptr&lt;Appearances&gt; appearances = appearanceLibrary-&gt;appearances();
+    if (!appearances)
+        return false;
+
+    Ptr&lt;Appearance&gt; newAppearance = appearances-&gt;itemByName("Glass - Window");
+    if (!newAppearance)
+        return false;
+
+    bool isSetAppearanceTrue = stlMeshBody-&gt;appearance(newAppearance);
+
+    Ptr&lt;Appearance&gt; appearance = stlMeshBody-&gt;appearance();
+    if (!appearance)
+        return false;
+
+    std::string appearanceName = appearance-&gt;name();
+
+    return true;
+}
+
+std::string getDllPath()
+{
+#if defined(_WINDOWS) || defined(_WIN32) || defined(_WIN64)
+    HMODULE hModule = NULL;
+    if (!GetModuleHandleExA(
+            GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,
+            (LPCSTR)&getDllPath,
+            &hModule))
+        return "";
+
+    char winTempPath[2048];
+    ::GetModuleFileNameA(hModule, winTempPath, 2048);
+
+    std::string strPath = winTempPath;
+    size_t stPos = strPath.rfind('\\');
+    return strPath.substr(0, stPos);
+#else
+    Dl_info info;
+    dladdr((void*)getDllPath, &info);
+
+    std::string strPath = info.dli_fname;
+    int stPos = (int)strPath.rfind('/');
+    if (stPos != -1)
+        return strPath.substr(0, stPos);
+    else
+        return "";
+    ;
+#endif
+}</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(MeshBodySample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

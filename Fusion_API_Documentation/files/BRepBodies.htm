@@ -1,0 +1,127 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/BRepBodies.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="BRepBodies">
+    <meta name="description" content="BRepBodies Object">
+    <meta name="topicid" content="GUID-a763ee95-ae76-4c68-9f5b-e36c931a75da">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>BRepBodies Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">BRepBodies Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/BRep/BRepBodies.h&gt;<h2 class="api">
+          Description
+        </h2>The BRepBodies collection provides access to all of the B-Rep bodies within a component.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BRepBodies_add.htm">add</a></td>
+        <td class="api-list">Creates a new BRepBody object. The input can be a persisted or transient BRepBody and the result is a persisted BRepBody. In a direct modeling design, the BRepBody is created within the component the BRepBodies collection was obtained from. In a parametric modeling design, the new BRepBody is created within the specified Base Feature.<br/><br/> Because of a current limitation, if you want to create a BRepBody in a parametric model, you must first call the edit method of the base feature, then use the add method to create the body, and finally call the finishEdit method of the base feature. The base feature must be in an "edit" state to be able to add any additional items to it.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BRepBodies_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BRepBodies_item.htm">item</a></td>
+        <td class="api-list">Function that returns the specified body using an index into the collection.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BRepBodies_itemByName.htm">itemByName</a></td>
+        <td class="api-list">Returns a specific body using the name of the body within the collection.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BRepBodies_count.htm">count</a></td>
+        <td class="api-list">Returns the number of bodies in the collection.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BRepBodies_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BRepBodies_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="ArrangeFeature_bodies.htm">ArrangeFeature.bodies</a>, <a href="BaseComponent_bRepBodies.htm">BaseComponent.bRepBodies</a>, <a href="BaseFeature_bodies.htm">BaseFeature.bodies</a>, <a href="BossFeature_bodies.htm">BossFeature.bodies</a>, <a href="BoundaryFillFeature_bodies.htm">BoundaryFillFeature.bodies</a>, <a href="BoxFeature_bodies.htm">BoxFeature.bodies</a>, <a href="ChamferFeature_bodies.htm">ChamferFeature.bodies</a>, <a href="CircularPatternFeature_bodies.htm">CircularPatternFeature.bodies</a>, <a href="CoilFeature_bodies.htm">CoilFeature.bodies</a>, <a href="CombineFeature_bodies.htm">CombineFeature.bodies</a>, <a href="Component_bRepBodies.htm">Component.bRepBodies</a>, <a href="CopyPasteBody_bodies.htm">CopyPasteBody.bodies</a>, <a href="CustomFeature_bodies.htm">CustomFeature.bodies</a>, <a href="CutPasteBody_bodies.htm">CutPasteBody.bodies</a>, <a href="CylinderFeature_bodies.htm">CylinderFeature.bodies</a>, <a href="DeleteFaceFeature_bodies.htm">DeleteFaceFeature.bodies</a>, <a href="DraftFeature_bodies.htm">DraftFeature.bodies</a>, <a href="EmbossFeature_bodies.htm">EmbossFeature.bodies</a>, <a href="ExtendFeature_bodies.htm">ExtendFeature.bodies</a>, <a href="ExtrudeFeature_bodies.htm">ExtrudeFeature.bodies</a>, <a href="Feature_bodies.htm">Feature.bodies</a>, <a href="FilletFeature_bodies.htm">FilletFeature.bodies</a>, <a href="FlangeFeature_bodies.htm">FlangeFeature.bodies</a>, <a href="FlatPattern_bodies.htm">FlatPattern.bodies</a>, <a href="FlatPatternComponent_bRepBodies.htm">FlatPatternComponent.bRepBodies</a>, <a href="FormFeature_bodies.htm">FormFeature.bodies</a>, <a href="HemFeature_bodies.htm">HemFeature.bodies</a>, <a href="HoleFeature_bodies.htm">HoleFeature.bodies</a>, <a href="LoftFeature_bodies.htm">LoftFeature.bodies</a>, <a href="MeshCombineFaceGroupsFeature_bodies.htm">MeshCombineFaceGroupsFeature.bodies</a>, <a href="MeshCombineFeature_bodies.htm">MeshCombineFeature.bodies</a>, <a href="MeshConvertFeature_bodies.htm">MeshConvertFeature.bodies</a>, <a href="MeshFeature_bodies.htm">MeshFeature.bodies</a>, <a href="MeshGenerateFaceGroupsFeature_bodies.htm">MeshGenerateFaceGroupsFeature.bodies</a>, <a href="MeshReduceFeature_bodies.htm">MeshReduceFeature.bodies</a>, <a href="MeshRemeshFeature_bodies.htm">MeshRemeshFeature.bodies</a>, <a href="MeshRepairFeature_bodies.htm">MeshRepairFeature.bodies</a>, <a href="MeshReverseNormalFeature_bodies.htm">MeshReverseNormalFeature.bodies</a>, <a href="MeshSeparateFeature_bodies.htm">MeshSeparateFeature.bodies</a>, <a href="MeshShellFeature_bodies.htm">MeshShellFeature.bodies</a>, <a href="MeshSmoothFeature_bodies.htm">MeshSmoothFeature.bodies</a>, <a href="MirrorFeature_bodies.htm">MirrorFeature.bodies</a>, <a href="MoveFeature_bodies.htm">MoveFeature.bodies</a>, <a href="Occurrence_bRepBodies.htm">Occurrence.bRepBodies</a>, <a href="OffsetFacesFeature_bodies.htm">OffsetFacesFeature.bodies</a>, <a href="OffsetFeature_bodies.htm">OffsetFeature.bodies</a>, <a href="PatchFeature_bodies.htm">PatchFeature.bodies</a>, <a href="PathPatternFeature_bodies.htm">PathPatternFeature.bodies</a>, <a href="PipeFeature_bodies.htm">PipeFeature.bodies</a>, <a href="RectangularPatternFeature_bodies.htm">RectangularPatternFeature.bodies</a>, <a href="RefoldFeature_bodies.htm">RefoldFeature.bodies</a>, <a href="RemoveFeature_bodies.htm">RemoveFeature.bodies</a>, <a href="ReplaceFaceFeature_bodies.htm">ReplaceFaceFeature.bodies</a>, <a href="ReverseNormalFeature_bodies.htm">ReverseNormalFeature.bodies</a>, <a href="RevolveFeature_bodies.htm">RevolveFeature.bodies</a>, <a href="RibFeature_bodies.htm">RibFeature.bodies</a>, <a href="RipFeature_bodies.htm">RipFeature.bodies</a>, <a href="RuledSurfaceFeature_bodies.htm">RuledSurfaceFeature.bodies</a>, <a href="RuleFilletFeature_bodies.htm">RuleFilletFeature.bodies</a>, <a href="ScaleFeature_bodies.htm">ScaleFeature.bodies</a>, <a href="ShellFeature_bodies.htm">ShellFeature.bodies</a>, <a href="SilhouetteSplitFeature_bodies.htm">SilhouetteSplitFeature.bodies</a>, <a href="SphereFeature_bodies.htm">SphereFeature.bodies</a>, <a href="SplitBodyFeature_bodies.htm">SplitBodyFeature.bodies</a>, <a href="SplitFaceFeature_bodies.htm">SplitFaceFeature.bodies</a>, <a href="StitchFeature_bodies.htm">StitchFeature.bodies</a>, <a href="SurfaceDeleteFaceFeature_bodies.htm">SurfaceDeleteFaceFeature.bodies</a>, <a href="SweepFeature_bodies.htm">SweepFeature.bodies</a>, <a href="TemporaryBRepManager_createFromFile.htm">TemporaryBRepManager.createFromFile</a>, <a href="TessellateFeature_bodies.htm">TessellateFeature.bodies</a>, <a href="ThickenFeature_bodies.htm">ThickenFeature.bodies</a>, <a href="ThreadFeature_bodies.htm">ThreadFeature.bodies</a>, <a href="TorusFeature_bodies.htm">TorusFeature.bodies</a>, <a href="TrimFeature_bodies.htm">TrimFeature.bodies</a>, <a href="UnfoldFeature_bodies.htm">UnfoldFeature.bodies</a>, <a href="UnstitchFeature_bodies.htm">UnstitchFeature.bodies</a>, <a href="UntrimFeature_bodies.htm">UntrimFeature.bodies</a>, <a href="VolumetricCustomFeature_bodies.htm">VolumetricCustomFeature.bodies</a>, <a href="VolumetricModelToMeshFeature_bodies.htm">VolumetricModelToMeshFeature.bodies</a>, <a href="WebFeature_bodies.htm">WebFeature.bodies</a><h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="GetsVolumeOfActiveDesign_Sample.htm">Get Volume of Active Design API Sample</a></td>
+        <td class="api-list">Traverses through the active design and totals the volume of every body within the design.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(BRepBodies%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

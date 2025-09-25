@@ -1,0 +1,126 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/Path.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="14/10/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="Path">
+    <meta name="description" content="Path Object">
+    <meta name="topicid" content="GUID-3038e2cf-b69f-4b33-8644-1657b0b5fa60">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>Path Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Path Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Features/Path.h&gt;<h2 class="api">
+          Description
+        </h2>The Path object represents a single set of connected curves. The order of the objects within the collection is the same as the connection order of the entities. When using a Path to create a feature, the Path serves as a way to pass in the set of sketch entities and edges. When getting the Path of an existing feature it returns the actual path used to define the feature geometry. In cases like a sweep feature, this can result in using portions of the original input sketch curves or edges and the returned path will provide these "partial" curves as the PathEntity objects.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Path_addCurves.htm">addCurves</a></td>
+        <td class="api-list">Adds additional curves to the existing path. This can be useful when creating a complex path for a sweep and you want to include sets of curves from multiple sketches and edges from multiple bodies.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Path_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Path_create.htm">create</a></td>
+        <td class="api-list">Creates a new Path that can be used as input to various features. For example, it is used to create an open set of curves to create surfaces using extrude, revolve, and sweep. It is also used to create the path for a sweep and sections and profiles and rails for lofts. And it is used to define the boundary of a patch feature.<br/><br/> Although the creation of a path is very flexible as far as the types of entities and whether they are planar or not, each of the features have specific requirements and the path must meet those requirements. For example, a path for an extrusion can only contain sketch curves and must be planar, whereas the path for a sweep can contain a mix of sketch curves and edges and can be in three dimensions.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Path_createForAssemblyContext.htm">createForAssemblyContext</a></td>
+        <td class="api-list">Creates or returns a proxy for the native object - i.e. a new object that represents this object but adds the assembly context defined by the input occurrence.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Path_item.htm">item</a></td>
+        <td class="api-list">Function that returns the specified PathEntity using an index into the collection.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Path_assemblyContext.htm">assemblyContext</a></td>
+        <td class="api-list">This property is not supported for the Path object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Path_count.htm">count</a></td>
+        <td class="api-list">The number of curves in the path.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Path_isClosed.htm">isClosed</a></td>
+        <td class="api-list">Indicates if the path is closed or not. Returns True in the case of a closed path.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Path_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Path_nativeObject.htm">nativeObject</a></td>
+        <td class="api-list">This property is not supported for the Path object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Path_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="Features_createPath.htm">Features.createPath</a>, <a href="Path_create.htm">Path.create</a>, <a href="Path_createForAssemblyContext.htm">Path.createForAssemblyContext</a>, <a href="Path_nativeObject.htm">Path.nativeObject</a>, <a href="PathEntity_parentPath.htm">PathEntity.parentPath</a>, <a href="PathPatternFeature_path.htm">PathPatternFeature.path</a>, <a href="PathPatternFeatureInput_path.htm">PathPatternFeatureInput.path</a>, <a href="PipeFeature_path.htm">PipeFeature.path</a>, <a href="PipeFeatureInput_path.htm">PipeFeatureInput.path</a>, <a href="SweepFeature_guideRail.htm">SweepFeature.guideRail</a>, <a href="SweepFeature_path.htm">SweepFeature.path</a>, <a href="SweepFeatureInput_guideRail.htm">SweepFeatureInput.guideRail</a>, <a href="SweepFeatureInput_path.htm">SweepFeatureInput.path</a><h2 class="api">
+            Version
+          </h2>
+        Introduced in version November 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(Path%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

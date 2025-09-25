@@ -1,0 +1,522 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/ApplicationEventSample.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="ApplicationEventSample_Sample">
+    <meta name="description" content="Application Event API Sample Sample">
+    <meta name="topicid" content="GUID-a445a970-997b-11e5-b40a-3417ebd3d5be">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Application Event API Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Application Event API Sample</h1>
+    <h2 class="api">
+          Description
+        </h2>Add-In that demonstrates application events. To use this sample, create a new folder using the name you want to use for the new add-in. Inside the folder, create a new file that is the same name as the folder but has a .py extension. Copy the code below into the .py file. Create another file that is the same name as the folder but has a .manifest extension and copy the JSON data below into that file.
+	
+{
+"autodeskProduct":	"Fusion360",
+"type":	"addin",
+"author":	"",
+"description":	{
+	"":	""
+},
+"supportedOS":	"windows|mac",
+"editEnabled":	true
+}
+
+Run the "Scripts and Add-Ins" command and click the green plus button near the top of the dialog. Browse to the location where you created the folder and select the folder. The add-in should now be displayed in the list of add-ins on the "Add-Ins" tab of the dialog. Select the add-in and click the "Run" button. This will load the add-in and when any of the application events occurr that it is watching for it will report them in the TEXT COMMAND window.<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#C++">C++</a></li>
+        <li><a href="#Python">Python</a></li>
+      </ul>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code">#include &lt;Core/Application/Application.h&gt;
+#include &lt;Core/Application/ApplicationEvents.h&gt;
+#include &lt;Core/Application/DocumentEvents.h&gt;
+#include &lt;Core/UserInterface/UserInterface.h&gt;
+
+using namespace adsk::core;
+
+Ptr&lt;Application&gt; app;
+Ptr&lt;UserInterface&gt; ui;
+
+<span style="color:blue">// Event handler for the documentCreated event.</span>
+class MyDocumentCreatedEventHandler : public adsk::core::DocumentEventHandler
+{
+  public:
+    void notify(const Ptr&lt;DocumentEventArgs&gt;& eventArgs) override
+    {
+        <span style="color:blue">// Code to react to the event.</span>
+        ui-&gt;messageBox("In MyDocumentCreatedEventHandler event handler.");
+    }
+} documentCreated_;
+
+<span style="color:blue">// Event handler for the documentSaved event.</span>
+class MyDocumentSavedEventHandler : public adsk::core::DocumentEventHandler
+{
+  public:
+    void notify(const Ptr&lt;DocumentEventArgs&gt;& eventArgs) override
+    {
+        <span style="color:blue">// Code to react to the event.</span>
+        ui-&gt;messageBox("In MyDocumentSavedEventHandler event handler.");
+    }
+} documentSaved_;
+
+<span style="color:blue">// Event handler for the documentSaving event.</span>
+class MyDocumentSavingEventHandler : public adsk::core::DocumentEventHandler
+{
+  public:
+    void notify(const Ptr&lt;DocumentEventArgs&gt;& eventArgs) override
+    {
+        <span style="color:blue">// Code to react to the event.</span>
+        ui-&gt;messageBox("In MyDocumentSavingEventHandler event handler.");
+    }
+} documentSaving_;
+
+<span style="color:blue">// Event handler for the documentClosed event.</span>
+class MyDocumentClosedEventHandler : public adsk::core::DocumentEventHandler
+{
+  public:
+    void notify(const Ptr&lt;DocumentEventArgs&gt;& eventArgs) override
+    {
+        <span style="color:blue">// Code to react to the event.</span>
+        ui-&gt;messageBox("In MyDocumentClosedEventHandler event handler.");
+    }
+} documentClosed_;
+
+<span style="color:blue">// Event handler for the documentClosing event.</span>
+class MyDocumentClosingEventHandler : public adsk::core::DocumentEventHandler
+{
+  public:
+    void notify(const Ptr&lt;DocumentEventArgs&gt;& eventArgs) override
+    {
+        <span style="color:blue">// Code to react to the event.</span>
+        ui-&gt;messageBox("In MyDocumentClosingEventHandler event handler.");
+    }
+} documentClosing_;
+
+class MyDocumentActivatedEventHandler : public adsk::core::DocumentEventHandler
+{
+  public:
+    void notify(const Ptr&lt;DocumentEventArgs&gt;& eventArgs) override
+    {
+        Ptr&lt;Document&gt; doc = eventArgs-&gt;document();
+
+        <span style="color:blue">// Code to react to the event.</span>
+        ui-&gt;messageBox("In MyDocumentActivatedEventHandler event handler.");
+    }
+} documentActivated_;
+
+class MyDocumentDeactivatedEventHandler : public adsk::core::DocumentEventHandler
+{
+  public:
+    void notify(const Ptr&lt;DocumentEventArgs&gt;& eventArgs) override
+    {
+        Ptr&lt;Document&gt; doc = eventArgs-&gt;document();
+
+        <span style="color:blue">// Code to react to the event.</span>
+        ui-&gt;messageBox("In MyDocumentDeactivatedEventHandler event handler.");
+    }
+} documentDeactivated_;
+
+class MyDocumentDeactivatingEventHandler : public adsk::core::DocumentEventHandler
+{
+  public:
+    void notify(const Ptr&lt;DocumentEventArgs&gt;& eventArgs) override
+    {
+        Ptr&lt;Document&gt; doc = eventArgs-&gt;document();
+
+        <span style="color:blue">// Code to react to the event.</span>
+        ui-&gt;messageBox("In MyDocumentDeactivatingEventHandler event handler.");
+    }
+} documentDeactivating_;
+
+class MyDocumentActivatingEventHandler : public adsk::core::DocumentEventHandler
+{
+  public:
+    void notify(const Ptr&lt;DocumentEventArgs&gt;& eventArgs) override
+    {
+        Ptr&lt;Document&gt; doc = eventArgs-&gt;document();
+
+        <span style="color:blue">// Code to react to the event.</span>
+        ui-&gt;messageBox("In MyDocumentActivatingEventHandler event handler.");
+    }
+} documentActivating_;
+
+class StartupCompletedHandler : public ApplicationEventHandler
+{
+  public:
+    void notify(const Ptr&lt;ApplicationEventArgs&gt;& eventArgs) override
+    {
+        if (ui)
+            ui-&gt;messageBox("Startup completed");
+    }
+};
+static StartupCompletedHandler startupCompletedHandler_;
+
+class OnlineStatusChangedHandler : public ApplicationEventHandler
+{
+  public:
+    void notify(const Ptr&lt;ApplicationEventArgs&gt;& eventArgs) override
+    {
+        if (!eventArgs)
+            return;
+
+        std::string status("Online");
+        if (eventArgs-&gt;isOffLine())
+            status = "Offline";
+
+        if (ui)
+            ui-&gt;messageBox("Online status changed: " + status);
+    }
+};
+static OnlineStatusChangedHandler onlineStatusChangedHandler_;
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    app = Application::get();
+    if (!app)
+        return false;
+
+    ui = app-&gt;userInterface();
+    if (!ui)
+        return false;
+
+    Ptr&lt;ApplicationEvent&gt; startupCompleted = app-&gt;startupCompleted();
+    if (!startupCompleted)
+        return false;
+    startupCompleted-&gt;add(&startupCompletedHandler_);
+
+    Ptr&lt;ApplicationEvent&gt; onlineStatusChanged = app-&gt;onlineStatusChanged();
+    if (!onlineStatusChanged)
+        return false;
+    onlineStatusChanged-&gt;add(&onlineStatusChangedHandler_);
+
+    Ptr&lt;DocumentEvent&gt; documentCreated = app-&gt;documentCreated();
+    if (!documentCreated)
+        return false;
+    documentCreated-&gt;add(&documentCreated_);
+
+    Ptr&lt;DocumentEvent&gt; documentSaved = app-&gt;documentSaved();
+    if (!documentSaved)
+        return false;
+    documentSaved-&gt;add(&documentSaved_);
+
+    Ptr&lt;DocumentEvent&gt; documentSaving = app-&gt;documentSaving();
+    if (!documentSaving)
+        return false;
+    documentSaving-&gt;add(&documentSaving_);
+
+    Ptr&lt;DocumentEvent&gt; documentClosed = app-&gt;documentClosed();
+    if (!documentClosed)
+        return false;
+    documentClosed-&gt;add(&documentClosed_);
+
+    Ptr&lt;DocumentEvent&gt; documentClosing = app-&gt;documentClosing();
+    if (!documentClosing)
+        return false;
+    documentClosing-&gt;add(&documentClosing_);
+
+    Ptr&lt;DocumentEvent&gt; documentActivated = app-&gt;documentActivated();
+    if (!documentActivated)
+        return false;
+    documentActivated-&gt;add(&documentActivated_);
+
+    Ptr&lt;DocumentEvent&gt; documentActivating = app-&gt;documentActivating();
+    if (!documentActivating)
+        return false;
+    documentActivating-&gt;add(&documentActivating_);
+
+    Ptr&lt;DocumentEvent&gt; documentDeactivating = app-&gt;documentDeactivating();
+    if (!documentDeactivating)
+        return false;
+    documentDeactivating-&gt;add(&documentDeactivating_);
+
+    Ptr&lt;DocumentEvent&gt; documentDeactivated = app-&gt;documentDeactivated();
+    if (!documentDeactivated)
+        return false;
+    documentDeactivated-&gt;add(&documentDeactivated_);
+
+    return true;
+}
+
+extern "C" XI_EXPORT bool stop(const char* context)
+{
+    return true;
+}</pre>
+      </div>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">import adsk.core, traceback
+
+<span style="color:blue"># global set of event handlers to keep them referenced</span>
+handlers = []
+app = adsk.core.Application.get()
+
+<span style="color:blue"># Event handler for the documentOpened event.</span>
+class MyDocumentOpenedHandler(adsk.core.DocumentEventHandler):
+    def __init__(self):
+        super().__init__()
+    def notify(self, args):
+        eventArgs = adsk.core.DocumentEventArgs.cast(args)
+
+        <span style="color:blue"># Code to react to the event.</span>
+        app.log('In MyDocumentOpenedHandler event handler.')
+
+<span style="color:blue"># Event handler for the documentOpening event.</span>
+class MyDocumentOpeningHandler(adsk.core.DocumentEventHandler):
+    def __init__(self):
+        super().__init__()
+    def notify(self, args):
+        eventArgs = adsk.core.DocumentEventArgs.cast(args)
+
+        <span style="color:blue"># Code to react to the event.</span>
+        app.log('In MyDocumentOpeningHandler event handler.')
+
+<span style="color:blue"># Event handler for the startupCompleted event.</span>
+class StartupCompletedHandler(adsk.core.ApplicationEventHandler):
+    def __init__(self):
+        super().__init__()
+    def notify(self, args):
+        try:
+           app.log('Startup completed')
+        except:
+           app.log('Startup completed event failed: {}'.format(traceback.format_exc()))
+
+<span style="color:blue"># Event handler for the onlineStatusChanged event.</span>
+class OnlineStatusChangedHandler(adsk.core.ApplicationEventHandler):
+    def __init__(self):
+        super().__init__()
+    def notify(self, args):
+        try:
+           status = 'Online'
+           if args.isOffLine:
+               status = 'Offline'
+           app.log('Online status changed: ' + status)
+        except:
+           app.log('Online status changed event failed: {}'.format(traceback.format_exc()))
+
+<span style="color:blue"># Event handler for the documentCreated event.</span>
+class MyDocumentCreatedHandler(adsk.core.DocumentEventHandler):
+    def __init__(self):
+        super().__init__()
+    def notify(self, args):
+        eventArgs = adsk.core.DocumentEventArgs.cast(args)
+
+        <span style="color:blue"># Code to react to the event.</span>
+        app.log('In MyDocumentCreatedHandler event handler.')        
+
+<span style="color:blue"># Event handler for the documentSaved event.</span>
+class MyDocumentSavedHandler(adsk.core.DocumentEventHandler):
+    def __init__(self):
+        super().__init__()
+    def notify(self, args):
+        eventArgs = adsk.core.DocumentEventArgs.cast(args)
+
+        <span style="color:blue"># Code to react to the event.</span>
+        app.log('In MyDocumentSavedHandler event handler.')   
+        
+<span style="color:blue"># Event handler for the documentSaving event.</span>
+class MyDocumentSavingHandler(adsk.core.DocumentEventHandler):
+    def __init__(self):
+        super().__init__()
+    def notify(self, args):
+        eventArgs = adsk.core.DocumentEventArgs.cast(args)
+
+        <span style="color:blue"># Code to react to the event.</span>
+        app.log('In MyDocumentSavingHandler event handler.')     
+
+<span style="color:blue"># Event handler for the documentClosing event.</span>
+class MyDocumentClosingHandler(adsk.core.DocumentEventHandler):
+    def __init__(self):
+        super().__init__()
+    def notify(self, args):
+        eventArgs = adsk.core.DocumentEventArgs.cast(args)
+
+        <span style="color:blue"># Code to react to the event.</span>
+        app.log('In MyDocumentClosingHandler event handler.')     
+        
+<span style="color:blue"># Event handler for the documentClosed event.</span>
+class MyDocumentClosedHandler(adsk.core.DocumentEventHandler):
+    def __init__(self):
+        super().__init__()
+    def notify(self, args):
+        eventArgs = adsk.core.DocumentEventArgs.cast(args)
+
+        <span style="color:blue"># Code to react to the event.</span>
+        app.log('In MyDocumentClosedHandler event handler.')     
+
+<span style="color:blue"># Event handler for the documentDeactivated event.</span>
+class MyDocumentDeactivatedHandler(adsk.core.DocumentEventHandler):
+    def __init__(self):
+        super().__init__()
+    def notify(self, args):
+        eventArgs = adsk.core.DocumentEventArgs.cast(args)
+
+        <span style="color:blue"># Code to react to the event.</span>
+        app.log('In MyDocumentDeactivatedHandler event handler.\ndocument: {}'.format(eventArgs.document.name))    
+
+<span style="color:blue"># Event handler for the documentActivated event.</span>
+class MyDocumentActivatedHandler(adsk.core.DocumentEventHandler):
+    def __init__(self):
+        super().__init__()
+    def notify(self, args):
+        eventArgs = adsk.core.DocumentEventArgs.cast(args)
+
+        <span style="color:blue"># Code to react to the event.</span>
+        app.log('In MyDocumentActivatedHandler event handler.\ndocument: {}'.format(eventArgs.document.name))    
+
+<span style="color:blue"># Event handler for the documentDeactivating event.</span>
+class MyDocumentDeactivatingHandler(adsk.core.DocumentEventHandler):
+    def __init__(self):
+        super().__init__()
+    def notify(self, args):
+        eventArgs = adsk.core.DocumentEventArgs.cast(args)
+
+        <span style="color:blue"># Code to react to the event.</span>
+        app.log('In MyDocumentDeactivatingHandler event handler.\ndocument: {}'.format(eventArgs.document.name))    
+
+<span style="color:blue"># Event handler for the documentActivating event.</span>
+class MyDocumentActivatingHandler(adsk.core.DocumentEventHandler):
+    def __init__(self):
+        super().__init__()
+    def notify(self, args):
+        eventArgs = adsk.core.DocumentEventArgs.cast(args)
+        
+        <span style="color:blue"># Code to react to the event.</span>
+        app.log('In MyDocumentActivatingHandler event handler.\ndocument: {}'.format(eventArgs.document.name))    
+                 
+def run(context):
+    try:
+        onStartupCompleted = StartupCompletedHandler()
+        app.startupCompleted.add(onStartupCompleted)
+        handlers.append(onStartupCompleted)
+        
+        onOnlineStatusChanged = OnlineStatusChangedHandler()
+        app.onlineStatusChanged.add(onOnlineStatusChanged)
+        handlers.append(onOnlineStatusChanged)
+        
+        onDocumentCreated = MyDocumentCreatedHandler()
+        app.documentCreated.add(onDocumentCreated)
+        handlers.append(onDocumentCreated)
+        
+        onDocumentSaved = MyDocumentSavedHandler()
+        app.documentSaved.add(onDocumentSaved)
+        handlers.append(onDocumentSaved)
+        
+        onDocumentSaving = MyDocumentSavingHandler()
+        app.documentSaving.add(onDocumentSaving)
+        handlers.append(onDocumentSaving)
+     
+        onDocumentOpened = MyDocumentOpenedHandler()
+        app.documentOpened.add(onDocumentOpened)
+        handlers.append(onDocumentOpened)   
+        
+        onDocumentOpening = MyDocumentOpeningHandler()
+        app.documentOpening.add(onDocumentOpening)
+        handlers.append(onDocumentOpening)    
+        
+        onDocumentClosing = MyDocumentClosingHandler()
+        app.documentClosing.add(onDocumentClosing)
+        handlers.append(onDocumentClosing)   
+        
+        onDocumentClosed = MyDocumentClosedHandler()
+        app.documentClosed.add(onDocumentClosed)
+        handlers.append(onDocumentClosed)           
+        
+        onDocumentDeactivated = MyDocumentDeactivatedHandler()
+        app.documentDeactivated.add(onDocumentDeactivated)
+        handlers.append(onDocumentDeactivated)    
+        
+        onDocumentActivated = MyDocumentActivatedHandler()
+        app.documentActivated.add(onDocumentActivated)
+        handlers.append(onDocumentActivated)
+        
+        onDocumentDeactivating = MyDocumentDeactivatingHandler()
+        app.documentDeactivating.add(onDocumentDeactivating)
+        handlers.append(onDocumentDeactivating)   
+        
+        onDocumentActivating = MyDocumentActivatingHandler()
+        app.documentActivating.add(onDocumentActivating)
+        handlers.append(onDocumentActivating)   
+    except:
+        app.log('AddIn Start Failed:\n{}'.format(traceback.format_exc()))
+
+
+def stop(context):
+    try:
+        pass
+    except:
+        app.log('AddIn Stop Failed: {}'.format(traceback.format_exc()))</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(ApplicationEventSample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

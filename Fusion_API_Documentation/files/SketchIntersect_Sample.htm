@@ -1,0 +1,444 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/SketchIntersect.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="SketchIntersect_Sample">
+    <meta name="description" content="Sketch Intersect API Sample Sample">
+    <meta name="topicid" content="GUID-bed462f4-6b51-11e7-bc60-6c0b84aa5a3f">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Sketch Intersect API Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Sketch Intersect API Sample</h1>
+    <h2 class="api">
+          Description
+        </h2>Intersects the specified entities with the sketch plane and creates sketch geometry that represents the intersection.<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">import adsk.core, adsk.fusion, traceback
+
+def run(context):
+    ui = None
+    try:
+        app = adsk.core.Application.get()
+        ui = app.userInterface
+        
+        <span style="color:blue"># Create a document.</span>
+        doc = app.documents.add(adsk.core.DocumentTypes.FusionDesignDocumentType)
+ 
+        product = app.activeProduct
+        design = adsk.fusion.Design.cast(product)
+
+        <span style="color:blue"># Get the root component of the active design</span>
+        rootComp = design.rootComponent
+        
+        <span style="color:blue"># Create a sketch</span>
+        sketches = rootComp.sketches
+        sketch1 = sketches.add(rootComp.yZConstructionPlane)
+        
+        <span style="color:blue"># Create an object collection for the points.</span>
+        points = adsk.core.ObjectCollection.create()
+
+        <span style="color:blue"># Define the points the spline with fit through.</span>
+        points.add(adsk.core.Point3D.create(-5, 0, 0))
+        points.add(adsk.core.Point3D.create(5, 1, 0))
+        points.add(adsk.core.Point3D.create(6, 4, 3))
+        points.add(adsk.core.Point3D.create(7, 6, 6))
+        points.add(adsk.core.Point3D.create(2, 3, 0))
+        points.add(adsk.core.Point3D.create(0, 1, 0))
+
+        <span style="color:blue"># Create the spline.</span>
+        spline = sketch1.sketchCurves.sketchFittedSplines.add(points)
+    
+        <span style="color:blue"># Get sketch lines</span>
+        sketchLines = sketch1.sketchCurves.sketchLines
+        
+        <span style="color:blue"># Create sketch rectangle</span>
+        startPoint = adsk.core.Point3D.create(0, 0, 0)
+        endPoint = adsk.core.Point3D.create(5.0, 5.0, 0)
+        sketchLines.addTwoPointRectangle(startPoint, endPoint)
+        
+        <span style="color:blue"># Get two sketch lines</span>
+        sketchLineOne = sketchLines.item(0)
+        sketchLineTwo = sketchLines.item(1)
+        
+        <span style="color:blue"># Get the profile</span>
+        prof = sketch1.profiles.item(0)
+        
+        <span style="color:blue"># Create an extrusion input</span>
+        extrudes = rootComp.features.extrudeFeatures
+        extInput = extrudes.createInput(prof, adsk.fusion.FeatureOperations.NewBodyFeatureOperation)
+        
+        <span style="color:blue"># Define that the extent is a distance extent of 5 cm</span>
+        distance = adsk.core.ValueInput.createByReal(5.0)
+        <span style="color:blue"># Set the distance extent</span>
+        extInput.setDistanceExtent(False, distance)
+        <span style="color:blue"># Set the extrude type to be solid</span>
+        extInput.isSolid = True
+        
+        <span style="color:blue"># Create the extrusion</span>
+        ext = extrudes.add(extInput)
+   
+        <span style="color:blue"># Get the body with the extrude</span>
+        body = ext.bodies.item(0)
+        
+        <span style="color:blue"># Get a vertex of the body</span>
+        vertex = body.vertices.item(5)
+        
+        <span style="color:blue"># Get a face of the vertex</span>
+        face = vertex.faces.item(0)
+        
+        <span style="color:blue"># Create perpendicular construction axis</span>
+        axes = rootComp.constructionAxes
+        axisInput = axes.createInput()
+        axisInput.setByPerpendicularAtPoint(face, vertex)
+        axis = axes.add(axisInput)
+        
+         <span style="color:blue"># Create construction point</span>
+        points = rootComp.constructionPoints
+        pointInput = points.createInput()
+        pointInput.setByTwoEdges(sketchLineOne, sketchLineTwo)
+        point = points.add(pointInput)
+        
+        <span style="color:blue"># Create construction plane</span>
+        planes = rootComp.constructionPlanes
+        planeInput = planes.createInput()
+        offsetValue = adsk.core.ValueInput.createByReal(3.0)
+        planeInput.setByOffset(prof, offsetValue)
+        plane = planes.add(planeInput)
+        
+        <span style="color:blue"># Create another sketch</span>
+        sketch2 = sketches.add(rootComp.xZConstructionPlane)
+        
+        entities = []
+        entities.append(body) <span style="color:blue"># body</span>
+        entities.append(face) <span style="color:blue"># face</span>
+        entities.append(sketchLineOne) <span style="color:blue"># edge </span>
+        entities.append(vertex) <span style="color:blue"># vertex</span>
+        entities.append(spline) <span style="color:blue"># sketch curve</span>
+        entities.append(axis) <span style="color:blue"># construction axis</span>
+        entities.append(point) <span style="color:blue"># construction point</span>
+        entities.append(plane) <span style="color:blue"># construction plane</span>
+        sketchEntities = sketch2.intersectWithSketchPlane(entities)
+        
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code">#include &lt;Core/Application/Application.h&gt;
+#include &lt;Core/Application/Document.h&gt;
+#include &lt;Core/Application/Documents.h&gt;
+#include &lt;Core/Geometry/Point3D.h&gt;
+#include &lt;Core/UserInterface/UserInterface.h&gt;
+#include &lt;Core/Application/ObjectCollection.h&gt;
+#include &lt;Fusion/Components/Component.h&gt;
+#include &lt;Fusion/Construction/ConstructionPlanes.h&gt;
+#include &lt;Fusion/Construction/ConstructionPlane.h&gt;
+#include &lt;Fusion/Construction/ConstructionPlaneInput.h&gt;
+#include &lt;Fusion/Construction/ConstructionAxes.h&gt;
+#include &lt;Fusion/Construction/ConstructionAxis.h&gt;
+#include &lt;Fusion/Construction/ConstructionAxisInput.h&gt;
+#include &lt;Fusion/Construction/ConstructionPoints.h&gt;
+#include &lt;Fusion/Construction/ConstructionPointInput.h&gt;
+#include &lt;Fusion/Construction/ConstructionPoint.h&gt;
+#include &lt;Fusion/Fusion/Design.h&gt;
+#include &lt;Fusion/Sketch/Sketch.h&gt;
+#include &lt;Fusion/Sketch/Sketches.h&gt;
+#include &lt;Fusion/Sketch/SketchCurves.h&gt;
+#include &lt;Fusion/Sketch/SketchLines.h&gt;
+#include &lt;Fusion/Sketch/SketchLine.h&gt;
+#include &lt;Fusion/Sketch/SketchFittedSplines.h&gt;
+#include &lt;Fusion/Sketch/SketchFittedSpline.h&gt;
+#include &lt;Fusion/Sketch/Profiles.h&gt;
+#include &lt;Fusion/Sketch/Profile.h&gt;
+#include &lt;Fusion/Features/Features.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeatures.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeatureInput.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeature.h&gt;
+#include &lt;Fusion/BRep/BRepBodies.h&gt;
+#include &lt;Fusion/BRep/BRepBody.h&gt;
+#include &lt;Fusion/BRep/BRepFaces.h&gt;
+#include &lt;Fusion/BRep/BRepFace.h&gt;
+#include &lt;Fusion/BRep/BRepVertices.h&gt;
+#include &lt;Fusion/BRep/BRepVertex.h&gt;
+
+using namespace adsk::core;
+using namespace adsk::fusion;
+
+Ptr&lt;UserInterface&gt; ui;
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    Ptr&lt;Application&gt; app = Application::get();
+    if (!app)
+        return false;
+
+    ui = app-&gt;userInterface();
+    if (!ui)
+        return false;
+
+    Ptr&lt;Documents&gt; docs = app-&gt;documents();
+    if (!docs)
+        return false;
+
+    <span style="color:blue">// Create a document.</span>
+    Ptr&lt;Document&gt; doc = docs-&gt;add(DocumentTypes::FusionDesignDocumentType);
+    if (!doc)
+        return false;
+
+    Ptr&lt;Design&gt; design = app-&gt;activeProduct();
+    if (!design)
+        return false;
+
+    <span style="color:blue">// Get the root component of the active design</span>
+    Ptr&lt;Component&gt; rootComp = design-&gt;rootComponent();
+    if (!rootComp)
+        return false;
+
+    <span style="color:blue">// Create a new sketch on the yz plane.</span>
+    Ptr&lt;Sketches&gt; sketches = rootComp-&gt;sketches();
+    if (!sketches)
+        return false;
+
+    Ptr&lt;ConstructionPlane&gt; yzPlane = rootComp-&gt;yZConstructionPlane();
+    if (!yzPlane)
+        return false;
+
+    Ptr&lt;Sketch&gt; yzSketch = sketches-&gt;add(yzPlane);
+    if (!yzSketch)
+        return false;
+
+    <span style="color:blue">// Create an object collection for the points.</span>
+    Ptr&lt;ObjectCollection&gt; points = ObjectCollection::create();
+    if (!points)
+        return false;
+
+    <span style="color:blue">// Define the points the spline with fit through.</span>
+    points-&gt;add(Point3D::create(-5, 0, 0));
+    points-&gt;add(Point3D::create(5, 1, 0));
+    points-&gt;add(Point3D::create(6, 4, 3));
+    points-&gt;add(Point3D::create(7, 6, 6));
+    points-&gt;add(Point3D::create(2, 3, 0));
+    points-&gt;add(Point3D::create(0, 1, 0));
+
+    <span style="color:blue">// Create the spline.</span>
+    Ptr&lt;SketchCurves&gt; sketchCurves = yzSketch-&gt;sketchCurves();
+    if (!sketchCurves)
+        return false;
+
+    Ptr&lt;SketchFittedSplines&gt; splines = sketchCurves-&gt;sketchFittedSplines();
+    if (!splines)
+        return false;
+
+    Ptr&lt;SketchFittedSpline&gt; spline = splines-&gt;add(points);
+    if (!spline)
+        return false;
+
+    <span style="color:blue">// Get sketch lines</span>
+    Ptr&lt;SketchLines&gt; sketchLines = sketchCurves-&gt;sketchLines();
+    if (!sketchLines)
+        return false;
+
+    <span style="color:blue">// Create sketch rectangle</span>
+    Ptr&lt;Point3D&gt; startPoint = Point3D::create(0, 0, 0);
+    Ptr&lt;Point3D&gt; endPoint = Point3D::create(5.0, 5.0, 0);
+    sketchLines-&gt;addTwoPointRectangle(startPoint, endPoint);
+
+    <span style="color:blue">// Get two sketch lines</span>
+    Ptr&lt;SketchLine&gt; sketchLineOne = sketchLines-&gt;item(0);
+    Ptr&lt;SketchLine&gt; sketchLineTwo = sketchLines-&gt;item(1);
+
+    <span style="color:blue">// Get the profile</span>
+    Ptr&lt;Profiles&gt; profs = yzSketch-&gt;profiles();
+    if (!profs)
+        return false;
+
+    Ptr&lt;Profile&gt; prof = profs-&gt;item(0);
+
+    <span style="color:blue">// Create an extrusion input</span>
+    Ptr&lt;Features&gt; feats = rootComp-&gt;features();
+    if (!feats)
+        return false;
+
+    Ptr&lt;ExtrudeFeatures&gt; extrudes = feats-&gt;extrudeFeatures();
+    if (!extrudes)
+        return false;
+
+    Ptr&lt;ExtrudeFeatureInput&gt; extInput = extrudes-&gt;createInput(prof, FeatureOperations::NewBodyFeatureOperation);
+
+    <span style="color:blue">// Define that the extent is a distance extent of 5 cm</span>
+    Ptr&lt;ValueInput&gt; distance = ValueInput::createByReal(5.0);
+    <span style="color:blue">// Set the distance extent</span>
+    extInput-&gt;setDistanceExtent(false, distance);
+    <span style="color:blue">// Set the extrude type to be solid</span>
+    extInput-&gt;isSolid(true);
+
+    <span style="color:blue">// Create the extrusion</span>
+    Ptr&lt;ExtrudeFeature&gt; ext = extrudes-&gt;add(extInput);
+    if (!ext)
+        return false;
+
+    <span style="color:blue">// Get the body with the extrude</span>
+    Ptr&lt;BRepBodies&gt; bodies = ext-&gt;bodies();
+    if (!bodies)
+        return false;
+
+    Ptr&lt;BRepBody&gt; body = bodies-&gt;item(0);
+
+    <span style="color:blue">// Get a vertex of the body</span>
+    Ptr&lt;BRepVertices&gt; vertices = body-&gt;vertices();
+    if (!vertices)
+        return false;
+
+    Ptr&lt;BRepVertex&gt; vertex = vertices-&gt;item(5);
+
+    <span style="color:blue">// Get a face of the vertex</span>
+    Ptr&lt;BRepFaces&gt; vertexFaces = vertex-&gt;faces();
+    if (!vertexFaces)
+        return false;
+    Ptr&lt;BRepFace&gt; face = vertexFaces-&gt;item(0);
+
+    <span style="color:blue">// Get construction axes</span>
+    Ptr&lt;ConstructionAxes&gt; constructionAxes = rootComp-&gt;constructionAxes();
+    if (!constructionAxes)
+        return false;
+
+    <span style="color:blue">// Create construction axis input</span>
+    Ptr&lt;ConstructionAxisInput&gt; axisInput = constructionAxes-&gt;createInput();
+    if (!axisInput)
+        return false;
+
+    <span style="color:blue">// Create perpendicular construction axis</span>
+    axisInput-&gt;setByPerpendicularAtPoint(face, vertex);
+    Ptr&lt;ConstructionAxis&gt; axis = constructionAxes-&gt;add(axisInput);
+
+    <span style="color:blue">// Get construction points</span>
+    Ptr&lt;ConstructionPoints&gt; constructionPoints = rootComp-&gt;constructionPoints();
+    if (!constructionPoints)
+        return false;
+
+    <span style="color:blue">// Create construction point input</span>
+    Ptr&lt;ConstructionPointInput&gt; pointInput = constructionPoints-&gt;createInput();
+    if (!pointInput)
+        return false;
+
+    <span style="color:blue">// Create construction point by two points</span>
+    pointInput-&gt;setByTwoEdges(sketchLineOne, sketchLineTwo);
+    Ptr&lt;ConstructionPoint&gt; point = constructionPoints-&gt;add(pointInput);
+
+    <span style="color:blue">// Create construction plane</span>
+    Ptr&lt;ConstructionPlanes&gt; planes = rootComp-&gt;constructionPlanes();
+    if (!planes)
+        return false;
+
+    <span style="color:blue">// Create construction plane input</span>
+    Ptr&lt;ConstructionPlaneInput&gt; planeInput = planes-&gt;createInput();
+    if (!planeInput)
+        return false;
+
+    <span style="color:blue">// Add construction plane by offset</span>
+    Ptr&lt;ValueInput&gt; offsetValue = ValueInput::createByReal(3.0);
+    planeInput-&gt;setByOffset(prof, offsetValue);
+    Ptr&lt;ConstructionPlane&gt; plane = planes-&gt;add(planeInput);
+
+    <span style="color:blue">// Create a new sketch on the xz plane.</span>
+    Ptr&lt;ConstructionPlane&gt; xzPlane = rootComp-&gt;xZConstructionPlane();
+    if (!xzPlane)
+        return false;
+
+    Ptr&lt;Sketch&gt; xzSketch = sketches-&gt;add(xzPlane);
+    if (!xzSketch)
+        return false;
+
+    std::vector&lt;Ptr&lt;Base&gt;&gt; entities;
+    entities.push_back(body);
+    entities.push_back(face);
+    entities.push_back(sketchLineOne);
+    entities.push_back(vertex);
+    entities.push_back(spline);
+    entities.push_back(axis);
+    entities.push_back(point);
+    entities.push_back(plane);
+
+    std::vector&lt;Ptr&lt;SketchEntity&gt;&gt; resVec = xzSketch-&gt;intersectWithSketchPlane(entities);
+    if (resVec.empty())
+        return false;
+
+    return true;
+}</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(SketchIntersect%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

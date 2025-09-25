@@ -1,0 +1,155 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/MachineAvoidDirectSelection.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="09/08/2024">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="MachineAvoidDirectSelection">
+    <meta name="description" content="MachineAvoidDirectSelection Object">
+    <meta name="topicid" content="GUID-9C2A1165-C330-4ABD-B732-4987AD503B7E">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>MachineAvoidDirectSelection Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">MachineAvoidDirectSelection Object
+			</h1>
+              Derived from: <a href="MachineAvoidSelectionBase.htm">MachineAvoidSelectionBase</a> Object
+            <br>Defined in namespace "adsk::cam" and the header file is &lt;Cam/MachineAvoidSelections/MachineAvoidDirectSelection.h&gt;<h2 class="api">
+          Description
+        </h2>Machine/avoid direct selection class. Represents a group of direct selections that the users can make (faces, bodies, components and higher level entities). Provides access to the stored selections.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MachineAvoidDirectSelection_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MachineAvoidDirectSelection_axialOffset.htm">axialOffset</a></td>
+        <td class="api-list">Axial offset - sets the corresponding axial offset value based on the machine mode</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MachineAvoidDirectSelection_combinedOffset.htm">combinedOffset</a></td>
+        <td class="api-list">Combined offset - clearance and stock to leave based on the machine mode This only applies to strategies that use a single offset value (Advanced Swarf, Multi-Axis Clearing, Multi-Axis Finishing, Deburr and Geodesic)</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MachineAvoidDirectSelection_error.htm">error</a></td>
+        <td class="api-list">Gets the last warning string encountered after the selection was applied to a parent.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MachineAvoidDirectSelection_hasError.htm">hasError</a></td>
+        <td class="api-list">Gets if errors were encountered when applying the selection to a a parent.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MachineAvoidDirectSelection_hasWarning.htm">hasWarning</a></td>
+        <td class="api-list">Gets if warnings were encountered when applying the selection to a parent.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MachineAvoidDirectSelection_inputGeometry.htm">inputGeometry</a></td>
+        <td class="api-list">Get or set the value of the input geometry.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MachineAvoidDirectSelection_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MachineAvoidDirectSelection_machineMode.htm">machineMode</a></td>
+        <td class="api-list">Desired machining mode. The default is Avoid. The current machining mode will determine which value the radial and axial offset functions refer to. When set to Machine, the radial and axial offset methods will read/set the stock to leave parameter. When set to Avoid, the radial and axial offset methods will read/set the clearance value, and the Fixture mode will map to the relative fixture clearance value.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MachineAvoidDirectSelection_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MachineAvoidDirectSelection_radialOffset.htm">radialOffset</a></td>
+        <td class="api-list">Radial offset - sets the corresponding radial offset value based on the machine mode</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MachineAvoidDirectSelection_value.htm">value</a></td>
+        <td class="api-list">Returns the resulting value of the selection. In general, this returns the input selection, but child classes can override the return value if needed. Refer to the child classes comments for further details. The collection may contain duplicates. For OperationInputs, the return value may not be the same as for Operations, as additional geometry selected by child classes is not evaluated for OperationInputs.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MachineAvoidDirectSelection_warning.htm">warning</a></td>
+        <td class="api-list">Gets the last warning string encountered after the selection was applied to a parent.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="MachineAvoidGroups_createNewMachineAvoidDirectSelectionGroup.htm">MachineAvoidGroups.createNewMachineAvoidDirectSelectionGroup</a><h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="AvoidMachineSurfaceSettings_Sample.htm">Avoid Machine Surface Settings API Sample</a></td>
+        <td class="api-list"><p>This sample script demonstrates how to use Machine/Avoid/Gouge/Fixture functionality.</p><p>The script starts by opening a sample model from the CAM Samples folder via its URN. The model comprises a curved surface with a through slot, a countersunk hole and a raised, circular and filleted upstand from the surface. The model is supported by two rectangular blocks, themselves mounted on a fixture plate. A setup is included with a single operation running a 3-axis diagonal raster over the model, supports and fixture. The operation machines the fixture, the supporting blocks, the upper surface of the upstand and the area within the slot and hole, something we would like to avoid.</p><p>The script duplicates the original operation and then proceeds to create a series of MachineAvoidGroups. These are labelled as either Machine in the case of 2 cap surfaces for the slot and hole, Fixture for the fixture plate, Gouge for the supporting blocks and Avoid for the top face of the upstand. Additionally, both AxialOffset and RadialOffset can be specified for the Machine, Avoid and Fixture passes.</p></td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CreateEngravingsSelectionSets_Sample.htm">Create Engravings Selection Sets API Sample</a></td>
+        <td class="api-list"><p>This sample script demonstrates how to find and machine engravings in the Z+ direction using pocket recognition.</p><p>The script will first open an example model via its URN. Using pocket recognition, it will identify pockets that may be engravings based on their dimensions.</p><p>We assume here that an engraving pocket is:<ul><li>Made with a flat bottom face and no fillet.</li><li>A closed pocket.</li><li>Have a Z height less than 2 mm</li></ul><p>We demonstrate creating selection sets in both design and manufacture workspaces and use one of the selection sets as an operation geometry selection input to generate an engraving operation.</p><p>The engraving toolpath can be seen by expanding the setup and selecting the operation.</p></td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version September 2024<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(MachineAvoidDirectSelection%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,224 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/CreateCcircleBy3Tangents.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="CreateCcircleBy3Tangents_Sample">
+    <meta name="description" content="Create Circle By 3 Tangents API Sample Sample">
+    <meta name="topicid" content="GUID-982b8eb4-fad6-11e4-bbf8-3417ebd3d5be">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Create Circle By 3 Tangents API Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Create Circle By 3 Tangents API Sample</h1>
+    <h2 class="api">
+          Description
+        </h2>Creates three lines and then draws a circle that is tangent to the lines. It then creates tangent constraints to maintain that relationship.<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">import adsk.core, adsk.fusion, traceback
+
+def run(context):
+    ui = None
+    try: 
+        app = adsk.core.Application.get()
+        ui = app.userInterface
+
+        doc = app.documents.add(adsk.core.DocumentTypes.FusionDesignDocumentType)
+        design = app.activeProduct
+
+        <span style="color:blue"># Get the root component of the active design.</span>
+        rootComp = design.rootComponent
+
+        <span style="color:blue"># Create a new sketch on the xy plane.</span>
+        sketches = rootComp.sketches;
+        xyPlane = rootComp.xYConstructionPlane
+        sketch = sketches.add(xyPlane)
+
+        <span style="color:blue"># Draw three lines.</span>
+        lines = sketch.sketchCurves.sketchLines;
+        line1 = lines.addByTwoPoints(adsk.core.Point3D.create(0, 0, 0), adsk.core.Point3D.create(3, 1, 0))
+        line2 = lines.addByTwoPoints(adsk.core.Point3D.create(4, 3, 0), adsk.core.Point3D.create(2, 4, 0))
+        line3 = lines.addByTwoPoints(adsk.core.Point3D.create(-1, 0, 0), adsk.core.Point3D.create(0, 4, 0))
+
+        <span style="color:blue"># Draw circle tangent to the lines.</span>
+        circles = sketch.sketchCurves.sketchCircles
+        circle1 = circles.addByThreeTangents(line1, line2, line3, adsk.core.Point3D.create(0,0,0))
+
+        <span style="color:blue"># Apply tangent contstraints to maintain the relationship.</span>
+        constraints = sketch.geometricConstraints
+        constraints.addTangent(circle1, line1)
+        constraints.addTangent(circle1, line2)
+        constraints.addTangent(circle1, line3)
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code">#include &lt;Core/CoreAll.h&gt;
+#include &lt;Fusion/FusionAll.h&gt;
+
+
+using namespace adsk::core;
+using namespace adsk::fusion;
+
+Ptr&lt;Application&gt; app;
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    app = Application::get();
+    if (!app)
+        return false;
+
+    Ptr&lt;Documents&gt; documents = app-&gt;documents();
+    if (!documents)
+        return false;
+
+    Ptr&lt;Document&gt; doc = documents-&gt;add(DocumentTypes::FusionDesignDocumentType);
+    if (!doc)
+        return false;
+
+    Ptr&lt;Product&gt; product = app-&gt;activeProduct();
+    if (!product)
+        return false;
+
+    Ptr&lt;Design&gt; design = product;
+    if (!design)
+        return false;
+
+    <span style="color:blue">// Get the root component of the active design</span>
+    Ptr&lt;Component&gt; rootComp = design-&gt;rootComponent();
+    if (!rootComp)
+        return false;
+
+    <span style="color:blue">// Create a new sketch on the xy plane.</span>
+    Ptr&lt;Sketches&gt; sketches = rootComp-&gt;sketches();
+    if (!sketches)
+        return false;
+    Ptr&lt;ConstructionPlane&gt; xyPlane = rootComp-&gt;xYConstructionPlane();
+    if (!xyPlane)
+        return false;
+    Ptr&lt;Sketch&gt; sketch = sketches-&gt;add(xyPlane);
+    if (!sketch)
+        return false;
+
+    <span style="color:blue">// Draw three lines.</span>
+    Ptr&lt;SketchCurves&gt; sketchCurves = sketch-&gt;sketchCurves();
+    if (!sketchCurves)
+        return false;
+    Ptr&lt;SketchLines&gt; sketchLines = sketchCurves-&gt;sketchLines();
+    if (!sketchLines)
+        return false;
+    Ptr&lt;SketchLine&gt; line1 = sketchLines-&gt;addByTwoPoints(Point3D::create(0, 0, 0), Point3D::create(3, 1, 0));
+    if (!line1)
+        return false;
+    Ptr&lt;SketchLine&gt; line2 = sketchLines-&gt;addByTwoPoints(Point3D::create(4, 3, 0), Point3D::create(2, 4, 0));
+    if (!line2)
+        return false;
+    Ptr&lt;SketchLine&gt; line3 = sketchLines-&gt;addByTwoPoints(Point3D::create(-1, 0, 0), Point3D::create(0, 4, 0));
+    if (!line3)
+        return false;
+
+    <span style="color:blue">// Draw circle tangent to the lines.</span>
+    Ptr&lt;SketchCircles&gt; sketchCircles = sketchCurves-&gt;sketchCircles();
+    if (!sketchCircles)
+        return false;
+
+    Ptr&lt;SketchCircle&gt; circle = sketchCircles-&gt;addByThreeTangents(line1, line2, line3, Point3D::create(0, 0, 0));
+    if (!circle)
+        return false;
+
+    <span style="color:blue">// Apply tangent contstraints to maintain the relationship.</span>
+    Ptr&lt;GeometricConstraints&gt; constraints = sketch-&gt;geometricConstraints();
+    if (!constraints)
+        return false;
+
+    Ptr&lt;TangentConstraint&gt; constraint1 = constraints-&gt;addTangent(circle, line1);
+    if (!constraint1)
+        return false;
+
+    Ptr&lt;TangentConstraint&gt; constraint2 = constraints-&gt;addTangent(circle, line2);
+    if (!constraint2)
+        return false;
+
+    Ptr&lt;TangentConstraint&gt; constraint3 = constraints-&gt;addTangent(circle, line3);
+    if (!constraint3)
+        return false;
+
+
+    return true;
+}</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(CreateCcircleBy3Tangents%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

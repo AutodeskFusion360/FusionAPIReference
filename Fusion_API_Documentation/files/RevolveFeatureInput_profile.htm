@@ -1,0 +1,79 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/RevolveFeatureInput_profile.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="RevolveFeatureInput_profile">
+    <meta name="description" content="RevolveFeatureInput.profile Property">
+    <meta name="topicid" content="GUID-ecf7d5e5-c9c7-48f4-91f2-3c9679a755df">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>RevolveFeatureInput.profile Property</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">RevolveFeatureInput.profile Property</h1>
+
+          Parent Object: <a href="RevolveFeatureInput.htm">RevolveFeatureInput</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Features/RevolveFeatureInput.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Gets and sets the profiles or planar faces used to define the shape of the revolve. This property can return or be set with a single Profile, a single planar face, or an ObjectCollection consisting of multiple profiles and planar faces. When an ObjectCollection is used all of the profiles and faces must be co-planar. This property returns null in the case where the feature is non-parametric.<br/><br/> To create a surface (non-solid) revolution, you can use the createOpenProfile and createBRepEdgeProfile methods of the Component object to create an open profile. The isSolid property of the RevolveFeatureInput property must also be False.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"revolveFeatureInput_var" is a variable referencing a RevolveFeatureInput object.</span><br /><br /><code><pre class="api-code"><span style="color:blue"># Get the value of the property.</span><br />propertyValue = revolveFeatureInput_var.<b>profile<br /><br /><span style="color:blue"># Set the value of the property.</span><br />revolveFeatureInput_var.<b>profile</b> = propertyValue</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"revolveFeatureInput_var" is a variable referencing a RevolveFeatureInput object.<br /><code><pre class="api-code">#include &lt;Fusion/Features/RevolveFeatureInput.h&gt;<br /><br /><span style="color:blue">// Get the value of the property.</span><br />Ptr&lt;Base&gt; propertyValue = revolveFeatureInput_var-&gt;<b>profile</b>();<br /><br /><span style="color:blue">// Set the value of the property, where value_var is a Base.</span><br />bool returnValue = revolveFeatureInput_var-&gt;<b>profile</b>(value_var);</pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Property Value
+          </h2>This is a read/write property whose value is a <a href="Base.htm">Base</a>.<h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(RevolveFeatureInput.profile%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

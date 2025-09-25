@@ -1,0 +1,126 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/PathEntity.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="14/10/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="PathEntity">
+    <meta name="description" content="PathEntity Object">
+    <meta name="topicid" content="GUID-3ca1dab6-b8d9-478e-871b-1df07a9a607a">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>PathEntity Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">PathEntity Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Features/PathEntity.h&gt;<h2 class="api">
+          Description
+        </h2>The PathEntity object represents a curve within a path<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PathEntity_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PathEntity_createForAssemblyContext.htm">createForAssemblyContext</a></td>
+        <td class="api-list">Creates or returns a proxy for the native object - i.e. a new object that represents this object but adds the assembly context defined by the input occurrence.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PathEntity_assemblyContext.htm">assemblyContext</a></td>
+        <td class="api-list">This property is not supported for a PathEntity object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PathEntity_curve.htm">curve</a></td>
+        <td class="api-list">Property that returns the geometry of the entity. This is different from the original path curve if the true start point is not the same as the start point of the original path curve.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PathEntity_curveType.htm">curveType</a></td>
+        <td class="api-list">Property that returns the type of the curve referenced by the path entity. This property allows you to determine what type of object will be returned by the Curve property.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PathEntity_entity.htm">entity</a></td>
+        <td class="api-list">Property that gets the sketch curve or edge this entity was derived from.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PathEntity_isOpposedToEntity.htm">isOpposedToEntity</a></td>
+        <td class="api-list">Indicates if the orientation of this PathEntity is in the same direction or opposed to the natural direction of the SketchCurve or BRepEdge object it is derived from.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PathEntity_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PathEntity_nativeObject.htm">nativeObject</a></td>
+        <td class="api-list">This property is not supported for a PathEntity object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PathEntity_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PathEntity_parentPath.htm">parentPath</a></td>
+        <td class="api-list">Property that returns the parent Path of the entity.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="Path_item.htm">Path.item</a>, <a href="PathEntity_createForAssemblyContext.htm">PathEntity.createForAssemblyContext</a>, <a href="PathEntity_nativeObject.htm">PathEntity.nativeObject</a><h2 class="api">
+            Version
+          </h2>
+        Introduced in version November 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(PathEntity%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

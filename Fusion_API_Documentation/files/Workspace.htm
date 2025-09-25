@@ -1,0 +1,167 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/Workspace.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="Workspace">
+    <meta name="description" content="Workspace Object">
+    <meta name="topicid" content="GUID-33f9ed37-e5c7-4153-ba85-c3254a199dd1">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>Workspace Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Workspace Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::core" and the header file is &lt;Core/UserInterface/Workspace.h&gt;<h2 class="api">
+          Description
+        </h2>A Workspace provides access to a set of panels, which contain commands that are relevant for that particular workspace. The user can switch from one workspace to another in a product (e.g. switch from Model to Sculpt in Fusion).<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Workspace_activate.htm">activate</a></td>
+        <td class="api-list">Activate the workspace (assuming it is valid to do so - a SIM workspace can't be activated if Fusion is the active product).</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Workspace_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Workspace_deleteMe.htm">deleteMe</a></td>
+        <td class="api-list">Deletes this workspace. Only a workspace added by the API can be deleted, (IsNative is false).</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Workspace_id.htm">id</a></td>
+        <td class="api-list">Gets the unique Id of the workspace that can be used programmatically to find a specific workspace. It is not affected by the current language.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Workspace_isActive.htm">isActive</a></td>
+        <td class="api-list">Gets if the workspace is currently active - i.e. displayed</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Workspace_isNative.htm">isNative</a></td>
+        <td class="api-list">Gets if this workspace is native to Fusion or was created via the API.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Workspace_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Workspace_name.htm">name</a></td>
+        <td class="api-list">Gets the visible name of the workspace as seen in the user interface. This is the localized name.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Workspace_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Workspace_productType.htm">productType</a></td>
+        <td class="api-list">Returns the name of the product this workspace is associated with.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Workspace_resourceFolder.htm">resourceFolder</a></td>
+        <td class="api-list">Gets or sets the resource folder.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Workspace_toolbarPanels.htm">toolbarPanels</a></td>
+        <td class="api-list">Gets the collection containing the panels associated with this workspace. It's through this collection that you can add new toolbar panels.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Workspace_toolbarTabs.htm">toolbarTabs</a></td>
+        <td class="api-list">Gets the collection containing the tabs associated with this workspace.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Workspace_toolClipFilename.htm">toolClipFilename</a></td>
+        <td class="api-list">Gets or sets the full filename of the image file (PNG) used for the tool clip. the tool clip is the image shown when the user hovers the mouse over the workspace name in the workspace drop-down.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Workspace_tooltip.htm">tooltip</a></td>
+        <td class="api-list">Gets or sets the tooltip text displayed for the workspace. This is the first line of text shown when the user hovers over the workspace name in the Fusion toolbar drop-down. This is typically the name of the workspace. This is different from the name in the that the name is a short name shown in the drop-down. The tooltip is only shown when the user hovers over the name and box appears providing more information about the workspace. For example, the name of the model workspace is "Model" and the tooltip is "Model Workspace".</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Workspace_tooltipDescription.htm">tooltipDescription</a></td>
+        <td class="api-list">Gets or sets the tooltip description displayed for the workspace. The tooltip description is a longer description of the workspace and is only displayed when the user hovers over the workspace name in the Fusion toolbar drop-down. The pop-up dialog that appears contains the tooltip, the tooltip description, and the tool clip which is a picture.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="UserInterface_activeWorkspace.htm">UserInterface.activeWorkspace</a>, <a href="WorkspaceEventArgs_workspace.htm">WorkspaceEventArgs.workspace</a>, <a href="WorkspaceList_item.htm">WorkspaceList.item</a>, <a href="WorkspaceList_itemById.htm">WorkspaceList.itemById</a>, <a href="Workspaces_item.htm">Workspaces.item</a>, <a href="Workspaces_itemById.htm">Workspaces.itemById</a><h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="UICustomizationSample_Sample.htm">Customizing the UI using the API Sample</a></td>
+        <td class="api-list">Demonstrates how to work with tabs, panels, and command in the user interface. The full source for <a href="../ExtraFiles/UICustomizationSampleCPP.zip">C++</a> and <a href="../ExtraFiles/UICustomizationSamplePython.zip">Python</a> samples can be downloaded. This is especially useful for getting the resource files.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="WriteUserInterfaceToFile_Sample.htm">Write user interface to a file API Sample</a></td>
+        <td class="api-list">Writes out the full structure of the Fusion user interface. This information is useful when editing the user-interface, as discussed in the usre manual topic <a href="UserInterface_UM.htm">User-Interface Customization with Fusion's API</a></td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(Workspace%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,275 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/Joint.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="16/7/2015">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="Joint">
+    <meta name="description" content="Joint Object">
+    <meta name="topicid" content="GUID-1d8fd21e-5c4a-4b57-b617-28a647332842">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>Joint Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Joint Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Components/Joint.h&gt;<h2 class="api">
+          Description
+        </h2>A joint in a design.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Joint_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Joint_createForAssemblyContext.htm">createForAssemblyContext</a></td>
+        <td class="api-list">Creates or returns a proxy for the native object - i.e. a new object that represents this object but adds the assembly context defined by the input occurrence.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Joint_deleteMe.htm">deleteMe</a></td>
+        <td class="api-list">Deletes this joint.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Joint_setAsBallJointMotion.htm">setAsBallJointMotion</a></td>
+        <td class="api-list">Redefines the relationship between the two joint geometries as a ball joint.<br/><br/> This method will fail in the case where the jointType property returns InferredJointType.<br/><br/> To use this method, you need to position the timeline marker to immediately before this joint. This can be accomplished using the following code: thisJoint.timelineObject.rollTo(True)</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Joint_setAsCylindricalJointMotion.htm">setAsCylindricalJointMotion</a></td>
+        <td class="api-list">Redefines the relationship between the two joint geometries as a cylindrical joint.<br/><br/> This method will fail in the case where the jointType property returns InferredJointType.<br/><br/> To use this method, you need to position the timeline marker to immediately before this joint. This can be accomplished using the following code: thisJoint.timelineObject.rollTo(True)</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Joint_setAsPinSlotJointMotion.htm">setAsPinSlotJointMotion</a></td>
+        <td class="api-list">Redefines the relationship between the two joint geometries as a pin-slot joint.<br/><br/> This method will fail in the case where the jointType property returns InferredJointType.<br/><br/> To use this method, you need to position the timeline marker to immediately before this joint. This can be accomplished using the following code: thisJoint.timelineObject.rollTo(True)</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Joint_setAsPlanarJointMotion.htm">setAsPlanarJointMotion</a></td>
+        <td class="api-list">Redefines the relationship between the two joint geometries as a planar joint.<br/><br/> This method will fail in the case where the jointType property returns InferredJointType.<br/><br/> To use this method, you need to position the timeline marker to immediately before this joint. This can be accomplished using the following code: thisJoint.timelineObject.rollTo(True)</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Joint_setAsRevoluteJointMotion.htm">setAsRevoluteJointMotion</a></td>
+        <td class="api-list">Redefines the relationship between the two joint geometries as a revolute joint.<br/><br/> This method will fail in the case where the jointType property returns InferredJointType.<br/><br/> To use this method, you need to position the timeline marker to immediately before this joint. This can be accomplished using the following code: thisJoint.timelineObject.rollTo(True)</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Joint_setAsRigidJointMotion.htm">setAsRigidJointMotion</a></td>
+        <td class="api-list">Redefines the relationship between the two joint geometries as a rigid joint.<br/><br/> This method will fail in the case where the jointType property returns InferredJointType.<br/><br/> To use this method, you need to position the timeline marker to immediately before this joint. This can be accomplished using the following code: thisJoint.timelineObject.rollTo(True)</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Joint_setAsSliderJointMotion.htm">setAsSliderJointMotion</a></td>
+        <td class="api-list">Redefines the relationship between the two joint geometries as a slider joint.<br/><br/> This method will fail in the case where the jointType property returns InferredJointType.<br/><br/> To use this method, you need to position the timeline marker to immediately before this joint. This can be accomplished using the following code: thisJoint.timelineObject.rollTo(True)</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Joint_angle.htm">angle</a></td>
+        <td class="api-list">Returns the parameter controlling the angle between the two input geometries. This is effectively the angle between the two primary axes of the two joint geometries.<br/><br/> This property will return null in the case where the jointType property returns InferredJointType</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Joint_assemblyContext.htm">assemblyContext</a></td>
+        <td class="api-list">Returns the assembly occurrence (i.e. the occurrence) of this object in an assembly. This is only valid in the case where this is acting as a proxy in an assembly. Returns null in the case where the object is not in the context of an assembly but is already the native object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Joint_attributes.htm">attributes</a></td>
+        <td class="api-list">Returns the collection of attributes associated with this joint.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Joint_entityToken.htm">entityToken</a></td>
+        <td class="api-list">Returns a token for the Joint object. This can be saved and used at a later time with the Design.findEntityByToken method to get back the same joint.<br/><br/> When using entity tokens it's important to understand that the token string returned for a specific entity can be different over time. However, even if you have two different token strings that were obtained from the same entity, when you use findEntityByToken they will both return the same entity. Because of that you should never compare entity tokens as way to determine what the token represents. Instead, you need to use the findEntityByToken method to get the two entities identified by the tokens and then compare them.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Joint_errorOrWarningMessage.htm">errorOrWarningMessage</a></td>
+        <td class="api-list">Returns the error or warning message in the case where the healthState property returns either WarningFeatureHealthState or ErrorFeatureHealthState. Otherwise this property returns an empty string.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Joint_geometricRelationships.htm">geometricRelationships</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Returns the set of geometric relationships that were used to infer this joint. This property is only valid when the jointType property returns InferredJointType. Otherwise, it returns null.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Joint_geometryOneTransform.htm">geometryOneTransform</a></td>
+        <td class="api-list">Returns the position and orientation of the joint geometry associated with the first occurrence. This is returned as a 3D matrix which provides the origin and the X, Y, and Z axis vectors of the coordinate system.<br/><br/> This property is especially useful in cases where the JointGeometry cannot be obtained. This can happen when the model has been modified in a way where the geometry used to create the joint is no longer available.<br/><br/> This property will return null in the case where the jointType property returns InferredJointType.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Joint_geometryOrOriginOne.htm">geometryOrOriginOne</a></td>
+        <td class="api-list">Gets and sets the first JointGeometry or JointOrigin for this joint.<br/><br/> If the JointType is InferredJointType, this property will return null when queried and will fail if it set.<br/><br/> To set this property, you need to position the timeline marker to immediately before this joint. This can be accomplished using the following code: thisJoint.timelineObject.rollTo(True)</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Joint_geometryOrOriginTwo.htm">geometryOrOriginTwo</a></td>
+        <td class="api-list">Gets and sets the second JointGeometry or JointOrigin for this joint.<br/><br/> If the JointType is InferredJointType, this property will return null when queried and will fail if it set.<br/><br/> To set this property, you need to position the timeline marker to immediately before this joint. This can be accomplished using the following code: thisJoint.timelineObject.rollTo(True)</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Joint_geometryTwoTransform.htm">geometryTwoTransform</a></td>
+        <td class="api-list">Returns the position and orientation of the joint geometry associated with the second occurrence. This is returned as a 3D matrix which provides the origin and the X, Y, and Z axis vectors of the coordinate system.<br/><br/> This property is especially useful in cases where the JointGeometry cannot be obtained. This can happen when the model has been modified in a way where the geometry used to create the joint is no longer available.<br/><br/> This property will return null in the case where the jointType property returns InferredJointType.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Joint_healthState.htm">healthState</a></td>
+        <td class="api-list">Returns the current health state of the joint.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Joint_isFlipped.htm">isFlipped</a></td>
+        <td class="api-list">Gets and sets if the joint direction is flipped or not. This is effectively specifying if the third axis of the two input geometries is facing (false) or opposed (true).<br/><br/> To set this property, you need to position the timeline marker to immediately before this joint. This can be accomplished using the following code: thisJoint.timelineObject.rollTo(True)<br/><br/> The value of this property should be ignored in the case where the jointType property returns InferredJointType.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Joint_isLightBulbOn.htm">isLightBulbOn</a></td>
+        <td class="api-list">Gets and sets if the light bulb of this joint as displayed in the browser is on or off. A joint will only be visible if the light bulb is switched on. However, the light bulb can be on and the joint still invisible if a higher level occurrence in the assembly context is not visible because its light bulb is off or the joints folder is light bulb is off.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Joint_isLocked.htm">isLocked</a></td>
+        <td class="api-list">Gets and sets if the joint is locked.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Joint_isSuppressed.htm">isSuppressed</a></td>
+        <td class="api-list">Gets and sets if this joint is suppressed.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Joint_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Joint_isVisible.htm">isVisible</a></td>
+        <td class="api-list">Gets whether the joint is visible. To change the visibility see the isLightBulbOn property. This property is affected by the assembly context.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Joint_jointMotion.htm">jointMotion</a></td>
+        <td class="api-list">Returns a JointMotion object that defines the motion relationship between the two geometries.<br/><br/> This property will return null in the case where the jointType property returns InferredJointType.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Joint_name.htm">name</a></td>
+        <td class="api-list">Gets and sets the name of the joint.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Joint_nativeObject.htm">nativeObject</a></td>
+        <td class="api-list">The NativeObject is the object outside the context of an assembly and in the context of it's parent component. Returns null in the case where this object is not in the context of an assembly but is already the native object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Joint_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Joint_occurrenceOne.htm">occurrenceOne</a></td>
+        <td class="api-list">Returns the first of two occurrences that this joint defines a relationship between. This is the occurrence that can also be found through the geometryOrOriginOne property.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Joint_occurrenceTwo.htm">occurrenceTwo</a></td>
+        <td class="api-list">Returns the first of two occurrences that this joint defines a relationship between. This is the occurrence that can also be found through the geometryOrOriginTwo property.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Joint_offset.htm">offset</a></td>
+        <td class="api-list">Returns the parameter controlling the offset between the two input geometries. This is effectively the offset distance between the two planes defined by the primary and secondary axes of the input geometries or the offset along the tertiary axis (z axis) of the joint.<br/><br/> This property will return null in the case where the jointType property returns InferredJointType.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Joint_offsetX.htm">offsetX</a></td>
+        <td class="api-list">Returns the parameter controlling the offset along the primary axis (x axis) of the joint. To edit this value, get the parameter and use one of its properties to edit the value.<br/><br/> This property will return null in the case where the jointType property returns InferredJointType.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Joint_offsetY.htm">offsetY</a></td>
+        <td class="api-list">Returns the parameter controlling the offset along the primary axis (y axis) of the joint. To edit this value, get the parameter and use one of its properties to edit the value.<br/><br/> This property will return null in the case where the jointType property returns InferredJointType.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Joint_parentComponent.htm">parentComponent</a></td>
+        <td class="api-list">Returns the parent component that owns this joint.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Joint_timelineObject.htm">timelineObject</a></td>
+        <td class="api-list">Returns the timeline object associated with this joint.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="Component_allJoints.htm">Component.allJoints</a>, <a href="FlatPatternComponent_allJoints.htm">FlatPatternComponent.allJoints</a>, <a href="Joint_createForAssemblyContext.htm">Joint.createForAssemblyContext</a>, <a href="Joint_nativeObject.htm">Joint.nativeObject</a>, <a href="JointList_item.htm">JointList.item</a>, <a href="JointList_itemByName.htm">JointList.itemByName</a>, <a href="Joints_add.htm">Joints.add</a>, <a href="Joints_addInferredJoint.htm">Joints.addInferredJoint</a>, <a href="Joints_item.htm">Joints.item</a>, <a href="Joints_itemByName.htm">Joints.itemByName</a><h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BallJointMotionSample_Sample.htm">BallJointMotion API Sample</a></td>
+        <td class="api-list">Demonstrates creating a joint with ball joint motion</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CylindricalJointMotionSample_Sample.htm">CylindricalJointMotion API Sample</a></td>
+        <td class="api-list">Demonstrates creating a joint with cylindrical joint motion.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="JointSample_Sample.htm">Joint API Sample</a></td>
+        <td class="api-list">Demonstrates creating a new joint.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PinSlotJointMotionSample_Sample.htm">Pin Slot Joint Motion API Sample</a></td>
+        <td class="api-list">Demonstrates creating a joint with pin slot joint motion</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PlanarJointMotionSample_Sample.htm">Planar Joint Motion API Sample</a></td>
+        <td class="api-list">Demonstrates creating a joint with planar joint motion</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RevoluteJointMotionSample_Sample.htm">RevoluteJointMotion API Sample</a></td>
+        <td class="api-list">Demonstrates creating a joint with revolute joint motion.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SliderJointMotionSample_Sample.htm">SliderJointMotion API Sample</a></td>
+        <td class="api-list">Demonstrates creating a joint with slider joint motion.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version July 2015<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(Joint%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

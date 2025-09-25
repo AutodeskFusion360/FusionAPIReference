@@ -1,0 +1,593 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/PostToolpaths_Sample.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="PostToolpaths_Sample_Sample">
+    <meta name="description" content="Post Toolpaths API Sample Sample">
+    <meta name="topicid" content="GUID-BF31EB56-B612-44C8-8F07-0C183036C803">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Post Toolpaths API Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Post Toolpaths API Sample</h1>
+    <h2 class="api">
+          Description
+        </h2>Demonstrates posting toolpaths in the active document.<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#C++">C++</a></li>
+        <li><a href="#Python">Python</a></li>
+      </ul>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code"><span style="color:blue">/////////////////////////////////////////////////////////////////////////////////////////////////</span>
+<span style="color:blue">// For this sample script to run, the active Fusion document needs at least one CAM operation. //</span>
+<span style="color:blue">/////////////////////////////////////////////////////////////////////////////////////////////////</span>
+
+#include &lt;Core/CoreAll.h&gt;
+#include &lt;CAM/CAMAll.h&gt;
+
+#ifdef _WINDOWS
+#include &lt;shlwapi.h&gt;
+#else
+#include &lt;stdlib.h&gt;
+#endif
+
+using namespace adsk::core;
+using namespace adsk::cam;
+
+<span style="color:blue">// Define a base class pointer for common usage.</span>
+using CAMObjectPtr = Ptr&lt;OperationBase&gt;;
+
+<span style="color:blue">// Function to ensure pathnames use forward slashes as required by the NC Program Output Folder.</span>
+void replaceBackslashWithSlash(std::string& str)
+{
+    for (char& ch : str)
+        if (ch == '\\')
+            ch = '/';
+}
+<span style="color:blue">// Customised messageBox to handle critical errors in one line</span>
+void criticalError(Ptr&lt;UserInterface&gt; ui, const std::string& message)
+{
+    ui-&gt;messageBox(
+        message, "Critical Error", MessageBoxButtonTypes::OKButtonType, MessageBoxIconTypes::CriticalIconType);
+}
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    Ptr&lt;Application&gt; app = Application::get();
+    if (!app)
+        return false;
+
+    Ptr&lt;UserInterface&gt; ui = app-&gt;userInterface();
+    if (!ui)
+        return false;
+
+    Ptr&lt;Document&gt; doc = app-&gt;activeDocument();
+    if (!doc)
+        return false;
+
+    Ptr&lt;Products&gt; products = doc-&gt;products();
+    if (!products)
+        return false;
+
+    <span style="color:blue">// Check if the document has a CAMProductType, abandon cleanly if not.</span>
+    std::string operationErrorMsg = "This script requires the active document to contain at least one CAM operation.";
+
+    Ptr&lt;CAM&gt; camProduct = products-&gt;itemByProductType("CAMProductType");
+    if (!camProduct)
+    {
+        criticalError(ui, operationErrorMsg);
+        return false;
+    }
+
+    <span style="color:blue">// Initialize the CAM manager to access the library manager and the post processor library.</span>
+    Ptr&lt;CAMManager&gt; camManager = CAMManager::get();
+    Ptr&lt;CAMLibraryManager&gt; libraryManager = camManager-&gt;libraryManager();
+    Ptr&lt;PostLibrary&gt; postLibrary = libraryManager-&gt;postLibrary();
+
+    <span style="color:blue">// Create a query to filter post processors from the Fusion library by the vendor "Autodesk".</span>
+    Ptr&lt;PostConfigurationQuery&gt; postQuery = postLibrary-&gt;createQuery(LibraryLocations::Fusion360LibraryLocation);
+    postQuery-&gt;vendor("Autodesk");
+
+    <span style="color:blue">// Set the post configuration to use based on Operation Type of the first Setup.</span>
+    Ptr&lt;Setup&gt; setup;
+    Ptr&lt;Setups&gt; setups = camProduct-&gt;setups();
+    if (setups)
+    {
+        setup = setups-&gt;item(0);
+        if (!setup)
+        {
+            criticalError(ui, operationErrorMsg);
+            return false;
+        }
+    }
+
+    OperationTypes opType = setup-&gt;operationType();
+
+    switch (opType)
+    {
+    case adsk::cam::MillingOperation:
+        postQuery-&gt;capability(adsk::cam::PostCapabilities::Milling);
+        break;
+    case adsk::cam::TurningOperation:
+        postQuery-&gt;capability(adsk::cam::PostCapabilities::Turning);
+        break;
+    case adsk::cam::JetOperation:
+        postQuery-&gt;capability(adsk::cam::PostCapabilities::Jet);
+        break;
+    default:
+        postQuery-&gt;capability(adsk::cam::PostCapabilities::Milling);
+        break;
+    }
+
+    std::vector&lt;Ptr&lt;PostConfiguration&gt;&gt; postConfigs = postQuery-&gt;execute();
+
+    Ptr&lt;URL&gt; importedURL;
+    std::string ncExtension;
+    std::string postRequired = "RS-274D";
+    std::string postDescription = "";
+
+    <span style="color:blue">// Find the required post in the post library and import it to local library.</span>
+    for (Ptr&lt;PostConfiguration&gt;& config : postConfigs)
+    {
+        if (config-&gt;description() == postRequired)
+        {
+            postDescription = postRequired;
+            ncExtension = config-&gt;extension();
+            Ptr&lt;URL&gt; configUrl = URL::create("user:<span style="color:blue">//");</span>
+            importedURL = postLibrary-&gt;importPostConfiguration(config, configUrl, "NCProgramSamplePost.cps");
+            break;
+        }
+    }
+    <span style="color:blue">// Check if the required post was found, abandon cleanly if not.</span>
+    if (postDescription.empty())
+    {
+        criticalError(ui, "Unable to find postprocessor " + postRequired + ".");
+        return false;
+    }
+
+    <span style="color:blue">// Get the imported local post config.</span>
+    Ptr&lt;PostConfiguration&gt; postConfig = postLibrary-&gt;postConfigurationAtURL(importedURL);
+
+    <span style="color:blue">// Prompt the user with an option to view the resulting NC file.</span>
+    DialogResults dlgResults = ui-&gt;messageBox(
+        "View nc file when done?",
+        "Post-processing",
+        MessageBoxButtonTypes::YesNoButtonType,
+        MessageBoxIconTypes::QuestionIconType);
+    bool viewResult = (dlgResults == DialogResults::DialogYes);
+
+    <span style="color:blue">// Create NCProgramInput object</span>
+    Ptr&lt;NCProgramInput&gt; ncInput = camProduct-&gt;ncPrograms()-&gt;createInput();
+
+    <span style="color:blue">// Set the value of scenario to 1, 2 or 3 to post all, post the first setup,</span>
+    <span style="color:blue">// or post only the first operation of the first setup.</span>
+    int scenario = 1;
+    std::string message = "Yes \t- All toolpaths will be posted.\n\n"
+                          "No \t- Toolpaths in the first setup will be posted.\n\n"
+                          "Cancel\t- The first toolpath in the first setup will be posted.\n";
+
+    <span style="color:blue">// Spaces appended to the title make the messageBox wider, preventing linw wrapping.</span>
+    DialogResults mbChoice = ui-&gt;messageBox(
+        message,
+        "Select what should be post-processed                                   ",
+        MessageBoxButtonTypes::YesNoCancelButtonType,
+        MessageBoxIconTypes::QuestionIconType);
+
+    if (mbChoice == DialogResults::DialogYes)
+    {
+        scenario = 1;
+    }
+    else if (mbChoice == DialogResults::DialogNo)
+    {
+        scenario = 2;
+    }
+    else
+    {
+        scenario = 3;
+    }
+
+    <span style="color:blue">// Adjust NC program parameters.</span>
+    ncInput-&gt;displayName("Sample NCProgram");
+
+    Ptr&lt;CAMParameters&gt; ncParameters = ncInput-&gt;parameters();
+    Ptr&lt;StringParameterValue&gt; nc_program_filename = ncParameters-&gt;itemByName("nc_program_filename")-&gt;value();
+
+    <span style="color:blue">// Embelish the nc filename to indicate chosen scenario and programming language.</span>
+    std::string programName = "NCProgramSampleCPP" + std::to_string(scenario);
+    nc_program_filename-&gt;value(programName);
+
+    <span style="color:blue">// Provide a comment at the top of the file.</span>
+    Ptr&lt;StringParameterValue&gt; nc_program_comment = ncParameters-&gt;itemByName("nc_program_comment")-&gt;value();
+    std::string comment = "This is the Post Toolpaths API Sample NC Program";
+    nc_program_comment-&gt;value(comment);
+
+    <span style="color:blue">// Open nc file in editor if earlier requested.</span>
+    Ptr&lt;BooleanParameterValue&gt; nc_program_openInEditor = ncParameters-&gt;itemByName("nc_program_openInEditor")-&gt;value();
+    nc_program_openInEditor-&gt;value(viewResult);
+
+    <span style="color:blue">// Set temp directory as output directory.</span>
+    std::string outputFolder = camProduct-&gt;temporaryFolder();
+
+    <span style="color:blue">// Variable outputFolder may contain backslashes but we need forward slashes.</span>
+    replaceBackslashWithSlash(outputFolder);
+    Ptr&lt;StringParameterValue&gt; nc_program_output_folder = ncParameters-&gt;itemByName("nc_program_output_folder")-&gt;value();
+    nc_program_output_folder-&gt;value(outputFolder);
+
+    <span style="color:blue">// We have already declared a setups Ptr for all 3 scenarios.</span>
+    <span style="color:blue">// Scenarios 2 and 3 use firstSetup.</span>
+    Ptr&lt;Setup&gt; firstSetup = setups-&gt;item(0);
+
+    switch (scenario)
+    {
+    case 1:
+        {
+            <span style="color:blue">// ncInput-&gt;operations() expects a list of type 'OperationBase'.</span>
+            <span style="color:blue">// For example: Operation, CAMFolder, CAMPattern, Setup.</span>
+            <span style="color:blue">// It will not accept CAMFolders, CAMPatterns or Setups (all plural)</span>
+            <span style="color:blue">// as they are derived from core.Base. We make our own list instead.</span>
+
+            <span style="color:blue">// Create a vector for the content of core.Base objects.</span>
+            std::vector&lt;CAMObjectPtr&gt; camObjects;
+
+            for (size_t i = 0; i &lt; setups-&gt;count(); ++i)
+            {
+                <span style="color:blue">// Add the operation to the operations list.</span>
+                camObjects.push_back(setups-&gt;item(i));
+            }
+            ncInput-&gt;operations({camObjects}); <span style="color:blue">// Include all setups</span>
+            break;
+        }
+    case 2:
+        {
+            ncInput-&gt;operations({firstSetup}); <span style="color:blue">// Only include the first setup</span>
+            break;
+        }
+
+    case 3:
+        {
+            Ptr&lt;Operation&gt; firstOperation = firstSetup-&gt;allOperations()-&gt;item(0);
+
+            if (firstOperation-&gt;hasToolpath())
+            {
+                ncInput-&gt;operations({firstOperation}); <span style="color:blue">// First operation of first setup</span>
+            }
+            else
+            {
+                criticalError(ui, "Operation has no toolpath to post");
+                return false;
+            }
+            break;
+        }
+    }
+
+    <span style="color:blue">// Create a new NC program using NC Program input and specified parameters and operations.</span>
+    Ptr&lt;NCProgram&gt; newProgram = camProduct-&gt;ncPrograms()-&gt;add(ncInput);
+
+    <span style="color:blue">// Configure the post processor</span>
+    newProgram-&gt;postConfiguration(postConfig);
+
+    <span style="color:blue">// Example of changing a post parameter. Parameters need to be declared as their correct type.</span>
+    Ptr&lt;CAMParameters&gt; postParams = newProgram-&gt;postParameters();
+
+    <span style="color:blue">// Parameter builtin_tolerance is of Type FloatParameterValue.</span>
+    Ptr&lt;FloatParameterValue&gt; builtInTolerance = postParams-&gt;itemByName("builtin_tolerance")-&gt;value();
+
+    <span style="color:blue">// Demonstrating how to check current parameter value and modify it.</span>
+    std::string previous = "Previous builtin_tolerance: " + std::to_string(builtInTolerance-&gt;value());
+    builtInTolerance-&gt;value(0.004);
+    app-&gt;log(previous + "\tNew value: " + std::to_string(builtInTolerance-&gt;value()));
+
+    <span style="color:blue">// The next assignment returns null if you use a post-processor that does not support</span>
+    <span style="color:blue">// block numbering - for example "XYZ" or "Generic 2D", however you will not need it in that case.</span>
+    Ptr&lt;CAMParameter&gt; showSequenceNumbersParam = postParams-&gt;itemByName("showSequenceNumbers");
+    if (showSequenceNumbersParam)
+    {
+        <span style="color:blue">// Parameter showSequenceNumbers is of type ChoiceParameterValue so "false" is a string not a boolean.</span>
+        Ptr&lt;ChoiceParameterValue&gt; showSequenceNumbers = postParams-&gt;itemByName("showSequenceNumbers")-&gt;value();
+
+        <span style="color:blue">// Demonstrating how to check current parameter value and modify it.</span>
+        previous = "Previous showSequenceNumbers: " + showSequenceNumbers-&gt;value();
+        showSequenceNumbers-&gt;value("false");
+        app-&gt;log(previous + "\tNew value: " + showSequenceNumbers-&gt;value());
+    }
+    <span style="color:blue">// Update to apply changes.</span>
+    newProgram-&gt;updatePostParameters(postParams);
+
+    <span style="color:blue">// Finally post the process.</span>
+    Ptr&lt;NCProgramPostProcessOptions&gt; postOptions = adsk::cam::NCProgramPostProcessOptions::create();
+    newProgram-&gt;postProcess(postOptions);
+
+    <span style="color:blue">// Activate CAM workspace if it is not the active one.</span>
+    if (ui-&gt;activeWorkspace()-&gt;name() != "Manufacture")
+    {
+        DialogResults result = ui-&gt;messageBox(
+            "Activate the CAM Workspace?",
+            "CAM Workspace Activate",
+            MessageBoxButtonTypes::YesNoButtonType,
+            MessageBoxIconTypes::QuestionIconType);
+        if (result == DialogResults::DialogYes)
+        {
+            Ptr&lt;Workspace&gt; camWorkspace = ui-&gt;workspaces()-&gt;itemById("CAMEnvironment");
+            camWorkspace-&gt;activate();
+        }
+    }
+
+    <span style="color:blue">// Indicate completion.</span>
+    ui-&gt;messageBox(
+        "Post processing is complete. See file:\n" + outputFolder + "/" + programName + ncExtension,
+        "Post Toolpath API Sample  \t\t\t\t\t"); <span style="color:blue">// Prevent line breaks</span>
+
+    return true;
+}</pre>
+      </div>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code"><span style="color:blue"># For this sample script to run, the active Fusion document needs at least one CAM operation.</span>
+
+import adsk.core, adsk.fusion, adsk.cam, traceback
+
+app = adsk.core.Application.get()
+ui = app.userInterface
+
+def criticalError(message:str):
+    ''' Customised messageBox to handle critical errors in one line '''
+    ui.messageBox(  message,
+                    'Critical Error',
+                    adsk.core.MessageBoxButtonTypes.OKButtonType,
+                    adsk.core.MessageBoxIconTypes.CriticalIconType)
+
+def run(context):
+    try:
+        doc: adsk.core.Document = app.activeDocument
+        products: adsk.core.Products = doc.products
+        try:
+            product: adsk.core.Product = products.itemByProductType('CAMProductType')
+        except Exception:
+            product = None
+
+        <span style="color:blue"># Check if the document has a CAMProductType, abandon cleanly if not.</span>
+        operationErrorMsg = 'This script requires the active document to contain at least one CAM operation.'
+        if product == None:
+            criticalError(operationErrorMsg)
+            return
+
+        cam = adsk.cam.CAM.cast(product)
+
+        <span style="color:blue"># Initialize the CAM manager to access the library manager and the post processor library.</span>
+        camManager = adsk.cam.CAMManager.get()
+        libraryManager: adsk.cam.CAMLibraryManager = camManager.libraryManager
+        postLibrary: adsk.cam.PostLibrary = libraryManager.postLibrary
+
+        <span style="color:blue"># Create a query to filter post processors from the Fusion library by the vendor "Autodesk".</span>
+        postQuery: adsk.cam.PostConfigurationQuery = \
+                postLibrary.createQuery(adsk.cam.LibraryLocations.Fusion360LibraryLocation)
+        postQuery.vendor = "Autodesk"
+
+        <span style="color:blue"># Set the post configuration to use based on Operation Type of the first Setup.</span>
+        try:
+            firstSetupOperationType: adsk.cam.OperationTypes = cam.setups.item(0).operationType
+        except:
+            criticalError(operationErrorMsg)
+            return
+
+        if firstSetupOperationType == adsk.cam.OperationTypes.MillingOperation:
+            postQuery.capability = adsk.cam.PostCapabilities.Milling
+        elif firstSetupOperationType == adsk.cam.OperationTypes.TurningOperation:
+            postQuery.capability = adsk.cam.PostCapabilities.Turning
+        elif firstSetupOperationType == adsk.cam.OperationTypes.JetOperation:
+            postQuery.capability = adsk.cam.PostCapabilities.Jet
+
+        postConfigs: list[adsk.cam.PostConfiguration] = postQuery.execute()
+
+        <span style="color:blue"># Check for post configs being available.</span>
+        if len(postConfigs) == 0:
+            criticalError('No post-configurations found.')
+            return
+    
+        <span style="color:blue"># Find the post required in the post library and import it to local library.</span>
+        postRequired = "RS-274D"
+        postDescription = None
+        for config in postConfigs:
+            if config.description == postRequired:
+                postDescription = postRequired
+                ncExtension = config.extension
+                url = adsk.core.URL.create("user://")
+                importedURL = postLibrary.importPostConfiguration(config, url, "NCProgramSamplePost.cps")
+                break
+
+        <span style="color:blue"># Check if the required post was found, abandon cleanly if not.</span>
+        if not postDescription:
+            criticalError(f'Unable to find postprocessor {postRequired}.')
+            return
+        
+        <span style="color:blue"># Get the imported local post config.</span>
+        postConfig: adsk.cam.PostConfiguration = postLibrary.postConfigurationAtURL(importedURL)
+
+        <span style="color:blue"># Prompt the user with an option to view the resulting NC file.</span>
+        dlgResults: adsk.core.DialogResults = ui.messageBox(
+                                    'View results when post is complete?', 'Post-processing',
+                                    adsk.core.MessageBoxButtonTypes.YesNoButtonType,
+                                    adsk.core.MessageBoxIconTypes.QuestionIconType)
+        viewResult: bool  = (dlgResults == adsk.core.DialogResults.DialogYes)
+
+        <span style="color:blue"># Create ncInput object.</span>
+        ncInput: adsk.cam.NCProgramInput = cam.ncPrograms.createInput()
+
+        <span style="color:blue"># Set the value of scenario to 1, 2 or 3 to post all, post the first setup,</span>
+        <span style="color:blue"># or post only the first operation of the first setup.</span>
+        scenario = 1
+
+        <span style="color:blue"># Spaces appended to the title make the messageBox wider, preventing linw wrapping.</span>
+        mbChoice: adsk.core.DialogResults = ui.messageBox(
+                                    "Yes \t- All toolpaths will be posted.\n\n" \
+                                    "No \t- Toolpaths in the first setup will be posted.\n\n" \
+                                    "Cancel\t- The first toolpath in the first setup will be posted.\n",
+                                    "Select what should be post-processed                                   ",
+                                    adsk.core.MessageBoxButtonTypes.YesNoCancelButtonType, 
+                                    adsk.core.MessageBoxIconTypes.QuestionIconType)
+
+        if (mbChoice == adsk.core.DialogResults.DialogYes):
+            scenario = 1
+        elif (mbChoice == adsk.core.DialogResults.DialogNo):
+            scenario = 2
+        else:
+            scenario = 3
+
+        <span style="color:blue"># Adjust NC program parameters.</span>
+        ncInput.displayName = 'Sample NCProgram'
+
+        <span style="color:blue"># Embelish the nc filename to indicate chosen scenario and programming language.</span>
+        programName:str = f'NCProgramSamplePy{scenario}'
+        programfilename: adsk.cam.CAMParameter = ncInput.parameters.itemByName('nc_program_filename')
+        programfilename.value.value = programName
+
+        <span style="color:blue"># Provide a comment at the top of the file.</span>
+        comment: adsk.cam.CAMParameter = ncInput.parameters.itemByName('nc_program_comment')
+        comment.value.value = "This is the Post Toolpaths API Sample NC Program"
+
+        <span style="color:blue"># Open nc file in editor if earlier requested.</span>
+        openInEditor: adsk.cam.CAMParameter = ncInput.parameters.itemByName('nc_program_openInEditor')
+        openInEditor.value.value = viewResult
+
+        <span style="color:blue"># Set temp directory as output directory</span>
+        <span style="color:blue"># Make the path valid for Fusion by replacing \\ to / in the path</span>
+        outputFolder = str(cam.temporaryFolder).replace('\\', '/') 
+        ncInput.parameters.itemByName('nc_program_output_folder').value.value = outputFolder
+        
+        if scenario == 1:
+            <span style="color:blue"># ncInput.operations() expects a list of type 'OperationsBase': Operation, CAMFolder, CAMPattern, Setup</span>
+            <span style="color:blue"># It will not accept CAMFolders, CAMPatterns or Setups (all plural) as they are derived from core.Base</span>
+            opsBaseList: list[adsk.cam.OperationBase] = []
+            setups: adsk.cam.Setups = cam.setups
+            for setup in setups:
+                opsBaseList.append(setup)
+            ncInput.operations = opsBaseList <span style="color:blue"># Include all setups</span>
+        elif scenario == 2:
+            ncInput.operations = [cam.setups.item(0)]  <span style="color:blue"># Only include the first setup</span>
+        elif scenario == 3:
+            firstSetup: adsk.cam.Setup = cam.setups.item(0)
+            firstOperation: adsk.core.Base = firstSetup.allOperations.item(0)
+            if firstOperation.hasToolpath:
+                ncInput.operations = [firstOperation]  <span style="color:blue"># Only include the first operation of the first setup</span>
+            else:
+                ui.messageBox('Operation has no toolpath to post')
+                return
+
+        <span style="color:blue"># Create a new NC program using the current NC Program input including specified parameters and operations</span>
+        newProgram: adsk.cam.NCProgram = cam.ncPrograms.add(ncInput)
+
+        <span style="color:blue"># Configure the post processor</span>
+        newProgram.postConfiguration = postConfig
+
+        <span style="color:blue"># Example of changing a post parameter. Parameters need to be declared as their correct type.</span>
+        postParams: adsk.cam.CAMParameters = newProgram.postParameters
+
+        <span style="color:blue"># Parameter builtin_tolerance is of Type FloatParameterValue.</span>
+        builtInTolerance: adsk.cam.FloatParameterValue = postParams.itemByName('builtin_tolerance')
+        builtInTolerance.value.value = 0.004
+
+        <span style="color:blue"># Parameter showSequenceNumbers is of type ChoiceParameterValue so "false" is a string not a boolean.</span>
+        showSequenceNumbers: adsk.cam.ChoiceParameterValue = postParams.itemByName('showSequenceNumbers')
+
+        <span style="color:blue"># Not all posts support SequenceNumbers</span>
+        if showSequenceNumbers:
+            showSequenceNumbers.value.value = str('false')
+        else:
+            criticalError(f'Parameter showSequenceNumbers cannot be modified for postprocessor: {postRequired} - skipping!')
+
+        <span style="color:blue"># Update to apply changes.</span>
+        newProgram.updatePostParameters(postParams)
+
+        <span style="color:blue"># Finally post the process.</span>
+        postOptions = adsk.cam.NCProgramPostProcessOptions.create()
+        newProgram.postProcess(postOptions)
+
+        <span style="color:blue"># Prompt user with an option to switch to the CAM workspace if it's not already active</span>
+        if ui.activeWorkspace.name != 'Manufacture':
+            activateCAMWorkspace: adsk.core.DialogResults = ui.messageBox(
+                                    f'Activate the CAM Workspace?','CAM Workspace Activate',
+                                    adsk.core.MessageBoxButtonTypes.YesNoButtonType,
+                                    adsk.core.MessageBoxIconTypes.QuestionIconType)
+
+            if activateCAMWorkspace == adsk.core.DialogResults.DialogYes:
+                camWorkspace: adsk.core.Workspace = ui.workspaces.itemById("CAMEnvironment")
+                camWorkspace.activate()
+
+        <span style="color:blue"># Indicate completion.</span>
+        ui.messageBox(f'See file:\n{outputFolder}/{programName}{ncExtension}',
+                      'Post processing is complete  \t\t\t\t\t'); <span style="color:blue"># Prevent line breaks of the pathname</span>
+
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(PostToolpaths_Sample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

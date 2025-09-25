@@ -1,0 +1,136 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/SplitFaceFeatures_add.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="22/4/2015">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="SplitFaceFeatures_add">
+    <meta name="description" content="SplitFaceFeatures.add Method">
+    <meta name="topicid" content="GUID-11e1aa73-edc7-4be1-9dfb-8d68c59cd900">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>SplitFaceFeatures.add Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">SplitFaceFeatures.add Method</h1>
+
+          Parent Object: <a href="SplitFaceFeatures.htm">SplitFaceFeatures</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Features/SplitFaceFeatures.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Creates a new split face feature.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"splitFaceFeatures_var" is a variable referencing a <a href="SplitFaceFeatures.htm">SplitFaceFeatures</a> object.<code><pre class="api-code">returnValue = splitFaceFeatures_var.<b>add</b>(input)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"splitFaceFeatures_var" is a variable referencing a <a href="SplitFaceFeatures.htm">SplitFaceFeatures</a> object.<br /><br /><code><pre class="api-code">#include &lt;Fusion/Features/SplitFaceFeatures.h&gt;<br /><br />returnValue = splitFaceFeatures_var-&gt;<b>add</b>(input);<br /></pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;"><a href="SplitFaceFeature.htm">SplitFaceFeature</a></td>
+        <td class="api-list">Returns the newly created SplitFaceFeature object or null if the creation failed.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">input</td>
+        <td class="api-list"><a href="SplitFaceFeatureInput.htm">SplitFaceFeatureInput</a></td>
+        <td class="api-list">A SplitFaceFeatureInput object that defines the desired split face feature. Use the createInput method to create a new SplitFaceFeatureInput object and then use methods on it (the SplitFaceFeatureInput object) to define the split face.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="splitFaceFeatures_add_Sample.htm">splitFaceFeatures.add</a></td>
+        <td class="api-list">Demonstrates the splitFaceFeatures.add method by spliting a face with another intersecting face.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SplitFaceFeatureSample_Sample.htm">Split Face Feature API Sample</a></td>
+        <td class="api-list">Demonstrates creating a new split face feature.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version June 2015<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(SplitFaceFeatures.add%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,304 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/DataFile.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="13/1/2015">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="DataFile">
+    <meta name="description" content="DataFile Object">
+    <meta name="topicid" content="GUID-6e608b14-d5a4-4dee-bb4f-7a371c7fa50a">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>DataFile Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">DataFile Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::core" and the header file is &lt;Core/Dashboard/DataFile.h&gt;<h2 class="api">
+          Description
+        </h2>A data file in a data folder.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_copy.htm">copy</a></td>
+        <td class="api-list">Copies this DataFile to the specified folder.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_copyWithInput.htm">copyWithInput</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Executes the copy using the information defined by the provided CopyFileInput.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_createCopyDesignFileInput.htm">createCopyDesignFileInput</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Creates a new CopyDesignFileInput object that is used to create a copy of a DataFile that represents a Fusion design. You set options on the CopyDesignFileInput object to define the behavior of the copy and call the copyWithInput method passing in the input object to create the copy.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_createCopyFileInput.htm">createCopyFileInput</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Creates a new CopyFileInput object that is used to create a copy of any DataFile.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_createMilestone.htm">createMilestone</a></td>
+        <td class="api-list">Makes the version this DataFile represents a milestone.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_deleteMe.htm">deleteMe</a></td>
+        <td class="api-list">Deletes this DataFile. This can fail if this file is referenced by another file or is currently open.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_download.htm">download</a></td>
+        <td class="api-list">Performs a synchronous or asynchronous download of this DataFile. Only DataFiles that represent non-Fusion data can be downloaded. For example, this will work for TXT or XLS files but will fail for F3D files.<br/><br/> When using this in its synchronous mode, Fusion is frozen during the download and the call will not return until the download is complete or has failed. When using this in its asynchronous mode, calling this method will start the download process and the call return before the download is complete. The event on the provided handler will be called notifying you when the download is complete.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_move.htm">move</a></td>
+        <td class="api-list">Moves this DataFile to the specified folder.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_promote.htm">promote</a></td>
+        <td class="api-list">Promotes this version to be the latest version. If this is the latest version, nothing happens.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_refresh.htm">refresh</a></td>
+        <td class="api-list">Refreshes the data associated with a DataFile object to be up to date with the associated cloud data. The DataFile returned by the API reflects the local representation of the DataFile as used by the Data Panel. This is method is only useful in very limited cases and should rarely be used. In most cases the local representation will match the actual data on the cloud. In rare occasions where Fusion was off-line while the cloud processing of DataFile is completed or the DataFile is not in the folder shown in the Data Panel. Getting a DataFileFolder contents forces an update of the local data for all of the data files it contains so they will all be up to date.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_childReferences.htm">childReferences</a></td>
+        <td class="api-list">Returns a collection of DataFiles that are the children (referenced designs) this datafile references.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_configurationRowId.htm">configurationRowId</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Returns the ID of the row that defines this configuration. Use the isCongiguration property to determine if this Design is a configuration or not. If this is not a configuration, this property returns an empty string.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_configurationTable.htm">configurationTable</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>If this file is a configured design or a configuration, this property returns the associated ConfigTable object. If this is not a configured design or configuration, this property returns null.<br/><br/> This property is typed as core.Base because the adsk.core library does not reference the fusion library where the ConfigurationTable object is defined. At runtime, this property will return a ConfigurationTable object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_createdBy.htm">createdBy</a></td>
+        <td class="api-list">Returns the User that created this data file.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_dataObject.htm">dataObject</a></td>
+        <td class="api-list">Starts the process to get the raw binary data associated with this DataFile. Because the data exists on the cloud, a DataObjectFuture is returned that you can use to monitor the state of downloading the data and then getting the raw data once it is available.<br/><br/> Only DataFiles that represent non-Fusion data can accessed. For example, this will work for TXT or XLS files but will fail for F3D files.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_dateCreated.htm">dateCreated</a></td>
+        <td class="api-list">Returns the date when this data file was created as UNIX epoch time. UNIX epoch time is the number of seconds since January 1, 1970 (midnight UTC/GMT).<br/><br/> In Python you can import the standard time module to work with UNIX epoch time.<br/><br/> In C++ you can use functions in time.h and std::chrono to work with UNIX epoch time.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_dateModified.htm">dateModified</a></td>
+        <td class="api-list">Returns the date when this data file was modified. Most changes to a file result in a new version which means a new DataFile is created and will have a new creation date. There are a few changes, like rename, that modify a DataFile without creating a new version and the date of that change is returned by this property.<br/><br/> The date is returned as UNIX epoch time, which is the number of seconds since January 1, 1970 (midnight UTC/GMT). In Python you can import the standard time module to work with UNIX epoch time. In C++ you can use functions in time.h and std::chrono to work with UNIX epoch time.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_description.htm">description</a></td>
+        <td class="api-list">Gets and sets the description information associated with this item.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_fileExtension.htm">fileExtension</a></td>
+        <td class="api-list">Gets the file extension for this data file. The file type can be inferred from this.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_fusionWebURL.htm">fusionWebURL</a></td>
+        <td class="api-list"><p>Returns a URL that can be used to access the Fusion Web interface for this file within a browser. The person using the URL must have an Autodesk account and have authority to access the hub this file is owned by.</p>
+ <p>You can also use this URL to directly open the file in Fusion using the Fusion protocol handler as discussed in the <a href="OpeningFilesFromWebPage_UM.htm">Opening Files from a Web Page</a> topic in the API user manual.</p></td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_hasChildReferences.htm">hasChildReferences</a></td>
+        <td class="api-list">Gets if this datafile has children, (i.e. a Fusion Design containing referenced components).</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_hasOutofDateChildReferences.htm">hasOutofDateChildReferences</a></td>
+        <td class="api-list">Gets if this datafile has Children (referenced components) that are out of date (not the latest version).</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_hasParentReferences.htm">hasParentReferences</a></td>
+        <td class="api-list">Gets if this datafile has parents, (i.e. this is a child being referenced in another Fusion design).</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_id.htm">id</a></td>
+        <td class="api-list">Returns the unique ID for this DataFile. This is the same id used in the APS Data Management API for an Item and is in the unencoded form and will look similar to this: "urn:adsk.wipprod:dm.lineage:hC6k4hndRWaeIVhIjvHu8w"</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_inUseBy.htm">inUseBy</a></td>
+        <td class="api-list">Returns the array of users that are currently using (have open for edit) this data file.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_isComplete.htm">isComplete</a></td>
+        <td class="api-list">Returns if the DataFile is fully processed. This is especially useful when a new file is being saved or uploaded. The initial call to save or upload the file returns when the process has started but processing continues on the cloud. This property will return true when all of the processing has been completed and all information related to the Datafile is now available.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_isConfiguration.htm">isConfiguration</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Gets if this file is a configuration of a configuration table. If this returns true, the configurationRowId can be used to get the row used to define this configuration. Also, when this is true, the design is essentially read-only and edits are either blocked from taking place or cannot be saved.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_isConfiguredDesign.htm">isConfiguredDesign</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Gets if this file represents a configured design. This is a design where a configuration table is defined. Use the configurationTable property to get the associated table.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_isInUse.htm">isInUse</a></td>
+        <td class="api-list">Gets if this DataFile is currently in use (opened for edit) by any other user.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_isMilestone.htm">isMilestone</a></td>
+        <td class="api-list">Returns if the version this Datafile represents is a milestone. Returns true if it is a milestone.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_isReadOnly.htm">isReadOnly</a></td>
+        <td class="api-list">Gets if this file is currently read-only or not. A file can be read-only for various reasons. For example, if you are running with a "Fusion for Personal Use license" and have not designate the file to be editable or if someone else is editing the file.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_lastUpdatedBy.htm">lastUpdatedBy</a></td>
+        <td class="api-list">Returns the User that last updated this data file</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_latestVersion.htm">latestVersion</a></td>
+        <td class="api-list">Returns the latest version of the DataFile. It can return a reference to the same DataFile is this DataFile is the latest version.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_latestVersionNumber.htm">latestVersionNumber</a></td>
+        <td class="api-list">Gets the latest version number for this DataFile.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_milestone.htm">milestone</a></td>
+        <td class="api-list">If the version this DataFile represents is a milestone, a Milestone object will be returned. If it's not a milestone, null is returned.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_milestones.htm">milestones</a></td>
+        <td class="api-list">Returns a collection of Milestones associated with all versions of this DataFile.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_name.htm">name</a></td>
+        <td class="api-list">Gets and sets the displayed name of this item.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_parentFolder.htm">parentFolder</a></td>
+        <td class="api-list">Returns the parent folder this item is contained within.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_parentProject.htm">parentProject</a></td>
+        <td class="api-list">Returns the parent project that this item is in.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_parentReferences.htm">parentReferences</a></td>
+        <td class="api-list">Returns a collection DataFiles collection that are the parents (designs that reference) this datafile.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_publicLink.htm">publicLink</a></td>
+        <td class="api-list"><mark>**RETIRED**</mark> Returns a short URL of this data file which can be shared with others.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_sharedLink.htm">sharedLink</a></td>
+        <td class="api-list">Returns the SharedLink object associated with this DataFile. You can use the SharedLink object to enable a shared link and set its behavior and to get the shared link URL.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_versionId.htm">versionId</a></td>
+        <td class="api-list">Returns the version ID for this DataFile. This is the same id used in the APS Data Management API for an Item and is in the unencoded form and will look similar to this: "urn:adsk.wipqa:fs.file:vf.W3syIw1lQAW-5vWObMdYnA?version=2"</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_versionNumber.htm">versionNumber</a></td>
+        <td class="api-list">Gets the version number of this DataFile.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_versions.htm">versions</a></td>
+        <td class="api-list">Gets the other version of this item.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="CloudFileDialog_dataFile.htm">CloudFileDialog.dataFile</a>, <a href="CloudFileDialog_dataFiles.htm">CloudFileDialog.dataFiles</a>, <a href="ConfigurationReplaceDesign_dataFile.htm">ConfigurationReplaceDesign.dataFile</a>, <a href="Data_findFileById.htm">Data.findFileById</a>, <a href="DataEventArgs_file.htm">DataEventArgs.file</a>, <a href="DataFile_copy.htm">DataFile.copy</a>, <a href="DataFile_latestVersion.htm">DataFile.latestVersion</a>, <a href="DataFileFuture_dataFile.htm">DataFileFuture.dataFile</a>, <a href="DataFiles_asArray.htm">DataFiles.asArray</a>, <a href="DataFiles_item.htm">DataFiles.item</a>, <a href="DataFiles_itemById.htm">DataFiles.itemById</a>, <a href="DesignDataFile_copy.htm">DesignDataFile.copy</a>, <a href="DesignDataFile_latestVersion.htm">DesignDataFile.latestVersion</a>, <a href="Document_dataFile.htm">Document.dataFile</a>, <a href="DocumentReference_dataFile.htm">DocumentReference.dataFile</a>, <a href="DrawingDocument_dataFile.htm">DrawingDocument.dataFile</a>, <a href="FusionDocument_dataFile.htm">FusionDocument.dataFile</a>, <a href="Milestone_version.htm">Milestone.version</a>, <a href="Occurrence_configuredDataFile.htm">Occurrence.configuredDataFile</a>, <a href="PersonalUseLimits_editableFiles.htm">PersonalUseLimits.editableFiles</a><h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="AvoidMachineSurfaceSettings_Sample.htm">Avoid Machine Surface Settings API Sample</a></td>
+        <td class="api-list"><p>This sample script demonstrates how to use Machine/Avoid/Gouge/Fixture functionality.</p><p>The script starts by opening a sample model from the CAM Samples folder via its URN. The model comprises a curved surface with a through slot, a countersunk hole and a raised, circular and filleted upstand from the surface. The model is supported by two rectangular blocks, themselves mounted on a fixture plate. A setup is included with a single operation running a 3-axis diagonal raster over the model, supports and fixture. The operation machines the fixture, the supporting blocks, the upper surface of the upstand and the area within the slot and hole, something we would like to avoid.</p><p>The script duplicates the original operation and then proceeds to create a series of MachineAvoidGroups. These are labelled as either Machine in the case of 2 cap surfaces for the slot and hole, Fixture for the fixture plate, Gouge for the supporting blocks and Avoid for the top face of the upstand. Additionally, both AxialOffset and RadialOffset can be specified for the Machine, Avoid and Fixture passes.</p></td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CreateEngravingsSelectionSets_Sample.htm">Create Engravings Selection Sets API Sample</a></td>
+        <td class="api-list"><p>This sample script demonstrates how to find and machine engravings in the Z+ direction using pocket recognition.</p><p>The script will first open an example model via its URN. Using pocket recognition, it will identify pockets that may be engravings based on their dimensions.</p><p>We assume here that an engraving pocket is:<ul><li>Made with a flat bottom face and no fillet.</li><li>A closed pocket.</li><li>Have a Z height less than 2 mm</li></ul><p>We demonstrate creating selection sets in both design and manufacture workspaces and use one of the selection sets as an operation geometry selection input to generate an engraving operation.</p><p>The engraving toolpath can be seen by expanding the setup and selecting the operation.</p></td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CreateSetupsFromHoleRecognition_Sample.htm">Create Setups From Hole Recognition API Sample</a></td>
+        <td class="api-list"><p>This sample script demonstrates how to create a correctly oriented setup using Hole Recognition functionality.</p><p>The Fusion Manufacturing Extension is required for Hole Recognition.</p><p>The script starts by opening a sample model from the CAM Samples folder via its URN. The model comprises a 3 way coupling containing holes in various orientations and mounted on a fixture. A reference setup is created for the model using a simple stock mode and offsets. The Hole Recognition feature of the Fusion Manufacturing Extension creates 5 hole groups containing 11 holes between them. For each unique hole group vector captured, a new setup is created and its orientation transformed to match the vector.</p></td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SetViseOriginAsSetupWCSOrigin_Sample.htm">Set Vise Origin As Setup WCS Origin API Sample</a></td>
+        <td class="api-list"><p>This sample script demonstrates how to define our setup WCS origin relative to our vise origin from either a component, a sketch point or a joint origin.</p><p>The Work Coordinate System is a reference point set in our CAM workspace and on our machine. All machine coordinates are drawn from the WCS. This script demonstrates defining the WCS by each of 4 alternative methods:</p><p>Setup by default with no origin defined.</p><p>Setup using vise origin as WCS origin.</p><p>Setup using a sketch point as WCS origin.</p><p>Setup using a joint origin as WCS origin.</p></td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version January 2015<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(DataFile%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

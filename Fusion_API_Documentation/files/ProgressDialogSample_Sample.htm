@@ -1,0 +1,229 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/ProgressDialogSample.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="ProgressDialogSample_Sample">
+    <meta name="description" content="Progress Dialog API Sample Sample">
+    <meta name="topicid" content="GUID-8a796014-9f22-11e5-ac4c-f8b156d7cd97">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Progress Dialog API Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Progress Dialog API Sample</h1>
+    <h2 class="api">
+          Description
+        </h2>Demonstrates how to use progress dialog<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#C++">C++</a></li>
+        <li><a href="#Python">Python</a></li>
+      </ul>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code">#include &lt;Core/Utils.h&gt;
+#include &lt;Core/Application/Application.h&gt;
+#include &lt;Core/Application/Documents.h&gt;
+#include &lt;Core/Application/Document.h&gt;
+#include &lt;Core/UserInterface/UserInterface.h&gt;
+#include &lt;Core/UserInterface/ProgressDialog.h&gt;
+#include &lt;Core/Geometry/Point3D.h&gt;
+#include &lt;Fusion/Fusion/Design.h&gt;
+#include &lt;Fusion/Components/Component.h&gt;
+#include &lt;Fusion/Construction/ConstructionPlane.h&gt;
+#include &lt;Fusion/Sketch/Sketches.h&gt;
+#include &lt;Fusion/Sketch/Sketch.h&gt;
+#include &lt;Fusion/Sketch/SketchCurves.h&gt;
+#include &lt;Fusion/Sketch/SketchCircles.h&gt;
+
+using namespace adsk::core;
+using namespace adsk::fusion;
+
+Ptr&lt;Application&gt; app;
+Ptr&lt;UserInterface&gt; ui;
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    app = Application::get();
+    if (!app)
+        return false;
+
+    ui = app-&gt;userInterface();
+    if (!ui)
+        return false;
+
+    Ptr&lt;Documents&gt; documents = app-&gt;documents();
+    if (!documents)
+        return false;
+
+    Ptr&lt;Document&gt; doc = documents-&gt;add(DocumentTypes::FusionDesignDocumentType);
+    if (!doc)
+        return false;
+
+    Ptr&lt;ProgressDialog&gt; progressDialog = ui-&gt;createProgressDialog();
+    if (!progressDialog)
+        return false;
+
+    <span style="color:blue">// Set styles of progress dialog.</span>
+    progressDialog-&gt;cancelButtonText("Cancel");
+    progressDialog-&gt;isBackgroundTranslucent(false);
+    progressDialog-&gt;isCancelButtonShown(true);
+
+    <span style="color:blue">// Show dialog</span>
+    progressDialog-&gt;show("Progress Dialog", "Percentage: %p, Current Value: %v, Total steps: %m", 0, 50, 1);
+
+    <span style="color:blue">// Draw sketches and update status.</span>
+    Ptr&lt;Design&gt; design = app-&gt;activeProduct();
+    if (!design)
+        return false;
+
+    Ptr&lt;Component&gt; rootComp = design-&gt;rootComponent();
+    if (!rootComp)
+        return false;
+
+    Ptr&lt;Sketches&gt; sketches = rootComp-&gt;sketches();
+    if (!sketches)
+        return false;
+
+    Ptr&lt;Sketch&gt; sketch = sketches-&gt;add(rootComp-&gt;xZConstructionPlane());
+    if (!sketch)
+        return false;
+
+    Ptr&lt;SketchCurves&gt; curves = sketch-&gt;sketchCurves();
+    if (!curves)
+        return false;
+
+    Ptr&lt;SketchCircles&gt; circles = curves-&gt;sketchCircles();
+    if (!circles)
+        return false;
+
+    Ptr&lt;Point3D&gt; centerPt = Point3D::create(0, 0, 0);
+    if (!centerPt)
+        return centerPt;
+    for (int i = 0; i &lt; 50; ++i)
+    {
+        <span style="color:blue">// If progress dialog is canceled, stop drawing.</span>
+        if (progressDialog-&gt;wasCancelled())
+            break;
+        circles-&gt;addByCenterRadius(centerPt, i + 1);
+
+        <span style="color:blue">// Update progress value of progress dialog</span>
+        progressDialog-&gt;progressValue(i + 1);
+    }
+
+    <span style="color:blue">// Hide the progress dialog at the end.</span>
+    progressDialog-&gt;hide();
+
+    return true;
+}</pre>
+      </div>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">import adsk.core, adsk.fusion, traceback
+
+def run(context):
+    ui = None
+    try:
+        app = adsk.core.Application.get()
+        ui  = app.userInterface
+        
+        <span style="color:blue"># Create a document.</span>
+        doc = app.documents.add(adsk.core.DocumentTypes.FusionDesignDocumentType)        
+        
+        <span style="color:blue"># Set styles of progress dialog.</span>
+        progressDialog = ui.createProgressDialog()
+        progressDialog.cancelButtonText = 'Cancel'
+        progressDialog.isBackgroundTranslucent = False
+        progressDialog.isCancelButtonShown = True
+        
+        <span style="color:blue"># Show dialog</span>
+        progressDialog.show('Progress Dialog', 'Percentage: %p, Current Value: %v, Total steps: %m', 0, 50, 1)
+        
+        <span style="color:blue"># Draw sketches and update status.</span>
+        design = app.activeProduct
+        rootComp = design.rootComponent
+        sketches = rootComp.sketches
+        sketch = sketches.add(rootComp.xZConstructionPlane)
+        sketchCircles = sketch.sketchCurves.sketchCircles
+        centerPt = adsk.core.Point3D.create(0, 0, 0)
+        for i in range(50):
+            <span style="color:blue"># If progress dialog is cancelled, stop drawing.</span>
+            if progressDialog.wasCancelled:
+                break
+            sketchCircles.addByCenterRadius(centerPt, i+1)
+            <span style="color:blue"># Update progress value of progress dialog</span>
+            progressDialog.progressValue = i+1
+        
+        <span style="color:blue"># Hide the progress dialog at the end.</span>
+        progressDialog.hide()
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(ProgressDialogSample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,196 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/BossFeatureSample.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="BossFeatureSample_Sample">
+    <meta name="description" content="Boss Feature Sample Sample">
+    <meta name="topicid" content="GUID-cce01b2a-1c9c-11ed-bb04-6c0b84aa9321">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Boss Feature Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Boss Feature Sample</h1>
+    <h2 class="api">
+          Description
+        </h2>Demonstrates creating a new boss feature<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">import adsk.core, adsk.fusion, traceback, math
+
+<span style="color:blue"># Get the Application object.</span>
+app = adsk.core.Application.get()
+
+def createBoss():
+    ui = None
+    <span style="color:blue"># Get various top-level Fusion objects.</span>
+    ui = app.userInterface
+    root = app.activeProduct.rootComponent
+
+    <span style="color:blue"># Select sketch point for boss location        </span>
+    selection = ui.selectEntity("Select Sketch Point", "SketchPoints")
+    sp = selection.entity
+    
+    <span style="color:blue">#Create the BossFeatureInput object</span>
+    bosses = root.features.bossFeatures
+    input = bosses.createInput()
+    input.setPositionBySketchPoints(sp)
+
+    draftAng = adsk.core.ValueInput.createByReal(math.pi/90) <span style="color:blue">#draft angle (2 deg)</span>
+    holeDraftAng = adsk.core.ValueInput.createByReal(math.pi/180) <span style="color:blue">#draft angle (1 deg)</span>
+    
+    <span style="color:blue">#set top side inputs</span>
+    top = input.createSideInput()
+    top.setCountersink(
+        adsk.core.ValueInput.createByReal(1.3),
+        adsk.core.ValueInput.createByReal(0.5),
+        adsk.core.ValueInput.createByReal(0.9),
+        adsk.core.ValueInput.createByReal(.3))
+    top.draftAngle = draftAng
+    top.holeDraftAngle = holeDraftAng
+    top.holeMajorDraftAngle = draftAng
+    top.rootRadius = adsk.core.ValueInput.createByReal(0.1)
+    top.tipRadius = adsk.core.ValueInput.createByReal(0.05)    
+
+    <span style="color:blue">#set alignment properties</span>
+    top.alignmentType = adsk.fusion.BossAlignmentTypes.BossAlignStepIn
+    top.alignmentDiameter = adsk.core.ValueInput.createByReal(0.9)
+    top.alignmentDepth = adsk.core.ValueInput.createByReal(0.1)
+    top.alignmentRootRadius = top.tipRadius 
+    top.alignmentDraftAngle = draftAng
+
+    <span style="color:blue">#set top rib properties</span>
+    top.ribCount = adsk.core.ValueInput.createByReal(4)
+    top.ribType = adsk.fusion.BossRibShapeTypes.BossRibShapeChamfer
+    top.ribLength = adsk.core.ValueInput.createByReal(1.3)
+    top.ribThickness = adsk.core.ValueInput.createByReal(0.2)
+    top.ribOffset = adsk.core.ValueInput.createByReal(0.7)
+    top.ribCutSize = adsk.core.ValueInput.createByReal(0.5)
+    top.ribChamferAngle = adsk.core.ValueInput.createByReal(math.pi/3)
+    top.ribOuterDraftAngle = adsk.core.ValueInput.createByReal(math.pi/18)
+    top.ribDraftAngle = draftAng
+    top.ribTipRadius =  adsk.core.ValueInput.createByReal(0.05)
+    top.ribRootRadius = adsk.core.ValueInput.createByReal(0.05)
+
+    <span style="color:blue">#set individual rib extent type for the selected point</span>
+    top.setRibExtent(sp,[
+        adsk.fusion.BossRibExtentTypes.RibSizeByLength,
+        adsk.fusion.BossRibExtentTypes.RibSizeToNext,
+        adsk.fusion.BossRibExtentTypes.RibSuppressed,
+        adsk.fusion.BossRibExtentTypes.RibSizeByLength
+    ])
+    
+    <span style="color:blue">#set bottom side inputs</span>
+    bottom = input.createSideInput()
+    bottom.setCounterbore(
+        top.alignmentDiameter,
+        adsk.core.ValueInput.createByReal(.3),
+        adsk.core.ValueInput.createByReal(.5),
+        adsk.core.ValueInput.createByReal(.1))
+
+    bottom.tipRadius = top.alignmentRootRadius    
+    bottom.holeMajorRootRadius = adsk.core.ValueInput.createByReal(0.05)
+    bottom.holeExtentType = adsk.fusion.BossHoleExtentTypes.BossBlindFull
+    bottom.holeDepth = adsk.core.ValueInput.createByReal(.3)
+    bottom.holeEndRadius = adsk.core.ValueInput.createByReal(.05)
+    bottom.draftAngle = draftAng
+    bottom.holeDraftAngle = holeDraftAng
+    bottom.rootRadius = adsk.core.ValueInput.createByReal(0.1)
+
+    <span style="color:blue">#set bottom rib properties</span>
+    bottom.ribCount = adsk.core.ValueInput.createByReal(3)
+    bottom.ribType = adsk.fusion.BossRibShapeTypes.BossRibShapeFillet
+    bottom.ribOffset = adsk.core.ValueInput.createByReal(0.7)
+    bottom.ribLength = adsk.core.ValueInput.createByReal(0.8)
+    bottom.ribCutSize = adsk.core.ValueInput.createByReal(0.5)
+    bottom.ribThickness = top.ribThickness
+    bottom.ribDraftAngle = draftAng
+    bottom.ribOuterDraftAngle = top.ribOuterDraftAngle
+    bottom.ribTipRadius =  adsk.core.ValueInput.createByReal(0.05)
+    bottom.ribRootRadius = adsk.core.ValueInput.createByReal(0.05)
+
+    input.side1 = top
+    input.side2 = bottom
+
+    <span style="color:blue"># Create the boss.        </span>
+    bosses.add(input)
+    
+def run(context):
+    try:
+        createBoss()
+    except:
+        app.log('AddIn Start Failed:\n{}'.format(traceback.format_exc()))
+
+def stop(context):
+    try:
+        pass
+    except:
+        app.log('AddIn Stop Failed: {}'.format(traceback.format_exc()))</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(BossFeatureSample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

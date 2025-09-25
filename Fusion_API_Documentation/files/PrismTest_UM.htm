@@ -1,0 +1,81 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/PrismTest_UM.htm#!">
+    <meta name="contextid" content="PrismTest_UM">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="24/1/2025">
+    <meta name="user-comments" content="enable">
+    <meta name="description" content="">
+    <meta name="topicid" content="GUID-26D98E8A-BD78-4C82-A284-5E4D9363EC0B"> 
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Test of the Prism JS Library</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+	<link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"/>
+	<script type="text/javascript" src="/view/clientframework/client.js"><!--filler--></script> 
+</head>
+<body>
+<link rel="stylesheet" href="../Style/APIHelp.css">
+<link rel="stylesheet" href="../Style/prism.css">
+<script src="../Scripts/prism.js"><!--filler--></script> 
+<style>
+pre.line-numbers [aria-hidden=true]
+{
+    display: block!important;
+}
+</style>
+
+<h4>Test of the Prism Javascript Library</h4>
+This page is to get the integration of the <a href="https://prismjs.com/">Prism Javasript Library</a> in the Fusion help system.
+
+<p Class="api">Below is some sample code that should have line numbers and support copying the code.</p>
+
+<pre class="line-numbers"><code class="language-python"># Get the current position of the timeline marker.
+currentPstn = design.timeline.markerPosition
+
+# Reposition the timeline marker to just before the Arrange feature.
+arrangeFeature.timelineObject.rollTo(True)
+
+# Make the desired changes to the Arrange feature.
+arrangeFeature.definition.grainDirection.value = math.radians(10)
+arrangeFeature.envelopeDefinition.frameWidth.value = 0.5
+arrangeFeature.envelopeDefinition.isPartialArrangeAllowed = True
+
+# Reposition the timeline marker to its original position.
+design.timeline.markerPosition = currentPstn</code></pre>
+
+<h2 Class="api">Uses the css below.</h2>
+To allow this to work, the following was added to APIHelp.css to make the line numbers and the code
+the same size so they line up. 
+
+<pre><code class="language-xml">/* This is to allow line numbers with the prism library to display the
+   same size as the code. */
+pre[class*=language-]
+{
+    font-size: 13.5px!important;
+}
+</code></pre>
+
+And, the following is added below the <body> element.
+
+<pre><code class="language-html">&lt;body&gt;
+&lt;link rel="stylesheet" href="../Style/APIHelp.css"&gt;
+&lt;link rel="stylesheet" href="../Style/prism.css"&gt;
+&lt;script src="../Scripts/prism.js">&lt;!--filler--&gt;&lt;/script&gt; 
+&lt;style&gt;
+pre.line-numbers [aria-hidden=true]
+{
+    display: block!important;
+}
+&lt;/style&gt;
+</code></pre>
+
+</body>
+</html>

@@ -1,0 +1,125 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/Scripts_createScriptInput.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="09/10/2023">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="Scripts_createScriptInput">
+    <meta name="description" content="Scripts.createScriptInput Method">
+    <meta name="topicid" content="GUID-13FC82AC-C3AC-49C8-B7AA-938D135C9C8C">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Scripts.createScriptInput Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Scripts.createScriptInput Method</h1>
+
+          Parent Object: <a href="Scripts.htm">Scripts</a><br>Defined in namespace "adsk::core" and the header file is &lt;Core/Application/Scripts.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Creates a new ScriptInput object. Logically, this object is equivalent to the dialog that is shown when you click the "Create" button in the "Scripts and Add-Ins" command dialog. It collects the information needed to create a new script or add-in. To create the script or add-in, call the addNew method, passing in the ScriptInput object.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"scripts_var" is a variable referencing a <a href="Scripts.htm">Scripts</a> object.<code><pre class="api-code">returnValue = scripts_var.<b>createScriptInput</b>(name, programmingLanguage, isAddIn)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"scripts_var" is a variable referencing a <a href="Scripts.htm">Scripts</a> object.<br /><br /><code><pre class="api-code">#include &lt;Core/Application/Scripts.h&gt;<br /><br />returnValue = scripts_var-&gt;<b>createScriptInput</b>(name, programmingLanguage, isAddIn);<br /></pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;"><a href="ScriptInput.htm">ScriptInput</a></td>
+        <td class="api-list">Returns a ScriptInput object or null in the case of failure.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">name</td>
+        <td class="api-list">string</td>
+        <td class="api-list">The name of the script or add-in to create. By default, it will be created in the folder specified by the "Default Path for Scripts and Add-Ins" preference, but a different path can be specified using the returned ScriptInput object. Regardless of where it is created, the name must be unique with respect to the other scripts and add-ins in that folder. If it's not unique the creation of the script or add-in will fail.</td>
+      </tr>
+      <tr>
+        <td class="api-list">programmingLanguage</td>
+        <td class="api-list"><a href="ProgrammingLanguages.htm">ProgrammingLanguages</a></td>
+        <td class="api-list">The programming language to use for the new script or add-in.</td>
+      </tr>
+      <tr>
+        <td class="api-list">isAddIn</td>
+        <td class="api-list">boolean</td>
+        <td class="api-list">Specifies if a script or add-in is to be created. If true, an add-in is created.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version October 2023<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(Scripts.createScriptInput%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

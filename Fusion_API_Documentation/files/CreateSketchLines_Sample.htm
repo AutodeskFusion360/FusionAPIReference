@@ -1,0 +1,249 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/CreateSketchLines.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="CreateSketchLines_Sample">
+    <meta name="description" content="API Sample that demonstrates creating sketch lines in various ways. Sample">
+    <meta name="topicid" content="GUID-98e163be-fd07-11e4-9c39-3417ebd3d5be">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>API Sample that demonstrates creating sketch lines in various ways.</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">API Sample that demonstrates creating sketch lines in various ways.</h1>
+    <h2 class="api">
+          Description
+        </h2>Demonstrates several ways to create sketch lines, including as the result of creating a rectangle.<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">import adsk.core, adsk.fusion, traceback
+
+def run(context):
+    ui = None
+    try: 
+        app = adsk.core.Application.get()
+        ui = app.userInterface
+
+        doc = app.documents.add(adsk.core.DocumentTypes.FusionDesignDocumentType)
+        design = app.activeProduct
+
+        <span style="color:blue"># Get the root component of the active design.</span>
+        rootComp = design.rootComponent
+
+        <span style="color:blue"># Create a new sketch on the xy plane.</span>
+        sketches = rootComp.sketches;
+        xyPlane = rootComp.xYConstructionPlane
+        sketch = sketches.add(xyPlane)
+
+        <span style="color:blue"># Draw two connected lines.</span>
+        lines = sketch.sketchCurves.sketchLines;
+        line1 = lines.addByTwoPoints(adsk.core.Point3D.create(0, 0, 0), adsk.core.Point3D.create(3, 1, 0))
+        line2 = lines.addByTwoPoints(line1.endSketchPoint, adsk.core.Point3D.create(1, 4, 0))
+
+        <span style="color:blue"># Draw a rectangle by two points.</span>
+        recLines = lines.addTwoPointRectangle(adsk.core.Point3D.create(4, 0, 0), adsk.core.Point3D.create(7, 2, 0))
+
+        <span style="color:blue"># Use the returned lines to add some constraints.</span>
+        sketch.geometricConstraints.addHorizontal(recLines.item(0))
+        sketch.geometricConstraints.addHorizontal(recLines.item(2))
+        sketch.geometricConstraints.addVertical(recLines.item(1))
+        sketch.geometricConstraints.addVertical(recLines.item(3))
+        sketch.sketchDimensions.addDistanceDimension(recLines.item(0).startSketchPoint, recLines.item(0).endSketchPoint,
+                                                     adsk.fusion.DimensionOrientations.HorizontalDimensionOrientation,
+                                                     adsk.core.Point3D.create(5.5, -1, 0));
+
+        <span style="color:blue"># Draw a rectangle by three points.</span>
+        recLines = lines.addThreePointRectangle(adsk.core.Point3D.create(8, 0, 0), adsk.core.Point3D.create(11, 1, 0), adsk.core.Point3D.create(9, 3, 0))
+
+        <span style="color:blue"># Draw a rectangle by a center point.</span>
+        recLines = lines.addCenterPointRectangle(adsk.core.Point3D.create(14, 3, 0), adsk.core.Point3D.create(16, 4, 0))
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code">#include &lt;Core/CoreAll.h&gt;
+#include &lt;Fusion/FusionAll.h&gt;
+
+
+using namespace adsk::core;
+using namespace adsk::fusion;
+
+Ptr&lt;Application&gt; app;
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    app = Application::get();
+    if (!app)
+        return false;
+
+    Ptr&lt;Documents&gt; documents = app-&gt;documents();
+    if (!documents)
+        return false;
+
+    Ptr&lt;Document&gt; doc = documents-&gt;add(DocumentTypes::FusionDesignDocumentType);
+    if (!doc)
+        return false;
+
+    Ptr&lt;Product&gt; product = app-&gt;activeProduct();
+    if (!product)
+        return false;
+
+    Ptr&lt;Design&gt; design = product;
+    if (!design)
+        return false;
+
+    <span style="color:blue">// Get the root component of the active design</span>
+    Ptr&lt;Component&gt; rootComp = design-&gt;rootComponent();
+    if (!rootComp)
+        return false;
+
+    <span style="color:blue">// Create a new sketch on the xy plane.</span>
+    Ptr&lt;Sketches&gt; sketches = rootComp-&gt;sketches();
+    if (!sketches)
+        return false;
+    Ptr&lt;ConstructionPlane&gt; xyPlane = rootComp-&gt;xYConstructionPlane();
+    if (!xyPlane)
+        return false;
+    Ptr&lt;Sketch&gt; sketch = sketches-&gt;add(xyPlane);
+    if (!sketch)
+        return false;
+
+    <span style="color:blue">// Draw two connected lines.</span>
+    Ptr&lt;SketchCurves&gt; sketchCurves = sketch-&gt;sketchCurves();
+    if (!sketchCurves)
+        return false;
+    Ptr&lt;SketchLines&gt; sketchLines = sketchCurves-&gt;sketchLines();
+    if (!sketchLines)
+        return false;
+    Ptr&lt;SketchLine&gt; line1 = sketchLines-&gt;addByTwoPoints(Point3D::create(0, 0, 0), Point3D::create(3, 1, 0));
+    if (!line1)
+        return false;
+    Ptr&lt;SketchLine&gt; line2 = sketchLines-&gt;addByTwoPoints(line1-&gt;endSketchPoint(), Point3D::create(1, 4, 0));
+    if (!line2)
+        return false;
+
+    <span style="color:blue">// Draw a rectangle by two points.</span>
+    Ptr&lt;SketchLineList&gt; recLines =
+        sketchLines-&gt;addTwoPointRectangle(Point3D::create(4, 0, 0), Point3D::create(7, 2, 0));
+    if (!recLines)
+        return false;
+
+    <span style="color:blue">// Use the returned lines to add some constraints.</span>
+    Ptr&lt;GeometricConstraints&gt; constraints = sketch-&gt;geometricConstraints();
+    if (!constraints)
+        return false;
+
+    Ptr&lt;HorizontalConstraint&gt; HConstraint = constraints-&gt;addHorizontal(recLines-&gt;item(0));
+    if (!HConstraint)
+        return false;
+    HConstraint = constraints-&gt;addHorizontal(recLines-&gt;item(2));
+    if (!HConstraint)
+        return false;
+
+    Ptr&lt;VerticalConstraint&gt; VConstraint = constraints-&gt;addVertical(recLines-&gt;item(1));
+    if (!VConstraint)
+        return false;
+    VConstraint = constraints-&gt;addVertical(recLines-&gt;item(3));
+    if (!VConstraint)
+        return false;
+
+    Ptr&lt;SketchDimensions&gt; sketchDimensions = sketch-&gt;sketchDimensions();
+    if (!sketchDimensions)
+        return false;
+    Ptr&lt;SketchDimension&gt; sketchDimension = sketchDimensions-&gt;addDistanceDimension(
+        recLines-&gt;item(0)-&gt;startSketchPoint(),
+        recLines-&gt;item(0)-&gt;endSketchPoint(),
+        HorizontalDimensionOrientation,
+        Point3D::create(5.5, -1, 0));
+    if (!sketchDimension)
+        return false;
+
+    <span style="color:blue">// Draw a rectangle by three points.</span>
+    recLines = sketchLines-&gt;addThreePointRectangle(
+        Point3D::create(8, 0, 0), Point3D::create(11, 1, 0), Point3D::create(9, 3, 0));
+    if (!recLines)
+        return false;
+
+    <span style="color:blue">// Draw a rectangle by a center point.</span>
+    recLines = sketchLines-&gt;addCenterPointRectangle(Point3D::create(14, 3, 0), Point3D::create(16, 4, 0));
+    if (!recLines)
+        return false;
+
+
+    return true;
+}</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(CreateSketchLines%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

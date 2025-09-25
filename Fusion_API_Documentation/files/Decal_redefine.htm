@@ -1,0 +1,108 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/Decal_redefine.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="09/08/2024">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="Decal_redefine">
+    <meta name="description" content="Decal.redefine Method">
+    <meta name="topicid" content="GUID-FEDF1EC0-6A35-4969-8F88-943977E12F46">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Decal.redefine Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Decal.redefine Method</h1>
+
+          Parent Object: <a href="Decal.htm">Decal</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Image/Decal.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Redefines the position, orientation, and how the decal is applied to the body.<br/><br/> To call this method, you need to position the timeline marker to immediately before this decal. This can be accomplished using the following code: thisDecal.timelineObject.rollTo(True)</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"decal_var" is a variable referencing a <a href="Decal.htm">Decal</a> object.<code><pre class="api-code">returnValue = decal_var.<b>redefine</b>(position, faces, isChainFaces)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"decal_var" is a variable referencing a <a href="Decal.htm">Decal</a> object.<br /><br /><code><pre class="api-code">#include &lt;Fusion/Image/Decal.h&gt;<br /><br />returnValue = decal_var-&gt;<b>redefine</b>(position, faces, isChainFaces);<br /></pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">position</td>
+        <td class="api-list"><a href="Matrix3D.htm">Matrix3D</a></td>
+        <td class="api-list">Defines the position, rotation, scaling, and flipping of the decal. The input 3D matrix defines a 3D coordinate system in model space. The origin of the matrix defines the center of the decal and must lie somewhere on the first face. The Z-axis of the matrix should be the same as the normal of the face at the origin. The X and Y axes define the orientation of the decal and must be both perpendicular to the Z axis and each other. Reversing the direction of the X or Y axis will flip the decal in that direction. The magnitude of the X and Y axes controls the scale, and the scale can be non-uniform, meaning the length of the X and Y vectors do not need to be the same.</td>
+      </tr>
+      <tr>
+        <td class="api-list">faces</td>
+        <td class="api-list">BRepFace[]</td>
+        <td class="api-list">Defines the face where the decal will be placed. The first face in the array is the primary face, which is where the position point must be on. If the isChainFaces argument is true, only the primary face is needed and it will be used to define the position and orientation of the decal and the decal can wrap onto all the faces of the body. If the isChainFaces argument is false, the decal can only be applied to the specified faces with the first face in the array being used as the primary face.</td>
+      </tr>
+      <tr>
+        <td class="api-list">isChainFaces</td>
+        <td class="api-list">boolean</td>
+        <td class="api-list">If true, only one face is needed and the decal wraps onto all the faces of the body. If false, the decal can only be applied to the specified faces with the first face being used to calculate the position and orientation.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version September 2024<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(Decal.redefine%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

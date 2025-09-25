@@ -1,0 +1,344 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/GenerateToolpaths_Sample.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="GenerateToolpaths_Sample_Sample">
+    <meta name="description" content="Generate Toolpaths API Sample Sample">
+    <meta name="topicid" content="GUID-E72505EA-DAAA-427A-B5F8-F46A3F2593FF">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Generate Toolpaths API Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Generate Toolpaths API Sample</h1>
+    <h2 class="api">
+          Description
+        </h2>Demonstrates generating the toolpaths in the active document.<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#C++">C++</a></li>
+        <li><a href="#Python">Python</a></li>
+      </ul>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code">#include &lt;Core/CoreAll.h&gt;
+#include &lt;CAM/CAMAll.h&gt;
+
+#include &lt;chrono&gt;
+
+using namespace adsk::core;
+using namespace adsk::cam;
+
+Ptr&lt;UserInterface&gt; ui;
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    Ptr&lt;Application&gt; app = Application::get();
+    if (!app)
+        return false;
+
+    ui = app-&gt;userInterface();
+    if (!ui)
+        return false;
+
+    Ptr&lt;Document&gt; doc = app-&gt;activeDocument();
+    if (!doc)
+        return false;
+
+    Ptr&lt;Products&gt; products = doc-&gt;products();
+    if (!products)
+        return false;
+
+    Ptr&lt;CAM&gt; camProduct = products-&gt;itemByProductType("CAMProductType");
+    if (!camProduct)
+    {
+        ui-&gt;messageBox(
+            "There are no CAM operations in the active document. This script requires the active document to contain "
+            "at least one CAM operation.",
+            "No CAM Operations Exist",
+            MessageBoxButtonTypes::OKButtonType,
+            MessageBoxIconTypes::CriticalIconType);
+        return false;
+    }
+
+    <span style="color:blue">// set the value of scenario to 1, 2 or 3 to generate all, the first setup, or the first operation of the first</span>
+    <span style="color:blue">// setup.</span>
+    int scenario = 1;
+    Ptr&lt;GenerateToolpathFuture&gt; future;
+    std::string message;
+    switch (scenario)
+    {
+    case 1:
+        {
+            future = camProduct-&gt;generateAllToolpaths(false);
+            message = "The toolpaths for all operations in the document have been generated.";
+        }
+        break;
+    case 2:
+        {
+            Ptr&lt;Setups&gt; setups = camProduct-&gt;setups();
+            if (!setups)
+                return false;
+
+            Ptr&lt;Setup&gt; setup = setups-&gt;item(0);
+            if (!setup)
+                return false;
+
+            future = camProduct-&gt;generateToolpath(setup);
+            message = "The toolpaths for the operations of the first setup in the document have been generated.";
+        }
+        break;
+    case 3:
+        {
+            Ptr&lt;Setups&gt; setups = camProduct-&gt;setups();
+            if (!setups)
+                return false;
+
+            Ptr&lt;Setup&gt; setup = setups-&gt;item(0);
+            if (!setup)
+                return false;
+
+            <span style="color:blue">// It is a set of Operations, Folders and Patterns.</span>
+            Ptr&lt;ObjectCollection&gt; objects = setup-&gt;allOperations();
+            if (!objects)
+                return false;
+
+            if (objects-&gt;count() == 0)
+            {
+                ui-&gt;messageBox("There are not any operations in the first setup!");
+                return false;
+            }
+
+            Ptr&lt;Operation&gt; operation = objects-&gt;item(0);
+            future = camProduct-&gt;generateToolpath(operation);
+            message = "The toolpath for the first operation of the first setup in the document have been generated.";
+        }
+        break;
+    default:
+        break;
+    }
+
+    if (!future)
+        return false;
+
+    int operationNum = future-&gt;numberOfOperations();
+    Ptr&lt;ProgressDialog&gt; progressDlg = ui-&gt;createProgressDialog();
+    progressDlg-&gt;isCancelButtonShown(false);
+    progressDlg-&gt;isBackgroundTranslucent(false);
+    progressDlg-&gt;show("Toolpath Generation Progress", "Generating Toolpaths", 0, 10);
+
+    <span style="color:blue">// Since toolpaths are calculated in parallel, loop the progress bar while the toolpaths are being generated but</span>
+    <span style="color:blue">// none are yet complete.</span>
+    while (future-&gt;isGenerationCompleted() == false)
+    {
+        int n = 0;
+        std::chrono::time_point&lt;std::chrono::system_clock&gt; startTime = std::chrono::system_clock::now();
+        while (future-&gt;numberOfCompleted() == 0)
+        {
+            std::chrono::time_point&lt;std::chrono::system_clock&gt; currentTime = std::chrono::system_clock::now();
+            std::chrono::duration&lt;double&gt; elapsed_seconds = currentTime - startTime;
+            if (elapsed_seconds.count() &gt; .125)
+            {
+                startTime = std::chrono::system_clock::now();
+                n += 1;
+                progressDlg-&gt;progressValue(n);
+                adsk::doEvents();
+            }
+            if (n &gt; 10)
+                n = 0;
+        }
+
+        <span style="color:blue">// Set the progress bar value to the number of completed toolpaths.</span>
+        progressDlg-&gt;progressValue(future-&gt;numberOfCompleted());
+
+        <span style="color:blue">// Set the progress bar max to the number of operations to be completed.</span>
+        progressDlg-&gt;maximumValue(operationNum);
+
+        <span style="color:blue">// set the message for the progress dialog to track the progress value and the total number of operations to be</span>
+        <span style="color:blue">// completed.</span>
+        progressDlg-&gt;message("Generating %v of %m toolpaths");
+        adsk::doEvents();
+    }
+
+    progressDlg-&gt;hide();
+
+    ui-&gt;messageBox(message);
+
+    <span style="color:blue">// Active CAM workspace if it is not the active one.</span>
+    if (ui-&gt;activeWorkspace()-&gt;name() != "CAM")
+    {
+        DialogResults result = ui-&gt;messageBox(
+            "Activate the CAM Workspace?",
+            "CAM Workspace Activate",
+            MessageBoxButtonTypes::YesNoButtonType,
+            MessageBoxIconTypes::QuestionIconType);
+        bool activeCAMWorkspace = result == DialogResults::DialogYes ? true : false;
+        if (activeCAMWorkspace)
+        {
+            Ptr&lt;Workspace&gt; camWorkspace = ui-&gt;workspaces()-&gt;itemById("CAMEnvironment");
+            camWorkspace-&gt;activate();
+        }
+    }
+
+    return true;
+}</pre>
+      </div>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">import adsk.core, adsk.fusion, traceback, time
+
+def run(context):
+    ui = None
+    try:
+        app = adsk.core.Application.get()
+        ui = app.userInterface
+        
+        <span style="color:blue"># Get the CAM product.</span>
+        doc = app.activeDocument
+        products = doc.products
+        product = products.itemByProductType('CAMProductType')
+        cam = adsk.cam.CAM.cast(product)
+        if not cam:
+            ui.messageBox('No CAM data exists in the active document.')
+            return
+            
+        <span style="color:blue"># Verify that there are any setups.</span>
+        if cam.allOperations.count == 0:
+            ui.messageBox('No CAM operations exist in the active document.')
+            return
+            
+        <span style="color:blue">#set the value of scenario to 1, 2 or 3 to generate all, the first setup, or the first operation of the first setup.</span>
+        scenario = 1
+        if scenario == 1:
+            future = cam.generateAllToolpaths(False)
+            message = 'The toolpaths for all operations in the document have been generated.'
+        elif scenario == 2:
+            setup = cam.setups.item(0)
+            future = cam.generateToolpath(setup)
+            message = 'The toolpaths for the operations of the first setup in the document have been generated.'
+        elif scenario == 3:
+            setup = cam.setups.item(0)
+            operations = setup.operations
+            operation = operations.item(0)
+            future = cam.generateToolpath(operation)
+            message = 'The toolpath for the first operation of the first setup in the document have been generated.'
+
+        numOps = future.numberOfOperations
+
+        <span style="color:blue">#  create and show the progress dialog while the toolpaths are being generated.</span>
+        progress = ui.createProgressDialog()
+        progress.isCancelButtonShown = False
+        progress.show('Toolpath Generation Progress', 'Generating Toolpaths', 0, 10)
+
+        <span style="color:blue"># Enter a loop to wait while the toolpaths are being generated and update</span>
+        <span style="color:blue"># the progress dialog.</span>
+        while not future.isGenerationCompleted:
+            <span style="color:blue"># since toolpaths are calculated in parallel, loop the progress bar while the toolpaths </span>
+            <span style="color:blue"># are being generated but none are yet complete.</span>
+            n = 0
+            start = time.time()
+            while future.numberOfCompleted == 0:
+                if time.time() - start &gt; .125: <span style="color:blue"># increment the progess value every .125 seconds.</span>
+                    start = time.time()
+                    n +=1
+                    progress.progressValue = n
+                    adsk.doEvents()
+                if n &gt; 10:
+                    n = 0
+
+            <span style="color:blue"># The first toolpath has finished computing so now display better</span>
+            <span style="color:blue"># information in the progress dialog.</span>
+
+            <span style="color:blue"># set the progress bar value to the number of completed toolpaths</span>
+            progress.progressValue = future.numberOfCompleted
+
+            <span style="color:blue"># set the progress bar max to the number of operations to be completed.</span>
+            progress.maximumValue = numOps
+
+            <span style="color:blue"># set the message for the progress dialog to track the progress value and the total number of operations to be completed.</span>
+            progress.message = 'Generating %v of %m' + ' Toolpaths'
+            adsk.doEvents()
+
+        progress.hide()
+        ui.messageBox(message)
+
+        <span style="color:blue"># Prompt user with an option to switch to the CAM workspace if it's not already active</span>
+        if ui.activeWorkspace.id != 'CAMEnvironment':
+            dialogResult = ui.messageBox('Activate the CAM Workspace?','CAM Workspace Activate',
+                                                 adsk.core.MessageBoxButtonTypes.YesNoButtonType,
+                                                 adsk.core.MessageBoxIconTypes.QuestionIconType)
+
+            if dialogResult == adsk.core.DialogResults.DialogYes:
+                ws = ui.workspaces.itemById('CAMEnvironment')
+                ws.activate()
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(GenerateToolpaths_Sample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

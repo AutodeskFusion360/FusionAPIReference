@@ -1,0 +1,168 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/ModelParameter.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="ModelParameter">
+    <meta name="description" content="ModelParameter Object">
+    <meta name="topicid" content="GUID-86e451c2-785f-4cdf-97c9-ecba4882c8d1">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>ModelParameter Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">ModelParameter Object
+			</h1>
+              Derived from: <a href="Parameter.htm">Parameter</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Fusion/ModelParameter.h&gt;<h2 class="api">
+          Description
+        </h2>Represents a Model Parameter.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ModelParameter_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ModelParameter_deleteMe.htm">deleteMe</a></td>
+        <td class="api-list">Deletes this ModelParameter. As a general rule, model parameters cannot be deleted because features depend on them. However, there are uncommon workflows where a parameter no longer has any dependents and is not automatically deleted. You can use the isDeletable property to see if the parameter is in this state and can successfully be deleted.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ModelParameter_attributes.htm">attributes</a></td>
+        <td class="api-list">Returns the collection of attributes associated with this face.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ModelParameter_comment.htm">comment</a></td>
+        <td class="api-list">The comment associated with this parameter</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ModelParameter_component.htm">component</a></td>
+        <td class="api-list">Returns the Component containing the ModelParameter.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ModelParameter_createdBy.htm">createdBy</a></td>
+        <td class="api-list">Returns the object that created this parameter. For example, a feature, a sketch dimension, or a construction plane.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ModelParameter_dependencyParameters.htm">dependencyParameters</a></td>
+        <td class="api-list">Returns a list of parameters that this parameter is dependent on.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ModelParameter_dependentParameters.htm">dependentParameters</a></td>
+        <td class="api-list">Returns a list of parameters that are dependent on this parameter as a result of this parameter being referenced in their equation.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ModelParameter_entityToken.htm">entityToken</a></td>
+        <td class="api-list">Returns a token for the Parameter object. This can be saved and used at a later time with the Design.findEntityByToken method to get back the same parameter.<br/><br/> When using entity tokens it's important to understand that the token string returned for a specific entity can be different over time. However, even if you have two different token strings that were obtained from the same entity, when you use findEntityByToken they will both return the same entity. Because of that you should never compare entity tokens as way to determine what the token represents. Instead, you need to use the findEntityByToken method to get the two entities identified by the tokens and then compare them.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ModelParameter_expression.htm">expression</a></td>
+        <td class="api-list">Gets and sets the expression used to calculate the value of the parameter. This is the equivalent of the "Expression" column in the Parameters dialog. Numeric parameters can be defined by a simple expression like "6.25", which will be interpreted based on whatever the default units are for the document. For example, if the units are set to millimeters, the value will be 6.25 mm; if the units are inches, it will be 6.25 inches. The expression can also contain the units so "6.25 in" will always be evaluated as inches regardless of the document units.<br/><br/> An expression can also contain references to other parameters and use equations. For example, the expression "Length / 2" is valid for a numeric parameter as long as there is a numeric parameter named "Length". Expressions can also be used for text parameters, such as concatenating two other text parameters. For example, if there are two existing text parameters named text1 and text2, the expression for another text parameter can be "text1 + text2". More complex equations can also be used with text parameters like "if (Length < 20 mm; 'Short'; 'Long')" where "Length" is a numeric parameter. The resulting string can be obtained using the textValue property.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ModelParameter_isDeletable.htm">isDeletable</a></td>
+        <td class="api-list">Gets if this parameter can be deleted. Parameters that have dependents cannot be deleted, and model parameters typically cannot be deleted. However, there is the possibility in uncommon workflows where a model parameter no longer has any dependents, and it was not automatically deleted. In this case, this property will return true, and the deleteMe method can delete the parameter.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ModelParameter_isFavorite.htm">isFavorite</a></td>
+        <td class="api-list">Gets and sets whether this parameter is included in the Favorites list in the parameters dialog</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ModelParameter_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ModelParameter_modelParameters.htm">modelParameters</a></td>
+        <td class="api-list">Returns the Collection containing the ModelParameter.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ModelParameter_name.htm">name</a></td>
+        <td class="api-list">Gets and sets the name of the parameter. Setting the name can fail if the name is not unique with respect to all other parameters in the design.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ModelParameter_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ModelParameter_role.htm">role</a></td>
+        <td class="api-list">This property identifies what the parameter is used for. For an extrude, it could be "Depth", for a work plane it could be "Offset".</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ModelParameter_textValue.htm">textValue</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Gets and sets the value of the parameter when it is a text parameter. This can be determined by checking the valueType property. Setting this value will cause the current expression to be overwritten. If the parameter is not a text parameter, the value of this property should be ignored and setting will fail.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ModelParameter_unit.htm">unit</a></td>
+        <td class="api-list">The unit type associated with this parameter. An empty string is returned for parameters that don't have a unit type.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ModelParameter_value.htm">value</a></td>
+        <td class="api-list">Gets and sets the real value (a double) of the parameter in database units. Setting this property will set/reset the expression value for this parameter.<br/><br/> This property is only valid for numeric parameters and will fail for text parameters. You can determine the value type of the parameter by using the valueType property. Use the textValue property to get and set the value of text parameters.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ModelParameter_valueType.htm">valueType</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Returns the type of value this parameter is. For a numeric parameter, you can get the value using the value property. For a text parameter, you can get the value using the textValue property.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="AlongEdgeRipFeatureDefinition_gapDistance.htm">AlongEdgeRipFeatureDefinition.gapDistance</a>, <a href="AngleExtentDefinition_angle.htm">AngleExtentDefinition.angle</a>, <a href="Arrange2DDefinition_globalQuantity.htm">Arrange2DDefinition.globalQuantity</a>, <a href="Arrange2DDefinition_grainDirection.htm">Arrange2DDefinition.grainDirection</a>, <a href="Arrange3DEnvelopeDefinition_ceilingClearance.htm">Arrange3DEnvelopeDefinition.ceilingClearance</a>, <a href="Arrange3DEnvelopeDefinition_frameWidth.htm">Arrange3DEnvelopeDefinition.frameWidth</a>, <a href="Arrange3DEnvelopeDefinition_height.htm">Arrange3DEnvelopeDefinition.height</a>, <a href="Arrange3DEnvelopeDefinition_length.htm">Arrange3DEnvelopeDefinition.length</a>, <a href="Arrange3DEnvelopeDefinition_objectSpacing.htm">Arrange3DEnvelopeDefinition.objectSpacing</a>, <a href="Arrange3DEnvelopeDefinition_originXOffset.htm">Arrange3DEnvelopeDefinition.originXOffset</a>, <a href="Arrange3DEnvelopeDefinition_originYOffset.htm">Arrange3DEnvelopeDefinition.originYOffset</a>, <a href="Arrange3DEnvelopeDefinition_placementClearance.htm">Arrange3DEnvelopeDefinition.placementClearance</a>, <a href="Arrange3DEnvelopeDefinition_width.htm">Arrange3DEnvelopeDefinition.width</a>, <a href="ArrangeEnvelopeDefinition_frameWidth.htm">ArrangeEnvelopeDefinition.frameWidth</a>, <a href="ArrangeEnvelopeDefinition_objectSpacing.htm">ArrangeEnvelopeDefinition.objectSpacing</a>, <a href="ArrangeEnvelopeDefinition_placementClearance.htm">ArrangeEnvelopeDefinition.placementClearance</a>, <a href="ArrangePlaneEnvelopeDefinition_envelopeSpacing.htm">ArrangePlaneEnvelopeDefinition.envelopeSpacing</a>, <a href="ArrangePlaneEnvelopeDefinition_frameWidth.htm">ArrangePlaneEnvelopeDefinition.frameWidth</a>, <a href="ArrangePlaneEnvelopeDefinition_length.htm">ArrangePlaneEnvelopeDefinition.length</a>, <a href="ArrangePlaneEnvelopeDefinition_objectSpacing.htm">ArrangePlaneEnvelopeDefinition.objectSpacing</a>, <a href="ArrangePlaneEnvelopeDefinition_originXOffset.htm">ArrangePlaneEnvelopeDefinition.originXOffset</a>, <a href="ArrangePlaneEnvelopeDefinition_originYOffset.htm">ArrangePlaneEnvelopeDefinition.originYOffset</a>, <a href="ArrangePlaneEnvelopeDefinition_placementClearance.htm">ArrangePlaneEnvelopeDefinition.placementClearance</a>, <a href="ArrangePlaneEnvelopeDefinition_quantity.htm">ArrangePlaneEnvelopeDefinition.quantity</a>, <a href="ArrangePlaneEnvelopeDefinition_width.htm">ArrangePlaneEnvelopeDefinition.width</a>, <a href="ArrangeProfileOrFaceEnvelopeDefinition_frameWidth.htm">ArrangeProfileOrFaceEnvelopeDefinition.frameWidth</a>, <a href="ArrangeProfileOrFaceEnvelopeDefinition_objectSpacing.htm">ArrangeProfileOrFaceEnvelopeDefinition.objectSpacing</a>, <a href="ArrangeProfileOrFaceEnvelopeDefinition_placementClearance.htm">ArrangeProfileOrFaceEnvelopeDefinition.placementClearance</a>, <a href="BetweenPointsRipFeatureDefinition_gapDistance.htm">BetweenPointsRipFeatureDefinition.gapDistance</a>, <a href="BetweenPointsRipFeatureDefinition_pointOneOffset.htm">BetweenPointsRipFeatureDefinition.pointOneOffset</a>, <a href="BetweenPointsRipFeatureDefinition_pointTwoOffset.htm">BetweenPointsRipFeatureDefinition.pointTwoOffset</a>, <a href="BossFeature_alignmentDepth.htm">BossFeature.alignmentDepth</a>, <a href="BossFeature_alignmentDiameter.htm">BossFeature.alignmentDiameter</a>, <a href="BossFeature_alignmentDraftAngle.htm">BossFeature.alignmentDraftAngle</a>, <a href="BossFeature_alignmentRootRadius.htm">BossFeature.alignmentRootRadius</a>, <a href="BossFeature_alignmentTipRadius.htm">BossFeature.alignmentTipRadius</a>, <a href="BossFeature_diameter.htm">BossFeature.diameter</a>, <a href="BossFeature_draftAngle.htm">BossFeature.draftAngle</a>, <a href="BossFeature_holeCountersinkAngle.htm">BossFeature.holeCountersinkAngle</a>, <a href="BossFeature_holeDepth.htm">BossFeature.holeDepth</a>, <a href="BossFeature_holeDiameter.htm">BossFeature.holeDiameter</a>, <a href="BossFeature_holeDraftAngle.htm">BossFeature.holeDraftAngle</a>, <a href="BossFeature_holeEndRadius.htm">BossFeature.holeEndRadius</a>, <a href="BossFeature_holeMajorDepth.htm">BossFeature.holeMajorDepth</a>, <a href="BossFeature_holeMajorDiameter.htm">BossFeature.holeMajorDiameter</a>, <a href="BossFeature_holeMajorDraftAngle.htm">BossFeature.holeMajorDraftAngle</a>, <a href="BossFeature_holeMajorRootRadius.htm">BossFeature.holeMajorRootRadius</a>, <a href="BossFeature_holeMajorTipRadius.htm">BossFeature.holeMajorTipRadius</a>, <a href="BossFeature_holeStartRadius.htm">BossFeature.holeStartRadius</a>, <a href="BossFeature_innerRadius.htm">BossFeature.innerRadius</a>, <a href="BossFeature_offset.htm">BossFeature.offset</a>, <a href="BossFeature_offsetClearance.htm">BossFeature.offsetClearance</a>, <a href="BossFeature_ribBlendRadius.htm">BossFeature.ribBlendRadius</a>, <a href="BossFeature_ribChamferAngle.htm">BossFeature.ribChamferAngle</a>, <a href="BossFeature_ribCount.htm">BossFeature.ribCount</a>, <a href="BossFeature_ribCutSize.htm">BossFeature.ribCutSize</a>, <a href="BossFeature_ribDraftAngle.htm">BossFeature.ribDraftAngle</a>, <a href="BossFeature_ribLength.htm">BossFeature.ribLength</a>, <a href="BossFeature_ribOffset.htm">BossFeature.ribOffset</a>, <a href="BossFeature_ribOuterDraftAngle.htm">BossFeature.ribOuterDraftAngle</a>, <a href="BossFeature_ribRotation.htm">BossFeature.ribRotation</a>, <a href="BossFeature_ribThickness.htm">BossFeature.ribThickness</a>, <a href="BossFeature_ribTipRadius.htm">BossFeature.ribTipRadius</a>, <a href="BossFeature_ribTotalAngle.htm">BossFeature.ribTotalAngle</a>, <a href="BossFeature_rootRadius.htm">BossFeature.rootRadius</a>, <a href="BossFeature_screwDiameter.htm">BossFeature.screwDiameter</a>, <a href="BossFeature_screwHeadAngle.htm">BossFeature.screwHeadAngle</a>, <a href="BossFeature_screwHeadDiameter.htm">BossFeature.screwHeadDiameter</a>, <a href="BossFeature_taperAngle.htm">BossFeature.taperAngle</a>, <a href="BossFeature_thickness.htm">BossFeature.thickness</a>, <a href="BossFeature_tipRadius.htm">BossFeature.tipRadius</a>, <a href="ChordLengthFilletEdgeSet_chordLength.htm">ChordLengthFilletEdgeSet.chordLength</a>, <a href="ChordLengthFilletEdgeSet_tangencyWeight.htm">ChordLengthFilletEdgeSet.tangencyWeight</a>, <a href="CircularPatternConstraint_quantity.htm">CircularPatternConstraint.quantity</a>, <a href="CircularPatternConstraint_totalAngle.htm">CircularPatternConstraint.totalAngle</a>, <a href="CircularPatternFeature_quantity.htm">CircularPatternFeature.quantity</a>, <a href="CircularPatternFeature_totalAngle.htm">CircularPatternFeature.totalAngle</a>, <a href="ConstantRadiusFilletEdgeSet_radius.htm">ConstantRadiusFilletEdgeSet.radius</a>, <a href="ConstantRadiusFilletEdgeSet_tangencyWeight.htm">ConstantRadiusFilletEdgeSet.tangencyWeight</a>, <a href="DistanceAndAngleChamferEdgeSet_angle.htm">DistanceAndAngleChamferEdgeSet.angle</a>, <a href="DistanceAndAngleChamferEdgeSet_distance.htm">DistanceAndAngleChamferEdgeSet.distance</a>, <a href="DistanceAndAngleChamferTypeDefinition_angle.htm">DistanceAndAngleChamferTypeDefinition.angle</a>, <a href="DistanceAndAngleChamferTypeDefinition_distance.htm">DistanceAndAngleChamferTypeDefinition.distance</a>, <a href="DistanceExtentDefinition_distance.htm">DistanceExtentDefinition.distance</a>, <a href="DoubleHemFeatureDefinition_gap.htm">DoubleHemFeatureDefinition.gap</a>, <a href="DoubleHemFeatureDefinition_length.htm">DoubleHemFeatureDefinition.length</a>, <a href="DoubleHemFeatureDefinition_setback.htm">DoubleHemFeatureDefinition.setback</a>, <a href="EmbossFeature_depth.htm">EmbossFeature.depth</a>, <a href="EmbossFeature_horizontalDistance.htm">EmbossFeature.horizontalDistance</a>, <a href="EmbossFeature_rotationAngle.htm">EmbossFeature.rotationAngle</a>, <a href="EmbossFeature_verticalDistance.htm">EmbossFeature.verticalDistance</a>, <a href="EqualDistanceChamferEdgeSet_distance.htm">EqualDistanceChamferEdgeSet.distance</a>, <a href="EqualDistanceChamferTypeDefinition_distance.htm">EqualDistanceChamferTypeDefinition.distance</a>, <a href="ExtendFeature_distance.htm">ExtendFeature.distance</a>, <a href="ExtrudeFeature_taperAngleOne.htm">ExtrudeFeature.taperAngleOne</a>, <a href="ExtrudeFeature_taperAngleTwo.htm">ExtrudeFeature.taperAngleTwo</a>, <a href="ExtrudeFeature_thinExtrudeWallThicknessOne.htm">ExtrudeFeature.thinExtrudeWallThicknessOne</a>, <a href="ExtrudeFeature_thinExtrudeWallThicknessTwo.htm">ExtrudeFeature.thinExtrudeWallThicknessTwo</a>, <a href="FilletEdgeSet_tangencyWeight.htm">FilletEdgeSet.tangencyWeight</a>, <a href="FlatHemFeatureDefinition_length.htm">FlatHemFeatureDefinition.length</a>, <a href="GeometricRelationship_offsetOrAngle.htm">GeometricRelationship.offsetOrAngle</a>, <a href="HoleFeature_counterboreDepth.htm">HoleFeature.counterboreDepth</a>, <a href="HoleFeature_counterboreDiameter.htm">HoleFeature.counterboreDiameter</a>, <a href="HoleFeature_countersinkAngle.htm">HoleFeature.countersinkAngle</a>, <a href="HoleFeature_countersinkDiameter.htm">HoleFeature.countersinkDiameter</a>, <a href="HoleFeature_holeDiameter.htm">HoleFeature.holeDiameter</a>, <a href="HoleFeature_tipAngle.htm">HoleFeature.tipAngle</a>, <a href="Joint_angle.htm">Joint.angle</a>, <a href="Joint_offset.htm">Joint.offset</a>, <a href="Joint_offsetX.htm">Joint.offsetX</a>, <a href="Joint_offsetY.htm">Joint.offsetY</a>, <a href="JointOrigin_angle.htm">JointOrigin.angle</a>, <a href="JointOrigin_offsetX.htm">JointOrigin.offsetX</a>, <a href="JointOrigin_offsetY.htm">JointOrigin.offsetY</a>, <a href="JointOrigin_offsetZ.htm">JointOrigin.offsetZ</a>, <a href="MeshConvertFeature_numberOfFaces.htm">MeshConvertFeature.numberOfFaces</a>, <a href="MeshGenerateFaceGroupsFeature_angleThreshold.htm">MeshGenerateFaceGroupsFeature.angleThreshold</a>, <a href="MeshGenerateFaceGroupsFeature_boundaryTolerance.htm">MeshGenerateFaceGroupsFeature.boundaryTolerance</a>, <a href="MeshGenerateFaceGroupsFeature_minimumFaceGroupSize.htm">MeshGenerateFaceGroupsFeature.minimumFaceGroupSize</a>, <a href="MeshReduceFeature_facecount.htm">MeshReduceFeature.facecount</a>, <a href="MeshReduceFeature_maximumDeviation.htm">MeshReduceFeature.maximumDeviation</a>, <a href="MeshReduceFeature_proportion.htm">MeshReduceFeature.proportion</a>, <a href="MeshRemeshFeature_density.htm">MeshRemeshFeature.density</a>, <a href="MeshRemeshFeature_shapePreservation.htm">MeshRemeshFeature.shapePreservation</a>, <a href="MeshRepairFeature_density.htm">MeshRepairFeature.density</a>, <a href="MeshRepairFeature_offset.htm">MeshRepairFeature.offset</a>, <a href="MeshShellFeature_thickness.htm">MeshShellFeature.thickness</a>, <a href="MeshSmoothFeature_smoothness.htm">MeshSmoothFeature.smoothness</a>, <a href="MirrorFeature_stitchTolerance.htm">MirrorFeature.stitchTolerance</a>, <a href="ModelParameters_item.htm">ModelParameters.item</a>, <a href="ModelParameters_itemByName.htm">ModelParameters.itemByName</a>, <a href="MoveFeaturePointToPositionDefinition_xDistance.htm">MoveFeaturePointToPositionDefinition.xDistance</a>, <a href="MoveFeaturePointToPositionDefinition_yDistance.htm">MoveFeaturePointToPositionDefinition.yDistance</a>, <a href="MoveFeaturePointToPositionDefinition_zDistance.htm">MoveFeaturePointToPositionDefinition.zDistance</a>, <a href="MoveFeatureRotateDefinition_angle.htm">MoveFeatureRotateDefinition.angle</a>, <a href="MoveFeatureTranslateAlongEntityDefinition_distance.htm">MoveFeatureTranslateAlongEntityDefinition.distance</a>, <a href="MoveFeatureTranslateXYZDefinition_xDistance.htm">MoveFeatureTranslateXYZDefinition.xDistance</a>, <a href="MoveFeatureTranslateXYZDefinition_yDistance.htm">MoveFeatureTranslateXYZDefinition.yDistance</a>, <a href="MoveFeatureTranslateXYZDefinition_zDistance.htm">MoveFeatureTranslateXYZDefinition.zDistance</a>, <a href="OffsetFeature_distance.htm">OffsetFeature.distance</a>, <a href="OpenHemFeatureDefinition_gap.htm">OpenHemFeatureDefinition.gap</a>, <a href="OpenHemFeatureDefinition_length.htm">OpenHemFeatureDefinition.length</a>, <a href="PathPatternFeature_distance.htm">PathPatternFeature.distance</a>, <a href="PathPatternFeature_quantity.htm">PathPatternFeature.quantity</a>, <a href="PipeFeature_distanceOne.htm">PipeFeature.distanceOne</a>, <a href="PipeFeature_distanceTwo.htm">PipeFeature.distanceTwo</a>, <a href="PipeFeature_sectionSize.htm">PipeFeature.sectionSize</a>, <a href="PipeFeature_sectionThickness.htm">PipeFeature.sectionThickness</a>, <a href="PlaneAndOffsetsHolePositionDefinition_offsetOne.htm">PlaneAndOffsetsHolePositionDefinition.offsetOne</a>, <a href="PlaneAndOffsetsHolePositionDefinition_offsetTwo.htm">PlaneAndOffsetsHolePositionDefinition.offsetTwo</a>, <a href="RectangularPatternConstraint_distanceOne.htm">RectangularPatternConstraint.distanceOne</a>, <a href="RectangularPatternConstraint_distanceTwo.htm">RectangularPatternConstraint.distanceTwo</a>, <a href="RectangularPatternConstraint_quantityOne.htm">RectangularPatternConstraint.quantityOne</a>, <a href="RectangularPatternConstraint_quantityTwo.htm">RectangularPatternConstraint.quantityTwo</a>, <a href="RectangularPatternFeature_distanceOne.htm">RectangularPatternFeature.distanceOne</a>, <a href="RectangularPatternFeature_distanceTwo.htm">RectangularPatternFeature.distanceTwo</a>, <a href="RectangularPatternFeature_quantityOne.htm">RectangularPatternFeature.quantityOne</a>, <a href="RectangularPatternFeature_quantityTwo.htm">RectangularPatternFeature.quantityTwo</a>, <a href="RolledHemFeatureDefinition_angle.htm">RolledHemFeatureDefinition.angle</a>, <a href="RolledHemFeatureDefinition_radius.htm">RolledHemFeatureDefinition.radius</a>, <a href="RopeHemFeatureDefinition_gap.htm">RopeHemFeatureDefinition.gap</a>, <a href="RopeHemFeatureDefinition_length.htm">RopeHemFeatureDefinition.length</a>, <a href="RopeHemFeatureDefinition_radius.htm">RopeHemFeatureDefinition.radius</a>, <a href="RuledSurfaceFeature_angle.htm">RuledSurfaceFeature.angle</a>, <a href="RuledSurfaceFeature_distance.htm">RuledSurfaceFeature.distance</a>, <a href="ScaleFeature_scaleFactor.htm">ScaleFeature.scaleFactor</a>, <a href="ScaleFeature_xScale.htm">ScaleFeature.xScale</a>, <a href="ScaleFeature_yScale.htm">ScaleFeature.yScale</a>, <a href="ScaleFeature_zScale.htm">ScaleFeature.zScale</a>, <a href="ShellFeature_insideThickness.htm">ShellFeature.insideThickness</a>, <a href="ShellFeature_outsideThickness.htm">ShellFeature.outsideThickness</a>, <a href="SketchAngularDimension_parameter.htm">SketchAngularDimension.parameter</a>, <a href="SketchConcentricCircleDimension_parameter.htm">SketchConcentricCircleDimension.parameter</a>, <a href="SketchDiameterDimension_parameter.htm">SketchDiameterDimension.parameter</a>, <a href="SketchDimension_parameter.htm">SketchDimension.parameter</a>, <a href="SketchDistanceBetweenLineAndPlanarSurfaceDimension_parameter.htm">SketchDistanceBetweenLineAndPlanarSurfaceDimension.parameter</a>, <a href="SketchDistanceBetweenPointAndSurfaceDimension_parameter.htm">SketchDistanceBetweenPointAndSurfaceDimension.parameter</a>, <a href="SketchEllipseMajorRadiusDimension_parameter.htm">SketchEllipseMajorRadiusDimension.parameter</a>, <a href="SketchEllipseMinorRadiusDimension_parameter.htm">SketchEllipseMinorRadiusDimension.parameter</a>, <a href="SketchLinearDiameterDimension_parameter.htm">SketchLinearDiameterDimension.parameter</a>, <a href="SketchLinearDimension_parameter.htm">SketchLinearDimension.parameter</a>, <a href="SketchOffsetCurvesDimension_parameter.htm">SketchOffsetCurvesDimension.parameter</a>, <a href="SketchOffsetDimension_parameter.htm">SketchOffsetDimension.parameter</a>, <a href="SketchRadialDimension_parameter.htm">SketchRadialDimension.parameter</a>, <a href="SketchTangentDistanceDimension_parameter.htm">SketchTangentDistanceDimension.parameter</a>, <a href="StitchFeature_tolerance.htm">StitchFeature.tolerance</a>, <a href="SweepFeature_distanceOne.htm">SweepFeature.distanceOne</a>, <a href="SweepFeature_distanceTwo.htm">SweepFeature.distanceTwo</a>, <a href="SweepFeature_taperAngle.htm">SweepFeature.taperAngle</a>, <a href="SweepFeature_twistAngle.htm">SweepFeature.twistAngle</a>, <a href="TeardropHemFeatureDefinition_gap.htm">TeardropHemFeatureDefinition.gap</a>, <a href="TeardropHemFeatureDefinition_length.htm">TeardropHemFeatureDefinition.length</a>, <a href="TeardropHemFeatureDefinition_radius.htm">TeardropHemFeatureDefinition.radius</a>, <a href="TessellateFeature_aspectRatio.htm">TessellateFeature.aspectRatio</a>, <a href="TessellateFeature_maximumEdgeLength.htm">TessellateFeature.maximumEdgeLength</a>, <a href="TessellateFeature_normalDeviation.htm">TessellateFeature.normalDeviation</a>, <a href="TessellateFeature_surfaceDeviation.htm">TessellateFeature.surfaceDeviation</a>, <a href="ThickenFeature_thickness.htm">ThickenFeature.thickness</a>, <a href="ThreadFeature_threadLength.htm">ThreadFeature.threadLength</a>, <a href="ThreadFeature_threadOffset.htm">ThreadFeature.threadOffset</a>, <a href="TwoDistancesChamferEdgeSet_distanceOne.htm">TwoDistancesChamferEdgeSet.distanceOne</a>, <a href="TwoDistancesChamferEdgeSet_distanceTwo.htm">TwoDistancesChamferEdgeSet.distanceTwo</a>, <a href="TwoDistancesChamferTypeDefinition_distanceOne.htm">TwoDistancesChamferTypeDefinition.distanceOne</a>, <a href="TwoDistancesChamferTypeDefinition_distanceTwo.htm">TwoDistancesChamferTypeDefinition.distanceTwo</a>, <a href="TwoSidesAngleExtentDefinition_angleOne.htm">TwoSidesAngleExtentDefinition.angleOne</a>, <a href="TwoSidesAngleExtentDefinition_angleTwo.htm">TwoSidesAngleExtentDefinition.angleTwo</a>, <a href="TwoSidesDistanceExtentDefinition_distanceOne.htm">TwoSidesDistanceExtentDefinition.distanceOne</a>, <a href="TwoSidesDistanceExtentDefinition_distanceTwo.htm">TwoSidesDistanceExtentDefinition.distanceTwo</a>, <a href="UntrimFeature_extensionDistance.htm">UntrimFeature.extensionDistance</a>, <a href="VariableRadiusFilletEdgeSet_endRadius.htm">VariableRadiusFilletEdgeSet.endRadius</a>, <a href="VariableRadiusFilletEdgeSet_startRadius.htm">VariableRadiusFilletEdgeSet.startRadius</a>, <a href="VariableRadiusFilletEdgeSet_tangencyWeight.htm">VariableRadiusFilletEdgeSet.tangencyWeight</a>, <a href="VolumetricModelToMeshFeature_elementSize.htm">VolumetricModelToMeshFeature.elementSize</a>, <a href="VolumetricModelToMeshFeature_smallShellThreshold.htm">VolumetricModelToMeshFeature.smallShellThreshold</a><h2 class="api">
+            Derived Classes
+          </h2><a href="CustomFeatureParameter.htm">CustomFeatureParameter</a><h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(ModelParameter%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

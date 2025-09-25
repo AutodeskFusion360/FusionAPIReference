@@ -1,0 +1,178 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/CustomGraphicsMesh.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="18/09/2017">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="CustomGraphicsMesh">
+    <meta name="description" content="CustomGraphicsMesh Object">
+    <meta name="topicid" content="GUID-CD642CF5-346A-4014-B54D-F9A7FBBE9F48">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>CustomGraphicsMesh Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">CustomGraphicsMesh Object
+			</h1>
+              Derived from: <a href="CustomGraphicsEntity.htm">CustomGraphicsEntity</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Graphics/CustomGraphicsMesh.h&gt;<h2 class="api">
+          Description
+        </h2>Represents a custom triangle mesh drawn in the graphics window.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomGraphicsMesh_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomGraphicsMesh_deleteMe.htm">deleteMe</a></td>
+        <td class="api-list">Deletes the entity from the custom graphics group.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomGraphicsMesh_getOpacity.htm">getOpacity</a></td>
+        <td class="api-list">Gets the opacity of the graphics entity.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomGraphicsMesh_setOpacity.htm">setOpacity</a></td>
+        <td class="api-list">Sets the opacity of the graphics entity. By default, when a new entity is it is completely opaque and does not override the opacity defined by the material.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomGraphicsMesh_billBoarding.htm">billBoarding</a></td>
+        <td class="api-list">Gets and sets the billboarding behavior of this custom graphics entity. To define billboarding you can set this property using a CustomGraphicsBillBoard objects that you statically create using the create method of the CustomGraphicsBillBoard class. To remove billboarding from this entity you can set this property to null.<br/><br/> Billboarding is used to specify that the orientation of custom graphics is defined relative to the screen instead of model space. This is commonly used for legends and symbols that you want to always face the user, even as the camera is rotated.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomGraphicsMesh_boundingBox.htm">boundingBox</a></td>
+        <td class="api-list">Returns a box oriented parallel to the world x-y-x axes that contains the graphics entity. Depending on whether the graphics are drawn in model space or screen space this will return the bounding box in either centimeters (model) or pixels (screen). In the case where it returns the bounding box in pixel space, the Z coordinates of the box will be 0 and can be ignored.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomGraphicsMesh_color.htm">color</a></td>
+        <td class="api-list">Gets and sets the current color definition for this entity. The color of custom graphics can be defined in many ways; solid color, simple material, and appearance.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomGraphicsMesh_coordinates.htm">coordinates</a></td>
+        <td class="api-list">Gets and sets the coordinates associated with this CustomGraphicsMesh.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomGraphicsMesh_cullMode.htm">cullMode</a></td>
+        <td class="api-list">Gets and sets the culling model to use when rendering the entity. Culling is used when the entity contains a mesh or B-Rep faces and defines which sides of the mesh or face are rendered. This is primarily used for a watertight mesh or solid B-Rep so that the "inside" of the faces is not rendered since it's never visible to the user.<br/><br/> When a new graphics entity is created its default cull mode is CustomGraphicsCullBack which will optimize the rendering of "solid" meshes so the inside is not rendered.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomGraphicsMesh_depthPriority.htm">depthPriority</a></td>
+        <td class="api-list">Gets and sets the depth priority associated with the graphics entity. The depth priority defines how one graphics entity will be drawn with respect to another entity. This is useful when there are entities that lie in the same space so it's ambiguous which should be drawn on the other. For example, if you draw a curve on a planar mesh and want the curve to be completely visible. You can set the depth priority of the curve to be greater than the mesh so it will be drawn after the mesh and will remain visible.<br/><br/> When a new graphics entity is created it's default depth priority is 0.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomGraphicsMesh_id.htm">id</a></td>
+        <td class="api-list">An id you can specify for the entity. By default, all new graphics entities do not have an id and this property will return an empty string. But in cases where entities will be selected, assigning an id can make understanding what was selected much easier.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomGraphicsMesh_isSelectable.htm">isSelectable</a></td>
+        <td class="api-list">Gets and sets if the graphics entity is selectable within the graphics window. By default, when a new entity is created it is selectable.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomGraphicsMesh_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomGraphicsMesh_isVisible.htm">isVisible</a></td>
+        <td class="api-list">Gets and sets if the graphics entity is visible in the graphics window. By default, when a new entity is created it is visible.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomGraphicsMesh_name.htm">name</a></td>
+        <td class="api-list">Gets and sets the name displayed when this entity is selected. If no name has been set, "Custom Graphics" will be displayed.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomGraphicsMesh_normalIndexList.htm">normalIndexList</a></td>
+        <td class="api-list">Gets and sets an array of indices that define which normal is associated with each vertex in the mesh. This is used to look-up the normal in the normalVectors array.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomGraphicsMesh_normalVectors.htm">normalVectors</a></td>
+        <td class="api-list">Gets and sets the normal vectors of the mesh where there is a normal vector at each node. The normals are defined as an array of floats where they are the x, y, z components of each vector.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomGraphicsMesh_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomGraphicsMesh_parent.htm">parent</a></td>
+        <td class="api-list">Returns the parent Component for a top-level group or the CustomGraphicsGroup object for graphics entities and child groups.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomGraphicsMesh_textureCoordinates.htm">textureCoordinates</a></td>
+        <td class="api-list">Gets and sets the texture coordinates as an array of floats where they are the u,v components at each node. They are defined as an array of doubles where they are the u, v coordinates of each node. Defining texture coordinates for a mesh is optional.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomGraphicsMesh_transform.htm">transform</a></td>
+        <td class="api-list">Gets and sets the transform associated with the graphics entity. When a new graphics entity is created its default transform is an identity matrix which results in the graphics entity being displayed in model space using the original coordinate data used to define the entity.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomGraphicsMesh_vertexIndexList.htm">vertexIndexList</a></td>
+        <td class="api-list">Gets and sets an array of indices that define which coordinate in the coordinate list is used for each vertex in the mesh. Each set of three indices defines a triangle. For example: Indices 0, 1, and 2 define the coordinates to use for the first triangle and indices 3, 4, and 5 define the coordinates for the second triangle, and so on.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomGraphicsMesh_viewPlacement.htm">viewPlacement</a></td>
+        <td class="api-list">Gets and sets the graphics view placement being applied to this graphics entity. A CustomGraphicsViewPlacement object can be created using the static create method of the class. When assigned to a graphics entity the position of the graphics is defined relative to the view in 2D view space (pixels) rather than in 3D model space (centimeters).</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomGraphicsMesh_viewScale.htm">viewScale</a></td>
+        <td class="api-list">Gets and sets the graphics view scale being applied to this graphics entity. A CustomGraphicsViewScale object can be created using the static create method of the class. When assigned to a graphics entity the size of the graphics entity is defined in view space (pixels) instead of model space (centimeters).</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="CustomGraphicsGroup_addMesh.htm">CustomGraphicsGroup.addMesh</a><h2 class="api">
+            Version
+          </h2>
+        Introduced in version September 2017<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(CustomGraphicsMesh%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

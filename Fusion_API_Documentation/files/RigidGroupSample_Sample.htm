@@ -1,0 +1,450 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/RigidGroupSample.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="RigidGroupSample_Sample">
+    <meta name="description" content="Rigid Group API Sample Sample">
+    <meta name="topicid" content="GUID-be3f5890-4229-11e5-894a-3417ebd41e19">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Rigid Group API Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Rigid Group API Sample</h1>
+    <h2 class="api">
+          Description
+        </h2>Demonstrates creating a new Rigid Group.<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">import adsk.core, adsk.fusion, traceback
+
+def run(context):
+    ui = None
+    try:
+        app = adsk.core.Application.get()
+        ui = app.userInterface
+
+        <span style="color:blue"># Create a document.</span>
+        doc = app.documents.add(adsk.core.DocumentTypes.FusionDesignDocumentType)
+
+        product = app.activeProduct
+        design = adsk.fusion.Design.cast(product)
+
+        <span style="color:blue"># Get the root component of the active design</span>
+        rootComp = design.rootComponent
+
+        <span style="color:blue"># Create four sub components under root component</span>
+        allOccs = rootComp.occurrences
+
+        transform0 = adsk.core.Matrix3D.create()
+        vector3d0 = adsk.core.Vector3D.create(10.0, 0.0, 0.0)
+        transform0.translation = vector3d0
+        subOcc0 = allOccs.addNewComponent(transform0)
+
+        transform1 = adsk.core.Matrix3D.create()
+        vector3d1 = adsk.core.Vector3D.create(0.0, 0.0, 12.0)
+        transform1.translation = vector3d1
+        subOcc1 = allOccs.addNewComponent(transform1)
+
+        transform2 = adsk.core.Matrix3D.create()
+        vector3d2 = adsk.core.Vector3D.create(-8.0, 0.0, 0.0)
+        transform2.translation = vector3d2
+        subOcc2 = allOccs.addNewComponent(transform2)
+
+        transform3 = adsk.core.Matrix3D.create()
+        vector3d3 = adsk.core.Vector3D.create(0.0, 0.0, -6.0)
+        transform3.translation = vector3d3
+        subOcc3 = allOccs.addNewComponent(transform3)
+
+        <span style="color:blue"># Create cylinder 1 in sub component 1</span>
+        centerPoint = adsk.core.Point3D.create(0, 0, 0)
+        subComp0 = subOcc0.component
+        sketches0 = subComp0.sketches
+        sketch0 = sketches0.add(subComp0.xZConstructionPlane)
+        sketchCircles0 = sketch0.sketchCurves.sketchCircles
+        sketchCircles0.addByCenterRadius(centerPoint, 0.5)
+
+        profile0 = sketch0.profiles.item(0)
+        extrudes0 = subComp0.features.extrudeFeatures
+        extInput0 = extrudes0.createInput(profile0, adsk.fusion.FeatureOperations.NewBodyFeatureOperation)
+
+        distance0 = adsk.core.ValueInput.createByString("50 mm")
+        extInput0.setDistanceExtent(False, distance0)
+        extInput0.isSolid = False
+        extrudes0.add(extInput0)
+
+        <span style="color:blue"># Create cylinder 2 in sub component 2</span>
+        subComp1 = subOcc1.component
+        sketches1 = subComp1.sketches
+        sketch1 = sketches1.add(subComp1.xZConstructionPlane)
+        sketchCircles1 = sketch1.sketchCurves.sketchCircles
+        sketchCircles1.addByCenterRadius(centerPoint, 0.75)
+
+        profile1 = sketch1.profiles.item(0)
+        extrudes1 = subComp1.features.extrudeFeatures
+        extInput1 = extrudes1.createInput(profile1, adsk.fusion.FeatureOperations.NewBodyFeatureOperation)
+
+        distance1 = adsk.core.ValueInput.createByString("75 mm")
+        extInput1.setDistanceExtent(False, distance1)
+        extInput1.isSolid = False
+        extrudes1.add(extInput1)
+
+        <span style="color:blue"># Create cylinder 3 in sub component 3</span>
+        subComp2 = subOcc2.component
+        sketches2 = subComp2.sketches
+        sketch2 = sketches2.add(subComp2.xZConstructionPlane)
+        sketchCircles2 = sketch2.sketchCurves.sketchCircles
+        sketchCircles2.addByCenterRadius(centerPoint, 1.0)
+
+        profile2 = sketch2.profiles.item(0)
+        extrudes2 = subComp2.features.extrudeFeatures
+        extInput2 = extrudes2.createInput(profile2, adsk.fusion.FeatureOperations.NewBodyFeatureOperation)
+
+        distance2 = adsk.core.ValueInput.createByString("100 mm")
+        extInput2.setDistanceExtent(False, distance2)
+        extInput2.isSolid = False
+        extrudes2.add(extInput2)
+
+        <span style="color:blue"># Create cylinder 4 in sub component 4</span>
+        subComp3 = subOcc3.component
+        sketches3 = subComp3.sketches
+        sketch3 = sketches3.add(subComp3.xZConstructionPlane)
+        sketchCircles3 = sketch3.sketchCurves.sketchCircles
+        sketchCircles3.addByCenterRadius(centerPoint, 1.25)
+
+        profile3 = sketch3.profiles.item(0)
+        extrudes3 = subComp3.features.extrudeFeatures
+        extInput3 = extrudes3.createInput(profile3, adsk.fusion.FeatureOperations.NewBodyFeatureOperation)
+
+        distance3 = adsk.core.ValueInput.createByString("125 mm")
+        extInput3.setDistanceExtent(False, distance3)
+        extInput3.isSolid = False
+        extrudes3.add(extInput3)
+
+        <span style="color:blue"># Create object collection</span>
+        occs = adsk.core.ObjectCollection.create()
+        occs.add(subOcc0)
+        occs.add(subOcc1)
+        occs.add(subOcc2)
+        occs.add(subOcc3)
+
+        <span style="color:blue"># Create a Rigid group</span>
+        isIncludeChildren = True
+        rigidGroups_ = rootComp.rigidGroups
+        rigidGroups_.add(occs, isIncludeChildren)
+
+        camera_ = app.activeViewport.camera
+        camera_.isFitView = True
+        app.activeViewport.camera = camera_
+
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code">#include &lt;Core/Application/Application.h&gt;
+#include &lt;Core/Application/Documents.h&gt;
+#include &lt;Core/Application/Document.h&gt;
+#include &lt;Core/Application/Product.h&gt;
+#include &lt;Core/Application/ValueInput.h&gt;
+#include &lt;Core/Application/Viewport.h&gt;
+#include &lt;Core/Application/Camera.h&gt;
+#include &lt;Core/Application/ObjectCollection.h&gt;
+#include &lt;Core/Geometry/Point3D.h&gt;
+#include &lt;Core/Geometry/Matrix3D.h&gt;
+#include &lt;Core/Geometry/Vector3D.h&gt;
+#include &lt;Core/UserInterface/UserInterface.h&gt;
+#include &lt;Fusion/Fusion/Design.h&gt;
+#include &lt;Fusion/Construction/ConstructionPlanes.h&gt;
+#include &lt;Fusion/Construction/ConstructionPlaneInput.h&gt;
+#include &lt;Fusion/Construction/ConstructionPlane.h&gt;
+#include &lt;Fusion/Components/Component.h&gt;
+#include &lt;Fusion/Components/RigidGroups.h&gt;
+#include &lt;Fusion/Components/RigidGroup.h&gt;
+#include &lt;Fusion/Components/Occurrence.h&gt;
+#include &lt;Fusion/Components/Occurrences.h&gt;
+#include &lt;Fusion/Features/Features.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeature.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeatures.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeatureInput.h&gt;
+#include &lt;Fusion/Sketch/Profile.h&gt;
+#include &lt;Fusion/Sketch/Profiles.h&gt;
+#include &lt;Fusion/Sketch/Sketch.h&gt;
+#include &lt;Fusion/Sketch/Sketches.h&gt;
+#include &lt;Fusion/Sketch/SketchCircle.h&gt;
+#include &lt;Fusion/Sketch/SketchCircles.h&gt;
+#include &lt;Fusion/Sketch/SketchCurves.h&gt;
+
+using namespace adsk::core;
+using namespace adsk::fusion;
+
+Ptr&lt;Application&gt; app;
+Ptr&lt;UserInterface&gt; ui;
+
+bool CreateCylinder(Ptr&lt;Occurrence&gt; occ, double diameter, double height, bool isSolid)
+{
+    Ptr&lt;Component&gt; comp = occ-&gt;component();
+    if (!comp)
+        return false;
+    Ptr&lt;Sketches&gt; sketches = comp-&gt;sketches();
+    if (!sketches)
+        return false;
+    Ptr&lt;ConstructionPlane&gt; xzPlane = comp-&gt;xZConstructionPlane();
+    if (!xzPlane)
+        return false;
+    Ptr&lt;Sketch&gt; sketch = sketches-&gt;add(xzPlane);
+    if (!sketch)
+        return false;
+    Ptr&lt;SketchCurves&gt; sketchCurves = sketch-&gt;sketchCurves();
+    if (!sketchCurves)
+        return false;
+    Ptr&lt;SketchCircles&gt; sketchCircles = sketchCurves-&gt;sketchCircles();
+    if (!sketchCircles)
+        return false;
+    Ptr&lt;Point3D&gt; centerPoint = Point3D::create(0, 0, 0);
+    if (!centerPoint)
+        return false;
+    Ptr&lt;SketchCircle&gt; sketchCircle = sketchCircles-&gt;addByCenterRadius(centerPoint, diameter);
+    if (!sketchCircle)
+        return false;
+
+    <span style="color:blue">// Get the profile defined by the circle</span>
+    Ptr&lt;Profiles&gt; profs = sketch-&gt;profiles();
+    if (!profs)
+        return false;
+    Ptr&lt;Profile&gt; profile = profs-&gt;item(0);
+    if (!profile)
+        return false;
+
+    <span style="color:blue">// Create an extrude input</span>
+    Ptr&lt;Features&gt; feats = comp-&gt;features();
+    if (!feats)
+        return false;
+    Ptr&lt;ExtrudeFeatures&gt; extrudes = feats-&gt;extrudeFeatures();
+    if (!extrudes)
+        return false;
+    Ptr&lt;ExtrudeFeatureInput&gt; extInput = extrudes-&gt;createInput(profile, FeatureOperations::NewBodyFeatureOperation);
+    if (!extInput)
+        return false;
+
+    <span style="color:blue">// Set the extrude input</span>
+    Ptr&lt;ValueInput&gt; distance = ValueInput::createByReal(height);
+    if (!distance)
+        return false;
+    extInput-&gt;setDistanceExtent(false, distance);
+    extInput-&gt;isSolid(isSolid);
+
+    <span style="color:blue">// Create the extrude</span>
+    Ptr&lt;ExtrudeFeature&gt; extrude = extrudes-&gt;add(extInput);
+    if (!extrude)
+        return false;
+
+    return true;
+}
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    app = Application::get();
+    if (!app)
+        return false;
+
+    ui = app-&gt;userInterface();
+    if (!ui)
+        return false;
+
+    Ptr&lt;Documents&gt; documents = app-&gt;documents();
+    if (!documents)
+        return false;
+
+    Ptr&lt;Document&gt; doc = documents-&gt;add(DocumentTypes::FusionDesignDocumentType);
+    if (!doc)
+        return false;
+
+    Ptr&lt;Product&gt; product = app-&gt;activeProduct();
+    if (!product)
+        return false;
+
+    Ptr&lt;Design&gt; design = product;
+    if (!design)
+        return false;
+
+    <span style="color:blue">// Get the root component of the active design</span>
+    Ptr&lt;Component&gt; rootComp = design-&gt;rootComponent();
+    if (!rootComp)
+        return false;
+
+    <span style="color:blue">// Create four sub components under root component</span>
+    Ptr&lt;Occurrences&gt; occs = rootComp-&gt;occurrences();
+    if (!occs)
+        return false;
+
+    <span style="color:blue">// sub component 1</span>
+    Ptr&lt;Matrix3D&gt; transform0 = adsk::core::Matrix3D::create();
+    if (!transform0)
+        return false;
+    Ptr&lt;Vector3D&gt; vector3d0 = adsk::core::Vector3D::create(10.0, 0.0, 0.0);
+    if (!vector3d0)
+        return false;
+    transform0-&gt;translation(vector3d0);
+    Ptr&lt;Occurrence&gt; subOcc0 = occs-&gt;addNewComponent(transform0);
+    if (!subOcc0)
+        return false;
+
+    <span style="color:blue">// sub component 2</span>
+    Ptr&lt;Matrix3D&gt; transform1 = adsk::core::Matrix3D::create();
+    if (!transform1)
+        return false;
+    Ptr&lt;Vector3D&gt; vector3d1 = adsk::core::Vector3D::create(0.0, 0.0, 12.0);
+    if (!vector3d1)
+        return false;
+    transform1-&gt;translation(vector3d1);
+    Ptr&lt;Occurrence&gt; subOcc1 = occs-&gt;addNewComponent(transform1);
+    if (!subOcc1)
+        return false;
+
+    <span style="color:blue">// sub component 3</span>
+    Ptr&lt;Matrix3D&gt; transform2 = adsk::core::Matrix3D::create();
+    if (!transform2)
+        return false;
+    Ptr&lt;Vector3D&gt; vector3d2 = adsk::core::Vector3D::create(-8.0, 0.0, 0.0);
+    if (!vector3d2)
+        return false;
+    transform2-&gt;translation(vector3d2);
+    Ptr&lt;Occurrence&gt; subOcc2 = occs-&gt;addNewComponent(transform2);
+    if (!subOcc2)
+        return false;
+
+    <span style="color:blue">// sub component 4</span>
+    Ptr&lt;Matrix3D&gt; transform3 = adsk::core::Matrix3D::create();
+    if (!transform3)
+        return false;
+    Ptr&lt;Vector3D&gt; vector3d3 = adsk::core::Vector3D::create(0.0, 0.0, -6.0);
+    if (!vector3d3)
+        return false;
+    transform3-&gt;translation(vector3d3);
+    Ptr&lt;Occurrence&gt; subOcc3 = occs-&gt;addNewComponent(transform3);
+    if (!subOcc3)
+        return false;
+
+    <span style="color:blue">// Create an object collection of occurrences</span>
+    Ptr&lt;ObjectCollection&gt; occGroups = adsk::core::ObjectCollection::create();
+    if (!occGroups)
+        return false;
+    occGroups-&gt;add(subOcc0);
+    occGroups-&gt;add(subOcc1);
+    occGroups-&gt;add(subOcc2);
+    occGroups-&gt;add(subOcc3);
+
+    <span style="color:blue">// Create four cylinders in four sub components</span>
+    bool result0 = CreateCylinder(subOcc0, 0.5, 5, false);
+    if (!result0)
+        return false;
+
+    bool result1 = CreateCylinder(subOcc1, 0.75, 7.5, false);
+    if (!result1)
+        return false;
+
+    bool result2 = CreateCylinder(subOcc2, 1.0, 10, false);
+    if (!result2)
+        return false;
+
+    bool result3 = CreateCylinder(subOcc3, 1.25, 12.5, false);
+    if (!result3)
+        return false;
+
+    <span style="color:blue">// Create a RigidGroup</span>
+    bool isIncludeChildren = true;
+    Ptr&lt;RigidGroups&gt; rigidGroups_ = rootComp-&gt;rigidGroups();
+    if (!rigidGroups_)
+        return false;
+    Ptr&lt;RigidGroup&gt; rigidGroup = rigidGroups_-&gt;add(occGroups, isIncludeChildren);
+    if (!rigidGroup)
+        return false;
+
+    <span style="color:blue">// Fit to window</span>
+    Ptr&lt;Viewport&gt; viewPort = app-&gt;activeViewport();
+    if (!viewPort)
+        return false;
+    Ptr&lt;Camera&gt; cam = viewPort-&gt;camera();
+    if (!cam)
+        return false;
+    cam-&gt;isFitView(true);
+    viewPort-&gt;camera(cam);
+
+
+    return true;
+}</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(RigidGroupSample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

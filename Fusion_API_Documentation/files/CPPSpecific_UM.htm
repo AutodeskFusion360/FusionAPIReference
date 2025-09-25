@@ -1,0 +1,454 @@
+ <html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/CPPSpecific_UM.htm#!">
+    <meta name="contextid" content="CPPSpecific_UM">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="21/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="description" content="">
+    <meta name="topicid" content="GUID-ECC0A398-4D89-4776-A054-F7B432F7FCF6">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+	<link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"/>
+    <title>C++ Specific Issues</title>
+	<script type="text/javascript" src="/view/clientframework/client.js"><!--filler--></script> 
+	<script>
+	  // This turns on the display of the copyright notice which is not visible by default.
+	  // Because the head is removed when used in the web help, this function will only exists
+	  // when the chm help is being created.
+	  window.onload = function() {
+		copyrightElement = document.getElementById('CopyrightNotice');
+		copyrightElement.style.display = 'block';
+	  };
+	</script>
+</head>
+<body>
+<link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+	
+<h2 class="api">C++ Specific Issues</h2>
+
+<p Class="api">Fusion has a single API that can be used from several different programming languages. In most cases, the API is used in a very similar way from each of the programming languages with just small language specific syntax changes. However, in some cases there are significant differences in how the API is used because of a particular language. This topic discusses the differences that are unique to C++ and covers the subjects listed below.</p>
+
+<ul>
+<li><a href="#OS Specific Issues">OS Specific Issues</a></li>
+<li><a href="#Object Declaration">Object Declaration</a></li>
+<li><a href="#Handling Errors">Handling Errors</a></li>
+<li><a href="#Properties">Properties</a></li>
+<li><a href="#Object Types and Casting">Object Types and Casting</a></li>
+<li><a href="#Events">Events</a></li>
+<li><a href="#Header Files">Header Files</a></li>
+<li><a href="#Iteration">Iteration</a></li>
+<li><a href="#Object Equality">Object Equality</a></li>
+<li><a href="#Utility Functions">Utility Functions</a></li>
+<li><a href="#Debugging a Windows Script or Add-In">Debugging a Windows Script or Add-In</a></li>
+<li><a href="#Debugging a Mac Script or Add-In">Debugging a Mac Script or Add-In</a></li>
+</ul>
+
+<a name="OS Specific Issues"></a>
+<h3 class="api">OS Specific Issues</h3>
+
+<p Class="api">When creating a new C++ script or add-in using the “Scripts and Add-Ins” command a single cpp is created and both Visual Studio (.vcxproj) and Xcode (.xcodeproj) projects are created that use the single cpp.  In most cases the same code can be used on both Windows and Mac unless you’ve chosen to use an external library that is OS specific.  Even though it’s usually possible that the same source code can be used for both Mac and Windows, the binary that’s used by Fusion is OS specific.  This means you need to use Windows and Visual Studio to compile your script or add-in for Windows and OS X and Xcode to compile it for Mac.</p>
+
+<p Class="api">Most of the discussion below is about the code of your script or add-in and is platform agnostic so it applies to both Mac and Windows.  The last topic describes debugging your script or add-in which is OS specific.</p>
+
+<a name="Object Declaration"></a>
+<h3 class="api">Object Declaration</h3>
+
+<p Class="api">Variables declarations and function arguments that use a Fusion defined type should <u>always</u> use the Fusion defined Ptr template to create a smart pointer.  A smart pointer will automatically handle adding and removing references, deleting the reference when it’s no longer needed (i.e. when the variable goes out of scope or is explicitly set to nullptr), and casting.</p>
+
+<pre class="api-code">
+Ptr&lt;SketchLine> line1;<br />
+bool doAnimation(Ptr&lt;SketchCurve&gt; pathCurve, Ptr&lt;Vector3D&gt; upDirection)
+{
+}
+</pre>
+<br>
+
+<a name="Handling Errors"></a>
+<h3 class="api">Handling Errors</h3>
+
+<p Class="api">In the C++ implementation of the Fusion API, all errors are reported through error codes.  There are not asserts fired so a try catch statement will not work. In most cases this means one of two things.  First, if a function is expected to return an object, it will either return the expected object or some other documented result (usually null) indicating the function failed. This is demonstrated below.</p>
+
+<pre class="api-code">
+Ptr&lt;SketchLine&gt; ln = lines-&gt;addByTwoPoints(p1, p2);
+if (!ln)
+    return false;
+</pre>
+<br>
+
+<p Class="api">If the function failed you can obtain additional information about the failure by using the getLastError method of the Application object.  This is demonstrated below:</p>
+
+<pre class="api-code">
+Ptr&lt;SketchLine&gt; ln;
+ln = lines-&gt;addByTwoPoints(p1, p2);
+If (!ln)
+{
+    <span style="color:green">// get error message</span>
+    std::string errorMessage;
+    int errorCode = app-&gt;getLastError(&errorMessage);
+    if (GenericErrors::Ok != errorCode)
+        ui-&gt;messageBox(errorMessage);
+    return false;
+}
+</pre>
+<br>
+
+<p Class="api">The second error reporting method is for functions that return a Boolean indicating success or failure, as demonstrated below.  Again, you can use the getLastError method to get more information about the error.</p>
+
+<pre class="api-code">
+bool isOK = sk-&gt;isComputeDeferred(false);
+if (!isOK)
+    return false;
+</pre>
+
+<a name="Properties"></a>
+<h3 class="api">Properties</h3>
+
+<p Class="api">C++ doesn’t support properties in the way they are defined in the API and as they are used by Python. The Python sample below illustrates using the read-write name property of the Component object to get the existing name of a component and then set it.</p>
+
+<pre class="api-code">
+<span style="color:green">// Python</span>
+if comp.name == "Test":
+    comp.name = "New Test"
+</pre>
+<br/>
+
+<p Class="api">In C++, properties are implemented using two overloaded functions where the read version of the property is implemented as a function that doesn’t have any arguments and returns the value of the property.  Setting the property’s value is done through a function that takes a single argument, which is the new value of the property and returns a bool indicating success or failure.  Both of these are demonstrated below.</p>
+
+<pre class="api-code">
+<span style="color:green">// C++</span>
+if (comp-&gt;name() == "Test")
+    bool isOK = comp.name("New Test");
+</pre>
+<br/>
+
+<a name="Object Types and Casting"></a>
+<h3 class="api">Object Types and Casting</h3>
+<p Class="api">Unlike Python, C++ is a strongly typed language and variables must be declared as a specific type and assignments must match the type.  As described above, when declaring a new variable you should always use the Ptr template to create a smart pointer of a specific type.  To check the type of object being referenced by a variable you can use the objectType property, which is supported by all Fusion objects.  This function returns a string that is the actual type of the object, not necessarily the type the variable is declared as.  For example, the code below gets the entity that is currently selected, (which could be anything so the variable is declared as Base), and checks to see if it is a sketch line.</p>
+
+<pre class="api-code">
+Ptr&lt;Selection&gt; selection = ui-&gt;activeSelections()-&gt;item(0);
+Ptr&lt;Base&gt; selectedEnt = selection-&gt;entity();
+
+if (selectedEnt-&gt;objectType() == adsk::fusion::SketchLine::classType())
+    ui-&gt;messageBox("Selected entity is a sketch line.");
+else
+    ui-&gt;messageBox("Selected entity is NOT a sketch line.");
+</pre>
+<br/>
+
+<p Class="api">A SketchLine object is derived from the SketchCurve class and it derives from the SketchEntity class which finally derives from the Base class.  If you want to know that the selected entity is one of the types that that derives from SketchCurve you can use the following.</p>
+
+<pre class="api-code">
+Ptr&lt;Selection&gt; selection = ui-&gt;activeSelections()-&gt;item(0);
+Ptr&lt;Base&gt; selectedEnt = selection-&gt;entity();
+
+if (Ptr&lt;SketchCurve&gt;(selectedEnt))
+    ui-&gt;messageBox("Selected entity is a sketch curve.");
+else
+    ui-&gt;messageBox("Selected entity is NOT a sketch curve.");
+</pre>
+<br/>
+
+<p Class="api">The code above takes advantage of one of the features of the Fusion smart pointers in that they automatically handle casting.  It uses the automatic casting performed by the Ptr template to cast selectEnt to a SketchCurve and if it is successful this results in the statement being true.  Below is another example of a common case where casting is used where the active product is obtained as the base class Product class.  It’s then assigned to a variable declared as Design.  If the active product is a design this will be successful and the variable “des” will reference the active design.  If the active product is a CAM or Drawing product then the variable “des” will be null because the casting failed.</p>
+
+<pre class="api-code">
+Ptr&lt;Product&gt; prod = app-&gt;activeProduct();
+if (!prod)
+    return false;
+
+Ptr&lt;Design&gt; des = prod;
+if (!des)
+    <span style="color:green">// A product is not active.</span>
+    return false;
+</pre>
+<br/>
+
+<a name="Events"></a>
+<h3 class="api">Events</h3>
+
+<p Class="api">Implementing events in C++ is similar to how it’s done in Python.  Although the concept is the same for both languages they each have their own unique requirements.  Below is a list of the steps to implement an event in C++ and some sample code that illustrates these steps.</p>
+
+<p Class="api">
+<ol>
+<li>Get a reference to an object that supports the event, (line 13).</li>
+<li>Get the event object, (line 18).</li>
+<li>Call the add method on the event object, passing in the event handler class, (line 19).  Notice that the variable being passed in is declared as part of the event handler class definition on line 56.</li>
+<li>Create an event handler class that derives from the appropriate Fusion class, (line 21).</li>
+<li>Implement the notify function with the appropriate signature, (line 24).</li>
+<li>Add code in the notify function that’s to be run when handling the event, which can also include connecting to other events (lines 25-52).</li>
+</ol>
+</p>
+
+<pre class="api-code">
+1 extern "C" XI_EXPORT bool run(const char* context)
+2 {
+3      _app = Application::get();
+4      if (!_app)
+5          return false;
+6
+7      _ui = _app-&gt;userInterface();
+8      if (!_ui)
+9          return false;
+10
+11     <span style="color:green">// Create a button command definition.</span>
+12     Ptr&lt;CommandDefinitions&gt; cmdDefs = _ui-&gt;commandDefinitions();
+13     <mark>sampleCmdDef = cmdDefs-&gt;addButtonDefinition("sampleCmdID", "Sample",</mark> 
+14                                                 <mark>"Sample tooltip",</mark>
+15                                                 <mark>"./Resources/Sample");</mark>
+16
+17     <span style="color:green">// Connect to the Command Created event.</span>
+18     <mark>Ptr&lt;CommandCreatedEvent&gt; commandCreatedEvent = sampleCmdDef-&gt;commandCreated();</mark>
+19     <mark>commandCreatedEvent-&gt;add(&_cmdCreated);</mark>
+20 }
+
+
+<span style="color:green">// CommandCreated event handler.</span>
+21 <mark>class CommandCreatedEventHandler : public adsk::core::CommandCreatedEventHandler</mark>
+22 <mark>{</mark>
+23 <mark>public:</mark>
+24     <mark>void notify(const Ptr&lt;CommandCreatedEventArgs&gt;& eventArgs) override</mark>
+25     {
+26         if (eventArgs)
+27         {
+28             Ptr&lt;Command&gt; cmd = eventArgs-&gt;command();
+29             if (cmd)
+30             {
+31                 <span style="color:green">// Define the inputs.</span>
+32                 Ptr&lt;CommandInputs&gt; inputs = cmd-&gt;commandInputs();
+34
+35                 <span style="color:green">// Add an input to have a sketch curve or edge selected.</span>
+36                 Ptr&lt;SelectionCommandInput&gt; curveInput;
+37                 curveInput = inputs-&gt;addSelectionInput("curveInput", "Curve", 
+38                                                        "Select the sketch or edge curve.");
+39                 curveInput-&gt;addSelectionFilter("SketchCurves");
+40                 curveInput-&gt;addSelectionFilter("Edges");
+41
+42                 <span style="color:green">// Add an input to get a true/false input.</span>
+43                 Ptr&lt;BoolValueCommandInput&gt; trueFalseInput;
+44                 trueFalseInput = inputs-&gt;addBoolValueInput("trueFalseInput", "Yes or No",
+45                                                       true, "", true);
+46
+47                 <span style="color:green">// Connect to the command executed event.</span>
+48                 Ptr&lt;CommandEvent&gt; onExec = cmd-&gt;execute();
+49                 bool isOk = onExec-&gt;add(&onExecuteHandler_);
+50             }
+51         }
+52     }
+53
+54 private:
+55     OnExecuteEventHander onExecuteHandler_;
+56 } <mark>_cmdCreated;</mark>
+</pre>
+<br/>
+
+<a name="Header Files"></a>
+<h3 class="api">Header Files</h3>
+
+<p Class="api">The C++ interface to the Fusion API is described by many .h files that are provided as part of the Fusion installation.  There is a separate .h file for each class and they’re organized into folders in the “…/API/CPP/include” folder.  There are two top-level folders called “Core” and “Fusion”.  The “Core” folder contains functionality that is not Fusion specific, (UI, Materials, Geometry, etc.) and “Fusion” contains Fusion specific functionality (Sketch, Features, Components, etc.).  Within each of these are folders grouping specific functionality.  To write a simple program that creates a profile of lines and extrudes you will use classes that require the following header files to be included.</p>
+
+<pre class="api-code">
+#include &lt;Core/Application/Application.h&gt;
+#include &lt;Fusion/Fusion/Design.h&gt;
+#include &lt;Fusion/Components/Component.h&gt;
+#include &lt;Fusion/Construction/ConstructionPlane.h&gt;
+#include &lt;Fusion/Sketch/Sketches.h&gt;
+#include &lt;Fusion/Sketch/Sketch.h&gt;
+#include &lt;Fusion/Sketch/SketchCurves.h&gt;
+#include &lt;Fusion/Sketch/SketchLines.h&gt;
+#include &lt;Fusion/Sketch/SketchLine.h&gt;
+#include &lt;Fusion/Sketch/Profiles.h&gt;
+#include &lt;Fusion/Sketch/Profile.h&gt;
+#include &lt;Fusion/Features/Features.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeatureInput.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeatures.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeature.h&gt;
+</pre>
+<br/>
+
+<p Class="api">It’s not always obvious which folder you would look in to find the .h file for a specific class.  The help topic for each class, method, property, and event lists which .h file you need to include to use that functionality.  Although it's not standard C++ practice, you can avoid the necessity of adding a #include statement for every class used in your program by using the “CoreAll.h” and “FusionAll.h” files.  These two files include every Fusion related .h file that is available.  This results in longer compile times, but because of compiler optimizations results in the same runtime.</p>
+
+<pre class="api-code">
+#include &lt;Core/CoreAll.h&gt;
+#include &lt;Fusion/FusionAll.h&gt;
+</pre>
+<br/>
+
+<p Class="api">To also simplify the use of the API you can use the “using namespace” statements to reference the core and fusion namespaces so you don’t have to specify the full namespace when declaring variables.  By using the two statements below you don’t need to find out if a class is defined in Core or Fusion.</p>
+
+<pre class="api-code">
+using namespace adsk::core;
+using namespace adsk::fusion;
+</pre>
+<br/>
+
+<p Class="api">When declaring a variable of type “Application” you can use:</p>
+
+<pre class="api-code">
+Ptr&lt;Application&gt; app = Application::get();
+</pre>
+<br/>
+
+<p Class="api">Instead of:</p>
+
+<pre class="api-code">
+Ptr&lt;adsk::core::Application&gt; app = Application::get();
+</pre>
+<br/>
+
+Of course, in both cases of using the CoreAll.h and FusionAll.h or the using namespace statement, the choice is yours to use these shortcuts or to use more standard C++ practice.
+
+<a name="Iteration"></a>
+<h3 class="api">Iteration</h3>
+
+<p Class="api">You can use standard C++ iteration methods to iterate through the contents of Fusion collections.  For example, the following code will iterate through all of the faces in a body.</p>
+
+<pre class="api-code">
+for (Ptr&lt;BRepFace&gt; newFace : selectedBody-&gt;faces())
+{
+    // Do something with the face.
+}
+</pre>
+<br/>
+
+<a name="Object Equality"></a>
+<h3 class="api">Object Equality</h3>
+
+<p Class="api">It’s often useful to be able to compare two variables to see if they reference the same Fusion object.  Every C++ API function that returns an API object that references an entity in Fusion will create the C++ wrapper with the same pointer.  This means you can directly compare the pointers of two variables to see if they reference the same object.  For example the following compares two variables to see if they reference the same face.</p>
+
+<pre class="api-code">
+If (face1 == face2)
+    ui.messageBox(“Faces are the same.”);
+</pre>
+<br/>
+
+<a name="Utility Functions"></a>
+<h3 class="api">Utility Functions</h3>
+
+<p Class="api">The C++ interface also supports a few utility functions defined in Core/Utils.h that are useful in some special cases.</p>
+
+<p Class="api"><b>adsk::doEvents()</b> – This pauses execution of your script or add-in and allows Fusion to process all messages currently in its queue.  There are cases when you’re driving Fusion using a program that Fusion won’t keep up graphically.  Calling doEvents gives Fusion a chance to catch up and refresh the display.</p>
+
+<p Class="api"><b>adsk::autoTerminate()</b> – When a C++ script is executed, it is automatically terminated. In most cases this is the desired behavior because scripts typically are executed, they perform their function, and they're done. If you want a program to continue to running and not automatically terminate it's best to create an add-in rather than use a script.  However, it is possible to have a script that continues to run and doesn't automatically by using the autoTerminate property.  Using this property you can check the current auto termination state and set it.</p>
+
+<p Class="api"><b>adsk::terminate()</b> – The terminate function forces a script or add-in to immediately terminate.  This is particularly useful is you've used the autoTerminate with a script so that it didn't automatically terminate. Using the terminate function you can determine when the script will terminate.</p>
+
+<a name="Debugging a Windows Script or Add-In"></a>
+<h3 class="api">Debugging a Windows Script or Add-In</h3>
+
+<p Class="api">You can debug your C++ script or add-in using Visual Studio on Windows.  The following describes the steps for debugging.</p>
+
+<ol>
+<li>First you must be able to successfully compile your script or add-in.</li>
+<li>Add whatever break points you need.  Additional break points can be added while debugging but you’ll want to have at least one break point that will halt execution in the portion of code you want to examine.  Otherwise it will just run through the code without giving you a chance to debug it.</li>
+
+<li><p Class="api">In the Debug menu, run the “Attach to Process…” command, as shown below.</p>
+
+<div align="center"><img src="../images/CPPAttachToProcess.png" border=0 align="middle" alt="Attach to Process"></div>
+<br/>
+
+<p Class="api">In the Attach to Process dialog, make sure the "Attach to" option is set to “Native code” and choose “Fusion360.exe” from the list, as shown below, and click “Attach”.</p>
+
+<div align="center"><img src="../images/CPPAttachDialog.png" border=0 align="middle" alt="Attach to Process Dialog"></div>
+<br/>
+
+<p Class="api">At this point, your script or add-in is attached to Fusion but it’s not running.  You’ll see an indication of this in Visual Studio because all of your break points are disabled, as shown below.</p>
+
+<div align="center"><img src="../images/CPPDebugDisabled.png" border=0 align="middle" alt="Disabled break point"></div>
+<br/>
+</li>
+
+<li>
+<p Class="api">To begin running your script or add-in in Fusion you need to use the “Scripts and Add-Ins” command as shown below.  Select your script or add-in and click the “Run” button.  While initially writing and debugging an add-in you should not enable the “Run on Startup” capability but only manually run your add-in as part of the debugging process.</p>
+
+<div align="center"><img src="../images/CPPRun.png" border=0 align="middle" alt="Run Add-In"></div>
+<br>
+</li>
+
+<li>
+<p Class="api">The run function in both scripts and add-ins will now be called and any break points in that function, or functions called from there, will be hit.  If the break points are in other areas of your code then you need to exercise your add-in in a way to cause those portions of code to be executed.  For example, if your add-in creates a command and your break points are in code specific to that command, you need to run the command by clicking the command’s button in the user interface.</p>
+
+<p Class="api">In any case, once you’ve hit a break point you can now step through your code and perform standard debugging operations.</p>
+</li>
+
+<li>
+<p Class="api">To stop debugging you need to stop the script or add-in from running using the Scripts and Add-Ins command.</p>
+
+<div align="center"><img src="../images/CPPStop.png" border=0 align="middle" alt="Stop Add-In"></div>
+<br>
+
+<p Class="api">And you also need to stop debugging from Visual Studio which you can do by using the “Stop Debugging” command.  This will stop debugging and detach from Fusion.  You can now edit code, recompile and go back to step 3 to begin the debugging process again.</p>
+
+<p Class="api">If you see an error similar to that shown below when compiling your script or add-in, it typically means that the script or add-in is still running in Fusion and you need to stop it as shown above.</p>
+
+<div align="center"><img src="../images/CPPCopyError.png" border=0 align="middle" alt="Copy Error"></div>
+<br>
+
+</li>
+</ol>
+
+<a name="Debugging a Mac Script or Add-In"></a>
+<h3 class="api">Debugging a Mac Script or Add-In</h3>
+
+<p Class="api">You can debug your C++ script or add-in using Xcode on a Mac.  The following describes the steps for debugging.</p>
+
+<ol>
+<li>First you must be able to successfully build your script or add-in.</li>
+<li>Add whatever break points you need.  Additional break points can be added while debugging but you’ll want to at least add a break point that will halt execution in the portion of code you want to examine.  Otherwise it will just run through the code without giving you a chance to examine it.</li>
+
+<li><p Class="api">In the Debug menu, choose “Attach to Process” and select “Autodesk Fusion” from the list, as shown below.</p>
+
+<div align="center"><img src="../images/CPPAttachToProcessMac.png" border=0 align="middle" alt="Attach to Process"></div>
+<br>
+
+<p Class="api">At this point, your script or add-in is attached to Fusion but it’s not running.</p>
+</li>
+
+<li>
+<p Class="api">To begin running your script or add-in in Fusion you need to use the “Scripts and Add-Ins” command as shown below.  Select your script or add-in and click the “Run” button.  While initially writing and debugging an add-in you should not enable the “Run on Startup” capability but only manually run your add-in as part of the debugging process.</p>
+
+<div align="center"><img src="../images/CPPRunMac.png" border=0 align="middle" alt="Run Add-In"></div>
+<br>
+</li>
+
+<li>
+<p Class="api">The run function in both scripts and add-ins will now be called and any break points in that function, or functions called from there, will be hit.  If the break points are in other areas of your code then you need to exercise your add-in in a way to cause those portions of code to be executed.  For example, if your add-in creates a command and your break points are in code specific to that command, you need to run the command by clicking the command’s button in the user interface.</p>
+
+<p Class="api">In any case, once you’ve hit a break point you can now step through your code and perform standard debugging operations.</p>
+</li>
+
+<li>
+<p Class="api">To stop debugging you need to stop the script or add-in from running using the “Scripts and Add-Ins” command.</p>
+
+<div align="center"><img src="../images/CPPStopMac.png" border=0 align="middle" alt="Stop Add-In"></div>
+<br>
+
+<p Class="api">And you also need to stop debugging from Xcode which you can do by using the “Detach” command in the Debug menu.  This will stop debugging and detach from Fusion.  You can now edit the code, recompile and go back to step 3 to begin the debugging process again.</p>
+</li>
+</ol>
+
+<br />
+<br />
+<div id="CopyrightNotice" style="display:none;">
+  <hr />
+  <table width="100%" style="font-size:15">
+	<tr>
+	  <td align="left">
+		&copy; Copyright 2025 Autodesk, Inc.
+	  </td>
+	  <td align="right">
+		<a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(CPPSpecific_UM)">Comment on this page.</a>
+	  </td>
+	</tr>
+  </table>
+</div>
+</body>
+</html>

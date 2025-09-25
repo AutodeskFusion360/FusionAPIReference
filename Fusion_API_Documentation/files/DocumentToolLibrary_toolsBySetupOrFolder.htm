@@ -1,0 +1,115 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/DocumentToolLibrary_toolsBySetupOrFolder.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="26/06/2023">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="DocumentToolLibrary_toolsBySetupOrFolder">
+    <meta name="description" content="DocumentToolLibrary.toolsBySetupOrFolder Method">
+    <meta name="topicid" content="GUID-D4A123A4-D904-4491-8084-FCD962CA3328">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>DocumentToolLibrary.toolsBySetupOrFolder Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">DocumentToolLibrary.toolsBySetupOrFolder Method</h1>
+
+          Parent Object: <a href="DocumentToolLibrary.htm">DocumentToolLibrary</a><br>Defined in namespace "adsk::cam" and the header file is &lt;Cam/Tools/DocumentToolLibrary.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Returns all tools used in a given setup or folder. Given setup or folder must belong to the document of the DocumentToolLibrary. Raises an error if given operation is not in the document.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"documentToolLibrary_var" is a variable referencing a <a href="DocumentToolLibrary.htm">DocumentToolLibrary</a> object.<code><pre class="api-code">returnValue = documentToolLibrary_var.<b>toolsBySetupOrFolder</b>(setupOrFolder)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"documentToolLibrary_var" is a variable referencing a <a href="DocumentToolLibrary.htm">DocumentToolLibrary</a> object.<br /><br /><code><pre class="api-code">#include &lt;Cam/Tools/DocumentToolLibrary.h&gt;<br /><br />returnValue = documentToolLibrary_var-&gt;<b>toolsBySetupOrFolder</b>(setupOrFolder);<br /></pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;"><a href="Tool.htm">Tool</a>[]</td>
+        <td class="api-list">Returns tools used by a specific setup or folder.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">setupOrFolder</td>
+        <td class="api-list"><a href="OperationBase.htm">OperationBase</a></td>
+        <td class="api-list">The setup or folder to get tools from. Must belong to the document.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version July 2023<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(DocumentToolLibrary.toolsBySetupOrFolder%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

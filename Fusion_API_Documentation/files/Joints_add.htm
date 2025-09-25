@@ -1,0 +1,156 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/Joints_add.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="16/7/2015">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="Joints_add">
+    <meta name="description" content="Joints.add Method">
+    <meta name="topicid" content="GUID-8ca4237b-89ae-4b09-b871-bbda0d5ba51e">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Joints.add Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Joints.add Method</h1>
+
+          Parent Object: <a href="Joints.htm">Joints</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Components/Joints.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Creates a new joint.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"joints_var" is a variable referencing a <a href="Joints.htm">Joints</a> object.<code><pre class="api-code">returnValue = joints_var.<b>add</b>(input)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"joints_var" is a variable referencing a <a href="Joints.htm">Joints</a> object.<br /><br /><code><pre class="api-code">#include &lt;Fusion/Components/Joints.h&gt;<br /><br />returnValue = joints_var-&gt;<b>add</b>(input);<br /></pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;"><a href="Joint.htm">Joint</a></td>
+        <td class="api-list">Returns the newly created Joint or null in the case of failure.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">input</td>
+        <td class="api-list"><a href="JointInput.htm">JointInput</a></td>
+        <td class="api-list">The JointInput object that defines the geometry and various inputs that fully define a joint. A JointInput object is created using the Joints.createInput method.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BallJointMotionSample_Sample.htm">BallJointMotion API Sample</a></td>
+        <td class="api-list">Demonstrates creating a joint with ball joint motion</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CylindricalJointMotionSample_Sample.htm">CylindricalJointMotion API Sample</a></td>
+        <td class="api-list">Demonstrates creating a joint with cylindrical joint motion.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="JointSample_Sample.htm">Joint API Sample</a></td>
+        <td class="api-list">Demonstrates creating a new joint.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PinSlotJointMotionSample_Sample.htm">Pin Slot Joint Motion API Sample</a></td>
+        <td class="api-list">Demonstrates creating a joint with pin slot joint motion</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PlanarJointMotionSample_Sample.htm">Planar Joint Motion API Sample</a></td>
+        <td class="api-list">Demonstrates creating a joint with planar joint motion</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RevoluteJointMotionSample_Sample.htm">RevoluteJointMotion API Sample</a></td>
+        <td class="api-list">Demonstrates creating a joint with revolute joint motion.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SliderJointMotionSample_Sample.htm">SliderJointMotion API Sample</a></td>
+        <td class="api-list">Demonstrates creating a joint with slider joint motion.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version July 2015<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(Joints.add%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

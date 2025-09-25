@@ -1,0 +1,251 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/CustomEventCommandDialog.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="CustomEventCommandDialog_Sample">
+    <meta name="description" content="Custom Event for Command Dialog Sample">
+    <meta name="topicid" content="GUID-B38361DE-1B38-432D-BAE6-ABC3B0E7AB35">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Custom Event for Command Dialog</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Custom Event for Command Dialog</h1>
+    <h2 class="api">
+          Description
+        </h2>Demonstrates using a custom event to process getting information in the background to display in a command dialog. This is an add-in and should be copied and pasted into an add-in project.<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">import adsk.core, adsk.fusion, adsk.cam, traceback
+import threading, time, json 
+from datetime import datetime
+import ctypes
+
+
+handlers = []
+_app = adsk.core.Application.cast(None)
+_ui = adsk.core.UserInterface.cast(None)
+_tableInput = adsk.core.TableCommandInput.cast(None)
+_cmdDef = adsk.core.CommandDefinition.cast(None)
+_workerThread = None
+myCustomEvent = 'MyDialogDataEvent'
+
+
+<span style="color:blue"># The event handler that responds when the custom event is fired.</span>
+class DialogDataEventHandler(adsk.core.CustomEventHandler):
+    def __init__(self):
+        super().__init__()
+    def notify(self, args):
+        try:
+            eventArgs = adsk.core.CustomEventArgs.cast(args)
+
+            <span style="color:blue"># Get the data passed through event.  In this case it is</span>
+            <span style="color:blue"># formatted as JSON so it extracts the values named</span>
+            <span style="color:blue"># "label" and "value".    </span>
+            dialogData = eventArgs.additionalInfo
+            valueData = json.loads(dialogData)
+            label = valueData['label']
+            value = valueData['value']
+            
+            <span style="color:blue"># Set the value of a string value input using the data passed in.</span>
+            stringInput = adsk.core.StringValueCommandInput.cast(_tableInput.getInputAtPosition(int(label), 1))
+            stringInput.value = value
+        except:
+            if _ui:
+                _ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
+            
+
+<span style="color:blue"># The worker thread class. </span>
+class GetDialogInfoThread(threading.Thread):
+    def __init__(self):
+        threading.Thread.__init__(self)
+        self.isStopped = False
+    def run(self):
+        try:
+            <span style="color:blue"># Iterate 5 steps to fill each of the 5 rows in the table.</span>
+            for i in range(5):
+                <span style="color:blue"># Check to see if the thread has been stopped.</span>
+                if not self.isStopped:
+                    <span style="color:blue"># Simulate calling a web service that will take some</span>
+                    <span style="color:blue"># time and returns some data by sleeping and building</span>
+                    <span style="color:blue"># some data using the current time.</span>
+                    time.sleep(2)
+
+                    date_object = datetime.now()
+                    current_time = date_object.strftime('%H:%M:%S')
+                    returnInfo = {'label': str(i), 'value': current_time}
+                    returnJson = json.dumps(returnInfo)
+
+                    <span style="color:blue"># Fire the custom event to allow the add-in to update the dialog.    </span>
+                    _app.fireCustomEvent(myCustomEvent, returnJson)                    
+                else:
+                    return
+        except:
+            ctypes.windll.user32.MessageBoxW(0, 'Failed:\n{}'.format(traceback.format_exc()), "Failed", 1)
+
+    <span style="color:blue"># Method to allow the thread to be stopped.                </span>
+    def stop(self):
+        self.isStopped = True
+
+
+<span style="color:blue"># Event handler that is called when the add-in is destroyed. The custom event is</span>
+<span style="color:blue"># unregistered here and the thread is stopped.</span>
+class MyDestroyHandler(adsk.core.CommandEventHandler):
+    def __init__(self):
+        super().__init__()
+    def notify(self, args):
+        try:
+            eventArgs = adsk.core.CommandEventArgs.cast(args)
+            _app.unregisterCustomEvent(myCustomEvent)
+            _workerThread.stop()
+        except:
+            if _ui:
+                _ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
+        
+
+<span style="color:blue"># Event handler to handle when the command is run by the user.</span>
+class MyCommandCreatedHandler(adsk.core.CommandCreatedEventHandler):
+    def __init__(self):
+        super().__init__()
+    def notify(self, args):
+        try:
+            eventArgs = adsk.core.CommandCreatedEventArgs.cast(args)
+            inputs = eventArgs.command.commandInputs
+            
+            <span style="color:blue"># Create a table command input and add five rows of two columns of string </span>
+            <span style="color:blue"># command inputs.  The first column is populated with values and the</span>
+            <span style="color:blue"># second is left empty to be populated later as the data is obtained.</span>
+            global _tableInput
+            _tableInput = inputs.addTableCommandInput('table', 'Info', 2, '1:2')
+            _tableInput.maximumVisibleRows = 5
+            for i in range(5):
+                labelText = inputs.addStringValueInput('label' + str(i), 'Label ' + str(i), 'Item ' + str(i))
+                labelText.isReadOnly = True
+                _tableInput.addCommandInput(labelText, i, 0, 0, 0)
+            
+                valueText = inputs.addStringValueInput('value' + str(i), 'Value ' + str(i), '')
+                valueText.isReadOnly = True
+                _tableInput.addCommandInput(valueText, i, 1, 0, 0)
+            
+            <span style="color:blue"># Register the custom event and connect the handler.</span>
+            customEvent = _app.registerCustomEvent(myCustomEvent)
+            onDialogData = DialogDataEventHandler()
+            customEvent.add(onDialogData)
+            handlers.append(onDialogData)
+            
+            <span style="color:blue"># Connect a handler to the command destroyed event.</span>
+            onDestroy = MyDestroyHandler()
+            inputs.command.destroy.add(onDestroy)
+            handlers.append(onDestroy)        
+    
+            <span style="color:blue"># Start the seperate thread that will collect the data to populate</span>
+            <span style="color:blue"># the second column of the dialog.</span>
+            global _workerThread
+            _workerThread = GetDialogInfoThread()
+            _workerThread.start()
+        except:
+            if _ui:
+                _ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
+        
+        
+def run(context):
+    try:
+        global _app, _ui, _cmdDef
+        _app = adsk.core.Application.get()
+        _ui  = _app.userInterface
+
+        <span style="color:blue"># Create a new command and add it to the ADD-INS panel in the model workspace.</span>
+        _cmdDef = _ui.commandDefinitions.addButtonDefinition('ThreadTestCmd', 'Thread Test', 'Thread Test') 
+        addInsPanel = _ui.allToolbarPanels.itemById('SolidScriptsAddinsPanel')
+        buttonControl = addInsPanel.controls.addCommand(_cmdDef)        
+
+        <span style="color:blue"># Connect the command created handler to the event.</span>
+        onCommandCreated = MyCommandCreatedHandler()
+        _cmdDef.commandCreated.add(onCommandCreated)
+        handlers.append(onCommandCreated)
+    except:
+        if _ui:
+            _ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
+
+
+def stop(context):
+    try:
+        <span style="color:blue"># Clean up the command.</span>
+        addInsPanel = _ui.allToolbarPanels.itemById('SolidScriptsAddinsPanel')
+        cntrl = addInsPanel.controls.itemById('ThreadTestCmd')
+        if cntrl:
+            cntrl.deleteMe()
+
+        if _cmdDef:
+            _cmdDef.deleteMe()
+    except:
+        if _ui:
+            _ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(CustomEventCommandDialog%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

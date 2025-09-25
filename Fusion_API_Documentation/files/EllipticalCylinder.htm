@@ -1,0 +1,142 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/EllipticalCylinder.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="EllipticalCylinder">
+    <meta name="description" content="EllipticalCylinder Object">
+    <meta name="topicid" content="GUID-9f7ed755-278a-4b9f-b65d-668864384387">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>EllipticalCylinder Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">EllipticalCylinder Object
+			</h1>
+              Derived from: <a href="Surface.htm">Surface</a> Object
+            <br>Defined in namespace "adsk::core" and the header file is &lt;Core/Geometry/EllipticalCylinder.h&gt;<h2 class="api">
+          Description
+        </h2>Transient elliptical cylinder. A transient elliptical cylinder is not displayed or saved in a document. A transient elliptical cylinder is used as a wrapper to work with raw elliptical cylinder information. A transient elliptical cylinder has no boundaries and is infinite in length. They are created statically using the create method of the EllipticalCylinder class.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="EllipticalCylinder_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="EllipticalCylinder_copy.htm">copy</a></td>
+        <td class="api-list">Creates and returns an independent copy of this EllipticalCylinder object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="EllipticalCylinder_create.htm">create</a></td>
+        <td class="api-list">Creates a transient 3D elliptical cylinder object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="EllipticalCylinder_getData.htm">getData</a></td>
+        <td class="api-list">Gets the data defining the elliptical cylinder.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="EllipticalCylinder_set.htm">set</a></td>
+        <td class="api-list">Sets the data defining the elliptical cylinder.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="EllipticalCylinder_transformBy.htm">transformBy</a></td>
+        <td class="api-list">Updates this surface by transforming it with a given input matrix.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="EllipticalCylinder_axis.htm">axis</a></td>
+        <td class="api-list">Gets and set the center axis (along the length) of the cylinder that defines its normal direction.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="EllipticalCylinder_evaluator.htm">evaluator</a></td>
+        <td class="api-list">Returns the surface evaluator.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="EllipticalCylinder_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="EllipticalCylinder_majorAxis.htm">majorAxis</a></td>
+        <td class="api-list">Gets and sets the direction of the major axis of the ellipse that defines the cylinder.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="EllipticalCylinder_majorRadius.htm">majorRadius</a></td>
+        <td class="api-list">Gets and sets the major radius of the ellipse that defines the cylinder.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="EllipticalCylinder_minorRadius.htm">minorRadius</a></td>
+        <td class="api-list">Gets and sets the minor radius of the ellipse that defines the cylinder.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="EllipticalCylinder_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="EllipticalCylinder_origin.htm">origin</a></td>
+        <td class="api-list">Gets and sets the origin point (center) of the base of the cylinder.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="EllipticalCylinder_surfaceType.htm">surfaceType</a></td>
+        <td class="api-list">Returns the surface type.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="EllipticalCylinder_copy.htm">EllipticalCylinder.copy</a>, <a href="EllipticalCylinder_create.htm">EllipticalCylinder.create</a><h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(EllipticalCylinder%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

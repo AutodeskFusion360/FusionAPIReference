@@ -1,0 +1,347 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/WoodRoutingSample.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="WoodRoutingSample_Sample">
+    <meta name="description" content="Wood Routing Workflow Sample Sample">
+    <meta name="topicid" content="GUID-da76b487-3f38-42a8-a5e2-0bf973cc42cc">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Wood Routing Workflow Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Wood Routing Workflow Sample</h1>
+    <h2 class="api">
+          Description
+        </h2>This script demonstrates routing wood panels.<p>When running the sample, it assumes you have an open design containing one or more "panels" oriented flat in the X-Y plane. The script creates a setup and a 2D contour operation with tabs to route the panels from a standard sheet.</p><h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#C++">C++</a></li>
+        <li><a href="#Python">Python</a></li>
+      </ul>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code">#include &lt;Core/CoreAll.h&gt;
+#include &lt;Fusion/FusionAll.h&gt;
+#include &lt;Cam/CamAll.h&gt;
+
+using namespace adsk::core;
+using namespace adsk::fusion;
+using namespace adsk::cam;
+
+<span style="color:blue">// Assumes a model is loaded in Fusion, eg a couple of flat panels</span>
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    Ptr&lt;Application&gt; app = Application::get();
+    Ptr&lt;UserInterface&gt; ui = app-&gt;userInterface();
+
+    <span style="color:blue">// use existing doc:</span>
+    Ptr&lt;Document&gt; doc = app-&gt;activeDocument();
+
+    <span style="color:blue">// switch to manufacturing space</span>
+    Ptr&lt;Workspace&gt; camWS = ui-&gt;workspaces()-&gt;itemById("CAMEnvironment");
+    camWS-&gt;activate();
+
+    <span style="color:blue">// get the CAM product</span>
+    Ptr&lt;Products&gt; products = doc-&gt;products();
+
+    <span style="color:blue">/*
+     * Search a tool in our tool library
+     */</span>
+    <span style="color:blue">// get the tool libraries from the library manager</span>
+    Ptr&lt;CAMManager&gt; camManager = CAMManager::get();
+    Ptr&lt;CAMLibraryManager&gt; libraryManager = camManager-&gt;libraryManager();
+    Ptr&lt;ToolLibraries&gt; toolLibraries = libraryManager-&gt;toolLibraries();
+
+    <span style="color:blue">// we can use a library URl directly if we know its address (using Fusion metric sample lib)</span>
+    Ptr&lt;URL&gt; toolLibraryUrl = URL::create("systemlibraryroot:<span style="color:blue">//Samples/Milling Tools (Metric).json");</span>
+
+    <span style="color:blue">// load tool library</span>
+    Ptr&lt;ToolLibrary&gt; toolLibrary = toolLibraries-&gt;toolLibraryAtURL(toolLibraryUrl);
+    if (!toolLibrary)
+    {
+        ui-&gt;messageBox("Failed to load tool library");
+        return false;
+    }
+
+    Ptr&lt;Tool&gt; MyTool = nullptr;
+    <span style="color:blue">// search an end mill for the contour operation</span>
+    for (Ptr&lt;Tool&gt;& tool : toolLibrary)
+    {
+        <span style="color:blue">// read the tool type</span>
+        Ptr&lt;ChoiceParameterValue&gt; toolTypeParameter = tool-&gt;parameters()-&gt;itemByName("tool_type")-&gt;value();
+        std::string toolType = toolTypeParameter-&gt;value();
+
+        <span style="color:blue">// compare toolType and filter on "flat end mill"</span>
+        if (toolType == "flat end mill" && !MyTool)
+        {
+            <span style="color:blue">// search for tool diameter larger or equal to 10mm but less than 12mm</span>
+            Ptr&lt;FloatParameterValue&gt; diameterParameter = tool-&gt;parameters()-&gt;itemByName("tool_diameter")-&gt;value();
+            double diameter = diameterParameter-&gt;value();
+            if (diameter &gt;= 1.0 && diameter &lt; 1.2)
+            {
+                MyTool = tool;
+                break;
+            }
+        }
+    }
+    if (!MyTool)
+    {
+        ui-&gt;messageBox("No flat end mill tool found");
+        return false;
+    }
+
+    <span style="color:blue">/*
+     * create setup
+     */</span>
+    Ptr&lt;CAM&gt; cam = products-&gt;itemByProductType("CAMProductType");
+    Ptr&lt;Setups&gt; setups = cam-&gt;setups();
+    Ptr&lt;SetupInput&gt; setupInput = setups-&gt;createInput(OperationTypes::MillingOperation);
+    <span style="color:blue">// create a list for the models to add to the setup Input</span>
+    std::vector&lt;Ptr&lt;Base&gt;&gt; models;
+
+    <span style="color:blue">// loop across all bRep bodies and add them all to our model list</span>
+    int countParts = cam-&gt;designRootOccurrence()-&gt;bRepBodies()-&gt;count();
+    int i = 0;
+    while (i &lt; countParts)
+    {
+        Ptr&lt;BRepBody&gt; part = cam-&gt;designRootOccurrence()-&gt;bRepBodies()-&gt;item(i);
+        models.push_back(part);
+        i = i + 1;
+    }
+
+    <span style="color:blue">// pass the model list to the setup input</span>
+    setupInput-&gt;models(models);
+    <span style="color:blue">// create the setup</span>
+    Ptr&lt;Setup&gt; setup = setups-&gt;add(setupInput);
+
+    <span style="color:blue">// change some properties of the setup & stock</span>
+    setup-&gt;name("CAM Woodworking Script Sample");
+    setup-&gt;stockMode(SetupStockModes::FixedBoxStock);
+    <span style="color:blue">// set setup origin in the corner</span>
+    Ptr&lt;ChoiceParameterValue&gt; wcs_origin_boxPoint = setup-&gt;parameters()-&gt;itemByName("wcs_origin_boxPoint")-&gt;value();
+    wcs_origin_boxPoint-&gt;value("top 1");
+    <span style="color:blue">// set stock size XYZ</span>
+    setup-&gt;parameters()-&gt;itemByName("job_stockFixedX")-&gt;expression("2440 mm");
+    setup-&gt;parameters()-&gt;itemByName("job_stockFixedY")-&gt;expression("1220 mm");
+    setup-&gt;parameters()-&gt;itemByName("job_stockFixedZ")-&gt;expression("18 mm");
+
+    <span style="color:blue">/*
+     * 2D contour operation
+     */</span>
+    <span style="color:blue">// set operation properties</span>
+    Ptr&lt;OperationInput&gt; input = setup-&gt;operations()-&gt;createInput("contour2d");
+    input-&gt;tool(MyTool);
+    input-&gt;displayName("2D Contour");
+    input-&gt;parameters()-&gt;itemByName("tolerance")-&gt;expression("0.1 mm");
+
+    <span style="color:blue">// add tabs</span>
+    <span style="color:blue">// activate tabs group to enable tabs and be able to modify its parameters</span>
+    input-&gt;parameters()-&gt;itemByName("group_tabs")-&gt;expression("true");
+    input-&gt;parameters()-&gt;itemByName("tabWidth")-&gt;expression("18 mm");
+    input-&gt;parameters()-&gt;itemByName("tabHeight")-&gt;expression("18 mm");
+    input-&gt;parameters()-&gt;itemByName("tabDistance")-&gt;expression("100 mm");
+
+    <span style="color:blue">// add the operation to the setup</span>
+    Ptr&lt;Operation&gt; contourOp = setup-&gt;operations()-&gt;add(input);
+
+    <span style="color:blue">// add silhouette to contour selection for 2D contour operation</span>
+    <span style="color:blue">// requires the operation to exist</span>
+    Ptr&lt;CadContours2dParameterValue&gt; cadcontours2dParam = contourOp-&gt;parameters()-&gt;itemByName("contours")-&gt;value();
+    Ptr&lt;CurveSelections&gt; chains = cadcontours2dParam-&gt;getCurveSelections();
+    <span style="color:blue">// calculate and add a new silhouette curve to the geometry selection list</span>
+    chains-&gt;createNewSilhouetteSelection();
+    cadcontours2dParam-&gt;applyCurveSelections(chains);
+
+    <span style="color:blue">// calculate operation</span>
+    cam-&gt;generateToolpath(contourOp);
+
+    <span style="color:blue">/*
+     * post process
+     */</span>
+    <span style="color:blue">// copy-paste from basic milling sample</span>
+
+    return true;
+}</pre>
+      </div>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code"><span style="color:blue">#Assumes a model is loaded in Fusion, eg a couple of flat panels </span>
+
+import adsk.core, adsk.fusion, adsk.cam, traceback
+
+def run(context):
+    ui = None
+    try:
+        app = adsk.core.Application.get()
+        ui  = app.userInterface
+        
+        <span style="color:blue"># use existing doc:</span>
+        doc = app.activeDocument
+
+        <span style="color:blue"># switch to manufacturing space</span>
+        camWS = ui.workspaces.itemById('CAMEnvironment') 
+        camWS.activate()
+
+        <span style="color:blue"># get the CAM product</span>
+        products = doc.products
+
+        <span style="color:blue">#################### Search a tool in our tool library ####################</span>
+        <span style="color:blue"># get the tool libraries from the library manager</span>
+        camManager = adsk.cam.CAMManager.get()
+        libraryManager = camManager.libraryManager
+        toolLibraries = libraryManager.toolLibraries
+
+        <span style="color:blue"># we can use a library URl directly if we know its address (using Fusion metric sample lib)</span>
+        url = adsk.core.URL.create('systemlibraryroot://Samples/Milling Tools (Metric).json')
+        
+        <span style="color:blue"># load tool library</span>
+        toolLibrary = toolLibraries.toolLibraryAtURL(url)
+
+        MyTool = None  
+        <span style="color:blue"># search an end mill for the contour operation</span>
+        for tool in toolLibrary:
+            <span style="color:blue"># read the tool type</span>
+            toolType = tool.parameters.itemByName('tool_type').value.value 
+ 
+            <span style="color:blue"># compare toolType and filter on 'flat end mill'</span>
+            if toolType == 'flat end mill' and not MyTool:
+                <span style="color:blue"># search for tool diameter larger or equal to 10mm but less than 12mm</span>
+                diameter = tool.parameters.itemByName('tool_diameter').value.value
+                if diameter &gt;= 1.0 and diameter &lt; 1.2: 
+                    MyTool = tool
+                    break
+
+        <span style="color:blue">#################### create setup ####################</span>
+        cam = adsk.cam.CAM.cast(products.itemByProductType("CAMProductType"))
+        setups = cam.setups
+        setupInput = setups.createInput(adsk.cam.OperationTypes.MillingOperation)
+        <span style="color:blue"># create a list for the models to add to the setup Input</span>
+        models = [] 
+          
+        <span style="color:blue"># loop across all bRep bodies and add them all to our model list</span>
+        countParts = cam.designRootOccurrence.bRepBodies.count
+        i = 0
+        while i &lt; countParts:
+            part = cam.designRootOccurrence.bRepBodies.item(i)
+            models.append(part)
+            i = i + 1
+            
+        <span style="color:blue"># pass the model list to the setup input</span>
+        setupInput.models = models 
+        <span style="color:blue"># create the setup</span>
+        setup = setups.add(setupInput) 
+
+        <span style="color:blue"># change some properties of the setup & stock</span>
+        setup.name = 'CAM Woodworking Script Sample'  
+        setup.stockMode = adsk.cam.SetupStockModes.FixedBoxStock
+        <span style="color:blue"># set setup origin in the corner</span>
+        setup.parameters.itemByName('wcs_origin_boxPoint').value.value = 'top 1'
+        <span style="color:blue"># set stock size XYZ</span>
+        setup.parameters.itemByName('job_stockFixedX').expression = '2440 mm'
+        setup.parameters.itemByName('job_stockFixedY').expression = '1220 mm'
+        setup.parameters.itemByName('job_stockFixedZ').expression = '18 mm'
+
+        <span style="color:blue">#################### 2D contour operation ####################</span>
+        <span style="color:blue"># set operation properties</span>
+        input = setup.operations.createInput('contour2d')
+        input.tool = MyTool
+        input.displayName = '2D Contour'
+        input.parameters.itemByName('tolerance').expression = '0.1 mm' 
+        
+        <span style="color:blue"># add tabs</span>
+        <span style="color:blue"># activate tabs group to enable tabs and be able to modify its parameters</span>
+        input.parameters.itemByName('group_tabs').expression = 'true'
+        input.parameters.itemByName('tabWidth').expression = '18 mm'
+        input.parameters.itemByName('tabHeight').expression = '18 mm'
+        input.parameters.itemByName('tabDistance').expression = '100 mm'
+
+        <span style="color:blue"># add the operation to the setup</span>
+        contourOp = setup.operations.add(input)
+        
+        <span style="color:blue"># add silhouette to contour selection for 2D contour operation</span>
+        <span style="color:blue"># requires the operation to exist</span>
+        cadcontours2dParam: adsk.cam.CadContours2dParameterValue = contourOp.parameters.itemByName('contours').value
+        chains = cadcontours2dParam.getCurveSelections()
+        <span style="color:blue"># calculate and add a new silhouette curve to the geometry selection list</span>
+        chains.createNewSilhouetteSelection()
+        cadcontours2dParam.applyCurveSelections(chains)
+
+        <span style="color:blue"># calculate operation</span>
+        cam.generateToolpath(contourOp)
+
+        <span style="color:blue">#################### post process ####################</span>
+        <span style="color:blue"># copy-paste from basic milling sample</span>
+
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(WoodRoutingSample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

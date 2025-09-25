@@ -1,0 +1,146 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/RevolveFeatures_createInput.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="RevolveFeatures_createInput">
+    <meta name="description" content="RevolveFeatures.createInput Method">
+    <meta name="topicid" content="GUID-123777a1-89e6-43f1-b064-f3d94badee33">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>RevolveFeatures.createInput Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">RevolveFeatures.createInput Method</h1>
+
+          Parent Object: <a href="RevolveFeatures.htm">RevolveFeatures</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Features/RevolveFeatures.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Creates a new RevolveFeatureInput object that is used to specify the input needed to create a new revolve feature.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"revolveFeatures_var" is a variable referencing a <a href="RevolveFeatures.htm">RevolveFeatures</a> object.<code><pre class="api-code">returnValue = revolveFeatures_var.<b>createInput</b>(profile, axis, operation)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"revolveFeatures_var" is a variable referencing a <a href="RevolveFeatures.htm">RevolveFeatures</a> object.<br /><br /><code><pre class="api-code">#include &lt;Fusion/Features/RevolveFeatures.h&gt;<br /><br />returnValue = revolveFeatures_var-&gt;<b>createInput</b>(profile, axis, operation);<br /></pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;"><a href="RevolveFeatureInput.htm">RevolveFeatureInput</a></td>
+        <td class="api-list">Returns the newly created RevolveFeatureInput object or null if the creation failed.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">profile</td>
+        <td class="api-list"><a href="Base.htm">Base</a></td>
+        <td class="api-list">The profile argument can be a single Profile, a single planar face, or an ObjectCollection consisting of multiple profiles and planar faces. When an ObjectCollection is used all of the profiles and faces must be co-planar.<br/><br/> To create a surface (non-solid) revolution, you can use the createOpenProfile and createBRepEdgeProfile methods of the Component object to create an open profile. You also need to set the isSolid property of the returned RevolveFeatureInput property to False.</td>
+      </tr>
+      <tr>
+        <td class="api-list">axis</td>
+        <td class="api-list"><a href="Base.htm">Base</a></td>
+        <td class="api-list">The axis can be a sketch line, construction axis, linear edge or a face that defines an axis (cylinder, cone, torus, etc.). If it is not in the same plane as the profile, it is projected onto the profile plane.</td>
+      </tr>
+      <tr>
+        <td class="api-list">operation</td>
+        <td class="api-list"><a href="FeatureOperations.htm">FeatureOperations</a></td>
+        <td class="api-list">The operation type to perform.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="revolveFeatures_add_Sample.htm">revolveFeatures.add</a></td>
+        <td class="api-list">Demonstrates creating a revolve feature using an angle extent.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SimpleRevolveFeatureSample_Sample.htm">Simple Revolve Feature Sample</a></td>
+        <td class="api-list">Creates a new revolve feature, resulting in a new component.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(RevolveFeatures.createInput%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

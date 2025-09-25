@@ -1,0 +1,570 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/MeasureSample.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="MeasureSample_Sample">
+    <meta name="description" content="Measure Sample Sample">
+    <meta name="topicid" content="GUID-4b13c86c-7aa0-4555-b3e3-02f7d1b01d10">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Measure Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Measure Sample</h1>
+    <h2 class="api">
+          Description
+        </h2>Measure related functions<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code"><span style="color:blue">#Author-</span>
+<span style="color:blue">#Description-</span>
+
+import adsk.core, adsk.fusion, adsk.cam, traceback
+
+def validate(discription, result, baseline):
+    if type(result) is str: 
+        if result != baseline:
+            raise Exception(discription + ' is different!\n'
+                           + 'Result is ' + result + '\n'
+                           + 'Baseline is ' + baseline + '\n'
+                           )
+    elif type(result) is float: 
+        if abs(result - baseline) &gt; 10e-6:
+            raise Exception(discription + ' is different!\n'
+                           + 'Result is ' + str(result) + '\n'
+                           + 'Baseline is ' + str(baseline) + '\n'
+                           )
+    elif type(result) is bool: 
+        if result != baseline:
+            raise Exception(discription + ' is different!\n'
+                           + 'Result is ' + str(result) + '\n'
+                           + 'Baseline is ' + str(baseline) + '\n'
+                           )
+    else:
+        raise Exception('Validaion is not support the data type ' + discription)
+<span style="color:blue">#endTest</span>
+
+def run(context):
+    ui = None
+    try:
+        app = adsk.core.Application.get()
+        ui  = app.userInterface
+        
+        <span style="color:blue"># Create a new document</span>
+        doc = app.documents.add(adsk.core.DocumentTypes.FusionDesignDocumentType)
+        product = app.activeProduct
+        design = adsk.fusion.Design.cast(product)
+        
+        <span style="color:blue"># Get the root component of the active design</span>
+        rootComp = design.rootComponent
+        
+        <span style="color:blue"># Create a sketch</span>
+        sketches = rootComp.sketches
+        sketch1 = sketches.add(rootComp.yZConstructionPlane)
+        
+        <span style="color:blue"># Create sketch lines</span>
+        sketchLines = sketch1.sketchCurves.sketchLines
+        
+        <span style="color:blue"># Create some 3D points</span>
+        point1 = adsk.core.Point3D.create(0.0, 0.0, 0.0)
+        point2 = adsk.core.Point3D.create(5.0, 5.0, 0.0)
+        
+        <span style="color:blue"># Create sketch rectangle</span>
+        sketchLines.addTwoPointRectangle(point1, point2)
+        
+        <span style="color:blue"># Get the profile</span>
+        profile = sketch1.profiles.item(0)
+        
+        <span style="color:blue"># Create an extusion input</span>
+        extrudes = rootComp.features.extrudeFeatures
+        extrudeInput = extrudes.createInput(profile, adsk.fusion.FeatureOperations.NewBodyFeatureOperation)     
+        <span style="color:blue"># Set extrude distance is 6 cm</span>
+        distance = adsk.core.ValueInput.createByReal(6.0)
+        <span style="color:blue"># Set the distance extent</span>
+        extrudeInput.setDistanceExtent(False, distance)
+        <span style="color:blue"># Set the extrude type is solid</span>
+        extrudeInput.isSolid = True
+        
+        <span style="color:blue"># Create the extrude</span>
+        extrude = extrudes.add(extrudeInput)
+        
+        <span style="color:blue"># Get the extrude brepbody</span>
+        brepBody = extrude.bodies.item(0)
+          
+        <span style="color:blue"># Measure minimum distance</span>
+        print("*** Measure minimum distance.")
+        sketchLine = sketchLines.item(0)
+        brepEdge = brepBody.edges.item(0)
+        measureResult = app.measureManager.measureMinimumDistance(sketchLine, brepEdge)
+        minDistance = measureResult.value
+        print('Minimum distance value is ' + str(minDistance))
+        
+        position1 = measureResult.positionOne
+        position2 = measureResult.positionTwo
+        print('positionOne is ('
+              + str(position1.x) 
+              + ',' 
+              + str(position1.y) 
+              + ',' 
+              + str(position1.z)
+              + ')'
+             )
+        print('positionTwo is ('
+              + str(position2.x) 
+              + ',' 
+              + str(position2.y) 
+              + ',' 
+              + str(position2.z) 
+              + ')'
+             ) 
+        
+        <span style="color:blue"># Measure angle for three point</span>
+        print("*** Measure angle for three point.")
+        constructionPoint = rootComp.originConstructionPoint
+        vertex = brepBody.vertices.item(0)
+        measureResult = app.measureManager.measureAngle(constructionPoint, point2, vertex)
+        angle = measureResult.value
+        print('Angle value is ' + str(angle))
+        
+        position1 = measureResult.positionOne
+        position2 = measureResult.positionTwo
+        position3 = measureResult.positionThree
+        print('positionOne is ('
+              + str(position1.x) 
+              + ',' 
+              + str(position1.y) 
+              + ',' 
+              + str(position1.z)
+              + ')'
+             )
+        print('positionTwo is ('
+              + str(position2.x) 
+              + ',' 
+              + str(position2.y) 
+              + ',' 
+              + str(position2.z) 
+              + ')'
+             )       
+        print('positionThree is ('
+              + str(position3.x) 
+              + ',' 
+              + str(position3.y) 
+              + ',' 
+              + str(position3.z) 
+              + ')'
+             )  
+        
+        <span style="color:blue"># Measure angle for two object</span>
+        print("*** Measure angle for two objects.")
+        brepFace = brepBody.faces.item(1)
+        brepEdge = brepBody.edges.item(0)
+        measureResult = app.measureManager.measureAngle(brepFace, brepEdge)
+        angle = measureResult.value
+        print('Angle value is ' + str(angle))
+        
+        <span style="color:blue"># Get oriented bounding box</span>
+        print("*** Get oriented bounding box.")
+        vector1 = adsk.core.Vector3D.create(0.0, 0.0, 1.0)
+        vector2 = adsk.core.Vector3D.create(0.0, 1.0, 0.0)
+        boundingBox = app.measureManager.getOrientedBoundingBox(brepBody, vector1, vector2)
+        
+        <span style="color:blue"># Get the bounding box length, width and height</span>
+        length = boundingBox.length
+        print("Bounding box length is " + str(length))
+        width = boundingBox.width
+        print("Bounding box width is " + str(width))
+        height = boundingBox.height
+        print("Bounding box height is " + str(height))
+        
+        <span style="color:blue"># Get the bounding box width direction </span>
+        widthDirection = boundingBox.widthDirection
+        heightDirection = boundingBox.heightDirection
+        lengthDirection = boundingBox.lengthDirection
+        print("Bounding box width direction is " 
+              + "("
+              + str(widthDirection.x)
+              + ", "
+              + str(widthDirection.y)
+              + ", "
+              + str(widthDirection.z)
+              + ")"
+             )
+        
+        <span style="color:blue"># Get the bounding contain a point or not</span>
+        pointA= adsk.core.Point3D.create(-2.0, 0.5, 2.0)
+        isContain = boundingBox.contains(pointA)
+        print("Dose the bounding box contain pointA? " + str(isContain))
+        
+        pointB = adsk.core.Point3D.create(0.0, 0.0, 0.0)
+        isContain = boundingBox.contains(pointB)
+        print("Dose the bounding box contain pointB? " + str(isContain))
+        
+        <span style="color:blue"># Copy the bounding box</span>
+        boundingBoxCopy = boundingBox.copy()
+        length = boundingBoxCopy.length
+        print("The copied Bounding box length is " + str(length))
+             
+        <span style="color:blue"># Set bounding box height</span>
+        boundingBoxCopy.height = 10.0
+        length = boundingBoxCopy.height
+        print("The new set length of the copied bounding box is " + str(length))
+        
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code">#include &lt;Core/Application/Application.h&gt;
+#include &lt;Core/UserInterface/UserInterface.h&gt;
+#include &lt;Core/Application/Document.h&gt;
+#include &lt;Core/Application/Documents.h&gt;
+#include &lt;Fusion/Components/Component.h&gt;
+#include &lt;Fusion/Fusion/Design.h&gt;
+#include &lt;Fusion/Sketch/Sketch.h&gt;
+#include &lt;Fusion/Sketch/Sketches.h&gt;
+#include &lt;Fusion/Construction/ConstructionPlane.h&gt;
+#include &lt;Fusion/Construction/ConstructionPoint.h&gt;
+#include &lt;Fusion/Sketch/SketchCurves.h&gt;
+#include &lt;Fusion/Sketch/SketchLines.h&gt;
+#include &lt;Fusion/Sketch/SketchLine.h&gt;
+#include &lt;Core/Geometry/Point3D.h&gt;
+#include &lt;Fusion/Sketch/Profiles.h&gt;
+#include &lt;Fusion/Sketch/Profile.h&gt;
+#include &lt;Fusion/Features/Features.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeatures.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeatureInput.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeature.h&gt;
+#include &lt;Core/Application/ValueInput.h&gt;
+#include &lt;Fusion/BRep/BRepBodies.h&gt;
+#include &lt;Fusion/BRep/BRepBody.h&gt;
+#include &lt;Fusion/BRep/BRepEdges.h&gt;
+#include &lt;Fusion/BRep/BRepEdge.h&gt;
+#include &lt;Fusion/BRep/BRepVertices.h&gt;
+#include &lt;Fusion/BRep/BRepVertex.h&gt;
+#include &lt;Fusion/BRep/BRepFaces.h&gt;
+#include &lt;Fusion/BRep/BRepFace.h&gt;
+#include &lt;Core/Application/MeasureManager.h&gt;
+#include &lt;Core/Application/MeasureResults.h&gt;
+#include &lt;Core/Geometry/Vector3D.h&gt;
+#include &lt;Core/Geometry/OrientedBoundingBox3D.h&gt;
+
+
+using namespace adsk::core;
+using namespace adsk::fusion;
+
+Ptr&lt;Application&gt; app;
+Ptr&lt;UserInterface&gt; ui;
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    app = Application::get();
+    if (!app)
+        return false;
+
+    ui = app-&gt;userInterface();
+    if (!ui)
+        return false;
+
+    <span style="color:blue">// Create a new document</span>
+    Ptr&lt;Documents&gt; docs = app-&gt;documents();
+    if (!docs)
+        return false;
+
+    Ptr&lt;Document&gt; doc = docs-&gt;add(DocumentTypes::FusionDesignDocumentType);
+    if (!doc)
+        return false;
+
+    Ptr&lt;Design&gt; design = app-&gt;activeProduct();
+    if (!design)
+        return false;
+
+    <span style="color:blue">// Get the root component of active design</span>
+    Ptr&lt;Component&gt; rootComp = design-&gt;rootComponent();
+    if (!rootComp)
+        return false;
+
+    <span style="color:blue">// Create a new sketch on the yz plane</span>
+    Ptr&lt;Sketches&gt; sketches = rootComp-&gt;sketches();
+    if (!sketches)
+        return false;
+
+    Ptr&lt;ConstructionPlane&gt; yzPlane = rootComp-&gt;yZConstructionPlane();
+    if (!yzPlane)
+        return false;
+
+    Ptr&lt;Sketch&gt; sketch1 = sketches-&gt;add(yzPlane);
+    if (!sketch1)
+        return false;
+
+    <span style="color:blue">// Create sketch lines</span>
+    Ptr&lt;SketchCurves&gt; sketchCurves = sketch1-&gt;sketchCurves();
+    if (!sketchCurves)
+        return false;
+
+    Ptr&lt;SketchLines&gt; sketchLines = sketchCurves-&gt;sketchLines();
+    if (!sketchLines)
+        return false;
+
+    <span style="color:blue">// Create sketch rectangle</span>
+    Ptr&lt;Point3D&gt; point1 = Point3D::create(0.0, 0.0, 0.0);
+    Ptr&lt;Point3D&gt; point2 = Point3D::create(5.0, 5.0, 0.0);
+    sketchLines-&gt;addTwoPointRectangle(point1, point2);
+
+    <span style="color:blue">// Get the profile</span>
+    Ptr&lt;Profiles&gt; profiles = sketch1-&gt;profiles();
+    if (!profiles)
+        return false;
+
+    Ptr&lt;Profile&gt; profile = profiles-&gt;item(0);
+    if (!profile)
+        return false;
+
+    <span style="color:blue">// Create an extrusion input</span>
+    Ptr&lt;Features&gt; features = rootComp-&gt;features();
+    if (!features)
+        return false;
+
+    Ptr&lt;ExtrudeFeatures&gt; extrudes = features-&gt;extrudeFeatures();
+    if (!extrudes)
+        return false;
+
+    Ptr&lt;ExtrudeFeatureInput&gt; extrudeInput = extrudes-&gt;createInput(profile, FeatureOperations::NewBodyFeatureOperation);
+
+    <span style="color:blue">// Set extrude distance is 6 cm</span>
+    Ptr&lt;ValueInput&gt; distance = ValueInput::createByReal(6.0);
+    <span style="color:blue">// Set the distance extent</span>
+    extrudeInput-&gt;setDistanceExtent(false, distance);
+    <span style="color:blue">// Set the extrude type to be solid</span>
+    extrudeInput-&gt;isSolid(true);
+
+    <span style="color:blue">// Create the extrude</span>
+    Ptr&lt;ExtrudeFeature&gt; extrude = extrudes-&gt;add(extrudeInput);
+    if (!extrude)
+        return false;
+
+    <span style="color:blue">// Get the extrude brepbody</span>
+    Ptr&lt;BRepBodies&gt; brepBodies = extrude-&gt;bodies();
+    if (!brepBodies)
+        return false;
+
+    Ptr&lt;BRepBody&gt; brepBody = brepBodies-&gt;item(0);
+    if (!brepBody)
+        return false;
+
+    <span style="color:blue">// Get one sketch line</span>
+    Ptr&lt;SketchLine&gt; sketchLine = sketchLines-&gt;item(0);
+    if (!sketchLine)
+        return false;
+
+    <span style="color:blue">// Get one brepEdge</span>
+    Ptr&lt;BRepEdges&gt; brepEdges = brepBody-&gt;edges();
+    if (!brepEdges)
+        return false;
+
+    Ptr&lt;BRepEdge&gt; brepEdge = brepEdges-&gt;item(0);
+    if (!brepEdge)
+        return false;
+
+    <span style="color:blue">// Get measure manager</span>
+    Ptr&lt;MeasureManager&gt; measureMgr = app-&gt;measureManager();
+    if (!measureMgr)
+        return false;
+
+    <span style="color:blue">// Measure minimum distance</span>
+    Ptr&lt;MeasureResults&gt; results = measureMgr-&gt;measureMinimumDistance(sketchLine, brepEdge);
+    if (!results)
+        return false;
+
+    double minIdstance = results-&gt;value();
+
+    Ptr&lt;Point3D&gt; position1 = results-&gt;positionOne();
+    if (!position1)
+        return false;
+
+    Ptr&lt;Point3D&gt; position2 = results-&gt;positionTwo();
+    if (!position2)
+        return false;
+
+    <span style="color:blue">// Get root component origin point</span>
+    Ptr&lt;ConstructionPoint&gt; constructionPoint = rootComp-&gt;originConstructionPoint();
+    if (!constructionPoint)
+        return false;
+
+    <span style="color:blue">// Get a brep Vertex</span>
+    Ptr&lt;BRepVertices&gt; brepVertices = brepBody-&gt;vertices();
+    if (!brepVertices)
+        return false;
+
+    Ptr&lt;BRepVertex&gt; brepVertex = brepVertices-&gt;item(0);
+    if (!brepVertex)
+        return false;
+
+    <span style="color:blue">// Measure angle for three point</span>
+    results = measureMgr-&gt;measureAngle(constructionPoint, point2, brepVertex);
+    if (!results)
+        return false;
+
+    double angle = results-&gt;value();
+
+    position1 = results-&gt;positionOne();
+    if (!position1)
+        return false;
+
+    position2 = results-&gt;positionTwo();
+    if (!position2)
+        return false;
+
+    Ptr&lt;Point3D&gt; position3 = results-&gt;positionThree();
+    if (!position3)
+        return false;
+
+    <span style="color:blue">// Get a brep face</span>
+    Ptr&lt;BRepFaces&gt; brepFaces = brepBody-&gt;faces();
+    if (!brepFaces)
+        return false;
+
+    Ptr&lt;BRepFace&gt; brepFace = brepFaces-&gt;item(1);
+    if (!brepFace)
+        return false;
+
+    <span style="color:blue">// Measure angle for two objects</span>
+    results = measureMgr-&gt;measureAngle(brepFace, brepEdge);
+    if (!results)
+        return false;
+
+    angle = results-&gt;value();
+
+    position1 = results-&gt;positionOne();
+    if (!position1)
+        return false;
+
+    position2 = results-&gt;positionTwo();
+    if (!position2)
+        return false;
+
+    position3 = results-&gt;positionThree();
+    if (!position3)
+        return false;
+
+    <span style="color:blue">// Get brep body's oriented bounding box</span>
+    Ptr&lt;Vector3D&gt; vector1 = Vector3D::create(0.0, 0.0, 1.0);
+    Ptr&lt;Vector3D&gt; vector2 = Vector3D::create(0.0, 1.0, 0.0);
+
+    Ptr&lt;OrientedBoundingBox3D&gt; boundingBox = measureMgr-&gt;getOrientedBoundingBox(brepBody, vector1, vector2);
+    if (!boundingBox)
+        return false;
+
+    <span style="color:blue">// Get the bounding box length, width and height</span>
+    double length = boundingBox-&gt;length();
+
+    double width = boundingBox-&gt;width();
+
+    double height = boundingBox-&gt;height();
+
+    <span style="color:blue">// Get the bounding box width direction</span>
+    Ptr&lt;Vector3D&gt; widthDir = boundingBox-&gt;widthDirection();
+    if (!widthDir)
+        return false;
+
+    <span style="color:blue">// Get the bounding box length direction</span>
+    Ptr&lt;Vector3D&gt; lengthDir = boundingBox-&gt;lengthDirection();
+    if (!lengthDir)
+        return false;
+
+    <span style="color:blue">// Get the bounding box height direction</span>
+    Ptr&lt;Vector3D&gt; heightDir = boundingBox-&gt;heightDirection();
+    if (!heightDir)
+        return false;
+
+    <span style="color:blue">// Get the bounding contain a point or not</span>
+    Ptr&lt;Point3D&gt; pointA = Point3D::create(-2.0, 0.5, 2.0);
+    bool isContain = boundingBox-&gt;contains(pointA);
+
+    Ptr&lt;Point3D&gt; pointB = Point3D::create(0.0, 0.0, 0.0);
+    isContain = boundingBox-&gt;contains(pointB);
+
+    <span style="color:blue">// Copy the bounding box</span>
+    Ptr&lt;OrientedBoundingBox3D&gt; boudingBoxCopy = boundingBox-&gt;copy();
+    if (!boudingBoxCopy)
+        return false;
+
+    <span style="color:blue">// Set bounding box height</span>
+    boudingBoxCopy-&gt;height(10.0);
+    double newHeight = boudingBoxCopy-&gt;height();
+
+    return true;
+}</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(MeasureSample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

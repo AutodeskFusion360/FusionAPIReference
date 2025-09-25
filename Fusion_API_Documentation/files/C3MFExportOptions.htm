@@ -1,0 +1,138 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/C3MFExportOptions.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="13/09/2021">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="C3MFExportOptions">
+    <meta name="description" content="C3MFExportOptions Object">
+    <meta name="topicid" content="GUID-3A5EAF91-DE80-4900-A730-03CE5C3C15E1">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>C3MFExportOptions Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">C3MFExportOptions Object
+			</h1>
+              Derived from: <a href="ExportOptions.htm">ExportOptions</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Fusion/C3MFExportOptions.h&gt;<h2 class="api">
+          Description
+        </h2>Defines that a 3MF export is to be done and specifies the various options.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="C3MFExportOptions_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="C3MFExportOptions_aspectRatio.htm">aspectRatio</a></td>
+        <td class="api-list">Gets and sets the minimum aspect ratio for that triangles that are generated for the mesh. Setting this property will automatically set the meshRefinement to MeshRefinementCustom. The default is the value associated with medium mesh refinement.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="C3MFExportOptions_availablePrintUtilities.htm">availablePrintUtilities</a></td>
+        <td class="api-list">Returns a list of the known available print utilities. These strings can be used to set the PrintUtility property to specify which print utility to open the 3MF file in.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="C3MFExportOptions_filename.htm">filename</a></td>
+        <td class="api-list">Gets and sets the filename that the exported file will be written to. This can be empty in the case of STL export and sending the result to the mesh editor.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="C3MFExportOptions_geometry.htm">geometry</a></td>
+        <td class="api-list">Specifies the geometry to export. This can be an Occurrence, or the root Component. For STL, OBJ, and 3MF export, it can be a BRepBody. For DXF export, it can be a sketch of flat pattern.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="C3MFExportOptions_isOneFilePerBody.htm">isOneFilePerBody</a></td>
+        <td class="api-list">If the input is an Occurrence or the root Component, this specifies if a single file should be created containing all of the bodies within that occurrence or component or if multiple files should be created; one for each body. If multiple files are created, the body name is appended to the filename. The default is false.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="C3MFExportOptions_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="C3MFExportOptions_maximumEdgeLength.htm">maximumEdgeLength</a></td>
+        <td class="api-list">Gets and sets the maximum length of any mesh edge. This is defined in centimeter. Setting this property will automatically set the meshRefinement to MeshRefinementCustom. The default is the value associated with medium mesh refinement.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="C3MFExportOptions_meshRefinement.htm">meshRefinement</a></td>
+        <td class="api-list">Gets and sets the current simple mesh refinement settings. Setting this property will reset the surfaceDeviation, normalDeviation, maximumEdgeLength, and aspectRatio to values that correspond to the specified mesh refinement. The default is MeshRefinementMedium.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="C3MFExportOptions_normalDeviation.htm">normalDeviation</a></td>
+        <td class="api-list">Gets and sets the current normal deviation, or the angle the mesh normals at the vertices can deviate from the actual surface normals. This is defined in radians. Setting this property will automatically set the meshRefinement to MeshRefinementCustom. The default is the value associated with medium mesh refinement.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="C3MFExportOptions_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="C3MFExportOptions_printUtility.htm">printUtility</a></td>
+        <td class="api-list">Specifies which print utility to use when opening the 3MF file if the sendToPrintUtility property is true. The value of this property can be one of the strings returned by the availalbePrintUtilities property, which will specify one of the know print utilities. You can also specify a custom print utility by specifying the full path to the print utility executable. The default value of this property is the last setting specified in the user-interface.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="C3MFExportOptions_sendToPrintUtility.htm">sendToPrintUtility</a></td>
+        <td class="api-list">Gets and sets whether the created 3MF file will be sent to the print utility specified by the printUtility property. If this is false a filename must be defined.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="C3MFExportOptions_surfaceDeviation.htm">surfaceDeviation</a></td>
+        <td class="api-list">Gets and sets the current surface deviation, or the distance the mesh can deviate from the actual surface. This is defined in centimeter. Setting this property will automatically set the meshRefinement to MeshRefinementCustom. The default is the value associated with medium mesh refinement.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="ExportManager_createC3MFExportOptions.htm">ExportManager.createC3MFExportOptions</a><h2 class="api">
+            Version
+          </h2>
+        Introduced in version September 2021<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(C3MFExportOptions%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

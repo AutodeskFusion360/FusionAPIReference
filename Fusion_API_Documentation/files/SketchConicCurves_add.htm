@@ -1,0 +1,130 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/SketchConicCurves_add.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="09/05/2022">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="SketchConicCurves_add">
+    <meta name="description" content="SketchConicCurves.add Method">
+    <meta name="topicid" content="GUID-C125F5A0-CF8B-40F2-BD0C-524925010773">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>SketchConicCurves.add Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">SketchConicCurves.add Method</h1>
+
+          Parent Object: <a href="SketchConicCurves.htm">SketchConicCurves</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Sketch/SketchConicCurves.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Creates a new conic curve.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"sketchConicCurves_var" is a variable referencing a <a href="SketchConicCurves.htm">SketchConicCurves</a> object.<code><pre class="api-code">returnValue = sketchConicCurves_var.<b>add</b>(startPoint, endPoint, apexPoint, rhoValue)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"sketchConicCurves_var" is a variable referencing a <a href="SketchConicCurves.htm">SketchConicCurves</a> object.<br /><br /><code><pre class="api-code">#include &lt;Fusion/Sketch/SketchConicCurves.h&gt;<br /><br />returnValue = sketchConicCurves_var-&gt;<b>add</b>(startPoint, endPoint, apexPoint, rhoValue);<br /></pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;"><a href="SketchConicCurve.htm">SketchConicCurve</a></td>
+        <td class="api-list">Returns the new conic curve or null if the creation failed.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">startPoint</td>
+        <td class="api-list"><a href="Base.htm">Base</a></td>
+        <td class="api-list">The start point of the conic curve. This can be either an existing SketchPoint or a Point3D object.</td>
+      </tr>
+      <tr>
+        <td class="api-list">endPoint</td>
+        <td class="api-list"><a href="Base.htm">Base</a></td>
+        <td class="api-list">The end point of the conic curve. This can be either an existing SketchPoint or a Point3D object.</td>
+      </tr>
+      <tr>
+        <td class="api-list">apexPoint</td>
+        <td class="api-list"><a href="Base.htm">Base</a></td>
+        <td class="api-list">The apex point of the conic curve. This can be either an existing SketchPoint or a Point3D object.</td>
+      </tr>
+      <tr>
+        <td class="api-list">rhoValue</td>
+        <td class="api-list">double</td>
+        <td class="api-list">Double that specifies the rho value for the conic. This value must be greater than zero and less than one.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version May 2022<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(SketchConicCurves.add%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

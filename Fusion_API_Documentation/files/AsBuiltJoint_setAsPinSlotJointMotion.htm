@@ -1,0 +1,135 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/AsBuiltJoint_setAsPinSlotJointMotion.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="10/9/2015">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="AsBuiltJoint_setAsPinSlotJointMotion">
+    <meta name="description" content="AsBuiltJoint.setAsPinSlotJointMotion Method">
+    <meta name="topicid" content="GUID-476B4548-185D-44F5-9BCF-1FC50DD93063">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>AsBuiltJoint.setAsPinSlotJointMotion Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">AsBuiltJoint.setAsPinSlotJointMotion Method</h1>
+
+          Parent Object: <a href="AsBuiltJoint.htm">AsBuiltJoint</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Components/AsBuiltJoint.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Redefines the relationship between the two joint geometries as a pin-slot joint.<br/><br/> To use this method, you need to position the timeline marker to immediately before this as-built joint. This can be accomplished using the following code: thisAsBuiltJoint.timelineObject.rollTo(True)</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"asBuiltJoint_var" is a variable referencing an <a href="AsBuiltJoint.htm">AsBuiltJoint</a> object.<code><pre class="api-code"><span style="color:blue"># Uses no optional arguments.</span><br />returnValue = asBuiltJoint_var.<b>setAsPinSlotJointMotion</b>(rotationAxis, slideDirection)<br /><br /><span style="color:blue"># Uses optional arguments.</span><br />returnValue = asBuiltJoint_var.<b>setAsPinSlotJointMotion</b>(rotationAxis, slideDirection, geometry, customRotationAxisEntity, customSlideDirectionEntity)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"asBuiltJoint_var" is a variable referencing an <a href="AsBuiltJoint.htm">AsBuiltJoint</a> object.<br /><br /><code><pre class="api-code">#include &lt;Fusion/Components/AsBuiltJoint.h&gt;<br /><br /><span style="color:blue">// Uses no optional arguments.</span><br />returnValue = asBuiltJoint_var-&gt;<b>setAsPinSlotJointMotion</b>(rotationAxis, slideDirection);<br /><br /><span style="color:blue">// Uses optional arguments.</span><br />returnValue = asBuiltJoint_var-&gt;<b>setAsPinSlotJointMotion</b>(rotationAxis, slideDirection, geometry, customRotationAxisEntity, customSlideDirectionEntity);</pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;">boolean</td>
+        <td class="api-list">Returns true if the operation was successful.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">rotationAxis</td>
+        <td class="api-list"><a href="JointDirections.htm">JointDirections</a></td>
+        <td class="api-list">Specifies which axis the rotation is around. If this is set to CustomJointDirection then the customRotationAxisEntity argument must also be provided.</td>
+      </tr>
+      <tr>
+        <td class="api-list">slideDirection</td>
+        <td class="api-list"><a href="JointDirections.htm">JointDirections</a></td>
+        <td class="api-list">Specifies which axis the slide direction is along. If this is set to CustomJointDirection then the customSlideDirectionEntity argument must also be provided.</td>
+      </tr>
+      <tr>
+        <td class="api-list">geometry</td>
+        <td class="api-list"><a href="JointGeometry.htm">JointGeometry</a></td>
+        <td class="api-list">Redefines the joint geometry. If not provided, the existing geometry is used. This argument is required if the current joint motion is rigid.<br /><br /> This is an optional argument whose default value is null.</td>
+      </tr>
+      <tr>
+        <td class="api-list">customRotationAxisEntity</td>
+        <td class="api-list"><a href="Base.htm">Base</a></td>
+        <td class="api-list">If the rotationAxis is customAxisEntity this argument is used to specify the entity that defines the custom axis of rotation. This can be several types of entities that an axis can be derived<br /><br /> This is an optional argument whose default value is null.</td>
+      </tr>
+      <tr>
+        <td class="api-list">customSlideDirectionEntity</td>
+        <td class="api-list"><a href="Base.htm">Base</a></td>
+        <td class="api-list">If the slideDirection is CustomJointDirection this argument is used to specify the entity that defines the custom slide direction. This can be several types of entities that can define a direction.<br /><br /> This is an optional argument whose default value is null.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version September 2015<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(AsBuiltJoint.setAsPinSlotJointMotion%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

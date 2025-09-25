@@ -1,0 +1,126 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/MachinePart.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="21/02/2023">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="MachinePart">
+    <meta name="description" content="MachinePart Object">
+    <meta name="topicid" content="GUID-957DB8CB-6F02-4C72-9A29-2B23C6A526CA">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>MachinePart Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">MachinePart Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::cam" and the header file is &lt;Cam/Machine/MachinePart.h&gt;<h2 class="api">
+          Description
+        </h2>Object representing some part of a machine, such as the static base of the machine, an axis, or the attachment points for tools and fixtures.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MachinePart_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MachinePart_deleteMe.htm">deleteMe</a></td>
+        <td class="api-list">Delete this part and its children from the kinematics tree.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MachinePart_axis.htm">axis</a></td>
+        <td class="api-list">Get the axis object for this part used to reference this part for other operations. Only valid when partType is Axis, otherwise returns null</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MachinePart_children.htm">children</a></td>
+        <td class="api-list">Get the collection of child parts.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MachinePart_id.htm">id</a></td>
+        <td class="api-list">Get the internal ID of the part. This is unique with respect to other MachineParts in the Machine.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MachinePart_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MachinePart_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MachinePart_parent.htm">parent</a></td>
+        <td class="api-list">Get or set the parent of this part. Returns null if this part is a root part. Setting the parent will add this part to the end of the parent's children collection. Setting the parent will throw an error if the new parent is this part or a child of this part.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MachinePart_partType.htm">partType</a></td>
+        <td class="api-list">Get the type of this part.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MachinePart_spindle.htm">spindle</a></td>
+        <td class="api-list">Get the spindle object for this part used to reference this part for other operations. Will return null if the part has no spindle assigned.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MachinePart_toolStation.htm">toolStation</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Get the tool station object for this part. Will return null if the part has no tool station assigned.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="MachineItem_part.htm">MachineItem.part</a>, <a href="MachinePart_parent.htm">MachinePart.parent</a>, <a href="MachineParts_add.htm">MachineParts.add</a>, <a href="MachineParts_item.htm">MachineParts.item</a>, <a href="MachineParts_itemById.htm">MachineParts.itemById</a><h2 class="api">
+            Version
+          </h2>
+        Introduced in version April 2023<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(MachinePart%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

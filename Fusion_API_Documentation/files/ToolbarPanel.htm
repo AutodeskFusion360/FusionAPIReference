@@ -1,0 +1,219 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/ToolbarPanel.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="ToolbarPanel">
+    <meta name="description" content="ToolbarPanel Object">
+    <meta name="topicid" content="GUID-0ca48ac9-da95-4623-bf87-150f3729717a">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>ToolbarPanel Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">ToolbarPanel Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::core" and the header file is &lt;Core/UserInterface/ToolbarPanel.h&gt;<h2 class="api">
+          Description
+        </h2>Toolbar panels are the panels shown in the command toolbar.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ToolbarPanel_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ToolbarPanel_deleteMe.htm">deleteMe</a></td>
+        <td class="api-list">Deletes this toolbar panel.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ToolbarPanel_indexWithinTab.htm">indexWithinTab</a></td>
+        <td class="api-list">Gets the position this panel is in within the toolbar tab. The first panel in the tab is at position 0.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ToolbarPanel_controls.htm">controls</a></td>
+        <td class="api-list">Gets the controls associated with this panel. These are all in the panel's drop-down (assuming their visible property is true) and are selectively shown within the panel.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ToolbarPanel_id.htm">id</a></td>
+        <td class="api-list">Gets The unique, language independent, ID of this panel.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ToolbarPanel_index.htm">index</a></td>
+        <td class="api-list">Gets the position this panel is in within the toolbar. The first panel is at position 0. This value is with respect to the complete list of panels so this value could be outside of the expected range if you have a collection of panels associated with a workspace, which is a subset of the entire list of panels.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ToolbarPanel_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ToolbarPanel_isVisible.htm">isVisible</a></td>
+        <td class="api-list">Gets or sets whether this panel is currently being displayed in the user interface. Visibility of a panel is controlled by it being associated with the currently active workspace. Setting it here will override that default behavior.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ToolbarPanel_name.htm">name</a></td>
+        <td class="api-list">Gets or sets the name of the panel as seen in the user interface.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ToolbarPanel_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ToolbarPanel_parentUserInterface.htm">parentUserInterface</a></td>
+        <td class="api-list">Gets the parent UserInterface object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ToolbarPanel_productType.htm">productType</a></td>
+        <td class="api-list">Returns the name of the product this toolbar panel is associated with.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ToolbarPanel_promotedControls.htm">promotedControls</a></td>
+        <td class="api-list">Gets the controls in the panel that have been promoted. Promoted controls are the controls that are displayed within the panel.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ToolbarPanel_relatedWorkspaces.htm">relatedWorkspaces</a></td>
+        <td class="api-list">Gets or sets the set of workspaces that this panel is displayed for.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="ToolbarPanelList_item.htm">ToolbarPanelList.item</a>, <a href="ToolbarPanelList_itemById.htm">ToolbarPanelList.itemById</a>, <a href="ToolbarPanels_add.htm">ToolbarPanels.add</a>, <a href="ToolbarPanels_item.htm">ToolbarPanels.item</a>, <a href="ToolbarPanels_itemById.htm">ToolbarPanels.itemById</a><h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PaletteSample_Sample.htm">Palette Sample</a></td>
+        <td class="api-list"><p>Demonstrates how to create a palette, how to dock and snap palettes and how Fusion communicates with the palette HTML. The sample is an add-in.  To use it, create a new Python add-in and replace the code with the code below. You also need to create an html file using the name and code below. The html file needs to be in the same folder as the py file.</p>
+	<p>When you load the add-in, you'll see two new commands under the ADD-INS panel of the TOOLS tab. The "Show Custom Palette" command will cause the custom palette to be displayed. It will remain displayed until you click its Close button. Clicking the "Click to send info to Fusion" button on the palette, will send information to your add-in, which uses the API to display that information in a message box. Running the "Send Info to HTML" command to send data to the javascript running in the palette, which uses it to update the content of a paragraph.</p>
+
+<h3 class="api">palette.html</h3>
+<pre class="api-code">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;p&gt;Click the button below to send data to Fusion.&lt;/p&gt;
+        &lt;button type='button' onclick='sendInfoToFusion()'&gt;Click to send info to Fusion&lt;/button&gt; 
+        &lt;p id='p1'&gt;Run the "Send Info to HTML" command in the ADD-INS panel to update this text.&lt;/p&gt;
+        &lt;br /&gt;&lt;br /&gt;
+	
+    &lt;/body&gt;
+    &lt;script&gt;
+        function sendInfoToFusion(){
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0');
+            var yyyy = today.getFullYear();
+
+            var hours = String(today.getHours()).padStart(2, '0');
+            var minutes = String(today.getMinutes()).padStart(2, '0');
+            var seconds = String(today.getSeconds()).padStart(2, '0');
+
+            var date = dd + '/' + mm + '/' + yyyy;
+            var time = hours + ':' + minutes + ':' + seconds;
+            var args = {
+                arg1 : "Sample argument 1",
+                arg2 : "Sample argument 2"
+            };
+            adsk.fusionSendData('send', JSON.stringify(args));
+        }
+        
+        window.fusionJavaScriptHandler = {handle: function(action, data){
+            try {
+                if (action == 'send') {
+					<span style="color:blue">// Update a paragraph with the data passed in.</span>
+					document.getElementById('p1').innerHTML = data;
+				}
+				else if (action == 'debugger') {
+                    debugger;
+				}
+				else {
+					return 'Unexpected command type: ' + action;
+                }
+            } catch (e) {
+                console.log(e);
+                console.log('exception caught with command: ' + action + ', data: ' + data);
+            }
+            return 'OK';
+        }};
+    &lt;/script&gt;
+&lt;/html&gt;
+</pre></td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="UICustomizationSample_Sample.htm">Customizing the UI using the API Sample</a></td>
+        <td class="api-list">Demonstrates how to work with tabs, panels, and command in the user interface. The full source for <a href="../ExtraFiles/UICustomizationSampleCPP.zip">C++</a> and <a href="../ExtraFiles/UICustomizationSamplePython.zip">Python</a> samples can be downloaded. This is especially useful for getting the resource files.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="WriteUserInterfaceToFile_Sample.htm">Write user interface to a file API Sample</a></td>
+        <td class="api-list">Writes out the full structure of the Fusion user interface. This information is useful when editing the user-interface, as discussed in the usre manual topic <a href="UserInterface_UM.htm">User-Interface Customization with Fusion's API</a></td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(ToolbarPanel%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

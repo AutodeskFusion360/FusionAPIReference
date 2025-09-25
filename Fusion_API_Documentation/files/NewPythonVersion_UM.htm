@@ -1,0 +1,63 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/NewPythonVersion_UM.htm#!">
+    <meta name="contextid" content="NewPythonVersion_UM">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="12/1/2022">
+    <meta name="user-comments" content="enable">
+    <meta name="description" content="">
+    <meta name="topicid" content="GUID-BAF0FFFE-10B8-4612-ABAB-0EF5D4C6F800">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Script Error</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+	<link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"/>
+	<script type="text/javascript" src="/view/clientframework/client.js"><!--filler--></script> 
+	<script>
+	  // This turns on the display of the copyright notice which is not visible by default.
+	  // Because the head is removed when used in the web help, this function will only exists
+	  // when the chm help is being created.
+	  window.onload = function() {
+		copyrightElement = document.getElementById('CopyrightNotice');
+		copyrightElement.style.display = 'block';
+	  };
+	</script>
+</head>
+<body>
+<link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+<h2 class="api">Script Error</h2>
+
+<p Class="api">The message you received results from an add-in loaded on your machine that has compiled Python code that will be incompatible with the next update of Fusion or is incompatible with the current version of Fusion. This message is displayed when Fusion upgrades to a newer version of Python, and add-ins compiled against the previous version will no longer work.</p>
+
+<p Class="api">If the message says, "The script <add-in name> will not be supported in the <u>next version</u>.", this is a warning telling you Fusion will no longer be able to load this add-in with the next Fusion update. When you get the update and the add-in quits working, you'll need to get an updated version of the add-in from the <a href= "https://apps.autodesk.com/FUSION/Home/Index">Autodesk App Store</a> or directly from the app developer. Unfortunately, you can't preemptively get a newer version because the new version of the add-in will not function with the current version of Fusion, you will need to wait until after the update.</p>
+
+<p Class="api">If the message says, "The script <add-in name> is not supported in the <u>current version</u>.", this is an error indicating Fusion could not load the add-in. You need to get an updated version of the add-in from the <a href= "https://apps.autodesk.com/FUSION/Home/Index">Autodesk App Store</a> or directly from the app developer.
+App developers are contacted to let them know they will need to update their apps to be compatible with the new Python version, and the updated apps should be available as soon as the Fusion update goes out. If an update is not available, you should contact the app developer.</p>
+
+<h2 class="api">App Developers</h2>
+<p Class="api">If you're a developer of an add-in for Fusion, use Python, and deliver any pre-compiled modules (.pyc files) with your add-in, this update will break your add-in. It will be broken because pre-compiled modules are tied to the version of Python used to compile them. Add-ins compiled with the current version of Python (3.7) will not be compatible with the updated Python (3.9) and will fail to load. This change <b>DOES NOT</b> affect any add-ins that do not deliver any pre-compiled modules and the.py source code is available. For detailed information about what you need to do to update your add-in and have it available for your customers at the time when the Fusion update goes out, see this <a href="https://forums.autodesk.com/t5/fusion-360-api-and-scripts/important-python-version-change-information/td-p/10929351">forum post</a> with the latest information.</p>
+
+<br />
+<div id="CopyrightNotice" style="display:none;">
+  <hr />
+  <table width="100%" style="font-size:15">
+	<tr>
+	  <td align="left">
+		&copy; Copyright 2025 Autodesk, Inc.
+	  </td>
+	  <td align="right">
+		<a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(NewPythonVersion_UM)">Comment on this page.</a>
+	  </td>
+	</tr>
+  </table>
+</div>
+
+</body>
+</html>

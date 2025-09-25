@@ -1,0 +1,215 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/ComponentsProxies_UM.htm#!">
+    <meta name="contextid" content="ComponentsProxies_UM">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="28/7/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="description" content="">
+    <meta name="topicid" content="GUID-88A4DB43-CFDD-4CFF-B124-7EE67915A07A">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Documents, Products, Components, Occurrences, and Proxies</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+	<link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"/>
+	<script type="text/javascript" src="/view/clientframework/client.js"><!--filler--></script> 
+	<script>
+	  // This turns on the display of the copyright notice which is not visible by default.
+	  // Because the head is removed when used in the web help, this function will only exists
+	  // when the chm help is being created.
+	  window.onload = function() {
+		copyrightElement = document.getElementById('CopyrightNotice');
+		copyrightElement.style.display = 'block';
+	  };
+	</script>
+</head>
+<body>
+<link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+	
+<h2 class="api">Documents, Products, Components, Occurrences, and Proxies</h2>
+<p Class="api">The structure and access to Fusion data is done through the Document, Product, Component, Occurrence, and proxy objects.  Successful use of the API requires an understanding of each of these object types, how to work with them, and how they are interrelated.</p>
+
+<h3 class="api">Documents</h3>
+
+<p Class="api">A Document object represents an item in the Fusion data panel.  An item gets added to the data panel each time a new Fusion document (file) is created.  When a new design is created or an existing design is opened, that file is represented in the API as a <i>Document</i> object.</p>
+
+<h3 class="api">Products</h3>
+
+<p Class="api">Groups of related data are stored within a document as a <i>Product</i>.  For example, a single Fusion document can contain design data as well as toolpath data.  The different types of data are stored separately within the document.  Though stored separately, the relationships between data (i.e. toolpath references to design geometry) are maintained and stored within the document.</p>
+
+<p Class="api">The Product object is the base class that represents the different product types.  For the design data, there is a Design object that derives from Product.  A document can only contain a single Design object.  The Python code below demonstrates how to get the active product from the application and then cast it to a Design object.  Casting will return null if the active product is not a design.</p>
+
+<pre class="api-code">
+app = adsk.core.Application.get()
+ui = app.userInterface
+
+design = adsk.fusion.Design.cast(app.activeProduct)
+if not design:
+    ui.messageBox('No active Fusion design', 'No Design')
+    return
+</pre>
+
+<h3 class="api">Components</h3>
+
+<p Class="api">
+    A Fusion design can contain one or more components.  Components contain the various types of Fusion geometry (i.e. solids, sketches, construction geometry, sculpt forms, etc.).  Every Fusion document contains a single, default component that is referred to as the root component.  In the user interface, the root component is represented by the top node in the browser.  In the example shown below, the root component is the "Sample v1" node and it contains the base construction geometry, two bodies, one sketch, and one construction plane.  
+</p>
+
+<div align="center"><img src="../images/Components_Root.png" border=0 align="middle" alt="Root Component"></div>
+<br>
+
+<p Class="api">
+The Python code below demonstrates how to get the root component from the design and then create a new sketch within it using the root component's X-Y construction plane.
+</p>
+
+<pre class="api-code">
+<span style="color:blue"># Get the root component of the active design.</span>	
+rootComp = design.rootComponent
+
+<span style="color:blue"># Create a new sketch on the xy plane.</span>	
+sketches = rootComp.sketches
+xyPlane = rootComp.xYConstructionPlane
+sketch = sketches.add(xyPlane)
+</pre>
+
+	<br />
+<p Class="api">
+The Fusion UI provides several ways to create additional components in a design, such as the <b>New Component</b> or <b>Create Components from Bodies</b> commands, or by choosing <b>"New Component"</b> as the operation to perform when creating a new feature.
+</p>	
+
+<div align="center"><img src="../images/Components_New.png" border=0 align="middle" alt="New Components"></div>
+<br>
+
+<p Class="api">
+A component node is added to the browser for each new component created, as shown below.
+</p>
+
+<div align="center"><img src="../images/Components_NewBrowser.png" border=0 align="middle" alt="New Component in Browser"></div>
+<br>
+
+<p Class="api">
+Clicking the radio button to the right of a component node in the browser activates that component, as shown below.  When creating new geometry using the user interface (such as sketches, construction geometry, etc.), it is always created in the active component.  The root component is always active by default after opening or creating a document. 
+</p>
+
+<div align="center"><img src="../images/Components_Activate.png" border=0 align="middle" alt="Activate Components"></div>
+<br>
+
+<p Class="api">
+When creating new geometry using the API, the active component is <b>NOT</b> used.  Instead, new geometry is created within the component that the API is accessed from.  The code sample below (same as shown earlier), first obtains the Component object that represents the root component, and then adds a new sketch to it by using the associated Sketches collection.  Similarly, new geometry (such as the sketch) can be added to any component within a design by obtaining the Component object and using its related functionality. 
+</p>
+<br>
+
+<pre class="api-code">
+<span style="color:blue"># Get the root component of the active design.</span>	
+rootComp = design.rootComponent
+
+<span style="color:blue"># Create a new sketch on the xy plane.</span>	
+sketches = rootComp.sketches
+sketch = sketches.add(rootComp.xYConstructionPlane)
+</pre>
+
+<br />
+<h3 class="api">Occurrences</h3>
+
+<p Class="api">An occurrence can be thought of as an instance of a component.  It is the occurrence of a component (rather than the component itself) that is displayed in the Fusion browser and displayed graphically.  When a new Component is created, it is not technically represented in the browser as a Component but, rather, as an occurrence that references the component and bears the name of that component (ex. Component1:1).  The idea of occurrences becomes more obvious when an occurrence is copied, resulting in multiple instances of the same component.  Any changes made to one instance of the component are also made to all other instances (occurrences).  This is because you are editing the single real component and are seeing the changes reflected in all of the occurrences that reference that component.  Each Fusion Document (file) contains a Root Component, represented by the top node in the browser tree. This Root Component is the only actual Component shown in the browser and the only component that is visible directly without an occurrence.</p>
+
+<p Class="api"><b>The main differences between Components and Occurrences are listed below:</b></p>
+
+<ol>
+<li>
+A component contains geometry, whereas an occurrence has no geometry of it own, but merely displays the geometry contained in the component it references.
+</li>
+<li>
+Component geometry is always defined with respect to model space and cannot be repositioned or constrained.  Occurrences can be reoriented, repositioned and constrained anywhere in the design.
+</li>
+<li>
+Components are not shown directly in the browser or graphics window (with the exception of the root component).  Occurrences are shown in the browser and the graphics window.  
+</li>
+<li>
+An occurrence can have an appearance override that can distinguish it from other occurrences.  Applying an appearance to a body in a component would in turn affect all of the occurrences that reference that component.
+</li>
+</ol>
+
+<p Class="api">Occurrences represent parts and subassemblies within the root component.  Components not only contain geometry, but they can also contain occurrences of other components, allowing for the nesting of occurrences as required to define a structured assembly, as shown below.</p>
+
+<div align="center"><img src="../images/Components_MulitpleOccs.png" border=0 align="middle" alt="Multiple levels of occurences"></div>
+<br>
+
+<p Class="api">In order to create a new component with the API, a new occurrence must be created.  With the exception of the root component, a component cannot exist without at least one referencing occurrence.  The Python code example below creates a new occurrence, which has the side effect of creating a new component. It then creates a sketch and an extrusion within that component.  Finally, it creates a new additional occurrence of the component resulting in two instances of the cylinder part.</p>
+
+<pre class="api-code">
+<span style="color:blue"># Create a new occurrence.</span>	
+trans = adsk.core.Matrix3D.create()
+occ = rootComp.occurrences.addNewComponent(trans)
+
+<span style="color:blue"># Get the associated component.</span>	
+newComp = occ.component
+
+<span style="color:blue"># Create a new sketch on the xy plane and draw a circle.</span>	
+sketches = newComp.sketches
+xyPlane = newComp.xYConstructionPlane
+sketch = sketches.add(xyPlane)
+sketch.sketchCurves.sketchCircles.addByCenterRadius(adsk.core.Point3D.create(0,0,0), 5.0)
+
+<span style="color:blue"># Create an extrusion.</span>	
+extInput = newComp.features.extrudeFeatures.createInput(sketch.profiles.item(0), adsk.fusion.FeatureOperations.NewBodyFeatureOperation)
+distance = adsk.core.ValueInput.createByReal(10.0)
+extInput.setDistanceExtent(false, distance)
+ext = newComp.features.extrudeFeatures.add(extInput)
+
+<span style="color:blue"># Create a new occurrence for the component, offset by 15 cm in the X direction.</span>	
+trans.setCell(0, 3, 15.0)
+newOcc = rootComp.occurrences.addExistingComponent(newComp, trans)
+</pre>
+<br />
+<p Class="api">Running the code above  results in the creation of the model shown below.  Two occurrences are created that both reference Component9.  The geometry of the two occurrences is identical because they both reference the same component.</p>
+	
+<div align="center"><img src="../images/Components_CylinderAsm.png" border=0 align="middle" alt="Multiple Occurrences"></div>
+<br>	
+	
+<p Class="api">Edits made to the component affect both occurrences.  However, edits made to the position or appearance override of an occurrence are specific to that occurrence, and do not affect other occurrences, nor do they affect the contents of the underlying component.</p>	
+	
+<h3 class="api">Proxies</h3>
+
+<p Class="api">The example shown above involving the two cylinders, demonstrates the challenge when working with models that contain multiple references (occurrences) to a single geometry representation (component).  In the image below a single face from the component is highlighted.  Because  there are two occurrences referencing the component there are two representations of the face in the assembly. In the user interface these two faces are treated as two distinct faces.  For example, each face has its own position that can be measured, or constraints can be defined that involve one of the faces independent of the other.</p>
+
+<div align="center"><img src="../images/Components_TwoFaces.png" border=0 align="middle" alt="Two Faces"></div>
+<br>
+	
+<p Class="api">Though handled separately in the UI, there is in reality only a single red face in the component. Each occurrence references that same, single face.  The faces being displayed are "proxies" or stand-ins for the actual face.  A proxy is an assembly representation of an object contained in a component.  When working interactively in an assembly and selecting geometry, everything is a proxy; the actual geometry is contained within the components.  The only geometry handled directly, without the use of a proxy, is that which is contained in the root component.</p> 
+
+<p Class="api">Proxies are needed in order to be able to uniquely specify each of the two faces above.  Proxies also greatly simplify working with the API by allowing geometry (referenced from a component) to be worked with directly, as though it actually exists in the occurrence.  Using the API to query the center points of the two circular faces above, will return two different points that are in world (root component) space and are the correct position.  This all happens automatically without the need to calculate whether the face is in the root component, an occurrence within the root component, or even an occurrence several levels deep in the assembly.</p>
+
+<p Class="api">A proxy isn't new geometry but defines a full path to the actual entities (objects) contained in a component. This enables Fusion to return information (such as position) about them from the context of an occurrence.  For example, shown below are two occurrences of Component9.  Since components are not directly visible in the browser we don't see Component9 but instead it is the occurrences (Component9:1 and Component9:2) that are seen.  The component only contains a single 'RedFace', but, there are two instances of it being displayed in the assembly.  To identify these two faces as distinct, a full path to the face from each occurrence is needed.  The face in Component9:1 can be represented by the full path, “Component9:1/RedFace”.  The face in Component9:2 is represented by the full path, “Component9:2/RedFace”.</p>
+
+<div align="center"><img src="../images/Components_CylinderAsmFaces.png" border=0 align="middle" alt="Two Faces and Browser"></div>
+<br>
+
+<p Class="api">In Fusion, any object that can be selected, can also act as a proxy.  In the Fusion API, objects that can act as proxies support two additional properties and one additional method.  The properties are: assemblyContext and nativeObject.  The assemblyContext property returns the top-level occurrence in the path of the proxy.  The nativeObject property returns the actual entity in the component the proxy represents.  So, for the example above, nativeObject would return the BRepFace from Component9.  All objects that support proxies also support the createForAssemblyContext method.  This method is used to add the necessary path information to an object in order to create a proxy, or to append additional path information to an existing proxy.  Calling createForAssemblyContext on the BRepFace (RedFace) object, contained in Component9 in the example above, and passing in either of the occurrences; Component9:1 or Component9:2, returns a proxy for that face in the context of the occurrence that was passed in.</p>
+
+<p Class="api">A common problem when working with the API, is not having the correct object to perform a particular function.  For example, adding a sketch to the sketches collection of the root component, and specifying the RedFace to create the sketch on, requires the face to be provided in the context of the root component.  The actual BRepFace (RedFace) object cannot be provided directly because it is ambiguous, in that Fusion does not know which of the two instances (occurrences) to use.  What is needed instead is a proxy to the face, in the context of the root component.  The proxy tells Fusion which face to use.</p>
+
+<br />
+<br />
+<div id="CopyrightNotice" style="display:none;">
+  <hr />
+  <table width="100%" style="font-size:15">
+	<tr>
+	  <td align="left">
+		&copy; Copyright 2025 Autodesk, Inc.
+	  </td>
+	  <td align="right">
+		<a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(ComponentsProxies_UM)">Comment on this page.</a>
+	  </td>
+	</tr>
+  </table>
+</div>
+</body>
+</html>

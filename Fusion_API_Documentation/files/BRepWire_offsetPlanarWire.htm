@@ -1,0 +1,142 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/BRepWire_offsetPlanarWire.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="28/11/2017">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="BRepWire_offsetPlanarWire">
+    <meta name="description" content="BRepWire.offsetPlanarWire Method">
+    <meta name="topicid" content="GUID-11E284D9-41E3-4D4E-B9CE-13FF087ECA20">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>BRepWire.offsetPlanarWire Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">BRepWire.offsetPlanarWire Method</h1>
+
+          Parent Object: <a href="BRepWire.htm">BRepWire</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/BRep/BRepWire.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Method that computes the offset for a planar wire. A BRepBody containing the resulting BRepWire object(s) is returned. It's possible that the offset result of a single wire can result in multiple wires.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"bRepWire_var" is a variable referencing a <a href="BRepWire.htm">BRepWire</a> object.<code><pre class="api-code">returnValue = bRepWire_var.<b>offsetPlanarWire</b>(planeNormal, distance, cornerType)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"bRepWire_var" is a variable referencing a <a href="BRepWire.htm">BRepWire</a> object.<br /><br /><code><pre class="api-code">#include &lt;Fusion/BRep/BRepWire.h&gt;<br /><br />returnValue = bRepWire_var-&gt;<b>offsetPlanarWire</b>(planeNormal, distance, cornerType);<br /></pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;"><a href="BRepBody.htm">BRepBody</a></td>
+        <td class="api-list">Returns a new temporary BRepBody that contains one or more wires that represent the offset.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">planeNormal</td>
+        <td class="api-list"><a href="Vector3D.htm">Vector3D</a></td>
+        <td class="api-list">Input Vector3D object that defines the positive direction of the plane the plane the wire lies on. This vector must be normal to the plane and is used to determine the side to offset the curves to. A positive offset distance is in the direction of the cross product (wire_tangent x wire_plane_normal). A negative offset is in the opposite direction.</td>
+      </tr>
+      <tr>
+        <td class="api-list">distance</td>
+        <td class="api-list">double</td>
+        <td class="api-list">The offset distance in centimeters. See the description for the Normal argument to see how a positive or negative value for the distance specifies the direction of the offset.</td>
+      </tr>
+      <tr>
+        <td class="api-list">cornerType</td>
+        <td class="api-list"><a href="OffsetCornerTypes.htm">OffsetCornerTypes</a></td>
+        <td class="api-list">Specifies how the corners are connected when offsetting the curves results in gaps in the corners. See the documentation of the enum for a detailed description of each option.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BrepWireSample_Sample.htm">BrepWire Sample</a></td>
+        <td class="api-list">BrepWires and BrepWire related functions</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version December 2017<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(BRepWire.offsetPlanarWire%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

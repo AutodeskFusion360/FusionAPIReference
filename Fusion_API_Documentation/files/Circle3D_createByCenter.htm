@@ -1,0 +1,125 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/Circle3D_createByCenter.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="Circle3D_createByCenter">
+    <meta name="description" content="Circle3D.createByCenter Method">
+    <meta name="topicid" content="GUID-1283f996-29cb-4038-a517-f21adda05573">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Circle3D.createByCenter Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Circle3D.createByCenter Method</h1>
+
+          Parent Object: <a href="Circle3D.htm">Circle3D</a><br>Defined in namespace "adsk::core" and the header file is &lt;Core/Geometry/Circle3D.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Creates a transient 3D circle object by specifying a center and radius.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>This is a static method.<br /><code><pre class="api-code"><br >returnValue = adsk.core.Circle3D.<b>createByCenter</b>(center, normal, radius)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>This is a static method.<br /><code><pre class="api-code"><br >#include &lt;Core/Geometry/Circle3D.h&gt;<br /><br />returnValue = adsk::core::Circle3D::<b>createByCenter</b>(center, normal, radius);<br /></pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;"><a href="Circle3D.htm">Circle3D</a></td>
+        <td class="api-list">Returns the new Circle3D object or null if the creation failed.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">center</td>
+        <td class="api-list"><a href="Point3D.htm">Point3D</a></td>
+        <td class="api-list">The center point of the circle.</td>
+      </tr>
+      <tr>
+        <td class="api-list">normal</td>
+        <td class="api-list"><a href="Vector3D.htm">Vector3D</a></td>
+        <td class="api-list">The normal vector of the circle. The plane through the center point and perpendicular to the normal vector defines the plane of the circle.</td>
+      </tr>
+      <tr>
+        <td class="api-list">radius</td>
+        <td class="api-list">double</td>
+        <td class="api-list">The radius of the circle.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(Circle3D.createByCenter%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

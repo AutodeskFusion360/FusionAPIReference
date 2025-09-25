@@ -1,0 +1,337 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/MirrorFeatureSample.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="MirrorFeatureSample_Sample">
+    <meta name="description" content="Mirror Feature API Sample Sample">
+    <meta name="topicid" content="GUID-81e2da74-eee7-11e4-86e4-f8b156d7cd97">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Mirror Feature API Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Mirror Feature API Sample</h1>
+    <h2 class="api">
+          Description
+        </h2>Demonstrates creating a new mirror feature<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">import adsk.core, adsk.fusion, traceback
+
+def run(context):
+    ui = None
+    try:
+        app = adsk.core.Application.get()
+        ui = app.userInterface
+        
+        <span style="color:blue"># Create a document.</span>
+        doc = app.documents.add(adsk.core.DocumentTypes.FusionDesignDocumentType)
+ 
+        product = app.activeProduct
+        design = adsk.fusion.Design.cast(product)
+
+        <span style="color:blue"># Get the root component of the active design.</span>
+        rootComp = design.rootComponent
+        
+        <span style="color:blue"># Create sketch</span>
+        sketches = rootComp.sketches
+        sketch = sketches.add(rootComp.xZConstructionPlane)
+        sketchLines = sketch.sketchCurves.sketchLines
+        startPoint = adsk.core.Point3D.create(0, 0, 0)
+        endPoint = adsk.core.Point3D.create(5, 5, 0)
+        sketchLines.addTwoPointRectangle(startPoint, endPoint)
+        
+        <span style="color:blue"># Get the profile defined by the rectangle.</span>
+        prof = sketch.profiles.item(0)
+
+        <span style="color:blue"># Create an extrusion input.</span>
+        features = rootComp.features
+        extrudes = features.extrudeFeatures
+        extInput = extrudes.createInput(prof, adsk.fusion.FeatureOperations.NewBodyFeatureOperation)
+        
+        <span style="color:blue"># Define that the extent is a distance extent of 5 cm.</span>
+        distance = adsk.core.ValueInput.createByReal(5)
+        extInput.setDistanceExtent(False, distance)
+
+        <span style="color:blue"># Create the extrusion.</span>
+        ext = extrudes.add(extInput)
+        
+        <span style="color:blue"># Get the body created by extrusion</span>
+        body = ext.bodies.item(0)
+        
+        <span style="color:blue"># Get a face of the body</span>
+        face = body.faces.item(0)
+        
+        <span style="color:blue"># Create a construction plane by offset</span>
+        planes = rootComp.constructionPlanes
+        planeInput = planes.createInput()
+        offsetDistance = adsk.core.ValueInput.createByString('5 cm')
+        planeInput.setByOffset(face, offsetDistance)
+        plane = planes.add(planeInput)
+        
+        <span style="color:blue"># Create input entities for mirror feature</span>
+        inputEntites = adsk.core.ObjectCollection.create()
+        inputEntites.add(body)
+        
+        <span style="color:blue"># Create the input for mirror feature</span>
+        mirrorFeatures = features.mirrorFeatures
+        mirrorInput = mirrorFeatures.createInput(inputEntites, plane)
+        
+        <span style="color:blue"># Create the mirror feature</span>
+        mirrorFeature = mirrorFeatures.add(mirrorInput)
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code">#include &lt;Core/Application/Application.h&gt;
+#include &lt;Core/Application/Documents.h&gt;
+#include &lt;Core/Application/Document.h&gt;
+#include &lt;Core/Application/ObjectCollection.h&gt;
+#include &lt;Core/Application/Product.h&gt;
+#include &lt;Core/Application/ValueInput.h&gt;
+#include &lt;Core/Geometry/Point3D.h&gt;
+#include &lt;Core/Geometry/Line3D.h&gt;
+#include &lt;Core/UserInterface/UserInterface.h&gt;
+#include &lt;Fusion/BRep/BRepBody.h&gt;
+#include &lt;Fusion/BRep/BRepBodies.h&gt;
+#include &lt;Fusion/BRep/BRepFace.h&gt;
+#include &lt;Fusion/BRep/BRepFaces.h&gt;
+#include &lt;Fusion/Components/Component.h&gt;
+#include &lt;Fusion/Construction/ConstructionPlane.h&gt;
+#include &lt;Fusion/Construction/ConstructionPlanes.h&gt;
+#include &lt;Fusion/Construction/ConstructionPlaneInput.h&gt;
+#include &lt;Fusion/Features/Features.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeature.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeatures.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeatureInput.h&gt;
+#include &lt;Fusion/Features/MirrorFeature.h&gt;
+#include &lt;Fusion/Features/MirrorFeatures.h&gt;
+#include &lt;Fusion/Features/MirrorFeatureInput.h&gt;
+#include &lt;Fusion/Fusion/Design.h&gt;
+#include &lt;Fusion/Sketch/Profile.h&gt;
+#include &lt;Fusion/Sketch/Profiles.h&gt;
+#include &lt;Fusion/Sketch/Sketch.h&gt;
+#include &lt;Fusion/Sketch/Sketches.h&gt;
+#include &lt;Fusion/Sketch/SketchCircle.h&gt;
+#include &lt;Fusion/Sketch/SketchCircles.h&gt;
+#include &lt;Fusion/Sketch/SketchCurves.h&gt;
+#include &lt;Fusion/Sketch/SketchLine.h&gt;
+#include &lt;Fusion/Sketch/SketchLines.h&gt;
+
+using namespace adsk::core;
+using namespace adsk::fusion;
+
+Ptr&lt;UserInterface&gt; ui;
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    Ptr&lt;Application&gt; app = Application::get();
+    if (!app)
+        return false;
+
+    ui = app-&gt;userInterface();
+    if (!ui)
+        return false;
+
+    Ptr&lt;Documents&gt; documents = app-&gt;documents();
+    if (!documents)
+        return false;
+
+    Ptr&lt;Document&gt; doc = documents-&gt;add(DocumentTypes::FusionDesignDocumentType);
+    if (!doc)
+        return false;
+
+    Ptr&lt;Product&gt; product = app-&gt;activeProduct();
+    if (!product)
+        return false;
+
+    Ptr&lt;Design&gt; design = product;
+    if (!design)
+        return false;
+
+    <span style="color:blue">// Get the root component of the active design</span>
+    Ptr&lt;Component&gt; rootComp = design-&gt;rootComponent();
+    if (!rootComp)
+        return false;
+
+    <span style="color:blue">// Create sketch</span>
+    Ptr&lt;Sketches&gt; sketches = rootComp-&gt;sketches();
+    if (!sketches)
+        return false;
+    Ptr&lt;ConstructionPlane&gt; xz = rootComp-&gt;xZConstructionPlane();
+    if (!xz)
+        return false;
+    Ptr&lt;Sketch&gt; sketch = sketches-&gt;add(xz);
+    if (!sketch)
+        return false;
+    Ptr&lt;SketchCurves&gt; sketchCurves = sketch-&gt;sketchCurves();
+    if (!sketchCurves)
+        return false;
+    Ptr&lt;SketchLines&gt; sketchLines = sketchCurves-&gt;sketchLines();
+    if (!sketchLines)
+        return false;
+    Ptr&lt;Point3D&gt; startPoint = Point3D::create(0, 0, 0);
+    if (!startPoint)
+        return false;
+    Ptr&lt;Point3D&gt; endPoint = Point3D::create(5, 5, 0);
+    if (!endPoint)
+        return false;
+    sketchLines-&gt;addTwoPointRectangle(startPoint, endPoint);
+
+    <span style="color:blue">// Get the profile defined by the rectangle.</span>
+    Ptr&lt;Profiles&gt; profs = sketch-&gt;profiles();
+    if (!profs)
+        return false;
+    Ptr&lt;Profile&gt; prof = profs-&gt;item(0);
+    if (!prof)
+        return false;
+
+    <span style="color:blue">// Create an extrusion input.</span>
+    Ptr&lt;Features&gt; features = rootComp-&gt;features();
+    if (!features)
+        return false;
+    Ptr&lt;ExtrudeFeatures&gt; extrudes = features-&gt;extrudeFeatures();
+    if (!extrudes)
+        return false;
+    Ptr&lt;ExtrudeFeatureInput&gt; extInput = extrudes-&gt;createInput(prof, FeatureOperations::NewBodyFeatureOperation);
+    if (!extInput)
+        return false;
+
+    <span style="color:blue">// Define that the extent is a distance extent of 5 cm.</span>
+    Ptr&lt;ValueInput&gt; distance = ValueInput::createByReal(5);
+    if (!distance)
+        return false;
+    extInput-&gt;setDistanceExtent(false, distance);
+
+    <span style="color:blue">// Create the extrusion.</span>
+    Ptr&lt;ExtrudeFeature&gt; ext = extrudes-&gt;add(extInput);
+    if (!ext)
+        return false;
+
+    <span style="color:blue">// Get the body created by extrusion</span>
+    Ptr&lt;BRepBodies&gt; bodies = ext-&gt;bodies();
+    if (!bodies)
+        return false;
+    Ptr&lt;BRepBody&gt; body = bodies-&gt;item(0);
+    if (!body)
+        return false;
+
+    <span style="color:blue">// Get a face of the body</span>
+    Ptr&lt;BRepFaces&gt; faces = body-&gt;faces();
+    if (!faces)
+        return false;
+    Ptr&lt;BRepFace&gt; face = faces-&gt;item(0);
+    if (!face)
+        return false;
+
+    <span style="color:blue">// Create a construction plane by offset</span>
+    Ptr&lt;ConstructionPlanes&gt; planes = rootComp-&gt;constructionPlanes();
+    if (!planes)
+        return false;
+    Ptr&lt;ConstructionPlaneInput&gt; planeInput = planes-&gt;createInput();
+    if (!planeInput)
+        return false;
+    Ptr&lt;ValueInput&gt; offsetDistance = ValueInput::createByString("5 cm");
+    if (!offsetDistance)
+        return false;
+    planeInput-&gt;setByOffset(face, offsetDistance);
+    Ptr&lt;ConstructionPlane&gt; plane = planes-&gt;add(planeInput);
+    if (!plane)
+        return false;
+
+    <span style="color:blue">// Create input entities for mirror feature</span>
+    Ptr&lt;ObjectCollection&gt; inputEntites = ObjectCollection::create();
+    if (!inputEntites)
+        return false;
+    inputEntites-&gt;add(body);
+
+    <span style="color:blue">// Create the input for mirror feature</span>
+    Ptr&lt;MirrorFeatures&gt; mirrorFeatures = features-&gt;mirrorFeatures();
+    if (!mirrorFeatures)
+        return false;
+    Ptr&lt;MirrorFeatureInput&gt; mirrorInput = mirrorFeatures-&gt;createInput(inputEntites, plane);
+    if (!mirrorInput)
+        return false;
+
+    <span style="color:blue">// Create the mirror feature</span>
+    Ptr&lt;MirrorFeature&gt; mirrorFeature = mirrorFeatures-&gt;add(mirrorInput);
+    if (!mirrorFeature)
+        return false;
+
+    return true;
+}</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(MirrorFeatureSample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

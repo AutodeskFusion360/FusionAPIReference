@@ -1,0 +1,115 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/ArrangeComponents_add.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="17/12/2024">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="ArrangeComponents_add">
+    <meta name="description" content="ArrangeComponents.add Method">
+    <meta name="topicid" content="GUID-39F15A53-D826-4B22-8D83-047FBA33682E">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>ArrangeComponents.add Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">ArrangeComponents.add Method</h1>
+
+          Parent Object: <a href="ArrangeComponents.htm">ArrangeComponents</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Arrange/ArrangeComponents.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Adds a new ArrangeComponent object to the collection.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"arrangeComponents_var" is a variable referencing an <a href="ArrangeComponents.htm">ArrangeComponents</a> object.<code><pre class="api-code">returnValue = arrangeComponents_var.<b>add</b>(occurrenceOrFace)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"arrangeComponents_var" is a variable referencing an <a href="ArrangeComponents.htm">ArrangeComponents</a> object.<br /><br /><code><pre class="api-code">#include &lt;Fusion/Arrange/ArrangeComponents.h&gt;<br /><br />returnValue = arrangeComponents_var-&gt;<b>add</b>(occurrenceOrFace);<br /></pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;"><a href="ArrangeComponent.htm">ArrangeComponent</a></td>
+        <td class="api-list">Returns the created ArrangeComponent where you can use properties on it to define the various other settings supported to control how the component is arranged.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">occurrenceOrFace</td>
+        <td class="api-list"><a href="Base.htm">Base</a></td>
+        <td class="api-list">For a 2D arrange this can be an Occurrence or BRepFace object that defines which component to use. If a BRepFace object is used, the face is used to orient the part in the arrangement and will face up or down depending on the isGlobalDirectionFaceUp property on the ArrangeFeature2DInput object.<br/><br/> For a 2D arrange, if an Occurrence is provided, the Occurrence will be oriented in the arrangement such that the largest face points downward.<br/><br/> For a 3D arrange this can be an Occurrence or BRepFace object but if a BRepFace is provided it does not define the orientation but is only used to get the parent Occurrence. For a 3D arrange the arranged occurrences have the same orientation as the original occurrence but are positioned within the 3D envelope.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version January 2025<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(ArrangeComponents.add%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

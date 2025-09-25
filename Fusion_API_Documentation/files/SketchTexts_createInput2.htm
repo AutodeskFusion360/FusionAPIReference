@@ -1,0 +1,149 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/SketchTexts_createInput2.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="14/10/2020">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="SketchTexts_createInput2">
+    <meta name="description" content="SketchTexts.createInput2 Method">
+    <meta name="topicid" content="GUID-BDE768AD-D653-4878-9A24-5730719C155A">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>SketchTexts.createInput2 Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">SketchTexts.createInput2 Method</h1>
+
+          Parent Object: <a href="SketchTexts.htm">SketchTexts</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Sketch/SketchTexts.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Creates a SketchTextInput object that is used to define the additional input to create text. The SketchTextInput object is equivalent to the Sketch Text dialog in that it collects all of the input required to create sketch text. You must call setAsFitOnPath, setAsAlongPath, or setAsMultiLine methods to define one of the three types of text and can use other and define any setAs Once the properties of the SketchTextInput object have been defined, use the add method to create the sketch text.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"sketchTexts_var" is a variable referencing a <a href="SketchTexts.htm">SketchTexts</a> object.<code><pre class="api-code">returnValue = sketchTexts_var.<b>createInput2</b>(formattedText, height)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"sketchTexts_var" is a variable referencing a <a href="SketchTexts.htm">SketchTexts</a> object.<br /><br /><code><pre class="api-code">#include &lt;Fusion/Sketch/SketchTexts.h&gt;<br /><br />returnValue = sketchTexts_var-&gt;<b>createInput2</b>(formattedText, height);<br /></pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;"><a href="SketchTextInput.htm">SketchTextInput</a></td>
+        <td class="api-list">Returns a SketchTextInput object that can be used to set additional formatting and is used as input to the add method.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">formattedText</td>
+        <td class="api-list">string</td>
+        <td class="api-list">The text used for the sketch text. This is a simple string as no additional formatting is currently supported.</td>
+      </tr>
+      <tr>
+        <td class="api-list">height</td>
+        <td class="api-list">double</td>
+        <td class="api-list">The height of the text in centimeters.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchTextinput_setAsAlongPath_Sample.htm">SketchTextInput.setAsAlongPath</a></td>
+        <td class="api-list">Demonstrates the SketchTextInput.setAsAlongPath method.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchTextInput_setAsFitOnPath_Sample.htm">SketchTextInput.setAsFitOnPath</a></td>
+        <td class="api-list">Demoonstrates the SketchTextInput.setAsFitOnPath method.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchTextInput_setAsMultiLine_Sample.htm">SketchTextInput.setAsMultiLine</a></td>
+        <td class="api-list">Demonstrates the SketchTextInput.setAsMultiLine method.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchTextSample_Sample.htm">Sketch Text API Sample</a></td>
+        <td class="api-list">Demonstrates creating sketch text by creating both mult-line text and text along a curve.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version December 2020<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(SketchTexts.createInput2%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

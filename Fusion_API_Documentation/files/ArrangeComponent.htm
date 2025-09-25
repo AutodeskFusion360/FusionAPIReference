@@ -1,0 +1,146 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/ArrangeComponent.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="17/12/2024">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="ArrangeComponent">
+    <meta name="description" content="ArrangeComponent Object">
+    <meta name="topicid" content="GUID-BDBE09F1-0D9F-485F-BE76-3097361F835A">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>ArrangeComponent Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">ArrangeComponent Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Arrange/ArrangeComponent.h&gt;<h2 class="api">
+          Description
+        </h2>Defines a component within an arrangement. This specifies an occurrence along with additional arrangement information. This object is the API equivalent of a single line within the component list shown in the Arrange dialog. This object is used for both the creation of a new Arrange feature and querying and modifying an existing Arrange feature.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ArrangeComponent_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ArrangeComponent_deleteMe.htm">deleteMe</a></td>
+        <td class="api-list">Deletes this ArrangeComponent from the arrangement.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ArrangeComponent_setRotationUsingEdge.htm">setRotationUsingEdge</a></td>
+        <td class="api-list">Sets the rotation angle using the specified edge such that the edge is pointing in the zero rotation angle. This is a convenience method to set the rotation angle. The rotation property can be used to accomplish the same result.<br/><br/> This is only valid for 2D True Shape arrangements and will fail for 2D rectangular and 3D arrangements.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ArrangeComponent_isDirectionFlipped.htm">isDirectionFlipped</a></td>
+        <td class="api-list">Specifies if the direction is flipped from it's default direction.<br/><br/> For a component defined by a face the default direction is defined by the selected face and the isGlobalDirectionFaceUp property of the Arrange2DDefinition associated with the parent ArrangeFeature object.<br/><br/> For a component defined by an occurrence, the default direction orients the occurrence such that the largest face points downward.<br/><br/> For a 3D arrange, this property is ignored and the orientation of the part is the same as it exists in the original assembly.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ArrangeComponent_isFiller.htm">isFiller</a></td>
+        <td class="api-list">Specifies if this component will be used to fill any left over empty space in the available envelopes.<br/><br/> This is only valid for 2D True Shape arrangements and is ignored for 2D rectangular and 3D arrangements.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ArrangeComponent_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ArrangeComponent_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ArrangeComponent_occurrence.htm">occurrence</a></td>
+        <td class="api-list">Returns the Occurrence associated with this ArrangeComponent. If an Occurrence was used to define this ArrangeComponent, this will return the same thing as the occurrenceOrFace. If a BRepFace was used to define this ArrangeComponent, this will return the Occurrence the face is in. This is a convenience property to make accessing the occurrence simpler.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ArrangeComponent_occurrenceOrFace.htm">occurrenceOrFace</a></td>
+        <td class="api-list">The BRepFace or Occurrence that was used to identify this ArrangeComponent.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ArrangeComponent_parentArrangeFeature.htm">parentArrangeFeature</a></td>
+        <td class="api-list">Returns the ArrangeFeature this ArrangeComponent is associated with. This property returns null in the case where a feature hasn't been created yet and there is only an ArrangeFeatureInput.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ArrangeComponent_priority.htm">priority</a></td>
+        <td class="api-list">Specifies the nesting priority for this component.<br/><br/> For a 3D arrange, this property is ignored and setting it will fail.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ArrangeComponent_quantity.htm">quantity</a></td>
+        <td class="api-list">Specifies the quantity of this component to use in the arrange. This defaults to -1, which indicates that the global quantity is to be used.<br/><br/> For a 3D arrange, this property is ignored and the quantity is always one.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ArrangeComponent_rotation.htm">rotation</a></td>
+        <td class="api-list">Gets and sets the rotation angle of this ArrangeComponent. The value is defined in Radians, is relative to the zero direction vector returned by the zeroDirectionVector property, and is in a counterclockwise direction.<br/><br/> This is only valid for 2D True Shape arrangements and is ignored for 2D rectangular and 3D arrangements.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ArrangeComponent_rotationType.htm">rotationType</a></td>
+        <td class="api-list">Gets and sets the rotation type for this ArrangeComponent. This defaults to use the global rotation type defined for the arrangement.<br/><br/> For a 3D arrange, this property is ignored.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ArrangeComponent_upDirection.htm">upDirection</a></td>
+        <td class="api-list">Returns a vector that is the up direction of this ArrangeComponent.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ArrangeComponent_zeroDirection.htm">zeroDirection</a></td>
+        <td class="api-list">Returns a vector that is the zero degree direction of this ArrangeComponent.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="ArrangeComponents_add.htm">ArrangeComponents.add</a>, <a href="ArrangeComponents_item.htm">ArrangeComponents.item</a>, <a href="ArrangeFeature_unusedComponents.htm">ArrangeFeature.unusedComponents</a>, <a href="ArrangeOccurrenceResult_arrangeComponent.htm">ArrangeOccurrenceResult.arrangeComponent</a><h2 class="api">
+            Version
+          </h2>
+        Introduced in version January 2025<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(ArrangeComponent%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

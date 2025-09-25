@@ -1,0 +1,878 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/TemporaryBRepManager.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="TemporaryBRepManager_Sample">
+    <meta name="description" content="TemporaryBRepManager API Sample Sample">
+    <meta name="topicid" content="GUID-0f6e9ca0-dc67-49c3-b902-baf881063e24">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>TemporaryBRepManager API Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">TemporaryBRepManager API Sample</h1>
+    <h2 class="api">
+          Description
+        </h2>TemporaryBRepManager related functions<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code"><span style="color:blue">#Author-</span>
+<span style="color:blue">#Description-</span>
+
+import adsk.core, adsk.fusion, adsk.cam, traceback
+import os
+
+def CreateBox():  
+    <span style="color:blue"># Get TemporaryBRepManager</span>
+    tempBrepMgr = adsk.fusion.TemporaryBRepManager.get()
+
+    centerPoint = adsk.core.Point3D.create(0.0, 10.0, 0.0);
+    lengthDir = adsk.core.Vector3D.create(1.0, 0.0, 0.0)
+    widthDir = adsk.core.Vector3D.create(0.0, 1.0, 0.0)
+    orientedBoundingBox3D = adsk.core.OrientedBoundingBox3D.create(centerPoint, 
+                                                                   lengthDir,
+                                                                   widthDir,
+                                                                   5.0,
+                                                                   6.0,
+                                                                   2.0
+                                                                   )
+    <span style="color:blue"># Create box                                                              </span>
+    box = tempBrepMgr.createBox(orientedBoundingBox3D)
+    return box
+
+def CreateCylinderOrCone(radius1, radius2):
+    <span style="color:blue"># Get TemporaryBRepManager</span>
+    tempBrepMgr = adsk.fusion.TemporaryBRepManager.get()  
+    
+    point1 = adsk.core.Point3D.create(3.0, 3.0, 3.0)
+    point2 = adsk.core.Point3D.create(-3.0, -3.0, -3.0)   
+    
+    <span style="color:blue"># Create Cylinder Or Cone</span>
+    cylinderOrCone = tempBrepMgr.createCylinderOrCone(point1, 
+                                                      radius1, 
+                                                      point2, 
+                                                      radius2
+                                                      )   
+    return cylinderOrCone
+        
+def CreateEllipticalCylinderOrCone(majorRadius1, minorRadius1, majorRadius2):
+    <span style="color:blue"># Get TemporaryBRepManager</span>
+    tempBrepMgr = adsk.fusion.TemporaryBRepManager.get()  
+    
+    pointOne = adsk.core.Point3D.create(8.0, 3.0, 0.0)
+    pointTwo = adsk.core.Point3D.create(8.0, -3.0, -3.0) 
+    majorAxisDirection = adsk.core.Vector3D.create(1.0, 1.0, 1.0)
+    
+    <span style="color:blue"># Create EllipticalCylinder Or Cone</span>
+    ellipicalCylinderOrCone = tempBrepMgr.createEllipticalCylinderOrCone(pointOne,
+                                                                   majorRadius1,
+                                                                   minorRadius1,
+                                                                   pointTwo,
+                                                                   majorRadius2,
+                                                                   majorAxisDirection
+                                                                  )      
+    return ellipicalCylinderOrCone
+   
+def CreateSphere(radius):
+    <span style="color:blue"># Get TemporaryBRepManager</span>
+    tempBrepMgr = adsk.fusion.TemporaryBRepManager.get()  
+    
+    sphereCenter = adsk.core.Point3D.create(0.0, 8.0, 8.0)
+    <span style="color:blue"># Create sphere</span>
+    sphere = tempBrepMgr.createSphere(sphereCenter, radius)
+    
+    return sphere
+    
+def CreateTorus(majorRadius, minorRadius):
+    <span style="color:blue"># Get TemporaryBRepManager</span>
+    tempBrepMgr = adsk.fusion.TemporaryBRepManager.get()  
+    
+    axis = adsk.core.Vector3D.create(0.0, 0.0, 10.0)
+    torusCenter = adsk.core.Point3D.create(0.0, 2.0, 8.0)
+    <span style="color:blue"># Create torus</span>
+    torus = tempBrepMgr.createTorus(torusCenter, 
+                                    axis,
+                                    majorRadius,
+                                    minorRadius
+                                    )
+    return torus  
+
+def PlaneIntersection(body):  
+    <span style="color:blue"># Get TemporaryBRepManager</span>
+    tempBrepMgr = adsk.fusion.TemporaryBRepManager.get()  
+
+    planeOrigin = adsk.core.Point3D.create(0.0, 0.0, 0.0)
+    planeNormal = adsk.core.Vector3D.create(0.0, 0.0, 1.0)
+    plane =  adsk.core.Plane.create(planeOrigin, planeNormal)
+    
+    <span style="color:blue"># creates a brep body by the intersection between the input body and plane</span>
+    intersectionBody = tempBrepMgr.planeIntersection(body, plane) 
+    return intersectionBody        
+    
+def TransformBody(body):
+    <span style="color:blue"># Get TemporaryBRepManager</span>
+    tempBrepMgr = adsk.fusion.TemporaryBRepManager.get() 
+    
+    transform = adsk.core.Matrix3D.create()
+    transform.translation = adsk.core.Vector3D.create(0.0, 0.0, -5.0)
+    
+    <span style="color:blue"># Transforms the brep body using the specified transformation matrix</span>
+    isSuccess = tempBrepMgr.transform(body, transform)
+    return isSuccess
+    
+def GetWireFromBody(body, index):
+    brepWires = body.wires;
+    brepWire = brepWires.item(index)
+    return brepWire
+    
+def DeleteFacesOnBody(body, indexes, isDeleteSpecifiedFaces):
+    <span style="color:blue"># Get TemporaryBRepManager</span>
+    tempBrepMgr = adsk.fusion.TemporaryBRepManager.get() 
+    
+    brepFaces = []
+    faces = body.faces
+    for index in indexes:
+        face = faces.item(index)
+        brepFaces.append(face)
+    
+    <span style="color:blue"># Delete faces on body</span>
+    isSuccess = tempBrepMgr.deleteFaces(brepFaces, isDeleteSpecifiedFaces)
+    return isSuccess
+    
+def CreateSilhouette(face):
+    <span style="color:blue"># Get TemporaryBRepManager</span>
+    tempBrepMgr = adsk.fusion.TemporaryBRepManager.get() 
+    
+    viewDirection = adsk.core.Vector3D.create(0.0, 0.0, 1.0)
+    silhouetteBody = tempBrepMgr.createSilhouetteCurves(face, viewDirection, True)
+    
+    <span style="color:blue"># Create silhouette body</span>
+    return silhouetteBody
+    
+def CreateWireFromCurves():
+    <span style="color:blue"># Get TemporaryBRepManager</span>
+    tempBrepMgr = adsk.fusion.TemporaryBRepManager.get() 
+    
+    center = adsk.core.Point3D.create(10.0, 0.0, 5.0)
+    normal = adsk.core.Vector3D.create(0.0, 0.0, 1.0)
+    circle1 = adsk.core.Circle3D.createByCenter(center, normal, 3.0)
+    circle2 = adsk.core.Circle3D.createByCenter(center, normal, 2.0)
+    curves = []
+    curves.append(circle1)
+    curves.append(circle2)
+    
+    <span style="color:blue"># Create wire from curves</span>
+    wireBody, edgeMap = tempBrepMgr.createWireFromCurves(curves)
+    return wireBody, edgeMap
+    
+def CreateHelixBody():
+    <span style="color:blue"># Get TemporaryBRepManager</span>
+    tempBrepMgr = adsk.fusion.TemporaryBRepManager.get() 
+    
+    axisPoint = adsk.core.Point3D.create(10.0, 10.0, 10.0)
+    axisVector = adsk.core.Vector3D.create(0.0, 1.0, 0.0)
+    startPoint = adsk.core.Point3D.create(8.0, 2.0, 10.0)
+    pitch = 1.0
+    turns = 10
+    taperAngle = 0.3
+    
+    <span style="color:blue"># Create helix body</span>
+    helixBody = tempBrepMgr.createHelixWire(axisPoint,
+                                axisVector,
+                                startPoint,
+                                pitch,
+                                turns,
+                                taperAngle
+                                )
+    return helixBody
+    
+def run(context):
+    ui = None
+    try:
+        app = adsk.core.Application.get()
+        ui  = app.userInterface
+        
+        <span style="color:blue"># Create a new document with parametric design</span>
+        doc = app.documents.add(adsk.core.DocumentTypes.FusionDesignDocumentType)
+        product = app.activeProduct
+        design = adsk.fusion.Design.cast(product)
+        design.designType = adsk.fusion.DesignTypes.DirectDesignType
+        
+        <span style="color:blue"># Get the root component of active design</span>
+        rootComp = design.rootComponent
+
+        <span style="color:blue"># Get bodies in root component</span>
+        bodies = rootComp.bRepBodies
+        
+        <span style="color:blue"># Get TemporaryBRepManager</span>
+        tempBrepMgr = adsk.fusion.TemporaryBRepManager.get()
+           
+        <span style="color:blue"># Create a temporary solid box</span>
+        box = CreateBox()
+        
+        <span style="color:blue"># Check the temporary box property</span>
+        isTemporary = box.isTemporary
+        print(("Is the Box temporary? {}").format(isTemporary))
+        
+        <span style="color:blue"># Creates a temporary solid cylinder and cone BRepBody</span>
+        cylinder = CreateCylinderOrCone(3.0, 3.0)
+        cone =  CreateCylinderOrCone(2.0, 4.0)
+        
+        <span style="color:blue"># Creates a temporary elliptical solid cylinder and cone BrepBody</span>
+        ellipicalCylinder = CreateEllipticalCylinderOrCone(4.0, 2.0, 4.0)
+        ellipicalCone = CreateEllipticalCylinderOrCone(3.0, 2.0, 4.5)
+                      
+        <span style="color:blue"># Creates a temporary spherical BRepBody</span>
+        sphere = CreateSphere(3.0)
+        
+        <span style="color:blue"># Creates a temporary toroidal BRepBody</span>
+        torus = CreateTorus(2.0, 1.0) 
+
+        <span style="color:blue"># creates a brep body by the intersection between the input body and plane</span>
+        intersectionBody = PlaneIntersection(box) 
+        
+        <span style="color:blue"># Creates a temporary copy of the input BRepBody</span>
+        copiedBody = tempBrepMgr.copy(intersectionBody)
+        
+        <span style="color:blue"># Transforms the brep body using the specified transformation matrix</span>
+        isSuccess = TransformBody(copiedBody)
+        print(("Is the transformation of the copied body successed? {}").format(isSuccess))
+  
+        <span style="color:blue"># Get brep wires </span>
+        brepWire = GetWireFromBody(intersectionBody, 0)
+        copiedWire = GetWireFromBody(copiedBody, 0)
+        
+        <span style="color:blue">#  Creates a new body by creating a ruled surface between the two input wire bodies. </span>
+        surfaceBody = tempBrepMgr.createRuledSurface(brepWire, copiedWire)
+        
+        <span style="color:blue"># Performs the specified Boolean operation between the two input bodies</span>
+        intersection = adsk.fusion.BooleanTypes.IntersectionBooleanType
+        isSuccess = tempBrepMgr.booleanOperation(cylinder, cone, intersection)
+        print(("Is the intersection boolean operation successed? {}").format(isSuccess))
+        
+        union = adsk.fusion.BooleanTypes.UnionBooleanType 
+        isSuccess = tempBrepMgr.booleanOperation(ellipicalCylinder, ellipicalCone, union)        
+        print(("Is the union boolean operation successed? {}").format(isSuccess))
+        
+        <span style="color:blue"># Delete face from a temporary BRepBody</span>
+        indexes = [0,2]
+        isSuccess = DeleteFacesOnBody(ellipicalCylinder, indexes, True)
+        print(("Is faces deletion successed? {}").format(isSuccess))
+        
+        <span style="color:blue"># Calculates the silhouette curve geometry for a given face as viewed from a given direction. </span>
+        face = torus.faces.item(0)
+        silhouetteBody = CreateSilhouette(face)
+ 
+        <span style="color:blue"># Create wire from curves</span>
+        wireBody, edgeMap = CreateWireFromCurves()
+        
+        <span style="color:blue"># Creates a body from multiple wires that all lie within the same plane</span>
+        wireBodies = []
+        wireBodies.append(wireBody)
+        planerBody = tempBrepMgr.createFaceFromPlanarWires(wireBodies)
+        
+        <span style="color:blue"># Create helix wire body    </span>
+        helixBody = CreateHelixBody()
+        <span style="color:blue"># Display the helix edges</span>
+        group = rootComp.customGraphicsGroups.add()
+        for edge in helixBody.edges:
+            group.addCurve(edge.geometry)
+
+        <span style="color:blue"># Add the temprary bodies to direct modeling design, </span>
+        <span style="color:blue"># then the temprary bodies will be displayed</span>
+        bodies.add(box)
+        bodies.add(cylinder)
+        bodies.add(cone)
+        bodies.add(ellipicalCylinder)
+        bodies.add(ellipicalCone)
+        bodies.add(sphere)
+        bodies.add(torus)
+        bodies.add(intersectionBody)
+        bodies.add(surfaceBody)
+        bodies.add(silhouetteBody)
+        bodies.add(planerBody)
+        
+        <span style="color:blue">#Exports the input bodies to the specified file.</span>
+        brepBodies = []
+        brepBodies.append(box)
+        brepBodies.append(surfaceBody)
+        
+        scriptDir = os.path.dirname(os.path.realpath(__file__))
+        exportPath = os.path.join(scriptDir, "sampleFile.smt")
+        
+        isSuccess = tempBrepMgr.exportToFile(brepBodies, exportPath)
+        print(("Is the export to file success? {}").format(isSuccess))
+        
+        <span style="color:blue">#Creates new BRepBody objects based on the contents of the specified file</span>
+        filePath = os.path.join(scriptDir, "sampleFile.smt")
+        newBodies = tempBrepMgr.createFromFile(filePath);
+
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code">#include &lt;Core/Application/Application.h&gt;
+#include &lt;Core/UserInterface/UserInterface.h&gt;
+#include &lt;Core/Application/Document.h&gt;
+#include &lt;Core/Application/Documents.h&gt;
+#include &lt;Fusion/Components/Component.h&gt;
+#include &lt;Fusion/Fusion/Design.h&gt;
+#include &lt;Fusion/BRep/BRepBodies.h&gt;
+#include &lt;Fusion/BRep/BRepBody.h&gt;
+#include &lt;Fusion/BRep/BRepWires.h&gt;
+#include &lt;Fusion/BRep/BRepWire.h&gt;
+#include &lt;Fusion/BRep/BRepFaces.h&gt;
+#include &lt;Fusion/BRep/BRepFace.h&gt;
+#include &lt;Fusion/BRep/BRepEdges.h&gt;
+#include &lt;Fusion/BRep/BRepEdge.h&gt;
+#include &lt;Fusion/BRep/TemporaryBRepManager.h&gt;
+#include &lt;Core/Geometry/Point3D.h&gt;
+#include &lt;Core/Geometry/Vector3D.h&gt;
+#include &lt;Core/Geometry/OrientedBoundingBox3D.h&gt;
+#include &lt;Core/Geometry/Plane.h&gt;
+#include &lt;Core/Geometry/Matrix3D.h&gt;
+#include &lt;Core/Geometry/Circle3D.h&gt;
+#include &lt;Core/Geometry/Curve3D.h&gt;
+#include &lt;Fusion/Graphics/CustomGraphicsGroups.h&gt;
+#include &lt;Fusion/Graphics/CustomGraphicsGroup.h&gt;
+
+
+using namespace adsk::core;
+using namespace adsk::fusion;
+
+Ptr&lt;Application&gt; app;
+Ptr&lt;UserInterface&gt; ui;
+
+std::string getDllPath();
+
+Ptr&lt;BRepBody&gt; CreateBox()
+{
+    <span style="color:blue">// Get TemporaryBRepManager</span>
+    Ptr&lt;TemporaryBRepManager&gt; tempBRepMgr = TemporaryBRepManager::get();
+    if (!tempBRepMgr)
+        return nullptr;
+
+    Ptr&lt;Point3D&gt; centerPoint = Point3D::create(0.0, 10.0, 0.0);
+    Ptr&lt;Vector3D&gt; lengthDir = Vector3D::create(1.0, 0.0, 0.0);
+    Ptr&lt;Vector3D&gt; widthDir = Vector3D::create(0.0, 1.0, 0.0);
+
+    Ptr&lt;OrientedBoundingBox3D&gt; orientedBoundingBox3D =
+        OrientedBoundingBox3D::create(centerPoint, lengthDir, widthDir, 5.0, 6.0, 2.0);
+
+    <span style="color:blue">// Create box</span>
+    Ptr&lt;BRepBody&gt; box = tempBRepMgr-&gt;createBox(orientedBoundingBox3D);
+
+    return box;
+}
+
+Ptr&lt;BRepBody&gt; CreateCylinderOrCone(double radius1, double radius2)
+{
+    <span style="color:blue">// Get TemporaryBRepManager</span>
+    Ptr&lt;TemporaryBRepManager&gt; tempBRepMgr = TemporaryBRepManager::get();
+    if (!tempBRepMgr)
+        return nullptr;
+
+    Ptr&lt;Point3D&gt; point1 = Point3D::create(3.0, 3.0, 3.0);
+    Ptr&lt;Point3D&gt; point2 = Point3D::create(-3.0, -3.0, -3.0);
+
+    <span style="color:blue">// Create Cylinder Or Cone</span>
+    Ptr&lt;BRepBody&gt; cylinderOrCone = tempBRepMgr-&gt;createCylinderOrCone(point1, radius1, point2, radius2);
+
+    return cylinderOrCone;
+}
+
+Ptr&lt;BRepBody&gt; CreateEllipticalCylinderOrCone(double majorRadius1, double minorRadius1, double majorRadius2)
+{
+    <span style="color:blue">// Get TemporaryBRepManager</span>
+    Ptr&lt;TemporaryBRepManager&gt; tempBRepMgr = TemporaryBRepManager::get();
+    if (!tempBRepMgr)
+        return nullptr;
+
+    Ptr&lt;Point3D&gt; pointOne = Point3D::create(8.0, 3.0, 0.0);
+    Ptr&lt;Point3D&gt; pointTwo = Point3D::create(8.0, -3.0, -3.0);
+    Ptr&lt;Vector3D&gt; majorAxisDirection = Vector3D::create(1.0, 1.0, 1.0);
+
+    <span style="color:blue">// Create EllipticalCylinder Or Cone</span>
+    Ptr&lt;BRepBody&gt; ellipicalCylinderOrCone = tempBRepMgr-&gt;createEllipticalCylinderOrCone(
+        pointOne, majorRadius1, minorRadius1, pointTwo, majorRadius2, majorAxisDirection);
+    return ellipicalCylinderOrCone;
+}
+
+Ptr&lt;BRepBody&gt; CreateSphere(double radius)
+{
+    <span style="color:blue">// Get TemporaryBRepManager</span>
+    Ptr&lt;TemporaryBRepManager&gt; tempBRepMgr = TemporaryBRepManager::get();
+    if (!tempBRepMgr)
+        return nullptr;
+
+    Ptr&lt;Point3D&gt; sphereCenter = Point3D::create(0.0, 8.0, 8.0);
+    <span style="color:blue">// Create sphere</span>
+    Ptr&lt;BRepBody&gt; sphere = tempBRepMgr-&gt;createSphere(sphereCenter, radius);
+
+    return sphere;
+}
+
+Ptr&lt;BRepBody&gt; CreateTorus(double majorRadius, double minorRadius)
+{
+    <span style="color:blue">// Get TemporaryBRepManager</span>
+    Ptr&lt;TemporaryBRepManager&gt; tempBRepMgr = TemporaryBRepManager::get();
+    if (!tempBRepMgr)
+        return nullptr;
+
+    Ptr&lt;Vector3D&gt; axis = Vector3D::create(0.0, 0.0, 10.0);
+    Ptr&lt;Point3D&gt; torusCenter = Point3D::create(0.0, 2.0, 8.0);
+
+    <span style="color:blue">// Create torus</span>
+    Ptr&lt;BRepBody&gt; torus = tempBRepMgr-&gt;createTorus(torusCenter, axis, majorRadius, minorRadius);
+
+    return torus;
+}
+
+Ptr&lt;BRepBody&gt; PlaneIntersection(const Ptr&lt;BRepBody&gt;& body)
+{
+    <span style="color:blue">// Get TemporaryBRepManager</span>
+    Ptr&lt;TemporaryBRepManager&gt; tempBRepMgr = TemporaryBRepManager::get();
+    if (!tempBRepMgr)
+        return nullptr;
+
+    Ptr&lt;Point3D&gt; planeOrigin = Point3D::create(0.0, 0.0, 0.0);
+    Ptr&lt;Vector3D&gt; planeNormal = Vector3D::create(0.0, 0.0, 1.0);
+    Ptr&lt;Plane&gt; plane = Plane::create(planeOrigin, planeNormal);
+
+    <span style="color:blue">// creates a brep body by the intersection between the input body and plane</span>
+    Ptr&lt;BRepBody&gt; intersectionBody = tempBRepMgr-&gt;planeIntersection(body, plane);
+
+    return intersectionBody;
+}
+
+bool TransformBody(const Ptr&lt;BRepBody&gt;& body)
+{
+    bool isSuccess = false;
+
+    <span style="color:blue">// Get TemporaryBRepManager</span>
+    Ptr&lt;TemporaryBRepManager&gt; tempBRepMgr = TemporaryBRepManager::get();
+    if (!tempBRepMgr)
+        return isSuccess;
+
+    Ptr&lt;Matrix3D&gt; transform = Matrix3D::create();
+    Ptr&lt;Vector3D&gt; translation = Vector3D::create(0.0, 0.0, -5.0);
+    isSuccess = transform-&gt;translation(translation);
+    if (!isSuccess)
+        return isSuccess;
+
+    <span style="color:blue">// Transforms the brep body using the specified transformation matrix</span>
+    isSuccess = tempBRepMgr-&gt;transform(body, transform);
+    return isSuccess;
+}
+
+Ptr&lt;BRepWire&gt; GetWireFromBody(const Ptr&lt;BRepBody&gt;& body, size_t index)
+{
+    Ptr&lt;BRepWires&gt; brepWires = body-&gt;wires();
+    if (!brepWires)
+        return nullptr;
+
+    Ptr&lt;BRepWire&gt; brepWire = brepWires-&gt;item(index);
+
+    return brepWire;
+}
+
+bool DeleteFacesOnBody(const Ptr&lt;BRepBody&gt;& body, const std::vector&lt;size_t&gt;& indexes, bool isDeleteSpecifiedFaces)
+{
+    bool isSuccess = false;
+
+    <span style="color:blue">// Get TemporaryBRepManager</span>
+    Ptr&lt;TemporaryBRepManager&gt; tempBRepMgr = TemporaryBRepManager::get();
+    if (!tempBRepMgr)
+        return isSuccess;
+
+    Ptr&lt;BRepFaces&gt; faces = body-&gt;faces();
+    if (!faces)
+        return isSuccess;
+
+    std::vector&lt;Ptr&lt;BRepFace&gt;&gt; brepFaces;
+    for each (size_t index in indexes)
+    {
+        Ptr&lt;BRepFace&gt; face = faces-&gt;item(index);
+        if (!face)
+            return isSuccess;
+
+        brepFaces.push_back(face);
+    }
+
+    <span style="color:blue">// Delete faces on body</span>
+    isSuccess = tempBRepMgr-&gt;deleteFaces(brepFaces, isDeleteSpecifiedFaces);
+    return isSuccess;
+}
+
+Ptr&lt;BRepBody&gt; CreateSilhouette(const Ptr&lt;BRepFace&gt;& face)
+{
+    <span style="color:blue">// Get TemporaryBRepManager</span>
+    Ptr&lt;TemporaryBRepManager&gt; tempBRepMgr = TemporaryBRepManager::get();
+    if (!tempBRepMgr)
+        return nullptr;
+
+    Ptr&lt;Vector3D&gt; viewDirection = Vector3D::create(0.0, 0.0, 1.0);
+
+    <span style="color:blue">// Create silhouette body</span>
+    Ptr&lt;BRepBody&gt; silhouetteBody = tempBRepMgr-&gt;createSilhouetteCurves(face, viewDirection, true);
+
+    return silhouetteBody;
+}
+
+Ptr&lt;BRepBody&gt; CreateWireFromCurves(std::vector&lt;Ptr&lt;BRepEdge&gt;&gt;& edgeMap)
+{
+    <span style="color:blue">// Get TemporaryBRepManager</span>
+    Ptr&lt;TemporaryBRepManager&gt; tempBRepMgr = TemporaryBRepManager::get();
+    if (!tempBRepMgr)
+        return nullptr;
+
+    Ptr&lt;Point3D&gt; center = Point3D::create(10.0, 0.0, 5.0);
+    Ptr&lt;Vector3D&gt; normal = Vector3D::create(0.0, 0.0, 1.0);
+    Ptr&lt;Circle3D&gt; circle1 = Circle3D::createByCenter(center, normal, 3.0);
+    Ptr&lt;Circle3D&gt; circle2 = Circle3D::createByCenter(center, normal, 2.0);
+
+    std::vector&lt;Ptr&lt;Curve3D&gt;&gt; curves;
+    curves.push_back(circle1);
+    curves.push_back(circle2);
+
+    <span style="color:blue">// Create wire from curves</span>
+    Ptr&lt;BRepBody&gt; wireBody = tempBRepMgr-&gt;createWireFromCurves(curves, edgeMap);
+
+    return wireBody;
+}
+
+Ptr&lt;BRepBody&gt; CreateHelixBody()
+{
+    <span style="color:blue">// Get TemporaryBRepManager</span>
+    Ptr&lt;TemporaryBRepManager&gt; tempBRepMgr = TemporaryBRepManager::get();
+    if (!tempBRepMgr)
+        return nullptr;
+
+    Ptr&lt;Point3D&gt; axisPoint = Point3D::create(10.0, 10.0, 10.0);
+    Ptr&lt;Vector3D&gt; axisVector = Vector3D::create(0.0, 1.0, 0.0);
+    Ptr&lt;Point3D&gt; startPoint = Point3D::create(8.0, 2.0, 10.0);
+    double pitch = 1.0;
+    double turns = 10.0;
+    double taperAngle = 0.3;
+
+    <span style="color:blue">// Create helix body</span>
+    Ptr&lt;BRepBody&gt; helixBody = tempBRepMgr-&gt;createHelixWire(axisPoint, axisVector, startPoint, pitch, turns, taperAngle);
+    return helixBody;
+}
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    app = Application::get();
+    if (!app)
+        return false;
+
+    ui = app-&gt;userInterface();
+    if (!ui)
+        return false;
+
+    <span style="color:blue">// Create a new document</span>
+    Ptr&lt;Documents&gt; docs = app-&gt;documents();
+    if (!docs)
+        return false;
+
+    Ptr&lt;Document&gt; doc = docs-&gt;add(DocumentTypes::FusionDesignDocumentType);
+    if (!doc)
+        return false;
+
+    Ptr&lt;Design&gt; design = app-&gt;activeProduct();
+    if (!design)
+        return false;
+
+    <span style="color:blue">// Set the design is a direct modelling design</span>
+    design-&gt;designType(adsk::fusion::DirectDesignType);
+
+    <span style="color:blue">// Get the root component of active design</span>
+    Ptr&lt;Component&gt; rootComp = design-&gt;rootComponent();
+    if (!rootComp)
+        return false;
+
+    <span style="color:blue">// Get bodies in root component</span>
+    Ptr&lt;BRepBodies&gt; bodies = rootComp-&gt;bRepBodies();
+    if (!bodies)
+        return false;
+
+    <span style="color:blue">// Get TemporaryBRepManager</span>
+    Ptr&lt;TemporaryBRepManager&gt; tempBRepMgr = TemporaryBRepManager::get();
+    if (!tempBRepMgr)
+        return false;
+
+    <span style="color:blue">// Create a temporary solid box</span>
+    Ptr&lt;BRepBody&gt; box = CreateBox();
+    if (!box)
+        return false;
+
+    <span style="color:blue">// Check the temporary box property</span>
+    bool isTemporary = box-&gt;isTemporary();
+
+    <span style="color:blue">// Creates a temporary solid cylinder and cone BRepBody</span>
+    Ptr&lt;BRepBody&gt; cylinder = CreateCylinderOrCone(3.0, 3.0);
+    if (!cylinder)
+        return false;
+
+    Ptr&lt;BRepBody&gt; cone = CreateCylinderOrCone(2.0, 4.0);
+    if (!cone)
+        return false;
+
+    <span style="color:blue">// Creates a temporary elliptical solid cylinder and cone BrepBody</span>
+    Ptr&lt;BRepBody&gt; ellipicalCylinder = CreateEllipticalCylinderOrCone(4.0, 2.0, 4.0);
+    if (!ellipicalCylinder)
+        return false;
+
+    Ptr&lt;BRepBody&gt; ellipicalCone = CreateEllipticalCylinderOrCone(3.0, 2.0, 4.5);
+    if (!ellipicalCone)
+        return false;
+
+    <span style="color:blue">// Creates a temporary spherical BRepBody</span>
+    Ptr&lt;BRepBody&gt; sphere = CreateSphere(3.0);
+    if (!sphere)
+        return false;
+
+    <span style="color:blue">// Creates a temporary toroidal BRepBody</span>
+    Ptr&lt;BRepBody&gt; torus = CreateTorus(2.0, 1.0);
+    if (!torus)
+        return false;
+
+    <span style="color:blue">// creates a brep body by the intersection between the input body and plane</span>
+    Ptr&lt;BRepBody&gt; intersectionBody = PlaneIntersection(box);
+    if (!intersectionBody)
+        return false;
+
+    <span style="color:blue">// Creates a temporary copy of the input BRepBody</span>
+    Ptr&lt;BRepBody&gt; copiedBody = tempBRepMgr-&gt;copy(intersectionBody);
+    if (!copiedBody)
+        return false;
+
+    <span style="color:blue">// Transforms the brep body using the specified transformation matrix</span>
+    bool isSuccess = TransformBody(copiedBody);
+    if (!isSuccess)
+        return false;
+
+    <span style="color:blue">// Transforms the brep body using the specified transformation matrix</span>
+    isSuccess = TransformBody(copiedBody);
+    if (!isSuccess)
+        return false;
+
+    <span style="color:blue">// Get brep wires</span>
+    Ptr&lt;BRepWire&gt; brepWire = GetWireFromBody(intersectionBody, 0);
+    if (!brepWire)
+        return false;
+    Ptr&lt;BRepWire&gt; copiedWire = GetWireFromBody(copiedBody, 0);
+    if (!copiedWire)
+        return false;
+
+    <span style="color:blue">//  Creates a new body by creating a ruled surface between the two input wire bodies.</span>
+    Ptr&lt;BRepBody&gt; surfaceBody = tempBRepMgr-&gt;createRuledSurface(brepWire, copiedWire);
+    if (!surfaceBody)
+        return false;
+
+    <span style="color:blue">// Performs the specified Boolean operation between the two input bodies</span>
+    isSuccess = tempBRepMgr-&gt;booleanOperation(cylinder, cone, BooleanTypes::IntersectionBooleanType);
+    if (!isSuccess)
+        return false;
+
+    isSuccess = tempBRepMgr-&gt;booleanOperation(ellipicalCylinder, ellipicalCone, BooleanTypes::UnionBooleanType);
+    if (!isSuccess)
+        return false;
+
+    <span style="color:blue">// Delete face from a temporary BRepBody</span>
+    std::vector&lt;size_t&gt; indexes;
+    indexes.push_back(0);
+    indexes.push_back(2);
+    isSuccess = DeleteFacesOnBody(ellipicalCylinder, indexes, true);
+    if (!isSuccess)
+        return false;
+
+    <span style="color:blue">// Calculates the silhouette curve geometry for a given face as viewed from a given direction.</span>
+    Ptr&lt;BRepFaces&gt; faces = torus-&gt;faces();
+    if (!faces)
+        return false;
+
+    Ptr&lt;BRepFace&gt; face = faces-&gt;item(0);
+    if (!face)
+        return false;
+
+    Ptr&lt;BRepBody&gt; silhouetteBody = CreateSilhouette(face);
+    if (!silhouetteBody)
+        return false;
+
+    <span style="color:blue">// Create wire from curves</span>
+    std::vector&lt;Ptr&lt;BRepEdge&gt;&gt; edgeMap;
+    Ptr&lt;BRepBody&gt; wireBody = CreateWireFromCurves(edgeMap);
+    if (!wireBody)
+        return false;
+
+    <span style="color:blue">// Creates a body from multiple wires that all lie within the same plane</span>
+    std::vector&lt;Ptr&lt;BRepBody&gt;&gt; wireBodies;
+    wireBodies.push_back(wireBody);
+    Ptr&lt;BRepBody&gt; planerBody = tempBRepMgr-&gt;createFaceFromPlanarWires(wireBodies);
+    if (!planerBody)
+        return false;
+
+    <span style="color:blue">// Create helix wire body</span>
+    Ptr&lt;BRepBody&gt; helixBody = CreateHelixBody();
+    if (!helixBody)
+        return false;
+
+    <span style="color:blue">// Display the helix edges</span>
+    Ptr&lt;CustomGraphicsGroups&gt; groups = rootComp-&gt;customGraphicsGroups();
+    if (!groups)
+        return false;
+
+    Ptr&lt;CustomGraphicsGroup&gt; group = groups-&gt;add();
+    if (!group)
+        return false;
+
+    Ptr&lt;BRepEdges&gt; edges = helixBody-&gt;edges();
+
+    for each (Ptr&lt;BRepEdge&gt; edge in edges)
+    {
+        Ptr&lt;Curve3D&gt; curve = edge-&gt;geometry();
+        if (!curve)
+            return false;
+
+        group-&gt;addCurve(curve);
+    }
+
+    <span style="color:blue">// Add the temprary bodies to direct modeling design, then the temprary bodies will be displayed</span>
+    bodies-&gt;add(box);
+    bodies-&gt;add(cylinder);
+    bodies-&gt;add(cone);
+    bodies-&gt;add(ellipicalCylinder);
+    bodies-&gt;add(ellipicalCone);
+    bodies-&gt;add(sphere);
+    bodies-&gt;add(torus);
+    bodies-&gt;add(intersectionBody);
+    bodies-&gt;add(surfaceBody);
+    bodies-&gt;add(silhouetteBody);
+    bodies-&gt;add(planerBody);
+
+    <span style="color:blue">// Exports the input bodies to the specified file.</span>
+    std::vector&lt;Ptr&lt;BRepBody&gt;&gt; brepBodies;
+    brepBodies.push_back(box);
+    brepBodies.push_back(surfaceBody);
+
+    std::string dllPath = getDllPath();
+    std::string exportPath = dllPath + "/" + "sampleFile.smt";
+
+    isSuccess = tempBRepMgr-&gt;exportToFile(brepBodies, exportPath);
+    if (!isSuccess)
+        return false;
+
+    <span style="color:blue">// Creates new BRepBody objects based on the contents of the specified file</span>
+    std::string filePath = dllPath + "/" + "sampleFile.smt";
+    Ptr&lt;BRepBodies&gt; newBodies = tempBRepMgr-&gt;createFromFile(filePath);
+    if (!newBodies)
+        return false;
+
+    return true;
+}
+
+std::string getDllPath()
+{
+#if defined(_WINDOWS) || defined(_WIN32) || defined(_WIN64)
+    HMODULE hModule = NULL;
+    if (!GetModuleHandleExA(
+            GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,
+            (LPCSTR)&getDllPath,
+            &hModule))
+        return "";
+
+    char winTempPath[2048];
+    ::GetModuleFileNameA(hModule, winTempPath, 2048);
+
+    std::string strPath = winTempPath;
+    size_t stPos = strPath.rfind('\\');
+    return strPath.substr(0, stPos);
+#else
+    Dl_info info;
+    dladdr((void*)getDllPath, &info);
+
+    std::string strPath = info.dli_fname;
+    int stPos = (int)strPath.rfind('/');
+    if (stPos != -1)
+        return strPath.substr(0, stPos);
+    else
+        return "";
+    ;
+#endif
+}</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(TemporaryBRepManager%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

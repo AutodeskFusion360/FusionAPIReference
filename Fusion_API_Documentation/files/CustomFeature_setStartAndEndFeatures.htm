@@ -1,0 +1,127 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/CustomFeature_setStartAndEndFeatures.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="29/06/2021">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="CustomFeature_setStartAndEndFeatures">
+    <meta name="description" content="CustomFeature.setStartAndEndFeatures Method">
+    <meta name="topicid" content="GUID-6A3B9E32-A672-4B5C-85AD-42B0FA7855D7">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>CustomFeature.setStartAndEndFeatures Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">CustomFeature.setStartAndEndFeatures Method<img src="../images/TestTubeLarge.png"></h1>
+
+          Parent Object: <a href="CustomFeature.htm">CustomFeature</a><p class="api-preview"><img src="../images/TestTubeSmall.png" alt="Preview">This functionality is provided as a preview
+				  of intended future API capabilities. You are encouraged to use it and report any problems or suggestions using the
+				  <a href="https://forums.autodesk.com/t5/fusion-360-api-and-scripts/bd-p/22">Fusion API and Scripts</a> forum.<br><br>
+
+				  Because this is a preview of future functionality, there is the possibility that it will change, which will possibly
+				  break any existing programs that use this functionality. Because of that, you should never deliver any programs that use
+				  any preview capabilities. For a distributed program, you should wait until it has moved from preview to released state.
+			  </p><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Features/CustomFeature.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Sets the start and end features that will be grouped by the custom feature. The "features" in this case can be any object that is visible in the timeline, such as modeling features, sketches, and construction geometry. The input features and all features between them in the timeline will be grouped by the custom feature.<br/><br/> The current start and end features can be determined by using the CustomFeature.features property and getting the first and last feature from the returned array.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"customFeature_var" is a variable referencing a <a href="CustomFeature.htm">CustomFeature</a> object.<code><pre class="api-code">returnValue = customFeature_var.<b>setStartAndEndFeatures</b>(startFeature, endFeature)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"customFeature_var" is a variable referencing a <a href="CustomFeature.htm">CustomFeature</a> object.<br /><br /><code><pre class="api-code">#include &lt;Fusion/Features/CustomFeature.h&gt;<br /><br />returnValue = customFeature_var-&gt;<b>setStartAndEndFeatures</b>(startFeature, endFeature);<br /></pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;">boolean</td>
+        <td class="api-list">Returns true if setting the start and end features was successful.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">startFeature</td>
+        <td class="api-list"><a href="Base.htm">Base</a></td>
+        <td class="api-list">The first feature in the timeline to be grouped by the custom feature. The start and the end features can be null which will result in moving all of the features out of the custom feature. This is useful in cases where you need to modify the inputs to a feature contained within a custom feature. You can move the features out of the custom feature, move the timeline marker as needed to edit the features, and then use this method again to add them back into the custom feature.</td>
+      </tr>
+      <tr>
+        <td class="api-list">endFeature</td>
+        <td class="api-list"><a href="Base.htm">Base</a></td>
+        <td class="api-list">The last feature in the timeline that will be grouped by the custom feature. This can be the same feature that is provided as the startFeature argument for the case where the custom feature contains a single feature.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version July 2021<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(CustomFeature.setStartAndEndFeatures%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

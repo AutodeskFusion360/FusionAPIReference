@@ -1,0 +1,279 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/ImportManager.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="ImportManager_Sample">
+    <meta name="description" content="Import Manager API Sample Sample">
+    <meta name="topicid" content="GUID-3f24e9e8-422d-11e5-937b-f8b156d7cd97">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Import Manager API Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Import Manager API Sample</h1>
+    <h2 class="api">
+          Description
+        </h2>Demonstrates how to import different formats to Fusion document<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">import adsk.core, adsk.fusion, traceback
+import os.path, sys
+
+def run(context):
+    ui = None
+    try:
+        app = adsk.core.Application.get()
+        ui  = app.userInterface
+        
+        <span style="color:blue"># Get import manager</span>
+        importManager = app.importManager
+        
+        <span style="color:blue"># Get iges import options</span>
+        igesFileName = 'C:\\APISampleImportNeutralIgs.igs'
+        igesOptions = importManager.createIGESImportOptions(igesFileName)
+        
+        <span style="color:blue"># Import iges file to new document</span>
+        importManager.importToNewDocument(igesOptions)
+        
+        <span style="color:blue"># Get sat import options</span>
+        satFileName = 'C:\\APISampleImportNeutralSat.sat'
+        satOptions = importManager.createSATImportOptions(satFileName)
+        satOptions.isViewFit = False
+        
+        <span style="color:blue"># Get active design</span>
+        product = app.activeProduct
+        design = adsk.fusion.Design.cast(product)
+        
+        <span style="color:blue"># Get root component</span>
+        rootComp = design.rootComponent
+        
+        <span style="color:blue"># Import sat file to root component</span>
+        importManager.importToTarget(satOptions, rootComp)
+        
+        <span style="color:blue"># Get smt import options</span>
+        smtFileName = 'C:\\APISampleImportNeutralSmt.smt'
+        smtOptions = importManager.createSMTImportOptions(smtFileName)
+        smtOptions.isViewFit = False
+        
+        <span style="color:blue"># Import smt file to root component</span>
+        importManager.importToTarget(smtOptions, rootComp)
+        
+        <span style="color:blue"># Get step import options</span>
+        stpFileName = 'C:\\APISampleImportNeutralStp.stp'
+        stpOptions = importManager.createSTEPImportOptions(stpFileName)
+        stpOptions.isViewFit = False
+        
+        <span style="color:blue"># Import step file to root component</span>
+        importManager.importToTarget(stpOptions, rootComp)
+
+        <span style="color:blue"># Get dxf import options</span>
+        <span style="color:blue">#dxfFileName = 'C:\\APISampleImportNeutralDxf2D.dxf'</span>
+        dxfOptions = importManager.createDXF2DImportOptions(dxfFileName, rootComp.xZConstructionPlane)
+        dxfOptions.isViewFit = False
+        
+        <span style="color:blue"># Import dxf file to root component</span>
+        importManager.importToTarget(dxfOptions, rootComp)
+        
+        dxfOptions = importManager.createDXF2DImportOptions(dxfFileName, rootComp.xZConstructionPlane)
+        dxfOptions.isViewFit = False
+        <span style="color:blue"># Set the flag true to merge all the layers of DXF into single sketch.</span>
+        dxfOptions.isSingleSketchResult = True
+        
+        <span style="color:blue"># Import dxf file to root component</span>
+        importManager.importToTarget(dxfOptions, rootComp)
+
+        <span style="color:blue"># Get archive import options</span>
+        archiveFileName = 'C:\\APISampleImportNeutralF3d2.f3d'
+        archiveOptions = importManager.createFusionArchiveImportOptions(archiveFileName)
+        
+        <span style="color:blue"># Import archive file to root component</span>
+        importManager.importToTarget(archiveOptions, rootComp)
+        
+        <span style="color:blue"># Close the new created document</span>
+        doc = app.activeDocument
+        doc.close(False)
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code">#include &lt;Core/Application/Application.h&gt;
+#include &lt;Core/Application/Document.h&gt;
+#include &lt;Core/Application/ImportManager.h&gt;
+#include &lt;Core/Application/FusionArchiveImportOptions.h&gt;
+#include &lt;Core/Application/SATImportOptions.h&gt;
+#include &lt;Core/Application/IGESImportOptions.h&gt;
+#include &lt;Core/Application/SMTImportOptions.h&gt;
+#include &lt;Core/Application/STEPImportOptions.h&gt;
+#include &lt;Core/Application/DXF2DImportOptions.h&gt;
+#include &lt;Core/UserInterface/UserInterface.h&gt;
+#include &lt;Fusion/Fusion/Design.h&gt;
+#include &lt;Fusion/Components/Component.h&gt;
+#include &lt;Fusion/Construction/ConstructionPlane.h&gt;
+
+using namespace adsk::core;
+using namespace adsk::fusion;
+
+Ptr&lt;UserInterface&gt; ui;
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    Ptr&lt;Application&gt; app = Application::get();
+    if (!app)
+        return false;
+
+    ui = app-&gt;userInterface();
+    if (!ui)
+        return false;
+
+    <span style="color:blue">// Get import manager</span>
+    Ptr&lt;ImportManager&gt; importManager = app-&gt;importManager();
+    if (!importManager)
+        return false;
+
+    <span style="color:blue">// Get iges import options</span>
+     const std::string igesFileName = "C:\\APISampleImportNeutralIgs.igs";
+    Ptr&lt;IGESImportOptions&gt; igesOptions = importManager-&gt;createIGESImportOptions(igesFileName);
+
+    <span style="color:blue">// Import iges file to new document</span>
+    importManager-&gt;importToNewDocument(igesOptions);
+
+    <span style="color:blue">// Get sat import options</span>
+     const std::string satFileName = "C:\\APISampleImportNeutralSat.sat";
+    Ptr&lt;SATImportOptions&gt; satOptions = importManager-&gt;createSATImportOptions(satFileName);
+    if (!satOptions)
+        return false;
+    satOptions-&gt;isViewFit(false);
+
+    <span style="color:blue">// Get active design</span>
+    Ptr&lt;Design&gt; design = app-&gt;activeProduct();
+    if (!design)
+        return false;
+
+    <span style="color:blue">// Get root component</span>
+    Ptr&lt;Component&gt; rootComp = design-&gt;rootComponent();
+
+    <span style="color:blue">// Import sat file to root component</span>
+    importManager-&gt;importToTarget(satOptions, rootComp);
+
+    <span style="color:blue">// Get smt import options</span>
+     const std::string smtFileName = "C:\\APISampleImportNeutralSmt.smt";
+    Ptr&lt;STEPImportOptions&gt; stpOptions = importManager-&gt;createSTEPImportOptions(stpFileName);
+    if (!stpOptions)
+        return false;
+    stpOptions-&gt;isViewFit(false);
+
+    <span style="color:blue">// Import step file to root component</span>
+    importManager-&gt;importToTarget(stpOptions, rootComp);
+
+    <span style="color:blue">// Get dxf import options</span>
+     const std::string dxfFileName = "C:\\APISampleImportNeutralDxf2D.dxf";
+    Ptr&lt;DXF2DImportOptions&gt; dxfOptions =
+        importManager-&gt;createDXF2DImportOptions(dxfFileName, rootComp-&gt;xZConstructionPlane());
+    if (!dxfOptions)
+        return false;
+    dxfOptions-&gt;isViewFit(false);
+
+    <span style="color:blue">// Import dxf file to root component</span>
+    importManager-&gt;importToTarget(dxfOptions, rootComp);
+
+    Ptr&lt;DXF2DImportOptions&gt; dxfOptions =
+        importManager-&gt;createDXF2DImportOptions(dxfFileName, rootComp-&gt;xZConstructionPlane());
+    if (!dxfOptions)
+        return false;
+    dxfOptions-&gt;isViewFit(false);
+    <span style="color:blue">// Set the flag true to merge all the layers of DXF into single sketch.</span>
+    dxfOptions-&gt;isSingleSketchResult(true);
+
+    <span style="color:blue">// Import dxf file to root component</span>
+    importManager-&gt;importToTarget(dxfOptions, rootComp);
+
+    <span style="color:blue">// Get archive import options</span>
+     const std::string archiveFileName = "C:\\APISampleImportNeutralF3d2.f3d";
+    Ptr&lt;FusionArchiveImportOptions&gt; archiveOptions = importManager-&gt;createFusionArchiveImportOptions(archiveFileName);
+
+    <span style="color:blue">// Import archive file to root component</span>
+    importManager-&gt;importToTarget(archiveOptions, rootComp);
+
+    <span style="color:blue">// Close the new created document</span>
+    Ptr&lt;Document&gt; doc = app-&gt;activeDocument();
+    if (!doc)
+        return false;
+    doc-&gt;close(false);
+
+    return true;
+}</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(ImportManager%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

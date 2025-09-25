@@ -1,0 +1,359 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/Sketch.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="Sketch">
+    <meta name="description" content="Sketch Object">
+    <meta name="topicid" content="GUID-2367ed6a-0ad1-4c8f-935e-b52738d1ce2b">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>Sketch Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Sketch Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Sketch/Sketch.h&gt;<h2 class="api">
+          Description
+        </h2>Represents a sketch within a component.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_addCenterToCenterSlot.htm">addCenterToCenterSlot</a></td>
+        <td class="api-list">Creates the geometry that represents a slot. Geometric constraints are automatically added to the geometry to maintain the slot shape and optionally, dimensions to control the size can be added. The created geometry and constraints are returned.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_copy.htm">copy</a></td>
+        <td class="api-list">Copies the specified sketch entities, applying the specified transform. Any geometric or dimension constraints associated with the entities will automatically be copied, if possible. For example, if there is a horizontal dimension and the transform defines a rotation then it will not be included in the result. This same behavior can be seen when performing a copy/paste operation in the user interface.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_createForAssemblyContext.htm">createForAssemblyContext</a></td>
+        <td class="api-list">Creates or returns a proxy for the native object - i.e. a new object that represents this object but adds the assembly context defined by the input occurrence.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_createSpunProfile.htm">createSpunProfile</a></td>
+        <td class="api-list">Creates sketch geometry that represents the spun profile. The spun profile is the silhouette of the entities as if they were spinning around an axis. The created spun profile is based on the information provided by the SpunProfileInput object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_createSpunProfileInput.htm">createSpunProfileInput</a></td>
+        <td class="api-list">Creates a new SpunProfileInput object that is used to specify the input needed to create a spun profile.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_deleteMe.htm">deleteMe</a></td>
+        <td class="api-list">Deletes the sketch.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_findConnectedCurves.htm">findConnectedCurves</a></td>
+        <td class="api-list">Finds the sketch curves that are end connected to the input curve. This can be useful for many cases but is especially useful in gathering the input when creating an offset.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_importSVG.htm">importSVG</a></td>
+        <td class="api-list">Imports the contents of an SVG file into the active sketch.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_include.htm">include</a></td>
+        <td class="api-list">Creates new sketch curves and points that represent the specified entity as sketch geometry. The sketch geometry is not projected but is created in the same location in space as the input geometry.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_intersectWithSketchPlane.htm">intersectWithSketchPlane</a></td>
+        <td class="api-list">Intersects the specified entities (BRepBody, BRepFace, BRepEdge, BRepVertex, SketchCurve, ConstructionPoint, ConstructionAxis, and ConstructionPlane) with the sketch plane and creates sketch geometry that represents the intersection.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_modelToSketchSpace.htm">modelToSketchSpace</a></td>
+        <td class="api-list">A specified point in model space returns the equivalent point in sketch space. This is sensitive to the assembly context.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_move.htm">move</a></td>
+        <td class="api-list">Moves the specified sketch entities using the specified transform. Transform respects any constraints that would normally prohibit the move.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_offset.htm">offset</a></td>
+        <td class="api-list"><mark>**RETIRED**</mark> Creates offset curves for the set of input curves. If the offset distance is not provided, the offset distance is defined by the direction point.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_project.htm">project</a></td>
+        <td class="api-list"><mark>**RETIRED**</mark> This method has been replaced by the project2 method, which supports specifying if the result will be linked or not.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_project2.htm">project2</a></td>
+        <td class="api-list">Projects the specified entity or entities onto the X-Y plane of the sketch and returns the created sketch entity(s).</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_projectCutEdges.htm">projectCutEdges</a></td>
+        <td class="api-list">Intersects the specified body with the sketch plane and creates new curves representing the intersection.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_projectToSurface.htm">projectToSurface</a></td>
+        <td class="api-list">Projects the specified set of curves onto the specified set of faces using the specified method of projection. if the projection type is along a vector, then the directionEntity argument must be supplied. if the projectionType is the closest point method, the directionEntity argument is ignored.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_redefine.htm">redefine</a></td>
+        <td class="api-list">Changes which plane the sketch is based on.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_saveAsDXF.htm">saveAsDXF</a></td>
+        <td class="api-list"><mark>**RETIRED**</mark> Saves the contents of the sketch to a specified DXF file.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_setCenterlineState.htm">setCenterlineState</a></td>
+        <td class="api-list">Method that sets the Centerline state for an array of sketch lines.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_setConstructionState.htm">setConstructionState</a></td>
+        <td class="api-list">Method that sets the Construction state for an array of sketch curves.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_sketchToModelSpace.htm">sketchToModelSpace</a></td>
+        <td class="api-list">A specified point in sketch space returns the equivalent point in model space. This is sensitive to the assembly context.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_areConstraintsShown.htm">areConstraintsShown</a></td>
+        <td class="api-list">Indicates if the constraints of the sketch are displayed when the sketch is active.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_areDimensionsShown.htm">areDimensionsShown</a></td>
+        <td class="api-list">Indicates if the dimensions of the sketch are displayed when the sketch is not active (in sketch edit mode)</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_arePointsShown.htm">arePointsShown</a></td>
+        <td class="api-list">Indicates if the sketch points in the sketch are displayed. Points that are not connected to any other geometry will continue to be shown.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_areProfilesShown.htm">areProfilesShown</a></td>
+        <td class="api-list">Indicates if the profiles of the sketch are displayed</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_assemblyContext.htm">assemblyContext</a></td>
+        <td class="api-list">Returns the assembly occurrence (i.e. the occurrence) of this object in an assembly. This is only valid in the case where this is acting as a proxy in an assembly. Returns null in the case where the object is not in the context of an assembly. but is already the native object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_attributes.htm">attributes</a></td>
+        <td class="api-list">Returns the collection of attributes associated with this face.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_baseOrFormFeature.htm">baseOrFormFeature</a></td>
+        <td class="api-list">This property returns the base or form feature that this sketch is associated with. It returns null in the case where the sketch is parametrically defined and is not related to a base or form feature. It also returns null in a direct modeling design.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_boundingBox.htm">boundingBox</a></td>
+        <td class="api-list">Returns the 3D bounding box of the sketch</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_entityToken.htm">entityToken</a></td>
+        <td class="api-list">Returns a token for the Sketch object. This can be saved and used at a later time with the Design.findEntityByToken method to get back the same token.<br/><br/> When using entity tokens it's important to understand that the token string returned for a specific entity can be different over time. However, even if you have two different token strings that were obtained from the same entity, when you use findEntityByToken they will both return the same entity. Because of that you should never compare entity tokens as way to determine what the token represents. Instead, you need to use the findEntityByToken method to get the two entities identified by the tokens and then compare them.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_errorOrWarningMessage.htm">errorOrWarningMessage</a></td>
+        <td class="api-list">Returns the error or warning message in the case where the healthState property returns either WarningFeatureHealthState or ErrorFeatureHealthState. Otherwise this property returns an empty string.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_geometricConstraints.htm">geometricConstraints</a></td>
+        <td class="api-list">Returns the sketch constraints collection associated with this sketch. This provides access to the existing sketch constraints and supports the creation of new sketch constraints.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_healthState.htm">healthState</a></td>
+        <td class="api-list">Returns the current health state of this sketch.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_isComputeDeferred.htm">isComputeDeferred</a></td>
+        <td class="api-list">This property temporarily turns off sketch computing. It is used to increase the performance as sketch geometry is created and modified. Once the sketch is drawn, this property should be set to false to allow the sketch to recompute. The file does not save this setting and is always false when a file is opened.<br/><br/> There is a side-effect when using this property that can result in the creation of a bad model. This is only a problem when editing an existing sketch used by one or more features. When the sketch is edited with the isComputeDeferred property set to true, the compute of the profiles can sometimes create weird results in the dependent features. There are two easy ways to solve this problem. The first is not to defer the sketch compute. The second is to roll the timeline back to just after the sketch, make whatever changes you want to the sketch with the compute deferred, and then roll the timeline back to its original location. This process mimics the behavior you see in the user interface when you manually edit a sketch where Fusion automatically rolls the timeline back while you're editing the sketch.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_isConstructionGeometryShown.htm">isConstructionGeometryShown</a></td>
+        <td class="api-list">Gets and sets whether construction geometry in the sketch is displayed. This provides access to the "Construction Geometries" setting in the "SKETCH PALETTE".</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_isFullyConstrained.htm">isFullyConstrained</a></td>
+        <td class="api-list">Indicates if this sketch is fully constrained.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_isLightBulbOn.htm">isLightBulbOn</a></td>
+        <td class="api-list">Gets and set if the light bulb beside the sketch node in the browser is on or not. Parent nodes in the browser can have their light bulb off which affects all of their children so this property does not indicate if the body is actually visible, just that it should be visible if all of it's parent nodes are also visible. Use the isVisible property to determine if it's actually visible.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_isModelSliced.htm">isModelSliced</a></td>
+        <td class="api-list">Gets and sets whether the model is sliced along the sketch plane when this sketch is active. This provides access to the "Slice" setting in the "SKETCH PALETTE".</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_isParametric.htm">isParametric</a></td>
+        <td class="api-list">Indicates if this sketch is parametric or not. For parametric sketches, you can also get the construction plane or face it is associative to using the ReferencePlane property.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_isProjectedGeometryShown.htm">isProjectedGeometryShown</a></td>
+        <td class="api-list">Gets and sets whether projected geometry in the sketch is displayed. This provides access to the "Projected Geometries" setting in the "SKETCH PALETTE".</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_isVisible.htm">isVisible</a></td>
+        <td class="api-list">Gets if this sketch is currently visible in the graphics window. Use the isLightBulbOn to change if the light bulb beside the sketch node in the browser is on or not. Parent nodes in the browser can have their light bulb off which affects all of their children. This property indicates the final result and whether this body is actually visible or not.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_name.htm">name</a></td>
+        <td class="api-list">Gets and sets the name of this sketch as seen in the browser and timeline.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_nativeObject.htm">nativeObject</a></td>
+        <td class="api-list">The NativeObject is the object outside the context of an assembly and in the context of it's parent component. Returns null in the case where this object is not in the context of an assembly but is already the native object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_origin.htm">origin</a></td>
+        <td class="api-list">Returns the origin point of the sketch in model space.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_originPoint.htm">originPoint</a></td>
+        <td class="api-list">Returns the sketch point that was automatically created by projecting the origin construction point into the sketch.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_parentComponent.htm">parentComponent</a></td>
+        <td class="api-list">Returns the parent Component.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_profiles.htm">profiles</a></td>
+        <td class="api-list">Returns the profiles currently computed for the sketch.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_referencePlane.htm">referencePlane</a></td>
+        <td class="api-list">Gets and sets the construction plane or planar face the sketch is associated to. This is only valid when the IsParametric property is True otherwise this returns null and setting the property will fail.<br/><br/> Setting this property is the equivalent of the Redefine command.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_revisionId.htm">revisionId</a></td>
+        <td class="api-list">Returns the current revision ID of the sketch. This ID changes any time the sketch is modified in any way. By getting and saving the ID when you create any data that is dependent on the sketch, you can then compare the saved ID with the current ID to determine if the sketch has changed to know if you should update your data.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_sketchCurves.htm">sketchCurves</a></td>
+        <td class="api-list">Returns the sketch curves collection associated with this sketch. This provides access to the existing sketch curves which is all geometry in the sketch except for sketch points. It is through this collection that new sketch geometry gets created.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_sketchDimensions.htm">sketchDimensions</a></td>
+        <td class="api-list">Returns the sketch dimensions collection associated with this sketch. This provides access to the existing sketch dimensions and supports the creation of new sketch dimensions.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_sketchPoints.htm">sketchPoints</a></td>
+        <td class="api-list">Returns the sketch points collection associated with this sketch. This provides access to the existing sketch points and supports the creation of new sketch points.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_sketchTexts.htm">sketchTexts</a></td>
+        <td class="api-list">Returns the sketch text collection associated with this sketch. This provides access to existing text and supports the creation of new text.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_timelineObject.htm">timelineObject</a></td>
+        <td class="api-list">Returns the timeline object associated with this sketch.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_transform.htm">transform</a></td>
+        <td class="api-list">Gets and sets the transform of the sketch with respect to model space. This defines the transform from the parent component space to the sketch space. For example, if you have point coordinates in the space of the parent component and apply this transform it will result in the coordinates of the equivalent position in sketch space. The transform is sensitive to the assembly context.<br/><br/> The position of a parametric sketch cannot be modified since its position is defined by its parametric association to other geometry. As a result this property will fail when called on a parametric sketch. Setting this property is only valid for sketches in a non-parametric design or sketches owned by a base feature.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_xDirection.htm">xDirection</a></td>
+        <td class="api-list">Returns the X direction of the sketch as defined in model space.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_yDirection.htm">yDirection</a></td>
+        <td class="api-list">Returns the Y direction of the sketch as defined in model space.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="BaseFeature_sketches.htm">BaseFeature.sketches</a>, <a href="CircularPatternConstraint_parentSketch.htm">CircularPatternConstraint.parentSketch</a>, <a href="CoincidentConstraint_parentSketch.htm">CoincidentConstraint.parentSketch</a>, <a href="CoincidentToSurfaceConstraint_parentSketch.htm">CoincidentToSurfaceConstraint.parentSketch</a>, <a href="CollinearConstraint_parentSketch.htm">CollinearConstraint.parentSketch</a>, <a href="ConcentricConstraint_parentSketch.htm">ConcentricConstraint.parentSketch</a>, <a href="EqualConstraint_parentSketch.htm">EqualConstraint.parentSketch</a>, <a href="GeometricConstraint_parentSketch.htm">GeometricConstraint.parentSketch</a>, <a href="HorizontalConstraint_parentSketch.htm">HorizontalConstraint.parentSketch</a>, <a href="HorizontalPointsConstraint_parentSketch.htm">HorizontalPointsConstraint.parentSketch</a>, <a href="LineOnPlanarSurfaceConstraint_parentSketch.htm">LineOnPlanarSurfaceConstraint.parentSketch</a>, <a href="LineParallelToPlanarSurfaceConstraint_parentSketch.htm">LineParallelToPlanarSurfaceConstraint.parentSketch</a>, <a href="MidPointConstraint_parentSketch.htm">MidPointConstraint.parentSketch</a>, <a href="OffsetConstraint_parentSketch.htm">OffsetConstraint.parentSketch</a>, <a href="ParallelConstraint_parentSketch.htm">ParallelConstraint.parentSketch</a>, <a href="PerpendicularConstraint_parentSketch.htm">PerpendicularConstraint.parentSketch</a>, <a href="PerpendicularToSurfaceConstraint_parentSketch.htm">PerpendicularToSurfaceConstraint.parentSketch</a>, <a href="PolygonConstraint_parentSketch.htm">PolygonConstraint.parentSketch</a>, <a href="Profile_parentSketch.htm">Profile.parentSketch</a>, <a href="ProfileCurve_parentSketch.htm">ProfileCurve.parentSketch</a>, <a href="RectangularPatternConstraint_parentSketch.htm">RectangularPatternConstraint.parentSketch</a>, <a href="Sketch_createForAssemblyContext.htm">Sketch.createForAssemblyContext</a>, <a href="Sketch_nativeObject.htm">Sketch.nativeObject</a>, <a href="SketchAngularDimension_parentSketch.htm">SketchAngularDimension.parentSketch</a>, <a href="SketchArc_parentSketch.htm">SketchArc.parentSketch</a>, <a href="SketchCircle_parentSketch.htm">SketchCircle.parentSketch</a>, <a href="SketchConcentricCircleDimension_parentSketch.htm">SketchConcentricCircleDimension.parentSketch</a>, <a href="SketchConicCurve_parentSketch.htm">SketchConicCurve.parentSketch</a>, <a href="SketchControlPointSpline_parentSketch.htm">SketchControlPointSpline.parentSketch</a>, <a href="SketchCurve_parentSketch.htm">SketchCurve.parentSketch</a>, <a href="SketchDiameterDimension_parentSketch.htm">SketchDiameterDimension.parentSketch</a>, <a href="SketchDimension_parentSketch.htm">SketchDimension.parentSketch</a>, <a href="SketchDistanceBetweenLineAndPlanarSurfaceDimension_parentSketch.htm">SketchDistanceBetweenLineAndPlanarSurfaceDimension.parentSketch</a>, <a href="SketchDistanceBetweenPointAndSurfaceDimension_parentSketch.htm">SketchDistanceBetweenPointAndSurfaceDimension.parentSketch</a>, <a href="SketchEllipse_parentSketch.htm">SketchEllipse.parentSketch</a>, <a href="SketchEllipseMajorRadiusDimension_parentSketch.htm">SketchEllipseMajorRadiusDimension.parentSketch</a>, <a href="SketchEllipseMinorRadiusDimension_parentSketch.htm">SketchEllipseMinorRadiusDimension.parentSketch</a>, <a href="SketchEllipticalArc_parentSketch.htm">SketchEllipticalArc.parentSketch</a>, <a href="SketchEntity_parentSketch.htm">SketchEntity.parentSketch</a>, <a href="Sketches_add.htm">Sketches.add</a>, <a href="Sketches_addToBaseOrFormFeature.htm">Sketches.addToBaseOrFormFeature</a>, <a href="Sketches_addWithoutEdges.htm">Sketches.addWithoutEdges</a>, <a href="Sketches_item.htm">Sketches.item</a>, <a href="Sketches_itemByName.htm">Sketches.itemByName</a>, <a href="SketchFittedSpline_parentSketch.htm">SketchFittedSpline.parentSketch</a>, <a href="SketchFixedSpline_parentSketch.htm">SketchFixedSpline.parentSketch</a>, <a href="SketchLine_parentSketch.htm">SketchLine.parentSketch</a>, <a href="SketchLinearDiameterDimension_parentSketch.htm">SketchLinearDiameterDimension.parentSketch</a>, <a href="SketchLinearDimension_parentSketch.htm">SketchLinearDimension.parentSketch</a>, <a href="SketchOffsetCurvesDimension_parentSketch.htm">SketchOffsetCurvesDimension.parentSketch</a>, <a href="SketchOffsetDimension_parentSketch.htm">SketchOffsetDimension.parentSketch</a>, <a href="SketchPoint_parentSketch.htm">SketchPoint.parentSketch</a>, <a href="SketchRadialDimension_parentSketch.htm">SketchRadialDimension.parentSketch</a>, <a href="SketchTangentDistanceDimension_parentSketch.htm">SketchTangentDistanceDimension.parentSketch</a>, <a href="SketchText_parentSketch.htm">SketchText.parentSketch</a>, <a href="SmoothConstraint_parentSketch.htm">SmoothConstraint.parentSketch</a>, <a href="SymmetryConstraint_parentSketch.htm">SymmetryConstraint.parentSketch</a>, <a href="TangentConstraint_parentSketch.htm">TangentConstraint.parentSketch</a>, <a href="VerticalConstraint_parentSketch.htm">VerticalConstraint.parentSketch</a>, <a href="VerticalPointsConstraint_parentSketch.htm">VerticalPointsConstraint.parentSketch</a><h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CreateSketchLines_Sample.htm">API Sample that demonstrates creating sketch lines in various ways.</a></td>
+        <td class="api-list">Demonstrates several ways to create sketch lines, including as the result of creating a rectangle.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="LoftFeatureSample_Sample.htm">Loft Feature API Sample</a></td>
+        <td class="api-list">Demonstrates creating a new loft feature.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PatchFeatureSample_Sample.htm">Patch Feature API Sample</a></td>
+        <td class="api-list">Demonstrates creating a new patch feature.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SimpleExtrusionSample_Sample.htm">Simple Extrusion Sample</a></td>
+        <td class="api-list">Creates a new extrusion feature, resulting in a new component.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SimpleRevolveFeatureSample_Sample.htm">Simple Revolve Feature Sample</a></td>
+        <td class="api-list">Creates a new revolve feature, resulting in a new component.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(Sketch%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

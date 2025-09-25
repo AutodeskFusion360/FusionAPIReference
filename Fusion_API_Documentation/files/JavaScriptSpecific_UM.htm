@@ -1,0 +1,442 @@
+ <html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/JavaScriptSpecific_UM.htm#!">
+    <meta name="contextid" content="JavaScriptSpecific_UM">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="21/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="description" content="">
+    <meta name="topicid" content="GUID-C081FA71-4541-4CA5-AA08-7343EF6701B4">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>JavaScript Specific Issues</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+	<link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"/>
+	<script type="text/javascript" src="/view/clientframework/client.js"><!--filler--></script> 
+	<style>
+	span.highlight {
+		background-color: yellow;
+	}
+	</style>
+	<script>
+	  // This turns on the display of the copyright notice which is not visible by default.
+	  // Because the head is removed when used in the web help, this function will only exists
+	  // when the chm help is being created.
+	  window.onload = function() {
+		copyrightElement = document.getElementById('CopyrightNotice');
+		copyrightElement.style.display = 'block';
+	  };
+	</script>
+</head>
+<body>
+<link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+	
+<h2 class="api">JavaScript Specific Issues</h2>
+
+<p Class="api">Fusion has a single API that can be used from several different programming languages.  In most cases, the API is used in a very similar way from each of the programming languages with just small language specific syntax changes.  However, in some cases there are significant differences in how the API is used because of a particular language.  This topic discusses the differences that are unique to JavaScript and covers the subjects listed below.</p>
+
+<ul>
+<li><a href="#Editing">Editing and Debugging</a></li>
+<li><a href="#Reference Arguments">Reference Arguments</a></li>
+<li><a href="#Object Types">Object Types</a></li>
+<li><a href="#Object Equality">Object Equality</a></li>
+<li><a href="#Events">Events</a></li>
+<li><a href="#OS Utilities">OS Utilities</a></li>
+<li><a href="#Mac Load Problem">Mac Issue when Writing Scripts and Add-Ins</a></li>
+</ul>
+
+<a name="Editing"></a>
+<h3 class="api">Editing and Debugging a JavaScript Script or Add-In</h3>
+
+<p Class="api">When editing a JavaScript script, the <b>Brackets</b> editor will be displayed where you can view and edit the script. When creating a JavaScript script there are two files created, the JavaScript .js file and an accompanying .html file. The html file is used to specify which JavaScript files to load. The contents of the html file are shown below.</p>
+
+<div align="center"><img src="../images/BracketsHTMLSample.png" border=0 align="middle" alt="Scripts command"></div>
+<br />
+
+<p Class="api">The .js file contains the JavaScript code. When you create a new script or add-in, it contains code with the "run" function that is called by Fusion when the script is loaded. It then gets the Fusion Application object, uses the Application object to get the UserInterface object, and then displays a message box. The Brackets editor and the JavaScript code for a new add-in can be seen below.</p>
+
+<div align="center"><img src="../images/BracketsJSSample.png" border=0 align="middle" alt="Scripts command"></div>
+<br />
+
+<p Class="api">The Brackets editor is used solely for editing the JavaScript code and it does not support debugging. In fact you can use any text editor you want to edit the code and are not restricted to using only Brackets. To debug a JavaScript program, select the script in the Scripts Manager and then select the "Debug" option from the drop-down at the bottom of the dialog, as shown below.</p>
+
+<div align="center"><img src="../images/JavaScriptDebug.png" border=0 align="middle" alt="Scripts command"></div>
+<br />
+
+<p Class="api">A browser window will display in debug mode with the script displayed and running but with execution halted at the debugger statement. You can now add break points and step through the code as shown below.</p>
+
+<div align="center"><img src="../images/JSDebug.png" border=0 align="middle" alt="Scripts command"></div>
+<br />
+
+<p Class="api">A very powerful feature of the JavaScript debugger is that while debugging you can hover over any variable and see its value. Variables that reference Fusion objects will show all of the properties for that object. You can click on any property to view its current value. For properties that return objects, this will show all of the properties that the object supports. This provides a "live" view of the Fusion object model. This is shown below using the Application object by hovering over "app" the pop-up window appears. Clicking on the "activeDocument" property expands it and you can see that it returns a FusionDocument object. Clicking on the "design" property you can see that it returns a Design object. You can also see the other properties of the Design object listed.</p>
+
+<div align="center"><img src="../images/LiveDebug.png" border=0 align="middle" alt="Scripts command"></div>
+<br />
+
+<p Class="api">While debugging you can edit code in the browser window but that that code is temporary and only exists while debugging so any changes you make will be lost once the debugging session ends. You always need to make any edits to the original .js source file.</p>
+
+<a name="Reference Arguments"></a>
+<h3 class="api">Reference Arguments</h3>
+
+<p Class="api">JavaScript does not support the notion of output or 'by reference' arguments.  For example, the Point2D.getData method is documented as:</p>
+<p Class="api">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;boolean Point2D.<b>getData</b>(  out double <b><i>x</i></b>, out double <b><i>y</i></b> ) </p>
+<p Class="api">The <b><i>x</i></b> and <b><i>y</i></b> arguments are of type 'out double' where 'out' indicates a 'by reference' argument. The documentation indicates that this argument will be used as an output argument containing the result values.</p>
+
+<p Class="api">The convention used to handle 'by reference' arguments in the JavaScript version of the API is to expect a variable that is set with an Object.  The input and/or output value will be set in a value in this object with a key name of 'value'.  For example, calling Point2D.getData would be done with the following code.</p>
+
+<pre class="api-code">
+<span style="color:green">// Pass empty objects to receive the reference values in.</span>
+var xVal = {}, yVal = {};
+if (point.getData(xVal, yVal)) {
+    <span style="color:green">// xVal.value and yVal.value now contain the Number result values.</span>
+	var x = xVal.value;
+	var y = yVal.value;
+    console.log(x + ', ' + y);
+}
+</pre>
+
+<a name="Object Types"></a>
+<h3 class="api">Object Types</h3>
+
+<p Class="api">JavaScript is not a rigid and strongly typed object language.  Objects are more dynamic.  The API objects do use the prototype inheritance model, so you can use the 'instanceof' operator to query for the type of an object.  For example, the following code can be used to determine if the type of a selected entity is a BRepFace.</p>
+
+<pre class="api-code">
+var entity = selection.object;
+if (entity instanceof adsk.fusion.BRepFace) {
+    <span style="color:green">// 'entity' is a BRepFace.  Call BRepFace members here.</span>
+    var surface = entity.geometry;
+}
+</pre>
+<br/>
+
+<p Class="api">Because JavaScript variables are untyped, code hints in a source code editor such as Brackets have to make guesses based on the context that the variable was obtained from.  In the example above, the 'entity' variable was obtained from the adsk.core.Selection.object property, which is defined to return an object of type adsk.core.Base.  Because of this, the code hints on the 'entity' variable at design time will be very poor.  When you type 'entity.' above, you will only get the code hints for the adsk.core.Base type, and not values from the adsk.fusion.BRepFace type.  As an alternative to using 'instanceof' directly, the constructor functions for the various API types can be used as a 'casting' operator.  For example, the sample code above could be rewritten as:</p>
+
+<pre class="api-code">
+var face = adsk.fusion.BRepFace(selection.object);
+if (face) {
+    <span style="color:green">// Call BRepFace members here.</span>
+    var surface = face.geometry;
+}
+</pre>
+<br/>
+
+<p Class="api">The adsk.fusion.BRepFace constructor function call in this case would be implemented with code roughly equivalent to 'return object instanceof adsk.core.BRepFace ? object : null;'.  If the argument passed into the constructor function is an instanceof that constructor function, it simply returns that object, else it returns a 'null'.  This does two things.  First, it provides a way to do type checking. You can test the returned value for null (or 'false-ness') to determine if it is of that type.  Second is that because these constructor functions are known to return an instance of that type, the code hints will be for this instance type.  So in the example code above, when you type 'face.' you should get proper code hints for the adsk.fusion.BRepFace type as expected.  While it is not necessary to use these casting functions, they may be convenient to use.</p>
+
+<a name="Object Equality"></a>
+<h3 class="api">Object Equality</h3>
+
+<p Class="api">It is common to need to compare whether two object variables are pointing to the same object.  In JavaScript, two variables will compare as equal ('==' or '===') if both variables reference the exact same object instance.</p>
+
+<pre class="api-code">
+var object1 = {};
+var object2 = {};
+var object3 = object1;
+object1 === object2; <span style="color:green">// false</span>
+object1 === object3; <span style="color:green">// true</span>
+</pre>
+<br/>
+
+<p Class="api">Every API function that returns an API object constructs a new JavaScript wrapper object instance and does not attempt to maintain a unique object reference.  Therefore, a simple equality check on two API objects obtained from two different API calls will return false when using the '==' or '===' operators.  An 'equals' function was added to all API JavaScript objects for use when comparing whether two API object instances reference the exact same object in Fusion.</p>
+
+<pre class="api-code">
+var plane1 = component.constructionPlanes.item(0);
+var plane2 = component.constructionPlanes.item(0);
+plane1 === plane2; <span style="color:green">// false</span>
+plane1.equals(plane2); <span style="color:green">// true</span>
+</pre>
+
+<a name="Events"></a>
+<h3 class="api">Events</h3>
+
+<p Class="api">The event pattern used by the API consists of an Event object that is the source of events.  You would normally implement your own, derived from the EventHandler, and create an instance of your event handler that you would then add and remove from the Event source object.  When the event is triggered, your event handler's 'notify' method would be invoked.  In the JavaScript API, this pattern has been modified to remove the need for a custom EventHandler derived class.  Instead, a function reference, to call when the event is triggered, can be passed directly to the Event's 'add' and 'remove' methods.</p>
+
+<pre class="api-code">
+var onCommandExecuted = function(args) {
+    <span style="color:green">// event handling code goes here</span>
+};
+...
+command.commandCreated.add(onCommandCreated);
+</pre>
+
+<a name="OS Utilities"></a>
+<h3 class="api">OS Utilities</h3>
+
+<p Class="api">JavaScript code is run in the context of a web browser.  When running in a web browser context, access to local system resources (such as the file system, the system registry, etc.) are completely restricted. For JavaScript, the Fusion API provides some utility functions to provide access to these otherwise restricted system resources.  These utility functions enable scripts to perform actions such as reading and writing files in the user's file system, which are commonly needed when writing CAD related programs.  The following utility functions are provided.</p>
+
+<p Class="api">
+<ul>
+    <li>
+        <h3 class="api">adsk.readFile</h3>
+        <h4 class="api">Description</h4>
+        Read and return the contents of a file.
+        If <code>filename</code> is not found or could not be opened or read, <code>undefined</code> is returned.
+        If <code>filename</code> is successfully read, an <code>ArrayBuffer</code> object is returned with the file's byte array.
+        <h4 class="api">Syntax</h4>
+        <code>adsk.readFile(filename)</code>
+        <h4 class="api">Arguments</h4>
+        <dl>
+            <dt><code>filename</code></dt>
+            <dd>The filename String with the full filename (path included) to the file to open and read.</dd>
+        </dl>
+    </li>
+    <li>
+        <h3 class="api">adsk.writeFile</h3>
+        <h4 class="api">Description</h4>
+        Write the contents of a file.
+        If <code>data</code> is a <code>String</code> the contents are written to the file with UTF-8 encoding.
+        If <code>data</code> is an <code>ArrayBuffer</code> the contents are written as binary bytes.
+        Returns <code>true</code> if the data is successfully written to the file.
+        <h4 class="api">Syntax</h4>
+        <code>adsk.writeFile(filename, data, [mode])</code>
+        <h4 class="api">Arguments</h4>
+        <dl>
+            <dt><code>filename</code></dt>
+            <dd>The full filename <code>String</code> to the file to open and write to.</dd>
+            <dt><code>data</code></dt>
+            <dd>The <code>ArrayBuffer</code> or <code>String</code> containing the data to write to the file.</dd>
+            <dt><code>mode</code></dt>
+            <dd>
+                The open mode <code>String</code> to use when opening the file.
+                Valid values are 'append' and 'truncate'.
+                'append' will append <code>data</code> to the end of the existing file (if any).
+                'truncate', the default mode, will replace the existing contents of the file with <code>data</code>.
+            </dd>
+        </dl>
+    </li>
+    <li>
+        <h3 class="api">adsk.copyFile</h3>
+        <h4 class="api">Description</h4>
+        Copies the specified file or folder to the destination location.
+        Returns <code>true</code> if the file or folder was successfully copied.
+        <h4 class="api">Syntax</h4>
+        <code>adsk.copyFile(fromFilename, toFilename)</code>
+        <h4 class="api">Arguments</h4>
+        <dl>
+            <dt><code>fromFilename</code></dt>
+            <dd>The full filename <code>String</code> to the file or folder to copy.</dd>
+            <dt><code>toFilename</code></dt>
+            <dd>The full filename <code>String</code> to the destination file or folder of the copy.</dd>
+        </dl>
+    </li>
+    <li>
+        <h3 class="api">adsk.renameFile</h3>
+        <h4 class="api">Description</h4>
+        Renames the specified file or folder to the new target name.
+        Returns <code>true</code> if the file or folder was successfully renamed.
+        <h4 class="api">Syntax</h4>
+        <code>adsk.renameFile(fromFilename, toFilename)</code>
+        <h4 class="api">Arguments</h4>
+        <dl>
+            <dt><code>fromFilename</code></dt>
+            <dd>The full filename <code>String</code> to the file or folder to rename.</dd>
+            <dt><code>toFilename</code></dt>
+            <dd>The full filename <code>String</code> to the new file or folder name.</dd>
+        </dl>
+    </li>
+    <li>
+        <h3 class="api">adsk.removeFile</h3>
+        <h4 class="api">Description</h4>
+        Removes the specified file or folder.
+        Returns <code>true</code> if the file or folder was successfully removed.
+        <h4 class="api">Syntax</h4>
+        <code>adsk.removeFile(filename)</code>
+        <h4 class="api">Arguments</h4>
+        <dl>
+            <dt><code>filename</code></dt>
+            <dd>The full filename <code>String</code> to the file or folder to remove.</dd>
+        </dl>
+    </li>
+    <li>
+        <h3 class="api">adsk.createDirectory</h3>
+        <h4 class="api">Description</h4>
+        Creates a new folder at the specified location.
+        Returns <code>true</code> if the folder was successfully created.
+        <h4 class="api">Syntax</h4>
+        <code>adsk.createDirectory(filename)</code>
+        <h4 class="api">Arguments</h4>
+        <dl>
+            <dt><code>filename</code></dt>
+            <dd>The full filename <code>String</code> to the new folder to create.</dd>
+        </dl>
+    </li>
+    <li>
+        <h3 class="api">adsk.listDirectoryFiles</h3>
+        <h4 class="api">Description</h4>
+        List the files contained in the specified folder.
+        Returns a <code>String</code> array with the full filename for each file result from the search.
+        Returns <code>undefined</code> if there was a failure of any kind.
+        <h4 class="api">Syntax</h4>
+        <code>adsk.listDirectoryFiles(filename, regularFilesOnly, recursive)</code>
+        <h4 class="api">Arguments</h4>
+        <dl>
+            <dt><code>filename</code></dt>
+            <dd>The full filename <code>String</code> to the folder to list the file contents from.</dd>
+            <dt><code>regularFilesOnly</code></dt>
+            <dd>A <code>Boolean</code> value indicating if only conventional disk files should be returned.
+                If <code>true</code>, files such as symbolic links will not be included in the results.</dd>
+            <dt><code>recursive</code></dt>
+            <dd>A <code>Boolean</code> value indicating if subdirectories will be recursively searched.</dd>
+        </dl>
+    </li>
+    <li>
+        <h3 class="api">adsk.fileExists</h3>
+        <h4 class="api">Description</h4>
+        Tests if the specified file or folder exists in the filesystem.
+        Returns <code>true</code> if the file or folder exists.
+        <h4 class="api">Syntax</h4>
+        <code>adsk.fileExists(filename)</code>
+        <h4 class="api">Arguments</h4>
+        <dl>
+            <dt><code>filename</code></dt>
+            <dd>The full filename <code>String</code> to the file or folder to look for.</dd>
+        </dl>
+    </li>
+    <li>
+        <h3 class="api">adsk.fileIsDirectory</h3>
+        <h4 class="api">Description</h4>
+        Tests if the specified filename is to a folder.
+        Returns <code>true</code> if the filename was found and if it was a folder.
+        <h4 class="api">Syntax</h4>
+        <code>adsk.fileIsDirectory(filename)</code>
+        <h4 class="api">Arguments</h4>
+        <dl>
+            <dt><code>filename</code></dt>
+            <dd>The full filename <code>String</code> to the folder.</dd>
+        </dl>
+    </li>
+    <li>
+        <h3 class="api">adsk.fileSize</h3>
+        <h4 class="api">Description</h4>
+        Returns the <code>Number</code> size of the file in bytes.
+        Returns <code>undefined</code> on failure.
+        <h4 class="api">Syntax</h4>
+        <code>adsk.fileSize(filename)</code>
+        <h4 class="api">Arguments</h4>
+        <dl>
+            <dt><code>filename</code></dt>
+            <dd>The full filename <code>String</code> to the file.</dd>
+        </dl>
+    </li>
+    <li>
+        <h3 class="api">adsk.tempDirectory</h3>
+        <h4 class="api">Description</h4>
+        Returns the full filename <code>String</code> to the system temp folder.
+        Returns <code>undefined</code> on failure.
+        <h4 class="api">Syntax</h4>
+        <code>adsk.tempDirectory()</code>
+    </li>
+    <li>
+        <h3 class="api">adsk.toBase64</h3>
+        <h4 class="api">Description</h4>
+        Encode the specified byte array into a Base64 <code>String</code>.
+        Returns the Base64 <code>String</code>.
+        <h4 class="api">Syntax</h4>
+        <code>adsk.toBase64(buffer)</code>
+        <h4 class="api">Arguments</h4>
+        <dl>
+            <dt><code>buffer</code></dt>
+            <dd>An <code>ArrayBuffer</code> of bytes to encode as a Base64 <code>String</code>.</dd>
+        </dl>
+    </li>
+    <li>
+        <h3 class="api">adsk.fromBase64</h3>
+        <h4 class="api">Description</h4>
+        Decodes the specified Base64 <code>String</code> into an array of bytes.
+        Returns an <code>ArrayBuffer</code> containing the decoded bytes.
+        <h4 class="api">Syntax</h4>
+        <code>adsk.fromBase64(encoded)</code>
+        <h4 class="api">Arguments</h4>
+        <dl>
+            <dt><code>encoded</code></dt>
+            <dd>A <code>String</code> containing valid Base64 encodings.</dd>
+        </dl>
+    </li>
+    <li>
+        <h3 class="api">adsk.utf8ToString</h3>
+        <h4 class="api">Description</h4>
+        Convert the specified Utf-8 encoded array of bytes to a JavaScript Utf-8 <code>String</code>.
+        Returns the resulting <code>String</code>.
+        <h4 class="api">Syntax</h4>
+        <code>adsk.utf8ToString(buffer)</code>
+        <h4 class="api">Arguments</h4>
+        <dl>
+            <dt><code>buffer</code></dt>
+            <dd>The <code>Uint8Array</code> or <code>ArrayBuffer</code> containing the Utf-8 encoded byte array.</dd>
+        </dl>
+    </li>
+</ul>
+</p>
+
+<a name="Mac Load Problem"></a>
+<h3 class="api">Mac Issue when Writing Scripts and Add-Ins</h3>
+
+<p Class="api">When writing a script or add-in you'll typically make code changes, run the code to find problems, make changes, and then run the code again.  To get the latest copy of code the invisible browser instance that Fusion created and that's running the JavaScript needs to refresh and load the latest version of the JavaScript code.  With Mac OS X 10.10.2 there is a problem with the Web Toolkit that used to create the browser instance, where it is not re-loading the JavaScript code but continues to use what was initially loaded.  This has been acknowledged by Apple as a problem but we don't know when it might be fixed. The current solution is to re-start Fusion to begin a fresh session.</p>
+
+<p Class="api">
+It's important to understand that this problem only affects those writing new scripts or add-ins using JavaScript on Mac.  It does not affect Mac users running JavaScript scripts or add-ins on a Mac because they're not changing the code.</p>
+
+<p Class="api">
+Because we don't know when this will be fixed and because it makes writing JavaScript scripts or add-ins very inconvenient, we've developed a temporary workaround that developers can use. The workaround is to manually add a new property to the manifest file of your script or add-in and to comment out the &lt;script&gt; tag in the html file associated with your program.  Below is an example of what needs to be added to the manifest.</p>
+
+<pre class="api-code">
+{
+	"autodeskProduct": "Fusion360",
+	"type": "addin",
+	"id": "54a85941-7b07-406a-aedb-e35096f0250c",
+	"author": "",
+	"description": {
+		"": ""
+	},
+	"version": "",
+	"runOnStartup": false,
+	"supportedOS": "windows|mac",
+	"autodeskLibraries": ["application","dashboard","geometry","materials",
+                              "userInterface","utilities","bRep","components",
+                              "construction","features","fusion","meshBody",
+                              "meshData","sketch","tSpline","cam"],
+	"editEnabled": true,
+	<span class="highlight">"dynamicLoad": true</span>
+}
+</pre>
+<br />
+
+<p Class="api">
+The code below illlustrates commenting out the &lt;script&gt; tag in the html file.</p>
+
+<pre class="api-code">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    <span class="highlight">&lt;!--</span>&lt;script type="text/javascript" charset="UTF-8" src="MyAddIn.js"&gt;&lt;/script&gt;<span class="highlight">--&gt;</span>
+&lt;body&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<br />
+
+<p Class="api">
+This results in Fusion dynamically adding the script at runtime along with some additional parameters to force the JavaScript to be loaded each time.</p>
+
+<br />
+<br />
+<div id="CopyrightNotice" style="display:none;">
+  <hr />
+  <table width="100%" style="font-size:15">
+	<tr>
+	  <td align="left">
+		&copy; Copyright 2025 Autodesk, Inc.
+	  </td>
+	  <td align="right">
+		<a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(JavaScriptSpecific_UM)">Comment on this page.</a>
+	  </td>
+	</tr>
+  </table>
+</div>
+</body>
+</html>

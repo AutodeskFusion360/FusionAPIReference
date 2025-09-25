@@ -1,0 +1,138 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/ConfigurationInsertStandardDesignColumn.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="06/08/2025">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="ConfigurationInsertStandardDesignColumn">
+    <meta name="description" content="ConfigurationInsertStandardDesignColumn Object">
+    <meta name="topicid" content="GUID-5C820ED4-C9B4-4B48-9F63-249EB8241C06">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>ConfigurationInsertStandardDesignColumn Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">ConfigurationInsertStandardDesignColumn Object
+			</h1>
+              Derived from: <a href="ConfigurationColumn.htm">ConfigurationColumn</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Configurations/ConfigurationInsertStandardDesignColumn.h&gt;<h2 class="api">
+          Description
+        </h2>This object represents a column in the table that controls which design should be referenced by an occurrence. The column contains a list of designs that have been specified for that column. One of the designs is specified for each cell in the column. That design will be referenced by the occurrence when the row that cell is in is active.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ConfigurationInsertStandardDesignColumn_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ConfigurationInsertStandardDesignColumn_deleteMe.htm">deleteMe</a></td>
+        <td class="api-list">Deletes this column from the table. Property columns cannot be deleted. If the table was obtained from a DataFile, this method will fail.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ConfigurationInsertStandardDesignColumn_getCell.htm">getCell</a></td>
+        <td class="api-list">Gets the cell in this column at the specified row. The first row has an index of 0 and does not include the header row.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ConfigurationInsertStandardDesignColumn_getCellByRowId.htm">getCellByRowId</a></td>
+        <td class="api-list">Gets the cell in this column at the row specified by its ID.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ConfigurationInsertStandardDesignColumn_getCellByRowName.htm">getCellByRowName</a></td>
+        <td class="api-list">Gets the cell in this column at the row specified by its name.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ConfigurationInsertStandardDesignColumn_id.htm">id</a></td>
+        <td class="api-list">The id of the column. This is constant and cannot be changed by the user.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ConfigurationInsertStandardDesignColumn_index.htm">index</a></td>
+        <td class="api-list">The index position of this column within the table. The first column is at index 0 and does not include the "Name" column.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ConfigurationInsertStandardDesignColumn_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ConfigurationInsertStandardDesignColumn_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ConfigurationInsertStandardDesignColumn_occurrence.htm">occurrence</a></td>
+        <td class="api-list">Returns the occurrence being controlled by this column.<br/><br/> This property returns null when the table being queried was obtained from a DataFile object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ConfigurationInsertStandardDesignColumn_parentTable.htm">parentTable</a></td>
+        <td class="api-list">Returns the parent table this column is in.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ConfigurationInsertStandardDesignColumn_replaceDesigns.htm">replaceDesigns</a></td>
+        <td class="api-list">Provides access to the list of replace designs that have been defined for this column. Using the returned collection you can define new ConfigurationReplaceDesign objects. Use the cells in the column to specify which one of the defined replace designs is used for a specific row.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ConfigurationInsertStandardDesignColumn_rowCount.htm">rowCount</a></td>
+        <td class="api-list">Returns the number of rows in this column.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ConfigurationInsertStandardDesignColumn_title.htm">title</a></td>
+        <td class="api-list">The title of this column. In a top table, this can only be edited for suppression, visibility, parameter, and theme table columns. It behaves as read-only for all other types. In a theme table, the title of all the columns can be modified except for the column that represents the root component for materials and appearances.<br/><br/> If the table was obtained from a DataFile, this property behaves as read-only for all the columns.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="ConfigurationColumns_addInsertStandardDesignColumn.htm">ConfigurationColumns.addInsertStandardDesignColumn</a>, <a href="ConfigurationInsertStandardDesignCell_parentColumn.htm">ConfigurationInsertStandardDesignCell.parentColumn</a><h2 class="api">
+            Version
+          </h2>
+        Introduced in version September 2025<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(ConfigurationInsertStandardDesignColumn%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

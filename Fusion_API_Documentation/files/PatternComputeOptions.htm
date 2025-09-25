@@ -1,0 +1,84 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/PatternComputeOptions.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="PatternComputeOptions">
+    <meta name="description" content="List of the compute options for mirroring and patterning features in the parametric modeling environment.">
+    <meta name="topicid" content="GUID-5AF94D77-791F-4581-BD39-78245D0CBDBB">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>PatternComputeOptions Enumerator
+        </title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">PatternComputeOptions Enumerator
+        </h1>
+    <h2 class="api">
+          Description
+        </h2>List of the compute options for mirroring and patterning features in the parametric modeling environment.<br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion\FusionTypeDefs.h&gt;<h2 class="api">
+          Methods
+        </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+              Name
+            </td>
+        <td class="api-list" style="width:1px;">
+              Value
+            </td>
+        <td class="api-list">
+              Description
+            </td>
+      </tr>
+      <tr>
+        <td class="api-list">AdjustPatternCompute</td>
+        <td class="api-list" align="right" style="padding-right:10px">2</td>
+        <td class="api-list">Adjust pattern compute. This is the slowest of all compute options. It can almost never produce a wrong result (e.g. works well even on Split features)</td>
+      </tr>
+      <tr>
+        <td class="api-list">IdenticalPatternCompute</td>
+        <td class="api-list" align="right" style="padding-right:10px">1</td>
+        <td class="api-list">Identical pattern compute. Used when you want force the resulting mirror or pattern to create identical results regardless of the dependencies that define the feature being copied.</td>
+      </tr>
+      <tr>
+        <td class="api-list">OptimizedPatternCompute</td>
+        <td class="api-list" align="right" style="padding-right:10px">0</td>
+        <td class="api-list">Optimized pattern compute. This is the fastest of all compute options. This option may fail or give wrong results in some very rare cases (e.g. when patterning a Split feature)</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+          Version
+        </h2>
+        Introduced in version November 2015<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(PatternComputeOptions%20Enum%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

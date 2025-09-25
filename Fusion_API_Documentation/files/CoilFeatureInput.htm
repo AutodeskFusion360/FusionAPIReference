@@ -1,0 +1,164 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/CoilFeatureInput.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="24/3/2016">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="CoilFeatureInput">
+    <meta name="description" content="CoilFeatureInput Object">
+    <meta name="topicid" content="GUID-AD2115D9-90F0-4F5A-AF48-2F0C365B232F">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>CoilFeatureInput Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">CoilFeatureInput Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Features/CoilFeatureInput.h&gt;<h2 class="api">
+          Description
+        </h2>This class defines the methods and properties that pertain to the definition of a coil feature.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CoilFeatureInput_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CoilFeatureInput_setToHeightAndPitchCoil.htm">setToHeightAndPitchCoil</a></td>
+        <td class="api-list">Sets the coil type to HeightAndPitchCoilType.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CoilFeatureInput_setToRevolutionAndHeight.htm">setToRevolutionAndHeight</a></td>
+        <td class="api-list">Sets the coil type to RevolutionsAndHeightCoilType.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CoilFeatureInput_setToRevolutionsAndPitch.htm">setToRevolutionsAndPitch</a></td>
+        <td class="api-list">Sets the coil type to RevolutionsAndPitchCoilType.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CoilFeatureInput_setToSpiral.htm">setToSpiral</a></td>
+        <td class="api-list">Sets the coil type to SpiralCoilType.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CoilFeatureInput_angle.htm">angle</a></td>
+        <td class="api-list">Gets the angle. Returns null in the case where the coilType property returns SpiralCoilType.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CoilFeatureInput_basePlane.htm">basePlane</a></td>
+        <td class="api-list">Gets and sets the base plane.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CoilFeatureInput_coilSectionPosition.htm">coilSectionPosition</a></td>
+        <td class="api-list">Gets the section position of the coil. It defaults to InsideCoilSectionPosition.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CoilFeatureInput_coilSectionType.htm">coilSectionType</a></td>
+        <td class="api-list">Gets the section type of the coil. It defaults to CircularCoilSectionType.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CoilFeatureInput_coilType.htm">coilType</a></td>
+        <td class="api-list">Gets the type of the coil.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CoilFeatureInput_diameter.htm">diameter</a></td>
+        <td class="api-list">Gets and sets the diameter.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CoilFeatureInput_height.htm">height</a></td>
+        <td class="api-list">Gets the height. Returns null in the case where the coilType property returns RevolutionsAndPitchCoilType.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CoilFeatureInput_isClockwiseRotation.htm">isClockwiseRotation</a></td>
+        <td class="api-list">Gets and sets whether the rotation is clockwise or counter-clockwise. A value of true indicates clockwise rotation. It defaults to true.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CoilFeatureInput_isSolid.htm">isSolid</a></td>
+        <td class="api-list">Specifies if the coil should be created as a solid or surface. This is initialized to true so a solid will be created if it's not changed. It only can be set to false in non-parametric modeling.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CoilFeatureInput_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CoilFeatureInput_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CoilFeatureInput_operation.htm">operation</a></td>
+        <td class="api-list">Gets and sets the type of operation performed by the coil.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CoilFeatureInput_pitch.htm">pitch</a></td>
+        <td class="api-list">Gets the pitch. Returns null in the case where the coilType property returns RevolutionsAndHeightCoilType or SpiralCoilType.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CoilFeatureInput_revolutions.htm">revolutions</a></td>
+        <td class="api-list">Gets the revolutions number. Returns null in the case where the coilType property returns HeightAndPitchCoilType.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CoilFeatureInput_sectionSize.htm">sectionSize</a></td>
+        <td class="api-list">Gets and sets the section size.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CoilFeatureInput_targetBaseFeature.htm">targetBaseFeature</a></td>
+        <td class="api-list">When creating a feature that is owned by a base feature, set this property to the base feature you want to associate the new feature with. By default, this is null, meaning it will not be associated with a base feature.<br/><br/> Because of a current limitation, if you want to create a feature associated with a base feature, you must set this property AND call the startEdit method of the base feature, create the feature, and then call the finishEdit method of the base feature. The base feature must be in an "edit" state to be able to add any additional items to it.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version March 2016<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(CoilFeatureInput%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

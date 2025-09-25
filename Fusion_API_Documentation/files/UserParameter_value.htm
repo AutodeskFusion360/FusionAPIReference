@@ -1,0 +1,79 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/UserParameter_value.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="14/10/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="UserParameter_value">
+    <meta name="description" content="UserParameter.value Property">
+    <meta name="topicid" content="GUID-f474ba26-022d-4a24-82a3-feb6b8c77791">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>UserParameter.value Property</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">UserParameter.value Property</h1>
+
+          Parent Object: <a href="UserParameter.htm">UserParameter</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Fusion/UserParameter.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Gets and sets the real value (a double) of the parameter in database units. Setting this property will set/reset the expression value for this parameter.<br/><br/> This property is only valid for numeric parameters and will fail for text parameters. You can determine the value type of the parameter by using the valueType property. Use the textValue property to get and set the value of text parameters.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"userParameter_var" is a variable referencing a UserParameter object.</span><br /><br /><code><pre class="api-code"><span style="color:blue"># Get the value of the property.</span><br />propertyValue = userParameter_var.<b>value<br /><br /><span style="color:blue"># Set the value of the property.</span><br />userParameter_var.<b>value</b> = propertyValue</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"userParameter_var" is a variable referencing a UserParameter object.<br /><code><pre class="api-code">#include &lt;Fusion/Fusion/UserParameter.h&gt;<br /><br /><span style="color:blue">// Get the value of the property.</span><br />double propertyValue = userParameter_var-&gt;<b>value</b>();<br /><br /><span style="color:blue">// Set the value of the property, where value_var is a double.</span><br />bool returnValue = userParameter_var-&gt;<b>value</b>(value_var);</pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Property Value
+          </h2>This is a read/write property whose value is a double.<h2 class="api">
+            Version
+          </h2>
+        Introduced in version November 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(UserParameter.value%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

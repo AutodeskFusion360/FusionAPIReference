@@ -1,0 +1,118 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/VariableRadiusFilletEdgeSetInput.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="09/11/2022">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="VariableRadiusFilletEdgeSetInput">
+    <meta name="description" content="VariableRadiusFilletEdgeSetInput Object">
+    <meta name="topicid" content="GUID-4FC54EDD-2D5B-4419-8619-CDD4E050C126">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>VariableRadiusFilletEdgeSetInput Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">VariableRadiusFilletEdgeSetInput Object
+			</h1>
+              Derived from: <a href="FilletEdgeSetInput.htm">FilletEdgeSetInput</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Features/VariableRadiusFilletEdgeSetInput.h&gt;<h2 class="api">
+          Description
+        </h2>Provides access to the edges and the parameters associated with a variable radius fillet.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="VariableRadiusFilletEdgeSetInput_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="VariableRadiusFilletEdgeSetInput_setMidRadii.htm">setMidRadii</a></td>
+        <td class="api-list">Defines any additional points along the fillet where a radius is specified.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="VariableRadiusFilletEdgeSetInput_continuity.htm">continuity</a></td>
+        <td class="api-list">Gets and sets the continuity of the fillet edge set. Valid values are TangentSurfaceContinuityType and CurvatureSurfaceContinuityType. The default is TangentSurfaceContinuityType.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="VariableRadiusFilletEdgeSetInput_endRadius.htm">endRadius</a></td>
+        <td class="api-list">Gets and sets a ValueInput object that defines the ending radius of the fillet. If a single edge is being filleted, the end radius is at the end of the edge. If multiple tangent edges are being filleted the end radius is the open end of the last edge in the collection.<br/><br/> If the ValueInput uses a real then it is interpreted as centimeters. If it is a string then the units can be defined as part of the string (i.e. "2 in") or if no units are specified it is interpreted using the current default units for length.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="VariableRadiusFilletEdgeSetInput_entities.htm">entities</a></td>
+        <td class="api-list">Gets and sets the entities associated with this fillet edge set. For constant radius and chord length edge sets, this can be edges, faces, and features. For variable radius edges sets, this must be edges.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="VariableRadiusFilletEdgeSetInput_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="VariableRadiusFilletEdgeSetInput_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="VariableRadiusFilletEdgeSetInput_startRadius.htm">startRadius</a></td>
+        <td class="api-list">Gets and sets a ValueInput object that defines the starting radius of the fillet. If a single edge is being filleted, the start radius is at the start end of the edge. If multiple tangent edges are being filleted the start radius is the start end of the first edge in the collection.<br/><br/> If the ValueInput uses a real then it is interpreted as centimeters. If it is a string then the units can be defined as part of the string (i.e. "2 in") or if no units are specified it is interpreted using the current default units for length.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="VariableRadiusFilletEdgeSetInput_tangencyWeight.htm">tangencyWeight</a></td>
+        <td class="api-list">Gets and sets the tangency weight for the given edge set. The tangency weight controls the influence of the continuity (G1 or G2) on the fillet. The ValueInput must be a real value between 0.1 and 2.0 inclusive, with no units. The default value is 1.0.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="FilletEdgeSetInputs_addVariableRadiusEdgeSet.htm">FilletEdgeSetInputs.addVariableRadiusEdgeSet</a><h2 class="api">
+            Version
+          </h2>
+        Introduced in version November 2022<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(VariableRadiusFilletEdgeSetInput%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

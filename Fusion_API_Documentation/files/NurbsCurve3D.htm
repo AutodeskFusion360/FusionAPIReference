@@ -1,0 +1,170 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/NurbsCurve3D.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="NurbsCurve3D">
+    <meta name="description" content="NurbsCurve3D Object">
+    <meta name="topicid" content="GUID-de6fb48b-371f-49b6-80be-0ef62745404e">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>NurbsCurve3D Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">NurbsCurve3D Object
+			</h1>
+              Derived from: <a href="Curve3D.htm">Curve3D</a> Object
+            <br>Defined in namespace "adsk::core" and the header file is &lt;Core/Geometry/NurbsCurve3D.h&gt;<h2 class="api">
+          Description
+        </h2>Transient 3D NURBS curve. A transient NURBS curve is not displayed or saved in a document. Transient 3D NURBS curves are used as a wrapper to work with raw 3D NURBS curve information. They are created statically using one of the create methods of the NurbsCurve3D class.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="NurbsCurve3D_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="NurbsCurve3D_copy.htm">copy</a></td>
+        <td class="api-list">Creates and returns an independent copy of this NurbsCurve3D object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="NurbsCurve3D_createNonRational.htm">createNonRational</a></td>
+        <td class="api-list">Creates a transient 3D NURBS non-rational b-spline object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="NurbsCurve3D_createRational.htm">createRational</a></td>
+        <td class="api-list">Creates a transient 3D NURBS rational b-spline object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="NurbsCurve3D_extract.htm">extract</a></td>
+        <td class="api-list">Defines a new NURBS curve that is the subset of this NURBS curve in the parameter range of [startParam, endParam]</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="NurbsCurve3D_getData.htm">getData</a></td>
+        <td class="api-list">Gets the data that defines a transient 3D NURBS rational b-spline object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="NurbsCurve3D_merge.htm">merge</a></td>
+        <td class="api-list">Define a new NURBS curve that is the result of combining this NURBS curve with another NURBS curve.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="NurbsCurve3D_reverse.htm">reverse</a></td>
+        <td class="api-list">Reverses the orientation of the curve so the start and end points are swapped. The shape of the curve remains unchanged. This is especially useful to prepare the curves to use with the merge method.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="NurbsCurve3D_set.htm">set</a></td>
+        <td class="api-list">Sets the data that defines a transient 3D NURBS rational b-spline object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="NurbsCurve3D_transformBy.htm">transformBy</a></td>
+        <td class="api-list">Transforms this curve in 3D space.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="NurbsCurve3D_controlPointCount.htm">controlPointCount</a></td>
+        <td class="api-list">Gets the number of control points that define the curve.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="NurbsCurve3D_controlPoints.htm">controlPoints</a></td>
+        <td class="api-list">Returns an array of Point3D objects that define the control points of the curve.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="NurbsCurve3D_curveType.htm">curveType</a></td>
+        <td class="api-list">Returns the type of geometry this curve represents.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="NurbsCurve3D_degree.htm">degree</a></td>
+        <td class="api-list">Returns the degree of the curve.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="NurbsCurve3D_evaluator.htm">evaluator</a></td>
+        <td class="api-list">Returns an evaluator object that lets you perform additional evaluations on the curve.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="NurbsCurve3D_isClosed.htm">isClosed</a></td>
+        <td class="api-list">Gets if the curve is closed.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="NurbsCurve3D_isPeriodic.htm">isPeriodic</a></td>
+        <td class="api-list">Gets if the curve is periodic.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="NurbsCurve3D_isRational.htm">isRational</a></td>
+        <td class="api-list">Gets if the curve is rational or non-rational type.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="NurbsCurve3D_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="NurbsCurve3D_knotCount.htm">knotCount</a></td>
+        <td class="api-list">Returns the knot count of the curve.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="NurbsCurve3D_knots.htm">knots</a></td>
+        <td class="api-list">Returns an array of numbers that define the knot vector of the curve.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="NurbsCurve3D_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="Arc3D_asNurbsCurve.htm">Arc3D.asNurbsCurve</a>, <a href="Circle3D_asNurbsCurve.htm">Circle3D.asNurbsCurve</a>, <a href="Ellipse3D_asNurbsCurve.htm">Ellipse3D.asNurbsCurve</a>, <a href="EllipticalArc3D_asNurbsCurve.htm">EllipticalArc3D.asNurbsCurve</a>, <a href="Line3D_asNurbsCurve.htm">Line3D.asNurbsCurve</a>, <a href="NurbsCurve3D_copy.htm">NurbsCurve3D.copy</a>, <a href="NurbsCurve3D_createNonRational.htm">NurbsCurve3D.createNonRational</a>, <a href="NurbsCurve3D_createRational.htm">NurbsCurve3D.createRational</a>, <a href="NurbsCurve3D_extract.htm">NurbsCurve3D.extract</a>, <a href="NurbsCurve3D_merge.htm">NurbsCurve3D.merge</a>, <a href="Polyline3D_asNurbsCurve.htm">Polyline3D.asNurbsCurve</a>, <a href="SketchConicCurve_geometry.htm">SketchConicCurve.geometry</a>, <a href="SketchConicCurve_worldGeometry.htm">SketchConicCurve.worldGeometry</a>, <a href="SketchControlPointSpline_geometry.htm">SketchControlPointSpline.geometry</a>, <a href="SketchControlPointSpline_worldGeometry.htm">SketchControlPointSpline.worldGeometry</a>, <a href="SketchFittedSpline_geometry.htm">SketchFittedSpline.geometry</a>, <a href="SketchFittedSpline_worldGeometry.htm">SketchFittedSpline.worldGeometry</a>, <a href="SketchFixedSpline_geometry.htm">SketchFixedSpline.geometry</a>, <a href="SketchFixedSpline_worldGeometry.htm">SketchFixedSpline.worldGeometry</a><h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(NurbsCurve3D%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

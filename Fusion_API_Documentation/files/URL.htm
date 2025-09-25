@@ -1,0 +1,151 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/URL.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="21/02/2023">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="URL">
+    <meta name="description" content="URL Object">
+    <meta name="topicid" content="GUID-50D3CFDE-BA36-435F-BBEE-58A10ABBB3DF">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>URL Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">URL Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::core" and the header file is &lt;Core/Application/URL.h&gt;<h2 class="api">
+          Description
+        </h2>A URL object provides useful and easy-to-use methods for creating, modifying, and analyzing URLs.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="URL_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="URL_create.htm">create</a></td>
+        <td class="api-list">Create a new URL by given string.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="URL_join.htm">join</a></td>
+        <td class="api-list">Join this URL with the given path and return the resulting URL. The operation does not alter the current URL. Join inserts a slash '/' to properly extend the path, so that "http://foo".join("bar") will return "http://foo/bar", not "http://foobar".</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="URL_toString.htm">toString</a></td>
+        <td class="api-list">Get the entire URL as string.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="URL_isURLValid.htm">isURLValid</a></td>
+        <td class="api-list">Check whether the URL is valid. Ensures that the URL is formatted with a protocol followed by a path which can be empty. The check is independent of the existence of the resource the URL may point to.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="URL_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="URL_leafName.htm">leafName</a></td>
+        <td class="api-list">Get the leaf name of the URL, which is the section behind the last '/'.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="URL_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="URL_parent.htm">parent</a></td>
+        <td class="api-list">Get the parent URL, represented by the section before the last '/'.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="URL_pathName.htm">pathName</a></td>
+        <td class="api-list">Get the path name of the URL, including the last '/' of the protocol followed by the path of the URL.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="URL_protocol.htm">protocol</a></td>
+        <td class="api-list">Get the protocol scheme of the URL, including the final ':'.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="CAMLibrary_childAssetURLs.htm">CAMLibrary.childAssetURLs</a>, <a href="CAMLibrary_childFolderURLs.htm">CAMLibrary.childFolderURLs</a>, <a href="CAMLibrary_createFolder.htm">CAMLibrary.createFolder</a>, <a href="CAMLibrary_urlByLocation.htm">CAMLibrary.urlByLocation</a>, <a href="CAMTemplateLibrary_childAssetURLs.htm">CAMTemplateLibrary.childAssetURLs</a>, <a href="CAMTemplateLibrary_childFolderURLs.htm">CAMTemplateLibrary.childFolderURLs</a>, <a href="CAMTemplateLibrary_createFolder.htm">CAMTemplateLibrary.createFolder</a>, <a href="CAMTemplateLibrary_importTemplate.htm">CAMTemplateLibrary.importTemplate</a>, <a href="CAMTemplateLibrary_updateTemplate.htm">CAMTemplateLibrary.updateTemplate</a>, <a href="CAMTemplateLibrary_urlByLocation.htm">CAMTemplateLibrary.urlByLocation</a>, <a href="Machine_postURL.htm">Machine.postURL</a>, <a href="MachineFromLibraryInput_url.htm">MachineFromLibraryInput.url</a>, <a href="MachineLibrary_childAssetURLs.htm">MachineLibrary.childAssetURLs</a>, <a href="MachineLibrary_childFolderURLs.htm">MachineLibrary.childFolderURLs</a>, <a href="MachineLibrary_createFolder.htm">MachineLibrary.createFolder</a>, <a href="MachineLibrary_importMachine.htm">MachineLibrary.importMachine</a>, <a href="MachineLibrary_urlByLocation.htm">MachineLibrary.urlByLocation</a>, <a href="MachineQuery_url.htm">MachineQuery.url</a>, <a href="PostConfigurationQuery_url.htm">PostConfigurationQuery.url</a>, <a href="PostLibrary_childAssetURLs.htm">PostLibrary.childAssetURLs</a>, <a href="PostLibrary_childFolderURLs.htm">PostLibrary.childFolderURLs</a>, <a href="PostLibrary_createFolder.htm">PostLibrary.createFolder</a>, <a href="PostLibrary_importPostConfiguration.htm">PostLibrary.importPostConfiguration</a>, <a href="PostLibrary_urlByLocation.htm">PostLibrary.urlByLocation</a>, <a href="PostProcessingMachineElement_postURL.htm">PostProcessingMachineElement.postURL</a>, <a href="PrintSettingLibrary_childAssetURLs.htm">PrintSettingLibrary.childAssetURLs</a>, <a href="PrintSettingLibrary_childFolderURLs.htm">PrintSettingLibrary.childFolderURLs</a>, <a href="PrintSettingLibrary_createFolder.htm">PrintSettingLibrary.createFolder</a>, <a href="PrintSettingLibrary_importPrintSetting.htm">PrintSettingLibrary.importPrintSetting</a>, <a href="PrintSettingLibrary_urlByLocation.htm">PrintSettingLibrary.urlByLocation</a>, <a href="PrintSettingQuery_url.htm">PrintSettingQuery.url</a>, <a href="StockMaterialLibrary_childAssetURLs.htm">StockMaterialLibrary.childAssetURLs</a>, <a href="StockMaterialLibrary_childFolderURLs.htm">StockMaterialLibrary.childFolderURLs</a>, <a href="StockMaterialLibrary_createFolder.htm">StockMaterialLibrary.createFolder</a>, <a href="StockMaterialLibrary_importStockMaterial.htm">StockMaterialLibrary.importStockMaterial</a>, <a href="StockMaterialLibrary_urlByLocation.htm">StockMaterialLibrary.urlByLocation</a>, <a href="ToolLibraries_childAssetURLs.htm">ToolLibraries.childAssetURLs</a>, <a href="ToolLibraries_childFolderURLs.htm">ToolLibraries.childFolderURLs</a>, <a href="ToolLibraries_createFolder.htm">ToolLibraries.createFolder</a>, <a href="ToolLibraries_importToolLibrary.htm">ToolLibraries.importToolLibrary</a>, <a href="ToolLibraries_urlByLocation.htm">ToolLibraries.urlByLocation</a>, <a href="ToolQuery_url.htm">ToolQuery.url</a>, <a href="ToolQueryResult_toolLibraryURL.htm">ToolQueryResult.toolLibraryURL</a>, <a href="URL_create.htm">URL.create</a>, <a href="URL_join.htm">URL.join</a>, <a href="URL_parent.htm">URL.parent</a><h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="HoleAndPocketRecognition_Sample.htm">Hole and Pocket Recognition API Sample</a></td>
+        <td class="api-list"><p>This sample script demonstrates three different methods for feature recognition: one for holes and two for pockets.</p><p>The script starts by creating a simple component which is then used to demonstrate the three methods. After the features are recognised they are coloured and milling and drilling operations are created for each feature.</p><p>RecognizedHoleGroup returns a list of BRepFaces that can be used as selections for the drilling operation. RecognizedPocket also return some BRepFaces but it needs additional processing before the output can be used for creating machining operations.</p><p>The sample script demonstrates a couple of different methods, including finding the pocket BRepFaces and creating sketches from the recognized pockets.</p><p>This script works only if the Manufacturing Extension is active.</p></td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ManufacturingWorkflowAPISample_Sample.htm">Manufacturing Workflow API Sample</a></td>
+        <td class="api-list">Manufacturing Workflow API Sample<p>This sample script starts by creating a simple component which is then used to describe a milling workflow. It creates a setup, a few operations, pick some tools from a Fusion sample tool library using loops and queries and ends up post-processing the operations out using an NC Program.</p></td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Turning_Workflow_API_Sample_Sample.htm">Turning Workflow API Sample</a></td>
+        <td class="api-list">Turning Workflow API Sample<p>This sample script starts by opening a simple component which is then used to describe a basic turning workflow. It creates a setup, a few operations, pick some tools from a Fusion sample tool library using loops and queries and ends up post-processing the operations out using an NC Program.</p></td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version April 2023<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(URL%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

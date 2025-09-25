@@ -1,0 +1,187 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/JointInput.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="16/7/2015">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="JointInput">
+    <meta name="description" content="JointInput Object">
+    <meta name="topicid" content="GUID-e54adb12-2eb4-4045-8e6e-e719ed3fd4a5">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>JointInput Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">JointInput Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Components/JointInput.h&gt;<h2 class="api">
+          Description
+        </h2>Defines all of the information required to create a new joint. This object provides equivalent functionality to the Joint command dialog in that it gathers the required information to create a joint.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="JointInput_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="JointInput_setAsBallJointMotion.htm">setAsBallJointMotion</a></td>
+        <td class="api-list">Defines the relationship between the two joint geometries as a ball joint.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="JointInput_setAsCylindricalJointMotion.htm">setAsCylindricalJointMotion</a></td>
+        <td class="api-list">Defines the relationship between the two joint geometries as a cylindrical joint.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="JointInput_setAsPinSlotJointMotion.htm">setAsPinSlotJointMotion</a></td>
+        <td class="api-list">Defines the relationship between the two joint geometries as a pin-slot joint.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="JointInput_setAsPlanarJointMotion.htm">setAsPlanarJointMotion</a></td>
+        <td class="api-list">Defines the relationship between the two joint geometries as a planar joint.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="JointInput_setAsRevoluteJointMotion.htm">setAsRevoluteJointMotion</a></td>
+        <td class="api-list">Defines the relationship between the two joint geometries as a revolute joint.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="JointInput_setAsRigidJointMotion.htm">setAsRigidJointMotion</a></td>
+        <td class="api-list">Defines the relationship between the two joint geometries as a rigid joint.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="JointInput_setAsSliderJointMotion.htm">setAsSliderJointMotion</a></td>
+        <td class="api-list">Defines the relationship between the two joint geometries as a slider joint.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="JointInput_angle.htm">angle</a></td>
+        <td class="api-list">Specifies the angle between two input geometries. This is effectively the angle between the two primary axes of the input geometries. When a new JointInput object is created, this value defaults to zero. When the joint is created this will become the value of the parameter that controls the joint angle.<br/><br/> When using a real value to define the angle, the value is in radians. When using a string the expression is evaluated using the document default units for angles.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="JointInput_geometryOrOriginOne.htm">geometryOrOriginOne</a></td>
+        <td class="api-list">Gets and sets the first JointGeometry or JointOrigin for this joint.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="JointInput_geometryOrOriginTwo.htm">geometryOrOriginTwo</a></td>
+        <td class="api-list">Gets and sets the second JointGeometry or JointOrigin for this joint.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="JointInput_isFlipped.htm">isFlipped</a></td>
+        <td class="api-list">Gets and sets if the joint direction is flipped or not. This is effectively specifying if the third axis of the two input geometries is facing (false) or opposed (true).</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="JointInput_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="JointInput_jointMotion.htm">jointMotion</a></td>
+        <td class="api-list">Returns an object derived from JointMotion that defines how the motion between the two joint geometries is defined.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="JointInput_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="JointInput_offset.htm">offset</a></td>
+        <td class="api-list">Specifies the offset between two input geometries. This is effectively the offset distance between the two planes defined by the primary and secondary axes of the input geometries. When a new JointInput object is created, this value defaults to zero. When the joint is created this will become the value of the parameter that controls the joint offset.<br/><br/> When using a real value to define the offset, the value is in centimeters. When using a string the expression is evaluated using the document default units for distance.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="Joints_createInput.htm">Joints.createInput</a><h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BallJointMotionSample_Sample.htm">BallJointMotion API Sample</a></td>
+        <td class="api-list">Demonstrates creating a joint with ball joint motion</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CylindricalJointMotionSample_Sample.htm">CylindricalJointMotion API Sample</a></td>
+        <td class="api-list">Demonstrates creating a joint with cylindrical joint motion.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="JointSample_Sample.htm">Joint API Sample</a></td>
+        <td class="api-list">Demonstrates creating a new joint.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PinSlotJointMotionSample_Sample.htm">Pin Slot Joint Motion API Sample</a></td>
+        <td class="api-list">Demonstrates creating a joint with pin slot joint motion</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PlanarJointMotionSample_Sample.htm">Planar Joint Motion API Sample</a></td>
+        <td class="api-list">Demonstrates creating a joint with planar joint motion</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RevoluteJointMotionSample_Sample.htm">RevoluteJointMotion API Sample</a></td>
+        <td class="api-list">Demonstrates creating a joint with revolute joint motion.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SliderJointMotionSample_Sample.htm">SliderJointMotion API Sample</a></td>
+        <td class="api-list">Demonstrates creating a joint with slider joint motion.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version July 2015<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(JointInput%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

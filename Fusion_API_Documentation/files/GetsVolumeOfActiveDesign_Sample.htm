@@ -1,0 +1,313 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/GetsVolumeOfActiveDesign.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="GetsVolumeOfActiveDesign_Sample">
+    <meta name="description" content="Get Volume of Active Design API Sample Sample">
+    <meta name="topicid" content="GUID-c703c5e2-fd2d-11e4-b685-f8b156d7cd97">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Get Volume of Active Design API Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Get Volume of Active Design API Sample</h1>
+    <h2 class="api">
+          Description
+        </h2>Traverses through the active design and totals the volume of every body within the design.<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">import adsk.core, adsk.fusion, traceback
+
+def run(context):
+    ui = None
+    try:
+        app = adsk.core.Application.get()
+        ui = app.userInterface
+        
+        design = app.activeProduct
+        if not design:
+            ui.messageBox('No active Fusion design', 'No Design')
+            return
+
+        <span style="color:blue"># Get the root component of the active design.</span>
+        rootComp = design.rootComponent
+        
+        <span style="color:blue"># Iterate over any bodies in the root component.</span>
+        totalVolume = 0
+        for j in range(0, rootComp.bRepBodies.count):
+            body = rootComp.bRepBodies.item(j)
+
+            <span style="color:blue"># Get the volume of the current body and add it to the total.</span>
+            totalVolume += body.volume
+
+        <span style="color:blue"># Iterate through all of the occurrences in the assembly.</span>
+        for i in range(0, rootComp.allOccurrences.count):
+            occ = rootComp.allOccurrences.item(i)
+            
+            <span style="color:blue"># Get the associated component.</span>
+            comp = occ.component
+            
+            <span style="color:blue"># Iterate over all of the bodies within the component.</span>
+            for j in range(0, comp.bRepBodies.count):
+                body = comp.bRepBodies.item(j)
+                
+                <span style="color:blue"># Get the volume of the current body and add it to the total.</span>
+                totalVolume += body.volume
+        
+        <span style="color:blue"># Format a string to display the volume using the default distance units.</span>
+        result = design.unitsManager.formatValue(totalVolume, design.unitsManager.defaultLengthUnits + '^3')
+        ui.messageBox('The volume of the entire asembly is: ' + result)
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code">#include &lt;Core/Application/Application.h&gt;
+#include &lt;Core/Application/Documents.h&gt;
+#include &lt;Core/Application/Document.h&gt;
+#include &lt;Core/Application/Product.h&gt;
+#include &lt;Core/Application/UnitsManager.h&gt;
+#include &lt;Core/Application/ValueInput.h&gt;
+#include &lt;Core/Geometry/Point3D.h&gt;
+#include &lt;Core/Geometry/Line3D.h&gt;
+#include &lt;Core/UserInterface/UserInterface.h&gt;
+#include &lt;Fusion/BRep/BRepBody.h&gt;
+#include &lt;Fusion/BRep/BRepBodies.h&gt;
+#include &lt;Fusion/Components/Component.h&gt;
+#include &lt;Fusion/Components/Occurrence.h&gt;
+#include &lt;Fusion/Components/OccurrenceList.h&gt;
+#include &lt;Fusion/Construction/ConstructionPlane.h&gt;
+#include &lt;Fusion/Features/Features.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeature.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeatures.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeatureInput.h&gt;
+#include &lt;Fusion/Fusion/Design.h&gt;
+#include &lt;Fusion/Sketch/Profile.h&gt;
+#include &lt;Fusion/Sketch/Profiles.h&gt;
+#include &lt;Fusion/Sketch/Sketch.h&gt;
+#include &lt;Fusion/Sketch/Sketches.h&gt;
+#include &lt;Fusion/Sketch/SketchCircle.h&gt;
+#include &lt;Fusion/Sketch/SketchCircles.h&gt;
+#include &lt;Fusion/Sketch/SketchCurves.h&gt;
+#include &lt;Fusion/Sketch/SketchLine.h&gt;
+#include &lt;Fusion/Sketch/SketchLines.h&gt;
+
+using namespace adsk::core;
+using namespace adsk::fusion;
+
+Ptr&lt;UserInterface&gt; ui;
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    Ptr&lt;Application&gt; app = Application::get();
+    if (!app)
+        return false;
+
+    ui = app-&gt;userInterface();
+    if (!ui)
+        return false;
+
+    Ptr&lt;Documents&gt; documents = app-&gt;documents();
+    if (!documents)
+        return false;
+
+    Ptr&lt;Document&gt; doc = documents-&gt;add(DocumentTypes::FusionDesignDocumentType);
+    if (!doc)
+        return false;
+
+    Ptr&lt;Product&gt; product = app-&gt;activeProduct();
+    if (!product)
+        return false;
+
+    Ptr&lt;Design&gt; design = product;
+    if (!design)
+        return false;
+
+    <span style="color:blue">// Get the root component of the active design</span>
+    Ptr&lt;Component&gt; rootComp = design-&gt;rootComponent();
+    if (!rootComp)
+        return false;
+
+    <span style="color:blue">// Create sketch</span>
+    Ptr&lt;Sketches&gt; sketches = rootComp-&gt;sketches();
+    if (!sketches)
+        return false;
+    Ptr&lt;ConstructionPlane&gt; xz = rootComp-&gt;xZConstructionPlane();
+    if (!xz)
+        return false;
+    Ptr&lt;Sketch&gt; sketch = sketches-&gt;add(xz);
+    if (!sketch)
+        return false;
+    Ptr&lt;SketchCurves&gt; sketchCurves = sketch-&gt;sketchCurves();
+    if (!sketchCurves)
+        return false;
+    Ptr&lt;SketchCircles&gt; sketchCircles = sketchCurves-&gt;sketchCircles();
+    if (!sketchCircles)
+        return false;
+    Ptr&lt;Point3D&gt; centerPoint = Point3D::create(0, 0, 0);
+    if (!centerPoint)
+        return false;
+    Ptr&lt;SketchCircle&gt; circle = sketchCircles-&gt;addByCenterRadius(centerPoint, 3.0);
+    if (!circle)
+        return false;
+
+    <span style="color:blue">// Get the profile defined by the circle.</span>
+    Ptr&lt;Profiles&gt; profs = sketch-&gt;profiles();
+    if (!profs)
+        return false;
+    Ptr&lt;Profile&gt; prof = profs-&gt;item(0);
+    if (!prof)
+        return false;
+
+    <span style="color:blue">// Create an extrusion input</span>
+    Ptr&lt;Features&gt; feats = rootComp-&gt;features();
+    if (!feats)
+        return false;
+    Ptr&lt;ExtrudeFeatures&gt; extrudes = feats-&gt;extrudeFeatures();
+    if (!extrudes)
+        return false;
+    Ptr&lt;ExtrudeFeatureInput&gt; extInput = extrudes-&gt;createInput(prof, FeatureOperations::NewBodyFeatureOperation);
+    if (!extInput)
+        return false;
+
+    <span style="color:blue">// Define that the extent is a distance extent of 5 cm.</span>
+    Ptr&lt;ValueInput&gt; distance = ValueInput::createByReal(5);
+    if (!distance)
+        return false;
+    extInput-&gt;setDistanceExtent(false, distance);
+
+    <span style="color:blue">// Create the extrusion.</span>
+    Ptr&lt;ExtrudeFeature&gt; ext = extrudes-&gt;add(extInput);
+    if (!ext)
+        return false;
+
+    <span style="color:blue">// Iterate over any bodies in the root component.</span>
+    double totalVolume = .0;
+    Ptr&lt;BRepBodies&gt; bodies = rootComp-&gt;bRepBodies();
+    if (!bodies)
+        return false;
+    for (size_t j = 0; j &lt; bodies-&gt;count(); ++j)
+    {
+        Ptr&lt;BRepBody&gt; body = bodies-&gt;item(j);
+        if (!body)
+            return false;
+
+        <span style="color:blue">// Get the volume of the current body and add it to the total.</span>
+        totalVolume += body-&gt;volume();
+    }
+
+    <span style="color:blue">// Iterate through all of the occurrences in the assembly.</span>
+    Ptr&lt;OccurrenceList&gt; occList = rootComp-&gt;allOccurrences();
+    if (!occList)
+        return false;
+    for (size_t i = 0; i &lt; occList-&gt;count(); ++i)
+    {
+        Ptr&lt;Occurrence&gt; occ = occList-&gt;item(i);
+        if (!occ)
+            return false;
+
+        <span style="color:blue">// Get the associated component.</span>
+        Ptr&lt;Component&gt; comp = occ-&gt;component();
+        if (!comp)
+            return false;
+
+        <span style="color:blue">// Iterate over all of the bodies within the component.</span>
+        Ptr&lt;BRepBodies&gt; compBodies = comp-&gt;bRepBodies();
+        if (!compBodies)
+            return false;
+        for (size_t j = 0; j &lt; compBodies-&gt;count(); ++j)
+        {
+            Ptr&lt;BRepBody&gt; body = compBodies-&gt;item(j);
+            if (!body)
+                return false;
+
+            <span style="color:blue">// Get the volume of the current body and add it to the total.</span>
+            totalVolume += body-&gt;volume();
+        }
+    }
+
+    <span style="color:blue">// Format a string to display the volume using the default distance units.</span>
+    Ptr&lt;UnitsManager&gt; unitMgr = product-&gt;unitsManager();
+    if (!unitMgr)
+        return false;
+
+     std::string result = unitMgr-&gt;formatValue(totalVolume, unitMgr-&gt;defaultLengthUnits() + "^3");
+     ui-&gt;messageBox("The volume of the entire asembly is: " + result);
+
+
+    return true;
+}</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(GetsVolumeOfActiveDesign%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

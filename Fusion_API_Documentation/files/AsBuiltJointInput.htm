@@ -1,0 +1,155 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/AsBuiltJointInput.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="10/9/2015">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="AsBuiltJointInput">
+    <meta name="description" content="AsBuiltJointInput Object">
+    <meta name="topicid" content="GUID-986DD0CF-C059-4703-98EA-56F1F260D681">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>AsBuiltJointInput Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">AsBuiltJointInput Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Components/AsBuiltJointInput.h&gt;<h2 class="api">
+          Description
+        </h2>Defines all of the information needed to create an as-built joint.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="AsBuiltJointInput_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="AsBuiltJointInput_setAsBallJointMotion.htm">setAsBallJointMotion</a></td>
+        <td class="api-list">Defines the relationship between the two joint geometries as a ball joint.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="AsBuiltJointInput_setAsCylindricalJointMotion.htm">setAsCylindricalJointMotion</a></td>
+        <td class="api-list">Defines the relationship between the two joint geometries as a cylindrical joint.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="AsBuiltJointInput_setAsPinSlotJointMotion.htm">setAsPinSlotJointMotion</a></td>
+        <td class="api-list">Defines the relationship between the two joint geometries as a pin-slot joint.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="AsBuiltJointInput_setAsPlanarJointMotion.htm">setAsPlanarJointMotion</a></td>
+        <td class="api-list">Defines the relationship between the two joint geometries as a planar joint.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="AsBuiltJointInput_setAsRevoluteJointMotion.htm">setAsRevoluteJointMotion</a></td>
+        <td class="api-list">Defines the relationship between the two joint geometries as a revolute joint.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="AsBuiltJointInput_setAsRigidJointMotion.htm">setAsRigidJointMotion</a></td>
+        <td class="api-list">Defines the relationship between the two joint geometries as a rigid joint.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="AsBuiltJointInput_setAsSliderJointMotion.htm">setAsSliderJointMotion</a></td>
+        <td class="api-list">Defines the relationship between the two joint geometries as a slider joint.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="AsBuiltJointInput_geometry.htm">geometry</a></td>
+        <td class="api-list">Specifies the position of the joint.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="AsBuiltJointInput_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="AsBuiltJointInput_jointMotion.htm">jointMotion</a></td>
+        <td class="api-list">Returns one of the objects derived from JointMotion that defines how the motion between the two joint geometries is defined. Can be null if the motion hasn't yet been defined.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="AsBuiltJointInput_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="AsBuiltJointInput_occurrenceOne.htm">occurrenceOne</a></td>
+        <td class="api-list">Specifies the first of two occurrences the joint is between.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="AsBuiltJointInput_occurrenceTwo.htm">occurrenceTwo</a></td>
+        <td class="api-list">Specifies the second of two occurrences the joint is between.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="AsBuiltJoints_createInput.htm">AsBuiltJoints.createInput</a><h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="AsBuiltJointSample_Sample.htm">As-Built Joint Sample</a></td>
+        <td class="api-list">Demonstrates creating a new As-Built Joint.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version September 2015<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(AsBuiltJointInput%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

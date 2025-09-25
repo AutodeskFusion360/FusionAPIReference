@@ -1,0 +1,222 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/MFGDMAPI_UM.htm#!">
+    <meta name="contextid" content="MFGDMAPI_UM">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="10/3/2015">
+    <meta name="user-comments" content="enable">
+    <meta name="description" content="">
+    <meta name="topicid" content="GUID-772C682D-475C-41D5-AEE2-6BC25F1333ED">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Using the MFGDM API with the Fusion desktop API</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+	<link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"/>
+	<script type="text/javascript" src="/view/clientframework/client.js"><!--filler--></script> 
+	<script>
+	  // This turns on the display of the copyright notice which is not visible by default.
+	  // Because the head is removed when used in the web help, this function will only exists
+	  // when the chm help is being created.
+	  window.onload = function() {
+		copyrightElement = document.getElementById('CopyrightNotice');
+		copyrightElement.style.display = 'block';
+	  };
+	</script>
+</head>
+<body>
+<link rel="stylesheet" href="../Style/APIHelp.css">
+<link rel="stylesheet" href="../Style/prism.css">
+<script src="../Scripts/prism.js"><!--filler--></script> 
+<style>
+	pre.line-numbers [aria-hidden=true]
+	{
+		display: block!important;
+	}
+</style>
+
+<h2 class="api">Using the MFGDM API with the Fusion desktop API</h2>
+<br>
+<p Class="api">
+<a href="#Overview">Overview</a><br/>
+<a href="#DataComponentObject">DataComponent Object</a><br/>
+<a href="#MFGDMDataReadyEvent">Knowing when the MDGDM Data is Available</a><br/>
+<a href="#ModelIdAndComponentID">Understanding modelId and componentId</a><br/>
+<a href="#LegacyPropertyAPI">Legacy PartNumber and PartDescription Desktop API</a><br/>
+<a href="#SampleScripts">Samples</a><br/>
+</p>
+
+
+<a name="Overview"></a>
+<h2 class="api">Overview</h2>
+<p Class="api">This topic introduces recent enhancements to the Fusion Desktop API that enable interoperability with the <b>MFGDM GraphQL API</b>, Autodesk’s cloud-based service for managing and querying design data. For more details, see the documentation specific to the <a href="https://aps.autodesk.com/en/docs/mfgdataapi/v3/developers_guide/">MFGDM GraphQL API</a></p>
+
+<p Class="api">Historically, most properties accessible through the Desktop API were held in memory and available locally. However, with the shift toward managing some of this data in the cloud via the MFGDM service, certain properties (<i>PartNumber, PartDescription</i>) reside in the cloud and require a different mechanism to access them efficiently and reliably.</p>
+
+<p Class="api">To support this change, the Fusion Desktop API now exposes new properties (such as mfgdmModelId and timestamp) and events (such as MFGDMDataReadyEvent) that allow client applications to coordinate with the MFGDM GraphQL API. These additions make it possible to retrieve cloud-managed data in a robust and time-aware manner.</p>
+
+
+<p Class="api">This topic will explain:
+
+<ul>
+<li>The motivation for this change.</li>
+<li>How to use the new API properties and events in conjunction with the MFGDM GraphQL API.</li>
+<li>A complete example workflow, including how to fetch cloud-backed metadata like part numbers.</li>
+</p>
+</ul>
+
+<p Class="api">By using the MFGDM GraphQL API, you gain improved performance and flexibility when working with cloud-managed data, as you can query precisely the information you need from multiple components in a single request.</p>
+
+<a name="DataComponentObject"></a>
+<h2 class="api">DataComponent Object</h2>
+
+<p Class="api">The DataComponent object in the Fusion Desktop API has been enhanced to support interoperability with Autodesk’s MFGDM GraphQL API. This object provides a bridge between the local design representation and the underlying cloud MFG DM model. It exposes key metadata that enables clients to identify and synchronize with the correct model version in the cloud.</p>
+
+<p Class="api">The DataComponent exposes properties such as mfgdmModelId (a timeless identifier) and timestamp (indicating the time at which the model data was fetched). These identifiers are essential when interacting with cloud APIs such as GraphQL.</p>
+
+<h3 Class="api">How to Access the DataComponent</h3>
+<p Class="api">
+<ul>
+<li>From the root of the design:<br>
+Use design.rootDataComponent to access the DataComponent associated with the top-level model.
+
+<pre><code class="language-python">design: adsk.fusion.Design = args.document.products.itemByProductType('DesignProductType')
+data = design.rootDataComponent
+app.log(f'root model id: {data.mfgdmModelId}, timestamp: {data.timestamp}')
+</code></pre>
+</li>
+
+<li>From individual occurrences:</br>
+Each Occurrence object in the design may also expose its own dataComponent, allowing access to metadata for inserted subassemblies or components.
+
+<pre><code class="language-python">for occ in design.rootComponent.allOccurrences:
+    if data := occ.dataComponent:
+    app.log(f'occurence: {occ.fullPathName}, model id: {data.mfgdmModelId}, timestamp: {data.timestamp}')
+</code></pre>
+</p>
+</li>
+</ul>
+
+<p Class="api">
+This structure ensures that clients can retrieve cloud model metadata not only for the full design but also for each part or subassembly in the hierarchy—supporting workflows like part tracking, versioning, and GraphQL queries at any level of the model tree.</p>
+
+<h3 Class="api">Key Properties</h3>
+<p Class="api">
+<b>mfgdmModelId</b><br>
+This property returns the unique model ID associated with the current design or the inserted component if obtained from an Occurrence. It serves as a reference for querying component properties via GraphQL APIs.</p>
+
+<p Class="api">
+<b>timestamp</b><br>
+The timestamp property indicates the time at which the model data was fetched. This datetime value is useful for tracking when the model snapshot was retrieved. In scenarios where the model is fetched “at-tip” (i.e., the latest state), this value may be empty string.</p>
+
+<p Class="api">
+These properties ensure that client working with the Fusion Desktop API can track cloud-sourced models accurately, providing consistent integration across local and remote data environments.</p>
+
+
+<a name="MFGDMDataReadyEvent"></a>
+<h2 class="api">Knowing when the MDGDM Data is Available</h2>
+
+<p Class="api">Accessing cloud-based model metadata—such as the mfgdmModelId and timestamp from the DataComponent—requires the model to be saved and successfully registered with the cloud (MFG DM). This process may take some time after saving, during which the data is not immediately available.</p>
+
+<p Class="api">To ensure these values are accessed only when they are ready, the Fusion Desktop API provides a specialized event: <b>MFGDMDataReady</b>.</p>
+
+<h3 class="api">Why this Event is Needed</h3>
+<p Class="api">While the standard documentOpened event indicates that a document is available in the local environment, it <b>does not guarantee</b> that the cloud metadata (MFG DM IDs) has been populated. In scenarios involving newly saved designs or first-time cloud syncs, there can be a delay between document save and metadata availability.</p>
+
+<p Class="api">This delay introduces uncertainty for clients that rely on cloud model IDs (mfgdmModelId) to call MFGDM GraphQL APIs or perform downstream cloud operations. As a result, you <b>cannot assume</b> that model IDs will be immediately available for unsaved designs or even for saved designs immediately after opening.</p>
+
+<p Class="api">Moreover, this event is also required after saving a design that includes newly added local components. These components are only registered in the cloud <b>after the save</b>, and their corresponding occurrence DataComponent information (including model IDs) will become available <b>only after the <code>MFGDMDataReadyEvent</code> fires again</b>.</p>
+
+<h3 class="api">MFGDMDataReady Event</h3>
+<p Class="api">The MFGDMDataReady event is triggered once the MFG DM metadata—such as the model ID and timestamp—is fully initialized and ready to be accessed. This ensures a reliable point at which clients can safely retrieve the values and proceed with further processing.</p>
+
+<p Class="api">This event is also essential in dynamic assembly workflows—for example, when inserting new assemblies or subassemblies into the design. In such cases, the newly inserted components also require a brief processing window for the cloud metadata to become available. The MFGDMDataReadyEvent ensures the application is notified only when those new components' model IDs are ready for use, avoiding premature access and potential errors.</p>
+
+<p Class="api">By subscribing to this event, clients can reliably coordinate the timing of GraphQL API calls and other model-dependent operations in both document load and insertion scenarios.</p>
+
+<a name="ModelIdAndComponentID"></a>
+<h2 class="api">Understanding modelId and componentId</h2>
+
+<p Class="api">When working with components and assemblies in Fusion’s cloud-backed environment (MFGDM), it’s important to understand the distinction between two key identifiers: modelId and componentId. These serve different purposes and are used in different contexts, especially when querying data via GraphQL.</p>
+
+<h3 class="api">modelId (also referred to as mfgdmModelId)</h3>
+<ul>
+<li>The <i>modelId</i> is a <b>timeless, unique identifier</b> for a component or assembly in the MFGDM cloud environment.</li>
+<li>It is persistent and invariant — it does not change across different versions or states of the component.</li>
+<li>Think of the <i>modelId</i> as the identity of the component in the cloud world. No matter how the component evolves (changes in geometry, parameters, or metadata), its <i>modelId</i> remains constant.</li>
+<li>We intentionally use <i>modelId</i> in client applications to abstract away the internal cloud storage or versioning details, providing a clean and consistent way to reference a component.</li>
+</ul>
+
+<h3 class="api">componentId</h3>
+<ul>
+<li>The componentId is a <b>time-specific identifier</b> that represents the exact state (geometry, features, properties) of a component <b>at a particular point in time</b>.</li>
+<li>It is derived from the combination of <i>modelId</i> and a specific <b>timestamp</b>.</li>
+<li>This ID is useful when you need to track or compare how a component has evolved over time. For instance, a component might have a different part number in one version and another in different version — each of those versions will have the same <i>modelId</i> but a different componentId.</li>
+</ul>
+
+
+<a name="LegacyPropertyAPI"></a>
+<h2 class="api">Legacy PartNumber and PartDescription Desktop API</h2>
+
+<p Class="api">Historically, legacy APIs for PartNumber (PN) and PartDescription (PD) on the desktop side did not require a save operation to function correctly.</p> 
+
+<p Class="api">With the support of direct GraphQL APIs, properties can be fetched in bulk together, improving performance compared to the legacy method which will now make individual GraphQL calls. However, there is a significant change to note: these properties now require the document to be saved before they can be accessed and edited, due to their nature as cloud properties. This is a crucial adjustment as unsaved documents will not support editing these properties through scripts.</p>
+
+<h3>Observation and Limitations</h3>
+<p Class="api">When the root document is not saved:<br>
+<ul>
+<li>Root Component:<br>
+Legacy PN/PD set property works as it goes through the cache route and reflects after save.</li>
+<li>Add new internal component (unsaved):<br>
+Legacy PN/PD set property works as it goes through the cache route and reflects after save.</li>
+<li>Add new external component (unsaved):<br>
+Legacy PN/PD set property works as it goes through the cache route and reflects after save.</li>
+</ul>
+</p>
+
+<p Class="api">When the root document is saved already:<br>
+<ul>
+<li>Root Component:<br>
+Legacy PN/PD set property works as it goes through the new GraphQL route.</li>
+<li>Add new internal component (unsaved):<br>
+&#10060; Legacy PN/PD set property <b>fails</b> as it goes through the new GraphQL route and internal component doesn’t have a valid model ID.</li>
+<li>Add new external component (unsaved):<br>
+Legacy PN/PD set property works as it goes through the cache route and reflects after save.</li>
+</ul>
+
+<p Class="api">This limitation highlights the necessity of saving the document to ensure proper functionality of cloud-integrated properties and the improvement graphql support is providing to avoid performance hits with individual fetching of properties.</p>
+
+<p Class="api">It is essential for developers to understand this limitation and the transition from the legacy system to effectively leverage the new API enhancements and ensure smooth interoperability between desktop and cloud services.</p>
+
+
+<a name="SampleScripts"></a>
+<h2>Samples</h2>
+<p Class="api">There are three samples that demonstrate calling the MFGDM API using the GraphQL API to get and set properties.</p>
+<ul>
+<li><a href="SetPartNumberUsingGraphQL_Sample.htm">Set part number using the MFGDM GraphQL API</a></li>
+<li><a href="FetchPartNumberForComponents_Sample.htm">Get the part number from components using the MFGDM GraphQL API</a></li>
+<li><a href="FetchBulkComponentProperties_Sample.htm">Gets all properties using the MFGDM GraphQL API</a></li>
+</ul>
+
+<br />
+<br />
+<div id="CopyrightNotice" style="display:none;">
+  <hr />
+  <table width="100%" style="font-size:15">
+	<tr>
+	  <td align="left">
+		&copy; Copyright 2025 Autodesk, Inc.
+	  </td>
+	  <td align="right">
+		<a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(MFGDMAPI_UM)">Comment on this page.</a>
+	  </td>
+	</tr>
+  </table>
+</div></body>
+</html>

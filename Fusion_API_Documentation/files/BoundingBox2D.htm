@@ -1,0 +1,126 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/BoundingBox2D.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="BoundingBox2D">
+    <meta name="description" content="BoundingBox2D Object">
+    <meta name="topicid" content="GUID-3039a1c9-6dd4-447c-ba75-7085d047cda3">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>BoundingBox2D Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">BoundingBox2D Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::core" and the header file is &lt;Core/Geometry/BoundingBox2D.h&gt;<h2 class="api">
+          Description
+        </h2>Transient object that represents a 2D bounding box. A 2D bounding box is a rectangle box that is parallel to the x and y axes. The box is defined by a minimum point (smallest x-y values) and maximum point (largest x-y values). This object is a wrapper for these points and serves as a way to pass bounding box information in and out of functions. It also provides some convenience function when working with the bounding box data. They are created statically using the create method of the BoundingBox2D class.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BoundingBox2D_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BoundingBox2D_combine.htm">combine</a></td>
+        <td class="api-list">Combines this bounding box with the input bounding box. If the input bounding box extends outside this bounding box then this bounding box will be extended to encompass both of the original bounding boxes.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BoundingBox2D_contains.htm">contains</a></td>
+        <td class="api-list">Determines if the specified point lies within the bounding box.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BoundingBox2D_copy.htm">copy</a></td>
+        <td class="api-list">Create a copy of this bounding box.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BoundingBox2D_create.htm">create</a></td>
+        <td class="api-list">Creates a transient bounding box object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BoundingBox2D_expand.htm">expand</a></td>
+        <td class="api-list">Expand this bounding box to contain the specified point.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BoundingBox2D_intersects.htm">intersects</a></td>
+        <td class="api-list">Test if this bounding box intersects with the specified bounding box.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BoundingBox2D_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BoundingBox2D_maxPoint.htm">maxPoint</a></td>
+        <td class="api-list">Gets and sets the maximum point of the box.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BoundingBox2D_minPoint.htm">minPoint</a></td>
+        <td class="api-list">Gets and sets the minimum point of the box.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BoundingBox2D_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="ArrangePlaneResultEnvelope_boundingBox.htm">ArrangePlaneResultEnvelope.boundingBox</a>, <a href="BoundingBox2D_copy.htm">BoundingBox2D.copy</a>, <a href="BoundingBox2D_create.htm">BoundingBox2D.create</a>, <a href="ConstructionPlane_displayBounds.htm">ConstructionPlane.displayBounds</a>, <a href="SurfaceEvaluator_parametricRange.htm">SurfaceEvaluator.parametricRange</a><h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(BoundingBox2D%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

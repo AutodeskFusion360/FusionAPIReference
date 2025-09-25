@@ -1,0 +1,1248 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/ManufacturingWorkflowAPISample.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="ManufacturingWorkflowAPISample_Sample">
+    <meta name="description" content="Manufacturing Workflow API Sample Sample">
+    <meta name="topicid" content="GUID-995d634e-a8ef-4f2b-a826-1d32171f4998">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Manufacturing Workflow API Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Manufacturing Workflow API Sample</h1>
+    <h2 class="api">
+          Description
+        </h2>Manufacturing Workflow API Sample<p>This sample script starts by creating a simple component which is then used to describe a milling workflow. It creates a setup, a few operations, pick some tools from a Fusion sample tool library using loops and queries and ends up post-processing the operations out using an NC Program.</p><h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#C++">C++</a></li>
+        <li><a href="#Python">Python</a></li>
+      </ul>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code">#include &lt;Core/CoreAll.h&gt;
+#include &lt;Fusion/FusionAll.h&gt;
+#include &lt;Cam/CamAll.h&gt;
+#include &lt;algorithm&gt;
+
+using namespace adsk::core;
+using namespace adsk::fusion;
+using namespace adsk::cam;
+
+<span style="color:blue">// Constants used in the script</span>
+<span style="color:blue">// We assume we are cutting Aluminum here...</span>
+
+<span style="color:blue">// Milling tool library to get tools from</span>
+const std::string MILLING_TOOL_LIBRARY = "Milling Tools (Metric)";
+
+<span style="color:blue">// Material properties for feed and speed calculation</span>
+const int ALUMINUM_CUTTING_SPEED = 300;     <span style="color:blue">// mm/min</span>
+const double ALUMINUM_FEED_PER_TOOTH = 0.1; <span style="color:blue">// mm/tooth</span>
+
+<span style="color:blue">// Tool preset names (which we know exists for the selected tools)</span>
+const std::string ALUMINUM_PRESET_ROUGHING = "alu* rou*";
+const std::string ALUMINUM_PRESET_FINISHING = "Aluminum - Finishing";
+
+<span style="color:blue">// Tool types used in this script</span>
+const std::string BULL_NOSE_END_MILL = "bull nose end mill";
+const std::string BALL_END_MILL = "ball end mill";
+const std::string FACE_MILL = "face mill";
+
+<span style="color:blue">// Setup work coordinate system (WCS) location</span>
+const std::string TOP_CENTER = "top center";
+const std::string TOP_XMIN_YMIN = "top 1";
+const std::string TOP_XMAX_YMIN = "top 2";
+const std::string TOP_XMIN_YMAX = "top 3";
+const std::string TOP_XMAX_YMAX = "top 4";
+const std::string TOP_SIDE_YMIN = "top side 1";
+const std::string TOP_SIDE_XMAX = "top side 2";
+const std::string TOP_SIDE_YMAX = "top side 3";
+const std::string TOP_SIDE_XMIN = "top side 4";
+const std::string CENTER = "center";
+const std::string MIDDLE_XMIN_YMIN = "middle 1";
+const std::string MIDDLE_XMAX_YMIN = "middle 2";
+const std::string MIDDLE_XMIN_YMAX = "middle 3";
+const std::string MIDDLE_XMAX_YMAX = "middle 4";
+const std::string MIDDLE_SIDE_YMIN = "middle side 1";
+const std::string MIDDLE_SIDE_XMAX = "middle side 2";
+const std::string MIDDLE_SIDE_YMAX = "middle side 3";
+const std::string MIDDLE_SIDE_XMIN = "middle side 4";
+const std::string BOTTOM_CENTER = "bottom center";
+const std::string BOTTOM_XMIN_YMIN = "bottom 1";
+const std::string BOTTOM_XMAX_YMIN = "bottom 2";
+const std::string BOTTOM_XMIN_YMAX = "bottom 3";
+const std::string BOTTOM_XMAX_YMAX = "bottom 4";
+const std::string BOTTOM_SIDE_YMIN = "bottom side 1";
+const std::string BOTTOM_SIDE_XMAX = "bottom side 2";
+const std::string BOTTOM_SIDE_YMAX = "bottom side 3";
+const std::string BOTTOM_SIDE_XMIN = "bottom side 4";
+
+const double PI = 3.14159265358979323846;
+
+std::vector&lt;std::string&gt; getLibrariesURLs(Ptr&lt;ToolLibraries&gt; libraries, Ptr&lt;URL&gt; url);
+std::vector&lt;Ptr&lt;Tool&gt;&gt; getToolsFromLibraryByTypeDiameterRangeAndMinFluteLength(
+    Ptr&lt;ToolLibrary&gt; toolLibrary,
+    std::string tooltype,
+    double minDiameter,
+    double maxDiameter,
+    double minimumFluteLength = 0.0);
+Ptr&lt;BRepBody&gt; createSamplePart(Ptr&lt;Design&gt; design);
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    <span style="color:blue">// Initialisation</span>
+    Ptr&lt;Application&gt; app = Application::get();
+    Ptr&lt;UserInterface&gt; ui = app-&gt;userInterface();
+
+    <span style="color:blue">// Create a new empty document</span>
+    Ptr&lt;Document&gt; doc = app-&gt;documents()-&gt;add(DocumentTypes::FusionDesignDocumentType);
+
+    <span style="color:blue">// Get the design document used to create the sample part</span>
+    Ptr&lt;Design&gt; design = app-&gt;activeProduct();
+
+    <span style="color:blue">// Switch to manufacturing space</span>
+    Ptr&lt;Workspace&gt; camWS = ui-&gt;workspaces()-&gt;itemById("CAMEnvironment");
+    camWS-&gt;activate();
+
+    <span style="color:blue">// Get the CAM product</span>
+    Ptr&lt;Products&gt; products = doc-&gt;products();
+
+    <span style="color:blue">// Create sample part</span>
+    Ptr&lt;BRepBody&gt; part = createSamplePart(design);
+
+    <span style="color:blue">// Select cutting tools</span>
+    <span style="color:blue">// Get the tool libraries from the library manager</span>
+    Ptr&lt;CAMManager&gt; camManager = CAMManager::get();
+    Ptr&lt;CAMLibraryManager&gt; libraryManager = camManager-&gt;libraryManager();
+    Ptr&lt;ToolLibraries&gt; toolLibraries = libraryManager-&gt;toolLibraries();
+
+    Ptr&lt;URL&gt; url;
+    const bool useHardCodedUrl = false;
+    if (useHardCodedUrl)
+    {
+        <span style="color:blue">// We can use a library URl directly if we know its address</span>
+        std::string libUrl = "systemlibraryroot:<span style="color:blue">//Samples/Milling Tools (Metric).json";</span>
+        url = URL::create(libUrl);
+    }
+    else
+    {
+        <span style="color:blue">// Or we can use the tool library objects fusion folder in the tool library</span>
+        Ptr&lt;URL&gt; fusionFolder = toolLibraries-&gt;urlByLocation(LibraryLocations::Fusion360LibraryLocation);
+        std::vector&lt;std::string&gt; fusionLibs = getLibrariesURLs(toolLibraries, fusionFolder);
+
+        <span style="color:blue">// Search the required library url in the libraries</span>
+        for (std::string& libUrl : fusionLibs)
+        {
+            if (libUrl.find(MILLING_TOOL_LIBRARY) != std::string::npos)
+            {
+                url = URL::create(libUrl);
+                break;
+            }
+        }
+    }
+
+    <span style="color:blue">// Load the tool library</span>
+    Ptr&lt;ToolLibrary&gt; toolLibrary = toolLibraries-&gt;toolLibraryAtURL(url);
+    if (!toolLibrary)
+    {
+        ui-&gt;messageBox("Failed to load tool library");
+        return false;
+    }
+
+    <span style="color:blue">// Create variables to host the milling tools to be used in the operations</span>
+    Ptr&lt;Tool&gt; faceTool;
+    Ptr&lt;Tool&gt; adaptiveTool;
+    Ptr&lt;Tool&gt; finishingTool;
+
+    <span style="color:blue">// Search for the face mill and the bull nose using a loop for the roughing operations</span>
+    for (Ptr&lt;Tool&gt; tool : toolLibrary)
+    {
+        <span style="color:blue">// Read the tool type</span>
+        Ptr&lt;ChoiceParameterValue&gt; toolTypeParameter = tool-&gt;parameters()-&gt;itemByName("tool_type")-&gt;value();
+        std::string toolType = toolTypeParameter-&gt;value();
+
+        if (toolType == FACE_MILL && !faceTool)
+        {
+            <span style="color:blue">// Select the first face tool found</span>
+            faceTool = tool;
+        }
+        else if (toolType == BULL_NOSE_END_MILL && !adaptiveTool)
+        {
+            <span style="color:blue">// Search the roughing tool</span>
+            <span style="color:blue">// We look for a bull nose end mill tool larger or equal to 12mm but less than 14mm</span>
+            Ptr&lt;FloatParameterValue&gt; diameterParameter = tool-&gt;parameters()-&gt;itemByName("tool_diameter")-&gt;value();
+            double diameter = diameterParameter-&gt;value();
+            if (diameter &gt;= 1.2 && diameter &lt; 1.4)
+            {
+                adaptiveTool = tool;
+            }
+        }
+
+        <span style="color:blue">// Exit when the 2 tools are found</span>
+        if (faceTool && adaptiveTool)
+        {
+            break;
+        }
+    }
+
+    if (!faceTool)
+    {
+        ui-&gt;messageBox("No face mill tool found");
+        return false;
+    }
+    if (!adaptiveTool)
+    {
+        ui-&gt;messageBox("No bull nose end mill tool found");
+        return false;
+    }
+
+    <span style="color:blue">// Using a query, search for a ball end mill tool having diameter between 6 mm and 10 mm and a minimum flute length</span>
+    <span style="color:blue">// of 20.001mm</span>
+    std::vector&lt;Ptr&lt;Tool&gt;&gt; finishingTools =
+        getToolsFromLibraryByTypeDiameterRangeAndMinFluteLength(toolLibrary, BALL_END_MILL, 0.6, 1, 2.0001);
+
+    <span style="color:blue">// For this example, we select the first tool found as our finishing tool</span>
+    if (finishingTools.size() == 0)
+    {
+        ui-&gt;messageBox("No ball end mill tool found");
+        return false;
+    }
+    finishingTool = finishingTools[0];
+
+    <span style="color:blue">// Create a setup</span>
+    Ptr&lt;CAM&gt; cam = products-&gt;itemByProductType("CAMProductType");
+    Ptr&lt;Setups&gt; setups = cam-&gt;setups();
+    Ptr&lt;SetupInput&gt; setupInput = setups-&gt;createInput(OperationTypes::MillingOperation);
+    <span style="color:blue">// Create a list for the models to add to the setup Input</span>
+    std::vector&lt;Ptr&lt;Base&gt;&gt; models;
+    <span style="color:blue">// Add the part to the model list</span>
+    models.push_back(part);
+    <span style="color:blue">// Pass the model list to the setup input</span>
+    setupInput-&gt;models(models);
+    <span style="color:blue">// Create the setup and set some properties</span>
+    Ptr&lt;Setup&gt; setup = setups-&gt;add(setupInput);
+    setup-&gt;name("CAM Automation Script Sample");
+    setup-&gt;stockMode(SetupStockModes::RelativeBoxStock);
+    <span style="color:blue">// Set the offset mode</span>
+    setup-&gt;parameters()-&gt;itemByName("job_stockOffsetMode")-&gt;expression("\"simple\"");
+    <span style="color:blue">// Set the offset stock side</span>
+    setup-&gt;parameters()-&gt;itemByName("job_stockOffsetSides")-&gt;expression("0 mm");
+    <span style="color:blue">// Set the offset stock top</span>
+    setup-&gt;parameters()-&gt;itemByName("job_stockOffsetTop")-&gt;expression("1 mm");
+    <span style="color:blue">// Set the setup origin</span>
+    Ptr&lt;ChoiceParameterValue&gt; wcs_origin = setup-&gt;parameters()-&gt;itemByName("wcs_origin_boxPoint")-&gt;value();
+    wcs_origin-&gt;value(TOP_XMIN_YMIN);
+
+    <span style="color:blue">// Face operations</span>
+    <span style="color:blue">// Calculate the feed and speed for the face operation</span>
+    Ptr&lt;FloatParameterValue&gt; toolDiameterParameter = faceTool-&gt;parameters()-&gt;itemByName("tool_diameter")-&gt;value();
+    double toolDiameter = toolDiameterParameter-&gt;value(); <span style="color:blue">// cm</span>
+    Ptr&lt;IntegerParameterValue&gt; numberOfFlutesParameter =
+        faceTool-&gt;parameters()-&gt;itemByName("tool_numberOfFlutes")-&gt;value();
+    int numberOfFlutes = numberOfFlutesParameter-&gt;value();                            <span style="color:blue">// int</span>
+    double spindleSpeed = ALUMINUM_CUTTING_SPEED / PI / (toolDiameter * 10) * 1000;   <span style="color:blue">// rpm</span>
+    double cuttingFeedrate = spindleSpeed * ALUMINUM_FEED_PER_TOOTH * numberOfFlutes; <span style="color:blue">// mm/min</span>
+
+    <span style="color:blue">// Create a preset with those calculated feeds</span>
+    Ptr&lt;ToolPreset&gt; facePreset = faceTool-&gt;presets()-&gt;add();
+    facePreset-&gt;name("Aluminum (set by script)");
+    Ptr&lt;FloatParameterValue&gt; tool_spindleSpeed = facePreset-&gt;parameters()-&gt;itemByName("tool_spindleSpeed")-&gt;value();
+    tool_spindleSpeed-&gt;value(int(spindleSpeed));
+    facePreset-&gt;parameters()
+        -&gt;itemByName("tool_feedCutting")
+        -&gt;expression(std::to_string(int(cuttingFeedrate)) + " mm/min");
+
+    <span style="color:blue">// Create a face operation input</span>
+    Ptr&lt;OperationInput&gt; input = setup-&gt;operations()-&gt;createInput("face");
+    input-&gt;tool(faceTool);
+    input-&gt;toolPreset(facePreset); <span style="color:blue">// Assign created preset</span>
+    input-&gt;displayName("Face Operation");
+    input-&gt;parameters()-&gt;itemByName("tolerance")-&gt;expression("0.01 mm");
+    input-&gt;parameters()-&gt;itemByName("stepover")-&gt;expression("0.75 * tool_diameter");
+    input-&gt;parameters()-&gt;itemByName("direction")-&gt;expression("\"climb\"");
+
+    <span style="color:blue">// Determine the pass angle along the largest part dimension</span>
+    <span style="color:blue">// Get the stock box dimensions in cm</span>
+    Ptr&lt;FloatParameterValue&gt; stockXParameter = setup-&gt;parameters()-&gt;itemByName("job_stockInfoDimensionX")-&gt;value();
+    double stockX = stockXParameter-&gt;value();
+    Ptr&lt;FloatParameterValue&gt; stockYParameter = setup-&gt;parameters()-&gt;itemByName("job_stockInfoDimensionY")-&gt;value();
+    double stockY = stockYParameter-&gt;value();
+    <span style="color:blue">// Determine the pass angle to be along the largest length (X or Y) of the block</span>
+    if (stockX &gt;= stockY)
+    {
+        input-&gt;parameters()-&gt;itemByName("passAngle")-&gt;expression("0 deg");
+    }
+    else
+    {
+        input-&gt;parameters()-&gt;itemByName("passAngle")-&gt;expression("90 deg");
+    }
+
+    <span style="color:blue">// Add the operation to the setup</span>
+    Ptr&lt;OperationBase&gt; faceOp = setup-&gt;operations()-&gt;add(input);
+
+    <span style="color:blue">// Adaptive operations</span>
+    input = setup-&gt;operations()-&gt;createInput("adaptive");
+    input-&gt;tool(adaptiveTool);
+    input-&gt;displayName("Adaptive Roughing");
+    input-&gt;parameters()-&gt;itemByName("tolerance")-&gt;expression("0.1 mm");
+    input-&gt;parameters()-&gt;itemByName("maximumStepdown")-&gt;expression("5 mm");
+    input-&gt;parameters()-&gt;itemByName("fineStepdown")-&gt;expression("0.25 * maximumStepdown");
+    input-&gt;parameters()-&gt;itemByName("flatAreaMachining")-&gt;expression("false");
+
+    <span style="color:blue">// Look for a tool preset related to aluminum roughing</span>
+    std::vector&lt;Ptr&lt;ToolPreset&gt;&gt; presets = adaptiveTool-&gt;presets()-&gt;itemsByName(ALUMINUM_PRESET_ROUGHING);
+    if (presets.size() &gt; 0)
+    {
+        <span style="color:blue">// We select and use the first preset found</span>
+        Ptr&lt;ToolPreset&gt; adaptivePreset = presets[0];
+        input-&gt;toolPreset(adaptivePreset);
+    }
+
+    <span style="color:blue">// Add the operation to the setup</span>
+    Ptr&lt;OperationBase&gt; adaptiveOp = setup-&gt;operations()-&gt;add(input);
+
+    <span style="color:blue">// Finishing tool preset</span>
+    <span style="color:blue">// Get a tool preset from the finishing tool</span>
+    Ptr&lt;ToolPreset&gt; finishingPreset;
+    presets = finishingTool-&gt;presets()-&gt;itemsByName(ALUMINUM_PRESET_FINISHING);
+    if (presets.size() &gt; 0)
+    {
+        <span style="color:blue">// Use the first aluminum finishing preset found</span>
+        finishingPreset = presets[0];
+    }
+
+    <span style="color:blue">// Parallel operations</span>
+    input = setup-&gt;operations()-&gt;createInput("parallel");
+    input-&gt;tool(finishingTool);
+    input-&gt;displayName("Parallel Finishing");
+    input-&gt;parameters()-&gt;itemByName("tolerance")-&gt;expression("0.01 mm");
+    input-&gt;parameters()-&gt;itemByName("cuspHeightStepover")-&gt;expression("0.005 mm");
+    input-&gt;parameters()-&gt;itemByName("boundaryMode")-&gt;expression("\"selection\"");
+    if (finishingPreset)
+    {
+        <span style="color:blue">// Assign the finishig tool preset</span>
+        input-&gt;toolPreset(finishingPreset);
+    }
+
+    <span style="color:blue">// Add the operation to the setup</span>
+    Ptr&lt;OperationBase&gt; parallelOp = setup-&gt;operations()-&gt;add(input);
+
+    <span style="color:blue">// Use a contour for the sake of demonstration</span>
+    Ptr&lt;BRepEdge&gt; limitEdge;
+    for (Ptr&lt;BRepEdge&gt; e : part-&gt;edges())
+    {
+        <span style="color:blue">// This is the inner one: intersection of a plane and a sphere making up a circle</span>
+        if (e-&gt;geometry()-&gt;curveType() == Curve3DTypes::Circle3DCurveType)
+        {
+            limitEdge = e;
+            break;
+        }
+    }
+
+    if (limitEdge)
+    {
+        <span style="color:blue">// Apply the limits edge to the operation</span>
+        Ptr&lt;CadContours2dParameterValue&gt; cadcontours2dParam =
+            parallelOp-&gt;parameters()-&gt;itemByName("machiningBoundarySel")-&gt;value();
+        Ptr&lt;CurveSelections&gt; chains = cadcontours2dParam-&gt;getCurveSelections();
+        Ptr&lt;ChainSelection&gt; chain = chains-&gt;createNewChainSelection();
+        chain-&gt;inputGeometry({limitEdge});
+        cadcontours2dParam-&gt;applyCurveSelections(chains);
+    }
+
+    <span style="color:blue">// Steep and shallow operations</span>
+    <span style="color:blue">// Create a folder for finishing operations that require Machining Extension</span>
+    Ptr&lt;OperationInput&gt; operationInput = setup-&gt;operations()-&gt;createInput("folder");
+    operationInput-&gt;displayName("Machining Extension Required");
+    Ptr&lt;CAMFolder&gt; folder = setup-&gt;operations()-&gt;add(operationInput);
+
+    <span style="color:blue">// Create a steep and shallow operation in the folder</span>
+    input = setup-&gt;operations()-&gt;createInput("steep_and_shallow");
+    input-&gt;tool(finishingTool);
+    input-&gt;displayName("Steep and Shallow Finishing");
+    input-&gt;parameters()-&gt;itemByName("tolerance")-&gt;expression("0.01 mm");
+    input-&gt;parameters()-&gt;itemByName("useAvoidFlats")-&gt;expression("true");
+    input-&gt;parameters()-&gt;itemByName("cuspHeightStepdown")-&gt;expression("0.005 mm");
+    input-&gt;parameters()-&gt;itemByName("cuspHeightStepover")-&gt;expression("cuspHeightStepdown");
+    input-&gt;parameters()-&gt;itemByName("spiral")-&gt;expression("true");
+    input-&gt;parameters()-&gt;itemByName("shallowSpiral")-&gt;expression("true");
+    input-&gt;parameters()-&gt;itemByName("offsetSmoothing")-&gt;expression("true");
+    if (finishingPreset)
+    {
+        <span style="color:blue">// Assign the finishig tool preset</span>
+        input-&gt;toolPreset(finishingPreset);
+    }
+
+    <span style="color:blue">// Add the operation to the folder</span>
+    Ptr&lt;OperationBase&gt; steepAndShallowOp = folder-&gt;operations()-&gt;add(input);
+
+    <span style="color:blue">// Check whether this toolpath is generatable ("steep_and_shallow" required the manufacturing extension)</span>
+    bool isSteepAndShallowGeneratable = false;
+    for (Ptr&lt;OperationStrategy&gt; op : setup-&gt;operations()-&gt;compatibleStrategies())
+    {
+        if (op-&gt;name() == "steep_and_shallow")
+        {
+            if (op-&gt;isGenerationAllowed())
+            {
+                <span style="color:blue">// isGenerationAllowed will be false if the extension is not active thus preventing the</span>
+                <span style="color:blue">// steep_and_shallow operation</span>
+                isSteepAndShallowGeneratable = true;
+            }
+            break;
+        }
+    }
+
+    <span style="color:blue">// Generate operations</span>
+    <span style="color:blue">// List the valid operations to generate</span>
+    Ptr&lt;ObjectCollection&gt; operations = ObjectCollection::create();
+    operations-&gt;add(faceOp);
+    operations-&gt;add(adaptiveOp);
+    operations-&gt;add(parallelOp);
+    if (isSteepAndShallowGeneratable)
+    {
+        operations-&gt;add(steepAndShallowOp);
+    }
+
+    <span style="color:blue">// Create progress bar</span>
+    Ptr&lt;ProgressDialog&gt; progressDialog = ui-&gt;createProgressDialog();
+    progressDialog-&gt;isCancelButtonShown(false);
+    progressDialog-&gt;show("Generating operations-&gt;()..", "%p%", 0, 100);
+    adsk::doEvents(); <span style="color:blue">// Allow Fusion to update so that the progressDialog updates nicely</span>
+
+    <span style="color:blue">// Generate the valid operations</span>
+    Ptr&lt;GenerateToolpathFuture&gt; gtf = cam-&gt;generateToolpath(operations);
+
+    <span style="color:blue">// Wait for the generation to be finished and update the progress bar</span>
+    while (!gtf-&gt;isGenerationCompleted())
+    {
+        <span style="color:blue">// Calculate progress and update the progress bar</span>
+        int total = gtf-&gt;numberOfOperations();
+        int completed = gtf-&gt;numberOfCompleted();
+        int progress = int(completed * 100 / total);
+        progressDialog-&gt;progressValue(progress);
+        adsk::doEvents(); <span style="color:blue">// Allow Fusion to update so that the screen does not freeze</span>
+    }
+
+    <span style="color:blue">// Generation done</span>
+    progressDialog-&gt;progressValue(100);
+    progressDialog-&gt;hide();
+
+    <span style="color:blue">// NC Program and post-processing</span>
+    <span style="color:blue">// Get the post library from the library manager</span>
+    Ptr&lt;PostLibrary&gt; postLibrary = libraryManager-&gt;postLibrary();
+
+    <span style="color:blue">// Query the post library to get the postprocessor list</span>
+    Ptr&lt;PostConfigurationQuery&gt; postQuery = postLibrary-&gt;createQuery(LibraryLocations::Fusion360LibraryLocation);
+    postQuery-&gt;vendor("Autodesk");
+    postQuery-&gt;capability(PostCapabilities::Milling);
+    std::vector&lt;Ptr&lt;PostConfiguration&gt;&gt; postConfigs = postQuery-&gt;execute();
+
+    <span style="color:blue">// Find the "XYZ" post in the post library and import it to the local library</span>
+    Ptr&lt;URL&gt; importedURL;
+    for (Ptr&lt;PostConfiguration&gt; config : postConfigs)
+    {
+        if (config-&gt;description() == "XYZ")
+        {
+            Ptr&lt;URL&gt; _url = URL::create("user:<span style="color:blue">//");</span>
+            importedURL = postLibrary-&gt;importPostConfiguration(config, _url, "NCProgramSamplePost.cps");
+        }
+    }
+
+    <span style="color:blue">// Get the imported local post config</span>
+    Ptr&lt;PostConfiguration&gt; postConfig = postLibrary-&gt;postConfigurationAtURL(importedURL);
+
+    <span style="color:blue">// Create the NCProgramInput object</span>
+    Ptr&lt;NCProgramInput&gt; ncInput = cam-&gt;ncPrograms()-&gt;createInput();
+    ncInput-&gt;displayName("NC Program Sample");
+
+    <span style="color:blue">// Change some nc program parameters...</span>
+    Ptr&lt;CAMParameters&gt; ncParameters = ncInput-&gt;parameters();
+    std::string programName = "NCProgramSample";
+    Ptr&lt;StringParameterValue&gt; nc_program_filename = ncParameters-&gt;itemByName("nc_program_filename")-&gt;value();
+    nc_program_filename-&gt;value(programName);
+    Ptr&lt;BooleanParameterValue&gt; nc_program_openInEditor = ncParameters-&gt;itemByName("nc_program_openInEditor")-&gt;value();
+    nc_program_openInEditor-&gt;value(true);
+
+    <span style="color:blue">// Set the temporary directory as the output directory</span>
+    std::string outputFolder = cam-&gt;temporaryFolder();
+    Ptr&lt;StringParameterValue&gt; nc_program_output_folder = ncParameters-&gt;itemByName("nc_program_output_folder")-&gt;value();
+    nc_program_output_folder-&gt;value(outputFolder);
+
+    <span style="color:blue">// Select the operations to generate (we skip steep_and_shallow here)</span>
+    ncInput-&gt;operations({faceOp, adaptiveOp, parallelOp});
+
+    <span style="color:blue">// Add a new ncprogram from the ncprogram input</span>
+    Ptr&lt;NCProgram&gt; newProgram = cam-&gt;ncPrograms()-&gt;add(ncInput);
+
+    <span style="color:blue">// Set the post processor</span>
+    newProgram-&gt;postConfiguration(postConfig);
+
+    <span style="color:blue">// Change some of the post parameters</span>
+    Ptr&lt;CAMParameters&gt; postParameters = newProgram-&gt;postParameters();
+    Ptr&lt;FloatParameterValue&gt; builtin_tolerance = postParameters-&gt;itemByName("builtin_tolerance")-&gt;value();
+    builtin_tolerance-&gt;value(0.02); <span style="color:blue">// NcProgram parameter is passed unchanged to the postprocessor (it has no units)</span>
+    Ptr&lt;FloatParameterValue&gt; builtin_minimumChordLength =
+        postParameters-&gt;itemByName("builtin_minimumChordLength")-&gt;value();
+    builtin_minimumChordLength-&gt;value(0.33); <span style="color:blue">// NcProgram parameter is passed unchanged (it has no units)</span>
+
+    <span style="color:blue">// Update/apply post parameters</span>
+    newProgram-&gt;updatePostParameters(postParameters);
+
+    <span style="color:blue">// Set post options, by default post process only valid operations containing toolpath data</span>
+    Ptr&lt;NCProgramPostProcessOptions&gt; postOptions = NCProgramPostProcessOptions::create();
+    <span style="color:blue">// postOptions.PostProcessExecutionBehaviors =</span>
+    <span style="color:blue">// adsk.cam.PostProcessExecutionBehaviors.PostProcessExecutionBehavior_PostAll</span>
+
+    <span style="color:blue">// Post-process</span>
+    newProgram-&gt;postProcess(postOptions);
+
+    <span style="color:blue">// Show the output file</span>
+    ui-&gt;messageBox(
+        "Post processing is complete. The results have been written to:\n" + outputFolder + "/" + programName + ".csv");
+
+    return true;
+}
+
+<span style="color:blue">// Return the list of libraries' URLs for the specified libraries</span>
+std::vector&lt;std::string&gt; getLibrariesURLs(Ptr&lt;ToolLibraries&gt; libraries, Ptr&lt;URL&gt; url)
+{
+    std::vector&lt;std::string&gt; urls;
+    std::vector&lt;Ptr&lt;URL&gt;&gt; libs = libraries-&gt;childAssetURLs(url);
+    for (auto& elem : libs)
+    {
+        urls.push_back(elem-&gt;toString());
+    }
+    for (Ptr&lt;URL&gt; folder : libraries-&gt;childFolderURLs(url))
+    {
+        std::vector&lt;std::string&gt; folderUrls = getLibrariesURLs(libraries, folder);
+        urls.insert(urls.end(), folderUrls.begin(), folderUrls.end());
+    }
+    return urls;
+}
+
+<span style="color:blue">//  Return a list of tools that fits the search</span>
+std::vector&lt;Ptr&lt;Tool&gt;&gt; getToolsFromLibraryByTypeDiameterRangeAndMinFluteLength(
+    Ptr&lt;ToolLibrary&gt; toolLibrary,
+    std::string tooltype,
+    double minDiameter,
+    double maxDiameter,
+    double minimumFluteLength)
+{
+    Ptr&lt;ToolQuery&gt; query = toolLibrary-&gt;createQuery();
+    <span style="color:blue">// Set the search critera</span>
+    query-&gt;criteria()-&gt;add("tool_type", ValueInput::createByString(tooltype));
+    query-&gt;criteria()-&gt;add("tool_diameter.min", ValueInput::createByReal(minDiameter));
+    query-&gt;criteria()-&gt;add("tool_diameter.max", ValueInput::createByReal(maxDiameter));
+    if (minimumFluteLength)
+    {
+        query-&gt;criteria()-&gt;add("tool_fluteLength.min", ValueInput::createByReal(minimumFluteLength));
+    }
+    <span style="color:blue">// Get query results</span>
+    std::vector&lt;Ptr&lt;ToolQueryResult&gt;&gt; results = query-&gt;execute();
+    <span style="color:blue">// Get the tools from the query</span>
+    std::vector&lt;Ptr&lt;Tool&gt;&gt; tools;
+    <span style="color:blue">// Results have a tool, url, toollibrary and the index of the tool in that library: we just return the tool here</span>
+    for (auto& elem : results)
+    {
+        tools.push_back(elem-&gt;tool());
+    }
+    return tools;
+}
+
+<span style="color:blue">// CAD creation functions</span>
+Ptr&lt;BRepBody&gt; createBox(Ptr&lt;Design&gt; design, double sizeX, double sizeY, double sizeZ);
+Ptr&lt;BRepBody&gt; createSphere(Ptr&lt;Design&gt; design, double radius);
+Ptr&lt;BRepBody&gt; getBodyFromBooleanOperation(Ptr&lt;Design&gt; design, Ptr&lt;BRepBody&gt; body1, Ptr&lt;BRepBody&gt; body2);
+
+<span style="color:blue">// Create the sample part for this script</span>
+Ptr&lt;BRepBody&gt; createSamplePart(Ptr&lt;Design&gt; design)
+{
+
+    <span style="color:blue">// The sample part is a box containing a concave side generated by subtracting the intersection from a sphere.</span>
+    <span style="color:blue">// The lower face of the box is at Z = 0 and we position the sphere above but intersecting with the box upper face.</span>
+    <span style="color:blue">// Fusion's default behaviour is now to ground the first component of an assembly to the parent.</span>
+    <span style="color:blue">// This can be overriden, see Preferences-&gt;General-&gt;Design-&gt;Assemblies-&gt;First component grounded to parent.</span>
+    <span style="color:blue">// However if we make the first component the box, we can move the sphere without changing anything.</span>
+
+    Ptr&lt;BRepBody&gt; box = createBox(design, 22, 15, 5);
+    Ptr&lt;BRepBody&gt; sphere = createSphere(design, 7.5);
+
+    <span style="color:blue">// Get the root component</span>
+    Ptr&lt;Component&gt; rootComp = design-&gt;rootComponent();
+    Ptr&lt;Occurrences&gt; occs = rootComp-&gt;occurrences();
+
+    <span style="color:blue">// Get the second Occurrence(sphere) as the first occurrence(box) may be grounded to the parent</span>
+    Ptr&lt;Occurrence&gt; occ = occs-&gt;item(1);
+    Ptr&lt;Matrix3D&gt; mat = occ-&gt;transform();
+
+    <span style="color:blue">// Matrix translation, moving the sphere up by 10 units along Z axis</span>
+    Ptr&lt;Vector3D&gt; origin = Vector3D::create(0, 0, 10);
+    mat-&gt;translation(origin);
+
+    <span style="color:blue">// Set the transform</span>
+    occ-&gt;transform(mat);
+
+    <span style="color:blue">// Snapshot - Determining the position is important!!!</span>
+    design-&gt;snapshots()-&gt;add();
+
+    <span style="color:blue">// Cut the sphere / box intersection from the box to leave a concave face</span>
+    Ptr&lt;BRepBody&gt; part = getBodyFromBooleanOperation(design, box, sphere);
+    return part;
+}
+
+<span style="color:blue">// Create a sample box</span>
+Ptr&lt;BRepBody&gt; createBox(Ptr&lt;Design&gt; design, double sizeX, double sizeY, double sizeZ)
+{
+    Ptr&lt;Component&gt; component = design-&gt;rootComponent();
+    <span style="color:blue">// Create a sketch</span>
+    Ptr&lt;Sketches&gt; sketches = component-&gt;sketches();
+    Ptr&lt;Sketch&gt; sketch = sketches-&gt;add(component-&gt;xYConstructionPlane());
+    Ptr&lt;SketchLines&gt; lines = sketch-&gt;sketchCurves()-&gt;sketchLines();
+    Ptr&lt;SketchLineList&gt; recLines = lines-&gt;addTwoPointRectangle(
+        Point3D::create(-sizeX / 2, -sizeY / 2, 0), Point3D::create(sizeX / 2, sizeY / 2, 0));
+    Ptr&lt;Profile&gt; prof = sketch-&gt;profiles()-&gt;item(0);
+    Ptr&lt;ExtrudeFeatures&gt; extrudes = component-&gt;features()-&gt;extrudeFeatures();
+    Ptr&lt;ValueInput&gt; distance = ValueInput::createByReal(sizeZ);
+    Ptr&lt;ExtrudeFeature&gt; ext = extrudes-&gt;addSimple(prof, distance, FeatureOperations::NewComponentFeatureOperation);
+    return ext-&gt;bodies()-&gt;item(0);
+}
+
+<span style="color:blue">// Create a sample sphere</span>
+Ptr&lt;BRepBody&gt; createSphere(Ptr&lt;Design&gt; design, double radius)
+{
+    Ptr&lt;Component&gt; component = design-&gt;rootComponent();
+    <span style="color:blue">// Create a new sketch on the xy plane</span>
+    Ptr&lt;Sketches&gt; sketches = component-&gt;sketches();
+    Ptr&lt;ConstructionPlane&gt; xyPlane = component-&gt;xYConstructionPlane();
+    Ptr&lt;Sketch&gt; sketch = sketches-&gt;add(component-&gt;xYConstructionPlane());
+    <span style="color:blue">// Draw a circle</span>
+    Ptr&lt;SketchCircles&gt; circles = sketch-&gt;sketchCurves()-&gt;sketchCircles();
+    Ptr&lt;SketchCircle&gt; circle = circles-&gt;addByCenterRadius(Point3D::create(0, 0, 0), radius);
+    <span style="color:blue">// Draw a line to use as the axis of revolution</span>
+    Ptr&lt;SketchLines&gt; lines = sketch-&gt;sketchCurves()-&gt;sketchLines();
+    Ptr&lt;SketchLine&gt; axisLine = lines-&gt;addByTwoPoints(Point3D::create(-radius, 0, 0), Point3D::create(radius, 0, 0));
+    <span style="color:blue">// Get the profile defined by half of the circle</span>
+    Ptr&lt;Profile&gt; prof = sketch-&gt;profiles()-&gt;item(0);
+    <span style="color:blue">// Create an revolution input to be able to define the input needed for a revolution</span>
+    <span style="color:blue">// while specifying the profile and that a new component is to be created</span>
+    Ptr&lt;RevolveFeatures&gt; revolves = component-&gt;features()-&gt;revolveFeatures();
+    Ptr&lt;RevolveFeatureInput&gt; revInput =
+        revolves-&gt;createInput(prof, axisLine, FeatureOperations::NewComponentFeatureOperation);
+    <span style="color:blue">// Define that the extent is an angle of 2*pi to get a sphere</span>
+    Ptr&lt;ValueInput&gt; angle = ValueInput::createByReal(2 * PI);
+    revInput-&gt;setAngleExtent(false, angle);
+    <span style="color:blue">// Create the extrusion</span>
+    Ptr&lt;RevolveFeature&gt; ext = revolves-&gt;add(revInput);
+
+    return ext-&gt;bodies()-&gt;item(0);
+}
+
+<span style="color:blue">// Creates a boolean operation between two bodies</span>
+Ptr&lt;BRepBody&gt; getBodyFromBooleanOperation(Ptr&lt;Design&gt; design, Ptr&lt;BRepBody&gt; body1, Ptr&lt;BRepBody&gt; body2)
+{
+    Ptr&lt;Component&gt; model = design-&gt;activeComponent();
+    Ptr&lt;Features&gt; features = model-&gt;features();
+    Ptr&lt;ObjectCollection&gt; bodyCollection = ObjectCollection::create();
+    bodyCollection-&gt;add(body2);
+    Ptr&lt;CombineFeatures&gt; combineFeatures = features-&gt;combineFeatures();
+    Ptr&lt;CombineFeatureInput&gt; combineFeatureInput = combineFeatures-&gt;createInput(body1, bodyCollection);
+    combineFeatureInput-&gt;operation(FeatureOperations(1));
+    combineFeatureInput-&gt;isKeepToolBodies(false);
+    combineFeatureInput-&gt;isNewComponent(false);
+    Ptr&lt;CombineFeature&gt; returnValue = combineFeatures-&gt;add(combineFeatureInput);
+    Ptr&lt;BRepBody&gt; part = returnValue-&gt;bodies()-&gt;item(0);
+    return part;
+}</pre>
+      </div>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">import math, os, traceback
+from enum import Enum
+import adsk.fusion, adsk.core, adsk.cam
+
+<span style="color:blue">#################### Script Constants ####################</span>
+<span style="color:blue"># We assume we are cutting Aluminum here...</span>
+
+<span style="color:blue"># Milling tool library to get tools from</span>
+MILLING_TOOL_LIBRARY = 'Milling Tools (Metric)'
+
+<span style="color:blue"># Some material properties for feed and speed calculation</span>
+ALUMINUM_CUTTING_SPEED = 300  <span style="color:blue"># mm/min</span>
+ALUMINUM_FEED_PER_TOOTH = 0.1 <span style="color:blue"># mm/tooth</span>
+
+<span style="color:blue"># Some tool preset names, known to exist for the selected tools</span>
+ALUMINUM_PRESET_ROUGHING = 'alu* rou*'
+ALUMINUM_PRESET_FINISHING = 'Aluminum - Finishing'
+
+<span style="color:blue">#################### Useful Enumerators ####################</span>
+<span style="color:blue"># Some tool types used in this script (enumerator)</span>
+class ToolType(Enum):
+    BULL_NOSE_END_MILL = 'bull nose end mill'
+    BALL_END_MILL = 'ball end mill'
+    FACE_MILL = 'face mill'
+
+<span style="color:blue"># Setup work coordinate system (WCS) location (enumerator)</span>
+class SetupWCSPoint(Enum):
+    TOP_CENTER = 'top center'
+    TOP_XMIN_YMIN = 'top 1'
+    TOP_XMAX_YMIN = 'top 2'
+    TOP_XMIN_YMAX = 'top 3'
+    TOP_XMAX_YMAX = 'top 4'
+    TOP_SIDE_YMIN = 'top side 1'
+    TOP_SIDE_XMAX = 'top side 2'
+    TOP_SIDE_YMAX = 'top side 3'
+    TOP_SIDE_XMIN = 'top side 4'
+    CENTER = 'center'
+    MIDDLE_XMIN_YMIN = 'middle 1'
+    MIDDLE_XMAX_YMIN = 'middle 2'
+    MIDDLE_XMIN_YMAX = 'middle 3'
+    MIDDLE_XMAX_YMAX = 'middle 4'
+    MIDDLE_SIDE_YMIN = 'middle side 1'
+    MIDDLE_SIDE_XMAX = 'middle side 2'
+    MIDDLE_SIDE_YMAX = 'middle side 3'
+    MIDDLE_SIDE_XMIN = 'middle side 4'
+    BOTTOM_CENTER = 'bottom center'
+    BOTTOM_XMIN_YMIN = 'bottom 1'
+    BOTTOM_XMAX_YMIN = 'bottom 2'
+    BOTTOM_XMIN_YMAX = 'bottom 3'
+    BOTTOM_XMAX_YMAX = 'bottom 4'
+    BOTTOM_SIDE_YMIN = 'bottom side 1'
+    BOTTOM_SIDE_XMAX = 'bottom side 2'
+    BOTTOM_SIDE_YMAX = 'bottom side 3'
+    BOTTOM_SIDE_XMIN = 'bottom side 4'
+
+<span style="color:blue">#################### Script Entry Point ####################</span>
+def run(context) -&gt; None:
+    ui = None
+    try:
+
+        <span style="color:blue">#################### Initialisation #####################</span>
+        app = adsk.core.Application.get()
+        ui: adsk.core.UserInterface  = app.userInterface
+        
+        <span style="color:blue"># Create a new empty document</span>
+        doc: adsk.core.Document = app.documents.add(adsk.core.DocumentTypes.FusionDesignDocumentType)
+
+        <span style="color:blue"># Get the design document used to create the sample part</span>
+        design: adsk.core.Product = app.activeProduct
+
+        <span style="color:blue"># Switch to manufacturing space</span>
+        camWS: adsk.core.Workspace = ui.workspaces.itemById('CAMEnvironment') 
+        camWS.activate()
+
+        <span style="color:blue"># Get the CAM product</span>
+        products: adsk.core.Products = doc.products
+
+        <span style="color:blue">#################### Create Sample Part ####################</span>
+
+        part: adsk.fusion.BRepBody = createSamplePart(design)
+
+        <span style="color:blue">#################### Select Cutting Tools ####################</span>
+
+        <span style="color:blue"># Get the tool libraries from the library manager</span>
+        camManager = adsk.cam.CAMManager.get()
+        libraryManager: adsk.cam.CAMLibraryManager = camManager.libraryManager
+        toolLibraries: adsk.cam.ToolLibraries = libraryManager.toolLibraries
+
+        url: adsk.core.URL = None
+        libUrl = None
+        useHardCodedUrl: bool = False
+        if useHardCodedUrl:
+            <span style="color:blue"># We could use a library URl directly if we know its address ...</span>
+            libUrl = 'systemlibraryroot://Samples/Milling Tools (Metric).json'
+            url = adsk.core.URL.create(libUrl)
+
+        else:
+            <span style="color:blue"># ... or we can use the tool library objects</span>
+            <span style="color:blue"># Fusion folder in the tool library</span>
+            fusionFolder: adsk.core.URL = toolLibraries.urlByLocation(adsk.cam.LibraryLocations.Fusion360LibraryLocation)
+            fusionLibs: list[str] = getLibrariesURLs(toolLibraries, fusionFolder)
+            
+            <span style="color:blue"># Search the required library url in the libraries</span>
+            for libUrl in fusionLibs:
+                if MILLING_TOOL_LIBRARY in libUrl:
+                    url = adsk.core.URL.create(libUrl)
+                    break
+        
+        <span style="color:blue"># Load the tool library</span>
+        toolLibrary: adsk.cam.ToolLibrary = toolLibraries.toolLibraryAtURL(url)
+
+        <span style="color:blue"># Create some variables to host the milling tools which will be used in the operations</span>
+        faceTool: adsk.cam.Tool = None
+        adaptiveTool: adsk.cam.Tool = None
+        finishingTool: adsk.cam.Tool = None
+
+        <span style="color:blue"># For the roughing operations, search for the face mill and the bull nose using a loop </span>
+        for tool in toolLibrary:
+            <span style="color:blue"># Read the tool type</span>
+            toolType: adsk.cam.ToolType = tool.parameters.itemByName('tool_type').value.value 
+            
+            <span style="color:blue"># Select the first face tool found</span>
+            if toolType == ToolType.FACE_MILL.value and not faceTool:
+                faceTool = tool  
+            
+            <span style="color:blue"># Search for the roughing tool</span>
+            elif toolType == ToolType.BULL_NOSE_END_MILL.value and not adaptiveTool:
+                <span style="color:blue"># Look for a bull nose end mill tool larger or equal to 12mm but less than 14mm</span>
+                diameter: float = tool.parameters.itemByName('tool_diameter').value.value
+                if diameter &gt;= 1.2 and diameter &lt; 1.4: 
+                    adaptiveTool = tool
+
+            <span style="color:blue"># Exit when the 2 tools are found</span>
+            if faceTool and adaptiveTool:
+                break
+
+        <span style="color:blue"># Using a query, search for a ball end mill tool with diameter between 6 mm and 10 mm with a minimum flute length of 20.001mm</span>
+        finishingTools: list[adsk.cam.Tool] = getToolsFromLibraryByTypeDiameterRangeAndMinFluteLength(toolLibrary, ToolType.BALL_END_MILL.value, 0.6, 1, 2.0001)
+
+        <span style="color:blue"># For this example, we select the first tool found as our finishing tool</span>
+        finishingTool = finishingTools[0]
+
+
+        <span style="color:blue">#################### Create Setup ####################</span>
+        cam = adsk.cam.CAM.cast(products.itemByProductType("CAMProductType"))
+        setups: adsk.cam.Setups = cam.setups
+        setupInput: adsk.cam.SetupInput = setups.createInput(adsk.cam.OperationTypes.MillingOperation)
+        <span style="color:blue"># Create a list for the models to add to the setup Input</span>
+        models:list = [] 
+        <span style="color:blue"># Add the part to the model list</span>
+        models.append(part)
+        <span style="color:blue"># Pass the model list to the setup input</span>
+        setupInput.models = models
+        <span style="color:blue"># Create the setup and set some properties</span>
+        setup: adsk.cam.Setup = setups.add(setupInput)
+        setup.name = 'CAM Automation Script Sample'
+        setup.stockMode = adsk.cam.SetupStockModes.RelativeBoxStock
+        <span style="color:blue"># Set the offset mode</span>
+        setup.parameters.itemByName('job_stockOffsetMode').expression = "'simple'"
+        <span style="color:blue"># Set offset stock side</span>
+        setup.parameters.itemByName('job_stockOffsetSides').expression = '0 mm'
+        <span style="color:blue"># Set offset stock top</span>
+        setup.parameters.itemByName('job_stockOffsetTop').expression = '1 mm'
+        <span style="color:blue"># Set setup origin</span>
+        setup.parameters.itemByName('wcs_origin_boxPoint').value.value = SetupWCSPoint.TOP_XMIN_YMIN.value
+
+
+        <span style="color:blue">#################### Face Operations ####################</span>
+        <span style="color:blue"># Calculate feed and speed for the face operation</span>
+        toolDiameter: float = faceTool.parameters.itemByName('tool_diameter').value.value          <span style="color:blue"># cm</span>
+        numberOfFlutes = faceTool.parameters.itemByName('tool_numberOfFlutes').value.value         <span style="color:blue"># int</span>
+        spindleSpeed: float = ALUMINUM_CUTTING_SPEED / math.pi / (toolDiameter * 10) * 1000        <span style="color:blue"># rpm</span>
+        cuttingFeedrate: float = spindleSpeed * ALUMINUM_FEED_PER_TOOTH * numberOfFlutes           <span style="color:blue"># mm/min</span>
+
+        <span style="color:blue"># Create a preset with those calculated feeds</span>
+        facePreset: adsk.cam.ToolPreset = faceTool.presets.add()
+        facePreset.name = 'Aluminum (set by script)'
+        facePreset.parameters.itemByName('tool_spindleSpeed').value.value = int(spindleSpeed)
+        facePreset.parameters.itemByName('tool_feedCutting').expression = str(int(cuttingFeedrate)) + ' mm/min'
+
+        <span style="color:blue"># Create a face operation input</span>
+        input: adsk.cam.OperationInput = setup.operations.createInput('face')
+        input.tool = faceTool
+        input.toolPreset = facePreset <span style="color:blue"># Assign created preset</span>
+        input.displayName = 'Face Operation'       
+        input.parameters.itemByName('tolerance').expression = '0.01 mm'
+        input.parameters.itemByName('stepover').expression = '0.75 * tool_diameter'
+        input.parameters.itemByName('direction').expression = "'climb'"
+
+        <span style="color:blue"># Determine pass angle along largest part dimension</span>
+        <span style="color:blue"># Get stock box dimensions in cm</span>
+        stockX: float = setup.parameters.itemByName('job_stockInfoDimensionX').value.value
+        stockY: float = setup.parameters.itemByName('job_stockInfoDimensionY').value.value
+
+        <span style="color:blue"># Determine pass angle to be along largest length (X or Y) of the block</span>
+        if stockX &gt;= stockY:
+            input.parameters.itemByName('passAngle').expression = '0 deg' 
+        else:
+            input.parameters.itemByName('passAngle').expression = '90 deg'
+
+        <span style="color:blue"># Add the operation to the setup</span>
+        faceOp: adsk.cam.OperationBase = setup.operations.add(input)
+
+
+        <span style="color:blue">#################### Adaptive Operations ####################</span>
+        input = setup.operations.createInput('adaptive')
+        input.tool = adaptiveTool
+        input.displayName = 'Adaptive Roughing'
+        input.parameters.itemByName('tolerance').expression = '0.1 mm' 
+        input.parameters.itemByName('maximumStepdown').expression = '5 mm' 
+        input.parameters.itemByName('fineStepdown').expression = '0.25 * maximumStepdown'
+        input.parameters.itemByName('flatAreaMachining').expression = 'false'
+
+        <span style="color:blue"># Check if there is a tool preset related to aluminum roughing</span>
+        presets: adsk.cam.ToolPresets = adaptiveTool.presets.itemsByName(ALUMINUM_PRESET_ROUGHING)
+        if len(presets) &gt; 0:
+            <span style="color:blue"># Select the first preset found</span>
+            adaptivePreset: adsk.cam.ToolPreset = presets[0]
+            input.toolPreset = adaptivePreset
+
+        <span style="color:blue"># Add the operation to the setup</span>
+        adaptiveOp: adsk.cam.OperationBase = setup.operations.add(input)
+
+
+        <span style="color:blue">#################### Finishing Tool Preset ####################</span>
+        <span style="color:blue"># Select a tool preset from the finishing tool</span>
+        finishingPreset: adsk.cam.ToolPreset = None
+        presets = finishingTool.presets.itemsByName(ALUMINUM_PRESET_FINISHING)
+        if len(presets) &gt; 0:
+            <span style="color:blue"># Use the first aluminum finishing preset found</span>
+            finishingPreset = presets[0]
+
+
+        <span style="color:blue">#################### Parallel Operations ####################</span>
+        input = setup.operations.createInput('parallel')
+        input.tool = finishingTool
+        input.displayName = 'Parallel Finishing'
+        input.parameters.itemByName('tolerance').expression = '0.01 mm'
+        input.parameters.itemByName('cuspHeightStepover').expression = '0.005 mm'
+        input.parameters.itemByName('boundaryMode').expression = "'selection'"
+        if finishingPreset:
+            <span style="color:blue"># Assign the finishing tool preset</span>
+            input.toolPreset = finishingPreset
+
+        <span style="color:blue"># Add the operation to the setup</span>
+        parallelOp: adsk.cam.OperationBase = setup.operations.add(input)
+
+        <span style="color:blue"># Lets use a contour for the sake of demonstration</span>
+        limitEdge: adsk.fusion.BRepEdge = None
+        for e in part.edges:
+            <span style="color:blue"># This is the inner one: intersection of a plane and a sphere making up a circle</span>
+            if e.geometry.curveType == adsk.core.Curve3DTypes.Circle3DCurveType:
+                limitEdge = e
+                break
+
+        if limitEdge:
+            <span style="color:blue"># Apply the limiting edge to the operation</span>
+            cadcontours2dParam: adsk.cam.CadContours2dParameterValue = parallelOp.parameters.itemByName('machiningBoundarySel').value
+            chains: adsk.cam.CurveSelections = cadcontours2dParam.getCurveSelections()
+            chain: adsk.cam.ChainSelection = chains.createNewChainSelection()
+            chain.inputGeometry = [limitEdge]
+            cadcontours2dParam.applyCurveSelections(chains)
+
+
+        <span style="color:blue">#################### Steep And Shallow Operations ####################</span>
+        <span style="color:blue"># Create folder for finishing operations that require Machining Extension</span>
+        operationInput: adsk.cam.OperationInput = setup.operations.createInput('folder')
+        operationInput.displayName = 'Machining Extension Required'
+        folder: adsk.cam.CAMFolder = setup.operations.add(operationInput)
+
+        <span style="color:blue"># Create steep and shallow operation in the folder</span>
+        input = setup.operations.createInput('steep_and_shallow')
+        input.tool = finishingTool
+        input.displayName = 'Steep and Shallow Finishing'
+        input.parameters.itemByName('tolerance').expression = '0.01 mm'
+        input.parameters.itemByName('useAvoidFlats').expression = 'true'
+        input.parameters.itemByName('cuspHeightStepdown').expression = '0.005 mm'
+        input.parameters.itemByName('cuspHeightStepover').expression = 'cuspHeightStepdown'
+        input.parameters.itemByName('spiral').expression = 'true'
+        input.parameters.itemByName('shallowSpiral').expression = 'true'
+        input.parameters.itemByName('offsetSmoothing').expression = 'true'
+
+        <span style="color:blue"># Assign the finishing tool preset</span>
+        if finishingPreset:
+            input.toolPreset = finishingPreset
+
+        <span style="color:blue"># Add the operation to the folder</span>
+        steepAndShallowOp: adsk.cam.OperationBase = folder.operations.add(input)
+
+        <span style="color:blue"># Check if this toolpath is generatable as "steep_and_shallow" requires the manufacturing extension</span>
+        isSteepAndShallowGeneratable: bool = False
+        for op in setup.operations.compatibleStrategies:
+            if op.name == 'steep_and_shallow':
+                if op.isGenerationAllowed:
+                    <span style="color:blue"># If isGenerationAllowed is False, the extension isn't active, preventing generation of the steep_and_shallow operation</span>
+                    isSteepAndShallowGeneratable = True
+                break
+
+
+        <span style="color:blue">#################### Generate Operations ####################</span>
+        <span style="color:blue"># Include the valid operations to generate</span>
+        operations = adsk.core.ObjectCollection.create()
+        operations.add(faceOp)
+        operations.add(adaptiveOp)
+        operations.add(parallelOp)
+        if isSteepAndShallowGeneratable:
+            operations.add(steepAndShallowOp)
+
+        <span style="color:blue"># create progress bar</span>
+        progressDialog: adsk.core.ProgressDialog = ui.createProgressDialog()
+        progressDialog.isCancelButtonShown = False
+        progressDialog.show('Generating operations...', '%p%', 0, 100)
+        adsk.doEvents() <span style="color:blue"># Allow Fusion to update so the progressDialog shows up nicely</span>
+
+        <span style="color:blue"># Generate the valid operations</span>
+        gtf: adsk.cam.GenerateToolpathFuture = cam.generateToolpath(operations)
+
+        <span style="color:blue"># Wait for the generation to be finished and update progress bar</span>
+        while not gtf.isGenerationCompleted:
+            <span style="color:blue"># Calculate progress and update progress bar</span>
+            total = gtf.numberOfOperations
+            completed = gtf.numberOfCompleted
+            progress = int(completed * 100 / total)
+            progressDialog.progressValue = progress
+            adsk.doEvents() <span style="color:blue"># Allow Fusion to update so the screen doesn't freeze</span>
+
+        <span style="color:blue"># Generation done</span>
+        progressDialog.progressValue = 100
+        progressDialog.hide()
+            
+
+        <span style="color:blue">#################### NC Program And Post-processing ####################</span>
+        <span style="color:blue"># Get the post library from library manager</span>
+        postLibrary: adsk.cam.PostLibrary = libraryManager.postLibrary
+
+        <span style="color:blue"># Query post library to get postprocessor list</span>
+        postQuery: adsk.cam.PostConfigurationQuery = postLibrary.createQuery(adsk.cam.LibraryLocations.Fusion360LibraryLocation)
+        postQuery.vendor = "Autodesk"
+        postQuery.capability = adsk.cam.PostCapabilities.Milling
+        postConfigs: list[adsk.cam.PostConfiguration] = postQuery.execute()
+
+        <span style="color:blue"># Find the "XYZ" post in the post library and import it to local library</span>
+        for config in postConfigs:
+            if config.description == 'XYZ':
+                url = adsk.core.URL.create("user://")
+                importedURL: adsk.core.URL = postLibrary.importPostConfiguration(config, url, "NCProgramSamplePost.cps")
+
+        <span style="color:blue"># Get the imported local post config</span>
+        postConfig: adsk.cam.PostConfiguration = postLibrary.postConfigurationAtURL(importedURL)
+       
+        <span style="color:blue"># Create NCProgramInput object</span>
+        ncInput: adsk.cam.NCProgramInput = cam.ncPrograms.createInput()
+        ncInput.displayName = 'NC Program Sample'
+
+        <span style="color:blue"># Change some nc program parameters...</span>
+        ncParameters: adsk.cam.CAMParameters = ncInput.parameters
+        ncParameters.itemByName('nc_program_filename').value.value = 'NCProgramSample'
+        ncParameters.itemByName('nc_program_openInEditor').value.value = True
+
+        <span style="color:blue"># Set user desktop as output directory (Windows and Mac)</span>
+        <span style="color:blue"># Make the path valid for Fusion by replacing \\ to / in the path</span>
+        desktopDirectory = os.path.expanduser("~/Desktop").replace('\\', '/') 
+        ncParameters.itemByName('nc_program_output_folder').value.value = desktopDirectory
+        
+        <span style="color:blue"># Select the operations to generate (we skip steep_and_shallow here)</span>
+        ncInput.operations = [faceOp, adaptiveOp, parallelOp]
+
+        <span style="color:blue"># Add a new ncprogram from the ncprogram input</span>
+        newProgram: adsk.cam.NCProgram = cam.ncPrograms.add(ncInput)
+
+        <span style="color:blue"># Set post processor</span>
+        newProgram.postConfiguration = postConfig
+
+        <span style="color:blue"># Change some post parameter</span>
+        postParameters: adsk.cam.CAMParameters = newProgram.postParameters
+
+        <span style="color:blue"># NcProgram parameters are passed as theyare to the postprocessor (they have no units)</span>
+        postParameters.itemByName('builtin_tolerance').value.value = 0.01 
+        postParameters.itemByName('builtin_minimumChordLength').value.value = 0.33
+
+        <span style="color:blue"># Update/apply post parameters</span>
+        newProgram.updatePostParameters(postParameters)
+
+        <span style="color:blue"># Set post options, by default post process only valid operations containing toolpath data</span>
+        postOptions = adsk.cam.NCProgramPostProcessOptions.create()
+
+        <span style="color:blue"># Post-process</span>
+        newProgram.postProcess(postOptions)
+        
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
+
+
+<span style="color:blue">#################### Functions To Make Our Life Easier ####################</span>
+
+def getLibrariesURLs(libraries: adsk.cam.ToolLibraries, url: adsk.core.URL) -&gt; list[str]:
+    ''' Return the list of libraries' URLs for the specified libraries '''
+    urls: list[str] = []
+    libs: list[adsk.core.URL] = libraries.childAssetURLs(url)
+    for lib in libs:
+        urls.append(lib.toString())
+    for folder in libraries.childFolderURLs(url):
+        urls = urls + getLibrariesURLs(libraries, folder)
+    return urls
+
+
+def getToolsFromLibraryByTypeDiameterRangeAndMinFluteLength(toolLibrary: adsk.cam.ToolLibrary, tooltype: str, minDiameter: float, maxDiameter: float, minimumFluteLength: float = None) -&gt; list[adsk.cam.Tool]:
+    ''' Return a list of tools that satisfy the search '''
+    query: adsk.cam.ToolQuery = toolLibrary.createQuery()
+    <span style="color:blue"># Set the search critera</span>
+    query.criteria.add('tool_type', adsk.core.ValueInput.createByString(tooltype))
+    query.criteria.add('tool_diameter.min', adsk.core.ValueInput.createByReal(minDiameter))
+    query.criteria.add('tool_diameter.max', adsk.core.ValueInput.createByReal(maxDiameter))
+    if minimumFluteLength:
+        query.criteria.add('tool_fluteLength.min', adsk.core.ValueInput.createByReal(minimumFluteLength))
+    <span style="color:blue"># Get query results</span>
+    results: list[adsk.cam.ToolQueryResult] = query.execute()
+    <span style="color:blue"># Get the tools from the query</span>
+    tools: list[adsk.cam.Tool] = []
+    for result in results:
+        <span style="color:blue"># Results have a tool, url, toollibrary and the index of the tool in that library: we just return the tool here</span>
+        tools.append(result.tool)
+    return tools
+
+
+<span style="color:blue">#################### CAD Creation ####################</span>
+
+def createSamplePart(design: adsk.fusion.Design) -&gt; adsk.fusion.BRepBody:
+    """ Creates the sample part for this script """
+    <span style="color:blue"># The sample part is a box containing a concave side generated by subtracting the intersection from a sphere.</span>
+    <span style="color:blue"># The lower face of the box is at Z=0 and we position the sphere above but intersecting with the box upper face.</span>
+    <span style="color:blue"># Fusion's default behaviour is now to ground the first component of an assembly to the parent. </span>
+    <span style="color:blue"># This can be overriden, see Preferences -&gt;General -&gt;Design -&gt;Assemblies -&gt;First component grounded to parent</span>
+    <span style="color:blue"># However if we make the first component the box, we can move the sphere without changing anything</span>
+
+    box: adsk.fusion.BRepBody = createBox(design, 22, 15, 5) <span style="color:blue"># 1st component occurrence</span>
+    sphere: adsk.fusion.BRepBody = createSphere(design, 7.5) <span style="color:blue"># 2nd component occurrence</span>
+
+    <span style="color:blue"># Get the root component</span>
+    rootComp: adsk.fusion.Component = design.rootComponent
+    occs: adsk.fusion.Occurrences = rootComp.occurrences
+
+    <span style="color:blue"># Get the second Occurrence (sphere) as the first occurrence (box) may be grounded to the parent</span>
+    occ: adsk.fusion.Occurrence = occs.item(1)
+    mat: adsk.core.Matrix3D = occ.transform
+    
+    <span style="color:blue"># Matrix translation, moving the sphere up by 10 units along Z axis</span>
+    mat.translation = adsk.core.Vector3D.create(0, 0, 10)
+
+    <span style="color:blue"># Set transform</span>
+    occ.transform = mat
+
+    <span style="color:blue"># Snapshot - Determining the position is important!!!</span>
+    design.snapshots.add()
+
+    <span style="color:blue"># Cut the sphere/box intersection from the box to leave a concave face</span>
+    part: adsk.fusion.BRepBody = getBodyFromBooleanOperation(design, box, sphere)
+    return part
+
+
+def createBox(design: adsk.fusion.Design, sizeX: float, sizeY: float, sizeZ: float) -&gt; adsk.fusion.BRepBody:
+    ''' Creates a sample box'''
+    component: adsk.fusion.Component = design.rootComponent
+    <span style="color:blue"># Create sketch</span>
+    sketches: adsk.fusion.Sketches = component.sketches
+    sketch: adsk.fusion.Sketch = sketches.add(component.xYConstructionPlane)
+    lines: adsk.fusion.SketchLines = sketch.sketchCurves.sketchLines
+    lines.addTwoPointRectangle(adsk.core.Point3D.create(-sizeX / 2, -sizeY / 2, 0), adsk.core.Point3D.create(sizeX / 2, sizeY / 2, 0))
+    prof: adsk.fusion.Profile = sketch.profiles.item(0)
+    extrudes: adsk.fusion.ExtrudeFeatures = component.features.extrudeFeatures
+    distance = adsk.core.ValueInput.createByReal(sizeZ)
+    ext: adsk.fusion.ExtrudeFeature = extrudes.addSimple(prof, distance, adsk.fusion.FeatureOperations.NewComponentFeatureOperation)
+    return ext.bodies.item(0)
+
+
+def createSphere(design: adsk.fusion.Design, radius: float) -&gt; adsk.fusion.BRepBody:
+    ''' Creates a sample sphere '''
+    component: adsk.fusion.Component = design.rootComponent
+    <span style="color:blue"># Create a new sketch on the xy plane.</span>
+    sketches: adsk.fusion.Sketches = component.sketches
+    xyPlane: adsk.fusion.ConstructionPlane = component.xYConstructionPlane
+    sketch: adsk.fusion.Sketch = sketches.add(xyPlane)
+    <span style="color:blue"># Draw a circle.</span>
+    circles: adsk.fusion.SketchCircles = sketch.sketchCurves.sketchCircles
+    circles.addByCenterRadius(adsk.core.Point3D.create(0, 0, 0), radius)
+    <span style="color:blue"># Draw a line to use as the axis of revolution.</span>
+    lines: adsk.fusion.SketchLines = sketch.sketchCurves.sketchLines
+    axisLine: adsk.fusion.SketchLine = lines.addByTwoPoints(adsk.core.Point3D.create(-radius, 0, 0), adsk.core.Point3D.create(radius, 0, 0))
+    <span style="color:blue"># Get the profile defined by half of the circle.</span>
+    prof: adsk.fusion.Profile = sketch.profiles.item(0)
+    <span style="color:blue"># Create an revolution input for a revolution while specifying the profile and that a new component is to be created</span>
+    revolves: adsk.fusion.RevolveFeatures = component.features.revolveFeatures
+    revInput: adsk.fusion.RevolveFeatureInput = revolves.createInput(prof, axisLine, adsk.fusion.FeatureOperations.NewComponentFeatureOperation)
+    <span style="color:blue"># Define that the extent is an angle of 2*pi to get a sphere</span>
+    angle = adsk.core.ValueInput.createByReal(2*math.pi)
+    revInput.setAngleExtent(False, angle)
+    <span style="color:blue"># Create the extrusion.</span>
+    ext: adsk.fusion.RevolveFeature = revolves.add(revInput)
+    return ext.bodies.item(0)
+
+
+def getBodyFromBooleanOperation(design: adsk.fusion.Design, body1: adsk.fusion.BRepBody, body2: adsk.fusion.BRepBody) -&gt; adsk.fusion.BRepBody:
+    """ Creates a boolean operation between two bodies """
+    model: adsk.fusion.Component = design.activeComponent
+    features: adsk.fusion.Features = model.features
+    <span style="color:blue"># Create a collection and add our sphere</span>
+    bodyCollection = adsk.core.ObjectCollection.create()
+    bodyCollection.add(body2)
+
+    <span style="color:blue"># Create a CombineFeatureInput using our box (body1), sphere (bodyCollection) specifying a 'cut' operation</span>
+    combineFeatures: adsk.fusion.CombineFeatures = features.combineFeatures
+    combineFeatureInput: adsk.fusion.CombineFeatureInput = combineFeatures.createInput(body1, bodyCollection)
+    combineFeatureInput.operation = adsk.fusion.FeatureOperations.CutFeatureOperation
+    combineFeatureInput.isKeepToolBodies = False
+    combineFeatureInput.isNewComponent = False
+
+    <span style="color:blue"># Generate our combined feature</span>
+    returnValue: adsk.fusion.CombineFeature = combineFeatures.add(combineFeatureInput)
+    part: adsk.fusion.BRepBody = returnValue.bodies[0]
+    return part</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(ManufacturingWorkflowAPISample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

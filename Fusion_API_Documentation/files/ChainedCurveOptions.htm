@@ -1,0 +1,94 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/ChainedCurveOptions.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2016">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="ChainedCurveOptions">
+    <meta name="description" content="Controls options used when creating a Path and determining the rules for how curves are considered to be chained or connected.">
+    <meta name="topicid" content="GUID-1728AD08-743F-4ABB-AA10-C2B2C53A0757">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>ChainedCurveOptions Enumerator
+        </title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">ChainedCurveOptions Enumerator
+        </h1>
+    <h2 class="api">
+          Description
+        </h2>Controls options used when creating a Path and determining the rules for how curves are considered to be chained or connected.<br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion\FusionTypeDefs.h&gt;<h2 class="api">
+          Methods
+        </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+              Name
+            </td>
+        <td class="api-list" style="width:1px;">
+              Value
+            </td>
+        <td class="api-list">
+              Description
+            </td>
+      </tr>
+      <tr>
+        <td class="api-list">connectedChainedCurves</td>
+        <td class="api-list" align="right" style="padding-right:10px">1</td>
+        <td class="api-list">Will find curves that are geometrically connected without regards to the geometry condition at the connection. This is limited to sketch curves.</td>
+      </tr>
+      <tr>
+        <td class="api-list">noChainedCurves</td>
+        <td class="api-list" align="right" style="padding-right:10px">0</td>
+        <td class="api-list">No chaining is done. This is useful when inputting a single entity and you don't want any chaining to be done.</td>
+      </tr>
+      <tr>
+        <td class="api-list">openEdgesChainedCurves</td>
+        <td class="api-list" align="right" style="padding-right:10px">3</td>
+        <td class="api-list">Will find edges that are geometrically end connected and are open edges of an open BRepBody.</td>
+      </tr>
+      <tr>
+        <td class="api-list">tangentAndOpenEdgesChainedCurves</td>
+        <td class="api-list" align="right" style="padding-right:10px">4</td>
+        <td class="api-list">Will find edges that are geometrically end connected, are tangent at the connection, and are open edges of an open BRepBody.</td>
+      </tr>
+      <tr>
+        <td class="api-list">tangentChainedCurves</td>
+        <td class="api-list" align="right" style="padding-right:10px">2</td>
+        <td class="api-list">Will find curves that are geometrically connected and tangent at the connection. This will work for both sketch curves and edges.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+          Version
+        </h2>
+        Introduced in version August 2016<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(ChainedCurveOptions%20Enum%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

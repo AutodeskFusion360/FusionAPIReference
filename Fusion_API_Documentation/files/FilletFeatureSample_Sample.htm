@@ -1,0 +1,366 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/FilletFeatureSample.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="FilletFeatureSample_Sample">
+    <meta name="description" content="Fillet Feature API Sample Sample">
+    <meta name="topicid" content="GUID-b46c8a2c-f30f-11e4-9ac6-005056c00008">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Fillet Feature API Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Fillet Feature API Sample</h1>
+    <h2 class="api">
+          Description
+        </h2>Demonstrates creating fillets using the various types of fillets. Create a new design and add a box that is at least 2 cm on each side. The script creates a constant radius, variable radius and chord length fillets. After creating each one, it deletes it and then creates the next. To see any of the fillets that were deleted, undo to get the fillet back.<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">import adsk.core, adsk.fusion, traceback
+
+def run(context):
+    ui = None
+    try:
+        app = adsk.core.Application.get()
+        ui  = app.userInterface
+        
+        <span style="color:blue"># Get active design        </span>
+        product = app.activeProduct
+        design = adsk.fusion.Design.cast(product)
+        
+        <span style="color:blue"># Get root component in this design</span>
+        rootComp = design.rootComponent
+        
+        <span style="color:blue"># Get fillet features</span>
+        fillets = rootComp.features.filletFeatures
+        
+        <span style="color:blue"># Create constant-radius fillet using the edges of a face of the body.</span>
+        edges1 = rootComp.bRepBodies.item(0).faces.item(0).edges
+        edgeCollection1 = adsk.core.ObjectCollection.create()
+        for edge in edges1:
+            edgeCollection1.add(edge);  
+        radius1 = adsk.core.ValueInput.createByReal(0.3)
+        
+        input1 = fillets.createInput()
+        input1.isRollingBallCorner = True
+
+        constRadiusInput = input1.edgeSetInputs.addConstantRadiusEdgeSet(edgeCollection1, radius1, True)
+        constRadiusInput.continuity = adsk.fusion.SurfaceContinuityTypes.TangentSurfaceContinuityType
+        
+        fillet1 = fillets.add(input1)
+        fillet1.deleteMe()
+        
+        <span style="color:blue"># Create variable-radius fillet.</span>
+        edgeCollection2 = adsk.core.ObjectCollection.create()
+        edgeCollection2.add(rootComp.bRepBodies.item(0).faces.item(0).edges.item(0))
+        
+        input2 = fillets.createInput()
+        input2.isRollingBallCorner = False
+
+        startRadius = adsk.core.ValueInput.createByString("1.0 mm")
+        endRadius = adsk.core.ValueInput.createByString("5.0 mm")
+        varRadiusEdgeSet = input2.edgeSetInputs.addVariableRadiusEdgeSet(edgeCollection2, startRadius, endRadius, True)
+        varRadiusEdgeSet.continuity = adsk.fusion.SurfaceContinuityTypes.TangentSurfaceContinuityType       
+
+        positions = [];
+        positions.append(adsk.core.ValueInput.createByReal(0.3))
+        positions.append(adsk.core.ValueInput.createByReal(0.6))
+        radii = [];
+        radii.append(adsk.core.ValueInput.createByString("2.0 mm"))
+        radii.append(adsk.core.ValueInput.createByString("3.0 mm"))
+
+        varRadiusEdgeSet.setMidRadii(radii, positions)
+
+        fillet2 = fillets.add(input2)   
+        fillet2.deleteMe()
+        
+        <span style="color:blue"># Create chord-length fillet on the edges of a face.</span>
+        edges3 = rootComp.bRepBodies.item(0).faces.item(0).edges
+        edgeCollection3 = adsk.core.ObjectCollection.create()
+        for edge in edges3:
+            edgeCollection3.add(edge);  
+        chordLength = adsk.core.ValueInput.createByReal(1.0)
+        
+        input3 = fillets.createInput()
+        input3.isRollingBallCorner = True
+
+        chordLengthEdgeSet = input3.edgeSetInputs.addChordLengthEdgeSet(edgeCollection3, chordLength, True)
+        chordLengthEdgeSet.continuity = adsk.fusion.SurfaceContinuityTypes.TangentSurfaceContinuityType       
+        fillets.add(input3)        
+        
+
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code">#include &lt;Core/Application/Application.h&gt;
+#include &lt;Core/UserInterface/UserInterface.h&gt;
+#include &lt;Core/Application/ObjectCollection.h&gt;
+#include &lt;Core/Application/ValueInput.h&gt;
+#include &lt;Core/Application/Document.h&gt;
+
+#include &lt;Fusion/Fusion/Design.h&gt;
+#include &lt;Fusion/Components/Component.h&gt;
+#include &lt;Fusion/BRep/BRepBodies.h&gt;
+#include &lt;Fusion/BRep/BRepBody.h&gt;
+#include &lt;Fusion/BRep/BRepFaces.h&gt;
+#include &lt;Fusion/BRep/BRepFace.h&gt;
+#include &lt;Fusion/BRep/BRepEdges.h&gt;
+#include &lt;Fusion/BRep/BRepEdge.h&gt;
+#include &lt;Fusion/Features/Features.h&gt;
+#include &lt;Fusion/Features/FilletEdgeSetInputs.h&gt;
+#include &lt;Fusion/Features/FilletFeatures.h&gt;
+#include &lt;Fusion/Features/FilletFeature.h&gt;
+#include &lt;Fusion/Features/FilletFeatureInput.h&gt;
+#include &lt;Fusion/Features/ConstantRadiusFilletEdgeSetInput.h&gt;
+#include &lt;Fusion/Features/ChordLengthFilletEdgeSetInput.h&gt;
+#include &lt;Fusion/Features/VariableRadiusFilletEdgeSetInput.h&gt;
+#include &lt;Fusion/Features/VariableRadiusFilletEdgeSet.h&gt;
+#include &lt;Fusion/Features/ChordLengthFilletEdgeSetInput.h&gt;
+#include &lt;Fusion/Features/ChordLengthFilletEdgeSet.h&gt;
+#include &lt;Fusion/Features/ConstantRadiusFilletEdgeSet.h&gt;
+
+
+using namespace adsk::core;
+using namespace adsk::fusion;
+
+Ptr&lt;UserInterface&gt; ui;
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    Ptr&lt;Application&gt; app = Application::get();
+    if (!app)
+        return false;
+
+    ui = app-&gt;userInterface();
+    if (!ui)
+        return false;
+
+
+    <span style="color:blue">// Get active design</span>
+    Ptr&lt;Product&gt; product = app-&gt;activeProduct();
+    if (!product)
+        return false;
+
+    Ptr&lt;Design&gt; design = product;
+    if (!design)
+        return false;
+
+    <span style="color:blue">// Get root component in this design</span>
+    Ptr&lt;Component&gt; rootComp = design-&gt;rootComponent();
+    if (!rootComp)
+        return false;
+
+    <span style="color:blue">// Get fillet features</span>
+    Ptr&lt;Features&gt; features = rootComp-&gt;features();
+    if (!features)
+        return false;
+
+    Ptr&lt;FilletFeatures&gt; fillets = features-&gt;filletFeatures();
+    if (!fillets)
+        return false;
+
+    <span style="color:blue">// Get edges of top face in the first body</span>
+    Ptr&lt;BRepBodies&gt; bodies = rootComp-&gt;bRepBodies();
+    if (!bodies)
+        return false;
+
+    Ptr&lt;BRepBody&gt; body1 = bodies-&gt;item(0);
+    if (!body1)
+        return false;
+
+    Ptr&lt;BRepFaces&gt; faces1 = body1-&gt;faces();
+    if (!faces1)
+        return false;
+
+    Ptr&lt;BRepFace&gt; face1 = faces1-&gt;item(0);
+    if (!face1)
+        return false;
+
+    Ptr&lt;BRepEdges&gt; edges1 = face1-&gt;edges();
+    if (!edges1)
+        return false;
+
+    <span style="color:blue">// Create constant-radius fillet</span>
+    Ptr&lt;ObjectCollection&gt; edgeCollection1 = ObjectCollection::create();
+    if (!edgeCollection1)
+        return false;
+
+    for (Ptr&lt;BRepEdge&gt; edge : edges1)
+        edgeCollection1-&gt;add(edge);
+
+    Ptr&lt;ValueInput&gt; radius1 = ValueInput::createByReal(0.3);
+    if (!radius1)
+        return false;
+
+    Ptr&lt;FilletFeatureInput&gt; input1 = fillets-&gt;createInput();
+    if (!input1)
+        return false;
+
+    input1-&gt;isRollingBallCorner(true);
+
+    Ptr&lt;FilletEdgeSetInputs&gt; edgeSets1 = input1-&gt;edgeSetInputs();
+    if (!edgeSets1)
+        return false;
+
+    Ptr&lt;ConstantRadiusFilletEdgeSetInput&gt; constRadiusInput =
+        edgeSets1-&gt;addConstantRadiusEdgeSet(edgeCollection1, radius1, true);
+    if (!constRadiusInput)
+        return false;
+
+    constRadiusInput-&gt;continuity(adsk::fusion::SurfaceContinuityTypes::TangentSurfaceContinuityType);
+
+    Ptr&lt;FilletFeature&gt; fillet1 = fillets-&gt;add(input1);
+    if (!fillet1)
+        return false;
+
+    fillet1-&gt;deleteMe();
+
+    <span style="color:blue">// Create variable-radius fillet</span>
+    Ptr&lt;ObjectCollection&gt; edgeCollection2 = ObjectCollection::create();
+    if (!edgeCollection2)
+        return false;
+
+    Ptr&lt;BRepEdge&gt; edge1 = edges1-&gt;item(0);
+    if (!edge1)
+        return false;
+    edgeCollection2-&gt;add(edge1);
+
+    Ptr&lt;ValueInput&gt; startRadius = ValueInput::createByString("1.0 mm");
+    if (!startRadius)
+        return false;
+
+    Ptr&lt;ValueInput&gt; endRadius = ValueInput::createByString("5.0 mm");
+    if (!endRadius)
+        return false;
+
+    Ptr&lt;FilletFeatureInput&gt; input2 = fillets-&gt;createInput();
+    if (!input2)
+        return false;
+
+    input2-&gt;isRollingBallCorner(false);
+
+    Ptr&lt;FilletEdgeSetInputs&gt; edgeSets2 = input2-&gt;edgeSetInputs();
+    if (!edgeSets2)
+        return false;
+
+    Ptr&lt;VariableRadiusFilletEdgeSetInput&gt; varRadiusEdgeSetInput =
+        edgeSets2-&gt;addVariableRadiusEdgeSet(edgeCollection2, startRadius, endRadius, false);
+
+    std::vector&lt;Ptr&lt;ValueInput&gt;&gt; radii;
+    radii.push_back(ValueInput::createByString("2.0 mm"));
+    radii.push_back(ValueInput::createByString("3.0 mm"));
+    std::vector&lt;Ptr&lt;ValueInput&gt;&gt; positions;
+    positions.push_back(ValueInput::createByReal(0.3));
+    positions.push_back(ValueInput::createByReal(0.6));
+    varRadiusEdgeSetInput-&gt;setMidRadii(radii, positions);
+
+    Ptr&lt;FilletFeature&gt; fillet2 = fillets-&gt;add(input2);
+    if (!fillet2)
+        return false;
+
+    fillet2-&gt;deleteMe();
+
+    <span style="color:blue">// Create chord-length fillet</span>
+    Ptr&lt;FilletFeatureInput&gt; input3 = fillets-&gt;createInput();
+    if (!input3)
+        return false;
+
+    input3-&gt;isRollingBallCorner(true);
+
+    Ptr&lt;FilletEdgeSetInputs&gt; edgeSets3 = input3-&gt;edgeSetInputs();
+    if (!edgeSets3)
+        return false;
+
+    Ptr&lt;ValueInput&gt; chordLength = ValueInput::createByReal(1.0);
+    if (!chordLength)
+        return false;
+
+    Ptr&lt;ChordLengthFilletEdgeSetInput&gt; chordLengthInputSet =
+        edgeSets3-&gt;addChordLengthEdgeSet(edgeCollection1, chordLength, true);
+    if (!chordLengthInputSet)
+        return false;
+
+    chordLengthInputSet-&gt;continuity(adsk::fusion::SurfaceContinuityTypes::TangentSurfaceContinuityType);
+    Ptr&lt;FilletFeature&gt; fillet3 = fillets-&gt;add(input3);
+    if (!fillet3)
+        return false;
+
+
+    return true;
+}</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(FilletFeatureSample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

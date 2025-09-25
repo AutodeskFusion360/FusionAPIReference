@@ -1,0 +1,102 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/FeatureList.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="14/10/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="FeatureList">
+    <meta name="description" content="FeatureList Object">
+    <meta name="topicid" content="GUID-991d2a39-11b7-4bf1-b1d0-ce097001dfd7">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>FeatureList Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">FeatureList Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Features/FeatureList.h&gt;<h2 class="api">
+          Description
+        </h2>Provides access to a list of features. This is used in the API to return a list of features from an API call.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="FeatureList_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="FeatureList_item.htm">item</a></td>
+        <td class="api-list">Returns the specified folder.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="FeatureList_count.htm">count</a></td>
+        <td class="api-list">The number of features in this collection.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="FeatureList_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="FeatureList_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="ArrangeFeature_linkedFeatures.htm">ArrangeFeature.linkedFeatures</a>, <a href="BaseFeature_linkedFeatures.htm">BaseFeature.linkedFeatures</a>, <a href="BossFeature_linkedFeatures.htm">BossFeature.linkedFeatures</a>, <a href="BoundaryFillFeature_linkedFeatures.htm">BoundaryFillFeature.linkedFeatures</a>, <a href="BoxFeature_linkedFeatures.htm">BoxFeature.linkedFeatures</a>, <a href="ChamferFeature_linkedFeatures.htm">ChamferFeature.linkedFeatures</a>, <a href="CircularPatternFeature_linkedFeatures.htm">CircularPatternFeature.linkedFeatures</a>, <a href="CoilFeature_linkedFeatures.htm">CoilFeature.linkedFeatures</a>, <a href="CombineFeature_linkedFeatures.htm">CombineFeature.linkedFeatures</a>, <a href="CopyPasteBody_linkedFeatures.htm">CopyPasteBody.linkedFeatures</a>, <a href="CustomFeature_linkedFeatures.htm">CustomFeature.linkedFeatures</a>, <a href="CutPasteBody_linkedFeatures.htm">CutPasteBody.linkedFeatures</a>, <a href="CylinderFeature_linkedFeatures.htm">CylinderFeature.linkedFeatures</a>, <a href="DeleteFaceFeature_linkedFeatures.htm">DeleteFaceFeature.linkedFeatures</a>, <a href="DraftFeature_linkedFeatures.htm">DraftFeature.linkedFeatures</a>, <a href="EmbossFeature_linkedFeatures.htm">EmbossFeature.linkedFeatures</a>, <a href="ExtendFeature_linkedFeatures.htm">ExtendFeature.linkedFeatures</a>, <a href="ExtrudeFeature_linkedFeatures.htm">ExtrudeFeature.linkedFeatures</a>, <a href="Feature_linkedFeatures.htm">Feature.linkedFeatures</a>, <a href="FilletFeature_linkedFeatures.htm">FilletFeature.linkedFeatures</a>, <a href="FlangeFeature_linkedFeatures.htm">FlangeFeature.linkedFeatures</a>, <a href="FlatPattern_linkedFeatures.htm">FlatPattern.linkedFeatures</a>, <a href="FormFeature_linkedFeatures.htm">FormFeature.linkedFeatures</a>, <a href="HemFeature_linkedFeatures.htm">HemFeature.linkedFeatures</a>, <a href="HoleFeature_linkedFeatures.htm">HoleFeature.linkedFeatures</a>, <a href="LoftFeature_linkedFeatures.htm">LoftFeature.linkedFeatures</a>, <a href="MeshCombineFaceGroupsFeature_linkedFeatures.htm">MeshCombineFaceGroupsFeature.linkedFeatures</a>, <a href="MeshCombineFeature_linkedFeatures.htm">MeshCombineFeature.linkedFeatures</a>, <a href="MeshConvertFeature_linkedFeatures.htm">MeshConvertFeature.linkedFeatures</a>, <a href="MeshFeature_linkedFeatures.htm">MeshFeature.linkedFeatures</a>, <a href="MeshGenerateFaceGroupsFeature_linkedFeatures.htm">MeshGenerateFaceGroupsFeature.linkedFeatures</a>, <a href="MeshReduceFeature_linkedFeatures.htm">MeshReduceFeature.linkedFeatures</a>, <a href="MeshRemeshFeature_linkedFeatures.htm">MeshRemeshFeature.linkedFeatures</a>, <a href="MeshRepairFeature_linkedFeatures.htm">MeshRepairFeature.linkedFeatures</a>, <a href="MeshReverseNormalFeature_linkedFeatures.htm">MeshReverseNormalFeature.linkedFeatures</a>, <a href="MeshSeparateFeature_linkedFeatures.htm">MeshSeparateFeature.linkedFeatures</a>, <a href="MeshShellFeature_linkedFeatures.htm">MeshShellFeature.linkedFeatures</a>, <a href="MeshSmoothFeature_linkedFeatures.htm">MeshSmoothFeature.linkedFeatures</a>, <a href="MirrorFeature_linkedFeatures.htm">MirrorFeature.linkedFeatures</a>, <a href="MoveFeature_linkedFeatures.htm">MoveFeature.linkedFeatures</a>, <a href="OffsetFacesFeature_linkedFeatures.htm">OffsetFacesFeature.linkedFeatures</a>, <a href="OffsetFeature_linkedFeatures.htm">OffsetFeature.linkedFeatures</a>, <a href="PatchFeature_linkedFeatures.htm">PatchFeature.linkedFeatures</a>, <a href="PathPatternFeature_linkedFeatures.htm">PathPatternFeature.linkedFeatures</a>, <a href="PipeFeature_linkedFeatures.htm">PipeFeature.linkedFeatures</a>, <a href="RectangularPatternFeature_linkedFeatures.htm">RectangularPatternFeature.linkedFeatures</a>, <a href="RefoldFeature_linkedFeatures.htm">RefoldFeature.linkedFeatures</a>, <a href="RemoveFeature_linkedFeatures.htm">RemoveFeature.linkedFeatures</a>, <a href="ReplaceFaceFeature_linkedFeatures.htm">ReplaceFaceFeature.linkedFeatures</a>, <a href="ReverseNormalFeature_linkedFeatures.htm">ReverseNormalFeature.linkedFeatures</a>, <a href="RevolveFeature_linkedFeatures.htm">RevolveFeature.linkedFeatures</a>, <a href="RibFeature_linkedFeatures.htm">RibFeature.linkedFeatures</a>, <a href="RipFeature_linkedFeatures.htm">RipFeature.linkedFeatures</a>, <a href="RuledSurfaceFeature_linkedFeatures.htm">RuledSurfaceFeature.linkedFeatures</a>, <a href="RuleFilletFeature_linkedFeatures.htm">RuleFilletFeature.linkedFeatures</a>, <a href="ScaleFeature_linkedFeatures.htm">ScaleFeature.linkedFeatures</a>, <a href="ShellFeature_linkedFeatures.htm">ShellFeature.linkedFeatures</a>, <a href="SilhouetteSplitFeature_linkedFeatures.htm">SilhouetteSplitFeature.linkedFeatures</a>, <a href="SphereFeature_linkedFeatures.htm">SphereFeature.linkedFeatures</a>, <a href="SplitBodyFeature_linkedFeatures.htm">SplitBodyFeature.linkedFeatures</a>, <a href="SplitFaceFeature_linkedFeatures.htm">SplitFaceFeature.linkedFeatures</a>, <a href="StitchFeature_linkedFeatures.htm">StitchFeature.linkedFeatures</a>, <a href="SurfaceDeleteFaceFeature_linkedFeatures.htm">SurfaceDeleteFaceFeature.linkedFeatures</a>, <a href="SweepFeature_linkedFeatures.htm">SweepFeature.linkedFeatures</a>, <a href="TessellateFeature_linkedFeatures.htm">TessellateFeature.linkedFeatures</a>, <a href="ThickenFeature_linkedFeatures.htm">ThickenFeature.linkedFeatures</a>, <a href="ThreadFeature_linkedFeatures.htm">ThreadFeature.linkedFeatures</a>, <a href="TorusFeature_linkedFeatures.htm">TorusFeature.linkedFeatures</a>, <a href="TrimFeature_linkedFeatures.htm">TrimFeature.linkedFeatures</a>, <a href="UnfoldFeature_linkedFeatures.htm">UnfoldFeature.linkedFeatures</a>, <a href="UnstitchFeature_linkedFeatures.htm">UnstitchFeature.linkedFeatures</a>, <a href="UntrimFeature_linkedFeatures.htm">UntrimFeature.linkedFeatures</a>, <a href="VolumetricCustomFeature_linkedFeatures.htm">VolumetricCustomFeature.linkedFeatures</a>, <a href="VolumetricModelToMeshFeature_linkedFeatures.htm">VolumetricModelToMeshFeature.linkedFeatures</a>, <a href="WebFeature_linkedFeatures.htm">WebFeature.linkedFeatures</a><h2 class="api">
+            Version
+          </h2>
+        Introduced in version November 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(FeatureList%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

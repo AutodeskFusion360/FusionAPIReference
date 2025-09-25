@@ -1,0 +1,356 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/RevoluteJointMotionSample.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="RevoluteJointMotionSample_Sample">
+    <meta name="description" content="RevoluteJointMotion API Sample Sample">
+    <meta name="topicid" content="GUID-A82E94EE-6509-4B8F-A6F8-457DBC906035">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>RevoluteJointMotion API Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">RevoluteJointMotion API Sample</h1>
+    <h2 class="api">
+          Description
+        </h2>Demonstrates creating a joint with revolute joint motion.<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code"><span style="color:blue">#Author-</span>
+<span style="color:blue">#Description-</span>
+import adsk.core, adsk.fusion, traceback
+
+def run(context):
+    ui = None
+    try:
+        app = adsk.core.Application.get()
+        ui = app.userInterface
+        
+        <span style="color:blue"># Create a document.</span>
+        doc = app.documents.add(adsk.core.DocumentTypes.FusionDesignDocumentType)
+ 
+        product = app.activeProduct
+        design = adsk.fusion.Design.cast(product)
+
+        <span style="color:blue"># Get the root component of the active design</span>
+        rootComp = design.rootComponent
+        
+        <span style="color:blue"># Create sketch in root component</span>
+        sketches = rootComp.sketches
+        sketch = sketches.add(rootComp.xZConstructionPlane)
+        sketchCircles = sketch.sketchCurves.sketchCircles
+        centerPoint0 = adsk.core.Point3D.create(0, 0, 0)
+        circle0 = sketchCircles.addByCenterRadius(centerPoint0, 5.0)
+        centerPoint1 = adsk.core.Point3D.create(10, 10, 0)
+        circle1 = sketchCircles.addByCenterRadius(centerPoint1, 5.0)
+        
+        <span style="color:blue"># Get the profile defined by the circle</span>
+        prof0 = sketch.profiles.item(0)
+        prof1 = sketch.profiles.item(1)
+
+        <span style="color:blue"># Create an extrusion input and make sure it's in a new component</span>
+        extrudes = rootComp.features.extrudeFeatures
+        extInput = extrudes.createInput(prof0, adsk.fusion.FeatureOperations.NewComponentFeatureOperation)
+        
+        <span style="color:blue"># Set the extrusion input</span>
+        distance = adsk.core.ValueInput.createByReal(5)
+        extInput.setDistanceExtent(True, distance)
+        extInput.isSolid = True
+
+        <span style="color:blue"># Create the extrusion</span>
+        ext = extrudes.add(extInput)
+        
+        <span style="color:blue"># Get the side face of the created extrusion body</span>
+        sideFace = ext.sideFaces.item(0)
+        
+        <span style="color:blue"># Create the first joint geometry with the side face</span>
+        geo0 = adsk.fusion.JointGeometry.createByNonPlanarFace(sideFace, adsk.fusion.JointKeyPointTypes.StartKeyPoint)
+        
+        <span style="color:blue"># Create the second joint geometry with prof1</span>
+        geo1 = adsk.fusion.JointGeometry.createByProfile(prof1, circle1, adsk.fusion.JointKeyPointTypes.CenterKeyPoint)
+        
+        <span style="color:blue"># Create joint input</span>
+        joints = rootComp.joints
+        jointInput = joints.createInput(geo0, geo1)
+        
+        <span style="color:blue"># Set the joint input</span>
+        angle = adsk.core.ValueInput.createByString('90 deg')
+        jointInput.angle = angle
+        offset = adsk.core.ValueInput.createByString('1 cm')
+        jointInput.offset = offset
+        jointInput.isFlipped = True
+        jointInput.setAsRevoluteJointMotion(adsk.fusion.JointDirections.YAxisJointDirection)
+        
+        <span style="color:blue"># Create the joint</span>
+        joint = joints.add(jointInput)
+		
+        revoluteMotion = joint.jointMotion
+        limits = revoluteMotion.rotationLimits
+        limits.isMinimumValueEnabled = True
+        limits.minimumValue = 3.14 / 3
+        limits.isMaximumValueEnabled = True
+        limits.maximumValue = 3.14 / 3 * 2
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code">#include &lt;Core/Application/Application.h&gt;
+#include &lt;Core/Application/Documents.h&gt;
+#include &lt;Core/Application/Document.h&gt;
+#include &lt;Core/Application/Product.h&gt;
+#include &lt;Core/Application/ValueInput.h&gt;
+#include &lt;Core/Geometry/Point3D.h&gt;
+#include &lt;Core/UserInterface/UserInterface.h&gt;
+#include &lt;Fusion/BRep/BRepFace.h&gt;
+#include &lt;Fusion/BRep/BRepFaces.h&gt;
+#include &lt;Fusion/Components/Component.h&gt;
+#include &lt;Fusion/Components/Joint.h&gt;
+#include &lt;Fusion/Components/JointGeometry.h&gt;
+#include &lt;Fusion/Components/JointInput.h&gt;
+#include &lt;Fusion/Components/JointLimits.h&gt;
+#include &lt;Fusion/Components/Joints.h&gt;
+#include &lt;Fusion/Components/RevoluteJointMotion.h&gt;
+#include &lt;Fusion/Construction/ConstructionPlane.h&gt;
+#include &lt;Fusion/Features/Features.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeature.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeatures.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeatureInput.h&gt;
+#include &lt;Fusion/Fusion/Design.h&gt;
+#include &lt;Fusion/Sketch/Profile.h&gt;
+#include &lt;Fusion/Sketch/Profiles.h&gt;
+#include &lt;Fusion/Sketch/Sketch.h&gt;
+#include &lt;Fusion/Sketch/Sketches.h&gt;
+#include &lt;Fusion/Sketch/SketchCircle.h&gt;
+#include &lt;Fusion/Sketch/SketchCircles.h&gt;
+#include &lt;Fusion/Sketch/SketchCurves.h&gt;
+
+using namespace adsk::core;
+using namespace adsk::fusion;
+
+Ptr&lt;UserInterface&gt; ui;
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    Ptr&lt;Application&gt; app = Application::get();
+    if (!app)
+        return false;
+
+    ui = app-&gt;userInterface();
+    if (!ui)
+        return false;
+
+    Ptr&lt;Documents&gt; documents = app-&gt;documents();
+    if (!documents)
+        return false;
+
+    Ptr&lt;Document&gt; doc = documents-&gt;add(DocumentTypes::FusionDesignDocumentType);
+    if (!doc)
+        return false;
+
+    Ptr&lt;Product&gt; product = app-&gt;activeProduct();
+    if (!product)
+        return false;
+
+    Ptr&lt;Design&gt; design = product;
+    if (!design)
+        return false;
+
+    <span style="color:blue">// Get the root component of the active design</span>
+    Ptr&lt;Component&gt; rootComp = design-&gt;rootComponent();
+    if (!rootComp)
+        return false;
+
+    <span style="color:blue">// Create sketch in root component</span>
+    Ptr&lt;Sketches&gt; sketches = rootComp-&gt;sketches();
+    if (!sketches)
+        return false;
+    Ptr&lt;ConstructionPlane&gt; xz = rootComp-&gt;xZConstructionPlane();
+    if (!xz)
+        return false;
+    Ptr&lt;Sketch&gt; sketch = sketches-&gt;add(xz);
+    if (!sketch)
+        return false;
+    Ptr&lt;SketchCurves&gt; sketchCurves = sketch-&gt;sketchCurves();
+    if (!sketchCurves)
+        return false;
+    Ptr&lt;SketchCircles&gt; sketchCircles = sketchCurves-&gt;sketchCircles();
+    if (!sketchCircles)
+        return false;
+    Ptr&lt;Point3D&gt; centerPoint0 = Point3D::create(0, 0, 0);
+    if (!centerPoint0)
+        return false;
+    Ptr&lt;SketchCircle&gt; circle0 = sketchCircles-&gt;addByCenterRadius(centerPoint0, 5.0);
+    if (!circle0)
+        return false;
+    Ptr&lt;Point3D&gt; centerPoint1 = Point3D::create(10, 10, 0);
+    if (!centerPoint1)
+        return false;
+    Ptr&lt;SketchCircle&gt; circle1 = sketchCircles-&gt;addByCenterRadius(centerPoint1, 5.0);
+    if (!circle1)
+        return false;
+
+    <span style="color:blue">// Get the profile defined by the circle</span>
+    Ptr&lt;Profiles&gt; profs = sketch-&gt;profiles();
+    if (!profs)
+        return false;
+    Ptr&lt;Profile&gt; prof0 = profs-&gt;item(0);
+    if (!prof0)
+        return false;
+    Ptr&lt;Profile&gt; prof1 = profs-&gt;item(1);
+    if (!prof1)
+        return false;
+
+    <span style="color:blue">// Create an extrusion input and make sure it's in a new component</span>
+    Ptr&lt;Features&gt; feats = rootComp-&gt;features();
+    if (!feats)
+        return false;
+    Ptr&lt;ExtrudeFeatures&gt; extrudes = feats-&gt;extrudeFeatures();
+    if (!extrudes)
+        return false;
+    Ptr&lt;ExtrudeFeatureInput&gt; extInput = extrudes-&gt;createInput(prof0, FeatureOperations::NewComponentFeatureOperation);
+    if (!extInput)
+        return false;
+
+    <span style="color:blue">// Set the extrusion input</span>
+    Ptr&lt;ValueInput&gt; distance = ValueInput::createByReal(5);
+    if (!distance)
+        return false;
+    extInput-&gt;setDistanceExtent(true, distance);
+    extInput-&gt;isSolid(true);
+
+    <span style="color:blue">// Create the extrusion</span>
+    Ptr&lt;ExtrudeFeature&gt; ext = extrudes-&gt;add(extInput);
+    if (!ext)
+        return false;
+
+    <span style="color:blue">// Get the side face of the created extrusion body</span>
+    Ptr&lt;BRepFaces&gt; sideFaces = ext-&gt;sideFaces();
+    if (!sideFaces)
+        return false;
+    Ptr&lt;BRepFace&gt; sideFace = sideFaces-&gt;item(0);
+    if (!sideFace)
+        return false;
+
+    <span style="color:blue">// Create the first joint geometry with the side face</span>
+    Ptr&lt;JointGeometry&gt; geo0 = JointGeometry::createByNonPlanarFace(sideFace, JointKeyPointTypes::StartKeyPoint);
+    if (!geo0)
+        return false;
+
+    <span style="color:blue">// Create the second joint geometry with prof1</span>
+    Ptr&lt;JointGeometry&gt; geo1 = JointGeometry::createByProfile(prof1, circle1, JointKeyPointTypes::CenterKeyPoint);
+    if (!geo1)
+        return false;
+
+    <span style="color:blue">// Create joint input</span>
+    Ptr&lt;Joints&gt; joints = rootComp-&gt;joints();
+    if (!joints)
+        return false;
+    Ptr&lt;JointInput&gt; jointInput = joints-&gt;createInput(geo0, geo1);
+    if (!jointInput)
+        return false;
+
+    <span style="color:blue">// Set the joint input</span>
+    Ptr&lt;ValueInput&gt; angle = ValueInput::createByString("90 deg");
+    if (!angle)
+        return false;
+    jointInput-&gt;angle(angle);
+    Ptr&lt;ValueInput&gt; offset = ValueInput::createByString("1 cm");
+    if (!offset)
+        return false;
+    jointInput-&gt;offset(offset);
+    jointInput-&gt;isFlipped(true);
+    jointInput-&gt;setAsRevoluteJointMotion(JointDirections::YAxisJointDirection);
+
+    <span style="color:blue">// Create the joint</span>
+    Ptr&lt;Joint&gt; joint = joints-&gt;add(jointInput);
+    if (!joint)
+        return false;
+
+    Ptr&lt;RevoluteJointMotion&gt; revoluteMotion = joint-&gt;jointMotion();
+    if (!revoluteMotion)
+        return false;
+    Ptr&lt;JointLimits&gt; limits = revoluteMotion-&gt;rotationLimits();
+    if (!limits)
+        return false;
+    limits-&gt;isMinimumValueEnabled(true);
+    limits-&gt;minimumValue(3.14 / 3);
+    limits-&gt;isMaximumValueEnabled(true);
+    limits-&gt;maximumValue(3.14 / 3 * 2);
+
+    return true;
+}</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(RevoluteJointMotionSample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,221 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API-API/files/SelectionFilters_UM.htm#!">
+    <meta name="contextid" content="SelectionFilters_UM">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API-API">
+    <meta name="created" content="12/22/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="description" content="">
+    <meta name="topicid" content="GUID-03033DE6-AD8E-46B3-B4E6-DADA8D389E4E">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+	<link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"/>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <title>Selection Filters</title>
+	<script type="text/javascript" src="/view/clientframework/client.js"><!--filler--></script> 
+	<script>
+	  // This turns on the display of the copyright notice which is not visible by default.
+	  // Because the head is removed when used in the web help, this function will only exists
+	  // when the chm help is being created.
+	  window.onload = function() {
+		copyrightElement = document.getElementById('CopyrightNotice');
+		copyrightElement.style.display = 'block';
+	  };
+	</script>
+  </head>
+  <body>
+  <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+
+  <h1 class="api">
+    Selection Filters
+  </h1>
+<p Class="api">When using the API to have the user select an entity you can specify which type(s) of entities are valid to be selected.  For example, when using the <a href="UserInterface_selectEntity.htm">selectEntity</a> method of the UserInterface object the second argument is the selection filter.  Also when performing selections using in a custom command using the <a href="SelectionCommandInput.htm">SelectionCommandInput</a> object you can define a filter to specify which type(s) of entities are selectable.  The selection filter is a string.  The complete list of all valid selection filter strings are listed below.</p>
+
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+              <b>Filter String</b>
+            </td>
+        <td class="api-list">
+              <b>Description</b>
+            </td>
+      </tr>
+      <tr>
+        <td class="api-list">Bodies</td>
+        <td class="api-list">Select BRepBody entities (both solid and surface).</td>
+      </tr>
+      <tr>
+        <td class="api-list">SolidBodies</td>
+        <td class="api-list">Select solid BRepBody entities.</td>
+      </tr>
+      <tr>
+        <td class="api-list">SurfaceBodies</td>
+        <td class="api-list">Select open (surface) BRepBody entities.</td>
+      </tr>
+      <tr>
+        <td class="api-list">MeshBodies</td>
+        <td class="api-list">Select mesh bodies.</td>
+      </tr>
+      <tr>
+        <td class="api-list">Faces</td>
+        <td class="api-list">Select BRepFace entities of any shape on solid and surface BRepBody objects.</td>
+      </tr>
+      <tr>
+        <td class="api-list">SolidFaces</td>
+        <td class="api-list">Select BRepFace entities of any shape on solid BRepBody objects.</td>
+      </tr>
+      <tr>
+        <td class="api-list">SurfaceFaces</td>
+        <td class="api-list">Select BRepFace entities of any shape on surface BRepBody objects.</td>
+      </tr>
+      <tr>
+        <td class="api-list">PlanarFaces</td>
+        <td class="api-list">Select planar BRepFace entities.</td>
+      </tr>
+      <tr>
+        <td class="api-list">CylindricalFaces</td>
+        <td class="api-list">Select cylindrical BRepFace entities.</td>
+      </tr>
+      <tr>
+        <td class="api-list">ConicalFaces</td>
+        <td class="api-list">Select conical BRepFace entities.</td>
+      </tr>
+      <tr>
+        <td class="api-list">SphericalFaces</td>
+        <td class="api-list">Select spherical BRepFace entities.</td>
+      </tr>
+      <tr>
+        <td class="api-list">ToroidalFaces</td>
+        <td class="api-list">Select toroidal BRepFace entities.</td>
+      </tr>
+      <tr>
+        <td class="api-list">SplineFaces</td>
+        <td class="api-list">Select spline (NURBS) BRepFace entities.</td>
+      </tr>
+      <tr>
+        <td class="api-list">Edges</td>
+        <td class="api-list">Select BRepEdge entities of any shape.</td>
+      </tr>
+      <tr>
+        <td class="api-list">LinearEdges</td>
+        <td class="api-list">Select linear BRepEdge entities.</td>
+      </tr>
+      <tr>
+        <td class="api-list">CircularEdges</td>
+        <td class="api-list">Select circular BRepEdge (circles and arcs) entities.</td>
+      </tr>
+      <tr>
+        <td class="api-list">EllipticalEdges</td>
+        <td class="api-list">Select elliptical BRepEdge (full ellipses and elliptical arcs) entities.</td>
+      </tr>
+      <tr>
+        <td class="api-list">TangentEdges</td>
+        <td class="api-list">Select a BRepEdge that connects faces that are tangent along that edge.</td>
+      </tr>
+      <tr>
+        <td class="api-list">NonTangentEdges</td>
+        <td class="api-list">Select a BRepEdge that connects faces that are not tangent along that edge.</td>
+      </tr>
+      <tr>
+        <td class="api-list">Vertices</td>
+        <td class="api-list">Select BRepVertex entities.</td>
+      </tr>
+      <tr>
+        <td class="api-list">RootComponents</td>
+        <td class="api-list">Select root Component objects.</td>
+      </tr>
+      <tr>
+        <td class="api-list">Occurrences</td>
+        <td class="api-list">Select Occurrence objects.</td>
+      </tr>
+      <tr>
+        <td class="api-list">Sketches</td>
+        <td class="api-list">Select Sketch objects.</td>
+      </tr>
+      <tr>
+        <td class="api-list">SketchConstraints</td>
+        <td class="api-list">Selects sketch geometric and dimensions constraints.</td>
+      </tr>
+      <tr>
+        <td class="api-list">Profiles</td>
+        <td class="api-list">Select profiles.</td>
+      </tr>
+      <tr>
+        <td class="api-list">Texts</td>
+        <td class="api-list">Select sketch text.</td>
+      </tr>
+      <tr>
+        <td class="api-list">SketchCurves</td>
+        <td class="api-list">Select any shape of sketch entity.</td>
+      </tr>
+      <tr>
+        <td class="api-list">SketchLines</td>
+        <td class="api-list">Select SketchLine entities.</td>
+      </tr>
+      <tr>
+        <td class="api-list">SketchCircles</td>
+        <td class="api-list">Select SketchCircle entities.</td>
+      </tr>
+      <tr>
+        <td class="api-list">SketchPoints</td>
+        <td class="api-list">Select SketchPoint entities.</td>
+      </tr>
+      <tr>
+        <td class="api-list">ConstructionPoints</td>
+        <td class="api-list">Select ConstructionPoint entities.</td>
+      </tr>
+      <tr>
+        <td class="api-list">ConstructionLines</td>
+        <td class="api-list">Select ConstructionLine entities.</td>
+      </tr>
+      <tr>
+        <td class="api-list">ConstructionPlanes</td>
+        <td class="api-list">Select ConstructionPlane entities.</td>
+      </tr>
+      <tr>
+        <td class="api-list">Features</td>
+        <td class="api-list">Select any type of feature.</td>
+      </tr>
+      <tr>
+        <td class="api-list">Canvases</td>
+        <td class="api-list">Select canvases.</td>
+      </tr>
+      <tr>
+        <td class="api-list">Decals</td>
+        <td class="api-list">Select decals.</td>
+      </tr>
+      <tr>
+        <td class="api-list">JointOrigins</td>
+        <td class="api-list">Select joint origins.</td>
+      </tr>
+      <tr>
+        <td class="api-list">Joints</td>
+        <td class="api-list">Select joints.</td>
+      </tr>
+	  </Table><br><br><hr>
+  </body>
+  
+  <br />
+<br />
+<div id="CopyrightNotice" style="display:none;">
+  <hr />
+  <table width="100%" style="font-size:15">
+	<tr>
+	  <td align="left">
+		&copy; Copyright 2025 Autodesk, Inc.
+	  </td>
+	  <td align="right">
+		<a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(SelectionFilters_UM)">Comment on this page.</a>
+	  </td>
+	</tr>
+  </table>
+</div>
+</html>

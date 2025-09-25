@@ -1,0 +1,130 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/ProgressBar_show.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="05/04/2024">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="ProgressBar_show">
+    <meta name="description" content="ProgressBar.show Method">
+    <meta name="topicid" content="GUID-DEADB451-49A4-4F00-8E2A-9B220A77B9EE">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>ProgressBar.show Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">ProgressBar.show Method</h1>
+
+          Parent Object: <a href="ProgressBar.htm">ProgressBar</a><br>Defined in namespace "adsk::core" and the header file is &lt;Core/UserInterface/ProgressBar.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">This method displays a message in the progress bar in the lower-right corner of the Fusion window. The progress bar can be used to display a continually updated message indicating the progress of a process. The progress is determined by comparing the current progress value with the minimum and maximum values.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"progressBar_var" is a variable referencing a <a href="ProgressBar.htm">ProgressBar</a> object.<code><pre class="api-code"><span style="color:blue"># Uses no optional arguments.</span><br />returnValue = progressBar_var.<b>show</b>(message, minimumValue, maximumValue)<br /><br /><span style="color:blue"># Uses optional arguments.</span><br />returnValue = progressBar_var.<b>show</b>(message, minimumValue, maximumValue, isModal)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"progressBar_var" is a variable referencing a <a href="ProgressBar.htm">ProgressBar</a> object.<br /><br /><code><pre class="api-code">#include &lt;Core/UserInterface/ProgressBar.h&gt;<br /><br /><span style="color:blue">// Uses no optional arguments.</span><br />returnValue = progressBar_var-&gt;<b>show</b>(message, minimumValue, maximumValue);<br /><br /><span style="color:blue">// Uses optional arguments.</span><br />returnValue = progressBar_var-&gt;<b>show</b>(message, minimumValue, maximumValue, isModal);</pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;">boolean</td>
+        <td class="api-list">Returns true if successful.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">message</td>
+        <td class="api-list">string</td>
+        <td class="api-list">Specifies the message that will be displayed in the progress bar. The following symbols can be used to display values. "%p" is replaced by the percentage completed. "%v" is replaced by the current value. "%m" is replaced by the total number of steps. For example, the message "Processing section %v of %m." will result in the message "Processing section 1 of 10." to be displayed if the maximum value is 10 and the current value is 1.<br/><br/> An empty string can be specified if you don't want a message and use only the progress meter.</td>
+      </tr>
+      <tr>
+        <td class="api-list">minimumValue</td>
+        <td class="api-list">integer</td>
+        <td class="api-list">Specifies the minimum value of the progress. This value and the maximum and progress values to compute the current percentage complete. This is the initial progress value when the progress bar is first displayed.</td>
+      </tr>
+      <tr>
+        <td class="api-list">maximumValue</td>
+        <td class="api-list">integer</td>
+        <td class="api-list">Specifies the maximum value of the progress. This value and the minimum and progress values are used to compute the current percentage completion.</td>
+      </tr>
+      <tr>
+        <td class="api-list">isModal</td>
+        <td class="api-list">boolean</td>
+        <td class="api-list">Specifies if the progress bar should be modal or not. If modal, the progress bar takes over the UI of Fusion, and the user cannot interact with any of the Fusion user interface. You need to be careful when using a modal dialog to make sure you hide the progress bar when you're finished or have an error condition that causes you to abort because otherwise, the user will need to kill the Fusion process.<br /><br /> This is an optional argument whose default value is False.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version May 2024<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(ProgressBar.show%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

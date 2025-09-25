@@ -1,0 +1,314 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/LibraryItemSample.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="LibraryItemSample_Sample">
+    <meta name="description" content="Library Item API Sample Sample">
+    <meta name="topicid" content="GUID-d7b12261-f874-4ad5-aa4f-251ab2a5b629">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Library Item API Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Library Item API Sample</h1>
+    <h2 class="api">
+          Description
+        </h2><p>Demonstrates how to examine library items using the API.</p>
+<p>To use the sample, create a new Python or C++ script and copy and paste this code, replacing the existing default code. The script will search for and record all components and library items in the current project. They are displayed in a dialog when the script has finished.</p><h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#C++">C++</a></li>
+        <li><a href="#Python">Python</a></li>
+      </ul>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code"><span style="color:blue">// We will activate the Design Environment before identifying components and/or library items if they exist.</span>
+<span style="color:blue">// Library items are commonly used components such as fasteners that may include nuts, bolts, washers and screws.</span>
+<span style="color:blue">// They may be utilised across many projects, especially those including assemblies.</span>
+
+#include &lt;Core/CoreAll.h&gt;
+#include &lt;Fusion/FusionAll.h&gt;
+
+using namespace adsk::core;
+using namespace adsk::fusion;
+
+Ptr&lt;Application&gt; app;
+Ptr&lt;UserInterface&gt; ui;
+
+<span style="color:blue">// Function to concatenate a list of strings punctuated by linefeeds into a single string.</span>
+std::string concatenateStrings(const std::vector&lt;std::string&gt;& stringList)
+{
+    std::string concatenatedString;
+    for (const auto& str : stringList)
+    {
+        concatenatedString += str + "\n";
+    }
+    return concatenatedString;
+}
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    <span style="color:blue">// Initialisation.</span>
+    app = Application::get();
+    if (!app)
+        return false;
+
+    ui = app-&gt;userInterface();
+
+    <span style="color:blue">// Ensure we are in the Design environment.</span>
+    Ptr&lt;Workspace&gt; designWorkspace = ui-&gt;workspaces()-&gt;itemById("FusionSolidEnvironment");
+    if (ui-&gt;activeWorkspace() != designWorkspace)
+    {
+        designWorkspace-&gt;activate();
+    }
+
+    <span style="color:blue">// Assume initially we have no library components.</span>
+    std::string resultMessage = "This design has no library items.";
+    std::string resultText = resultMessage;
+    std::string indent1 = "      ";
+    std::string indent2 = "\t";
+
+    <span style="color:blue">// Initialise a list of non - library components with a heading.</span>
+    std::vector&lt;std::string&gt; nonlib = {"Components"};
+
+    <span style="color:blue">// Initialise a list of library item components with a heading.</span>
+    std::vector&lt;std::string&gt; output = {"Library Components"};
+
+    Ptr&lt;Design&gt; design = app-&gt;activeProduct();
+    if (design)
+    {
+        <span style="color:blue">// Get the 'LibraryItem' property group in the root component of the design.</span>
+
+        auto allComponents = design-&gt;allComponents();
+        auto allCompCount = allComponents-&gt;count();
+
+        <span style="color:blue">// Iterate over all components.</span>
+        for (auto i = 0; i &lt; allCompCount; ++i)
+        {
+            auto component = allComponents-&gt;item(i);
+
+            <span style="color:blue">// Concentrate first on library items.</span>
+            if (component-&gt;isLibraryItem())
+            {
+                <span style="color:blue">// Capture and indent the component name.</span>
+                output.push_back(indent1 + component-&gt;name());
+
+                <span style="color:blue">// Get a list of available library items.</span>
+                auto propertyGroups = component-&gt;propertyGroups();
+                auto groupLibraryItem = propertyGroups-&gt;itemById("libraryItem");
+
+                <span style="color:blue">// Iterate over all library items.</span>
+                auto countLibProps = groupLibraryItem-&gt;count();
+                for (int j = 0; j &lt; countLibProps; ++j)
+                {
+                    auto property = groupLibraryItem-&gt;item(j);
+                    auto propName = property-&gt;name();
+
+                    <span style="color:blue">// Get string value from string property.</span>
+                    auto stringProperty =
+                        static_cast&lt;StringProperty*&gt;(property-&gt;queryInterface(StringProperty::classType()));
+                    output.push_back(indent2 + propName + " = " + stringProperty-&gt;value());
+                }
+                <span style="color:blue">// Provide an extra linebreak.</span>
+                output.push_back(indent1);
+            }
+            else
+            {
+                <span style="color:blue">// Indent the names of any non - library items.</span>
+                nonlib.push_back(indent1 + component-&gt;name());
+            }
+        }
+        <span style="color:blue">// Overwrite our reassuring message with the results if there are any.</span>
+        if ((std::size(output) &gt; 1) || (std::size(nonlib) &gt; 2))
+        {
+            resultText = concatenateStrings(nonlib);
+            resultText += "\n";
+            resultText += concatenateStrings(output);
+
+            resultMessage = "The results are displayed in the TEXT COMMANDS window.";
+        }
+        Ptr&lt;TextCommandPalette&gt; textPalette = ui-&gt;palettes()-&gt;itemById("TextCommands");
+        if (!textPalette-&gt;isVisible())
+        {
+            textPalette-&gt;isVisible(true);
+            adsk::doEvents();
+        }
+        app-&gt;log(resultText);
+
+        <span style="color:blue">// Indicate in a messageBox that the script has finished</span>
+        ui-&gt;messageBox(
+            resultMessage,
+            "Library Items Sample\t\t\t\t\t",
+            MessageBoxButtonTypes::OKButtonType,
+            MessageBoxIconTypes::InformationIconType);
+    }
+
+    return true;
+}</pre>
+      </div>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code"><span style="color:blue"># We will activate the Design Environment before identifying components and/or library items if they exist.</span>
+<span style="color:blue"># Library items are commonly used components such as fasteners that may include nuts, bolts, washers and screws.</span>
+<span style="color:blue"># They may be utilised across many projects, especially those including assemblies.</span>
+
+import adsk.core, adsk.fusion, traceback
+
+def run(context):
+    ui = None
+    try:
+
+        <span style="color:blue"># Initialisation.</span>
+        app = adsk.core.Application.get()
+        ui  = app.userInterface
+
+        <span style="color:blue"># Ensure we are in the Design environment.</span>
+        designWorkspace: adsk.core.Workspace = ui.workspaces.itemById("FusionSolidEnvironment")
+        if ui.activeWorkspace != designWorkspace:        
+            designWorkspace.activate()
+
+        <span style="color:blue"># Assume initially we have no library components.</span>
+        resultMessage = 'This design has no library items.'
+        resultText = resultMessage
+        indent1 = '        '
+        indent2 = '\t'
+        messageBoxLineLimit = 25
+
+        <span style="color:blue"># Initialise a list of non-library components with a heading.</span>
+        nonlib: list[str] = ['Components']
+
+        <span style="color:blue"># Initialise a list of library item components with a heading.</span>
+        output: list[str] = ['Library Components']
+
+        design = adsk.fusion.Design.cast(app.activeProduct)
+        if design:
+
+            <span style="color:blue"># Get the 'LibraryItem' property group in the root component of the design.</span>
+            allComponents: adsk.fusion.Components = design.allComponents
+
+            <span style="color:blue"># Iterate over all components.</span>
+            for i in range(allComponents.count):
+                component: adsk.fusion.Component = allComponents.item(i)
+
+                <span style="color:blue"># Concentrate first on library items.</span>
+                if component.isLibraryItem:
+                    
+                    <span style="color:blue"># Capture and indent the component name.</span>
+                    output.append(f'{indent1}{component.name}')
+
+                    <span style="color:blue"># Get a list of available library items.</span>
+                    propertyGroups: adsk.core.PropertyGroups = component.propertyGroups
+                    groupLibraryItem: adsk.core.PropertyGroup = propertyGroups.itemById('libraryItem')
+
+                    <span style="color:blue"># Iterate over all library items.</span>
+                    for j in range(groupLibraryItem.count):
+                        property: adsk.core.Property = groupLibraryItem.item(j)
+                        
+                        <span style="color:blue"># Get string value from string property.</span>
+                        stringProperty = adsk.core.StringProperty.cast(property)
+                        output.append(f'{indent2}{property.name}  = {stringProperty.value}')
+                    
+                    <span style="color:blue"># Provide an extra linebreak.</span>
+                    output.append(indent1)
+                else:
+                    <span style="color:blue"># Indent the names of any non-library items.</span>
+                    nonlib.append(f'{indent1}{component.name}')
+
+        <span style="color:blue"># Overwrite our reassuring message with the results if there are any.</span>
+        if len(output) &gt; 1 or len(nonlib) &gt; 2:
+            resultLines = nonlib + [indent1] + output
+            resultMessage = '\n'.join(resultLines[0:messageBoxLineLimit])
+            if len(resultLines) &gt;= messageBoxLineLimit:
+                resultMessage += '\n...\n\nThe full results are displayed in the TEXT COMMANDS window.' 
+            resultText = '\n'.join(resultLines)
+
+        <span style="color:blue"># Display our full conclusions in the text palette</span>
+        textPalette = ui.palettes.itemById('TextCommands')
+        if not textPalette.isVisible:
+            textPalette.isVisible = True
+            adsk.doEvents()
+        app.log(resultText)
+
+        <span style="color:blue"># Display our possibly truncated conclusions in a messageBox.</span>
+        ui.messageBox(
+            resultMessage,
+            'Library Items Sample' + indent2 * 5,
+            adsk.core.MessageBoxButtonTypes.OKButtonType, 
+            adsk.core.MessageBoxIconTypes.InformationIconType)
+
+    <span style="color:blue"># Capture and highlight any reason for error</span>
+    except Exception as e:
+        if ui:
+            ui.messageBox(
+                f'Failed: {e}\n{format(traceback.format_exc())}',
+                'Unable to continue',
+                adsk.core.MessageBoxButtonTypes.OKButtonType, 
+                adsk.core.MessageBoxIconTypes.CriticalIconType)</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(LibraryItemSample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

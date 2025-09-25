@@ -1,0 +1,2637 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/CustomGraphicsSample.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="CustomGraphicsSample_Sample">
+    <meta name="description" content="Custom Graphics Sample Sample">
+    <meta name="topicid" content="GUID-fb436dae-65fd-11e7-ac2f-3417ebc87622">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Custom Graphics Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Custom Graphics Sample</h1>
+    <h2 class="api">
+          Description
+        </h2><p>A sample demonstrating how to create custom graphics entities.</p>
+<p>To use the sample, create a new Python or C++ script and copy and paste this code, replacing the default code.  You also need to unpack this zip file which contains a <a href="../ExtraFiles/GraphicsSampleResources.zip">resource folder</a> into the same folder where the source code file (.py or .cpp) is.</p><h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#C++">C++</a></li>
+        <li><a href="#Python">Python</a></li>
+      </ul>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code">#include &lt;Core/Utils.h&gt;
+#include &lt;Core/Application/Application.h&gt;
+#include &lt;Core/Application/Color.h&gt;
+#include &lt;Core/Application/Document.h&gt;
+#include &lt;Core/Application/ObjectCollection.h&gt;
+#include &lt;Core/Application/Product.h&gt;
+#include &lt;Core/Application/Products.h&gt;
+#include &lt;Core/Application/ValueInput.h&gt;
+#include &lt;Core/Geometry/Arc3D.h&gt;
+#include &lt;Core/Geometry/Circle3D.h&gt;
+#include &lt;Core/Geometry/BoundingBox3D.h&gt;
+#include &lt;Core/Geometry/Ellipse3D.h&gt;
+#include &lt;Core/Geometry/EllipticalArc3D.h&gt;
+#include &lt;Core/Geometry/Line3D.h&gt;
+#include &lt;Core/Geometry/NurbsCurve3D.h&gt;
+#include &lt;Core/Geometry/Point2D.h&gt;
+#include &lt;Core/Geometry/Point3D.h&gt;
+#include &lt;Core/Geometry/Vector2D.h&gt;
+#include &lt;Core/Geometry/Vector3D.h&gt;
+#include &lt;Core/Geometry/Matrix3D.h&gt;
+#include &lt;Core/Materials/Appearance.h&gt;
+#include &lt;Core/Materials/Appearances.h&gt;
+#include &lt;Core/Materials/MaterialLibraries.h&gt;
+#include &lt;Core/Materials/MaterialLibrary.h&gt;
+#include &lt;Core/UserInterface/UserInterface.h&gt;
+#include &lt;Core/UserInterface/CommandCreatedEventHandler.h&gt;
+#include &lt;Core/UserInterface/CommandCreatedEvent.h&gt;
+#include &lt;Core/UserInterface/CommandCreatedEventArgs.h&gt;
+#include &lt;Core/UserInterface/CommandEvent.h&gt;
+#include &lt;Core/UserInterface/CommandEventArgs.h&gt;
+#include &lt;Core/UserInterface/CommandEventHandler.h&gt;
+#include &lt;Core/UserInterface/InputChangedEvent.h&gt;
+#include &lt;Core/UserInterface/InputChangedEventArgs.h&gt;
+#include &lt;Core/UserInterface/InputChangedEventHandler.h&gt;
+#include &lt;Core/UserInterface/Command.h&gt;
+#include &lt;Core/UserInterface/CommandDefinition.h&gt;
+#include &lt;Core/UserInterface/CommandDefinitions.h&gt;
+#include &lt;Core/UserInterface/CommandInputs.h&gt;
+#include &lt;Core/UserInterface/ValueCommandInput.h&gt;
+#include &lt;Core/UserInterface/StringValueCommandInput.h&gt;
+#include &lt;Core/UserInterface/BoolValueCommandInput.h&gt;
+#include &lt;Core/UserInterface/ButtonRowCommandInput.h&gt;
+#include &lt;Core/UserInterface/DropDownCommandInput.h&gt;
+#include &lt;Core/UserInterface/Selection.h&gt;
+#include &lt;Core/UserInterface/SelectionCommandInput.h&gt;
+#include &lt;Core/UserInterface/FloatSliderCommandInput.h&gt;
+#include &lt;Core/UserInterface/IntegerSliderCommandInput.h&gt;
+#include &lt;Core/UserInterface/FloatSpinnerCommandInput.h&gt;
+#include &lt;Core/UserInterface/GroupCommandInput.h&gt;
+#include &lt;Core/UserInterface/IntegerSpinnerCommandInput.h&gt;
+#include &lt;Core/UserInterface/ListItems.h&gt;
+#include &lt;Core/UserInterface/ListItem.h&gt;
+#include &lt;Core/UserInterface/DistanceValueCommandInput.h&gt;
+#include &lt;Core/UserInterface/TableCommandInput.h&gt;
+
+#include &lt;CAM/CAM/CAM.h&gt;
+
+#include &lt;Fusion/BRep/BRepBody.h&gt;
+#include &lt;Fusion/Components/Component.h&gt;
+#include &lt;Fusion/Fusion/Design.h&gt;
+<span style="color:blue">// #include &lt;Fusion/Graphics/CustomGraphicsEntity.h&gt;</span>
+#include &lt;Fusion/Graphics/CustomGraphicsAppearanceColorEffect.h&gt;
+#include &lt;Fusion/Graphics/CustomGraphicsBasicMaterialColorEffect.h&gt;
+#include &lt;Fusion/Graphics/CustomGraphicsBillBoard.h&gt;
+#include &lt;Fusion/Graphics/CustomGraphicsSolidColorEffect.h&gt;
+#include &lt;Fusion/Graphics/CustomGraphicsVertexColorEffect.h&gt;
+#include &lt;Fusion/Graphics/CustomGraphicsViewPlacement.h&gt;
+#include &lt;Fusion/Graphics/CustomGraphicsViewScale.h&gt;
+#include &lt;Fusion/Graphics/CustomGraphicsBRepBody.h&gt;
+#include &lt;Fusion/Graphics/CustomGraphicsCoordinates.h&gt;
+#include &lt;Fusion/Graphics/CustomGraphicsCurve.h&gt;
+#include &lt;Fusion/Graphics/CustomGraphicsGroup.h&gt;
+#include &lt;Fusion/Graphics/CustomGraphicsGroups.h&gt;
+#include &lt;Fusion/Graphics/CustomGraphicsLines.h&gt;
+#include &lt;Fusion/Graphics/CustomGraphicsMesh.h&gt;
+#include &lt;Fusion/Graphics/CustomGraphicsText.h&gt;
+#include &lt;Fusion/Graphics/CustomGraphicsPointSet.h&gt;
+#include &lt;Fusion/Sketch/Sketch.h&gt;
+#include &lt;Fusion/Sketch/SketchArc.h&gt;
+#include &lt;Fusion/Sketch/SketchEllipticalArc.h&gt;
+#include &lt;Fusion/Sketch/SketchCircle.h&gt;
+#include &lt;Fusion/Sketch/SketchEllipse.h&gt;
+#include &lt;Fusion/Sketch/SketchFittedSpline.h&gt;
+#include &lt;Fusion/Sketch/SketchLine.h&gt;
+
+#include &lt;sstream&gt;
+#include &lt;map&gt;
+#include &lt;algorithm&gt;
+#include &lt;math.h&gt;
+
+using namespace adsk::core;
+using namespace adsk::fusion;
+using namespace adsk::cam;
+
+namespace
+{
+const double pi = 4.0 * atan(1.0);
+}
+
+Ptr&lt;Application&gt; _app;
+Ptr&lt;UserInterface&gt; _ui;
+Ptr&lt;Design&gt; _des;
+Ptr&lt;CustomGraphicsGroups&gt; _cgGroups;
+Ptr&lt;Point3D&gt; _anchorPt;
+
+<span style="color:blue">// Global</span>
+const std::string _commandId = "CustomGraphicsSample_CPP";
+const std::string _colorEffect_solid_id = "SolidColorEfect";
+const std::string _colorEffect_basicMaterial_id = "BasicMaterialColorEffect";
+const std::string _colorEffect_appearance_id = "AppearanceColorEffect";
+const std::string _colorEffect_vertex_id = "VertexColorEffect";
+const std::string _pointSetImage = "resources/16x16.png";
+const std::string _solidLine_id = "Solid Line";
+const std::string _centerLine_id = "Center Line";
+const std::string _dashedLine_id = "Dashed Line";
+const std::string _dotLine_id = "Dot Line";
+const std::string _phantomLine_id = "Phantom Line";
+const std::string _tracksLine_id = "Tracks Line";
+const std::string _zigZagLine_id = "ZigZag Line";
+int _numTeeth = 5;
+double _thickness = 0.5 * 2.54;
+double _scaleFactor = 10; <span style="color:blue">// _scaleFactor is used to limit the size of pixel-scaled model</span>
+
+<span style="color:blue">// Global command inputs</span>
+Ptr&lt;DropDownCommandInput&gt; _customGraphicsObj;
+Ptr&lt;DropDownCommandInput&gt; _colorEffects;
+Ptr&lt;IntegerSliderCommandInput&gt; _red;
+Ptr&lt;IntegerSliderCommandInput&gt; _green;
+Ptr&lt;IntegerSliderCommandInput&gt; _blue;
+Ptr&lt;FloatSliderCommandInput&gt; _opacity;
+Ptr&lt;FloatSliderCommandInput&gt; _glossiness;
+Ptr&lt;SelectionCommandInput&gt; _selection;
+Ptr&lt;DistanceValueCommandInput&gt; _transform;
+Ptr&lt;DropDownCommandInput&gt; _materialLibList;
+Ptr&lt;DropDownCommandInput&gt; _appearanceList;
+Ptr&lt;StringValueCommandInput&gt; _appearanceFilter;
+<span style="color:blue">// Ptr&lt;StringValueCommandInput&gt; _text;</span>
+Ptr&lt;TableCommandInput&gt; _coordTable;
+Ptr&lt;BoolValueCommandInput&gt; _add;
+Ptr&lt;BoolValueCommandInput&gt; _addStrip;
+Ptr&lt;BoolValueCommandInput&gt; _delete;
+Ptr&lt;BoolValueCommandInput&gt; _isLineStrip;
+Ptr&lt;DropDownCommandInput&gt; _lineStylePattern;
+Ptr&lt;IntegerSliderCommandInput&gt; _lineStyleWeight;
+Ptr&lt;IntegerSliderCommandInput&gt; _lineStyleScale;
+
+Ptr&lt;GroupCommandInput&gt; _viewPlacementGroup;
+Ptr&lt;ButtonRowCommandInput&gt; _viewCorner;
+Ptr&lt;GroupCommandInput&gt; _viewScaleGroup;
+Ptr&lt;FloatSliderCommandInput&gt; _pixelScale;
+Ptr&lt;GroupCommandInput&gt; _billboardingGroup;
+Ptr&lt;ButtonRowCommandInput&gt; _billboardingStyle;
+
+<span style="color:blue">// Create the command definition.</span>
+static Ptr&lt;CommandDefinition&gt; createCommandDefinition()
+{
+    Ptr&lt;CommandDefinitions&gt; commandDefinitions = _ui-&gt;commandDefinitions();
+    if (!commandDefinitions)
+        return nullptr;
+
+    <span style="color:blue">// Be fault tolerant in case the command is already added.</span>
+    Ptr&lt;CommandDefinition&gt; cmDef = commandDefinitions-&gt;itemById(_commandId);
+    if (!cmDef)
+    {
+        cmDef = commandDefinitions-&gt;addButtonDefinition(_commandId, "CustomGraphicsSample", "Custom Graphics Sample");
+    }
+
+    return cmDef;
+}
+
+<span style="color:blue">// Add a row representing a coordinate (x, y, z)</span>
+static void addRow(Ptr&lt;TableCommandInput&gt; tableInput)
+{
+    if (!tableInput)
+        return;
+
+    static size_t rowNumber = 0;
+    std::stringstream rowId;
+    rowId &lt;&lt; rowNumber;
+    Ptr&lt;CommandInputs&gt; tableChildInputs = tableInput-&gt;commandInputs();
+    Ptr&lt;CommandInput&gt; xValueInput = tableChildInputs-&gt;addValueInput(
+        tableInput-&gt;id() + "_x" + rowId.str(), "Value", "cm", ValueInput::createByReal(static_cast&lt;double&gt;(rowNumber)));
+    Ptr&lt;CommandInput&gt; yValueInput = tableChildInputs-&gt;addValueInput(
+        tableInput-&gt;id() + "_y" + rowId.str(), "Value", "cm", ValueInput::createByReal(static_cast&lt;double&gt;(rowNumber)));
+    Ptr&lt;CommandInput&gt; zValueInput = tableChildInputs-&gt;addValueInput(
+        tableInput-&gt;id() + "_z" + rowId.str(), "Value", "cm", ValueInput::createByReal(static_cast&lt;double&gt;(rowNumber)));
+
+    int row = tableInput-&gt;rowCount();
+    tableInput-&gt;addCommandInput(xValueInput, row, 0);
+    tableInput-&gt;addCommandInput(yValueInput, row, 1);
+    tableInput-&gt;addCommandInput(zValueInput, row, 2);
+
+    rowNumber = rowNumber + 1;
+}
+
+static void addLineStrip(Ptr&lt;TableCommandInput&gt; tableInput)
+{
+    if (!tableInput)
+        return;
+
+    static size_t stripNumber = 0;
+    std::stringstream stripId;
+    stripId &lt;&lt; stripNumber;
+
+    Ptr&lt;CommandInputs&gt; tableChildInputs = tableInput-&gt;commandInputs();
+    Ptr&lt;StringValueCommandInput&gt; strInput = tableChildInputs-&gt;addStringValueInput(
+        tableInput-&gt;id() + "_strip" + stripId.str(), "Line Strip", "-- Line Strip --");
+    if (!strInput)
+        return;
+    strInput-&gt;isReadOnly(true);
+
+    int row = tableInput-&gt;rowCount();
+    tableInput-&gt;addCommandInput(strInput, row, 0, 0, 2);
+
+    stripNumber = stripNumber + 1;
+}
+
+static void replaceItems(Ptr&lt;DropDownCommandInput&gt; cmdInput, std::vector&lt;std::string&gt; newItems)
+{
+    if (!cmdInput)
+        return;
+    Ptr&lt;ListItems&gt; listItems = cmdInput-&gt;listItems();
+    if (!listItems)
+        return;
+    listItems-&gt;clear();
+    Ptr&lt;ListItem&gt; itemNone = listItems-&gt;add("None", true);
+    if (!itemNone)
+        return;
+    itemNone-&gt;isSelected(true);
+
+    if (newItems.size() &gt; 0)
+    {
+        for (std::string str : newItems)
+        {
+            listItems-&gt;add(str, false);
+        }
+        if (listItems-&gt;count() &gt; 1)
+        {
+            Ptr&lt;ListItem&gt; item1 = listItems-&gt;item(1);
+            Ptr&lt;ListItem&gt; item0 = listItems-&gt;item(0); <span style="color:blue">// item "None"</span>
+            if (!item1 || !item0)
+                return;
+            item1-&gt;isSelected(true);
+            item0-&gt;deleteMe();
+        }
+    }
+}
+
+static std::vector&lt;std::string&gt; getAppearancesFromLib(const std::string& libName, const std::string& filterExp)
+{
+    std::vector&lt;std::string&gt; appearanceList;
+
+    static std::map&lt;std::string, std::vector&lt;std::string&gt;&gt; appearanceMap;
+    if (appearanceMap.find(libName) != appearanceMap.end())
+    {
+        appearanceList = appearanceMap[libName];
+    }
+    else
+    {
+        if (!_app)
+            return std::vector&lt;std::string&gt;();
+
+        <span style="color:blue">// get appearances according to libName</span>
+        Ptr&lt;MaterialLibraries&gt; matLibs = _app-&gt;materialLibraries();
+        if (!matLibs)
+            return std::vector&lt;std::string&gt;();
+        Ptr&lt;MaterialLibrary&gt; matLib = matLibs-&gt;itemByName(libName);
+        if (!matLib)
+            return std::vector&lt;std::string&gt;();
+        Ptr&lt;Appearances&gt; appearances = matLib-&gt;appearances();
+        if (!appearances)
+            return std::vector&lt;std::string&gt;();
+
+        for (int i = 0; i &lt; appearances-&gt;count(); ++i)
+        {
+            if (Ptr&lt;Appearance&gt; appear = appearances-&gt;item(i))
+                appearanceList.push_back(appear-&gt;name());
+        }
+        appearanceMap[libName] = appearanceList;
+    }
+
+    <span style="color:blue">// apply filter</span>
+    std::string lowerFilterExp(filterExp);
+    if (!filterExp.empty())
+    {
+        std::transform(filterExp.begin(), filterExp.end(), lowerFilterExp.begin(), ::tolower);
+        std::vector&lt;std::string&gt; filteredList;
+        for (std::string appearanceName : appearanceList)
+        {
+            std::string lowerName(appearanceName);
+            std::transform(appearanceName.begin(), appearanceName.end(), lowerName.begin(), ::tolower);
+            if (lowerName.find(lowerFilterExp) != std::string::npos)
+            {
+                filteredList.push_back(appearanceName);
+            }
+        }
+        appearanceList = filteredList;
+    }
+
+    return appearanceList;
+}
+
+static bool hasAppearance(Ptr&lt;MaterialLibrary&gt; lib)
+{
+    if (!lib)
+        return false;
+    Ptr&lt;Appearances&gt; appearances = lib-&gt;appearances();
+    if (!appearances || appearances-&gt;count() == 0)
+        return false;
+
+    return true;
+}
+
+static std::vector&lt;std::string&gt; getMaterialLibNames()
+{
+    if (!_app)
+        return std::vector&lt;std::string&gt;();
+    Ptr&lt;MaterialLibraries&gt; libs = _app-&gt;materialLibraries();
+    if (!libs)
+        return std::vector&lt;std::string&gt;();
+
+    std::vector&lt;std::string&gt; libNames;
+    for (int i = 0; i &lt; libs-&gt;count(); ++i)
+    {
+        if (Ptr&lt;MaterialLibrary&gt; lib = libs-&gt;item(i))
+        {
+            if (hasAppearance(lib))
+            {
+                libNames.push_back(lib-&gt;name());
+            }
+        }
+    }
+    return libNames;
+}
+
+static Ptr&lt;Appearance&gt; getAppearance(const std::string& libName, const std::string& appearanceName)
+{
+    if (appearanceName.empty() || appearanceName == "None" || !_app)
+        return nullptr;
+
+    if (!_des)
+        return nullptr;
+
+    Ptr&lt;Appearances&gt; appearances = _des-&gt;appearances();
+    if (appearances)
+    {
+        Ptr&lt;Appearance&gt; appearance = appearances-&gt;itemByName(appearanceName);
+        if (appearance)
+            return appearance;
+    }
+
+    Ptr&lt;MaterialLibraries&gt; libs = _app-&gt;materialLibraries();
+    if (!libs)
+        return nullptr;
+    Ptr&lt;MaterialLibrary&gt; lib = libs-&gt;itemByName(libName);
+    if (!lib)
+        return nullptr;
+    appearances = lib-&gt;appearances();
+    if (!appearances)
+        return nullptr;
+    Ptr&lt;Appearance&gt; appearance = appearances-&gt;itemByName(appearanceName);
+    return appearance;
+}
+
+static void applyLinesProperties(Ptr&lt;CustomGraphicsLines&gt; cgLines)
+{
+    if (!cgLines)
+        return;
+    if (_lineStylePattern && _lineStylePattern-&gt;selectedItem())
+    {
+        if (_lineStylePattern-&gt;selectedItem()-&gt;name() == _solidLine_id)
+            cgLines-&gt;lineStylePattern(continuousLineStylePattern);
+        else if (_lineStylePattern-&gt;selectedItem()-&gt;name() == _centerLine_id)
+            cgLines-&gt;lineStylePattern(centerLineStylePattern);
+        else if (_lineStylePattern-&gt;selectedItem()-&gt;name() == _dashedLine_id)
+            cgLines-&gt;lineStylePattern(dashedLineStylePattern);
+        else if (_lineStylePattern-&gt;selectedItem()-&gt;name() == _dotLine_id)
+            cgLines-&gt;lineStylePattern(dotLineStylePattern);
+        else if (_lineStylePattern-&gt;selectedItem()-&gt;name() == _dashedLine_id)
+            cgLines-&gt;lineStylePattern(dashedLineStylePattern);
+        else if (_lineStylePattern-&gt;selectedItem()-&gt;name() == _phantomLine_id)
+            cgLines-&gt;lineStylePattern(phantomLineStylePattern);
+        else if (_lineStylePattern-&gt;selectedItem()-&gt;name() == _tracksLine_id)
+            cgLines-&gt;lineStylePattern(tracksLineStylePattern);
+        else if (_lineStylePattern-&gt;selectedItem()-&gt;name() == _zigZagLine_id)
+            cgLines-&gt;lineStylePattern(zigzagLineStylePattern);
+    }
+
+    if (_lineStyleWeight)
+        cgLines-&gt;weight(static_cast&lt;float&gt;(_lineStyleWeight-&gt;valueOne()));
+    if (_lineStyleScale)
+        cgLines-&gt;lineStyleScale(static_cast&lt;float&gt;(_lineStyleScale-&gt;valueOne()));
+}
+
+static void applyColorEffect(Ptr&lt;CustomGraphicsEntity&gt; cgEnt)
+{
+    if (!_des)
+        return;
+    if (!_colorEffects)
+        return;
+
+    Ptr&lt;ListItem&gt; selected = _colorEffects-&gt;selectedItem();
+    if (!selected)
+        return;
+
+    std::string colorEffectName = selected-&gt;name();
+    Ptr&lt;CustomGraphicsColorEffect&gt; colorEffect = nullptr;
+    if (colorEffectName == _colorEffect_solid_id)
+    {
+        int red = 255, green = 0, blue = 0;
+        if (_red)
+            red = _red-&gt;valueOne();
+        if (_green)
+            green = _green-&gt;valueOne();
+        if (_blue)
+            blue = _blue-&gt;valueOne();
+
+        if (Ptr&lt;Color&gt; solidColor = Color::create(red, green, blue, 255))
+        {
+            colorEffect = CustomGraphicsSolidColorEffect::create(solidColor);
+        }
+    }
+    else if (colorEffectName == _colorEffect_basicMaterial_id)
+    {
+        Ptr&lt;Color&gt; diffuseColor = Color::create(0, 255, 0, 255);
+        Ptr&lt;Color&gt; ambientColor = Color::create(255, 0, 0, 255);
+        Ptr&lt;Color&gt; specularColor = Color::create(0, 0, 255, 255);
+        Ptr&lt;Color&gt; emissiveColor = Color::create(0, 0, 0, 255);
+        double glossiness = 5.0, opacity = 1.0;
+        if (_glossiness)
+            glossiness = _glossiness-&gt;valueOne();
+        if (_opacity)
+            opacity = _opacity-&gt;valueOne();
+        if (diffuseColor && ambientColor && specularColor && emissiveColor)
+        {
+            colorEffect = CustomGraphicsBasicMaterialColorEffect::create(
+                diffuseColor, ambientColor, specularColor, emissiveColor, glossiness, opacity);
+        }
+    }
+    else if (colorEffectName == _colorEffect_appearance_id)
+    {
+        if (!_appearanceList || !_materialLibList)
+            return;
+        Ptr&lt;ListItem&gt; appearanceSelected = _appearanceList-&gt;selectedItem();
+        Ptr&lt;ListItem&gt; libSelected = _materialLibList-&gt;selectedItem();
+        if (!appearanceSelected || !libSelected)
+            return;
+        std::string appearanceName = appearanceSelected-&gt;name();
+        std::string libName = libSelected-&gt;name();
+        Ptr&lt;Appearance&gt; appearance = getAppearance(libName, appearanceName);
+        if (appearance)
+        {
+            Ptr&lt;Appearances&gt; desAppearances = _des-&gt;appearances();
+            if (!desAppearances)
+                return;
+            if (!desAppearances-&gt;itemByName(appearanceName))
+            {
+                appearance = desAppearances-&gt;addByCopy(appearance, appearanceName);
+            }
+            colorEffect = CustomGraphicsAppearanceColorEffect::create(appearance);
+        }
+    }
+    else if (colorEffectName == _colorEffect_vertex_id)
+    {
+        colorEffect = CustomGraphicsVertexColorEffect::create();
+    }
+
+    if (colorEffect && cgEnt)
+        cgEnt-&gt;color(colorEffect);
+}
+
+static void getCoordinatesFromTable(
+    Ptr&lt;TableCommandInput&gt; tableInput, std::vector&lt;double&gt;& vecCoords, std::vector&lt;int&gt;& vecStripLen)
+{
+    vecCoords.clear();
+    vecStripLen.clear();
+    if (_coordTable)
+    {
+        int stripLen = 0;
+        for (int i = 0; i &lt; _coordTable-&gt;rowCount(); ++i)
+        {
+            if (Ptr&lt;ValueCommandInput&gt; xValueInput = tableInput-&gt;getInputAtPosition(i, 0))
+            {
+                Ptr&lt;ValueCommandInput&gt; yValueInput = tableInput-&gt;getInputAtPosition(i, 1);
+                Ptr&lt;ValueCommandInput&gt; zValueInput = tableInput-&gt;getInputAtPosition(i, 2);
+                if (yValueInput && zValueInput)
+                {
+                    vecCoords.push_back(xValueInput-&gt;value());
+                    vecCoords.push_back(yValueInput-&gt;value());
+                    vecCoords.push_back(zValueInput-&gt;value());
+                    ++stripLen;
+                }
+            }
+            else if (Ptr&lt;StringValueCommandInput&gt; lineStripInput = tableInput-&gt;getInputAtPosition(i, 0))
+            {
+                vecStripLen.push_back(stripLen);
+                stripLen = 0;
+            }
+        }
+        vecStripLen.push_back(stripLen);
+    }
+}
+
+static void changeColorEffectVisibility(const std::string& strColorEffectName)
+{
+    if (_red)
+        _red-&gt;isVisible(false);
+    if (_green)
+        _green-&gt;isVisible(false);
+    if (_blue)
+        _blue-&gt;isVisible(false);
+    if (_opacity)
+        _opacity-&gt;isVisible(false);
+    if (_glossiness)
+        _glossiness-&gt;isVisible(false);
+    if (_appearanceList)
+        _appearanceList-&gt;isVisible(false);
+    if (_materialLibList)
+        _materialLibList-&gt;isVisible(false);
+    if (_appearanceFilter)
+        _appearanceFilter-&gt;isVisible(false);
+
+    if (strColorEffectName == _colorEffect_solid_id)
+    {
+        if (_red)
+            _red-&gt;isVisible(true);
+        if (_green)
+            _green-&gt;isVisible(true);
+        if (_blue)
+            _blue-&gt;isVisible(true);
+    }
+    else if (strColorEffectName == _colorEffect_basicMaterial_id)
+    {
+        if (_opacity)
+            _opacity-&gt;isVisible(true);
+        if (_glossiness)
+            _glossiness-&gt;isVisible(true);
+    }
+    else if (strColorEffectName == _colorEffect_appearance_id)
+    {
+        if (_appearanceList)
+            _appearanceList-&gt;isVisible(true);
+        if (_materialLibList)
+            _materialLibList-&gt;isVisible(true);
+        if (_appearanceFilter)
+            _appearanceFilter-&gt;isVisible(true);
+    }
+}
+
+static void changeLineStyleInputsVisibility(const std::string& patternName)
+{
+    if (patternName == _solidLine_id)
+        _lineStyleScale-&gt;isVisible(false);
+    else
+        _lineStyleScale-&gt;isVisible(true);
+}
+
+static void changeCGObjVisibility(const std::string& strObjName)
+{
+    if (_colorEffects)
+    {
+        if (Ptr&lt;ListItems&gt; listItems = _colorEffects-&gt;listItems())
+        {
+            listItems-&gt;clear();
+            listItems-&gt;add(_colorEffect_solid_id, true);
+            listItems-&gt;add(_colorEffect_basicMaterial_id, false);
+            listItems-&gt;add(_colorEffect_appearance_id, false);
+        }
+        _colorEffects-&gt;isVisible(false);
+    }
+    if (_selection)
+    {
+        _selection-&gt;clearSelection();
+        _selection-&gt;clearSelectionFilter();
+        _selection-&gt;setSelectionLimits(0, 0);
+        _selection-&gt;isVisible(false);
+        _selection-&gt;isEnabled(false);
+    }
+    <span style="color:blue">// if (_text)</span>
+    <span style="color:blue">//	_text-&gt;isVisible(false);</span>
+    if (_coordTable)
+        _coordTable-&gt;isVisible(false);
+    if (_isLineStrip)
+        _isLineStrip-&gt;isVisible(false);
+    if (_lineStylePattern)
+        _lineStylePattern-&gt;isVisible(false);
+    if (_lineStyleWeight)
+        _lineStyleWeight-&gt;isVisible(false);
+    if (_lineStyleScale)
+        _lineStyleScale-&gt;isVisible(false);
+
+    changeColorEffectVisibility("None");
+
+    _viewPlacementGroup-&gt;isVisible(false);
+    _viewScaleGroup-&gt;isVisible(false);
+    _billboardingGroup-&gt;isVisible(false);
+
+    if (strObjName == "Mesh")
+    {
+        if (_colorEffects)
+        {
+            _colorEffects-&gt;isVisible(true);
+            if (Ptr&lt;ListItems&gt; listItems = _colorEffects-&gt;listItems())
+            {
+                listItems-&gt;add(_colorEffect_vertex_id, false);
+            }
+            changeColorEffectVisibility(_colorEffect_solid_id);
+            _viewPlacementGroup-&gt;isVisible(true);
+            _viewScaleGroup-&gt;isVisible(true);
+            _billboardingGroup-&gt;isVisible(true);
+        }
+    }
+    else if (strObjName == "Lines")
+    {
+        changeColorEffectVisibility(_colorEffect_solid_id);
+        _lineStylePattern-&gt;isVisible(true);
+        _lineStyleWeight-&gt;isVisible(true);
+        if (_lineStylePattern-&gt;selectedItem()-&gt;name() == _solidLine_id)
+        {
+            _lineStyleScale-&gt;isVisible(true);
+        }
+        _viewPlacementGroup-&gt;isVisible(true);
+        _viewScaleGroup-&gt;isVisible(true);
+        _billboardingGroup-&gt;isVisible(true);
+    }
+    else if (strObjName == "Curve")
+    {
+        if (_selection)
+        {
+            _selection-&gt;isVisible(true);
+            _selection-&gt;isEnabled(true);
+            _selection-&gt;tooltip("select a sketch curve");
+            _selection-&gt;commandPrompt("select a sketch curve");
+            _selection-&gt;addSelectionFilter("SketchCurve");
+            _selection-&gt;setSelectionLimits(1, 1);
+            changeColorEffectVisibility(_colorEffect_solid_id);
+            _lineStyleWeight-&gt;isVisible(true);
+        }
+        _viewPlacementGroup-&gt;isVisible(true);
+        _viewScaleGroup-&gt;isVisible(true);
+        _billboardingGroup-&gt;isVisible(true);
+    }
+    else if (strObjName == "BRep")
+    {
+        if (_colorEffects)
+            _colorEffects-&gt;isVisible(true);
+        if (_selection)
+        {
+            _selection-&gt;isVisible(true);
+            _selection-&gt;isEnabled(true);
+            _selection-&gt;tooltip("select a BRep body");
+            _selection-&gt;commandPrompt("select a BRep body");
+            _selection-&gt;addSelectionFilter("Bodies");
+            _selection-&gt;setSelectionLimits(1, 1);
+            changeColorEffectVisibility(_colorEffect_solid_id);
+        }
+        _viewPlacementGroup-&gt;isVisible(true);
+        _viewScaleGroup-&gt;isVisible(true);
+        _billboardingGroup-&gt;isVisible(true);
+    }
+    <span style="color:blue">// else if (strObjName == "Text") {</span>
+    <span style="color:blue">//	if (_text)</span>
+    <span style="color:blue">//		_text-&gt;isVisible(true);</span>
+    <span style="color:blue">//	changeColorEffectVisibility(_colorEffect_solid_id);</span>
+    <span style="color:blue">// }</span>
+    else if (strObjName == "PointSet - Custom")
+    {
+        if (_coordTable)
+            _coordTable-&gt;isVisible(true);
+        if (_addStrip)
+            _addStrip-&gt;isEnabled(false);
+    }
+    else if (strObjName == "Lines - Custom")
+    {
+        if (_coordTable)
+            _coordTable-&gt;isVisible(true);
+        if (_isLineStrip)
+            _isLineStrip-&gt;isVisible(true);
+        if (_addStrip)
+            _addStrip-&gt;isEnabled(true);
+        changeColorEffectVisibility(_colorEffect_solid_id);
+        _lineStylePattern-&gt;isVisible(true);
+        _lineStyleWeight-&gt;isVisible(true);
+        if (_lineStylePattern-&gt;selectedItem()-&gt;name() == _solidLine_id)
+        {
+            _lineStyleScale-&gt;isVisible(true);
+        }
+    }
+}
+
+static Ptr&lt;Vector2D&gt; rotate2D(double rad, Ptr&lt;Vector2D&gt; vec)
+{
+    if (!vec)
+        return Vector2D::create();
+    double x = vec-&gt;x();
+    double y = vec-&gt;y();
+
+    double newX = x * cos(rad) - y * sin(rad);
+    double newY = x * sin(rad) + y * cos(rad);
+    return Vector2D::create(newX, newY);
+}
+
+static void calculateCoordinates(
+    int numTeeth,
+    <span style="color:blue">/*out*/</span> std::vector&lt;int&gt;& rPts0,
+    <span style="color:blue">/*out*/</span> std::vector&lt;int&gt;& hPts0,
+    <span style="color:blue">/*out*/</span> std::vector&lt;int&gt;& pPts0,
+    <span style="color:blue">/*out*/</span> std::vector&lt;int&gt;& oPts0,
+    <span style="color:blue">/*out*/</span> std::vector&lt;int&gt;& rPts1,
+    <span style="color:blue">/*out*/</span> std::vector&lt;int&gt;& hPts1,
+    <span style="color:blue">/*out*/</span> std::vector&lt;int&gt;& pPts1,
+    <span style="color:blue">/*out*/</span> std::vector&lt;int&gt;& oPts1,
+    <span style="color:blue">/*out*/</span> std::vector&lt;double&gt;& vecCoords,
+    <span style="color:blue">/*out*/</span> std::vector&lt;short&gt;& vecColors)
+{
+    if (numTeeth &lt; 3)
+        return;
+    <span style="color:blue">// holeDia &lt; rootDia &lt; pitchDia &lt; outsideDia</span>
+    double holeDia = 0.5 * 2.54, diametralPitch = 2 / 2.54;
+    double pitchDia = _numTeeth / diametralPitch;
+    double dedendum = 1.157 / diametralPitch;
+    if (fabs((20 * (pi / 180)) - diametralPitch) &lt; 1e-6)
+    {
+        double circularPitch = pi / diametralPitch;
+        if (circularPitch &gt;= 20)
+            dedendum = 1.25 / diametralPitch;
+        else
+            dedendum = (1.2 / diametralPitch) + (.002 * 2.54);
+    }
+    double rootDia = pitchDia - (2 * dedendum);
+    double outsideDia = (_numTeeth + 2) / diametralPitch;
+
+    Ptr&lt;Vector2D&gt; vecRootRadi = Vector2D::create(rootDia / 2, 0);
+    Ptr&lt;Vector2D&gt; vecHoleRadi = Vector2D::create(holeDia / 2, 0);
+    Ptr&lt;Vector2D&gt; vecPitchRadi = Vector2D::create(pitchDia / 2, 0);
+    Ptr&lt;Vector2D&gt; vecOutRadi = Vector2D::create(outsideDia / 2, 0);
+    double unitRadian = pi / numTeeth;
+
+    for (int i = 0; i &lt; 2 * numTeeth; ++i)
+    {
+        if (Ptr&lt;Vector2D&gt; pos = rotate2D(unitRadian * (i - 0.5), vecRootRadi))
+        {
+            double x = pos-&gt;x(), y = pos-&gt;y();
+            rPts0.push_back(static_cast&lt;int&gt;(vecCoords.size() / 3));
+            rPts1.push_back(static_cast&lt;int&gt;(vecCoords.size() / 3 + 1));
+            vecCoords.insert(vecCoords.end(), {x, y, 0, x, y, _thickness});
+            vecColors.insert(vecColors.end(), {255, 0, 255, 128, 255, 0, 255, 128});
+        }
+    }
+    for (int i = 0; i &lt; 2 * numTeeth; ++i)
+    {
+        if (Ptr&lt;Vector2D&gt; pos = rotate2D(unitRadian * (i - 0.5), vecHoleRadi))
+        {
+            double x = pos-&gt;x(), y = pos-&gt;y();
+            hPts0.push_back(static_cast&lt;int&gt;(vecCoords.size() / 3));
+            hPts1.push_back(static_cast&lt;int&gt;(vecCoords.size() / 3 + 1));
+            vecCoords.insert(vecCoords.end(), {x, y, 0, x, y, _thickness});
+            vecColors.insert(vecColors.end(), {255, 0, 0, 128, 255, 0, 0, 128});
+        }
+    }
+    for (int i = 0; i &lt; 2 * numTeeth; ++i)
+    {
+        if (Ptr&lt;Vector2D&gt; pos = rotate2D(unitRadian * (i - 0.5), vecPitchRadi))
+        {
+            double x = pos-&gt;x(), y = pos-&gt;y();
+            pPts0.push_back(static_cast&lt;int&gt;(vecCoords.size() / 3));
+            pPts1.push_back(static_cast&lt;int&gt;(vecCoords.size() / 3 + 1));
+            vecCoords.insert(vecCoords.end(), {x, y, 0, x, y, _thickness});
+            vecColors.insert(vecColors.end(), {0, 0, 255, 128, 0, 0, 255, 128});
+        }
+    }
+    for (int i = 0; i &lt; numTeeth; ++i)
+    {
+        if (Ptr&lt;Vector2D&gt; pos = rotate2D(unitRadian * i * 2, vecOutRadi))
+        {
+            double x = pos-&gt;x(), y = pos-&gt;y();
+            oPts0.push_back(static_cast&lt;int&gt;(vecCoords.size() / 3));
+            oPts1.push_back(static_cast&lt;int&gt;(vecCoords.size() / 3 + 1));
+            vecCoords.insert(vecCoords.end(), {x, y, 0, x, y, _thickness});
+            vecColors.insert(vecColors.end(), {0, 255, 255, 128, 0, 255, 255, 128});
+        }
+    }
+}
+
+static std::vector&lt;int&gt; calculateStripLen(int numTeeth)
+{
+    if (numTeeth &lt; 3)
+        return std::vector&lt;int&gt;();
+
+    std::vector&lt;int&gt; vecStripLen;
+    for (int i = 0; i &lt; numTeeth; ++i)
+        vecStripLen.push_back(6);
+    for (int i = 0; i &lt; 2 * numTeeth; ++i)
+        vecStripLen.push_back(21);
+    for (int i = 0; i &lt; numTeeth; ++i)
+        vecStripLen.push_back(24);
+    for (int i = 0; i &lt; 2 * numTeeth; ++i)
+        vecStripLen.push_back(6);
+    return vecStripLen;
+}
+
+static std::vector&lt;int&gt; calculateTriangles(
+    int numTeeth,
+    std::vector&lt;int&gt; rPts0,
+    std::vector&lt;int&gt; hPts0,
+    std::vector&lt;int&gt; pPts0,
+    std::vector&lt;int&gt; oPts0,
+    std::vector&lt;int&gt; rPts1,
+    std::vector&lt;int&gt; hPts1,
+    std::vector&lt;int&gt; pPts1,
+    std::vector&lt;int&gt; oPts1)
+{
+    if (numTeeth &lt; 3)
+        return std::vector&lt;int&gt;();
+
+    std::vector&lt;int&gt; vertexIndexList;
+    <span style="color:blue">// triangles between teeth</span>
+    for (int i = 0; i &lt; numTeeth; ++i)
+    {
+        int idx0 = (2 * i + 1) % (2 * numTeeth);
+        int idx1 = (2 * i + 2) % (2 * numTeeth);
+        int rPtA0 = rPts0[idx0];
+        int rPtB0 = rPts0[idx1];
+        int rPtA1 = rPts1[idx0];
+        int rPtB1 = rPts1[idx1];
+        vertexIndexList.insert(vertexIndexList.end(), {rPtA0, rPtB0, rPtB1, rPtB1, rPtA1, rPtA0});
+    }
+
+    <span style="color:blue">// triangles on surface0</span>
+    for (int i = 0; i &lt; numTeeth; ++i)
+    {
+        int rPtA = rPts0[i * 2];
+        int rPtB = rPts0[i * 2 + 1];
+        int rPtC = rPts0[(i * 2 + 2) % (2 * numTeeth)];
+        int hPtA = hPts0[i * 2];
+        int hPtB = hPts0[i * 2 + 1];
+        int hPtC = hPts0[(i * 2 + 2) % (2 * numTeeth)];
+        int pPtA = pPts0[i * 2];
+        int pPtB = pPts0[i * 2 + 1];
+        int oPt = oPts0[i];
+        vertexIndexList.insert(vertexIndexList.end(), {hPtB, hPtC, rPtC, rPtC, rPtB, hPtB, rPtA, rPtB, pPtB, pPtB, pPtA,
+                                                       rPtA, hPtA, hPtB, rPtB, rPtB, rPtA, hPtA, pPtA, pPtB, oPt});
+    }
+
+    <span style="color:blue">// triangles on surface1</span>
+    for (int i = 0; i &lt; numTeeth; ++i)
+    {
+        int rPtA = rPts1[i * 2];
+        int rPtB = rPts1[i * 2 + 1];
+        int rPtC = rPts1[(i * 2 + 2) % (2 * numTeeth)];
+        int hPtA = hPts1[i * 2];
+        int hPtB = hPts1[i * 2 + 1];
+        int hPtC = hPts1[(i * 2 + 2) % (2 * numTeeth)];
+        int pPtA = pPts1[i * 2];
+        int pPtB = pPts1[i * 2 + 1];
+        int oPt = oPts1[i];
+        vertexIndexList.insert(vertexIndexList.end(), {hPtC, hPtB, rPtB, rPtB, rPtC, hPtC, rPtB, rPtA, pPtA, pPtA, pPtB,
+                                                       rPtB, hPtB, hPtA, rPtA, rPtA, rPtB, hPtB, pPtB, pPtA, oPt});
+    }
+
+    <span style="color:blue">// triangles on teeth</span>
+    for (int i = 0; i &lt; numTeeth; ++i)
+    {
+        int rPtA0 = rPts0[i * 2];
+        int rPtB0 = rPts0[i * 2 + 1];
+        int pPtA0 = pPts0[i * 2];
+        int pPtB0 = pPts0[i * 2 + 1];
+        int rPtA1 = rPts1[i * 2];
+        int rPtB1 = rPts1[i * 2 + 1];
+        int pPtA1 = pPts1[i * 2];
+        int pPtB1 = pPts1[i * 2 + 1];
+        int oPt0 = oPts0[i];
+        int oPt1 = oPts1[i];
+        vertexIndexList.insert(vertexIndexList.end(), {rPtA1, rPtA0, pPtA0, pPtA0, pPtA1, rPtA1, pPtA1, pPtA0,
+                                                       oPt0,  oPt0,  oPt1,  pPtA1, rPtB0, rPtB1, pPtB1, pPtB1,
+                                                       pPtB0, rPtB0, pPtB0, pPtB1, oPt1,  oPt1,  oPt0,  pPtB0});
+    }
+
+    <span style="color:blue">// triangles on inner face</span>
+    for (int i = 0; i &lt; 2 * numTeeth; ++i)
+    {
+        int hPtA0 = hPts0[i];
+        int hPtB0 = hPts0[(i + 1) % (2 * numTeeth)];
+        int hPtA1 = hPts1[i];
+        int hPtB1 = hPts1[(i + 1) % (2 * numTeeth)];
+        vertexIndexList.insert(vertexIndexList.end(), {hPtA1, hPtB1, hPtB0, hPtB0, hPtA0, hPtA1});
+    }
+
+    return vertexIndexList;
+}
+
+static Ptr&lt;CustomGraphicsMesh&gt; drawMesh(const Ptr&lt;CustomGraphicsGroup&gt;& cgGroup)
+{
+    <span style="color:blue">//  Calculate mesh coordinates</span>
+    std::vector&lt;int&gt; rPts0, hPts0, pPts0, oPts0, rPts1, hPts1, pPts1, oPts1;
+    std::vector&lt;short&gt; vecColors;
+    std::vector&lt;double&gt; vecCoords;
+    calculateCoordinates(_numTeeth, rPts0, hPts0, pPts0, oPts0, rPts1, hPts1, pPts1, oPts1, vecCoords, vecColors);
+    Ptr&lt;CustomGraphicsCoordinates&gt; coordinates = CustomGraphicsCoordinates::create(vecCoords);
+    if (!coordinates)
+        return nullptr;
+    coordinates-&gt;colors(vecColors);
+
+    <span style="color:blue">// Calculate mesh triangles</span>
+    std::vector&lt;int&gt; vertexIndexList =
+        calculateTriangles(_numTeeth, rPts0, hPts0, pPts0, oPts0, rPts1, hPts1, pPts1, oPts1);
+    <span style="color:blue">// Add Custom Graphics mesh</span>
+    if (!cgGroup)
+        return nullptr;
+    return cgGroup-&gt;addMesh(coordinates, vertexIndexList, std::vector&lt;double&gt;(), std::vector&lt;int&gt;());
+}
+
+static Ptr&lt;CustomGraphicsLines&gt; drawLines(const Ptr&lt;CustomGraphicsGroup&gt;& cgGroup)
+{
+    if (!cgGroup)
+        return nullptr;
+
+    <span style="color:blue">//  Calculate lines coordinates</span>
+    std::vector&lt;int&gt; rPts0, hPts0, pPts0, oPts0, rPts1, hPts1, pPts1, oPts1;
+    std::vector&lt;short&gt; vecColors;
+    std::vector&lt;double&gt; vecCoords;
+    calculateCoordinates(_numTeeth, rPts0, hPts0, pPts0, oPts0, rPts1, hPts1, pPts1, oPts1, vecCoords, vecColors);
+    Ptr&lt;CustomGraphicsCoordinates&gt; coordinates = CustomGraphicsCoordinates::create(vecCoords);
+    if (!coordinates)
+        return nullptr;
+
+    <span style="color:blue">// Calculate lines triangles</span>
+    std::vector&lt;int&gt; vertexIndexList =
+        calculateTriangles(_numTeeth, rPts0, hPts0, pPts0, oPts0, rPts1, hPts1, pPts1, oPts1);
+
+    <span style="color:blue">// Calculate lines strip length</span>
+    std::vector&lt;int&gt; vecStripLen = calculateStripLen(_numTeeth);
+
+    Ptr&lt;CustomGraphicsLines&gt; cgLines = cgGroup-&gt;addLines(coordinates, vertexIndexList, true, vecStripLen);
+    return cgLines;
+}
+
+static Ptr&lt;CustomGraphicsPointSet&gt; drawPointSet(const Ptr&lt;CustomGraphicsGroup&gt;& cgGroup)
+{
+    if (!cgGroup)
+        return nullptr;
+
+    <span style="color:blue">//  Calculate coordinates</span>
+    std::vector&lt;int&gt; rPts0, hPts0, pPts0, oPts0, rPts1, hPts1, pPts1, oPts1;
+    std::vector&lt;short&gt; vecColors;
+    std::vector&lt;double&gt; vecCoords;
+    calculateCoordinates(_numTeeth, rPts0, hPts0, pPts0, oPts0, rPts1, hPts1, pPts1, oPts1, vecCoords, vecColors);
+    Ptr&lt;CustomGraphicsCoordinates&gt; coordinates = CustomGraphicsCoordinates::create(vecCoords);
+    if (!coordinates)
+        return nullptr;
+
+    return cgGroup-&gt;addPointSet(coordinates, std::vector&lt;int&gt;(), UserDefinedCustomGraphicsPointType, _pointSetImage);
+}
+
+<span style="color:blue">// CommandExecuted event handler.</span>
+class OnExecuteEventHandler : public adsk::core::CommandEventHandler
+{
+  public:
+    void notify(const Ptr&lt;CommandEventArgs&gt;& eventArgs) override
+    {
+        <span style="color:blue">//  get selection entity first since it's fragile and any creation/edit operations will clear the selection.</span>
+        Ptr&lt;Base&gt; selEntity = nullptr;
+        if (_selection && _selection-&gt;selectionCount() &gt; 0)
+        {
+            if (Ptr&lt;Selection&gt; sel0 = _selection-&gt;selection(0))
+            {
+                selEntity = sel0-&gt;entity();
+            }
+        }
+
+        if (_customGraphicsObj)
+        {
+            if (!_cgGroups)
+                return;
+            Ptr&lt;CustomGraphicsGroup&gt; cgGroup = _cgGroups-&gt;add();
+            if (!cgGroup)
+                return;
+
+            if (!_anchorPt)
+                _anchorPt = Point3D::create();
+
+            Ptr&lt;CustomGraphicsEntity&gt; cgEnt = nullptr;
+            Ptr&lt;ListItem&gt; selectedCGObj = _customGraphicsObj-&gt;selectedItem();
+            if (!selectedCGObj)
+                return;
+            std::string cgObjName = selectedCGObj-&gt;name();
+            if (cgObjName == "Mesh")
+            {
+                cgEnt = drawMesh(cgGroup);
+                _anchorPt-&gt;setWithArray({0, 0, _thickness / 2});
+            }
+            else if (cgObjName == "Lines")
+            {
+                cgEnt = drawLines(cgGroup);
+                _anchorPt-&gt;setWithArray({0, 0, _thickness / 2});
+                applyLinesProperties(cgEnt);
+            }
+            else if (cgObjName == "PointSet")
+            {
+                cgEnt = drawPointSet(cgGroup);
+            }
+            else if (cgObjName == "BRep")
+            {
+                if (Ptr&lt;BRepBody&gt; body = selEntity-&gt;cast&lt;BRepBody&gt;())
+                {
+                    cgEnt = cgGroup-&gt;addBRepBody(body);
+                }
+            }
+            else if (cgObjName == "Curve")
+            {
+                if (Ptr&lt;SketchCurve&gt; skCurve = selEntity-&gt;cast&lt;SketchCurve&gt;())
+                {
+                    if (Ptr&lt;Sketch&gt; sk = skCurve-&gt;parentSketch())
+                    {
+                        Ptr&lt;Curve3D&gt; curv = nullptr;
+                        if (Ptr&lt;SketchArc&gt; skArc = skCurve-&gt;cast&lt;SketchArc&gt;())
+                            curv = skArc-&gt;geometry();
+                        else if (Ptr&lt;SketchEllipticalArc&gt; skEllipArc = skCurve-&gt;cast&lt;SketchEllipticalArc&gt;())
+                            curv = skEllipArc-&gt;geometry();
+                        else if (Ptr&lt;SketchCircle&gt; skCircle = skCurve-&gt;cast&lt;SketchCircle&gt;())
+                            curv = skCircle-&gt;geometry();
+                        else if (Ptr&lt;SketchEllipse&gt; skEllipse = skCurve-&gt;cast&lt;SketchEllipse&gt;())
+                            curv = skEllipse-&gt;geometry();
+                        else if (Ptr&lt;SketchLine&gt; skLine = skCurve-&gt;cast&lt;SketchLine&gt;())
+                            curv = skLine-&gt;geometry();
+                        else if (Ptr&lt;SketchFittedSpline&gt; skSpline = skCurve-&gt;cast&lt;SketchFittedSpline&gt;())
+                            curv = skSpline-&gt;geometry();
+
+                        if (curv)
+                        {
+                            curv-&gt;transformBy(sk-&gt;transform());
+                            Ptr&lt;CustomGraphicsCurve&gt; cgCurve = cgGroup-&gt;addCurve(curv);
+                            cgEnt = cgCurve;
+                            if (cgCurve)
+                                cgCurve-&gt;weight(static_cast&lt;float&gt;(_lineStyleWeight-&gt;valueOne()));
+                        }
+                    }
+                }
+            }
+            <span style="color:blue">// else if (cgObjName == "Text") {</span>
+            <span style="color:blue">//	if (_text) {</span>
+            <span style="color:blue">//		cgEnt = cgGroup-&gt;addText(_text-&gt;value(), "Test", 10, Point3D::create());</span>
+            <span style="color:blue">//	}</span>
+            <span style="color:blue">// }</span>
+            else if (cgObjName == "PointSet - Custom")
+            {
+                if (_coordTable)
+                {
+                    std::vector&lt;double&gt; vecCoords;
+                    std::vector&lt;int&gt; vecStripLen;
+                    getCoordinatesFromTable(_coordTable, vecCoords, vecStripLen);
+                    Ptr&lt;CustomGraphicsCoordinates&gt; coordinates = CustomGraphicsCoordinates::create(vecCoords);
+                    cgEnt = cgGroup-&gt;addPointSet(
+                        coordinates, std::vector&lt;int&gt;(), UserDefinedCustomGraphicsPointType, _pointSetImage);
+                }
+            }
+            else if (cgObjName == "Lines - Custom")
+            {
+                if (_coordTable)
+                {
+                    std::vector&lt;double&gt; vecCoords;
+                    std::vector&lt;int&gt; vecStripLen;
+                    getCoordinatesFromTable(_coordTable, vecCoords, vecStripLen);
+                    Ptr&lt;CustomGraphicsCoordinates&gt; coordinates = CustomGraphicsCoordinates::create(vecCoords);
+                    bool isLineStrip = true;
+                    if (_isLineStrip)
+                        isLineStrip = _isLineStrip-&gt;value();
+                    cgEnt = cgGroup-&gt;addLines(coordinates, std::vector&lt;int&gt;(), isLineStrip, vecStripLen);
+                    applyLinesProperties(cgEnt);
+                }
+            }
+
+            <span style="color:blue">// add attributes to the custom graphics entity</span>
+            if (cgEnt)
+            {
+                <span style="color:blue">// color effect</span>
+                if (!cgEnt-&gt;cast&lt;CustomGraphicsPointSet&gt;()) <span style="color:blue">// do not apply effect to point set node</span>
+                    applyColorEffect(cgEnt);
+                <span style="color:blue">// transform</span>
+                Ptr&lt;Matrix3D&gt; transMat = Matrix3D::create();
+                double transformDistance = 1.0;
+                if (_transform)
+                    transformDistance = _transform-&gt;value();
+                Ptr&lt;Point3D&gt; origin = Point3D::create(transformDistance, 0, 0);
+                if (transMat && origin)
+                {
+                    transMat-&gt;setWithCoordinateSystem(
+                        origin, Vector3D::create(1, 0, 0), Vector3D::create(0, 1, 0), Vector3D::create(0, 0, 1));
+                    cgEnt-&gt;transform(transMat);
+                }
+                <span style="color:blue">// calculate _scaleFactor and _anchorPt for viewPlacement, viewScale and billboarding attributes based</span>
+                <span style="color:blue">// on the bounding box of custom graphics entity</span>
+                if (Ptr&lt;BoundingBox3D&gt; bbox = cgEnt-&gt;boundingBox())
+                {
+                    Ptr&lt;Point3D&gt; maxPt = bbox-&gt;maxPoint();
+                    Ptr&lt;Point3D&gt; minPt = bbox-&gt;minPoint();
+                    if (maxPt && minPt)
+                    {
+                        _scaleFactor = 100 / minPt-&gt;distanceTo(maxPt);
+                        _anchorPt-&gt;setWithArray(
+                            {(minPt-&gt;x() + maxPt-&gt;x()) / 2,
+                             (minPt-&gt;y() + maxPt-&gt;y()) / 2,
+                             (minPt-&gt;z() + maxPt-&gt;z()) / 2});
+                    }
+                }
+                <span style="color:blue">// view placement</span>
+                if (_viewPlacementGroup && _viewPlacementGroup-&gt;isVisible() &&
+                    _viewPlacementGroup-&gt;isEnabledCheckBoxChecked() && _viewCorner && _viewCorner-&gt;selectedItem())
+                {
+                    Ptr&lt;Point2D&gt; viewPt = Point2D::create(100, 100);
+                    <span style="color:blue">// upper left corner by default</span>
+                    ViewCorners corner = ViewCorners::upperLeftViewCorner;
+                    Ptr&lt;ListItem&gt; selected = _viewCorner-&gt;selectedItem();
+                    if (selected-&gt;name() == "Upper Right")
+                        corner = ViewCorners::upperRightViewCorner;
+                    else if (selected-&gt;name() == "Lower Left")
+                        corner = ViewCorners::lowerLeftViewCorner;
+                    else if (selected-&gt;name() == "Lower Right")
+                        corner = ViewCorners::lowerRightViewCorner;
+                    Ptr&lt;CustomGraphicsViewPlacement&gt; attr =
+                        CustomGraphicsViewPlacement::create(_anchorPt, corner, viewPt);
+                    cgEnt-&gt;viewPlacement(attr);
+                }
+                <span style="color:blue">// view scale</span>
+                if (_viewScaleGroup && _viewScaleGroup-&gt;isVisible() && _viewScaleGroup-&gt;isEnabledCheckBoxChecked() &&
+                    _pixelScale)
+                {
+                    Ptr&lt;CustomGraphicsViewScale&gt; attr =
+                        CustomGraphicsViewScale::create(_scaleFactor * _pixelScale-&gt;valueOne(), _anchorPt);
+                    cgEnt-&gt;viewScale(attr);
+                }
+                <span style="color:blue">// billboarding</span>
+                if (_billboardingGroup && _billboardingGroup-&gt;isVisible() &&
+                    _billboardingGroup-&gt;isEnabledCheckBoxChecked() && _billboardingStyle &&
+                    _billboardingStyle-&gt;selectedItem())
+                {
+                    <span style="color:blue">//  screen style by default</span>
+                    CustomGraphicsBillBoardStyles bbStyle = CustomGraphicsBillBoardStyles::ScreenBillBoardStyle;
+                    Ptr&lt;ListItem&gt; selected = _billboardingStyle-&gt;selectedItem();
+                    if (selected-&gt;name() == "Axis")
+                        bbStyle = CustomGraphicsBillBoardStyles::AxialBillBoardStyle;
+                    else if (selected-&gt;name() == "Right Reading")
+                        bbStyle = CustomGraphicsBillBoardStyles::RightReadingBillBoardStyle;
+                    Ptr&lt;CustomGraphicsBillBoard&gt; attr = CustomGraphicsBillBoard::create(_anchorPt);
+                    attr-&gt;axis(Vector3D::create(0, 1, 0));
+                    attr-&gt;billBoardStyle(bbStyle);
+                    cgEnt-&gt;billBoarding(attr);
+                }
+            }
+        }
+    }
+};
+
+<span style="color:blue">// InputChange event handler.</span>
+class OnInputChangedEventHander : public adsk::core::InputChangedEventHandler
+{
+  public:
+    void notify(const Ptr&lt;InputChangedEventArgs&gt;& eventArgs) override
+    {
+        if (!eventArgs)
+            return;
+
+        Ptr&lt;CommandInput&gt; changedInput = eventArgs-&gt;input();
+        if (!changedInput)
+            return;
+
+        std::string changedInputId = changedInput-&gt;id();
+        if (changedInputId == _commandId + "_cgObj")
+        {
+            if (_customGraphicsObj)
+            {
+                if (Ptr&lt;ListItem&gt; selectedItem = _customGraphicsObj-&gt;selectedItem())
+                {
+                    changeCGObjVisibility(selectedItem-&gt;name());
+                }
+            }
+        }
+        else if (changedInputId == _commandId + "_colorEffects")
+        {
+            if (_colorEffects)
+            {
+                if (Ptr&lt;ListItem&gt; selectedItem = _colorEffects-&gt;selectedItem())
+                {
+                    changeColorEffectVisibility(selectedItem-&gt;name());
+                }
+            }
+        }
+        else if (changedInputId == _commandId + "_appearanceFilter" || changedInputId == _commandId + "_materialLib")
+        {
+            std::string libName(""), filterExp("");
+            if (_materialLibList)
+            {
+                if (Ptr&lt;ListItem&gt; selectedItem = _materialLibList-&gt;selectedItem())
+                {
+                    libName = selectedItem-&gt;name();
+                }
+            }
+            if (_appearanceFilter)
+            {
+                filterExp = _appearanceFilter-&gt;value();
+            }
+            std::vector&lt;std::string&gt; appearanceNames = getAppearancesFromLib(libName, filterExp);
+            if (_appearanceList)
+            {
+                replaceItems(_appearanceList, appearanceNames);
+            }
+        }
+        else if (_coordTable && changedInputId == _coordTable-&gt;id() + "_add")
+        {
+            addRow(_coordTable);
+        }
+        else if (_coordTable && changedInputId == _coordTable-&gt;id() + "_addStrip")
+        {
+            addLineStrip(_coordTable);
+        }
+        else if (_coordTable && changedInputId == _coordTable-&gt;id() + "_delete")
+        {
+            int selectedRowNo = _coordTable-&gt;selectedRow();
+            if (selectedRowNo == -1)
+            {
+                _ui-&gt;messageBox("Select one row to delete");
+            }
+            else
+            {
+                _coordTable-&gt;deleteRow(selectedRowNo);
+            }
+        }
+        else if (_lineStylePattern && changedInputId == _commandId + "_LSPattern")
+        {
+            changeLineStyleInputsVisibility(_lineStylePattern-&gt;selectedItem()-&gt;name());
+        }
+    }
+};
+
+<span style="color:blue">// CommandDestroyed event handler</span>
+class OnDestroyEventHandler : public adsk::core::CommandEventHandler
+{
+  public:
+    void notify(const Ptr&lt;CommandEventArgs&gt;& eventArgs) override
+    {
+        adsk::terminate();
+    }
+};
+
+<span style="color:blue">// CommandCreated event handler.</span>
+class CommandCreatedEventHandler : public adsk::core::CommandCreatedEventHandler
+{
+  public:
+    void notify(const Ptr&lt;CommandCreatedEventArgs&gt;& eventArgs) override
+    {
+        if (eventArgs)
+        {
+            Ptr&lt;Command&gt; command = eventArgs-&gt;command();
+            if (command)
+            {
+                Ptr&lt;CommandEvent&gt; onDestroy = command-&gt;destroy();
+                if (!onDestroy)
+                    return;
+                bool isOk = onDestroy-&gt;add(&onDestroyHandler_);
+                if (!isOk)
+                    return;
+
+                Ptr&lt;InputChangedEvent&gt; onInputChanged = command-&gt;inputChanged();
+                if (!onInputChanged)
+                    return;
+                isOk = onInputChanged-&gt;add(&onInputChangedHandler_);
+                if (!isOk)
+                    return;
+
+                Ptr&lt;CommandEvent&gt; onExecute = command-&gt;execute();
+                if (!onExecute)
+                    return;
+                isOk = onExecute-&gt;add(&onExecuteHandler_);
+                if (!isOk)
+                    return;
+
+                Ptr&lt;CommandEvent&gt; onExecutePtrview = command-&gt;executePreview();
+                if (!onExecutePtrview)
+                    return;
+                isOk = onExecutePtrview-&gt;add(&onExecuteHandler_);
+                if (!isOk)
+                    return;
+
+                Ptr&lt;CommandInputs&gt; inputs = command-&gt;commandInputs();
+                if (!inputs)
+                    return;
+
+                <span style="color:blue">// menu for different kinds of custom graphics</span>
+                _customGraphicsObj = inputs-&gt;addDropDownCommandInput(
+                    _commandId + "_cgObj", "Custom Graphics Object", DropDownStyles::TextListDropDownStyle);
+                if (_customGraphicsObj)
+                {
+                    Ptr&lt;ListItems&gt; listItems = _customGraphicsObj-&gt;listItems();
+                    if (listItems)
+                    {
+                        listItems-&gt;add("Mesh", true);
+                        listItems-&gt;add("Lines", false);
+                        listItems-&gt;add("PointSet", false);
+                        listItems-&gt;add("Curve", false);
+                        listItems-&gt;add("BRep", false);
+                        <span style="color:blue">// listItems-&gt;add("Text", false);</span>
+                        listItems-&gt;add("Lines - Custom", false);
+                        listItems-&gt;add("PointSet - Custom", false);
+                    }
+                }
+
+                <span style="color:blue">// coordinates table used by 'Lines - Custom' and 'PointSet - Custom'</span>
+                _coordTable = inputs-&gt;addTableCommandInput(_commandId + "_table", "Coordinates Table", 3, "1:1:1");
+                if (_coordTable)
+                {
+                    _coordTable-&gt;maximumVisibleRows(10);
+                    addRow(_coordTable);
+                    Ptr&lt;CommandInput&gt; addButtonInput =
+                        inputs-&gt;addBoolValueInput(_coordTable-&gt;id() + "_add", "Add", false, "", true);
+                    if (addButtonInput)
+                    {
+                        _coordTable-&gt;addToolbarCommandInput(addButtonInput);
+                        addButtonInput-&gt;isVisible(false);
+                    }
+                    Ptr&lt;CommandInput&gt; addStripButtonInput =
+                        inputs-&gt;addBoolValueInput(_coordTable-&gt;id() + "_addStrip", "Add Strip", false, "", true);
+                    if (addStripButtonInput)
+                    {
+                        _coordTable-&gt;addToolbarCommandInput(addStripButtonInput);
+                        addStripButtonInput-&gt;isVisible(false);
+                    }
+                    Ptr&lt;CommandInput&gt; deleteButtonInput =
+                        inputs-&gt;addBoolValueInput(_coordTable-&gt;id() + "_delete", "Delete", false, "", true);
+                    if (deleteButtonInput)
+                    {
+                        _coordTable-&gt;addToolbarCommandInput(deleteButtonInput);
+                        deleteButtonInput-&gt;isVisible(false);
+                    }
+                    _coordTable-&gt;isVisible(false);
+                }
+
+                <span style="color:blue">// specific for 'Lines - Custom'</span>
+                _isLineStrip = inputs-&gt;addBoolValueInput(_commandId + "_isLineStrip", "Use LineStrip", true, "", true);
+                if (_isLineStrip)
+                {
+                    _isLineStrip-&gt;isVisible(false);
+                }
+
+                <span style="color:blue">// color effects for custom graphics Mesh/BRep</span>
+                _colorEffects = inputs-&gt;addDropDownCommandInput(
+                    _commandId + "_colorEffects", "Color Effect", DropDownStyles::TextListDropDownStyle);
+                if (_colorEffects)
+                {
+                    Ptr&lt;ListItems&gt; listItems = _colorEffects-&gt;listItems();
+                    if (listItems)
+                    {
+                        listItems-&gt;add(_colorEffect_solid_id, true);
+                        listItems-&gt;add(_colorEffect_basicMaterial_id, false);
+                        listItems-&gt;add(_colorEffect_appearance_id, false);
+                        listItems-&gt;add(_colorEffect_vertex_id, false);
+                    }
+                }
+
+                <span style="color:blue">// RGB for solid colors</span>
+                _red = inputs-&gt;addIntegerSliderCommandInput(_commandId + "_red", "Red", 0, 255);
+                if (_red)
+                    _red-&gt;valueOne(255);
+                _green = inputs-&gt;addIntegerSliderCommandInput(_commandId + "_green", "Green", 0, 255);
+                if (_green)
+                    _green-&gt;valueOne(0);
+                _blue = inputs-&gt;addIntegerSliderCommandInput(_commandId + "_blue", "Blue", 0, 255);
+                if (_blue)
+                    _blue-&gt;valueOne(0);
+
+                <span style="color:blue">// specific for basic material color effect</span>
+                _glossiness = inputs-&gt;addFloatSliderCommandInput(_commandId + "_glossiness", "Glossiness", "", 0, 128);
+                if (_glossiness)
+                {
+                    _glossiness-&gt;valueOne(128);
+                    _glossiness-&gt;isVisible(false);
+                }
+                _opacity = inputs-&gt;addFloatSliderCommandInput(_commandId + "_opacity", "Opacity", "", 0, 1);
+                if (_opacity)
+                {
+                    _opacity-&gt;valueOne(1);
+                    _opacity-&gt;isVisible(false);
+                }
+
+                <span style="color:blue">// for appearance color effect</span>
+                std::string defaultMatLibName("");
+                _materialLibList = inputs-&gt;addDropDownCommandInput(
+                    _commandId + "_materialLib", "Material Library", DropDownStyles::TextListDropDownStyle);
+                if (_materialLibList)
+                {
+                    Ptr&lt;ListItems&gt; listItems = _materialLibList-&gt;listItems();
+                    if (listItems)
+                    {
+                        std::vector&lt;std::string&gt; matLibNames = getMaterialLibNames();
+                        for (std::string libName : matLibNames)
+                        {
+                            listItems-&gt;add(libName, false);
+                        }
+                        if (listItems-&gt;count() &gt; 0)
+                        {
+                            Ptr&lt;ListItem&gt; item0 = listItems-&gt;item(0);
+                            if (item0)
+                            {
+                                item0-&gt;isSelected(true);
+                                defaultMatLibName = item0-&gt;name();
+                            }
+                        }
+                    }
+                    _materialLibList-&gt;isVisible(false);
+                }
+                _appearanceList = inputs-&gt;addDropDownCommandInput(
+                    _commandId + "_appearanceList", "Appearance", DropDownStyles::TextListDropDownStyle);
+                if (_appearanceList && !defaultMatLibName.empty())
+                {
+                    Ptr&lt;ListItems&gt; listItems = _appearanceList-&gt;listItems();
+                    if (listItems)
+                    {
+                        std::vector&lt;std::string&gt; defaultAppearanceList = getAppearancesFromLib(defaultMatLibName, "");
+                        for (std::string appearanceName : defaultAppearanceList)
+                        {
+                            listItems-&gt;add(appearanceName, false);
+                        }
+                        if (listItems-&gt;count() &gt; 0)
+                        {
+                            Ptr&lt;ListItem&gt; item0 = listItems-&gt;item(0);
+                            if (item0)
+                            {
+                                item0-&gt;isSelected(true);
+                            }
+                        }
+                    }
+                    _appearanceList-&gt;isVisible(false);
+                }
+                _appearanceFilter = inputs-&gt;addStringValueInput(_commandId + "_appearanceFilter", "Filter");
+                if (_appearanceFilter)
+                {
+                    _appearanceFilter-&gt;isVisible(false);
+                }
+
+                <span style="color:blue">// selection input for custom graphics BRep/Curve</span>
+                _selection = inputs-&gt;addSelectionInput(_commandId + "_sel", "Selection", "");
+                if (_selection)
+                {
+                    _selection-&gt;setSelectionLimits(0, 1);
+                    _selection-&gt;isVisible(false);
+                    _selection-&gt;isEnabled(false);
+                }
+
+                <span style="color:blue">//// for custom graphics text</span>
+                <span style="color:blue">//_text = inputs-&gt;addStringValueInput(_commandId + "_text", "Text", "This is a text.");</span>
+                <span style="color:blue">// if (_text) {</span>
+                <span style="color:blue">//	_text-&gt;isVisible(false);</span>
+                <span style="color:blue">//}</span>
+
+                <span style="color:blue">// transform for all custom graphics entity</span>
+                if (Ptr&lt;ValueInput&gt; transformDistance = adsk::core::ValueInput::createByReal(0))
+                {
+                    _transform =
+                        inputs-&gt;addDistanceValueCommandInput(_commandId + "_transform", "Transform", transformDistance);
+                    if (_transform)
+                    {
+                        Ptr&lt;Point3D&gt; origin = adsk::core::Point3D::create(0, 0, 0);
+                        Ptr&lt;Vector3D&gt; direction = adsk::core::Vector3D::create(1, 0, 0);
+                        if (origin && direction)
+                        {
+                            _transform-&gt;setManipulator(origin, direction);
+                        }
+                    }
+                }
+
+                <span style="color:blue">// for custom graphics line style pattern</span>
+                _lineStylePattern = inputs-&gt;addDropDownCommandInput(
+                    _commandId + "_LSPattern", "Line Style Pattern", DropDownStyles::TextListDropDownStyle);
+                if (_lineStylePattern)
+                {
+                    Ptr&lt;ListItems&gt; listItems = _lineStylePattern-&gt;listItems();
+                    if (listItems)
+                    {
+                        listItems-&gt;add(_solidLine_id, true);
+                        listItems-&gt;add(_centerLine_id, false);
+                        listItems-&gt;add(_dashedLine_id, false);
+                        listItems-&gt;add(_dotLine_id, false);
+                        listItems-&gt;add(_phantomLine_id, false);
+                        listItems-&gt;add(_tracksLine_id, false);
+                        listItems-&gt;add(_zigZagLine_id, false);
+                    }
+                    _lineStylePattern-&gt;isVisible(false);
+                }
+
+                <span style="color:blue">// for line style weight</span>
+                _lineStyleWeight =
+                    inputs-&gt;addIntegerSliderCommandInput(_commandId + "_LSWeight", "Line Style Weight", 1, 20);
+                _lineStyleWeight-&gt;valueOne(1);
+                _lineStyleWeight-&gt;isVisible(false);
+
+                <span style="color:blue">// for line style scale</span>
+                _lineStyleScale =
+                    inputs-&gt;addIntegerSliderCommandInput(_commandId + "_LSScale", "Line Style Scale", 1, 100);
+                _lineStyleScale-&gt;valueOne(10);
+                _lineStyleScale-&gt;isVisible(false);
+
+                <span style="color:blue">// for view placement attribute</span>
+                _viewPlacementGroup = inputs-&gt;addGroupCommandInput(_commandId + "_VPGroup", "View Placement");
+                if (_viewPlacementGroup)
+                {
+                    _viewPlacementGroup-&gt;isEnabledCheckBoxDisplayed(true);
+                    _viewPlacementGroup-&gt;isEnabledCheckBoxChecked(false);
+                    if (Ptr&lt;CommandInputs&gt; childInputs = _viewPlacementGroup-&gt;children())
+                    {
+                        _viewCorner =
+                            childInputs-&gt;addButtonRowCommandInput(_commandId + "_viewCorner", "corner", false);
+                        if (_viewCorner)
+                        {
+                            if (Ptr&lt;ListItems&gt; listItems = _viewCorner-&gt;listItems())
+                            {
+                                listItems-&gt;add("Upper Left", false, "./resources/upperLeft");
+                                listItems-&gt;add("Upper Right", false, "./resources/upperRight");
+                                listItems-&gt;add("Lower Left", false, "./resources/lowerLeft");
+                                listItems-&gt;add("Lower Right", false, "./resources/lowerRight");
+                            }
+                        }
+                    }
+                }
+
+                <span style="color:blue">// for view scale attribute</span>
+                _viewScaleGroup = inputs-&gt;addGroupCommandInput(_commandId + "_VSGroup", "View Scale");
+                if (_viewScaleGroup)
+                {
+                    _viewScaleGroup-&gt;isEnabledCheckBoxDisplayed(true);
+                    _viewScaleGroup-&gt;isEnabledCheckBoxChecked(false);
+                    if (Ptr&lt;CommandInputs&gt; childInputs = _viewScaleGroup-&gt;children())
+                    {
+                        _pixelScale = childInputs-&gt;addFloatSliderCommandInput(
+                            _commandId + "_pixelScale", "pixel scale", "", 0.5, 5, false);
+                        if (_pixelScale)
+                        {
+                            _pixelScale-&gt;valueOne(1);
+                            _pixelScale-&gt;setText("Smaller", "Larger");
+                        }
+                    }
+                }
+
+                <span style="color:blue">// for billboarding attribute</span>
+                _billboardingGroup = inputs-&gt;addGroupCommandInput(_commandId + "_BBGroup", "Billboarding");
+                if (_billboardingGroup)
+                {
+                    _billboardingGroup-&gt;isEnabledCheckBoxDisplayed(true);
+                    _billboardingGroup-&gt;isEnabledCheckBoxChecked(false);
+                    if (Ptr&lt;CommandInputs&gt; childInputs = _billboardingGroup-&gt;children())
+                    {
+                        _billboardingStyle =
+                            childInputs-&gt;addButtonRowCommandInput(_commandId + "_billboardingStyle", "style", false);
+                        if (_billboardingStyle)
+                        {
+                            if (Ptr&lt;ListItems&gt; listItems = _billboardingStyle-&gt;listItems())
+                            {
+                                listItems-&gt;add("Screen", false, "./resources/One");
+                                listItems-&gt;add("Axis", false, "./resources/Two");
+                                listItems-&gt;add("Right Reading", false, "./resources/Three");
+                            }
+                        }
+                    }
+                }
+                <span style="color:blue">//</span>
+            }
+        }
+    }
+
+  private:
+    OnExecuteEventHandler onExecuteHandler_;
+    OnDestroyEventHandler onDestroyHandler_;
+    OnInputChangedEventHander onInputChangedHandler_;
+} cmdCreated_;
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    _app = Application::get();
+    if (!_app)
+        return false;
+
+    _ui = _app-&gt;userInterface();
+    if (!_ui)
+        return false;
+
+    Ptr&lt;Document&gt; doc = _app-&gt;activeDocument();
+    if (!doc)
+        return false;
+
+    Ptr&lt;Products&gt; prods = doc-&gt;products();
+    if (!prods)
+        return false;
+
+    Ptr&lt;Product&gt; prod = prods-&gt;itemByProductType("DesignProductType");
+    if (!prod)
+        return false;
+
+    _des = prod-&gt;cast&lt;Design&gt;();
+    if (!_des)
+        return false;
+
+    <span style="color:blue">// get the entry for custom graphics</span>
+    Ptr&lt;Product&gt; activeProd = _app-&gt;activeProduct();
+    if (!activeProd)
+        return false;
+
+    Ptr&lt;CAM&gt; cam = activeProd-&gt;cast&lt;CAM&gt;();
+    if (cam)
+    {
+        _cgGroups = cam-&gt;customGraphicsGroups();
+    }
+    else
+    {
+        Ptr&lt;Component&gt; rootComp = _des-&gt;rootComponent();
+        if (!rootComp)
+            return false;
+        _cgGroups = rootComp-&gt;customGraphicsGroups();
+    }
+    if (!_cgGroups)
+        return false;
+
+    Ptr&lt;CommandDefinition&gt; command = createCommandDefinition();
+    if (!command)
+        return false;
+
+    Ptr&lt;CommandCreatedEvent&gt; commandCreatedEvent = command-&gt;commandCreated();
+    if (!commandCreatedEvent)
+        return false;
+    commandCreatedEvent-&gt;add(&cmdCreated_);
+    command-&gt;execute();
+
+    <span style="color:blue">// prevent this module from being terminate when the script returns, because we are waiting for event handlers to</span>
+    <span style="color:blue">// fire</span>
+    adsk::autoTerminate(false);
+
+    return true;
+}</pre>
+      </div>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code"><span style="color:blue">#Author-Autodesk Inc.</span>
+<span style="color:blue">#Description-Demo custom graphics examples</span>
+
+import adsk.core, adsk.fusion, adsk.cam, traceback
+import math
+
+<span style="color:blue"># Globals</span>
+_app = adsk.core.Application.cast(None)
+_ui = adsk.core.UserInterface.cast(None)
+_des = adsk.fusion.Design.cast(None)
+_cgGroups = adsk.fusion.CustomGraphicsGroups.cast(None)
+_numTeeth = 5
+_handlers = []
+appearancesMap = {}
+coordNumber = 0
+stripNumber = 0
+_pointSetImage = './resources/16x16.png'
+_thickness = 0.5 * 2.54
+_anchorPt = adsk.core.Point3D.cast(None)
+<span style="color:blue">#_scaleFactor is used to limit the size of pixel-scaled model however large the actual graphics model.</span>
+_scaleFactor = 10
+
+_commandId = 'CustomGraphicsSample_Python'
+_colorEffect_solid_id = 'SolidColorEfect'
+_colorEffect_basicMaterial_id = 'BasicMaterialColorEffect'
+_colorEffect_appearance_id = 'AppearanceColorEffect'
+_colorEffect_vertex_id = 'VertexColorEffect'
+
+<span style="color:blue"># Global Command inputs</span>
+_customGraphicsObj = adsk.core.DropDownCommandInput.cast(None)
+_colorEffects = adsk.core.DropDownCommandInput.cast(None)
+_red = adsk.core.IntegerSliderCommandInput.cast(None)
+_green = adsk.core.IntegerSliderCommandInput.cast(None)
+_blue = adsk.core.IntegerSliderCommandInput.cast(None)
+_opacity = adsk.core.SliderCommandInput.cast(None)
+_glossiness = adsk.core.SliderCommandInput.cast(None)
+<span style="color:blue">#_text = adsk.core.StringValueCommandInput.cast(None)</span>
+_selection = adsk.core.SelectionCommandInput.cast(None)
+_transform = adsk.core.DistanceValueCommandInput.cast(None)
+_materialLibList = adsk.core.DropDownCommandInput.cast(None)
+_appearanceList = adsk.core.DropDownCommandInput.cast(None)
+_appearanceFilter = adsk.core.StringValueCommandInput.cast(None)
+_coordTable = adsk.core.TableCommandInput.cast(None)
+_add = adsk.core.BoolValueCommandInput.cast(None)
+_addStrip = adsk.core.BoolValueCommandInput.cast(None)
+_delete = adsk.core.BoolValueCommandInput.cast(None)
+_isLineStrip = adsk.core.BoolValueCommandInput.cast(None)
+_lineStylePattern = adsk.core.DropDownCommandInput.cast(None)
+_lineStyleWeight = adsk.core.IntegerSliderCommandInput.cast(None)
+_lineStyleScale = adsk.core.IntegerSliderCommandInput.cast(None)
+
+_viewPlacementGroup = adsk.core.GroupCommandInput.cast(None)
+_viewCorner = adsk.core.ButtonRowCommandInput.cast(None)
+_viewScaleGroup = adsk.core.GroupCommandInput.cast(None)
+_pixelScale = adsk.core.FloatSliderCommandInput.cast(None)
+_billboardingGroup = adsk.core.GroupCommandInput.cast(None)
+_billboardingStyle = adsk.core.ButtonRowCommandInput.cast(None)
+
+def run(context):
+    try:
+        global _app, _ui, _des, _cgGroups
+        _app = adsk.core.Application.get()
+        _ui  = _app.userInterface        
+        doc = _app.activeDocument
+        prods = doc.products
+        _des = prods.itemByProductType('DesignProductType')
+        if not _des:
+            raise Exception('Failed to get fusion design.')
+
+        <span style="color:blue"># get the entry for custom graphics</span>
+        activeProd = _app.activeProduct
+        cam = adsk.cam.CAM.cast(activeProd)
+        if cam:              
+            _cgGroups = cam.customGraphicsGroups
+        else:
+            _cgGroups = _des.rootComponent.customGraphicsGroups
+
+        cmdDef = _ui.commandDefinitions.itemById(_commandId)
+        if not cmdDef:
+            <span style="color:blue"># Create a command definition.</span>
+            cmdDef = _ui.commandDefinitions.addButtonDefinition(_commandId, 'CustomGraphicsSample', 'Custom Graphics Sample') 
+        
+        <span style="color:blue"># Connect to the command created event.</span>
+        onCommandCreated = MyCommandCreatedHandler()
+        cmdDef.commandCreated.add(onCommandCreated)
+        _handlers.append(onCommandCreated)
+        
+        <span style="color:blue"># Execute the command.</span>
+        cmdDef.execute()
+
+        <span style="color:blue"># prevent this module from being terminate when the script returns, because we are waiting for event handlers to fire</span>
+        adsk.autoTerminate(False)
+    except:
+        if _ui:
+            _ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
+            
+class MyCommandDestroyHandler(adsk.core.CommandEventHandler):
+    def __init__(self):
+        super().__init__()
+    def notify(self, args):
+        try:
+<span style="color:blue">#            eventArgs = adsk.core.CommandEventArgs.cast(args)</span>
+
+            <span style="color:blue"># when the command is done, terminate the script</span>
+            <span style="color:blue"># this will release all globals which will remove all event handlers</span>
+            adsk.terminate()
+        except:
+            if _ui:
+                _ui.messageBox('Failed in MyCommandDestroyHandler:\n{}'.format(traceback.format_exc()))     
+
+def addRow(tableInput):
+    global coordNumber
+    tableChildInputs = tableInput.commandInputs
+    xValueInput = tableChildInputs.addValueInput(_coordTable.id + '_x{}'.format(coordNumber), 'Value', 'cm', adsk.core.ValueInput.createByReal(coordNumber))
+    yValueInput = tableChildInputs.addValueInput(_coordTable.id + '_y{}'.format(coordNumber), 'Value', 'cm', adsk.core.ValueInput.createByReal(coordNumber))
+    zValueInput = tableChildInputs.addValueInput(_coordTable.id + '_z{}'.format(coordNumber), 'Value', 'cm', adsk.core.ValueInput.createByReal(coordNumber))
+    
+    row = tableInput.rowCount
+    tableInput.addCommandInput(xValueInput, row, 0)
+    tableInput.addCommandInput(yValueInput, row, 1)
+    tableInput.addCommandInput(zValueInput, row, 2)
+    
+    coordNumber = coordNumber + 1
+    
+def addLineStrip(tableInput):
+    global stripNumber
+    tableChildInputs = tableInput.commandInputs
+    strInput = tableChildInputs.addStringValueInput(_coordTable.id + '_strip{}'.format(stripNumber), 'Line Strip', '-- Line Strip --')
+    strInput.isReadOnly = True
+    
+    row = tableInput.rowCount
+    tableInput.addCommandInput(strInput, row, 0, 0, 2)
+    
+    stripNumber = stripNumber + 1                
+    
+def replaceItems(cmdInput, newItems):
+    try:
+        cmdInput.listItems.clear()
+        itemNone = cmdInput.listItems.add('None', True, '')
+        itemNone.isSelected = True
+        if len(newItems) &gt; 0:
+            for item in newItems:
+                cmdInput.listItems.add(item, False, '')
+            cmdInput.listItems[1].isSelected = True
+            cmdInput.listItems[0].deleteMe()   
+    except:
+        if _ui:
+            _ui.messageBox('Failed in replaceItems:\n{}'.format(traceback.format_exc()))        
+        
+def getAppearancesFromLib(libName, filterExp):
+    try:
+        global appearancesMap
+        appearanceList = None
+        if libName in appearancesMap:
+            appearanceList = appearancesMap[libName]
+        else:
+            materialLib = _app.materialLibraries.itemByName(libName)
+            appearances = materialLib.appearances
+            appearanceNames = []
+            for appearance in appearances:
+                appearanceNames.append(appearance.name)
+            appearancesMap[libName] = appearanceNames
+            appearanceList = appearanceNames
+
+        if filterExp and len(filterExp) &gt; 0:
+            filteredList = []
+            for appearanceName in appearanceList:
+                if appearanceName.lower().find(filterExp.lower()) &gt;= 0:
+                    filteredList.append(appearanceName)
+            return filteredList
+        else:
+            return appearanceList
+    except:
+        if _ui:
+            _ui.messageBox('Failed in getAppearancesFromLib:\n{}'.format(traceback.format_exc()))        
+
+def hasAppearances(lib):
+    if lib and lib.appearances.count &gt; 0:
+        return True
+    return False
+    
+def getMaterialLibNames(libFilter):
+    materialLibs = _app.materialLibraries
+    libNames = []
+    for materialLib in materialLibs:
+        if (not libFilter) or libFilter(materialLib):
+            libNames.append(materialLib.name)
+    return libNames   
+             
+def getAppearance(libName, appearanceName):
+    try:
+        if not appearanceName or appearanceName == 'None':
+            return
+        appearance = _des.appearances.itemByName(appearanceName)
+        if appearance:
+            return appearance
+        
+        matLib = _app.materialLibraries.itemByName(libName)      
+        if matLib:
+            appearance = matLib.appearances.itemByName(appearanceName)
+
+        return appearance            
+    except:
+        if _ui:
+            _ui.messageBox('Failed in getAppearance:\n{}'.format(traceback.format_exc()))        
+    
+<span style="color:blue"># Event handler for the commandCreated event.</span>
+class MyCommandCreatedHandler(adsk.core.CommandCreatedEventHandler):
+    def __init__(self):
+        super().__init__()
+    def notify(self, args):
+        try:
+            eventArgs = adsk.core.CommandCreatedEventArgs.cast(args)
+            
+            <span style="color:blue"># Verify that a Fusion design is active.</span>
+            if not _des:
+                _ui.messageBox('A Fusion design must be active when invoking this command.')
+                return()
+
+            cmd = eventArgs.command
+            cmd.isExecutedWhenPreEmpted = False
+            inputs = cmd.commandInputs            
+            
+            global _customGraphicsObj, _selection, _coordTable, _add, _delete
+            global _colorEffects,_glossiness, _opacity, _transform, _isLineStrip, _addStrip, _lineStyleWeight, _lineStyleScale, _lineStylePattern
+            global _red,_green,_blue, _appearanceList, _materialLibList, _appearanceFilter
+            
+            <span style="color:blue"># menu for different kinds of custom graphics</span>
+            _customGraphicsObj = inputs.addDropDownCommandInput(_commandId + '_cgObj', 'Custom Graphics Object', adsk.core.DropDownStyles.TextListDropDownStyle)
+            _customGraphicsObj.listItems.add('Mesh', True)     
+            _customGraphicsObj.listItems.add('Lines', False) 
+            _customGraphicsObj.listItems.add('PointSet', False)
+            _customGraphicsObj.listItems.add('Curve', False)
+            _customGraphicsObj.listItems.add('BRep', False)
+            <span style="color:blue">#_customGraphicsObj.listItems.add('Text', False)       </span>
+            _customGraphicsObj.listItems.add('Lines - Custom', False)
+            _customGraphicsObj.listItems.add('PointSet - Custom', False) 
+            
+            <span style="color:blue"># coordinates table used by 'Lines - Custom' and 'PointSet - Custom'</span>
+            _coordTable = inputs.addTableCommandInput(_commandId + '_table', 'Coordinates Table', 3, '1:1:1')    
+            _coordTable.maximumVisibleRows = 10
+            addRow(_coordTable)          
+            _add = inputs.addBoolValueInput(_coordTable.id + '_add', 'Add', False, '', True)
+            _coordTable.addToolbarCommandInput(_add)
+            _addStrip = inputs.addBoolValueInput(_coordTable.id + '_addStrip', 'AddStrip', False, '', True)
+            _coordTable.addToolbarCommandInput(_addStrip)
+            _delete = inputs.addBoolValueInput(_coordTable.id + '_delete', 'Delete', False, '', True)
+            _coordTable.addToolbarCommandInput(_delete)
+            _coordTable.isVisible = False
+            _add.isVisible = False
+            _delete.isVisible = False
+            _addStrip.isVisible = False
+            
+            <span style="color:blue"># specific for 'Lines - Custom'</span>
+            _isLineStrip = inputs.addBoolValueInput(_commandId + '_isLineStrip', 'Use LineStrip', True, '', True)
+            _isLineStrip.isVisible = False
+            
+            <span style="color:blue"># color effects for custom graphics Mesh/BRep</span>
+            _colorEffects = inputs.addDropDownCommandInput(_commandId + '_colorEffects', 'Color Effect', adsk.core.DropDownStyles.TextListDropDownStyle)
+            _colorEffects.listItems.add(_colorEffect_solid_id, True) 
+            _colorEffects.listItems.add(_colorEffect_basicMaterial_id, False) 
+            _colorEffects.listItems.add(_colorEffect_appearance_id, False)     
+            _colorEffects.listItems.add(_colorEffect_vertex_id, False)   
+            
+            <span style="color:blue"># RGB for solid colors</span>
+            _red = inputs.addIntegerSliderCommandInput(_commandId + '_red', 'Red', 0, 255, False)
+            _red.valueOne = 255
+            _green = inputs.addIntegerSliderCommandInput(_commandId + '_green', 'Green', 0, 255, False)
+            _green.valueOne = 0
+            _blue = inputs.addIntegerSliderCommandInput(_commandId + '_blue', 'Blue', 0, 255, False)   
+            _blue.valueOne = 0
+            
+            <span style="color:blue"># specific for basic material color effect</span>
+            _glossiness = inputs.addFloatSliderCommandInput(_commandId + '_glossiness', 'Glossiness', '', 0.0, 128.0, False)
+            _glossiness.valueOne = 128.0
+            _glossiness.isVisible = False            
+            _opacity = inputs.addFloatSliderCommandInput(_commandId + '_opacity', 'Opacity', '', 0.0, 1.0, False)
+            _opacity.valueOne = 1.0
+            _opacity.isVisible = False
+
+            <span style="color:blue"># for appearance color effect</span>
+            _materialLibList = inputs.addDropDownCommandInput(_commandId + '_materialLib', 'Material Library', adsk.core.DropDownStyles.TextListDropDownStyle)
+            listItems = _materialLibList.listItems
+            materialLibNames = getMaterialLibNames(hasAppearances)
+            for materialName in materialLibNames:
+                listItems.add(materialName, False, '')
+            listItems[0].isSelected = True
+            _materialLibList.isVisible = False
+            _appearanceList = inputs.addDropDownCommandInput(_commandId + '_appearanceList', 'Appearance', adsk.core.DropDownStyles.TextListDropDownStyle)
+            appearances = getAppearancesFromLib(materialLibNames[0], '')
+            listItems = _appearanceList.listItems
+            for appearanceName in appearances:
+                listItems.add(appearanceName, False, '')
+            listItems[0].isSelected = True
+            _appearanceList.isVisible = False
+            _appearanceFilter = inputs.addStringValueInput(_commandId + '_appearanceFilter', 'Filter', '')
+            _appearanceFilter.isVisible = False
+
+            <span style="color:blue"># selection input for custom graphics BRep/Curve</span>
+            _selection = inputs.addSelectionInput(_commandId + '_sel', 'Selection', '')
+            _selection.setSelectionLimits(0, 1)
+            _selection.isVisible = False
+            _selection.isEnabled = False
+            
+            <span style="color:blue"># for custom graphics text</span>
+            <span style="color:blue">#_text = inputs.addStringValueInput(_commandId + '_text', 'Text', 'This is a text.')</span>
+            <span style="color:blue">#_text.isVisible = False</span>
+            
+            <span style="color:blue"># transform for all custom graphics entity</span>
+            _transform = inputs.addDistanceValueCommandInput(_commandId + '_transform', 'Transform', adsk.core.ValueInput.createByReal(0))
+            _transform.setManipulator( adsk.core.Point3D.create(0,0,0), adsk.core.Vector3D.create(1,0,0))
+            
+            <span style="color:blue"># menu for different kinds of line sytles</span>
+            _lineStylePattern = inputs.addDropDownCommandInput(_commandId + '_LSPattern', 'Line Style Pattern', adsk.core.DropDownStyles.TextListDropDownStyle)
+            _lineStylePattern.listItems.add('Solid Line', True)     
+            _lineStylePattern.listItems.add('Center Line', False) 
+            _lineStylePattern.listItems.add('Dashed Line', False)
+            _lineStylePattern.listItems.add('Dot Line', False)
+            _lineStylePattern.listItems.add('Phantom Line', False)
+            _lineStylePattern.listItems.add('Tracks Line', False)       
+            _lineStylePattern.listItems.add('ZigZag Line', False)
+            _lineStylePattern.isVisible = False
+            
+            <span style="color:blue"># for line sytle weight</span>
+            _lineStyleWeight = inputs.addIntegerSliderCommandInput(_commandId + '_LSWeight', 'Line Style Weight', 1, 20, False)
+            _lineStyleWeight.valueOne = 1
+            _lineStyleWeight.isVisible = False
+            
+            <span style="color:blue"># for line style scale</span>
+            _lineStyleScale = inputs.addIntegerSliderCommandInput(_commandId + '_LSScale', 'Line Style Scale', 1, 100, False)
+            _lineStyleScale.valueOne = 10
+            _lineStyleScale.isVisible = False
+            
+            global _viewPlacementGroup, _viewCorner, _viewScaleGroup, _pixelScale, _billboardingGroup, _billboardingStyle            
+            <span style="color:blue"># for view placement attribute</span>
+            _viewPlacementGroup = inputs.addGroupCommandInput(_commandId + '_VPGroup', 'View Placement')
+            _viewPlacementGroup.isEnabledCheckBoxDisplayed = True
+            _viewPlacementGroup.isEnabledCheckBoxChecked = False
+            _viewCorner = _viewPlacementGroup.children.addButtonRowCommandInput(_commandId + '_viewCorner', 'corner', False)
+            _viewCorner.listItems.add('Upper Left', False, './resources/upperLeft')
+            _viewCorner.listItems.add('Upper Right', False, './resources/upperRight')
+            _viewCorner.listItems.add('Lower Left', False, './resources/lowerLeft')
+            _viewCorner.listItems.add('Lower Right', False, './resources/lowerRight')     
+            
+            <span style="color:blue"># for view scale attribute</span>
+            _viewScaleGroup = inputs.addGroupCommandInput(_commandId + '_VSGroup', 'View Scale')
+            _viewScaleGroup.isEnabledCheckBoxDisplayed = True
+            _viewScaleGroup.isEnabledCheckBoxChecked = False
+            _pixelScale = _viewScaleGroup.children.addFloatSliderCommandInput(_commandId + '_pixelScale', 'pixel scale', '', 0.5, 5, False)
+            _pixelScale.valueOne = 1
+            _pixelScale.setText('Smaller', 'Larger')
+            
+            <span style="color:blue"># for billboarding attribute</span>
+            _billboardingGroup = inputs.addGroupCommandInput(_commandId + '_BBGroup', 'Billboarding')
+            _billboardingGroup.isEnabledCheckBoxDisplayed = True
+            _billboardingGroup.isEnabledCheckBoxChecked = False        
+            _billboardingStyle = _billboardingGroup.children.addButtonRowCommandInput(_commandId + '_billboardingStyle', 'style', False)
+            _billboardingStyle.listItems.add('Screen', False, './resources/One')
+            _billboardingStyle.listItems.add('Axis', False, './resources/Two')
+            _billboardingStyle.listItems.add('Right Reading', False, './resources/Three')          
+            
+            <span style="color:blue"># Connect to the command related events.</span>
+            onExecute = MyCommandExecuteHandler()
+            cmd.execute.add(onExecute)
+            _handlers.append(onExecute)        
+            
+            onExecutePreview = MyCommandExecuteHandler()
+            cmd.executePreview.add(onExecutePreview)
+            _handlers.append(onExecutePreview)  
+            
+            onInputChanged = MyCommandInputChangedHandler()
+            cmd.inputChanged.add(onInputChanged)
+            _handlers.append(onInputChanged)     
+
+            onDestroy = MyCommandDestroyHandler()
+            cmd.destroy.add(onDestroy)
+            _handlers.append(onDestroy)
+        except:
+            if _ui:
+                _ui.messageBox('Failed in MyCommandCreatedHandler:\n{}'.format(traceback.format_exc()))
+
+def applyColorEffect(cgEnt):
+    try:
+        colorEffect = None
+        if _colorEffects.selectedItem.name == _colorEffect_solid_id:
+            colorEffect = adsk.fusion.CustomGraphicsSolidColorEffect.create(adsk.core.Color.create(int(_red.valueOne),int(_green.valueOne),int(_blue.valueOne),255))
+        elif _colorEffects.selectedItem.name == _colorEffect_basicMaterial_id:
+            diffuseColor = adsk.core.Color.create(0,255,0,255)                      
+            ambientColor = adsk.core.Color.create(255,0,0,255)            
+            specularColor = adsk.core.Color.create(0,0,255,255)  
+            emissiveColor = adsk.core.Color.create(0,0,0,255) 
+            colorEffect = adsk.fusion.CustomGraphicsBasicMaterialColorEffect.create(diffuseColor, ambientColor, specularColor, emissiveColor, float(_glossiness.valueOne), float(_opacity.valueOne))
+        elif _colorEffects.selectedItem.name == _colorEffect_appearance_id:
+            appearance = getAppearance(_materialLibList.selectedItem.name, _appearanceList.selectedItem.name)
+            if appearance:
+                if not _des.appearances.itemByName(appearance.name):
+                    appearance = _des.appearances.addByCopy(appearance, appearance.name)
+                colorEffect = adsk.fusion.CustomGraphicsAppearanceColorEffect.create(appearance)
+        elif _colorEffects.selectedItem.name == _colorEffect_vertex_id:
+            colorEffect = adsk.fusion.CustomGraphicsVertexColorEffect.create()
+        if colorEffect:
+            cgEnt.color = colorEffect
+    except:
+        if _ui:
+            _ui.messageBox('Failed in applyColorEffect:\n{}'.format(traceback.format_exc()))
+
+def getCoordinatesFromTable(tableInput):
+    try:
+        vecCoord = []
+        vecStripLen = []
+        stripLen = 0
+        if _coordTable:
+            for i in range(0, _coordTable.rowCount):
+                xValueInput = adsk.core.ValueCommandInput.cast(_coordTable.getInputAtPosition(i,0))
+                if xValueInput:
+                    stripLen = stripLen + 1
+                    yValueInput = adsk.core.ValueCommandInput.cast(_coordTable.getInputAtPosition(i,1))
+                    zValueInput = adsk.core.ValueCommandInput.cast(_coordTable.getInputAtPosition(i,2))
+                    vecCoord.extend([xValueInput.value, yValueInput.value, zValueInput.value])    
+                else:
+                    vecStripLen.append(stripLen)
+                    stripLen = 0
+            vecStripLen.append(stripLen)
+        return vecCoord, vecStripLen
+    except:
+        if _ui:
+            _ui.messageBox('Failed in getCoordinatesFromTable:\n{}'.format(traceback.format_exc()))    
+				
+<span style="color:blue"># Event handler for the execute event.</span>
+class MyCommandExecuteHandler(adsk.core.CommandEventHandler):
+    def __init__(self):
+        super().__init__()
+    def notify(self, args):
+        try:
+            <span style="color:blue"># get selection entity first since it's fragile and any creation/edit operations will clear the selection.</span>
+            selEntity = None
+            if _selection.selectionCount &gt; 0:
+                selEntity = _selection.selection(0).entity
+                                    
+            if _customGraphicsObj:
+                cgGroup = adsk.fusion.CustomGraphicsGroup.cast(_cgGroups.add())     
+                
+                global _anchorPt, _scaleFactor
+                if not _anchorPt:
+                    _anchorPt = adsk.core.Point3D.create(0,0,0)
+                cgEnt = None
+                if _customGraphicsObj.selectedItem.name == 'Mesh':
+                    cgEnt = drawMesh(cgGroup) 
+                    _anchorPt.setWithArray([0,0,_thickness/2])
+                elif _customGraphicsObj.selectedItem.name == 'Lines':
+                    cgEnt = drawLines(cgGroup)                
+                    _anchorPt.setWithArray([0,0,_thickness/2])
+                elif _customGraphicsObj.selectedItem.name == 'PointSet':
+                    cgEnt = drawPointSet(cgGroup)
+                elif _customGraphicsObj.selectedItem.name == 'BRep':                    
+                    if selEntity:
+                        body = adsk.fusion.BRepBody.cast(selEntity)
+                        cgEnt = cgGroup.addBRepBody(body)
+                elif _customGraphicsObj.selectedItem.name == 'Curve':
+                    if selEntity:
+                        skCurve = adsk.fusion.SketchCurve.cast(selEntity)
+                        sk = skCurve.parentSketch
+                        curve = skCurve.geometry
+                        curve.transformBy(sk.transform)
+                        cgEnt = cgGroup.addCurve(curve)
+                        cgEnt.weight = float(_lineStyleWeight.valueOne)                        
+                <span style="color:blue">#elif _customGraphicsObj.selectedItem.name == 'Text':</span>
+                <span style="color:blue">#    if _text.value:</span>
+                <span style="color:blue">#        cgEnt = cgGroup.addText(_text.value, 'None', 10, adsk.core.Point3D.create(0,0,0))</span>
+                elif _customGraphicsObj.selectedItem.name == 'PointSet - Custom':
+                    vecCoords, vecStripLen = getCoordinatesFromTable(_coordTable)
+                    coords = adsk.fusion.CustomGraphicsCoordinates.create(vecCoords)
+                    cgEnt = cgGroup.addPointSet(coords, [], adsk.fusion.CustomGraphicsPointTypes.UserDefinedCustomGraphicsPointType, _pointSetImage)
+                elif _customGraphicsObj.selectedItem.name == 'Lines - Custom':
+                    vecCoords, vecStripLength = getCoordinatesFromTable(_coordTable)
+                    coords = adsk.fusion.CustomGraphicsCoordinates.create(vecCoords)
+                    isLineStrip = _isLineStrip.value
+                    if coords.coordinateCount &lt; 1:
+                        return
+                    cgEnt = cgGroup.addLines(coords, [], isLineStrip, vecStripLength)
+                
+                <span style="color:blue"># add attributes to the custom graphics entity</span>
+                if cgEnt:
+                    <span style="color:blue"># transform</span>
+                    transMat = adsk.core.Matrix3D.create()
+                    origin = adsk.core.Point3D.create(float(_transform.value),0,0)
+                    transMat.setWithCoordinateSystem(origin, adsk.core.Vector3D.create(1,0,0), adsk.core.Vector3D.create(0,1,0), adsk.core.Vector3D.create(0,0,1))
+                    cgEnt.transform = transMat   
+                    <span style="color:blue"># color effect</span>
+                    if not adsk.fusion.CustomGraphicsPointSet.cast(cgEnt):
+                        applyColorEffect(cgEnt)                    
+                    <span style="color:blue"># calculate _scaleFactor and _anchorPt for viewPlacement, viewScale and billboarding attributes based on the bounding box of custom graphics entity</span>
+                    maxPt = cgEnt.boundingBox.maxPoint
+                    minPt = cgEnt.boundingBox.minPoint       
+                    _scaleFactor = 100 / minPt.distanceTo(maxPt)
+                    _anchorPt.setWithArray([(minPt.x + maxPt.x) / 2, (minPt.y + maxPt.y) / 2, (minPt.z + maxPt.z) / 2])
+                    <span style="color:blue"># view placement</span>
+                    if _viewPlacementGroup and _viewPlacementGroup.isVisible and _viewPlacementGroup.isEnabledCheckBoxChecked and _viewCorner and _viewCorner.selectedItem:                       
+                        viewPt = adsk.core.Point2D.create(100,100)
+                        <span style="color:blue"># upper left by default</span>
+                        corner = adsk.fusion.ViewCorners.upperLeftViewCorner                          
+                        if _viewCorner.selectedItem.name == 'Upper Right':
+                            corner = adsk.fusion.ViewCorners.upperRightViewCorner
+                        elif _viewCorner.selectedItem.name == 'Lower Left':
+                            corner = adsk.fusion.ViewCorners.lowerLeftViewCorner
+                        elif _viewCorner.selectedItem.name == 'Lower Right':
+                            corner = adsk.fusion.ViewCorners.lowerRightViewCorner
+                        attr = adsk.fusion.CustomGraphicsViewPlacement.create(_anchorPt, corner, viewPt)
+                        cgEnt.viewPlacement = attr
+                    <span style="color:blue"># view scale</span>
+                    if _viewScaleGroup and _viewScaleGroup.isVisible and _viewScaleGroup.isEnabledCheckBoxChecked and _pixelScale:
+                        attr = adsk.fusion.CustomGraphicsViewScale.create(_scaleFactor * _pixelScale.valueOne, _anchorPt)
+                        cgEnt.viewScale = attr
+                    <span style="color:blue"># billboarding</span>
+                    if _billboardingGroup and _billboardingGroup.isVisible and _billboardingGroup.isEnabledCheckBoxChecked and _billboardingStyle and _billboardingStyle.selectedItem:
+                        <span style="color:blue"># screen style by default</span>
+                        bbStyle = adsk.fusion.CustomGraphicsBillBoardStyles.ScreenBillBoardStyle
+                        if _billboardingStyle.selectedItem.name == 'Axis':
+                            bbStyle = adsk.fusion.CustomGraphicsBillBoardStyles.AxialBillBoardStyle
+                        elif _billboardingStyle.selectedItem.name == 'Right Reading':
+                            bbStyle = adsk.fusion.CustomGraphicsBillBoardStyles.RightReadingBillBoardStyle
+                        attr = adsk.fusion.CustomGraphicsBillBoard.create(_anchorPt)
+                        attr.axis = adsk.core.Vector3D.create(0,1,0)
+                        attr.billBoardStyle = bbStyle
+                        cgEnt.billBoarding = attr
+                            
+        except:
+            if _ui:
+                _ui.messageBox('Failed in MyCommandExecuteHandler:\n{}'.format(traceback.format_exc()))
+
+def changeCGObjVisibility(strObjName):
+    try:       
+        _colorEffects.listItems.clear()
+        _colorEffects.listItems.add(_colorEffect_solid_id, True) 
+        _colorEffects.listItems.add(_colorEffect_basicMaterial_id, False) 
+        _colorEffects.listItems.add(_colorEffect_appearance_id, False)   
+        _colorEffects.isVisible = False
+        _selection.clearSelection()
+        _selection.clearSelectionFilter()
+        _selection.setSelectionLimits(0, 0)
+        _selection.isVisible = False
+        _selection.isEnabled = False        
+        <span style="color:blue">#_text.isVisible = False</span>
+        _coordTable.isVisible = False
+        _isLineStrip.isVisible = False
+        _lineStylePattern.isVisible = False
+        _lineStyleWeight.isVisible = False
+        _lineStyleScale.isVisible = False
+        changeColorEffectVisibility(None)
+        
+        _viewPlacementGroup.isVisible = False
+        _viewScaleGroup.isVisible = False
+        _billboardingGroup.isVisible = False
+        
+        if strObjName == 'Mesh':
+            _colorEffects.isVisible = True
+            _colorEffects.listItems.add(_colorEffect_vertex_id, False) 
+            changeColorEffectVisibility(_colorEffect_solid_id)
+            _viewPlacementGroup.isVisible = True
+            _viewScaleGroup.isVisible = True
+            _billboardingGroup.isVisible = True
+        elif strObjName == 'Lines':    		         
+            changeColorEffectVisibility(_colorEffect_solid_id)
+            _lineStylePattern.isVisible = True
+            _lineStyleWeight.isVisible = True
+            if _lineStylePattern.selectedItem.name != 'Solid Line':
+                _lineStyleScale.isVisible = True
+            _viewPlacementGroup.isVisible = True
+            _viewScaleGroup.isVisible = True
+            _billboardingGroup.isVisible = True
+        elif strObjName == 'Curve':
+            _selection.isVisible = True
+            _selection.isEnabled = True
+            _selection.tooltip = 'select a curve'
+            _selection.commandPrompt = 'select a curve'
+            _selection.addSelectionFilter('SketchCurves')
+            _selection.setSelectionLimits(1,1)
+            changeColorEffectVisibility(_colorEffect_solid_id)
+            _lineStyleWeight.isVisible = True
+            _viewPlacementGroup.isVisible = True
+            _viewScaleGroup.isVisible = True
+            _billboardingGroup.isVisible = True
+        elif strObjName == 'BRep':
+            _selection.isVisible = True
+            _selection.isEnabled = True
+            _selection.tooltip = 'select a body'
+            _selection.commandPrompt = 'select a body'
+            _selection.addSelectionFilter('Bodies')  
+            _selection.setSelectionLimits(1,1)
+            _colorEffects.isVisible = True
+            changeColorEffectVisibility(_colorEffect_solid_id)
+            _viewPlacementGroup.isVisible = True
+            _viewScaleGroup.isVisible = True
+            _billboardingGroup.isVisible = True
+        <span style="color:blue">#elif strObjName == 'Text':</span>
+        <span style="color:blue">#    _text.isVisible = True</span>
+        <span style="color:blue">#    changeColorEffectVisibility(_colorEffect_solid_id)   </span>
+        elif strObjName == 'PointSet - Custom':   
+            _coordTable.isVisible = True 
+            _addStrip.isEnabled = False
+        elif strObjName == 'Lines - Custom': 
+            _coordTable.isVisible = True
+            _isLineStrip.isVisible = True
+            _addStrip.isEnabled = True
+            changeColorEffectVisibility(_colorEffect_solid_id)
+            _lineStylePattern.isVisible = True
+            _lineStyleWeight.isVisible = True
+            if _lineStylePattern.selectedItem.name != 'Solid Line':
+                _lineStyleScale.isVisible = True
+    except:
+        if _ui:
+            _ui.messageBox('Failed in changeCGObjVisibility:\n{}'.format(traceback.format_exc()))
+                 
+def changeColorEffectVisibility(strColorEffectName):
+    try:
+        _red.isVisible = False
+        _green.isVisible = False
+        _blue.isVisible = False
+        _opacity.isVisible = False
+        _glossiness.isVisible = False
+        _appearanceList.isVisible = False
+        _materialLibList.isVisible = False
+        _appearanceFilter.isVisible = False
+        
+        if strColorEffectName == _colorEffect_solid_id:	
+            _red.isVisible = True
+            _green.isVisible = True
+            _blue.isVisible = True	    		    
+        elif strColorEffectName == _colorEffect_basicMaterial_id:		    		
+            _opacity.isVisible = True
+            _glossiness.isVisible = True
+        elif strColorEffectName == _colorEffect_appearance_id:
+            _appearanceList.isVisible = True
+            _materialLibList.isVisible = True
+            _appearanceFilter.isVisible = True
+            
+    except:
+        if _ui:
+            _ui.messageBox('Failed in changeColorEffectVisibility:\n{}'.format(traceback.format_exc()))
+
+def changeLineStyleInputsVisibility(patternName):
+    try:
+        if patternName == 'Solid Line':
+            _lineStyleScale.isVisible = False
+        else:
+            _lineStyleScale.isVisible = True
+        
+    except:
+        if _ui:
+            _ui.messageBox('Failed in changeLineStyleInputsVisibility:\n{}'.format(traceback.format_exc()))
+    
+<span style="color:blue"># Event handler for the inputChanged event.</span>
+class MyCommandInputChangedHandler(adsk.core.InputChangedEventHandler):
+    def __init__(self):
+        super().__init__()
+    def notify(self, args):
+        try:
+            eventArgs = adsk.core.InputChangedEventArgs.cast(args)
+            changedInput = eventArgs.input
+            if changedInput.id == _commandId + '_cgObj':
+                changeCGObjVisibility(_customGraphicsObj.selectedItem.name)
+            elif changedInput.id == _commandId + '_colorEffects':
+                changeColorEffectVisibility(_colorEffects.selectedItem.name)  
+            elif changedInput.id == _commandId + '_appearanceFilter' or changedInput.id == _commandId + '_materialLib':
+                appearances = getAppearancesFromLib(_materialLibList.selectedItem.name, _appearanceFilter.value)
+                replaceItems(_appearanceList, appearances)
+            elif changedInput.id == _coordTable.id + '_add':
+                addRow(_coordTable)
+            elif changedInput.id == _coordTable.id + '_addStrip':
+                addLineStrip(_coordTable)
+            elif changedInput.id == _coordTable.id + '_delete':
+               if _coordTable.selectedRow == -1:
+                   _ui.messageBox('Select one row to delete')
+               else:
+                   _coordTable.deleteRow(_coordTable.selectedRow)
+            elif changedInput.id == _commandId + '_LSPattern':
+                changeLineStyleInputsVisibility(_lineStylePattern.selectedItem.name)
+        except:
+            if _ui:
+                _ui.messageBox('Failed in MyCommandInputChangedHandler:\n{}'.format(traceback.format_exc()))
+def rotate2D(rad, vec):
+    try:
+        x = vec[0]
+        y = vec[1]
+        return (x*math.cos(rad)-y*math.sin(rad), x*math.sin(rad)+y*math.cos(rad))
+    except:
+        if _ui:
+            _ui.messageBox('Failed in rotate2D:\n{}'.format(traceback.format_exc()))    
+
+def calculateCoordinates(numTeeth):
+    try:         
+        <span style="color:blue"># holeDia &lt; rootDia &lt; pitchDia &lt; outsideDia     </span>
+        holeDia = 0.5 * 2.54
+        diametralPitch = 2 / 2.54
+        pitchDia = numTeeth / diametralPitch
+        if (diametralPitch &lt; (20 *(math.pi/180))-0.000001):
+            dedendum = 1.157 / diametralPitch
+        else:
+            circularPitch = math.pi / diametralPitch
+            if circularPitch &gt;= 20:
+                dedendum = 1.25 / diametralPitch
+            else:
+                dedendum = (1.2 / diametralPitch) + (.002 * 2.54)                
+        rootDia = pitchDia - (2 * dedendum)        
+        outsideDia = (numTeeth + 2) / diametralPitch
+        
+        rPts0 = []    <span style="color:blue"># 2 * numTeeth for root</span>
+        hPts0 = []    <span style="color:blue"># 2 * numTeeth for hole</span>
+        pPts0 = []    <span style="color:blue"># 2 * numTeeth for pitch</span>
+        oPts0 = []    <span style="color:blue"># 1 * numTeeth for outside</span>
+        rPts1 = []    <span style="color:blue"># 2 * numTeeth for root with thickness</span>
+        hPts1 = []    <span style="color:blue"># 2 * numTeeth for hole with thickness</span>
+        pPts1 = []    <span style="color:blue"># 2 * numTeeth for pitch with thickness</span>
+        oPts1 = []    <span style="color:blue"># 1 * numTeeth for outside with thickness</span>
+        
+        vecRootRadi = [rootDia/2.0, 0]
+        vecHoleRadi = [holeDia/2.0, 0]
+        vecPitchRadi = [pitchDia/2.0, 0]
+        vecOutRadi = [outsideDia/2.0, 0]
+        unitRadian = math.pi / numTeeth
+        
+        vecCoords = []    
+        vecColors = []
+        for i in range(0, 2 * numTeeth):            
+            x, y = rotate2D(unitRadian * (i - 0.5), vecRootRadi)
+            rPts0.append(int(len(vecCoords) / 3))
+            rPts1.append(int(len(vecCoords) / 3) + 1)
+            vecCoords.extend([x, y, 0, x, y, _thickness])
+            vecColors.extend([255,0,255,128, 255,0,255,128])
+    
+        for i in range(0, 2 * numTeeth):            
+            x, y = rotate2D(unitRadian * (i - 0.5), vecHoleRadi)
+            hPts0.append(int(len(vecCoords) / 3))
+            hPts1.append(int(len(vecCoords) / 3) + 1)   
+            vecCoords.extend([x, y, 0, x, y, _thickness])
+            vecColors.extend([255,0,0,128,  255,0,0,128])
+            
+        for i in range(0, 2 * numTeeth):            
+            x, y = rotate2D(unitRadian * (i - 0.5), vecPitchRadi)
+            pPts0.append(int(len(vecCoords) / 3))
+            pPts1.append(int(len(vecCoords) / 3) + 1)   
+            vecCoords.extend([x, y, 0, x, y, _thickness])
+            vecColors.extend([0,0,255,128, 0,0,255,128])
+    
+        for i in range(0, numTeeth):            
+            x, y = rotate2D(unitRadian * i * 2 , vecOutRadi)
+            oPts0.append(int(len(vecCoords) / 3))
+            oPts1.append(int(len(vecCoords) / 3) + 1)   
+            vecCoords.extend([x, y, 0, x, y, _thickness])
+            vecColors.extend([0,255,255,128, 0,255,255,128])
+    
+        return (rPts0, hPts0, pPts0, oPts0, rPts1, hPts1, pPts1, oPts1, vecCoords, vecColors)
+    except:
+        if _ui:
+            _ui.messageBox('Failed in calculateCoordinates:\n{}'.format(traceback.format_exc()))
+
+def calculateStripLen(numTeeth):
+    try:
+        vecStripLen = []
+        for i in range(0, numTeeth):
+            vecStripLen.append(6)
+        for i in range(0, 2 * numTeeth):
+            vecStripLen.append(21)  
+        for i in range(0, numTeeth):
+            vecStripLen.append(24)
+        for i in range(0, 2 * numTeeth):
+            vecStripLen.append(6)            
+        return vecStripLen
+    except Exception as error:
+        _ui.messageBox("calculateTriangles Failed : " + str(error)) 
+            
+def calculateTriangles(numTeeth, rPts0, hPts0, pPts0, oPts0, rPts1, hPts1, pPts1, oPts1):
+    try: 
+        vertexIndexList = []    
+        <span style="color:blue"># triangles between teeth</span>
+        for i in range(0, numTeeth):
+            idx0 = (2*i+1) % (2*numTeeth)
+            idx1 = (2*i+2) % (2*numTeeth)
+            rPtA0 = rPts0[idx0]
+            rPtB0 = rPts0[idx1]         
+            rPtA1 = rPts1[idx0]
+            rPtB1 = rPts1[idx1]  
+            vertexIndexList.extend([rPtA0,rPtB0,rPtB1, rPtB1,rPtA1,rPtA0])
+        <span style="color:blue"># triangles on surface0</span>
+        for i in range(0, numTeeth):
+            rPtA = rPts0[i*2]
+            rPtB = rPts0[i*2 + 1]
+            rPtC = rPts0[(i*2 + 2)%(2*numTeeth)]        
+            hPtA = hPts0[i*2]
+            hPtB = hPts0[i*2 + 1]  
+            hPtC = hPts0[(i*2 + 2)%(2*numTeeth)]        
+            pPtA = pPts0[i*2]
+            pPtB = pPts0[i*2 + 1]               
+            oPt = oPts0[i]                                  
+            vertexIndexList.extend([hPtB,hPtC,rPtC, rPtC,rPtB,hPtB])
+            vertexIndexList.extend([rPtA,rPtB,pPtB, pPtB,pPtA,rPtA])  
+            vertexIndexList.extend([hPtA,hPtB,rPtB, rPtB,rPtA,hPtA])           
+            vertexIndexList.extend([pPtA,pPtB,oPt])              
+        <span style="color:blue"># triangles on surface1</span>
+        for i in range(0, numTeeth):
+            rPtA = rPts1[i*2]
+            rPtB = rPts1[i*2 + 1]
+            rPtC = rPts1[(i*2 + 2)%(2*numTeeth)]
+            hPtA = hPts1[i*2]
+            hPtB = hPts1[i*2 + 1]  
+            hPtC = hPts1[(i*2 + 2)%(2*numTeeth)]
+            pPtA = pPts1[i*2]
+            pPtB = pPts1[i*2 + 1]         
+            oPt = oPts1[i]             
+            vertexIndexList.extend([hPtC,hPtB,rPtB, rPtB,rPtC,hPtC])
+            vertexIndexList.extend([rPtB,rPtA,pPtA, pPtA,pPtB,rPtB]) 
+            vertexIndexList.extend([hPtB,hPtA,rPtA, rPtA,rPtB,hPtB])          
+            vertexIndexList.extend([pPtB,pPtA,oPt])         
+        <span style="color:blue"># triangles on teeth</span>
+        for i in range(0, numTeeth):
+            rPtA0 = rPts0[i*2]
+            rPtB0 = rPts0[i*2 + 1]  
+            pPtA0 = pPts0[i*2]
+            pPtB0 = pPts0[i*2 + 1]    
+            rPtA1 = rPts1[i*2]
+            rPtB1 = rPts1[i*2 + 1]  
+            pPtA1 = pPts1[i*2]
+            pPtB1 = pPts1[i*2 + 1] 
+            oPt0 = oPts0[i]
+            oPt1 = oPts1[i]        
+            <span style="color:blue"># triangles on one tooth</span>
+            vertexIndexList.extend([rPtA1, rPtA0, pPtA0, pPtA0, pPtA1, rPtA1])
+            vertexIndexList.extend([pPtA1, pPtA0, oPt0, oPt0, oPt1, pPtA1])
+            vertexIndexList.extend([rPtB0, rPtB1, pPtB1, pPtB1, pPtB0, rPtB0])    
+            vertexIndexList.extend([pPtB0, pPtB1, oPt1, oPt1, oPt0, pPtB0])         
+        <span style="color:blue"># triangles on inner face</span>
+        for i in range(0, 2*numTeeth):
+            hPtA0 = hPts0[i]
+            hPtB0 = hPts0[(i + 1)%(2*numTeeth)] 
+            hPtA1 = hPts1[i]
+            hPtB1 = hPts1[(i + 1)%(2*numTeeth)] 
+            vertexIndexList.extend([hPtA1,hPtB1,hPtB0, hPtB0,hPtA0,hPtA1])                
+            
+        return vertexIndexList
+    except Exception as error:
+        _ui.messageBox("calculateTriangles Failed : " + str(error)) 
+        return None
+<span style="color:blue"># Builds a custom graphics mesh.</span>
+def drawMesh(cgGroup):
+    try:        
+        <span style="color:blue"># Calculate mesh coordinates</span>
+        rPts0, hPts0, pPts0, oPts0, rPts1, hPts1, pPts1, oPts1, vecCoords, vecColors = calculateCoordinates(_numTeeth)        
+        coordinates = adsk.fusion.CustomGraphicsCoordinates.create(vecCoords)
+        coordinates.colors = vecColors
+
+        <span style="color:blue"># Calculate mesh triangles</span>
+        vertexIndexList = calculateTriangles(_numTeeth, rPts0, hPts0, pPts0, oPts0, rPts1, hPts1, pPts1, oPts1)        
+        <span style="color:blue"># Add Custom Graphics mesh</span>
+        normalVectors = []
+        normalIndexList = []
+        cgMesh = cgGroup.addMesh(coordinates, vertexIndexList, normalVectors, normalIndexList)        
+        return cgMesh
+        
+    except Exception as error:
+        _ui.messageBox("drawMesh Failed : " + str(error)) 
+        return None
+        
+def drawLines(cgGroup):
+    try:
+        rPts0, hPts0, pPts0, oPts0, rPts1, hPts1, pPts1, oPts1, vecCoords, vecColors = calculateCoordinates(_numTeeth)        
+        coordinates = adsk.fusion.CustomGraphicsCoordinates.create(vecCoords)       
+        vertexIndexList = calculateTriangles(_numTeeth, rPts0, hPts0, pPts0, oPts0, rPts1, hPts1, pPts1, oPts1)        
+            
+        stripLen = calculateStripLen(_numTeeth)
+        cgLines = cgGroup.addLines(coordinates, vertexIndexList, True, stripLen)
+        
+        if _lineStylePattern.selectedItem.name == 'Solid Line':
+            cgLines.lineStylePattern = adsk.fusion.LineStylePatterns.continuousLineStylePattern
+        elif _lineStylePattern.selectedItem.name == 'Center Line':
+            cgLines.lineStylePattern = adsk.fusion.LineStylePatterns.centerLineStylePattern
+        elif _lineStylePattern.selectedItem.name == 'Dashed Line':
+            cgLines.lineStylePattern = adsk.fusion.LineStylePatterns.dashedLineStylePattern
+        elif _lineStylePattern.selectedItem.name == 'Dot Line':
+            cgLines.lineStylePattern = adsk.fusion.LineStylePatterns.dotLineStylePattern
+        elif _lineStylePattern.selectedItem.name == 'Dashed Line':
+            cgLines.lineStylePattern = adsk.fusion.LineStylePatterns.dashedLineStylePattern
+        elif _lineStylePattern.selectedItem.name == 'Phantom Line':
+            cgLines.lineStylePattern = adsk.fusion.LineStylePatterns.phantomLineStylePattern
+        elif _lineStylePattern.selectedItem.name == 'Tracks Line':
+            cgLines.lineStylePattern = adsk.fusion.LineStylePatterns.tracksLineStylePattern
+        elif _lineStylePattern.selectedItem.name == 'ZigZag Line':
+            cgLines.lineStylePattern = adsk.fusion.LineStylePatterns.zigzagLineStylePattern
+            
+        cgLines.weight = float(_lineStyleWeight.valueOne)
+        cgLines.lineStyleScale = float(_lineStyleScale.valueOne)
+        
+        return cgLines
+    except Exception as error:
+        _ui.messageBox("drawLines Failed : " + str(error)) 
+        return None   
+        
+def drawPointSet(cgGroup):
+    try:
+        rPts0, hPts0, pPts0, oPts0, rPts1, hPts1, pPts1, oPts1, vecCoords, vecColors = calculateCoordinates(_numTeeth)        
+        coordinates = adsk.fusion.CustomGraphicsCoordinates.create(vecCoords)       
+               
+        cgPoints = cgGroup.addPointSet(coordinates, [], adsk.fusion.CustomGraphicsPointTypes.UserDefinedCustomGraphicsPointType, _pointSetImage)
+
+        return cgPoints
+    except Exception as error:
+        _ui.messageBox("drawPointSet Failed : " + str(error)) 
+        return None</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(CustomGraphicsSample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,239 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/RuledSurfaceFeatureSample.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="RuledSurfaceFeatureSample_Sample">
+    <meta name="description" content="Ruled Surface Feature API Sample Sample">
+    <meta name="topicid" content="GUID-409E6710-8576-4BD6-9ADE-9F5E6ACF8FEA">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Ruled Surface Feature API Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Ruled Surface Feature API Sample</h1>
+    <h2 class="api">
+          Description
+        </h2>Demonstrates creating a new ruled surface feature.<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code">#include &lt;Core/Application/Application.h&gt;
+#include &lt;Core/Application/Documents.h&gt;
+#include &lt;Core/Application/Document.h&gt;
+#include &lt;Core/Application/Product.h&gt;
+#include &lt;Core/Application/ObjectCollection.h&gt;
+#include &lt;Core/Application/ValueInput.h&gt;
+#include &lt;Core/Geometry/Point3D.h&gt;
+#include &lt;Fusion/Components/Component.h&gt;
+#include &lt;Fusion/Construction/ConstructionPlane.h&gt;
+#include &lt;Fusion/BRep/BRepBodies.h&gt;
+#include &lt;Fusion/BRep/BRepBody.h&gt;
+#include &lt;Fusion/BRep/BRepEdges.h&gt;
+#include &lt;Fusion/BRep/BRepEdge.h&gt;
+#include &lt;Fusion/Features/Features.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeature.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeatures.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeatureInput.h&gt;
+#include &lt;Fusion/Features/Path.h&gt;
+#include &lt;Fusion/Features/RuledSurfaceFeatures.h&gt;
+#include &lt;Fusion/Features/RuledSurfaceFeatureInput.h&gt;
+#include &lt;Fusion/Features/RuledSurfaceFeature.h&gt;
+#include &lt;Fusion/Fusion/Design.h&gt;
+#include &lt;Fusion/Sketch/Sketch.h&gt;
+#include &lt;Fusion/Sketch/Sketches.h&gt;
+#include &lt;Fusion/Sketch/SketchCurves.h&gt;
+#include &lt;Fusion/Sketch/SketchLines.h&gt;
+#include &lt;Fusion/Sketch/SketchLine.h&gt;
+#include &lt;Fusion/Sketch/Profile.h&gt;
+#include &lt;Fusion/Sketch/Profiles.h&gt;
+
+using namespace adsk::core;
+using namespace adsk::fusion;
+
+Ptr&lt;UserInterface&gt; ui;
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    Ptr&lt;Application&gt; app = Application::get();
+    if (!app)
+        return false;
+
+    ui = app-&gt;userInterface();
+    if (!ui)
+        return false;
+
+    Ptr&lt;Documents&gt; documents = app-&gt;documents();
+    if (!documents)
+        return false;
+
+    Ptr&lt;Document&gt; doc = documents-&gt;add(DocumentTypes::FusionDesignDocumentType);
+    if (!doc)
+        return false;
+
+    Ptr&lt;Product&gt; product = app-&gt;activeProduct();
+    if (!product)
+        return false;
+
+    Ptr&lt;Design&gt; design = product;
+    if (!design)
+        return false;
+
+    <span style="color:blue">// Get the root component of the active design</span>
+    Ptr&lt;Component&gt; rootComp = design-&gt;rootComponent();
+    if (!rootComp)
+        return false;
+
+    <span style="color:blue">// Get ruled surfaces features</span>
+    Ptr&lt;Features&gt; feats = rootComp-&gt;features();
+    if (!feats)
+        return false;
+    Ptr&lt;RuledSurfaceFeatures&gt; ruledSurfaces = feats-&gt;ruledSurfaceFeatures();
+    if (!ruledSurfaces)
+        return false;
+
+    <span style="color:blue">// Create sketch line on the xz plane.</span>
+    Ptr&lt;Sketches&gt; sketches = rootComp-&gt;sketches();
+    if (!sketches)
+        return false;
+    Ptr&lt;Sketch&gt; sketch = sketches-&gt;add(rootComp-&gt;xZConstructionPlane());
+    if (!sketch)
+        return false;
+    Ptr&lt;SketchCurves&gt; sketchCurves = sketch-&gt;sketchCurves();
+    if (!sketchCurves)
+        return false;
+    Ptr&lt;SketchLines&gt; sketchLines = sketchCurves-&gt;sketchLines();
+    if (!sketchLines)
+        return false;
+    Ptr&lt;Point3D&gt; startPoint = Point3D::create(0, 0, 0);
+    Ptr&lt;Point3D&gt; endPoint = Point3D::create(1.0, 0, 0);
+    Ptr&lt;SketchLine&gt; sketchLine = sketchLines-&gt;addByTwoPoints(startPoint, endPoint);
+
+    <span style="color:blue">// Create a open profile.</span>
+    Ptr&lt;Profile&gt; openProfile = rootComp-&gt;createOpenProfile(sketchLine);
+
+    <span style="color:blue">// Create an extrusion input.</span>
+    Ptr&lt;Features&gt; features = rootComp-&gt;features();
+    if (!features)
+        return false;
+    Ptr&lt;ExtrudeFeatures&gt; extrudes = features-&gt;extrudeFeatures();
+    if (!extrudes)
+        return false;
+    Ptr&lt;ExtrudeFeatureInput&gt; extrudeInput =
+        extrudes-&gt;createInput(openProfile, FeatureOperations::NewBodyFeatureOperation);
+    if (!extrudeInput)
+        return false;
+    extrudeInput-&gt;isSolid(false);
+
+    <span style="color:blue">// Define the extent.</span>
+    Ptr&lt;ValueInput&gt; distanceExtrusion = ValueInput::createByReal(1.0);
+    extrudeInput-&gt;setDistanceExtent(false, distanceExtrusion);
+
+    <span style="color:blue">// Create the extrusion.</span>
+    Ptr&lt;ExtrudeFeature&gt; extrude = extrudes-&gt;add(extrudeInput);
+    if (!extrude)
+        return false;
+    Ptr&lt;BRepBodies&gt; bodies = extrude-&gt;bodies();
+    if (!bodies)
+        return false;
+    Ptr&lt;BRepBody&gt; body = bodies-&gt;item(0);
+
+    <span style="color:blue">// Get an edge from surface, and add it to object collection.</span>
+    Ptr&lt;BRepEdges&gt; edges = body-&gt;edges();
+    if (!edges)
+        return false;
+    Ptr&lt;BRepEdge&gt; edge = edges-&gt;item(0);
+    Ptr&lt;ObjectCollection&gt; objCol = ObjectCollection::create();
+    objCol-&gt;add(edge);
+    Ptr&lt;Path&gt; profile = Path::create(objCol, ChainedCurveOptions::connectedChainedCurves);
+
+    <span style="color:blue">// Create a ruled surface input.</span>
+    Ptr&lt;ValueInput&gt; distance = ValueInput::createByReal(1.0);
+    Ptr&lt;ValueInput&gt; angle = ValueInput::createByReal(0.0);
+    extrudeInput-&gt;setDistanceExtent(false, distance);
+    Ptr&lt;RuledSurfaceFeatureInput&gt; ruledSurfaceInput =
+        ruledSurfaces-&gt;createInput(profile, distance, angle, NormalRuledSurfaceType);
+    if (!ruledSurfaceInput)
+        return false;
+
+    <span style="color:blue">// Create the ruled surface</span>
+    Ptr&lt;RuledSurfaceFeature&gt; ruledSurface = ruledSurfaces-&gt;add(ruledSurfaceInput);
+    if (!ruledSurface)
+        return false;
+    bodies = ruledSurface-&gt;bodies();
+    if (!bodies)
+        return false;
+    body = bodies-&gt;item(0);
+    if (!body)
+        return false;
+    body-&gt;name("RuledSurfaceFromEdge");
+
+
+    return true;
+}</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(RuledSurfaceFeatureSample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

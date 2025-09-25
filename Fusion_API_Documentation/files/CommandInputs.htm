@@ -1,0 +1,225 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/CommandInputs.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="CommandInputs">
+    <meta name="description" content="CommandInputs Object">
+    <meta name="topicid" content="GUID-504c1dbc-5132-454e-86fd-72101fa55d84">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>CommandInputs Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">CommandInputs Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::core" and the header file is &lt;Core/UserInterface/CommandInputs.h&gt;<h2 class="api">
+          Description
+        </h2>Provides access to the set of inputs for a command. Command inputs are used to gather inputs from the user when a command is executed. The set of inputs used by a command are created and added to the command with the methods in this class.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CommandInputs_addAngleValueCommandInput.htm">addAngleValueCommandInput</a></td>
+        <td class="api-list">Adds a new angle value input to the command. This displays a field in the command dialog where an angle value can be entered. It displays the angle in the dialog using degrees. There is also a graphical manipulator associated with the input to allow the user to graphically set the value. You use the setManipulator method of the returned AngleValueCommandInput object to define the position and orientation of the manipulator.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CommandInputs_addBoolValueInput.htm">addBoolValueInput</a></td>
+        <td class="api-list">Adds a new boolean input to the command. The input can be shown as a check box or a button. If it's a button you need to specify the resource folder to define the icon to use. Buttons don't have an up or down state but can just be clicked.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CommandInputs_addBrowserCommandInput.htm">addBrowserCommandInput</a></td>
+        <td class="api-list">Adds a new command input to the command that behaves as a browser.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CommandInputs_addButtonRowCommandInput.htm">addButtonRowCommandInput</a></td>
+        <td class="api-list">Adds a new row of buttons as a command input. Depending on the isMultiSelectEnabled argument it can act like an option list where only a single button on the row can be selected at a time or multiple buttons can be selected. The buttons are defined by using the returned ButtonRowCommandInput object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CommandInputs_addDirectionCommandInput.htm">addDirectionCommandInput</a></td>
+        <td class="api-list">Adds a new direction command input to the command. The input can be shown as a check box or a button. If it's a button you need to specify the resource folder to define the icon to use for the Button.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CommandInputs_addDistanceValueCommandInput.htm">addDistanceValueCommandInput</a></td>
+        <td class="api-list">Adds a new distance value input to the command. This displays a field in the command dialog where a distance value can be entered. It displays the distance in the dialog using current document default unit. There is also a graphical manipulator associated with the input. You use the setManipulator method of the returned DistanceValueCommandInput object to define the position and orientation of the manipulator.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CommandInputs_addDropDownCommandInput.htm">addDropDownCommandInput</a></td>
+        <td class="api-list">Adds a new empty drop-down input to the command. drop-downs of various types are supported. To add items to the drop down use the returned DropDownCommandInput object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CommandInputs_addFloatSliderCommandInput.htm">addFloatSliderCommandInput</a></td>
+        <td class="api-list">Adds a new slider input to the command. The value type is double.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CommandInputs_addFloatSliderListCommandInput.htm">addFloatSliderListCommandInput</a></td>
+        <td class="api-list">Adds a new slider input to the command. The value type is float.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CommandInputs_addFloatSpinnerCommandInput.htm">addFloatSpinnerCommandInput</a></td>
+        <td class="api-list">Adds a new spinner input to the command. The value type is float.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CommandInputs_addGroupCommandInput.htm">addGroupCommandInput</a></td>
+        <td class="api-list">Adds a new Group input to the command. Group Command inputs organize a set of command inputs into a collapsible list within a command dialog.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CommandInputs_addImageCommandInput.htm">addImageCommandInput</a></td>
+        <td class="api-list">Adds a new Image input to the command.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CommandInputs_addIntegerSliderCommandInput.htm">addIntegerSliderCommandInput</a></td>
+        <td class="api-list">Adds a new slider input to the command. The value type is integer.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CommandInputs_addIntegerSliderListCommandInput.htm">addIntegerSliderListCommandInput</a></td>
+        <td class="api-list">Adds a new slider input to the command. The value type is integer.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CommandInputs_addIntegerSpinnerCommandInput.htm">addIntegerSpinnerCommandInput</a></td>
+        <td class="api-list">Adds a new spinner input to the command. The value type is integer.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CommandInputs_addRadioButtonGroupCommandInput.htm">addRadioButtonGroupCommandInput</a></td>
+        <td class="api-list">Adds a new Radio Button Group input to the command.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CommandInputs_addSelectionInput.htm">addSelectionInput</a></td>
+        <td class="api-list">Adds a new selection input to the command. This allows you to get entity selections from the user. The default behavior is that only one entity can be selected and it can be of any type. To change the selection behavior to select specific types and control the number of items selected use the methods and properties on the returned SelectionCommandInput object. You can also use the selectionEvent event that's associated with the command to have additional control over the selection process.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CommandInputs_addSeparatorCommandInput.htm">addSeparatorCommandInput</a></td>
+        <td class="api-list">Adds a new Separator input to the command. A separator input is for visual purposes only and creates a line in the dialog providing a visual separation between the command inputs above and below where the separator is inserted.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CommandInputs_addStringValueInput.htm">addStringValueInput</a></td>
+        <td class="api-list">Adds a new string input to the command.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CommandInputs_addTabCommandInput.htm">addTabCommandInput</a></td>
+        <td class="api-list">Adds a new Tab input to the command. Tab command inputs contain a set of command inputs and/or group command inputs</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CommandInputs_addTableCommandInput.htm">addTableCommandInput</a></td>
+        <td class="api-list">Adds a new table command input to the command.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CommandInputs_addTextBoxCommandInput.htm">addTextBoxCommandInput</a></td>
+        <td class="api-list">Adds a text box input to the command.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CommandInputs_addTriadCommandInput.htm">addTriadCommandInput</a></td>
+        <td class="api-list">Adds a new triad command input to the command. The input is initially invisible to allow you to define the desired behavior and then set the isVisible property to true when you're ready to display the triad.<br/><br/> The creation of a triad command input results in displaying many input fields in the command dialog. For example, there can be individual fields for the X, Y, and Z offset distances, the X, Y, and Z scales, the X, Y, and Z angles, etc. You control which fields are visible by setting properties on the returned TriadCommandInput. Even though each of these appears as an individual input in the command dialog, and they are all associated with the single TriadCommandInput object. It also results in graphics widgets being displayed to allow the user to define the values graphically.<br/><br/> When a new triad is created, it displays all inputs except those that control scaling. You can use the properties on the returned triad to define the inputs you want to display further.<br/><br/> To simplify your command dialog it can be useful put the TriadCommandInput within a GroupCommandInput so it's apparent to the user these items are related and they can be collapsed to reduce clutter in the dialog. This also allows you to label the set of displayed inputs by using the name of the GroupCommandInput.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CommandInputs_addValueInput.htm">addValueInput</a></td>
+        <td class="api-list">Adds a new value input to the command.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CommandInputs_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CommandInputs_item.htm">item</a></td>
+        <td class="api-list">Returns the specified command input using an index into the collection.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CommandInputs_itemById.htm">itemById</a></td>
+        <td class="api-list">Returns the command input that has the specified ID.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CommandInputs_command.htm">command</a></td>
+        <td class="api-list">Gets the parent Command object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CommandInputs_count.htm">count</a></td>
+        <td class="api-list">Gets the number of inputs.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CommandInputs_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CommandInputs_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="AngleValueCommandInput_commandInputs.htm">AngleValueCommandInput.commandInputs</a>, <a href="BoolValueCommandInput_commandInputs.htm">BoolValueCommandInput.commandInputs</a>, <a href="BrowserCommandInput_commandInputs.htm">BrowserCommandInput.commandInputs</a>, <a href="ButtonRowCommandInput_commandInputs.htm">ButtonRowCommandInput.commandInputs</a>, <a href="Command_commandInputs.htm">Command.commandInputs</a>, <a href="CommandInput_commandInputs.htm">CommandInput.commandInputs</a>, <a href="DirectionCommandInput_commandInputs.htm">DirectionCommandInput.commandInputs</a>, <a href="DistanceValueCommandInput_commandInputs.htm">DistanceValueCommandInput.commandInputs</a>, <a href="DropDownCommandInput_commandInputs.htm">DropDownCommandInput.commandInputs</a>, <a href="FloatSliderCommandInput_commandInputs.htm">FloatSliderCommandInput.commandInputs</a>, <a href="FloatSpinnerCommandInput_commandInputs.htm">FloatSpinnerCommandInput.commandInputs</a>, <a href="GroupCommandInput_children.htm">GroupCommandInput.children</a>, <a href="GroupCommandInput_commandInputs.htm">GroupCommandInput.commandInputs</a>, <a href="ImageCommandInput_commandInputs.htm">ImageCommandInput.commandInputs</a>, <a href="InputChangedEventArgs_inputs.htm">InputChangedEventArgs.inputs</a>, <a href="IntegerSliderCommandInput_commandInputs.htm">IntegerSliderCommandInput.commandInputs</a>, <a href="IntegerSpinnerCommandInput_commandInputs.htm">IntegerSpinnerCommandInput.commandInputs</a>, <a href="RadioButtonGroupCommandInput_commandInputs.htm">RadioButtonGroupCommandInput.commandInputs</a>, <a href="SelectionCommandInput_commandInputs.htm">SelectionCommandInput.commandInputs</a>, <a href="SeparatorCommandInput_commandInputs.htm">SeparatorCommandInput.commandInputs</a>, <a href="SliderCommandInput_commandInputs.htm">SliderCommandInput.commandInputs</a>, <a href="StringValueCommandInput_commandInputs.htm">StringValueCommandInput.commandInputs</a>, <a href="TabCommandInput_children.htm">TabCommandInput.children</a>, <a href="TabCommandInput_commandInputs.htm">TabCommandInput.commandInputs</a>, <a href="TableCommandInput_commandInputs.htm">TableCommandInput.commandInputs</a>, <a href="TextBoxCommandInput_commandInputs.htm">TextBoxCommandInput.commandInputs</a>, <a href="TriadCommandInput_commandInputs.htm">TriadCommandInput.commandInputs</a>, <a href="ValidateInputsEventArgs_inputs.htm">ValidateInputsEventArgs.inputs</a>, <a href="ValueCommandInput_commandInputs.htm">ValueCommandInput.commandInputs</a><h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CommandInputsSample_Sample.htm">Command Inputs API Sample</a></td>
+        <td class="api-list"><p>Creates a command dialog that demonstrates all of the available command inputs.</p>
+
+<p>To use the sample, create a new Python or C++ script and copy and paste this code, replacing the default code.  You also need to unpack this zip file which contains a <a href="../ExtraFiles/CommandInputsResources.zip">resource folder</a> into the same folder where the source code file (.py or .cpp) is.</p></td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(CommandInputs%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

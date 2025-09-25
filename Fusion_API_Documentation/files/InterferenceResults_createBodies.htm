@@ -1,0 +1,136 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/InterferenceResults_createBodies.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="10/10/2015">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="InterferenceResults_createBodies">
+    <meta name="description" content="InterferenceResults.createBodies Method">
+    <meta name="topicid" content="GUID-A674BC55-E914-44FE-8A1B-4CAF88132950">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>InterferenceResults.createBodies Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">InterferenceResults.createBodies Method</h1>
+
+          Parent Object: <a href="InterferenceResults.htm">InterferenceResults</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Fusion/InterferenceResults.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Creates bodies in the model that represent the interference volumes. This is not supported in parametric modeling.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"interferenceResults_var" is a variable referencing an <a href="InterferenceResults.htm">InterferenceResults</a> object.<code><pre class="api-code">returnValue = interferenceResults_var.<b>createBodies</b>(allInterferenceBodies)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"interferenceResults_var" is a variable referencing an <a href="InterferenceResults.htm">InterferenceResults</a> object.<br /><br /><code><pre class="api-code">#include &lt;Fusion/Fusion/InterferenceResults.h&gt;<br /><br />returnValue = interferenceResults_var-&gt;<b>createBodies</b>(allInterferenceBodies);<br /></pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;"><a href="ObjectCollection.htm">ObjectCollection</a></td>
+        <td class="api-list">Returns an ObjectCollection containing the bodies that were created.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">allInterferenceBodies</td>
+        <td class="api-list">boolean</td>
+        <td class="api-list">Sets if all bodies or only individual bodies will be created as bodies in the model. If False, then only interferenceResult objects whose isCreateBody property is true will be created as a model body. If true, all interface volumes will be created as a body regardless of the value of the isCreateBody property on each InterferenceResult object.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="AnalyzeInterferenceSample_Sample.htm">Analyze Interference API Sample</a></td>
+        <td class="api-list">Demonstrates analyzing the interference between components. This uses a direct modeling design because the ability to create bodies that represent the interference volume is only supported in a direct modeling design.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="InterferenceSample_Sample.htm">Interference API Sample</a></td>
+        <td class="api-list">Demonstrates Interference APIs.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version November 2015<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(InterferenceResults.createBodies%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

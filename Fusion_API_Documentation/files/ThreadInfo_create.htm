@@ -1,0 +1,140 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/ThreadInfo_create.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="06/08/2025">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="ThreadInfo_create">
+    <meta name="description" content="ThreadInfo.create Method">
+    <meta name="topicid" content="GUID-C034DCCE-3B19-4C48-8327-A74AC6E5F58F">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>ThreadInfo.create Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">ThreadInfo.create Method</h1>
+
+          Parent Object: <a href="ThreadInfo.htm">ThreadInfo</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Features/ThreadInfo.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">This method creates a new ThreadInfo object that can be used to create a thread or tapped-hole feature. The ThreadInfo object defines the type and size of the thread to create. When creating a thread, the type and size of the thread are defined by specifying the thread type, designation, and class. Fusion uses this information to look up the full details of the thread in tables delivered with Fusion. The ThreadDataQuery object can be used to determine valid input for this information.<br/><br/> The thread type implicitly defines if the thread is standard or tapered. Tapered threads can only be used when creating tapped holes and are not supported for thread features.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>This is a static method.<br /><code><pre class="api-code"><br >returnValue = adsk.fusion.ThreadInfo.<b>create</b>(isTapered, isInternal, threadType, threadDesignation, threadClass, isRightHanded)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>This is a static method.<br /><code><pre class="api-code"><br >#include &lt;Fusion/Features/ThreadInfo.h&gt;<br /><br />returnValue = adsk::fusion::ThreadInfo::<b>create</b>(isTapered, isInternal, threadType, threadDesignation, threadClass, isRightHanded);<br /></pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;"><a href="ThreadInfo.htm">ThreadInfo</a></td>
+        <td class="api-list">Returns the newly created ThreadInfo object or null if the creation failed.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">isTapered</td>
+        <td class="api-list">boolean</td>
+        <td class="api-list">Input Boolean that indicates if the thread is straight or tapered.</td>
+      </tr>
+      <tr>
+        <td class="api-list">isInternal</td>
+        <td class="api-list">boolean</td>
+        <td class="api-list">Input Boolean that indicates if the thread is internal or external. A value of true indicates an internal thread. When the ThreadInfo is used to create a tapped hole, this value is ignored since it is always an internal thread.</td>
+      </tr>
+      <tr>
+        <td class="api-list">threadType</td>
+        <td class="api-list">string</td>
+        <td class="api-list">Input string that defines the thread type.</td>
+      </tr>
+      <tr>
+        <td class="api-list">threadDesignation</td>
+        <td class="api-list">string</td>
+        <td class="api-list">Input string that contains the thread designation.</td>
+      </tr>
+      <tr>
+        <td class="api-list">threadClass</td>
+        <td class="api-list">string</td>
+        <td class="api-list">Input string that defines the thread class. This argument is ignored for tapered threads, so an empty string can be used.</td>
+      </tr>
+      <tr>
+        <td class="api-list">isRightHanded</td>
+        <td class="api-list">boolean</td>
+        <td class="api-list">Input boolean that defines if the thread is right or left-handed.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version September 2025<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(ThreadInfo.create%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,147 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/PostProcessInput_create.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="9/12/2015">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="PostProcessInput_create">
+    <meta name="description" content="PostProcessInput.create Method">
+    <meta name="topicid" content="GUID-914741D5-A17A-48EB-BAFB-885BDCFE5245">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>PostProcessInput.create Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">PostProcessInput.create Method</h1>
+
+          Parent Object: <a href="PostProcessInput.htm">PostProcessInput</a><br>Defined in namespace "adsk::cam" and the header file is &lt;Cam/CAM/PostProcessInput.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Creates a new PostProcessInput object to be used as an input argument by the postProcess() and postProcessAll() methods on the CAM class for posting toolpaths and generating CNC files.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>This is a static method.<br /><code><pre class="api-code"><br >returnValue = adsk.cam.PostProcessInput.<b>create</b>(programName, postConfiguration, outputFolder, outputUnits)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>This is a static method.<br /><code><pre class="api-code"><br >#include &lt;Cam/CAM/PostProcessInput.h&gt;<br /><br />returnValue = adsk::cam::PostProcessInput::<b>create</b>(programName, postConfiguration, outputFolder, outputUnits);<br /></pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;"><a href="PostProcessInput.htm">PostProcessInput</a></td>
+        <td class="api-list">Returns the newly created PostProcessInput object or null if the creation failed.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">programName</td>
+        <td class="api-list">string</td>
+        <td class="api-list">The program name or number. If the post configuration specifies the parameter programNameIsInteger = true, then the program name must be a number.</td>
+      </tr>
+      <tr>
+        <td class="api-list">postConfiguration</td>
+        <td class="api-list">string</td>
+        <td class="api-list">The full filename (including the path) to the post configuration file (.cps) The post config file can be stored in any path but for convenience you can use the genericPostFolder or the personalPostFolder property on the CAM class to specify the path if your .cps file is stored in either of those locations.&nbsp;You must add a forward slash (this works for Mac or Windows) to the path defined by these folder properties before the filename (e.g. postConfiguration = cam.genericPostFolder + '/' + 'fanuc.cps')</td>
+      </tr>
+      <tr>
+        <td class="api-list">outputFolder</td>
+        <td class="api-list">string</td>
+        <td class="api-list">The path for the existing output folder where the .cnc files will be located.&nbsp;This method will create the specified output folder if it does not already exist. It is not necessary to add a slash to the end of the outputFolder path.&nbsp;You should use forward slashes in your path definition if you want your script to run on both Mac and Windows.</td>
+      </tr>
+      <tr>
+        <td class="api-list">outputUnits</td>
+        <td class="api-list"><a href="PostOutputUnitOptions.htm">PostOutputUnitOptions</a></td>
+        <td class="api-list">The units option for the CNC output. Valid options are DocumentUnitsOutput, InchesOutput or MillimetersOutput</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PostToolpaths_Sample_Sample.htm">Post Toolpaths API Sample</a></td>
+        <td class="api-list">Demonstrates posting toolpaths in the active document.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version January 2016<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(PostProcessInput.create%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

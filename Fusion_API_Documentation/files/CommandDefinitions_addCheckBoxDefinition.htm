@@ -1,0 +1,130 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/CommandDefinitions_addCheckBoxDefinition.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="CommandDefinitions_addCheckBoxDefinition">
+    <meta name="description" content="CommandDefinitions.addCheckBoxDefinition Method">
+    <meta name="topicid" content="GUID-7c332ecc-3419-4542-bf23-046e66141779">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>CommandDefinitions.addCheckBoxDefinition Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">CommandDefinitions.addCheckBoxDefinition Method</h1>
+
+          Parent Object: <a href="CommandDefinitions.htm">CommandDefinitions</a><br>Defined in namespace "adsk::core" and the header file is &lt;Core/UserInterface/CommandDefinitions.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Creates a new command definition that can be used to create a single check box control and handle the response when the check box is clicked.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"commandDefinitions_var" is a variable referencing a <a href="CommandDefinitions.htm">CommandDefinitions</a> object.<code><pre class="api-code">returnValue = commandDefinitions_var.<b>addCheckBoxDefinition</b>(id, name, tooltip, isChecked)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"commandDefinitions_var" is a variable referencing a <a href="CommandDefinitions.htm">CommandDefinitions</a> object.<br /><br /><code><pre class="api-code">#include &lt;Core/UserInterface/CommandDefinitions.h&gt;<br /><br />returnValue = commandDefinitions_var-&gt;<b>addCheckBoxDefinition</b>(id, name, tooltip, isChecked);<br /></pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;"><a href="CommandDefinition.htm">CommandDefinition</a></td>
+        <td class="api-list">Returns the created CommandDefinition object or null if the creation failed.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">id</td>
+        <td class="api-list">string</td>
+        <td class="api-list">The unique identifier for this command definition. It must be unique with respect to all other command definitions and is limited to the following set of characters, [A-Z][a-z][0-9] and _.</td>
+      </tr>
+      <tr>
+        <td class="api-list">name</td>
+        <td class="api-list">string</td>
+        <td class="api-list">The name displayed in the UI for the associated check box control.</td>
+      </tr>
+      <tr>
+        <td class="api-list">tooltip</td>
+        <td class="api-list">string</td>
+        <td class="api-list">The full description of the command as seen in the extended tooltip in the user interface. Using the returned CommandDefinition you can also optionally set the toolClipFilename property to show an image the extended tooltip.<br/><br/> The width of all tooltips is limited to 300 pixels. Word wrapping is enabled, so Fusion will automatically break the line and flow your text to the next line. However, if you include a long word that exceeds 300 pixels, it doesn't wrap and the right portion will be clipped. This is common when displaying paths or URL's. If a single word is longer than 300 pixels there are a couple of options to avoid the clipping.<br/><br/> The first option is to insert one or more zero width space characters within the word to define where the word should be broken. The UNICODE character '\u200b' defines a zero width space. This is not displayed is only used to designate a possible break point.<br/><br/> The second option is to shorten the word by removing a section. For example, if the word is a full path to a file and a portion of the path is common you can remove that portion and replace it with the ellipsis character to indicate there is some missing text. There is a single UNICODE character you can use the ellipsis. It is '\u2026'.</td>
+      </tr>
+      <tr>
+        <td class="api-list">isChecked</td>
+        <td class="api-list">boolean</td>
+        <td class="api-list">Indicates if the initial state of the check box.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(CommandDefinitions.addCheckBoxDefinition%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

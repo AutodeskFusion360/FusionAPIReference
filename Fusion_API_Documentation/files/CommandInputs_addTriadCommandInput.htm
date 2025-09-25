@@ -1,0 +1,120 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/CommandInputs_addTriadCommandInput.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="09/05/2022">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="CommandInputs_addTriadCommandInput">
+    <meta name="description" content="CommandInputs.addTriadCommandInput Method">
+    <meta name="topicid" content="GUID-8F6C5E95-61E3-4488-81DE-059AFDD2C8E7">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>CommandInputs.addTriadCommandInput Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">CommandInputs.addTriadCommandInput Method</h1>
+
+          Parent Object: <a href="CommandInputs.htm">CommandInputs</a><br>Defined in namespace "adsk::core" and the header file is &lt;Core/UserInterface/CommandInputs.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Adds a new triad command input to the command. The input is initially invisible to allow you to define the desired behavior and then set the isVisible property to true when you're ready to display the triad.<br/><br/> The creation of a triad command input results in displaying many input fields in the command dialog. For example, there can be individual fields for the X, Y, and Z offset distances, the X, Y, and Z scales, the X, Y, and Z angles, etc. You control which fields are visible by setting properties on the returned TriadCommandInput. Even though each of these appears as an individual input in the command dialog, and they are all associated with the single TriadCommandInput object. It also results in graphics widgets being displayed to allow the user to define the values graphically.<br/><br/> When a new triad is created, it displays all inputs except those that control scaling. You can use the properties on the returned triad to define the inputs you want to display further.<br/><br/> To simplify your command dialog it can be useful put the TriadCommandInput within a GroupCommandInput so it's apparent to the user these items are related and they can be collapsed to reduce clutter in the dialog. This also allows you to label the set of displayed inputs by using the name of the GroupCommandInput.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"commandInputs_var" is a variable referencing a <a href="CommandInputs.htm">CommandInputs</a> object.<code><pre class="api-code">returnValue = commandInputs_var.<b>addTriadCommandInput</b>(id, transform)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"commandInputs_var" is a variable referencing a <a href="CommandInputs.htm">CommandInputs</a> object.<br /><br /><code><pre class="api-code">#include &lt;Core/UserInterface/CommandInputs.h&gt;<br /><br />returnValue = commandInputs_var-&gt;<b>addTriadCommandInput</b>(id, transform);<br /></pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;"><a href="TriadCommandInput.htm">TriadCommandInput</a></td>
+        <td class="api-list">Returns the created TriadCommandInput object or null if the creation failed.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">id</td>
+        <td class="api-list">string</td>
+        <td class="api-list">The unique ID of this command input. It must be unique with respect to the other inputs associated with this command.</td>
+      </tr>
+      <tr>
+        <td class="api-list">transform</td>
+        <td class="api-list"><a href="Matrix3D.htm">Matrix3D</a></td>
+        <td class="api-list">Defines the initial position and orientation of the manipulator.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version May 2022<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(CommandInputs.addTriadCommandInput%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

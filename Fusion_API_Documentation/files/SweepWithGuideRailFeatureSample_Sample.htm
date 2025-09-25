@@ -1,0 +1,321 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/SweepWithGuideRailFeatureSample.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="SweepWithGuideRailFeatureSample_Sample">
+    <meta name="description" content="Sweep with guide rail Feature API Sample Sample">
+    <meta name="topicid" content="GUID-{11E9EECC-1641-4BF0-8C81-BDD178CF8C3A}">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Sweep with guide rail Feature API Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Sweep with guide rail Feature API Sample</h1>
+    <h2 class="api">
+          Description
+        </h2>Demonstrates creating a new Sweep feature that uses a guide rail along with a profile.<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#C++">C++</a></li>
+        <li><a href="#Python">Python</a></li>
+      </ul>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code">#include &lt;Core/CoreAll.h&gt;
+#include &lt;Fusion/FusionAll.h&gt;
+
+using namespace adsk::core;
+using namespace adsk::fusion;
+
+Ptr&lt;Application&gt; app;
+Ptr&lt;UserInterface&gt; ui;
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    app = Application::get();
+    if (!app)
+        return false;
+
+    ui = app-&gt;userInterface();
+    if (!ui)
+        return false;
+
+    Ptr&lt;Documents&gt; documents = app-&gt;documents();
+    if (!documents)
+        return false;
+
+    Ptr&lt;Document&gt; doc = documents-&gt;add(DocumentTypes::FusionDesignDocumentType);
+    if (!doc)
+        return false;
+
+    Ptr&lt;Product&gt; product = app-&gt;activeProduct();
+    if (!product)
+        return false;
+
+    Ptr&lt;Design&gt; design = product;
+    if (!design)
+        return false;
+
+    <span style="color:blue">// Get the root component of the active design</span>
+    Ptr&lt;Component&gt; rootComp = design-&gt;rootComponent();
+    if (!rootComp)
+        return false;
+
+    <span style="color:blue">// Create sketch for the profile to sweep</span>
+    Ptr&lt;Sketches&gt; sketches = rootComp-&gt;sketches();
+    if (!sketches)
+        return false;
+    Ptr&lt;ConstructionPlane&gt; xz = rootComp-&gt;xZConstructionPlane();
+    if (!xz)
+        return false;
+    Ptr&lt;Sketch&gt; sketch = sketches-&gt;add(xz);
+    if (!sketch)
+        return false;
+    Ptr&lt;SketchCurves&gt; sketchCurves = sketch-&gt;sketchCurves();
+    if (!sketchCurves)
+        return false;
+    Ptr&lt;SketchCircles&gt; sketchCircles = sketchCurves-&gt;sketchCircles();
+    if (!sketchCircles)
+        return false;
+    Ptr&lt;Point3D&gt; centerPoint = Point3D::create(0, 0, 0);
+    if (!centerPoint)
+        return false;
+    Ptr&lt;SketchCircle&gt; circle = sketchCircles-&gt;addByCenterRadius(centerPoint, 1.0);
+    if (!circle)
+        return false;
+
+    <span style="color:blue">// Get the profile defined by the circle.</span>
+    Ptr&lt;Profiles&gt; profs = sketch-&gt;profiles();
+    if (!profs)
+        return false;
+    Ptr&lt;Profile&gt; prof = profs-&gt;item(0);
+    if (!prof)
+        return false;
+
+    <span style="color:blue">// Create a vertical sketch and add a spline (for the sweep path) and a line (for the sweep guide rail)</span>
+    Ptr&lt;ConstructionPlane&gt; yz = rootComp-&gt;yZConstructionPlane();
+    if (!yz)
+        return false;
+    Ptr&lt;Sketch&gt; sketchVertical = sketches-&gt;add(yz);
+    if (!sketchVertical)
+        return false;
+    Ptr&lt;SketchCurves&gt; sketchCurves2 = sketchVertical-&gt;sketchCurves();
+    if (!sketchCurves2)
+        return false;
+    Ptr&lt;SketchFittedSplines&gt; sketchSplines = sketchCurves2-&gt;sketchFittedSplines();
+    if (!sketchSplines)
+        return false;
+    Ptr&lt;SketchLines&gt; sketchLines = sketchCurves2-&gt;sketchLines();
+    if (!sketchLines)
+        return false;
+
+    <span style="color:blue">// Create points for the spline definition</span>
+    Ptr&lt;Point3D&gt; splineStartPt = Point3D::create(0, 0, 0);
+    if (!splineStartPt)
+        return false;
+    Ptr&lt;Point3D&gt; splineMidPt = Point3D::create(0, 5, 0);
+    if (!splineMidPt)
+        return false;
+    Ptr&lt;Point3D&gt; splineEndPt = Point3D::create(3, 10, 0);
+    if (!splineEndPt)
+        return false;
+
+    <span style="color:blue">// Create a collection of the points for the input needed to create the spline</span>
+    Ptr&lt;ObjectCollection&gt; fitPoints = ObjectCollection::create();
+    if (!fitPoints)
+        return false;
+    fitPoints-&gt;add(splineStartPt);
+    fitPoints-&gt;add(splineMidPt);
+    fitPoints-&gt;add(splineEndPt);
+
+    <span style="color:blue">// Create the spline</span>
+    Ptr&lt;SketchFittedSpline&gt; spline = sketchSplines-&gt;add(fitPoints);
+    if (!spline)
+        return false;
+
+    <span style="color:blue">// Create points for the line definition</span>
+    Ptr&lt;Point3D&gt; lineStartPt = Point3D::create(-2, 0, 0);
+    if (!lineStartPt)
+        return false;
+    Ptr&lt;Point3D&gt; lineEndPt = Point3D::create(-2, 10, 0);
+    if (!lineEndPt)
+        return false;
+
+    <span style="color:blue">// Create the line</span>
+    Ptr&lt;SketchLine&gt; line = sketchLines-&gt;addByTwoPoints(lineStartPt, lineEndPt);
+    if (!line)
+        return false;
+
+    <span style="color:blue">// Create a path for the sweep path and guide rail</span>
+    Ptr&lt;Features&gt; feats = rootComp-&gt;features();
+    if (!feats)
+        return false;
+    Ptr&lt;Path&gt; path = feats-&gt;createPath(spline);
+    if (!path)
+        return false;
+    Ptr&lt;Path&gt; guide = feats-&gt;createPath(line);
+    if (!guide)
+        return false;
+
+    <span style="color:blue">// Create a sweep input</span>
+    Ptr&lt;SweepFeatures&gt; sweeps = feats-&gt;sweepFeatures();
+    if (!sweeps)
+        return false;
+    Ptr&lt;SweepFeatureInput&gt; sweepInput =
+        sweeps-&gt;createInput(prof, path, adsk::fusion::FeatureOperations::NewBodyFeatureOperation);
+    if (!sweepInput)
+        return false;
+    sweepInput-&gt;guideRail(guide);
+
+    sweepInput-&gt;profileScaling(adsk::fusion::SweepProfileScalingOptions::SweepProfileScaleOption);
+
+    <span style="color:blue">// Create the sweep.</span>
+    Ptr&lt;SweepFeature&gt; sweep = sweeps-&gt;add(sweepInput);
+    if (!sweep)
+        return false;
+
+    sketchVertical-&gt;isVisible(true);
+    return true;
+}</pre>
+      </div>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">import adsk.core, adsk.fusion, traceback
+
+def run(context):
+    ui = None
+    try:
+        app = adsk.core.Application.get()
+        ui = app.userInterface
+        
+        <span style="color:blue"># Create a document.</span>
+        doc = app.documents.add(adsk.core.DocumentTypes.FusionDesignDocumentType)
+ 
+        product = app.activeProduct
+        design = adsk.fusion.Design.cast(product)
+
+        <span style="color:blue"># Get the root component of the active design.</span>
+        rootComp = design.rootComponent
+        
+        <span style="color:blue"># Create sketch for the profile to sweep</span>
+        sketches = rootComp.sketches
+        sketch = sketches.add(rootComp.xZConstructionPlane)
+        sketchCircles = sketch.sketchCurves.sketchCircles
+        centerPoint = adsk.core.Point3D.create(0, 0, 0)
+        circle = sketchCircles.addByCenterRadius(centerPoint, 1.0)        
+        
+        <span style="color:blue"># Get the profile defined by the circle.</span>
+        prof = sketch.profiles.item(0)        
+        
+        <span style="color:blue"># Create a vertical sketch and add a spline (for the sweep path) and a line (for the sweep guide rail)</span>
+        sketchVertical = sketches.add(rootComp.yZConstructionPlane)
+        sketchSplines = sketchVertical.sketchCurves.sketchFittedSplines
+        sketchLines = sketchVertical.sketchCurves.sketchLines
+        
+        <span style="color:blue"># Create points for the spline definition       </span>
+        splineStartPt = adsk.core.Point3D.create(0, 0, 0)
+        splineMidPt = adsk.core.Point3D.create(0, 5, 0)
+        splineEndPt = adsk.core.Point3D.create(3, 10, 0)
+        
+        <span style="color:blue"># Create a collection of the points for the input needed to create the spline</span>
+        fitPoints = adsk.core.ObjectCollection.create()
+        fitPoints.add(splineStartPt)
+        fitPoints.add(splineMidPt)
+        fitPoints.add(splineEndPt)
+        
+        <span style="color:blue"># Create the spline</span>
+        spline = sketchSplines.add(fitPoints)
+        
+        <span style="color:blue"># Create points for the line definition       </span>
+        lineStartPt = adsk.core.Point3D.create(-2, 0, 0)
+        lineEndPt = adsk.core.Point3D.create(-2, 10, 0)
+        
+        <span style="color:blue"># Create the line</span>
+        line = sketchLines.addByTwoPoints(lineStartPt, lineEndPt)
+        
+        <span style="color:blue"># Create a path for the sweep path and guide rail</span>
+        path = rootComp.features.createPath(spline)
+        guide = rootComp.features.createPath(line)
+        
+        <span style="color:blue"># Create a sweep input</span>
+        sweeps = rootComp.features.sweepFeatures
+        sweepInput = sweeps.createInput(prof, path, adsk.fusion.FeatureOperations.NewBodyFeatureOperation)
+        sweepInput.guideRail = guide
+        sweepInput.profileScaling = adsk.fusion.SweepProfileScalingOptions.SweepProfileScaleOption
+
+        <span style="color:blue"># Create the sweep.</span>
+        sweep = sweeps.add(sweepInput)
+        
+        sketchVertical.isVisible = True
+
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(SweepWithGuideRailFeatureSample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

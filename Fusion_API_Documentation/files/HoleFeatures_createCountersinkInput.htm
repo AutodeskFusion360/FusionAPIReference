@@ -1,0 +1,142 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/HoleFeatures_createCountersinkInput.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="HoleFeatures_createCountersinkInput">
+    <meta name="description" content="HoleFeatures.createCountersinkInput Method">
+    <meta name="topicid" content="GUID-e58b1abd-080f-48d3-a50c-44678e3818d9">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>HoleFeatures.createCountersinkInput Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">HoleFeatures.createCountersinkInput Method</h1>
+
+          Parent Object: <a href="HoleFeatures.htm">HoleFeatures</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Features/HoleFeatures.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Creates a HoleFeatureInput object that defines a countersink hole. This is not a hole feature but an object used to create a hole feature. Functionality on the returned HoleFeatureInput object is used to define the position and extent of the hole.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"holeFeatures_var" is a variable referencing a <a href="HoleFeatures.htm">HoleFeatures</a> object.<code><pre class="api-code">returnValue = holeFeatures_var.<b>createCountersinkInput</b>(holeDiameter, countersinkDiameter, countersinkAngle)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"holeFeatures_var" is a variable referencing a <a href="HoleFeatures.htm">HoleFeatures</a> object.<br /><br /><code><pre class="api-code">#include &lt;Fusion/Features/HoleFeatures.h&gt;<br /><br />returnValue = holeFeatures_var-&gt;<b>createCountersinkInput</b>(holeDiameter, countersinkDiameter, countersinkAngle);<br /></pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;"><a href="HoleFeatureInput.htm">HoleFeatureInput</a></td>
+        <td class="api-list">Returns the newly created HoleFeatureInput object or null if the creation failed.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">holeDiameter</td>
+        <td class="api-list"><a href="ValueInput.htm">ValueInput</a></td>
+        <td class="api-list">A ValueInput object that defines the diameter of the hole. If the ValueInput uses a real, it is interpreted as centimeters. If it is a string, the units can be defined as part of the string (i.e. "3 in") If no units are specified, it is interpreted using the current default units for length.<br/><br/> If tap information is added to the hole using the returned HoleFeatureInput, it will override this diameter, and the hole will be the correct size for the specified tap.</td>
+      </tr>
+      <tr>
+        <td class="api-list">countersinkDiameter</td>
+        <td class="api-list"><a href="ValueInput.htm">ValueInput</a></td>
+        <td class="api-list">A ValueInput object that defines the diameter of the countersink. If the ValueInput uses a real, it is interpreted as centimeters. If it is a string, the units can be defined as part of the string (i.e. "3 in") If no units are specified, it is interpreted using the current default units for length.</td>
+      </tr>
+      <tr>
+        <td class="api-list">countersinkAngle</td>
+        <td class="api-list"><a href="ValueInput.htm">ValueInput</a></td>
+        <td class="api-list">A ValueInput object that defines the angle of the countersink. If the ValueInput uses a real then it is interpreted as radians. If it is a string then the units can be defined as part of the string (i.e. "120 deg"). If no units are specified it is interpreted using the current default units for angles.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="holeFeaturesCounterSink_add_Sample.htm">holeFeatures.add with Countersink</a></td>
+        <td class="api-list">Demonstrates the holeFeatures.add method using the createCountersinkInput method and postions the hole in the center of a selected circular edge.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(HoleFeatures.createCountersinkInput%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

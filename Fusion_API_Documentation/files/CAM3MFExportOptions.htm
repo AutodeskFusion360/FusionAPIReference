@@ -1,0 +1,154 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/CAM3MFExportOptions.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="11/11/2021">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="CAM3MFExportOptions">
+    <meta name="description" content="CAM3MFExportOptions Object">
+    <meta name="topicid" content="GUID-D5ED8674-A8C0-4480-96A4-64D0D2EA6AE3">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>CAM3MFExportOptions Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">CAM3MFExportOptions Object
+			</h1>
+              Derived from: <a href="CAMExportOptions.htm">CAMExportOptions</a> Object
+            <br>Defined in namespace "adsk::cam" and the header file is &lt;Cam/CAM/CAM3MFExportOptions.h&gt;<h2 class="api">
+          Description
+        </h2>3MF export option. Available with all additive machines except Formlabs. Expects a setup as its export object.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CAM3MFExportOptions_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CAM3MFExportOptions_areSimulationSurrogatesSplit.htm">areSimulationSurrogatesSplit</a></td>
+        <td class="api-list">Flag toggling if surrogate supports used in the simulation should be split. This option might not be available for all machine types. The default value is false.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CAM3MFExportOptions_areSimulationThickeningStructuresKept.htm">areSimulationThickeningStructuresKept</a></td>
+        <td class="api-list">Flag toggling if thickening structures used for simulation should be kept. This option might not be available for all machine types. The default value is false.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CAM3MFExportOptions_areSupportsIncluded.htm">areSupportsIncluded</a></td>
+        <td class="api-list"><mark>**RETIRED**</mark> Flag toggling if support information should be included in the exported file. Includes both support structures marked as open or closed support as well as meta data used in Netfabb. This option might not be available for all machine types. The default value is false.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CAM3MFExportOptions_error.htm">error</a></td>
+        <td class="api-list">Gets the last encountered error message. When the CAMExportManager's executeWithExportFuture() method is used, this method only returns errors encoutered when setting up the export. Errors thrown afterwards can be retrieved via the CAMExportFuture object. When the CAMExportManager's execute() method is used, any error can be retrieved using this property.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CAM3MFExportOptions_exportObject.htm">exportObject</a></td>
+        <td class="api-list">The export object we want to export. Depending on the actual export option, this might be geometry, an operation or a setup.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CAM3MFExportOptions_fullFilename.htm">fullFilename</a></td>
+        <td class="api-list">The file we want to export to. Needs to contain a valid path, as no intermediate folders are created.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CAM3MFExportOptions_isMachineInformationIncluded.htm">isMachineInformationIncluded</a></td>
+        <td class="api-list">Flag toggling if machine information should be included in the exported file. The machine information is only compatible with Netfabb. This option might not be available for all machine types. The default value is false.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CAM3MFExportOptions_isProcessSimulationDataIncluded.htm">isProcessSimulationDataIncluded</a></td>
+        <td class="api-list">Flag toggling if simulation information should be included in the exported file. This option might not be available for all machine types. The default value is false.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CAM3MFExportOptions_isSimulationPostProcessingIncluded.htm">isSimulationPostProcessingIncluded</a></td>
+        <td class="api-list">Flag toggling if post processing of the simulation should be included. This option might not be available for all machine types. The default value is false.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CAM3MFExportOptions_isThumbnailSupported.htm">isThumbnailSupported</a></td>
+        <td class="api-list">Method to check if the exporter implementation supports thumbnail</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CAM3MFExportOptions_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CAM3MFExportOptions_isVolumetricDataIncluded.htm">isVolumetricDataIncluded</a></td>
+        <td class="api-list">Flag toggling if volumetric data should be included in the exported file. The flag is only evaluated if the user has bought the product design extension. The default value is false.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CAM3MFExportOptions_metadata.htm">metadata</a></td>
+        <td class="api-list">Class for setting the meta data options with in the 3mf export</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CAM3MFExportOptions_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CAM3MFExportOptions_supportInclusion.htm">supportInclusion</a></td>
+        <td class="api-list">Flag setting if support information should be included in the exported file. Includes both support structures marked as open or closed support as well as meta data used in Netfabb. This option might not be available for all machine types. The default value is NotIncluded.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CAM3MFExportOptions_thumbnailPath.htm">thumbnailPath</a></td>
+        <td class="api-list">Path to the thumbnail for the buildfile</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CAM3MFExportOptions_volumetricDataResolution.htm">volumetricDataResolution</a></td>
+        <td class="api-list">Integer value representing the resolution of the volumetric data. The value is only evaluated if the user has bought the product design extension. The default value is 128.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="CAMExportManager_create3MFOptions.htm">CAMExportManager.create3MFOptions</a><h2 class="api">
+            Version
+          </h2>
+        Introduced in version November 2021<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(CAM3MFExportOptions%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

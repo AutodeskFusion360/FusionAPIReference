@@ -1,0 +1,254 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/SetParametersFromACsvFileAndExportToSTEP.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="SetParametersFromACsvFileAndExportToSTEP_Sample">
+    <meta name="description" content="Set parameters from a csv file and export to STEP Sample">
+    <meta name="topicid" content="GUID-1c19f064-fdf0-11e4-a863-f8b156d7cd97">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Set parameters from a csv file and export to STEP</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Set parameters from a csv file and export to STEP</h1>
+    <h2 class="api">
+          Description
+        </h2>Reads data from a .csv file and sets user parameters in the model and then exports the model to STEP. When setting parameters be aware that this sample is setting user parameters. It's also possible to set model parameters but that's not demonstrated here. Also when accessing parameters, it is case sensitive so the names you use in your program much exactly match the names in the model.<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">import adsk.core, adsk.fusion, traceback
+
+def run(context):
+    ui = None
+    try:
+        app = adsk.core.Application.get()
+        ui  = app.userInterface
+        
+        design = app.activeProduct
+        <span style="color:blue"># Read the csv file.</span>
+        cnt = 0
+        file = open('C://Temp//values.csv')
+        for line in file:
+            <span style="color:blue"># Get the values from the csv file.</span>
+            pieces = line.split(',')
+            
+            length = pieces[0]
+            width = pieces[1]
+            height = pieces[2]
+            
+            <span style="color:blue"># Set the parameters.</span>
+            lengthParam = design.userParameters.itemByName('Length')
+            lengthParam.expression = length
+            
+            widthParam = design.userParameters.itemByName('Width')
+            widthParam.expression = width
+
+            heightParam = design.userParameters.itemByName('Height')
+            heightParam.expression = height
+            
+            <span style="color:blue">#Export the STEP file.</span>
+            exportMgr = design.exportManager
+            stepOptions = exportMgr.createSTEPExportOptions('C:\\Temp\\test_​box' + str(cnt) + '.stp')
+            cnt += 1
+            res = exportMgr.execute(stepOptions)
+        
+        ui.messageBox('Finished')
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code">#include &lt;Core/Application/Application.h&gt;
+#include &lt;Core/UserInterface/UserInterface.h&gt;
+#include &lt;Fusion/Fusion/UserParameters.h&gt;
+#include &lt;Fusion/Fusion/UserParameter.h&gt;
+#include &lt;Fusion/Fusion/STEPExportOptions.h&gt;
+#include &lt;Fusion/Fusion/ExportManager.h&gt;
+
+#include &lt;fstream&gt;
+#include &lt;iostream&gt;
+#include &lt;sstream&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+
+using namespace adsk::core;
+using namespace adsk::fusion;
+
+Ptr&lt;UserInterface&gt; ui;
+
+typedef std::vector&lt;std::vector&lt;std::string&gt;&gt; DataSet;
+
+void loadCSVFile(const std::string& csvFilePath, DataSet& dataSet)
+{
+    std::ifstream infile(csvFilePath);
+
+    while (infile)
+    {
+        std::string s;
+        if (!getline(infile, s))
+            break;
+
+        std::istringstream ss(s);
+        std::vector&lt;std::string&gt; record;
+
+        while (ss)
+        {
+            std::string s;
+            if (!getline(ss, s, ','))
+                break;
+            record.push_back(s);
+        }
+
+        dataSet.push_back(record);
+    }
+}
+
+std::string getTempPath()
+{
+    std::string strTempPath;
+#ifdef XI_WIN
+    char chPath[MAX_PATH];
+    if (::GetTempPathA(MAX_PATH, chPath))
+        strTempPath = chPath;
+#else  <span style="color:blue">// Mac</span>
+    NSString* tempDir = NSTemporaryDirectory();
+    if (tempDir == nil)
+        tempDir = @"/tmp";
+    strTempPath = [tempDir UTF8String];
+#endif <span style="color:blue">// XI_WIN</span>
+    return strTempPath;
+}
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    Ptr&lt;Application&gt; app = Application::get();
+    if (!app)
+        return false;
+
+    ui = app-&gt;userInterface();
+    if (!ui)
+        return false;
+
+
+    <span style="color:blue">// Read the csv file.</span>
+    int cnt = 0;
+
+     DataSet dataSet;
+     loadCSVFile("C:\\Temp\\values.csv", dataSet);
+
+    for (auto data : dataSet)
+    {
+        <span style="color:blue">// Get the values from the csv file.</span>
+        std::string length = data.at(0);
+        std::string width = data.at(1);
+        std::string height = data.at(2);
+
+        <span style="color:blue">// Set the parameters.</span>
+        Ptr&lt;UserParameters&gt; userParams = design-&gt;userParameters();
+        if (!userParams)
+            return false;
+        Ptr&lt;UserParameter&gt; lengthParam = userParams-&gt;itemByName("Length");
+        if (!lengthParam)
+            return false;
+        lengthParam-&gt;expression(length);
+
+        Ptr&lt;UserParameter&gt; widthParam = userParams-&gt;itemByName("Width");
+        if (!widthParam)
+            return false;
+        widthParam-&gt;expression(width);
+
+        Ptr&lt;UserParameter&gt; heightParam = userParams-&gt;itemByName("Height");
+        if (!heightParam)
+            return false;
+        heightParam-&gt;expression(height);
+
+        <span style="color:blue">// Export the STEP file.</span>
+        Ptr&lt;ExportManager&gt; exportMgr = design-&gt;exportManager();
+        if (!exportMgr)
+            return false;
+         std::string filename = "C:\\Temp\\test_box" + std::to_string(cnt) + ".stp";
+         Ptr&lt;STEPExportOptions&gt; stepOptions = exportMgr-&gt;createSTEPExportOptions(filename);
+        if (!stepOptions)
+            return false;
+
+        ++cnt;
+        exportMgr-&gt;execute(stepOptions);
+    }
+
+
+    return true;
+}</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(SetParametersFromACsvFileAndExportToSTEP%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

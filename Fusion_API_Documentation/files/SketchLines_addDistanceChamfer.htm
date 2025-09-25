@@ -1,0 +1,161 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/SketchLines_addDistanceChamfer.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="26/02/2021">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="SketchLines_addDistanceChamfer">
+    <meta name="description" content="SketchLines.addDistanceChamfer Method">
+    <meta name="topicid" content="GUID-97DC6FF5-6EBD-4D58-B44C-0DADFE25830A">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>SketchLines.addDistanceChamfer Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">SketchLines.addDistanceChamfer Method</h1>
+
+          Parent Object: <a href="SketchLines.htm">SketchLines</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Sketch/SketchLines.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Creates a chamfer between two sketch lines. In the case where the two input lines cross each other creating an "X" shape, this results in four quadrants where the chamfer can be placed. The point arguments are used to define which of the four quadrants the chamfer should be created in. The two points define which side of the two lines should be kept and the other end will be trimmed by the chamfer. The easiest way to use this is to use the end points of the lines on the side you want to keep. In the case where the lines don't intersect or connect at the end points, there is only one valid quadrant for the chamfer so the points are ignored.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"sketchLines_var" is a variable referencing a <a href="SketchLines.htm">SketchLines</a> object.<code><pre class="api-code">returnValue = sketchLines_var.<b>addDistanceChamfer</b>(firstLine, firstLinePoint, secondLine, secondLinePoint, distanceOne, distanceTwo)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"sketchLines_var" is a variable referencing a <a href="SketchLines.htm">SketchLines</a> object.<br /><br /><code><pre class="api-code">#include &lt;Fusion/Sketch/SketchLines.h&gt;<br /><br />returnValue = sketchLines_var-&gt;<b>addDistanceChamfer</b>(firstLine, firstLinePoint, secondLine, secondLinePoint, distanceOne, distanceTwo);<br /></pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;"><a href="SketchLine.htm">SketchLine</a></td>
+        <td class="api-list">Returns the newly created SketchLine object that represents the chamfer or null if the creation failed.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">firstLine</td>
+        <td class="api-list"><a href="SketchLine.htm">SketchLine</a></td>
+        <td class="api-list">The first line you want to chamfer.</td>
+      </tr>
+      <tr>
+        <td class="api-list">firstLinePoint</td>
+        <td class="api-list"><a href="Point3D.htm">Point3D</a></td>
+        <td class="api-list">A point on the first line that is on the side of the intersection with the second line that you want to keep.</td>
+      </tr>
+      <tr>
+        <td class="api-list">secondLine</td>
+        <td class="api-list"><a href="SketchLine.htm">SketchLine</a></td>
+        <td class="api-list">The second line you want to chamfer.</td>
+      </tr>
+      <tr>
+        <td class="api-list">secondLinePoint</td>
+        <td class="api-list"><a href="Point3D.htm">Point3D</a></td>
+        <td class="api-list">A point on the second line that is on the side of the intersection with the first line that you want to keep.</td>
+      </tr>
+      <tr>
+        <td class="api-list">distanceOne</td>
+        <td class="api-list">double</td>
+        <td class="api-list">Defines the distance of the start point of the chamfer line from the intersection point of the two lines along the first line. The distance is defined in centimeters.</td>
+      </tr>
+      <tr>
+        <td class="api-list">distanceTwo</td>
+        <td class="api-list">double</td>
+        <td class="api-list">Defines the distance of the start point of the chamfer line from the intersection point of the two lines along the second line. The distance is defined in centimeters.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchChamferSample_Sample.htm">Sketch Chamfer API Sample</a></td>
+        <td class="api-list">Demonstrates creating a new sketch point.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchLines_addDistanceChamfer_Sample.htm">SketchLines.addDistanceChamfer</a></td>
+        <td class="api-list">Demonstrates the SketchLines.addDistanceChamfer method.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version March 2021<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(SketchLines.addDistanceChamfer%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

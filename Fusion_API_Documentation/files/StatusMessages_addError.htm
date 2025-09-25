@@ -1,0 +1,120 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/StatusMessages_addError.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="29/06/2021">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="StatusMessages_addError">
+    <meta name="description" content="StatusMessages.addError Method">
+    <meta name="topicid" content="GUID-5DB93608-2551-4114-AF97-6FEB275CB985">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>StatusMessages.addError Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">StatusMessages.addError Method</h1>
+
+          Parent Object: <a href="StatusMessages.htm">StatusMessages</a><br>Defined in namespace "adsk::core" and the header file is &lt;Core/Application/StatusMessages.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Adds a new error status message to the list of warning and error messages.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"statusMessages_var" is a variable referencing a <a href="StatusMessages.htm">StatusMessages</a> object.<code><pre class="api-code"><span style="color:blue"># Uses no optional arguments.</span><br />returnValue = statusMessages_var.<b>addError</b>()<br /><br /><span style="color:blue"># Uses optional arguments.</span><br />returnValue = statusMessages_var.<b>addError</b>(messageId, message)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"statusMessages_var" is a variable referencing a <a href="StatusMessages.htm">StatusMessages</a> object.<br /><br /><code><pre class="api-code">#include &lt;Core/Application/StatusMessages.h&gt;<br /><br /><span style="color:blue">// Uses no optional arguments.</span><br />returnValue = statusMessages_var-&gt;<b>addError</b>();<br /><br /><span style="color:blue">// Uses optional arguments.</span><br />returnValue = statusMessages_var-&gt;<b>addError</b>(messageId, message);</pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;"><a href="StatusMessage.htm">StatusMessage</a></td>
+        <td class="api-list">Returns true if the error message was successfully added.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">messageId</td>
+        <td class="api-list">string</td>
+        <td class="api-list">The ID of a predefined message or if an empty string is provided, the default error message will be used. The displayed message is localized based on the current default language in Fusion. Below is a list of some valid message ID's and the corresponding English message. <br/><br/> "API_COMPUTE_ERROR" - "Cannot compute this feature."<br /> "API_COMPUTE_WARNING" - "This feature computed with warnings."<br /> "CFLANGE_INVALID_GEOM" - "Invalid input sketch curve."<br /> "DRAFT_MISSING_FACE_REFERENCES" - "Missing face references"<br /> "DRAFT_MISSING_REFERENCE_PLANE" - "Missing reference plane"<br /> "FEATURE_ENTITY_TYPE_INVALID" - "Entity type is invalid"<br /> "FEATURE_FAILED_TO_CREATE" - "Failed to create feature"<br /> "FEATURE_MISSING_INPUTS" - "Missing inputs"<br /> "FEATURE_REFERENCE_LOST" - "Reference is lost"<br /> "Feature_Compute_Error" - "Compute Failed"<br /> "Feature_Input_Compute_Error" - "Reference Failures"<br /> "InvalidWPntInput" - "Invalid input"<br /> "NO_TARGET_BODY" - "No target body!"<br /> "ORIGIN_SELECTION_MISSING" - "Origin geometry is missing."<br /> "DRPOINT_COMPUTE_FAILED" - "Failed to evaluate the point due to the invalid input"<br /><br /><br /> This is an optional argument whose default value is "".</td>
+      </tr>
+      <tr>
+        <td class="api-list">message</td>
+        <td class="api-list">string</td>
+        <td class="api-list">This is not currently supported for custom feature compute errors and will be ignored.<br /><br /> This is an optional argument whose default value is "".</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version July 2021<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(StatusMessages.addError%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

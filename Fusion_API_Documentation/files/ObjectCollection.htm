@@ -1,0 +1,159 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/ObjectCollection.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="ObjectCollection">
+    <meta name="description" content="ObjectCollection Object">
+    <meta name="topicid" content="GUID-ded8aff3-e42d-4354-9778-aa60172f788e">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>ObjectCollection Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">ObjectCollection Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::core" and the header file is &lt;Core/Application/ObjectCollection.h&gt;<h2 class="api">
+          Description
+        </h2>Generic collection used to handle lists of any object type.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ObjectCollection_add.htm">add</a></td>
+        <td class="api-list">Adds an object to the end of the collection. Duplicates can be added to the collection.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ObjectCollection_asArray.htm">asArray</a></td>
+        <td class="api-list">Returns the content of the ObjectCollection as an array.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ObjectCollection_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ObjectCollection_clear.htm">clear</a></td>
+        <td class="api-list">Clears the entire contents of the collection.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ObjectCollection_contains.htm">contains</a></td>
+        <td class="api-list">Returns whether the specified object exists within the collection.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ObjectCollection_create.htm">create</a></td>
+        <td class="api-list">Creates a new ObjectCollection object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ObjectCollection_createWithArray.htm">createWithArray</a></td>
+        <td class="api-list">Creates a new ObjectCollection that is initialized with the content of the provided array.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ObjectCollection_find.htm">find</a></td>
+        <td class="api-list">Finds the specified component in the collection.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ObjectCollection_item.htm">item</a></td>
+        <td class="api-list">Function that returns the specified object using an index into the collection.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ObjectCollection_removeByIndex.htm">removeByIndex</a></td>
+        <td class="api-list">Function that removes an item from the list. Will fail if the list is read only.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ObjectCollection_removeByItem.htm">removeByItem</a></td>
+        <td class="api-list">Function that removes an item from the collection.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ObjectCollection_count.htm">count</a></td>
+        <td class="api-list">Returns the number of occurrences in the collection.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ObjectCollection_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ObjectCollection_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="Appearance_usedBy.htm">Appearance.usedBy</a>, <a href="Attribute_otherParents.htm">Attribute.otherParents</a>, <a href="BaseComponent_findBRepUsingPoint.htm">BaseComponent.findBRepUsingPoint</a>, <a href="BaseComponent_findBRepUsingRay.htm">BaseComponent.findBRepUsingRay</a>, <a href="BoundaryFillFeature_tools.htm">BoundaryFillFeature.tools</a>, <a href="BoundaryFillFeatureInput_tools.htm">BoundaryFillFeatureInput.tools</a>, <a href="BRepCell_sourceTools.htm">BRepCell.sourceTools</a>, <a href="BRepEdge_tangentiallyConnectedEdges.htm">BRepEdge.tangentiallyConnectedEdges</a>, <a href="CAM_allOperations.htm">CAM.allOperations</a>, <a href="CAMAdditiveContainer_allOperations.htm">CAMAdditiveContainer.allOperations</a>, <a href="CAMFolder_allOperations.htm">CAMFolder.allOperations</a>, <a href="CAMFolder_createFromTemplate.htm">CAMFolder.createFromTemplate</a>, <a href="CAMPattern_allOperations.htm">CAMPattern.allOperations</a>, <a href="CAMPattern_createFromTemplate.htm">CAMPattern.createFromTemplate</a>, <a href="ChamferFeature_edges.htm">ChamferFeature.edges</a>, <a href="ChamferFeatureInput_edges.htm">ChamferFeatureInput.edges</a>, <a href="ChordLengthFilletEdgeSet_edges.htm">ChordLengthFilletEdgeSet.edges</a>, <a href="ChordLengthFilletEdgeSetInput_entities.htm">ChordLengthFilletEdgeSetInput.entities</a>, <a href="CircularPatternFeature_inputEntities.htm">CircularPatternFeature.inputEntities</a>, <a href="CircularPatternFeature_resultFeatures.htm">CircularPatternFeature.resultFeatures</a>, <a href="CircularPatternFeatureInput_inputEntities.htm">CircularPatternFeatureInput.inputEntities</a>, <a href="CombineFeature_toolBodies.htm">CombineFeature.toolBodies</a>, <a href="CombineFeatureInput_toolBodies.htm">CombineFeatureInput.toolBodies</a>, <a href="Component_findBRepUsingPoint.htm">Component.findBRepUsingPoint</a>, <a href="Component_findBRepUsingRay.htm">Component.findBRepUsingRay</a>, <a href="ConstantRadiusFilletEdgeSet_edges.htm">ConstantRadiusFilletEdgeSet.edges</a>, <a href="ConstantRadiusFilletEdgeSetInput_entities.htm">ConstantRadiusFilletEdgeSetInput.entities</a>, <a href="CopyPasteBody_sourceBody.htm">CopyPasteBody.sourceBody</a>, <a href="CutPasteBody_sourceBody.htm">CutPasteBody.sourceBody</a>, <a href="DistanceAndAngleChamferEdgeSet_edges.htm">DistanceAndAngleChamferEdgeSet.edges</a>, <a href="DXF2DImportOptions_results.htm">DXF2DImportOptions.results</a>, <a href="EqualDistanceChamferEdgeSet_edges.htm">EqualDistanceChamferEdgeSet.edges</a>, <a href="ExtendFeature_edges.htm">ExtendFeature.edges</a>, <a href="ExtendFeatureInput_edges.htm">ExtendFeatureInput.edges</a>, <a href="FilletEdgeSetInput_entities.htm">FilletEdgeSetInput.entities</a>, <a href="FlatPatternComponent_findBRepUsingPoint.htm">FlatPatternComponent.findBRepUsingPoint</a>, <a href="FlatPatternComponent_findBRepUsingRay.htm">FlatPatternComponent.findBRepUsingRay</a>, <a href="ImportManager_importToTarget2.htm">ImportManager.importToTarget2</a>, <a href="InfiniteLine3D_intersectWithCurve.htm">InfiniteLine3D.intersectWithCurve</a>, <a href="InfiniteLine3D_intersectWithSurface.htm">InfiniteLine3D.intersectWithSurface</a>, <a href="InterferenceInput_entities.htm">InterferenceInput.entities</a>, <a href="InterferenceResults_createBodies.htm">InterferenceResults.createBodies</a>, <a href="Line3D_intersectWithCurve.htm">Line3D.intersectWithCurve</a>, <a href="Line3D_intersectWithSurface.htm">Line3D.intersectWithSurface</a>, <a href="MirrorFeature_inputEntities.htm">MirrorFeature.inputEntities</a>, <a href="MirrorFeature_resultFeatures.htm">MirrorFeature.resultFeatures</a>, <a href="MirrorFeatureInput_inputEntities.htm">MirrorFeatureInput.inputEntities</a>, <a href="MoveFeature_inputEntities.htm">MoveFeature.inputEntities</a>, <a href="MoveFeatureInput_inputEntities.htm">MoveFeatureInput.inputEntities</a>, <a href="ObjectCollection_create.htm">ObjectCollection.create</a>, <a href="ObjectCollection_createWithArray.htm">ObjectCollection.createWithArray</a>, <a href="OffsetFeature_entities.htm">OffsetFeature.entities</a>, <a href="OffsetFeatureInput_entities.htm">OffsetFeatureInput.entities</a>, <a href="PatchFeature_interiorRailsAndPoints.htm">PatchFeature.interiorRailsAndPoints</a>, <a href="PatchFeatureInput_interiorRailsAndPoints.htm">PatchFeatureInput.interiorRailsAndPoints</a>, <a href="PathPatternFeature_inputEntities.htm">PathPatternFeature.inputEntities</a>, <a href="PathPatternFeature_resultFeatures.htm">PathPatternFeature.resultFeatures</a>, <a href="PathPatternFeatureInput_inputEntities.htm">PathPatternFeatureInput.inputEntities</a>, <a href="Plane_intersectWithCurve.htm">Plane.intersectWithCurve</a>, <a href="Plane_intersectWithSurface.htm">Plane.intersectWithSurface</a>, <a href="RectangularPatternFeature_inputEntities.htm">RectangularPatternFeature.inputEntities</a>, <a href="RectangularPatternFeature_resultFeatures.htm">RectangularPatternFeature.resultFeatures</a>, <a href="RectangularPatternFeatureInput_inputEntities.htm">RectangularPatternFeatureInput.inputEntities</a>, <a href="ReplaceFaceFeatureInput_sourceFaces.htm">ReplaceFaceFeatureInput.sourceFaces</a>, <a href="ReverseNormalFeature_surfaces.htm">ReverseNormalFeature.surfaces</a>, <a href="ScaleFeature_inputEntities.htm">ScaleFeature.inputEntities</a>, <a href="ScaleFeatureInput_inputEntities.htm">ScaleFeatureInput.inputEntities</a>, <a href="SelectionEventArgs_additionalEntities.htm">SelectionEventArgs.additionalEntities</a>, <a href="Selections_all.htm">Selections.all</a>, <a href="Setup_allOperations.htm">Setup.allOperations</a>, <a href="Setup_createFromTemplate.htm">Setup.createFromTemplate</a>, <a href="Setup_fixtures.htm">Setup.fixtures</a>, <a href="Setup_models.htm">Setup.models</a>, <a href="Setup_stockSolids.htm">Setup.stockSolids</a>, <a href="ShellFeature_inputEntities.htm">ShellFeature.inputEntities</a>, <a href="ShellFeatureInput_inputEntities.htm">ShellFeatureInput.inputEntities</a>, <a href="Sketch_copy.htm">Sketch.copy</a>, <a href="Sketch_findConnectedCurves.htm">Sketch.findConnectedCurves</a>, <a href="Sketch_include.htm">Sketch.include</a>, <a href="Sketch_offset.htm">Sketch.offset</a>, <a href="Sketch_project.htm">Sketch.project</a>, <a href="Sketch_projectCutEdges.htm">Sketch.projectCutEdges</a>, <a href="SketchArc_breakCurve.htm">SketchArc.breakCurve</a>, <a href="SketchArc_extend.htm">SketchArc.extend</a>, <a href="SketchArc_intersections.htm">SketchArc.intersections</a>, <a href="SketchArc_split.htm">SketchArc.split</a>, <a href="SketchArc_trim.htm">SketchArc.trim</a>, <a href="SketchCircle_breakCurve.htm">SketchCircle.breakCurve</a>, <a href="SketchCircle_extend.htm">SketchCircle.extend</a>, <a href="SketchCircle_intersections.htm">SketchCircle.intersections</a>, <a href="SketchCircle_split.htm">SketchCircle.split</a>, <a href="SketchCircle_trim.htm">SketchCircle.trim</a>, <a href="SketchConicCurve_breakCurve.htm">SketchConicCurve.breakCurve</a>, <a href="SketchConicCurve_extend.htm">SketchConicCurve.extend</a>, <a href="SketchConicCurve_intersections.htm">SketchConicCurve.intersections</a>, <a href="SketchConicCurve_split.htm">SketchConicCurve.split</a>, <a href="SketchConicCurve_trim.htm">SketchConicCurve.trim</a>, <a href="SketchControlPointSpline_breakCurve.htm">SketchControlPointSpline.breakCurve</a>, <a href="SketchControlPointSpline_extend.htm">SketchControlPointSpline.extend</a>, <a href="SketchControlPointSpline_intersections.htm">SketchControlPointSpline.intersections</a>, <a href="SketchControlPointSpline_split.htm">SketchControlPointSpline.split</a>, <a href="SketchControlPointSpline_trim.htm">SketchControlPointSpline.trim</a>, <a href="SketchCurve_breakCurve.htm">SketchCurve.breakCurve</a>, <a href="SketchCurve_extend.htm">SketchCurve.extend</a>, <a href="SketchCurve_intersections.htm">SketchCurve.intersections</a>, <a href="SketchCurve_split.htm">SketchCurve.split</a>, <a href="SketchCurve_trim.htm">SketchCurve.trim</a>, <a href="SketchEllipse_breakCurve.htm">SketchEllipse.breakCurve</a>, <a href="SketchEllipse_extend.htm">SketchEllipse.extend</a>, <a href="SketchEllipse_intersections.htm">SketchEllipse.intersections</a>, <a href="SketchEllipse_split.htm">SketchEllipse.split</a>, <a href="SketchEllipse_trim.htm">SketchEllipse.trim</a>, <a href="SketchEllipticalArc_breakCurve.htm">SketchEllipticalArc.breakCurve</a>, <a href="SketchEllipticalArc_extend.htm">SketchEllipticalArc.extend</a>, <a href="SketchEllipticalArc_intersections.htm">SketchEllipticalArc.intersections</a>, <a href="SketchEllipticalArc_split.htm">SketchEllipticalArc.split</a>, <a href="SketchEllipticalArc_trim.htm">SketchEllipticalArc.trim</a>, <a href="SketchFittedSpline_breakCurve.htm">SketchFittedSpline.breakCurve</a>, <a href="SketchFittedSpline_extend.htm">SketchFittedSpline.extend</a>, <a href="SketchFittedSpline_intersections.htm">SketchFittedSpline.intersections</a>, <a href="SketchFittedSpline_split.htm">SketchFittedSpline.split</a>, <a href="SketchFittedSpline_trim.htm">SketchFittedSpline.trim</a>, <a href="SketchFixedSpline_breakCurve.htm">SketchFixedSpline.breakCurve</a>, <a href="SketchFixedSpline_extend.htm">SketchFixedSpline.extend</a>, <a href="SketchFixedSpline_intersections.htm">SketchFixedSpline.intersections</a>, <a href="SketchFixedSpline_split.htm">SketchFixedSpline.split</a>, <a href="SketchFixedSpline_trim.htm">SketchFixedSpline.trim</a>, <a href="SketchLine_breakCurve.htm">SketchLine.breakCurve</a>, <a href="SketchLine_extend.htm">SketchLine.extend</a>, <a href="SketchLine_intersections.htm">SketchLine.intersections</a>, <a href="SketchLine_split.htm">SketchLine.split</a>, <a href="SketchLine_trim.htm">SketchLine.trim</a>, <a href="SketchPointsBossPositionDefinition_sketchPoints.htm">SketchPointsBossPositionDefinition.sketchPoints</a>, <a href="SketchPointsHolePositionDefinition_sketchPoints.htm">SketchPointsHolePositionDefinition.sketchPoints</a>, <a href="SplitBodyFeature_splitBodies.htm">SplitBodyFeature.splitBodies</a>, <a href="SplitFaceFeature_facesToSplit.htm">SplitFaceFeature.facesToSplit</a>, <a href="SplitFaceFeature_splittingTool.htm">SplitFaceFeature.splittingTool</a>, <a href="SplitFaceFeatureInput_facesToSplit.htm">SplitFaceFeatureInput.facesToSplit</a>, <a href="StitchFeature_stitchSurfaces.htm">StitchFeature.stitchSurfaces</a>, <a href="StitchFeatureInput_stitchSurfaces.htm">StitchFeatureInput.stitchSurfaces</a>, <a href="SurfaceEvaluator_getIsoCurve.htm">SurfaceEvaluator.getIsoCurve</a>, <a href="SurfaceEvaluator_getModelCurveFromParametricCurve.htm">SurfaceEvaluator.getModelCurveFromParametricCurve</a>, <a href="ThickenFeature_inputFaces.htm">ThickenFeature.inputFaces</a>, <a href="ThickenFeatureInput_inputFaces.htm">ThickenFeatureInput.inputFaces</a>, <a href="ThreadFeature_inputCylindricalFaces.htm">ThreadFeature.inputCylindricalFaces</a>, <a href="ThreadFeatureInput_inputCylindricalFaces.htm">ThreadFeatureInput.inputCylindricalFaces</a>, <a href="ToolbarPanel_relatedWorkspaces.htm">ToolbarPanel.relatedWorkspaces</a>, <a href="TwoDistancesChamferEdgeSet_edges.htm">TwoDistancesChamferEdgeSet.edges</a>, <a href="UnstitchFeature_inputFaces.htm">UnstitchFeature.inputFaces</a>, <a href="VariableRadiusFilletEdgeSet_edges.htm">VariableRadiusFilletEdgeSet.edges</a>, <a href="VariableRadiusFilletEdgeSetInput_entities.htm">VariableRadiusFilletEdgeSetInput.entities</a><h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SetViseOriginAsSetupWCSOrigin_Sample.htm">Set Vise Origin As Setup WCS Origin API Sample</a></td>
+        <td class="api-list"><p>This sample script demonstrates how to define our setup WCS origin relative to our vise origin from either a component, a sketch point or a joint origin.</p><p>The Work Coordinate System is a reference point set in our CAM workspace and on our machine. All machine coordinates are drawn from the WCS. This script demonstrates defining the WCS by each of 4 alternative methods:</p><p>Setup by default with no origin defined.</p><p>Setup using vise origin as WCS origin.</p><p>Setup using a sketch point as WCS origin.</p><p>Setup using a joint origin as WCS origin.</p></td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchFittedSplines_add_Sample.htm">SketchFittedSplines.add</a></td>
+        <td class="api-list">Demonstrates the SketchFittedSplines.add method.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(ObjectCollection%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

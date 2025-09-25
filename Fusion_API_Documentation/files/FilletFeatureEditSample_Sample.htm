@@ -1,0 +1,478 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/FilletFeatureEditSample.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="FilletFeatureEditSample_Sample">
+    <meta name="description" content="Fillet Feature Edit API Sample Sample">
+    <meta name="topicid" content="GUID-a4dc7230-60f3-11e5-a4e9-989096c56ffe">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Fillet Feature Edit API Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Fillet Feature Edit API Sample</h1>
+    <h2 class="api">
+          Description
+        </h2><p></p>Demonstrates editing a fillet feature.<br />To successfully run this sample you can use this <a href="../ExtraFiles/APISampleFilletEdgeSetData.f3d> file</a> or create a new model with the described fillet feature.</p>
+	<p>
+	<ol>
+	<li>Create a new model and add a block feature.</li>
+	<li>Create a single fillet feature that defines three different fillets. The fillets need to be created in a way where they don't interact with one another. The easiest way is to create the fillets only on the vertical edges of the box.
+	<ol>
+	<li>Create a constant radius fillet with a radius that is about 1/4 the size of the box.</li>
+	<li>Create a chord length fillet whose radius is also about 1/4 the size of the box.</li>
+	<li>Create a variable radius fillet with one intermediate radius and the radii are about 1/4 the size of the box and less.</li>
+	</ol>
+</ol>
+Running the sample script will modify various settings of each fillet and change the edge each fillet is applied to.
+	</p><h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">import adsk.core, adsk.fusion, traceback
+
+def run(context):
+    ui = None
+    try:
+        app = adsk.core.Application.get()
+        ui  = app.userInterface
+
+        <span style="color:blue"># Get active design, root component, and timeline.</span>
+        product = app.activeProduct
+        design = adsk.fusion.Design.cast(product)
+        rootComp = design.rootComponent              
+        timeline = design.timeline
+
+        <span style="color:blue"># Get the first fillet feature in the root component.</span>
+        fillet: adsk.fusion.FilletFeature = rootComp.features.filletFeatures[0]
+
+        <span style="color:blue"># Roll the timeline to just before the fillet.</span>
+        fillet.timelineObject.rollTo(True)
+
+        <span style="color:blue"># Iterate over the edge sets.</span>
+        edgeSet: adsk.fusion.FilletEdgeSet = None
+
+        <span style="color:blue"># Save the edges currently used by the edge sets into a list.</span>
+        edges = []
+        for edgeSet in fillet.edgeSets:
+            edges.append(edgeSet.edges[0])
+
+        <span style="color:blue"># Insert the last edge into the first index and remove the last edge.</span>
+        edges.insert(0, edges[len(edges)-1])
+        edges.pop(len(edges)-1)
+
+        <span style="color:blue"># Process each edge set based on its type.</span>
+        for i in range(fillet.edgeSets.count):
+            edgeSet = fillet.edgeSets[i]
+            if edgeSet.objectType == adsk.fusion.ConstantRadiusFilletEdgeSet.classType():
+                <span style="color:blue"># Change the radious of the fillet.</span>
+                constantEdgeSet: adsk.fusion.ConstantRadiusFilletEdgeSet = edgeSet
+                radiusParam = constantEdgeSet.radius
+                radiusParam.value = radiusParam.value / 2.0
+
+                <span style="color:blue"># Toggle the continuity type between tangent and curvature.</span>
+                if constantEdgeSet.continuity == adsk.fusion.SurfaceContinuityTypes.TangentSurfaceContinuityType:
+                    constantEdgeSet.continuity = adsk.fusion.SurfaceContinuityTypes.CurvatureSurfaceContinuityType
+                elif constantEdgeSet.continuity == adsk.fusion.SurfaceContinuityTypes.CurvatureSurfaceContinuityType:
+                    constantEdgeSet.continuity = adsk.fusion.SurfaceContinuityTypes.TangentSurfaceContinuityType
+
+                <span style="color:blue"># Change which edge is filleted.</span>
+                newEdge = adsk.core.ObjectCollection.create()
+                newEdge.add(edges[i])
+                constantEdgeSet.edges = newEdge
+            elif edgeSet.objectType == adsk.fusion.VariableRadiusFilletEdgeSet.classType():
+                variableEdgeSet: adsk.fusion.VariableRadiusFilletEdgeSet = edgeSet
+                
+                <span style="color:blue"># Swap the values of the start and end radii.</span>
+                startRadiusParam = variableEdgeSet.startRadius
+                endRadiusParam = variableEdgeSet.endRadius
+                startVal = startRadiusParam.value
+                startRadiusParam.expression = endRadiusParam.expression
+                endRadiusParam.value = startVal
+
+                <span style="color:blue"># Edit the mid positions.</span>
+                midPositions = variableEdgeSet.midPositions  
+                midRadii = variableEdgeSet.midRadii
+                for j in range(0, midPositions.count):
+                    <span style="color:blue"># Change the position and radius of the mid positions.</span>
+                    pos = midPositions.item(j).value
+                    pos = pos + ((1 - pos) * 0.25)
+                    midPositions.item(j).value = pos
+
+                    midRadii.item(j).value = midRadii.item(j).value * 1.5
+                
+                <span style="color:blue"># Add a new position.                    </span>
+                newMidPosition = adsk.core.ValueInput.createByReal(0.25)
+                newMidRadius = adsk.core.ValueInput.createByReal(startRadiusParam.value * 0.75)
+                variableEdgeSet.addMidPosition(newMidPosition, newMidRadius)
+
+                <span style="color:blue"># Toggle the continuity type between tangent and curvature.</span>
+                if variableEdgeSet.continuity == adsk.fusion.SurfaceContinuityTypes.TangentSurfaceContinuityType:
+                    variableEdgeSet.continuity = adsk.fusion.SurfaceContinuityTypes.CurvatureSurfaceContinuityType
+                elif variableEdgeSet.continuity == adsk.fusion.SurfaceContinuityTypes.CurvatureSurfaceContinuityType:
+                    variableEdgeSet.continuity = adsk.fusion.SurfaceContinuityTypes.TangentSurfaceContinuityType
+
+                <span style="color:blue"># Change which edge is filleted.</span>
+                newEdge = adsk.core.ObjectCollection.create()
+                newEdge.add(edges[i])
+                variableEdgeSet.edges = newEdge
+            elif edgeSet.objectType == adsk.fusion.ChordLengthFilletEdgeSet.classType():
+                chordLengthEdgeSet = adsk.fusion.ChordLengthFilletEdgeSet.cast(edgeSet)
+
+                <span style="color:blue"># Edit the chord length.</span>
+                chordLengthParam = chordLengthEdgeSet.chordLength
+                chordLengthParam.value = chordLengthParam.value * .75
+
+                <span style="color:blue"># Edit the tangency weight.</span>
+                tangencyWeightParam = chordLengthEdgeSet.tangencyWeight
+                tangencyWeightParam.value = tangencyWeightParam.value / 2                   
+
+                <span style="color:blue"># Toggle the continuity type between tangent and curvature.</span>
+                if chordLengthEdgeSet.continuity == adsk.fusion.SurfaceContinuityTypes.TangentSurfaceContinuityType:
+                    chordLengthEdgeSet.continuity = adsk.fusion.SurfaceContinuityTypes.CurvatureSurfaceContinuityType
+                elif chordLengthEdgeSet.continuity == adsk.fusion.SurfaceContinuityTypes.CurvatureSurfaceContinuityType:
+                    chordLengthEdgeSet.continuity = adsk.fusion.SurfaceContinuityTypes.TangentSurfaceContinuityType
+
+                <span style="color:blue"># Change which edge is filleted.</span>
+                newEdge = adsk.core.ObjectCollection.create()
+                newEdge.add(edges[i])
+                chordLengthEdgeSet.edges = newEdge
+
+        <span style="color:blue"># Move the timeline back.</span>
+        timeline.moveToEnd()
+        
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code">#include &lt;Core/Application/Application.h&gt;
+#include &lt;Core/UserInterface/UserInterface.h&gt;
+#include &lt;Core/Application/ObjectCollection.h&gt;
+#include &lt;Core/Application/ValueInput.h&gt;
+#include &lt;Core/Application/Document.h&gt;
+
+#include &lt;Fusion/Fusion/Design.h&gt;
+#include &lt;Fusion/Fusion/Timeline.h&gt;
+#include &lt;Fusion/Fusion/TimelineObject.h&gt;
+#include &lt;Fusion/Fusion/ModelParameter.h&gt;
+#include &lt;Fusion/Fusion/ParameterList.h&gt;
+#include &lt;Fusion/Components/Component.h&gt;
+#include &lt;Fusion/Features/Features.h&gt;
+#include &lt;Fusion/Features/FilletFeatures.h&gt;
+#include &lt;Fusion/Features/FilletFeature.h&gt;
+#include &lt;Fusion/Features/FilletFeatureInput.h&gt;
+#include &lt;Fusion/Features/FilletEdgeSets.h&gt;
+#include &lt;Fusion/Features/ConstantRadiusFilletEdgeSet.h&gt;
+#include &lt;Fusion/Features/VariableRadiusFilletEdgeSet.h&gt;
+#include &lt;Fusion/Features/ChordLengthFilletEdgeSet.h&gt;
+#include &lt;Fusion/BRep/BRepEdge.h&gt;
+
+
+using namespace adsk::core;
+using namespace adsk::fusion;
+
+Ptr&lt;UserInterface&gt; ui;
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    Ptr&lt;Application&gt; app = Application::get();
+    if (!app)
+        return false;
+
+    ui = app-&gt;userInterface();
+    if (!ui)
+        return false;
+
+
+    <span style="color:blue">// Get active design</span>
+    Ptr&lt;Product&gt; product = app-&gt;activeProduct();
+    if (!product)
+        return false;
+    Ptr&lt;Design&gt; design = product;
+    if (!design)
+        return false;
+
+    <span style="color:blue">// Get root component in this design</span>
+    Ptr&lt;Component&gt; rootComp = design-&gt;rootComponent();
+    if (!rootComp)
+        return false;
+
+    <span style="color:blue">// Get the timeline associated with this design</span>
+    Ptr&lt;Timeline&gt; timeline = design-&gt;timeline();
+    if (!timeline)
+        return false;
+
+    <span style="color:blue">// Get the first fillet in the design.</span>
+    Ptr&lt;Features&gt; features = rootComp-&gt;features();
+    if (!features)
+        return false;
+    Ptr&lt;FilletFeatures&gt; fillets = features-&gt;filletFeatures();
+    if (!fillets)
+        return false;
+    Ptr&lt;FilletFeature&gt; fillet = fillets-&gt;item(0);
+    if (!fillet)
+        return false;
+
+    <span style="color:blue">// Roll the timeline to just before the fillet.</span>
+    Ptr&lt;TimelineObject&gt; timelineObj = fillet-&gt;timelineObject();
+    if (!timelineObj)
+        return false;
+    timelineObj-&gt;rollTo(true);
+
+    <span style="color:blue">// Change the corner type.</span>
+    bool isRollingBallCorner = fillet-&gt;isRollingBallCorner();
+    fillet-&gt;isRollingBallCorner(!isRollingBallCorner);
+
+    <span style="color:blue">// Save the edges currently used by the edge sets into a vector so that they are</span>
+    <span style="color:blue">// rotated from the their indexed position. 0 = 1, 1 = 2, 2 = 0.</span>
+    Ptr&lt;BRepEdge&gt; edges[3];
+    for (int i = 0; i &lt; 3; ++i)
+    {
+        Ptr&lt;FilletEdgeSet&gt; edgeSet = fillet-&gt;edgeSets()-&gt;item(i);
+        if (!edgeSet)
+            return false;
+        Ptr&lt;BRepEdge&gt; edge = NULL;
+        if (edgeSet-&gt;objectType() == adsk::fusion::ConstantRadiusFilletEdgeSet::classType())
+        {
+            Ptr&lt;ConstantRadiusFilletEdgeSet&gt; constRadEdgeSet = edgeSet;
+            edge = constRadEdgeSet-&gt;edges()-&gt;item(0);
+            if (!edge)
+                return false;
+        }
+        else if (edgeSet-&gt;objectType() == adsk::fusion::ChordLengthFilletEdgeSet::classType())
+        {
+            Ptr&lt;ChordLengthFilletEdgeSet&gt; chordLengthEdgeSet = edgeSet;
+            edge = chordLengthEdgeSet-&gt;edges()-&gt;item(0);
+            if (!edge)
+                return false;
+        }
+        else if (edgeSet-&gt;objectType() == adsk::fusion::VariableRadiusFilletEdgeSet::classType())
+        {
+            Ptr&lt;VariableRadiusFilletEdgeSet&gt; varRadEdgeSet = edgeSet;
+            edge = varRadEdgeSet-&gt;edges()-&gt;item(0);
+            if (!edge)
+                return false;
+        }
+
+        <span style="color:blue">// Reassign the edge into the new index.</span>
+        if (i == 2)
+        {
+            edges[0] = edge;
+        }
+        else
+        {
+            edges[i + 1] = edge;
+        }
+    }
+
+    <span style="color:blue">// Process each edge set based on its type.</span>
+    for (int i = 0; i &lt; 3; ++i)
+    {
+        Ptr&lt;FilletEdgeSet&gt; edgeSet = fillet-&gt;edgeSets()-&gt;item(i);
+        if (!edgeSet)
+            return false;
+
+        if (edgeSet-&gt;objectType() == adsk::fusion::ConstantRadiusFilletEdgeSet::classType())
+        {
+            Ptr&lt;ConstantRadiusFilletEdgeSet&gt; constRadEdgeSet = edgeSet;
+
+            <span style="color:blue">// Change the radius of the fillet.</span>
+            Ptr&lt;ModelParameter&gt; radiusParam = constRadEdgeSet-&gt;radius();
+            if (!radiusParam)
+                return false;
+            radiusParam-&gt;value(radiusParam-&gt;value() / 2.0);
+
+            <span style="color:blue">// Toggle the continuity type between tangent and curvature.</span>
+            if (constRadEdgeSet-&gt;continuity() == adsk::fusion::SurfaceContinuityTypes::TangentSurfaceContinuityType)
+            {
+                constRadEdgeSet-&gt;continuity(adsk::fusion::SurfaceContinuityTypes::CurvatureSurfaceContinuityType);
+            }
+            else if (
+                constRadEdgeSet-&gt;continuity() == adsk::fusion::SurfaceContinuityTypes::CurvatureSurfaceContinuityType)
+            {
+                constRadEdgeSet-&gt;continuity(adsk::fusion::SurfaceContinuityTypes::TangentSurfaceContinuityType);
+            }
+
+            <span style="color:blue">// Change which edge is filleted.</span>
+            Ptr&lt;ObjectCollection&gt; newEdge = adsk::core::ObjectCollection::create();
+            if (!newEdge)
+                return false;
+            newEdge-&gt;add(edges[i]);
+            bool ret = constRadEdgeSet-&gt;edges(newEdge);
+        }
+        else if (edgeSet-&gt;objectType() == adsk::fusion::ChordLengthFilletEdgeSet::classType())
+        {
+            Ptr&lt;ChordLengthFilletEdgeSet&gt; chordLengthEdgeSet = edgeSet;
+
+            <span style="color:blue">// Edit the chord length.</span>
+            Ptr&lt;ModelParameter&gt; chordLengthParam = chordLengthEdgeSet-&gt;chordLength();
+            if (!chordLengthParam)
+                return false;
+            chordLengthParam-&gt;value(chordLengthParam-&gt;value() * 0.75);
+
+            <span style="color:blue">// Edit the tangency weight.</span>
+            Ptr&lt;ModelParameter&gt; tangencyWeightParam = chordLengthEdgeSet-&gt;tangencyWeight();
+            if (!tangencyWeightParam)
+                return false;
+            tangencyWeightParam-&gt;value(tangencyWeightParam-&gt;value() / 2.0);
+
+            <span style="color:blue">// Toggle the continuity type between tangent and curvature.</span>
+            if (chordLengthEdgeSet-&gt;continuity() == adsk::fusion::SurfaceContinuityTypes::TangentSurfaceContinuityType)
+            {
+                chordLengthEdgeSet-&gt;continuity(adsk::fusion::SurfaceContinuityTypes::CurvatureSurfaceContinuityType);
+            }
+            else if (
+                chordLengthEdgeSet-&gt;continuity() ==
+                adsk::fusion::SurfaceContinuityTypes::CurvatureSurfaceContinuityType)
+            {
+                chordLengthEdgeSet-&gt;continuity(adsk::fusion::SurfaceContinuityTypes::TangentSurfaceContinuityType);
+            }
+
+            <span style="color:blue">// Change which edge is filleted.</span>
+            Ptr&lt;ObjectCollection&gt; newEdge = adsk::core::ObjectCollection::create();
+            if (!newEdge)
+                return false;
+            newEdge-&gt;add(edges[i]);
+            chordLengthEdgeSet-&gt;edges(newEdge);
+        }
+        else if (edgeSet-&gt;objectType() == adsk::fusion::VariableRadiusFilletEdgeSet::classType())
+        {
+            Ptr&lt;VariableRadiusFilletEdgeSet&gt; variableEdgeSet = edgeSet;
+
+            <span style="color:blue">// Swap the values of the start and end radii.</span>
+            Ptr&lt;ModelParameter&gt; startRadiusParam = variableEdgeSet-&gt;startRadius();
+            if (!startRadiusParam)
+                return false;
+            Ptr&lt;ModelParameter&gt; endRadiusParam = variableEdgeSet-&gt;endRadius();
+            if (!endRadiusParam)
+                return false;
+            double startVal = startRadiusParam-&gt;value();
+            startRadiusParam-&gt;expression(endRadiusParam-&gt;expression());
+            endRadiusParam-&gt;value(startVal);
+
+            <span style="color:blue">// Edit the mid positions.</span>
+            Ptr&lt;ParameterList&gt; midPositions = variableEdgeSet-&gt;midPositions();
+            if (!midPositions)
+                return false;
+            Ptr&lt;ParameterList&gt; midRadii = variableEdgeSet-&gt;midRadii();
+            if (!midRadii)
+                return false;
+            for (int j = 0; j &lt; midPositions-&gt;count(); ++j)
+            {
+                <span style="color:blue">// Change the position and radius of the mid positions.</span>
+                double pos = midPositions-&gt;item(j)-&gt;value();
+                pos = pos + ((1 - pos) * 0.25);
+                midPositions-&gt;item(j)-&gt;value(pos);
+
+                midRadii-&gt;item(j)-&gt;value(midRadii-&gt;item(j)-&gt;value() * 1.5);
+            }
+
+            <span style="color:blue">// Add a new position.</span>
+            Ptr&lt;ValueInput&gt; newMidPosition = adsk::core::ValueInput::createByReal(0.25);
+            if (!newMidPosition)
+                return false;
+            Ptr&lt;ValueInput&gt; newMidRadius = adsk::core::ValueInput::createByReal(startRadiusParam-&gt;value() * 0.75);
+            if (!newMidRadius)
+                return false;
+            variableEdgeSet-&gt;addMidPosition(newMidPosition, newMidRadius);
+
+            <span style="color:blue">// Toggle the continuity type between tangent and curvature.</span>
+            if (variableEdgeSet-&gt;continuity() == adsk::fusion::SurfaceContinuityTypes::TangentSurfaceContinuityType)
+            {
+                variableEdgeSet-&gt;continuity(adsk::fusion::SurfaceContinuityTypes::CurvatureSurfaceContinuityType);
+            }
+            else if (
+                variableEdgeSet-&gt;continuity() == adsk::fusion::SurfaceContinuityTypes::CurvatureSurfaceContinuityType)
+            {
+                variableEdgeSet-&gt;continuity(adsk::fusion::SurfaceContinuityTypes::TangentSurfaceContinuityType);
+            }
+
+            <span style="color:blue">// Change which edge is filleted.</span>
+            Ptr&lt;ObjectCollection&gt; newEdge = adsk::core::ObjectCollection::create();
+            if (!newEdge)
+                return false;
+            newEdge-&gt;add(edges[i]);
+            variableEdgeSet-&gt;edges(newEdge);
+        }
+    }
+
+    <span style="color:blue">// Move the timeline back.</span>
+    timeline-&gt;moveToEnd();
+
+
+    return true;
+}</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(FilletFeatureEditSample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

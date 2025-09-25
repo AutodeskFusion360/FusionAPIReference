@@ -1,0 +1,332 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/UserInterface.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="UserInterface">
+    <meta name="description" content="UserInterface Object">
+    <meta name="topicid" content="GUID-52303e26-c1c2-4a1c-8c1a-a3c199e6db63">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>UserInterface Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">UserInterface Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::core" and the header file is &lt;Core/UserInterface/UserInterface.h&gt;<h2 class="api">
+          Description
+        </h2>Provides access to the user-interface related objects and functionality.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="UserInterface_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="UserInterface_createCloudFileDialog.htm">createCloudFileDialog</a></td>
+        <td class="api-list">Creates a new CloudFileDialog object which provides the ability to show a file selection dialog to the user that allows them to choose a file from Fusion web client.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="UserInterface_createFileDialog.htm">createFileDialog</a></td>
+        <td class="api-list">Creates a new FileDialog object which provides the ability to show a standard file selection dialog to the user.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="UserInterface_createFolderDialog.htm">createFolderDialog</a></td>
+        <td class="api-list">Creates a new FolderDialog object which provides the ability to show a standard folder selection dialog to the user.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="UserInterface_createProgressDialog.htm">createProgressDialog</a></td>
+        <td class="api-list">Creates a new ProgressDialog object that you can use to display and control a progress dialog.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="UserInterface_getText.htm">getText</a></td>
+        <td class="api-list">Get the localized text for a specific application text string. The strings used by Fusion are stored in localized XML files that are installed with Fusion. On Windows, you can find them here:<br/><br/> %LocalAppData%\Autodesk\webdeploy\production\VERSION_CODE\StringTable<br/><br/> And on Mac, you can find them here:<br/><br/> ~/Library/Application Support/Autodesk/webdeploy/production/VERSION_CODE/Autodesk Fusion.app/Contents/Libraries/Neutron/StringTable<br/><br/> There is a folder for each language that Fusion supports, and the strings for that language are defined in files within that folder. Fusion will use the language specified by the user in their preferences.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="UserInterface_inputBox.htm">inputBox</a></td>
+        <td class="api-list">Displays a modal dialog to get string input from the user.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="UserInterface_messageBox.htm">messageBox</a></td>
+        <td class="api-list">Display a modal message box with the provided text.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="UserInterface_selectEntity.htm">selectEntity</a></td>
+        <td class="api-list">Supports the selection of a single entity. This provides a simple way to prompt the user for for a selection in a script. If you need more control over the selection a command should be created and a SelectionCommandInput used.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="UserInterface_terminateActiveCommand.htm">terminateActiveCommand</a></td>
+        <td class="api-list">Method that causes the currently active (running) command to be terminated</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="UserInterface_toolbarPanelsByProductType.htm">toolbarPanelsByProductType</a></td>
+        <td class="api-list">Gets all of the toolbar panels associated with the specified product.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="UserInterface_toolbarTabsByProductType.htm">toolbarTabsByProductType</a></td>
+        <td class="api-list">Gets all of the toolbar tabs associated with the specified product.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="UserInterface_workspacesByProductType.htm">workspacesByProductType</a></td>
+        <td class="api-list">Returns all of the workspaces associated with the specified product.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="UserInterface_activeCommand.htm">activeCommand</a></td>
+        <td class="api-list">Gets the id of the command definition from the active command (the one that is currently running)</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="UserInterface_activeSelections.htm">activeSelections</a></td>
+        <td class="api-list">Gets the current set of selected objects.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="UserInterface_activeToolbar.htm">activeToolbar</a></td>
+        <td class="api-list">Retrieve the active Toolbar being displayed in the user interface.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="UserInterface_activeToolbarTab.htm">activeToolbarTab</a></td>
+        <td class="api-list">Retrieve the active ToolbarTab being displayed in the user interface. This may be null.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="UserInterface_activeWorkspace.htm">activeWorkspace</a></td>
+        <td class="api-list">Gets the active workspace. The active workspace is the one currently active in the user interface. This can be null if there is no active product.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="UserInterface_allToolbarPanels.htm">allToolbarPanels</a></td>
+        <td class="api-list">Gets all of the toolbar panels. This returns all of the panels available, regardless of which workspace or product they're associated with.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="UserInterface_allToolbarTabs.htm">allToolbarTabs</a></td>
+        <td class="api-list">Gets all of the toolbar tabs. This returns all of the tabs available, regardless of which workspace or product they're associated with.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="UserInterface_commandDefinitions.htm">commandDefinitions</a></td>
+        <td class="api-list">Gets all of the command definitions currently defined. This is all command definitions both internal and those defined through the API.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="UserInterface_isTabbedToolbarUI.htm">isTabbedToolbarUI</a></td>
+        <td class="api-list">Returns true if Tabbed Toolbars are being used.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="UserInterface_isUIEnabled.htm">isUIEnabled</a></td>
+        <td class="api-list">Gets and sets if the Fusion user interface is enabled or not. By default it is enabled allowing the user to interact with Fusion. When set to false, the UI is disabled which blocks all interaction, including running commands, manipulating the view and interacting with the browser.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="UserInterface_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="UserInterface_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="UserInterface_palettes.htm">palettes</a></td>
+        <td class="api-list">Returns the collection object that provides access to all of the existing palettes and provides the functionality to create new custom palettes.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="UserInterface_progressBar.htm">progressBar</a></td>
+        <td class="api-list">Gets the ProgressBar object that can be used to display a progress bar in the lower-right corner of the Fusion window.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="UserInterface_statusMessage.htm">statusMessage</a></td>
+        <td class="api-list">Gets and sets the current message displayed in the lower-right corner of the Fusion window. This is useful when displaying progress information to the user for the current process. Set the value to an empty string to remove the message. The lifetime of your message is indeterminant because Fusion uses the same field to display messages.<br/><br/> If your process is running in the main thread of Fusion, you will need to call adsk.doEvents to give control back to Fusion, so it can update the UI.<br/><br/> The ProgressBar can also be used as a way to communicate to the user the current progress of a running process.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="UserInterface_toolbars.htm">toolbars</a></td>
+        <td class="api-list">Gets a collection that provides access to the toolbars. This includes the left and right QAT, and the Navbar.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="UserInterface_workspaces.htm">workspaces</a></td>
+        <td class="api-list">Gets all of the workspaces currently available.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Events
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="UserInterface_activeSelectionChanged.htm">activeSelectionChanged</a></td>
+        <td class="api-list">This event fires whenever the contents of the active selection changes. This occurs as the user selects or unselects entities while using the Fusion Select command. The Select command is the default command that is always running if no other command is active. Pressing Escape terminates the currently active command and starts the Select command. If the Select command is running and you press Escape, it terminates the current Select command and starts a new one.<br/><br/> This event is only associated with the selection associated with the Select command and does not fire when any other command is running. The event fires when there is any change to the active selection, including when the selection is cleared when the Select command is terminated. It is also fired when the user clicks in an open area of the canvas to clear the current selection.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="UserInterface_commandCreated.htm">commandCreated</a></td>
+        <td class="api-list">The commandCreated event fires immediately after the command is created.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="UserInterface_commandStarting.htm">commandStarting</a></td>
+        <td class="api-list">The commandStarting event fires when a request for a command to be executed has been received but before the command is executed. Through this event, it's possible to cancel the command from being executed.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="UserInterface_commandTerminated.htm">commandTerminated</a></td>
+        <td class="api-list">Gets an event that is fired when a command is terminated.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="UserInterface_markingMenuDisplaying.htm">markingMenuDisplaying</a></td>
+        <td class="api-list">The markingMenuDisplaying event fires just before the marking menu and context menus are displayed. The marking menu is the round menu displayed when the user right-clicks the mouse within Fusion. The context menu is the vertical menu displayed. The event provides both the marking menu and the context menu so you can examine and edit the contents of either one or both of them before they are displayed. Fusion will then display the marking and context menu that you've customized. If either one is empty it will not be displayed.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="UserInterface_workspaceActivated.htm">workspaceActivated</a></td>
+        <td class="api-list">The workspaceActivated event fires at the VERY end of a workspace being activated. The client can add or remove WorkspaceEventHandlers from the WorkspaceEvent.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="UserInterface_workspaceDeactivated.htm">workspaceDeactivated</a></td>
+        <td class="api-list">The workspaceDeactivated event fires at the VERY end of a workspace being deactivated. The client can add or remove WorkspaceEventHandlers from the WorkspaceEvent.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="UserInterface_workspacePreActivate.htm">workspacePreActivate</a></td>
+        <td class="api-list">The workspacePreActivate event fires at the VERY start of a workspace being activated. The client can add or remove WorkspaceEventHandlers from the WorkspaceEvent.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="UserInterface_workspacePreDeactivate.htm">workspacePreDeactivate</a></td>
+        <td class="api-list">The workspacePreDeactivate event fires at the VERY start of a workspace being deactivated. The client can add or remove WorkspaceEventHandlers from the WorkspaceEvent.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="Application_userInterface.htm">Application.userInterface</a>, <a href="Toolbar_parentUserInterface.htm">Toolbar.parentUserInterface</a>, <a href="ToolbarPanel_parentUserInterface.htm">ToolbarPanel.parentUserInterface</a>, <a href="ToolbarTab_parentUserInterface.htm">ToolbarTab.parentUserInterface</a><h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PaletteSample_Sample.htm">Palette Sample</a></td>
+        <td class="api-list"><p>Demonstrates how to create a palette, how to dock and snap palettes and how Fusion communicates with the palette HTML. The sample is an add-in.  To use it, create a new Python add-in and replace the code with the code below. You also need to create an html file using the name and code below. The html file needs to be in the same folder as the py file.</p>
+	<p>When you load the add-in, you'll see two new commands under the ADD-INS panel of the TOOLS tab. The "Show Custom Palette" command will cause the custom palette to be displayed. It will remain displayed until you click its Close button. Clicking the "Click to send info to Fusion" button on the palette, will send information to your add-in, which uses the API to display that information in a message box. Running the "Send Info to HTML" command to send data to the javascript running in the palette, which uses it to update the content of a paragraph.</p>
+
+<h3 class="api">palette.html</h3>
+<pre class="api-code">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;p&gt;Click the button below to send data to Fusion.&lt;/p&gt;
+        &lt;button type='button' onclick='sendInfoToFusion()'&gt;Click to send info to Fusion&lt;/button&gt; 
+        &lt;p id='p1'&gt;Run the "Send Info to HTML" command in the ADD-INS panel to update this text.&lt;/p&gt;
+        &lt;br /&gt;&lt;br /&gt;
+	
+    &lt;/body&gt;
+    &lt;script&gt;
+        function sendInfoToFusion(){
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0');
+            var yyyy = today.getFullYear();
+
+            var hours = String(today.getHours()).padStart(2, '0');
+            var minutes = String(today.getMinutes()).padStart(2, '0');
+            var seconds = String(today.getSeconds()).padStart(2, '0');
+
+            var date = dd + '/' + mm + '/' + yyyy;
+            var time = hours + ':' + minutes + ':' + seconds;
+            var args = {
+                arg1 : "Sample argument 1",
+                arg2 : "Sample argument 2"
+            };
+            adsk.fusionSendData('send', JSON.stringify(args));
+        }
+        
+        window.fusionJavaScriptHandler = {handle: function(action, data){
+            try {
+                if (action == 'send') {
+					<span style="color:blue">// Update a paragraph with the data passed in.</span>
+					document.getElementById('p1').innerHTML = data;
+				}
+				else if (action == 'debugger') {
+                    debugger;
+				}
+				else {
+					return 'Unexpected command type: ' + action;
+                }
+            } catch (e) {
+                console.log(e);
+                console.log('exception caught with command: ' + action + ', data: ' + data);
+            }
+            return 'OK';
+        }};
+    &lt;/script&gt;
+&lt;/html&gt;
+</pre></td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="UICustomizationSample_Sample.htm">Customizing the UI using the API Sample</a></td>
+        <td class="api-list">Demonstrates how to work with tabs, panels, and command in the user interface. The full source for <a href="../ExtraFiles/UICustomizationSampleCPP.zip">C++</a> and <a href="../ExtraFiles/UICustomizationSamplePython.zip">Python</a> samples can be downloaded. This is especially useful for getting the resource files.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="WriteUserInterfaceToFile_Sample.htm">Write user interface to a file API Sample</a></td>
+        <td class="api-list">Writes out the full structure of the Fusion user interface. This information is useful when editing the user-interface, as discussed in the usre manual topic <a href="UserInterface_UM.htm">User-Interface Customization with Fusion's API</a></td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(UserInterface%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

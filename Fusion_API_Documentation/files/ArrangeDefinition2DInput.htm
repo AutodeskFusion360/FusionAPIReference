@@ -1,0 +1,120 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/ArrangeDefinition2DInput.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="17/12/2024">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="ArrangeDefinition2DInput">
+    <meta name="description" content="ArrangeDefinition2DInput Object">
+    <meta name="topicid" content="GUID-033C6EF2-81B9-408A-B93E-DCEFC40F0CD5">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>ArrangeDefinition2DInput Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">ArrangeDefinition2DInput Object
+			</h1>
+              Derived from: <a href="ArrangeDefinitionInput.htm">ArrangeDefinitionInput</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Arrange/ArrangeDefinition2DInput.h&gt;<h2 class="api">
+          Description
+        </h2>This object defines all of the settings associated with a 2D arrangement. This is used for both rectangular and true shape arrangements, but some properties are ignored in some cases.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ArrangeDefinition2DInput_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ArrangeDefinition2DInput_globalQuantity.htm">globalQuantity</a></td>
+        <td class="api-list">Gets and sets the global quantity, which is the default quantity value for components. This defaults to 1.<br/><br/> This value will become a parameter when the arrangement is created. When created with a real value it must be a whole number. You can also use a string where it is interpreted the same as when entered in the command dialog. The expression must result in a unitless whole number. It's also possible to use an equation like "Total / 4" where "Total" is an existing parameter and be evenly divided by four.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ArrangeDefinition2DInput_globalRotation.htm">globalRotation</a></td>
+        <td class="api-list">Gets and sets the global rotation type. This defaults to AllRotationsArrangeRotationType.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ArrangeDefinition2DInput_grainDirection.htm">grainDirection</a></td>
+        <td class="api-list">Defines the angle of the grain direction of the envelope. This is only used when the solver type is True Shape. An angle of 0 is in the X direction of the envelope, and the default value is zero.<br/><br/> This value will become a parameter when the arrangement is created. If the ValueInput is created using a real number it is in radians. If you use a string, it is evaluated the same as a value would be in the command dialog and uses degrees as the units. For example, if you specify "45" it will result in a 45 degree&nbsp;grain direction. Using a string you can also define an equation for the expression, "PartAngle / 2" where "PartAngle"</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ArrangeDefinition2DInput_isCreateCopies.htm">isCreateCopies</a></td>
+        <td class="api-list">Gets and set if the original components will be moved or copied to create the arrangement. This defaults to true.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ArrangeDefinition2DInput_isGlobalDirectionFaceUp.htm">isGlobalDirectionFaceUp</a></td>
+        <td class="api-list">Gets and sets the global direction for input faces. When true, the components specified by selecting a face will be oriented such that the selection face will be oriented upward in the arrangement. This defaults to true.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ArrangeDefinition2DInput_isPartInPartAllowed.htm">isPartInPartAllowed</a></td>
+        <td class="api-list">Gets and sets if parts can be nested within void areas of other parts. This defaults to true.<br/><br/> This is only used when the solver type is 2D True Shape and is ignored for 2D Rectangular solutions.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ArrangeDefinition2DInput_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ArrangeDefinition2DInput_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ArrangeDefinition2DInput_solverType.htm">solverType</a></td>
+        <td class="api-list">Gets the type of arrange feature defined by this definition.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version January 2025<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(ArrangeDefinition2DInput%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,180 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/TemporaryBRepManager_imprintOverlapBodies.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="28/11/2017">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="TemporaryBRepManager_imprintOverlapBodies">
+    <meta name="description" content="TemporaryBRepManager.imprintOverlapBodies Method">
+    <meta name="topicid" content="GUID-87400208-7F2B-4931-A707-E75BD7A85776">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>TemporaryBRepManager.imprintOverlapBodies Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">TemporaryBRepManager.imprintOverlapBodies Method</h1>
+
+          Parent Object: <a href="TemporaryBRepManager.htm">TemporaryBRepManager</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/BRep/TemporaryBRepManager.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Method that finds regions of faces on two bodies which overlap and creates new bodies where the faces are split at the edges of the overlaps. This does not modify the original bodies but creates new temporary bodies that contain the imprints.</p>
+    <h2 class="api">
+            Remarks
+          </h2>The picture below shows an example of imprinting. The picture on the left shows the initial two bodies that are positioned so there are coincident faces. The picture on the right shows the two bodies individually so you can see the result of the imprint and how the coincident faces were split. <br/><br/><center><img src="../images/ImprintBodies.png"></center><br/><br/>
+ The ability to imprint solids can be important to applications that need to mesh models. By creating edges at the points where solids connect, it guarantees that there will be mesh nodes along those boundaries.<h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"temporaryBRepManager_var" is a variable referencing a <a href="TemporaryBRepManager.htm">TemporaryBRepManager</a> object.<br /><br /><code><pre class="api-code"><span style="color:blue"># Uses no optional arguments.</span><br />(returnValue, resultBodyOne, resultBodyTwo, bodyOneOverlappingFaces, bodyTwoOverlappingFaces, bodyOneOverlappingEdges, bodyTwoOverlappingEdges) = temporaryBRepManager_var.<b>imprintOverlapBodies</b>(bodyOne, bodyTwo, imprintCoincidentEdges)<br /><br /><span style="color:blue"># Uses optional arguments.</span><br />(returnValue, resultBodyOne, resultBodyTwo, bodyOneOverlappingFaces, bodyTwoOverlappingFaces, bodyOneOverlappingEdges, bodyTwoOverlappingEdges) = temporaryBRepManager_var.<b>imprintOverlapBodies</b>(bodyOne, bodyTwo, imprintCoincidentEdges, tolerance)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td><code><pre class="api-code"><br >#include &lt;Fusion/BRep/TemporaryBRepManager.h<br /><br /><span style="color:blue">// Uses no optional arguments.</span><br /><span style="color:blue">// Declare the output arguments.</span><br />Ptr&lt;BRepBody&gt; bodyOne;<br />Ptr&lt;BRepBody&gt; bodyTwo;<br />boolean imprintCoincidentEdges;<br />Ptr&lt;BRepBody&gt; resultBodyOne;<br />Ptr&lt;BRepBody&gt; resultBodyTwo;<br />BRepFace[] bodyOneOverlappingFaces;<br />BRepFace[] bodyTwoOverlappingFaces;<br />BRepEdge[] bodyOneOverlappingEdges;<br />BRepEdge[] bodyTwoOverlappingEdges;<br />boolean returnValue = temporaryBRepManager_var-&gt;<b>imprintOverlapBodies</b>(bodyOne, bodyTwo, imprintCoincidentEdges, resultBodyOne, resultBodyTwo, bodyOneOverlappingFaces, bodyTwoOverlappingFaces, bodyOneOverlappingEdges, bodyTwoOverlappingEdges);<br /><br /><span style="color:blue">// Uses optional arguments.</span><br /><span style="color:blue">// Declare the output arguments.</span><br />double tolerance;<br /><br /><span style="color:blue">// Call the function.</span><br />Ptr&lt;TemporaryBRepManager&gt; returnValue = temporaryBRepManager_var-&gt;<b>imprintOverlapBodies</b>(bodyOne, bodyTwo, imprintCoincidentEdges, resultBodyOne, resultBodyTwo, bodyOneOverlappingFaces, bodyTwoOverlappingFaces, bodyOneOverlappingEdges, bodyTwoOverlappingEdges, tolerance);</pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;">boolean</td>
+        <td class="api-list">Returns true if the imprint calculation was successful.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">bodyOne</td>
+        <td class="api-list"><a href="BRepBody.htm">BRepBody</a></td>
+        <td class="api-list">Input BRepBody that will participate in the imprint operation. This body can be either a parametric or temporary body.</td>
+      </tr>
+      <tr>
+        <td class="api-list">bodyTwo</td>
+        <td class="api-list"><a href="BRepBody.htm">BRepBody</a></td>
+        <td class="api-list">Input BRepBody that will participate in the imprint operation. This body can be either a parametric or temporary body.</td>
+      </tr>
+      <tr>
+        <td class="api-list">imprintCoincidentEdges</td>
+        <td class="api-list">boolean</td>
+        <td class="api-list">Input Boolean that indicates if overlapping edges should be included in the result. The picture below shows an example of when this argument will make a difference. The two bodies have overlapping faces and there is also an overlapping edge. If this argument is true, then the edge shown in red below will be included in the output as an overlapping edge. If False it will not be included and only the edges of the overlapping faces will be in the overlapping faces collections. <br/><br/><center><img src="../images/ImprintOverlappingEdges.png"></center></td>
+      </tr>
+      <tr>
+        <td class="api-list">resultBodyOne</td>
+        <td class="api-list"><a href="BRepBody.htm">BRepBody</a></td>
+        <td class="api-list">Output temporary BRepBody that contains the imprinted body that corresponds to the body provided through the bodyOne argument.</td>
+      </tr>
+      <tr>
+        <td class="api-list">resultBodyTwo</td>
+        <td class="api-list"><a href="BRepBody.htm">BRepBody</a></td>
+        <td class="api-list">Output temporary BRepBody that contains the imprinted body that corresponds to the body provided through the bodyTwo argument.</td>
+      </tr>
+      <tr>
+        <td class="api-list">bodyOneOverlappingFaces</td>
+        <td class="api-list">BRepFace[]</td>
+        <td class="api-list">Output array of BRepFace objects that represent the overlapping faces that are part of resultBodyOne. Faces at the same index within the collection returned here and that returned by the bodyTwoOverlappingFaces are overlapping.</td>
+      </tr>
+      <tr>
+        <td class="api-list">bodyTwoOverlappingFaces</td>
+        <td class="api-list">BRepFace[]</td>
+        <td class="api-list">Output array of BRepFace objects that represent the overlapping faces that are part of resultBodyTwo. Faces at the same index within the collection returned here and that returned by the bodyOneOverlappingFaces are overlapping.</td>
+      </tr>
+      <tr>
+        <td class="api-list">bodyOneOverlappingEdges</td>
+        <td class="api-list">BRepEdge[]</td>
+        <td class="api-list">Output array of BRepEdge objects that represent the overlapping edges that are part of resultBodyOne. Edges at the same index within the collection returned here and that returned by the bodyTwoOverlappingEdges are overlapping.</td>
+      </tr>
+      <tr>
+        <td class="api-list">bodyTwoOverlappingEdges</td>
+        <td class="api-list">BRepEdge[]</td>
+        <td class="api-list">Output array of BRepEdge objects that represent the overlapping edges that are part of resultBodyTwo. Edges at the same index within the collection returned here and that returned by the bodyOneOverlappingEdges are overlapping.</td>
+      </tr>
+      <tr>
+        <td class="api-list">tolerance</td>
+        <td class="api-list">double</td>
+        <td class="api-list">Optional Input double that specifies the tolerance, in centimeters, to use when comparing the bodies. If not specified, or a value of zero is specified, the internal modeling tolerance will be used.<br /><br /> This is an optional argument whose default value is 0.0.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TemporaryBRepManager_Sample.htm">TemporaryBRepManager API Sample</a></td>
+        <td class="api-list">TemporaryBRepManager related functions</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version December 2017<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(TemporaryBRepManager.imprintOverlapBodies%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

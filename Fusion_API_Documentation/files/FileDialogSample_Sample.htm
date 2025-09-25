@@ -1,0 +1,223 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/FileDialogSample.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="FileDialogSample_Sample">
+    <meta name="description" content="File Dialog Sample Sample">
+    <meta name="topicid" content="GUID-d5163350-6d2f-11e7-8c44-3417ebc87622">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>File Dialog Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">File Dialog Sample</h1>
+    <h2 class="api">
+          Description
+        </h2>Demonstrating how to pop up a file dialog and a folder dialog.<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#C++">C++</a></li>
+        <li><a href="#Python">Python</a></li>
+      </ul>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code">#include &lt;Core/Application/Application.h&gt;
+#include &lt;Core/UserInterface/UserInterface.h&gt;
+#include &lt;Core/UserInterface/FileDialog.h&gt;
+#include &lt;Core/UserInterface/FolderDialog.h&gt;
+
+using namespace adsk::core;
+
+Ptr&lt;UserInterface&gt; ui;
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    Ptr&lt;Application&gt; app = Application::get();
+    if (!app)
+        return false;
+
+    ui = app-&gt;userInterface();
+    if (!ui)
+        return false;
+
+    std::string msg("");
+
+    <span style="color:blue">// Set styles of file dialog.</span>
+    Ptr&lt;FileDialog&gt; fileDlg = ui-&gt;createFileDialog();
+    if (!fileDlg)
+        return false;
+    fileDlg-&gt;title("Fusion File Dialog");
+    fileDlg-&gt;filter("*.*");
+    fileDlg-&gt;isMultiSelectEnabled(true);
+
+    <span style="color:blue">// Show file open dialog</span>
+    DialogResults dlgResult = fileDlg-&gt;showOpen();
+    if (dlgResult == DialogOK)
+    {
+        msg += "\nFiles to Open:";
+        std::vector&lt;std::string&gt; fileNames = fileDlg-&gt;filenames();
+        for (std::string fileName : fileNames)
+        {
+            msg += "\n\t" + fileName;
+        }
+    }
+    else
+    {
+        return false;
+    }
+
+    <span style="color:blue">// Show file save dialog</span>
+    fileDlg-&gt;title("Fusion Save File Dialog");
+    dlgResult = fileDlg-&gt;showSave();
+    if (dlgResult == DialogOK)
+    {
+        std::string fileName = fileDlg-&gt;filename();
+        msg += "\nFile to Save: " + fileName;
+    }
+    else
+    {
+        return false;
+    }
+
+    <span style="color:blue">// Set styles of file dialog.</span>
+    Ptr&lt;FolderDialog&gt; folderDlg = ui-&gt;createFolderDialog();
+    if (!folderDlg)
+        return false;
+    folderDlg-&gt;title("Fusion Choose Folder Dialog");
+
+    <span style="color:blue">// Show folder dialog</span>
+    dlgResult = folderDlg-&gt;showDialog();
+    if (dlgResult == DialogOK)
+    {
+        std::string folderName = folderDlg-&gt;folder();
+        msg += "\nSelected Folder: " + folderName;
+    }
+    else
+    {
+        return false;
+    }
+
+    if (!msg.empty())
+        ui-&gt;messageBox(msg);
+    return true;
+}</pre>
+      </div>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">import adsk.core, adsk.fusion, traceback
+import os.path
+
+def run(context):
+    ui = None
+    try:
+        app = adsk.core.Application.get()
+        ui  = app.userInterface
+            
+        msg = ''
+        <span style="color:blue"># Set styles of file dialog.</span>
+        fileDlg = ui.createFileDialog()
+        fileDlg.isMultiSelectEnabled = True
+        fileDlg.title = 'Fusion Open File Dialog'
+        fileDlg.filter = '*.*'
+        
+        <span style="color:blue"># Show file open dialog</span>
+        dlgResult = fileDlg.showOpen()
+        if dlgResult == adsk.core.DialogResults.DialogOK:
+            msg += '\nFiles to Open:'
+            for filename in fileDlg.filenames:
+                msg += '\n\t{}'.format(filename)
+        else:
+            return       
+        
+        <span style="color:blue"># Show file save dialog</span>
+        fileDlg.title = 'Fusion Save File Dialog'
+        dlgResult = fileDlg.showSave()
+        if dlgResult == adsk.core.DialogResults.DialogOK:
+            msg += '\nFile to Save: {}'.format(fileDlg.filename)
+        else:
+            return
+            
+        <span style="color:blue"># Set styles of file dialog.</span>
+        folderDlg = ui.createFolderDialog()
+        folderDlg.title = 'Fusion Choose Folder Dialog' 
+        
+        <span style="color:blue"># Show folder dialog</span>
+        dlgResult = folderDlg.showDialog()
+        if dlgResult == adsk.core.DialogResults.DialogOK:
+            msg += '\nSelected Folder: {}'.format(folderDlg.folder)
+        else:
+            return
+        
+        ui.messageBox(msg)
+
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(FileDialogSample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

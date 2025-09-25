@@ -1,0 +1,90 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/Command_helpFile.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="15/4/2016">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="Command_helpFile">
+    <meta name="description" content="Command.helpFile Property">
+    <meta name="topicid" content="GUID-1BBF65E3-8758-461B-95B2-82C1E0A46842">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Command.helpFile Property</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Command.helpFile Property</h1>
+
+          Parent Object: <a href="Command.htm">Command</a><br>Defined in namespace "adsk::core" and the header file is &lt;Core/UserInterface/Command.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Gets and sets the associated HTML help file for this command.</p>
+    <h2 class="api">
+            Remarks
+          </h2><p class='api'>If this is defined then the help button will be displayed in the lower-left corner of the command dialog and when clicked the help file will be displayed using the application defined by the operating system for that file type.For example, if the helpFile property references a .htm or .html file, the default browser will be invoked to display the file. If a .pdf file is used then whatever the default application is for viewing a PDF file will be invoked.</p>
+ <p class='api'>The file referenced must be a local file and cannot be a URL. However, you can use a local HTML file that redirects to a URL.</p>
+ <pre class="api-code">&lt;html&gt;
+&nbsp;&nbsp;&lt;head&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;meta http-equiv="refresh" content="0; url=http://example.com/" /&gt;
+&nbsp;&nbsp;&lt;/head&gt;
+&nbsp;&nbsp;&lt;body&gt;&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+ <p class='api'>The filename can be either a full path or a relative path with respect to the script or add-in .py, .js, .dll, or .dylib file. If this is an empty string, (which is the default), then the help button will not be displayed.</p><h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"command_var" is a variable referencing a Command object.</span><br /><br /><code><pre class="api-code"><span style="color:blue"># Get the value of the property.</span><br />propertyValue = command_var.<b>helpFile<br /><br /><span style="color:blue"># Set the value of the property.</span><br />command_var.<b>helpFile</b> = propertyValue</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"command_var" is a variable referencing a Command object.<br /><code><pre class="api-code">#include &lt;Core/UserInterface/Command.h&gt;<br /><br /><span style="color:blue">// Get the value of the property.</span><br />string propertyValue = command_var-&gt;<b>helpFile</b>();<br /><br /><span style="color:blue">// Set the value of the property, where value_var is a string.</span><br />bool returnValue = command_var-&gt;<b>helpFile</b>(value_var);</pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Property Value
+          </h2>This is a read/write property whose value is a string.<h2 class="api">
+            Version
+          </h2>
+        Introduced in version May 2016<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(Command.helpFile%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

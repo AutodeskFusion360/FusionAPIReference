@@ -1,0 +1,195 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/SketchDimensions.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="SketchDimensions">
+    <meta name="description" content="SketchDimensions Object">
+    <meta name="topicid" content="GUID-ea0faa88-65eb-4845-b2ce-22d0640bedf4">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>SketchDimensions Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">SketchDimensions Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Sketch/SketchDimensions.h&gt;<h2 class="api">
+          Description
+        </h2>A collection of the dimensions in a sketch. This object also supports the methods to add new sketch dimensions.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchDimensions_addAngularDimension.htm">addAngularDimension</a></td>
+        <td class="api-list">Creates a new angular dimension constraint between the two input lines. The position of the text controls which of the four quadrants will be dimensioned.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchDimensions_addConcentricCircleDimension.htm">addConcentricCircleDimension</a></td>
+        <td class="api-list">Creates a new dimension constraint between to concentric circles or arcs.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchDimensions_addDiameterDimension.htm">addDiameterDimension</a></td>
+        <td class="api-list">Creates a new diameter dimension constraint on the arc or circle.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchDimensions_addDistanceBetweenLineAndPlanarSurfaceDimension.htm">addDistanceBetweenLineAndPlanarSurfaceDimension</a></td>
+        <td class="api-list">Creates a new linear dimension controlling the distance between a sketch line and the specified planar face or construction plane. The sketch line must lie on a plane that is parallel to the planar surface. The text position is automatically chosen and is positioned so it is midway between the line and surface and the extension lines are a minimum length. You can modify the position by using functionality on the returned SketchDistanceBetweenLineAndPlanarSurfaceDimension object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchDimensions_addDistanceBetweenPointAndSurfaceDimension.htm">addDistanceBetweenPointAndSurfaceDimension</a></td>
+        <td class="api-list">Creates a new linear dimension controlling the distance between a sketch point and the specified surface or point. The text position is automatically chosen and is positioned so it is midway between the point and surface and the extension lines are a minimum length. You can modify the position by using functionality on the returned SketchDistanceBetweenPointAndSurfaceDimension object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchDimensions_addDistanceDimension.htm">addDistanceDimension</a></td>
+        <td class="api-list">Creates a new linear dimension constraint between the two input entities.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchDimensions_addEllipseMajorRadiusDimension.htm">addEllipseMajorRadiusDimension</a></td>
+        <td class="api-list">Creates a new dimension constraint on the major radius of an ellipse.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchDimensions_addEllipseMinorRadiusDimension.htm">addEllipseMinorRadiusDimension</a></td>
+        <td class="api-list">Creates a new dimension constraint on the minor radius of an ellipse.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchDimensions_addLinearDiameterDimension.htm">addLinearDiameterDimension</a></td>
+        <td class="api-list">Creates a new linear dimension showing the diameter where the first line acts as the center line and the second entity defines the size. The first input entity must be a sketch line. The second entity can be a point or a line that is parallel to the first. The dimension controls the distance as measured perpendicular to the first input line.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchDimensions_addOffsetDimension.htm">addOffsetDimension</a></td>
+        <td class="api-list">Creates a new linear dimension constraint between the two input entities. The first input entity must be a sketch line. The second entity can be a point or a line that is parallel to the first. The dimension controls the distance as measured perpendicular to the first input line.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchDimensions_addRadialDimension.htm">addRadialDimension</a></td>
+        <td class="api-list">Creates a new radial dimension constraint on the arc or circle.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchDimensions_addTangentDistanceDimension.htm">addTangentDistanceDimension</a></td>
+        <td class="api-list">Creates a new linear dimension from between a line and circle or arc and a second circle or arc where the dimension is to the tangent on the edge of the circle or arc.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchDimensions_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchDimensions_item.htm">item</a></td>
+        <td class="api-list">Function that returns the specified sketch dimension using an index into the collection.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchDimensions_count.htm">count</a></td>
+        <td class="api-list">Returns the number of sketch dimensions in the sketch.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchDimensions_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchDimensions_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="Sketch_sketchDimensions.htm">Sketch.sketchDimensions</a><h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CreateSketchLines_Sample.htm">API Sample that demonstrates creating sketch lines in various ways.</a></td>
+        <td class="api-list">Demonstrates several ways to create sketch lines, including as the result of creating a rectangle.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchDimension_addAngularDimension_Sample.htm">SketchDimensions.addAngularDimension</a></td>
+        <td class="api-list">Demonstrates the SketchDimension.addAngularDimension method.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchDimension_addConcentricCircleDimension_Sample.htm">SketchDimensions.addConcentricCicleDimension</a></td>
+        <td class="api-list">Demonstrates the SketchDimension.addConcentricCircleDimension method.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchDimension_addDiameterDimension_Sample.htm">SketchDimensions.addDiameterDimension</a></td>
+        <td class="api-list">Demonstrates the SketchDimension.addDiameterDimension method.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchDimension_addDistanceDimension_Sample.htm">SketchDimensions.addDistanceDimension</a></td>
+        <td class="api-list">Demonstrates the SketchDimension.addDistanceDimension method.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchDimension_addEllipseMajorRadiusDimension_Sample.htm">SketchDimensions.AddEllipseMajorRadiusDimension</a></td>
+        <td class="api-list">Demonstrates the SketchDimension.addEllipseMajorRadiusDimension method.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchDimension_addEllipseMinorRadiusDimension_Sample.htm">SketchDimensions.AddEllipseMinorRadiusDimension</a></td>
+        <td class="api-list">Demonstrates the SketchDimension.addEllipseMinorRadiusDimension method.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchDimension_addOffsetDimension_Sample.htm">SketchDimensions.addOffsetDimension</a></td>
+        <td class="api-list">Demonstrates the SketchDimension.addOffsetDimension method.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(SketchDimensions%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

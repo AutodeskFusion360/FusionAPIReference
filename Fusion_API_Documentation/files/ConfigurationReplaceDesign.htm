@@ -1,0 +1,106 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/ConfigurationReplaceDesign.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="06/08/2025">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="ConfigurationReplaceDesign">
+    <meta name="description" content="ConfigurationReplaceDesign Object">
+    <meta name="topicid" content="GUID-5DA19A88-96F8-4A2D-9B64-5C59F190D7B5">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>ConfigurationReplaceDesign Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">ConfigurationReplaceDesign Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Configurations/ConfigurationReplaceDesign.h&gt;<h2 class="api">
+          Description
+        </h2>This object represents an individual ConfigurationReplaceDesign object that has been defined for a ConfigurationReplaceDesignColumn. Multiple ConfigurationReplaceDesign objects can be defined for a column and then one of those ConfigurationReplaceDesign objects is specified in each cell of the column.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ConfigurationReplaceDesign_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ConfigurationReplaceDesign_deleteMe.htm">deleteMe</a></td>
+        <td class="api-list">Deletes this ConfigurationReplaceDesign.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ConfigurationReplaceDesign_dataFile.htm">dataFile</a></td>
+        <td class="api-list">Gets the Design object associated with this ConfigurationReplaceDesign object. This must be a DataFile object that represents a standard design, not a configured design.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ConfigurationReplaceDesign_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ConfigurationReplaceDesign_name.htm">name</a></td>
+        <td class="api-list">Gets the name of the ConfigurationReplaceDesign object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ConfigurationReplaceDesign_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="ConfigurationInsertStandardDesignCell_replaceDesign.htm">ConfigurationInsertStandardDesignCell.replaceDesign</a>, <a href="ConfigurationReplaceDesigns_add.htm">ConfigurationReplaceDesigns.add</a>, <a href="ConfigurationReplaceDesigns_item.htm">ConfigurationReplaceDesigns.item</a>, <a href="ConfigurationReplaceDesigns_itemByName.htm">ConfigurationReplaceDesigns.itemByName</a><h2 class="api">
+            Version
+          </h2>
+        Introduced in version September 2025<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(ConfigurationReplaceDesign%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

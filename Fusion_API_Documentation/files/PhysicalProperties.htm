@@ -1,0 +1,155 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/PhysicalProperties.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="10/9/2015">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="PhysicalProperties">
+    <meta name="description" content="PhysicalProperties Object">
+    <meta name="topicid" content="GUID-534772A3-99BE-487F-A01E-20B5420CC93F">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>PhysicalProperties Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">PhysicalProperties Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Fusion/PhysicalProperties.h&gt;<h2 class="api">
+          Description
+        </h2>The physical properties of a Component, Occurrence or BRepBody<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PhysicalProperties_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PhysicalProperties_getPrincipalAxes.htm">getPrincipalAxes</a></td>
+        <td class="api-list">Method that returns the principal axes.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PhysicalProperties_getPrincipalMomentsOfInertia.htm">getPrincipalMomentsOfInertia</a></td>
+        <td class="api-list">Method that returns the moments of inertia about the principal axes. Unit for returned values is kg*cm^2.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PhysicalProperties_getRadiusOfGyration.htm">getRadiusOfGyration</a></td>
+        <td class="api-list">Method that returns the radius of gyration about the principal axes. Unit for returned values is cm.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PhysicalProperties_getRotationToPrincipal.htm">getRotationToPrincipal</a></td>
+        <td class="api-list">Gets the rotation from the world coordinate system of the target to the principal coordinate system.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PhysicalProperties_getXYZMomentsOfInertia.htm">getXYZMomentsOfInertia</a></td>
+        <td class="api-list">Method that gets the moment of inertia about the world coordinate system. Unit for returned values is kg*cm^2.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PhysicalProperties_accuracy.htm">accuracy</a></td>
+        <td class="api-list">Returns the accuracy that was used for the calculation.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PhysicalProperties_area.htm">area</a></td>
+        <td class="api-list">Gets the area in square centimeters.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PhysicalProperties_centerOfMass.htm">centerOfMass</a></td>
+        <td class="api-list">Returns the center of mass position</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PhysicalProperties_density.htm">density</a></td>
+        <td class="api-list">Gets the density in kilograms per cubic centimeter.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PhysicalProperties_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PhysicalProperties_mass.htm">mass</a></td>
+        <td class="api-list">Gets the mass in kilograms.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PhysicalProperties_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PhysicalProperties_volume.htm">volume</a></td>
+        <td class="api-list">Gets the volume in the cubic centimeters.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="BRepBody_getPhysicalProperties.htm">BRepBody.getPhysicalProperties</a>, <a href="BRepBody_physicalProperties.htm">BRepBody.physicalProperties</a>, <a href="Component_getPhysicalProperties.htm">Component.getPhysicalProperties</a>, <a href="Component_physicalProperties.htm">Component.physicalProperties</a>, <a href="Design_physicalProperties.htm">Design.physicalProperties</a>, <a href="FlatPatternComponent_getPhysicalProperties.htm">FlatPatternComponent.getPhysicalProperties</a>, <a href="FlatPatternComponent_physicalProperties.htm">FlatPatternComponent.physicalProperties</a>, <a href="FlatPatternProduct_physicalProperties.htm">FlatPatternProduct.physicalProperties</a>, <a href="Occurrence_getPhysicalProperties.htm">Occurrence.getPhysicalProperties</a>, <a href="Occurrence_physicalProperties.htm">Occurrence.physicalProperties</a>, <a href="WorkingModel_physicalProperties.htm">WorkingModel.physicalProperties</a><h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="GetPhysicalProperties_Sample.htm">Get Physical Properties API Sample</a></td>
+        <td class="api-list">Script that demonstrates getting physical properties using the API. When this script is run it will create a new document, build a simple model, and get the various physical properties from the model.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version September 2015<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(PhysicalProperties%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

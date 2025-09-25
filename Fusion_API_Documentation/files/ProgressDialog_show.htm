@@ -1,0 +1,156 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/ProgressDialog_show.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="9/12/2015">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="ProgressDialog_show">
+    <meta name="description" content="ProgressDialog.show Method">
+    <meta name="topicid" content="GUID-18198165-C2C1-4B7E-8EA9-72A1B0E655C2">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>ProgressDialog.show Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">ProgressDialog.show Method</h1>
+
+          Parent Object: <a href="ProgressDialog.htm">ProgressDialog</a><br>Defined in namespace "adsk::core" and the header file is &lt;Core/UserInterface/ProgressDialog.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Displays the progress dialog that includes a progress bar that can be used to display a continually updated message indicating the progress of a process that will take more than a few seconds. The progress is determined by comparing the current progress value with the minimum and maximum values.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"progressDialog_var" is a variable referencing a <a href="ProgressDialog.htm">ProgressDialog</a> object.<code><pre class="api-code"><span style="color:blue"># Uses no optional arguments.</span><br />returnValue = progressDialog_var.<b>show</b>(title, message, minimumValue, maximumValue)<br /><br /><span style="color:blue"># Uses optional arguments.</span><br />returnValue = progressDialog_var.<b>show</b>(title, message, minimumValue, maximumValue, delay)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"progressDialog_var" is a variable referencing a <a href="ProgressDialog.htm">ProgressDialog</a> object.<br /><br /><code><pre class="api-code">#include &lt;Core/UserInterface/ProgressDialog.h&gt;<br /><br /><span style="color:blue">// Uses no optional arguments.</span><br />returnValue = progressDialog_var-&gt;<b>show</b>(title, message, minimumValue, maximumValue);<br /><br /><span style="color:blue">// Uses optional arguments.</span><br />returnValue = progressDialog_var-&gt;<b>show</b>(title, message, minimumValue, maximumValue, delay);</pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;">boolean</td>
+        <td class="api-list">Returns true if successful.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">title</td>
+        <td class="api-list">string</td>
+        <td class="api-list">Sets the title for the progress dialog</td>
+      </tr>
+      <tr>
+        <td class="api-list">message</td>
+        <td class="api-list">string</td>
+        <td class="api-list">The message to display along with the progress bar. The following symbols can be used to display values. "%p" is replaced by the percentage completed. "%v" is replaced by the current value. %m is replaced by the total number of steps. For example, the message "Processing section %v of %m." will result in the message "Processing section 1 of 10." to be displayed if the maximum value is 10 and the current value is 1.</td>
+      </tr>
+      <tr>
+        <td class="api-list">minimumValue</td>
+        <td class="api-list">integer</td>
+        <td class="api-list">The minimum value of the progress bar. This is used along with the maximum value and the progress value to compute the current percentage complete. This is also the initial progress value when the progress bar is first displayed.</td>
+      </tr>
+      <tr>
+        <td class="api-list">maximumValue</td>
+        <td class="api-list">integer</td>
+        <td class="api-list">The maximum value of the progress bar. This is used along with the minimum value and the progress value to compute the current percentage complete.</td>
+      </tr>
+      <tr>
+        <td class="api-list">delay</td>
+        <td class="api-list">integer</td>
+        <td class="api-list">Specifies the time interval in seconds to delay displaying the Progress Dialog. This provides a way to hide the progress dialog before it actually gets displayed, which is useful for cases where the progress of the operation being tracked completes quickly and there is no need to indicate progress to the user.<br /><br /> This is an optional argument whose default value is 0.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="GenerateToolpaths_Sample_Sample.htm">Generate Toolpaths API Sample</a></td>
+        <td class="api-list">Demonstrates generating the toolpaths in the active document.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ProgressDialogSample_Sample.htm">Progress Dialog API Sample</a></td>
+        <td class="api-list">Demonstrates how to use progress dialog</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version January 2016<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(ProgressDialog.show%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

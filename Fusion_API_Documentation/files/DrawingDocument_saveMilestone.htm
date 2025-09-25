@@ -1,0 +1,122 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/DrawingDocument_saveMilestone.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="04/03/2024">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="DrawingDocument_saveMilestone">
+    <meta name="description" content="DrawingDocument.saveMilestone Method">
+    <meta name="topicid" content="GUID-18B1B22A-FFBF-4365-8133-6C7E852D111C">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>DrawingDocument.saveMilestone Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">DrawingDocument.saveMilestone Method</h1>
+
+          Parent Object: <a href="DrawingDocument.htm">DrawingDocument</a><br>Defined in namespace "adsk::drawing" and the header file is &lt;Drawing/Drawing/DrawingDocument.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Saves the document as a new milestone. This method is not applicable when saving a document for the first time. In that case, you must use the SaveAs method. You can determine if a document has been saved by checking the value of the isSaved property.</p>
+    <h2 class="api">
+            Remarks
+          </h2>Saving a document is not supported within any of the Command related events. When a command is running, a transaction is open, and saving a document cannot be transacted and, as a result, cannot be contained within a command transaction.<h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"drawingDocument_var" is a variable referencing a <a href="DrawingDocument.htm">DrawingDocument</a> object.<code><pre class="api-code">returnValue = drawingDocument_var.<b>saveMilestone</b>(milestoneName, versionDescription)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"drawingDocument_var" is a variable referencing a <a href="DrawingDocument.htm">DrawingDocument</a> object.<br /><br /><code><pre class="api-code">#include &lt;Drawing/Drawing/DrawingDocument.h&gt;<br /><br />returnValue = drawingDocument_var-&gt;<b>saveMilestone</b>(milestoneName, versionDescription);<br /></pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;">boolean</td>
+        <td class="api-list">Returns true if saving the document as a milestone was successful.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">milestoneName</td>
+        <td class="api-list">string</td>
+        <td class="api-list">The name of the milestone as seen in the data panel and Fusion web client. If an empty string is provided a default name will be used.</td>
+      </tr>
+      <tr>
+        <td class="api-list">versionDescription</td>
+        <td class="api-list">string</td>
+        <td class="api-list">The description associated with the version. If an empty string is provided, a default description will be used.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version March 2024<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(DrawingDocument.saveMilestone%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,238 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/SketchFilletAndOffset.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="SketchFilletAndOffset_Sample">
+    <meta name="description" content="Sketch fillet and offset API Sample Sample">
+    <meta name="topicid" content="GUID-e20ca15a-fd06-11e4-aaf7-3417ebd3d5be">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Sketch fillet and offset API Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Sketch fillet and offset API Sample</h1>
+    <h2 class="api">
+          Description
+        </h2>Demonstrates the creation of a fillet in a sketch and offset a set of curves.<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">import adsk.core, adsk.fusion, traceback
+
+def run(context):
+    ui = None
+    try:
+        app = adsk.core.Application.get()
+        ui  = app.userInterface
+        
+        doc = app.documents.add(adsk.core.DocumentTypes.FusionDesignDocumentType)
+        design = app.activeProduct
+        
+        <span style="color:blue"># Get the root component of the active design.</span>
+        rootComp = design.rootComponent
+
+        <span style="color:blue"># Create a new sketch on the xy plane.</span>
+        sketches = rootComp.sketches
+        xyPlane = rootComp.xYConstructionPlane
+        sketch = sketches.add(xyPlane)
+
+        <span style="color:blue"># Draw two connected lines.</span>
+        lines = sketch.sketchCurves.sketchLines
+        line1 = lines.addByTwoPoints(adsk.core.Point3D.create(0, 0, 0), adsk.core.Point3D.create(3, 1, 0))
+        line2 = lines.addByTwoPoints(line1.endSketchPoint, adsk.core.Point3D.create(1, 4, 0))
+        
+        <span style="color:blue"># Add a fillet.</span>
+        arc = sketch.sketchCurves.sketchArcs.addFillet(line1, line1.endSketchPoint.geometry, line2, line2.startSketchPoint.geometry, 1)
+
+        <span style="color:blue"># Add the geometry to a collection. This uses a utility function that</span>
+        <span style="color:blue"># automatically finds the connected curves and returns a collection.</span>
+        curves = sketch.findConnectedCurves(line1)
+               
+        <span style="color:blue"># Create the offset.</span>
+        dirPoint = adsk.core.Point3D.create(0, .5, 0)
+        offsetCurves = sketch.offset(curves, dirPoint, 0.25)
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code">#include &lt;Core/Application/Application.h&gt;
+#include &lt;Core/Application/Documents.h&gt;
+#include &lt;Core/Application/Document.h&gt;
+#include &lt;Core/Application/Product.h&gt;
+#include &lt;Core/UserInterface/UserInterface.h&gt;
+#include &lt;Core/Geometry/Point3D.h&gt;
+#include &lt;Core/Geometry/Line3D.h&gt;
+#include &lt;Core/Application/ObjectCollection.h&gt;
+#include &lt;Fusion/Fusion/Design.h&gt;
+#include &lt;Fusion/Components/Component.h&gt;
+#include &lt;Fusion/Sketch/Sketches.h&gt;
+#include &lt;Fusion/Sketch/Sketch.h&gt;
+#include &lt;Fusion/Sketch/SketchCurves.h&gt;
+#include &lt;Fusion/Sketch/SketchLines.h&gt;
+#include &lt;Fusion/Sketch/SketchLine.h&gt;
+#include &lt;Fusion/Sketch/SketchPoint.h&gt;
+#include &lt;Fusion/Sketch/SketchArcs.h&gt;
+#include &lt;Fusion/Sketch/SketchArc.h&gt;
+#include &lt;Fusion/Construction/ConstructionPlane.h&gt;
+
+using namespace adsk::core;
+using namespace adsk::fusion;
+
+Ptr&lt;UserInterface&gt; ui;
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    Ptr&lt;Application&gt; app = Application::get();
+    if (!app)
+        return false;
+
+    ui = app-&gt;userInterface();
+    if (!ui)
+        return false;
+
+    Ptr&lt;Documents&gt; documents = app-&gt;documents();
+    if (!documents)
+        return false;
+
+    Ptr&lt;Document&gt; doc = documents-&gt;add(DocumentTypes::FusionDesignDocumentType);
+    if (!doc)
+        return false;
+
+    Ptr&lt;Product&gt; product = app-&gt;activeProduct();
+    if (!product)
+        return false;
+
+    Ptr&lt;Design&gt; design = product;
+    if (!design)
+        return false;
+
+    <span style="color:blue">// Get the root component of the active design.</span>
+    Ptr&lt;Component&gt; rootComp = design-&gt;rootComponent();
+    if (!rootComp)
+        return false;
+
+    <span style="color:blue">// Create a new sketch on the xy plane.</span>
+    Ptr&lt;Sketches&gt; sketches = rootComp-&gt;sketches();
+    if (!sketches)
+        return false;
+    Ptr&lt;ConstructionPlane&gt; xyPlane = rootComp-&gt;xYConstructionPlane();
+    if (!xyPlane)
+        return false;
+    Ptr&lt;Sketch&gt; sketch = sketches-&gt;add(xyPlane);
+    if (!sketch)
+        return false;
+
+    <span style="color:blue">// Draw two connected lines.</span>
+    Ptr&lt;SketchCurves&gt; curves = sketch-&gt;sketchCurves();
+    if (!curves)
+        return false;
+    Ptr&lt;SketchLines&gt; lines = curves-&gt;sketchLines();
+    if (!lines)
+        return false;
+    Ptr&lt;SketchLine&gt; line1 =
+        lines-&gt;addByTwoPoints(adsk::core::Point3D::create(0, 0, 0), adsk::core::Point3D::create(3, 1, 0));
+    if (!line1)
+        return false;
+    Ptr&lt;SketchLine&gt; line2 = lines-&gt;addByTwoPoints(line1-&gt;endSketchPoint(), adsk::core::Point3D::create(1, 4, 0));
+    if (!line2)
+        return false;
+
+    <span style="color:blue">// Add a fillet.</span>
+    Ptr&lt;SketchArcs&gt; arcs = curves-&gt;sketchArcs();
+    if (!arcs)
+        return false;
+    Ptr&lt;SketchArc&gt; arc =
+        arcs-&gt;addFillet(line1, line1-&gt;endSketchPoint()-&gt;geometry(), line2, line2-&gt;startSketchPoint()-&gt;geometry(), 1);
+    if (!arc)
+        return false;
+
+    <span style="color:blue">// Add the geometry to a collection. This uses a utility function that</span>
+    <span style="color:blue">// automatically finds the connected curves and returns a collection.</span>
+    Ptr&lt;ObjectCollection&gt; connectedCurves = sketch-&gt;findConnectedCurves(line1);
+    if (!connectedCurves)
+        return false;
+
+    <span style="color:blue">// Create the offset.</span>
+    Ptr&lt;Point3D&gt; dirPoint = adsk::core::Point3D::create(0, 0.5, 0);
+    if (!dirPoint)
+        return false;
+    Ptr&lt;ObjectCollection&gt; offsetCurves = sketch-&gt;offset(connectedCurves, dirPoint, 0.25);
+    if (!offsetCurves)
+        return false;
+
+    return true;
+}</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(SketchFilletAndOffset%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

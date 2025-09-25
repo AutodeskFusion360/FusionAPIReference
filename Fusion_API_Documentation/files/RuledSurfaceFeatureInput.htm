@@ -1,0 +1,151 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/RuledSurfaceFeatureInput.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="10/09/2020">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="RuledSurfaceFeatureInput">
+    <meta name="description" content="RuledSurfaceFeatureInput Object">
+    <meta name="topicid" content="GUID-EC5ECDDB-BDD4-409B-8045-72173063C3A5">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>RuledSurfaceFeatureInput Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">RuledSurfaceFeatureInput Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Features/RuledSurfaceFeatureInput.h&gt;<h2 class="api">
+          Description
+        </h2>This class defines the methods and properties that pertain to the definition of a Ruled Surface feature.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RuledSurfaceFeatureInput_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RuledSurfaceFeatureInput_alternateFace.htm">alternateFace</a></td>
+        <td class="api-list">Gets and sets if the other face is used for creation of the Ruled Surface. When creating a ruled surface using the edges of a solid or the interior edges of a surface the angle of the ruled surface is measured with respect to the face the selected edge is bounding. For a solid, or an interior edge on a surface, the edge connects to two faces. This setting toggles which of the two faces will be used for measuring the angle.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RuledSurfaceFeatureInput_angle.htm">angle</a></td>
+        <td class="api-list">Gets and sets the ValueInput object that defines the Ruled Surface angle. If the input is a real value, the units are radians.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RuledSurfaceFeatureInput_cornerType.htm">cornerType</a></td>
+        <td class="api-list">Gets and sets the corner type for the ruled surface, indicating if the corners will be rounded or mitered. The default value is rounded.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RuledSurfaceFeatureInput_creationOccurrence.htm">creationOccurrence</a></td>
+        <td class="api-list">In order for geometry to be transformed correctly, an Occurrence for creation needs to be specified when the Ruled Surface is created based on geometry (e.g. a profile) in another component AND (the Ruled Surface) is not in the root component. The CreationOccurrence is analogous to the active occurrence in the UI</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RuledSurfaceFeatureInput_direction.htm">direction</a></td>
+        <td class="api-list">Gets and sets the entity that defines the direction when the ruled surface type is DirectionRuledSurfaceType. The direction is specified by providing a linear or planar entity. For example, a linear edge, construction axis, planar face, or construction plane can be used as input.<br/><br/> If this property is set when the ruledSurfaceType is not DirectionRuledSurfaceType, the type will automatically be changed to DirectionRuledSurfaceType. If you get this property when the direction is not DirectionRuledSurfaceType, it will return null.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RuledSurfaceFeatureInput_distance.htm">distance</a></td>
+        <td class="api-list">Gets and sets the ValueInput object that defines the Ruled Surface distance. If the value input is a real value it will define the distance in centimeters.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RuledSurfaceFeatureInput_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RuledSurfaceFeatureInput_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RuledSurfaceFeatureInput_operation.htm">operation</a></td>
+        <td class="api-list">Gets and sets the type of operation performed by the ruled surface.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RuledSurfaceFeatureInput_profile.htm">profile</a></td>
+        <td class="api-list">Gets and sets the Profile object that defines the sketch geometry or edges that define the shape of the ruled surface. The Component.createBRepEdgeProfile method is useful to create a profile defined from edges.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RuledSurfaceFeatureInput_ruledSurfaceType.htm">ruledSurfaceType</a></td>
+        <td class="api-list">Gets and sets the type of ruled surface to create. To set this to DirectionRuledSurfaceType, use the direction property to set the direction entity, which will automatically set this to DirectionRuledSurfaceType.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RuledSurfaceFeatureInput_targetBaseFeature.htm">targetBaseFeature</a></td>
+        <td class="api-list">When creating a feature that is owned by a base feature, set this property to the base feature you want to associate the new feature with. By default, this is null, meaning it will not be associated with a base feature.<br/><br/> Because of a current limitation, if you want to create a feature associated with a base feature, you must set this property AND call the startEdit method of the base feature, create the feature, and then call the finishEdit method of the base feature. The base feature must be in an "edit" state to be able to add any additional items to it.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="RuledSurfaceFeatures_createInput.htm">RuledSurfaceFeatures.createInput</a><h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RuledSurfaceFeatureSample_Sample.htm">Ruled Surface Feature API Sample</a></td>
+        <td class="api-list">Demonstrates creating a new ruled surface feature.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version September 2020<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(RuledSurfaceFeatureInput%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

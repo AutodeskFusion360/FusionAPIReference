@@ -1,0 +1,414 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/CreateSetupsFromHoleRecognition.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="CreateSetupsFromHoleRecognition_Sample">
+    <meta name="description" content="Create Setups From Hole Recognition API Sample Sample">
+    <meta name="topicid" content="GUID-256c4b63-16e3-47af-988b-eae91ffbd85e">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Create Setups From Hole Recognition API Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Create Setups From Hole Recognition API Sample</h1>
+    <h2 class="api">
+          Description
+        </h2><p>This sample script demonstrates how to create a correctly oriented setup using Hole Recognition functionality.</p><p>The Fusion Manufacturing Extension is required for Hole Recognition.</p><p>The script starts by opening a sample model from the CAM Samples folder via its URN. The model comprises a 3 way coupling containing holes in various orientations and mounted on a fixture. A reference setup is created for the model using a simple stock mode and offsets. The Hole Recognition feature of the Fusion Manufacturing Extension creates 5 hole groups containing 11 holes between them. For each unique hole group vector captured, a new setup is created and its orientation transformed to match the vector.</p><h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">import adsk.core, adsk.fusion, adsk.cam, traceback, math
+
+<span style="color:blue">#################### Global settings ####################</span>
+_app = adsk.core.Application.get()
+_ui = _app.userInterface
+
+<span style="color:blue"># A Constant that sets the vector output to 6 decimal places.</span>
+DECIMAL_PLACES = 6
+
+<span style="color:blue"># The name of the part for which we create a reference setup.</span>
+BODY_NAME = 'Body999'
+
+<span style="color:blue"># Names of any fixtures.</span>
+FIXTURE_NAMES: list[str] = ['5 Axis-V562-VPY56:1', 'Component30:1']
+
+<span style="color:blue"># Our sample model, 3 way coupling part + Fixture.</span>
+PROJECT_URN = 'urn:adsk.wipprod:fs.file:vf.9Y50bpnXR-eWplz5h8SAYg?version=1'
+
+<span style="color:blue"># If True, print results of hole information to the TEXT COMMAND window of Fusion.</span>
+PRINT_RESULTS = True
+
+<span style="color:blue">#################### Script entry point ####################</span>
+def run(context):
+    ''' Main entry point for the script. '''
+    try:
+        <span style="color:blue">#################### Initialisation #####################</span>
+
+        doc = loadProjectFromURN(PROJECT_URN)
+        if doc is None: return
+
+        <span style="color:blue"># Switch to the manufacturing workspace (CAM environment).</span>
+        camWS = _ui.workspaces.itemById('CAMEnvironment')
+        camWS.activate()
+
+        <span style="color:blue"># Get the CAM product.</span>
+        products = doc.products
+        cam: adsk.cam.CAM = products.itemByProductType("CAMProductType")
+
+        <span style="color:blue"># Get the CAD product.</span>
+        design: adsk.fusion.Design = products.itemByProductType('DesignProductType')
+
+        <span style="color:blue">#################### Get body or component ####################</span>
+        part = getBRepBodyByName(design, BODY_NAME)
+        if not part:
+            userMessageBox(f'{BODY_NAME} not found in the Fusion document', True)
+            return
+        
+        <span style="color:blue">#################### Reference Setup ####################</span>
+
+        <span style="color:blue"># Create a reference setup based on the sample part.</span>
+        referenceSetup = createReferenceSetup(design, cam, part)
+
+        <span style="color:blue"># The Fusion Manufacturing Extension is required  for hole recogintion.</span>
+        if not isManufacturingExtensionActive(referenceSetup):
+            userMessageBox('Fusion Manufacturing Extension is required for hole recognition.', True)
+            return
+
+        <span style="color:blue">#################### Define Z Vectors ####################</span>
+        <span style="color:blue"># Create a list of vectors for each hole group from which setups will be generated.</span>
+        zVectors = getVectorsFromRecognziedHoles(part)
+
+        <span style="color:blue"># Create a dummy anchor component.</span>
+        <span style="color:blue"># This is required if the default option: </span>
+        <span style="color:blue"># 'First component grounded to parent' is ticked in Preferences &gt; Design &gt; Assemblies.</span>
+        occurrence, component = createComponent(design, 'dummyAnchorComponent')
+
+        <span style="color:blue"># Use a list to store the created setups.</span>
+        createdSetups: list[adsk.cam.Setup] = []
+
+        <span style="color:blue">#################### Loop to Create Setups for Each Z Vector ####################</span>
+        for vector in zVectors:
+
+            <span style="color:blue"># Generate a name string based on the vector.</span>
+            name = createStringFromVector(vector)
+
+            <span style="color:blue"># Create a new component.</span>
+            newOccurrence, newComponent = createComponent(design, name)
+
+            <span style="color:blue"># Transform if it's not vertical.</span>
+            if not vector.isEqualTo(adsk.core.Vector3D.create(0, 0, 1)):
+                transformMatrix = getTransformMatrixFromVector(vector)
+                transformComponent(transformMatrix, newOccurrence, design)
+
+            newSetup = createNewSetupFromReference(cam, referenceSetup, name)
+
+            axisX, axisY, origin = getComponentAxes(newComponent, newOccurrence)
+            newSetup = applyAxesToSetup(axisX, axisY, origin, newSetup)
+
+            createdSetups.append(newSetup)
+
+        _app.log(f'---Completed Creation of {len(createdSetups)} Setup{'s' if len(createdSetups) &gt; 1 else ''}---')
+        userMessageBox('Completed. Please expand Setups to view the new setups.', False)
+
+    except Exception as e:
+        userMessageBox(f'Failed:{e}\n{traceback.format_exc()}', True)
+
+<span style="color:blue">#################### Custom Axes Setup Creation Functions ####################</span>
+
+def createComponent(design: adsk.fusion.Design, name: str):
+    '''
+    Creates a new component in the design and names it.
+    Returns the occurrence and the component.
+    '''
+    rootComp = design.rootComponent
+    occurrence = rootComp.occurrences.addNewComponent(adsk.core.Matrix3D.create())
+    component = occurrence.component
+    component.name = f'setVector: {name}'
+    return occurrence, component
+
+
+def transformComponent(transformMatrix: adsk.core.Matrix3D, occurrence: adsk.fusion.Occurrence, design: adsk.fusion.Design):
+    ''' Transforms the given occurrence using the provided transformation matrix. '''
+    try:
+        occurrence.transform2 = transformMatrix
+        design.snapshots.add()
+
+    except Exception as e:
+        if str(e)[0:35] != '3 : this is not a parametric design': <span style="color:blue"># We handle this specific error.</span>
+            <span style="color:blue"># Abandon for unhandled errors, displaying the error message.</span>
+            userMessageBox(str(e), True)
+            return
+
+
+def getComponentAxes(component: adsk.fusion.Component, occurrence: adsk.fusion.Occurrence):
+    ''' Retrieves the X and Y axes and origin point of the given component in the assembly context. '''
+    axisX = component.xConstructionAxis.createForAssemblyContext(occurrence)
+    axisY = component.yConstructionAxis.createForAssemblyContext(occurrence)
+    origin = component.originConstructionPoint.createForAssemblyContext(occurrence)
+    return axisX, axisY, origin
+
+
+def createNewSetupFromReference(cam: adsk.cam.CAM, referenceSetup: adsk.cam.Setup, setupName: str):
+    ''' Duplicates a reference setup and renames it based on the given setup name. '''
+    setups = cam.setups
+
+    <span style="color:blue"># Duplicate the reference setup.</span>
+    duplicateSetup = referenceSetup.duplicate()
+
+    <span style="color:blue"># Move the duplicated setup after the last one.</span>
+    if duplicateSetup:
+        newSetup = setups[1]
+        newSetup.moveAfter(setups[-1])
+    else:
+        userMessageBox('Failed to duplicate setup', True)
+
+    <span style="color:blue"># Set stock mode to previous setup and rename the new setup.</span>
+    newSetup.parameters.itemByName('job_stockMode').expression = "'previoussetup'"
+    newSetup.name = f'Setup {setupName}'
+    return newSetup
+
+
+def createStringFromVector(vector: adsk.core.Vector3D):
+    '''Converts a vector to a string for naming purposes.'''
+    <span style="color:blue"># Adding zero so a -0.0 will become 0.0 (nicer for printing a zero value).</span>
+    x = round(vector.x, DECIMAL_PLACES) + 0 
+    y = round(vector.y, DECIMAL_PLACES) + 0
+    z = round(vector.z, DECIMAL_PLACES) + 0
+    vectorString = f'[{x}, {y}, {z}]'
+    return vectorString
+
+
+def applyAxesToSetup(axisX: adsk.fusion.ConstructionAxis, axisY: adsk.fusion.ConstructionAxis, \
+                     origin: adsk.fusion.ConstructionPoint, setup: adsk.cam.Setup):
+    ''' Applies the given axes and origin to the WCS of the setup. '''
+    setup.parameters.itemByName('wcs_orientation_mode').expression = "'axesXY'"
+
+    <span style="color:blue"># Apply the input X and Y axes to the setup.</span>
+    axisXSelection: adsk.cam.CadObjectParameterValue = setup.parameters.itemByName('wcs_orientation_axisX').value
+    axisXSelection.value = [axisX]
+    axisYSelection: adsk.cam.CadObjectParameterValue = setup.parameters.itemByName('wcs_orientation_axisY').value
+    axisYSelection.value = [axisY]
+
+    <span style="color:blue"># Apply the origin point to the setup.</span>
+    setup.parameters.itemByName('wcs_origin_mode').expression = "'point'"
+    originSelection: adsk.cam.CadObjectParameterValue = setup.parameters.itemByName('wcs_origin_point').value
+    originSelection.value = [origin]
+    return setup
+
+
+def getTransformMatrixFromVector(zVector: adsk.core.Vector3D):
+    ''' Generates a transformation matrix based on a Z vector. '''
+    zVector.normalize()
+
+    <span style="color:blue"># Define an initial X vector.</span>
+    xVector = adsk.core.Vector3D.create(1, 0, 0)
+
+    <span style="color:blue"># If the Z vector is too close to the X vector, use Y as an alternative.</span>
+    if abs(zVector.angleTo(xVector)) &lt; math.radians(1):
+        xVector = adsk.core.Vector3D.create(0, 1, 0)
+
+    <span style="color:blue"># Compute the orthogonal Y vector.</span>
+    yVector = zVector.crossProduct(xVector)
+    yVector.normalize()
+
+    <span style="color:blue"># Recompute the orthogonal X vector.</span>
+    xVector = yVector.crossProduct(zVector)
+    xVector.normalize()
+
+    <span style="color:blue"># Create the transformation matrix.</span>
+    transformMatrix = adsk.core.Matrix3D.create()
+    transformMatrix.setWithCoordinateSystem(adsk.core.Point3D.create(0, 0, 0), xVector, yVector, zVector)
+    return transformMatrix
+
+<span style="color:blue">#################### Helper Functions ####################</span>
+
+def getBRepBodyByName(design: adsk.fusion.Design, name: str):
+    ''' Get a body by its name (return None if not found) '''
+
+    for i in range(design.rootComponent.bRepBodies.count):
+        body = design.rootComponent.bRepBodies.item(i)
+        if body.name == name:
+            return body
+
+    for i in range(design.rootComponent.allOccurrences.count):
+        occ = design.rootComponent.allOccurrences.item(i)
+        for j in range(occ.bRepBodies.count):
+            body = occ.bRepBodies.item(j)
+            if body.name == name:
+                return body
+    return None
+
+
+def isManufacturingExtensionActive(setup: adsk.cam.Setup):
+    ''' Checks if manufacturing extension is active '''
+    for op in setup.operations.compatibleStrategies:
+        if op.name == 'steep_and_shallow':
+            <span style="color:blue"># The Fusion Manufacturing Extension is required for Hole Recogintion.</span>
+            if op.isGenerationAllowed:
+                return True
+            else:
+               return False
+    return False
+
+
+def userMessageBox(messageText: str, isWarning: bool = False):
+    ''' Keep messageBox calls informative but succinct'''
+    iconType = adsk.core.MessageBoxIconTypes.WarningIconType if isWarning else adsk.core.MessageBoxIconTypes.InformationIconType
+    _ui.messageBox(messageText, 'Fusion\t\t\t\t\t\t', adsk.core.MessageBoxButtonTypes.OKButtonType, iconType) <span style="color:blue"># Title tabs widen messageBox.</span>
+
+
+def createReferenceSetup(design: adsk.fusion.Design, cam: adsk.cam.CAM, part: adsk.fusion.BRepBody):
+    ''' Creates a reference setup with a simple stock mode and offsets. '''
+    setups = cam.setups
+    setupInput = setups.createInput(adsk.cam.OperationTypes.MillingOperation)
+
+    <span style="color:blue"># Add the part to the setup input models.</span>
+    models = [part]
+    setupInput.models = models
+
+    <span style="color:blue"># Add fixture items into the setup.</span>
+    modelsOther: list[adsk.fusion.Occurrence] = []
+    for fixtureName in FIXTURE_NAMES:
+        modelsOther.append(design.rootComponent.allOccurrences.itemByName(fixtureName))
+    
+    setupInput.fixtures = modelsOther
+
+    <span style="color:blue"># Create the setup and configure stock properties.</span>
+    setup = setups.add(setupInput)
+    setup.name = 'Setup Reference'
+    setup.stockMode = adsk.cam.SetupStockModes.RelativeBoxStock
+
+    <span style="color:blue"># Configure stock offsets.</span>
+    setup.parameters.itemByName('job_stockOffsetMode').expression = "'simple'"
+    setup.parameters.itemByName('job_stockOffsetSides').expression = '0 mm'
+    setup.parameters.itemByName('job_stockOffsetTop').expression = '1 mm'
+    return setup
+
+
+def isVectorInListOfVectors(vector: adsk.core.Vector3D, vectors: list[adsk.core.Vector3D]):
+    ''' Check if the vector is already in a list of vectors '''
+    for v in vectors:
+        if vector.isEqualTo(v):
+            return True
+    return False
+
+
+def getVectorsFromRecognziedHoles(part: adsk.fusion.BRepBody):
+    ''' Hole Recognition of body in documnent and extract vectors '''
+    vectors: list[adsk.core.Vector3D] = []
+
+    <span style="color:blue"># The Fusion Manufacturing Extension is required for Hole Recogintion. </span>
+    recognizedHolesInput = adsk.cam.RecognizedHolesInput.create()
+    holeGroups = adsk.cam.RecognizedHoleGroup.recognizeHoleGroupsWithInput([part], recognizedHolesInput)
+    holes = adsk.cam.RecognizedHole.recognizeHoles([part])
+    if PRINT_RESULTS:
+        _app.log(f'Hole Group count = {holeGroups.count} (Additional groups are created for differing hole types sharing the same orientation)')
+        _app.log(f'Total number of holes in model = {holes.count}')
+    grpNum = 0
+
+    <span style="color:blue"># Deal with hole groups.</span>
+    for holeGroup in holeGroups:
+        grpNum += 1
+        hole = holeGroup.item(0) <span style="color:blue"># This is the first hole in the group.</span>
+        axis = hole.axis
+        if PRINT_RESULTS:
+            strVect = createStringFromVector(hole.axis)
+            _app.log(f'Number of holes in group {grpNum} = {holeGroup.count} : Vector direction = {strVect}')
+        
+        <span style="color:blue"># We make sure the vector is not added to the Fusion Setup list if it's a duplicate.</span>
+        if not isVectorInListOfVectors(axis, vectors):
+            vectors.append(axis)
+
+    _app.log('***Completed hole recognition***')
+    return vectors
+
+
+def loadProjectFromURN(urn:str = None) -&gt; adsk.core.Document:
+    ''' Minimal self-contained function to load and return a document via URN or return None safely '''
+    doc: adsk.core.Document = None
+    app = adsk.core.Application.get()
+    if urn is not None:
+        try: <span style="color:blue"># File not found causes an exception</span>
+            project: adsk.core.DataFile = app.data.findFileById(urn)
+            if project:
+                doc = app.documents.open(project, True)
+            else:
+                app.userInterface.messageBox(f'File not found for URN: {urn}!')
+        except Exception as e:
+            if str(e)[0:38] == '3 : Design is located in another team.':
+                <span style="color:blue"># Although the document has been loaded, variable 'doc' may not be populated</span>
+                if doc is None:
+                    doc: adsk.core.Document = adsk.core.Application.get().activeDocument
+            elif str(e)[0:20] == '3 : file not found':
+                app.userInterface.messageBox(f'File not found for URN: {urn}!')
+            else:
+                <span style="color:blue"># Abandon for unhandled errors, displaying the error message.</span>
+                app.userInterface.messageBox(f'Failed:{str(e)}\n{traceback.format_exc()}')
+    return doc</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(CreateSetupsFromHoleRecognition%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,400 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/ConstructionPointSample.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="ConstructionPointSample_Sample">
+    <meta name="description" content="Construction Point API Sample Sample">
+    <meta name="topicid" content="GUID-19cdcc66-aed7-11e5-b31f-f8b156d7cd97">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Construction Point API Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Construction Point API Sample</h1>
+    <h2 class="api">
+          Description
+        </h2>Demonstrates creating construction point by different ways<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">import adsk.core, adsk.fusion, traceback
+
+def run(context):
+    ui = None
+    try:
+        app = adsk.core.Application.get()
+        ui = app.userInterface
+
+        <span style="color:blue"># Create a document.</span>
+        doc = app.documents.add(adsk.core.DocumentTypes.FusionDesignDocumentType)
+
+        product = app.activeProduct
+        design = adsk.fusion.Design.cast(product)
+
+        <span style="color:blue"># Get the root component of the active design</span>
+        rootComp = design.rootComponent
+
+        <span style="color:blue"># Create sketch</span>
+        sketches = rootComp.sketches
+        sketch = sketches.add(rootComp.xZConstructionPlane)
+        
+        <span style="color:blue"># Get sketch lines</span>
+        sketchLines = sketch.sketchCurves.sketchLines
+        
+        <span style="color:blue"># Create sketch rectangle</span>
+        startPoint = adsk.core.Point3D.create(0, 0, 0)
+        endPoint = adsk.core.Point3D.create(5.0, 5.0, 0)
+        sketchLines.addTwoPointRectangle(startPoint, endPoint)
+        
+        <span style="color:blue"># Get two sketch lines</span>
+        sketchLineOne = sketchLines.item(0)
+        sketchLineTwo = sketchLines.item(1)
+        
+        <span style="color:blue"># Get the profile</span>
+        prof = sketch.profiles.item(0)
+        
+        <span style="color:blue"># Create an extrusion input</span>
+        extrudes = rootComp.features.extrudeFeatures
+        extInput = extrudes.createInput(prof, adsk.fusion.FeatureOperations.NewBodyFeatureOperation)
+        
+        <span style="color:blue"># Define that the extent is a distance extent of 5 cm</span>
+        distance = adsk.core.ValueInput.createByReal(5.0)
+        <span style="color:blue"># Set the distance extent</span>
+        extInput.setDistanceExtent(False, distance)
+        <span style="color:blue"># Set the extrude type to be solid</span>
+        extInput.isSolid = True
+        
+        <span style="color:blue"># Create the extrusion</span>
+        ext = extrudes.add(extInput)
+        
+        <span style="color:blue"># Create a sketch circle</span>
+        sketchCircles = sketch.sketchCurves.sketchCircles
+        centerPoint = adsk.core.Point3D.create(8, 8, 0)
+        sketchCircle = sketchCircles.addByCenterRadius(centerPoint, 3.0)
+        
+        <span style="color:blue"># Get the body with the extrude</span>
+        body = ext.bodies.item(0)
+        
+        <span style="color:blue"># Get a vertex of the body</span>
+        vertex = body.vertices.item(0)
+        
+        <span style="color:blue"># Get three intersect faces</span>
+        faceOne = vertex.faces.item(0)
+        faceTwo = vertex.faces.item(1)
+        faceThree = vertex.faces.item(2)
+        
+        <span style="color:blue"># Create perpendicular construction axis</span>
+        axes = rootComp.constructionAxes
+        axisInput = axes.createInput()
+        axisInput.setByPerpendicularAtPoint(faceOne, vertex)
+        axis = axes.add(axisInput)
+        
+        <span style="color:blue"># Get construction points</span>
+        constructionPoints = rootComp.constructionPoints
+        
+        <span style="color:blue"># Create construction point input</span>
+        pointInput = constructionPoints.createInput()
+        
+        <span style="color:blue"># Create construction point by two points</span>
+        pointInput.setByTwoEdges(sketchLineOne, sketchLineTwo)
+        constructionPoints.add(pointInput)
+
+        <span style="color:blue"># Create construction point by three planes</span>
+        pointInput.setByThreePlanes(faceOne, faceTwo, faceThree)
+        constructionPoints.add(pointInput)
+        
+        <span style="color:blue"># Create construction point by edge and plane</span>
+        pointInput.setByEdgePlane(axis, faceOne)
+        constructionPoints.add(pointInput)
+        
+        <span style="color:blue"># Create construction point by center</span>
+        pointInput.setByCenter(sketchCircle)
+        constructionPoints.add(pointInput)
+        
+        <span style="color:blue"># Create construction point by point</span>
+        pointInput.setByPoint(vertex)
+        point = constructionPoints.add(pointInput)
+        
+        <span style="color:blue"># Get the health state of the construction point</span>
+        health = point.healthState
+        if health == adsk.fusion.FeatureHealthStates.ErrorFeatureHealthState or health == adsk.fusion.FeatureHealthStates.WarningFeatureHealthState:
+            message = point.errorOrWarningMessage
+
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code">#include &lt;Core/Application/Application.h&gt;
+#include &lt;Core/Application/Document.h&gt;
+#include &lt;Core/Application/Documents.h&gt;
+#include &lt;Core/Geometry/Point3D.h&gt;
+#include &lt;Core/Geometry/Vector3D.h&gt;
+#include &lt;Core/UserInterface/UserInterface.h&gt;
+#include &lt;Fusion/Components/Component.h&gt;
+#include &lt;Fusion/Construction/ConstructionPlane.h&gt;
+#include &lt;Fusion/Construction/ConstructionAxes.h&gt;
+#include &lt;Fusion/Construction/ConstructionAxis.h&gt;
+#include &lt;Fusion/Construction/ConstructionAxisInput.h&gt;
+#include &lt;Fusion/Construction/ConstructionPoints.h&gt;
+#include &lt;Fusion/Construction/ConstructionPointInput.h&gt;
+#include &lt;Fusion/Construction/ConstructionPoint.h&gt;
+#include &lt;Fusion/Fusion/Design.h&gt;
+#include &lt;Fusion/Sketch/Sketch.h&gt;
+#include &lt;Fusion/Sketch/Sketches.h&gt;
+#include &lt;Fusion/Sketch/SketchPoints.h&gt;
+#include &lt;Fusion/Sketch/SketchPoint.h&gt;
+#include &lt;Fusion/Sketch/SketchCurves.h&gt;
+#include &lt;Fusion/Sketch/SketchLines.h&gt;
+#include &lt;Fusion/Sketch/SketchLine.h&gt;
+#include &lt;Fusion/Sketch/SketchCircles.h&gt;
+#include &lt;Fusion/Sketch/SketchCircle.h&gt;
+#include &lt;Fusion/Sketch/Profiles.h&gt;
+#include &lt;Fusion/Sketch/Profile.h&gt;
+#include &lt;Fusion/Features/Features.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeatures.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeatureInput.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeature.h&gt;
+#include &lt;Fusion/BRep/BRepBodies.h&gt;
+#include &lt;Fusion/BRep/BRepBody.h&gt;
+#include &lt;Fusion/BRep/BRepFaces.h&gt;
+#include &lt;Fusion/BRep/BRepFace.h&gt;
+#include &lt;Fusion/BRep/BRepVertices.h&gt;
+#include &lt;Fusion/BRep/BRepVertex.h&gt;
+
+using namespace adsk::core;
+using namespace adsk::fusion;
+
+Ptr&lt;UserInterface&gt; ui;
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    Ptr&lt;Application&gt; app = Application::get();
+    if (!app)
+        return false;
+
+    ui = app-&gt;userInterface();
+    if (!ui)
+        return false;
+
+    Ptr&lt;Documents&gt; docs = app-&gt;documents();
+    if (!docs)
+        return false;
+
+    <span style="color:blue">// Create a document.</span>
+    Ptr&lt;Document&gt; doc = docs-&gt;add(DocumentTypes::FusionDesignDocumentType);
+    if (!doc)
+        return false;
+
+    Ptr&lt;Design&gt; design = app-&gt;activeProduct();
+    if (!design)
+        return false;
+
+    <span style="color:blue">// Get the root component of the active design</span>
+    Ptr&lt;Component&gt; rootComp = design-&gt;rootComponent();
+    if (!rootComp)
+        return false;
+
+    <span style="color:blue">// Create sketch</span>
+    Ptr&lt;Sketches&gt; sketches = rootComp-&gt;sketches();
+    if (!sketches)
+        return false;
+
+    Ptr&lt;Sketch&gt; sketch = sketches-&gt;add(rootComp-&gt;xYConstructionPlane());
+    if (!sketch)
+        return false;
+
+    <span style="color:blue">// Get sketch lines</span>
+    Ptr&lt;SketchCurves&gt; curves = sketch-&gt;sketchCurves();
+    if (!curves)
+        return false;
+    Ptr&lt;SketchLines&gt; sketchLines = curves-&gt;sketchLines();
+    if (!sketchLines)
+        return false;
+
+    <span style="color:blue">// Create sketch rectangle</span>
+    Ptr&lt;Point3D&gt; startPoint = Point3D::create(0, 0, 0);
+    Ptr&lt;Point3D&gt; endPoint = Point3D::create(5.0, 5.0, 0);
+    sketchLines-&gt;addTwoPointRectangle(startPoint, endPoint);
+
+    <span style="color:blue">// Get two sketch lines</span>
+    Ptr&lt;SketchLine&gt; sketchLineOne = sketchLines-&gt;item(0);
+    Ptr&lt;SketchLine&gt; sketchLineTwo = sketchLines-&gt;item(1);
+
+    <span style="color:blue">// Get the profile</span>
+    Ptr&lt;Profiles&gt; profs = sketch-&gt;profiles();
+    if (!profs)
+        return false;
+    Ptr&lt;Profile&gt; prof = profs-&gt;item(0);
+
+    <span style="color:blue">// Create an extrusion input</span>
+    Ptr&lt;Features&gt; feats = rootComp-&gt;features();
+    if (!feats)
+        return false;
+    Ptr&lt;ExtrudeFeatures&gt; extrudes = feats-&gt;extrudeFeatures();
+    if (!extrudes)
+        return false;
+    Ptr&lt;ExtrudeFeatureInput&gt; extInput = extrudes-&gt;createInput(prof, FeatureOperations::NewBodyFeatureOperation);
+
+    <span style="color:blue">// Define that the extent is a distance extent of 5 cm</span>
+    Ptr&lt;ValueInput&gt; distance = ValueInput::createByReal(5.0);
+    <span style="color:blue">// Set the distance extent</span>
+    extInput-&gt;setDistanceExtent(false, distance);
+    <span style="color:blue">// Set the extrude type to be solid</span>
+    extInput-&gt;isSolid(true);
+
+    <span style="color:blue">// Create the extrusion</span>
+    Ptr&lt;ExtrudeFeature&gt; ext = extrudes-&gt;add(extInput);
+    if (!ext)
+        return false;
+
+    <span style="color:blue">// Create a sketch circle</span>
+    Ptr&lt;SketchCircles&gt; sketchCircles = curves-&gt;sketchCircles();
+    if (!sketchCircles)
+        return false;
+    Ptr&lt;Point3D&gt; centerPoint = Point3D::create(8.0, 8.0, 0);
+    Ptr&lt;SketchCircle&gt; sketchCircle = sketchCircles-&gt;addByCenterRadius(centerPoint, 3.0);
+
+    <span style="color:blue">// Get the body with the extrude</span>
+    Ptr&lt;BRepBodies&gt; bodies = ext-&gt;bodies();
+    if (!bodies)
+        return false;
+    Ptr&lt;BRepBody&gt; body = bodies-&gt;item(0);
+
+    <span style="color:blue">// Get a vertex of the body</span>
+    Ptr&lt;BRepVertices&gt; vertices = body-&gt;vertices();
+    if (!vertices)
+        return false;
+    Ptr&lt;BRepVertex&gt; vertex = vertices-&gt;item(0);
+
+    <span style="color:blue">// Get three intersect faces</span>
+    Ptr&lt;BRepFaces&gt; vertexFaces = vertex-&gt;faces();
+    if (!vertexFaces)
+        return false;
+    Ptr&lt;BRepFace&gt; faceOne = vertexFaces-&gt;item(0);
+    Ptr&lt;BRepFace&gt; faceTwo = vertexFaces-&gt;item(1);
+    Ptr&lt;BRepFace&gt; faceThree = vertexFaces-&gt;item(2);
+
+    <span style="color:blue">// Create perpendicular construction axis</span>
+    Ptr&lt;ConstructionAxes&gt; axes = rootComp-&gt;constructionAxes();
+    if (!axes)
+        return false;
+    Ptr&lt;ConstructionAxisInput&gt; axisInput = axes-&gt;createInput();
+    if (!axisInput)
+        return false;
+    axisInput-&gt;setByPerpendicularAtPoint(faceOne, vertex);
+    Ptr&lt;ConstructionAxis&gt; axis = axes-&gt;add(axisInput);
+
+    <span style="color:blue">// Get construction points</span>
+    Ptr&lt;ConstructionPoints&gt; constructionPoints = rootComp-&gt;constructionPoints();
+    if (!constructionPoints)
+        return false;
+
+    <span style="color:blue">// Create construction point input</span>
+    Ptr&lt;ConstructionPointInput&gt; pointInput = constructionPoints-&gt;createInput();
+    if (!pointInput)
+        return false;
+
+    <span style="color:blue">// Create construction point by two points</span>
+    pointInput-&gt;setByTwoEdges(sketchLineOne, sketchLineTwo);
+    constructionPoints-&gt;add(pointInput);
+
+    <span style="color:blue">// Create construction point by three planes</span>
+    pointInput-&gt;setByThreePlanes(faceOne, faceTwo, faceThree);
+    constructionPoints-&gt;add(pointInput);
+
+    <span style="color:blue">// Create construction point by edge and plane</span>
+    pointInput-&gt;setByEdgePlane(axis, faceOne);
+    constructionPoints-&gt;add(pointInput);
+
+    <span style="color:blue">// Create construction point by center</span>
+    pointInput-&gt;setByCenter(sketchCircle);
+    constructionPoints-&gt;add(pointInput);
+
+    <span style="color:blue">// Create construction point by point</span>
+    pointInput-&gt;setByPoint(vertex);
+    Ptr&lt;ConstructionPoint&gt; point = constructionPoints-&gt;add(pointInput);
+
+    <span style="color:blue">// Get health state of a construction point</span>
+    adsk::fusion::FeatureHealthStates health = point-&gt;healthState();
+    if (health == adsk::fusion::FeatureHealthStates::ErrorFeatureHealthState ||
+        health == adsk::fusion::FeatureHealthStates::WarningFeatureHealthState)
+    {
+        std::string msg = point-&gt;errorOrWarningMessage();
+    }
+
+    return true;
+}</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(ConstructionPointSample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

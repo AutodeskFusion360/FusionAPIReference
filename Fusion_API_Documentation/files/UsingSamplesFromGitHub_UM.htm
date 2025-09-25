@@ -1,0 +1,107 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/UsingSamplesFromGitHub_UM.htm#!">
+    <meta name="contextid" content="Attributes_UM">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="28/7/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="description" content="">
+    <meta name="topicid" content="GUID-B81A4B10-3781-4925-94C6-47DA85A4F65A">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">    
+	<title>Using Samples from GitHub</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+	<link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"/>
+	<script type="text/javascript" src="/view/clientframework/client.js"><!--filler--></script> 
+	<script>
+	  // This turns on the display of the copyright notice which is not visible by default.
+	  // Because the head is removed when used in the web help, this function will only exists
+	  // when the chm help is being created.
+	  window.onload = function() {
+		copyrightElement = document.getElementById('CopyrightNotice');
+		copyrightElement.style.display = 'block';
+	  };
+	</script>
+  </head>
+  <body>
+<link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+
+<h1 class="api">Using Samples from GitHub</h1>
+<p Class="api">There are additional <a href="https://autodeskfusion360.github.io/" target="_blank">sample programs available on GitHub</a>. The following steps can be used to install the sample scripts and add-ins from GitHub. There are two general locations where scripts or add-ins can exist on your machine. The first is within a specific directory where Fusion looks for scripts and add-ins every time it is started. The second location can be anywhere on your computer, but then there is one additional step needed so that Fusion knows about the script or add-in.</p>
+
+<h3 class="api">Known Locations</h3>
+<p Class="api">Each sample's readme mentions if it's a script or an add-in. Depending on whether the sample is a script or an add-in it needs to be placed in a different folder on your computer.  These locations are different depending on if you're using Windows or Mac OS.
+    <ul>
+        <li><b>Windows</b>:<br />
+            <ul>
+                <li><b>Script</b>: %appdata%\Autodesk\Autodesk Fusion\API\<b>Scripts</b></li>
+                <li><b>Add-In</b>: %appdata%\Autodesk\Autodesk Fusion\API\<b>AddIns</b></li>
+                <br />
+            </ul>
+        </li>
+        <li><b>Mac OS</b>:
+            <ul>
+                <li><b>Script</b>: ~/Library/Application Support/Autodesk/Autodesk Fusion/API/<b>Scripts</b></li>
+                <li><b>Add-In</b>: ~/Library/Application Support/Autodesk/Autodesk Fusion/API/<b>AddIns</b></li>
+            </ul>
+        </li>
+    </ul>
+</p>
+
+<p Class="api">
+Inside the existing Scripts or AddIns folder you need to create a new folder whose name is the name as the .manifest file that will exist for each sample.</p>
+
+<p Class="api">For example, in the case of the <a href="https://github.com/AutodeskFusion360/ParameterIO_Python"><b>ParameterIO_Python</b></a> sample, which is an <b>Add-In</b>, the manifest file is named <b>ParameterIO_Python</b>.manifest, therefore you should create a new <b>ParameterIO_Python</b> folder under the appropriate <b>Fusion</b> folder:</p>
+        <b>Windows</b><br />
+            <img src="../images/ParameterIO_Python_Windows.png"/>
+            <br />
+            <br />
+            <br />
+        <b>Mac OS</b><br />
+            <img src="../images/ParameterIO_Python_MacOS.png"/>
+            <br />
+            <br />
+</p>
+
+<p Class="api">You now need to copy all of the files of the script or add-in to this new folder.  The easiest way to do that is to use the <b>Download Zip</b> option in GitHub, as shown below.  This will package all of the files into a single zip and download it to your computer. You can then unpack the zip, maintaining any subdirectories, into the new directory you created. There will be a few extra GitHub specific files but they won't hurt anything and you can choose to delete them or not.</p>
+
+<div align="center"><img src="../images/GitHubDownloadZip.png" border=0 align="middle" alt="Download from GitHub"></div>
+            <br />
+<br>
+<p Class="api">
+    Once you restart <b>Fusion</b>, the <b>Add-In</b> or <b>Script</b> will be ready to use and shows up in the <b>Scripts and Add-Ins</b> dialog, as shown below.
+</p>
+<p Class="api">
+<div align="center"><img src="../images/ParameterIO_ScriptsAddIns.png"/></div>
+            <br />
+            <br />
+</p>
+<h3 class="api">Any Location</h3>
+<p Class="api">To be able to put the sample at any location on your machine, create a new folder anywhere on your machine, using the same name as the .manifest file.  Using the <b>Download Zip</b> GitHub option as described above, copy all of the samples, files into the newly created folder.  To make the script or add-in known to Fusion, run the <b>Script and Add-Ins</b> command and click the green "+" icon beside the "My Scripts" or "My Add-Ins" folder in the dialog, as shown below. Use the dialog to browse to the location of the script or add-in and choose the .py, .js, .dll (for Windows), or .pylib (for Mac) file.  The script or add-in will now be listed in the Scripts and Add-Ins dialog and you can run, edit, and debug it from there the same as any other script  or add-in. You only need to do this once and Fusion will remember the script or add-in for all subsequent sessions.
+<p>
+<div align="center"><img src="../images/ScriptsAndAddInsBrowse.png" border=0 align="middle" alt="Add Script or Add-In"></div>
+
+<br />
+<br />
+<div id="CopyrightNotice" style="display:none;">
+  <hr />
+  <table width="100%" style="font-size:15">
+	<tr>
+	  <td align="left">
+		&copy; Copyright 2025 Autodesk, Inc.
+	  </td>
+	  <td align="right">
+		<a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(UsingSamplesFromGitHub_UM)">Comment on this page.</a>
+	  </td>
+	</tr>
+  </table>
+</div>
+</body>
+</html>

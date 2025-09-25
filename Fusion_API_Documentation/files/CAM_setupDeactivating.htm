@@ -1,0 +1,85 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/CAM_setupDeactivating.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="21/02/2023">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="CAM_setupDeactivating">
+    <meta name="description" content="CAM.setupDeactivating Event">
+    <meta name="topicid" content="GUID-BAA9C9FC-14B7-45A0-B1CE-657AA506AF34">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>CAM.setupDeactivating Event</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">CAM.setupDeactivating Event</h1>
+
+          Parent Object: <a href="CAM.htm">CAM</a><br>Defined in namespace "adsk::cam" and the header file is &lt;Cam/CAM/CAM.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">The SetupDeactivating event fires before a setup is deactivated.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#PythonUsingFusion360Utils">Python Using fusion360utils</a></li>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="PythonUsingFusion360Utils" class="api-code">
+        <table class="api-code">
+          <td><em>-------- Import ---------</em><br /><code><pre class="api-code"><span style="color:blue"># Import fusion360utils folder, which includes event_utils.py.</span><br />from ...lib import fusion360utils as futil</pre></code><br /><em>-------- Global variables ---------</em><br /><code><pre class="api-code"><span style="color:blue"># Global variable used to maintain a reference to all event handlers.</span><br />local_handlers = []<br /></pre></code><br /><em>-------- Connect the handler to the event. ---------</em><br /><code><pre class="api-code"><span style="color:blue"># "cAM_var" is a variable referencing a <a href="CAM.htm">CAM</a> object.</span><br /><span style="color:blue"># "cAM_setupDeactivating" is the event handler function.</span><br />futil.add_handler(cAM_var.setupDeactivating, cAM_setupDeactivating, local_handlers=local_handlers)<br /></pre></code><br /><em>-------- Event handler function definition ---------</em><br /><code><pre class="api-code"><span style="color:blue"># Event handler for the setupDeactivating event.</span><br />def cAM_setupDeactivating(args: adsk.cam.SetupEventArgs):<br />    <span style="color:blue"># Code to react to the event.</span><br />    app.log('In cAM_setupDeactivating event handler.')<br /></pre></code></td>
+        </table>
+      </div>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td><em>-------- Global variables ---------</em><br /><code><pre class="api-code"><span style="color:blue"># Global variable used to maintain a reference to all event handlers.</span><br />handlers = []<br /></pre></code><br /><em>-------- Connect the handler to the event. ---------</em><br /><code><pre class="api-code"><span style="color:blue"># "cAM_var" is a variable referencing a <a href="CAM.htm">CAM</a> object.</span><br /><span style="color:blue"># "MySetupDeactivatingHandler" is the name of the class that handles the event.</span><br />onSetupDeactivating = MySetupDeactivatingHandler()<br />cAM_var.<b>setupDeactivating</b>.add(onSetupDeactivating)<br />handlers.append(onSetupDeactivating)</pre></code><br /><em>-------- Event handler class definition ---------</em><br /><code><pre class="api-code"><span style="color:blue"># Event handler for the setupDeactivating event.</span><br />class MySetupDeactivatingHandler(adsk.cam.SetupEventHandler):<br />    def __init__(self):<br />        super().__init__()<br />    def notify(self, args: adsk.cam.SetupEventArgs):<br />        <span style="color:blue"># Code to react to the event.</span><br />        app.log('In MySetupDeactivatingHandler event handler.')<br /></pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td><em>--------- Required include files. ---------</em><br /><code><pre class="api-code">#include &lt;Cam/CAM/CAM.h&gt;<br />#include &lt;Cam/CAM/SetupEvent.h&gt;<br />#include &lt;Cam/CAM/SetupEventHandler.h&gt;<br />#include &lt;Cam/CAM/SetupEventArgs.h&gt;<br /></pre></code><br /><br /><em>--------- Event handler class definition and global declaration. ---------<br /><code><pre class="api-code"><span style="color:blue">// Event handler for the setupDeactivating event.</em></span><br />class MySetupDeactivatingEventHandler : public adsk::cam::SetupEventHandler<br />{<br />public:<br />    void notify(const Ptr&lt;SetupEventArgs&gt;& eventArgs) override<br />    {<br />        <span style="color:blue">// Code to react to the event.</span><br />        ui->messageBox("In MySetupDeactivatingEventHandler event handler.");<br />    }<br />} _setupDeactivating;<br /></pre></code><br /><em>--------- Connect the handler to the event. ---------</em><br /><code><pre class="api-code"><span style="color:blue">// "cAM_var" is a variable referencing a <a href="CAM.htm">CAM</a> object.</span><br /><span style="color:blue">// Connect the handler function to the event.</span><br />Ptr&lt;SetupEvent&gt; setupDeactivatingEvent = cAM_var-&gt;<b>setupDeactivating</b>();<br />if (!setupDeactivatingEvent)<br />    return;<br /><br />bool isOk = setupDeactivatingEvent-&gt;add(&_setupDeactivating);<br />if (!isOk)<br />    return;<br /></pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Property Value
+          </h2>This is an event property that returns a <a href="SetupEvent.htm">SetupEvent</a>.<h2 class="api">
+            Version
+          </h2>
+        Introduced in version April 2023<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(CAM.setupDeactivating%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

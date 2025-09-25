@@ -1,0 +1,211 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/Viewport.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="Viewport">
+    <meta name="description" content="Viewport Object">
+    <meta name="topicid" content="GUID-717295a3-3d16-4c03-80ba-1df008c867e0">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>Viewport Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Viewport Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::core" and the header file is &lt;Core/Application/Viewport.h&gt;<h2 class="api">
+          Description
+        </h2>A viewport within Fusion. A viewport is the window where the model is displayed.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Viewport_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Viewport_fit.htm">fit</a></td>
+        <td class="api-list">Forces a camera change so that all of the graphics are visible in the viewport.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Viewport_goHome.htm">goHome</a></td>
+        <td class="api-list">Sets the camera of the viewport to the defined "home" position.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Viewport_modelToViewSpace.htm">modelToViewSpace</a></td>
+        <td class="api-list">A specified point in model space returns the equivalent point in view space.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Viewport_refresh.htm">refresh</a></td>
+        <td class="api-list">Forces the view to refresh. It is sometimes useful to force a refresh to be able to see edits that have been made using the API.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Viewport_resetFront.htm">resetFront</a></td>
+        <td class="api-list">Resets the front view to be the default front view orientation.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Viewport_saveAsImageFile.htm">saveAsImageFile</a></td>
+        <td class="api-list">Saves the current view to the specified image file. The view is re-rendered to the specified size and not just scaled from the existing view. This allows you to generate higher resolution images than you could do with just a screen capture.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Viewport_saveAsImageFileWithOptions.htm">saveAsImageFileWithOptions</a></td>
+        <td class="api-list">Saves the current view to the specified image file. The view is re-rendered to the specified size and not just scaled from the existing view. This allows you to generate higher resolution images than you could do with just a screen capture.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Viewport_screenToView.htm">screenToView</a></td>
+        <td class="api-list">Converts a 2D screen point into the equivalent viewport coordinate.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Viewport_setCurrentAsFront.htm">setCurrentAsFront</a></td>
+        <td class="api-list">Sets the "front" view to be the current view orientation.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Viewport_setCurrentAsHome.htm">setCurrentAsHome</a></td>
+        <td class="api-list">Sets the "home" view to be the current view orientation.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Viewport_setCurrentAsTop.htm">setCurrentAsTop</a></td>
+        <td class="api-list">Sets the "top" view to be the current view orientation.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Viewport_viewToModelSpace.htm">viewToModelSpace</a></td>
+        <td class="api-list">A specified point in view space returns the equivalent point in model space. Because view space is 2D and model space is 3D, the depth of the point is returned is somewhat arbitrary along the eye to target point direction.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Viewport_viewToScreen.htm">viewToScreen</a></td>
+        <td class="api-list">Converts a 2D viewPort point into the equivalent screen coordinate.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Viewport_camera.htm">camera</a></td>
+        <td class="api-list">Gets and sets the camera associated with the view. The camera returned is a copy of the current camera settings of the view. Editing the properties of the camera will have no affect on the viewport until the camera is assigned back to the viewport.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Viewport_frontEyeDirection.htm">frontEyeDirection</a></td>
+        <td class="api-list">Returns the direction of the front view as defined by the view cube. This vector defines the direction from the eye to the target for the front view.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Viewport_frontUpDirection.htm">frontUpDirection</a></td>
+        <td class="api-list">Returns the up direction of the front view as defined by the view cube.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Viewport_height.htm">height</a></td>
+        <td class="api-list">Returns the height of the viewport in pixels.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Viewport_isFullScreen.htm">isFullScreen</a></td>
+        <td class="api-list">Gets and sets if the view is in full screen mode.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Viewport_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Viewport_modelToViewSpaceTransform.htm">modelToViewSpaceTransform</a></td>
+        <td class="api-list">Returns a transformation matrix that defines the transform from model to viewport space.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Viewport_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Viewport_parentDocument.htm">parentDocument</a></td>
+        <td class="api-list">Returns the parent document of this viewport.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Viewport_visualStyle.htm">visualStyle</a></td>
+        <td class="api-list">Gets and sets the current visual style being used.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Viewport_width.htm">width</a></td>
+        <td class="api-list">Returns the width of the viewport in pixels.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="Application_activeViewport.htm">Application.activeViewport</a>, <a href="CameraEventArgs_viewport.htm">CameraEventArgs.viewport</a>, <a href="MouseEventArgs_viewport.htm">MouseEventArgs.viewport</a>, <a href="RenderEventArgs_viewport.htm">RenderEventArgs.viewport</a><h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="AsBuiltJointSample_Sample.htm">As-Built Joint Sample</a></td>
+        <td class="api-list">Demonstrates creating a new As-Built Joint.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CreateAnimation_Sample.htm">Create Animation API Sample</a></td>
+        <td class="api-list">Creates a series of images of a design where a parameter is being changed. The series of images can be used to create an animation using other software. To run this sample, have a part open that contains a parameter named "Length". The parameter should be able to be successfully modified from 10 to 15 centimeters. Run the sample and choose or create a directory for the output. After running you should have a folder full of images that are snapshots of each parameter value.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="JointOriginSample_Sample.htm">Joint Origin Sample</a></td>
+        <td class="api-list">Demonstrates creating a new Joint Origin.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RigidGroupSample_Sample.htm">Rigid Group API Sample</a></td>
+        <td class="api-list">Demonstrates creating a new Rigid Group.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(Viewport%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,99 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/FeatureHealthStates.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2016">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="FeatureHealthStates">
+    <meta name="description" content="The various states that a feature can be in. This is used for the states of modeling features, construction geometry, and sketches.">
+    <meta name="topicid" content="GUID-FBCBA2D5-BFBF-4CCB-BC77-9E80A450777E">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>FeatureHealthStates Enumerator
+        </title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">FeatureHealthStates Enumerator
+        </h1>
+    <h2 class="api">
+          Description
+        </h2>The various states that a feature can be in. This is used for the states of modeling features, construction geometry, and sketches.<br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion\FusionTypeDefs.h&gt;<h2 class="api">
+          Methods
+        </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+              Name
+            </td>
+        <td class="api-list" style="width:1px;">
+              Value
+            </td>
+        <td class="api-list">
+              Description
+            </td>
+      </tr>
+      <tr>
+        <td class="api-list">ErrorFeatureHealthState</td>
+        <td class="api-list" align="right" style="padding-right:10px">2</td>
+        <td class="api-list">The feature, construction geometry, or sketch has an error. Use the errorOrWarningMessage property to get the message.</td>
+      </tr>
+      <tr>
+        <td class="api-list">HealthyFeatureHealthState</td>
+        <td class="api-list" align="right" style="padding-right:10px">0</td>
+        <td class="api-list">The feature, construction geometry, or sketch is successfully computed.</td>
+      </tr>
+      <tr>
+        <td class="api-list">RolledBackFeatureHealthState</td>
+        <td class="api-list" align="right" style="padding-right:10px">4</td>
+        <td class="api-list">The feature, construction geometry, or sketch is rolled back so it has not computed.</td>
+      </tr>
+      <tr>
+        <td class="api-list">SuppressedFeatureHealthState</td>
+        <td class="api-list" align="right" style="padding-right:10px">3</td>
+        <td class="api-list">The feature, construction geometry, or sketch is suppressed so it has not computed.</td>
+      </tr>
+      <tr>
+        <td class="api-list">UnknownFeatureHealthState</td>
+        <td class="api-list" align="right" style="padding-right:10px">5</td>
+        <td class="api-list">The state of the object is unknown. This can occur in the case where the object being queried is a TimelineObject whose associated entity does not have a health state. For example, if it is a TimelineGroup or an position snapshot.</td>
+      </tr>
+      <tr>
+        <td class="api-list">WarningFeatureHealthState</td>
+        <td class="api-list" align="right" style="padding-right:10px">1</td>
+        <td class="api-list">The feature, construction geometry, or sketch has a warning. Use the errorOrWarningMessage property to get the message.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+          Version
+        </h2>
+        Introduced in version August 2016<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(FeatureHealthStates%20Enum%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

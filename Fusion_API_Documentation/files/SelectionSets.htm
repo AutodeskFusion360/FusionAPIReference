@@ -1,0 +1,110 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/SelectionSets.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="09/05/2022">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="SelectionSets">
+    <meta name="description" content="SelectionSets Object">
+    <meta name="topicid" content="GUID-70CB3BFE-15C4-422A-A37D-F2FBF7C18905">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>SelectionSets Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">SelectionSets Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::core" and the header file is &lt;Core/Application/SelectionSets.h&gt;<h2 class="api">
+          Description
+        </h2>The SelectionSets object is used to create and access existing selection sets.<br/><br/> In the user interface, selection sets are created by selecting geometry and then running the "Create Selection Set" command from the context menu. All existing selection sets are shown in a "Selection Sets" folder in the browser.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SelectionSets_add.htm">add</a></td>
+        <td class="api-list">Adds a new SelectionSet to the parent product.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SelectionSets_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SelectionSets_item.htm">item</a></td>
+        <td class="api-list">Returns the specified SelectionSet object using an index into the collection.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SelectionSets_itemByName.htm">itemByName</a></td>
+        <td class="api-list">Returns the specified SelectionSet object using the name of the selection set.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SelectionSets_count.htm">count</a></td>
+        <td class="api-list">Returns the number of SelectionSet objects in the collection.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SelectionSets_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SelectionSets_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="CAM_selectionSets.htm">CAM.selectionSets</a>, <a href="Design_selectionSets.htm">Design.selectionSets</a>, <a href="Drawing_selectionSets.htm">Drawing.selectionSets</a>, <a href="FlatPatternProduct_selectionSets.htm">FlatPatternProduct.selectionSets</a>, <a href="Product_selectionSets.htm">Product.selectionSets</a>, <a href="WorkingModel_selectionSets.htm">WorkingModel.selectionSets</a><h2 class="api">
+            Version
+          </h2>
+        Introduced in version May 2022<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(SelectionSets%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

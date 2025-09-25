@@ -1,0 +1,182 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/MaterialSample.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="MaterialSample_Sample">
+    <meta name="description" content="Material API Sample Sample">
+    <meta name="topicid" content="GUID-d00ba5c2-d3f0-11e6-bd5a-989096c57042">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Material API Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Material API Sample</h1>
+    <h2 class="api">
+          Description
+        </h2><p>Demonstrates using materials and appearance using the API.</p>
+<p>To use the sample, create a new Python or C++ script and copy and paste this code, replacing the default code. The sample also used an external appearance library which you can get <a href="../ExtraFiles/APISampleMaterialLibrary2.adsklib">here</a>. Copy that to any location on your computer and edit the path in the script. When running the script, have a design open that contains a body in the root component.</p><h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">import adsk.core, adsk.fusion, traceback
+def run(context):
+    ui = None
+    try:
+        app = adsk.core.Application.get()
+        ui = app.userInterface
+        
+        <span style="color:blue"># Load a local material library. You'll need to edit the path to the libary.</span>
+        materialLibs = app.materialLibraries
+        matLib = materialLibs.load('C:/Temp//APISampleMaterialLibrary2.adsklib')
+
+        <span style="color:blue"># Get the first appearance from the library.</span>
+        appear = matLib.appearances.item(0)
+
+        <span style="color:blue"># Copy the appearance into the design.</span>
+        des = adsk.fusion.Design.cast(app.activeProduct)             
+        appear = des.appearances.addByCopy(appear, f'{appear.name}_Copied')
+        
+        <span style="color:blue"># Apply the appearance to the first body in the design.</span>
+        root = des.rootComponent
+        body = root.bRepBodies.item(0)
+        body.appearance = appear
+        
+        <span style="color:blue"># Unload the library.</span>
+        if matLib.isNative == False:
+            matLib.unload()       
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code">#include &lt;Core/CoreAll.h&gt;
+#include &lt;Fusion/FusionAll.h&gt;
+
+
+using namespace adsk::core;
+using namespace adsk::fusion;
+
+Ptr&lt;Application&gt; app;
+Ptr&lt;UserInterface&gt; ui;
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    app = Application::get();
+    if (!app)
+        return false;
+
+    Ptr&lt;Product&gt; product = app-&gt;activeProduct();
+    if (!product)
+        return false;
+
+    Ptr&lt;Design&gt; design = product;
+    if (!design)
+        return false;
+
+    <span style="color:blue">// Load a local material library. You'll need to edit the path to the  library.</span>
+    Ptr&lt;MaterialLibraries&gt; matLibs = app-&gt;materialLibraries();
+    if (!matLibs)
+        return false;
+
+     Ptr&lt;MaterialLibrary&gt; matLib = matLibs-&gt;load("C:/Temp/APISampleMaterialLibrary2.adsklib");
+
+    <span style="color:blue">// Get the first appearance from the library.</span>
+    Ptr&lt;Appearance&gt; existingAppear = matLib-&gt;appearances()-&gt;item(0);
+    if (!existingAppear)
+        return false;
+
+    <span style="color:blue">// Copy the appearance into the design.</span>
+    Ptr&lt;Appearance&gt; appear = design-&gt;appearances()-&gt;addByCopy(existingAppear, existingAppear-&gt;name() + "_Copied");
+
+    <span style="color:blue">// Get the first body in the root component of the design.</span>
+    Ptr&lt;Component&gt; rootComp = design-&gt;rootComponent();
+    if (!rootComp)
+        return false;
+
+    Ptr&lt;BRepBody&gt; body = rootComp-&gt;bRepBodies()-&gt;item(0);
+    if (!body)
+        return false;
+
+    <span style="color:blue">// Apply the appearance to the body.</span>
+    body-&gt;appearance(appear);
+
+    if (matLib-&gt;isNative() == false)
+    {
+        matLib-&gt;unload();
+    }
+
+    return true;
+}</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(MaterialSample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

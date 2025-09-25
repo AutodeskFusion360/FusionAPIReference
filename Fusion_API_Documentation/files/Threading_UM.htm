@@ -1,0 +1,138 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/Threading_UM.htm#!">
+    <meta name="contextid" content="Threading_UM">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="06/1/2017">
+    <meta name="user-comments" content="enable">
+    <meta name="description" content="">
+    <meta name="topicid" content="GUID-F9FD4A6D-C59F-4176-9003-CE04F7558CCC">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Working in a Seperate Thread</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+	<link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"/>
+	<script type="text/javascript" src="/view/clientframework/client.js"><!--filler--></script> 
+	<script>
+	  // This turns on the display of the copyright notice which is not visible by default.
+	  // Because the head is removed when used in the web help, this function will only exists
+	  // when the chm help is being created.
+	  window.onload = function() {
+		copyrightElement = document.getElementById('CopyrightNotice');
+		copyrightElement.style.display = 'block';
+	  };
+	</script>
+</head>
+<body>
+<link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+	
+<h2 class="api">Working in a Seperate Thread</h2>
+<h3 class="api">Introduction</h3>
+<p Class="api">
+The desire to have multi-threaded applications became very popular when computer processors started to have multiple cores. Multi-threading is one way to take better advantage of the full processing capabilities of a computer. In concept it's a great idea but in practice it doesn't always fit real-world workflows and is very difficult to implement.  Most of Fusion is single threaded, as are most applications with a user-interface. Each step of constructing a model depends on the result of the previous step.  For example, if you create a very complex feature that will take several seconds to compute it doesn't make sense for Fusion to return control back to you to continue modeling while it's still calculating the feature because the model needs to be complete before you can begin to define the next feature. Ideally, multi-threading would be used in the calcuation of the feature to speed up that part of the process but that can be difficult to implement too. 
+</p>
+<p Class="api">
+If you think of a thread as a sequence of instructions that are processed by the computer, multi-threading allows many threads to be processed simultaneously.  Besides being used to speed up the processing of complex tasks, multiple threads are also very useful in interactive applications when you need to have background processing occurring but still want to allow the user to interact with the application. That's the big benefit of what's provided by the Fusion API, as you'll see in the example below.
+</p>  
+<p Class="api">
+It's important to remember that most of Fusion is running in the single main thread and this includes the user-interface and your program. You can think of it as a single queue where everyone has to wait their turn and only one person is being waited on at a time. When your program is executing a function, nothing else is happening inside Fusion. Let's look at how this works with an add-in and a command.  When an add-in is loaded, Fusion calls its run function.  At that point, your add-in is actively running in the main thread and nothing else is happening in Fusion.  Once the run function has completed Fusion begins processing the other queued up actions, while your add-in sits in the background.  When the user executes a command the add-in defined, the commandCreated event is fired to the add-in.  This moves the add-in to the front of the queue and while its event handler for the command created event is running it has the main thread.  In the command created event handler it defines the command dialog and connects to other events.  Once the command created event has completed it gives up control of the main thread and Fusion takes over to allow the user to interact with the command dialog.  As the user does interact with the dialog, Fusion then fires events to the add-in notifying of what's happening but this also allows the add-in to run in the main thread as it responds to the events.  By using events, Fusion and other add-ins are able to share the main thread.
+</p>
+<p>
+It becomes a problem when an add-in wants to continue to run and not give up the main thread.  This blocks Fusion from doing any other work. For example, if an add-in wants to monitor a known file to see if it's modified date changes.  One way to do this is to have a loop that continuously checks the date of the file.  However, if you have a function in an add-in that does this, it will block the use of Fusion because it is monopolizing the main thread.  Fusion does support a doEvents function which temporarily returns control back to Fusion to allow any queued up actions to be processed and then it goes back to the running function.  It's not appropriate to use this in a long term loop and will likely result in Fusion crashing at some point.  The better solution is to have the add-in start a new worker thread that will do whatever work needs to be done and set up a custom event so the worker thread can notify the add-in of it's progress or when it's complete.  When the worker thread causes the event to be fired, the add-in then gains control of the main thread where it can do whatever is appropriate.
+</p>
+
+<h3 class="api">Custom Event</h3>
+<p Class="api">
+The Fusion API doesn't support the creation or management of threads, you do that through whatever threading capabilities the language you've chosen to use supports. Both Python and C++ support the creation of threads. What the Fusion API does support is a way for the code running in a worker thread to communicate back to your add-in running in the main thread. This is done through a custom event that allows the program in the worker thread to fire an event that your add-in will handle. Your worker thread should never do any work inside Fusion because that should always be done in the main thread.
+</p>  
+<p Class="api">
+Here are a couple of examples that illustrate two common ways this functionality might be used. The first  is a command that accesses the web to get information to populate the command dialog. Web calls are dependent on a lot of factors and can sometimes take some time. The interaction with the web service can be done in a seperate thread allowing the main thread to continue processing the command so the command dialog can quickly be displayed and then when the web data is retrieved is can be passed from the worker thread to the add-in running in the main thread to update the command dialog.
+</p>
+<p Class="api">
+Another example of how this functionality can be used is to start a worker thread that continuously watches for something and then does something in reaction to a specific action.  For example, an add-in can be written that starts a worker theread that checks the modified time of a specific csv file periodically to see if it has been changed. If it has, it reads the updated csv file and updates the values of corresponding parameters in the design. This type of background polling was not possible before because it would have consumed the main thread.
+</p>
+<p Class="api">
+A third, more obscure use of this functionality is to allow two add-ins to communicate with each other. It's possible for another add-in to fire the custom event of another add-in. A custom event is identified by name so by knowing the name and the format of the data the add-in expects, one add-in can send another add-in information. It will be interesting to see if any interseting applications are developed that take advantage of this capability.
+</p>
+<h3 class="api">Using a Custom Event</h3>
+<p Class="api">
+Conceptually, implementing and using a custom event is relatively simple. In practice it is a little more difficult because it involves understanding how to create and use a seperate thread and basic principles of threading. The steps to set up and use a custom event are listed below.
+</p>
+<ol>
+	<li>
+		<p Class="api">
+		Register your custom event and connect your handler to the event.
+		</p>
+	</li>
+	<li>
+		<p Class="api">
+		Create the worker thread and start it.
+		</p>
+	</li>
+	<li>
+		<p Class="api">
+		The worker thread does whatever work it does and when it has information to share with the add-in it calls the <b>fireCustomEvent</b> method. This results in Fusion calling the event handler for the custom event and passing the information provided. This gives the add-in control of the main thread so it can do whatever is supposed to happen.
+		</p><br>
+		<p Class="api">
+		If in response to the event, the add-in will be creating or modifying something in Fusion (some action that will cause an undo operation to be added), the add-in should first terminate the active command before doing it's work.  This can easily be done using the code below which checks to see if the default Select command is running and if not, it executes the select command which has the side-effect of terminating the currently running command. 
+		</p>
+<pre class="api-code"><span style="color:blue"># Make sure a command isn't running before changes are made.</span>
+if ui.activeCommand != 'SelectCommand':
+    ui.commandDefinitions.itemById('SelectCommand').execute()
+</pre>
+<br />
+	</li>
+	<li>
+		<p Class="api">
+		Clean up by unregistering the custom event.
+		</p>
+	</li>
+</ol>
+
+<h3 class="api">Sample Programs</h3>
+<p Class="api">
+There are two samples that demonstrate two of the uses described above.  The <a href="CustomEventSample_Sample.htm">first sample</a> starts a worker thread with a timer that will send a random number between 1 and 15 back to the main thread which then updates the parameter named "d1" in the active design using the value passed in.
+</p>
+<p Class="api">
+The <a href="CustomEventCommandDialog_Sample.htm">second sample</a> demonstrates using this capability within a command to get information to display in the command dialog. It creates a command with a dialog containing a table. The worker thread periodically sends new data back to the main thread which is used to populate the table.
+</p>
+
+<h3 class="api">Using a Custom Event</h3>
+<p Class="api">
+One important thing to know when using custom events is that you should not call any Fusion API functions within the worker thread. Even calling the messageBox method can sometimes result in Fusion crashing. To help in debugging your program you can use other techniques to display messages. For example, in Python on Windows you can use ctypes library and its MessageBoxW function as shown below. This is a Python friendly wrapper over the Windows MessageBoxW function that you can call directly from C++.
+</p>
+
+<pre class="api-code">import ctypes
+
+ctypes.windll.user32.MessageBoxW(None, "The message.", "Title", 1)
+</pre>
+<br />
+
+<p Class="api">
+The main thing is that all Fusion specific work needs to be done by your add-in in the main thread.
+</p>
+
+<br />
+<br />
+<div id="CopyrightNotice" style="display:none;">
+  <hr />
+  <table width="100%" style="font-size:15">
+	<tr>
+	  <td align="left">
+		&copy; Copyright 2025 Autodesk, Inc.
+	  </td>
+	  <td align="right">
+		<a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(Threading_UM)">Comment on this page.</a>
+	  </td>
+	</tr>
+  </table>
+</div>
+</body>
+</html>

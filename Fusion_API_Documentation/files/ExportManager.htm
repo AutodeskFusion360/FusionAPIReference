@@ -1,0 +1,171 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/ExportManager.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="13/1/2015">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="ExportManager">
+    <meta name="description" content="ExportManager Object">
+    <meta name="topicid" content="GUID-bb9ca64f-0fc0-43a8-a381-076bded65744">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>ExportManager Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">ExportManager Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Fusion/ExportManager.h&gt;<h2 class="api">
+          Description
+        </h2>Provides support for exporting model data to various formats.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ExportManager_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ExportManager_createC3MFExportOptions.htm">createC3MFExportOptions</a></td>
+        <td class="api-list">Creates a C3MFExportOptions object that's used to export a design in 3MF format. Creation of the C3MFExportOptions object does not perform the export. You must pass this object to the ExportManager.execute method to perform the export.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ExportManager_createDXFFlatPatternExportOptions.htm">createDXFFlatPatternExportOptions</a></td>
+        <td class="api-list">Creates a DXFFlatPatternExport object that's used to export a flat pattern in DXF format. Creation of the DXFFlatPatternExport object does not perform the export. You must call the execute method. You can change any additional settings by setting properties on the returned object before calling the execute method.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ExportManager_createDXFSketchExportOptions.htm">createDXFSketchExportOptions</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Creates a DXFSketchExportOptions object that's used to export a sketch in DXF format. Creation of the DXFSketchExportOptions object does not perform the export. You must call the execute method after changing the settings to the desired values.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ExportManager_createFusionArchiveExportOptions.htm">createFusionArchiveExportOptions</a></td>
+        <td class="api-list">Creates an FusionArchiveExportOptions object that's used to export a design in Fusion archive format. Creation of the FusionArchiveExportOptions object does not perform the export. You must pass this object to the ExportManager.execute method to perform the export. The FusionArchiveExportOptions supports any available options when exporting to Fusion archive format.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ExportManager_createIGESExportOptions.htm">createIGESExportOptions</a></td>
+        <td class="api-list">Creates an IGESExportOptions object that's used to export a design in IGES format. Creation of the IGESExportOptions object does not perform the export. You must pass this object to the ExportManager.execute method to perform the export. The IGESExportOptions supports any available options when exporting to IGES format.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ExportManager_createOBJExportOptions.htm">createOBJExportOptions</a></td>
+        <td class="api-list">Creates an OBJExportOptions object that's used to export a design in OBJ format. Creation of the OBJExportOptions object does not perform the export. You must pass this object to the ExportManager.execute method to perform the export.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ExportManager_createSATExportOptions.htm">createSATExportOptions</a></td>
+        <td class="api-list">Creates an SATExportOptions object that's used to export a design in SAT format. Creation of the SATExportOptions object does not perform the export. You must pass this object to the ExportManager.execute method to perform the export. The SATExportOptions supports any available options when exporting to SAT format.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ExportManager_createSMTExportOptions.htm">createSMTExportOptions</a></td>
+        <td class="api-list">Creates an SMTExportOptions object that's used to export a design in SMT format. Creation of the SMTExportOptions object does not perform the export. You must pass this object to the ExportManager.execute method to perform the export. The SMTExportOptions supports any available options when exporting to SMT format.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ExportManager_createSTEPExportOptions.htm">createSTEPExportOptions</a></td>
+        <td class="api-list">Creates an STEPExportOptions object that's used to export a design in STEP format. Creation of the STEPExportOptions object does not perform the export. You must pass this object to the ExportManager.execute method to perform the export. The STEPExportOptions supports any available options when exporting to STEP format.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ExportManager_createSTLExportOptions.htm">createSTLExportOptions</a></td>
+        <td class="api-list">Creates an STLExportOptions object that's used to export a design in STL format. Creation of the STLExportOptions object does not perform the export. You must pass this object to the ExportManager.execute method to perform the export.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ExportManager_createUSDExportOptions.htm">createUSDExportOptions</a></td>
+        <td class="api-list">Creates an USDExportOptions object that's used to export a design in USD format. Creation of the USDExportOptions object does not perform the export. You must pass this object to the ExportManager.execute method to perform the export. The USDExportOptions supports any available options when exporting to USD format.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ExportManager_execute.htm">execute</a></td>
+        <td class="api-list">Executes the export operation to create the file in the format specified by the provided ExportOptions object.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ExportManager_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ExportManager_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="Design_exportManager.htm">Design.exportManager</a>, <a href="FlatPatternProduct_exportManager.htm">FlatPatternProduct.exportManager</a>, <a href="WorkingModel_exportManager.htm">WorkingModel.exportManager</a><h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ExportManager_Sample.htm">ExportManager API Sample</a></td>
+        <td class="api-list">Demonstrates how to export f3d to different formats.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ExportToOtherFormats_Sample.htm">Export to other formats API Sample</a></td>
+        <td class="api-list">Demonstrates exporting the active design to IGES, STEP, SAT, SMT, F3D and STL formats. To run this sample, have a design open and run the script. It will write out the translated files to a temp directory, which will it show in a message box.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SetParametersFromACsvFileAndExportToSTEP_Sample.htm">Set parameters from a csv file and export to STEP</a></td>
+        <td class="api-list">Reads data from a .csv file and sets user parameters in the model and then exports the model to STEP. When setting parameters be aware that this sample is setting user parameters. It's also possible to set model parameters but that's not demonstrated here. Also when accessing parameters, it is case sensitive so the names you use in your program much exactly match the names in the model.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="STLExport_Sample.htm">STLExport API Sample</a></td>
+        <td class="api-list">Demonstrates how to export f3d to STL format.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version January 2015<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(ExportManager%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

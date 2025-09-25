@@ -1,0 +1,125 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/JointGeometry_createByTorusFace.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="09/04/2025">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="JointGeometry_createByTorusFace">
+    <meta name="description" content="JointGeometry.createByTorusFace Method">
+    <meta name="topicid" content="GUID-1882D27E-E456-4D78-AD0B-B7DFE51D89CC">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>JointGeometry.createByTorusFace Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">JointGeometry.createByTorusFace Method</h1>
+
+          Parent Object: <a href="JointGeometry.htm">JointGeometry</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Components/JointGeometry.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Creates a new transient JointGeometry object based on a torus BRepFace object.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>This is a static method.<br /><code><pre class="api-code"><br >returnValue = adsk.fusion.JointGeometry.<b>createByTorusFace</b>(face, azimuthAngle, sectionAngle)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>This is a static method.<br /><code><pre class="api-code"><br >#include &lt;Fusion/Components/JointGeometry.h&gt;<br /><br />returnValue = adsk::fusion::JointGeometry::<b>createByTorusFace</b>(face, azimuthAngle, sectionAngle);<br /></pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;"><a href="JointGeometry.htm">JointGeometry</a></td>
+        <td class="api-list">Returns the transient JointGeometry object that can be used to create a joint or joint origin or null in the case of a failure.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">face</td>
+        <td class="api-list"><a href="BRepFace.htm">BRepFace</a></td>
+        <td class="api-list">The torus BRepFace object.</td>
+      </tr>
+      <tr>
+        <td class="api-list">azimuthAngle</td>
+        <td class="api-list"><a href="JointQuadrantAngleTypes.htm">JointQuadrantAngleTypes</a></td>
+        <td class="api-list">Specifies the azimuth angle relative to the v parameterization of the input face. The zero, or start angle, is where the v parameter of the sphere is zero. This can be determined by using the getPointAtParameter method of the SurfaceEvaluator object obtained from the evaluator property of the BRepFace object. The possible values can be StartJointQuadrantAngleType, QuarterJointQuadrantAngleType, MiddleJointQuadrantAngleType or ThirdQuarterJointQuadrantAngleType.</td>
+      </tr>
+      <tr>
+        <td class="api-list">sectionAngle</td>
+        <td class="api-list"><a href="JointQuadrantAngleTypes.htm">JointQuadrantAngleTypes</a></td>
+        <td class="api-list">Specifies the angle relative to the start point of the section circle at give azimuth angle. The possible values can be StartJointQuadrantAngleType, QuarterJointQuadrantAngleType, MiddleJointQuadrantAngleType or ThirdQuarterJointQuadrantAngleType.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version May 2025<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(JointGeometry.createByTorusFace%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

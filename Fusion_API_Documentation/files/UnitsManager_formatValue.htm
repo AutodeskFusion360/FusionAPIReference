@@ -1,0 +1,157 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/UnitsManager_formatValue.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="04/03/2024">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="UnitsManager_formatValue">
+    <meta name="description" content="UnitsManager.formatValue Method">
+    <meta name="topicid" content="GUID-F170B6A0-8D7A-40BB-8C8D-FC268EC4EEF8">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>UnitsManager.formatValue Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">UnitsManager.formatValue Method</h1>
+
+          Parent Object: <a href="UnitsManager.htm">UnitsManager</a><br>Defined in namespace "adsk::core" and the header file is &lt;Core/Application/UnitsManager.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Given a floating point number this method evaluates it as a value of a specific unit type and returns an appropriate string. By default, the current unit settings defined in the user preferences is used, but you can set the method arguments to override the defaults to specify the formatting you want. The input value always uses internal units, which are centimeters for length, radians for angles, and mass is in kilograms.<br/><br/> This method is useful whenever you have a value you've gotten from Fusion or computed on your own and need to display it to the user as a string. This method does the conversion and also takes into account the units and the formatting the user has specified in their preferences.<br/><br/> Below are some examples of various formatting where the user preferences for general precision is four decimal places, and the angular precision is one decimal place. Also, trailing zeros are set to be hidden and the minimum precision is two decimal places when trailing zeros are turned off. The design units are specified to be "inch".<br/><br/> Here, only the value is supplied and the default is to assume the units are the current design length unit and use the preference settings to format it so there are four decimal places shown and the unit name is included. formatValue(1.5) -> "0.5906 in"<br/><br/> In this example, an angle is specified by using "deg" as the unit, and the result showing one decimal place, which is what's defined in the user preference, and it shows the unit name. formatValue(0.7853981633974483096, "deg") -> "45.0 deg"<br/><br/> This example converts the input value of 1.5 cm to mm where eight decimal places are shown, trailing zeros are shown, and the unit name is shown. The fourth argument of minimum precision is ignored, since it is only used when showTrailing zeros is False. formatValue(1.5, "mm", 8, BooleanOptions.TrueBooleanOption, 0, True) - > "15.00000000 mm"</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"unitsManager_var" is a variable referencing a <a href="UnitsManager.htm">UnitsManager</a> object.<code><pre class="api-code"><span style="color:blue"># Uses no optional arguments.</span><br />returnValue = unitsManager_var.<b>formatValue</b>(value)<br /><br /><span style="color:blue"># Uses optional arguments.</span><br />returnValue = unitsManager_var.<b>formatValue</b>(value, units, precision, showTrailingZeros, minimumPrecision, showUnits)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"unitsManager_var" is a variable referencing a <a href="UnitsManager.htm">UnitsManager</a> object.<br /><br /><code><pre class="api-code">#include &lt;Core/Application/UnitsManager.h&gt;<br /><br /><span style="color:blue">// Uses no optional arguments.</span><br />returnValue = unitsManager_var-&gt;<b>formatValue</b>(value);<br /><br /><span style="color:blue">// Uses optional arguments.</span><br />returnValue = unitsManager_var-&gt;<b>formatValue</b>(value, units, precision, showTrailingZeros, minimumPrecision, showUnits);</pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;">string</td>
+        <td class="api-list">Returns the formatted string or an empty string in case of an error.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">value</td>
+        <td class="api-list">double</td>
+        <td class="api-list">A floating point value that is assumed to use the internal unit type, which are centimeters for length, radians for angles, and mass is in kilograms.</td>
+      </tr>
+      <tr>
+        <td class="api-list">units</td>
+        <td class="api-list">string</td>
+        <td class="api-list">The units the value represents. The default value for this argument is "DefaultDistance" which means it will use the default distance units defined for the active design.<br /><br /> This is an optional argument whose default value is "DefaultDistance".</td>
+      </tr>
+      <tr>
+        <td class="api-list">precision</td>
+        <td class="api-list">integer</td>
+        <td class="api-list">This specifies the number of decimal places to display. The default value is -1 which indicates the precision specified in preferences should be used. A maximum of 9 can be used and any larger numbers will be forced to 9.<br /><br /> This is an optional argument whose default value is -1.</td>
+      </tr>
+      <tr>
+        <td class="api-list">showTrailingZeros</td>
+        <td class="api-list"><a href="BooleanOptions.htm">BooleanOptions</a></td>
+        <td class="api-list">Specifies if trailing zeros should be shown or not. The default value is to use the preference setting.<br /><br /> This is an optional argument whose default value is BooleanOptions.DefaultBooleanOption.</td>
+      </tr>
+      <tr>
+        <td class="api-list">minimumPrecision</td>
+        <td class="api-list">integer</td>
+        <td class="api-list">When trailing zeros are not displayed, this specifies a minimum precision where some trailing zeros are still shown. The default value is -1 which indicates the minimum precision specified in preferences should be used. A maximum of 8 can be used, and any larger numbers will be forced to 8.<br /><br /> This is an optional argument whose default value is -1.</td>
+      </tr>
+      <tr>
+        <td class="api-list">showUnits</td>
+        <td class="api-list">boolean</td>
+        <td class="api-list">This specifies whether the unit name or symbol should be included in the result.<br /><br /> This is an optional argument whose default value is True.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="GetsVolumeOfActiveDesign_Sample.htm">Get Volume of Active Design API Sample</a></td>
+        <td class="api-list">Traverses through the active design and totals the volume of every body within the design.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version March 2024<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(UnitsManager.formatValue%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

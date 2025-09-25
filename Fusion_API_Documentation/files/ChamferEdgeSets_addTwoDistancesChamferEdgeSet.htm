@@ -1,0 +1,135 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/ChamferEdgeSets_addTwoDistancesChamferEdgeSet.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="01/12/2020">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="ChamferEdgeSets_addTwoDistancesChamferEdgeSet">
+    <meta name="description" content="ChamferEdgeSets.addTwoDistancesChamferEdgeSet Method">
+    <meta name="topicid" content="GUID-D5FA722F-8785-4166-92D0-05923FC558BA">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>ChamferEdgeSets.addTwoDistancesChamferEdgeSet Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">ChamferEdgeSets.addTwoDistancesChamferEdgeSet Method</h1>
+
+          Parent Object: <a href="ChamferEdgeSets.htm">ChamferEdgeSets</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Features/ChamferEdgeSets.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Adds a set of edges an equal distance offset to this chamfer feature.<br/><br/> To use this method, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"chamferEdgeSets_var" is a variable referencing a <a href="ChamferEdgeSets.htm">ChamferEdgeSets</a> object.<code><pre class="api-code">returnValue = chamferEdgeSets_var.<b>addTwoDistancesChamferEdgeSet</b>(edges, distanceOne, distanceTwo, isFlipped, isTangentChain)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"chamferEdgeSets_var" is a variable referencing a <a href="ChamferEdgeSets.htm">ChamferEdgeSets</a> object.<br /><br /><code><pre class="api-code">#include &lt;Fusion/Features/ChamferEdgeSets.h&gt;<br /><br />returnValue = chamferEdgeSets_var-&gt;<b>addTwoDistancesChamferEdgeSet</b>(edges, distanceOne, distanceTwo, isFlipped, isTangentChain);<br /></pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;">boolean</td>
+        <td class="api-list">Returns true if the set of edges was successfully added to the ChamferFeatureInput.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">edges</td>
+        <td class="api-list"><a href="ObjectCollection.htm">ObjectCollection</a></td>
+        <td class="api-list">An ObjectCollection containing the edges to be chamfered. Edges can be defined by passing in BrepEdge, BRepFace, or Feature objects. If BRepFace or Feature objects are passed in all of the edges associated with those objects will be chamfered. If BRepEdge objects are provided and the isTangentChain argument is true additional edges may also get chamfered if they are tangentially connected to any of the input edges.</td>
+      </tr>
+      <tr>
+        <td class="api-list">distanceOne</td>
+        <td class="api-list"><a href="ValueInput.htm">ValueInput</a></td>
+        <td class="api-list">A ValueInput object that defines the first distance offset of the chamfer. If the ValueInput uses a real then it is interpreted as centimeters. If it is a string then the units can be defined as part of the string (i.e. "2 in") or if no units are specified it is interpreted using the current default units for length.</td>
+      </tr>
+      <tr>
+        <td class="api-list">distanceTwo</td>
+        <td class="api-list"><a href="ValueInput.htm">ValueInput</a></td>
+        <td class="api-list">A ValueInput object that defines the second distance offset of the chamfer. If the ValueInput uses a real then it is interpreted as centimeters. If it is a string then the units can be defined as part of the string (i.e. "2 in") or if no units are specified it is interpreted using the current default units for length.</td>
+      </tr>
+      <tr>
+        <td class="api-list">isFlipped</td>
+        <td class="api-list">boolean</td>
+        <td class="api-list">Swaps the directions for distance one and two.</td>
+      </tr>
+      <tr>
+        <td class="api-list">isTangentChain</td>
+        <td class="api-list">boolean</td>
+        <td class="api-list">A boolean value for setting whether or not edges that are tangentially connected to the input edges (if any) will also be chamfered.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version December 2020<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(ChamferEdgeSets.addTwoDistancesChamferEdgeSet%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

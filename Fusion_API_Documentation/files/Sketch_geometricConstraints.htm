@@ -1,0 +1,152 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/Sketch_geometricConstraints.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="Sketch_geometricConstraints">
+    <meta name="description" content="Sketch.geometricConstraints Property">
+    <meta name="topicid" content="GUID-ad9dea68-b775-444a-b253-f14aa9bafb68">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Sketch.geometricConstraints Property</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Sketch.geometricConstraints Property</h1>
+
+          Parent Object: <a href="Sketch.htm">Sketch</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Sketch/Sketch.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Returns the sketch constraints collection associated with this sketch. This provides access to the existing sketch constraints and supports the creation of new sketch constraints.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"sketch_var" is a variable referencing a Sketch object.</span><br /><br /><code><pre class="api-code"><span style="color:blue"># Get the value of the property.</span><br />propertyValue = sketch_var.<b>geometricConstraints<br /></pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"sketch_var" is a variable referencing a Sketch object.<br /><code><pre class="api-code">#include &lt;Fusion/Sketch/Sketch.h&gt;<br /><br /><span style="color:blue">// Get the value of the property.</span><br />Ptr&lt;GeometricConstraints&gt; propertyValue = sketch_var-&gt;<b>geometricConstraints</b>();<br /></pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Property Value
+          </h2>This is a read only property whose value is a <a href="GeometricConstraints.htm">GeometricConstraints</a>.<h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CreateSketchLines_Sample.htm">API Sample that demonstrates creating sketch lines in various ways.</a></td>
+        <td class="api-list">Demonstrates several ways to create sketch lines, including as the result of creating a rectangle.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="GeometricConstraint_addHorizontal_Sample.htm">GeometricConstraint.addHorizontal</a></td>
+        <td class="api-list">Demonstrates the GeometricConstraint.addHorizontal method.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="GeometricConstraint_addHorizontalPoints_Sample.htm">GeometricConstraint.addHorizontalPoints</a></td>
+        <td class="api-list">Demonstrates the GeometricConstraint.addHorizontalPoints method.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="GeometricConstraint_addMidPont_Sample.htm">GeometricConstraint.addMidPont</a></td>
+        <td class="api-list">Demonstrate the GeometricConstraint.addMidPont method.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="GeometricConstraints_addCoincident_Sample.htm">GeometricConstraints.addCoincident</a></td>
+        <td class="api-list">Demonstrates the GeometricConstraints.addCoincident method.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="GeometricConstraints_addCollinear_Sample.htm">GeometricConstraints.addCollinear</a></td>
+        <td class="api-list">Demonstrates the GeometricConstraints.addCollinear method.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="GeometricConstraints_addConcentric_Sample.htm">GeometricConstraints.addConcentric</a></td>
+        <td class="api-list">Demonstrates the GeometricConstraints.addConcentric method.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="GeometricConstraints_addEqual_Sample.htm">GeometricConstraints.addEqual</a></td>
+        <td class="api-list">Demonstrates the GeometricConstraints.addEqual method.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="GeometricConstraints_addParallel_Sample.htm">GeometricConstraints.addParallel</a></td>
+        <td class="api-list">Demonstrate the GeometricConstraints.addParallel method.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="GeometricConstraints_addPerpendicular_Sample.htm">GeometricConstraints.addPerpendicular</a></td>
+        <td class="api-list">Demonstrates the GeometricConstraints.addPerpendicular method.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="GeometricConstraints_addSmooth_Sample.htm">GeometricConstraints.addSmooth</a></td>
+        <td class="api-list">Demonstrate the GeometricConstraints.addSmooth method.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="GeometricConstraints_addSymmetry_Sample.htm">GeometricConstraints.addSymmetry</a></td>
+        <td class="api-list">Demonstrates the GeometricConstraints.addSymmetry method.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="GeometricConstraints_addTangent_Sample.htm">GeometricConstraints.addTangent</a></td>
+        <td class="api-list">Demonstrates the GeometricConstraints.addTangent method.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="GeometricConstraints_addVertical_Sample.htm">GeometricConstraints.addVertical</a></td>
+        <td class="api-list">Demonstrates the GeometricConstraints.addVertical method.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchCircles_addByTwoTangents_Sample.htm">SketchCircles.addByTwoTangents</a></td>
+        <td class="api-list">Demonstrates the SketchCircles.addByTwoTangets method.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(Sketch.geometricConstraints%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

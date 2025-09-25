@@ -1,0 +1,115 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/Occurrence_moveToComponent.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="16/7/2015">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="Occurrence_moveToComponent">
+    <meta name="description" content="Occurrence.moveToComponent Method">
+    <meta name="topicid" content="GUID-155aeff7-79b1-4283-92cf-5ee0b1bebf87">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Occurrence.moveToComponent Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Occurrence.moveToComponent Method</h1>
+
+          Parent Object: <a href="Occurrence.htm">Occurrence</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Components/Occurrence.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Moves this occurrence from it's current component into the component owned by the specified occurrence. This occurrence and the target occurrence must be in the same context.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"occurrence_var" is a variable referencing an <a href="Occurrence.htm">Occurrence</a> object.<code><pre class="api-code">returnValue = occurrence_var.<b>moveToComponent</b>(targetOccurrence)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"occurrence_var" is a variable referencing an <a href="Occurrence.htm">Occurrence</a> object.<br /><br /><code><pre class="api-code">#include &lt;Fusion/Components/Occurrence.h&gt;<br /><br />returnValue = occurrence_var-&gt;<b>moveToComponent</b>(targetOccurrence);<br /></pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;"><a href="Occurrence.htm">Occurrence</a></td>
+        <td class="api-list">Returns the moved Occurrence or null in the case the move failed.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">targetOccurrence</td>
+        <td class="api-list"><a href="Occurrence.htm">Occurrence</a></td>
+        <td class="api-list">The target occurrence defines both the component and the transform to apply when moving the occurrence. The occurrence will be copied into the parent component of the target occurrence and the target occurrence also defines the transform of how the occurrence will be copied so that the occurrence maintains it's same position in model space.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version July 2015<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(Occurrence.moveToComponent%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

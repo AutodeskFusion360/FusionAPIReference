@@ -1,0 +1,205 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/VolumetricCustomFeatureSample.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="VolumetricCustomFeatureSample_Sample">
+    <meta name="description" content="Volumetric Custom Feature API Sample Sample">
+    <meta name="topicid" content="GUID-{E4FDB583-62D4-402B-986E-CE3D31BBB063}">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Volumetric Custom Feature API Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Volumetric Custom Feature API Sample</h1>
+    <h2 class="api">
+          Description
+        </h2><p>Demonstrates how to create a Volumetric Custom Feature using the API for graph creation.</p>
+
+<p>To run the sample script, have a document open in Fusion’s DESIGN workspace. This script will create a component with a box by sketching then extruding that sketch. It will then use that box as a boundary body and create a Volumetric Custom Feature.</p>
+
+<p>The script will the create a gyroid lattice using the Volumetric Model API with the appropriate Graphs, Nodes and Connections for a minimal example. Finally, the script will convert that Volumetric Model to Mesh using the API and the VolumetricModelToMeshFeature.</p><h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code"><span style="color:blue"># Description: This script is used to create a volumetric model in the API</span>
+
+import os, adsk.core, adsk.fusion, adsk.volume,  traceback, time
+
+
+def CreateVolumetricModel(component:adsk.fusion.Component,body):
+    """Creation of the volumetric model"""
+    features = component.features
+    
+    <span style="color:blue">#Creating volumetric model input with the body</span>
+    VolumetricCustomFeatures = features.volumetricCustomFeatures
+    volumetricCustomFeatureInput = VolumetricCustomFeatures.createInput(body)
+    volumetricCustomFeature = VolumetricCustomFeatures.add(volumetricCustomFeatureInput)
+
+    <span style="color:blue"># build a simple volume - returns type adsk.core.Base</span>
+    volumetricModel = volumetricCustomFeature.volumetricModel
+    <span style="color:blue"># cast to a adsk.volume.VolumetricModel</span>
+    volumetricModel = adsk.volume.VolumetricModel.cast(volumetricModel)
+
+    return volumetricModel
+
+def VolumetricGraph(volumetricModel):
+    """Assigning graph and modifying it (adding volume/density)"""
+    <span style="color:blue">#AS LONG AS THE VOLUMETRIC MODEL IS NOT NULL, WE HAVE SUCCESSFULLY CREATED A VOLUMETRIC MODEL</span>
+    <span style="color:blue">#Call the graph and create a volume using it. Add a simple sphere for density as offset.</span>
+    primaryGraph = volumetricModel.getGraph(adsk.volume.GraphTypes.PrimaryGraphType)
+    cellGraph = volumetricModel.getGraph(adsk.volume.GraphTypes.CellGraphType)
+
+    <span style="color:blue"># All the channels are created by default as well as the Boundary sdf</span>
+
+    <span style="color:blue"># Create a density node and connect it to the density channel (Primary Graph)</span>
+    node1 = primaryGraph.addNode("ConstantDensity", "ConstantScalar")
+    node1.properties.itemByName("value").value = 0.5
+    densityChannel = primaryGraph.getOutputNode(adsk.volume.GraphOutputNodeTypes.LatticeDensityOutputNodeType)
+    assert primaryGraph.connect(node1, 0, densityChannel, 0), "Failed to connect the node to the density channel"
+        
+    <span style="color:blue"># Create a coordinate node and connect it to the coordinate channel (Primary Graph)</span>
+    node2 = primaryGraph.addNode("NoTransform", "TransformCoords")
+    node2.properties.itemByName("scaling").value = adsk.core.Vector3D.create(1, 2, 3) <span style="color:blue"># Scale the lattice asymmetrically</span>
+    coordinateOutput = primaryGraph.getOutputNode(adsk.volume.GraphOutputNodeTypes.LatticeCoordinatesOutputNodeType)
+    assert primaryGraph.connect(node2, 0, coordinateOutput, 0), "Failed to connect the node to the coordinate channel"
+        
+    <span style="color:blue"># Get the density output node from the cell graph and connect the density node to it</span>
+    node3 = cellGraph.addNode("gyroid", "FunctionVectorToScalar")
+    node3.properties.itemByName("function").value = "(sin(x*pi2)*cos(y*pi2)+sin(y*pi2)*cos(z*pi2)+sin(z*pi2)*cos(x*pi2))*0.333333333+0.5"
+    cellDensityChannel = cellGraph.getOutputNode(adsk.volume.GraphOutputNodeTypes.CellLatticeShapeOutputNodeType)
+    assert cellGraph.connect(node3, 0, cellDensityChannel, 0), "Failed to connect the node to the density channel"
+
+def run(context):
+    ui = None
+    try:
+    <span style="color:blue">### Lines from 56 to 84 preparing a document to work with. Creating a body and volumetric lattice.</span>
+
+        <span style="color:blue"># ALL THIS CODE IS TO GET A BODY AND COMPONENT TO WORK WITH</span>
+        app = adsk.core.Application.get()
+        ui  = app.userInterface
+        product = app.activeProduct
+        design = adsk.fusion.Design.cast(product)
+        rootComp = design.rootComponent
+
+        <span style="color:blue"># new component</span>
+        newCompOcc = rootComp.occurrences.addNewComponent(adsk.core.Matrix3D.create())
+        newComp = newCompOcc.component
+
+        <span style="color:blue"># create a new sketch</span>
+        sketches = newComp.sketches
+        sketch = sketches.add(newComp.xYConstructionPlane)
+        sketch.sketchCurves.sketchLines.addTwoPointRectangle(adsk.core.Point3D.create(0, 0, 0), adsk.core.Point3D.create(10, 10, 0))
+        sketch.isComputeDeferred = False
+
+        extrudeFeatures = newComp.features.extrudeFeatures
+        extrudeInput = extrudeFeatures.createInput(sketch.profiles.item(0), adsk.fusion.FeatureOperations.NewBodyFeatureOperation)
+        distanceExtent = adsk.fusion.DistanceExtentDefinition.create(adsk.core.ValueInput.createByString('10 cm'))
+        direction = adsk.fusion.ExtentDirections.PositiveExtentDirection
+        extrudeInput.setOneSideExtent(distanceExtent, direction)
+        extrude = extrudeFeatures.add(extrudeInput)
+
+        body = extrude.bodies.item(0)
+        body = body.createForAssemblyContext(newCompOcc)
+
+    <span style="color:blue">### Creating a volumetric model</span>
+        comp = newCompOcc.component
+        features = comp.features
+
+        VolumetricCustomFeatures = features.volumetricCustomFeatures
+        volumetricCustomFeatureInput = VolumetricCustomFeatures.createInput(body)
+        volumetricCustomFeature = VolumetricCustomFeatures.add(volumetricCustomFeatureInput)
+
+        <span style="color:blue"># build a simple volume - returns type adsk.core.Base</span>
+        volumetricModel = volumetricCustomFeature.volumetricModel
+        <span style="color:blue"># cast to a adsk.volume.VolumetricModel for autocompletion</span>
+        volumetricModel = adsk.volume.VolumetricModel.cast(volumetricModel)
+
+        VolumetricGraph(volumetricModel)
+
+    <span style="color:blue">### Convert to volumetric feature to mesh.</span>
+
+        <span style="color:blue"># Now we should have valid volumetric models We need to create a Volumetric Model To Mesh</span>
+        volumetricModelToMeshFeatures = features.volumetricModelToMeshFeatures
+        volumetricModelToMeshFeatureInput = volumetricModelToMeshFeatures.createInput(volumetricModel)
+
+        <span style="color:blue"># Setting all the properties for the volumetric model to mesh feature, though defaults are fine.</span>
+        volumetricModelToMeshFeatureInput.isComputeSuspended  = True
+        volumetricModelToMeshFeatureInput.isSmallShellsRemoved = True
+        volumetricModelToMeshFeatureInput.isVolumetricModelRemoved = True
+        volumetricModelToMeshFeatureInput.smallShellThreshold = adsk.core.ValueInput.createByString("0.05")
+        volumetricModelToMeshFeatureInput.meshingApproach = adsk.fusion.VolumetricMeshingApproachTypes.VolumetricMeshingAdvancedType
+        volumetricModelToMeshFeatureInput.refinementType  = adsk.fusion.VolumetricMeshRefinementTypes.VolumetricMeshRefinementMediumType
+
+        <span style="color:blue"># Create the volumetric model to mesh feature</span>
+        volumetricModelToMeshFeatures.add(volumetricModelToMeshFeatureInput)
+
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(VolumetricCustomFeatureSample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

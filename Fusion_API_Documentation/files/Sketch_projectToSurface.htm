@@ -1,0 +1,147 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/Sketch_projectToSurface.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="29/08/2017">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="Sketch_projectToSurface">
+    <meta name="description" content="Sketch.projectToSurface Method">
+    <meta name="topicid" content="GUID-8A805B12-E220-4C7B-A816-0E4931B97F93">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Sketch.projectToSurface Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Sketch.projectToSurface Method</h1>
+
+          Parent Object: <a href="Sketch.htm">Sketch</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Sketch/Sketch.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Projects the specified set of curves onto the specified set of faces using the specified method of projection. if the projection type is along a vector, then the directionEntity argument must be supplied. if the projectionType is the closest point method, the directionEntity argument is ignored.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"sketch_var" is a variable referencing a <a href="Sketch.htm">Sketch</a> object.<code><pre class="api-code"><span style="color:blue"># Uses no optional arguments.</span><br />returnValue = sketch_var.<b>projectToSurface</b>(faces, curves, projectType)<br /><br /><span style="color:blue"># Uses optional arguments.</span><br />returnValue = sketch_var.<b>projectToSurface</b>(faces, curves, projectType, directionEntity)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"sketch_var" is a variable referencing a <a href="Sketch.htm">Sketch</a> object.<br /><br /><code><pre class="api-code">#include &lt;Fusion/Sketch/Sketch.h&gt;<br /><br /><span style="color:blue">// Uses no optional arguments.</span><br />returnValue = sketch_var-&gt;<b>projectToSurface</b>(faces, curves, projectType);<br /><br /><span style="color:blue">// Uses optional arguments.</span><br />returnValue = sketch_var-&gt;<b>projectToSurface</b>(faces, curves, projectType, directionEntity);</pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;"><a href="SketchEntity.htm">SketchEntity</a>[]</td>
+        <td class="api-list">Returns an array of the sketch entities that were created as a result of projection the specified curves onto the faces.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">faces</td>
+        <td class="api-list">BRepFace[]</td>
+        <td class="api-list">An array of BRepFace objects that the curves will be projected onto.</td>
+      </tr>
+      <tr>
+        <td class="api-list">curves</td>
+        <td class="api-list">Base[]</td>
+        <td class="api-list">An array of various curve objects that will be projected onto the faces. The curves can be sketch curves and points, BRepEdge objects, ConstructionAxis objects, and ConstructionPoint objects.</td>
+      </tr>
+      <tr>
+        <td class="api-list">projectType</td>
+        <td class="api-list"><a href="SurfaceProjectTypes.htm">SurfaceProjectTypes</a></td>
+        <td class="api-list">Specifies which projection type to use which defines the direction of projection. If this is set to AlongVectorSurfaceProjectType the directionEntity argument must be provided.</td>
+      </tr>
+      <tr>
+        <td class="api-list">directionEntity</td>
+        <td class="api-list"><a href="Base.htm">Base</a></td>
+        <td class="api-list">if the projectType argument is AlongVectorSurfaceProjectType, this argument must be specified and defines the direction of projection. It can be a linear BRepEdge, a BRepFace where the normal will be used, a SketchLine, or a ConstructionLine.<br /><br /> This is an optional argument whose default value is null.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ProjectToSurface_Sample.htm">Project To Surface API Sample</a></td>
+        <td class="api-list">Projects the specified set of curves onto the specified set of faces using the specified method of projection.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version September 2017<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(Sketch.projectToSurface%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

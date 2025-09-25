@@ -1,0 +1,150 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/Line3D.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="Line3D">
+    <meta name="description" content="Line3D Object">
+    <meta name="topicid" content="GUID-42613b0c-dd36-499f-8076-320856063f92">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>Line3D Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Line3D Object
+			</h1>
+              Derived from: <a href="Curve3D.htm">Curve3D</a> Object
+            <br>Defined in namespace "adsk::core" and the header file is &lt;Core/Geometry/Line3D.h&gt;<h2 class="api">
+          Description
+        </h2>Transient 3D line. A transient line is not displayed or saved in a document. Transient 3D lines are used as a wrapper to work with raw 3D line information. They are created statically using the create method of the Line3D class.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Line3D_asInfiniteLine.htm">asInfiniteLine</a></td>
+        <td class="api-list">Creates an equivalent InfiniteLine3D.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Line3D_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Line3D_copy.htm">copy</a></td>
+        <td class="api-list">Creates and returns a copy of this line object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Line3D_create.htm">create</a></td>
+        <td class="api-list">Creates a transient line.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Line3D_getData.htm">getData</a></td>
+        <td class="api-list">Gets all of the data defining the line segment.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Line3D_intersectWithCurve.htm">intersectWithCurve</a></td>
+        <td class="api-list">Intersect this line with a curve to get the intersection point(s).</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Line3D_intersectWithSurface.htm">intersectWithSurface</a></td>
+        <td class="api-list">Intersect this line with a surface to get the intersection point(s).</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Line3D_isColinearTo.htm">isColinearTo</a></td>
+        <td class="api-list">Compare this line with another to check for collinearity</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Line3D_set.htm">set</a></td>
+        <td class="api-list">Sets all of the data defining the line segment.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Line3D_transformBy.htm">transformBy</a></td>
+        <td class="api-list">Transforms this curve in 3D space.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Line3D_asNurbsCurve.htm">asNurbsCurve</a></td>
+        <td class="api-list">Returns a NURBS curve that is geometrically identical to the line.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Line3D_curveType.htm">curveType</a></td>
+        <td class="api-list">Returns the type of geometry this curve represents.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Line3D_endPoint.htm">endPoint</a></td>
+        <td class="api-list">Gets and sets the end point of the line.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Line3D_evaluator.htm">evaluator</a></td>
+        <td class="api-list">Returns an evaluator object that lets you perform additional evaluations on the curve.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Line3D_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Line3D_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Line3D_startPoint.htm">startPoint</a></td>
+        <td class="api-list">Gets and sets the start point of the line.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="Line3D_copy.htm">Line3D.copy</a>, <a href="Line3D_create.htm">Line3D.create</a>, <a href="SketchLine_geometry.htm">SketchLine.geometry</a>, <a href="SketchLine_worldGeometry.htm">SketchLine.worldGeometry</a><h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(Line3D%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

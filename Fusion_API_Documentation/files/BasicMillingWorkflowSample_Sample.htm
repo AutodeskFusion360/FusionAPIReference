@@ -1,0 +1,609 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/BasicMillingWorkflowSample.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="BasicMillingWorkflowSample_Sample">
+    <meta name="description" content="Basic Milling Workflow Sample Sample">
+    <meta name="topicid" content="GUID-c4836048-974e-4544-acc0-d384e7e55613">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Basic Milling Workflow Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Basic Milling Workflow Sample</h1>
+    <h2 class="api">
+          Description
+        </h2>Demonstrates the creation of a basic milling workflow from script<p>Demonstrates creating a setup, searching tool library to retrieve a tool, create a couple of machining operations and a NC program, ready for post processing.</p><p>Use the 2D Strategies model from the Fusion CAM Samples folder as your CAD model.</p><h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#C++">C++</a></li>
+        <li><a href="#Python">Python</a></li>
+      </ul>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code">#include &lt;Core/CoreAll.h&gt;
+#include &lt;Fusion/FusionAll.h&gt;
+#include &lt;Cam/CamAll.h&gt;
+#include &lt;chrono&gt;
+#include &lt;thread&gt;
+#include &lt;algorithm&gt;
+
+#ifdef _WINDOWS
+#include &lt;shlwapi.h&gt;
+#else
+#include &lt;stdlib.h&gt;
+#endif
+
+using namespace adsk::core;
+using namespace adsk::fusion;
+using namespace adsk::cam;
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    <span style="color:blue">// Initialisation</span>
+    Ptr&lt;Application&gt; app = Application::get();
+    Ptr&lt;UserInterface&gt; ui = app-&gt;userInterface();
+    Ptr&lt;Document&gt; doc = nullptr;
+
+    <span style="color:blue">// Load by URN a specific sample project to demonstrate a basic milling workflow.</span>
+    std::string urn = "urn:adsk.wipprod:fs.file:vf.KoBHzV4mTOiNvFStiBwpzA?version=1"; <span style="color:blue">// Production</span>
+
+    <span style="color:blue">// Load 2D Strategies model from the Fusion CAM Samples folder</span>
+    Ptr&lt;DataFile&gt; sampleFile = app-&gt;data()-&gt;findFileById(urn);
+    if (sampleFile)
+    {
+        doc = app-&gt;documents()-&gt;open(sampleFile, true);
+    }
+
+    <span style="color:blue">// Did we find our document?</span>
+    if (!doc)
+    {
+        ui-&gt;messageBox("Sample file not found, using the current document.", "", MessageBoxButtonTypes::OKButtonType);
+
+        <span style="color:blue">// Use existing document, load 2D Strategies model from the Fusion CAM Samples folder</span>
+        doc = app-&gt;activeDocument();
+    }
+
+    <span style="color:blue">// Switch to manufacturing space</span>
+    Ptr&lt;Workspace&gt; camWS = ui-&gt;workspaces()-&gt;itemById("CAMEnvironment");
+    camWS-&gt;activate();
+
+    Ptr&lt;Products&gt; products = doc-&gt;products();
+    if (!products)
+        return false;
+
+    <span style="color:blue">// Check if the document has a CAMProductType. It will return if there are no CAM operations in it.</span>
+    Ptr&lt;CAM&gt; camProduct = products-&gt;itemByProductType("CAMProductType");
+    if (!camProduct)
+    {
+        ui-&gt;messageBox(
+            "There are no CAM operations in the active document. This script requires the active document to contain "
+            "at least one CAM operation.",
+            "No CAM Operations Exist",
+            MessageBoxButtonTypes::OKButtonType,
+            MessageBoxIconTypes::CriticalIconType);
+        return false;
+    }
+
+    <span style="color:blue">// Find tools in sample tool library</span>
+
+    <span style="color:blue">// Get the tool libraries from the library manager</span>
+    Ptr&lt;CAMManager&gt; camManager = CAMManager::get();
+    Ptr&lt;CAMLibraryManager&gt; libraryManager = camManager-&gt;libraryManager();
+    Ptr&lt;ToolLibraries&gt; toolLibraries = libraryManager-&gt;toolLibraries();
+
+    <span style="color:blue">// We can use a library URl directly if we know its address (here we use Fusion"s Metric sample library)</span>
+    Ptr&lt;URL&gt; toolLibraryUrl = URL::create("systemlibraryroot:<span style="color:blue">//Samples/Milling Tools (Metric).json");</span>
+
+    <span style="color:blue">// Load tool library</span>
+    Ptr&lt;ToolLibrary&gt; toolLibrary = toolLibraries-&gt;toolLibraryAtURL(toolLibraryUrl);
+    if (!toolLibrary)
+    {
+        ui-&gt;messageBox("Failed to load tool library");
+        return false;
+    }
+
+    <span style="color:blue">// Create some variables for the milling tools which will be used in the operations</span>
+    Ptr&lt;Tool&gt; faceTool = nullptr;
+    Ptr&lt;Tool&gt; adaptiveTool = nullptr;
+
+    <span style="color:blue">// Searching the face mill and the bull nose using a loop for the roughing operations</span>
+    for (Ptr&lt;Tool&gt;& tool : toolLibrary)
+    {
+        <span style="color:blue">// Read the tool type</span>
+        Ptr&lt;ChoiceParameterValue&gt; toolTypeParameter = tool-&gt;parameters()-&gt;itemByName("tool_type")-&gt;value();
+        std::string toolType = toolTypeParameter-&gt;value();
+
+        <span style="color:blue">// Select the first face tool found</span>
+        if (toolType == "face mill" && !faceTool)
+        {
+            faceTool = tool;
+        }
+
+        <span style="color:blue">// Search the roughing tool</span>
+        else if (toolType == "bull nose end mill" && !adaptiveTool)
+        {
+            <span style="color:blue">// We look for a bull nose end mill tool larger or equal to 10mm but less than 14mm</span>
+            Ptr&lt;FloatParameterValue&gt; diameterParameter = tool-&gt;parameters()-&gt;itemByName("tool_diameter")-&gt;value();
+            double diameter = diameterParameter-&gt;value();
+            if (diameter &gt;= 1.0 && diameter &lt; 1.4)
+            {
+                adaptiveTool = tool;
+            }
+        }
+
+        <span style="color:blue">// Exit when the 2 tools are found</span>
+        if (faceTool && adaptiveTool)
+        {
+            break;
+        }
+    }
+
+    if (!faceTool)
+    {
+        ui-&gt;messageBox("No face mill tool found");
+        return false;
+    }
+    if (!adaptiveTool)
+    {
+        ui-&gt;messageBox("No bull nose end mill tool found");
+        return false;
+    }
+
+    <span style="color:blue">// Create setup</span>
+    Ptr&lt;CAM&gt; cam = products-&gt;itemByProductType("CAMProductType");
+    Ptr&lt;Setups&gt; setups = cam-&gt;setups();
+    Ptr&lt;SetupInput&gt; setupInput = setups-&gt;createInput(OperationTypes::MillingOperation);
+
+    <span style="color:blue">// Create a list for the models to add to the setup Input</span>
+    std::vector&lt;Ptr&lt;Base&gt;&gt; models;
+    Ptr&lt;BRepBody&gt; part = cam-&gt;designRootOccurrence()-&gt;bRepBodies()-&gt;item(0);
+    if (!part)
+    {
+        ui-&gt;messageBox(
+            "No part found in the current document, exiting sample script.", "", MessageBoxButtonTypes::OKButtonType);
+        return false;
+    }
+    <span style="color:blue">// Add the part to the model list</span>
+    models.push_back(part);
+    <span style="color:blue">// Pass the model list to the setup input</span>
+    setupInput-&gt;models(models);
+    <span style="color:blue">// Create the setup</span>
+    Ptr&lt;Setup&gt; setup = setups-&gt;add(setupInput);
+    <span style="color:blue">// Change some properties of the setup</span>
+    setup-&gt;name() = "CAM Basic Script Sample";
+    setup-&gt;stockMode(SetupStockModes::RelativeBoxStock);
+    <span style="color:blue">// Set offset mode</span>
+    setup-&gt;parameters()-&gt;itemByName("job_stockOffsetMode")-&gt;expression("'simple'");
+    <span style="color:blue">// Set offset stock side</span>
+    setup-&gt;parameters()-&gt;itemByName("job_stockOffsetSides")-&gt;expression("0 mm");
+    <span style="color:blue">// Set offset stock top</span>
+    setup-&gt;parameters()-&gt;itemByName("job_stockOffsetTop")-&gt;expression("2 mm");
+    <span style="color:blue">// Set setup origin</span>
+    Ptr&lt;ChoiceParameterValue&gt; wcs_origin_boxPoint = setup-&gt;parameters()-&gt;itemByName("wcs_origin_boxPoint")-&gt;value();
+    wcs_origin_boxPoint-&gt;value("top 1");
+
+    <span style="color:blue">// Face operation</span>
+
+    <span style="color:blue">// Create a face operation input</span>
+    Ptr&lt;OperationInput&gt; faceInput = setup-&gt;operations()-&gt;createInput("face");
+    faceInput-&gt;tool(faceTool);
+    faceInput-&gt;displayName("Face Operation");
+    faceInput-&gt;parameters()-&gt;itemByName("tolerance")-&gt;expression("0.01 mm");
+    faceInput-&gt;parameters()-&gt;itemByName("stepover")-&gt;expression("0.75 * tool_diameter");
+    faceInput-&gt;parameters()
+        -&gt;itemByName("direction")
+        -&gt;expression("'climb'"); <span style="color:blue">// Must be single quotes inside double quotes</span>
+
+    <span style="color:blue">// Add the operation to the setup</span>
+    Ptr&lt;Operation&gt; faceOp = setup-&gt;operations()-&gt;add(faceInput);
+
+    <span style="color:blue">// Adaptive operation</span>
+    Ptr&lt;OperationInput&gt; adaptiveInput = setup-&gt;operations()-&gt;createInput("adaptive");
+    adaptiveInput-&gt;tool(adaptiveTool);
+    adaptiveInput-&gt;displayName("Adaptive Roughing");
+    adaptiveInput-&gt;parameters()-&gt;itemByName("tolerance")-&gt;expression("0.1 mm");
+    adaptiveInput-&gt;parameters()-&gt;itemByName("maximumStepdown")-&gt;expression("5 mm");
+    adaptiveInput-&gt;parameters()-&gt;itemByName("fineStepdown")-&gt;expression("0.25 * maximumStepdown");
+    adaptiveInput-&gt;parameters()-&gt;itemByName("flatAreaMachining")-&gt;expression("false");
+
+    <span style="color:blue">// Add the operation to the setup</span>
+    Ptr&lt;Operation&gt; adaptiveOp = setup-&gt;operations()-&gt;add(adaptiveInput);
+
+    <span style="color:blue">// Generate operations</span>
+    cam-&gt;generateToolpath(faceOp);
+    Ptr&lt;GenerateToolpathFuture&gt; genFuture = cam-&gt;generateToolpath(adaptiveOp);
+
+    <span style="color:blue">// ncProgram and post-processing</span>
+
+    <span style="color:blue">// Get the post library from library manager</span>
+    Ptr&lt;PostLibrary&gt; postLibrary = libraryManager-&gt;postLibrary();
+
+    <span style="color:blue">// Query post library to get postprocessor list</span>
+    Ptr&lt;PostConfigurationQuery&gt; postQuery = postLibrary-&gt;createQuery(LibraryLocations::Fusion360LibraryLocation);
+    postQuery-&gt;vendor("Autodesk");
+    postQuery-&gt;capability(PostCapabilities::Milling);
+    std::vector&lt;Ptr&lt;PostConfiguration&gt;&gt; postConfigs = postQuery-&gt;execute();
+
+    Ptr&lt;URL&gt; importedURL;
+    std::string ncExtension;
+    <span style="color:blue">// Find the "XYZ" post in the post library and import it to local library</span>
+    for (Ptr&lt;PostConfiguration&gt;& config : postConfigs)
+    {
+        if (config-&gt;description() == "XYZ")
+        {
+            ncExtension = config-&gt;extension();
+            Ptr&lt;URL&gt; configUrl = URL::create("user:<span style="color:blue">//");</span>
+            importedURL = postLibrary-&gt;importPostConfiguration(config, configUrl, "NCProgramSamplePost.cps");
+            break;
+        }
+    }
+
+    <span style="color:blue">// Get the imported local post config</span>
+    Ptr&lt;PostConfiguration&gt; postConfig = postLibrary-&gt;postConfigurationAtURL(importedURL);
+
+    <span style="color:blue">// Create NCProgramInput object</span>
+    Ptr&lt;NCProgramInput&gt; ncInput = cam-&gt;ncPrograms()-&gt;createInput();
+    ncInput-&gt;displayName("NC Program Sample");
+
+    <span style="color:blue">// Change some nc program parameters...</span>
+    Ptr&lt;CAMParameters&gt; ncParameters = ncInput-&gt;parameters();
+
+    Ptr&lt;StringParameterValue&gt; nc_program_filename = ncParameters-&gt;itemByName("nc_program_filename")-&gt;value();
+    nc_program_filename-&gt;value("NCProgramSample");
+
+    Ptr&lt;BooleanParameterValue&gt; nc_program_openInEditor = ncParameters-&gt;itemByName("nc_program_openInEditor")-&gt;value();
+    nc_program_openInEditor-&gt;value(true);
+
+    <span style="color:blue">// Set temp directory as output directory</span>
+    std::string outputFolder = cam-&gt;temporaryFolder();
+
+    <span style="color:blue">// Variable outputFolder may contain backslashes but nc_program_output_folder requires forward slashes</span>
+    std::replace_if(
+        outputFolder.begin(), outputFolder.end(), [](char ch) { return ch == '\\'; }, '/');
+
+    Ptr&lt;StringParameterValue&gt; nc_program_output_folder = ncParameters-&gt;itemByName("nc_program_output_folder")-&gt;value();
+    nc_program_output_folder-&gt;value(outputFolder);
+
+    <span style="color:blue">// Select the operations to generate (we skip steep_and_shallow here)</span>
+    ncInput-&gt;operations({faceOp, adaptiveOp});
+
+    <span style="color:blue">// Add a new ncprogram from the ncprogram input</span>
+    Ptr&lt;NCProgram&gt; newProgram = cam-&gt;ncPrograms()-&gt;add(ncInput);
+
+    <span style="color:blue">// Set post processor</span>
+    newProgram-&gt;postConfiguration(postConfig);
+
+    <span style="color:blue">// Change some post parameter</span>
+    Ptr&lt;CAMParameters&gt; postParameters = newProgram-&gt;postParameters();
+
+    <span style="color:blue">// NcProgram parameters are passed without units to the postprocessor</span>
+    Ptr&lt;FloatParameterValue&gt; builtin_tolerance = postParameters-&gt;itemByName("builtin_tolerance")-&gt;value();
+    builtin_tolerance-&gt;value(0.01);
+
+    Ptr&lt;FloatParameterValue&gt; builtin_minimumChordLength =
+        postParameters-&gt;itemByName("builtin_minimumChordLength")-&gt;value();
+    builtin_minimumChordLength-&gt;value(0.33);
+
+    <span style="color:blue">// Update/apply post parameters</span>
+    newProgram-&gt;updatePostParameters(postParameters);
+
+    <span style="color:blue">// Post-process</span>
+    <span style="color:blue">// Set post options, by default post process only valid operations containing toolpath data</span>
+    Ptr&lt;NCProgramPostProcessOptions&gt; postOptions = NCProgramPostProcessOptions::create();
+
+    <span style="color:blue">// Ensure toolpaths are visible</span>
+    faceOp-&gt;isLightBulbOn(true);
+    adaptiveOp-&gt;isLightBulbOn(true);
+
+    <span style="color:blue">// To avoid errors, post-process only when toolpath generation has completed</span>
+    if (!genFuture)
+        return false;
+    while (!genFuture-&gt;isGenerationCompleted())
+    {
+        std::this_thread::sleep_for(std::chrono::milliseconds(1));
+    }
+    newProgram-&gt;postProcess(postOptions);
+
+    <span style="color:blue">// Advise where the NC file is located to indicate completion</span>
+    ui-&gt;messageBox(
+        "The result has been written to:\n" + outputFolder + "/" + nc_program_filename-&gt;value() + ncExtension,
+        "Post processing is complete  \t\t\t\t\t");
+
+    return true;
+}</pre>
+      </div>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">import adsk.core, adsk.fusion, adsk.cam, traceback
+import time
+
+def run(context):
+    ui = None
+    try:
+
+        <span style="color:blue">#################### Initialisation #####################</span>
+        app = adsk.core.Application.get()
+        ui  = app.userInterface
+
+        PROJECT_URN = 'urn:adsk.wipprod:fs.file:vf.KoBHzV4mTOiNvFStiBwpzA?version=1' <span style="color:blue"># Production</span>
+
+        <span style="color:blue"># Load by URN a specific sample project to demonstrate a basic milling workflow.</span>
+        doc = loadProjectFromURN(PROJECT_URN)
+        if doc is None: 
+            return
+
+        <span style="color:blue"># Switch to manufacturing space</span>
+        camWS: adsk.core.Workspace = ui.workspaces.itemById('CAMEnvironment')
+        camWS.activate()
+
+        <span style="color:blue"># Get the CAM product</span>
+        products: adsk.core.Products = doc.products
+
+        <span style="color:blue">#################### Find tools in sample tool library ####################</span>
+        <span style="color:blue"># Get the tool libraries from the library manager</span>
+        camManager = adsk.cam.CAMManager.get()
+        libraryManager: adsk.cam.CAMLibraryManager = camManager.libraryManager
+        toolLibraries: adsk.cam.ToolLibraries = libraryManager.toolLibraries
+
+        <span style="color:blue"># We can use a library URl directly if we know its address (here we use Fusion's Metric sample library)</span>
+        url = adsk.core.URL.create('systemlibraryroot://Samples/Milling Tools (Metric).json')
+
+        <span style="color:blue"># Load tool library</span>
+        toolLibrary: adsk.cam.ToolLibrary = toolLibraries.toolLibraryAtURL(url)
+
+        <span style="color:blue"># Create some variables for the milling tools which will be used in the operations</span>
+        faceTool: adsk.cam.Tool = None
+        adaptiveTool: adsk.cam.Tool = None
+
+        <span style="color:blue"># Searching the face mill and the bull nose using a loop for the roughing operations</span>
+        for tool in toolLibrary:
+            <span style="color:blue"># Read the tool type</span>
+            toolType = tool.parameters.itemByName('tool_type').value.value
+
+            <span style="color:blue"># Select the first face tool found</span>
+            if toolType == 'face mill' and not faceTool:
+                faceTool = tool
+
+            <span style="color:blue"># Search the roughing tool</span>
+            elif toolType == 'bull nose end mill' and not adaptiveTool:
+                <span style="color:blue"># We look for a bull nose end mill tool larger or equal to 10mm but less than 14mm</span>
+                diameter = tool.parameters.itemByName('tool_diameter').value.value
+                if diameter &gt;= 1.0 and diameter &lt; 1.4:
+                    adaptiveTool = tool
+
+            <span style="color:blue"># Exit when the 2 tools are found</span>
+            if faceTool and adaptiveTool:
+                break
+
+
+        <span style="color:blue">#################### Create setup ####################</span>
+        cam: adsk.cam.CAM = adsk.cam.CAM.cast(products.itemByProductType("CAMProductType"))
+        setups: adsk.cam.Setups = cam.setups
+        setupInput: adsk.cam.SetupInput = setups.createInput(adsk.cam.OperationTypes.MillingOperation)
+        <span style="color:blue"># Create a list for the models to add to the setup Input</span>
+        models = []
+
+        <span style="color:blue"># Identify the part or exit gracefully</span>
+        try:
+            part: adsk.fusion.BRepBody = cam.designRootOccurrence.bRepBodies.item(0)
+        except Exception as e:
+            ui.messageBox('No part found in the current document, exiting sample script.')
+            return
+
+        <span style="color:blue"># Add the part to the model list</span>
+        models.append(part)
+        <span style="color:blue"># Pass the model list to the setup input</span>
+        setupInput.models = models
+        <span style="color:blue"># Create the setup</span>
+        setup: adsk.cam.Setup = setups.add(setupInput)
+        <span style="color:blue"># Change some properties of the setup</span>
+        setup.name = 'CAM Basic Script Sample'
+        setup.stockMode = adsk.cam.SetupStockModes.RelativeBoxStock
+        <span style="color:blue"># Set offset mode</span>
+        setup.parameters.itemByName('job_stockOffsetMode').expression = "'simple'"
+        <span style="color:blue"># Set offset stock side</span>
+        setup.parameters.itemByName('job_stockOffsetSides').expression = '0 mm'
+        <span style="color:blue"># Set offset stock top</span>
+        setup.parameters.itemByName('job_stockOffsetTop').expression = '2 mm'
+        <span style="color:blue"># Set setup origin</span>
+        setup.parameters.itemByName('wcs_origin_boxPoint').value.value = 'top 1'
+
+
+        <span style="color:blue">#################### Face operation ####################</span>
+        <span style="color:blue"># Create a face operation input</span>
+        faceInput: adsk.cam.OperationInput = setup.operations.createInput('face')
+        faceInput.tool = faceTool
+        faceInput.displayName = 'Face Operation'       
+        faceInput.parameters.itemByName('tolerance').expression = '0.01 mm'
+        faceInput.parameters.itemByName('stepover').expression = '0.75 * tool_diameter'
+        faceInput.parameters.itemByName('direction').expression = "'climb'"
+
+        <span style="color:blue"># Add the operation to the setup</span>
+        faceOp: adsk.cam.OperationBase = setup.operations.add(faceInput)
+
+
+        <span style="color:blue">#################### Adaptive operation ####################</span>
+        adaptiveInput = setup.operations.createInput('adaptive')
+        adaptiveInput.tool = adaptiveTool
+        adaptiveInput.displayName = 'Adaptive Roughing'
+        adaptiveInput.parameters.itemByName('tolerance').expression = '0.1 mm'
+        adaptiveInput.parameters.itemByName('maximumStepdown').expression = '5 mm'
+        adaptiveInput.parameters.itemByName('fineStepdown').expression = '0.25 * maximumStepdown'
+        adaptiveInput.parameters.itemByName('flatAreaMachining').expression = 'false'
+
+        <span style="color:blue"># Add the operation to the setup</span>
+        adaptiveOp: adsk.cam.OperationBase = setup.operations.add(adaptiveInput)
+
+        <span style="color:blue">##################### Generate operations ####################</span>
+        cam.generateToolpath(faceOp)
+        genFuture: adsk.cam.GenerateToolpathFuture = cam.generateToolpath(adaptiveOp)
+
+        <span style="color:blue">#################### ncProgram and post-processing ####################</span>
+        <span style="color:blue"># Get the post library from library manager</span>
+        postLibrary: adsk.cam.PostLibrary = libraryManager.postLibrary
+
+        <span style="color:blue"># Query post library to get postprocessor list</span>
+        libraryLocation = adsk.cam.LibraryLocations.Fusion360LibraryLocation
+        postQuery: adsk.cam.PostConfigurationQuery = postLibrary.createQuery(libraryLocation)
+        postQuery.vendor = "Autodesk"
+        postQuery.capability = adsk.cam.PostCapabilities.Milling
+        postConfigs: list[adsk.cam.PostConfiguration] = postQuery.execute()
+
+        <span style="color:blue"># Find the "XYZ" post in the post library and import it to local library</span>
+        ncExtension = ''
+        for config in postConfigs:
+            if config.description == 'XYZ':
+                ncExtension = config.extension
+                url = adsk.core.URL.create("user://")
+                importedURL = postLibrary.importPostConfiguration(config, url, "NCProgramSamplePost.cps")
+
+        <span style="color:blue"># Get the imported local post config</span>
+        postConfig: adsk.cam.PostConfiguration = postLibrary.postConfigurationAtURL(importedURL)
+
+        <span style="color:blue"># Create NCProgramInput object</span>
+        ncInput: adsk.cam.NCProgramInput = cam.ncPrograms.createInput()
+        ncInput.displayName = 'NC Program Sample'
+
+        <span style="color:blue"># Change some nc program parameters...</span>
+        ncFilename = 'NCProgramSample'
+        ncParameters: adsk.cam.CAMParameters = ncInput.parameters
+        ncParameters.itemByName('nc_program_filename').value.value = ncFilename
+        ncParameters.itemByName('nc_program_openInEditor').value.value = True
+        ncParameters.itemByName('nc_program_nc_extension').value.value = ncExtension
+
+        <span style="color:blue"># Set temp directory as output directory</span>
+        <span style="color:blue"># Make the path valid for Fusion by replacing \\ to / in the path</span>
+        outputFolder = str(cam.temporaryFolder).replace('\\', '/') 
+        ncParameters.itemByName('nc_program_output_folder').value.value = outputFolder
+        
+        <span style="color:blue"># Select the operations to generate</span>
+        ncInput.operations = [faceOp, adaptiveOp]
+
+        <span style="color:blue"># Add a new ncprogram from the ncprogram input</span>
+        newProgram: adsk.cam.NCProgram = cam.ncPrograms.add(ncInput)
+
+        <span style="color:blue"># Set post processor</span>
+        newProgram.postConfiguration = postConfig
+
+        <span style="color:blue"># Change some post parameters</span>
+        postParameters: adsk.cam.CAMParameters = newProgram.postParameters
+
+        <span style="color:blue"># NcProgram parameters are passed without units to the postprocessor</span>
+        postParameters.itemByName('builtin_tolerance').value.value = 0.01
+        postParameters.itemByName('builtin_minimumChordLength').value.value = 0.33
+
+        <span style="color:blue"># Update/apply post parameters</span>
+        newProgram.updatePostParameters(postParameters)
+
+        <span style="color:blue"># Post-process</span>
+        <span style="color:blue"># Set post options, by default post process only valid operations containing toolpath data</span>
+        postOptions = adsk.cam.NCProgramPostProcessOptions.create()
+
+        <span style="color:blue"># Ensure toolpaths are visible</span>
+        faceOp.isLightBulbOn = True
+        adaptiveOp.isLightBulbOn = True
+
+        <span style="color:blue"># To avoid errors, post-process only when toolpath generation has completed</span>
+        while not genFuture.isGenerationCompleted:
+            time.sleep(1)
+        newProgram.postProcess(postOptions)
+
+        <span style="color:blue"># Advise where the NC file is located to indicate completion</span>
+        ui.messageBox(f'The results have been written to:\n{outputFolder}/{ncFilename}{ncExtension}',
+                     'Post processing is complete  \t\t\t\t\t'); <span style="color:blue"># Prevent line breaks of the pathname</span>
+
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
+
+def loadProjectFromURN(urn:str = None) -&gt; adsk.core.Document:
+    ''' Minimal self-contained function to load and return a document via URN or return None safely '''
+    doc: adsk.core.Document = None
+    app = adsk.core.Application.get()
+    if urn is not None:
+        try: <span style="color:blue"># File not found causes an exception</span>
+            project: adsk.core.DataFile = app.data.findFileById(urn)
+            if project:
+                doc = app.documents.open(project, True)
+            else:
+                app.userInterface.messageBox(f'File not found for URN: {urn}!')
+        except Exception as e:
+            if str(e)[0:38] == '3 : Design is located in another team.':
+                <span style="color:blue"># Although the document has been loaded, variable 'doc' may not be populated</span>
+                if doc is None:
+                    doc: adsk.core.Document = adsk.core.Application.get().activeDocument
+            elif str(e)[0:20] == '3 : file not found':
+                app.userInterface.messageBox(f'File not found for URN: {urn}!')
+            else:
+                <span style="color:blue"># Abandon for unhandled errors, displaying the error message.</span>
+                app.userInterface.messageBox(f'Failed:{str(e)}\n{traceback.format_exc()}')
+    return doc</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(BasicMillingWorkflowSample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

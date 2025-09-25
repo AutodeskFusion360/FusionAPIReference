@@ -1,0 +1,243 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/GetCircleAndArcDataFromEdge.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="GetCircleAndArcDataFromEdge_Sample">
+    <meta name="description" content="Get Circle and Arc Data from Edge API Sample Sample">
+    <meta name="topicid" content="GUID-2aae1b64-fd3c-11e4-a1cb-f8b156d7cd97">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Get Circle and Arc Data from Edge API Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Get Circle and Arc Data from Edge API Sample</h1>
+    <h2 class="api">
+          Description
+        </h2>Display the arc and circle geometric information from a selected circular edge.<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">import adsk.core, adsk.fusion, traceback
+
+def getArcGeometryInfo(arcGeom):
+    result = arcGeom.getData()
+    if (result[0]):
+        (retVal, center, axis, refVector, radius, startAngle, endAngle) = result
+                    
+        arcInfo = "Center: %.6f, %.6f, %.6f\n" % (center.x, center.y, center.z)
+        arcInfo += "Axis: %.6f, %.6f, %.6f\n" % (axis.x, axis.y, axis.z)
+        arcInfo += "Reference vector: %.6f, %.6f, %.6f\n" % (refVector.x, refVector.y, refVector.z)
+        arcInfo += "Radius: %.6f\n" % radius
+        arcInfo += "Start angle: %.6f\n" % startAngle
+        arcInfo += "End angle: %.6f" % endAngle
+        return arcInfo
+        
+def getCircleGeometryInfo(circGeom):
+    result = circGeom.getData()                
+    if (result[0]):
+        (retVal, center, axis, radius) = result
+
+        circleInfo = "Center: %.6f, %.6f, %.6f\n" % (center.x, center.y, center.z)
+        circleInfo += "Axis: %.6f, %.6f, %.6f\n" % (axis.x, axis.y, axis.z)
+        circleInfo += "Radius: %.6f" % radius
+        return circleInfo
+
+def run(context):
+    ui = None
+    try:
+        app = adsk.core.Application.get()
+        ui = app.userInterface
+        
+        ent = ui.selectEntity("Select a circular edge", "CircularEdges")
+        
+        if (isinstance(ent.entity.geometry, adsk.core.Arc3D)): 
+            arcGeom = ent.entity.geometry
+            
+            arcInfo = getArcGeometryInfo(arcGeom)
+                            
+            ui.messageBox(arcInfo, "Arc Info")
+        else:  
+            if (isinstance(ent.entity.geometry, adsk.core.Circle3D)):
+                circGeom = ent.entity.geometry
+                
+                circleInfo = getCircleGeometryInfo(circGeom)
+                
+                ui.messageBox( circleInfo, "Circle Info")
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code">#include &lt;Core/Application/Application.h&gt;
+#include &lt;Core/Geometry/Arc3D.h&gt;
+#include &lt;Core/Geometry/Circle3D.h&gt;
+#include &lt;Core/Geometry/Point3D.h&gt;
+#include &lt;Core/Geometry/Vector3D.h&gt;
+#include &lt;Core/UserInterface/Selection.h&gt;
+#include &lt;Core/UserInterface/UserInterface.h&gt;
+#include &lt;Fusion/BRep/BRepEdge.h&gt;
+
+using namespace adsk::core;
+using namespace adsk::fusion;
+
+Ptr&lt;UserInterface&gt; ui;
+
+namespace
+{
+std::string getArcGeometryInfo(Ptr&lt;Arc3D&gt; arcGeom)
+{
+    std::string arcInfo;
+    if (!arcGeom)
+        return arcInfo;
+
+    Ptr&lt;Point3D&gt; center;
+    Ptr&lt;Vector3D&gt; axis;
+    Ptr&lt;Vector3D&gt; refVector;
+    double radius = 0.0;
+    double startAngle = 0.0;
+    double endAngle = 0.0;
+    bool result = arcGeom-&gt;getData(center, axis, refVector, radius, startAngle, endAngle);
+    if (!result)
+        return arcInfo;
+
+    std::stringstream ss;
+    ss.precision(6);
+    ss &lt;&lt; std::fixed;
+    ss &lt;&lt; "Center: " &lt;&lt; center-&gt;x() &lt;&lt; ", " &lt;&lt; center-&gt;y() &lt;&lt; ", " &lt;&lt; center-&gt;z() &lt;&lt; "\n";
+    ss &lt;&lt; "Axis: " &lt;&lt; axis-&gt;x() &lt;&lt; ", " &lt;&lt; axis-&gt;y() &lt;&lt; ", " &lt;&lt; axis-&gt;z() &lt;&lt; "\n";
+    ss &lt;&lt; "Reference vector: " &lt;&lt; refVector-&gt;x() &lt;&lt; ", " &lt;&lt; refVector-&gt;y() &lt;&lt; ", " &lt;&lt; refVector-&gt;z() &lt;&lt; "\n";
+    ss &lt;&lt; "Radius: " &lt;&lt; radius &lt;&lt; "\n";
+    ss &lt;&lt; "Start angle: " &lt;&lt; startAngle &lt;&lt; "\n";
+    ss &lt;&lt; "End angle: " &lt;&lt; endAngle &lt;&lt; "\n";
+
+    arcInfo += ss.str();
+    return arcInfo;
+}
+
+std::string getCircleGeometryInfo(Ptr&lt;Circle3D&gt; circGeom)
+{
+    std::string circleInfo;
+    if (!circGeom)
+        return circleInfo;
+
+    Ptr&lt;Point3D&gt; center;
+    Ptr&lt;Vector3D&gt; axis;
+    double radius = 0.0;
+    bool result = circGeom-&gt;getData(center, axis, radius);
+    if (!result)
+        return circleInfo;
+
+    std::stringstream ss;
+    ss.precision(6);
+    ss &lt;&lt; std::fixed;
+    ss &lt;&lt; "Center: " &lt;&lt; center-&gt;x() &lt;&lt; ", " &lt;&lt; center-&gt;y() &lt;&lt; ", " &lt;&lt; center-&gt;z() &lt;&lt; "\n";
+    ss &lt;&lt; "Axis: " &lt;&lt; axis-&gt;x() &lt;&lt; ", " &lt;&lt; axis-&gt;y() &lt;&lt; ", " &lt;&lt; axis-&gt;z() &lt;&lt; "\n";
+    ss &lt;&lt; "Radius: " &lt;&lt; radius &lt;&lt; "\n";
+
+    circleInfo += ss.str();
+    return circleInfo;
+}
+} <span style="color:blue">// namespace</span>
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    Ptr&lt;Application&gt; app = Application::get();
+    if (!app)
+        return false;
+
+    ui = app-&gt;userInterface();
+    if (!ui)
+        return false;
+
+     Ptr&lt;Selection&gt; selection = ui-&gt;selectEntity("Select a circular edge", "CircularEdges");
+     if (!selection)
+    	return false;
+
+     Ptr&lt;BRepEdge&gt; edge = selection-&gt;entity();
+     if (!edge)
+    	return false;
+
+     if (Ptr&lt;Arc3D&gt; arcGeom = edge-&gt;geometry()) {
+    	std::string arcInfo = getArcGeometryInfo(arcGeom);
+    	ui-&gt;messageBox(arcInfo, "Arc Info");
+     }
+     else if (Ptr&lt;Circle3D&gt; circGeom = edge-&gt;geometry()) {
+    	std::string circleInfo = getCircleGeometryInfo(circGeom);
+    	ui-&gt;messageBox(circleInfo, "Circle Info");
+     }
+
+    return true;
+}</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(GetCircleAndArcDataFromEdge%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

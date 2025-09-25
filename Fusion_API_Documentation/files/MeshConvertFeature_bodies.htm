@@ -1,0 +1,86 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/MeshConvertFeature_bodies.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="06/06/2025">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="MeshConvertFeature_bodies">
+    <meta name="description" content="MeshConvertFeature.bodies Property">
+    <meta name="topicid" content="GUID-5B33093D-9F64-4329-B7B2-02DF8A606B11">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>MeshConvertFeature.bodies Property</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">MeshConvertFeature.bodies Property<img src="../images/TestTubeLarge.png"></h1>
+
+          Parent Object: <a href="MeshConvertFeature.htm">MeshConvertFeature</a><p class="api-preview"><img src="../images/TestTubeSmall.png" alt="Preview">This functionality is provided as a preview
+				  of intended future API capabilities. You are encouraged to use it and report any problems or suggestions using the
+				  <a href="https://forums.autodesk.com/t5/fusion-360-api-and-scripts/bd-p/22">Fusion API and Scripts</a> forum.<br><br>
+
+				  Because this is a preview of future functionality, there is the possibility that it will change, which will possibly
+				  break any existing programs that use this functionality. Because of that, you should never deliver any programs that use
+				  any preview capabilities. For a distributed program, you should wait until it has moved from preview to released state.
+			  </p><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/MeshBody/MeshConvertFeature.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Returns the bodies that were modified or created by this feature. This property works for both parametric and non-parametric features.<br/><br/> For a BaseFeature, this property has two different behaviors depending on if the BaseFeature is active for edit or not. When the base feature is active, this property returns the bodies owned by the base feature or the source bodies. When the base feature is not active, this property returns the result bodies.<br/><br/> When a body is added to a base feature, that body is owned by the base feature and is only seen in the UI when the base feature is active. This body is referred to as a "source body". Fusion creates a parametric copy of the body when you exit the base feature. This copy is referred to as the "result body," and it is used for subsequent modeling operations.<br/><br/> You can map between the source and result bodies by using their position within the bodies returned. To get a valid list of result bodies, you should roll the timeline to immediately after the base feature node in the timeline. Otherwise, subsequent operations could have done something to cause one or more bodies to no longer be available.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"meshConvertFeature_var" is a variable referencing a MeshConvertFeature object.</span><br /><br /><code><pre class="api-code"><span style="color:blue"># Get the value of the property.</span><br />propertyValue = meshConvertFeature_var.<b>bodies<br /></pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"meshConvertFeature_var" is a variable referencing a MeshConvertFeature object.<br /><code><pre class="api-code">#include &lt;Fusion/MeshBody/MeshConvertFeature.h&gt;<br /><br /><span style="color:blue">// Get the value of the property.</span><br />Ptr&lt;BRepBodies&gt; propertyValue = meshConvertFeature_var-&gt;<b>bodies</b>();<br /></pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Property Value
+          </h2>This is a read only property whose value is a <a href="BRepBodies.htm">BRepBodies</a>.<h2 class="api">
+            Version
+          </h2>
+        Introduced in version July 2025<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(MeshConvertFeature.bodies%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

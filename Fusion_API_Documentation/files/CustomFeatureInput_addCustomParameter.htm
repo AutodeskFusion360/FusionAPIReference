@@ -1,0 +1,142 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/CustomFeatureInput_addCustomParameter.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="13/01/2021">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="CustomFeatureInput_addCustomParameter">
+    <meta name="description" content="CustomFeatureInput.addCustomParameter Method">
+    <meta name="topicid" content="GUID-3A7333B1-CAC7-44F2-84C9-40938EDAC464">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>CustomFeatureInput.addCustomParameter Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">CustomFeatureInput.addCustomParameter Method<img src="../images/TestTubeLarge.png"></h1>
+
+          Parent Object: <a href="CustomFeatureInput.htm">CustomFeatureInput</a><p class="api-preview"><img src="../images/TestTubeSmall.png" alt="Preview">This functionality is provided as a preview
+				  of intended future API capabilities. You are encouraged to use it and report any problems or suggestions using the
+				  <a href="https://forums.autodesk.com/t5/fusion-360-api-and-scripts/bd-p/22">Fusion API and Scripts</a> forum.<br><br>
+
+				  Because this is a preview of future functionality, there is the possibility that it will change, which will possibly
+				  break any existing programs that use this functionality. Because of that, you should never deliver any programs that use
+				  any preview capabilities. For a distributed program, you should wait until it has moved from preview to released state.
+			  </p><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Features/CustomFeatureInput.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Defines the information needed to create a new custom parameter that will be associated with this feature. A custom parameter appears as a model parameter and will be listed as a child of the custom feature in the parameter dialog. The custom feature will automatically have a dependency on this parameter.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"customFeatureInput_var" is a variable referencing a <a href="CustomFeatureInput.htm">CustomFeatureInput</a> object.<code><pre class="api-code"><span style="color:blue"># Uses no optional arguments.</span><br />returnValue = customFeatureInput_var.<b>addCustomParameter</b>(id, label, value, units)<br /><br /><span style="color:blue"># Uses optional arguments.</span><br />returnValue = customFeatureInput_var.<b>addCustomParameter</b>(id, label, value, units, isVisible)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"customFeatureInput_var" is a variable referencing a <a href="CustomFeatureInput.htm">CustomFeatureInput</a> object.<br /><br /><code><pre class="api-code">#include &lt;Fusion/Features/CustomFeatureInput.h&gt;<br /><br /><span style="color:blue">// Uses no optional arguments.</span><br />returnValue = customFeatureInput_var-&gt;<b>addCustomParameter</b>(id, label, value, units);<br /><br /><span style="color:blue">// Uses optional arguments.</span><br />returnValue = customFeatureInput_var-&gt;<b>addCustomParameter</b>(id, label, value, units, isVisible);</pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;">boolean</td>
+        <td class="api-list">Returns true if the definition of the model parameter was successfully added.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">id</td>
+        <td class="api-list">string</td>
+        <td class="api-list">An id for this parameter. This is used to allow you to identify the parameter in the future. This must be unique with respect to all other parameters associated with this custom feature. It's needed because the label does not need to be unique and the Fusion auto-generated name can be edited by the user.</td>
+      </tr>
+      <tr>
+        <td class="api-list">label</td>
+        <td class="api-list">string</td>
+        <td class="api-list">The label for this parameter as seen in the parameters dialog. This identifies to the user the purpose of this parameter. For example, when you create an extrusion with a specific distance, there are two parameters displayed in the parameters dialog with the labels "AlongDistance" and "TaperAngle". This does not have to be unique because in the case of a fillet feature there can be multiple parameters all labeled "Radius".</td>
+      </tr>
+      <tr>
+        <td class="api-list">value</td>
+        <td class="api-list"><a href="ValueInput.htm">ValueInput</a></td>
+        <td class="api-list">ValueInput object that specifies the value of the parameter. If the ValueInput was created using a real, the value will be interpreted using the internal unit for the unit type specified by the "units" argument. For example, if the ValueInput was created using the real value 5 and the input to the "units" argument is any valid length unit, the value will be interpreted as 5 centimeters since centimeters is the internal unit for lengths. If the "units" argument is a valid angle unit the value will be interpreted as 5 radians.<br/><br/> If the ValueInput was created using a string, the string is used as-is for the expression of the parameter. This means if there are units as part of the string it must evaluate to the same unit type as that specified by the "units" argument and if no units are specified it will use the current default units specified for the current document. For example, if the ValueInput was created with the string "5 in", then the "units" argument must define any valid length so it is compatible. If the ValueInput was created with the string "5", any unit type can be used and the result will be 5 of that unit.<br/><br/> When using a ValueInput created using a string, it's the same as creating a parameter in the user-interface. You can specify any valid expression, i.e. "5", "5 in", "5 in / 2", "5 + Length", etc. and you can choose from many different types of units. The only requirement is that the units must match in type. For example, they must both be lengths, or they must both be angles.</td>
+      </tr>
+      <tr>
+        <td class="api-list">units</td>
+        <td class="api-list">string</td>
+        <td class="api-list">The units to use for the value of the parameter. Units specified must match the units specified (if any) in the ValueInput object.<br/><br/> To create a parameter with no units (unitless) you can specify either an empty string.</td>
+      </tr>
+      <tr>
+        <td class="api-list">isVisible</td>
+        <td class="api-list">boolean</td>
+        <td class="api-list">Optional argument that specifies if the parameter will be visible in the parameters dialog or not. By default the parameter will be visible.<br/><br/> This can be useful in cases where the feature can be edited to be in different states where a parameter is only valid in a certain state. You can change the visibility based on the current state of the feature and if that parameter should be available for edit. This implies that you create all the parameters that might be needed and then change their visibility based on the current state of the feature. The parameters that are not visible will not be returned by the ModelParameters collection and are only available through the custom feature they're associated with.<br /><br /> This is an optional argument whose default value is True.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version January 2021<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(CustomFeatureInput.addCustomParameter%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

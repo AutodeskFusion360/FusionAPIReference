@@ -1,0 +1,327 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/AdditiveMJFManufacturingSample.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="AdditiveMJFManufacturingSample_Sample">
+    <meta name="description" content="Additive Manufacturing MJF API Sample Sample">
+    <meta name="topicid" content="GUID-{3C372103-F3EF-4C85-9849-934F112D0BCD}">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Additive Manufacturing MJF API Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Additive Manufacturing MJF API Sample</h1>
+    <h2 class="api">
+          Description
+        </h2><p>Demonstrates how to automate the creation of an additive MJF manufacturing setup and arrange components within the build volume of a 3D printer.</p>
+
+<p>To run the sample script, have a design with one or more components open in Fusion’s DESIGN workspace. This script will switch the UI from the DESIGN workspace to the MANUFACTURE workspace, create a new Manufacturing Model, and create an Additive Arrange using that manufacturing model as an input.</p>
+
+<p>The setup will select an MJF 3D printer from Fusion’s machine library and a print setting from the print setting library. All components in the Manufacturing model will be automatically arranged within the build volume of the selected MJF machine.</p><h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">import adsk.core, adsk.fusion, adsk.cam, traceback, tempfile, time
+
+app = adsk.core.Application.get()
+ui  = app.userInterface
+
+<span style="color:blue"># Global set of event handlers to keep them referenced for the duration of the command</span>
+handlers = []
+
+def createManufacturingModel(cam: adsk.cam.CAM):
+    showMessage('=============================================')
+    showMessage('Creating Manufacturing Model...')
+    manufacturingModels = cam.manufacturingModels
+    mmInput = manufacturingModels.createInput()
+    mmInput.name = "My Manufacturing Model - MJF"
+    manufacturingModel = manufacturingModels.add(mmInput)
+
+    showMessage('Getting occurrences...')
+    occs = getValidOccurrences(manufacturingModel.occurrence)
+    if len(occs) == 0:
+        ui.messageBox('No component has been added to the scene.')
+        return (None, [])
+    
+    return (manufacturingModel, occs)
+
+<span style="color:blue"># Create an additive setup.</span>
+def createAdditiveSetup(models: list[adsk.fusion.Occurrence], cam: adsk.cam.CAM, libraryManager: adsk.cam.CAMLibraryManager):
+    showMessage('Creating Setup...')
+    setups = cam.setups
+    input = setups.createInput(adsk.cam.OperationTypes.AdditiveOperation)
+    input.models = models
+    input.name = 'AdditiveSetup'
+
+    printSettingLibrary = libraryManager.printSettingLibrary
+    machineLibrary = libraryManager.machineLibrary
+    printSetting = None
+    machine = None
+    if True:
+        <span style="color:blue"># URL-structure browsing</span>
+        printSettingUrl = printSettingLibrary.urlByLocation(adsk.cam.LibraryLocations.Fusion360LibraryLocation) <span style="color:blue">## .Fusion360LibraryLocation vs .LocalLibraryLocation etc.</span>
+        printSettings = printSettingLibrary.childPrintSettings(printSettingUrl)
+
+        machineUrl = machineLibrary.urlByLocation(adsk.cam.LibraryLocations.Fusion360LibraryLocation) <span style="color:blue">## .Fusion360LibraryLocation vs .LocalLibraryLocation etc.</span>
+        machines = machineLibrary.childMachines(machineUrl)
+        for ps in printSettings:
+            if ps.name ==  "HP - MJF": <span style="color:blue">#print setting name from fusions library</span>
+                input.printSetting = ps
+                break
+
+        for machine in machines: <span style="color:blue">#model name from fusions library</span>
+            if machine.model ==  "Jet Fusion 5200 Series":
+                input.machine = machine
+                break
+
+    setup = setups.add(input)
+    return setup
+
+def createAdditiveArrange(setup: adsk.cam.Setup, cam: adsk.cam.CAM):
+    <span style="color:blue"># Define and create the arrange operation.</span>
+    showMessage('Generating Additive Arrange...')
+    operationInput = setup.operations.createInput('additive_arrange')
+    arrange = setup.operations.add(operationInput)
+
+    parameter: adsk.cam.StringParameterValue = arrange.parameters.itemByName("arrange_arrangement_type").value
+    parameter.value = 'Pack3D_TrueShape'
+
+    parameter: adsk.cam.StringParameterValue = arrange.parameters.itemByName("arrange_priority_type").value
+    parameter.value = 'priority_volume'
+
+    parameter: adsk.cam.BooleanParameterValue = arrange.parameters.itemByName("arrange_quantity_group").value
+    parameter.value = True
+    
+    parameter: adsk.cam.FloatParameterValue = arrange.parameters.itemByName("arrange_global_quantity").value
+    parameter.value = 1
+    
+    parameter: adsk.cam.BooleanParameterValue = arrange.parameters.itemByName("arrange_rotation_group").value
+    parameter.value = True
+
+    parameter: adsk.cam.StringParameterValue = arrange.parameters.itemByName("arrange_rotation_z").value
+    parameter.value = 'arrange_rotation_90'
+
+    parameter: adsk.cam.StringParameterValue = arrange.parameters.itemByName("arrange_unselected_components_option").value
+    parameter.value = 'unselected_move_outside'
+
+    <span style="color:blue"># Specify the values to control the arrangement. All length units are centimeters.</span>
+    parameter: adsk.cam.FloatParameterValue = arrange.parameters.itemByName("arrange_platform_clearance").value
+    parameter.value = 0.0
+    
+    parameter: adsk.cam.FloatParameterValue = arrange.parameters.itemByName("arrange_frame_width").value
+    parameter.value = 0.2
+    
+    parameter: adsk.cam.FloatParameterValue = arrange.parameters.itemByName("arrange_ceiling_clearance").value
+    parameter.value = 0.2              
+
+    parameter: adsk.cam.FloatParameterValue = arrange.parameters.itemByName("arrange_object_spacing").value
+    parameter.value = 0.5
+   
+    parameter: adsk.cam.FloatParameterValue = arrange.parameters.itemByName("arrange_voxelsize").value
+    parameter.value = 0.5
+    
+    future = cam.generateToolpath(arrange)
+    while (future.isGenerationCompleted == False):
+        time.sleep(0.5)
+
+
+<span style="color:blue"># Event handler that reacts to when the command is executed.       </span>
+class MyCommandExecuteHandler(adsk.core.CommandEventHandler):
+    def __init__(self):
+        super().__init__()
+    def notify(self, args):
+        try:
+            <span style="color:blue"># Make sure the TEXT COMMAND palette is visible.</span>
+            textPalette = ui.palettes.itemById('TextCommands')
+            if not textPalette.isVisible:
+                textPalette.isVisible = True
+                adsk.doEvents()
+
+            doc = app.activeDocument
+            products = doc.products
+
+            <span style="color:blue"># Make</span>
+            camWS = ui.workspaces.itemById('CAMEnvironment') 
+            camWS.activate()
+            cam = adsk.cam.CAM.cast(products.itemByProductType("CAMProductType"))
+
+            <span style="color:blue"># Design creation</span>
+            designWS = ui.workspaces.itemById('FusionSolidEnvironment') 
+            designWS.activate()
+            design = adsk.fusion.Design.cast(products.itemByProductType("DesignProductType"))
+            camWS.activate()
+
+            libraryManager = adsk.cam.CAMManager.get().libraryManager
+            templateLibrary = libraryManager.templateLibrary
+
+            <span style="color:blue"># The block below is the gist of this script.</span>
+            <span style="color:blue"># Each method can be edited to fit the user's needs.</span>
+            (manufacturingModel, occs) = createManufacturingModel(cam)
+            if manufacturingModel is None:
+                return
+            
+            setup: adsk.cam.Setup = createAdditiveSetup(occs, cam, libraryManager)
+
+            machineElements = setup.machine.elements
+            machineDimsList: adsk.cam.AdditivePlatformMachineElement = machineElements.itemsByType(adsk.cam.AdditivePlatformMachineElement.staticTypeId())
+            machineDims = machineDimsList[0]
+            origin = machineDims.origin
+            machineSize = machineDims.size
+
+            maxPointX = - origin.x + machineSize.x
+        
+            createAdditiveArrange(setup, cam)
+
+            ui.activeSelections.clear()
+            ui.activeSelections.add(setup)
+
+            app.activeViewport.fit()
+
+            showMessage('Finished.')
+        except:
+            if ui:
+                ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
+
+<span style="color:blue"># Event handler that reacts to when the command is destroyed. This terminates the script if this has not happened before in an exception. </span>
+class MyCommandDestroyHandler(adsk.core.CommandEventHandler):
+    def __init__(self):
+        super().__init__()
+    def notify(self, args):
+        try:
+            <span style="color:blue"># When the command is done, terminate the script</span>
+            showMessage('Script is terminating.')
+            adsk.terminate()
+        except:
+            if ui:
+                ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
+            adsk.terminate()
+
+<span style="color:blue"># Event handler that reacts when the command definition is executed which</span>
+<span style="color:blue"># results in the command being created and this event being fired.</span>
+class MyCommandCreatedHandler(adsk.core.CommandCreatedEventHandler):
+    def __init__(self):
+        super().__init__()
+    def notify(self, args):
+        try:
+            <span style="color:blue"># Get the command that was created.</span>
+            cmd = adsk.core.Command.cast(args.command)
+        
+            onExecute = MyCommandExecuteHandler()
+            cmd.execute.add(onExecute)
+            handlers.append(onExecute)
+
+            onDestroy = MyCommandDestroyHandler()
+            cmd.destroy.add(onDestroy)
+            handlers.append(onDestroy)
+        except:
+            if ui:
+                ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
+
+def run(context):
+    try:
+        global app, ui
+
+        <span style="color:blue"># Get the existing command definition or create it if it doesn't already exist.</span>
+        cmdDef = ui.commandDefinitions.itemById('MJFExampleScript')
+        if not cmdDef:
+            cmdDef = ui.commandDefinitions.addButtonDefinition('MJFExampleScript', 'MJF Example Script', 'Sample to demonstrate a workflow for MJF printers.')
+
+        <span style="color:blue"># Connect to the command created event.</span>
+        onCommandCreated = MyCommandCreatedHandler()
+        cmdDef.commandCreated.add(onCommandCreated)
+        handlers.append(onCommandCreated)
+
+        <span style="color:blue"># Execute the command definition.</span>
+        cmdDef.execute()
+        
+        <span style="color:blue"># Keeps the script alive until it is terminated by the onDestroy event.</span>
+        adsk.autoTerminate(False)
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
+
+<span style="color:blue"># Given an occurrence, this finds all child occurrences that contain either a</span>
+<span style="color:blue"># B-Rep or Mesh body. It is recursive, so it will find all occurrences at all levels.</span>
+def getValidOccurrences(occurrence: adsk.fusion.Occurrence) -&gt; list[adsk.fusion.Occurrence]:
+    result = []
+    for childOcc in occurrence.childOccurrences:
+        if (childOcc.bRepBodies.count + childOcc.component.meshBodies.count  &gt; 0):
+            result.append(childOcc)
+
+        result.extend(getValidOccurrences(childOcc))
+
+    return result
+
+
+def showMessage(message):
+    app.log(message)
+
+    <span style="color:blue"># Give control back to Fusion, so it can update the UI.</span>
+    adsk.doEvents()</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(AdditiveMJFManufacturingSample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

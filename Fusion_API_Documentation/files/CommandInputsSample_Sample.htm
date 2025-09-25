@@ -1,0 +1,939 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/CommandInputsSample.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="CommandInputsSample_Sample">
+    <meta name="description" content="Command Inputs API Sample Sample">
+    <meta name="topicid" content="GUID-e5c4dbe8-ee48-11e4-9823-f8b156d7cd97">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Command Inputs API Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Command Inputs API Sample</h1>
+    <h2 class="api">
+          Description
+        </h2><p>Creates a command dialog that demonstrates all of the available command inputs.</p>
+
+<p>To use the sample, create a new Python or C++ script and copy and paste this code, replacing the default code.  You also need to unpack this zip file which contains a <a href="../ExtraFiles/CommandInputsResources.zip">resource folder</a> into the same folder where the source code file (.py or .cpp) is.</p><h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#C++">C++</a></li>
+        <li><a href="#Python">Python</a></li>
+      </ul>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code">#include &lt;Core/Utils.h&gt;
+#include &lt;Core/Application/Application.h&gt;
+#include &lt;Core/Application/Product.h&gt;
+#include &lt;Core/Application/ValueInput.h&gt;
+#include &lt;Core/Application/UnitsManager.h&gt;
+#include &lt;Core/Application/ObjectCollection.h&gt;
+#include &lt;Core/UserInterface/UserInterface.h&gt;
+#include &lt;Core/UserInterface/CommandCreatedEventHandler.h&gt;
+#include &lt;Core/UserInterface/CommandCreatedEvent.h&gt;
+#include &lt;Core/UserInterface/CommandCreatedEventArgs.h&gt;
+#include &lt;Core/UserInterface/CommandEvent.h&gt;
+#include &lt;Core/UserInterface/CommandEventArgs.h&gt;
+#include &lt;Core/UserInterface/CommandEventHandler.h&gt;
+#include &lt;Core/UserInterface/InputChangedEvent.h&gt;
+#include &lt;Core/UserInterface/InputChangedEventArgs.h&gt;
+#include &lt;Core/UserInterface/InputChangedEventHandler.h&gt;
+#include &lt;Core/UserInterface/Command.h&gt;
+#include &lt;Core/UserInterface/CommandDefinition.h&gt;
+#include &lt;Core/UserInterface/CommandDefinitions.h&gt;
+#include &lt;Core/UserInterface/CommandInputs.h&gt;
+#include &lt;Core/UserInterface/ValueCommandInput.h&gt;
+#include &lt;Core/UserInterface/StringValueCommandInput.h&gt;
+#include &lt;Core/UserInterface/TabCommandInput.h&gt;
+#include &lt;Core/UserInterface/GroupCommandInput.h&gt;
+#include &lt;Core/UserInterface/BoolValueCommandInput.h&gt;
+#include &lt;Core/UserInterface/ButtonRowCommandInput.h&gt;
+#include &lt;Core/UserInterface/DropDownCommandInput.h&gt;
+#include &lt;Core/UserInterface/SelectionCommandInput.h&gt;
+#include &lt;Core/UserInterface/FloatSliderCommandInput.h&gt;
+#include &lt;Core/UserInterface/IntegerSliderCommandInput.h&gt;
+#include &lt;Core/UserInterface/FloatSpinnerCommandInput.h&gt;
+#include &lt;Core/UserInterface/IntegerSpinnerCommandInput.h&gt;
+#include &lt;Core/UserInterface/RadioButtonGroupCommandInput.h&gt;
+#include &lt;Core/UserInterface/ImageCommandInput.h&gt;
+#include &lt;Core/UserInterface/ListItems.h&gt;
+#include &lt;Core/Geometry/Point3D.h&gt;
+#include &lt;Core/Geometry/Vector3D.h&gt;
+#include &lt;Core/UserInterface/DirectionCommandInput.h&gt;
+#include &lt;Core/UserInterface/DistanceValueCommandInput.h&gt;
+#include &lt;Core/UserInterface/TableCommandInput.h&gt;
+#include &lt;Core/UserInterface/AngleValueCommandInput.h&gt;
+
+#include &lt;sstream&gt;
+
+using namespace adsk::core;
+
+Ptr&lt;Application&gt; app;
+Ptr&lt;UserInterface&gt; ui;
+
+<span style="color:blue">// Adds a new row to the table.</span>
+static void addRowToTable(Ptr&lt;TableCommandInput&gt; tableInput)
+{
+    if (!tableInput)
+        return;
+
+    <span style="color:blue">// Define a unique id for each row.</span>
+    static int rowNumber = 0;
+    std::stringstream rowId;
+    rowId &lt;&lt; rowNumber;
+
+    <span style="color:blue">// Get the CommandInputs object associated with the parent command.</span>
+    Ptr&lt;CommandInputs&gt; cmdInputs = tableInput-&gt;commandInputs();
+
+    <span style="color:blue">// Create three new command inputs.</span>
+    Ptr&lt;CommandInput&gt; childTableValueInput =
+        cmdInputs-&gt;addValueInput("TableInput_value" + rowId.str(), "Value", "cm", ValueInput::createByReal(rowNumber));
+    Ptr&lt;CommandInput&gt; childTableStringInput =
+        cmdInputs-&gt;addStringValueInput("TableInput_string" + rowId.str(), "String", rowId.str());
+    Ptr&lt;CommandInput&gt; childTableSpinnerInput =
+        cmdInputs-&gt;addIntegerSpinnerCommandInput("spinnerInt" + rowId.str(), "Integer Spinner", 0, 100, 2, rowNumber);
+
+    <span style="color:blue">// Add the inputs to the table.</span>
+    int row = tableInput-&gt;rowCount();
+    tableInput-&gt;addCommandInput(childTableValueInput, row, 0);
+    tableInput-&gt;addCommandInput(childTableStringInput, row, 1);
+    tableInput-&gt;addCommandInput(childTableSpinnerInput, row, 2);
+
+    rowNumber = rowNumber + 1;
+}
+
+<span style="color:blue">// Populate 'slider_configuration' group with as many sliders as set in 'slider_controller'.</span>
+<span style="color:blue">// Delete previous ones and create new sliders.</span>
+static void updateSliders(Ptr&lt;CommandInputs&gt; sliderInputs)
+{
+    Ptr&lt;IntegerSpinnerCommandInput&gt; spinner = sliderInputs-&gt;itemById("slider_controller");
+    if (!spinner)
+    {
+        return;
+    }
+    int value = spinner-&gt;value();
+    <span style="color:blue">// Check ranges</span>
+    if (value &gt; spinner-&gt;maximumValue() || value &lt; spinner-&gt;minimumValue())
+    {
+        return;
+    }
+
+    <span style="color:blue">// Delete all sliders we have</span>
+    std::vector&lt;Ptr&lt;CommandInput&gt;&gt; toRemove;
+    for (size_t i = 0; i &lt; sliderInputs-&gt;count(); ++i)
+    {
+        Ptr&lt;CommandInput&gt; input = sliderInputs-&gt;item(i);
+        if (input-&gt;objectType() == FloatSliderCommandInput::classType())
+        {
+            toRemove.push_back(input);
+        }
+    }
+    for (auto input : toRemove)
+    {
+        input-&gt;deleteMe();
+    }
+
+    <span style="color:blue">// Create new ones with range depending on total number</span>
+    for (int i = 1; i &lt;= value; ++i)
+    {
+        std::string id = std::to_string(i);
+        sliderInputs-&gt;addFloatSliderCommandInput("slider_configuration_" + id, "slider_" + id, "cm", 0, 10.0 * value);
+    }
+}
+
+<span style="color:blue">// InputChange event handler.</span>
+class OnInputChangedEventHander : public adsk::core::InputChangedEventHandler
+{
+  public:
+    void notify(const Ptr&lt;InputChangedEventArgs&gt;& eventArgs) override
+    {
+        Ptr&lt;CommandInputs&gt; inputs = eventArgs-&gt;inputs();
+        if (!inputs)
+            return;
+
+        Ptr&lt;CommandInput&gt; cmdInput = eventArgs-&gt;input();
+        if (!cmdInput)
+            return;
+
+        <span style="color:blue">// onInputChange for slider controller</span>
+        if (cmdInput-&gt;id() == "slider_controller")
+        {
+            Ptr&lt;GroupCommandInput&gt; sliderGroup = cmdInput-&gt;parentCommandInput();
+            if (!sliderGroup)
+            {
+                return;
+            }
+            Ptr&lt;CommandInputs&gt; sliderInputs = sliderGroup-&gt;children();
+            if (!sliderInputs)
+            {
+                return;
+            }
+            updateSliders(sliderInputs);
+        }
+        else
+        {
+            <span style="color:blue">// Table handling</span>
+            Ptr&lt;TableCommandInput&gt; tableInput = inputs-&gt;itemById("table");
+            if (!tableInput)
+                return;
+
+            if (cmdInput-&gt;id() == "tableAdd")
+            {
+                addRowToTable(tableInput);
+            }
+            else if (cmdInput-&gt;id() == "tableDelete")
+            {
+                if (tableInput-&gt;selectedRow() == -1)
+                {
+                    ui-&gt;messageBox("Select one row to delete.");
+                }
+                else
+                {
+                    tableInput-&gt;deleteRow(tableInput-&gt;selectedRow());
+                }
+            }
+        }
+    }
+};
+
+<span style="color:blue">// CommandExecuted event handler.</span>
+class OnExecuteEventHander : public adsk::core::CommandEventHandler
+{
+  public:
+    void notify(const Ptr&lt;CommandEventArgs&gt;& eventArgs) override
+    {
+    }
+};
+
+<span style="color:blue">// CommandDestroyed event handler</span>
+class OnDestroyEventHandler : public adsk::core::CommandEventHandler
+{
+  public:
+    void notify(const Ptr&lt;CommandEventArgs&gt;& eventArgs) override
+    {
+        adsk::terminate();
+    }
+};
+
+<span style="color:blue">// CommandCreated event handler.</span>
+class CommandCreatedEventHandler : public adsk::core::CommandCreatedEventHandler
+{
+  public:
+    void notify(const Ptr&lt;CommandCreatedEventArgs&gt;& eventArgs) override
+    {
+        if (eventArgs)
+        {
+            <span style="color:blue">// Get the command that was created.</span>
+            Ptr&lt;Command&gt; command = eventArgs-&gt;command();
+            if (command)
+            {
+                <span style="color:blue">// Connect to the command destroyed event.</span>
+                Ptr&lt;CommandEvent&gt; onDestroy = command-&gt;destroy();
+                if (!onDestroy)
+                    return;
+                bool isOk = onDestroy-&gt;add(&onDestroyHandler);
+                if (!isOk)
+                    return;
+
+                <span style="color:blue">// Connect to the input changed event.</span>
+                Ptr&lt;InputChangedEvent&gt; onInputChanged = command-&gt;inputChanged();
+                if (!onInputChanged)
+                    return;
+                isOk = onInputChanged-&gt;add(&onInputChangedHandler);
+                if (!isOk)
+                    return;
+
+                <span style="color:blue">// Get the CommandInputs collection associated with the command.</span>
+                Ptr&lt;CommandInputs&gt; inputs = command-&gt;commandInputs();
+                if (!inputs)
+                    return;
+
+                <span style="color:blue">// Create a tab input.</span>
+                Ptr&lt;TabCommandInput&gt; tabCmdInput1 = inputs-&gt;addTabCommandInput("tab_1", "Tab 1");
+                if (!tabCmdInput1)
+                    return;
+                Ptr&lt;CommandInputs&gt; tab1ChildInputs = tabCmdInput1-&gt;children();
+                if (!tab1ChildInputs)
+                    return;
+
+                <span style="color:blue">// Create a read only textbox input.</span>
+                tab1ChildInputs-&gt;addTextBoxCommandInput(
+                    "readonly_textBox", "Text Box 1", "This is an example of a read-only text box.", 2, true);
+
+                <span style="color:blue">// Create an editable textbox input.</span>
+                tab1ChildInputs-&gt;addTextBoxCommandInput(
+                    "writable_textBox", "Text Box 2", "This is an example of an editable text box.", 2, false);
+
+                <span style="color:blue">// Create a message that spans the entire width of the dialog by leaving out the "name" argument.</span>
+                std::string message = "&lt;div align=\"center\"&gt;A full width message using &lt;a "
+                                      "\"href=\"http:fusion.autodesk.com\"&gt;html.&lt;/a&gt;&lt;/div&gt;";
+                tab1ChildInputs-&gt;addTextBoxCommandInput("fullWidth_textBox", "", message, 1, true);
+
+                <span style="color:blue">// Create a selection input.</span>
+                Ptr&lt;SelectionCommandInput&gt; selectionInput =
+                    tab1ChildInputs-&gt;addSelectionInput("selection", "Select", "Basic select command input");
+                if (!selectionInput)
+                    return;
+                selectionInput-&gt;setSelectionLimits(0);
+
+                <span style="color:blue">// Create string value input.</span>
+                Ptr&lt;StringValueCommandInput&gt; strInput =
+                    tab1ChildInputs-&gt;addStringValueInput("string", "Text", "Basic string command input");
+
+                <span style="color:blue">// Create value input.</span>
+                tab1ChildInputs-&gt;addValueInput("value", "Value", "cm", ValueInput::createByReal(0.0));
+
+                <span style="color:blue">// Create bool value input with checkbox style.</span>
+                tab1ChildInputs-&gt;addBoolValueInput("checkbox", "Checkbox", true, "", false);
+
+                <span style="color:blue">// Create bool value input with button style that can be clicked.</span>
+                tab1ChildInputs-&gt;addBoolValueInput("buttonClick", "Click Button", false, "resources/button", true);
+
+                <span style="color:blue">// Create bool value input with button style that has a state.</span>
+                tab1ChildInputs-&gt;addBoolValueInput("buttonState", "State Button", true, "resources/button", true);
+
+                <span style="color:blue">// Create float slider input with two sliders.</span>
+                tab1ChildInputs-&gt;addFloatSliderCommandInput("floatSlider", "Float Slider", "cm", 0, 10.0, true);
+
+                <span style="color:blue">// Create float slider input with two sliders and a value list</span>
+                std::vector&lt;double&gt; floatValueList;
+                floatValueList.push_back(1.0);
+                floatValueList.push_back(3.0);
+                floatValueList.push_back(4.0);
+                floatValueList.push_back(7.0);
+                tab1ChildInputs-&gt;addFloatSliderListCommandInput("floatSlider2", "Float Slider 2", "cm", floatValueList);
+
+                <span style="color:blue">// Create float slider input with two sliders and visible texts</span>
+                Ptr&lt;FloatSliderCommandInput&gt; floatSlider3 =
+                    tab1ChildInputs-&gt;addFloatSliderCommandInput("floatSlider3", "Float Slider 3", "", 0, 50.0, false);
+                if (!floatSlider3)
+                    return;
+                floatSlider3-&gt;setText("Min", "Max");
+
+                <span style="color:blue">// Create integer slider input with one slider</span>
+                tab1ChildInputs-&gt;addIntegerSliderCommandInput("intSlider", "Integer Slider", 0, 10);
+
+                <span style="color:blue">// Create integer slider input with two sliders and a value list</span>
+                std::vector&lt;int&gt; valueList;
+                valueList.push_back(1);
+                valueList.push_back(3);
+                valueList.push_back(4);
+                valueList.push_back(7);
+                valueList.push_back(11);
+                tab1ChildInputs-&gt;addIntegerSliderListCommandInput("intSlider2", "Integer Slider 2", valueList);
+
+                <span style="color:blue">// Create float spinner input.</span>
+                tab1ChildInputs-&gt;addFloatSpinnerCommandInput("spinnerFloat", "Float Spinner", "cm", 0.2, 9.0, 2.2, 1);
+
+                <span style="color:blue">// Create integer spinner input.</span>
+                tab1ChildInputs-&gt;addIntegerSpinnerCommandInput("spinnerInt", "Integer Spinner", 2, 9, 2, 3);
+
+                <span style="color:blue">// Create dropdown input with checkbox style.</span>
+                Ptr&lt;DropDownCommandInput&gt; dropdownInput = tab1ChildInputs-&gt;addDropDownCommandInput(
+                    "dropdown", "Dropdown 1", DropDownStyles::CheckBoxDropDownStyle);
+                if (!dropdownInput)
+                    return;
+                Ptr&lt;ListItems&gt; dropdownItems = dropdownInput-&gt;listItems();
+                if (!dropdownItems)
+                    return;
+                dropdownItems-&gt;add("Item 1", false, "resources/One");
+                dropdownItems-&gt;add("Item 2", false, "resources/Two");
+
+                <span style="color:blue">// Create dropdown input with icon style.</span>
+                Ptr&lt;DropDownCommandInput&gt; dropdownInput2 = tab1ChildInputs-&gt;addDropDownCommandInput(
+                    "dropdown2", "Dropdown 2", DropDownStyles::LabeledIconDropDownStyle);
+                if (!dropdownInput2)
+                    return;
+                Ptr&lt;ListItems&gt; dropdown2Items = dropdownInput2-&gt;listItems();
+                if (!dropdown2Items)
+                    return;
+                dropdown2Items-&gt;add("Item 1", true, "resources/One");
+                dropdown2Items-&gt;add("Item 2", false, "resources/Two");
+
+                <span style="color:blue">// Create dropdown input with radio style.</span>
+                Ptr&lt;DropDownCommandInput&gt; dropdownInput3 = tab1ChildInputs-&gt;addDropDownCommandInput(
+                    "dropdown3", "Dropdown 3", DropDownStyles::LabeledIconDropDownStyle);
+                if (!dropdownInput3)
+                    return;
+                Ptr&lt;ListItems&gt; dropdown3Items = dropdownInput3-&gt;listItems();
+                if (!dropdown3Items)
+                    return;
+                dropdown3Items-&gt;add("Item 1", true, "");
+                dropdown3Items-&gt;add("Item 2", false, "");
+
+                <span style="color:blue">// Create dropdown input with test list style.</span>
+                Ptr&lt;DropDownCommandInput&gt; dropdownInput4 = tab1ChildInputs-&gt;addDropDownCommandInput(
+                    "dropdown4", "Dropdown 4", DropDownStyles::TextListDropDownStyle);
+                if (!dropdownInput4)
+                    return;
+                Ptr&lt;ListItems&gt; dropdown4Items = dropdownInput4-&gt;listItems();
+                if (!dropdown4Items)
+                    return;
+                dropdown4Items-&gt;add("Item 1", true, "");
+                dropdown4Items-&gt;add("Item 2", false, "");
+
+                <span style="color:blue">// Create single selectable button row input.</span>
+                Ptr&lt;ButtonRowCommandInput&gt; buttonRowInput =
+                    tab1ChildInputs-&gt;addButtonRowCommandInput("buttonRow", "Button Row 1", false);
+                if (!buttonRowInput)
+                    return;
+                Ptr&lt;ListItems&gt; buttonRowItems = buttonRowInput-&gt;listItems();
+                if (!buttonRowItems)
+                    return;
+                buttonRowItems-&gt;add("Item 1", false, "resources/One");
+                buttonRowItems-&gt;add("Item 2", false, "resources/Two");
+
+                <span style="color:blue">// Create multi selectable button row input.</span>
+                Ptr&lt;ButtonRowCommandInput&gt; buttonRowInput2 =
+                    tab1ChildInputs-&gt;addButtonRowCommandInput("buttonRow2", "Button Row 2", true);
+                if (!buttonRowInput2)
+                    return;
+                Ptr&lt;ListItems&gt; buttonRow2Items = buttonRowInput2-&gt;listItems();
+                if (!buttonRow2Items)
+                    return;
+                buttonRow2Items-&gt;add("Item 1", false, "resources/One");
+                buttonRow2Items-&gt;add("Item 2", false, "resources/Two");
+
+                <span style="color:blue">// Create tab input 2.</span>
+                Ptr&lt;TabCommandInput&gt; tabCmdInput2 = inputs-&gt;addTabCommandInput("tab_2", "Tab 2");
+                if (!tabCmdInput2)
+                    return;
+                Ptr&lt;CommandInputs&gt; tab2ChildInputs = tabCmdInput2-&gt;children();
+                if (!tab2ChildInputs)
+                    return;
+
+                <span style="color:blue">// Create group input.</span>
+                Ptr&lt;GroupCommandInput&gt; groupCmdInput = tab2ChildInputs-&gt;addGroupCommandInput("group", "Group");
+                if (!groupCmdInput)
+                    return;
+                groupCmdInput-&gt;isExpanded(true);
+                groupCmdInput-&gt;isEnabledCheckBoxDisplayed(true);
+                Ptr&lt;CommandInputs&gt; groupChildInputs = groupCmdInput-&gt;children();
+                if (!groupChildInputs)
+                    return;
+
+                <span style="color:blue">// Create radio button group input.</span>
+                Ptr&lt;RadioButtonGroupCommandInput&gt; radioButtonGroup =
+                    groupChildInputs-&gt;addRadioButtonGroupCommandInput("radioButtonGroup", "Radio button group");
+                if (!radioButtonGroup)
+                    return;
+                Ptr&lt;ListItems&gt; radioButtonItems = radioButtonGroup-&gt;listItems();
+                if (!radioButtonItems)
+                    return;
+                radioButtonItems-&gt;add("Item 1", false);
+                radioButtonItems-&gt;add("Item 2", false);
+                radioButtonItems-&gt;add("Item 3", false);
+
+                <span style="color:blue">// Create image input</span>
+                Ptr&lt;ImageCommandInput&gt; imageCmdInput =
+                    groupChildInputs-&gt;addImageCommandInput("image", "Image", "resources/image.png");
+                if (!imageCmdInput)
+                    return;
+
+                <span style="color:blue">// Create direction input 1.</span>
+                Ptr&lt;DirectionCommandInput&gt; directionCmdInput =
+                    tab2ChildInputs-&gt;addDirectionCommandInput("direction", "Direction");
+                if (!directionCmdInput)
+                    return;
+                directionCmdInput-&gt;setManipulator(Point3D::create(0, 0, 0), Vector3D::create(1, 0, 0));
+
+                <span style="color:blue">// Create direction input 2.</span>
+                Ptr&lt;DirectionCommandInput&gt; directionCmdInput2 =
+                    tab2ChildInputs-&gt;addDirectionCommandInput("direction2", "Direction 2", "resources/One");
+                if (!directionCmdInput2)
+                    return;
+                directionCmdInput2-&gt;setManipulator(Point3D::create(0, 0, 0), Vector3D::create(0, 1, 0));
+                directionCmdInput2-&gt;isDirectionFlipped(true);
+
+                <span style="color:blue">// Create distance value input 1.</span>
+                Ptr&lt;DistanceValueCommandInput&gt; distanceValueInput = tab2ChildInputs-&gt;addDistanceValueCommandInput(
+                    "distanceValue", "Distance Value", ValueInput::createByReal(2));
+                if (!distanceValueInput)
+                    return;
+                distanceValueInput-&gt;setManipulator(Point3D::create(0, 0, 0), Vector3D::create(1, 0, 0));
+                distanceValueInput-&gt;minimumValue(0);
+                distanceValueInput-&gt;isMinimumValueInclusive(true);
+                distanceValueInput-&gt;maximumValue(10);
+                distanceValueInput-&gt;isMaximumValueInclusive(true);
+
+                <span style="color:blue">// Create distance value input 2.</span>
+                Ptr&lt;DistanceValueCommandInput&gt; distanceValueInput2 = tab2ChildInputs-&gt;addDistanceValueCommandInput(
+                    "distanceValue2", "DistanceValue 2", ValueInput::createByReal(1));
+                if (!distanceValueInput2)
+                    return;
+                distanceValueInput2-&gt;setManipulator(Point3D::create(0, 0, 0), Vector3D::create(0, 1, 0));
+                distanceValueInput2-&gt;expression("1 in");
+                distanceValueInput2-&gt;hasMinimumValue(false);
+                distanceValueInput2-&gt;hasMaximumValue(false);
+
+                <span style="color:blue">// Create table input.</span>
+                Ptr&lt;TableCommandInput&gt; tableInput = tab2ChildInputs-&gt;addTableCommandInput("table", "Table", 3, "1:1:1");
+                addRowToTable(tableInput);
+
+                <span style="color:blue">// Add inputs into the table.</span>
+                Ptr&lt;CommandInput&gt; addButtonInput =
+                    tab2ChildInputs-&gt;addBoolValueInput("tableAdd", "Add", false, "", true);
+                tableInput-&gt;addToolbarCommandInput(addButtonInput);
+                Ptr&lt;CommandInput&gt; deleteButtonInput =
+                    tab2ChildInputs-&gt;addBoolValueInput("tableDelete", "Delete", false, "", true);
+                tableInput-&gt;addToolbarCommandInput(deleteButtonInput);
+
+                <span style="color:blue">// Create angle value input.</span>
+                Ptr&lt;AngleValueCommandInput&gt; angleValueInput = tab2ChildInputs-&gt;addAngleValueCommandInput(
+                    "angleValue", "AngleValue", ValueInput::createByString("30 degree"));
+                angleValueInput-&gt;setManipulator(
+                    Point3D::create(0, 0, 0), Vector3D::create(1, 0, 0), Vector3D::create(0, 0, 1));
+                angleValueInput-&gt;hasMinimumValue(false);
+                angleValueInput-&gt;hasMaximumValue(false);
+
+                <span style="color:blue">// Create tab inputs 3</span>
+                Ptr&lt;TabCommandInput&gt; tabCmdInput3 = inputs-&gt;addTabCommandInput("tab_3", "Tab 3");
+                if (!tabCmdInput3)
+                    return;
+                Ptr&lt;CommandInputs&gt; tab3ChildInputs = tabCmdInput3-&gt;children();
+                if (!tab3ChildInputs)
+                    return;
+                <span style="color:blue">// Create group</span>
+                Ptr&lt;GroupCommandInput&gt; sliderGroup =
+                    tab3ChildInputs-&gt;addGroupCommandInput("slider_configuration", "Configuration");
+                if (!sliderGroup)
+                {
+                    return;
+                }
+                Ptr&lt;CommandInputs&gt; sliderInputs = sliderGroup-&gt;children();
+                <span style="color:blue">// Create integer spinner input</span>
+                sliderInputs-&gt;addIntegerSpinnerCommandInput("slider_controller", "Num sliders", 1, 5, 1, 1);
+                if (!sliderInputs)
+                {
+                    return;
+                }
+                updateSliders(sliderInputs);
+            }
+        }
+    }
+
+  private:
+    OnExecuteEventHander onExecuteHandler;
+    OnDestroyEventHandler onDestroyHandler;
+    OnInputChangedEventHander onInputChangedHandler;
+} _cmdCreatedHandler;
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    app = Application::get();
+    if (!app)
+        return false;
+
+    ui = app-&gt;userInterface();
+    if (!ui)
+        return false;
+
+    <span style="color:blue">// Create the command definition.</span>
+    Ptr&lt;CommandDefinitions&gt; commandDefinitions = ui-&gt;commandDefinitions();
+    if (!commandDefinitions)
+        return nullptr;
+
+    <span style="color:blue">// Get the existing command definition or create it if it doesn't already exist.</span>
+    Ptr&lt;CommandDefinition&gt; cmdDef = commandDefinitions-&gt;itemById("cmdInputsSample");
+    if (!cmdDef)
+    {
+        cmdDef = commandDefinitions-&gt;addButtonDefinition(
+            "cmdInputsSample", "Command Inputs Sample", "Sample to demonstrate various command inputs.");
+    }
+
+    <span style="color:blue">// Connect to the command created event.</span>
+    Ptr&lt;CommandCreatedEvent&gt; commandCreatedEvent = cmdDef-&gt;commandCreated();
+    if (!commandCreatedEvent)
+        return false;
+    commandCreatedEvent-&gt;add(&_cmdCreatedHandler);
+
+    <span style="color:blue">// Execute the command definition.</span>
+    cmdDef-&gt;execute();
+
+    <span style="color:blue">// Prevent this module from being terminated when the script returns, because we are waiting for event handlers to</span>
+    <span style="color:blue">// fire.</span>
+    adsk::autoTerminate(false);
+
+    return true;
+}</pre>
+      </div>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code"><span style="color:blue">#Author-Autodesk Inc.</span>
+<span style="color:blue">#Description-Demo command input examples</span>
+import adsk.core, adsk.fusion, traceback
+
+_app = None
+_ui  = None
+_rowNumber = 0
+
+<span style="color:blue"># Global set of event handlers to keep them referenced for the duration of the command</span>
+_handlers = []
+
+<span style="color:blue"># Adds a new row to the table.</span>
+def addRowToTable(tableInput):
+    global _rowNumber
+    <span style="color:blue"># Get the CommandInputs object associated with the parent command.</span>
+    cmdInputs = adsk.core.CommandInputs.cast(tableInput.commandInputs)
+    
+    <span style="color:blue"># Create three new command inputs.</span>
+    valueInput = cmdInputs.addValueInput('TableInput_value{}'.format(_rowNumber), 'Value', 'cm', adsk.core.ValueInput.createByReal(_rowNumber))
+    stringInput =  cmdInputs.addStringValueInput('TableInput_string{}'.format(_rowNumber), 'String', str(_rowNumber))
+    spinnerInput = cmdInputs.addIntegerSpinnerCommandInput('spinnerInt{}'.format(_rowNumber), 'Integer Spinner', 0 , 100 , 2, int(_rowNumber))
+    
+    <span style="color:blue"># Add the inputs to the table.</span>
+    row = tableInput.rowCount
+    tableInput.addCommandInput(valueInput, row, 0)
+    tableInput.addCommandInput(stringInput, row, 1)
+    tableInput.addCommandInput(spinnerInput, row, 2)
+    
+    <span style="color:blue"># Increment a counter used to make each row unique.</span>
+    _rowNumber = _rowNumber + 1
+
+def updateSliders(sliderInputs):
+    """
+    Populate 'slider_configuration' group with as many sliders as set in 'slider_controller'.
+    Delete previous ones and create new sliders.
+    """
+    spinner = sliderInputs.itemById("slider_controller")
+    value = spinner.value
+    <span style="color:blue"># check ranges</span>
+    if value &gt; spinner.maximumValue or value &lt; spinner.minimumValue:
+        return
+
+    <span style="color:blue"># delete all sliders we have</span>
+    toRemove = []
+    for i in range(sliderInputs.count):
+        input = sliderInputs.item(i)
+        if input.objectType == adsk.core.FloatSliderCommandInput.classType():
+            toRemove.append(input)
+    
+    for input in toRemove:
+        input.deleteMe()
+
+    <span style="color:blue"># create new ones with range depending on total number</span>
+    for i in range(1, value+1):
+        id = str(i)
+        sliderInputs.addFloatSliderCommandInput("slider_configuration_" + id, "slider_" + id, "cm", 0, 10.0*value)
+
+<span style="color:blue"># Event handler that reacts to any changes the user makes to any of the command inputs.</span>
+class MyCommandInputChangedHandler(adsk.core.InputChangedEventHandler):
+    def __init__(self):
+        super().__init__()
+    def notify(self, args):
+        try:
+            eventArgs = adsk.core.InputChangedEventArgs.cast(args)
+            inputs = eventArgs.inputs
+            cmdInput = eventArgs.input
+            <span style="color:blue"># onInputChange for slider controller</span>
+            if cmdInput.id == "slider_controller":
+                sliderGroup = adsk.core.GroupCommandInput.cast(cmdInput.parentCommandInput)
+                sliderInputs = sliderGroup.children
+                updateSliders(sliderInputs)
+            else:
+                tableInput = inputs.itemById('table')
+                if cmdInput.id == 'tableAdd':
+                    addRowToTable(tableInput)
+                elif cmdInput.id == 'tableDelete':
+                    if tableInput.selectedRow == -1:
+                        _ui.messageBox('Select one row to delete.')
+                    else:
+                        tableInput.deleteRow(tableInput.selectedRow)
+          
+        except:
+            _ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
+
+
+<span style="color:blue"># Event handler that reacts to when the command is destroyed. This terminates the script.            </span>
+class MyCommandDestroyHandler(adsk.core.CommandEventHandler):
+    def __init__(self):
+        super().__init__()
+    def notify(self, args):
+        try:
+            <span style="color:blue"># When the command is done, terminate the script</span>
+            <span style="color:blue"># This will release all globals which will remove all event handlers</span>
+            adsk.terminate()
+        except:
+            _ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
+
+
+<span style="color:blue"># Event handler that reacts when the command definitio is executed which</span>
+<span style="color:blue"># results in the command being created and this event being fired.</span>
+class MyCommandCreatedHandler(adsk.core.CommandCreatedEventHandler):
+    def __init__(self):
+        super().__init__()
+    def notify(self, args):
+        try:
+            <span style="color:blue"># Get the command that was created.</span>
+            cmd = adsk.core.Command.cast(args.command)
+
+            <span style="color:blue"># Connect to the command destroyed event.</span>
+            onDestroy = MyCommandDestroyHandler()
+            cmd.destroy.add(onDestroy)
+            _handlers.append(onDestroy)
+
+            <span style="color:blue"># Connect to the input changed event.           </span>
+            onInputChanged = MyCommandInputChangedHandler()
+            cmd.inputChanged.add(onInputChanged)
+            _handlers.append(onInputChanged)    
+
+            <span style="color:blue"># Get the CommandInputs collection associated with the command.</span>
+            inputs = cmd.commandInputs
+
+            <span style="color:blue"># Create a tab input.</span>
+            tabCmdInput1 = inputs.addTabCommandInput('tab_1', 'Tab 1')
+            tab1ChildInputs = tabCmdInput1.children
+
+            <span style="color:blue"># Create a read only textbox input.</span>
+            tab1ChildInputs.addTextBoxCommandInput('readonly_textBox', 'Text Box 1', 'This is an example of a read-only text box.', 2, True)
+
+            <span style="color:blue"># Create an editable textbox input.</span>
+            tab1ChildInputs.addTextBoxCommandInput('writable_textBox', 'Text Box 2', 'This is an example of an editable text box.', 2, False)
+            
+            <span style="color:blue"># Create a message that spans the entire width of the dialog by leaving out the "name" argument.</span>
+            message = '&lt;div align="center"&gt;A &quot;full width&quot; message using &lt;a href="http:fusion.autodesk.com"&gt;html.&lt;/a&gt;&lt;/div&gt;'
+            tab1ChildInputs.addTextBoxCommandInput('fullWidth_textBox', '', message, 1, True)            
+
+            <span style="color:blue"># Create a selection input.</span>
+            selectionInput = tab1ChildInputs.addSelectionInput('selection', 'Select', 'Basic select command input')
+            selectionInput.setSelectionLimits(0)
+
+            <span style="color:blue"># Create a string value input.</span>
+            strInput = tab1ChildInputs.addStringValueInput('string', 'Text', 'Basic string command input')
+
+            <span style="color:blue"># Create value input.</span>
+            tab1ChildInputs.addValueInput('value', 'Value', 'cm', adsk.core.ValueInput.createByReal(0.0))
+
+            <span style="color:blue"># Create bool value input with checkbox style.</span>
+            tab1ChildInputs.addBoolValueInput('checkbox', 'Checkbox', True, '', False)
+
+            <span style="color:blue"># Create bool value input with button style that can be clicked.</span>
+            tab1ChildInputs.addBoolValueInput('buttonClick', 'Click Button', False, 'resources/button', True)
+
+            <span style="color:blue"># Create bool value input with button style that has a state.</span>
+            tab1ChildInputs.addBoolValueInput('buttonState', 'State Button', True, 'resources/button', True)
+
+            <span style="color:blue"># Create float slider input with two sliders.</span>
+            tab1ChildInputs.addFloatSliderCommandInput('floatSlider', 'Float Slider', 'cm', 0, 10.0, True)
+
+            <span style="color:blue"># Create float slider input with two sliders and a value list.</span>
+            floatValueList = [1.0, 3.0, 4.0, 7.0]
+            tab1ChildInputs.addFloatSliderListCommandInput('floatSlider2', 'Float Slider 2', 'cm', floatValueList)
+
+            <span style="color:blue"># Create float slider input with two sliders and visible texts.</span>
+            floatSlider3 = tab1ChildInputs.addFloatSliderCommandInput('floatSlider3', 'Float Slider 3', '', 0, 50.0, False)
+            floatSlider3.setText('Min', 'Max')
+
+            <span style="color:blue"># Create integer slider input with one slider.</span>
+            tab1ChildInputs.addIntegerSliderCommandInput('intSlider', 'Integer Slider', 0, 10);
+            valueList = [1, 3, 4, 7, 11]
+
+            <span style="color:blue"># Create integer slider input with two sliders and a value list.</span>
+            tab1ChildInputs.addIntegerSliderListCommandInput('intSlider2', 'Integer Slider 2', valueList)
+
+            <span style="color:blue"># Create float spinner input.</span>
+            tab1ChildInputs.addFloatSpinnerCommandInput('spinnerFloat', 'Float Spinner', 'cm', 0.2 , 9.0 , 2.2, 1)
+
+            <span style="color:blue"># Create integer spinner input.</span>
+            tab1ChildInputs.addIntegerSpinnerCommandInput('spinnerInt', 'Integer Spinner', 2 , 9 , 2, 3)
+
+            <span style="color:blue"># Create dropdown input with checkbox style.</span>
+            dropdownInput = tab1ChildInputs.addDropDownCommandInput('dropdown', 'Dropdown 1', adsk.core.DropDownStyles.CheckBoxDropDownStyle)
+            dropdownItems = dropdownInput.listItems
+            dropdownItems.add('Item 1', False, 'resources/One')
+            dropdownItems.add('Item 2', False, 'resources/Two')
+
+            <span style="color:blue"># Create dropdown input with icon style.</span>
+            dropdownInput2 = tab1ChildInputs.addDropDownCommandInput('dropdown2', 'Dropdown 2', adsk.core.DropDownStyles.LabeledIconDropDownStyle);
+            dropdown2Items = dropdownInput2.listItems
+            dropdown2Items.add('Item 1', True, 'resources/One')
+            dropdown2Items.add('Item 2', False, 'resources/Two')
+
+            <span style="color:blue"># Create dropdown input with radio style.</span>
+            dropdownInput3 = tab1ChildInputs.addDropDownCommandInput('dropdown3', 'Dropdown 3', adsk.core.DropDownStyles.LabeledIconDropDownStyle);
+            dropdown3Items = dropdownInput3.listItems
+            dropdown3Items.add('Item 1', True, '')
+            dropdown3Items.add('Item 2', False, '')
+
+            <span style="color:blue"># Create dropdown input with test list style.</span>
+            dropdownInput4 = tab1ChildInputs.addDropDownCommandInput('dropdown4', 'Dropdown 4', adsk.core.DropDownStyles.TextListDropDownStyle);
+            dropdown4Items = dropdownInput4.listItems
+            dropdown4Items.add('Item 1', True, '')
+            dropdown4Items.add('Item 2', False, '')
+
+            <span style="color:blue"># Create single selectable button row input.</span>
+            buttonRowInput = tab1ChildInputs.addButtonRowCommandInput('buttonRow', 'Single Select Buttons', False)
+            buttonRowInput.listItems.add('Item 1', False, 'resources/One')
+            buttonRowInput.listItems.add('Item 2', False, 'resources/Two')
+
+            <span style="color:blue"># Create multi selectable button row input.</span>
+            buttonRowInput2 = tab1ChildInputs.addButtonRowCommandInput('buttonRow2', 'Multi-select Buttons', True)
+            buttonRowInput2.listItems.add('Item 1', False, 'resources/One')
+            buttonRowInput2.listItems.add('Item 2', False, 'resources/Two')
+
+            <span style="color:blue"># Create tab input 2</span>
+            tabCmdInput2 = inputs.addTabCommandInput('tab_2', 'Tab 2')
+            tab2ChildInputs = tabCmdInput2.children
+
+            <span style="color:blue"># Create group input.</span>
+            groupCmdInput = tab2ChildInputs.addGroupCommandInput('group', 'Group')
+            groupCmdInput.isExpanded = True
+            groupCmdInput.isEnabledCheckBoxDisplayed = True
+            groupChildInputs = groupCmdInput.children
+            
+            <span style="color:blue"># Create radio button group input.</span>
+            radioButtonGroup = groupChildInputs.addRadioButtonGroupCommandInput('radioButtonGroup', 'Radio button group')
+            radioButtonItems = radioButtonGroup.listItems
+            radioButtonItems.add("Item 1", False)
+            radioButtonItems.add("Item 2", False)
+            radioButtonItems.add("Item 3", False)
+            
+            <span style="color:blue"># Create image input.</span>
+            groupChildInputs.addImageCommandInput('image', 'Image', "resources/image.png")
+            
+            <span style="color:blue"># Create direction input 1.</span>
+            directionCmdInput = tab2ChildInputs.addDirectionCommandInput('direction', 'Direction1')
+            directionCmdInput.setManipulator(adsk.core.Point3D.create(0, 0, 0), adsk.core.Vector3D.create(1, 0, 0))
+            
+            <span style="color:blue"># Create direction input 2.</span>
+            directionCmdInput2 = tab2ChildInputs.addDirectionCommandInput('direction2', 'Direction 2', 'resources/One')
+            directionCmdInput2.setManipulator(adsk.core.Point3D.create(0, 0, 0), adsk.core.Vector3D.create(0, 1, 0)) 
+            directionCmdInput2.isDirectionFlipped = True
+            
+            <span style="color:blue"># Create distance value input 1.</span>
+            distanceValueInput = tab2ChildInputs.addDistanceValueCommandInput('distanceValue', 'DistanceValue', adsk.core.ValueInput.createByReal(2))
+            distanceValueInput.setManipulator(adsk.core.Point3D.create(0, 0, 0), adsk.core.Vector3D.create(1, 0, 0))
+            distanceValueInput.minimumValue = 0
+            distanceValueInput.isMinimumValueInclusive = True
+            distanceValueInput.maximumValue = 10
+            distanceValueInput.isMaximumValueInclusive = True
+            
+            <span style="color:blue"># Create distance value input 2.</span>
+            distanceValueInput2 = tab2ChildInputs.addDistanceValueCommandInput('distanceValue2', 'DistanceValue 2', adsk.core.ValueInput.createByReal(1))
+            distanceValueInput2.setManipulator(adsk.core.Point3D.create(0, 0, 0), adsk.core.Vector3D.create(0, 1, 0))
+            distanceValueInput2.expression = '1 in'
+            distanceValueInput2.hasMinimumValue = False
+            distanceValueInput2.hasMaximumValue = False
+            
+            <span style="color:blue"># Create table input</span>
+            tableInput = tab2ChildInputs.addTableCommandInput('table', 'Table', 3, '1:1:1')
+            addRowToTable(tableInput)
+
+            <span style="color:blue"># Add inputs into the table.            </span>
+            addButtonInput = tab2ChildInputs.addBoolValueInput('tableAdd', 'Add', False, '', True)
+            tableInput.addToolbarCommandInput(addButtonInput)
+            deleteButtonInput = tab2ChildInputs.addBoolValueInput('tableDelete', 'Delete', False, '', True)
+            tableInput.addToolbarCommandInput(deleteButtonInput)
+            
+            <span style="color:blue"># Create angle value input.</span>
+            angleValueInput = tab2ChildInputs.addAngleValueCommandInput('angleValue', 'AngleValue', adsk.core.ValueInput.createByString('30 degree'))
+            angleValueInput.setManipulator(adsk.core.Point3D.create(0, 0, 0), adsk.core.Vector3D.create(1, 0, 0), adsk.core.Vector3D.create(0, 0, 1))
+            angleValueInput.hasMinimumValue = False
+            angleValueInput.hasMaximumValue = False
+
+            <span style="color:blue"># Create tab input 3</span>
+            tabCmdInput3 = inputs.addTabCommandInput('tab_3', 'Tab 3')
+            tab3ChildInputs = tabCmdInput3.children
+            <span style="color:blue"># Create group</span>
+            sliderGroup = tab3ChildInputs.addGroupCommandInput("slider_configuration", "Configuration")
+            sliderInputs = sliderGroup.children
+            <span style="color:blue"># Create integer spinner input</span>
+            sliderInputs.addIntegerSpinnerCommandInput("slider_controller", "Num sliders", 1, 5, 1, 1)
+            updateSliders(sliderInputs)
+        except:
+            _ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
+
+
+def run(context):
+    try:
+        global _app, _ui
+        _app = adsk.core.Application.get()
+        _ui = _app.userInterface
+
+        <span style="color:blue"># Get the existing command definition or create it if it doesn't already exist.</span>
+        cmdDef = _ui.commandDefinitions.itemById('cmdInputsSample')
+        if not cmdDef:
+            cmdDef = _ui.commandDefinitions.addButtonDefinition('cmdInputsSample', 'Command Inputs Sample', 'Sample to demonstrate various command inputs.')
+
+        <span style="color:blue"># Connect to the command created event.</span>
+        onCommandCreated = MyCommandCreatedHandler()
+        cmdDef.commandCreated.add(onCommandCreated)
+        _handlers.append(onCommandCreated)
+
+        <span style="color:blue"># Execute the command definition.</span>
+        cmdDef.execute()
+
+        <span style="color:blue"># Prevent this module from being terminated when the script returns, because we are waiting for event handlers to fire.</span>
+        adsk.autoTerminate(False)
+    except:
+        if _ui:
+            _ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(CommandInputsSample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

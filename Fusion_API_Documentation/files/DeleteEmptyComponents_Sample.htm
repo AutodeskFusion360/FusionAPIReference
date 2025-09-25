@@ -1,0 +1,169 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/DeleteEmptyComponents.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="DeleteEmptyComponents_Sample">
+    <meta name="description" content="Delete Empty Components Sample">
+    <meta name="topicid" content="GUID-9bb21a10-86f8-11e7-981a-6c46a4aa5a3f">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Delete Empty Components</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Delete Empty Components</h1>
+    <h2 class="api">
+          Description
+        </h2>Deletes empty components from the active design.<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code"><span style="color:blue">#Author-Autodesk Inc.</span>
+<span style="color:blue">#Description-Delete empty components from an assembly.</span>
+
+import adsk, adsk.core, adsk.fusion, traceback
+
+def run(context):
+    ui = None
+    try:
+        app = adsk.core.Application.get()
+        ui = app.userInterface
+        
+        <span style="color:blue"># Get all components in the active design.</span>
+        product = app.activeProduct
+        design = adsk.fusion.Design.cast(product)
+        title = 'Delete Empty Components'
+        if not design:
+            ui.messageBox('No active Fusion design', title)
+            return
+
+        components = design.allComponents
+
+        <span style="color:blue"># Find all of the empty components.</span>
+        <span style="color:blue"># It is empty if it has no occurrences, bodies, featres, sketches, or construction.</span>
+        root = design.rootComponent
+        componentsToDelete = []
+
+        for component in components:
+
+            <span style="color:blue"># Skip the root component.</span>
+            if root == component:
+                continue
+
+            if component.occurrences.count == 0 \
+                and component.bRepBodies.count == 0 \
+                and component.features.count == 0 \
+                and component.sketches.count == 0 \
+                and component.constructionPlanes.count == 0 \
+                and component.constructionAxes.count == 0 \
+                and component.constructionPoints.count == 0:
+
+                componentsToDelete.append(component)
+
+        <span style="color:blue"># Delete all immediate occurrences of the empty components.</span>
+        deletedComponents = []
+        for component in componentsToDelete:
+
+            <span style="color:blue"># Get the name first because deleting the final Occurrence will delete the Component.</span>
+            name = component.name
+
+            <span style="color:blue"># Build a list of unique immediate occurrences of the component.</span>
+            occurrences = root.allOccurrencesByComponent(component)
+            uniqueOccurrences = []
+            for occurrence in occurrences:
+                index = 0
+                for k in range(0, len(uniqueOccurrences)):
+                    if occurrence is uniqueOccurrences[k]:
+                        break
+                    index = k+1
+                if index == len(uniqueOccurrences):
+                    uniqueOccurrences.append(occurrence)
+
+            <span style="color:blue"># Delete them.</span>
+            for uniqueOccurrencesI in uniqueOccurrences:
+                uniqueOccurrencesI.deleteMe()
+
+            deletedComponents.append(name)
+
+        if len(deletedComponents) == 0:
+            msg = 'No empty components found.'
+        else:
+            if len(deletedComponents) &gt; 1:
+                msg = str(len(deletedComponents)) + ' empty component' + 's'
+            else:
+                msg = str(len(deletedComponents)) + ' empty component' + ' deleted'
+            msg += '\n\n'
+            for deletedComponentI in deletedComponents:
+                msg += '\n' + deletedComponentI
+
+        ui.messageBox(msg, title)
+
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(DeleteEmptyComponents%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

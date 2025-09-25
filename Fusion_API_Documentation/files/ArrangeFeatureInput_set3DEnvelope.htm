@@ -1,0 +1,130 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/ArrangeFeatureInput_set3DEnvelope.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="17/12/2024">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="ArrangeFeatureInput_set3DEnvelope">
+    <meta name="description" content="ArrangeFeatureInput.set3DEnvelope Method">
+    <meta name="topicid" content="GUID-1C59A323-CD2F-467E-9BF3-21DCE060A707">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>ArrangeFeatureInput.set3DEnvelope Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">ArrangeFeatureInput.set3DEnvelope Method</h1>
+
+          Parent Object: <a href="ArrangeFeatureInput.htm">ArrangeFeatureInput</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Arrange/ArrangeFeatureInput.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Defines a 3D envelope input. Only a single envelope input can exist at time. Calling this method will cause any existing envelope input object to be invalid.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"arrangeFeatureInput_var" is a variable referencing an <a href="ArrangeFeatureInput.htm">ArrangeFeatureInput</a> object.<code><pre class="api-code">returnValue = arrangeFeatureInput_var.<b>set3DEnvelope</b>(plane, length, width, height)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"arrangeFeatureInput_var" is a variable referencing an <a href="ArrangeFeatureInput.htm">ArrangeFeatureInput</a> object.<br /><br /><code><pre class="api-code">#include &lt;Fusion/Arrange/ArrangeFeatureInput.h&gt;<br /><br />returnValue = arrangeFeatureInput_var-&gt;<b>set3DEnvelope</b>(plane, length, width, height);<br /></pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;"><a href="Arrange3DEnvelopeInput.htm">Arrange3DEnvelopeInput</a></td>
+        <td class="api-list">Returns the created Arrange3DEnvelopeInput object or null if the creation fails.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">plane</td>
+        <td class="api-list"><a href="ConstructionPlane.htm">ConstructionPlane</a></td>
+        <td class="api-list">The Construction plane the envelope will be on.</td>
+      </tr>
+      <tr>
+        <td class="api-list">length</td>
+        <td class="api-list"><a href="ValueInput.htm">ValueInput</a></td>
+        <td class="api-list">The length of the envelope. This is the size of the envelope as measured along the X axis of the specified construction plane.<br/><br/> This value will become a parameter when the arrangement is created. If the ValueInput is created using a real number it is in centimeters. If you use a string, it is evaluated the same as a value would be in the command dialog and uses the current document units. For example, if the document units are inch and you specific "0.25" it will result in 1/4 inch clearance. Using a string, you can also specify the units as part of the expression, such as "0.25 in + 2 mm". And you can define equations like "PartSize + 2 mm" where "PartSize" is an existing parameter.</td>
+      </tr>
+      <tr>
+        <td class="api-list">width</td>
+        <td class="api-list"><a href="ValueInput.htm">ValueInput</a></td>
+        <td class="api-list">The width of the envelope. This is the size of the envelope as measured along the Y axis of the specified construction plane.<br/><br/> This value will become a parameter when the arrangement is created. If the ValueInput is created using a real number it is in centimeters. If you use a string, it is evaluated the same as a value would be in the command dialog and uses the current document units. For example, if the document units are inch and you specific "0.25" it will result in 1/4 inch clearance. Using a string, you can also specify the units as part of the expression, such as "0.25 in + 2 mm". And you can define equations like "PartSize + 2 mm" where "PartSize" is an existing parameter.</td>
+      </tr>
+      <tr>
+        <td class="api-list">height</td>
+        <td class="api-list"><a href="ValueInput.htm">ValueInput</a></td>
+        <td class="api-list">The height of the envelope. This is the size of the envelope as measured along the Z axis of the specified construction plane.<br/><br/> This value will become a parameter when the arrangement is created. If the ValueInput is created using a real number it is in centimeters. If you use a string, it is evaluated the same as a value would be in the command dialog and uses the current document units. For example, if the document units are inch and you specific "0.25" it will result in 1/4 inch clearance. Using a string, you can also specify the units as part of the expression, such as "0.25 in + 2 mm". And you can define equations like "PartSize + 2 mm" where "PartSize" is an existing parameter.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version January 2025<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(ArrangeFeatureInput.set3DEnvelope%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,179 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/SetupInput.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="21/02/2023">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="SetupInput">
+    <meta name="description" content="SetupInput Object">
+    <meta name="topicid" content="GUID-D1FC72E9-7EC8-4DC7-BC87-F745BE4D6D31">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>SetupInput Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">SetupInput Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::cam" and the header file is &lt;Cam/CAM/SetupInput.h&gt;<h2 class="api">
+          Description
+        </h2>Object that represents an setup creation parameters. The input-object can be used from the Setups.add method to instantiate a new setup<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SetupInput_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SetupInput_fixtureEnabled.htm">fixtureEnabled</a></td>
+        <td class="api-list">Set this value to enable the use of fixtures for this setup. To then set the fixture models themselves use the `fixtures` property.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SetupInput_fixtures.htm">fixtures</a></td>
+        <td class="api-list">An array of models that represent fixtures, where a model can be an Occurrence, BRepBody, or MeshBody.<br/><br/> The returned array is connected to the SetupInput and can be added to directly without needing to create a new array, populate it, and assign using this property, although, that is supported too.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SetupInput_isUsingPreviousSetupData.htm">isUsingPreviousSetupData</a></td>
+        <td class="api-list">Get and set if data from the previous setup should be used when creating another setup. The data applied from the previous setup is machine information and the stock from the preceeding setup. By default this value is false.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SetupInput_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SetupInput_machine.htm">machine</a></td>
+        <td class="api-list">Gets and sets the Machine associated with the setup.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SetupInput_models.htm">models</a></td>
+        <td class="api-list">A list of models, where a model can be an Occurrence, BRepBody, or MeshBody. The returned array is connected to the SetupInput and can be added to directly without needing to create a new array, populate it, and assign it using this property, although, that is supported too.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SetupInput_name.htm">name</a></td>
+        <td class="api-list">Name of the new setup. This is displayed in the browser tree and can be used to access the setup from Setups.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SetupInput_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SetupInput_operationType.htm">operationType</a></td>
+        <td class="api-list">Operation Type for the setup</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SetupInput_parameters.htm">parameters</a></td>
+        <td class="api-list">Get all parameters for the setup to be created. Parameters are initialized by user defaults. Configure operation parameters before creation for a better performance.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SetupInput_printSetting.htm">printSetting</a></td>
+        <td class="api-list">Gets and sets the PrintSetting associated with the setup.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SetupInput_stockMode.htm">stockMode</a></td>
+        <td class="api-list">StockMode for the setup.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SetupInput_stockSolids.htm">stockSolids</a></td>
+        <td class="api-list">An array of models, where a model can be an Occurrence, ManufacturingModel, BRepBody, or MeshBody. Setting this property, or adding the first object to the returned array will automatically set the stockMode to "SolidStock".<br/><br/> The returned array is connected to the SetupInput and can be added to directly without needing to create a new array, populate it, and assign it using this property, although, that is supported too.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="Setups_createInput.htm">Setups.createInput</a><h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="AdditiveMJFManufacturingSample_Sample.htm">Additive Manufacturing MJF API Sample</a></td>
+        <td class="api-list"><p>Demonstrates how to automate the creation of an additive MJF manufacturing setup and arrange components within the build volume of a 3D printer.</p>
+
+<p>To run the sample script, have a design with one or more components open in Fusion’s DESIGN workspace. This script will switch the UI from the DESIGN workspace to the MANUFACTURE workspace, create a new Manufacturing Model, and create an Additive Arrange using that manufacturing model as an input.</p>
+
+<p>The setup will select an MJF 3D printer from Fusion’s machine library and a print setting from the print setting library. All components in the Manufacturing model will be automatically arranged within the build volume of the selected MJF machine.</p></td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CreateSetupsFromHoleRecognition_Sample.htm">Create Setups From Hole Recognition API Sample</a></td>
+        <td class="api-list"><p>This sample script demonstrates how to create a correctly oriented setup using Hole Recognition functionality.</p><p>The Fusion Manufacturing Extension is required for Hole Recognition.</p><p>The script starts by opening a sample model from the CAM Samples folder via its URN. The model comprises a 3 way coupling containing holes in various orientations and mounted on a fixture. A reference setup is created for the model using a simple stock mode and offsets. The Hole Recognition feature of the Fusion Manufacturing Extension creates 5 hole groups containing 11 holes between them. For each unique hole group vector captured, a new setup is created and its orientation transformed to match the vector.</p></td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="HoleAndPocketRecognition_Sample.htm">Hole and Pocket Recognition API Sample</a></td>
+        <td class="api-list"><p>This sample script demonstrates three different methods for feature recognition: one for holes and two for pockets.</p><p>The script starts by creating a simple component which is then used to demonstrate the three methods. After the features are recognised they are coloured and milling and drilling operations are created for each feature.</p><p>RecognizedHoleGroup returns a list of BRepFaces that can be used as selections for the drilling operation. RecognizedPocket also return some BRepFaces but it needs additional processing before the output can be used for creating machining operations.</p><p>The sample script demonstrates a couple of different methods, including finding the pocket BRepFaces and creating sketches from the recognized pockets.</p><p>This script works only if the Manufacturing Extension is active.</p></td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ManufacturingWorkflowAPISample_Sample.htm">Manufacturing Workflow API Sample</a></td>
+        <td class="api-list">Manufacturing Workflow API Sample<p>This sample script starts by creating a simple component which is then used to describe a milling workflow. It creates a setup, a few operations, pick some tools from a Fusion sample tool library using loops and queries and ends up post-processing the operations out using an NC Program.</p></td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SetViseOriginAsSetupWCSOrigin_Sample.htm">Set Vise Origin As Setup WCS Origin API Sample</a></td>
+        <td class="api-list"><p>This sample script demonstrates how to define our setup WCS origin relative to our vise origin from either a component, a sketch point or a joint origin.</p><p>The Work Coordinate System is a reference point set in our CAM workspace and on our machine. All machine coordinates are drawn from the WCS. This script demonstrates defining the WCS by each of 4 alternative methods:</p><p>Setup by default with no origin defined.</p><p>Setup using vise origin as WCS origin.</p><p>Setup using a sketch point as WCS origin.</p><p>Setup using a joint origin as WCS origin.</p></td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Turning_Workflow_API_Sample_Sample.htm">Turning Workflow API Sample</a></td>
+        <td class="api-list">Turning Workflow API Sample<p>This sample script starts by opening a simple component which is then used to describe a basic turning workflow. It creates a setup, a few operations, pick some tools from a Fusion sample tool library using loops and queries and ends up post-processing the operations out using an NC Program.</p></td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version April 2023<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(SetupInput%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,646 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/ExtrudeFeatureSample.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="ExtrudeFeatureSample_Sample">
+    <meta name="description" content="Extrude Feature API Sample Sample">
+    <meta name="topicid" content="GUID-CB1A2357-C8CD-474D-921E-992CA3621D04">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Extrude Feature API Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Extrude Feature API Sample</h1>
+    <h2 class="api">
+          Description
+        </h2>Demonstrates creating a new extrude feature.<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">import adsk.core, adsk.fusion, traceback
+
+def run(context):
+    ui = None
+    try:
+        app = adsk.core.Application.get()
+        ui = app.userInterface
+        
+        <span style="color:blue"># Create a document.</span>
+        doc = app.documents.add(adsk.core.DocumentTypes.FusionDesignDocumentType)
+ 
+        product = app.activeProduct
+        design = adsk.fusion.Design.cast(product)
+
+        <span style="color:blue"># Get the root component of the active design</span>
+        rootComp = design.rootComponent
+                
+        <span style="color:blue"># Get extrude features</span>
+        extrudes = rootComp.features.extrudeFeatures
+
+        <span style="color:blue"># Create sketch     </span>
+        sketches = rootComp.sketches   
+        sketch = sketches.add(rootComp.xZConstructionPlane)
+        sketchCircles = sketch.sketchCurves.sketchCircles
+        centerPoint = adsk.core.Point3D.create(0, 0, 0)
+        circle = sketchCircles.addByCenterRadius(centerPoint, 5.0)
+        
+        <span style="color:blue"># Get the profile defined by the circle</span>
+        prof = sketch.profiles.item(0)
+        
+        <span style="color:blue"># Create another sketch</span>
+        sketchVertical = sketches.add(rootComp.yZConstructionPlane)
+        sketchCirclesVertical = sketchVertical.sketchCurves.sketchCircles
+        centerPointVertical = adsk.core.Point3D.create(0, 1, 0)
+        cicleVertical = sketchCirclesVertical.addByCenterRadius(centerPointVertical, 0.5)    
+        
+        <span style="color:blue"># Get the profile defined by the vertical circle</span>
+        profVertical = sketchVertical.profiles.item(0)
+        
+        <span style="color:blue"># Extrude Sample 1: A simple way of creating typical extrusions (extrusion that goes from the profile plane the specified distance).</span>
+        <span style="color:blue"># Define a distance extent of 5 cm</span>
+        distance = adsk.core.ValueInput.createByReal(5)
+        extrude1 = extrudes.addSimple(prof, distance, adsk.fusion.FeatureOperations.NewBodyFeatureOperation)        
+        <span style="color:blue"># Get the extrusion body</span>
+        body1 = extrude1.bodies.item(0)
+        body1.name = "simple"
+
+        <span style="color:blue"># Get the state of the extrusion</span>
+        health = extrude1.healthState
+        if health == adsk.fusion.FeatureHealthStates.WarningFeatureHealthState or health == adsk.fusion.FeatureHealthStates.ErrorFeatureHealthState:
+            message = extrude1.errorOrWarningMessage
+        
+        <span style="color:blue"># Get the state of timeline object</span>
+        timeline = design.timeline
+        timelineObj = timeline.item(timeline.count - 1);
+        health = timelineObj.healthState
+        message = timelineObj.errorOrWarningMessage
+        
+        <span style="color:blue"># Create another sketch</span>
+        sketch = sketches.add(rootComp.xZConstructionPlane)
+        sketchCircles = sketch.sketchCurves.sketchCircles
+        centerPoint = adsk.core.Point3D.create(0, 0, 0)
+        circle1 = sketchCircles.addByCenterRadius(centerPoint, 13.0)
+        circle2 = sketchCircles.addByCenterRadius(centerPoint, 15.0)
+        outerProfile = sketch.profiles.item(1)
+        
+        <span style="color:blue"># Create taperAngle value inputs</span>
+        deg0 = adsk.core.ValueInput.createByString("0 deg")
+        deg2 = adsk.core.ValueInput.createByString("2 deg")
+        deg5 = adsk.core.ValueInput.createByString("5 deg")
+        
+        <span style="color:blue"># Create distance value inputs</span>
+        mm10 = adsk.core.ValueInput.createByString("10 mm")
+        mm100 = adsk.core.ValueInput.createByString("100 mm")
+         
+        <span style="color:blue"># Extrude Sample 2: Create an extrusion that goes from the profile plane with one side distance extent</span>
+        extrudeInput = extrudes.createInput(outerProfile, adsk.fusion.FeatureOperations.NewBodyFeatureOperation)
+        <span style="color:blue"># Create a distance extent definition</span>
+        extent_distance = adsk.fusion.DistanceExtentDefinition.create(mm100)        
+        extrudeInput.setOneSideExtent(extent_distance, adsk.fusion.ExtentDirections.PositiveExtentDirection)
+        <span style="color:blue"># Create the extrusion</span>
+        extrude2 = extrudes.add(extrudeInput)
+        <span style="color:blue"># Get the body of the extrusion       </span>
+        body2 = extrude2.bodies.item(0)
+        body2.name = "distance, from profile"
+        
+        <span style="color:blue"># Extrude Sample 3: Create an extrusion that starts from an entity and goes the specified distance.</span>
+        extrudeInput = extrudes.createInput(profVertical, adsk.fusion.FeatureOperations.NewBodyFeatureOperation)
+        <span style="color:blue"># Create a distance extent definition</span>
+        extent_distance_2 = adsk.fusion.DistanceExtentDefinition.create(mm10)
+        <span style="color:blue"># Create a start extent that starts from a brep face with an offset of 10 mm.</span>
+        start_from = adsk.fusion.FromEntityStartDefinition.create(body1.faces.item(0), mm10)
+        <span style="color:blue"># taperAngle should be 0 because extrude start face is not a planar face in this case</span>
+        extrudeInput.setOneSideExtent(extent_distance_2, adsk.fusion.ExtentDirections.PositiveExtentDirection)        
+        extrudeInput.startExtent = start_from
+        <span style="color:blue"># Create the extrusion</span>
+        extrude3 = extrudes.add(extrudeInput)
+        body3 = extrude3.bodies.item(0)
+        body3.name = "distance, from entity"
+        
+        <span style="color:blue"># Edit the distance extent of the extrusion.</span>
+        disDef = adsk.fusion.DistanceExtentDefinition.cast(extrude3.extentOne)
+        distanceMP = adsk.fusion.ModelParameter.cast(disDef.distance)
+        distanceMP.value = 5.0
+        
+        <span style="color:blue"># Edit the start entity of the extrusion.</span>
+        startDef = adsk.fusion.FromEntityStartDefinition.cast(extrude3.startExtent)
+        outerFace = body2.faces.item(1)
+        extrude3.timelineObject.rollTo(True)
+        startDef.entity = outerFace
+        design.timeline.moveToEnd()
+
+        <span style="color:blue"># Edit the offset to the start entity in the extrusion.</span>
+        startDef = adsk.fusion.FromEntityStartDefinition.cast(extrude3.startExtent)
+        offsetMP = adsk.fusion.ModelParameter.cast(startDef.offset)
+        offsetMP.value = 1.5
+        
+        <span style="color:blue"># Extrude Sample 4: Create an extrusion that goes from the profile plane to a specified entity.</span>
+        extrudeInput = extrudes.createInput(profVertical, adsk.fusion.FeatureOperations.NewBodyFeatureOperation)
+        <span style="color:blue"># Create a to-entity extent definition</span>
+        isChained = True
+        extent_toentity = adsk.fusion.ToEntityExtentDefinition.create(body1, isChained)
+        <span style="color:blue"># Set the one side extent with the to-entity-extent-definition, and with a taper angle of 0 degree</span>
+        extrudeInput.setOneSideExtent(extent_toentity, adsk.fusion.ExtentDirections.PositiveExtentDirection)
+        <span style="color:blue"># Create an offset type start definition</span>
+        start_offset = adsk.fusion.OffsetStartDefinition.create(mm10)
+        <span style="color:blue"># Set the start extent of the extrusion</span>
+        extrudeInput.startExtent = start_offset
+        <span style="color:blue"># Create the extrusion</span>
+        extrude4 = extrudes.add(extrudeInput)
+        body4 = extrude4.bodies.item(0)
+        body4.name = "to entity, from offset"
+        
+        <span style="color:blue"># Edit the start offset of the extrusion</span>
+        startDef = adsk.fusion.OffsetStartDefinition.cast(extrude4.startExtent)
+        offsetMP = adsk.fusion.ModelParameter.cast(startDef.offset)
+        offsetMP.value = 0.5
+
+        <span style="color:blue"># Edit the to-entity extent definition of the extrusion</span>
+        negative = adsk.core.Vector3D.create(-1,0,0)
+        toDef = adsk.fusion.ToEntityExtentDefinition.cast(extrude4.extentOne)
+        extrude4.timelineObject.rollTo(True)
+        toDef.entity = body2
+        toDef.isMinimumSolution = False
+        toDef.directionHint = negative
+        toDef.isChained = False
+        design.timeline.moveToEnd()
+      
+        <span style="color:blue"># Extrude Sample 5: Create an extrusion that goes through all entities</span>
+        extrudeInput = extrudes.createInput(profVertical, adsk.fusion.FeatureOperations.NewBodyFeatureOperation)
+        <span style="color:blue"># Create an extent definition of through-all type.          </span>
+        extent_all = adsk.fusion.ThroughAllExtentDefinition.create()
+        extrudeInput.setOneSideExtent(extent_all, adsk.fusion.ExtentDirections.NegativeExtentDirection, deg2)
+        <span style="color:blue"># Set the extrusion start with an offset</span>
+        extrudeInput.startExtent = start_offset
+        <span style="color:blue"># Create the extrusion</span>
+        extrude5 = extrudes.add(extrudeInput)
+        body5 = extrude5.bodies.item(0)
+        body5.name = "through-all, from offset"
+        
+        <span style="color:blue"># Edit the start offset</span>
+        startDef = adsk.fusion.OffsetStartDefinition.cast(extrude5.startExtent)
+        offsetMP = adsk.fusion.ModelParameter.cast(startDef.offset)
+        offsetMP.value = 0.5
+        
+        <span style="color:blue"># Edit the direction of the extrusion, make it in the same direction as the sketch plane.</span>
+        allDef = adsk.fusion.ThroughAllExtentDefinition.cast(extrude5.extentOne)
+        extrude5.timelineObject.rollTo(True)
+        if allDef.isPositiveDirection:
+            allDef.isPositiveDirection = False
+        design.timeline.moveToEnd()
+        
+        <span style="color:blue"># Extrude Sample 6: Create a symmetric extrusion that goes 10 mm from the profile plane with a 5 degree taper angle.</span>
+        isFullLength = True
+        extrudeInput = extrudes.createInput(profVertical, adsk.fusion.FeatureOperations.NewBodyFeatureOperation)
+        extrudeInput.setSymmetricExtent(mm10, isFullLength, deg5)
+        <span style="color:blue"># Create the extrusion</span>
+        extrude6 = extrudes.add(extrudeInput)
+        body6 = extrude6.bodies.item(0)
+        body6.name = "symmetric"
+        
+        <span style="color:blue"># Edit the measurement, distance and taper angle properties of the symmetric extrusion</span>
+        symDef = adsk.fusion.SymmetricExtentDefinition.cast(extrude6.extentOne)
+        extrude6.timelineObject.rollTo(True)
+        symDef.isFullLength = not symDef.isFullLength
+        design.timeline.moveToEnd()
+        taperAngleMP = adsk.fusion.ModelParameter.cast(symDef.taperAngle)
+        taperAngleMP.expression = "6 deg"
+        distanceMP = adsk.fusion.ModelParameter.cast(symDef.distance)
+        distanceMP.expression = "3 mm"
+        <span style="color:blue"># another way to get the symmetric extent definition</span>
+        if (extrude6.extentType == adsk.fusion.FeatureExtentTypes.SymmetricFeatureExtentType):
+            symDef1 = extrude6.symmetricExtent
+            distanceMP1 = symDef1.distance
+            distanceMP1.value = 4
+        
+        <span style="color:blue"># Extrude Sample 7: Create a 2-side extrusion, whose 1st side is 100 mm distance extent, and 2nd side is 10 mm distance extent.</span>
+        extrudeInput = extrudes.createInput(profVertical, adsk.fusion.FeatureOperations.CutFeatureOperation)
+        extent_distance_2 = adsk.fusion.DistanceExtentDefinition.create(adsk.core.ValueInput.createByString("20cm"))
+        extrudeInput.setTwoSidesExtent(extent_distance, extent_distance_2, deg5, deg0)
+        extrude7 = extrudes.add(extrudeInput)
+        
+        <span style="color:blue"># Edit the taper angles of both sides in the extrusion</span>
+        angleMP_1 = adsk.fusion.ModelParameter.cast(extrude7.taperAngleOne)
+        angleMP_2 = adsk.fusion.ModelParameter.cast(extrude7.taperAngleTwo)
+        angleMP_1.expression = "30 deg"
+        angleMP_2.expression = "-1 deg"
+        <span style="color:blue"># Get the extent definition of both sides</span>
+        extent_1 = adsk.fusion.DistanceExtentDefinition.cast(extrude7.extentOne)
+        extent_2 = adsk.fusion.DistanceExtentDefinition.cast(extrude7.extentTwo)
+        <span style="color:blue"># Edit the distances the extrusion</span>
+        distanceMP_1 = adsk.fusion.ModelParameter.cast(extent_1.distance)
+        distanceMP_2 = adsk.fusion.ModelParameter.cast(extent_2.distance)
+        distanceMP_1.expression = "80 mm"
+        distanceMP_2.expression = "25 cm"
+        
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code">#include &lt;Core/Application/Application.h&gt;
+#include &lt;Core/Application/Documents.h&gt;
+#include &lt;Core/Application/Document.h&gt;
+#include &lt;Core/Application/Product.h&gt;
+#include &lt;Core/Application/ValueInput.h&gt;
+#include &lt;Core/Geometry/Point3D.h&gt;
+#include &lt;Core/Geometry/Line3D.h&gt;
+#include &lt;Core/Geometry/Vector3D.h&gt;
+#include &lt;Core/UserInterface/UserInterface.h&gt;
+#include &lt;Fusion/BRep/BRepBody.h&gt;
+#include &lt;Fusion/BRep/BRepBodies.h&gt;
+#include &lt;Fusion/BRep/BRepFace.h&gt;
+#include &lt;Fusion/BRep/BRepFaces.h&gt;
+#include &lt;Fusion/Components/Component.h&gt;
+#include &lt;Fusion/Construction/ConstructionPlane.h&gt;
+#include &lt;Fusion/Features/Features.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeature.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeatures.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeatureInput.h&gt;
+#include &lt;Fusion/Features/ExtentDefinition.h&gt;
+#include &lt;Fusion/Features/DistanceExtentDefinition.h&gt;
+#include &lt;Fusion/Features/FromEntityStartDefinition.h&gt;
+#include &lt;Fusion/Features/OffsetStartDefinition.h&gt;
+#include &lt;Fusion/Features/SymmetricExtentDefinition.h&gt;
+#include &lt;Fusion/Features/ThroughAllExtentDefinition.h&gt;
+#include &lt;Fusion/Features/ToEntityExtentDefinition.h&gt;
+#include &lt;Fusion/Fusion/Design.h&gt;
+#include &lt;Fusion/Fusion/ModelParameter.h&gt;
+#include &lt;Fusion/Fusion/Timeline.h&gt;
+#include &lt;Fusion/Fusion/TimelineObject.h&gt;
+#include &lt;Fusion/Sketch/Profile.h&gt;
+#include &lt;Fusion/Sketch/Profiles.h&gt;
+#include &lt;Fusion/Sketch/Sketch.h&gt;
+#include &lt;Fusion/Sketch/Sketches.h&gt;
+#include &lt;Fusion/Sketch/SketchCircle.h&gt;
+#include &lt;Fusion/Sketch/SketchCircles.h&gt;
+#include &lt;Fusion/Sketch/SketchCurves.h&gt;
+#include &lt;Fusion/Sketch/SketchLine.h&gt;
+#include &lt;Fusion/Sketch/SketchLines.h&gt;
+
+
+using namespace adsk::core;
+using namespace adsk::fusion;
+
+Ptr&lt;UserInterface&gt; ui;
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    Ptr&lt;Application&gt; app = Application::get();
+    if (!app)
+        return false;
+
+    ui = app-&gt;userInterface();
+    if (!ui)
+        return false;
+
+    Ptr&lt;Documents&gt; documents = app-&gt;documents();
+    if (!documents)
+        return false;
+
+    Ptr&lt;Document&gt; doc = documents-&gt;add(DocumentTypes::FusionDesignDocumentType);
+    if (!doc)
+        return false;
+
+    Ptr&lt;Product&gt; product = app-&gt;activeProduct();
+    if (!product)
+        return false;
+
+    Ptr&lt;Design&gt; design = product;
+    if (!design)
+        return false;
+
+    <span style="color:blue">// Get the root component of the active design</span>
+    Ptr&lt;Component&gt; rootComp = design-&gt;rootComponent();
+    if (!rootComp)
+        return false;
+
+    <span style="color:blue">// Get extrude features</span>
+    Ptr&lt;Features&gt; feats = rootComp-&gt;features();
+    if (!feats)
+        return false;
+    Ptr&lt;ExtrudeFeatures&gt; extrudes = feats-&gt;extrudeFeatures();
+    if (!extrudes)
+        return false;
+
+    <span style="color:blue">// Create sketch</span>
+    Ptr&lt;Sketches&gt; sketches = rootComp-&gt;sketches();
+    if (!sketches)
+        return false;
+    Ptr&lt;ConstructionPlane&gt; xz = rootComp-&gt;xZConstructionPlane();
+    if (!xz)
+        return false;
+    Ptr&lt;Sketch&gt; sketch = sketches-&gt;add(xz);
+    if (!sketch)
+        return false;
+    Ptr&lt;SketchCurves&gt; sketchCurves = sketch-&gt;sketchCurves();
+    if (!sketchCurves)
+        return false;
+    Ptr&lt;SketchCircles&gt; sketchCircles = sketchCurves-&gt;sketchCircles();
+    if (!sketchCircles)
+        return false;
+    Ptr&lt;Point3D&gt; centerPoint = Point3D::create(0, 0, 0);
+    if (!centerPoint)
+        return false;
+    Ptr&lt;SketchCircle&gt; circle = sketchCircles-&gt;addByCenterRadius(centerPoint, 5.0);
+    if (!circle)
+        return false;
+
+    <span style="color:blue">// Get the profile defined by the circle</span>
+    Ptr&lt;Profiles&gt; profs = sketch-&gt;profiles();
+    if (!profs)
+        return false;
+    Ptr&lt;Profile&gt; prof = profs-&gt;item(0);
+    if (!prof)
+        return false;
+
+    <span style="color:blue">// Create another sketch</span>
+    Ptr&lt;ConstructionPlane&gt; yz = rootComp-&gt;yZConstructionPlane();
+    if (!yz)
+        return false;
+    Ptr&lt;Sketch&gt; sketchVertical = sketches-&gt;add(yz);
+    if (!sketchVertical)
+        return false;
+    Ptr&lt;SketchCurves&gt; sketchCurvesVertical = sketchVertical-&gt;sketchCurves();
+    if (!sketchCurvesVertical)
+        return false;
+    Ptr&lt;SketchCircles&gt; sketchCirclesVertical = sketchCurvesVertical-&gt;sketchCircles();
+    if (!sketchCirclesVertical)
+        return false;
+    Ptr&lt;Point3D&gt; centerPointVertical = Point3D::create(0, 1, 0);
+    if (!centerPointVertical)
+        return false;
+    Ptr&lt;SketchCircle&gt; cicleVertical = sketchCirclesVertical-&gt;addByCenterRadius(centerPointVertical, 0.5);
+    if (!cicleVertical)
+        return false;
+
+    <span style="color:blue">// Get the profile defined by the vertical circle</span>
+    Ptr&lt;Profiles&gt; profsVertical = sketchVertical-&gt;profiles();
+    if (!profsVertical)
+        return false;
+    Ptr&lt;Profile&gt; profVertical = profsVertical-&gt;item(0);
+    if (!profVertical)
+        return false;
+
+    <span style="color:blue">// Extrude Sample 1: A simple way of creating typical extrusions (extrusion that goes from the profile plane the</span>
+    <span style="color:blue">// specified distance). Define that the extent is a distance extent of 5 cm</span>
+    Ptr&lt;ValueInput&gt; distance = ValueInput::createByReal(5);
+    if (!distance)
+        return false;
+    Ptr&lt;ExtrudeFeature&gt; extrude1 =
+        extrudes-&gt;addSimple(prof, distance, adsk::fusion::FeatureOperations::NewBodyFeatureOperation);
+    if (!extrude1)
+        return false;
+    <span style="color:blue">// Get the body created by the extrusion</span>
+    Ptr&lt;BRepBodies&gt; bodies = extrude1-&gt;bodies();
+    if (!bodies)
+        return false;
+    Ptr&lt;BRepBody&gt; body1 = bodies-&gt;item(0);
+    if (!body1)
+        return false;
+    body1-&gt;name("simple");
+
+    <span style="color:blue">// Get the state of the extrusion</span>
+    adsk::fusion::FeatureHealthStates health = extrude1-&gt;healthState();
+    if (adsk::fusion::FeatureHealthStates::ErrorFeatureHealthState == health ||
+        adsk::fusion::FeatureHealthStates::WarningFeatureHealthState == health)
+    {
+        std::string strWarningMsgForExtrusion = extrude1-&gt;errorOrWarningMessage();
+    }
+    <span style="color:blue">// Get the state of a timeline object</span>
+    Ptr&lt;Timeline&gt; timeline = design-&gt;timeline();
+    Ptr&lt;TimelineObject&gt; timelineObj = timeline-&gt;item(timeline-&gt;count() - 1);
+    health = timelineObj-&gt;healthState();
+    std::string strMsg = timelineObj-&gt;errorOrWarningMessage();
+
+    <span style="color:blue">// Create another sketch</span>
+    sketch = sketches-&gt;add(rootComp-&gt;xZConstructionPlane());
+    sketchCurves = sketch-&gt;sketchCurves();
+    sketchCircles = sketchCurves-&gt;sketchCircles();
+    Ptr&lt;SketchCircle&gt; circle1 = sketchCircles-&gt;addByCenterRadius(centerPoint, 13.0);
+    Ptr&lt;SketchCircle&gt; circle2 = sketchCircles-&gt;addByCenterRadius(centerPoint, 15.0);
+    Ptr&lt;Profiles&gt; profiles = sketch-&gt;profiles();
+    Ptr&lt;Profile&gt; outerProfile = profiles-&gt;item(1);
+
+    <span style="color:blue">// Create taper angle value inputs</span>
+    Ptr&lt;ValueInput&gt; deg0 = adsk::core::ValueInput::createByString("0 deg");
+    Ptr&lt;ValueInput&gt; deg2 = adsk::core::ValueInput::createByString("2 deg");
+    Ptr&lt;ValueInput&gt; deg5 = adsk::core::ValueInput::createByString("5 deg");
+    <span style="color:blue">// Create distance value inputs</span>
+    Ptr&lt;ValueInput&gt; mm10 = adsk::core::ValueInput::createByString("10 mm");
+    Ptr&lt;ValueInput&gt; mm100 = adsk::core::ValueInput::createByString("100 mm");
+
+    <span style="color:blue">// Extrude Sample 2: Create an extrusion that goes from the profile plane with one side distance extent</span>
+    Ptr&lt;ExtrudeFeatureInput&gt; extrudeInput =
+        extrudes-&gt;createInput(outerProfile, adsk::fusion::FeatureOperations::NewBodyFeatureOperation);
+    <span style="color:blue">// Create a distance extent definition</span>
+    Ptr&lt;DistanceExtentDefinition&gt; extent_distance = adsk::fusion::DistanceExtentDefinition::create(mm100);
+        extrudeInput-&gt;setOneSideExtent(extent_distance, adsk::fusion::ExtentDirections::PositiveExtentDirection));
+    <span style="color:blue">// Create the extrusion</span>
+    Ptr&lt;ExtrudeFeature&gt; extrude2 = extrudes-&gt;add(extrudeInput);
+    <span style="color:blue">// Get the body of the extrusion</span>
+    bodies = extrude2-&gt;bodies();
+    Ptr&lt;BRepBody&gt; body2 = bodies-&gt;item(0);
+    body2-&gt;name("distance, from profile");
+
+    <span style="color:blue">// Extrude Sample 3: Create an extrusion that starts from an entity and goes the specified distance.</span>
+    extrudeInput = extrudes-&gt;createInput(profVertical, adsk::fusion::FeatureOperations::NewBodyFeatureOperation);
+    <span style="color:blue">// Create a distance extent definition</span>
+    Ptr&lt;DistanceExtentDefinition&gt; extent_distance_2 = adsk::fusion::DistanceExtentDefinition::create(mm10);
+    <span style="color:blue">// Create a start extent that starts from a BRep face with an offset of 10 mm.</span>
+    Ptr&lt;BRepFaces&gt; faces = body1-&gt;faces();
+    Ptr&lt;BRepFace&gt; face = faces-&gt;item(0);
+    Ptr&lt;FromEntityStartDefinition&gt; start_from = adsk::fusion::FromEntityStartDefinition::create(face, mm10);
+        extrudeInput-&gt;setOneSideExtent(extent_distance_2, adsk::fusion::ExtentDirections::PositiveExtentDirection));
+    <span style="color:blue">// Create the extrusion</span>
+    Ptr&lt;ExtrudeFeature&gt; extrude3 = extrudes-&gt;add(extrudeInput);
+    <span style="color:blue">// Get the body of the extrusion</span>
+    bodies = extrude3-&gt;bodies();
+    Ptr&lt;BRepBody&gt; body3 = bodies-&gt;item(0);
+    body3-&gt;name("distance, from entity");
+
+    <span style="color:blue">// taperAngle is nullptr, because extrude start face is not a planar face in this case</span>
+    Ptr&lt;ModelParameter&gt; taperAngle = extrude3-&gt;taperAngleOne();
+
+    <span style="color:blue">// Edit the distance extent of the extrusion.</span>
+    Ptr&lt;ExtentDefinition&gt; extent1 = extrude3-&gt;extentOne();
+    Ptr&lt;DistanceExtentDefinition&gt; disDef = extent1-&gt;cast&lt;DistanceExtentDefinition&gt;();
+
+    Ptr&lt;ModelParameter&gt; distanceMP = disDef-&gt;distance();
+
+    <span style="color:blue">// Edit the start entity of the extrusion.</span>
+    Ptr&lt;FromEntityStartDefinition&gt; startDef_from = extrude3-&gt;startExtent();
+
+    Ptr&lt;BRepFaces&gt; faces2 = body2-&gt;faces();
+    Ptr&lt;BRepFace&gt; outerFace = faces2-&gt;item(0);
+
+    Ptr&lt;TimelineObject&gt; extrudeTimelineObj = extrude3-&gt;timelineObject();
+
+    <span style="color:blue">// Edit the offset to the start entity in the extrusion.</span>
+    startDef_from = extrude3-&gt;startExtent();
+    Ptr&lt;ModelParameter&gt; offsetMP = startDef_from-&gt;offset();
+
+    <span style="color:blue">// Extrude Sample 4: Create an extrusion that goes from the profile plane to a specified entity.</span>
+    extrudeInput = extrudes-&gt;createInput(profVertical, adsk::fusion::FeatureOperations::NewBodyFeatureOperation);
+    <span style="color:blue">// Create a to-entity extent definition</span>
+    bool isChained = true;
+    Ptr&lt;ToEntityExtentDefinition&gt; extent_toentity = adsk::fusion::ToEntityExtentDefinition::create(body1, isChained);
+    <span style="color:blue">// Set the one side extent with the to-entity-extent-definition, and with a taper angle of 0 degree</span>
+        extrudeInput-&gt;setOneSideExtent(extent_toentity, adsk::fusion::ExtentDirections::PositiveExtentDirection, deg0));
+    <span style="color:blue">// Create an offset type start definition</span>
+    Ptr&lt;OffsetStartDefinition&gt; start_offset = adsk::fusion::OffsetStartDefinition::create(mm10);
+    <span style="color:blue">// Create the extrusion</span>
+    Ptr&lt;ExtrudeFeature&gt; extrude4 = extrudes-&gt;add(extrudeInput);
+    <span style="color:blue">// Get the body of the extrusion</span>
+    bodies = extrude4-&gt;bodies();
+    Ptr&lt;BRepBody&gt; body4 = bodies-&gt;item(0);
+    body4-&gt;name("to entity, from offset");
+
+    <span style="color:blue">// Edit the start offset of the extrusion</span>
+    Ptr&lt;OffsetStartDefinition&gt; startDef_offset = extrude4-&gt;startExtent();
+    offsetMP = startDef_offset-&gt;offset();
+
+    <span style="color:blue">// Edit the to-entity extent definition of the extrusion</span>
+    Ptr&lt;Vector3D&gt; negative = adsk::core::Vector3D::create(-1, 0, 0);
+    Ptr&lt;ToEntityExtentDefinition&gt; toDef = extrude4-&gt;extentOne();
+    extrudeTimelineObj = extrude4-&gt;timelineObject();
+
+    <span style="color:blue">// Extrude Sample 5: Create an extrusion that goes through all entities</span>
+    extrudeInput = extrudes-&gt;createInput(profVertical, adsk::fusion::FeatureOperations::NewBodyFeatureOperation);
+    <span style="color:blue">// Create an extent definition of through-all type.</span>
+    Ptr&lt;ThroughAllExtentDefinition&gt; extent_all = adsk::fusion::ThroughAllExtentDefinition::create();
+        extrudeInput-&gt;setOneSideExtent(extent_all, adsk::fusion::ExtentDirections::PositiveExtentDirection, deg2));
+    <span style="color:blue">// Set the extrusion start with an offset</span>
+    Ptr&lt;ExtrudeFeature&gt; extrude5 = extrudes-&gt;add(extrudeInput);
+    <span style="color:blue">// Get the body of the extrusion</span>
+    bodies = extrude5-&gt;bodies();
+    Ptr&lt;BRepBody&gt; body5 = bodies-&gt;item(0);
+    body5-&gt;name("through-all, from offset");
+
+    <span style="color:blue">// Edit the start offset</span>
+    startDef_offset = extrude5-&gt;startExtent();
+    offsetMP = startDef_offset-&gt;offset();
+
+    <span style="color:blue">// Edit the direction of the extrusion, make it in the same direction as the sketch plane.</span>
+    Ptr&lt;ThroughAllExtentDefinition&gt; allDef = extrude5-&gt;extentOne();
+    extrudeTimelineObj = extrude5-&gt;timelineObject();
+    if (allDef-&gt;isPositiveDirection())
+    {
+    }
+
+    <span style="color:blue">// Extrude Sample 6: Create a symmetric extrusion that goes 10 mm from the profile plane with a 5 degree taper</span>
+    <span style="color:blue">// angle.</span>
+    bool isFullLength = true;
+    extrudeInput = extrudes-&gt;createInput(profVertical, adsk::fusion::FeatureOperations::NewBodyFeatureOperation);
+    Ptr&lt;ExtrudeFeature&gt; extrude6 = extrudes-&gt;add(extrudeInput);
+    <span style="color:blue">// Get the body of the extrusion</span>
+    bodies = extrude6-&gt;bodies();
+    Ptr&lt;BRepBody&gt; body6 = bodies-&gt;item(0);
+    body6-&gt;name("symmetric");
+
+    <span style="color:blue">// Edit the measurement, distance and taper angle properties of the symmetric extrusion</span>
+    Ptr&lt;SymmetricExtentDefinition&gt; symDef = extrude6-&gt;extentOne();
+    extrudeTimelineObj = extrude6-&gt;timelineObject();
+    Ptr&lt;ModelParameter&gt; taperAngleMP = symDef-&gt;taperAngle();
+    distanceMP = symDef-&gt;distance();
+    <span style="color:blue">// another way to get the symmetric extent definition</span>
+    if (extrude6-&gt;extentType() == adsk::fusion::FeatureExtentTypes::SymmetricFeatureExtentType)
+    {
+        Ptr&lt;SymmetricExtentDefinition&gt; symDef1 = extrude6-&gt;symmetricExtent();
+        Ptr&lt;ModelParameter&gt; distanceMP1 = symDef1-&gt;distance();
+    }
+
+    <span style="color:blue">// Extrude Sample 7: Create a 2-side extrusion, whose 1st side is 100 mm distance extent, and 2nd side is 10 mm</span>
+    <span style="color:blue">// distance extent.</span>
+    extrudeInput = extrudes-&gt;createInput(profVertical, adsk::fusion::FeatureOperations::CutFeatureOperation);
+    Ptr&lt;DistanceExtentDefinition&gt; extent_distance_20cm =
+        adsk::fusion::DistanceExtentDefinition::create(adsk::core::ValueInput::createByString("20cm"));
+
+    Ptr&lt;ExtrudeFeature&gt; extrude7 = extrudes-&gt;add(extrudeInput);
+
+    <span style="color:blue">// Edit the taper angles of both sides in the extrusion</span>
+    Ptr&lt;ModelParameter&gt; angleMP_1 = extrude7-&gt;taperAngleOne();
+    Ptr&lt;ModelParameter&gt; angleMP_2 = extrude7-&gt;taperAngleTwo();
+    <span style="color:blue">// Get the extent definition of both sides</span>
+    Ptr&lt;DistanceExtentDefinition&gt; extent_1 = extrude7-&gt;extentOne();
+    Ptr&lt;DistanceExtentDefinition&gt; extent_2 = extrude7-&gt;extentTwo();
+    <span style="color:blue">// Edit the distances the extrusion</span>
+    Ptr&lt;ModelParameter&gt; distanceMP_1 = extent_1-&gt;distance();
+    Ptr&lt;ModelParameter&gt; distanceMP_2 = extent_2-&gt;distance();
+
+
+    return true;
+}</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(ExtrudeFeatureSample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

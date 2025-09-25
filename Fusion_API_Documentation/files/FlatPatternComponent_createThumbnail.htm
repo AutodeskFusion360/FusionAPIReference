@@ -1,0 +1,125 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/FlatPatternComponent_createThumbnail.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="08/10/2024">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="FlatPatternComponent_createThumbnail">
+    <meta name="description" content="FlatPatternComponent.createThumbnail Method">
+    <meta name="topicid" content="GUID-2A9FA2B4-BC57-4533-B670-857AA318996F">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>FlatPatternComponent.createThumbnail Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">FlatPatternComponent.createThumbnail Method</h1>
+
+          Parent Object: <a href="FlatPatternComponent.htm">FlatPatternComponent</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/SheetMetal/FlatPatternComponent.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Creates a thumbnail for this component. This can be a root component to get a thumbnail that represents the associated file, or it can be any sub component to get a thumbnail of a subset of the complete assembly or individual parts.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"flatPatternComponent_var" is a variable referencing a <a href="FlatPatternComponent.htm">FlatPatternComponent</a> object.<code><pre class="api-code"><span style="color:blue"># Uses no optional arguments.</span><br />returnValue = flatPatternComponent_var.<b>createThumbnail</b>()<br /><br /><span style="color:blue"># Uses optional arguments.</span><br />returnValue = flatPatternComponent_var.<b>createThumbnail</b>(width, height, imageType)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"flatPatternComponent_var" is a variable referencing a <a href="FlatPatternComponent.htm">FlatPatternComponent</a> object.<br /><br /><code><pre class="api-code">#include &lt;Fusion/SheetMetal/FlatPatternComponent.h&gt;<br /><br /><span style="color:blue">// Uses no optional arguments.</span><br />returnValue = flatPatternComponent_var-&gt;<b>createThumbnail</b>();<br /><br /><span style="color:blue">// Uses optional arguments.</span><br />returnValue = flatPatternComponent_var-&gt;<b>createThumbnail</b>(width, height, imageType);</pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;"><a href="DataObject.htm">DataObject</a></td>
+        <td class="api-list">Returns a DataObject that you can use to save the thumbnail to a file or to access the binary data of the bitmap directly.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">width</td>
+        <td class="api-list">integer</td>
+        <td class="api-list">Optional argument to define the width of the thumbnail in pixels. A default width of 256 pixels is used if no width is specified.<br /><br /> This is an optional argument whose default value is 256.</td>
+      </tr>
+      <tr>
+        <td class="api-list">height</td>
+        <td class="api-list">integer</td>
+        <td class="api-list">Optional argument to define the height of the thumbnail in pixels. A default height of 256 pixels is used if no height is specified.<br /><br /> This is an optional argument whose default value is 256.</td>
+      </tr>
+      <tr>
+        <td class="api-list">imageType</td>
+        <td class="api-list">string</td>
+        <td class="api-list">Optional argument to define the type of image data to create. The default of PNG is used if no type is specified. Valid types include "PNG", "JPG", "TIF", and "BMP".<br /><br /> This is an optional argument whose default value is "PNG".</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version November 2024<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(FlatPatternComponent.createThumbnail%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

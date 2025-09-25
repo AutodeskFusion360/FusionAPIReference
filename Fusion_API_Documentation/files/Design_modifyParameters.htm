@@ -1,0 +1,120 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/Design_modifyParameters.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="30/08/2022">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="Design_modifyParameters">
+    <meta name="description" content="Design.modifyParameters Method">
+    <meta name="topicid" content="GUID-BCE0AE8B-AA02-4A4E-A81C-09E6A887E41D">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Design.modifyParameters Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Design.modifyParameters Method</h1>
+
+          Parent Object: <a href="Design.htm">Design</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Fusion/Design.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Modifies the values of many parameters all at once. Changing them all at once is more efficient than modifying them one at a time.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"design_var" is a variable referencing a <a href="Design.htm">Design</a> object.<code><pre class="api-code">returnValue = design_var.<b>modifyParameters</b>(parameters, values)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"design_var" is a variable referencing a <a href="Design.htm">Design</a> object.<br /><br /><code><pre class="api-code">#include &lt;Fusion/Fusion/Design.h&gt;<br /><br />returnValue = design_var-&gt;<b>modifyParameters</b>(parameters, values);<br /></pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;">boolean</td>
+        <td class="api-list">Returns true if setting all of the parameters was successful. Setting multiple parameters is either all or none. If it fails to set any parameters, none of them are updated, and the method will return false.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">parameters</td>
+        <td class="api-list">Parameter[]</td>
+        <td class="api-list">An array of UserParameter and ModelParameter objects that you want to change the value. The parameters must all exist within the Design object you're calling this method from. They can be in any component but must be local components owned by the Design.</td>
+      </tr>
+      <tr>
+        <td class="api-list">values</td>
+        <td class="api-list">ValueInput[]</td>
+        <td class="api-list">An array of ValueInput objects that defines the new value for each parameter defined by the "parameters" argument. This array must be the same size as the array used for the "parameters" argument, and the items in the arrays are used in the order they exist within the arrays. For example, the parameter at index 0 will use the value at index 0.<br/><br/> If you use the createByString method to create the ValueInput, the expression of the parameter will be edited, and the effect is the same as interactively editing the expression.When you set the expression, you can include units, references to other parameters, and math operators and functions.For example, "(Length / 3) * cos(Angle)" is a valid expression for a distance parameter if the parameters "Length" and "Angle" already exist.<br/><br/> If you use the createByReal method, the value is assigned directly and is always in the internal units for the unit type associated with the parameter.For example, if the parameter is a length, the value will ALWAYS be used as centimeters. If the parameter is an angle, the value will ALWAYS be used as radians.This is because the default design unit types for length are ignored, and internal units are ALWAYS used.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version September 2022<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(Design.modifyParameters%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

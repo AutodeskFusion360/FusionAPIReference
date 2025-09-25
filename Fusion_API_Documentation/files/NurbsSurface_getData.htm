@@ -1,0 +1,160 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/NurbsSurface_getData.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="NurbsSurface_getData">
+    <meta name="description" content="NurbsSurface.getData Method">
+    <meta name="topicid" content="GUID-36442287-2c85-45cc-b630-0cca7b4790af">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>NurbsSurface.getData Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">NurbsSurface.getData Method</h1>
+
+          Parent Object: <a href="NurbsSurface.htm">NurbsSurface</a><br>Defined in namespace "adsk::core" and the header file is &lt;Core/Geometry/NurbsSurface.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Gets the data that defines the NURBS surface.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"nurbsSurface_var" is a variable referencing a <a href="NurbsSurface.htm">NurbsSurface</a> object.<br /><br /><code><pre class="api-code">(returnValue, degreeU, degreeV, controlPointCountU, controlPointCountV, controlPoints, knotsU, knotsV, weights, propertiesU, propertiesV) = nurbsSurface_var.<b>getData</b>()</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td><code><pre class="api-code"><br >#include &lt;Core/Geometry/NurbsSurface.h<br /><br /><span style="color:blue">// Declare the output arguments.</span><br />integer degreeU;<br />integer degreeV;<br />integer controlPointCountU;<br />integer controlPointCountV;<br />Point3D[] controlPoints;<br />double[] knotsU;<br />double[] knotsV;<br />double[] weights;<br />NurbsSurfaceProperties propertiesU;<br />NurbsSurfaceProperties propertiesV;<br />boolean returnValue = nurbsSurface_var-&gt;<b>getData</b>(degreeU, degreeV, controlPointCountU, controlPointCountV, controlPoints, knotsU, knotsV, weights, propertiesU, propertiesV);</pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;">boolean</td>
+        <td class="api-list">Returns true if successful.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">degreeU</td>
+        <td class="api-list">integer</td>
+        <td class="api-list">The output degree in the U direction.</td>
+      </tr>
+      <tr>
+        <td class="api-list">degreeV</td>
+        <td class="api-list">integer</td>
+        <td class="api-list">The output degree in the V direction.</td>
+      </tr>
+      <tr>
+        <td class="api-list">controlPointCountU</td>
+        <td class="api-list">integer</td>
+        <td class="api-list">The output number of control points in the U direction.</td>
+      </tr>
+      <tr>
+        <td class="api-list">controlPointCountV</td>
+        <td class="api-list">integer</td>
+        <td class="api-list">The output number of control points in the V direction.</td>
+      </tr>
+      <tr>
+        <td class="api-list">controlPoints</td>
+        <td class="api-list">Point3D[]</td>
+        <td class="api-list">An output array of surface control points.</td>
+      </tr>
+      <tr>
+        <td class="api-list">knotsU</td>
+        <td class="api-list">double[]</td>
+        <td class="api-list">The output knot vector for the U direction.</td>
+      </tr>
+      <tr>
+        <td class="api-list">knotsV</td>
+        <td class="api-list">double[]</td>
+        <td class="api-list">The output knot vector for the V direction.</td>
+      </tr>
+      <tr>
+        <td class="api-list">weights</td>
+        <td class="api-list">double[]</td>
+        <td class="api-list">An output array of weights that corresponds to the control points of the surface.</td>
+      </tr>
+      <tr>
+        <td class="api-list">propertiesU</td>
+        <td class="api-list"><a href="NurbsSurfaceProperties.htm">NurbsSurfaceProperties</a></td>
+        <td class="api-list">The output properties (NurbsSurfaceProperties) of the surface in the U direction.</td>
+      </tr>
+      <tr>
+        <td class="api-list">propertiesV</td>
+        <td class="api-list"><a href="NurbsSurfaceProperties.htm">NurbsSurfaceProperties</a></td>
+        <td class="api-list">The output properties (NurbsSurfaceProperties) of the surface in the V direction.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(NurbsSurface.getData%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

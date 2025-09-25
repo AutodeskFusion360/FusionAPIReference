@@ -1,0 +1,142 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/MeasureManager_measureAngle.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="28/11/2017">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="MeasureManager_measureAngle">
+    <meta name="description" content="MeasureManager.measureAngle Method">
+    <meta name="topicid" content="GUID-3FBDCE61-33C5-4667-AAE7-245E26AB6181">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>MeasureManager.measureAngle Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">MeasureManager.measureAngle Method</h1>
+
+          Parent Object: <a href="MeasureManager.htm">MeasureManager</a><br>Defined in namespace "adsk::core" and the header file is &lt;Core/Application/MeasureManager.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Measures the angle between the input geometry.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"measureManager_var" is a variable referencing a <a href="MeasureManager.htm">MeasureManager</a> object.<code><pre class="api-code"><span style="color:blue"># Uses no optional arguments.</span><br />returnValue = measureManager_var.<b>measureAngle</b>(geometryOne, geometryTwo)<br /><br /><span style="color:blue"># Uses optional arguments.</span><br />returnValue = measureManager_var.<b>measureAngle</b>(geometryOne, geometryTwo, geometryThree)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"measureManager_var" is a variable referencing a <a href="MeasureManager.htm">MeasureManager</a> object.<br /><br /><code><pre class="api-code">#include &lt;Core/Application/MeasureManager.h&gt;<br /><br /><span style="color:blue">// Uses no optional arguments.</span><br />returnValue = measureManager_var-&gt;<b>measureAngle</b>(geometryOne, geometryTwo);<br /><br /><span style="color:blue">// Uses optional arguments.</span><br />returnValue = measureManager_var-&gt;<b>measureAngle</b>(geometryOne, geometryTwo, geometryThree);</pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;"><a href="MeasureResults.htm">MeasureResults</a></td>
+        <td class="api-list">A MeasureResults object that contains the angle and the two points on the geometry that the angle that was measured between them in radians.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">geometryOne</td>
+        <td class="api-list"><a href="Base.htm">Base</a></td>
+        <td class="api-list">The first geometry to measure the angle to. This can be any 3D point geometry (Construction Point, Vertex, SketchPoint, or Point3D), any 3D linear geometry (Construction Axis, linear BRepEdge, SketchLine, Line3D, or InfiniteLine3D), or any planar geometry (Construction Plane, planar BRepFace, or Plane).</td>
+      </tr>
+      <tr>
+        <td class="api-list">geometryTwo</td>
+        <td class="api-list"><a href="Base.htm">Base</a></td>
+        <td class="api-list">The second geometry to measure the angle to. This can be any 3D point geometry (Construction Point, Vertex, SketchPoint, or Point3D), any 3D linear geometry (Construction Axis, linear BRepEdge, SketchLine, Line3D, or InfiniteLine3D), or any planar geometry (Construction Plane, planar BRepFace, or Plane).</td>
+      </tr>
+      <tr>
+        <td class="api-list">geometryThree</td>
+        <td class="api-list"><a href="Base.htm">Base</a></td>
+        <td class="api-list">The optional third geometry to measure the angle to. This is only used when the first two geometries are points and this defines the third point. When three points define a triangle, the apex of the triangle is defined by the second point. A point can be defined by a Construction Point, Vertex, SketchPoint, or Point3D object.<br /><br /> This is an optional argument whose default value is null.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeasureSample_Sample.htm">Measure Sample</a></td>
+        <td class="api-list">Measure related functions</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version December 2017<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(MeasureManager.measureAngle%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,77 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/Events_UM.htm#!">
+    <meta name="contextid" content="Events_UM">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="10/3/2015">
+    <meta name="user-comments" content="enable">
+    <meta name="description" content="">
+    <meta name="topicid" content="GUID-BC156A40-9E14-4C25-828D-764F087FD26C">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Events in the Fusion API</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+	<link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"/>
+	<script type="text/javascript" src="/view/clientframework/client.js"><!--filler--></script> 
+	<script>
+	  // This turns on the display of the copyright notice which is not visible by default.
+	  // Because the head is removed when used in the web help, this function will only exists
+	  // when the chm help is being created.
+	  window.onload = function() {
+		copyrightElement = document.getElementById('CopyrightNotice');
+		copyrightElement.style.display = 'block';
+	  };
+	</script>
+</head>
+<body>
+<link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+	
+<h2 class="api">Events in the Fusion API</h2>
+<p Class="api">Events allow you to receive notifications when specific actions occur within Fusion. Events are a crucial component when creating custom Fusion commands. Through events, your program can know that the user clicked the button associated with your command and interact with the user while your command is running (preview, input validation, selection, execute, etc.).</p>
+
+<p Class="api">To implement an event, you need to add a "handler" function to your code and connect that handler to the event. Fusion will call your handler function whenever the related action occurs in Fusion that causes the event to fire. Even though the concept of implementing an event is the same, the actual practice differs from one language to another. Therefore, specifics for setting up events are provided in the topics covering each supported language; <a href="PythonSpecific_UM.htm">Python</a> and <a href="CPPSpecific_UM.htm">C++</a>. In fact, for Python, there is a Fusion library provided to simplify using events. You can read more about it in the topic about the <a href=PythonTemplate_UM.htm>Fusion Python Add-In Template.</a></p>
+
+<p Class="api">One thing to be aware of that can significantly simplify adding support for events is the "Syntax" portion of the help for every event shows example code for the event handler and connecting the handler to the event. You can copy and paste this code from the help, make minor edits to a couple of variable names, and you'll have the event implemented. There are two tabs for Python and one for C++. The reason for the two tabs with Python is that the tab labeled "Python Using fusion360utils" uses a library provided when you create a Python add-in. This library simplifies the implementation of events. The "Python" tab illustrates implementing an event handler without help from an external library.</p>
+
+<div align="center"><img src="../images/EventHelpSample.png" align="middle" alt="Event Sample"></div>
+<br><br>
+
+<p Class="api">Some basic concepts apply to all events, regardless of your programming language.
+<ol>
+<li>The initial access to an event is through a property on the object that supports the event.  For example, the UserInterface object supports the activeSelectionChanged, commandCreated, commandStarting, and several other events.  These are accessed through properties of the same name on the UserInterface object.  Events are listed in an "Events" section within the help topic of the object, as shown below.</li>
+<br />
+<div align="center"><img src="../images/EventsHelp1.png" align="middle" alt="Workspace Events"></div>
+<br><br>
+
+<li>The object returned by the event property is an object that derives from the Event base class. Any object derived from Event supports the "add" method, which you call to connect the event to your handler. Event objects also support the "remove" method to disconnect a handle, they support the "name" property, which returns the name of the event, and they support the "sender" property, which returns the object that is firing the event. For example, the ApplicationCommandEvent object returned by the commandStarting event will return the UserInterface object as the event's sender.</li>
+
+<li>When implementing the handler, the handler type must match the type of event. For example, in the case of the commandStarting event, the event type is ApplicationCommandEvent, and the handler is ApplicationCommandEventHandler. In addition, all handlers support a single method named "notify". The notify method is called by Fusion when the event occurs and by reacting to the notify method, you can handle the event.</li>
+
+<li>The notify method has a single argument that provides an object derived from EventArgs. This object provides information about the event being fired. All objects derived from EventArgs support the firingEvent property, which returns the event object that is firing the event. In this example of the commandStarting event, it will return the ApplicationCommandEvent object. Most objects derived from EventArgs also support other properties that provide additional information specific to that type of event. For example, in the case of the notify method for the commandStarting event, an ApplicationCommandEventArgs object is returned and supports the commandDefinition, commandId, and isCanceled properties specific to application command events. These provide information about which command is starting and allow you to cancel it.</li>  
+</ol>
+</p>
+
+<br />
+<br />
+<div id="CopyrightNotice" style="display:none;">
+  <hr />
+  <table width="100%" style="font-size:15">
+	<tr>
+	  <td align="left">
+		&copy; Copyright 2025 Autodesk, Inc.
+	  </td>
+	  <td align="right">
+		<a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(Events_UM)">Comment on this page.</a>
+	  </td>
+	</tr>
+  </table>
+</div>
+</body>
+</html>

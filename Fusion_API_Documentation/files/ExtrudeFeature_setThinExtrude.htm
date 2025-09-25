@@ -1,0 +1,130 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/ExtrudeFeature_setThinExtrude.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="01/04/2021">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="ExtrudeFeature_setThinExtrude">
+    <meta name="description" content="ExtrudeFeature.setThinExtrude Method">
+    <meta name="topicid" content="GUID-CE8304D5-7D37-462E-AC6C-46AD9775FD73">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>ExtrudeFeature.setThinExtrude Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">ExtrudeFeature.setThinExtrude Method</h1>
+
+          Parent Object: <a href="ExtrudeFeature.htm">ExtrudeFeature</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Features/ExtrudeFeature.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Changes the extrude feature to be a thin extrude. This is only valid if the isThinExtrude property is False. If the extrusion is already a thin extrude, you can use the properties on the ExtrudeFeature to modify the thin extrude specific values.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"extrudeFeature_var" is a variable referencing an <a href="ExtrudeFeature.htm">ExtrudeFeature</a> object.<code><pre class="api-code"><span style="color:blue"># Uses no optional arguments.</span><br />returnValue = extrudeFeature_var.<b>setThinExtrude</b>(thinExtrudeWallLocationOne, thinExtrudeWallThicknessOne)<br /><br /><span style="color:blue"># Uses optional arguments.</span><br />returnValue = extrudeFeature_var.<b>setThinExtrude</b>(thinExtrudeWallLocationOne, thinExtrudeWallThicknessOne, thinExtrudeWallLocationTwo, thinExtrudeWallThicknessTwo)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"extrudeFeature_var" is a variable referencing an <a href="ExtrudeFeature.htm">ExtrudeFeature</a> object.<br /><br /><code><pre class="api-code">#include &lt;Fusion/Features/ExtrudeFeature.h&gt;<br /><br /><span style="color:blue">// Uses no optional arguments.</span><br />returnValue = extrudeFeature_var-&gt;<b>setThinExtrude</b>(thinExtrudeWallLocationOne, thinExtrudeWallThicknessOne);<br /><br /><span style="color:blue">// Uses optional arguments.</span><br />returnValue = extrudeFeature_var-&gt;<b>setThinExtrude</b>(thinExtrudeWallLocationOne, thinExtrudeWallThicknessOne, thinExtrudeWallLocationTwo, thinExtrudeWallThicknessTwo);</pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;">boolean</td>
+        <td class="api-list">Returns true if successful.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">thinExtrudeWallLocationOne</td>
+        <td class="api-list"><a href="ThinExtrudeWallLocation.htm">ThinExtrudeWallLocation</a></td>
+        <td class="api-list">Specifies the position of the thin wall extrude with respect to the profile being extruded. This defines the direction for a single sided thin extrude or side one of a two-sided extrusion.</td>
+      </tr>
+      <tr>
+        <td class="api-list">thinExtrudeWallThicknessOne</td>
+        <td class="api-list"><a href="ValueInput.htm">ValueInput</a></td>
+        <td class="api-list">A ValueInput object that defines the thickness for a single sided thin extrude or side one of a two-sided extrusion .</td>
+      </tr>
+      <tr>
+        <td class="api-list">thinExtrudeWallLocationTwo</td>
+        <td class="api-list"><a href="ThinExtrudeWallLocation.htm">ThinExtrudeWallLocation</a></td>
+        <td class="api-list">Optional argument that specifies the position of side two of a two-sided extrusion. This argument is ignored for a single sided thin extrude.<br /><br /> This is an optional argument whose default value is ThinExtrudeWallLocation.Side1.</td>
+      </tr>
+      <tr>
+        <td class="api-list">thinExtrudeWallThicknessTwo</td>
+        <td class="api-list"><a href="ValueInput.htm">ValueInput</a></td>
+        <td class="api-list">Optional argument that is a ValueInput object that defines the thickness for side two of a two-sided extrusion. This argument is ignored for a single sided thin extrude.<br /><br /> This is an optional argument whose default value is null.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version April 2021<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(ExtrudeFeature.setThinExtrude%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

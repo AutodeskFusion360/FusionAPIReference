@@ -1,0 +1,158 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/IntegerSpinnerCommandInput.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="16/7/2015">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="IntegerSpinnerCommandInput">
+    <meta name="description" content="IntegerSpinnerCommandInput Object">
+    <meta name="topicid" content="GUID-12aa42ec-0171-42a1-9b12-83ddacc5eb44">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>IntegerSpinnerCommandInput Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">IntegerSpinnerCommandInput Object
+			</h1>
+              Derived from: <a href="CommandInput.htm">CommandInput</a> Object
+            <br>Defined in namespace "adsk::core" and the header file is &lt;Core/UserInterface/IntegerSpinnerCommandInput.h&gt;<h2 class="api">
+          Description
+        </h2>Provides a command input to get the value of a spinner from the user, the value type is integer.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="IntegerSpinnerCommandInput_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="IntegerSpinnerCommandInput_deleteMe.htm">deleteMe</a></td>
+        <td class="api-list">Deletes this Command input.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="IntegerSpinnerCommandInput_commandInputs.htm">commandInputs</a></td>
+        <td class="api-list">Gets the CommandInputs class of the parent, which can be a Command, GroupCommandInput or TabCommandInput.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="IntegerSpinnerCommandInput_id.htm">id</a></td>
+        <td class="api-list">Gets the unique identifier for this input in the command's CommandInputs.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="IntegerSpinnerCommandInput_isEnabled.htm">isEnabled</a></td>
+        <td class="api-list">Gets or sets if this input is currently enabled or disabled for user interaction.<br/><br/> Currently, the isEnabled property does not disable SelectionCommandInput objects but instead has the same effect as the SelectionCommandInput.hasFocus property.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="IntegerSpinnerCommandInput_isFullWidth.htm">isFullWidth</a></td>
+        <td class="api-list">Gets or sets if this input fills the entire width of the dialog. If true, the name is ignored and the input control will fill the entire width of the command dialog. The default value for this property in a new command input if false, or not to fill the width. This property does not apply to GroupCommandInputs or TabCommandInputs.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="IntegerSpinnerCommandInput_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="IntegerSpinnerCommandInput_isVisible.htm">isVisible</a></td>
+        <td class="api-list">Gets or sets if this input will be visible to the user.<br/><br/> Setting a SelectionCommandInput to be invisible will clear any selections it currently has.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="IntegerSpinnerCommandInput_maximumValue.htm">maximumValue</a></td>
+        <td class="api-list">Gets the maximum allowed value of the spinner.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="IntegerSpinnerCommandInput_minimumValue.htm">minimumValue</a></td>
+        <td class="api-list">Gets the minimum allowed value of the spinner.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="IntegerSpinnerCommandInput_name.htm">name</a></td>
+        <td class="api-list">Gets the user visible name of this input.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="IntegerSpinnerCommandInput_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="IntegerSpinnerCommandInput_parentCommand.htm">parentCommand</a></td>
+        <td class="api-list">Gets the parent Command.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="IntegerSpinnerCommandInput_parentCommandInput.htm">parentCommandInput</a></td>
+        <td class="api-list">Gets the parent CommandInput if this commandInput is the child of a TabCommandInput or GroupCommandInput. Returns null if there is no parent.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="IntegerSpinnerCommandInput_spinStep.htm">spinStep</a></td>
+        <td class="api-list">Gets the spin step. The value should be more than zero. This is the amount the spinner will advance when the user clicks the spin button beside the value.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="IntegerSpinnerCommandInput_toolClipFilename.htm">toolClipFilename</a></td>
+        <td class="api-list">Gets or sets the full filename of the image file (PNG) used for the tool clip. The tooltip is always shown but as the user hovers over the control it will progressively display the tool clip and description text.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="IntegerSpinnerCommandInput_tooltip.htm">tooltip</a></td>
+        <td class="api-list">Gets or sets the base tooltip string. This is always shown for commands. If the tooltip description and/or tool clip are also specified then the tooltip will progressively display more information as the user hovers the mouse over the control.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="IntegerSpinnerCommandInput_tooltipDescription.htm">tooltipDescription</a></td>
+        <td class="api-list">Gets or sets additional text to display progressively along with the tooltip. The text for the description can contain some basic HTML formatting tags to format the tags. For example the br tag can be used to create multiple paragraphs. The tooltip is always shown but as the user hovers over the control it will progressively display the tool clip and description text.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="IntegerSpinnerCommandInput_value.htm">value</a></td>
+        <td class="api-list">Gets and sets the value associated with this input.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="CommandInputs_addIntegerSpinnerCommandInput.htm">CommandInputs.addIntegerSpinnerCommandInput</a><h2 class="api">
+            Version
+          </h2>
+        Introduced in version July 2015<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(IntegerSpinnerCommandInput%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

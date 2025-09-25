@@ -1,0 +1,365 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/BrepWireSample.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="BrepWireSample_Sample">
+    <meta name="description" content="BrepWire Sample Sample">
+    <meta name="topicid" content="GUID-0dabb6e5-6a0e-4479-a2f9-beb2341d0bb6">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>BrepWire Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">BrepWire Sample</h1>
+    <h2 class="api">
+          Description
+        </h2>BrepWires and BrepWire related functions<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">import adsk.core, adsk.fusion, adsk.cam, traceback
+
+def CreateWireBody():
+    <span style="color:blue"># Get temproray brep manager</span>
+    tempBrepMrg = adsk.fusion.TemporaryBRepManager.get() 
+    
+    conter = adsk.core.Point3D.create(10.0, 0.0, 5.0)
+    normal = adsk.core.Vector3D.create(0.0, 0.0, 1.0)
+    circle1 = adsk.core.Circle3D.createByCenter(conter, normal, 3.0)
+    circle2 = adsk.core.Circle3D.createByCenter(conter, normal, 2.0)
+    curves = []
+    curves.append(circle1)
+    curves.append(circle2)     
+    
+    <span style="color:blue"># Create wire from curves</span>
+    wireBody, edgeMap = tempBrepMrg.createWireFromCurves(curves)
+    return wireBody
+    
+def run(context):
+    ui = None
+    try:
+        app = adsk.core.Application.get()
+        ui  = app.userInterface
+        
+        <span style="color:blue"># Create a new document</span>
+        doc = app.documents.add(adsk.core.DocumentTypes.FusionDesignDocumentType)
+        product = app.activeProduct
+        design = adsk.fusion.Design.cast(product)
+        
+        <span style="color:blue"># Set the design is a direct modelling design</span>
+        design.designType = adsk.fusion.DesignTypes.DirectDesignType
+        
+        <span style="color:blue">#Get the root component</span>
+        rootComp = design.rootComponent
+        
+        <span style="color:blue"># Create a sub component under root component</span>
+        occs = rootComp.occurrences
+        transform = adsk.core.Matrix3D.create()
+        subOcc = occs.addNewComponent(transform)  
+        subComp = subOcc.component
+    
+        <span style="color:blue"># Create temproray wire body </span>
+        wireBody = CreateWireBody()
+        
+        <span style="color:blue"># Add wireBody to sub-component</span>
+        bodies = subComp.bRepBodies
+        bodies.add(wireBody)
+        
+        <span style="color:blue"># Get the brep wire body</span>
+        brepWireBody = bodies.item(0)
+        
+        <span style="color:blue"># Get brep wires</span>
+        brepWires = brepWireBody.wires
+        
+        <span style="color:blue"># Get brep wires count</span>
+        count = brepWires.count
+        print("BrepWires count is {}".format(count))
+        
+        <span style="color:blue"># Get brep wire</span>
+        brepWire = brepWires.item(0)
+        
+        <span style="color:blue"># Get brep edges from brepWire</span>
+        brepEdges = brepWire.edges
+        
+        <span style="color:blue"># Get vertices from brepWire</span>
+        vertices = brepWire.vertices
+        
+        <span style="color:blue"># Get brep coEdges from brepWire</span>
+        coEdges = brepWire.coEdges
+        
+        <span style="color:blue"># Get the brep wire is planar or not</span>
+        isPlanar = brepWire.isPlanar
+        print("Is the brep wire planar? {}".format(isPlanar))
+        
+        <span style="color:blue"># Get wire's parent brep body</span>
+        parent = brepWire.parent
+        
+        <span style="color:blue"># offse the planar brep wire</span>
+        offsetType = adsk.fusion.OffsetCornerTypes.LinearOffsetCornerType
+        planeNormal = adsk.core.Vector3D.create(0.0, 0.0, 1.0)
+        offsetBody = brepWire.offsetPlanarWire(planeNormal, 3.0, offsetType)
+
+        <span style="color:blue"># Create brep wire proxy    </span>
+        wireProxy = brepWire.createForAssemblyContext(subOcc)
+        
+        <span style="color:blue"># Get native brep wire</span>
+        nativeBrepWire = wireProxy.nativeObject
+        
+        <span style="color:blue"># Get the assembly occurrence</span>
+        occurence = wireProxy.assemblyContext
+        
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code">#include &lt;Core/Application/Application.h&gt;
+#include &lt;Core/UserInterface/UserInterface.h&gt;
+#include &lt;Core/Application/Document.h&gt;
+#include &lt;Core/Application/Documents.h&gt;
+#include &lt;Fusion/Components/Component.h&gt;
+#include &lt;Fusion/Fusion/Design.h&gt;
+#include &lt;Fusion/BRep/BRepBodies.h&gt;
+#include &lt;Fusion/BRep/BRepBody.h&gt;
+#include &lt;Fusion/BRep/BRepWires.h&gt;
+#include &lt;Fusion/BRep/BRepWire.h&gt;
+#include &lt;Fusion/BRep/BRepCoEdges.h&gt;
+#include &lt;Fusion/BRep/BRepEdges.h&gt;
+#include &lt;Fusion/BRep/BRepVertices.h&gt;
+#include &lt;Core/Geometry/Matrix3D.h&gt;
+#include &lt;Core/Geometry/Circle3D.h&gt;
+#include &lt;Core/Geometry/Point3D.h&gt;
+#include &lt;Core/Geometry/Vector3D.h&gt;
+#include &lt;Fusion/Components/Occurrences.h&gt;
+#include &lt;Fusion/Components/Occurrence.h&gt;
+#include &lt;Fusion/Components/Component.h&gt;
+#include &lt;Fusion/BRep/TemporaryBRepManager.h&gt;
+
+
+using namespace adsk::core;
+using namespace adsk::fusion;
+
+Ptr&lt;Application&gt; app;
+Ptr&lt;UserInterface&gt; ui;
+
+Ptr&lt;BRepBody&gt; CreateWireBody(std::vector&lt;Ptr&lt;BRepEdge&gt;&gt;& edgeMap)
+{
+    <span style="color:blue">// Get TemporaryBRepManager</span>
+    Ptr&lt;TemporaryBRepManager&gt; tempBRepMgr = TemporaryBRepManager::get();
+    if (!tempBRepMgr)
+        return nullptr;
+
+    Ptr&lt;Point3D&gt; center = Point3D::create(10.0, 0.0, 5.0);
+    Ptr&lt;Vector3D&gt; normal = Vector3D::create(0.0, 0.0, 1.0);
+    Ptr&lt;Circle3D&gt; circle1 = Circle3D::createByCenter(center, normal, 3.0);
+    Ptr&lt;Circle3D&gt; circle2 = Circle3D::createByCenter(center, normal, 2.0);
+
+    std::vector&lt;Ptr&lt;Curve3D&gt;&gt; curves;
+    curves.push_back(circle1);
+    curves.push_back(circle2);
+
+    <span style="color:blue">// Create wire from curves</span>
+    Ptr&lt;BRepBody&gt; wireBody = tempBRepMgr-&gt;createWireFromCurves(curves, edgeMap);
+
+    return wireBody;
+}
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    app = Application::get();
+    if (!app)
+        return false;
+
+    ui = app-&gt;userInterface();
+    if (!ui)
+        return false;
+
+    <span style="color:blue">// Create a new document</span>
+    Ptr&lt;Documents&gt; docs = app-&gt;documents();
+    if (!docs)
+        return false;
+
+    Ptr&lt;Document&gt; doc = docs-&gt;add(DocumentTypes::FusionDesignDocumentType);
+    if (!doc)
+        return false;
+
+    Ptr&lt;Design&gt; design = app-&gt;activeProduct();
+    if (!design)
+        return false;
+
+    <span style="color:blue">// Set the design is a direct modelling design</span>
+    design-&gt;designType(adsk::fusion::DirectDesignType);
+
+    <span style="color:blue">// Get the root component of active design</span>
+    Ptr&lt;Component&gt; rootComp = design-&gt;rootComponent();
+    if (!rootComp)
+        return false;
+
+    <span style="color:blue">// Create a sub component under root component</span>
+    Ptr&lt;Occurrences&gt; occs = rootComp-&gt;occurrences();
+    if (!occs)
+        return false;
+
+    Ptr&lt;Matrix3D&gt; transform = Matrix3D::create();
+    if (!transform)
+        return false;
+
+    Ptr&lt;Occurrence&gt; subOcc = occs-&gt;addNewComponent(transform);
+    if (!subOcc)
+        return false;
+
+    Ptr&lt;Component&gt; subComp = subOcc-&gt;component();
+    if (!subComp)
+        return false;
+
+    <span style="color:blue">// Create temproray wire body</span>
+    std::vector&lt;Ptr&lt;BRepEdge&gt;&gt; edgeMap;
+    Ptr&lt;BRepBody&gt; wireBody = CreateWireBody(edgeMap);
+    if (!wireBody)
+        return false;
+
+    <span style="color:blue">// Add wireBody to sub - component</span>
+    Ptr&lt;BRepBodies&gt; bodies = subComp-&gt;bRepBodies();
+    if (!bodies)
+        return false;
+    bodies-&gt;add(wireBody);
+
+    <span style="color:blue">// Get the brep wire body</span>
+    Ptr&lt;BRepBody&gt; brepWireBody = bodies-&gt;item(0);
+    if (!brepWireBody)
+        return false;
+
+    <span style="color:blue">// Get brep wires</span>
+    Ptr&lt;BRepWires&gt; brepWires = brepWireBody-&gt;wires();
+    if (!brepWires)
+        return false;
+
+    <span style="color:blue">// Get brep wires count</span>
+    size_t count = brepWires-&gt;count();
+
+    <span style="color:blue">// Get brep wire</span>
+    Ptr&lt;BRepWire&gt; brepWire = brepWires-&gt;item(0);
+    if (!brepWire)
+        return false;
+
+    <span style="color:blue">// Get brep edges from brepWire</span>
+    Ptr&lt;BRepEdges&gt; brepEdges = brepWire-&gt;edges();
+    if (!brepEdges)
+        return false;
+
+    <span style="color:blue">// Get vertices from brepWire</span>
+    Ptr&lt;BRepVertices&gt; vertices = brepWire-&gt;vertices();
+    if (!vertices)
+        return false;
+
+    <span style="color:blue">// Get brep coEdges from brepWire</span>
+    Ptr&lt;BRepCoEdges&gt; coEdges = brepWire-&gt;coEdges();
+    <span style="color:blue">// ON_ERROR_RETURN(coEdges);</span>
+    <span style="color:blue">// if (!coEdges)</span>
+    <span style="color:blue">//	return false;</span>
+
+    <span style="color:blue">// Get the brep wire is planar or not</span>
+    bool isPlanar = brepWire-&gt;isPlanar();
+
+    <span style="color:blue">// Get wire's parent brep body</span>
+    Ptr&lt;BRepBody&gt; parent = brepWire-&gt;parent();
+    if (!parent)
+        return false;
+
+    <span style="color:blue">// offse the planar brep wire</span>
+
+    Ptr&lt;Vector3D&gt; planeNormal = Vector3D::create(0.0, 0.0, 1.0);
+    Ptr&lt;BRepBody&gt; offsetBody = brepWire-&gt;offsetPlanarWire(planeNormal, 3.0, OffsetCornerTypes::LinearOffsetCornerType);
+    if (!offsetBody)
+        return false;
+
+    <span style="color:blue">// Create brep wire proxy</span>
+    Ptr&lt;BRepWire&gt; wireProxy = brepWire-&gt;createForAssemblyContext(subOcc);
+    if (!wireProxy)
+        return false;
+
+    <span style="color:blue">// Get native brep wire</span>
+    Ptr&lt;BRepWire&gt; nativeBrepWire = wireProxy-&gt;nativeObject();
+    if (!nativeBrepWire)
+        return false;
+
+    <span style="color:blue">// Get the assembly occurrence</span>
+    Ptr&lt;Occurrence&gt; occurence = wireProxy-&gt;assemblyContext();
+    if (!occurence)
+        return false;
+
+    return true;
+}</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(BrepWireSample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

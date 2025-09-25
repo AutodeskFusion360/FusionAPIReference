@@ -1,0 +1,119 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/BRepFaces.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="BRepFaces">
+    <meta name="description" content="BRepFaces Object">
+    <meta name="topicid" content="GUID-5f0e3ae5-2ba6-4d2b-a3fe-93d2fb3f23af">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>BRepFaces Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">BRepFaces Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/BRep/BRepFaces.h&gt;<h2 class="api">
+          Description
+        </h2>BRepFace collection.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BRepFaces_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BRepFaces_item.htm">item</a></td>
+        <td class="api-list">Function that returns the specified face using an index into the collection.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BRepFaces_count.htm">count</a></td>
+        <td class="api-list">The number of faces in the collection.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BRepFaces_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BRepFaces_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="ArrangeFeature_faces.htm">ArrangeFeature.faces</a>, <a href="BaseFeature_faces.htm">BaseFeature.faces</a>, <a href="BossFeature_faces.htm">BossFeature.faces</a>, <a href="BoundaryFillFeature_faces.htm">BoundaryFillFeature.faces</a>, <a href="BoxFeature_faces.htm">BoxFeature.faces</a>, <a href="BRepBody_faces.htm">BRepBody.faces</a>, <a href="BRepEdge_faces.htm">BRepEdge.faces</a>, <a href="BRepFace_tangentiallyConnectedFaces.htm">BRepFace.tangentiallyConnectedFaces</a>, <a href="BRepLump_faces.htm">BRepLump.faces</a>, <a href="BRepShell_faces.htm">BRepShell.faces</a>, <a href="BRepVertex_faces.htm">BRepVertex.faces</a>, <a href="ChamferFeature_faces.htm">ChamferFeature.faces</a>, <a href="CircularPatternFeature_faces.htm">CircularPatternFeature.faces</a>, <a href="CoilFeature_faces.htm">CoilFeature.faces</a>, <a href="CombineFeature_faces.htm">CombineFeature.faces</a>, <a href="CopyPasteBody_faces.htm">CopyPasteBody.faces</a>, <a href="CustomFeature_faces.htm">CustomFeature.faces</a>, <a href="CutPasteBody_faces.htm">CutPasteBody.faces</a>, <a href="CylinderFeature_faces.htm">CylinderFeature.faces</a>, <a href="DeleteFaceFeature_faces.htm">DeleteFaceFeature.faces</a>, <a href="DraftFeature_faces.htm">DraftFeature.faces</a>, <a href="EmbossFeature_faces.htm">EmbossFeature.faces</a>, <a href="ExtendFeature_faces.htm">ExtendFeature.faces</a>, <a href="ExtrudeFeature_endFaces.htm">ExtrudeFeature.endFaces</a>, <a href="ExtrudeFeature_faces.htm">ExtrudeFeature.faces</a>, <a href="ExtrudeFeature_sideFaces.htm">ExtrudeFeature.sideFaces</a>, <a href="ExtrudeFeature_startFaces.htm">ExtrudeFeature.startFaces</a>, <a href="Feature_faces.htm">Feature.faces</a>, <a href="FilletFeature_faces.htm">FilletFeature.faces</a>, <a href="FlangeFeature_faces.htm">FlangeFeature.faces</a>, <a href="FlatPattern_faces.htm">FlatPattern.faces</a>, <a href="FlatPattern_sideFaces.htm">FlatPattern.sideFaces</a>, <a href="FormFeature_faces.htm">FormFeature.faces</a>, <a href="HemFeature_faces.htm">HemFeature.faces</a>, <a href="HoleFeature_endFaces.htm">HoleFeature.endFaces</a>, <a href="HoleFeature_faces.htm">HoleFeature.faces</a>, <a href="HoleFeature_sideFaces.htm">HoleFeature.sideFaces</a>, <a href="LoftFeature_faces.htm">LoftFeature.faces</a>, <a href="LoftFeature_sideFaces.htm">LoftFeature.sideFaces</a>, <a href="MeshCombineFaceGroupsFeature_faces.htm">MeshCombineFaceGroupsFeature.faces</a>, <a href="MeshCombineFeature_faces.htm">MeshCombineFeature.faces</a>, <a href="MeshConvertFeature_faces.htm">MeshConvertFeature.faces</a>, <a href="MeshFeature_faces.htm">MeshFeature.faces</a>, <a href="MeshGenerateFaceGroupsFeature_faces.htm">MeshGenerateFaceGroupsFeature.faces</a>, <a href="MeshReduceFeature_faces.htm">MeshReduceFeature.faces</a>, <a href="MeshRemeshFeature_faces.htm">MeshRemeshFeature.faces</a>, <a href="MeshRepairFeature_faces.htm">MeshRepairFeature.faces</a>, <a href="MeshReverseNormalFeature_faces.htm">MeshReverseNormalFeature.faces</a>, <a href="MeshSeparateFeature_faces.htm">MeshSeparateFeature.faces</a>, <a href="MeshShellFeature_faces.htm">MeshShellFeature.faces</a>, <a href="MeshSmoothFeature_faces.htm">MeshSmoothFeature.faces</a>, <a href="MirrorFeature_faces.htm">MirrorFeature.faces</a>, <a href="MoveFeature_faces.htm">MoveFeature.faces</a>, <a href="OffsetFacesFeature_faces.htm">OffsetFacesFeature.faces</a>, <a href="OffsetFeature_faces.htm">OffsetFeature.faces</a>, <a href="PatchFeature_faces.htm">PatchFeature.faces</a>, <a href="PathPatternFeature_faces.htm">PathPatternFeature.faces</a>, <a href="PipeFeature_endFaces.htm">PipeFeature.endFaces</a>, <a href="PipeFeature_faces.htm">PipeFeature.faces</a>, <a href="PipeFeature_sideFaces.htm">PipeFeature.sideFaces</a>, <a href="PipeFeature_startFaces.htm">PipeFeature.startFaces</a>, <a href="RectangularPatternFeature_faces.htm">RectangularPatternFeature.faces</a>, <a href="RefoldFeature_faces.htm">RefoldFeature.faces</a>, <a href="RemoveFeature_faces.htm">RemoveFeature.faces</a>, <a href="ReplaceFaceFeature_faces.htm">ReplaceFaceFeature.faces</a>, <a href="ReverseNormalFeature_faces.htm">ReverseNormalFeature.faces</a>, <a href="RevolveFeature_endFaces.htm">RevolveFeature.endFaces</a>, <a href="RevolveFeature_faces.htm">RevolveFeature.faces</a>, <a href="RevolveFeature_sideFaces.htm">RevolveFeature.sideFaces</a>, <a href="RevolveFeature_startFaces.htm">RevolveFeature.startFaces</a>, <a href="RibFeature_faces.htm">RibFeature.faces</a>, <a href="RipFeature_faces.htm">RipFeature.faces</a>, <a href="RuledSurfaceFeature_faces.htm">RuledSurfaceFeature.faces</a>, <a href="RuleFilletFeature_faces.htm">RuleFilletFeature.faces</a>, <a href="ScaleFeature_faces.htm">ScaleFeature.faces</a>, <a href="ShellFeature_faces.htm">ShellFeature.faces</a>, <a href="SilhouetteSplitFeature_faces.htm">SilhouetteSplitFeature.faces</a>, <a href="SphereFeature_faces.htm">SphereFeature.faces</a>, <a href="SplitBodyFeature_faces.htm">SplitBodyFeature.faces</a>, <a href="SplitFaceFeature_faces.htm">SplitFaceFeature.faces</a>, <a href="StitchFeature_faces.htm">StitchFeature.faces</a>, <a href="SurfaceDeleteFaceFeature_faces.htm">SurfaceDeleteFaceFeature.faces</a>, <a href="SweepFeature_endFaces.htm">SweepFeature.endFaces</a>, <a href="SweepFeature_faces.htm">SweepFeature.faces</a>, <a href="SweepFeature_sideFaces.htm">SweepFeature.sideFaces</a>, <a href="SweepFeature_startFaces.htm">SweepFeature.startFaces</a>, <a href="TessellateFeature_faces.htm">TessellateFeature.faces</a>, <a href="ThickenFeature_faces.htm">ThickenFeature.faces</a>, <a href="ThreadFeature_faces.htm">ThreadFeature.faces</a>, <a href="TorusFeature_faces.htm">TorusFeature.faces</a>, <a href="TrimFeature_faces.htm">TrimFeature.faces</a>, <a href="UnfoldFeature_faces.htm">UnfoldFeature.faces</a>, <a href="UnstitchFeature_faces.htm">UnstitchFeature.faces</a>, <a href="UntrimFeature_faces.htm">UntrimFeature.faces</a>, <a href="VolumetricCustomFeature_faces.htm">VolumetricCustomFeature.faces</a>, <a href="VolumetricModelToMeshFeature_faces.htm">VolumetricModelToMeshFeature.faces</a>, <a href="WebFeature_faces.htm">WebFeature.faces</a><h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PatchFeatureSample_Sample.htm">Patch Feature API Sample</a></td>
+        <td class="api-list">Demonstrates creating a new patch feature.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(BRepFaces%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

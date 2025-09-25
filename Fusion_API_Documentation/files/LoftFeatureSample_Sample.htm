@@ -1,0 +1,363 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/LoftFeatureSample.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="LoftFeatureSample_Sample">
+    <meta name="description" content="Loft Feature API Sample Sample">
+    <meta name="topicid" content="GUID-a03e26b4-4a3c-11e6-a2e4-3417ebd41e19">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Loft Feature API Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Loft Feature API Sample</h1>
+    <h2 class="api">
+          Description
+        </h2>Demonstrates creating a new loft feature.<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">import adsk.core, adsk.fusion, traceback
+
+def run(context):
+    ui = None
+    try:
+        app = adsk.core.Application.get()
+        ui  = app.userInterface
+
+         <span style="color:blue"># Create a document.</span>
+        doc = app.documents.add(adsk.core.DocumentTypes.FusionDesignDocumentType)
+
+        product = app.activeProduct
+        design = adsk.fusion.Design.cast(product)
+        rootComp = design.rootComponent
+
+        <span style="color:blue"># Create profile 1</span>
+        sketchesObj = rootComp.sketches
+        sketch0 = sketchesObj.add(rootComp.xZConstructionPlane)
+        sketchCirclesObj0 = sketch0.sketchCurves.sketchCircles
+        centerPoint = adsk.core.Point3D.create(0, 0, 0)
+        sketchCirclesObj0.addByCenterRadius(centerPoint, 5.0)
+        profile0 = sketch0.profiles.item(0)
+
+        <span style="color:blue"># Create profile 2</span>
+        ctorPlanes = rootComp.constructionPlanes
+        ctorPlaneInput1 = ctorPlanes.createInput()
+        offset = adsk.core.ValueInput.createByString("10 cm")
+        ctorPlaneInput1.setByOffset(rootComp.xZConstructionPlane, offset)
+        ctorPlane1 = ctorPlanes.add(ctorPlaneInput1)
+        sketch1 = sketchesObj.add(ctorPlane1)
+        sketchCirclesObj1 = sketch1.sketchCurves.sketchCircles
+        sketchCirclesObj1.addByCenterRadius(centerPoint, 2.0)
+        profile1 = sketch1.profiles.item(0)
+
+        <span style="color:blue"># Create profile 3</span>
+        ctorPlaneInput2 = ctorPlanes.createInput()
+        ctorPlaneInput2.setByOffset(ctorPlane1, offset)
+        ctorPlane2 = ctorPlanes.add(ctorPlaneInput2)
+        sketch2 = sketchesObj.add(ctorPlane2)
+        sketchCirclesObj2 = sketch2.sketchCurves.sketchCircles
+        sketchCirclesObj2.addByCenterRadius(centerPoint, 10.0)
+        profile2 = sketch2.profiles.item(0)
+
+        <span style="color:blue"># Create loft feature input</span>
+        loftFeats = rootComp.features.loftFeatures
+        loftInput = loftFeats.createInput(adsk.fusion.FeatureOperations.NewBodyFeatureOperation)
+        loftSectionsObj = loftInput.loftSections
+        loftSectionsObj.add(profile0)
+        loftSectionsObj.add(profile1)
+        loftSectionsObj.add(profile2)
+        loftInput.isSolid = False
+        loftInput.isClosed = False
+        loftInput.isTangentEdgesMerged = True
+        loftInput.startLoftEdgeAlignment = adsk.fusion.LoftEdgeAlignments.FreeEdgesLoftEdgeAlignment;
+        loftInput.endLoftEdgeAlignment = adsk.fusion.LoftEdgeAlignments.FreeEdgesLoftEdgeAlignment;
+
+        <span style="color:blue"># Create loft feature</span>
+        loftFeats.add(loftInput)
+
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code">#include &lt;Core/Application/Application.h&gt;
+#include &lt;Core/Application/Document.h&gt;
+#include &lt;Core/Application/Documents.h&gt;
+#include &lt;Core/Application/Product.h&gt;
+#include &lt;Core/Application/ValueInput.h&gt;
+#include &lt;Core/Geometry/Point3D.h&gt;
+#include &lt;Core/UserInterface/UserInterface.h&gt;
+#include &lt;Fusion/Components/Component.h&gt;
+#include &lt;Fusion/Construction/ConstructionPlanes.h&gt;
+#include &lt;Fusion/Construction/ConstructionPlane.h&gt;
+#include &lt;Fusion/Construction/ConstructionPlaneInput.h&gt;
+#include &lt;Fusion/Features/Features.h&gt;
+#include &lt;Fusion/Features/LoftFeatures.h&gt;
+#include &lt;Fusion/Features/LoftFeature.h&gt;
+#include &lt;Fusion/Features/LoftFeatureInput.h&gt;
+#include &lt;Fusion/Features/LoftSections.h&gt;
+#include &lt;Fusion/Features/LoftSection.h&gt;
+#include &lt;Fusion/Fusion/Design.h&gt;
+#include &lt;Fusion/Sketch/Profile.h&gt;
+#include &lt;Fusion/Sketch/Profiles.h&gt;
+#include &lt;Fusion/Sketch/Sketch.h&gt;
+#include &lt;Fusion/Sketch/SketchCircles.h&gt;
+#include &lt;Fusion/Sketch/SketchCurves.h&gt;
+#include &lt;Fusion/Sketch/Sketches.h&gt;
+
+using namespace adsk::core;
+using namespace adsk::fusion;
+
+Ptr&lt;UserInterface&gt; ui;
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    Ptr&lt;Application&gt; app = Application::get();
+    if (!app)
+        return false;
+
+    ui = app-&gt;userInterface();
+    if (!ui)
+        return false;
+
+    Ptr&lt;Documents&gt; docs = app-&gt;documents();
+    if (!docs)
+        return false;
+
+    <span style="color:blue">// Create a document.</span>
+    Ptr&lt;Document&gt; doc = docs-&gt;add(DocumentTypes::FusionDesignDocumentType);
+    if (!doc)
+        return false;
+
+    Ptr&lt;Design&gt; design = app-&gt;activeProduct();
+    if (!design)
+        return false;
+
+    Ptr&lt;Component&gt; rootComp = design-&gt;rootComponent();
+    if (!rootComp)
+        return false;
+
+    <span style="color:blue">// Create profile 1</span>
+    Ptr&lt;Sketches&gt; sketchesObj = rootComp-&gt;sketches();
+    if (!sketchesObj)
+        return false;
+
+    Ptr&lt;Sketch&gt; sketch0 = sketchesObj-&gt;add(rootComp-&gt;xZConstructionPlane());
+    if (!sketch0)
+        return false;
+
+    Ptr&lt;SketchCurves&gt; sketchCurvesObj0 = sketch0-&gt;sketchCurves();
+    if (!sketchCurvesObj0)
+        return false;
+
+    Ptr&lt;SketchCircles&gt; sketchCirclesObj0 = sketchCurvesObj0-&gt;sketchCircles();
+    if (!sketchCirclesObj0)
+        return false;
+
+    Ptr&lt;Point3D&gt; centerPoint = adsk::core::Point3D::create(0, 0, 0);
+    if (!centerPoint)
+        return false;
+    sketchCirclesObj0-&gt;addByCenterRadius(centerPoint, 5.0);
+
+    Ptr&lt;Profiles&gt; profilesObj0 = sketch0-&gt;profiles();
+    if (!profilesObj0)
+        return false;
+
+    Ptr&lt;Profile&gt; profile0 = profilesObj0-&gt;item(0);
+    if (!profile0)
+        return false;
+
+    <span style="color:blue">// Create profile 2</span>
+    Ptr&lt;ConstructionPlanes&gt; ctorPlanes = rootComp-&gt;constructionPlanes();
+    if (!ctorPlanes)
+        return false;
+
+    Ptr&lt;ConstructionPlaneInput&gt; ctorPlaneInput1 = ctorPlanes-&gt;createInput();
+    if (!ctorPlaneInput1)
+        return false;
+
+    Ptr&lt;ValueInput&gt; offset = adsk::core::ValueInput::createByString("10 cm");
+    if (!offset)
+        return false;
+
+    bool ret = ctorPlaneInput1-&gt;setByOffset(rootComp-&gt;xZConstructionPlane(), offset);
+    if (!ret)
+        return false;
+
+    Ptr&lt;ConstructionPlane&gt; ctorPlane1 = ctorPlanes-&gt;add(ctorPlaneInput1);
+    if (!ctorPlane1)
+        return false;
+
+    Ptr&lt;Sketch&gt; sketch1 = sketchesObj-&gt;add(ctorPlane1);
+    if (!sketch1)
+        return false;
+
+    Ptr&lt;SketchCurves&gt; sketchCurvesObj1 = sketch1-&gt;sketchCurves();
+    if (!sketchCurvesObj1)
+        return false;
+
+    Ptr&lt;SketchCircles&gt; sketchCirclesObj1 = sketchCurvesObj1-&gt;sketchCircles();
+    if (!sketchCirclesObj1)
+        return false;
+    sketchCirclesObj1-&gt;addByCenterRadius(centerPoint, 2.0);
+
+    Ptr&lt;Profiles&gt; profilesObj1 = sketch1-&gt;profiles();
+    if (!profilesObj1)
+        return false;
+
+    Ptr&lt;Profile&gt; profile1 = profilesObj1-&gt;item(0);
+    if (!profile1)
+        return false;
+
+    <span style="color:blue">// Create profile 3</span>
+    Ptr&lt;ConstructionPlaneInput&gt; ctorPlaneInput2 = ctorPlanes-&gt;createInput();
+    if (!ctorPlaneInput2)
+        return false;
+
+    ret = ctorPlaneInput2-&gt;setByOffset(ctorPlane1, offset);
+    if (!ret)
+        return false;
+
+    Ptr&lt;ConstructionPlane&gt; ctorPlane2 = ctorPlanes-&gt;add(ctorPlaneInput2);
+    if (!ctorPlane2)
+        return false;
+
+    Ptr&lt;Sketch&gt; sketch2 = sketchesObj-&gt;add(ctorPlane2);
+    if (!sketch2)
+        return false;
+
+    Ptr&lt;SketchCurves&gt; sketchCurvesObj2 = sketch2-&gt;sketchCurves();
+    if (!sketchCurvesObj2)
+        return false;
+
+    Ptr&lt;SketchCircles&gt; sketchCirclesObj2 = sketchCurvesObj2-&gt;sketchCircles();
+    if (!sketchCirclesObj2)
+        return false;
+    sketchCirclesObj2-&gt;addByCenterRadius(centerPoint, 10.0);
+
+    Ptr&lt;Profiles&gt; profilesObj2 = sketch2-&gt;profiles();
+    if (!profilesObj2)
+        return false;
+
+    Ptr&lt;Profile&gt; profile2 = profilesObj2-&gt;item(0);
+    if (!profile2)
+        return false;
+
+    <span style="color:blue">// Create loft feature input</span>
+    Ptr&lt;Features&gt; feats = rootComp-&gt;features();
+    if (!feats)
+        return false;
+
+    Ptr&lt;LoftFeatures&gt; loftFeats = feats-&gt;loftFeatures();
+    if (!loftFeats)
+        return false;
+
+    Ptr&lt;LoftFeatureInput&gt; loftInput = loftFeats-&gt;createInput(adsk::fusion::FeatureOperations::NewBodyFeatureOperation);
+    if (!loftInput)
+        return false;
+
+    Ptr&lt;LoftSections&gt; loftSectionsObj = loftInput-&gt;loftSections();
+    if (!loftSectionsObj)
+        return false;
+
+    Ptr&lt;LoftSection&gt; loftSection0 = loftSectionsObj-&gt;add(profile0);
+    if (!loftSection0)
+        return false;
+
+    Ptr&lt;LoftSection&gt; loftSection1 = loftSectionsObj-&gt;add(profile1);
+    if (!loftSection1)
+        return false;
+
+    Ptr&lt;LoftSection&gt; loftSection2 = loftSectionsObj-&gt;add(profile2);
+    if (!loftSection2)
+        return false;
+
+    <span style="color:blue">// Set solid, closed, tangent edges merged and alignment options</span>
+    loftInput-&gt;isSolid(false);
+    loftInput-&gt;isClosed(false);
+    loftInput-&gt;isTangentEdgesMerged(true);
+    loftInput-&gt;startLoftEdgeAlignment(adsk::fusion::LoftEdgeAlignments::FreeEdgesLoftEdgeAlignment);
+    loftInput-&gt;endLoftEdgeAlignment(adsk::fusion::LoftEdgeAlignments::FreeEdgesLoftEdgeAlignment);
+
+    <span style="color:blue">// Create loft feature</span>
+    Ptr&lt;LoftFeature&gt; loftFeature = loftFeats-&gt;add(loftInput);
+    if (!loftFeature)
+        return false;
+
+
+    return true;
+}</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(LoftFeatureSample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

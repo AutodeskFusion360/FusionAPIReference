@@ -1,0 +1,410 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/SliderJointMotionSample.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="SliderJointMotionSample_Sample">
+    <meta name="description" content="SliderJointMotion API Sample Sample">
+    <meta name="topicid" content="GUID-6C0D8659-3294-4F3B-B2FC-ED120BAC2E27">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>SliderJointMotion API Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">SliderJointMotion API Sample</h1>
+    <h2 class="api">
+          Description
+        </h2>Demonstrates creating a joint with slider joint motion.<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code"><span style="color:blue">#Author-</span>
+<span style="color:blue">#Description-</span>
+import adsk.core, adsk.fusion, traceback
+
+def run(context):
+    ui = None
+    try:
+        app = adsk.core.Application.get()
+        ui = app.userInterface
+        
+        <span style="color:blue"># Create a document.</span>
+        doc = app.documents.add(adsk.core.DocumentTypes.FusionDesignDocumentType)
+ 
+        product = app.activeProduct
+        design = adsk.fusion.Design.cast(product)
+
+        <span style="color:blue"># Get the root component of the active design</span>
+        rootComp = design.rootComponent
+        
+        <span style="color:blue"># Create sketch in root component</span>
+        sketches = rootComp.sketches
+        sketch = sketches.add(rootComp.xZConstructionPlane)
+        sketchPts = sketch.sketchPoints
+        point = adsk.core.Point3D.create(1, 0, 1)
+        sketchPt = sketchPts.add(point)
+        sketchCircles = sketch.sketchCurves.sketchCircles
+        centerPoint = adsk.core.Point3D.create(0, 0, 0)
+        circle = sketchCircles.addByCenterRadius(centerPoint, 5.0)
+        
+        <span style="color:blue"># Get the profile defined by the circle</span>
+        prof = sketch.profiles.item(0)
+
+        <span style="color:blue"># Create an extrusion input and make sure it's in a new component</span>
+        extrudes = rootComp.features.extrudeFeatures
+        extInput = extrudes.createInput(prof, adsk.fusion.FeatureOperations.NewComponentFeatureOperation)
+        
+        <span style="color:blue"># Set the extrusion input</span>
+        distance = adsk.core.ValueInput.createByReal(5)
+        extInput.setDistanceExtent(True, distance)
+        extInput.isSolid = True
+
+        <span style="color:blue"># Create the extrusion</span>
+        ext = extrudes.add(extInput)
+        
+        <span style="color:blue"># Get the end face of the created extrusion body</span>
+        endFace = ext.endFaces.item(0)
+        
+        <span style="color:blue"># Get the occurrence of the new component</span>
+        occ = rootComp.occurrences.item(0)
+        
+        <span style="color:blue"># Create a new sketch in the occurrence</span>
+        sketchInOcc = sketches.add(endFace, occ)
+        
+        <span style="color:blue"># Get the sketch curve projected to the sketch</span>
+        curve = sketchInOcc.sketchCurves.item(0)
+        
+        <span style="color:blue"># Create the first joint geometry with the sketch curve</span>
+        geo0 = adsk.fusion.JointGeometry.createByCurve(curve, adsk.fusion.JointKeyPointTypes.CenterKeyPoint)
+        
+        <span style="color:blue"># Create the second joint geometry with sketch point</span>
+        geo1 = adsk.fusion.JointGeometry.createByPoint(sketchPt)
+        
+        <span style="color:blue"># Create joint input</span>
+        joints = rootComp.joints
+        jointInput = joints.createInput(geo0, geo1)
+        
+        <span style="color:blue"># Set the joint input</span>
+        jointInput.setAsSliderJointMotion(adsk.fusion.JointDirections.ZAxisJointDirection)
+        
+        <span style="color:blue"># Create the joint</span>
+        joint = joints.add(jointInput)
+		
+        sliderMotion = joint.jointMotion
+        limits = sliderMotion.slideLimits
+        limits.isRestValueEnabled = True
+        limits.restValue = 1.0
+        
+        <span style="color:blue"># Create ContactSets</span>
+        mat = adsk.core.Matrix3D.create()
+        mat.translation = adsk.core.Vector3D.create(0, 10, 0)
+        rootComp.occurrences.addExistingComponent(ext.parentComponent, mat)
+        
+        design.isContactAnalysisEnabled = True
+        design.isContactSetAnalysis = True
+        
+        contacts = design.contactSets
+        occurrencesAndBodies = []
+        occurrencesAndBodies.append(rootComp.occurrences[0])
+        occurrencesAndBodies.append(rootComp.occurrences[1])
+        
+        contacts.add(occurrencesAndBodies)
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code">#include &lt;Core/Application/Application.h&gt;
+#include &lt;Core/Application/Documents.h&gt;
+#include &lt;Core/Application/Document.h&gt;
+#include &lt;Core/Application/Product.h&gt;
+#include &lt;Core/Application/ValueInput.h&gt;
+#include &lt;Core/Geometry/Matrix3D.h&gt;
+#include &lt;Core/Geometry/Point3D.h&gt;
+#include &lt;Core/Geometry/Vector3D.h&gt;
+#include &lt;Core/UserInterface/UserInterface.h&gt;
+#include &lt;Fusion/BRep/BRepFace.h&gt;
+#include &lt;Fusion/BRep/BRepFaces.h&gt;
+#include &lt;Fusion/Components/Component.h&gt;
+#include &lt;Fusion/Components/ContactSets.h&gt;
+#include &lt;Fusion/Components/Joint.h&gt;
+#include &lt;Fusion/Components/JointGeometry.h&gt;
+#include &lt;Fusion/Components/JointInput.h&gt;
+#include &lt;Fusion/Components/JointLimits.h&gt;
+#include &lt;Fusion/Components/Joints.h&gt;
+#include &lt;Fusion/Components/SliderJointMotion.h&gt;
+#include &lt;Fusion/Components/Occurrence.h&gt;
+#include &lt;Fusion/Components/Occurrences.h&gt;
+#include &lt;Fusion/Construction/ConstructionPlane.h&gt;
+#include &lt;Fusion/Features/Features.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeature.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeatures.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeatureInput.h&gt;
+#include &lt;Fusion/Fusion/Design.h&gt;
+#include &lt;Fusion/Sketch/Profile.h&gt;
+#include &lt;Fusion/Sketch/Profiles.h&gt;
+#include &lt;Fusion/Sketch/Sketch.h&gt;
+#include &lt;Fusion/Sketch/Sketches.h&gt;
+#include &lt;Fusion/Sketch/SketchCircle.h&gt;
+#include &lt;Fusion/Sketch/SketchCircles.h&gt;
+#include &lt;Fusion/Sketch/SketchCurves.h&gt;
+#include &lt;Fusion/Sketch/SketchPoint.h&gt;
+#include &lt;Fusion/Sketch/SketchPoints.h&gt;
+
+using namespace adsk::core;
+using namespace adsk::fusion;
+
+Ptr&lt;UserInterface&gt; ui;
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    Ptr&lt;Application&gt; app = Application::get();
+    if (!app)
+        return false;
+
+    ui = app-&gt;userInterface();
+    if (!ui)
+        return false;
+
+    Ptr&lt;Documents&gt; documents = app-&gt;documents();
+    if (!documents)
+        return false;
+
+    Ptr&lt;Document&gt; doc = documents-&gt;add(DocumentTypes::FusionDesignDocumentType);
+    if (!doc)
+        return false;
+
+    Ptr&lt;Product&gt; product = app-&gt;activeProduct();
+    if (!product)
+        return false;
+
+    Ptr&lt;Design&gt; design = product;
+    if (!design)
+        return false;
+
+    <span style="color:blue">// Get the root component of the active design</span>
+    Ptr&lt;Component&gt; rootComp = design-&gt;rootComponent();
+    if (!rootComp)
+        return false;
+
+    <span style="color:blue">// Create sketch in root component</span>
+    Ptr&lt;Sketches&gt; sketches = rootComp-&gt;sketches();
+    if (!sketches)
+        return false;
+    Ptr&lt;ConstructionPlane&gt; xz = rootComp-&gt;xZConstructionPlane();
+    if (!xz)
+        return false;
+    Ptr&lt;Sketch&gt; sketch = sketches-&gt;add(xz);
+    if (!sketch)
+        return false;
+    Ptr&lt;SketchPoints&gt; sketchPts = sketch-&gt;sketchPoints();
+    if (!sketchPts)
+        return false;
+    Ptr&lt;Point3D&gt; point = Point3D::create(1, 0, 1);
+    if (!point)
+        return false;
+    Ptr&lt;SketchPoint&gt; sketchPt = sketchPts-&gt;add(point);
+    if (!sketchPt)
+        return false;
+    Ptr&lt;SketchCurves&gt; sketchCurves = sketch-&gt;sketchCurves();
+    if (!sketchCurves)
+        return false;
+    Ptr&lt;SketchCircles&gt; sketchCircles = sketchCurves-&gt;sketchCircles();
+    if (!sketchCircles)
+        return false;
+    Ptr&lt;Point3D&gt; centerPoint = Point3D::create(0, 0, 0);
+    if (!centerPoint)
+        return false;
+    Ptr&lt;SketchCircle&gt; circle = sketchCircles-&gt;addByCenterRadius(centerPoint, 5.0);
+    if (!circle)
+        return false;
+
+    <span style="color:blue">// Get the profile defined by the circle</span>
+    Ptr&lt;Profiles&gt; profs = sketch-&gt;profiles();
+    if (!profs)
+        return false;
+    Ptr&lt;Profile&gt; prof = profs-&gt;item(0);
+    if (!prof)
+        return false;
+
+    <span style="color:blue">// Create an extrusion input and make sure it's in a new component</span>
+    Ptr&lt;Features&gt; feats = rootComp-&gt;features();
+    if (!feats)
+        return false;
+    Ptr&lt;ExtrudeFeatures&gt; extrudes = feats-&gt;extrudeFeatures();
+    if (!extrudes)
+        return false;
+    Ptr&lt;ExtrudeFeatureInput&gt; extInput = extrudes-&gt;createInput(prof, FeatureOperations::NewComponentFeatureOperation);
+    if (!extInput)
+        return false;
+
+    <span style="color:blue">// Set the extrusion input</span>
+    Ptr&lt;ValueInput&gt; distance = ValueInput::createByReal(5);
+    if (!distance)
+        return false;
+    extInput-&gt;setDistanceExtent(true, distance);
+    extInput-&gt;isSolid(true);
+
+    <span style="color:blue">// Create the extrusion</span>
+    Ptr&lt;ExtrudeFeature&gt; ext = extrudes-&gt;add(extInput);
+    if (!ext)
+        return false;
+
+    <span style="color:blue">// Get the end face of the created extrusion body</span>
+    Ptr&lt;BRepFaces&gt; endFaces = ext-&gt;endFaces();
+    if (!endFaces)
+        return false;
+    Ptr&lt;BRepFace&gt; endFace = endFaces-&gt;item(0);
+    if (!endFace)
+        return false;
+
+    <span style="color:blue">// Get the occurrence of the new component</span>
+    Ptr&lt;Occurrences&gt; occs = rootComp-&gt;occurrences();
+    if (!occs)
+        return false;
+    Ptr&lt;Occurrence&gt; occ = occs-&gt;item(0);
+    if (!occ)
+        return false;
+
+    <span style="color:blue">// Create a new sketch in the occurrence</span>
+    Ptr&lt;Sketch&gt; sketchInOcc = sketches-&gt;add(endFace, occ);
+    if (!sketchInOcc)
+        return false;
+
+    <span style="color:blue">// Get the sketch curve projected to the sketch</span>
+    Ptr&lt;SketchCurves&gt; sketchCurvesInOcc = sketchInOcc-&gt;sketchCurves();
+    if (!sketchCurvesInOcc)
+        return false;
+    Ptr&lt;SketchCurve&gt; curve = sketchCurvesInOcc-&gt;item(0);
+    if (!curve)
+        return false;
+
+    <span style="color:blue">// Create the first joint geometry with the sketch curve</span>
+    Ptr&lt;JointGeometry&gt; geo0 = JointGeometry::createByCurve(curve, JointKeyPointTypes::CenterKeyPoint);
+    if (!geo0)
+        return false;
+
+    <span style="color:blue">// Create the second joint geometry with sketch point</span>
+    Ptr&lt;JointGeometry&gt; geo1 = JointGeometry::createByPoint(sketchPt);
+    if (!geo1)
+        return false;
+
+    <span style="color:blue">// Create joint input</span>
+    Ptr&lt;Joints&gt; joints = rootComp-&gt;joints();
+    if (!joints)
+        return false;
+    Ptr&lt;JointInput&gt; jointInput = joints-&gt;createInput(geo0, geo1);
+    if (!jointInput)
+        return false;
+
+    <span style="color:blue">// Set the joint input</span>
+    jointInput-&gt;setAsSliderJointMotion(JointDirections::ZAxisJointDirection);
+
+    <span style="color:blue">// Create the joint</span>
+    Ptr&lt;Joint&gt; joint = joints-&gt;add(jointInput);
+    if (!joint)
+        return false;
+
+    Ptr&lt;SliderJointMotion&gt; sliderMotion = joint-&gt;jointMotion();
+    if (!sliderMotion)
+        return false;
+    Ptr&lt;JointLimits&gt; limits = sliderMotion-&gt;slideLimits();
+    if (!limits)
+        return false;
+    limits-&gt;isRestValueEnabled(true);
+    limits-&gt;restValue(1.0);
+
+    <span style="color:blue">// Create ContactSets</span>
+    Ptr&lt;Matrix3D&gt; mat = Matrix3D::create();
+    if (!mat)
+        return false;
+
+    mat-&gt;translation(Vector3D::create(0, 10, 0));
+    occs-&gt;addExistingComponent(ext-&gt;parentComponent(), mat);
+    design-&gt;isContactAnalysisEnabled(true);
+    design-&gt;isContactSetAnalysis(true);
+
+    Ptr&lt;ContactSets&gt; contacts = design-&gt;contactSets();
+    if (!contacts)
+        return false;
+
+    std::vector&lt;Ptr&lt;Base&gt;&gt; occurrencesAndBodies;
+    occurrencesAndBodies.push_back(occs-&gt;item(0));
+    occurrencesAndBodies.push_back(occs-&gt;item(1));
+
+    contacts-&gt;add(occurrencesAndBodies);
+
+    return true;
+}</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(SliderJointMotionSample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

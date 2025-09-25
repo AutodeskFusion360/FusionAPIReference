@@ -1,0 +1,373 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/CreateEngravingsSelectionSets.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="CreateEngravingsSelectionSets_Sample">
+    <meta name="description" content="Create Engravings Selection Sets API Sample Sample">
+    <meta name="topicid" content="GUID-228ffb77-7268-411d-abaa-f0cab9c0d40f">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Create Engravings Selection Sets API Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Create Engravings Selection Sets API Sample</h1>
+    <h2 class="api">
+          Description
+        </h2><p>This sample script demonstrates how to find and machine engravings in the Z+ direction using pocket recognition.</p><p>The script will first open an example model via its URN. Using pocket recognition, it will identify pockets that may be engravings based on their dimensions.</p><p>We assume here that an engraving pocket is:<ul><li>Made with a flat bottom face and no fillet.</li><li>A closed pocket.</li><li>Have a Z height less than 2 mm</li></ul><p>We demonstrate creating selection sets in both design and manufacture workspaces and use one of the selection sets as an operation geometry selection input to generate an engraving operation.</p><p>The engraving toolpath can be seen by expanding the setup and selecting the operation.</p><h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">import adsk.core, adsk.fusion, adsk.cam, traceback
+
+PROJECT_URN = 'urn:adsk.wipprod:fs.file:vf.XhO3KCCLTUi83YJLaAiCRg?version=1'
+TOOL_LIBRARY_URN = 'systemlibraryroot://Samples/Milling Tools (Metric).json'
+
+def run(context):
+    ui = None
+    try:
+        app = adsk.core.Application.get()
+        ui  = app.userInterface
+
+        <span style="color:blue"># Open document by its URN.</span>
+        doc = loadProjectFromURN(PROJECT_URN)
+        if doc is None:
+            return
+
+        <span style="color:blue"># Switch to the manufacturing space.</span>
+        camWS = ui.workspaces.itemById('CAMEnvironment')
+        camWS.activate()
+
+        <span style="color:blue"># Get the cam product.</span>
+        products = doc.products
+        cam: adsk.cam.CAM = products.itemByProductType('CAMProductType')
+
+        <span style="color:blue"># Get the design product.</span>
+        design: adsk.fusion.Design = products.itemByProductType('DesignProductType')
+
+        <span style="color:blue">############# Find design and manufacturins bRepBodies #############</span>
+
+        <span style="color:blue"># Get the first body of the design root component.</span>
+        designBody = design.rootComponent.bRepBodies.item(0)
+
+        <span style="color:blue"># Find the equivalent body in manufacturing space.</span>
+        comp = designBody.parentComponent
+        camBody: adsk.fusion.BRepBody = None
+        for body in cam.designRootOccurrence.bRepBodies:
+            if body.parentComponent.name == comp.name:
+                camBody = body
+                break
+
+        <span style="color:blue">############# Find engravings using pocket recognition #############</span>
+
+        <span style="color:blue"># Define recognition vector: recognize pockets on top side (Z- view direction).</span>
+        searchVector = adsk.core.Vector3D.create(0, 0, -1)
+
+        <span style="color:blue"># Recognize any pockets in the design body.</span>
+        recognizedPockets = adsk.cam.RecognizedPocket.recognizePockets(designBody, searchVector)
+
+        <span style="color:blue"># Identify pockets that may be engravings based on their dimensions.</span>
+        <span style="color:blue"># We assume here that an engraving pocket is:</span>
+        <span style="color:blue">#  - made of a flat bottom face (no fillet or such)</span>
+        <span style="color:blue">#  - must be a closed pocket</span>
+        <span style="color:blue">#  - Z height is less than 2 mm</span>
+        POCKET_MAX_DEPTH = 0.2
+
+        engravingFeatures: list[EngravingFeature] = []
+        for recognizedPocket in recognizedPockets:
+            <span style="color:blue"># Pocket must be closed.</span>
+            if recognizedPocket.isClosed:
+                <span style="color:blue"># Check the pocket depth.</span>
+                if recognizedPocket.depth &lt;= POCKET_MAX_DEPTH:
+                    <span style="color:blue"># Look only at flat types.</span>
+                    if recognizedPocket.bottomType == adsk.cam.RecognizedPocketBottomType.RecognizedPocketBottomTypeFlat:
+                        <span style="color:blue"># This pocket matches the requirements so adding it as an engraving.</span>
+                        engraving = EngravingFeature(designBody, recognizedPocket, searchVector)
+                        engravingFeatures.append(engraving)
+
+        <span style="color:blue">############# Create selections sets in design space #############</span>
+
+        <span style="color:blue"># Create a list of all engraved bottom faces from design body.</span>
+        bottomFaces: list[adsk.fusion.BRepFace] = []
+        for engraving in engravingFeatures:
+            bottomFaces.extend(engraving.bottomFaces)
+
+        <span style="color:blue"># Add into the design space</span>
+        design.selectionSets.add(bottomFaces, '(design) Engravings bottom faces (all)')
+
+        <span style="color:blue">############# Create selections sets in manufacturing space #############</span>
+
+        <span style="color:blue"># Find the equivalent BRep face in the manufacturing space using tempID.</span>
+        bottomFacesInCam = findEquivalentFacesInManufacturingSpace(camBody, bottomFaces)
+        <span style="color:blue"># Add into the manufacturing space, using this selection set as operation geometry selection input also.</span>
+        engravingsBottomFacesSelectionSet = cam.selectionSets.add(bottomFacesInCam, '(cam) Engravings bottom faces (all)')
+
+        <span style="color:blue">############# Create an operation using selections set data #############</span>
+
+        <span style="color:blue"># Create a basic setup.</span>
+        setupInput = cam.setups.createInput(adsk.cam.OperationTypes.MillingOperation)
+        setupInput.name = 'Sample setup with engraving operation'
+        setupInput.models = [camBody]
+        setup = cam.setups.add(setupInput)
+
+        <span style="color:blue"># Find an engraving tool from tool library using a query.</span>
+        toolLibraries = adsk.cam.CAMManager.get().libraryManager.toolLibraries
+        url = adsk.core.URL.create(TOOL_LIBRARY_URN)
+        toolLibrary = toolLibraries.toolLibraryAtURL(url)
+        query = toolLibrary.createQuery()
+        query.criteria.add('tool_type', adsk.core.ValueInput.createByString('chamfer mill'))
+        query.criteria.add('tool_diameter.min', adsk.core.ValueInput.createByReal(0.4)) <span style="color:blue"># 4 mm</span>
+        query.criteria.add('tool_diameter.max', adsk.core.ValueInput.createByReal(0.6)) <span style="color:blue"># 6 mm</span>
+        results = query.execute()
+        tools: list[adsk.cam.Tool] = []
+        for result in results:
+            tools.append(result.tool)
+        engravingTool = tools[0] <span style="color:blue"># We pick the first tool found.</span>
+
+        <span style="color:blue"># Create an engraving operation.</span>
+        operationInput = setup.operations.createInput('engrave')
+        operationInput.tool = engravingTool
+        operationInput.displayName = 'Engraving Operation'
+        operationInput.parameters.itemByName('topHeight_offset').expression = '1 mm'
+
+        <span style="color:blue"># Add the selection set data to the operationInput as a new face contour selection entry.</span>
+        cadContours2dParam: adsk.cam.CadContours2dParameterValue = operationInput.parameters.itemByName('contours').value
+        curveSelections = cadContours2dParam.getCurveSelections()
+        chain = curveSelections.createNewFaceContourSelection()
+        chain.inputGeometry = engravingsBottomFacesSelectionSet.entities
+        cadContours2dParam.applyCurveSelections(curveSelections)
+
+        <span style="color:blue"># Add the operationInput to the setup.</span>
+        setup.operations.add(operationInput)
+        setup.operations.item(setup.operations.count-1).isLightBulbOn = True
+
+        <span style="color:blue"># Generate operation.</span>
+        cam.generateAllToolpaths(True)
+
+        <span style="color:blue"># Raise a done! message.</span>
+        ui.messageBox('- Selection Sets have been created in both design and manufacturing workspaces.\n' + \
+                        '- An engraving operation has been created.',
+                        'Fusion' + '\t' * 6, <span style="color:blue"># Widen the messageBox width</span>
+                        adsk.core.MessageBoxButtonTypes.OKButtonType,
+                        adsk.core.MessageBoxIconTypes.InformationIconType)
+
+    except Exception as e:
+        if ui:
+            ui.messageBox(f'Failed: {e}\n{traceback.format_exc()}', 'Fusion',
+                            adsk.core.MessageBoxButtonTypes.OKButtonType,
+                            adsk.core.MessageBoxIconTypes.CriticalIconType)
+
+
+def findEquivalentFacesInManufacturingSpace(camBody: adsk.fusion.BRepBody, designFaces: list[adsk.fusion.BRepFace]):
+    ''' From given list of design faces, find the equivalent faces in a cam body using tempID '''
+    camFaces: list[adsk.fusion.BRepFace] = []
+    for face in designFaces:
+        items = camBody.findByTempId(face.tempId)
+        for item in items:
+            if isinstance(item, adsk.fusion.BRepFace):
+                camFaces.append(item)
+    return camFaces
+
+
+<span style="color:blue">############# Engraving pocket feature object #############</span>
+
+class EngravingFeature():
+    ''' Engraving pocket feature object (that can deal with bottom and wall faces extraction) '''
+    def __init__(self, body: adsk.fusion.BRepBody, recognizedPocket: adsk.cam.RecognizedPocket, searchVector: adsk.core.Vector3D):
+        self.__body = body
+        self.__recognizedPocket = recognizedPocket
+        self.__searchVector = searchVector
+        self.__component = self.__body.parentComponent
+        self.__wallFaces: list[adsk.fusion.BRepFace] = []
+        self.__bottomFaces: list[adsk.fusion.BRepFace] = []
+        <span style="color:blue"># Extract the bottom and top faces when the object is created.</span>
+        self.__extractFaces()
+
+    @property
+    def wallFaces(self):
+        ''' Return engraving pocket wall faces '''
+        return self.__wallFaces
+
+    @property
+    def bottomFaces(self):
+        ''' Return engraving pocket bottom faces '''
+        return self.__bottomFaces
+
+    def __extractFaces(self):
+        ''' Extract pocket bottom and wall faces '''
+        boundaries = self.__recognizedPocket.boundaries
+        islands = self.__recognizedPocket.islands
+
+        <span style="color:blue"># Get the pocket boundary key points.</span>
+        points: list[adsk.core.Point3D] = []
+        for boundary in boundaries:
+            boundaryPoints = self.__getPointsFromCurve3DPath(boundary)
+            points.extend(boundaryPoints)
+
+        <span style="color:blue"># Get any pocket island key points.</span>
+        for island in islands:
+            islandPoints = self.__getPointsFromCurve3DPath(island)
+            points.extend(islandPoints)
+
+        <span style="color:blue"># Extract the faces.</span>
+        self.__wallFaces = self.__getWallFaces(points) 
+        self.__bottomFaces = self.__getBottomFaces(points)
+
+
+    def __getPointsFromCurve3DPath(self, curves: adsk.core.Curve3DPath):
+        ''' Get a list of exact points on the curve 3D paths '''
+        points: list[adsk.core.Point3D] = []
+        for curve in curves:
+            <span style="color:blue"># Cast to get the actual segment type as casting returns None if the wrong object is passed.</span>
+            line3D = adsk.core.Line3D.cast(curve)
+            arc3D = adsk.core.Arc3D.cast(curve)
+            circle3D = adsk.core.Circle3D.cast(curve)
+            ellipse3D = adsk.core.Ellipse3D.cast(curve)
+            nurbsCurve3D = adsk.core.NurbsCurve3D.cast(curve)
+            ellipticalArc3D = adsk.core.EllipticalArc3D.cast(curve)
+
+            nurbs: adsk.core.NurbsCurve3D = None
+            if line3D:
+                nurbs = line3D.asNurbsCurve
+            elif arc3D:
+                nurbs = arc3D.asNurbsCurve
+            elif circle3D:
+                nurbs = circle3D.asNurbsCurve
+            elif ellipse3D:
+                nurbs = ellipse3D.asNurbsCurve
+            elif nurbsCurve3D:
+                nurbs = nurbsCurve3D.copy()
+            elif ellipticalArc3D:
+                nurbs = ellipticalArc3D.asNurbsCurve
+            else:
+                classType = curve.classType()
+                raise Exception('Unsupported curve type: ' + classType)
+
+            if nurbs:
+                _, startPoint, endPoint = nurbs.evaluator.getEndPoints()
+                <span style="color:blue"># There is no need to add the end point as the start of the end of the curve is the start of the next one...</span>
+                points.append(startPoint)
+
+        return points
+
+
+    def __getBottomFaces(self, points: list[adsk.core.Point3D]):
+        ''' Search the pocket bottom faces using the provided boundary points '''
+        faces: list[adsk.fusion.BRepFace] = []
+        for point in points:
+            breps = self.__component.findBRepUsingPoint(point, adsk.fusion.BRepEntityTypes.BRepFaceEntityType, -1, True)
+            for brep in breps:
+                <span style="color:blue"># Cast so we have a nicely typed object.</span>
+                brep = adsk.fusion.BRepFace.cast(brep)
+                <span style="color:blue"># Filter to find only the wall faces where the normal is parallel to the search vector.</span>
+                _ , normal = brep.evaluator.getNormalAtPoint(brep.pointOnFace)
+                if normal.isParallelTo(self.__searchVector):
+                    if not brep in faces:
+                        faces.append(brep)
+        return faces
+
+
+    def __getWallFaces(self, points: list[adsk.core.Point3D]):
+        ''' Search the pocket wall faces using the provided boundary points '''
+        faces: list[adsk.fusion.BRepFace] = []
+        for point in points:
+            breps = self.__component.findBRepUsingPoint(point, adsk.fusion.BRepEntityTypes.BRepFaceEntityType, -1, True)
+            for brep in breps:
+                <span style="color:blue"># Cast so we have a nicely typed object.</span>
+                brep = adsk.fusion.BRepFace.cast(brep)
+                <span style="color:blue"># Filter to find only the wall faces where the normal is perpendicular to the search vector.</span>
+                _ , normal = brep.evaluator.getNormalAtPoint(brep.pointOnFace)
+                if normal.isPerpendicularTo(self.__searchVector):
+                    if not brep in faces:
+                        faces.append(brep)
+        return faces
+
+
+def loadProjectFromURN(urn:str = None) -&gt; adsk.core.Document:
+    ''' Minimal self-contained function to load and return a document via URN or return None safely '''
+    doc: adsk.core.Document = None
+    app = adsk.core.Application.get()
+    if urn is not None:
+        try: <span style="color:blue"># File not found causes an exception</span>
+            project: adsk.core.DataFile = app.data.findFileById(urn)
+            if project:
+                doc = app.documents.open(project, True)
+            else:
+                app.userInterface.messageBox(f'File not found for URN: {urn}!')
+        except Exception as e:
+            if str(e)[0:38] == '3 : Design is located in another team.':
+                <span style="color:blue"># Although the document has been loaded, variable 'doc' may not be populated</span>
+                if doc is None:
+                    doc: adsk.core.Document = adsk.core.Application.get().activeDocument
+            elif str(e)[0:20] == '3 : file not found':
+                app.userInterface.messageBox(f'File not found for URN: {urn}!')
+            else:
+                <span style="color:blue"># Abandon for unhandled errors, displaying the error message.</span>
+                app.userInterface.messageBox(f'Failed:{str(e)}\n{traceback.format_exc()}')
+    return doc</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(CreateEngravingsSelectionSets%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

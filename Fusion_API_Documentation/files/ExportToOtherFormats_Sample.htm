@@ -1,0 +1,260 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/ExportToOtherFormats.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="ExportToOtherFormats_Sample">
+    <meta name="description" content="Export to other formats API Sample Sample">
+    <meta name="topicid" content="GUID-d1462fe6-fd43-11e4-b6b4-f8b156d7cd97">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Export to other formats API Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Export to other formats API Sample</h1>
+    <h2 class="api">
+          Description
+        </h2>Demonstrates exporting the active design to IGES, STEP, SAT, SMT, F3D and STL formats. To run this sample, have a design open and run the script. It will write out the translated files to a temp directory, which will it show in a message box.<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">import adsk.core, adsk.fusion, traceback, tempfile
+
+def run(context):
+    ui = None
+    try:
+        app = adsk.core.Application.get()
+        ui  = app.userInterface
+        design = app.activeProduct
+        <span style="color:blue"># Get the ExportManager from the active design.</span>
+        exportMgr = design.exportManager
+        
+        tmpDir = tempfile.gettempdir()
+
+        <span style="color:blue"># Create an IgesExportOptions object and do the export.</span>
+        igesOptions = exportMgr.createIGESExportOptions(tmpDir + '/test.igs')
+        res = exportMgr.execute(igesOptions)
+        
+        <span style="color:blue"># Create an STEPExportOptions object and do the export.</span>
+        stepOptions = exportMgr.createSTEPExportOptions(tmpDir+ '/test.step')
+        res = exportMgr.execute(stepOptions)
+        
+        <span style="color:blue"># Create a SATExportOptions object and do the export.</span>
+        satOptions = exportMgr.createSATExportOptions(tmpDir + '/test.sat')
+        res = exportMgr.execute(satOptions)
+        
+        <span style="color:blue"># Create a SMTExportOptions object and do the export.</span>
+        smtOptions = exportMgr.createSMTExportOptions(tmpDir + '/test.smt')
+        res = exportMgr.execute(smtOptions)
+        
+        <span style="color:blue"># Create a FusionArchiveExportOptions object and do the export.</span>
+        fusionArchivevOptions = exportMgr.createFusionArchiveExportOptions(tmpDir + '/test.f3d')
+        res = exportMgr.execute(fusionArchivevOptions)
+        ui.messageBox(f'Design exported to: {tmpDir}')
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code">#include &lt;Core/Application/Application.h&gt;
+#include &lt;Core/Application/Documents.h&gt;
+#include &lt;Core/Application/Document.h&gt;
+#include &lt;Core/Application/Product.h&gt;
+#include &lt;Core/UserInterface/UserInterface.h&gt;
+#include &lt;Core/Geometry/Point3D.h&gt;
+
+#include &lt;Fusion/Fusion/Design.h&gt;
+#include &lt;Fusion/Components/Component.h&gt;
+#include &lt;Fusion/Sketch/Sketches.h&gt;
+#include &lt;Fusion/Sketch/Sketch.h&gt;
+#include &lt;Fusion/Sketch/SketchCurves.h&gt;
+#include &lt;Fusion/Sketch/SketchCircles.h&gt;
+#include &lt;Fusion/Sketch/SketchCircle.h&gt;
+#include &lt;Fusion/Sketch/Profiles.h&gt;
+#include &lt;Fusion/Sketch/Profile.h&gt;
+#include &lt;Fusion/Construction/ConstructionPlane.h&gt;
+#include &lt;Fusion/Features/Features.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeatures.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeature.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeatureInput.h&gt;
+#include &lt;Fusion/FusionTypeDefs.h&gt;
+#include &lt;Fusion/Fusion/ExportManager.h&gt;
+#include &lt;Fusion/Fusion/ExportOptions.h&gt;
+#include &lt;Fusion/Fusion/IGESExportOptions.h&gt;
+#include &lt;Fusion/Fusion/FusionArchiveExportOptions.h&gt;
+#include &lt;Fusion/Fusion/SATExportOptions.h&gt;
+#include &lt;Fusion/Fusion/SMTExportOptions.h&gt;
+#include &lt;Fusion/Fusion/STEPExportOptions.h&gt;
+#include &lt;Fusion/Fusion/STLExportOptions.h&gt;
+
+
+using namespace adsk::core;
+using namespace adsk::fusion;
+
+Ptr&lt;UserInterface&gt; ui;
+
+std::string getDllPath();
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    Ptr&lt;Application&gt; app = Application::get();
+    if (!app)
+        return false;
+
+    ui = app-&gt;userInterface();
+    if (!ui)
+        return false;
+
+
+    Ptr&lt;Product&gt; product = app-&gt;activeProduct();
+    if (!product)
+        return false;
+
+    Ptr&lt;Design&gt; design = product;
+    if (!design)
+        return false;
+
+
+    Ptr&lt;ExportManager&gt; exportMgr = design-&gt;exportManager();
+    if (!exportMgr)
+        return false;
+
+    std::string pathName = getDllPath();
+    Ptr&lt;IGESExportOptions&gt; igesOptions = exportMgr-&gt;createIGESExportOptions(pathName + "/" + "test.igs");
+    if (!igesOptions)
+        return false;
+    bRet = exportMgr-&gt;execute(igesOptions);
+
+    Ptr&lt;STEPExportOptions&gt; stepOptions = exportMgr-&gt;createSTEPExportOptions(pathName + "/" + "test.step");
+    if (!stepOptions)
+        return false;
+    bRet = exportMgr-&gt;execute(stepOptions);
+
+    Ptr&lt;SATExportOptions&gt; satOptions = exportMgr-&gt;createSATExportOptions(pathName + "/" + "test.sat");
+    if (!satOptions)
+        return false;
+    bRet = exportMgr-&gt;execute(satOptions);
+
+    Ptr&lt;SMTExportOptions&gt; smtOptions = exportMgr-&gt;createSMTExportOptions(pathName + "/" + "test.smt");
+    if (!smtOptions)
+        return false;
+    bRet = exportMgr-&gt;execute(smtOptions);
+
+    Ptr&lt;FusionArchiveExportOptions&gt; fusionArchiveOptions =
+        exportMgr-&gt;createFusionArchiveExportOptions(pathName + "/" + "test.f3d");
+    if (!fusionArchiveOptions)
+        return false;
+    bRet = exportMgr-&gt;execute(fusionArchiveOptions);
+
+    Ptr&lt;STLExportOptions&gt; stlOptions = exportMgr-&gt;createSTLExportOptions(rootComp, pathName + "/" + "test.stl");
+    if (!stlOptions)
+        return false;
+    stlOptions-&gt;isBinaryFormat(true);
+    stlOptions-&gt;meshRefinement(MeshRefinementHigh);
+    bRet = exportMgr-&gt;execute(stlOptions);
+
+
+    return true;
+}
+
+std::string getDllPath()
+{
+#if defined(_WINDOWS) || defined(_WIN32) || defined(_WIN64)
+    HMODULE hModule = NULL;
+    if (!GetModuleHandleExA(
+            GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,
+            (LPCSTR)&getDllPath,
+            &hModule))
+        return "";
+
+    char winTempPath[2048];
+    ::GetModuleFileNameA(hModule, winTempPath, 2048);
+
+    std::string strPath = winTempPath;
+    size_t stPos = strPath.rfind('\\');
+    return strPath.substr(0, stPos);
+#else
+    Dl_info info;
+    dladdr((void*)getDllPath, &info);
+
+    std::string strPath = info.dli_fname;
+    int stPos = (int)strPath.rfind('/');
+    if (stPos != -1)
+        return strPath.substr(0, stPos);
+    else
+        return "";
+    ;
+#endif
+}</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(ExportToOtherFormats%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

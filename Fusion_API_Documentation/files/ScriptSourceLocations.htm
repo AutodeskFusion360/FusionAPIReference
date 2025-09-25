@@ -1,0 +1,99 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/ScriptSourceLocations.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="17/12/2024">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="ScriptSourceLocations">
+    <meta name="description" content="Defines the different locations where Fusion looks for scripts and add-ins.">
+    <meta name="topicid" content="GUID-4BEBDC72-D7AB-4808-BEA4-96A79C2A746A">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>ScriptSourceLocations Enumerator
+        </title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">ScriptSourceLocations Enumerator
+        </h1>
+    <h2 class="api">
+          Description
+        </h2>Defines the different locations where Fusion looks for scripts and add-ins.<br>Defined in namespace "adsk::core" and the header file is &lt;Core\CoreTypeDefs.h&gt;<h2 class="api">
+          Methods
+        </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+              Name
+            </td>
+        <td class="api-list" style="width:1px;">
+              Value
+            </td>
+        <td class="api-list">
+              Description
+            </td>
+      </tr>
+      <tr>
+        <td class="api-list">AppStoreScriptSourceLocation</td>
+        <td class="api-list" align="right" style="padding-right:10px">0</td>
+        <td class="api-list">The location where add-ins are installed from the Autodesk App Store. Windows - %appdata%\Autodesk\ApplicationPlugins Mac - ~/Library/Application Support/Autodesk/ApplicationPlugins</td>
+      </tr>
+      <tr>
+        <td class="api-list">InternalScriptSourceLocation</td>
+        <td class="api-list" align="right" style="padding-right:10px">3</td>
+        <td class="api-list">One of the internal folders where add-ins are installed with Fusion.</td>
+      </tr>
+      <tr>
+        <td class="api-list">LinkedScriptSourceLocation</td>
+        <td class="api-list" align="right" style="padding-right:10px">5</td>
+        <td class="api-list">The script or add-in can be located anywhere and has been manually added to the known list of scripts and add-ins as a link.</td>
+      </tr>
+      <tr>
+        <td class="api-list">OtherInstalledScriptSourceLocation</td>
+        <td class="api-list" align="right" style="padding-right:10px">1</td>
+        <td class="api-list">The folder where non-App Store add-ins are installed. Windows - %appdata%\Autodesk\FusionAddins Mac - ~/Library/Application Support/Autodesk/FusionAddins</td>
+      </tr>
+      <tr>
+        <td class="api-list">SamplesScriptSourceLocation</td>
+        <td class="api-list" align="right" style="padding-right:10px">4</td>
+        <td class="api-list">One of the sample folders where sample scripts and add-ins are installed with Fusion.</td>
+      </tr>
+      <tr>
+        <td class="api-list">UserDefinedScriptSourceLocation</td>
+        <td class="api-list" align="right" style="padding-right:10px">2</td>
+        <td class="api-list">The folder defined in the API tab of the Preferences dialog.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+          Version
+        </h2>
+        Introduced in version January 2025<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(ScriptSourceLocations%20Enum%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

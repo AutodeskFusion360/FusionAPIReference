@@ -1,0 +1,245 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/SetViseOriginAsSetupWCSOrigin.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="SetViseOriginAsSetupWCSOrigin_Sample">
+    <meta name="description" content="Set Vise Origin As Setup WCS Origin API Sample Sample">
+    <meta name="topicid" content="GUID-13e1321f-cfa6-48d7-a75a-fa74d88549d1">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Set Vise Origin As Setup WCS Origin API Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Set Vise Origin As Setup WCS Origin API Sample</h1>
+    <h2 class="api">
+          Description
+        </h2><p>This sample script demonstrates how to define our setup WCS origin relative to our vise origin from either a component, a sketch point or a joint origin.</p><p>The Work Coordinate System is a reference point set in our CAM workspace and on our machine. All machine coordinates are drawn from the WCS. This script demonstrates defining the WCS by each of 4 alternative methods:</p><p>Setup by default with no origin defined.</p><p>Setup using vise origin as WCS origin.</p><p>Setup using a sketch point as WCS origin.</p><p>Setup using a joint origin as WCS origin.</p><h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">import adsk.core, adsk.fusion, adsk.cam, traceback
+
+<span style="color:blue"># Project URN for this script to open.</span>
+PROJECT_URN = 'urn:adsk.wipprod:fs.file:vf.Bp9h61ZBSzyiNd47VexneA?version=1'
+
+<span style="color:blue"># Name of project components, sketch and joint origin.</span>
+MODEL_COMPONENT_NAME = 'Model'
+STOCK_COMPONENT_NAME = 'Stock'
+VISE_COMPONENT_NAME = 'Vise'
+VISE_COMPONENT_SKETCH_NAME = 'Sketch with a SkethPoint representing origin location'
+VISE_COMPONENT_JOINT_ORIGIN_NAME = 'Vise Joint Origin'
+
+<span style="color:blue"># Name of the setup that will be created.</span>
+SETUP_NO_ORIGIN = 'Setup by default (no origin defined)'
+SETUP_BY_ORIGIN = 'Setup using vise origin as WCS origin'
+SETUP_BY_SKETCH = 'Setup using sketch point as WCS origin'
+SETUP_BY_JOINT_ORIGIN = 'Setup using joint origin as WCS origin'
+
+
+def run(context):
+    ui = None
+    try:
+        app = adsk.core.Application.get()
+        ui  = app.userInterface
+
+        <span style="color:blue"># Open document by its URN</span>
+        doc = loadProjectFromURN(PROJECT_URN)
+        if doc is None:
+            return
+
+        <span style="color:blue"># Switch to the manufacturing workspace.</span>
+        camWS = ui.workspaces.itemById('CAMEnvironment')
+        camWS.activate()
+
+        <span style="color:blue"># Get the cam product.</span>
+        products = doc.products
+        cam: adsk.cam.CAM = products.itemByProductType('CAMProductType')
+
+        <span style="color:blue"># Get design product.</span>
+        design: adsk.fusion.Design = products.itemByProductType('DesignProductType')
+       
+        <span style="color:blue"># Find the occurences of the components that we need to pass to the setups.</span>
+        occurrences = design.rootComponent.allOccurrences
+        models: list[adsk.fusion.Occurrence] = []
+        stocks: list[adsk.fusion.Occurrence] = []
+        fixtures: list[adsk.fusion.Occurrence] = []
+        fixtureOrigin: adsk.fusion.ConstructionPoint = None
+
+        for occurrence in occurrences:
+            if occurrence.component.name == VISE_COMPONENT_NAME:
+                fixtures.append(occurrence)
+                <span style="color:blue"># Get the construction point in its assembly context to return </span>
+                <span style="color:blue"># the originConstructionPoint equivalent in the cam workspace.</span>
+                fixtureOrigin = occurrence.component.originConstructionPoint.createForAssemblyContext(occurrence)
+            elif occurrence.component.name == STOCK_COMPONENT_NAME:
+                stocks.append(occurrence)
+            elif occurrence.component.name == MODEL_COMPONENT_NAME:
+                models.append(occurrence)
+
+        <span style="color:blue">####### Create a first setup with no origin assignment. We can compare the difference over the rest.#######             </span>
+        setupBasic = createBaseSetup(cam, models, stocks, fixtures, SETUP_NO_ORIGIN)
+
+        <span style="color:blue">####### Create a second setup and assign the vise origin point as setup origin. #######</span>
+        <span style="color:blue"># Create a base setup...</span>
+        setupVise = createBaseSetup(cam, models, stocks, fixtures, SETUP_BY_ORIGIN)
+        <span style="color:blue"># ... then modify its origin.</span>
+        setupVise.parameters.itemByName('wcs_orientation_mode').expression = "'coordinateSystem'"
+        setupVise.parameters.itemByName('wcs_orientation_cSys').value.value = [fixtureOrigin]
+
+        <span style="color:blue">####### create a third setup and assign the sketch point as setup origin... #######</span>
+        <span style="color:blue"># Get the sketch that contains the point we want to use.</span>
+        firstFixtureComponent = fixtures[0].component
+        sketch = firstFixtureComponent.sketches.itemByName(VISE_COMPONENT_SKETCH_NAME)
+
+        <span style="color:blue"># The first sketchPoint item(0) is the sketch origin, we're interested in the second point here:</span>
+        <span style="color:blue"># the one we manually added to the sketch to define an origin point item(1).</span>
+        sketchPoint = sketch.sketchPoints.item(1)
+
+        <span style="color:blue"># Create a base setup...</span>
+        setupSketch = createBaseSetup(cam, models, stocks, fixtures, SETUP_BY_SKETCH)
+        <span style="color:blue"># ... then modify its origin.</span>
+        setupSketch.parameters.itemByName('wcs_orientation_mode').expression = "'modelOrientation'"
+        setupSketch.parameters.itemByName('wcs_origin_mode').expression = "'point'"
+        setupSketch.parameters.itemByName('wcs_origin_point').value.value = [sketchPoint]
+
+        <span style="color:blue">####### Create a fourth setup and assign the joint origin point as setup origin. #######</span>
+        <span style="color:blue"># Get the joint origin we want to use</span>
+        jointOrigin = fixtures[0].component.jointOrigins.itemByName(VISE_COMPONENT_JOINT_ORIGIN_NAME)
+
+        <span style="color:blue"># Create a base setup...</span>
+        setupSketch = createBaseSetup(cam, models, stocks, fixtures, SETUP_BY_JOINT_ORIGIN)
+        <span style="color:blue"># ... then modify its origin.</span>
+        setupSketch.parameters.itemByName('wcs_orientation_mode').expression = "'modelOrientation'"
+        setupSketch.parameters.itemByName('wcs_origin_mode').expression = "'point'"
+        setupSketch.parameters.itemByName('wcs_origin_point').value.value = [jointOrigin]
+
+        <span style="color:blue"># Raise a done! message.</span>
+        setupMsg = f'\n- {SETUP_NO_ORIGIN}\n- {SETUP_BY_ORIGIN}\n- {SETUP_BY_SKETCH}\n- {SETUP_BY_JOINT_ORIGIN}'
+        ui.messageBox(f'Setups created: \n{setupMsg}',
+                        'Fusion\t\t\t',
+                        adsk.core.MessageBoxButtonTypes.OKButtonType,
+                        adsk.core.MessageBoxIconTypes.InformationIconType)
+
+    except Exception as e:
+        if ui:
+            ui.messageBox(f'Failed:{e}\n{traceback.format_exc()}',
+                            'Fusion\t\t\t',
+                            adsk.core.MessageBoxButtonTypes.OKButtonType,
+                            adsk.core.MessageBoxIconTypes.CriticalIconType)
+
+
+def createBaseSetup(cam: adsk.cam.CAM, models: list[adsk.fusion.Occurrence], \
+                    stocks: list[adsk.fusion.Occurrence], fixtures: list[adsk.fusion.Occurrence], name: str):
+    ''' Create a basic setup with no origin defined'''
+    <span style="color:blue"># Create setup input object.</span>
+    setupInput = cam.setups.createInput(adsk.cam.OperationTypes.MillingOperation)
+    setupInput.name = name
+
+    <span style="color:blue"># Set model.</span>
+    setupInput.models = models
+
+    <span style="color:blue"># Set fixture.</span>
+    setupInput.fixtureEnabled = True
+    setupInput.fixtures = fixtures
+
+    <span style="color:blue"># Create the setup.</span>
+    setup = cam.setups.add(setupInput)
+
+    <span style="color:blue"># Set stock on the setup. After the first setup is created, the newly created setups are created with</span>
+    <span style="color:blue"># default stock equivalent to their preceeding stock so, applying this to the setup to overwrite default</span>
+    objCollection = adsk.core.ObjectCollection.createWithArray(stocks)
+    setup.stockMode = adsk.cam.SetupStockModes.SolidStock
+    setup.stockSolids = objCollection
+
+    <span style="color:blue"># Return created setup</span>
+    return setup
+
+def loadProjectFromURN(urn:str = None) -&gt; adsk.core.Document:
+    ''' Minimal self-contained function to load and return a document via URN or return None safely '''
+    doc: adsk.core.Document = None
+    app = adsk.core.Application.get()
+    if urn is not None:
+        try: <span style="color:blue"># File not found causes an exception</span>
+            project: adsk.core.DataFile = app.data.findFileById(urn)
+            if project:
+                doc = app.documents.open(project, True)
+            else:
+                app.userInterface.messageBox(f'File not found for URN: {urn}!')
+        except Exception as e:
+            if str(e)[0:38] == '3 : Design is located in another team.':
+                <span style="color:blue"># Although the document has been loaded, variable 'doc' may not be populated</span>
+                if doc is None:
+                    doc: adsk.core.Document = adsk.core.Application.get().activeDocument
+            elif str(e)[0:20] == '3 : file not found':
+                app.userInterface.messageBox(f'File not found for URN: {urn}!')
+            else:
+                <span style="color:blue"># Abandon for unhandled errors, displaying the error message.</span>
+                app.userInterface.messageBox(f'Failed:{str(e)}\n{traceback.format_exc()}')
+    return doc</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(SetViseOriginAsSetupWCSOrigin%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

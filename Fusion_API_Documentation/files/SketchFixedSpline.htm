@@ -1,0 +1,218 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/SketchFixedSpline.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="SketchFixedSpline">
+    <meta name="description" content="SketchFixedSpline Object">
+    <meta name="topicid" content="GUID-6fc8b90c-e04a-4f4f-ac0d-f511e7237a77">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>SketchFixedSpline Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">SketchFixedSpline Object
+			</h1>
+              Derived from: <a href="SketchCurve.htm">SketchCurve</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Sketch/SketchFixedSpline.h&gt;<h2 class="api">
+          Description
+        </h2>The SketchFixedSpline class represents splines in a sketch that are not editable. These can result from including splines from other sketches or the spline edges. They can also be created by intersections and projecting splines onto a sketch.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchFixedSpline_breakCurve.htm">breakCurve</a></td>
+        <td class="api-list">Breaks a curve into two or three pieces by finding intersections of this curve with all other curves in the sketch and splitting this curve at the nearest intersections to a specified point on the curve.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchFixedSpline_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchFixedSpline_createForAssemblyContext.htm">createForAssemblyContext</a></td>
+        <td class="api-list">Creates or returns a proxy for the native object - i.e. a new object that represents this object but adds the assembly context defined by the input occurrence.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchFixedSpline_deleteMe.htm">deleteMe</a></td>
+        <td class="api-list">Deletes the entity from the sketch.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchFixedSpline_extend.htm">extend</a></td>
+        <td class="api-list">Extend a curve by specifying a point that determines the end of the curve to extend</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchFixedSpline_intersections.htm">intersections</a></td>
+        <td class="api-list">Get the curves that intersect this curve along with the intersection points (Point3D)</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchFixedSpline_replaceGeometry.htm">replaceGeometry</a></td>
+        <td class="api-list">Replaces the underlying NURBS curve that defines the shape of the fixed curve. This can only be used if the isNative property of the SketchFixedSpline returns false.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchFixedSpline_split.htm">split</a></td>
+        <td class="api-list">Split a curve at a position specified along the curve</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchFixedSpline_trim.htm">trim</a></td>
+        <td class="api-list">Trim a curve by specifying a point that determines the segment of the curve to trim away</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchFixedSpline_assemblyContext.htm">assemblyContext</a></td>
+        <td class="api-list">Returns the assembly occurrence (i.e. the occurrence) of this object in an assembly. This is only valid in the case where this is acting as a proxy in an assembly. Returns null in the case where the object is not in the context of an assembly but is already the native object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchFixedSpline_attributes.htm">attributes</a></td>
+        <td class="api-list">Returns the collection of attributes associated with this face.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchFixedSpline_boundingBox.htm">boundingBox</a></td>
+        <td class="api-list">Returns the bounding box of the entity in sketch space.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchFixedSpline_endSketchPoint.htm">endSketchPoint</a></td>
+        <td class="api-list">The sketch point at the end of the spline.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchFixedSpline_entityToken.htm">entityToken</a></td>
+        <td class="api-list">Returns a token for the SketchEntity object. This can be saved and used at a later time with the Design.findEntityByToken method to get back the same sketch entity.<br/><br/> When using entity tokens it's important to understand that the token string returned for a specific entity can be different over time. However, even if you have two different token strings that were obtained from the same entity, when you use findEntityByToken they will both return the same entity. Because of that you should never compare entity tokens as way to determine what the token represents. Instead, you need to use the findEntityByToken method to get the two entities identified by the tokens and then compare them.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchFixedSpline_evaluator.htm">evaluator</a></td>
+        <td class="api-list">Returns an evaluator object that lets you perform evaluations on the precise geometry of the curve.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchFixedSpline_geometricConstraints.htm">geometricConstraints</a></td>
+        <td class="api-list">Returns the sketch constraints that are attached to this curve.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchFixedSpline_geometry.htm">geometry</a></td>
+        <td class="api-list">Returns the transient geometry of the curve which provides geometric information about the curve. The returned geometry is always in sketch space.<br/><br/> Because the fixed spline can be analytically defined, for example it can be the precise intersection of a surface and the sketch plane, returning a NURBS curve that represents the spline may be an approximation of the actual curve. You can use the Evaluator property of the SketchFixedSpline object to perform evaluations on the precise curve.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchFixedSpline_is2D.htm">is2D</a></td>
+        <td class="api-list">Indicates if this curve lies entirely on the sketch x-y plane.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchFixedSpline_isConstruction.htm">isConstruction</a></td>
+        <td class="api-list">Gets and sets whether this curve is construction geometry.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchFixedSpline_isDeletable.htm">isDeletable</a></td>
+        <td class="api-list">Indicates if this sketch entity can be deleted. There are cases, especially with sketch points where another entity is dependent on an entity so deleting it is not allowed. For example, you can't delete the center point of circle by itself but deleting the circle will delete the point. The same is true for the end points of a line.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchFixedSpline_isFixed.htm">isFixed</a></td>
+        <td class="api-list">Indicates if this geometry is "fixed".</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchFixedSpline_isFullyConstrained.htm">isFullyConstrained</a></td>
+        <td class="api-list">Indicates if this sketch entity is fully constrained.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchFixedSpline_isLinked.htm">isLinked</a></td>
+        <td class="api-list">Indicates if this sketch entity was created by a projection, inclusion, or driven by an API script. If this returns true, then the entity is presented to the user as not editable and with a 'break link' command available.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchFixedSpline_isReference.htm">isReference</a></td>
+        <td class="api-list">Indicates if this geometry is a reference. Changing this property from true to false removes the reference. This property can not be set to true if it is already false.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchFixedSpline_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchFixedSpline_isVisible.htm">isVisible</a></td>
+        <td class="api-list">When a sketch is created, geometry is sometimes automatically added to the sketch. For example a sketch point that references the origin point is always included and if a face was selected to create the sketch on, geometry from the face is also included. This automatically created geometry behaves in a special way in that it is invisible but is available for selection and it also participates in profile calculations. It's not possible to make them visible but they can be deleted and they can be used for any other standard sketch operation.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchFixedSpline_length.htm">length</a></td>
+        <td class="api-list">Returns the length of the curve in centimeters.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchFixedSpline_nativeObject.htm">nativeObject</a></td>
+        <td class="api-list">The NativeObject is the object outside the context of an assembly and in the context of it's parent component. Returns null in the case where this object is not in the context of an assembly but is already the native object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchFixedSpline_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchFixedSpline_parentSketch.htm">parentSketch</a></td>
+        <td class="api-list">Returns the parent sketch.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchFixedSpline_referencedEntity.htm">referencedEntity</a></td>
+        <td class="api-list">Returns the referenced entity in the case where IsReference is true. However, this property can also return null when IsReference is true in the case where the reference is not parametric.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchFixedSpline_sketchDimensions.htm">sketchDimensions</a></td>
+        <td class="api-list">Returns the sketch dimensions that are attached to this curve.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchFixedSpline_startSketchPoint.htm">startSketchPoint</a></td>
+        <td class="api-list">The sketch point at the start of the spline.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchFixedSpline_worldGeometry.htm">worldGeometry</a></td>
+        <td class="api-list">Returns a NurbsCurve3D object that is the equivalent of this sketch curve but is in the space of the parent component rather than in sketch space.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="SketchFixedSpline_createForAssemblyContext.htm">SketchFixedSpline.createForAssemblyContext</a>, <a href="SketchFixedSpline_nativeObject.htm">SketchFixedSpline.nativeObject</a>, <a href="SketchFixedSplines_addByNurbsCurve.htm">SketchFixedSplines.addByNurbsCurve</a>, <a href="SketchFixedSplines_item.htm">SketchFixedSplines.item</a><h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(SketchFixedSpline%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

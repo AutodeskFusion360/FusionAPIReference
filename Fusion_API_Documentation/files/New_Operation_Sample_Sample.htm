@@ -1,0 +1,413 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/New_Operation_Sample.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="New_Operation_Sample_Sample">
+    <meta name="description" content="Create CAM Operation From Template API Sample Sample">
+    <meta name="topicid" content="GUID-AEF0708D-B657-4E9F-9032-4535E0D1C417">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Create CAM Operation From Template API Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Create CAM Operation From Template API Sample</h1>
+    <h2 class="api">
+          Description
+        </h2>Demonstrates adding a new toolpath into the document using an existing CAM template. You can view the template <a href="../ExtraFiles/face.f3dhsm-template" download>here</a>, although it will be loaded automatically. Run the sample script within any Fusion project containing at least one setup. A new facing operation will be created at the end of each setup discovered.<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#C++">C++</a></li>
+        <li><a href="#Python">Python</a></li>
+      </ul>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code"><span style="color:blue">// Apply a CAM Template to a specific machining operation on the selected model of each setup.</span>
+
+#include &lt;Core/CoreAll.h&gt;
+#include &lt;Fusion/FusionAll.h&gt;
+#include &lt;Cam/CamAll.h&gt;
+#include &lt;fstream&gt;
+#include &lt;algorithm&gt;
+
+using namespace adsk::core;
+using namespace adsk::fusion;
+using namespace adsk::cam;
+
+<span style="color:blue">// The location from where a sample template file can be downloaded if performed manually.</span>
+std::string TEMPLATE_URL = "https:<span style="color:blue">//help.autodesk.com/cloudhelp/ENU/Fusion-360-API/ExtraFiles/face.f3dhsm-template";</span>
+
+<span style="color:blue">// The name of the template file.</span>
+std::string TEMPLATE_FILE = "face.f3dhsm-template";
+
+<span style="color:blue">// The URN is the identifier of the template as located within Fusion's library of sample templates.</span>
+std::string TEMPLATE_URN = "urn:adsk.wipprod:fs.file:vf.p0C9h2KARa61iM_vsZauog?version=1";
+
+<span style="color:blue">// Variable initialisation.</span>
+Ptr&lt;Application&gt; app = Application::get();
+Ptr&lt;UserInterface&gt; ui = app-&gt;userInterface();
+Ptr&lt;Document&gt; doc = app-&gt;activeDocument();
+
+<span style="color:blue">// Abandon the script with a dialog explaining the reason and solution</span>
+bool abandonScript(std::string& notice)
+{
+    notice += "\nAfter completing the above tasks, run this script again.";
+    <span style="color:blue">// Spaces appended to the title make the messageBox wider, preventing line wrapping.</span>
+    ui-&gt;messageBox(
+        notice,
+        "Please take note of the following:\t\t\t\t",
+        MessageBoxButtonTypes::OKButtonType,
+        MessageBoxIconTypes::WarningIconType);
+    return true;
+}
+
+<span style="color:blue">// Function to check whether the template file exists.</span>
+bool fileExists(const std::string& filename)
+{
+    std::ifstream file(filename);
+    return file.good();
+}
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    std::string notice = "";
+    size_t occurrenceCount = 0;
+    size_t bRepBodyCount = 0;
+
+    <span style="color:blue">// Switch to manufacturing space.</span>
+    Ptr&lt;Workspace&gt; camWS = ui-&gt;workspaces()-&gt;itemById("CAMEnvironment");
+    camWS-&gt;activate();
+
+    <span style="color:blue">// Get the CAM product.</span>
+    Ptr&lt;Products&gt; products = doc-&gt;products();
+    Ptr&lt;Product&gt; product = app-&gt;activeProduct();
+    Ptr&lt;CAM&gt; cam = products-&gt;itemByProductType("CAMProductType");
+
+    <span style="color:blue">// Get the CAD product.</span>
+    Ptr&lt;Design&gt; design = products-&gt;itemByProductType("DesignProductType");
+
+    <span style="color:blue">// An alternative possibility.</span>
+    if (!design)
+    {
+        Ptr&lt;Design&gt; design = products-&gt;itemByProductType("WorkingModelProduct");
+    }
+
+    <span style="color:blue">// Check that a model exists in this document.</span>
+    if (design)
+    {
+        occurrenceCount = design-&gt;rootComponent()-&gt;occurrences()-&gt;count();
+        bRepBodyCount = design-&gt;rootComponent()-&gt;bRepBodies()-&gt;count();
+    }
+    else
+    {
+        notice += "No active Fusion design found.\n";
+    }
+
+    if (bRepBodyCount &lt; 1 && occurrenceCount &lt; 1)
+    {
+        notice += "\nNo model found. Open a Fusion document that contains a model.\n";
+    }
+
+    <span style="color:blue">// Check we have an existing setup and abandon if not.</span>
+    Ptr&lt;Setups&gt; setups = cam-&gt;setups();
+    if (setups-&gt;count() &lt; 1)
+    {
+        notice += "\nNo setup found. Create a setup and assign a model to it.\n";
+    }
+
+    <span style="color:blue">// Present a single messageBox stating problems, remedies and instructions.</span>
+    if (notice.length() &gt; 0)
+    {
+        return abandonScript(notice);
+    }
+
+    <span style="color:blue">// We are unable to read the content of a CAMTemplate dataFile directly from its URN.</span>
+    <span style="color:blue">// Instead we download the dataFile from the URN into a temporary folder and read the file contents.</span>
+
+    <span style="color:blue">// Set CAM temporary folder as inputFolder.</span>
+    std::string inputFolder = cam-&gt;temporaryFolder();
+
+    <span style="color:blue">// Variable inputFolder may contain backslashes but we need forward slashes.</span>
+    std::replace_if(
+        inputFolder.begin(), inputFolder.end(), [](char ch) { return ch == '\\'; }, '/');
+
+    <span style="color:blue">// Specify the full filename of the template.</span>
+    std::string templatePathname = inputFolder + "/" + TEMPLATE_FILE;
+
+    <span style="color:blue">// Check if the template exists(from the path specified above).Show an error if it fails to download.</span>
+    if (!fileExists(templatePathname))
+    {
+        Ptr&lt;DataFile&gt; templateDataFile = app-&gt;data()-&gt;findFileById(TEMPLATE_URN);
+        bool downloadSuccess = false;
+
+        if (templateDataFile)
+        {
+            downloadSuccess = templateDataFile-&gt;download(templatePathname, NULL);
+        }
+        else
+        {
+            notice += "\nUnable to locate template via " + TEMPLATE_URN + "\n";
+        }
+
+        if (!downloadSuccess)
+        {
+            <span style="color:blue">// We should never get here but if so, explain how to perform the previous step manually.</span>
+            notice += "\nThe template file: " + TEMPLATE_FILE + " has not been found.\n";
+            notice += "\nCreate your own template file called \"" + TEMPLATE_FILE;
+            notice += "\" or download a sample file from here : \n\n" + TEMPLATE_URL + "\n\n";
+            notice += "Move the downloaded template file to this folder:\n\n" + inputFolder + "\n\n";
+        }
+    }
+
+    <span style="color:blue">// Present a single messageBox stating problems, remedies and instructions.</span>
+    if (notice.length() &gt; 0)
+    {
+        return abandonScript(notice);
+    }
+
+    <span style="color:blue">// Iterate through each setup and insert the template into the setup.</span>
+    <span style="color:blue">// for each (Ptr&lt;Setup&gt; setup in cam-&gt;setups()) // for each iterator fails on Mac when tried.</span>
+    for (size_t i = 0; i &lt; setups-&gt;count(); i++)
+    {
+        <span style="color:blue">// Add the template to each setup.</span>
+        Ptr&lt;ObjectCollection&gt; results = setups-&gt;item(i)-&gt;createFromTemplate(templatePathname);
+
+        <span style="color:blue">// Get the operation that was created.What's created will vary depending on what's defined</span>
+        <span style="color:blue">// in the template so you may need more logic to find the result you want.</span>
+        Ptr&lt;Operation&gt; operation = results-&gt;item(0);
+
+        std::string name = operation-&gt;name() + " (API added operation)";
+        operation-&gt;name(name);
+    }
+
+    <span style="color:blue">// Generate all toolpaths, skipping any that are already valid.</span>
+    cam-&gt;generateAllToolpaths(true);
+
+    <span style="color:blue">// Indicate what has changed within the setup.</span>
+    notice = "Expand the setup to see all operations.\n\n";
+    notice += "Note the operation names appended with: (API added operation).";
+    ui-&gt;messageBox(
+        notice,
+        "Operation creation from template complete.\t\t",
+        MessageBoxButtonTypes::OKButtonType,
+        MessageBoxIconTypes::InformationIconType);
+
+    return true;
+}</pre>
+      </div>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code"><span style="color:blue"># Apply a CAM Template to a specific machining operation on the selected model of each setup.</span>
+
+import adsk.core, adsk.fusion, adsk.cam, os, traceback
+
+<span style="color:blue"># The location from where a sample template file can be downloaded if performed manually.</span>
+TEMPLATE_URL = 'https://help.autodesk.com/cloudhelp/ENU/Fusion-360-API/ExtraFiles/face.f3dhsm-template'
+
+<span style="color:blue"># The name of the template file.</span>
+TEMPLATE_FILE = 'face.f3dhsm-template'
+
+<span style="color:blue"># The URN is the identifier of the template as located within Fusion's library of sample templates.</span>
+TEMPLATE_URN = 'urn:adsk.wipprod:fs.file:vf.p0C9h2KARa61iM_vsZauog?version=1'
+
+<span style="color:blue"># Variable initialisation.</span>
+app = adsk.core.Application.get()
+ui = app.userInterface
+doc = app.activeDocument
+
+def abandonScript(notice:str):
+    notice += '\nAfter completing the above tasks, run this script again.'
+    <span style="color:blue"># Spaces appended to the title make the messageBox wider, preventing line wrapping.</span>
+    ui.messageBox(
+        notice,
+        'Please take note of the following:\t\t\t\t',
+        adsk.core.MessageBoxButtonTypes.OKButtonType,
+        adsk.core.MessageBoxIconTypes.WarningIconType)
+
+def run(context):
+
+    <span style="color:blue"># Variable initialisation.</span>
+    notice = ''
+    occurrenceCount = 0
+    bRepBodyCount = 0
+    
+    try:
+        <span style="color:blue"># Switch to manufacturing space.</span>
+        camWS = ui.workspaces.itemById('CAMEnvironment') 
+        camWS.activate()
+
+        <span style="color:blue"># Get the CAM product.</span>
+        products = doc.products
+        cam: adsk.cam.CAM = products.itemByProductType('CAMProductType')
+
+        <span style="color:blue"># Get the CAD product.</span>
+        design: adsk.fusion.Design = products.itemByProductType('DesignProductType')
+        
+        <span style="color:blue"># An alternative possibility.</span>
+        if not design:
+            design = products.itemByProductType('WorkingModelProductType')
+        
+        <span style="color:blue"># Check that a model exists in this document.</span>
+        if design:
+            occurrenceCount  = design.rootComponent.occurrences.count 
+            bRepBodyCount = design.rootComponent.bRepBodies.count
+        else:
+            notice += 'No active Fusion design found.\n'
+
+        if bRepBodyCount &lt; 1 and occurrenceCount &lt; 1:
+            notice += f'\nNo model found. Open a Fusion document that contains a model.\n'
+
+        <span style="color:blue"># Check we have an existing setup and abandon if not.</span>
+        setups: adsk.cam.Setups = cam.setups
+        if setups.count &lt; 1:
+            notice += '\nNo setup found. Create a setup and assign a model to it.\n'
+
+        <span style="color:blue"># Present a single messageBox stating problems, remedies and instructions.</span>
+        if (len(notice) &gt; 0):
+            abandonScript(notice)
+            return
+
+        <span style="color:blue"># We are unable to read the content of a CAMTemplate dataFile directly from its URN.</span>
+        <span style="color:blue"># Instead we download the dataFile from the URN into a temporary folder and read the file contents.</span>
+
+        <span style="color:blue"># Set CAM temporary folder as inputFolder.</span>
+        <span style="color:blue"># Variable inputFolder may contain backslashes but we need forward slashes.</span>
+        inputFolder = str(cam.temporaryFolder).replace('\\', '/') 
+
+        <span style="color:blue"># Specify the full filename of the template.</span>
+        templatePathname = f'{inputFolder}/{TEMPLATE_FILE}'
+
+        <span style="color:blue"># Check if the template exists (from the path specified above). Show an error if it fails to download.</span>
+        if not os.path.exists(templatePathname):
+            templateDataFile: adsk.core.DataFile = None
+            try:
+                templateDataFile = app.data.findFileById(TEMPLATE_URN)
+            except:
+                notice += f'\nUnable to locate template via {TEMPLATE_URN}.\n'
+
+            downloadSuccess:bool = False
+            if templateDataFile:
+                try:
+                    downloadSuccess = templateDataFile.download(templatePathname, None)
+                except Exception as e:
+                    notice += f'\n{e}\n'
+            
+            if not downloadSuccess:
+                <span style="color:blue"># We should never get here but if so, explain how to perform the previous step manually.</span>
+                notice += f'\nThe template file: {TEMPLATE_FILE} has not been found.\n'
+                notice += f'\nCreate your own template file called {TEMPLATE_FILE} '
+                notice += f'or download a sample file from here:\n\n{TEMPLATE_URL}\n\n'
+                notice += f'Move the downloaded template file to this folder:\n\n{inputFolder}\n\n'
+
+        <span style="color:blue"># Present a single messageBox stating problems, remedies and instructions.</span>
+        if len(notice) &gt; 0:
+            abandonScript(notice)
+            return
+        
+        <span style="color:blue"># Go through each setup in the document.</span>
+        for setup in setups:
+            <span style="color:blue"># Add a templated operation to each setup.</span>
+            templateInput = adsk.cam.CreateFromCAMTemplateInput.create()
+            camTemplate = adsk.cam.CAMTemplate.createFromFile(templatePathname)
+            templateInput.camTemplate = camTemplate
+            results: list[adsk.cam.OperationBase] = setup.createFromCAMTemplate2(templateInput)
+
+            <span style="color:blue"># Get the operation that was created. What's created will vary depending on what's defined </span>
+            <span style="color:blue"># in the template so you may need more logic to find the result you want.</span>
+            operation: adsk.cam.OperationBase = results[0]
+
+            <span style="color:blue"># Change the operation name.</span>
+            name = operation.name + ' (API added operation)'
+            operation.name = name
+
+            <span style="color:blue"># Make the toolpath visible.</span>
+            operation.isSuppressed = False
+            operation.isLightBulbOn = True
+        
+        <span style="color:blue"># Generate all toolpaths, skipping any that are already valid.</span>
+        cam.generateAllToolpaths(True)
+
+        <span style="color:blue"># Indicate what has changed within the setup.</span>
+        notice = 'Expand the setup to see all operations.\n\n'
+        notice += 'Note the operation names appended with: (API added operation).'
+        ui.messageBox(
+            notice,
+            'Operation creation from template complete.\t\t',
+            adsk.core.MessageBoxButtonTypes.OKButtonType, 
+            adsk.core.MessageBoxIconTypes.InformationIconType)
+
+    <span style="color:blue"># Capture and highlight any reason for error</span>
+    except Exception as e:
+        if ui:
+            ui.messageBox(
+                f'Failed: {e}\n{format(traceback.format_exc())}',
+                'Unable to continue',
+                adsk.core.MessageBoxButtonTypes.OKButtonType, 
+                adsk.core.MessageBoxIconTypes.CriticalIconType)</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(New_Operation_Sample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

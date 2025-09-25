@@ -1,0 +1,179 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/SketchCircles.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="SketchCircles">
+    <meta name="description" content="SketchCircles Object">
+    <meta name="topicid" content="GUID-15d12c6c-e604-488a-8f62-8fa1547c653c">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>SketchCircles Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">SketchCircles Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Sketch/SketchCircles.h&gt;<h2 class="api">
+          Description
+        </h2>The collection of circles in a sketch. This provides access to the existing circles and supports the methods to create new circles.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchCircles_addByCenterRadius.htm">addByCenterRadius</a></td>
+        <td class="api-list">Creates a sketch circle that is always parallel to the x-y plane of the sketch and is centered at the specified point.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchCircles_addByThreePoints.htm">addByThreePoints</a></td>
+        <td class="api-list">Creates a sketch circle that passes through the three points. The three points must lie on the x-y plane of the sketch.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchCircles_addByThreeTangents.htm">addByThreeTangents</a></td>
+        <td class="api-list">Creates a sketch circle that is tangent to the three input lines. The three lines must lie on the x-y plane of the sketch.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchCircles_addByTwoPoints.htm">addByTwoPoints</a></td>
+        <td class="api-list">Creates a sketch circle where the circle passes through the two points and the distance between the two points is the diameter of the circle.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchCircles_addByTwoTangents.htm">addByTwoTangents</a></td>
+        <td class="api-list">Creates a sketch circle that is tangent to the two input lines. The two lines must lie on the x-y plane of the sketch.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchCircles_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchCircles_item.htm">item</a></td>
+        <td class="api-list">Function that returns the specified sketch circle using an index into the collection.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchCircles_count.htm">count</a></td>
+        <td class="api-list">Returns the number of circles in the sketch.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchCircles_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchCircles_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="SketchCurves_sketchCircles.htm">SketchCurves.sketchCircles</a><h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CircleByCenterRadius_Sample.htm">Create circle by center and radius API Sample</a></td>
+        <td class="api-list">Demonstrates creating a sketch circle by the center and radius.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CreateCcircleBy3Tangents_Sample.htm">Create Circle By 3 Tangents API Sample</a></td>
+        <td class="api-list">Creates three lines and then draws a circle that is tangent to the lines. It then creates tangent constraints to maintain that relationship.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="LoftFeatureSample_Sample.htm">Loft Feature API Sample</a></td>
+        <td class="api-list">Demonstrates creating a new loft feature.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PatchFeatureSample_Sample.htm">Patch Feature API Sample</a></td>
+        <td class="api-list">Demonstrates creating a new patch feature.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SimpleExtrusionSample_Sample.htm">Simple Extrusion Sample</a></td>
+        <td class="api-list">Creates a new extrusion feature, resulting in a new component.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SimpleRevolveFeatureSample_Sample.htm">Simple Revolve Feature Sample</a></td>
+        <td class="api-list">Creates a new revolve feature, resulting in a new component.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchCircles_addByCenterRadius_Sample.htm">SketchCircles.addByCenterRadius</a></td>
+        <td class="api-list">Demonstrates the SketchCircles.addByCenterRadius method.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchCircles_addByThreePoints_Sample.htm">SketchCircles.addByThreePoints</a></td>
+        <td class="api-list">Demonstrates the SketchCircles.addByThreePoints method.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchCircles_addByThreeTangents_Sample.htm">SketchCircles.addByThreeTangents</a></td>
+        <td class="api-list">Demonstrates the SketchCircles.addByThreeTangets method.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchCircles_addByTwoPoints_Sample.htm">SketchCircles.addByTwoPoints</a></td>
+        <td class="api-list">Demonstrates the SketchCircles.addByTwoPoints method.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchCircles_addByTwoTangents_Sample.htm">SketchCircles.addByTwoTangents</a></td>
+        <td class="api-list">Demonstrates the SketchCircles.addByTwoTangets method.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(SketchCircles%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

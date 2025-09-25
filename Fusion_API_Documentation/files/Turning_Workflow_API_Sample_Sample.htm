@@ -1,0 +1,329 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/Turning_Workflow_API_Sample.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="Turning_Workflow_API_Sample_Sample">
+    <meta name="description" content="Turning Workflow API Sample Sample">
+    <meta name="topicid" content="GUID-026cfce3-f1a7-4158-aef4-2a66223218fa">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Turning Workflow API Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Turning Workflow API Sample</h1>
+    <h2 class="api">
+          Description
+        </h2>Turning Workflow API Sample<p>This sample script starts by opening a simple component which is then used to describe a basic turning workflow. It creates a setup, a few operations, pick some tools from a Fusion sample tool library using loops and queries and ends up post-processing the operations out using an NC Program.</p><h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">import adsk.core, adsk.fusion, adsk.cam, traceback
+import time
+
+<span style="color:blue"># Address/urn of the sample project to load by the script</span>
+PROJECT_URN = 'urn:adsk.wipprod:fs.file:vf.484G2xc_Tx2ZOs6kSWmyXw?version=2' <span style="color:blue"># CAM Samples -&gt; API Samples -&gt; Models -&gt; Threaded_Mount</span>
+
+<span style="color:blue"># local turning tool library to use</span>
+TURNING_TOOL_LIBRARY_NAME = 'Turning Tools (Metric)'
+
+
+def run(context):
+    ui = None
+    try:
+
+        <span style="color:blue">#################### Initialisation #####################</span>
+        app = adsk.core.Application.get()
+        ui = app.userInterface
+
+        <span style="color:blue"># Load by URN a specific sample project to demonstrate a basic turning workflow.</span>
+        doc = loadProjectFromURN(PROJECT_URN)
+        if not doc:
+            return
+
+        design = adsk.fusion.Design.cast(doc.products.itemByProductType("DesignProductType"))
+        if not design:
+            ui.messageBox('No active Fusion design found.', 'Fusion', adsk.core.MessageBoxButtonTypes.OKButtonType, adsk.core.MessageBoxIconTypes.CriticalIconType)
+            return
+
+        <span style="color:blue"># Switch to manufacturing space</span>
+        camWS: adsk.core.Workspace = ui.workspaces.itemById('CAMEnvironment')
+        camWS.activate()
+
+        <span style="color:blue"># Get the products (to get CAM product later...)</span>
+        products: adsk.core.Products = doc.products
+
+        <span style="color:blue">#################### Find tools in sample tool library ####################</span>
+        <span style="color:blue"># Get the tool libraries from the library manager</span>
+        camManager = adsk.cam.CAMManager.get()
+        libraryManager: adsk.cam.CAMLibraryManager = camManager.libraryManager
+        toolLibraries: adsk.cam.ToolLibraries = libraryManager.toolLibraries
+
+        <span style="color:blue"># Search for a specific turning tool library in local tool libraries</span>
+        toolLibrary: adsk.cam.ToolLibrary = None
+        localLibLocationURL = toolLibraries.urlByLocation(adsk.cam.LibraryLocations.Fusion360LibraryLocation)
+        localFolderURLs = toolLibraries.childAssetURLs(localLibLocationURL)
+        for url in localFolderURLs:
+            <span style="color:blue"># search for tool library using its name name</span>
+            if url.leafName == TURNING_TOOL_LIBRARY_NAME:
+                <span style="color:blue"># Load tool library</span>
+                toolLibrary: adsk.cam.ToolLibrary = toolLibraries.toolLibraryAtURL(url)
+                break
+
+        <span style="color:blue"># check tool library has been found</span>
+        if not toolLibrary:
+            ui.messageBox(f'Failed to find tool library: "{TURNING_TOOL_LIBRARY_NAME}"', 'Fusion', adsk.core.MessageBoxButtonTypes.OKButtonType, adsk.core.MessageBoxIconTypes.CriticalIconType)
+            return
+
+        <span style="color:blue"># Create some variables for the turning tools which will be used in the operations</span>
+        faceTool: adsk.cam.Tool = None
+        roughingTool: adsk.cam.Tool = None
+
+        <span style="color:blue"># Searching the turning tool using a loop for the roughing operations</span>
+        for tool in toolLibrary:
+            <span style="color:blue"># Read the tool type</span>
+            toolType = tool.parameters.itemByName('tool_type').value.value
+            hand = tool.parameters.itemByName('tool_hand').value.value
+            shape = tool.parameters.itemByName('tool_insertType').value.value
+
+            <span style="color:blue"># Select the first face tool found</span>
+            if toolType == 'turning general' and hand == 'R' and shape == 'C' and not faceTool:
+                tool.parameters.itemByName('tool_number').expression = '1'
+                faceTool = tool
+
+            <span style="color:blue"># Search the roughing tool</span>
+            elif toolType == 'turning general' and hand == 'R' and shape == 'V' and not roughingTool:
+                tool.parameters.itemByName('tool_number').expression = '2'
+                roughingTool = tool
+
+            <span style="color:blue"># Exit when the 2 tools are found</span>
+            if faceTool and roughingTool:
+                break
+
+        <span style="color:blue">#################### Create setup ####################</span>
+        cam: adsk.cam.CAM = adsk.cam.CAM.cast(products.itemByProductType("CAMProductType"))
+        setups: adsk.cam.Setups = cam.setups
+        setupInput: adsk.cam.SetupInput = setups.createInput(adsk.cam.OperationTypes.TurningOperation)
+
+        <span style="color:blue"># Create a list for the models to add to the setup Input</span>
+        models = []
+
+        <span style="color:blue"># Identify the part or exit gracefully</span>
+        try:
+            part: adsk.fusion.BRepBody = cam.designRootOccurrence.bRepBodies.item(0)
+        except Exception as e:
+            ui.messageBox('No part found in the current document, exiting sample script.', 'Fusion', adsk.core.MessageBoxButtonTypes.OKButtonType, adsk.core.MessageBoxIconTypes.CriticalIconType)
+            return
+
+        <span style="color:blue"># Add the part to the model list</span>
+        models.append(part)
+        <span style="color:blue"># Pass the model list to the setup input</span>
+        setupInput.models = models
+        <span style="color:blue"># Create the setup</span>
+        setup: adsk.cam.Setup = setups.add(setupInput)
+        <span style="color:blue"># Change some properties of the setup</span>
+        setup.name = 'CAM Turning Basic Script Sample'
+        setup.stockMode = adsk.cam.SetupStockModes.RelativeCylinderStock
+        <span style="color:blue"># Set offset mode</span>
+        setup.parameters.itemByName('job_stockOffsetMode').expression = "'simple'"
+        <span style="color:blue"># Set offset stock side</span>
+        setup.parameters.itemByName('job_stockOffsetSides').expression = '1 mm'
+        <span style="color:blue"># Set offset stock top</span>
+        setup.parameters.itemByName('job_stockOffsetTop').expression = '0.5 mm'
+        <span style="color:blue"># Set setup origin</span>
+        setup.parameters.itemByName('wcs_origin_boxPoint').value.value = 'top 1'
+
+        <span style="color:blue">#################### Face operation ####################</span>
+        <span style="color:blue"># Create a face operation input</span>
+        faceInput: adsk.cam.OperationInput = setup.operations.createInput('turningFace')
+        faceInput.tool = faceTool
+        faceInput.displayName = 'Turning Facing Operation'
+        faceInput.parameters.itemByName('tolerance').expression = '0.01 mm'
+        faceInput.parameters.itemByName('stepover').expression = '0.75 * tool_diameter'
+        faceInput.parameters.itemByName('direction').expression = "'outside to inside'"
+
+        <span style="color:blue"># Add the operation to the setup</span>
+        faceOp: adsk.cam.OperationBase = setup.operations.add(faceInput)
+
+        <span style="color:blue">#################### Adaptive operation ####################</span>
+        roughingInput = setup.operations.createInput('turningProfileRoughing')
+        roughingInput.tool = roughingTool
+        roughingInput.displayName = 'Turning Roughing Operation'
+        roughingInput.parameters.itemByName('tolerance').expression = '0.1 mm'
+        roughingInput.parameters.itemByName('depthOfCut').expression = '1.1 mm'
+
+        <span style="color:blue"># Add the operation to the setup</span>
+        roughingOp: adsk.cam.OperationBase = setup.operations.add(roughingInput)
+
+        <span style="color:blue">##################### Generate operations ####################</span>
+        cam.generateToolpath(faceOp)
+        genFuture: adsk.cam.GenerateToolpathFuture = cam.generateToolpath(roughingOp)
+        adsk.doEvents()
+
+        <span style="color:blue">#################### ncProgram and post-processing ####################</span>
+        <span style="color:blue"># Get the post library from library manager</span>
+        postLibrary: adsk.cam.PostLibrary = libraryManager.postLibrary
+
+        <span style="color:blue"># Query post library to get postprocessor list</span>
+        libraryLocation = adsk.cam.LibraryLocations.Fusion360LibraryLocation
+        postQuery: adsk.cam.PostConfigurationQuery = postLibrary.createQuery(libraryLocation)
+        postQuery.vendor = "Fanuc"
+        postQuery.capability = adsk.cam.PostCapabilities.Turning
+        postConfigs: list[adsk.cam.PostConfiguration] = postQuery.execute()
+
+        <span style="color:blue"># Find a post in the post library and import it to local library</span>
+        ncExtension = ''
+        for config in postConfigs:
+            if config.description == 'FANUC Turning':
+                ncExtension = config.extension
+                url = adsk.core.URL.create("user://")
+                importedURL = postLibrary.importPostConfiguration(config, url, "NCProgramSampleTurnPost.cps")
+                break
+
+        <span style="color:blue"># Get the imported local post config</span>
+        postConfig: adsk.cam.PostConfiguration = postLibrary.postConfigurationAtURL(importedURL)
+
+        <span style="color:blue"># Create NCProgramInput object</span>
+        ncInput: adsk.cam.NCProgramInput = cam.ncPrograms.createInput()
+        ncInput.displayName = 'NC Program Sample'
+
+        <span style="color:blue"># Change some nc program parameters...</span>
+        ncFilename = 'NCProgramSample'
+        ncParameters: adsk.cam.CAMParameters = ncInput.parameters
+        ncParameters.itemByName('nc_program_filename').value.value = ncFilename
+        ncParameters.itemByName('nc_program_openInEditor').value.value = True
+        ncParameters.itemByName('nc_program_nc_extension').value.value = ncExtension
+
+        <span style="color:blue"># Set temp directory as output directory</span>
+        <span style="color:blue"># Make the path valid for Fusion by replacing \\ to / in the path</span>
+        outputFolder = str(cam.temporaryFolder).replace('\\', '/')
+        ncParameters.itemByName('nc_program_output_folder').value.value = outputFolder
+
+        <span style="color:blue"># Select the operations to generate</span>
+        ncInput.operations = [faceOp, roughingOp]
+
+        <span style="color:blue"># Add a new ncprogram from the ncprogram input</span>
+        newProgram: adsk.cam.NCProgram = cam.ncPrograms.add(ncInput)
+
+        <span style="color:blue"># Set post processor</span>
+        newProgram.postConfiguration = postConfig
+
+        <span style="color:blue"># Change some post parameters</span>
+        postParameters: adsk.cam.CAMParameters = newProgram.postParameters
+
+        <span style="color:blue"># NcProgram parameters are passed without units to the postprocessor</span>
+        postParameters.itemByName('builtin_tolerance').value.value = 0.01
+        postParameters.itemByName('builtin_minimumChordLength').value.value = 0.33
+
+        <span style="color:blue"># Update/apply post parameters</span>
+        newProgram.updatePostParameters(postParameters)
+
+        <span style="color:blue"># Post-process</span>
+        <span style="color:blue"># Set post options, by default post process only valid operations containing toolpath data</span>
+        postOptions = adsk.cam.NCProgramPostProcessOptions.create()
+
+        <span style="color:blue"># Ensure toolpaths are visible</span>
+        faceOp.isLightBulbOn = True
+        roughingOp.isLightBulbOn = True
+
+        <span style="color:blue"># To avoid errors, post-process only when toolpath generation has completed</span>
+        while not genFuture.isGenerationCompleted:
+            time.sleep(1)
+        newProgram.postProcess(postOptions)
+
+        <span style="color:blue"># Advise where the NC file is located to indicate completion (adding a few Tabs '\t' so the file path is nicely printed on one line..)</span>
+        ui.messageBox(f'Setup, Operations and NCProgram created.\n\nThe results have been written to:\n{outputFolder}/{ncFilename}{ncExtension}\n\nPost processing is complete.  \t\t\t\t\t', 'Fusion', adsk.core.MessageBoxButtonTypes.OKButtonType, adsk.core.MessageBoxIconTypes.InformationIconType)
+
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()), 'Fusion', adsk.core.MessageBoxButtonTypes.OKButtonType, adsk.core.MessageBoxIconTypes.CriticalIconType)
+
+
+def loadProjectFromURN(urn: str = None) -&gt; adsk.core.Document:
+    ''' Minimal self-contained function to load and return a document via URN or return None safely '''
+    doc: adsk.core.Document = None
+    app = adsk.core.Application.get()
+    if urn:
+        try:  <span style="color:blue"># File not found causes an exception</span>
+            project: adsk.core.DataFile = app.data.findFileById(urn)
+            if project:
+                doc = app.documents.open(project, True)
+            else:
+                app.userInterface.messageBox(f'File not found for URN: {urn}!', 'Fusion', adsk.core.MessageBoxButtonTypes.OKButtonType, adsk.core.MessageBoxIconTypes.CriticalIconType)
+        except Exception as e:
+            if str(e)[0:38] == '3 : Design is located in another team.':
+                <span style="color:blue"># Although the document has been loaded, variable 'doc' may not be populated</span>
+                if not doc:
+                    doc: adsk.core.Document = adsk.core.Application.get().activeDocument
+            elif str(e)[0:20] == '3 : file not found':
+                app.userInterface.messageBox(f'File not found for URN: {urn}!', 'Fusion', adsk.core.MessageBoxButtonTypes.OKButtonType, adsk.core.MessageBoxIconTypes.CriticalIconType)
+            else:
+                <span style="color:blue"># Abandon for unhandled errors, displaying the error message.</span>
+                app.userInterface.messageBox(f'Failed:{str(e)}\n{traceback.format_exc()}', 'Fusion', adsk.core.MessageBoxButtonTypes.OKButtonType, adsk.core.MessageBoxIconTypes.CriticalIconType)
+    return doc</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(Turning_Workflow_API_Sample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

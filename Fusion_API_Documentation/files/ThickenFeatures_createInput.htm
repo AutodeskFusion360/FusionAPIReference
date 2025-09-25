@@ -1,0 +1,156 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/ThickenFeatures_createInput.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="22/4/2015">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="ThickenFeatures_createInput">
+    <meta name="description" content="ThickenFeatures.createInput Method">
+    <meta name="topicid" content="GUID-2af69699-cc1a-4095-8b88-2f8ab2dcd595">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>ThickenFeatures.createInput Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">ThickenFeatures.createInput Method</h1>
+
+          Parent Object: <a href="ThickenFeatures.htm">ThickenFeatures</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Features/ThickenFeatures.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Creates a ThickenFeatureInput object. Use properties and methods on this object to define the Thicken feature you want to create and then use the Add method, passing in the ThickenFeatureInput object to create the feature.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"thickenFeatures_var" is a variable referencing a <a href="ThickenFeatures.htm">ThickenFeatures</a> object.<code><pre class="api-code"><span style="color:blue"># Uses no optional arguments.</span><br />returnValue = thickenFeatures_var.<b>createInput</b>(inputFaces, thickness, isSymmetric, operation)<br /><br /><span style="color:blue"># Uses optional arguments.</span><br />returnValue = thickenFeatures_var.<b>createInput</b>(inputFaces, thickness, isSymmetric, operation, isChainSelection)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"thickenFeatures_var" is a variable referencing a <a href="ThickenFeatures.htm">ThickenFeatures</a> object.<br /><br /><code><pre class="api-code">#include &lt;Fusion/Features/ThickenFeatures.h&gt;<br /><br /><span style="color:blue">// Uses no optional arguments.</span><br />returnValue = thickenFeatures_var-&gt;<b>createInput</b>(inputFaces, thickness, isSymmetric, operation);<br /><br /><span style="color:blue">// Uses optional arguments.</span><br />returnValue = thickenFeatures_var-&gt;<b>createInput</b>(inputFaces, thickness, isSymmetric, operation, isChainSelection);</pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;"><a href="ThickenFeatureInput.htm">ThickenFeatureInput</a></td>
+        <td class="api-list">Returns the newly created ThickenFeatureInput object or null if the creation failed.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">inputFaces</td>
+        <td class="api-list"><a href="ObjectCollection.htm">ObjectCollection</a></td>
+        <td class="api-list">The faces or patch bodies to thicken. Faces need not be from the same component or body, nor do they need to be connected or touching one another.</td>
+      </tr>
+      <tr>
+        <td class="api-list">thickness</td>
+        <td class="api-list"><a href="ValueInput.htm">ValueInput</a></td>
+        <td class="api-list">ValueInput object that defines the thickness.</td>
+      </tr>
+      <tr>
+        <td class="api-list">isSymmetric</td>
+        <td class="api-list">boolean</td>
+        <td class="api-list">A boolean value for setting whether to add thickness symmetrically or only on one side of the face/s to thicken</td>
+      </tr>
+      <tr>
+        <td class="api-list">operation</td>
+        <td class="api-list"><a href="FeatureOperations.htm">FeatureOperations</a></td>
+        <td class="api-list">The feature operation to perform.</td>
+      </tr>
+      <tr>
+        <td class="api-list">isChainSelection</td>
+        <td class="api-list">boolean</td>
+        <td class="api-list">A boolean value for setting whether or not faces that are tangentially connected to the input faces (if any) will be included in the thicken. The default value is true.<br /><br /> This is an optional argument whose default value is True.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="thickenFeatures_add_Sample.htm">thickenFeatures.add</a></td>
+        <td class="api-list">Demonstrates the thickenFeatures.add method.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThickenFeatureSample_Sample.htm">Thicken Feature API Sample</a></td>
+        <td class="api-list">Demonstrates creating a new thiken feature.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version June 2015<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(ThickenFeatures.createInput%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

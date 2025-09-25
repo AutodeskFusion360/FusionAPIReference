@@ -1,0 +1,170 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/NurbsCurve2D.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="NurbsCurve2D">
+    <meta name="description" content="NurbsCurve2D Object">
+    <meta name="topicid" content="GUID-e6a6f526-4911-4482-9e76-770d0ee43fd3">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>NurbsCurve2D Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">NurbsCurve2D Object
+			</h1>
+              Derived from: <a href="Curve2D.htm">Curve2D</a> Object
+            <br>Defined in namespace "adsk::core" and the header file is &lt;Core/Geometry/NurbsCurve2D.h&gt;<h2 class="api">
+          Description
+        </h2>Transient 2D NURBS curve. A transient NURBS curve is not displayed or saved in a document. Transient 2D NURBS curves are used as a wrapper to work with raw 2D NURBS curve information. They are created statically using one of the create methods of the NurbsCurve2D class.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="NurbsCurve2D_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="NurbsCurve2D_copy.htm">copy</a></td>
+        <td class="api-list">Creates and returns an independent copy of this NurbsCurve2D object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="NurbsCurve2D_createNonRational.htm">createNonRational</a></td>
+        <td class="api-list">Creates a transient 2D NURBS non-rational b-spline object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="NurbsCurve2D_createRational.htm">createRational</a></td>
+        <td class="api-list">Creates a transient 2D NURBS rational b-spline object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="NurbsCurve2D_extract.htm">extract</a></td>
+        <td class="api-list">Defines a new NURBS curve that is the subset of this NURBS curve in the parameter range of [startParam, endParam]</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="NurbsCurve2D_getData.htm">getData</a></td>
+        <td class="api-list">Gets the data that defines a transient 2D NURBS rational b-spline object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="NurbsCurve2D_merge.htm">merge</a></td>
+        <td class="api-list">Define a new NURBS curve that is the result of combining this NURBS curve with another NURBS curve. The curves are merged with the end point of the current curve merging with the start point of the other curve. The curves are forced to join even if they are not physically touching so you will typically want to make sure the end and start points of the curves are where you expect them to be.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="NurbsCurve2D_reverse.htm">reverse</a></td>
+        <td class="api-list">Reverses the orientation of the curve so the start and end points are swapped. The shape of the curve remains unchanged. This is especially useful to prepare the curves to use with the merge method.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="NurbsCurve2D_set.htm">set</a></td>
+        <td class="api-list">Sets the data that defines a transient 2D NURBS rational b-spline object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="NurbsCurve2D_transformBy.htm">transformBy</a></td>
+        <td class="api-list">Transforms this curve in 2D space.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="NurbsCurve2D_controlPointCount.htm">controlPointCount</a></td>
+        <td class="api-list">Gets the number of control points that define the curve</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="NurbsCurve2D_controlPoints.htm">controlPoints</a></td>
+        <td class="api-list">Returns an array of Point2D objects that define the control points of the curve.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="NurbsCurve2D_curveType.htm">curveType</a></td>
+        <td class="api-list">Returns the type of geometry this curve represents.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="NurbsCurve2D_degree.htm">degree</a></td>
+        <td class="api-list">Returns the degree of the curve</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="NurbsCurve2D_evaluator.htm">evaluator</a></td>
+        <td class="api-list">Returns an evaluator object that lets you perform additional evaluations on the curve.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="NurbsCurve2D_isClosed.htm">isClosed</a></td>
+        <td class="api-list">Returns if the curve is closed</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="NurbsCurve2D_isPeriodic.htm">isPeriodic</a></td>
+        <td class="api-list">Returns if the curve is periodic.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="NurbsCurve2D_isRational.htm">isRational</a></td>
+        <td class="api-list">Returns if the curve is rational or non-rational type</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="NurbsCurve2D_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="NurbsCurve2D_knotCount.htm">knotCount</a></td>
+        <td class="api-list">Returns the knot count of the curve</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="NurbsCurve2D_knots.htm">knots</a></td>
+        <td class="api-list">Returns an array of numbers that define the Knots of the curve.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="NurbsCurve2D_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="Arc2D_asNurbsCurve.htm">Arc2D.asNurbsCurve</a>, <a href="Circle2D_asNurbsCurve.htm">Circle2D.asNurbsCurve</a>, <a href="Ellipse2D_asNurbsCurve.htm">Ellipse2D.asNurbsCurve</a>, <a href="EllipticalArc2D_asNurbsCurve.htm">EllipticalArc2D.asNurbsCurve</a>, <a href="Line2D_asNurbsCurve.htm">Line2D.asNurbsCurve</a>, <a href="NurbsCurve2D_copy.htm">NurbsCurve2D.copy</a>, <a href="NurbsCurve2D_createNonRational.htm">NurbsCurve2D.createNonRational</a>, <a href="NurbsCurve2D_createRational.htm">NurbsCurve2D.createRational</a>, <a href="NurbsCurve2D_extract.htm">NurbsCurve2D.extract</a>, <a href="NurbsCurve2D_merge.htm">NurbsCurve2D.merge</a>, <a href="Polyline2D_asNurbsCurve.htm">Polyline2D.asNurbsCurve</a><h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(NurbsCurve2D%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

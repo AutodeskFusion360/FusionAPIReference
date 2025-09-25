@@ -1,0 +1,119 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/PostCapabilities.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="21/02/2023">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="PostCapabilities">
+    <meta name="description" content="List of capabilities a post configuration can support. These capabilities represent either a class of operations (milling, turning, etc.) or some additional functionality (e.g. machine simulation).">
+    <meta name="topicid" content="GUID-600BCA5E-866F-4B9E-88BA-EAE5891024F7">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>PostCapabilities Enumerator
+        </title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">PostCapabilities Enumerator
+        </h1>
+    <h2 class="api">
+          Description
+        </h2>List of capabilities a post configuration can support. These capabilities represent either a class of operations (milling, turning, etc.) or some additional functionality (e.g. machine simulation).<br>Defined in namespace "adsk::cam" and the header file is &lt;Cam\CamTypeDefs.h&gt;<h2 class="api">
+          Methods
+        </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+              Name
+            </td>
+        <td class="api-list" style="width:1px;">
+              Value
+            </td>
+        <td class="api-list">
+              Description
+            </td>
+      </tr>
+      <tr>
+        <td class="api-list">Additive</td>
+        <td class="api-list" align="right" style="padding-right:10px">64</td>
+        <td class="api-list">Post supports additive operations.</td>
+      </tr>
+      <tr>
+        <td class="api-list">Cascading</td>
+        <td class="api-list" align="right" style="padding-right:10px">32</td>
+        <td class="api-list">Post configuration is intended to run as a complement to another post that produces NC code to pass additional data to an external application.</td>
+      </tr>
+      <tr>
+        <td class="api-list">Inspection</td>
+        <td class="api-list" align="right" style="padding-right:10px">128</td>
+        <td class="api-list">Post supports surface inspection operations.</td>
+      </tr>
+      <tr>
+        <td class="api-list">Intermediate</td>
+        <td class="api-list" align="right" style="padding-right:10px">8</td>
+        <td class="api-list">Post outputs data in an intermediate format intended for processing by another application rather than NC code for a machine.</td>
+      </tr>
+      <tr>
+        <td class="api-list">Jet</td>
+        <td class="api-list" align="right" style="padding-right:10px">16</td>
+        <td class="api-list">Post supports jet cutting operations (e.g. water jet, plasma, or laser).</td>
+      </tr>
+      <tr>
+        <td class="api-list">MachineSimulation</td>
+        <td class="api-list" align="right" style="padding-right:10px">256</td>
+        <td class="api-list">Post configuration provides additional data to support machine simulation.</td>
+      </tr>
+      <tr>
+        <td class="api-list">Milling</td>
+        <td class="api-list" align="right" style="padding-right:10px">1</td>
+        <td class="api-list">Post supports milling operations.</td>
+      </tr>
+      <tr>
+        <td class="api-list">SetupSheet</td>
+        <td class="api-list" align="right" style="padding-right:10px">4</td>
+        <td class="api-list">Post creates a setup sheet rather than NC code.</td>
+      </tr>
+      <tr>
+        <td class="api-list">Turning</td>
+        <td class="api-list" align="right" style="padding-right:10px">2</td>
+        <td class="api-list">Post supports turning operations.</td>
+      </tr>
+      <tr>
+        <td class="api-list">Undefined</td>
+        <td class="api-list" align="right" style="padding-right:10px">0</td>
+        <td class="api-list">Undefined, default when query is created.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+          Version
+        </h2>
+        Introduced in version April 2023<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(PostCapabilities%20Enum%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

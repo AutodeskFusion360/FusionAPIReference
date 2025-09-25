@@ -1,0 +1,129 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/MeshRemeshFeatureInput.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="04/03/2024">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="MeshRemeshFeatureInput">
+    <meta name="description" content="MeshRemeshFeatureInput Object">
+    <meta name="topicid" content="GUID-2814D29A-05C6-4519-B50C-5D6704EE2FF2">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>MeshRemeshFeatureInput Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">MeshRemeshFeatureInput Object <img src="../images/TestTubeLarge.png" alt="Preview"></h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/MeshBody/MeshRemeshFeatureInput.h&gt;<p class="api-preview"><img src="../images/TestTubeSmall.png" alt="Preview">This functionality is provided as a preview
+				of intended future API capabilities. You are encouraged to use it and report any problems or suggestions using the
+				<a href="https://forums.autodesk.com/t5/fusion-360-api-and-scripts/bd-p/22">Fusion API and Scripts</a> forum.<br><br>
+	
+                Because this is a preview of future functionality, there is the possibility that it will change, which will possibly
+		        break any existing programs that use this functionality. Because of that, you should never deliver any programs that use
+		        any preview capabilities. For a distributed program, you should wait until it has moved from preview to released state.
+		    </p>
+    <h2 class="api">
+          Description
+        </h2>This class defines the methods and properties that pertain to the definition of a mesh re-mesh feature.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshRemeshFeatureInput_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshRemeshFeatureInput_density.htm">density</a></td>
+        <td class="api-list">Controls the density of the newly created faces of the re-meshed mesh. The values can range between 0 and 1. The default value is 0.25</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshRemeshFeatureInput_isPreserveBoundariesEnabled.htm">isPreserveBoundariesEnabled</a></td>
+        <td class="api-list">Gets and sets if open boundary edges are preserved during the re-mesh process. Default value is false.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshRemeshFeatureInput_isPreserveSharpEdgesEnabled.htm">isPreserveSharpEdgesEnabled</a></td>
+        <td class="api-list">Gets and sets if sharp edges are preserved during the re-mesh process. Default value is false.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshRemeshFeatureInput_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshRemeshFeatureInput_mesh.htm">mesh</a></td>
+        <td class="api-list">Gets and sets the input mesh body.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshRemeshFeatureInput_meshRemeshMethodType.htm">meshRemeshMethodType</a></td>
+        <td class="api-list">Gets and sets the type of mesh re-mesh, default value is AdaptiveType.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshRemeshFeatureInput_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshRemeshFeatureInput_shapePreservation.htm">shapePreservation</a></td>
+        <td class="api-list">Gets and sets how much of the original shape needs to preserved. The value can range between 0 and 1. The default value is 0.5. Only valid if meshRemeshMethodType is AdaptiveType.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshRemeshFeatureInput_targetBaseFeature.htm">targetBaseFeature</a></td>
+        <td class="api-list">When creating a feature that is owned by a base feature, set this property to the base feature you want to associate the new feature with. By default, this is null, meaning it will not be associated with a base feature.<br/><br/> Because of a current limitation, if you want to create a feature associated with a base feature, you must set this property AND call the startEdit method of the base feature, create the feature, and then call the finishEdit method of the base feature. The base feature must be in an "edit" state to be able to add any additional items to it.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="MeshRemeshFeatures_createInput.htm">MeshRemeshFeatures.createInput</a><h2 class="api">
+            Version
+          </h2>
+        Introduced in version March 2024<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(MeshRemeshFeatureInput%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

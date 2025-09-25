@@ -1,0 +1,132 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/DrawingDocument_saveAs.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="03/12/2020">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="DrawingDocument_saveAs">
+    <meta name="description" content="DrawingDocument.saveAs Method">
+    <meta name="topicid" content="GUID-691DADD2-2E40-477A-83D9-8CCB8BD62D26">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>DrawingDocument.saveAs Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">DrawingDocument.saveAs Method</h1>
+
+          Parent Object: <a href="DrawingDocument.htm">DrawingDocument</a><br>Defined in namespace "adsk::drawing" and the header file is &lt;Drawing/Drawing/DrawingDocument.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Performs a Save As on this document. This saves the currently open document to the specified location and this document becomes the saved document. If this is a new document that has never been saved you must use the SaveAs method in order to specify the location and name. You can determine if the document has been saved by checking the value of the isSaved property.</p>
+    <h2 class="api">
+            Remarks
+          </h2>Saving a document is not supported within any of the Command related events. When a command is running, a transaction is open, and saving a document cannot be transacted and, as a result, cannot be contained within a command transaction.<h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"drawingDocument_var" is a variable referencing a <a href="DrawingDocument.htm">DrawingDocument</a> object.<code><pre class="api-code">returnValue = drawingDocument_var.<b>saveAs</b>(name, dataFolder, description, tag)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"drawingDocument_var" is a variable referencing a <a href="DrawingDocument.htm">DrawingDocument</a> object.<br /><br /><code><pre class="api-code">#include &lt;Drawing/Drawing/DrawingDocument.h&gt;<br /><br />returnValue = drawingDocument_var-&gt;<b>saveAs</b>(name, dataFolder, description, tag);<br /></pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;">boolean</td>
+        <td class="api-list">Returns true if the save as was successful.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">name</td>
+        <td class="api-list">string</td>
+        <td class="api-list">The name to use for this document. If this is an empty string, Fusion will use the default name assigned when the document was created.</td>
+      </tr>
+      <tr>
+        <td class="api-list">dataFolder</td>
+        <td class="api-list"><a href="DataFolder.htm">DataFolder</a></td>
+        <td class="api-list">The data folder to save this document to.</td>
+      </tr>
+      <tr>
+        <td class="api-list">description</td>
+        <td class="api-list">string</td>
+        <td class="api-list">The description string of the document. This can be an empty string.</td>
+      </tr>
+      <tr>
+        <td class="api-list">tag</td>
+        <td class="api-list">string</td>
+        <td class="api-list">The tag string of the document. This can be an empty string.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version December 2020<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(DrawingDocument.saveAs%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,89 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/MeshRepairTypes.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="04/03/2024">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="MeshRepairTypes">
+    <meta name="description" content="Specify the main repair type for the mesh. If RebuildMeshRepairType is chosen, other parameters can be set.">
+    <meta name="topicid" content="GUID-173B04A3-D2C3-47E9-82B1-633BFA1F390E">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>MeshRepairTypes Enumerator
+        </title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">MeshRepairTypes Enumerator
+        </h1>
+    <h2 class="api">
+          Description
+        </h2>Specify the main repair type for the mesh. If RebuildMeshRepairType is chosen, other parameters can be set.<br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion\FusionTypeDefs.h&gt;<h2 class="api">
+          Methods
+        </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+              Name
+            </td>
+        <td class="api-list" style="width:1px;">
+              Value
+            </td>
+        <td class="api-list">
+              Description
+            </td>
+      </tr>
+      <tr>
+        <td class="api-list">CloseHolesMeshRepairType</td>
+        <td class="api-list" align="right" style="padding-right:10px">0</td>
+        <td class="api-list">Simplest and fastest type of repair, only close holes and fix flipped triangles are used to fix the part.</td>
+      </tr>
+      <tr>
+        <td class="api-list">RebuildMeshRepairType</td>
+        <td class="api-list" align="right" style="padding-right:10px">3</td>
+        <td class="api-list">Reconstructs the mesh body using one of 4 MeshRepairRebuildTypes. All inner structures are destroyed.</td>
+      </tr>
+      <tr>
+        <td class="api-list">StitchAndRemoveMeshRepairType</td>
+        <td class="api-list" align="right" style="padding-right:10px">1</td>
+        <td class="api-list">Makes the same changes as CloseHolesMeshRepairType, and also stitches triangles, removes double triangles, removes degenerated faces, and removes tiny shells.</td>
+      </tr>
+      <tr>
+        <td class="api-list">WrapMeshRepairType</td>
+        <td class="api-list" align="right" style="padding-right:10px">2</td>
+        <td class="api-list">Uses in addition to the methods in StitchAndRemoveMeshRepairType also the wrapped method. This methods takes time and removes internal structure.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+          Version
+        </h2>
+        Introduced in version March 2024<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(MeshRepairTypes%20Enum%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,130 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/UserParameters_add.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="UserParameters_add">
+    <meta name="description" content="UserParameters.add Method">
+    <meta name="topicid" content="GUID-e558457b-ca64-48f6-b17c-4cd21188b9e4">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>UserParameters.add Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">UserParameters.add Method</h1>
+
+          Parent Object: <a href="UserParameters.htm">UserParameters</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Fusion/UserParameters.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Adds a new user parameter to the collection.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"userParameters_var" is a variable referencing a <a href="UserParameters.htm">UserParameters</a> object.<code><pre class="api-code">returnValue = userParameters_var.<b>add</b>(name, value, units, comment)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"userParameters_var" is a variable referencing a <a href="UserParameters.htm">UserParameters</a> object.<br /><br /><code><pre class="api-code">#include &lt;Fusion/Fusion/UserParameters.h&gt;<br /><br />returnValue = userParameters_var-&gt;<b>add</b>(name, value, units, comment);<br /></pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;"><a href="UserParameter.htm">UserParameter</a></td>
+        <td class="api-list">Returns the newly created UserParameter or null if the creation failed.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">name</td>
+        <td class="api-list">string</td>
+        <td class="api-list">The name of the parameter. This is the name shown in the parameters dialog</td>
+      </tr>
+      <tr>
+        <td class="api-list">value</td>
+        <td class="api-list"><a href="ValueInput.htm">ValueInput</a></td>
+        <td class="api-list">ValueInput object that specifies the value of the parameter. If the ValueInput was created using a real, the value will be interpreted using the internal unit for the unit type specified by the "units" argument. For example, if the ValueInput was created using the real value 5 and the input to the "units" argument is any valid length unit, the value will be interpreted as 5 centimeters since centimeters is the internal unit for lengths. If the "units" argument is a valid angle unit the value will be interpreted as 5 radians.<br/><br/> If the ValueInput was created using a string, the string is used as-is for the expression of the parameter. For value parameters, this means if there are units as part of the string, it must evaluate to the same unit type as that specified by the "units" argument and if no units are specified it will use the current default units specified for the current document. For example, if the ValueInput was created with the string "5 in", then the "units" argument must define any valid length so they are compatible. If the ValueInput was created with the string "5", any unit type can be used and the result will be 5 of that unit.<br/><br/> If the "units" argument is "Text" then a text parameter will be created using the value provided as the expression.<br/><br/> When using a ValueInput created using a string, it's the same as creating a parameter in the user-interface. You can specify any valid expression, i.e. "5", "5 in", "5 in / 2", "5 + Length", etc. and you can choose from many different types of units. The only requirement is that the units must match in type. For example, they must both be lengths, or they must both be angles.</td>
+      </tr>
+      <tr>
+        <td class="api-list">units</td>
+        <td class="api-list">string</td>
+        <td class="api-list">The units to use for the value of the parameter. The use of any of the measurement units will result in the creation of a numeric parameter. The units specified must match the units specified (if any) in the ValueInput object.<br/><br/> To create a parameter with no units, you can specify an empty string as the units, which will also create a numeric parameter. To create a text parameter, use "Text" as the unit type.</td>
+      </tr>
+      <tr>
+        <td class="api-list">comment</td>
+        <td class="api-list">string</td>
+        <td class="api-list">The comment to display in the parameters dialog. Specify an empty string ("") for no comment</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(UserParameters.add%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

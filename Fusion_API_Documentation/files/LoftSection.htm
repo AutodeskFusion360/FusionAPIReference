@@ -1,0 +1,138 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/LoftSection.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2016">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="LoftSection">
+    <meta name="description" content="LoftSection Object">
+    <meta name="topicid" content="GUID-B08B08BE-391A-4F12-AE1A-B8C556CD6FD6">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>LoftSection Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">LoftSection Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Features/LoftSection.h&gt;<h2 class="api">
+          Description
+        </h2>A single loft section.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="LoftSection_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="LoftSection_deleteMe.htm">deleteMe</a></td>
+        <td class="api-list">Deletes this LoftSection.<br/><br/> If this LoftSection object is associated with a created feature, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="LoftSection_reorder.htm">reorder</a></td>
+        <td class="api-list">Repositions this section so that it has the new index specified.<br/><br/> If this LoftSection object is associated with a created feature, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="LoftSection_setDirectionEndCondition.htm">setDirectionEndCondition</a></td>
+        <td class="api-list">Sets the end condition to be defined by a direction and weight.<br/><br/> This is valid for sections defined with sketch curves.<br/><br/> If this LoftSection object is associated with a created feature, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="LoftSection_setFreeEndCondition.htm">setFreeEndCondition</a></td>
+        <td class="api-list">Sets the end condition to be a "Free" end condition. This is the default end condition when a new section is added.<br/><br/> This is valid for sections defined with all curve types.<br/><br/> If this LoftSection object is associated with a created feature, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="LoftSection_setPointSharpEndCondition.htm">setPointSharpEndCondition</a></td>
+        <td class="api-list">Sets the end condition to be sharp where the section is a point. This is the default condition for a point section.<br/><br/> If this LoftSection object is associated with a created feature, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="LoftSection_setPointTangentEndCondition.htm">setPointTangentEndCondition</a></td>
+        <td class="api-list">Set the end condition to a tangent condition in the case where the section is a point.<br/><br/> If this LoftSection object is associated with a created feature, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="LoftSection_setSmoothEndCondition.htm">setSmoothEndCondition</a></td>
+        <td class="api-list">Sets the end condition to be smooth to the adjacent face. If the end profile is not defined by a BRepEdge, then this is ignored because there is no face to be smooth to.<br/><br/> This is only valid on the first or last section.<br/><br/> If this LoftSection object is associated with a created feature, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="LoftSection_setTangentEndCondition.htm">setTangentEndCondition</a></td>
+        <td class="api-list">Sets the end condition to be tangent to the adjacent face. If the section is not defined by a BRepEdge, then this is ignored because there is no face to be tangent to.<br/><br/> This is only valid on the first or last profile.<br/><br/> If this LoftSection object is associated with a created feature, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="LoftSection_endCondition.htm">endCondition</a></td>
+        <td class="api-list">Returns the current end condition. This is only valid for the first and last section and when the result is not closed. In other cases this will return null. This returns one of the several objects derived from LoftEndCondition and represents the current end condition. You can edit the existing condition using properties on the returned object. You can change the end condition using one of the set methods on the LoftSection object.<br/><br/> If this LoftSection object is associated with a created feature, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="LoftSection_entity.htm">entity</a></td>
+        <td class="api-list">Get and sets the entity that defines the section of the loft. This can be a BRepFace, Profile, Path, SketchPoint, ConstructionPoint, or an ObjectCollection of contiguous profiles.<br/><br/> If this LoftSection object is associated with a created feature, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="LoftSection_index.htm">index</a></td>
+        <td class="api-list">The position of this LoftSection within the collection. The first section has an index of 0. This is also the order of how the section will be used in the loft. The order can be modified by using the reorder method.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="LoftSection_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="LoftSection_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="LoftDirectionEndCondition_parentLoftSection.htm">LoftDirectionEndCondition.parentLoftSection</a>, <a href="LoftEndCondition_parentLoftSection.htm">LoftEndCondition.parentLoftSection</a>, <a href="LoftFreeEndCondition_parentLoftSection.htm">LoftFreeEndCondition.parentLoftSection</a>, <a href="LoftPointSharpEndCondition_parentLoftSection.htm">LoftPointSharpEndCondition.parentLoftSection</a>, <a href="LoftPointTangentEndCondition_parentLoftSection.htm">LoftPointTangentEndCondition.parentLoftSection</a>, <a href="LoftSections_add.htm">LoftSections.add</a>, <a href="LoftSections_item.htm">LoftSections.item</a>, <a href="LoftSmoothEndCondition_parentLoftSection.htm">LoftSmoothEndCondition.parentLoftSection</a>, <a href="LoftTangentEndCondition_parentLoftSection.htm">LoftTangentEndCondition.parentLoftSection</a><h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2016<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(LoftSection%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,100 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/CustomEventArgs_additionalInfo.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="6/1/2017">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="CustomEventArgs_additionalInfo">
+    <meta name="description" content="CustomEventArgs.additionalInfo Property">
+    <meta name="topicid" content="GUID-9CC6E37A-11F2-4B31-984F-E438C7AA308C">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>CustomEventArgs.additionalInfo Property</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">CustomEventArgs.additionalInfo Property</h1>
+
+          Parent Object: <a href="CustomEventArgs.htm">CustomEventArgs</a><br>Defined in namespace "adsk::core" and the header file is &lt;Core/Application/CustomEventArgs.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Information being passed to the add-in in the primary thread from the worker thread or other add-in.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"customEventArgs_var" is a variable referencing a CustomEventArgs object.</span><br /><br /><code><pre class="api-code"><span style="color:blue"># Get the value of the property.</span><br />propertyValue = customEventArgs_var.<b>additionalInfo<br /></pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"customEventArgs_var" is a variable referencing a CustomEventArgs object.<br /><code><pre class="api-code">#include &lt;Core/Application/CustomEventArgs.h&gt;<br /><br /><span style="color:blue">// Get the value of the property.</span><br />string propertyValue = customEventArgs_var-&gt;<b>additionalInfo</b>();<br /></pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Property Value
+          </h2>This is a read only property whose value is a string.<h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomEventCommandDialog_Sample.htm">Custom Event for Command Dialog</a></td>
+        <td class="api-list">Demonstrates using a custom event to process getting information in the background to display in a command dialog. This is an add-in and should be copied and pasted into an add-in project.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomEventSample_Sample.htm">Custom Event Sample</a></td>
+        <td class="api-list">Demonstrates the ability to call into the main thread from a worker thread. This sample is an <b>add-in</b>. To use it, use the <b>Scripts and Add-Ins</b> command to create a new add-in. Delete all of the code in the newly created add-in and replace it with the code below. Have a model open that has a parameter named "Length". Load the add-in. The add-in will change the value of the parameter every two seconds using a random value between 1 and 10.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version January 2017<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(CustomEventArgs.additionalInfo%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

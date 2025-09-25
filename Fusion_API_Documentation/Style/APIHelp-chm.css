@@ -1,0 +1,57 @@
+/* Changes that are only for the chm version of the help. */
+body
+{
+    font-family:Calibri;
+    background-color:rgb(256,256,256);
+    margin: 10px 16px; 
+}
+
+h1
+{
+    color:rgb(63,82,156);
+}
+
+h2
+{
+    color:rgb(63,82,156);
+}
+
+h3
+{
+    color:rgb(63,82,156);
+}
+
+h4
+{
+    color:rgb(63,82,156);
+}
+
+a
+{
+    text-decoration: none
+}
+
+a:link
+{
+    color:rgb(19,100,216);
+}
+
+a:visited
+{   
+    color:rgb(19,100,216);
+}
+
+a:hover
+{   
+    color:rgb(59,150,256);
+} 
+
+a:focus
+{
+    color:rgb(59,150,256);
+} 
+
+a:active
+{   
+    color:rgb(59,150,256);
+} 

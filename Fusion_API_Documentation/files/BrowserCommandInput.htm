@@ -1,0 +1,158 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/BrowserCommandInput.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="29/06/2021">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="BrowserCommandInput">
+    <meta name="description" content="BrowserCommandInput Object">
+    <meta name="topicid" content="GUID-70140D54-8784-4947-A446-DCC85F72A12E">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>BrowserCommandInput Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">BrowserCommandInput Object
+			</h1>
+              Derived from: <a href="CommandInput.htm">CommandInput</a> Object
+            <br>Defined in namespace "adsk::core" and the header file is &lt;Core/UserInterface/BrowserCommandInput.h&gt;<h2 class="api">
+          Description
+        </h2>Browser command inputs behave as a browser where you can define HTML to be displayed within the area occupied by the command input.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BrowserCommandInput_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BrowserCommandInput_deleteMe.htm">deleteMe</a></td>
+        <td class="api-list">Deletes this Command input.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BrowserCommandInput_sendInfoToHTML.htm">sendInfoToHTML</a></td>
+        <td class="api-list">Sends a string to the JavaScript associated with the loaded HTML.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BrowserCommandInput_commandInputs.htm">commandInputs</a></td>
+        <td class="api-list">Gets the CommandInputs class of the parent, which can be a Command, GroupCommandInput or TabCommandInput.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BrowserCommandInput_htmlFileURL.htm">htmlFileURL</a></td>
+        <td class="api-list">Gets and sets the URL to the HTML file currently being displayed. This can be local or on the web.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BrowserCommandInput_id.htm">id</a></td>
+        <td class="api-list">Gets the unique identifier for this input in the command's CommandInputs.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BrowserCommandInput_isEnabled.htm">isEnabled</a></td>
+        <td class="api-list">Gets or sets if this input is currently enabled or disabled for user interaction.<br/><br/> Currently, the isEnabled property does not disable SelectionCommandInput objects but instead has the same effect as the SelectionCommandInput.hasFocus property.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BrowserCommandInput_isFullWidth.htm">isFullWidth</a></td>
+        <td class="api-list">Gets or sets if this input fills the entire width of the dialog. If true, the name is ignored and the input control will fill the entire width of the command dialog. The default value for this property in a new command input if false, or not to fill the width. This property does not apply to GroupCommandInputs or TabCommandInputs.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BrowserCommandInput_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BrowserCommandInput_isVisible.htm">isVisible</a></td>
+        <td class="api-list">Gets or sets if this input will be visible to the user.<br/><br/> Setting a SelectionCommandInput to be invisible will clear any selections it currently has.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BrowserCommandInput_maximumHeight.htm">maximumHeight</a></td>
+        <td class="api-list">Gets and sets the maximum height of the browser within the command dialog, in pixels. As the user resizes the dialog, the area taken up by the browser will shrink and grow to fit within the defined space. It will never shrink to be less than the minimum height or expand to be larger than the maximum height. If the content displayed within the browser does not fit within the current area, a scroll bar will appear to allow the user to scroll to see the entire browser content. The default value of zero sets no maximum height, so the browser will expand to the maximum extent available.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BrowserCommandInput_minimumHeight.htm">minimumHeight</a></td>
+        <td class="api-list">Gets and sets the minimum height of the browser within the command dialog in pixels. As the user resizes the dialog, the area taken up by the browser will shrink and grow to fit within the defined space. It will never shrink to be less than the minimum height or expand to be larger than the maximum height. If the dialog can't fit the browser at the minimum size a scroll bar will appear for the dialog to allow the user to scroll to access all the inputs in the dialog.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BrowserCommandInput_name.htm">name</a></td>
+        <td class="api-list">Gets the user visible name of this input.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BrowserCommandInput_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BrowserCommandInput_parentCommand.htm">parentCommand</a></td>
+        <td class="api-list">Gets the parent Command.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BrowserCommandInput_parentCommandInput.htm">parentCommandInput</a></td>
+        <td class="api-list">Gets the parent CommandInput if this commandInput is the child of a TabCommandInput or GroupCommandInput. Returns null if there is no parent.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BrowserCommandInput_toolClipFilename.htm">toolClipFilename</a></td>
+        <td class="api-list">Gets or sets the full filename of the image file (PNG) used for the tool clip. The tooltip is always shown but as the user hovers over the control it will progressively display the tool clip and description text.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BrowserCommandInput_tooltip.htm">tooltip</a></td>
+        <td class="api-list">Gets or sets the base tooltip string. This is always shown for commands. If the tooltip description and/or tool clip are also specified then the tooltip will progressively display more information as the user hovers the mouse over the control.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BrowserCommandInput_tooltipDescription.htm">tooltipDescription</a></td>
+        <td class="api-list">Gets or sets additional text to display progressively along with the tooltip. The text for the description can contain some basic HTML formatting tags to format the tags. For example the br tag can be used to create multiple paragraphs. The tooltip is always shown but as the user hovers over the control it will progressively display the tool clip and description text.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="CommandInputs_addBrowserCommandInput.htm">CommandInputs.addBrowserCommandInput</a>, <a href="HTMLEventArgs_browserCommandInput.htm">HTMLEventArgs.browserCommandInput</a>, <a href="NavigationEventArgs_browserCommandInput.htm">NavigationEventArgs.browserCommandInput</a><h2 class="api">
+            Version
+          </h2>
+        Introduced in version July 2021<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(BrowserCommandInput%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

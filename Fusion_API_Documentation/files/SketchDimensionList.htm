@@ -1,0 +1,102 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/SketchDimensionList.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="SketchDimensionList">
+    <meta name="description" content="SketchDimensionList Object">
+    <meta name="topicid" content="GUID-44197fe1-f5f8-4023-bd53-973d97a2ff13">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>SketchDimensionList Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">SketchDimensionList Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Sketch/SketchDimensionList.h&gt;<h2 class="api">
+          Description
+        </h2>A list of sketch dimensions.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchDimensionList_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchDimensionList_item.htm">item</a></td>
+        <td class="api-list">Function that returns the specified sketch dimension using an index into the collection.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchDimensionList_count.htm">count</a></td>
+        <td class="api-list">Returns the number of sketch dimensions in the sketch.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchDimensionList_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchDimensionList_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="SketchArc_sketchDimensions.htm">SketchArc.sketchDimensions</a>, <a href="SketchCircle_sketchDimensions.htm">SketchCircle.sketchDimensions</a>, <a href="SketchConicCurve_sketchDimensions.htm">SketchConicCurve.sketchDimensions</a>, <a href="SketchControlPointSpline_sketchDimensions.htm">SketchControlPointSpline.sketchDimensions</a>, <a href="SketchCurve_sketchDimensions.htm">SketchCurve.sketchDimensions</a>, <a href="SketchEllipse_sketchDimensions.htm">SketchEllipse.sketchDimensions</a>, <a href="SketchEllipticalArc_sketchDimensions.htm">SketchEllipticalArc.sketchDimensions</a>, <a href="SketchEntity_sketchDimensions.htm">SketchEntity.sketchDimensions</a>, <a href="SketchFittedSpline_sketchDimensions.htm">SketchFittedSpline.sketchDimensions</a>, <a href="SketchFixedSpline_sketchDimensions.htm">SketchFixedSpline.sketchDimensions</a>, <a href="SketchLine_sketchDimensions.htm">SketchLine.sketchDimensions</a>, <a href="SketchPoint_sketchDimensions.htm">SketchPoint.sketchDimensions</a>, <a href="SketchText_sketchDimensions.htm">SketchText.sketchDimensions</a><h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(SketchDimensionList%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

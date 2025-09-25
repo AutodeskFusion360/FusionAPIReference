@@ -1,0 +1,217 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/BasicConcepts_UM.htm#!">
+    <meta name="contextid" content="BasicConcepts_UM">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="28/7/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="description" content="">
+    <meta name="topicid" content="GUID-D93DF10F-4209-4073-A2A0-4FA8788C8709">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Getting Started with Fusion's API</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+	<link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"/>
+	<script type="text/javascript" src="/view/clientframework/client.js"><!--filler--></script> 
+	<script>
+	  // This turns on the display of the copyright notice which is not visible by default.
+	  // Because the head is removed when used in the web help, this function will only exist
+	  // when the chm help is being created.
+	  window.onload = function() {
+		copyrightElement = document.getElementById('CopyrightNotice');
+		copyrightElement.style.display = 'block';
+	  };
+	</script>
+</head>
+<body>
+<link rel="stylesheet" href="../Style/APIHelp.css">
+<link rel="stylesheet" href="../Style/prism.css">
+<script src="../Scripts/prism.js"><!--filler--></script> 
+<style>
+	pre.line-numbers [aria-hidden=true]
+	{
+		display: block!important;
+	}
+</style>
+
+<h2 class="api">Basic API Concepts</h2>
+<p Class="api">There are some basic concepts that are used throughout the Fusion API and understanding these concepts will make the API much easier to understand and use.</p>
+
+<h3 class="api">Objects</h3>
+
+<p Class="api">The Fusion API is an object oriented API exposed through a set of objects. Many of these objects have a one-to-one correspondence with the things you are already familiar with as a Fusion user. For example, an extrusion in a Fusion model is represented in the API by the ExtrudeFeature object. Through functionality provided by the ExtrudeFeature object you can do the same things you can do through the user-interface.  For example, you can create a new extrusion, get and set its name in the timeline, suppress it, delete it, or even access and edit the associated sketch.</p>
+
+<p Class="api">In addition to the API objects that represent things in the Fusion UI that you're already familiar with, there are also "API only" objects that provide functionality that is unique to working with the API.  For example, using the API, it is possible to query a model and extract all of its geometry.  Another example of an API only capability is the ability to create new commands and add them to the Fusion user interface.</p>
+
+<h3 class="api">Object Model</h3>
+
+<p Class="api">One of the basic differences between using the Fusion user interface and the API is how specific objects are accessed.  With the user interface, you select (click on) things graphically in the browser,the timeline, and in the graphics window.  New objects are created using dedicated commands such as 'Extrude' to create an extrusion or 'Box' to create a new box.  With the API, objects are accessed through what is called an "Object Model". The Fusion object model is a hierarchical structure of objects that is represented in the chart shown below.  This chart is a useful tool when working with the API.  You can download a printable pdf version of the chart <a href="../ExtraFiles/Fusion.pdf" target="_blank">here</a>.</p>
+
+<div align="center"><img src="../images/ObjectModel.png" width=600 border=0 align="middle" alt="Fusion Object Model"></div>
+<br><br>
+
+<p Class="api">Shown below, is the portion of the object model used when creating extrusions. The Application object, at the top level, represents all of Fusion.  The Application object provides access to application wide properties as well as to its direct children (Documents being the most important).  Documents can contain different types of data such as modeling or CAM data.  The Design object represents all of the modeling data within the document.  The Design object includes a single, top-level component known as the <i>root component</i>. All of the sketches, features, construction geometry, components, etc. contained within the Design are accessed from the <i>root component</i>.</p> 
+
+<p Class="api">All of the objects are organized in this parent-child structure in the object model.  In most cases it should be fairly logical what the structure to get to a particular object is.  For example, if you want to access a specific sketch line, think about what would own a sketch line. All of the various types of sketch entities are owned by a sketch and a sketch is owned by a component.  In many cases the same structure is represented in the browser.
+</p>
+
+<div align="center"><img src="../images/ExtrudeObjectModel.png" width=500 border=0 align="middle" alt="Extrusion Object Model"></div>
+
+<h3 class="api">Common Object Functionality</h3>
+
+<p Class="api">All objects in Fusion support the following functions:
+<ul>
+<li>objectType – Returns a string indicating the type of object.</li>
+<li>classType - A static function that returns the name associated with a particular class.  This can be used in combination with the objectType property to check to see if an object reference is a particular type.</li>
+<li>IsValid – Returns a Boolean indicating if the object reference is still valid (i.e. has not been deleted or invalidated by some other action).</li>
+</ul>
+</p>
+
+<h3 class="api">Static Functions</h3>
+
+<p Class="api">Not all functions need to called by first getting a reference to an object through the object model. There are many objects that are "transient", meaning they're temporary and don't have an owner.  They're typically used by the API to pass certain types of data.  These are "static" functions and can be called directly on a class without having to get a reference to an object.  For example, to create an ObjectCollection object, which is used to pass a group of objects into a function, you can use the code below.
+</p>
+<h4 class="api">Python</h4>
+<pre class="api-code">
+<span style="color:blue"># Create a new ObjectCollection.</span>
+objColl = adsk.core.ObjectCollection.create()
+</pre>
+
+<h4 class="api">C++</h4>
+<pre class="api-code">
+<span style="color:blue">// Create a new ObjectCollection.</span>
+Ptr&lt;ObjectCollection&gt; objColl = adsk::core::ObjectCollection::create();
+</pre>
+
+
+<h3 class="api">Collections</h3>
+
+<p Class="api">Collections provide access to a set of common objects.  For example, the ExtrudeFeatures collection object provides access to all of the extrude features within a component.  All collections support the count property and the item method.  The count property returns the number of items in the collection and the item method returns a specific object in the collection.</p>
+
+<p Class="api">All collections support an item method that takes an index as input and returns the object at that index.  The first item in the collection has an index of 0.  The last item has an index equal to the count-1.  Many collections also support other types of item methods, the most common being itemByName.  When an item in a collection has a unique name or ID, itemByName or itemById can be used to get the item from the collection by specifying its name or ID.</p>
+
+<p Class="api">Collections also provide support for the creation of new objects by means of various add methods.  For example, the SketchArcs object provides access to all of the existing arcs within a sketch along with multiple add methods (addByCenterStartSweep, addByThreePoints, and addFillet) for creating new arcs in a sketch.</p>
+
+<p Class="api">Below is an example of starting with a Sketch object, getting the SketchCircles and SketchLines collections, and creating a new circle and line.</p>
+
+<div align="center"><img src="../images/BasicsCircleLineSketch.png" border=0 align="middle" alt="Create Circle and Line"></div>
+
+<h4 class="api">Python</h4>
+<pre class="api-code">
+<span style="color:blue"># Get the SketchCircles collection from an existing sketch.</span>
+circles = sketch.sketchCurves.sketchCircles
+
+<span style="color:blue"># Call an add method on the collection to create a new circle.</span>
+circle1 = circles.addByCenterRadius(adsk.core.Point3D.create(0,0,0), 2)
+
+<span style="color:blue"># Get the SketchLines collection from an existing sketch.</span>
+lines = sketch.sketchCurves.sketchLines
+
+<span style="color:blue"># Call an add method on the collection to create a new line.</span>
+axis = lines.addByTwoPoints(adsk.core.Point3D.create(-1,-4,0), adsk.core.Point3D.create(1,-4,0))
+</pre>
+
+<h4 class="api">C++</h4>
+<pre class="api-code">
+<span style="color:blue">// Get the SketchCircles collection from an existing sketch.</span>
+Ptr&lt;SketchCircles&gt; circles = sketch->sketchCurves()->sketchCircles();
+
+<span style="color:blue">// Call an add method on the collection to create a new circle.</span>
+Ptr&lt;SketchCircle&gt; circle1 = circles->addByCenterRadius(adsk::core::Point3D::create(0.0, 0.0, 0.0), 2.0);
+
+<span style="color:blue">// Get the SketchLines collection from an existing sketch.</span>
+Ptr&lt;SketchLines&gt; lines = sketch->sketchCurves()->sketchLines();
+
+<span style="color:blue">// Call an add method on the collection to create a new line.</span>
+Ptr&lt;SketchLine&gt; axis = lines->addByTwoPoints(adsk::core::Point3D::create(-1,-4,0), adsk::core::Point3D::create(1,-4,0));
+</pre>
+		
+<h3 class="api">Lists</h3>
+
+<p Class="api">A List is a special type of collection that is also used to return a set of similarly typed objects.  Lists also support the count property and item method but do not provide any add methods. One example of where a list is used is when creating rectangles in a sketch. Creating a rectangle using one of the add methods from the Sketchlines object results in the creation of four new lines. The add method returns a SketchLineList object that contains the four new lines.</p>
+
+<h3 class="api">Input Objects</h3>
+
+<p Class="api">Input objects are used to define all of the input required to create more complex objects. An input object can be thought of as the API equivalent of a command dialog. To illustrate this, consider the Revolve command and its associated dialog. To create an revolve feature with the user interface, the Revolve command is executed which pops a dialog where you specify the various required input values and options, and then click “OK” to create the feature.</p>
+
+<p Class="api">The creation of a revolve feature requires multiple inputs and options, as shown in the dialog below. Choosing different options sometimes enables and/or disables other fields in the dialog. The dialog collects the input required to create an revolve feature. In the API, the input object for a revolve feature does the same thing as the dialog.  It has methods and properties for specifying all of the various inputs and options that define a revolve feature.</p>
+
+<p Class="api">Once the required settings have been defined using the input object, the Add method is called, passing in the input object.  The Add method is the equivalent of clicking the “OK” button in the dialog.</p>
+
+<div align="center"><img src="../images/InputObjectRevolve1.png" border=0 align="middle" alt="Revolve Dialog"></div>
+<br><br>
+
+<p Class="api">The code below demonstrates the workflow for creating an revolve where the sketch created above is being used.</p>
+
+<div align="center"><img src="../images/RevolveResult.png" border=0 align="middle" alt="RevolveFeature"></div>
+
+<h4 class="api">Python</h4>
+<pre class="api-code">
+<span style="color:blue"># Get the first profile from the sketch, which will be the profile defined by the circle in this case.</span>
+prof = sketch.profiles.item(0)
+
+<span style="color:blue"># Get the RevolveFeatures collection.</span>
+revolves = rootComp.features.revolveFeatures
+
+<span style="color:blue"># Create a revolve input object that defines the input for a revolve feature.
+# When creating the input object, required settings are provided as arguments.</span>
+revInput = revolves.createInput(prof, axis, adsk.fusion.FeatureOperations.NewBodyFeatureOperation)
+
+<span style="color:blue"># Define a full revolve by specifying 2 pi as the revolve angle.</span>
+angle = adsk.core.ValueInput.createByReal(math.pi * 2)
+revInput.setAngleExtent(False, angle)
+		
+<span style="color:blue"># Create the revolve by calling the add method on the RevolveFeatures collection and passing it the RevolveInput object.</span>
+rev = revolves.add(revInput)
+</pre>
+
+<h4 class="api">C++</h4>
+<pre class="api-code">
+<span style="color:blue">// Get the first profile from the sketch, which will be the profile defined by the circle in this case.</span>
+Ptr&lt;Profile&gt; prof = sketch->profiles()->item(0);
+
+<span style="color:blue">// Get the RevolveFeatures collection.</span>
+Ptr&lt;RevolveFeatures&gt; revolves = rootComp->features()->revolveFeatures();
+
+<span style="color:blue">// Create a revolve input object that defines the input for a revolve feature.
+// When creating the input object, required settings are provided as arguments.</span>
+Ptr&lt;RevolveFeatureInput&gt; revInput = revolves->createInput(prof, axis, adsk::fusion::FeatureOperations::NewBodyFeatureOperation);
+
+<span style="color:blue">// Define a full revolve by specifying 2 pi as the revolve angle.</span>
+Ptr&lt;ValueInput&gt; angle = adsk::core::ValueInput::createByReal(PI*2);
+revInput->setAngleExtent(false, angle);
+		
+<span style="color:blue">// Create the revolve by calling the add method on the RevolveFeatures collection and passing it the RevolveInput object.</span>
+Ptr&lt;RevolveFeature&gt; rev = revolves->add(revInput);
+</pre>
+
+<h3 class="api">ValueInput Objects</h3>
+     <p Class="api">Notice, in the code above, that the distance of the extrusion is defined by providing a ValueInput object. The ValueInput object is used to define any values that will result in the creation of a parameter. A ValueInput object can be defined using a real or a string value.  Real values are always interpreted as Fusion’s database units; lengths are always centimeters and angles are always radians.  By default, strings are interpreted using the current document units.  For example, specifying “5” for a length is interpreted as 5 inches in a document where the default units for length set to inches. Strings can also specify units directly.  For example, the string “15 mm” is interpreted as 15 millimeters, regardless of the default document units.  A string can also be an equation that can include existing parameters together with numbers such as “d0 / 2”.  Any valid equation that could otherwise be entered as a value in a Fusion dialog can be used in a ValueInput object. ValueInput objects are created statically using the createByString and createByReal methods on the adsk.core.ValueInput class.</p>
+
+<h3 class="api">Definition Objects</h3>
+     Definition objects are similar to input objects but instead of being used to create new features, definition objects are used to edit existing features.  Another notable difference between an input object and a definition object is that the properties (of the input object) that took a ValueInput object during creation, are now read-only and return a Parameter object.
+	 
+<br />
+<br />
+<div id="CopyrightNotice" style="display:none;">
+  <hr />
+  <table width="100%" style="font-size:15">
+	<tr>
+	  <td align="left">
+		&copy; Copyright 2025 Autodesk, Inc.
+	  </td>
+	  <td align="right">
+		<a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(BasicConcepts_UM)">Comment on this page.</a>
+	  </td>
+	</tr>
+  </table>
+</div>	 
+</body>
+</html>

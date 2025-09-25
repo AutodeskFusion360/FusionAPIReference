@@ -1,0 +1,152 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/CircularPatternFeatureSample.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="CircularPatternFeatureSample_Sample">
+    <meta name="description" content="CircularPattern Feature API Sample Sample">
+    <meta name="topicid" content="GUID-4C69401B-CDB7-41A2-BA92-19A904B15BB7">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>CircularPattern Feature API Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">CircularPattern Feature API Sample</h1>
+    <h2 class="api">
+          Description
+        </h2>Demonstrates creating a new circular pattern feature.<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">import adsk.core, adsk.fusion, traceback
+
+def run(context):
+    ui = None
+    try:
+        app = adsk.core.Application.get()
+        ui = app.userInterface
+        
+        <span style="color:blue"># Create a document.</span>
+        doc = app.documents.add(adsk.core.DocumentTypes.FusionDesignDocumentType)
+ 
+        product = app.activeProduct
+        design = adsk.fusion.Design.cast(product)
+
+        <span style="color:blue"># Get the root component of the active design.</span>
+        rootComp = design.rootComponent
+        
+        <span style="color:blue"># Create sketch</span>
+        sketches = rootComp.sketches
+        sketch = sketches.add(rootComp.xZConstructionPlane)
+        sketchCircles = sketch.sketchCurves.sketchCircles
+        centerPoint = adsk.core.Point3D.create(10, 0, 0)
+        circle = sketchCircles.addByCenterRadius(centerPoint, 3.0)
+        
+        <span style="color:blue"># Get the profile defined by the circle.</span>
+        prof = sketch.profiles.item(0)
+
+        <span style="color:blue"># Create an extrusion input</span>
+        extrudes = rootComp.features.extrudeFeatures
+        extInput = extrudes.createInput(prof, adsk.fusion.FeatureOperations.NewBodyFeatureOperation)
+        
+        <span style="color:blue"># Define that the extent is a distance extent of 5 cm.</span>
+        distance = adsk.core.ValueInput.createByReal(5)
+        extInput.setDistanceExtent(False, distance)
+
+        <span style="color:blue"># Create the extrusion.</span>
+        ext = extrudes.add(extInput)
+        
+        <span style="color:blue"># Get the body created by extrusion</span>
+        body = rootComp.bRepBodies.item(0)
+        
+        <span style="color:blue"># Create input entities for circular pattern</span>
+        inputEntites = adsk.core.ObjectCollection.create()
+        inputEntites.add(body)
+        
+        <span style="color:blue"># Get Y axis for circular pattern</span>
+        yAxis = rootComp.yConstructionAxis
+        
+        <span style="color:blue"># Create the input for circular pattern</span>
+        circularFeats = rootComp.features.circularPatternFeatures
+        circularFeatInput = circularFeats.createInput(inputEntites, yAxis)
+        
+        <span style="color:blue"># Set the quantity of the elements</span>
+        circularFeatInput.quantity = adsk.core.ValueInput.createByReal(5)
+        
+        <span style="color:blue"># Set the angle of the circular pattern</span>
+        circularFeatInput.totalAngle = adsk.core.ValueInput.createByString('180 deg')
+        
+        <span style="color:blue"># Set symmetry of the circular pattern</span>
+        circularFeatInput.isSymmetric = False
+        
+        <span style="color:blue"># Create the circular pattern</span>
+        circularFeat = circularFeats.add(circularFeatInput)
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(CircularPatternFeatureSample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

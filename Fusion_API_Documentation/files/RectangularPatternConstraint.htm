@@ -1,0 +1,182 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/RectangularPatternConstraint.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="24/3/2016">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="RectangularPatternConstraint">
+    <meta name="description" content="RectangularPatternConstraint Object">
+    <meta name="topicid" content="GUID-A28C489D-7B28-495B-BEF4-D529CC7105B7">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>RectangularPatternConstraint Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">RectangularPatternConstraint Object
+			</h1>
+              Derived from: <a href="GeometricConstraint.htm">GeometricConstraint</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Sketch/RectangularPatternConstraint.h&gt;<h2 class="api">
+          Description
+        </h2>A rectangular pattern constraint in a sketch.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RectangularPatternConstraint_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RectangularPatternConstraint_createForAssemblyContext.htm">createForAssemblyContext</a></td>
+        <td class="api-list">Creates or returns a proxy for the native object - i.e. a new object that represents this object but adds the assembly context defined by the input occurrence.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RectangularPatternConstraint_deleteMe.htm">deleteMe</a></td>
+        <td class="api-list">Deletes this constraint. The IsDeletable property can be used to determine if this constraint can be deleted.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RectangularPatternConstraint_setDirectionOne.htm">setDirectionOne</a></td>
+        <td class="api-list">Sets all of the input required to define the pattern in the first direction.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RectangularPatternConstraint_setDirectionTwo.htm">setDirectionTwo</a></td>
+        <td class="api-list">Sets all of the input required to define the pattern in the second direction.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RectangularPatternConstraint_assemblyContext.htm">assemblyContext</a></td>
+        <td class="api-list">Returns the assembly occurrence (i.e. the occurrence) of this object in an assembly. This is only valid in the case where this is acting as a proxy in an assembly. Returns null in the case where the object is not in the context of an assembly but is already the native object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RectangularPatternConstraint_attributes.htm">attributes</a></td>
+        <td class="api-list">Returns the collection of attributes associated with this geometric constraint.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RectangularPatternConstraint_createdEntities.htm">createdEntities</a></td>
+        <td class="api-list">Returns an array that contains all of the sketch entities that were created as a result of the pattern. This does not contain the original entities that were used as input to the pattern. The input entities can be obtained by using the entities property.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RectangularPatternConstraint_directionOneEntity.htm">directionOneEntity</a></td>
+        <td class="api-list">Gets and sets the entity that defined the first direction of the pattern. This can be null which indicates to use the default which is the X-axis of the sketch. Setting this property to null will automatically clear directionTwoEntity, if it has been set.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RectangularPatternConstraint_directionTwoEntity.htm">directionTwoEntity</a></td>
+        <td class="api-list">Gets and sets the entity that defines the second direction of the pattern. This can be null which indicates to use the default direction, which is perpendicular to direction one. The directionOneEntity property must be set before setting this property.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RectangularPatternConstraint_distanceOne.htm">distanceOne</a></td>
+        <td class="api-list">Returns the parameter that controls the distance in first direction. To change the value, use the properties on the returned ModelParameter object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RectangularPatternConstraint_distanceTwo.htm">distanceTwo</a></td>
+        <td class="api-list">Returns the parameter that controls the distance in second direction. To change the value, use the properties on the returned ModelParameter object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RectangularPatternConstraint_distanceType.htm">distanceType</a></td>
+        <td class="api-list">Gets and sets how the distance between elements is computed.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RectangularPatternConstraint_entities.htm">entities</a></td>
+        <td class="api-list">Gets and sets the entities that are patterned. Sketch points and curves are valid entities to pattern.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RectangularPatternConstraint_entityToken.htm">entityToken</a></td>
+        <td class="api-list">Returns a token for the GeometricConstraint object. This can be saved and used at a later time with the Design.findEntityByToken method to get back the same geometric constraint.<br/><br/> When using entity tokens it's important to understand that the token string returned for a specific entity can be different over time. However, even if you have two different token strings that were obtained from the same entity, when you use findEntityByToken they will both return the same entity. Because of that you should never compare entity tokens as way to determine what the token represents. Instead, you need to use the findEntityByToken method to get the two entities identified by the tokens and then compare them.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RectangularPatternConstraint_isDeletable.htm">isDeletable</a></td>
+        <td class="api-list">Indicates if this constraint is deletable.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RectangularPatternConstraint_isSuppressed.htm">isSuppressed</a></td>
+        <td class="api-list">Specifies which, if any, instances of the pattern are suppressed. This returns an array of Boolean values that indicates if a particular instance in the pattern is suppressed or not. A value of true will result in the associated instance being suppressed.<br/><br/> The indices represent the pattern instances in a row-column order, with the initial geometry not counting. For example, if you have a 4x4 pattern, the array will have 15 elements rather than 16 because the original geometry cannot be suppressed as part of the pattern. The first element in the array is the one next to the original in the first direction. The second element is the next one on the first row, and the third is the next one. The fourth element will be the first element in the row next to the first row that contains the original geometry.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RectangularPatternConstraint_isSymmetricInDirectionOne.htm">isSymmetricInDirectionOne</a></td>
+        <td class="api-list">Gets and sets if the pattern in direction one is in one direction or is symmetric.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RectangularPatternConstraint_isSymmetricInDirectionTwo.htm">isSymmetricInDirectionTwo</a></td>
+        <td class="api-list">Gets and sets if the pattern in direction two is in one direction or is symmetric.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RectangularPatternConstraint_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RectangularPatternConstraint_nativeObject.htm">nativeObject</a></td>
+        <td class="api-list">The NativeObject is the object outside the context of an assembly and in the context of it's parent component. Returns null in the case where this object is not in the context of an assembly but is already the native object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RectangularPatternConstraint_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RectangularPatternConstraint_parentSketch.htm">parentSketch</a></td>
+        <td class="api-list">Returns the parent sketch object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RectangularPatternConstraint_quantityOne.htm">quantityOne</a></td>
+        <td class="api-list">Returns the parameter that controls the number of instances in the first direction. To change the value, use the properties on the returned ModelParameter.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RectangularPatternConstraint_quantityTwo.htm">quantityTwo</a></td>
+        <td class="api-list">Returns the parameter that controls the number of instances in the second direction. To change the value, use the properties on the returned ModelParameter object.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="GeometricConstraints_addRectangularPattern.htm">GeometricConstraints.addRectangularPattern</a>, <a href="RectangularPatternConstraint_createForAssemblyContext.htm">RectangularPatternConstraint.createForAssemblyContext</a>, <a href="RectangularPatternConstraint_nativeObject.htm">RectangularPatternConstraint.nativeObject</a><h2 class="api">
+            Version
+          </h2>
+        Introduced in version March 2016<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(RectangularPatternConstraint%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

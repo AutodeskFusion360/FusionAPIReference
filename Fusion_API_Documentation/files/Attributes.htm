@@ -1,0 +1,118 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/Attributes.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="15/4/2016">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="Attributes">
+    <meta name="description" content="Attributes Object">
+    <meta name="topicid" content="GUID-84864338-D55F-47DF-95C8-53C5B8813DA7">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>Attributes Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Attributes Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::core" and the header file is &lt;Core/Application/Attributes.h&gt;<h2 class="api">
+          Description
+        </h2>Provides access to attributes associated with a specific entity, Product, or Document. Also supports the creation of new attributes.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Attributes_add.htm">add</a></td>
+        <td class="api-list">Adds a new attribute to the parent entity. If an attribute already exists on the entity with the same groupName and name already exists, this will update the existing attribute with the new value.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Attributes_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Attributes_item.htm">item</a></td>
+        <td class="api-list">Returns the specified attribute using an index into the collection.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Attributes_itemByName.htm">itemByName</a></td>
+        <td class="api-list">Returns the specified attribute using the name of the attribute.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Attributes_itemsByGroup.htm">itemsByGroup</a></td>
+        <td class="api-list">Returns an array of all of the attributes that belong to the specified group.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Attributes_count.htm">count</a></td>
+        <td class="api-list">Returns the number of attributes in the collection.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Attributes_groupNames.htm">groupNames</a></td>
+        <td class="api-list">Returns an array of strings that are all of the name of attribute groups that exist on this entity. An empty array can be returns if there are no attributes on the entity.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Attributes_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Attributes_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="AccessibilityAnalysis_attributes.htm">AccessibilityAnalysis.attributes</a>, <a href="Analysis_attributes.htm">Analysis.attributes</a>, <a href="ArrangeFeature_attributes.htm">ArrangeFeature.attributes</a>, <a href="AsBuiltJoint_attributes.htm">AsBuiltJoint.attributes</a>, <a href="AssemblyConstraint_attributes.htm">AssemblyConstraint.attributes</a>, <a href="BaseFeature_attributes.htm">BaseFeature.attributes</a>, <a href="BossFeature_attributes.htm">BossFeature.attributes</a>, <a href="BoundaryFillFeature_attributes.htm">BoundaryFillFeature.attributes</a>, <a href="BoxFeature_attributes.htm">BoxFeature.attributes</a>, <a href="BRepBody_attributes.htm">BRepBody.attributes</a>, <a href="BRepEdge_attributes.htm">BRepEdge.attributes</a>, <a href="BRepFace_attributes.htm">BRepFace.attributes</a>, <a href="BRepVertex_attributes.htm">BRepVertex.attributes</a>, <a href="CAM_attributes.htm">CAM.attributes</a>, <a href="CAMAdditiveContainer_attributes.htm">CAMAdditiveContainer.attributes</a>, <a href="CAMFolder_attributes.htm">CAMFolder.attributes</a>, <a href="CAMHoleRecognition_attributes.htm">CAMHoleRecognition.attributes</a>, <a href="CAMPattern_attributes.htm">CAMPattern.attributes</a>, <a href="ChamferFeature_attributes.htm">ChamferFeature.attributes</a>, <a href="CircularPatternConstraint_attributes.htm">CircularPatternConstraint.attributes</a>, <a href="CircularPatternFeature_attributes.htm">CircularPatternFeature.attributes</a>, <a href="CoilFeature_attributes.htm">CoilFeature.attributes</a>, <a href="CoincidentConstraint_attributes.htm">CoincidentConstraint.attributes</a>, <a href="CoincidentToSurfaceConstraint_attributes.htm">CoincidentToSurfaceConstraint.attributes</a>, <a href="CollinearConstraint_attributes.htm">CollinearConstraint.attributes</a>, <a href="CombineFeature_attributes.htm">CombineFeature.attributes</a>, <a href="Component_attributes.htm">Component.attributes</a>, <a href="ConcentricConstraint_attributes.htm">ConcentricConstraint.attributes</a>, <a href="ConstructionAxis_attributes.htm">ConstructionAxis.attributes</a>, <a href="ConstructionPlane_attributes.htm">ConstructionPlane.attributes</a>, <a href="ConstructionPoint_attributes.htm">ConstructionPoint.attributes</a>, <a href="CopyPasteBody_attributes.htm">CopyPasteBody.attributes</a>, <a href="CurvatureCombAnalysis_attributes.htm">CurvatureCombAnalysis.attributes</a>, <a href="CurvatureMapAnalysis_attributes.htm">CurvatureMapAnalysis.attributes</a>, <a href="CustomFeature_attributes.htm">CustomFeature.attributes</a>, <a href="CustomFeatureParameter_attributes.htm">CustomFeatureParameter.attributes</a>, <a href="CutPasteBody_attributes.htm">CutPasteBody.attributes</a>, <a href="CylinderFeature_attributes.htm">CylinderFeature.attributes</a>, <a href="DeleteFaceFeature_attributes.htm">DeleteFaceFeature.attributes</a>, <a href="Design_attributes.htm">Design.attributes</a>, <a href="Document_attributes.htm">Document.attributes</a>, <a href="DraftAnalysis_attributes.htm">DraftAnalysis.attributes</a>, <a href="DraftFeature_attributes.htm">DraftFeature.attributes</a>, <a href="Drawing_attributes.htm">Drawing.attributes</a>, <a href="DrawingDocument_attributes.htm">DrawingDocument.attributes</a>, <a href="EmbossFeature_attributes.htm">EmbossFeature.attributes</a>, <a href="EqualConstraint_attributes.htm">EqualConstraint.attributes</a>, <a href="ExtendFeature_attributes.htm">ExtendFeature.attributes</a>, <a href="ExtrudeFeature_attributes.htm">ExtrudeFeature.attributes</a>, <a href="Feature_attributes.htm">Feature.attributes</a>, <a href="FilletFeature_attributes.htm">FilletFeature.attributes</a>, <a href="FlangeFeature_attributes.htm">FlangeFeature.attributes</a>, <a href="FlatPattern_attributes.htm">FlatPattern.attributes</a>, <a href="FlatPatternComponent_attributes.htm">FlatPatternComponent.attributes</a>, <a href="FlatPatternProduct_attributes.htm">FlatPatternProduct.attributes</a>, <a href="FormFeature_attributes.htm">FormFeature.attributes</a>, <a href="FusionDocument_attributes.htm">FusionDocument.attributes</a>, <a href="GeometricConstraint_attributes.htm">GeometricConstraint.attributes</a>, <a href="HemFeature_attributes.htm">HemFeature.attributes</a>, <a href="HoleFeature_attributes.htm">HoleFeature.attributes</a>, <a href="HorizontalConstraint_attributes.htm">HorizontalConstraint.attributes</a>, <a href="HorizontalPointsConstraint_attributes.htm">HorizontalPointsConstraint.attributes</a>, <a href="IsoCurveAnalysis_attributes.htm">IsoCurveAnalysis.attributes</a>, <a href="Joint_attributes.htm">Joint.attributes</a>, <a href="JointOrigin_attributes.htm">JointOrigin.attributes</a>, <a href="LineOnPlanarSurfaceConstraint_attributes.htm">LineOnPlanarSurfaceConstraint.attributes</a>, <a href="LineParallelToPlanarSurfaceConstraint_attributes.htm">LineParallelToPlanarSurfaceConstraint.attributes</a>, <a href="LoftFeature_attributes.htm">LoftFeature.attributes</a>, <a href="MeshBody_attributes.htm">MeshBody.attributes</a>, <a href="MeshCombineFaceGroupsFeature_attributes.htm">MeshCombineFaceGroupsFeature.attributes</a>, <a href="MeshCombineFeature_attributes.htm">MeshCombineFeature.attributes</a>, <a href="MeshConvertFeature_attributes.htm">MeshConvertFeature.attributes</a>, <a href="MeshFeature_attributes.htm">MeshFeature.attributes</a>, <a href="MeshGenerateFaceGroupsFeature_attributes.htm">MeshGenerateFaceGroupsFeature.attributes</a>, <a href="MeshReduceFeature_attributes.htm">MeshReduceFeature.attributes</a>, <a href="MeshRemeshFeature_attributes.htm">MeshRemeshFeature.attributes</a>, <a href="MeshRepairFeature_attributes.htm">MeshRepairFeature.attributes</a>, <a href="MeshReverseNormalFeature_attributes.htm">MeshReverseNormalFeature.attributes</a>, <a href="MeshSeparateFeature_attributes.htm">MeshSeparateFeature.attributes</a>, <a href="MeshShellFeature_attributes.htm">MeshShellFeature.attributes</a>, <a href="MeshSmoothFeature_attributes.htm">MeshSmoothFeature.attributes</a>, <a href="MidPointConstraint_attributes.htm">MidPointConstraint.attributes</a>, <a href="MinimumRadiusAnalysis_attributes.htm">MinimumRadiusAnalysis.attributes</a>, <a href="MirrorFeature_attributes.htm">MirrorFeature.attributes</a>, <a href="ModelParameter_attributes.htm">ModelParameter.attributes</a>, <a href="MoveFeature_attributes.htm">MoveFeature.attributes</a>, <a href="NCProgram_attributes.htm">NCProgram.attributes</a>, <a href="Occurrence_attributes.htm">Occurrence.attributes</a>, <a href="OffsetConstraint_attributes.htm">OffsetConstraint.attributes</a>, <a href="OffsetFacesFeature_attributes.htm">OffsetFacesFeature.attributes</a>, <a href="OffsetFeature_attributes.htm">OffsetFeature.attributes</a>, <a href="Operation_attributes.htm">Operation.attributes</a>, <a href="OperationBase_attributes.htm">OperationBase.attributes</a>, <a href="ParallelConstraint_attributes.htm">ParallelConstraint.attributes</a>, <a href="Parameter_attributes.htm">Parameter.attributes</a>, <a href="PatchFeature_attributes.htm">PatchFeature.attributes</a>, <a href="PathPatternFeature_attributes.htm">PathPatternFeature.attributes</a>, <a href="PerpendicularConstraint_attributes.htm">PerpendicularConstraint.attributes</a>, <a href="PerpendicularToSurfaceConstraint_attributes.htm">PerpendicularToSurfaceConstraint.attributes</a>, <a href="PipeFeature_attributes.htm">PipeFeature.attributes</a>, <a href="PolygonConstraint_attributes.htm">PolygonConstraint.attributes</a>, <a href="Product_attributes.htm">Product.attributes</a>, <a href="RectangularPatternConstraint_attributes.htm">RectangularPatternConstraint.attributes</a>, <a href="RectangularPatternFeature_attributes.htm">RectangularPatternFeature.attributes</a>, <a href="RefoldFeature_attributes.htm">RefoldFeature.attributes</a>, <a href="RemoveFeature_attributes.htm">RemoveFeature.attributes</a>, <a href="ReplaceFaceFeature_attributes.htm">ReplaceFaceFeature.attributes</a>, <a href="ReverseNormalFeature_attributes.htm">ReverseNormalFeature.attributes</a>, <a href="RevolveFeature_attributes.htm">RevolveFeature.attributes</a>, <a href="RibFeature_attributes.htm">RibFeature.attributes</a>, <a href="RigidGroup_attributes.htm">RigidGroup.attributes</a>, <a href="RipFeature_attributes.htm">RipFeature.attributes</a>, <a href="RuledSurfaceFeature_attributes.htm">RuledSurfaceFeature.attributes</a>, <a href="RuleFilletFeature_attributes.htm">RuleFilletFeature.attributes</a>, <a href="ScaleFeature_attributes.htm">ScaleFeature.attributes</a>, <a href="SectionAnalysis_attributes.htm">SectionAnalysis.attributes</a>, <a href="Setup_attributes.htm">Setup.attributes</a>, <a href="ShellFeature_attributes.htm">ShellFeature.attributes</a>, <a href="SilhouetteSplitFeature_attributes.htm">SilhouetteSplitFeature.attributes</a>, <a href="Sketch_attributes.htm">Sketch.attributes</a>, <a href="SketchAngularDimension_attributes.htm">SketchAngularDimension.attributes</a>, <a href="SketchArc_attributes.htm">SketchArc.attributes</a>, <a href="SketchCircle_attributes.htm">SketchCircle.attributes</a>, <a href="SketchConcentricCircleDimension_attributes.htm">SketchConcentricCircleDimension.attributes</a>, <a href="SketchConicCurve_attributes.htm">SketchConicCurve.attributes</a>, <a href="SketchControlPointSpline_attributes.htm">SketchControlPointSpline.attributes</a>, <a href="SketchCurve_attributes.htm">SketchCurve.attributes</a>, <a href="SketchDiameterDimension_attributes.htm">SketchDiameterDimension.attributes</a>, <a href="SketchDimension_attributes.htm">SketchDimension.attributes</a>, <a href="SketchDistanceBetweenLineAndPlanarSurfaceDimension_attributes.htm">SketchDistanceBetweenLineAndPlanarSurfaceDimension.attributes</a>, <a href="SketchDistanceBetweenPointAndSurfaceDimension_attributes.htm">SketchDistanceBetweenPointAndSurfaceDimension.attributes</a>, <a href="SketchEllipse_attributes.htm">SketchEllipse.attributes</a>, <a href="SketchEllipseMajorRadiusDimension_attributes.htm">SketchEllipseMajorRadiusDimension.attributes</a>, <a href="SketchEllipseMinorRadiusDimension_attributes.htm">SketchEllipseMinorRadiusDimension.attributes</a>, <a href="SketchEllipticalArc_attributes.htm">SketchEllipticalArc.attributes</a>, <a href="SketchEntity_attributes.htm">SketchEntity.attributes</a>, <a href="SketchFittedSpline_attributes.htm">SketchFittedSpline.attributes</a>, <a href="SketchFixedSpline_attributes.htm">SketchFixedSpline.attributes</a>, <a href="SketchLine_attributes.htm">SketchLine.attributes</a>, <a href="SketchLinearDiameterDimension_attributes.htm">SketchLinearDiameterDimension.attributes</a>, <a href="SketchLinearDimension_attributes.htm">SketchLinearDimension.attributes</a>, <a href="SketchOffsetCurvesDimension_attributes.htm">SketchOffsetCurvesDimension.attributes</a>, <a href="SketchOffsetDimension_attributes.htm">SketchOffsetDimension.attributes</a>, <a href="SketchPoint_attributes.htm">SketchPoint.attributes</a>, <a href="SketchRadialDimension_attributes.htm">SketchRadialDimension.attributes</a>, <a href="SketchTangentDistanceDimension_attributes.htm">SketchTangentDistanceDimension.attributes</a>, <a href="SketchText_attributes.htm">SketchText.attributes</a>, <a href="SmoothConstraint_attributes.htm">SmoothConstraint.attributes</a>, <a href="SphereFeature_attributes.htm">SphereFeature.attributes</a>, <a href="SplitBodyFeature_attributes.htm">SplitBodyFeature.attributes</a>, <a href="SplitFaceFeature_attributes.htm">SplitFaceFeature.attributes</a>, <a href="StitchFeature_attributes.htm">StitchFeature.attributes</a>, <a href="SurfaceDeleteFaceFeature_attributes.htm">SurfaceDeleteFaceFeature.attributes</a>, <a href="SweepFeature_attributes.htm">SweepFeature.attributes</a>, <a href="SymmetryConstraint_attributes.htm">SymmetryConstraint.attributes</a>, <a href="TangentConstraint_attributes.htm">TangentConstraint.attributes</a>, <a href="TangentRelationship_attributes.htm">TangentRelationship.attributes</a>, <a href="TessellateFeature_attributes.htm">TessellateFeature.attributes</a>, <a href="ThickenFeature_attributes.htm">ThickenFeature.attributes</a>, <a href="ThreadFeature_attributes.htm">ThreadFeature.attributes</a>, <a href="TorusFeature_attributes.htm">TorusFeature.attributes</a>, <a href="TrimFeature_attributes.htm">TrimFeature.attributes</a>, <a href="UnfoldFeature_attributes.htm">UnfoldFeature.attributes</a>, <a href="UnstitchFeature_attributes.htm">UnstitchFeature.attributes</a>, <a href="UntrimFeature_attributes.htm">UntrimFeature.attributes</a>, <a href="UserParameter_attributes.htm">UserParameter.attributes</a>, <a href="VerticalConstraint_attributes.htm">VerticalConstraint.attributes</a>, <a href="VerticalPointsConstraint_attributes.htm">VerticalPointsConstraint.attributes</a>, <a href="VolumetricCustomFeature_attributes.htm">VolumetricCustomFeature.attributes</a>, <a href="VolumetricModelToMeshFeature_attributes.htm">VolumetricModelToMeshFeature.attributes</a>, <a href="WebFeature_attributes.htm">WebFeature.attributes</a>, <a href="WorkingModel_attributes.htm">WorkingModel.attributes</a>, <a href="ZebraAnalysis_attributes.htm">ZebraAnalysis.attributes</a><h2 class="api">
+            Version
+          </h2>
+        Introduced in version May 2016<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(Attributes%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

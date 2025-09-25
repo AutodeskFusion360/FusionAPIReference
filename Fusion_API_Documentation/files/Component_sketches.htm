@@ -1,0 +1,116 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/Component_sketches.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="Component_sketches">
+    <meta name="description" content="Component.sketches Property">
+    <meta name="topicid" content="GUID-33e9fd18-3155-44eb-acb9-142097e097c9">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Component.sketches Property</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Component.sketches Property</h1>
+
+          Parent Object: <a href="Component.htm">Component</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Components/Component.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Returns the sketches collection associated with this component. This provides access to the existing sketches and supports the creation of new sketches.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"component_var" is a variable referencing a Component object.</span><br /><br /><code><pre class="api-code"><span style="color:blue"># Get the value of the property.</span><br />propertyValue = component_var.<b>sketches<br /></pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"component_var" is a variable referencing a Component object.<br /><code><pre class="api-code">#include &lt;Fusion/Components/Component.h&gt;<br /><br /><span style="color:blue">// Get the value of the property.</span><br />Ptr&lt;Sketches&gt; propertyValue = component_var-&gt;<b>sketches</b>();<br /></pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Property Value
+          </h2>This is a read only property whose value is a <a href="Sketches.htm">Sketches</a>.<h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CreateSketchLines_Sample.htm">API Sample that demonstrates creating sketch lines in various ways.</a></td>
+        <td class="api-list">Demonstrates several ways to create sketch lines, including as the result of creating a rectangle.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="LoftFeatureSample_Sample.htm">Loft Feature API Sample</a></td>
+        <td class="api-list">Demonstrates creating a new loft feature.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SimpleExtrusionSample_Sample.htm">Simple Extrusion Sample</a></td>
+        <td class="api-list">Creates a new extrusion feature, resulting in a new component.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SimpleRevolveFeatureSample_Sample.htm">Simple Revolve Feature Sample</a></td>
+        <td class="api-list">Creates a new revolve feature, resulting in a new component.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketches_add_Sample.htm">Sketches.add</a></td>
+        <td class="api-list">Demonstrates the Sketches.add method.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketches_addToFormBaseOrFeature_Sample.htm">Sketches.addToBaseOrFormFeature</a></td>
+        <td class="api-list">Demonstrates the Sketches.addToBaseOrFormFeature method.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(Component.sketches%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,146 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/SketchDiameterDimension.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="SketchDiameterDimension">
+    <meta name="description" content="SketchDiameterDimension Object">
+    <meta name="topicid" content="GUID-36f0d390-1024-4c75-b620-056d8957e7a9">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>SketchDiameterDimension Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">SketchDiameterDimension Object
+			</h1>
+              Derived from: <a href="SketchDimension.htm">SketchDimension</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Sketch/SketchDiameterDimension.h&gt;<h2 class="api">
+          Description
+        </h2>An diameter dimension in a sketch.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchDiameterDimension_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchDiameterDimension_createForAssemblyContext.htm">createForAssemblyContext</a></td>
+        <td class="api-list">Creates or returns a proxy for the native object - i.e. a new object that represents this object but adds the assembly context defined by the input occurrence.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchDiameterDimension_deleteMe.htm">deleteMe</a></td>
+        <td class="api-list">Deletes this dimension. The IsDeletable property indicates if this dimension can be deleted.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchDiameterDimension_assemblyContext.htm">assemblyContext</a></td>
+        <td class="api-list">Returns the assembly occurrence (i.e. the occurrence) of this object in an assembly. This is only valid in the case where this is acting as a proxy in an assembly. Returns null in the case where the object is not in the context of an assembly but is already the native object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchDiameterDimension_attributes.htm">attributes</a></td>
+        <td class="api-list">Returns the collection of attributes associated with this sketch dimension.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchDiameterDimension_entity.htm">entity</a></td>
+        <td class="api-list">Returns the arc or circle being constrained.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchDiameterDimension_entityToken.htm">entityToken</a></td>
+        <td class="api-list">Returns a token for the SketchDimension object. This can be saved and used at a later time with the Design.findEntityByToken method to get back the same sketch dimension.<br/><br/> When using entity tokens it's important to understand that the token string returned for a specific entity can be different over time. However, even if you have two different token strings that were obtained from the same entity, when you use findEntityByToken they will both return the same entity. Because of that you should never compare entity tokens as way to determine what the token represents. Instead, you need to use the findEntityByToken method to get the two entities identified by the tokens and then compare them.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchDiameterDimension_isDeletable.htm">isDeletable</a></td>
+        <td class="api-list">Indicates if this dimension is deletable.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchDiameterDimension_isDriving.htm">isDriving</a></td>
+        <td class="api-list">Gets and sets if the dimension is Driving or is Driven. Setting this property to true for a given dimension may fail if the result would over constrain the sketch. Fusion does not allow over-constrained sketches.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchDiameterDimension_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchDiameterDimension_nativeObject.htm">nativeObject</a></td>
+        <td class="api-list">The NativeObject is the object outside the context of an assembly and in the context of it's parent component. Returns null in the case where this object is not in the context of an assembly but is already the native object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchDiameterDimension_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchDiameterDimension_parameter.htm">parameter</a></td>
+        <td class="api-list">Returns the associated parameter or null if there is no associated parameter.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchDiameterDimension_parentSketch.htm">parentSketch</a></td>
+        <td class="api-list">Returns the parent sketch object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchDiameterDimension_textPosition.htm">textPosition</a></td>
+        <td class="api-list">Gets and sets position of the dimension text.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchDiameterDimension_value.htm">value</a></td>
+        <td class="api-list">Gets and sets the current value of the sketch dimension.<br/><br/> In a parametric modeling design and the isDriving property is True, this is exactly equivalent to getting the parameter associated with the dimension and editing its value. Editing this property will result in the parameter value being changed. If isDriving is False, this acts as a read-only property and attempting to set it will fail.<br/><br/> In a direct modeling design the parameter property will return null and this property can be used to get and set the value of the dimension because in this case, there isn't an associated parameter.<br/><br/> The value is always in internal units which means that for dimensions that represent a distance, the value is in Centimeters and for dimensions representing an angle the value is in Radians.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="SketchDiameterDimension_createForAssemblyContext.htm">SketchDiameterDimension.createForAssemblyContext</a>, <a href="SketchDiameterDimension_nativeObject.htm">SketchDiameterDimension.nativeObject</a>, <a href="SketchDimensions_addDiameterDimension.htm">SketchDimensions.addDiameterDimension</a><h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(SketchDiameterDimension%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

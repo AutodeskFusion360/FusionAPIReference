@@ -1,0 +1,9 @@
+*
+!.gitignore
+!Application/EventHandler.h
+!Application/ScriptHandler.h
+!Base.h
+!Deallocator.h
+!Memory.h
+!OSMacros.h
+!Utils.h

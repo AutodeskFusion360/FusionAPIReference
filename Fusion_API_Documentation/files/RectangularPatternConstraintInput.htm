@@ -1,0 +1,146 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/RectangularPatternConstraintInput.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="30/08/2022">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="RectangularPatternConstraintInput">
+    <meta name="description" content="RectangularPatternConstraintInput Object">
+    <meta name="topicid" content="GUID-1B7AC79B-044E-41C3-A7DF-C12EAC99F73E">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>RectangularPatternConstraintInput Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">RectangularPatternConstraintInput Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Sketch/RectangularPatternConstraintInput.h&gt;<h2 class="api">
+          Description
+        </h2>Used to define the inputs need to create a rectangular pattern in a sketch.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RectangularPatternConstraintInput_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RectangularPatternConstraintInput_setDirectionOne.htm">setDirectionOne</a></td>
+        <td class="api-list">Sets all of the input required to define the pattern in the first direction.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RectangularPatternConstraintInput_setDirectionTwo.htm">setDirectionTwo</a></td>
+        <td class="api-list">Sets all of the input required to define the pattern in the second direction.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RectangularPatternConstraintInput_directionOneEntity.htm">directionOneEntity</a></td>
+        <td class="api-list">Defines the first direction of the pattern. This can be null which indicates to use the default which is the X-axis of the sketch. Setting this property to null will automatically clear directionTwoEntity, if it has been set.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RectangularPatternConstraintInput_directionTwoEntity.htm">directionTwoEntity</a></td>
+        <td class="api-list">Defines the second direction of the pattern. This can be null which indicates to use the default which is perpendicular to direction one. The directionOneEntity property must be set before setting this property.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RectangularPatternConstraintInput_distanceOne.htm">distanceOne</a></td>
+        <td class="api-list">Gets and sets the distance in the first direction.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RectangularPatternConstraintInput_distanceTwo.htm">distanceTwo</a></td>
+        <td class="api-list">Gets and sets the distance in the second direction.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RectangularPatternConstraintInput_distanceType.htm">distanceType</a></td>
+        <td class="api-list">Gets and sets how the distance between elements is computed.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RectangularPatternConstraintInput_entities.htm">entities</a></td>
+        <td class="api-list">Gets and sets the entities to pattern. Sketch points and curves are valid entities to pattern.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RectangularPatternConstraintInput_isSuppressed.htm">isSuppressed</a></td>
+        <td class="api-list">Specifies which, if any, instances of the pattern are suppressed. This defaults to all instances being visible. This returns an array of Booleans that indicates if a particular instance in the pattern is suppressed or not. A value of true will result in the associated instance being suppressed.<br/><br/> Both the quantityOne and quantityTwo properties must be set with valid values before using the isSuppressed property is valid. A quantity of one is a valid value.<br/><br/> The indices represent the pattern instances in a row-column order, with the initial geometry not counting. For example, if you have a 4x4 pattern, the array will have 15 elements rather than 16 because the original geometry cannot be suppressed as part of the pattern. The first element in the array is the one next to the original in the first direction. The second element is the next one on the first row, and the third is the next one. The fourth element will be the first element in the row next to the first row that contains the original geometry.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RectangularPatternConstraintInput_isSymmetricInDirectionOne.htm">isSymmetricInDirectionOne</a></td>
+        <td class="api-list">Gets and sets if the pattern in direction one is in one direction or is symmetric.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RectangularPatternConstraintInput_isSymmetricInDirectionTwo.htm">isSymmetricInDirectionTwo</a></td>
+        <td class="api-list">Gets and sets if the pattern in direction two is in one direction or is symmetric.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RectangularPatternConstraintInput_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RectangularPatternConstraintInput_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RectangularPatternConstraintInput_quantityOne.htm">quantityOne</a></td>
+        <td class="api-list">Gets and sets the number of instances in the first direction.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RectangularPatternConstraintInput_quantityTwo.htm">quantityTwo</a></td>
+        <td class="api-list">Gets and sets the number of instances in the second direction.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="GeometricConstraints_createRectangularPatternInput.htm">GeometricConstraints.createRectangularPatternInput</a><h2 class="api">
+            Version
+          </h2>
+        Introduced in version September 2022<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(RectangularPatternConstraintInput%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

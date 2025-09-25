@@ -1,0 +1,851 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/UICustomizationSample.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="UICustomizationSample_Sample">
+    <meta name="description" content="Customizing the UI using the API Sample Sample">
+    <meta name="topicid" content="GUID-8793050f-9b14-4125-811a-4cdd85f9ee41">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Customizing the UI using the API Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Customizing the UI using the API Sample</h1>
+    <h2 class="api">
+          Description
+        </h2>Demonstrates how to work with tabs, panels, and command in the user interface. The full source for <a href="../ExtraFiles/UICustomizationSampleCPP.zip">C++</a> and <a href="../ExtraFiles/UICustomizationSamplePython.zip">Python</a> samples can be downloaded. This is especially useful for getting the resource files.<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#C++">C++</a></li>
+        <li><a href="#Python">Python</a></li>
+      </ul>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code">#include &lt;stddef.h&gt;
+#include &lt;Core/Application/Application.h&gt;
+#include &lt;Core/UserInterface/UserInterface.h&gt;
+#include &lt;Core/UserInterface/ButtonControlDefinition.h&gt;
+#include &lt;Core/UserInterface/CommandControl.h&gt;
+#include &lt;Core/UserInterface/CommandDefinitions.h&gt;
+#include &lt;Core/UserInterface/CommandDefinition.h&gt;
+#include &lt;Core/UserInterface/CommandCreatedEvent.h&gt;
+#include &lt;Core/UserInterface/CommandCreatedEventHandler.h&gt;
+#include &lt;Core/UserInterface/CommandCreatedEventArgs.h&gt;
+#include &lt;Core/UserInterface/Command.h&gt;
+#include &lt;Core/UserInterface/CommandEvent.h&gt;
+#include &lt;Core/UserInterface/CommandEventHandler.h&gt;
+#include &lt;Core/UserInterface/CommandEventArgs.h&gt;
+#include &lt;Core/UserInterface/DropDownControl.h&gt;
+#include &lt;Core/UserInterface/ToolbarPanels.h&gt;
+#include &lt;Core/UserInterface/ToolbarPanel.h&gt;
+#include &lt;Core/UserInterface/ToolbarTabs.h&gt;
+#include &lt;Core/UserInterface/ToolbarTab.h&gt;
+#include &lt;Core/UserInterface/ToolbarControls.h&gt;
+#include &lt;Core/UserInterface/Workspaces.h&gt;
+#include &lt;Core/UserInterface/Workspace.h&gt;
+#include &lt;Core/UserInterface/SeparatorControl.h&gt;
+#include &lt;Core/UserInterface/Palettes.h&gt;
+#include &lt;Core/UserInterface/TextCommandPalette.h&gt;
+
+using namespace adsk::core;
+
+Ptr&lt;Application&gt; app;
+Ptr&lt;UserInterface&gt; ui;
+
+bool createUserInterface();
+
+<span style="color:blue">// Create a vector to use for storing the command definitions.</span>
+std::vector&lt;Ptr&lt;CommandDefinition&gt;&gt; commandDefs;
+
+inline const std::string BoolToString(bool b)
+{
+    return b ? "true" : "false";
+}
+
+<span style="color:blue">// Event handler for the execute event. This is where the work that a command</span>
+<span style="color:blue">// does is performed.</span>
+class MyExecuteEventHandler : public adsk::core::CommandEventHandler
+{
+  public:
+    void notify(const Ptr&lt;CommandEventArgs&gt;& eventArgs) override
+    {
+        <span style="color:blue">// Get the command that's being executed.</span>
+        Ptr&lt;Command&gt; cmd = eventArgs-&gt;command();
+        Ptr&lt;CommandDefinition&gt; cmdDef = cmd-&gt;parentCommandDefinition();
+
+        <span style="color:blue">// Get the sample command, because most of the other commands modify it.</span>
+        Ptr&lt;CommandDefinition&gt; sampleCmdDef = ui-&gt;commandDefinitions()-&gt;itemById("SampleCmd");
+        Ptr&lt;ButtonControlDefinition&gt; buttonDef = sampleCmdDef-&gt;controlDefinition();
+
+        <span style="color:blue">// Handle the execution of each of the commands. Since this sample is implemented using</span>
+        <span style="color:blue">// a single command creation and execute event, it special cases for each command and</span>
+        <span style="color:blue">// performs the appropriate action.</span>
+        if (cmdDef-&gt;id() == "SampleCmd")
+        {
+            <span style="color:blue">// Display a message box indicating the sample command was run.</span>
+            ui-&gt;messageBox("Executed the sample command.");
+        }
+        else if (cmdDef-&gt;id() == "toggleNameCmd")
+        {
+            app-&gt;log("name Property");
+            app-&gt;log("   Name before: " + sampleCmdDef-&gt;name());
+
+            <span style="color:blue">// Toggle the name of the sample command.</span>
+            if (sampleCmdDef-&gt;name() == "Sample Command")
+                sampleCmdDef-&gt;name("Renamed Command");
+            else
+                sampleCmdDef-&gt;name("Sample Command");
+
+            app-&gt;log("   Name after: " + sampleCmdDef-&gt;name());
+        }
+        else if (cmdDef-&gt;id() == "toggleTooltipCmd")
+        {
+            app-&gt;log("tooltip Property");
+            app-&gt;log("   Tooltip before: " + sampleCmdDef-&gt;tooltip());
+
+            <span style="color:blue">// Toggle the tooltip of the sample command.</span>
+            if (sampleCmdDef-&gt;tooltip() == "This is the longer original tooltip.")
+                sampleCmdDef-&gt;tooltip("Modified tooltip.");
+            else
+                sampleCmdDef-&gt;tooltip("This is the longer original tooltip.");
+
+            app-&gt;log("   Tooltip after: " + sampleCmdDef-&gt;tooltip());
+        }
+        else if (cmdDef-&gt;id() == "toggleIconCmd")
+        {
+            app-&gt;log("resourceFolder Property");
+            app-&gt;log("   Resource Folder before: " + sampleCmdDef-&gt;resourceFolder());
+
+            <span style="color:blue">// Toggle the icon of the sample command.</span>
+            if (sampleCmdDef-&gt;resourceFolder().find("SampleCmdBW") != std::string::npos)
+                sampleCmdDef-&gt;resourceFolder("Resources/SampleCmdColor");
+            else
+                sampleCmdDef-&gt;resourceFolder("Resources/SampleCmdBW");
+
+            app-&gt;log("   Resource Folder after: " + sampleCmdDef-&gt;resourceFolder());
+        }
+        else if (cmdDef-&gt;id() == "toggleVisibleCmd")
+        {
+            app-&gt;log("isVisible Property");
+            app-&gt;log("   isVisible before: " + BoolToString(buttonDef-&gt;isVisible()));
+
+            <span style="color:blue">// Toggle the visibility of the sample command.</span>
+            buttonDef-&gt;isVisible(!buttonDef-&gt;isVisible());
+
+            app-&gt;log("   isVisible after: " + BoolToString(buttonDef-&gt;isVisible()));
+        }
+        else if (cmdDef-&gt;id() == "toggleEnabledCmd")
+        {
+            app-&gt;log("isEnabled Property");
+            app-&gt;log("   isEnabled before: " + BoolToString(buttonDef-&gt;isEnabled()));
+
+            <span style="color:blue">// Toggle the enabled state of the sample command.</span>
+            buttonDef-&gt;isEnabled(!buttonDef-&gt;isEnabled());
+
+            app-&gt;log("   isEnabled after: " + BoolToString(buttonDef-&gt;isEnabled()));
+        }
+    }
+} _execute;
+
+<span style="color:blue">// This event is fired when the user executes a command. This example has several commands</span>
+<span style="color:blue">// but this class has been defined as the handler for all of them and then it checks to</span>
+<span style="color:blue">// see which command is being created and does the appropriate thing. Typically, the</span>
+<span style="color:blue">// the command created event handler is where the command dialog is defined, but in this</span>
+<span style="color:blue">// case none of the commands have a dialog so they don't create any command inputs, which</span>
+<span style="color:blue">// means the command is immediately executed.</span>
+class CommandCreatedEventHandler : public adsk::core::CommandCreatedEventHandler
+{
+  public:
+    void notify(const Ptr&lt;CommandCreatedEventArgs&gt;& eventArgs) override
+    {
+        <span style="color:blue">// Get the command that's being created.</span>
+        Ptr&lt;Command&gt; cmd = eventArgs-&gt;command();
+
+        <span style="color:blue">// Connect to the command executed event.</span>
+        Ptr&lt;CommandEvent&gt; executeEvent = cmd-&gt;execute();
+        executeEvent-&gt;add(&_execute);
+    }
+} _commandCreated;
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    <span style="color:blue">// Get the Application and UserInterface objects.</span>
+    app = Application::get();
+    if (!app)
+        return false;
+
+    ui = app-&gt;userInterface();
+    if (!ui)
+        return false;
+
+    app-&gt;log(" ");
+    app-&gt;log(" ");
+    app-&gt;log("===============================================================");
+
+    createUserInterface();
+
+    <span style="color:blue">// Make sure the "TEXT COMMANDS" windows is visible.</span>
+    Ptr&lt;Palettes&gt; palettes = ui-&gt;palettes();
+    Ptr&lt;TextCommandPalette&gt; textPalette = palettes-&gt;itemById("TextCommands");
+    if (!textPalette-&gt;isVisible())
+        textPalette-&gt;isVisible(true);
+
+    ui-&gt;messageBox("Information about this sample is displayed in the TEXT COMMAND window.");
+
+    return true;
+}
+
+bool createUserInterface()
+{
+    <span style="color:blue">// Create all the custom commands.</span>
+    Ptr&lt;CommandDefinitions&gt; cmdDefs = ui-&gt;commandDefinitions();
+    Ptr&lt;CommandDefinition&gt; sampleCmd = cmdDefs-&gt;addButtonDefinition(
+        "SampleCmd", "Sample Command", "This is the longer original tooltip.", "Resources/SampleCmdBW");
+    if (!sampleCmd)
+    {
+        std::string desc;
+        app-&gt;getLastError(&desc);
+        app-&gt;log("Failed to create SampleCmd. " + desc);
+        return false;
+    }
+    commandDefs.push_back(sampleCmd);
+
+    <span style="color:blue">// Set up the tool clip for the sample command.</span>
+    sampleCmd-&gt;toolClipFilename("Resources/SampleCmdToolClip.png");
+
+    Ptr&lt;CommandDefinition&gt; toggleNameCmd = cmdDefs-&gt;addButtonDefinition(
+        "toggleNameCmd",
+        "Toggle Name",
+        "Running this command will toggle the command name of the sample command.",
+        "Resources/toggleName");
+    if (!toggleNameCmd)
+    {
+        app-&gt;log("Failed to create toggleNameCmd");
+        return false;
+    }
+    commandDefs.push_back(toggleNameCmd);
+
+    Ptr&lt;CommandDefinition&gt; toggleTooltipCmd = cmdDefs-&gt;addButtonDefinition(
+        "toggleTooltipCmd",
+        "Toggle Tooltip",
+        "Running this command will toggle the tooltip of the sample command.",
+        "Resources/toggleTooltip");
+    if (!toggleTooltipCmd)
+    {
+        app-&gt;log("Failed to create toggleTooltipCmd.");
+        return false;
+    }
+    commandDefs.push_back(toggleTooltipCmd);
+
+    Ptr&lt;CommandDefinition&gt; toggleIconCmd = cmdDefs-&gt;addButtonDefinition(
+        "toggleIconCmd",
+        "Toggle Icon",
+        "Running this command will toggle the icon of the sample command.",
+        "Resources/toggleIcon");
+    if (!toggleIconCmd)
+    {
+        app-&gt;log("Failed to create toggleIconCmd.");
+        return false;
+    }
+    commandDefs.push_back(toggleIconCmd);
+
+    Ptr&lt;CommandDefinition&gt; toggleVisibleCmd = cmdDefs-&gt;addButtonDefinition(
+        "toggleVisibleCmd",
+        "Toggle Visibility",
+        "Running this command will toggle the visibility of the sample command.",
+        "Resources/toggleVisible");
+    if (!toggleVisibleCmd)
+    {
+        app-&gt;log("Failed to create toggleVisibleCmd.");
+        return false;
+    }
+    commandDefs.push_back(toggleVisibleCmd);
+
+    Ptr&lt;CommandDefinition&gt; toggleEnabledCmd = cmdDefs-&gt;addButtonDefinition(
+        "toggleEnabledCmd",
+        "Toggle Enabled",
+        "Running this command will toggle the enabled state of the sample command.",
+        "Resources/toggleEnabled");
+    if (!toggleEnabledCmd)
+    {
+        app-&gt;log("Failed to create toggleEndabledCmd.");
+        return false;
+    }
+    commandDefs.push_back(toggleEnabledCmd);
+
+    <span style="color:blue">// Get the Render workspace.</span>
+    Ptr&lt;Workspace&gt; renderWS = ui-&gt;workspaces()-&gt;itemById("FusionRenderEnvironment");
+    if (!renderWS)
+    {
+        app-&gt;log("Failed to get Render workspace.");
+        return false;
+    }
+
+    <span style="color:blue">// Add a custom tab to the workspace.</span>
+    Ptr&lt;ToolbarTab&gt; testTab = renderWS-&gt;toolbarTabs()-&gt;add("UITestTab", "UI Test Tab");
+    if (!testTab)
+    {
+        app-&gt;log("Failed to add toolbar tab.");
+        return false;
+    }
+
+    <span style="color:blue">// Add a panel to the tab.</span>
+    Ptr&lt;ToolbarPanel&gt; panel1 = testTab-&gt;toolbarPanels()-&gt;add("testPanelOne", "Test Panel 1");
+    if (!panel1)
+    {
+        std::string desc;
+        app-&gt;getLastError(&desc);
+        app-&gt;log("Failed to add toolbar panel to tab. " + desc);
+        return false;
+    }
+
+    <span style="color:blue">// Add the test command to the new panel.</span>
+    Ptr&lt;CommandControl&gt; cmdCntrl = panel1-&gt;controls()-&gt;addCommand(sampleCmd);
+    if (!cmdCntrl)
+    {
+        app-&gt;log("Failed to add panel 1 to the tab.");
+        return false;
+    }
+    cmdCntrl-&gt;isPromoted(true);
+
+    <span style="color:blue">// Add a button to toggle the icon to the panel to the panel.</span>
+    cmdCntrl = panel1-&gt;controls()-&gt;addCommand(toggleIconCmd, "toggleTooltipCmd", false);
+    if (!cmdCntrl)
+    {
+        app-&gt;log("Failed to add toggle icon command to the panel.");
+        return false;
+    }
+    cmdCntrl-&gt;isPromoted(true);
+
+    <span style="color:blue">// Add a second panel to the tab.</span>
+    Ptr&lt;ToolbarPanel&gt; panel2 = testTab-&gt;toolbarPanels()-&gt;add("testPanelTwo", "Test Panel 2");
+    if (!panel2)
+    {
+        app-&gt;log("Failed to add panel 2 to the tab.");
+        return false;
+    }
+
+    <span style="color:blue">// Add a button to toggle the tooltip to the panel.</span>
+    cmdCntrl = panel2-&gt;controls()-&gt;addCommand(toggleTooltipCmd);
+    if (!cmdCntrl)
+    {
+        app-&gt;log("Failed to add toggle tooltip command to the panel.");
+        return false;
+    }
+    cmdCntrl-&gt;isPromoted(true);
+
+    <span style="color:blue">// Add a button to toggle the name to the panel by inserting before the existing button.</span>
+    cmdCntrl = panel2-&gt;controls()-&gt;addCommand(toggleNameCmd, "toggleTooltipCmd", true);
+    if (!cmdCntrl)
+    {
+        app-&gt;log("Failed to add toggle name command to the panel.");
+        return false;
+    }
+    cmdCntrl-&gt;isPromoted(true);
+
+    <span style="color:blue">// Add a seperator.</span>
+    cmdCntrl = panel2-&gt;controls()-&gt;addSeparator("toolbarSeperator");
+    if (!cmdCntrl)
+    {
+        app-&gt;log("Failed to add a separator to the panel.");
+        return false;
+    }
+
+    <span style="color:blue">// Add a drop-down.</span>
+    Ptr&lt;DropDownControl&gt; dropDown =
+        panel2-&gt;controls()-&gt;addDropDown("Drop Down Example", "Resources/toggleEnabled", "DropDownTest");
+
+    <span style="color:blue">// Add a button to toggle the visibility to the end of the panel.</span>
+    cmdCntrl = dropDown-&gt;controls()-&gt;addCommand(toggleVisibleCmd);
+    if (!cmdCntrl)
+    {
+        app-&gt;log("Failed to add toggle visible command to the panel.");
+        return false;
+    }
+    cmdCntrl-&gt;isPromoted(true);
+
+    <span style="color:blue">// Add a button to toggle the enabled state to the end of the panel.</span>
+    cmdCntrl = dropDown-&gt;controls()-&gt;addCommand(toggleEnabledCmd);
+    if (!cmdCntrl)
+    {
+        app-&gt;log("Failed to add toggle enabled command to the panel.");
+        return false;
+    }
+    cmdCntrl-&gt;isPromoted(true);
+
+    <span style="color:blue">// Get the "Render" tab.</span>
+    Ptr&lt;ToolbarTab&gt; renderTab = renderWS-&gt;toolbarTabs()-&gt;itemById("RenderTab");
+    if (!renderTab)
+    {
+        app-&gt;log("Failed to get \"Render\" tab.");
+        return false;
+    }
+
+    <span style="color:blue">// Get "Render" panel.</span>
+    Ptr&lt;ToolbarPanel&gt; renderPanel = renderTab-&gt;toolbarPanels()-&gt;itemById("RenderPanel");
+    if (!renderPanel)
+    {
+        app-&gt;log("Failed to get \"Render\" panel.");
+        return false;
+    }
+
+    <span style="color:blue">// Add the "Scripts and Add-Ins" command to the Render panel.</span>
+    Ptr&lt;CommandDefinition&gt; scriptCmdDef = ui-&gt;commandDefinitions()-&gt;itemById("ScriptsManagerCommand");
+    if (!scriptCmdDef)
+    {
+        app-&gt;log("Failed to get \"Scripts and Add-Ins\" command definition.");
+        return false;
+    }
+
+    cmdCntrl = renderPanel-&gt;controls()-&gt;addCommand(scriptCmdDef);
+    if (!cmdCntrl)
+    {
+        app-&gt;log("Failed to add \"Scripts and Add-Ins\" command to the \"Render\" panel.");
+        return false;
+    }
+    cmdCntrl-&gt;isPromoted(true);
+
+    app-&gt;log("A new tab named \"UI Test Tab\" was added to the RENDER workspace.");
+    app-&gt;log("This tab contains two panels: \"Test Panel 1\" and \"Test Panel 2\".");
+    app-&gt;log("\"Test Panel 1\" contains the commands \"Sample Command\" and \"Toggle Icon\".");
+    app-&gt;log("\"Test Panel 2\" contains the commands \"Toggle Tooltip\", \"Toggle Name\", \"Toggle Visibility\", and "
+             "\"Toggle Enabled\".");
+    app-&gt;log("The \"Scripts and Add-Ins\" command was also added to the \"RENDER\" panel in the \"RENDER\" tab.");
+    app-&gt;log("The command with the \"S\" icon is the sample command and the other commands change things about it.");
+
+    <span style="color:blue">// Connect each of the commands to the command created event handler. For this</span>
+    <span style="color:blue">// example, the same event handler is used for all the commands and the handler</span>
+    <span style="color:blue">// special cases for each command.</span>
+    Ptr&lt;CommandCreatedEvent&gt; commandCreatedEvent = sampleCmd-&gt;commandCreated();
+    commandCreatedEvent-&gt;add(&_commandCreated);
+
+    commandCreatedEvent = toggleNameCmd-&gt;commandCreated();
+    commandCreatedEvent-&gt;add(&_commandCreated);
+
+    commandCreatedEvent = toggleTooltipCmd-&gt;commandCreated();
+    commandCreatedEvent-&gt;add(&_commandCreated);
+
+    commandCreatedEvent = toggleIconCmd-&gt;commandCreated();
+    commandCreatedEvent-&gt;add(&_commandCreated);
+
+    commandCreatedEvent = toggleVisibleCmd-&gt;commandCreated();
+    commandCreatedEvent-&gt;add(&_commandCreated);
+
+    commandCreatedEvent = toggleEnabledCmd-&gt;commandCreated();
+    commandCreatedEvent-&gt;add(&_commandCreated);
+
+    return true;
+}
+
+extern "C" XI_EXPORT bool stop(const char* context)
+{
+    if (ui)
+    {
+        app-&gt;log("Stopping and cleaning up add-in.");
+
+        <span style="color:blue">// Get the Render workspace.</span>
+        Ptr&lt;Workspace&gt; renderWS = ui-&gt;workspaces()-&gt;itemById("FusionRenderEnvironment");
+        if (!renderWS)
+        {
+            app-&gt;log("Failed to get Render workspace.");
+            return false;
+        }
+
+        Ptr&lt;ToolbarTab&gt; tab = renderWS-&gt;toolbarTabs()-&gt;itemById("UITestTab");
+        if (!tab)
+        {
+            app-&gt;log("Failed to get tab \"UI Test Tab\" from Render workspace.");
+        }
+        else
+        {
+            <span style="color:blue">// Get the test panels and delete them.</span>
+            Ptr&lt;ToolbarPanel&gt; panel = tab-&gt;toolbarPanels()-&gt;itemById("testPanelOne");
+            if (!panel)
+                app-&gt;log("Failed to get \"testPanelOne\".");
+            else
+                panel-&gt;deleteMe();
+
+            panel = tab-&gt;toolbarPanels()-&gt;itemById("testPanelTwo");
+            if (!panel)
+                app-&gt;log("Failed to get \"testPanelTwo\".");
+            else
+                panel-&gt;deleteMe();
+
+            <span style="color:blue">// Delete the tab.</span>
+            tab-&gt;deleteMe();
+        }
+
+        <span style="color:blue">// Get the "Render" tab.</span>
+        Ptr&lt;ToolbarTab&gt; renderTab = renderWS-&gt;toolbarTabs()-&gt;itemById("RenderTab");
+        if (!renderTab)
+            app-&gt;log("Failed to get \"Render\" tab.");
+        else
+        {
+            <span style="color:blue">// Get "Render" panel.</span>
+            Ptr&lt;ToolbarPanel&gt; renderPanel = renderTab-&gt;toolbarPanels()-&gt;itemById("RenderPanel");
+            if (!renderPanel)
+                app-&gt;log("Failed to get \"Render\" panel.");
+            else
+            {
+                <span style="color:blue">// Delete the "Scripts and Add-Ins" command.</span>
+                Ptr&lt;ToolbarControl&gt; scriptMgrControl = renderPanel-&gt;controls()-&gt;itemById("ScriptsManagerCommand");
+                if (scriptMgrControl)
+                {
+                    scriptMgrControl-&gt;deleteMe();
+                }
+            }
+        }
+
+        <span style="color:blue">// Delete the command definitions.</span>
+        for (Ptr&lt;CommandDefinition&gt; cmdDef : commandDefs)
+        {
+            app-&gt;log("Deleting command definition: " + cmdDef-&gt;id());
+            if (!cmdDef-&gt;deleteMe())
+                app-&gt;log("Failed to delete: " + cmdDef-&gt;id());
+        }
+
+        ui = nullptr;
+        app = nullptr;
+    }
+
+    return true;
+}</pre>
+      </div>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code"><span style="color:blue">#Author-</span>
+<span style="color:blue">#Description-</span>
+
+import adsk.core, adsk.fusion, traceback
+from typing import List
+
+_app = adsk.core.Application.get()
+_ui = _app.userInterface
+
+_handlers = []
+_commandDefs: List[adsk.core.CommandDefinition] = []
+
+def run(context):
+    try:
+        _app.log(' ')
+        _app.log(' ')
+        _app.log('===============================================================')
+
+        createUserInterface()
+
+        <span style="color:blue"># Make sure the "TEXT COMMANDS" windows is visible.</span>
+        textPalette: adsk.core.TextCommandPalette = _ui.palettes.itemById('TextCommands')
+        if not textPalette.isVisible:
+            textPalette.isVisible = True
+
+        _ui.messageBox('Information about this sample is displayed in the TEXT COMMAND window.')
+
+        return True
+    except:
+        if _ui:
+            _ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
+
+
+def stop(context):
+    try:
+        _app.log('Stopping and cleaning up add-in.')
+
+		<span style="color:blue"># Get the Render workspace.</span>
+        renderWS = _ui.workspaces.itemById('FusionRenderEnvironment')
+
+        if renderWS:
+            _app.log('Cleaning up toolbar.')
+            tab = renderWS.toolbarTabs.itemById('UITestTab');
+            if tab:
+                <span style="color:blue"># Get the test panels and delete them.</span>
+                panel = tab.toolbarPanels.itemById('testPanelOne')
+                if panel:
+                    panel.deleteMe()
+
+                panel = tab.toolbarPanels.itemById('testPanelTwo')
+                if panel:
+                    panel.deleteMe()
+
+                <span style="color:blue"># Delete the tab.</span>
+                tab.deleteMe()
+
+		<span style="color:blue"># Get the "Render" tab.</span>
+        renderTab = renderWS.toolbarTabs.itemById('RenderTab')
+        if renderTab:
+            <span style="color:blue"># Get "Render" panel.</span>
+            renderPanel = renderTab.toolbarPanels.itemById('RenderPanel')
+            if renderPanel:
+                <span style="color:blue"># Delete the "Scripts and Add-Ins" command.</span>
+                scriptMgrControl = renderPanel.controls.itemById('ScriptsManagerCommand')
+                if scriptMgrControl:
+                    scriptMgrControl.deleteMe()
+
+		<span style="color:blue"># Delete the command definitions.</span>
+        for cmdDef in _commandDefs:
+            _app.log(f'Deleting command definition: {cmdDef.id}')
+            cmdDef.deleteMe()
+    except:
+        _ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
+
+
+def createUserInterface():
+    try:
+        <span style="color:blue"># Create all the custom commands.</span>
+        cmdDefs = _ui.commandDefinitions
+        sampleCmd = cmdDefs.addButtonDefinition('SampleCmd', 'Sample Command', 'This is the longer original tooltip.', 'Resources/SampleCmdBW')
+        _commandDefs.append(sampleCmd)
+
+        sampleCmd.toolClipFilename = 'Resources/SampleCmdToolClip.png'
+
+        toggleNameCmd = cmdDefs.addButtonDefinition('toggleNameCmd', 'Toggle Name', 'Running this command will toggle the command name of the sample command.', 'Resources/toggleName');
+        _commandDefs.append(toggleNameCmd)
+
+        toggleTooltipCmd = cmdDefs.addButtonDefinition('toggleTooltipCmd', 'Toggle Tooltip', 'Running this command will toggle the tooltip of the sample command.', 'Resources/toggleTooltip');
+        _commandDefs.append(toggleTooltipCmd)
+
+        toggleIconCmd = cmdDefs.addButtonDefinition('toggleIconCmd', 'Toggle Icon', 'Running this command will toggle the icon of the sample command.', 'Resources/toggleIcon');
+        _commandDefs.append(toggleIconCmd)
+
+        toggleVisibleCmd = cmdDefs.addButtonDefinition('toggleVisibleCmd', 'Toggle Visibility', 'Running this command will toggle the visibility of the sample command.', 'Resources/toggleVisible');
+        _commandDefs.append(toggleVisibleCmd)
+
+        toggleEnabledCmd = cmdDefs.addButtonDefinition('toggleEnabledCmd', 'Toggle Enabled', 'Running this command will toggle the enabled state of the sample command.', 'Resources/toggleEnabled');
+        _commandDefs.append(toggleEnabledCmd)
+
+        <span style="color:blue"># Get the Render workspace.</span>
+        renderWS = _ui.workspaces.itemById('FusionRenderEnvironment')
+        if renderWS:
+            <span style="color:blue"># Add a custom tab to the workspace.</span>
+            testTab = renderWS.toolbarTabs.add('UITestTab', 'UI Test Tab')
+
+            if testTab:        
+                <span style="color:blue"># Add a panel to the tab.</span>
+                panel1 = testTab.toolbarPanels.add('testPanelOne', 'Test Panel 1')
+
+                if panel1:
+                    <span style="color:blue"># Add the test command to the new panel.</span>
+                    cmdCntrl = panel1.controls.addCommand(sampleCmd)                   
+                    cmdCntrl.isPromoted = True
+
+                    <span style="color:blue"># Add a button to toggle the icon to the panel.</span>
+                    cmdCntrl = panel1.controls.addCommand(toggleIconCmd)
+                    cmdCntrl.isPromoted = True
+
+                <span style="color:blue"># Add a second panel to the tab.</span>
+                panel2 = testTab.toolbarPanels.add('testPanelTwo', 'Test Panel 2')
+
+                if panel2:
+                    <span style="color:blue"># Add a button to toggle the tooltip to the panel by inserting before the existing button.</span>
+                    cmdCntrl = panel2.controls.addCommand(toggleTooltipCmd)
+                    cmdCntrl.isPromoted = True
+
+                    <span style="color:blue"># Add a button to toggle the name to the panel.</span>
+                    cmdCntrl = panel2.controls.addCommand(toggleNameCmd, 'toggleTooltipCmd', True)
+                    cmdCntrl.isPromoted = True
+
+                    cmdCntrl = panel2.controls.addSeparator('toolbarSeperator')
+
+                    <span style="color:blue"># Add a drop-down.</span>
+                    dropDown = panel2.controls.addDropDown('Drop Down Example','Resources/toggleEnabled', 'DropDownTest')
+
+                    if dropDown:
+                        <span style="color:blue"># Add a button to toggle the visibility to the end of the panel.</span>
+                        cmdCntrl = dropDown.controls.addCommand(toggleVisibleCmd)
+                        cmdCntrl.isPromoted = True
+
+                        <span style="color:blue"># Add a button to toggle the enabled state to the end of the panel.</span>
+                        cmdCntrl = dropDown.controls.addCommand(toggleEnabledCmd)
+                        cmdCntrl.isPromoted = True
+
+            <span style="color:blue"># Get the "Render" tab.</span>
+            renderTab = renderWS.toolbarTabs.itemById('RenderTab');
+            
+            if renderTab:
+                <span style="color:blue"># Get "Render" panel.</span>
+                renderPanel = renderTab.toolbarPanels.itemById('RenderPanel')
+
+                if renderPanel:
+                    <span style="color:blue"># Add the "Scripts and Add-Ins" command to the Render panel.</span>
+                    scriptCmdDef = _ui.commandDefinitions.itemById('ScriptsManagerCommand')
+
+                    cmdCntrl = renderPanel.controls.addCommand(scriptCmdDef)
+                    cmdCntrl.isPromoted = True
+
+        _app.log('A new tab named "UI Test Tab" was added to the RENDER workspace.')
+        _app.log('This tab contains two panels: "Test Panel 1" and "Test Panel 2".')
+        _app.log('"Test Panel 1" contains the commands "Sample Command" and "Toggle Icon".')
+        _app.log('"Test Panel 2" contains the commands "Toggle Tooltip", "Toggle Name", "Toggle Visibility", and "Toggle Enabled"')
+        _app.log('The "Scripts and Add-Ins" command was also added to the "RENDER" panel in the "RENDER" tab.')
+        _app.log('The command with the "S" icon is the sample command and the other commands change things about it.')
+
+        <span style="color:blue"># Connect each of the commands to the command created event handler. For this</span>
+        <span style="color:blue"># example, the same event handler is used for all the commands and the handler</span>
+        <span style="color:blue"># special cases for each command.</span>
+        onCommandCreated = MyCommandCreatedHandler()
+        sampleCmd.commandCreated.add(onCommandCreated)
+        toggleNameCmd.commandCreated.add(onCommandCreated)
+        toggleTooltipCmd.commandCreated.add(onCommandCreated)
+        toggleIconCmd.commandCreated.add(onCommandCreated)
+        toggleVisibleCmd.commandCreated.add(onCommandCreated)
+        toggleEnabledCmd.commandCreated.add(onCommandCreated)
+        _handlers.append(onCommandCreated)
+    except:
+        _ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
+
+
+<span style="color:blue"># Event handler for the commandCreated event.</span>
+class MyCommandCreatedHandler(adsk.core.CommandCreatedEventHandler):
+    def __init__(self):
+        super().__init__()
+    def notify(self, args):
+        try:
+            eventArgs = adsk.core.CommandCreatedEventArgs.cast(args)
+            command = eventArgs.command
+
+            <span style="color:blue"># Connect to the command execute event.</span>
+            onExecute = MyExecuteHandler()
+            command.execute.add(onExecute)
+            _handlers.append(onExecute)
+        except:
+            _ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
+
+
+<span style="color:blue"># Event handler for the execute event.</span>
+class MyExecuteHandler(adsk.core.CommandEventHandler):
+    def __init__(self):
+        super().__init__()
+    def notify(self, eventArgs):
+        try:
+            <span style="color:blue"># Get the command that's being executed.</span>
+            cmd = eventArgs.command
+            cmdDef = cmd.parentCommandDefinition
+
+            <span style="color:blue"># Get the sample command, because most of the other commands modify it.</span>
+            sampleCmdDef = _ui.commandDefinitions.itemById('SampleCmd')
+            buttonDef = sampleCmdDef.controlDefinition
+
+            <span style="color:blue"># Handle the execution of each of the commands. Since this sample is implemented using</span>
+            <span style="color:blue"># a single command created and execute event, it special cases for each command and</span>
+            <span style="color:blue"># performs the appropriate action for that command.</span>
+            if cmdDef.id == 'SampleCmd':
+                <span style="color:blue"># Display a message box indicating the sample command was run.</span>
+                _ui.messageBox('Executed the sample command.')
+            elif cmdDef.id == 'toggleNameCmd':
+                _app.log('name Property')
+                _app.log(f'   Name before: "{sampleCmdDef.name}".')
+
+                <span style="color:blue"># Toggle the name of the sample command.</span>
+                if sampleCmdDef.name == 'Sample Command':
+                    sampleCmdDef.name = "Renamed Command"
+                else:
+                    sampleCmdDef.name = 'Sample Command'
+
+                _app.log(f'   Name after: "{sampleCmdDef.name}".')
+            elif cmdDef.id == 'toggleTooltipCmd':
+                _app.log('tooltip Property')
+                _app.log(f'   Tooltip before: "{sampleCmdDef.tooltip}".')
+
+                <span style="color:blue"># Toggle the tooltip of the sample command.</span>
+                if sampleCmdDef.tooltip == 'This is the longer original tooltip.':
+                    sampleCmdDef.tooltip = "Modified tooltip."
+                else:
+                    sampleCmdDef.tooltip = 'This is the longer original tooltip.'
+
+                _app.log(f'   Tooltip after: "{sampleCmdDef.tooltip}".')
+            elif cmdDef.id == 'toggleIconCmd':
+                _app.log('resourceFolder Property')
+                _app.log(f'   Resource Folder before: "{sampleCmdDef.resourceFolder}".')
+
+                <span style="color:blue"># Toggle the icon of the sample command.</span>
+                if 'Resources/SampleCmdBW' in sampleCmdDef.resourceFolder:
+                    sampleCmdDef.resourceFolder = 'Resources/SampleCmdColor'
+                else:
+                    sampleCmdDef.resourceFolder = 'Resources/SampleCmdBW'
+
+                _app.log(f'   Resource Folder after: "{sampleCmdDef.resourceFolder}".')
+            elif cmdDef.id == 'toggleVisibleCmd':
+                _app.log('isVisible Property')
+                _app.log(f'   isVisible before: {buttonDef.isVisible}.')
+
+                <span style="color:blue"># Toggle the visibility of the sample command.</span>
+                buttonDef.isVisible = not buttonDef.isVisible
+
+                _app.log(f'   isVisible after: {buttonDef.isVisible}.')
+            elif cmdDef.id == 'toggleEnabledCmd':
+                _app.log('isEnabled Property')
+                _app.log(f'   isEnabled before: {buttonDef.isEnabled}.')
+
+                <span style="color:blue"># Toggle the enabled state of the sample command.</span>
+                buttonDef.isEnabled = not buttonDef.isEnabled
+
+                _app.log(f'   isEnabled after: {buttonDef.isEnabled}.')
+        except:
+            _ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(UICustomizationSample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

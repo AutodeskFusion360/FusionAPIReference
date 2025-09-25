@@ -1,0 +1,89 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/BRepConvertOptions.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2016">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="BRepConvertOptions">
+    <meta name="description" content="Defines the various options when converting the geometry of a B-Rep body or face to NURBS. This is used by the convert method of the BRepBody and BRepFace objects.">
+    <meta name="topicid" content="GUID-FD6535CF-CDE2-4D48-BC35-B3A44F619868">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>BRepConvertOptions Enumerator
+        </title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">BRepConvertOptions Enumerator
+        </h1>
+    <h2 class="api">
+          Description
+        </h2>Defines the various options when converting the geometry of a B-Rep body or face to NURBS. This is used by the convert method of the BRepBody and BRepFace objects.<br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion\FusionTypeDefs.h&gt;<h2 class="api">
+          Methods
+        </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+              Name
+            </td>
+        <td class="api-list" style="width:1px;">
+              Value
+            </td>
+        <td class="api-list">
+              Description
+            </td>
+      </tr>
+      <tr>
+        <td class="api-list">AnalyticsToNURBSConversion</td>
+        <td class="api-list" align="right" style="padding-right:10px">1</td>
+        <td class="api-list">Converts all analytic surfaces (cylinder, elliptical cylinder, cone, elliptical cone, sphere, and torus) except planes to NURBS surfaces.</td>
+      </tr>
+      <tr>
+        <td class="api-list">PlanesToNURBSConversion</td>
+        <td class="api-list" align="right" style="padding-right:10px">2</td>
+        <td class="api-list">Converts all planar faces to NURBS surfaces.</td>
+      </tr>
+      <tr>
+        <td class="api-list">ProceduralToNURBSConversion</td>
+        <td class="api-list" align="right" style="padding-right:10px">0</td>
+        <td class="api-list">Converts all procedurally calculated faces and edges into NURBS within the base tolerance. For example, an edge that is the intersection of two faces is represented as the exact analytical intersection of the two faces. This is converted into a NURBS curve as part of the conversion.</td>
+      </tr>
+      <tr>
+        <td class="api-list">SplitPeriodicFacesConversion</td>
+        <td class="api-list" align="right" style="padding-right:10px">4</td>
+        <td class="api-list">Splits any periodic surfaces so they become open surfaces.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+          Version
+        </h2>
+        Introduced in version August 2016<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(BRepConvertOptions%20Enum%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,403 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/ParticipantBodiesSample.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="ParticipantBodiesSample_Sample">
+    <meta name="description" content="Manage Participant Bodies API Sample Sample">
+    <meta name="topicid" content="GUID-5a1236c0-b0ae-11e6-8b8e-989096c62968">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Manage Participant Bodies API Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Manage Participant Bodies API Sample</h1>
+    <h2 class="api">
+          Description
+        </h2>Demonstrates how to manage participant During Cut operation. Same API can be used to manage participants During intersection also.<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">import adsk.core, adsk.fusion, traceback
+
+def run(context):
+    ui = None
+    try:
+        app = adsk.core.Application.get()
+        ui = app.userInterface
+
+        <span style="color:blue"># Create a document.</span>
+        doc = app.documents.add(adsk.core.DocumentTypes.FusionDesignDocumentType)
+
+        product = app.activeProduct
+        design = adsk.fusion.Design.cast(product)
+
+        <span style="color:blue"># Get the root component of the active design.</span>
+        rootComp = design.rootComponent
+
+        <span style="color:blue"># Create sketch</span>
+        sketches = rootComp.sketches
+        sketch = sketches.add(rootComp.xZConstructionPlane)
+        sketchCircles = sketch.sketchCurves.sketchCircles
+        centerPoint = adsk.core.Point3D.create(0, 0, 0)
+        sketchCircles.addByCenterRadius(centerPoint, 3.0)
+
+        <span style="color:blue"># Get the profile defined by the circle.</span>
+        prof = sketch.profiles.item(0)
+
+        <span style="color:blue"># Create sketch for Cut</span>
+        sketchForCut = sketches.add(rootComp.xZConstructionPlane)
+        sketchForCutCircles = sketchForCut.sketchCurves.sketchCircles
+        sketchForCutCircles.addByCenterRadius(centerPoint, 1.5)
+
+        <span style="color:blue"># Get the profile defined by the circle.</span>
+        profForCut = sketchForCut.profiles.item(0)
+
+        <span style="color:blue"># Create an extrusion input</span>
+        extrudes = rootComp.features.extrudeFeatures
+        extInput = extrudes.createInput(prof, adsk.fusion.FeatureOperations.NewBodyFeatureOperation)
+
+        <span style="color:blue"># Define that the extent is a distance extent of 5 cm.</span>
+        distance = adsk.core.ValueInput.createByReal(5)
+        extInput.setDistanceExtent(False, distance)
+
+        <span style="color:blue"># Create the extrusion.</span>
+        ext = extrudes.add(extInput)
+
+        <span style="color:blue"># Get the body created by extrusion</span>
+        body = ext.bodies.item(0)
+
+        <span style="color:blue"># Create input entities for rectangular pattern</span>
+        inputEntites = adsk.core.ObjectCollection.create()
+        inputEntites.add(body)
+
+        <span style="color:blue"># Get x and y axes for rectangular pattern</span>
+        xAxis = rootComp.xConstructionAxis
+        yAxis = rootComp.yConstructionAxis
+
+        <span style="color:blue"># Quantity and distance</span>
+        quantityOne = adsk.core.ValueInput.createByString('1')
+        distanceOne = adsk.core.ValueInput.createByString('0 cm')
+        quantityTwo = adsk.core.ValueInput.createByString('6')
+        distanceTwo = adsk.core.ValueInput.createByString('15 cm')
+
+        <span style="color:blue"># Create the input for rectangular pattern</span>
+        rectangularPatterns = rootComp.features.rectangularPatternFeatures
+        rectangularPatternInput = rectangularPatterns.createInput(inputEntites, xAxis, quantityOne, distanceOne, adsk.fusion.PatternDistanceType.SpacingPatternDistanceType)
+
+        <span style="color:blue"># Set the data for second direction</span>
+        rectangularPatternInput.setDirectionTwo(yAxis, quantityTwo, distanceTwo)
+
+        <span style="color:blue"># Create the rectangular pattern</span>
+        rectangularFeature = rectangularPatterns.add(rectangularPatternInput)
+
+        patBodies = rectangularFeature.bodies
+
+        body0 = patBodies.item(0)
+        face0 = body0.faces.item(0)
+
+        extCutInput = extrudes.createInput(profForCut, adsk.fusion.FeatureOperations.CutFeatureOperation)
+
+         <span style="color:blue"># Set the extrude input</span>
+        distanceForCut = adsk.core.ValueInput.createByString('90 cm')
+        extCutInput.setDistanceExtent(False, distanceForCut)
+
+        <span style="color:blue">#set bodies to participate</span>
+        extCutInput.participantBodies = [patBodies.item(0), patBodies.item(2), patBodies.item(4)]
+
+        extrudes.add(extCutInput)
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code">#include &lt;Core/Application/Application.h&gt;
+#include &lt;Core/Application/Documents.h&gt;
+#include &lt;Core/Application/Document.h&gt;
+#include &lt;Core/Application/ObjectCollection.h&gt;
+#include &lt;Core/Application/Product.h&gt;
+#include &lt;Core/Application/ValueInput.h&gt;
+#include &lt;Core/Geometry/Point3D.h&gt;
+#include &lt;Core/Geometry/Line3D.h&gt;
+#include &lt;Core/UserInterface/UserInterface.h&gt;
+#include &lt;Fusion/BRep/BRepBody.h&gt;
+#include &lt;Fusion/BRep/BRepBodies.h&gt;
+#include &lt;Fusion/BRep/BRepFace.h&gt;
+#include &lt;Fusion/BRep/BRepFaces.h&gt;
+#include &lt;Fusion/Components/Component.h&gt;
+#include &lt;Fusion/Construction/ConstructionAxis.h&gt;
+#include &lt;Fusion/Construction/ConstructionPlane.h&gt;
+#include &lt;Fusion/Features/Features.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeature.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeatures.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeatureInput.h&gt;
+#include &lt;Fusion/Features/RectangularPatternFeature.h&gt;
+#include &lt;Fusion/Features/RectangularPatternFeatures.h&gt;
+#include &lt;Fusion/Features/RectangularPatternFeatureInput.h&gt;
+#include &lt;Fusion/Features/DistanceExtentDefinition.h&gt;
+#include &lt;Fusion/Fusion/Design.h&gt;
+#include &lt;Fusion/Sketch/Profile.h&gt;
+#include &lt;Fusion/Sketch/Profiles.h&gt;
+#include &lt;Fusion/Sketch/Sketch.h&gt;
+#include &lt;Fusion/Sketch/Sketches.h&gt;
+#include &lt;Fusion/Sketch/SketchCircle.h&gt;
+#include &lt;Fusion/Sketch/SketchCircles.h&gt;
+#include &lt;Fusion/Sketch/SketchCurves.h&gt;
+#include &lt;Fusion/Sketch/SketchLine.h&gt;
+#include &lt;Fusion/Sketch/SketchLines.h&gt;
+
+using namespace adsk::core;
+using namespace adsk::fusion;
+
+Ptr&lt;UserInterface&gt; ui;
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    Ptr&lt;Application&gt; app = Application::get();
+    if (!app)
+        return false;
+
+    ui = app-&gt;userInterface();
+    if (!ui)
+        return false;
+
+    Ptr&lt;Documents&gt; documents = app-&gt;documents();
+    if (!documents)
+        return false;
+
+    Ptr&lt;Document&gt; doc = documents-&gt;add(DocumentTypes::FusionDesignDocumentType);
+    if (!doc)
+        return false;
+
+    Ptr&lt;Product&gt; product = app-&gt;activeProduct();
+    if (!product)
+        return false;
+
+    Ptr&lt;Design&gt; design = product;
+    if (!design)
+        return false;
+
+    <span style="color:blue">// Get the root component of the active design</span>
+    Ptr&lt;Component&gt; rootComp = design-&gt;rootComponent();
+    if (!rootComp)
+        return false;
+
+    <span style="color:blue">// Create sketch</span>
+    Ptr&lt;Sketches&gt; sketches = rootComp-&gt;sketches();
+    if (!sketches)
+        return false;
+    Ptr&lt;ConstructionPlane&gt; xz = rootComp-&gt;xZConstructionPlane();
+    if (!xz)
+        return false;
+    Ptr&lt;Sketch&gt; sketch = sketches-&gt;add(xz);
+    if (!sketch)
+        return false;
+    Ptr&lt;SketchCurves&gt; sketchCurves = sketch-&gt;sketchCurves();
+    if (!sketchCurves)
+        return false;
+    Ptr&lt;SketchCircles&gt; sketchCircles = sketchCurves-&gt;sketchCircles();
+    if (!sketchCircles)
+        return false;
+    Ptr&lt;Point3D&gt; centerPoint = Point3D::create(0, 0, 0);
+    if (!centerPoint)
+        return false;
+    Ptr&lt;SketchCircle&gt; circle = sketchCircles-&gt;addByCenterRadius(centerPoint, 3.0);
+    if (!circle)
+        return false;
+
+    <span style="color:blue">// Get the profile defined by the circle.</span>
+    Ptr&lt;Profiles&gt; profs = sketch-&gt;profiles();
+    if (!profs)
+        return false;
+    Ptr&lt;Profile&gt; prof = profs-&gt;item(0);
+    if (!prof)
+        return false;
+
+    <span style="color:blue">// Create sketch for Cut</span>
+    Ptr&lt;Sketch&gt; sketchForCut = sketches-&gt;add(rootComp-&gt;xZConstructionPlane());
+
+    Ptr&lt;SketchCurves&gt; sketchForCutCurves = sketchForCut-&gt;sketchCurves();
+    if (!sketchForCutCurves)
+        return false;
+    Ptr&lt;SketchCircles&gt; sketchForCutCircles = sketchForCutCurves-&gt;sketchCircles();
+
+    if (!sketchForCutCircles)
+        return false;
+
+    sketchForCutCircles-&gt;addByCenterRadius(centerPoint, 1.5);
+
+    <span style="color:blue">// Get the profile defined by the circle.</span>
+    Ptr&lt;Profiles&gt; profilesForCut = sketchForCut-&gt;profiles();
+    if (!profilesForCut)
+        return false;
+
+    Ptr&lt;Profile&gt; profForCut = profilesForCut-&gt;item(0);
+    if (!profForCut)
+        return false;
+
+    <span style="color:blue">// Define that the extent is a distance extent of 5 cm.</span>
+    Ptr&lt;ValueInput&gt; distance = ValueInput::createByReal(5);
+    if (!distance)
+        return false;
+
+    <span style="color:blue">// Create the extrusion.</span>
+    Ptr&lt;Features&gt; feats = rootComp-&gt;features();
+    if (!feats)
+        return false;
+    Ptr&lt;ExtrudeFeatures&gt; extrudes = feats-&gt;extrudeFeatures();
+    if (!extrudes)
+        return false;
+    Ptr&lt;ExtrudeFeature&gt; ext = extrudes-&gt;addSimple(prof, distance, FeatureOperations::NewBodyFeatureOperation);
+    if (!ext)
+        return false;
+
+    <span style="color:blue">// Get the body created by extrusion</span>
+    Ptr&lt;BRepBodies&gt; bodies = ext-&gt;bodies();
+    if (!bodies)
+        return false;
+    Ptr&lt;BRepBody&gt; body = bodies-&gt;item(0);
+    if (!body)
+        return false;
+
+    <span style="color:blue">// Create input entities for rectangular pattern</span>
+    Ptr&lt;ObjectCollection&gt; inputEntites = ObjectCollection::create();
+    if (!inputEntites)
+        return false;
+    inputEntites-&gt;add(body);
+
+    <span style="color:blue">// Get x and y axes for rectangular pattern</span>
+    Ptr&lt;ConstructionAxis&gt; xAxis = rootComp-&gt;xConstructionAxis();
+    if (!xAxis)
+        return false;
+    Ptr&lt;ConstructionAxis&gt; yAxis = rootComp-&gt;yConstructionAxis();
+    if (!yAxis)
+        return false;
+
+    <span style="color:blue">// Quantity and distance</span>
+    Ptr&lt;ValueInput&gt; quantityOne = ValueInput::createByString("0");
+    if (!quantityOne)
+        return false;
+    Ptr&lt;ValueInput&gt; distanceOne = ValueInput::createByString("0 cm");
+    if (!distanceOne)
+        return false;
+    Ptr&lt;ValueInput&gt; quantityTwo = ValueInput::createByString("6");
+    if (!quantityTwo)
+        return false;
+    Ptr&lt;ValueInput&gt; distanceTwo = ValueInput::createByString("15 cm");
+    if (!distanceTwo)
+        return false;
+
+    <span style="color:blue">// Create the input for rectangular pattern</span>
+    Ptr&lt;RectangularPatternFeatures&gt; rectangularPatterns = feats-&gt;rectangularPatternFeatures();
+    if (!rectangularPatterns)
+        return false;
+    Ptr&lt;RectangularPatternFeatureInput&gt; rectangularPatternInput = rectangularPatterns-&gt;createInput(
+        inputEntites, xAxis, quantityOne, distanceOne, PatternDistanceType::SpacingPatternDistanceType);
+    if (!rectangularPatternInput)
+        return false;
+
+    <span style="color:blue">// Set the data for second direction</span>
+    rectangularPatternInput-&gt;setDirectionTwo(yAxis, quantityTwo, distanceTwo);
+
+    <span style="color:blue">// Create the rectangular pattern</span>
+    Ptr&lt;RectangularPatternFeature&gt; rectangularFeature = rectangularPatterns-&gt;add(rectangularPatternInput);
+    if (!rectangularFeature)
+        return false;
+
+    Ptr&lt;BRepBodies&gt; patBodies = rectangularFeature-&gt;bodies();
+    if (!patBodies)
+        return false;
+
+    Ptr&lt;ExtrudeFeatureInput&gt; extCutInput = extrudes-&gt;createInput(profForCut, FeatureOperations::CutFeatureOperation);
+    if (!extCutInput)
+        return false;
+
+    <span style="color:blue">// Set the extrude input</span>
+    Ptr&lt;ValueInput&gt; distanceForCut = ValueInput::createByString("90 cm");
+    if (!distanceForCut)
+        return false;
+    Ptr&lt;DistanceExtentDefinition&gt; distExtent = DistanceExtentDefinition::create(distanceForCut);
+    if (!distExtent)
+        return false;
+    extCutInput-&gt;setOneSideExtent(distExtent, ExtentDirections::PositiveExtentDirection);
+
+    <span style="color:blue">// set bodies to participate</span>
+    extCutInput-&gt;participantBodies({patBodies-&gt;item(0), patBodies-&gt;item(2), patBodies-&gt;item(4)});
+
+    extrudes-&gt;add(extCutInput);
+
+
+    return true;
+}</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(ParticipantBodiesSample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

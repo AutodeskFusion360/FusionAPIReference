@@ -1,0 +1,140 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/HoleFeature_setPositionByPlaneAndOffsets.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="HoleFeature_setPositionByPlaneAndOffsets">
+    <meta name="description" content="HoleFeature.setPositionByPlaneAndOffsets Method">
+    <meta name="topicid" content="GUID-030c660d-1e9d-4eb0-971c-5ef20392cf7a">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>HoleFeature.setPositionByPlaneAndOffsets Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">HoleFeature.setPositionByPlaneAndOffsets Method</h1>
+
+          Parent Object: <a href="HoleFeature.htm">HoleFeature</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Features/HoleFeature.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Redefines the orientation of the hole using a planar face or construction plane. The position of the hole is defined by the distance from one or two edges.<br/><br/> To use this method, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"holeFeature_var" is a variable referencing a <a href="HoleFeature.htm">HoleFeature</a> object.<code><pre class="api-code"><span style="color:blue"># Uses no optional arguments.</span><br />returnValue = holeFeature_var.<b>setPositionByPlaneAndOffsets</b>(planarEntity, point, edgeOne, offsetOne)<br /><br /><span style="color:blue"># Uses optional arguments.</span><br />returnValue = holeFeature_var.<b>setPositionByPlaneAndOffsets</b>(planarEntity, point, edgeOne, offsetOne, edgeTwo, offsetTwo)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"holeFeature_var" is a variable referencing a <a href="HoleFeature.htm">HoleFeature</a> object.<br /><br /><code><pre class="api-code">#include &lt;Fusion/Features/HoleFeature.h&gt;<br /><br /><span style="color:blue">// Uses no optional arguments.</span><br />returnValue = holeFeature_var-&gt;<b>setPositionByPlaneAndOffsets</b>(planarEntity, point, edgeOne, offsetOne);<br /><br /><span style="color:blue">// Uses optional arguments.</span><br />returnValue = holeFeature_var-&gt;<b>setPositionByPlaneAndOffsets</b>(planarEntity, point, edgeOne, offsetOne, edgeTwo, offsetTwo);</pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;">boolean</td>
+        <td class="api-list">Returns true if successful.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">planarEntity</td>
+        <td class="api-list"><a href="Base.htm">Base</a></td>
+        <td class="api-list">The planar BRepFace or ConstructionPlane object that defines the orientation of the hole. The natural direction of the hole will be opposite the normal of the face or construction plane.</td>
+      </tr>
+      <tr>
+        <td class="api-list">point</td>
+        <td class="api-list"><a href="Point3D.htm">Point3D</a></td>
+        <td class="api-list">A Point3D object that defines the approximate initial position of the hole. The point will be projected onto the plane. This point should be close to the final position of the hole and is used to determine which solution out of several possible solutions should be chosen for the hole location.</td>
+      </tr>
+      <tr>
+        <td class="api-list">edgeOne</td>
+        <td class="api-list"><a href="BRepEdge.htm">BRepEdge</a></td>
+        <td class="api-list">A linear BRepEdge object that the position of the hole will be measured from. The position of the hole will be measured along a perpendicular from this edge.</td>
+      </tr>
+      <tr>
+        <td class="api-list">offsetOne</td>
+        <td class="api-list"><a href="ValueInput.htm">ValueInput</a></td>
+        <td class="api-list">A ValueInput object that defines the offset distance from edgeOne. If the ValueInput uses a real then it is interpreted as centimeters. If it is a string then the units can be defined as part of the string (i.e. "3 in"). If no units are specified it is interpreted using the current default units for length.</td>
+      </tr>
+      <tr>
+        <td class="api-list">edgeTwo</td>
+        <td class="api-list"><a href="BRepEdge.htm">BRepEdge</a></td>
+        <td class="api-list">You can optionally define a second edge and offset to specify the position of the hole. If you use a second edge it has the same requirements as the edgeOne argument. If you provide a second edge you must also provide the offsetTwo argument.<br /><br /> This is an optional argument whose default value is null.</td>
+      </tr>
+      <tr>
+        <td class="api-list">offsetTwo</td>
+        <td class="api-list"><a href="ValueInput.htm">ValueInput</a></td>
+        <td class="api-list">If edgeTwo is defined, you must provide this argument which is a ValueInput object that defines the offset from the edgeTwo. If the ValueInput uses a real then it is interpreted as centimeters. If it is a string then the units can be defined as part of the string (i.e. "3 in"). If no units are specified it is interpreted using the current default units for length.<br /><br /> This is an optional argument whose default value is null.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(HoleFeature.setPositionByPlaneAndOffsets%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

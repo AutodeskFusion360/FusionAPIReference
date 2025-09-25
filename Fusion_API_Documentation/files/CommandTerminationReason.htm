@@ -1,0 +1,99 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/CommandTerminationReason.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="CommandTerminationReason">
+    <meta name="description" content="Defines the termination reason for a command. Commands can be terminated for a number of different reasons, and based on the reason commands have to do different things during termination so this enum defines various reasons for termination">
+    <meta name="topicid" content="GUID-a8b3de5d-a667-444d-9518-f21bda0a9395">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>CommandTerminationReason Enumerator
+        </title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">CommandTerminationReason Enumerator
+        </h1>
+    <h2 class="api">
+          Description
+        </h2>Defines the termination reason for a command. Commands can be terminated for a number of different reasons, and based on the reason commands have to do different things during termination so this enum defines various reasons for termination<br>Defined in namespace "adsk::core" and the header file is &lt;Core\CoreTypeDefs.h&gt;<h2 class="api">
+          Methods
+        </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+              Name
+            </td>
+        <td class="api-list" style="width:1px;">
+              Value
+            </td>
+        <td class="api-list">
+              Description
+            </td>
+      </tr>
+      <tr>
+        <td class="api-list">AbortedTerminationReason</td>
+        <td class="api-list" align="right" style="padding-right:10px">3</td>
+        <td class="api-list">The command is terminated by clicking OK button, and executed failed.</td>
+      </tr>
+      <tr>
+        <td class="api-list">CancelledTerminationReason</td>
+        <td class="api-list" align="right" style="padding-right:10px">2</td>
+        <td class="api-list">The command is terminated by clicking Cancel button.</td>
+      </tr>
+      <tr>
+        <td class="api-list">CompletedTerminationReason</td>
+        <td class="api-list" align="right" style="padding-right:10px">1</td>
+        <td class="api-list">The command is terminated by clicking OK button, and executed successfully.</td>
+      </tr>
+      <tr>
+        <td class="api-list">PreEmptedTerminationReason</td>
+        <td class="api-list" align="right" style="padding-right:10px">4</td>
+        <td class="api-list">The command is terminated by activating another command.</td>
+      </tr>
+      <tr>
+        <td class="api-list">SessionEndingTerminationReason</td>
+        <td class="api-list" align="right" style="padding-right:10px">5</td>
+        <td class="api-list">The command is terminated by closing the document.</td>
+      </tr>
+      <tr>
+        <td class="api-list">UnknownTerminationReason</td>
+        <td class="api-list" align="right" style="padding-right:10px">0</td>
+        <td class="api-list">The command is terminated out of the reasons list below.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+          Version
+        </h2>
+        Introduced in version June 2015<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(CommandTerminationReason%20Enum%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

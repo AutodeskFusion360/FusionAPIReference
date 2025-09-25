@@ -1,0 +1,137 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/UnitsManager_evaluateExpression.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="UnitsManager_evaluateExpression">
+    <meta name="description" content="UnitsManager.evaluateExpression Method">
+    <meta name="topicid" content="GUID-d2c46e12-f05a-4e5b-afba-0082d60a152a">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>UnitsManager.evaluateExpression Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">UnitsManager.evaluateExpression Method</h1>
+
+          Parent Object: <a href="UnitsManager.htm">UnitsManager</a><br>Defined in namespace "adsk::core" and the header file is &lt;Core/Application/UnitsManager.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Gets the value (in internal units) of the expression.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"unitsManager_var" is a variable referencing a <a href="UnitsManager.htm">UnitsManager</a> object.<code><pre class="api-code"><span style="color:blue"># Uses no optional arguments.</span><br />returnValue = unitsManager_var.<b>evaluateExpression</b>(expression)<br /><br /><span style="color:blue"># Uses optional arguments.</span><br />returnValue = unitsManager_var.<b>evaluateExpression</b>(expression, units)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"unitsManager_var" is a variable referencing a <a href="UnitsManager.htm">UnitsManager</a> object.<br /><br /><code><pre class="api-code">#include &lt;Core/Application/UnitsManager.h&gt;<br /><br /><span style="color:blue">// Uses no optional arguments.</span><br />returnValue = unitsManager_var-&gt;<b>evaluateExpression</b>(expression);<br /><br /><span style="color:blue">// Uses optional arguments.</span><br />returnValue = unitsManager_var-&gt;<b>evaluateExpression</b>(expression, units);</pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;">double</td>
+        <td class="api-list">Returns -1 AND GetLastError will return ExpressionError in the event of an error.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">expression</td>
+        <td class="api-list">string</td>
+        <td class="api-list">EvaluateExpression("1cm + 1in") -> 3.54 EvaluateExpression("1") -> -> depends on the DistanceUnits, with "mm" it gives 0.1</td>
+      </tr>
+      <tr>
+        <td class="api-list">units</td>
+        <td class="api-list">string</td>
+        <td class="api-list">If not supplied the units will default to the default length specified in the preferences.<br /><br /> This is an optional argument whose default value is "DefaultDistance".</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="InputBox_Sample.htm">Use inputBox to get value and evaluateExpression to validate it</a></td>
+        <td class="api-list">Uses the UserInterface.inputBox function to get a string from the user and then validates that the strinng entered is a valid expression by using the UnitsManager.evaluateExpression function.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(UnitsManager.evaluateExpression%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

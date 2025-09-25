@@ -1,0 +1,124 @@
+﻿/* Styles for all API content; both chm and online. */
+div.api-code
+{
+	padding:5px;
+}
+
+div.api-outline
+{
+    border:1px solid rgb(187,187,187);
+    border-radius:5px;
+    background-color:rgb(255,255,200);
+    padding: 10px;
+	padding-bottom: 0px;
+	margin: 3px;
+}
+
+pre.api-code
+{
+    border:1px solid rgb(187,187,187);
+    border-radius:5px;
+    background-color:rgb(245,245,240);
+    padding:8px;
+    display: block;
+    word-wrap: normal;
+    overflow: auto;
+    white-space: pre;
+	margin-top: 5px;
+	margin-bottom: 0px;
+    font-size: 0.875em;
+    tab-size: 4;
+}
+
+table.api-list
+{
+    border-top:1px solid rgb(187,187,187);
+    border-left: 1px solid rgb(187,187,187);
+    width:100%;
+    border-collapse: collapse;
+}
+
+table.api-listnarrow
+{
+    border-top:1px solid rgb(187,187,187);
+    border-left: 1px solid rgb(187,187,187);
+    width:85%;
+    border-collapse: collapse;
+}
+
+td.api-list
+{
+    border-bottom:1px solid rgb(187,187,187); 
+    border-right: 1px solid rgb(187,187,187);
+    padding-top:10px;
+    padding-bottom:10px;
+    padding-right:5px;
+    padding-left:5px;
+    vertical-align:top;
+}
+
+button.copy-code {
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 12px;
+    color: black;
+}
+
+/* This maintains the border around the tabbed area. */
+.tabsOutline-api {
+    border: 1px solid #aaaaaa;
+}
+
+.api-indent
+{ 
+    margin-left: 40px; 
+}
+
+span.api-new
+{
+    font-family:Impact;
+    color:rgb(255,0,0);
+    font-size:10.0pt;
+}
+
+p.api-preview {
+	border: 3px solid #000000;
+    color:rgb(180,0,0);
+    background-color:rgb(255,255,100);
+	font-weight: normal;
+	padding:10px;
+}
+
+h1.api
+{
+    margin-bottom: 0px;
+}
+
+h2.api
+{
+    margin-bottom: 0px;
+}
+
+h3.api
+{
+    margin-bottom: 0px;
+}
+
+h4.api
+{
+    margin-bottom: 0px;
+}
+
+p.api
+{
+    margin-top:0in;
+    margin-right:0in;
+    margin-bottom:10.0pt;
+    margin-left:0in;
+}
+
+/* This is to allow line numbers with the prism library to display the
+   same size as the code. */
+pre[class*=language-]
+{
+    font-size: 13.5px!important;
+}

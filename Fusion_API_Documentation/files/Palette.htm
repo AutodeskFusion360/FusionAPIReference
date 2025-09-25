@@ -1,0 +1,270 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/Palette.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="22/2/2017">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="Palette">
+    <meta name="description" content="Palette Object">
+    <meta name="topicid" content="GUID-F9998A83-E4E7-4EBF-946C-56EC9A37A609">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>Palette Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Palette Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::core" and the header file is &lt;Core/UserInterface/Palette.h&gt;<h2 class="api">
+          Description
+        </h2>A Palette is a floating or docked dialog in Fusion. The browser is an example of a built-in palette. The contents of a custom palette are created by displaying an HTML file.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Palette_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Palette_deleteMe.htm">deleteMe</a></td>
+        <td class="api-list">Deletes this palette. Fusion native palettes cannot be deleted. Use the isNative property to determine if this is a native or API created palette.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Palette_sendInfoToHTML.htm">sendInfoToHTML</a></td>
+        <td class="api-list">Sends the string to the JavaScript associated with the loaded HTML.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Palette_setMaximumSize.htm">setMaximumSize</a></td>
+        <td class="api-list">Sets the maximum size of the palette. The user cannot resize it to be larger than this size. This does not change the current size of the palette unless the palette is already larger than this size.<br/><br/> Calling this method and setting the width and height to zero, removes the maximum size restriction.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Palette_setMinimumSize.htm">setMinimumSize</a></td>
+        <td class="api-list">Sets the minimum size of the palette. The user cannot resize it to be smaller than this size. This does not change the current size of the palette unless the palette is already smaller than this size.<br/><br/> Calling this method and setting the width and height to zero, removes the minimum size restriction.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Palette_setPosition.htm">setPosition</a></td>
+        <td class="api-list">Sets the position of the palette. If the palette is docked or snapped, this will result in changing it to be floating.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Palette_setSize.htm">setSize</a></td>
+        <td class="api-list">Sets the size of the palette. This is best used for a floating palette because either the width or height can be locked when a palette is docked.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Palette_snapTo.htm">snapTo</a></td>
+        <td class="api-list">Snaps this palette to another palette.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Palette_dockingOption.htm">dockingOption</a></td>
+        <td class="api-list">Defines the docking behavior for this palette. This controls how the user is allowed to dock the palette.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Palette_dockingState.htm">dockingState</a></td>
+        <td class="api-list">Gets and sets how the palette is currently docked.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Palette_height.htm">height</a></td>
+        <td class="api-list">Gets and sets the height of the palette. Setting this property may not always set the height. Depending on how the palette is docked or snapped, the height may not be editable.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Palette_htmlFileURL.htm">htmlFileURL</a></td>
+        <td class="api-list">Gets and sets the URL to the HTML file that will be displayed in the palette. This can be a local file or a URL on the web where the HTML will be read. To avoid reading a file, this can also be the full HTML definition as a string.<br/><br/> If you are providing the HTML content as a string, it should begin with the <html> element. Any references made in the HTML should be to URL's and not local files since the local path is ambiguous.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Palette_id.htm">id</a></td>
+        <td class="api-list">Gets The unique, language independent, ID of this palette.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Palette_isNative.htm">isNative</a></td>
+        <td class="api-list">Indicates if this is one of the standard Fusion palettes or a custom palette created through the API. If true, it is a standard Fusion palette and will have some restrictions on changing its properties and cannot be deleted.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Palette_isTransparent.htm">isTransparent</a></td>
+        <td class="api-list">Returns if this palette was created as a transparent palette.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Palette_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Palette_isVisible.htm">isVisible</a></td>
+        <td class="api-list">Gets and sets whether this palette is currently being displayed in the user interface.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Palette_left.htm">left</a></td>
+        <td class="api-list">Gets and sets the left side of the palette relative to screen space and in pixels. Because palettes can be positioned outside of the Fusion window, a value of zero indicates the left side of the screen and not the Fusion window.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Palette_name.htm">name</a></td>
+        <td class="api-list">Gets and set the name of the palette as seen in the user interface. The name of native palettes cannot be set.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Palette_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Palette_top.htm">top</a></td>
+        <td class="api-list">Gets and sets the top of the palette relative to screen space and in pixels. Because palettes can be positioned outside of the Fusion window, a value of zero indicates the top of the screen and not the Fusion window.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Palette_width.htm">width</a></td>
+        <td class="api-list">Gets and sets the width of the palette. Setting this property may not always set the width. Depending on how the palette is docked or snapped, the width may not be editable.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Events
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Palette_closed.htm">closed</a></td>
+        <td class="api-list">This event is fired when the user clicks the "Close" button on the palette. You can choose if the "Close" button is available or not when you initially create the palette. When a palette is closed, it still exists but is change to invisible so you can still interact with it and retrieve any needed information and can make it visible again. Use the deleteMe method to delete the palette.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Palette_incomingFromHTML.htm">incomingFromHTML</a></td>
+        <td class="api-list">This event is fired when the JavaScript associated with the HTML calls the adsk.fusionSendData function. This allows the HTML to communicate with the add-in by passing information to the add-in.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Palette_navigatingURL.htm">navigatingURL</a></td>
+        <td class="api-list">This event is fired when a navigation event occurs on the page. This allows the add-in to determine how this navigation should be handled by the browser.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="Palettes_add.htm">Palettes.add</a>, <a href="Palettes_add2.htm">Palettes.add2</a>, <a href="Palettes_addTransparent.htm">Palettes.addTransparent</a>, <a href="Palettes_item.htm">Palettes.item</a>, <a href="Palettes_itemById.htm">Palettes.itemById</a><h2 class="api">
+            Derived Classes
+          </h2><a href="TextCommandPalette.htm">TextCommandPalette</a><h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PaletteSample_Sample.htm">Palette Sample</a></td>
+        <td class="api-list"><p>Demonstrates how to create a palette, how to dock and snap palettes and how Fusion communicates with the palette HTML. The sample is an add-in.  To use it, create a new Python add-in and replace the code with the code below. You also need to create an html file using the name and code below. The html file needs to be in the same folder as the py file.</p>
+	<p>When you load the add-in, you'll see two new commands under the ADD-INS panel of the TOOLS tab. The "Show Custom Palette" command will cause the custom palette to be displayed. It will remain displayed until you click its Close button. Clicking the "Click to send info to Fusion" button on the palette, will send information to your add-in, which uses the API to display that information in a message box. Running the "Send Info to HTML" command to send data to the javascript running in the palette, which uses it to update the content of a paragraph.</p>
+
+<h3 class="api">palette.html</h3>
+<pre class="api-code">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;p&gt;Click the button below to send data to Fusion.&lt;/p&gt;
+        &lt;button type='button' onclick='sendInfoToFusion()'&gt;Click to send info to Fusion&lt;/button&gt; 
+        &lt;p id='p1'&gt;Run the "Send Info to HTML" command in the ADD-INS panel to update this text.&lt;/p&gt;
+        &lt;br /&gt;&lt;br /&gt;
+	
+    &lt;/body&gt;
+    &lt;script&gt;
+        function sendInfoToFusion(){
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0');
+            var yyyy = today.getFullYear();
+
+            var hours = String(today.getHours()).padStart(2, '0');
+            var minutes = String(today.getMinutes()).padStart(2, '0');
+            var seconds = String(today.getSeconds()).padStart(2, '0');
+
+            var date = dd + '/' + mm + '/' + yyyy;
+            var time = hours + ':' + minutes + ':' + seconds;
+            var args = {
+                arg1 : "Sample argument 1",
+                arg2 : "Sample argument 2"
+            };
+            adsk.fusionSendData('send', JSON.stringify(args));
+        }
+        
+        window.fusionJavaScriptHandler = {handle: function(action, data){
+            try {
+                if (action == 'send') {
+					<span style="color:blue">// Update a paragraph with the data passed in.</span>
+					document.getElementById('p1').innerHTML = data;
+				}
+				else if (action == 'debugger') {
+                    debugger;
+				}
+				else {
+					return 'Unexpected command type: ' + action;
+                }
+            } catch (e) {
+                console.log(e);
+                console.log('exception caught with command: ' + action + ', data: ' + data);
+            }
+            return 'OK';
+        }};
+    &lt;/script&gt;
+&lt;/html&gt;
+</pre></td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version March 2017<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(Palette%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

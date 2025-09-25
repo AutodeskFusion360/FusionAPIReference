@@ -1,0 +1,183 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/Point3D.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="Point3D">
+    <meta name="description" content="Point3D Object">
+    <meta name="topicid" content="GUID-c49e1ed5-7221-49a4-abc9-81e7beb2e51d">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>Point3D Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Point3D Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::core" and the header file is &lt;Core/Geometry/Point3D.h&gt;<h2 class="api">
+          Description
+        </h2>Transient 3D point. A transient point is not displayed or saved in a document. Transient 3D points are used as a wrapper to work with raw 3D point information. They are created statically using the create method of the Point3D class.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Point3D_asArray.htm">asArray</a></td>
+        <td class="api-list">Get coordinate data of the point.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Point3D_asVector.htm">asVector</a></td>
+        <td class="api-list">Defines a vector using the coordinates of the point.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Point3D_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Point3D_copy.htm">copy</a></td>
+        <td class="api-list">Creates and returns a copy of this point object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Point3D_create.htm">create</a></td>
+        <td class="api-list">Creates a transient 3D point object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Point3D_distanceTo.htm">distanceTo</a></td>
+        <td class="api-list">Returns the distance from this point to another point.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Point3D_getData.htm">getData</a></td>
+        <td class="api-list">Gets the data defining the point.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Point3D_isEqualTo.htm">isEqualTo</a></td>
+        <td class="api-list">Checks to see if this point and another point are equal (have identical coordinates). The comparison is done within the modeling tolerance which can be found with the Application.pointTolerance property. If you want to compare two points with any other tolerance you can use the isEqualToByTolerance method.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Point3D_isEqualToByTolerance.htm">isEqualToByTolerance</a></td>
+        <td class="api-list">Checks to see if this point and another point are equal within the specified tolerance.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Point3D_set.htm">set</a></td>
+        <td class="api-list">Sets the data defining the point.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Point3D_setWithArray.htm">setWithArray</a></td>
+        <td class="api-list">Sets the coordinates of the point using an array as input.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Point3D_transformBy.htm">transformBy</a></td>
+        <td class="api-list">Transforms the point using the provided matrix.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Point3D_translateBy.htm">translateBy</a></td>
+        <td class="api-list">Translates the point using the provided vector.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Point3D_vectorTo.htm">vectorTo</a></td>
+        <td class="api-list">Returns a vector from this point to another point.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Point3D_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Point3D_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Point3D_x.htm">x</a></td>
+        <td class="api-list">Gets and sets the X coordinate of the point.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Point3D_y.htm">y</a></td>
+        <td class="api-list">Gets and sets the Y coordinate of the point.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Point3D_z.htm">z</a></td>
+        <td class="api-list">Gets and sets the Z coordinate of the point.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="AdditiveFFFLimitsMachineElement_homePosition.htm">AdditiveFFFLimitsMachineElement.homePosition</a>, <a href="AdditiveFFFLimitsMachineElement_parkPosition.htm">AdditiveFFFLimitsMachineElement.parkPosition</a>, <a href="AdditivePlatformMachineElement_origin.htm">AdditivePlatformMachineElement.origin</a>, <a href="AdditivePlatformMachineElement_size.htm">AdditivePlatformMachineElement.size</a>, <a href="AngleValueCommandInput_manipulatorOrigin.htm">AngleValueCommandInput.manipulatorOrigin</a>, <a href="Arc3D_center.htm">Arc3D.center</a>, <a href="Arc3D_endPoint.htm">Arc3D.endPoint</a>, <a href="Arc3D_getData.htm">Arc3D.getData</a>, <a href="Arc3D_startPoint.htm">Arc3D.startPoint</a>, <a href="AreaProperties_centroid.htm">AreaProperties.centroid</a>, <a href="BeamNetwork_vertices.htm">BeamNetwork.vertices</a>, <a href="BoundingBox3D_maxPoint.htm">BoundingBox3D.maxPoint</a>, <a href="BoundingBox3D_minPoint.htm">BoundingBox3D.minPoint</a>, <a href="BRepEdge_pointOnEdge.htm">BRepEdge.pointOnEdge</a>, <a href="BRepFace_centroid.htm">BRepFace.centroid</a>, <a href="BRepFace_pointOnFace.htm">BRepFace.pointOnFace</a>, <a href="BRepVertex_geometry.htm">BRepVertex.geometry</a>, <a href="BRepVertexDefinition_position.htm">BRepVertexDefinition.position</a>, <a href="Camera_eye.htm">Camera.eye</a>, <a href="Camera_target.htm">Camera.target</a>, <a href="Circle3D_center.htm">Circle3D.center</a>, <a href="Circle3D_getData.htm">Circle3D.getData</a>, <a href="Cone_getData.htm">Cone.getData</a>, <a href="Cone_origin.htm">Cone.origin</a>, <a href="ConstructionPoint_geometry.htm">ConstructionPoint.geometry</a>, <a href="CurveEvaluator3D_getEndPoints.htm">CurveEvaluator3D.getEndPoints</a>, <a href="CurveEvaluator3D_getPointAtParameter.htm">CurveEvaluator3D.getPointAtParameter</a>, <a href="CustomGraphicsBillBoard_anchorPoint.htm">CustomGraphicsBillBoard.anchorPoint</a>, <a href="CustomGraphicsCoordinates_getCoordinate.htm">CustomGraphicsCoordinates.getCoordinate</a>, <a href="CustomGraphicsViewPlacement_anchorPoint.htm">CustomGraphicsViewPlacement.anchorPoint</a>, <a href="CustomGraphicsViewScale_anchorPoint.htm">CustomGraphicsViewScale.anchorPoint</a>, <a href="Cylinder_getData.htm">Cylinder.getData</a>, <a href="Cylinder_origin.htm">Cylinder.origin</a>, <a href="DirectionCommandInput_manipulatorOrigin.htm">DirectionCommandInput.manipulatorOrigin</a>, <a href="DistanceValueCommandInput_manipulatorOrigin.htm">DistanceValueCommandInput.manipulatorOrigin</a>, <a href="Ellipse3D_center.htm">Ellipse3D.center</a>, <a href="Ellipse3D_getData.htm">Ellipse3D.getData</a>, <a href="EllipticalArc3D_center.htm">EllipticalArc3D.center</a>, <a href="EllipticalArc3D_getData.htm">EllipticalArc3D.getData</a>, <a href="EllipticalCone_getData.htm">EllipticalCone.getData</a>, <a href="EllipticalCone_origin.htm">EllipticalCone.origin</a>, <a href="EllipticalCylinder_getData.htm">EllipticalCylinder.getData</a>, <a href="EllipticalCylinder_origin.htm">EllipticalCylinder.origin</a>, <a href="FaceGroup_centroid.htm">FaceGroup.centroid</a>, <a href="HoleFeature_position.htm">HoleFeature.position</a>, <a href="InfiniteLine3D_getData.htm">InfiniteLine3D.getData</a>, <a href="InfiniteLine3D_origin.htm">InfiniteLine3D.origin</a>, <a href="JointGeometry_origin.htm">JointGeometry.origin</a>, <a href="Line3D_endPoint.htm">Line3D.endPoint</a>, <a href="Line3D_getData.htm">Line3D.getData</a>, <a href="Line3D_startPoint.htm">Line3D.startPoint</a>, <a href="Matrix3D_getAsCoordinateSystem.htm">Matrix3D.getAsCoordinateSystem</a>, <a href="MeasureResults_positionOne.htm">MeasureResults.positionOne</a>, <a href="MeasureResults_positionThree.htm">MeasureResults.positionThree</a>, <a href="MeasureResults_positionTwo.htm">MeasureResults.positionTwo</a>, <a href="NurbsCurve3D_controlPoints.htm">NurbsCurve3D.controlPoints</a>, <a href="NurbsSurface_controlPoints.htm">NurbsSurface.controlPoints</a>, <a href="OffsetConstraintInput_dimensionPoint.htm">OffsetConstraintInput.dimensionPoint</a>, <a href="OrientedBoundingBox3D_centerPoint.htm">OrientedBoundingBox3D.centerPoint</a>, <a href="PhysicalProperties_centerOfMass.htm">PhysicalProperties.centerOfMass</a>, <a href="Plane_intersectWithLine.htm">Plane.intersectWithLine</a>, <a href="Plane_origin.htm">Plane.origin</a>, <a href="Point3D_copy.htm">Point3D.copy</a>, <a href="Point3D_create.htm">Point3D.create</a>, <a href="PolygonMesh_nodeCoordinates.htm">PolygonMesh.nodeCoordinates</a>, <a href="Polyline3D_points.htm">Polyline3D.points</a>, <a href="RecognizedHole_bottom.htm">RecognizedHole.bottom</a>, <a href="RecognizedHole_top.htm">RecognizedHole.top</a>, <a href="SceneSettings_centerOfFocus.htm">SceneSettings.centerOfFocus</a>, <a href="SceneSettings_groundPosition.htm">SceneSettings.groundPosition</a>, <a href="Selection_point.htm">Selection.point</a>, <a href="Sketch_modelToSketchSpace.htm">Sketch.modelToSketchSpace</a>, <a href="Sketch_origin.htm">Sketch.origin</a>, <a href="Sketch_sketchToModelSpace.htm">Sketch.sketchToModelSpace</a>, <a href="SketchAngularDimension_textPosition.htm">SketchAngularDimension.textPosition</a>, <a href="SketchConcentricCircleDimension_textPosition.htm">SketchConcentricCircleDimension.textPosition</a>, <a href="SketchDiameterDimension_textPosition.htm">SketchDiameterDimension.textPosition</a>, <a href="SketchDimension_textPosition.htm">SketchDimension.textPosition</a>, <a href="SketchDistanceBetweenLineAndPlanarSurfaceDimension_textPosition.htm">SketchDistanceBetweenLineAndPlanarSurfaceDimension.textPosition</a>, <a href="SketchDistanceBetweenPointAndSurfaceDimension_textPosition.htm">SketchDistanceBetweenPointAndSurfaceDimension.textPosition</a>, <a href="SketchEllipseMajorRadiusDimension_textPosition.htm">SketchEllipseMajorRadiusDimension.textPosition</a>, <a href="SketchEllipseMinorRadiusDimension_textPosition.htm">SketchEllipseMinorRadiusDimension.textPosition</a>, <a href="SketchLinearDiameterDimension_textPosition.htm">SketchLinearDiameterDimension.textPosition</a>, <a href="SketchLinearDimension_textPosition.htm">SketchLinearDimension.textPosition</a>, <a href="SketchOffsetCurvesDimension_textPosition.htm">SketchOffsetCurvesDimension.textPosition</a>, <a href="SketchOffsetDimension_textPosition.htm">SketchOffsetDimension.textPosition</a>, <a href="SketchPoint_geometry.htm">SketchPoint.geometry</a>, <a href="SketchPoint_worldGeometry.htm">SketchPoint.worldGeometry</a>, <a href="SketchRadialDimension_textPosition.htm">SketchRadialDimension.textPosition</a>, <a href="SketchTangentDistanceDimension_textPosition.htm">SketchTangentDistanceDimension.textPosition</a>, <a href="SketchText_position.htm">SketchText.position</a>, <a href="SketchTextInput_position.htm">SketchTextInput.position</a>, <a href="Sphere_getData.htm">Sphere.getData</a>, <a href="Sphere_origin.htm">Sphere.origin</a>, <a href="SurfaceEvaluator_getPointAtParameter.htm">SurfaceEvaluator.getPointAtParameter</a>, <a href="Torus_getData.htm">Torus.getData</a>, <a href="Torus_origin.htm">Torus.origin</a>, <a href="TriangleMesh_nodeCoordinates.htm">TriangleMesh.nodeCoordinates</a>, <a href="Vector3D_asPoint.htm">Vector3D.asPoint</a>, <a href="Viewport_viewToModelSpace.htm">Viewport.viewToModelSpace</a>, <a href="VolumetricColorSample_point.htm">VolumetricColorSample.point</a>, <a href="VolumetricSample_point.htm">VolumetricSample.point</a>, <a href="VolumetricScalarSample_point.htm">VolumetricScalarSample.point</a>, <a href="VolumetricVectorSample_point.htm">VolumetricVectorSample.point</a><h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchArcs_addByCenterStartaSweep_Sample.htm">SketchArcs.addByCenterStartSweep</a></td>
+        <td class="api-list">Demonstrates the SketchArcs.addByCenterStartSweep method.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchArcs_addByThreePoints_Sample.htm">SketchArcs.addByThreePoints</a></td>
+        <td class="api-list">Demonstrates the SketchArcs.addByThreePoints method.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchArcs_addFillet_Sample.htm">SketchArcs.addFillet</a></td>
+        <td class="api-list">Demonstrates the SketchArcs.addFillet method.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(Point3D%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

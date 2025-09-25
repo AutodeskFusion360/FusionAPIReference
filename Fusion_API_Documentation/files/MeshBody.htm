@@ -1,0 +1,230 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/MeshBody.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="MeshBody">
+    <meta name="description" content="MeshBody Object">
+    <meta name="topicid" content="GUID-96f7fbb8-1faf-4f6a-8079-1129ef336033">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>MeshBody Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">MeshBody Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/MeshBody/MeshBody.h&gt;<h2 class="api">
+          Description
+        </h2>Provides access to a mesh body.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshBody_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshBody_copy.htm">copy</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Copies the mesh body to the clipboard.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshBody_copyToComponent.htm">copyToComponent</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Creates a copy of this mesh body into the specified target.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshBody_createComponent.htm">createComponent</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Creates a new component and occurrence within the component that currently owns this body. This body is moved into the new component and returned. The newly created component can be obtained by using the parentComponent property of the MeshBody object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshBody_createForAssemblyContext.htm">createForAssemblyContext</a></td>
+        <td class="api-list">Creates or returns a proxy for the native object - i.e. a new object that represents this object but adds the assembly context defined by the input occurrence. Fails if this object is not the NativeObject.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshBody_cut.htm">cut</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Cuts the mesh body to the clipboard.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshBody_deleteMe.htm">deleteMe</a></td>
+        <td class="api-list">Deletes the mesh body.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshBody_findByTempId.htm">findByTempId</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Returns the face group with the temporary id.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshBody_moveToComponent.htm">moveToComponent</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Moves this mesh body from it's current component into the root component or the component owned by the specified occurrence.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshBody_appearance.htm">appearance</a></td>
+        <td class="api-list">Read-write property that gets and sets the current appearance of the body. Setting this property will result in applying an override appearance to the body and the AppearanceSourceType property will return OverrideAppearanceSource. Setting this property to null will remove any override.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshBody_appearanceSourceType.htm">appearanceSourceType</a></td>
+        <td class="api-list">Read-write property that gets the source of the appearance for the body. If this returns OverrideAppearanceSource, an override exists on this body. The override can be removed by setting the Appearance property to null.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshBody_area.htm">area</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Returns the area in cm ^ 2.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshBody_assemblyContext.htm">assemblyContext</a></td>
+        <td class="api-list">Returns the assembly occurrence (i.e. the occurrence) of this object in an assembly. This is only valid in the case where this is acting as a proxy in an assembly. Returns null in the case where the object is not in the context of an assembly but is already the native object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshBody_attributes.htm">attributes</a></td>
+        <td class="api-list">Returns the collection of attributes associated with this mesh body.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshBody_baseOrFormFeature.htm">baseOrFormFeature</a></td>
+        <td class="api-list">This property returns the base or form feature that this mesh body is associated with. It returns null in a direct modeling design.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshBody_boundingBox.htm">boundingBox</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Returns the bounding box of this mesh body.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshBody_displayMesh.htm">displayMesh</a></td>
+        <td class="api-list">Returns the associated mesh that is used for the display. This will always be triangles and includes any textures.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshBody_displayOverrides.htm">displayOverrides</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Gets the object that allows manipulation of overrides that control how the mesh is displayed in the interactive 3D view.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshBody_entityToken.htm">entityToken</a></td>
+        <td class="api-list">Returns a token for the MeshBody object. This can be saved and used at a later time with the Design.findEntityByToken method to get back the same mesh body.<br/><br/> When using entity tokens it's important to understand that the token string returned for a specific entity can be different over time. However, even if you have two different token strings that were obtained from the same entity, when you use findEntityByToken they will both return the same entity. Because of that you should never compare entity tokens as way to determine what the token represents. Instead, you need to use the findEntityByToken method to get the two entities identified by the tokens and then compare them.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshBody_faceGroups.htm">faceGroups</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Returns a collection of all of the face groups in the body.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshBody_isClosed.htm">isClosed</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Check to see if the mesh is closed - i.e. contains no edges with only one triangle. Returns true if the mesh is closed, false if not.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshBody_isLightBulbOn.htm">isLightBulbOn</a></td>
+        <td class="api-list">Is the light bulb (as displayed in the browser) on. A mesh body will only be visible if the light bulb is switched on. However, the light bulb can be on and the mesh body is still invisible if the light bulb for all bodies or the owning component is off.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshBody_isOriented.htm">isOriented</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Check to see if the mesh is oriented - i.e. every edge has at most two triangles, and those triangles have consistent orientations. Returns true if the mesh is oriented, false if not.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshBody_isSelectable.htm">isSelectable</a></td>
+        <td class="api-list">Gets and sets if the mesh body is selectable in the graphics window.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshBody_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshBody_isVisible.htm">isVisible</a></td>
+        <td class="api-list">Gets if the mesh body point is visible.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshBody_material.htm">material</a></td>
+        <td class="api-list">Gets and sets the physical material assigned to this mesh body.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshBody_mesh.htm">mesh</a></td>
+        <td class="api-list">Returns the original mesh data that was imported. This can include triangles, quads, and polygons.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshBody_name.htm">name</a></td>
+        <td class="api-list">Gets and sets the name of the mesh body as displayed in the browser.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshBody_nativeObject.htm">nativeObject</a></td>
+        <td class="api-list">The NativeObject is the object outside the context of an assembly and in the context of it's parent component. Returns null in the case where this object is not in the context of an assembly but is already the native object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshBody_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshBody_opacity.htm">opacity</a></td>
+        <td class="api-list">Gets and sets the opacity override assigned to this body. A value of 1.0 specifies that is it completely opaque and a value of 0.0 specifies that is it completely transparent.<br/><br/> This value is not necessarily related to what the user sees because the opacity is inherited. For example, if you this body is in a component and that component's opacity is set to something other than 1.0, the body will also be shown as slightly transparent even though the opacity property for the body will return 1.0. Because the component that contains the body can be referenced as an occurrence in other components and they can have different opacity settings, it's possible that different instances of the same body can display using different opacity levels. To get the opacity that it is being displayed with use the MeshBody.visibleOpacity property.<br/><br/> This is the API equivalent of the "Opacity Control" command available for the body in the browser.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshBody_orientedMinimumBoundingBox.htm">orientedMinimumBoundingBox</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Returns an oriented bounding box of the body that is best oriented to tightly fit the body.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshBody_parentComponent.htm">parentComponent</a></td>
+        <td class="api-list">Returns the parent Component.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshBody_textureMapControl.htm">textureMapControl</a></td>
+        <td class="api-list">Returns the TextureMapControl object associated with this body when there is an appearance assigned to the body that has a texture associated with it. If there isn't a texture, this property will return null. If there is a texture, you can use the returned object to query and modify how the texture is applied to the body.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshBody_visibleOpacity.htm">visibleOpacity</a></td>
+        <td class="api-list">The user can set an override opacity for components and bodies these opacity overrides combine if children and parent components have overrides. This property returns the actual opacity that is being used to render the body. To set the opacity use the opacity property of the MeshBody object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MeshBody_volume.htm">volume</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Returns the volume in cm ^ 3. Returns 0 in the case the mesh body is not closed.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="BaseFeature_meshBodies.htm">BaseFeature.meshBodies</a>, <a href="FaceGroup_parentBody.htm">FaceGroup.parentBody</a>, <a href="MeshBodies_addByTriangleMeshData.htm">MeshBodies.addByTriangleMeshData</a>, <a href="MeshBodies_item.htm">MeshBodies.item</a>, <a href="MeshBody_copyToComponent.htm">MeshBody.copyToComponent</a>, <a href="MeshBody_createComponent.htm">MeshBody.createComponent</a>, <a href="MeshBody_createForAssemblyContext.htm">MeshBody.createForAssemblyContext</a>, <a href="MeshBody_moveToComponent.htm">MeshBody.moveToComponent</a>, <a href="MeshBody_nativeObject.htm">MeshBody.nativeObject</a>, <a href="MeshBodyList_item.htm">MeshBodyList.item</a>, <a href="MeshCombineFeature_targetBody.htm">MeshCombineFeature.targetBody</a>, <a href="MeshCombineFeature_toolBodies.htm">MeshCombineFeature.toolBodies</a>, <a href="MeshCombineFeatureInput_targetBody.htm">MeshCombineFeatureInput.targetBody</a>, <a href="MeshCombineFeatureInput_toolBodies.htm">MeshCombineFeatureInput.toolBodies</a>, <a href="MeshConvertFeature_inputBodies.htm">MeshConvertFeature.inputBodies</a>, <a href="MeshConvertFeatureInput_inputBodies.htm">MeshConvertFeatureInput.inputBodies</a>, <a href="VolumetricModelToMeshFeature_meshBody.htm">VolumetricModelToMeshFeature.meshBody</a><h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(MeshBody%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,136 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/JointOrigins_add.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="10/9/2015">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="JointOrigins_add">
+    <meta name="description" content="JointOrigins.add Method">
+    <meta name="topicid" content="GUID-BC7F273E-EFBF-45CE-A70D-A3DFE3A2E640">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>JointOrigins.add Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">JointOrigins.add Method</h1>
+
+          Parent Object: <a href="JointOrigins.htm">JointOrigins</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Components/JointOrigins.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Create a new joint origin.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"jointOrigins_var" is a variable referencing a <a href="JointOrigins.htm">JointOrigins</a> object.<code><pre class="api-code">returnValue = jointOrigins_var.<b>add</b>(input)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"jointOrigins_var" is a variable referencing a <a href="JointOrigins.htm">JointOrigins</a> object.<br /><br /><code><pre class="api-code">#include &lt;Fusion/Components/JointOrigins.h&gt;<br /><br />returnValue = jointOrigins_var-&gt;<b>add</b>(input);<br /></pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;"><a href="JointOrigin.htm">JointOrigin</a></td>
+        <td class="api-list">Returns a JointOrigin object if successfully created and null if it fails.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">input</td>
+        <td class="api-list"><a href="JointOriginInput.htm">JointOriginInput</a></td>
+        <td class="api-list">A JointOriginInput object that full defines all of the information needed to create a joint origin. You create a JointOriginInput by using the createInput method of the JointOrigins object.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="JointOrigin2Planes_Sample.htm">Joint Origin Between Two Faces Sample</a></td>
+        <td class="api-list">Demonstrates creating a new Joint Origin between two planes.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="JointOriginSample_Sample.htm">Joint Origin Sample</a></td>
+        <td class="api-list">Demonstrates creating a new Joint Origin.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version September 2015<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(JointOrigins.add%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

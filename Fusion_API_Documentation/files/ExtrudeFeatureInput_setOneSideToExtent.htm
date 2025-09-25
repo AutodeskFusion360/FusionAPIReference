@@ -1,0 +1,127 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/ExtrudeFeatureInput_setOneSideToExtent.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="30/06/2022">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="ExtrudeFeatureInput_setOneSideToExtent">
+    <meta name="description" content="ExtrudeFeatureInput.setOneSideToExtent Method">
+    <meta name="topicid" content="GUID-92D3E883-F56C-4D13-B804-BF4E8DB8B072">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>ExtrudeFeatureInput.setOneSideToExtent Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">ExtrudeFeatureInput.setOneSideToExtent Method</h1>
+
+          Parent Object: <a href="ExtrudeFeatureInput.htm">ExtrudeFeatureInput</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Features/ExtrudeFeatureInput.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api"><mark>This function is retired. See more information in the 'Remarks' section below.</mark><br/><br/>Sets the extrusion Direction option to 'One Side' and the Extents option to 'To' (a specified face)</p>
+    <h2 class="api">
+            Remarks
+          </h2>This method has been retired and is replaced with the new setOneSideExtent and passing in a ToEntityExtentDefinition. This method continues to work to allow the API to remain backward compatible, but it is no longer officially supported.<h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"extrudeFeatureInput_var" is a variable referencing an <a href="ExtrudeFeatureInput.htm">ExtrudeFeatureInput</a> object.<code><pre class="api-code"><span style="color:blue"># Uses no optional arguments.</span><br />returnValue = extrudeFeatureInput_var.<b>setOneSideToExtent</b>(toEntity, matchShape)<br /><br /><span style="color:blue"># Uses optional arguments.</span><br />returnValue = extrudeFeatureInput_var.<b>setOneSideToExtent</b>(toEntity, matchShape, directionHint)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"extrudeFeatureInput_var" is a variable referencing an <a href="ExtrudeFeatureInput.htm">ExtrudeFeatureInput</a> object.<br /><br /><code><pre class="api-code">#include &lt;Fusion/Features/ExtrudeFeatureInput.h&gt;<br /><br /><span style="color:blue">// Uses no optional arguments.</span><br />returnValue = extrudeFeatureInput_var-&gt;<b>setOneSideToExtent</b>(toEntity, matchShape);<br /><br /><span style="color:blue">// Uses optional arguments.</span><br />returnValue = extrudeFeatureInput_var-&gt;<b>setOneSideToExtent</b>(toEntity, matchShape, directionHint);</pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;">boolean</td>
+        <td class="api-list">Returns true if successful.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">toEntity</td>
+        <td class="api-list"><a href="Base.htm">Base</a></td>
+        <td class="api-list">The entity that defines the "to" extent. The valid types of entities can vary depending on the type of feature this is being used with. For an extrude it can be a BRepBody, BRepFace, BRepVertex, ConstructionPlane, or ConstructionPoint.</td>
+      </tr>
+      <tr>
+        <td class="api-list">matchShape</td>
+        <td class="api-list">boolean</td>
+        <td class="api-list">If the matchShape argument is 'true', the toEntity is extended to fully intersect the extrusion.</td>
+      </tr>
+      <tr>
+        <td class="api-list">directionHint</td>
+        <td class="api-list"><a href="Vector3D.htm">Vector3D</a></td>
+        <td class="api-list">Specifies the direction of the extrusion. This is only used in the case where there are two possible solutions and the extrusion can hit the toEntity in either direction. An example is if the profile of the extrusion is within a hole. The extrusion will intersect the cylinder of the hole in either direction.<br/><br/> Typically there is only a single solution and the direction is determined automatically.<br /><br /> This is an optional argument whose default value is null.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2014<br>Retired in version November 2016<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(ExtrudeFeatureInput.setOneSideToExtent%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

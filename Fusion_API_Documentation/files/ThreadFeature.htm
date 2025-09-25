@@ -1,0 +1,227 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/ThreadFeature.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="22/12/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="ThreadFeature">
+    <meta name="description" content="ThreadFeature Object">
+    <meta name="topicid" content="GUID-562e38be-3fb6-4d4b-9832-5a024fa069fc">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>ThreadFeature Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">ThreadFeature Object
+			</h1>
+              Derived from: <a href="Feature.htm">Feature</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Features/ThreadFeature.h&gt;<h2 class="api">
+          Description
+        </h2>Object that represents an existing thread feature in a design. The creation of a tapped hole also results in the creation of a thread feature. There are some limitation when the thread feature is associated with a hole, which are described in the documentation for the property or method where the limitation exists.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadFeature_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadFeature_createForAssemblyContext.htm">createForAssemblyContext</a></td>
+        <td class="api-list">Creates or returns a proxy for the native object - i.e. a new object that represents this object but adds the assembly context defined by the input occurrence.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadFeature_deleteMe.htm">deleteMe</a></td>
+        <td class="api-list">Deletes the feature. This works for both parametric and non-parametric features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadFeature_dissolve.htm">dissolve</a></td>
+        <td class="api-list">Dissolves the feature so that the feature information is lost and only the B-Rep geometry defined by the feature remains. This is only valid for non-parametric features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadFeature_setThreadOffsetLength.htm">setThreadOffsetLength</a></td>
+        <td class="api-list">Sets the thread offset, length and location. Calling this method will cause the isFullLength property to be set to false.<br/><br/> To use this method, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadFeature_assemblyContext.htm">assemblyContext</a></td>
+        <td class="api-list">Returns the assembly occurrence (i.e. the occurrence) of this object in an assembly. This is only valid in the case where this is acting as a proxy in an assembly. Returns null in the case where the object is not in the context of an assembly but is already the native object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadFeature_attributes.htm">attributes</a></td>
+        <td class="api-list">Returns the collection of attributes associated with this face.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadFeature_baseFeature.htm">baseFeature</a></td>
+        <td class="api-list">If this feature is associated with a base feature, this property will return that base feature. If it's not associated with a base feature, this property will return null.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadFeature_bodies.htm">bodies</a></td>
+        <td class="api-list">Returns the bodies that were modified or created by this feature. This property works for both parametric and non-parametric features.<br/><br/> For a BaseFeature, this property has two different behaviors depending on if the BaseFeature is active for edit or not. When the base feature is active, this property returns the bodies owned by the base feature or the source bodies. When the base feature is not active, this property returns the result bodies.<br/><br/> When a body is added to a base feature, that body is owned by the base feature and is only seen in the UI when the base feature is active. This body is referred to as a "source body". Fusion creates a parametric copy of the body when you exit the base feature. This copy is referred to as the "result body," and it is used for subsequent modeling operations.<br/><br/> You can map between the source and result bodies by using their position within the bodies returned. To get a valid list of result bodies, you should roll the timeline to immediately after the base feature node in the timeline. Otherwise, subsequent operations could have done something to cause one or more bodies to no longer be available.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadFeature_entityToken.htm">entityToken</a></td>
+        <td class="api-list">Returns a token for the Feature object. This can be saved and used at a later time with the Design.findEntityByToken method to get back the same feature.<br/><br/> When using entity tokens it's important to understand that the token string returned for a specific entity can be different over time. However, even if you have two different token strings that were obtained from the same entity, when you use findEntityByToken they will both return the same entity. Because of that you should never compare entity tokens as way to determine what the token represents. Instead, you need to use the findEntityByToken method to get the two entities identified by the tokens and then compare them.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadFeature_errorOrWarningMessage.htm">errorOrWarningMessage</a></td>
+        <td class="api-list">Returns the error or warning message in the case where the healthState property returns either WarningFeatureHealthState or ErrorFeatureHealthState. Otherwise this property returns an empty string.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadFeature_faces.htm">faces</a></td>
+        <td class="api-list">Returns the faces that were created by this feature. This works for both parametric and non-parametric features.<br/><br/> Depending on the modifications made to the body after the feature was created, this may not return all of the faces. For example, when a component is created from a body, the original body and its faces no longer exist, so this won't return any faces. However, you can roll the timeline to immediately after the feature, and all the original faces will be available.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadFeature_healthState.htm">healthState</a></td>
+        <td class="api-list">Returns the current health state of the feature.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadFeature_hole.htm">hole</a></td>
+        <td class="api-list">If this thread feature is was created as the result of creating a tapped hole, this property will return the associated hole feature. If this is a standard thread feature, this property will return null.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadFeature_inputCylindricalFace.htm">inputCylindricalFace</a></td>
+        <td class="api-list">Gets and sets the threaded face. In the case where there are multiple faces, only the first one is returned. Setting this results in a thread being applied to only a single face. It is recommended that you use the inputCylindricalfaces property in order to have full access to the collection of faces to be threaded.<br/><br/> To set this property, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)<br/><br/> If the thread feature is associated with a hole (the hole property is not null), this property will always return null and will fail if set.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadFeature_inputCylindricalFaces.htm">inputCylindricalFaces</a></td>
+        <td class="api-list">Gets and sets the cylindrical input faces.<br/><br/> To use this property, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)<br/><br/> If the thread feature is associated with a hole (the hole property is not null), this property will always return null and will fail if set.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadFeature_isFullLength.htm">isFullLength</a></td>
+        <td class="api-list">Gets and sets if this thread is the full length of the cylinder. It only can be set to true.<br/><br/> To set this property, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadFeature_isModeled.htm">isModeled</a></td>
+        <td class="api-list">Gets and sets if the thread is physical or cosmetic thread. A value of true indicates a physical thread. It defaults to false.<br/><br/> To set this property, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadFeature_isParametric.htm">isParametric</a></td>
+        <td class="api-list">Indicates if this feature is parametric or not.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadFeature_isRightHanded.htm">isRightHanded</a></td>
+        <td class="api-list">Gets and sets if the thread is right or left-handed thread. A value of true indicates a right-handed thread. It defaults to true.<br/><br/> To set this property, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadFeature_isSuppressed.htm">isSuppressed</a></td>
+        <td class="api-list">Gets and sets if this feature is suppressed. This is only valid for parametric features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadFeature_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadFeature_linkedFeatures.htm">linkedFeatures</a></td>
+        <td class="api-list">Returns the set of features that are linked to this feature. The set of linked features are all of the features that were created in various components as the result of a single feature being created in the user interface.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadFeature_name.htm">name</a></td>
+        <td class="api-list">Returns the name of the feature as seen in the browser (non-parametric) or in the timeline (parametric).</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadFeature_nativeObject.htm">nativeObject</a></td>
+        <td class="api-list">The NativeObject is the object outside the context of an assembly and in the context of its parent component. Returns null in the case where this object is not in the context of an assembly but is already the native object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadFeature_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadFeature_parentComponent.htm">parentComponent</a></td>
+        <td class="api-list">Returns the parent component that owns this feature.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadFeature_threadInfo.htm">threadInfo</a></td>
+        <td class="api-list">Gets and sets the thread data. Also can edit the thread through the properties and methods on the ThreadInfo object.<br/><br/> To set this property, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadFeature_threadLength.htm">threadLength</a></td>
+        <td class="api-list">Gets the parameter that controls the depth of the thread. Even though the parameter for the thread depth is always created and accessible through this property, it is only used in the case where the isFullLength property is false. Returns nothing in the case where the feature is non-parametric.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadFeature_threadLocation.htm">threadLocation</a></td>
+        <td class="api-list">Gets and sets where the thread length is measured from. This property is only used in the case where the isFullLength property is false.<br/><br/> To set this property, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)<br/><br/> If the thread feature is associated with a hole (the hole property is not null), this property will always return null and will always return LowEndThreadLocation and will fail if set.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadFeature_threadOffset.htm">threadOffset</a></td>
+        <td class="api-list">Gets the parameter that controls the offset value of the thread. The offset is the distance along the axis of the cylinder from the edge to the start of the thread, it is only used in the case where the isFullLength property is false. Returns nothing in the case where the feature is non-parametric.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadFeature_timelineObject.htm">timelineObject</a></td>
+        <td class="api-list">Returns the timeline object associated with this feature.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="HoleFeature_thread.htm">HoleFeature.thread</a>, <a href="RecognizedHoleSegment_threadFeatures.htm">RecognizedHoleSegment.threadFeatures</a>, <a href="ThreadFeature_createForAssemblyContext.htm">ThreadFeature.createForAssemblyContext</a>, <a href="ThreadFeature_nativeObject.htm">ThreadFeature.nativeObject</a>, <a href="ThreadFeatures_add.htm">ThreadFeatures.add</a>, <a href="ThreadFeatures_item.htm">ThreadFeatures.item</a>, <a href="ThreadFeatures_itemByName.htm">ThreadFeatures.itemByName</a><h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadFeatureSample_Sample.htm">Thread Feature API Sample</a></td>
+        <td class="api-list">Demonstrates creating a new thread feature.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version January 2015<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(ThreadFeature%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,311 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/STLExport.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="STLExport_Sample">
+    <meta name="description" content="STLExport API Sample Sample">
+    <meta name="topicid" content="GUID-ECA8A484-7EDD-427D-B1E3-BD59A646F4FA">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>STLExport API Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">STLExport API Sample</h1>
+    <h2 class="api">
+          Description
+        </h2>Demonstrates how to export f3d to STL format.<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">import adsk.core, adsk.fusion, traceback
+import os.path
+  
+def run(context):
+    ui = None
+    try:
+        app = adsk.core.Application.get()
+        ui  = app.userInterface
+        
+        <span style="color:blue"># get active design        </span>
+        product = app.activeProduct
+        design = adsk.fusion.Design.cast(product)
+        
+        <span style="color:blue"># get root component in this design</span>
+        rootComp = design.rootComponent
+        
+        <span style="color:blue"># create a single exportManager instance</span>
+        exportMgr = design.exportManager
+        
+        <span style="color:blue"># export the root component to printer utility</span>
+        stlRootOptions = exportMgr.createSTLExportOptions(rootComp)
+
+        <span style="color:blue"># get all available print utilities</span>
+        printUtils = stlRootOptions.availablePrintUtilities
+
+        <span style="color:blue"># export the root component to the print utility, instead of a specified file            </span>
+        for printUtil in printUtils:
+            stlRootOptions.sendToPrintUtility = True
+            stlRootOptions.printUtility = printUtil
+
+            exportMgr.execute(stlRootOptions)
+            
+        <span style="color:blue"># get the script location</span>
+        scriptDir = os.path.dirname(os.path.realpath(__file__))  
+        
+        <span style="color:blue"># export the occurrence one by one in the root component to a specified file</span>
+        allOccu = rootComp.allOccurrences
+        for occ in allOccu:
+            fileName = scriptDir + "/" + occ.component.name
+            
+            <span style="color:blue"># create stl exportOptions</span>
+            stlExportOptions = exportMgr.createSTLExportOptions(occ, fileName)
+            stlExportOptions.sendToPrintUtility = False
+            
+            exportMgr.execute(stlExportOptions)
+
+        <span style="color:blue"># export the body one by one in the design to a specified file</span>
+        allBodies = rootComp.bRepBodies
+        for body in allBodies:
+            fileName = scriptDir + "/" + body.parentComponent.name + '-' + body.name
+            
+            <span style="color:blue"># create stl exportOptions</span>
+            stlExportOptions = exportMgr.createSTLExportOptions(body, fileName)
+            stlExportOptions.sendToPrintUtility = False
+            
+            exportMgr.execute(stlExportOptions)
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code">#include &lt;Core/Application/Application.h&gt;
+#include &lt;Core/UserInterface/UserInterface.h&gt;
+#include &lt;Core/Application/Document.h&gt;
+
+#include &lt;Fusion/Fusion/Design.h&gt;
+#include &lt;Fusion/Fusion/ExportManager.h&gt;
+#include &lt;Fusion/Fusion/ExportOptions.h&gt;
+#include &lt;Fusion/Fusion/STLExportOptions.h&gt;
+#include &lt;Fusion/Components/Components.h&gt;
+#include &lt;Fusion/Components/Component.h&gt;
+#include &lt;Fusion/Components/OccurrenceList.h&gt;
+#include &lt;Fusion/Components/Occurrence.h&gt;
+#include &lt;Fusion/BRep/BRepBodies.h&gt;
+#include &lt;Fusion/BRep/BRepBody.h&gt;
+
+
+using namespace adsk::core;
+using namespace adsk::fusion;
+
+Ptr&lt;UserInterface&gt; ui;
+
+std::string getDllPath();
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    Ptr&lt;Application&gt; app = Application::get();
+    if (!app)
+        return false;
+
+    ui = app-&gt;userInterface();
+    if (!ui)
+        return false;
+
+
+    <span style="color:blue">// get active design</span>
+    Ptr&lt;Product&gt; product = app-&gt;activeProduct();
+    if (!product)
+        return false;
+
+    Ptr&lt;Design&gt; design = product;
+    if (!design)
+        return false;
+
+    Ptr&lt;Component&gt; rootComp = design-&gt;rootComponent();
+    if (!rootComp)
+        return false;
+
+    <span style="color:blue">// create a single exportManager instance</span>
+    Ptr&lt;ExportManager&gt; exportMgr = design-&gt;exportManager();
+    if (!exportMgr)
+        return false;
+
+    <span style="color:blue">// export the root component to printer utility</span>
+    Ptr&lt;STLExportOptions&gt; stlRootOptions = exportMgr-&gt;createSTLExportOptions(rootComp);
+    if (!stlRootOptions)
+        return false;
+
+    <span style="color:blue">// get all available print utilities</span>
+    std::vector&lt;std::string&gt; printUtils = stlRootOptions-&gt;availablePrintUtilities();
+
+    <span style="color:blue">// export the root component to the print utility, instead of a specified file</span>
+    size_t count = printUtils.size();
+    for (size_t i = 0; i &lt; count; i++)
+    {
+        std::string printUtil = printUtils[i];
+        stlRootOptions-&gt;sendToPrintUtility(true);
+        stlRootOptions-&gt;printUtility(printUtil);
+
+        exportMgr-&gt;execute(stlRootOptions);
+    }
+
+    <span style="color:blue">// export the occurrence one by one in the root component to a specified file</span>
+    Ptr&lt;OccurrenceList&gt; occurs = rootComp-&gt;allOccurrences();
+    if (!occurs)
+        return false;
+    size_t occrCount = occurs-&gt;count();
+    for (size_t j = 0; j &lt; occrCount; j++)
+    {
+        Ptr&lt;Occurrence&gt; occur = occurs-&gt;item(j);
+        if (!occur)
+            continue;
+
+        Ptr&lt;Component&gt; comp = occur-&gt;component();
+        if (!comp)
+            continue;
+
+        std::string compName = comp-&gt;name();
+        std::string fileName = getDllPath() + "/" + compName;
+
+        <span style="color:blue">// create stl exportOptions</span>
+        Ptr&lt;STLExportOptions&gt; stlExportOptions = exportMgr-&gt;createSTLExportOptions(occur, fileName);
+        stlExportOptions-&gt;sendToPrintUtility(false);
+
+        exportMgr-&gt;execute(stlExportOptions);
+    }
+
+    <span style="color:blue">// export the body one by one in the design to a specified file</span>
+    Ptr&lt;BRepBodies&gt; bRepBodies = rootComp-&gt;bRepBodies();
+    if (!bRepBodies)
+        return false;
+    size_t bodyCount = bRepBodies-&gt;count();
+    for (size_t k = 0; k &lt; bodyCount; k++)
+    {
+        Ptr&lt;BRepBody&gt; body = bRepBodies-&gt;item(k);
+        if (!body)
+            continue;
+
+        Ptr&lt;Component&gt; comp = body-&gt;parentComponent();
+        if (!comp)
+            continue;
+
+        std::string compName = comp-&gt;name();
+        std::string bodyName = body-&gt;name();
+        std::string fileName = getDllPath() + "/" + compName + "-" + bodyName;
+
+        <span style="color:blue">// create stl exportOptions</span>
+        Ptr&lt;STLExportOptions&gt; stlExportOptions = exportMgr-&gt;createSTLExportOptions(body, fileName);
+        if (!stlExportOptions)
+            continue;
+
+        stlExportOptions-&gt;sendToPrintUtility(false);
+
+        exportMgr-&gt;execute(stlExportOptions);
+    }
+
+
+    return true;
+}
+
+std::string getDllPath()
+{
+#if defined(_WINDOWS) || defined(_WIN32) || defined(_WIN64)
+    HMODULE hModule = NULL;
+    if (!GetModuleHandleExA(
+            GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,
+            (LPCSTR)&getDllPath,
+            &hModule))
+        return "";
+
+    char winTempPath[2048];
+    ::GetModuleFileNameA(hModule, winTempPath, 2048);
+
+    std::string strPath = winTempPath;
+    size_t stPos = strPath.rfind('\\');
+    return strPath.substr(0, stPos);
+#else
+    Dl_info info;
+    dladdr((void*)getDllPath, &info);
+
+    std::string strPath = info.dli_fname;
+    int stPos = (int)strPath.rfind('/');
+    if (stPos != -1)
+        return strPath.substr(0, stPos);
+    else
+        return "";
+    ;
+#endif
+}</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(STLExport%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

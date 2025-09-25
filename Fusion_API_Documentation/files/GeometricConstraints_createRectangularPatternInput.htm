@@ -1,0 +1,120 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/GeometricConstraints_createRectangularPatternInput.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="30/08/2022">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="GeometricConstraints_createRectangularPatternInput">
+    <meta name="description" content="GeometricConstraints.createRectangularPatternInput Method">
+    <meta name="topicid" content="GUID-A9C35D14-1CFC-44F3-B994-BA4443515CF6">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>GeometricConstraints.createRectangularPatternInput Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">GeometricConstraints.createRectangularPatternInput Method</h1>
+
+          Parent Object: <a href="GeometricConstraints.htm">GeometricConstraints</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Sketch/GeometricConstraints.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Creates a new RectangularPatternConstraintInput object. Use this object to define the various settings associated with a rectangular pattern in a sketch. Once the pattern is defined you can call the addRectangularPattern method and pass in the input object to create the sketch rectangular pattern.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"geometricConstraints_var" is a variable referencing a <a href="GeometricConstraints.htm">GeometricConstraints</a> object.<code><pre class="api-code">returnValue = geometricConstraints_var.<b>createRectangularPatternInput</b>(entities, distanceType)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"geometricConstraints_var" is a variable referencing a <a href="GeometricConstraints.htm">GeometricConstraints</a> object.<br /><br /><code><pre class="api-code">#include &lt;Fusion/Sketch/GeometricConstraints.h&gt;<br /><br />returnValue = geometricConstraints_var-&gt;<b>createRectangularPatternInput</b>(entities, distanceType);<br /></pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;"><a href="RectangularPatternConstraintInput.htm">RectangularPatternConstraintInput</a></td>
+        <td class="api-list">Returns the created RectangularPatternsConstraintInput object or null in the case of failure.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">entities</td>
+        <td class="api-list">SketchEntity[]</td>
+        <td class="api-list">An array of sketch entities to pattern. These can be sketch points and curves.</td>
+      </tr>
+      <tr>
+        <td class="api-list">distanceType</td>
+        <td class="api-list"><a href="PatternDistanceType.htm">PatternDistanceType</a></td>
+        <td class="api-list">Specifies if the distances defined for the pattern define the overall size of the pattern or the distance between the rows and columns.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version September 2022<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(GeometricConstraints.createRectangularPatternInput%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

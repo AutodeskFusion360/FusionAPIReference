@@ -1,0 +1,292 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/CustomEventSample.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="CustomEventSample_Sample">
+    <meta name="description" content="Custom Event Sample Sample">
+    <meta name="topicid" content="GUID-85edd118-c2a4-11e6-b401-3417ebc87622">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Custom Event Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Custom Event Sample</h1>
+    <h2 class="api">
+          Description
+        </h2>Demonstrates the ability to call into the main thread from a worker thread. This sample is an <b>add-in</b>. To use it, use the <b>Scripts and Add-Ins</b> command to create a new add-in. Delete all of the code in the newly created add-in and replace it with the code below. Have a model open that has a parameter named "Length". Load the add-in. The add-in will change the value of the parameter every two seconds using a random value between 1 and 10.<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#C++">C++</a></li>
+        <li><a href="#Python">Python</a></li>
+      </ul>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code">#include &lt;Core/Utils.h&gt;
+#include &lt;Core/Application/Application.h&gt;
+#include &lt;Core/Application/Product.h&gt;
+#include &lt;Core/Application/CustomEvents.h&gt;
+#include &lt;Core/UserInterface/UserInterface.h&gt;
+#include &lt;Core/UserInterface/CommandDefinitions.h&gt;
+#include &lt;Core/UserInterface/CommandDefinition.h&gt;
+#include &lt;Fusion/Fusion/Design.h&gt;
+#include &lt;Fusion/Components/Component.h&gt;
+#include &lt;Fusion/Fusion/ModelParameters.h&gt;
+#include &lt;Fusion/Fusion/ModelParameter.h&gt;
+
+#include &lt;thread&gt;
+#include &lt;sstream&gt;
+#include &lt;chrono&gt;
+#include &lt;random&gt;
+
+using namespace adsk::core;
+using namespace adsk::fusion;
+
+const std::string myCustomEvent = "MyCustomEventId1";
+
+Ptr&lt;Application&gt; app;
+Ptr&lt;UserInterface&gt; ui;
+Ptr&lt;CustomEvent&gt; customEvent;
+bool stopFlag;
+std::default_random_engine generator;
+std::uniform_int_distribution&lt;int&gt; distribution(1000, 10000);
+
+class ThreadEventHandler : public CustomEventHandler
+{
+  public:
+    void notify(const Ptr&lt;CustomEventArgs&gt;& eventArgs) override
+    {
+        if (eventArgs)
+        {
+            <span style="color:blue">// Make sure a command isn't running before changes are made.</span>
+            if (ui-&gt;activeCommand() != "SelectCommand")
+            {
+                Ptr&lt;CommandDefinitions&gt; cmdDefs = ui-&gt;commandDefinitions();
+                cmdDefs-&gt;itemById("SelectCommand")-&gt;execute();
+            }
+
+            Ptr&lt;Design&gt; design = app-&gt;activeProduct();
+            if (!design)
+                return;
+
+            Ptr&lt;Component&gt; rootComp = design-&gt;rootComponent();
+            if (!rootComp)
+                return;
+
+            Ptr&lt;ModelParameters&gt; params = rootComp-&gt;modelParameters();
+            if (!params)
+                return;
+
+            Ptr&lt;ModelParameter&gt; param = params-&gt;itemByName("Length");
+            if (!param)
+                return;
+
+            <span style="color:blue">// Get the value that was passed in from other thread and set the paraemter value.</span>
+            std::string info = eventArgs-&gt;additionalInfo();
+            param-&gt;value(std::stod(info));
+        }
+    }
+} onCustomEvent_;
+
+void myThreadRun()
+{
+    while (!stopFlag)
+    {
+        double randVal = distribution(generator);
+        std::string additionalInfo = std::to_string(randVal / 1000.0);
+        app-&gt;fireCustomEvent(myCustomEvent, additionalInfo);
+
+        std::this_thread::sleep_for(std::chrono::seconds(2));
+    }
+}
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    app = Application::get();
+    if (!app)
+        return false;
+
+    ui = app-&gt;userInterface();
+    if (!ui)
+        return false;
+
+    customEvent = app-&gt;registerCustomEvent(myCustomEvent);
+    if (!customEvent)
+        return false;
+    customEvent-&gt;add(&onCustomEvent_);
+
+    stopFlag = false;
+    std::thread myThread(myThreadRun);
+    myThread.detach();
+
+    return true;
+}
+
+extern "C" XI_EXPORT bool stop(const char* context)
+{
+    if (ui)
+    {
+        customEvent-&gt;remove(&onCustomEvent_);
+        stopFlag = true;
+        app-&gt;unregisterCustomEvent(myCustomEvent);
+        ui-&gt;messageBox("Stop addin");
+        ui = nullptr;
+    }
+
+    return true;
+}</pre>
+      </div>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code"><span style="color:blue">#Author-</span>
+<span style="color:blue">#Description-</span>
+
+import adsk.core, adsk.fusion, adsk.cam, traceback
+import threading, random, json
+
+app = None
+ui = adsk.core.UserInterface.cast(None)
+handlers = []
+stopFlag = None
+myCustomEvent = 'MyCustomEventId'
+customEvent = None
+
+
+<span style="color:blue"># The event handler that responds to the custom event being fired.</span>
+class ThreadEventHandler(adsk.core.CustomEventHandler):
+    def __init__(self):
+        super().__init__()
+    def notify(self, args):
+        try:
+            <span style="color:blue"># Make sure a command isn't running before changes are made.</span>
+            if ui.activeCommand != 'SelectCommand':
+                ui.commandDefinitions.itemById('SelectCommand').execute()
+                            
+            <span style="color:blue"># Get the value from the JSON data passed through the event.</span>
+            eventArgs = json.loads(args.additionalInfo)
+            newValue = float(eventArgs['Value'])
+            
+            <span style="color:blue"># Set the parameter value.</span>
+            design = adsk.fusion.Design.cast(app.activeProduct)
+            param = design.rootComponent.modelParameters.itemByName('Length')
+            param.value = newValue
+        except:
+            if ui:
+                ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
+            adsk.autoTerminate(False)
+
+
+<span style="color:blue"># The class for the new thread.</span>
+class MyThread(threading.Thread):
+    def __init__(self, event):
+        threading.Thread.__init__(self)
+        self.stopped = event
+
+    def run(self):
+        <span style="color:blue"># Every five seconds fire a custom event, passing a random number.</span>
+        while not self.stopped.wait(2):
+            args = {'Value': random.randint(1000, 10000)/1000}
+            app.fireCustomEvent(myCustomEvent, json.dumps(args)) 
+        
+        
+def run(context):
+    global ui
+    global app
+    try:
+        app = adsk.core.Application.get()
+        ui  = app.userInterface
+        
+        <span style="color:blue"># Register the custom event and connect the handler.</span>
+        global customEvent
+        customEvent = app.registerCustomEvent(myCustomEvent)
+        onThreadEvent = ThreadEventHandler()
+        customEvent.add(onThreadEvent)
+        handlers.append(onThreadEvent)
+
+        <span style="color:blue"># Create a new thread for the other processing.        </span>
+        global stopFlag        
+        stopFlag = threading.Event()
+        myThread = MyThread(stopFlag)
+        myThread.start()
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
+
+
+def stop(context):
+    try:
+        if handlers.count:
+            customEvent.remove(handlers[0])
+        stopFlag.set() 
+        app.unregisterCustomEvent(myCustomEvent)
+        ui.messageBox('Stop addin')
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(CustomEventSample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

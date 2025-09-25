@@ -1,0 +1,155 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/ThreadDataQuery.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="22/12/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="ThreadDataQuery">
+    <meta name="description" content="ThreadDataQuery Object">
+    <meta name="topicid" content="GUID-ecff3130-855e-4a41-9543-036ec5faab94">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>ThreadDataQuery Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">ThreadDataQuery Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Features/ThreadDataQuery.h&gt;<h2 class="api">
+          Description
+        </h2>This object provides methods to query the thread data contained in the XML files in ThreadData folder within the Fusion install folder. You can use the queried values to create a ThreadInfo object that is then used to create a thread feature.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadDataQuery_allClasses.htm">allClasses</a></td>
+        <td class="api-list">Returns and array/list of all the available classes for a thread type of a given thread designation.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadDataQuery_allDesignations.htm">allDesignations</a></td>
+        <td class="api-list">returns an array/list of all the available thread designations for a thread type of a given size. Valid thread types and sizes and be obtained by using the allThreadTypes and allSizes functions.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadDataQuery_allSizes.htm">allSizes</a></td>
+        <td class="api-list">Returns an array/list of all the available thread sizes for a given thread type. You can use the allThreadTypes property to get the available thread types.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadDataQuery_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadDataQuery_create.htm">create</a></td>
+        <td class="api-list">Static method to create a new ThreadDataQuery object. The ThreadDataQuery object is a utility object that provides methods to query for the valid thread definitions defined in Fusion. This object provides similar functionality as the Thread and Hole command dialogs to find valid thread types, designations and classes which can be used to create thread and tapped hole features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadDataQuery_recommendThreadData.htm">recommendThreadData</a></td>
+        <td class="api-list">Method that gets the recommended thread data for a given cylinder diameter. This method is only valid for straight threads and will fail for tapered threads.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadDataQuery_threadTypeCustomName.htm">threadTypeCustomName</a></td>
+        <td class="api-list">Method that returns the custom name for a given thread type. The custom name is the localized name of the thread type using the current language specified for Fusion.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadDataQuery_threadTypeUnit.htm">threadTypeUnit</a></td>
+        <td class="api-list">Method that returns the unit for a given thread type.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadDataQuery_allThreadTypes.htm">allThreadTypes</a></td>
+        <td class="api-list">This method returns an array of all the available thread types (families). The type names are always English. This English name should be used in the other methods that take the type as an input argument. If you need to display the type name to the user, you can use the threadTypeCustomName method To get the localized name.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadDataQuery_defaultInchThreadType.htm">defaultInchThreadType</a></td>
+        <td class="api-list">Gets the default thread type for inch threads.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadDataQuery_defaultMetricThreadType.htm">defaultMetricThreadType</a></td>
+        <td class="api-list">Gets the default thread type for metric threads.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadDataQuery_isTapered.htm">isTapered</a></td>
+        <td class="api-list">Returns if this ThreadDataQuery was created to query for standard or tapered threads.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadDataQuery_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadDataQuery_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="ThreadDataQuery_create.htm">ThreadDataQuery.create</a>, <a href="ThreadFeatures_threadDataQuery.htm">ThreadFeatures.threadDataQuery</a><h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ThreadFeatureSample_Sample.htm">Thread Feature API Sample</a></td>
+        <td class="api-list">Demonstrates creating a new thread feature.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version January 2015<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(ThreadDataQuery%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

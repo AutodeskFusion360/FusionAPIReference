@@ -1,0 +1,283 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/SweepFeature.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="14/10/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="SweepFeature">
+    <meta name="description" content="SweepFeature Object">
+    <meta name="topicid" content="GUID-b6d891ad-56d9-4650-96d2-a1a2573824fe">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>SweepFeature Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">SweepFeature Object
+			</h1>
+              Derived from: <a href="Feature.htm">Feature</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Features/SweepFeature.h&gt;<h2 class="api">
+          Description
+        </h2>Object that represents an existing sweep feature in a design.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SweepFeature_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SweepFeature_createForAssemblyContext.htm">createForAssemblyContext</a></td>
+        <td class="api-list">Creates or returns a proxy for the native object - i.e. a new object that represents this object but adds the assembly context defined by the input occurrence.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SweepFeature_deleteMe.htm">deleteMe</a></td>
+        <td class="api-list">Deletes the feature. This works for both parametric and non-parametric features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SweepFeature_dissolve.htm">dissolve</a></td>
+        <td class="api-list">Dissolves the feature so that the feature information is lost and only the B-Rep geometry defined by the feature remains. This is only valid for non-parametric features.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SweepFeature_assemblyContext.htm">assemblyContext</a></td>
+        <td class="api-list">Returns the assembly occurrence (i.e. the occurrence) of this object in an assembly. This is only valid in the case where this is acting as a proxy in an assembly. Returns null in the case where the object is not in the context of an assembly but is already the native object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SweepFeature_attributes.htm">attributes</a></td>
+        <td class="api-list">Returns the collection of attributes associated with this face.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SweepFeature_baseFeature.htm">baseFeature</a></td>
+        <td class="api-list">If this feature is associated with a base feature, this property will return that base feature. If it's not associated with a base feature, this property will return null.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SweepFeature_bodies.htm">bodies</a></td>
+        <td class="api-list">Returns the bodies that were modified or created by this feature. This property works for both parametric and non-parametric features.<br/><br/> For a BaseFeature, this property has two different behaviors depending on if the BaseFeature is active for edit or not. When the base feature is active, this property returns the bodies owned by the base feature or the source bodies. When the base feature is not active, this property returns the result bodies.<br/><br/> When a body is added to a base feature, that body is owned by the base feature and is only seen in the UI when the base feature is active. This body is referred to as a "source body". Fusion creates a parametric copy of the body when you exit the base feature. This copy is referred to as the "result body," and it is used for subsequent modeling operations.<br/><br/> You can map between the source and result bodies by using their position within the bodies returned. To get a valid list of result bodies, you should roll the timeline to immediately after the base feature node in the timeline. Otherwise, subsequent operations could have done something to cause one or more bodies to no longer be available.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SweepFeature_distanceOne.htm">distanceOne</a></td>
+        <td class="api-list">Gets the distance for the first side. This property returns nothing in the case where the feature is non-parametric.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SweepFeature_distanceTwo.htm">distanceTwo</a></td>
+        <td class="api-list">Gets the distance for the second side. Returns nothing if the path is only on one side of the profile or if the sweep definition includes a guide rail or surface. It's always the distance against the normal of the profile if available. This property returns nothing in the case where the feature is non-parametric.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SweepFeature_endFaces.htm">endFaces</a></td>
+        <td class="api-list">Property that returns the set of that cap one end of the sweep that are coincident with the sketch plane. The end faces are those not coincident to the sketch plane of the feature's profile. In the case of a symmetric revolution these faces are the ones on the negative normal side of the sketch plane. In the cases where there aren't any end faces this property will return Nothing.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SweepFeature_entityToken.htm">entityToken</a></td>
+        <td class="api-list">Returns a token for the Feature object. This can be saved and used at a later time with the Design.findEntityByToken method to get back the same feature.<br/><br/> When using entity tokens it's important to understand that the token string returned for a specific entity can be different over time. However, even if you have two different token strings that were obtained from the same entity, when you use findEntityByToken they will both return the same entity. Because of that you should never compare entity tokens as way to determine what the token represents. Instead, you need to use the findEntityByToken method to get the two entities identified by the tokens and then compare them.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SweepFeature_errorOrWarningMessage.htm">errorOrWarningMessage</a></td>
+        <td class="api-list">Returns the error or warning message in the case where the healthState property returns either WarningFeatureHealthState or ErrorFeatureHealthState. Otherwise this property returns an empty string.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SweepFeature_extent.htm">extent</a></td>
+        <td class="api-list">Gets and sets the sweep extent type. It defaults to PerpendicularToPathExtentType. When sweeping a solid setting the twist angle requires the solid twist axis to be set. This property is ignored when a guide rail has not been specified.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SweepFeature_faces.htm">faces</a></td>
+        <td class="api-list">Returns the faces that were created by this feature. This works for both parametric and non-parametric features.<br/><br/> Depending on the modifications made to the body after the feature was created, this may not return all of the faces. For example, when a component is created from a body, the original body and its faces no longer exist, so this won't return any faces. However, you can roll the timeline to immediately after the feature, and all the original faces will be available.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SweepFeature_guideRail.htm">guideRail</a></td>
+        <td class="api-list">Gets and sets the guide rail to create the sweep. This can be set to null to have a path only sweep.<br/><br/> To use this property, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SweepFeature_guideSurfaces.htm">guideSurfaces</a></td>
+        <td class="api-list">Gets and sets the guide surfaces to create the sweep. This can be set to an empty array to remove the guide surfaces and have a single path sweep feature. The isChainSelection property controls whether tangentially connected faces to the guide surfaces are also made guide surfaces.<br/><br/> To use this property, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SweepFeature_healthState.htm">healthState</a></td>
+        <td class="api-list">Returns the current health state of the feature.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SweepFeature_isChainSelection.htm">isChainSelection</a></td>
+        <td class="api-list">Get and sets whether faces that are tangentially connected to the guide surfaces are also made guide surfaces.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SweepFeature_isDirectionFlipped.htm">isDirectionFlipped</a></td>
+        <td class="api-list">Gets and sets if the direction of the sweep is flipped. This property only applies to sweep features that include a guide rail and whose path runs on both sides of the profile.<br/><br/> To set this property, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SweepFeature_isParametric.htm">isParametric</a></td>
+        <td class="api-list">Indicates if this feature is parametric or not.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SweepFeature_isSolid.htm">isSolid</a></td>
+        <td class="api-list">Indicates if this feature was initially created as a solid or a surface.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SweepFeature_isSuppressed.htm">isSuppressed</a></td>
+        <td class="api-list">Gets and sets if this feature is suppressed. This is only valid for parametric features.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SweepFeature_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SweepFeature_linkedFeatures.htm">linkedFeatures</a></td>
+        <td class="api-list">Returns the set of features that are linked to this feature. The set of linked features are all of the features that were created in various components as the result of a single feature being created in the user interface.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SweepFeature_name.htm">name</a></td>
+        <td class="api-list">Returns the name of the feature as seen in the browser (non-parametric) or in the timeline (parametric).</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SweepFeature_nativeObject.htm">nativeObject</a></td>
+        <td class="api-list">The NativeObject is the object outside the context of an assembly and in the context of its parent component. Returns null in the case where this object is not in the context of an assembly but is already the native object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SweepFeature_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SweepFeature_operation.htm">operation</a></td>
+        <td class="api-list">Gets and sets the type of operation performed by the sweep.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SweepFeature_orientation.htm">orientation</a></td>
+        <td class="api-list">Gets and sets the sweep orientation. It defaults to PerpendicularOrientationType. This property is ignored if sweeping a solid or a guide rail or surface has been specified.<br/><br/> To set this property, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SweepFeature_parentComponent.htm">parentComponent</a></td>
+        <td class="api-list">Returns the parent component that owns this feature.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SweepFeature_participantBodies.htm">participantBodies</a></td>
+        <td class="api-list">Gets and sets the list of bodies that will participate in the feature when the operation is a cut or intersection.<br/><br/> To use this property, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SweepFeature_path.htm">path</a></td>
+        <td class="api-list">Gets and sets the path to create the sweep. This property returns nothing in the case where the feature is non-parametric.<br/><br/> To set this property, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SweepFeature_profile.htm">profile</a></td>
+        <td class="api-list">Gets and sets the profiles or planar faces used to define the shape of the sweep. This property can return or be set with a single Profile, a single planar face, or an ObjectCollection consisting of multiple profiles and planar faces. When an ObjectCollection is used all of the profiles and faces must be co-planar. This property returns nothing in the case where the feature is non-parametric.<br/><br/> To set this property, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SweepFeature_profileScaling.htm">profileScaling</a></td>
+        <td class="api-list">Gets and sets the sweep profile scaling option. It defaults to SweepProfileScaleOption. This property is only used when a guide rail has been specified.<br/><br/> To set this property, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SweepFeature_sideFaces.htm">sideFaces</a></td>
+        <td class="api-list">Property that returns an object that provides access to all of the faces created around the perimeter of the feature.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SweepFeature_solidAlignedAxis.htm">solidAlignedAxis</a></td>
+        <td class="api-list">Gets and sets the axis to align the solid being swept with. The axis is used when sweeping a solid, and the solid orientation is set to AlignedSolidOrientationType. It can be a sketch line, linear edge, or construction axis.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SweepFeature_solidBody.htm">solidBody</a></td>
+        <td class="api-list">Gets and sets the BRepBody object to sweep. It must be a solid body. Setting this property results in the type being a single path sweep, and if the profile, guide path, or surface are set, they are set to null.<br/><br/> To set this property, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SweepFeature_solidOrientation.htm">solidOrientation</a></td>
+        <td class="api-list">Gets and sets the sweep solid orientation. It defaults to PerpendicularSolidOrientationType. Setting the solid orientation to AlignedSolidOrientationType requires the solid aligned axis to be set. This property is ignored if sweeping a profile.<br/><br/> To set this property, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SweepFeature_solidTwistAxis.htm">solidTwistAxis</a></td>
+        <td class="api-list">Gets and sets the twist axis of the solid being swept. The axis is used when sweeping a solid, and the twist angle is set. It can be a sketch line, linear edge, construction axis, or a face that defines an axis (cylinder, cone, torus, etc.).</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SweepFeature_startFaces.htm">startFaces</a></td>
+        <td class="api-list">Property that returns the set of that cap one end of the sweep that are coincident with the sketch plane. In the cases where there aren't any start faces this property will return Nothing.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SweepFeature_taperAngle.htm">taperAngle</a></td>
+        <td class="api-list">Gets the ModelParameter that defines the taper angle of the sweep feature. The value of the angle can be edited by using the properties on the ModelParameter object to edit the parameter. This property is ignored if sweeping a solid or a guide rail or surface has been specified.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SweepFeature_timelineObject.htm">timelineObject</a></td>
+        <td class="api-list">Returns the timeline object associated with this feature.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SweepFeature_twistAngle.htm">twistAngle</a></td>
+        <td class="api-list">Gets the ModelParameter that defines the twist angle of the sweep feature. The value of the angle can be edited by using the properties on the ModelParameter object to edit the parameter. When sweeping a solid setting the twist angle requires the solid twist axis to be set. This property is ignored if a guide rail or surface has been specified.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="SweepFeature_createForAssemblyContext.htm">SweepFeature.createForAssemblyContext</a>, <a href="SweepFeature_nativeObject.htm">SweepFeature.nativeObject</a>, <a href="SweepFeatures_add.htm">SweepFeatures.add</a>, <a href="SweepFeatures_item.htm">SweepFeatures.item</a>, <a href="SweepFeatures_itemByName.htm">SweepFeatures.itemByName</a><h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SweepFeatureSample_Sample.htm">Sweep Feature API Sample</a></td>
+        <td class="api-list">Demonstrates creating a new sweep feature.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SweepWithGuideRailFeatureSample_Sample.htm">Sweep with guide rail Feature API Sample</a></td>
+        <td class="api-list">Demonstrates creating a new Sweep feature that uses a guide rail along with a profile.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="TwoRailSweepFeatureSample_Sample.htm">Two Rail Sweep Feature API Sample</a></td>
+        <td class="api-list">Demonstrates creating new two rail sweep feature.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version November 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(SweepFeature%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

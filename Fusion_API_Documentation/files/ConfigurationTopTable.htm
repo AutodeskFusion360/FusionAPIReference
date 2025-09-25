@@ -1,0 +1,142 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/ConfigurationTopTable.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="27/12/2023">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="ConfigurationTopTable">
+    <meta name="description" content="ConfigurationTopTable Object">
+    <meta name="topicid" content="GUID-FA104406-B0CC-408C-8530-7ED324DDB1B5">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>ConfigurationTopTable Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">ConfigurationTopTable Object
+			</h1>
+              Derived from: <a href="ConfigurationTable.htm">ConfigurationTable</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Configurations/ConfigurationTopTable.h&gt;<h2 class="api">
+          Description
+        </h2>API object representing the top configuration table associated with a configured design.<br/><br/> When obtained from the DataFile object of a configured design, the functionality is limited because it's not loaded in Fusion, and there is no access to the Fusion objects represented in the table. For example, any properties that return a Component or Parameter will return null because those objects aren't available.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ConfigurationTopTable_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ConfigurationTopTable_getCell.htm">getCell</a></td>
+        <td class="api-list">Returns the cell at the specified row and column.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ConfigurationTopTable_moveColumns.htm">moveColumns</a></td>
+        <td class="api-list">Moves the specified columns from one table to another.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ConfigurationTopTable_activeRow.htm">activeRow</a></td>
+        <td class="api-list">Returns the row that is currently active. To set the active row, use the activate method on the ConfigurationRow object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ConfigurationTopTable_appearanceTable.htm">appearanceTable</a></td>
+        <td class="api-list">Returns the appearance table associated with this top table. The returned table can be empty and not have any columns. In this case, the table is not displayed in the user interface. Use the returned table to add columns.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ConfigurationTopTable_columns.htm">columns</a></td>
+        <td class="api-list">Returns the columns defined for this table and provides the functionality to create new columns.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ConfigurationTopTable_customThemeTables.htm">customThemeTables</a></td>
+        <td class="api-list">Returns any custom theme tables associated with this top table.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ConfigurationTopTable_id.htm">id</a></td>
+        <td class="api-list">Returns the unique ID of this table.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ConfigurationTopTable_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ConfigurationTopTable_materialTable.htm">materialTable</a></td>
+        <td class="api-list">Returns the material table associated with this top table. The returned table can be empty and not have any columns. In this case, the table is not displayed in the user interface. Use the returned table to add columns.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ConfigurationTopTable_name.htm">name</a></td>
+        <td class="api-list">Gets the name of the table as seen in the user interface.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ConfigurationTopTable_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ConfigurationTopTable_plasticRuleTable.htm">plasticRuleTable</a></td>
+        <td class="api-list">Returns the plastic rule table associated with this top table. The returned table can be empty and not have any columns. In this case, the table is not displayed in the user interface. Use the returned table to add columns.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ConfigurationTopTable_rows.htm">rows</a></td>
+        <td class="api-list">Returns the rows (configurations) defined for this table and provides the functionality to create new rows.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ConfigurationTopTable_sheetMetalRuleTable.htm">sheetMetalRuleTable</a></td>
+        <td class="api-list">Returns the sheet metal rule table associated with this top table. The returned table can be empty and not have any columns. In this case, the table is not displayed in the user interface. Use the returned table to add columns.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="Design_configurationTopTable.htm">Design.configurationTopTable</a>, <a href="Design_createConfiguredDesign.htm">Design.createConfiguredDesign</a>, <a href="FlatPatternProduct_configurationTopTable.htm">FlatPatternProduct.configurationTopTable</a>, <a href="FlatPatternProduct_createConfiguredDesign.htm">FlatPatternProduct.createConfiguredDesign</a>, <a href="WorkingModel_configurationTopTable.htm">WorkingModel.configurationTopTable</a>, <a href="WorkingModel_createConfiguredDesign.htm">WorkingModel.createConfiguredDesign</a><h2 class="api">
+            Version
+          </h2>
+        Introduced in version January 2024<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(ConfigurationTopTable%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,284 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/ShellFeatureSample.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="ShellFeatureSample_Sample">
+    <meta name="description" content="Shell Feature API Sample Sample">
+    <meta name="topicid" content="GUID-E68CF5E7-E733-4A93-A06F-B54E115BD666">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Shell Feature API Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Shell Feature API Sample</h1>
+    <h2 class="api">
+          Description
+        </h2>Demonstrates creating a new shell feature.<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">import adsk.core, adsk.fusion, traceback
+
+def run(context):
+    ui = None
+    try:
+        app = adsk.core.Application.get()
+        ui  = app.userInterface
+
+        <span style="color:blue"># Create a document.</span>
+        doc = app.documents.add(adsk.core.DocumentTypes.FusionDesignDocumentType)
+
+        product = app.activeProduct
+        design = adsk.fusion.Design.cast(product)
+
+        <span style="color:blue"># Get the root component of the active design.</span>
+        rootComp = design.rootComponent
+        features = rootComp.features
+
+        <span style="color:blue"># Create sketch circle on the xz plane.</span>
+        sketches = rootComp.sketches
+        sketch = sketches.add(rootComp.xZConstructionPlane)
+        sketchCircles = sketch.sketchCurves.sketchCircles
+        centerPoint = adsk.core.Point3D.create(0, 0, 0)
+        sketchCircles.addByCenterRadius(centerPoint, 10)
+
+        <span style="color:blue"># Get the profile from the sketch.</span>
+        profile = sketch.profiles.item(0)
+
+        <span style="color:blue"># Create a cylinder with ExtrudeFeature using the profile above.</span>
+        extrudeFeats = features.extrudeFeatures
+        distance = adsk.core.ValueInput.createByReal(2.5)
+        extrudeFeature = extrudeFeats.addSimple(profile, distance, adsk.fusion.FeatureOperations.NewBodyFeatureOperation)
+
+        <span style="color:blue"># Create a collection of entities for shell</span>
+        entities1 = adsk.core.ObjectCollection.create()
+        entities1.add(extrudeFeature.endFaces.item(0))
+
+        <span style="color:blue"># Create a shell feature</span>
+        shellFeats = features.shellFeatures
+        isTangentChain = False
+        shellFeatureInput = shellFeats.createInput(entities1, isTangentChain)
+        thickness = adsk.core.ValueInput.createByReal(0.5)
+        shellFeatureInput.insideThickness = thickness
+        shellType = adsk.fusion.ShellTypes.SharpOffsetShellType;
+        shellFeatureInput.shellType = shellType;
+        shellFeats.add(shellFeatureInput)
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code">#include &lt;Core/Application/Application.h&gt;
+#include &lt;Core/Application/Documents.h&gt;
+#include &lt;Core/Application/Document.h&gt;
+#include &lt;Core/Application/Product.h&gt;
+#include &lt;Core/Application/ObjectCollection.h&gt;
+#include &lt;Core/Application/ValueInput.h&gt;
+#include &lt;Core/Geometry/Point3D.h&gt;
+#include &lt;Core/UserInterface/UserInterface.h&gt;
+#include &lt;Fusion/BRep/BRepFace.h&gt;
+#include &lt;Fusion/BRep/BRepFaces.h&gt;
+#include &lt;Fusion/Sketch/SketchCircle.h&gt;
+#include &lt;Fusion/Fusion/Design.h&gt;
+#include &lt;Fusion/Components/Component.h&gt;
+#include &lt;Fusion/Construction/ConstructionPlane.h&gt;
+#include &lt;Fusion/Features/Features.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeature.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeatures.h&gt;
+#include &lt;Fusion/Features/ShellFeatures.h&gt;
+#include &lt;Fusion/Features/ShellFeature.h&gt;
+#include &lt;Fusion/Features/ShellFeatureInput.h&gt;
+#include &lt;Fusion/Sketch/Profile.h&gt;
+#include &lt;Fusion/Sketch/Profiles.h&gt;
+#include &lt;Fusion/Sketch/Sketch.h&gt;
+#include &lt;Fusion/Sketch/Sketches.h&gt;
+#include &lt;Fusion/Sketch/SketchCurves.h&gt;
+#include &lt;Fusion/Sketch/SketchCircles.h&gt;
+#include &lt;Fusion/Sketch/SketchPoint.h&gt;
+#include &lt;Fusion/Sketch/SketchPoints.h&gt;
+
+using namespace adsk::core;
+using namespace adsk::fusion;
+
+Ptr&lt;UserInterface&gt; ui;
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    Ptr&lt;Application&gt; app = Application::get();
+    if (!app)
+        return false;
+
+    ui = app-&gt;userInterface();
+    if (!ui)
+        return false;
+
+    Ptr&lt;Documents&gt; documents = app-&gt;documents();
+    if (!documents)
+        return false;
+
+    Ptr&lt;Document&gt; doc = documents-&gt;add(DocumentTypes::FusionDesignDocumentType);
+    if (!doc)
+        return false;
+
+    Ptr&lt;Product&gt; product = app-&gt;activeProduct();
+    if (!product)
+        return false;
+
+    Ptr&lt;Design&gt; design = product;
+    if (!design)
+        return false;
+
+    <span style="color:blue">// Get the root component of the active design</span>
+    Ptr&lt;Component&gt; rootComp = design-&gt;rootComponent();
+    if (!rootComp)
+        return false;
+
+    <span style="color:blue">// Create sketch circle on the xz plane.</span>
+    Ptr&lt;Sketches&gt; sketches = rootComp-&gt;sketches();
+    if (!sketches)
+        return false;
+    Ptr&lt;Sketch&gt; sketch = sketches-&gt;add(rootComp-&gt;xZConstructionPlane());
+    if (!sketch)
+        return false;
+    Ptr&lt;SketchCurves&gt; sketchCurves = sketch-&gt;sketchCurves();
+    if (!sketchCurves)
+        return false;
+    Ptr&lt;SketchCircles&gt; sketchCirles = sketchCurves-&gt;sketchCircles();
+    if (!sketchCirles)
+        return false;
+    Ptr&lt;Point3D&gt; centerPoint = Point3D::create(0, 0, 0);
+    if (!centerPoint)
+        return false;
+    Ptr&lt;SketchCircle&gt; sketchCircle = sketchCirles-&gt;addByCenterRadius(centerPoint, 10);
+    if (!sketchCircle)
+        return false;
+
+    <span style="color:blue">// Get the profile from the sketch.</span>
+    Ptr&lt;Profiles&gt; sketchProfiles = sketch-&gt;profiles();
+    if (!sketchProfiles)
+        return false;
+    Ptr&lt;Profile&gt; profile = sketchProfiles-&gt;item(0);
+    if (!profile)
+        return false;
+
+    <span style="color:blue">// Create a cylinder with ExtrudeFeature using the profile above.</span>
+    Ptr&lt;Features&gt; features = rootComp-&gt;features();
+    if (!features)
+        return false;
+    Ptr&lt;ExtrudeFeatures&gt; extrudeFeats = features-&gt;extrudeFeatures();
+    if (!extrudeFeats)
+        return false;
+    Ptr&lt;ValueInput&gt; distance = adsk::core::ValueInput::createByReal(2.0);
+    if (!distance)
+        return false;
+    Ptr&lt;ExtrudeFeature&gt; extrudeFeature =
+        extrudeFeats-&gt;addSimple(profile, distance, adsk::fusion::FeatureOperations::NewBodyFeatureOperation);
+    if (!extrudeFeature)
+        return false;
+
+    <span style="color:blue">// Create a collection of entities for shell</span>
+    Ptr&lt;BRepFaces&gt; brepFaces = extrudeFeature-&gt;endFaces();
+    if (!brepFaces)
+        return false;
+    Ptr&lt;BRepFace&gt; brepFace = brepFaces-&gt;item(0);
+    if (!brepFace)
+        return false;
+    Ptr&lt;ObjectCollection&gt; entities1 = adsk::core::ObjectCollection::create();
+    if (!entities1)
+        return false;
+    entities1-&gt;add(brepFace);
+
+    <span style="color:blue">// Create a shell feature</span>
+    Ptr&lt;ShellFeatures&gt; shellFeats = features-&gt;shellFeatures();
+    if (!shellFeats)
+        return false;
+    bool isTangentChain = false;
+    Ptr&lt;ValueInput&gt; thickness = adsk::core::ValueInput::createByReal(0.5);
+    if (!thickness)
+        return false;
+    Ptr&lt;ShellFeatureInput&gt; shellFeatureInput = shellFeats-&gt;createInput(entities1, isTangentChain);
+    if (!shellFeatureInput)
+        return false;
+    shellFeatureInput-&gt;insideThickness(thickness);
+    adsk::fusion::ShellType shellType = ShellType::SharpOffset;
+    shellFeatureInput-&gt;shellType(shellType);
+    Ptr&lt;ShellFeature&gt; shellFeature = shellFeats-&gt;add(shellFeatureInput);
+    if (!shellFeature)
+        return false;
+
+
+    return true;
+}</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(ShellFeatureSample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

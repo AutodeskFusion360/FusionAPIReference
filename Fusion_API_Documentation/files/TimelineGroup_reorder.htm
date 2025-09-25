@@ -1,0 +1,115 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/TimelineGroup_reorder.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="TimelineGroup_reorder">
+    <meta name="description" content="TimelineGroup.reorder Method">
+    <meta name="topicid" content="GUID-b18bf472-471d-4a0f-a8ea-3c4b65f8043e">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>TimelineGroup.reorder Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">TimelineGroup.reorder Method</h1>
+
+          Parent Object: <a href="TimelineGroup.htm">TimelineGroup</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Fusion/TimelineGroup.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Reorders this object to the position specified. The default value of -1 indicates the end of the timeline.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"timelineGroup_var" is a variable referencing a <a href="TimelineGroup.htm">TimelineGroup</a> object.<code><pre class="api-code"><span style="color:blue"># Uses no optional arguments.</span><br />returnValue = timelineGroup_var.<b>reorder</b>()<br /><br /><span style="color:blue"># Uses optional arguments.</span><br />returnValue = timelineGroup_var.<b>reorder</b>(beforeIndex)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"timelineGroup_var" is a variable referencing a <a href="TimelineGroup.htm">TimelineGroup</a> object.<br /><br /><code><pre class="api-code">#include &lt;Fusion/Fusion/TimelineGroup.h&gt;<br /><br /><span style="color:blue">// Uses no optional arguments.</span><br />returnValue = timelineGroup_var-&gt;<b>reorder</b>();<br /><br /><span style="color:blue">// Uses optional arguments.</span><br />returnValue = timelineGroup_var-&gt;<b>reorder</b>(beforeIndex);</pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;">boolean</td>
+        <td class="api-list">Returns true if the reorder operation was successful This method will fail and return false if this is a timelineGroup object and the  group is expanded.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">beforeIndex</td>
+        <td class="api-list">integer</td>
+        <td class="api-list">The index number of the position in the timeline to place this object before<br /><br /> This is an optional argument whose default value is -1.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(TimelineGroup.reorder%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

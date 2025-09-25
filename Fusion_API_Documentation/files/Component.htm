@@ -1,0 +1,418 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/Component.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="Component">
+    <meta name="description" content="Component Object">
+    <meta name="topicid" content="GUID-b56b394e-b9c9-4403-a78b-a186b897909c">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>Component Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Component Object
+			</h1>
+              Derived from: <a href="BaseComponent.htm">BaseComponent</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Components/Component.h&gt;<h2 class="api">
+          Description
+        </h2>Represents a component in the data model. A component represents a set of geometry, features, and parameters that make up an item in the design. A component can be referenced multiple times into a design with a Occurrence object.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_allOccurrencesByComponent.htm">allOccurrencesByComponent</a></td>
+        <td class="api-list">Returns all occurrences, at any level of the assembly, that reference the specified component. The returned list is read-only.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_boundingBox2.htm">boundingBox2</a></td>
+        <td class="api-list">Returns the bounding box of the specified entity types within the component.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_createBRepEdgeProfile.htm">createBRepEdgeProfile</a></td>
+        <td class="api-list">Creates a profile based on the outside open edges of a BRepFace.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_createFlatPattern.htm">createFlatPattern</a></td>
+        <td class="api-list">Creates a flat pattern of the sheet metal folded body. The isSheetMetal property of the BRepBody object can be used to determine if a particular body can be flattened. Creating a flat pattern will fail if a flat pattern already exists in the component. You can determine if a flat pattern already exists by checking if the flatPattern property returns a FlatPattern object or null.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_createOpenProfile.htm">createOpenProfile</a></td>
+        <td class="api-list">Creates an open profile based on the input curve(s).</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_createThumbnail.htm">createThumbnail</a></td>
+        <td class="api-list">Creates a thumbnail for this component. This can be a root component to get a thumbnail that represents the associated file, or it can be any sub component to get a thumbnail of a subset of the complete assembly or individual parts.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_findBRepUsingPoint.htm">findBRepUsingPoint</a></td>
+        <td class="api-list">Finds all the entities of the specified type at the specified location.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_findBRepUsingRay.htm">findBRepUsingRay</a></td>
+        <td class="api-list">Finds all the B-Rep entities that are intersected by the specified ray. This can return BRepFace, BrepEdge, and BRepVertex objects.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_getPhysicalProperties.htm">getPhysicalProperties</a></td>
+        <td class="api-list">Returns the PhysicalProperties object that has properties for getting the area, density, mass, volume, moments, etc of this component.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_occurrencesByComponent.htm">occurrencesByComponent</a></td>
+        <td class="api-list">Returns all occurrences at the top-level of this component that reference the specified component. The returned list is read-only.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_saveCopyAs.htm">saveCopyAs</a></td>
+        <td class="api-list">Performs a Save Copy As on this component. This saves the specified component as a new document in the specified location.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_transformOccurrences.htm">transformOccurrences</a></td>
+        <td class="api-list">Transforms a set of occurrences in one step. This provides better performance than transforming them one at a time. This method is only valid when called on the root component because Fusion flattens the entire assembly structure when manipulating the assembly so all transforms are relative to the root component.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_activeSheetMetalRule.htm">activeSheetMetalRule</a></td>
+        <td class="api-list">Gets and sets the active sheet metal rule. This can return null in the case where the component has never contained any sheet metal related data.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_allAsBuiltJoints.htm">allAsBuiltJoints</a></td>
+        <td class="api-list">Returns all joint origins in this component and any sub components. The joint origins returned are all in the context of this component so any joint origins in sub components will be proxies. This is primarily useful when used from the root component because Fusion flattens the assembly structure, including joint origins, when manipulating an assembly.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_allAssemblyConstraints.htm">allAssemblyConstraints</a></td>
+        <td class="api-list">Returns all assembly constraints in this component and any sub components. The assembly constraints returned are all in the context of this component so any joints in sub components will be proxies. This is primarily useful when used from the root component because Fusion flattens the assembly structure, including joints, when manipulating an assembly.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_allJointOrigins.htm">allJointOrigins</a></td>
+        <td class="api-list">Returns all as-built joints in this component and any sub components. The as-built joints returned are all in the context of this component so any as-built joints in sub components will be proxies. This is primarily useful when used from the root component because Fusion flattens the assembly structure, including as-built joints, when manipulating an assembly.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_allJoints.htm">allJoints</a></td>
+        <td class="api-list">Returns all joints in this component and any sub components. The joints returned are all in the context of this component so any joints in sub components will be proxies. This is primarily useful when used from the root component because Fusion flattens the assembly structure, including joints, when manipulating an assembly.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_allOccurrences.htm">allOccurrences</a></td>
+        <td class="api-list">Returns all of the occurrences in the assembly regardless of their level within the assembly structure. The returned list is read-only.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_allRigidGroups.htm">allRigidGroups</a></td>
+        <td class="api-list">Returns all rigid groups in this component and any sub components. The rigid groups returned are all in the context of this component so any rigid groups in sub components will be proxies. This is primarily useful when used from the root component because Fusion flattens the assembly structure, including rigid groups, when manipulating an assembly.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_allTangentRelationships.htm">allTangentRelationships</a></td>
+        <td class="api-list">Returns all tangent relationships in this component and any sub components. The tangent relationships returned are all in the context of this component so any tangent relationships in sub components will be proxies. This is primarily useful when used from the root component because Fusion flattens the assembly structure, including tangent relationships, when manipulating an assembly.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_asBuiltJoints.htm">asBuiltJoints</a></td>
+        <td class="api-list">Returns the collection of as-built joints associated with this component.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_assemblyConstraints.htm">assemblyConstraints</a></td>
+        <td class="api-list">Returns the collection of assembly constraints associated with this component.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_attributes.htm">attributes</a></td>
+        <td class="api-list">Returns the collection of attributes associated with this face.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_boundingBox.htm">boundingBox</a></td>
+        <td class="api-list">Returns the bounding box of this component. This is always in world space of the component. The boundingBox2 method provides greater control over which types of entities you want included in the bounding box calculation.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_bRepBodies.htm">bRepBodies</a></td>
+        <td class="api-list">Returns the B-Rep bodies collection associated with this component.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_canvases.htm">canvases</a></td>
+        <td class="api-list">Returns the canvases collection associated with this component. This provides access to the existing canvases and supports the creation of new canvases.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_componentColor.htm">componentColor</a></td>
+        <td class="api-list">Gets and sets the color associated with a component. This color is only used when the "Display Component Colors" command is enabled. Enabling the display of component colors is done through the command or API using the Application.isComponentColorsDisplayed property. When this is on, all bodies in a component will display using the color assigned to the component. Fusion randomly assigns a color to a component when it is created. This property allows you to get and change the assigned default color. Setting this property to null results in a new color being randomly assigned by Fusion. This is the equivalent of the "Cycle Component Color" command available in the context menu of a component.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_constructionAxes.htm">constructionAxes</a></td>
+        <td class="api-list">Returns the construction axes collection associated with this component. This provides access to the existing construction axes and supports the creation of new construction axes.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_constructionPlanes.htm">constructionPlanes</a></td>
+        <td class="api-list">Returns the construction planes collection associated with this component. This provides access to the existing construction planes and supports the creation of new construction planes.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_constructionPoints.htm">constructionPoints</a></td>
+        <td class="api-list">Returns the construction points collection associated with this component. This provides access to the existing construction points and supports the creation of new construction points.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_customGraphicsGroups.htm">customGraphicsGroups</a></td>
+        <td class="api-list">Returns the customGraphicsGroups object in this component.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_dataComponent.htm">dataComponent</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Returns the DataComponent associated with this component. The DataComponent provides ID information that can be used to access this component using the MFG DM API. These ID's don't exist until a component has been saved. The ID's are generated by MFG DM API on the cloud, so there will be a slight delay after saving before the ID's are available. This property returns null in the case the MFG DM API information doesn't exist yet.<br/><br/> When opening a design, the MFG DM API information is obtained from the cloud and as a result may not be available immediately after opening a document. Again, this property will return null in this case too. Essentially, null is returned in all cases where good ID information is not yet available.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_decals.htm">decals</a></td>
+        <td class="api-list">Returns the decals collection associated with this component. This provides access to the existing decals and supports the creation of new decals.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_description.htm">description</a></td>
+        <td class="api-list">Gets and sets the description associated with this component.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_entityToken.htm">entityToken</a></td>
+        <td class="api-list">Returns a token for the Component object. This can be saved and used at a later time with the Design.findEntityByToken method to get back the same component.<br/><br/> When using entity tokens it's important to understand that the token string returned for a specific entity can be different over time. However, even if you have two different token strings that were obtained from the same entity, when you use findEntityByToken they will both return the same entity. Because of that you should never compare entity tokens as way to determine what the token represents. Instead, you need to use the findEntityByToken method to get the two entities identified by the tokens and then compare them.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_features.htm">features</a></td>
+        <td class="api-list">Returns the collection that provides access to all of the features associated with this component.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_flatPattern.htm">flatPattern</a></td>
+        <td class="api-list">Gets the existing flat pattern or returns null in the case where a flat pattern doesn't exist in this component.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_id.htm">id</a></td>
+        <td class="api-list">Returns the persistent ID of the component. This ID is created with the component and does not change. Because this ID does not change, different revisions of the same design or copies of the design asset/file will retain this ID. If components from different designs have the same ID, it indicates they are either different revisions or a copy of the design was made. Therefore, this ID will always be unique within a single design, but may not be unique in an assembly where externally referenced designs include different revisions or copies of a design.<br/><br/> The ID is also the same ID used by PIM (Product Information Model).</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_isBodiesFolderLightBulbOn.htm">isBodiesFolderLightBulbOn</a></td>
+        <td class="api-list">Gets and sets if the light bulb of the bodies folder as seen in the browser is on or off. This controls the visibility of the solid/surface bodies and the mesh bodies in this component.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_isCanvasFolderLightBulbOn.htm">isCanvasFolderLightBulbOn</a></td>
+        <td class="api-list">Gets and sets if the light bulb of the canvas folder as seen in the browser is on or off. This controls the visibility of all the canvases in the component.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_isConstructionFolderLightBulbOn.htm">isConstructionFolderLightBulbOn</a></td>
+        <td class="api-list">Gets and sets if the light bulb of the construction folder as seen in the browser is on or off. This controls the visibility of the (non-origin) construction geometry (i.e. planes, points, axes).</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_isDecalFolderLightBulbOn.htm">isDecalFolderLightBulbOn</a></td>
+        <td class="api-list">Gets and sets whether the light bulb of the decal folder, as seen in the browser, is on or off. This controls the visibility of all the decals in the component.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_isJointOriginsFolderLightBulbOn.htm">isJointOriginsFolderLightBulbOn</a></td>
+        <td class="api-list">Gets and sets if the light bulb of the joint origins folder as seen in the browser is on or off. This controls the visibility of the joint origins in this occurrence. The light bulb for the folder is component specific and will turn off the joints for all occurrences referencing the component.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_isJointsFolderLightBulbOn.htm">isJointsFolderLightBulbOn</a></td>
+        <td class="api-list">Gets and sets if the light bulb of the joints folder as seen in the browser is on or off. This controls the visibility of the joints in this occurrence. The light bulb for the folder is component specific and will turn off the joints for all occurrences referencing the component.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_isLibraryItem.htm">isLibraryItem</a></td>
+        <td class="api-list">Gets whether the component was created from a fasteners library item."</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_isOriginFolderLightBulbOn.htm">isOriginFolderLightBulbOn</a></td>
+        <td class="api-list">Gets and sets if the light bulb of the origin folder as seen in the browser is on or off. This controls the visibility of the origin construction geometry.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_isSketchFolderLightBulbOn.htm">isSketchFolderLightBulbOn</a></td>
+        <td class="api-list">Gets and sets if the light bulb of the sketch folder as seen in the browser is on or off. This controls the visibility of the sketches in this component.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_jointOrigins.htm">jointOrigins</a></td>
+        <td class="api-list">Returns the collection of joint origins associated with this component.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_joints.htm">joints</a></td>
+        <td class="api-list">Returns the collection of joints associated with this component.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_material.htm">material</a></td>
+        <td class="api-list">Gets and sets the physical material assigned to this component.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_meshBodies.htm">meshBodies</a></td>
+        <td class="api-list">Returns the mesh bodies collection associated with this component.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_mfgdmModelId.htm">mfgdmModelId</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Returns the MFGDM model ID for this component.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_modelParameters.htm">modelParameters</a></td>
+        <td class="api-list">Returns the collection of model parameters in the Component.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_name.htm">name</a></td>
+        <td class="api-list">Property that gets and sets the name of this component. This is the name shown in the browser for each occurrence referencing this component.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_occurrences.htm">occurrences</a></td>
+        <td class="api-list">Property that returns the Occurrences collection associated with this component. This provides access to the occurrences at the top-level of this component and provides the functionality to add new occurrences.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_opacity.htm">opacity</a></td>
+        <td class="api-list">Gets and sets the opacity override assigned to this component. A value of 1.0 specifies that is it completely opaque and a value of 0.0 specifies that is it completely transparent.<br/><br/> This is only applicable for a non-root local component.<br/><br/> This value is not necessarily related to what the user sees because the opacity is inherited. For example, if you have TopComponent and it has a component in it called SubComponent and you set the opacity of TopComponent to be 0.5, SubComponent will also be shown as slightly transparent even though the opacity property for it will return 1.0. Because a component can be referenced as an occurrence in other components and they can have different opacity settings, it's possible that different instances of the same component can display using different opacity levels. To get the opacity that it is being displayed with use the Occurrence.visibleOpacity property.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_orientedMinimumBoundingBox.htm">orientedMinimumBoundingBox</a></td>
+        <td class="api-list">Returns an oriented bounding box that is best oriented to tightly fit all B-Rep bodies in the component. All other geometry types are ignored.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_originConstructionPoint.htm">originConstructionPoint</a></td>
+        <td class="api-list">Returns the origin construction point.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_parentDesign.htm">parentDesign</a></td>
+        <td class="api-list">Returns the parent product this component is owned by.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_partNumber.htm">partNumber</a></td>
+        <td class="api-list">Gets and sets the part number associated with this component. Setting this to an empty string will reset it to be the same as the component name.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_physicalProperties.htm">physicalProperties</a></td>
+        <td class="api-list">Returns the PhysicalProperties object that has properties for getting the area, density, mass, volume, moments, etc of this component. Property values will be calculated using the 'LowCalculationAccuracy' setting when using this property to get the PhysicalProperties object. To specify a higher calculation tolerance, use the getPhysicalProperties method instead.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_preciseBoundingBox.htm">preciseBoundingBox</a></td>
+        <td class="api-list">Returns a bounding box that tightly fits around all B-Rep bodies in the component. All other geometry types are ignored.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_propertyGroups.htm">propertyGroups</a></td>
+        <td class="api-list">Returns the PropertyGroups object associated with this component.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_revisionId.htm">revisionId</a></td>
+        <td class="api-list">Returns the current revision ID of the component. This ID changes any time the component is modified in any way. By getting and saving the ID when you create any data that is dependent on the component, you can then compare the saved ID with the current ID to determine if the component has changed to know if you should update your data.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_rigidGroups.htm">rigidGroups</a></td>
+        <td class="api-list">Returns the collection of rigid groups associated with this component.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_sketches.htm">sketches</a></td>
+        <td class="api-list">Returns the sketches collection associated with this component. This provides access to the existing sketches and supports the creation of new sketches.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_tangentRelationships.htm">tangentRelationships</a></td>
+        <td class="api-list">Returns the collection of tangent relationships associated with this component.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_xConstructionAxis.htm">xConstructionAxis</a></td>
+        <td class="api-list">Returns the X origin construction axis.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_xYConstructionPlane.htm">xYConstructionPlane</a></td>
+        <td class="api-list">Returns the XY origin construction plane.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_xZConstructionPlane.htm">xZConstructionPlane</a></td>
+        <td class="api-list">Returns the XZ origin construction plane.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_yConstructionAxis.htm">yConstructionAxis</a></td>
+        <td class="api-list">Returns the Y origin construction axis.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_yZConstructionPlane.htm">yZConstructionPlane</a></td>
+        <td class="api-list">Returns the YZ origin construction plane.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Component_zConstructionAxis.htm">zConstructionAxis</a></td>
+        <td class="api-list">Returns the Z origin construction axis.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="ArrangeFeature_parentComponent.htm">ArrangeFeature.parentComponent</a>, <a href="AsBuiltJoint_parentComponent.htm">AsBuiltJoint.parentComponent</a>, <a href="AssemblyConstraint_parentComponent.htm">AssemblyConstraint.parentComponent</a>, <a href="BaseFeature_parentComponent.htm">BaseFeature.parentComponent</a>, <a href="BossFeature_parentComponent.htm">BossFeature.parentComponent</a>, <a href="BoundaryFillFeature_parentComponent.htm">BoundaryFillFeature.parentComponent</a>, <a href="BoxFeature_parentComponent.htm">BoxFeature.parentComponent</a>, <a href="BRepBody_parentComponent.htm">BRepBody.parentComponent</a>, <a href="ChamferFeature_parentComponent.htm">ChamferFeature.parentComponent</a>, <a href="CircularPatternFeature_parentComponent.htm">CircularPatternFeature.parentComponent</a>, <a href="CoilFeature_parentComponent.htm">CoilFeature.parentComponent</a>, <a href="CombineFeature_parentComponent.htm">CombineFeature.parentComponent</a>, <a href="ComponentList_item.htm">ComponentList.item</a>, <a href="Components_item.htm">Components.item</a>, <a href="Components_itemById.htm">Components.itemById</a>, <a href="Components_itemByName.htm">Components.itemByName</a>, <a href="ConfigurationPlasticRuleColumn_component.htm">ConfigurationPlasticRuleColumn.component</a>, <a href="ConfigurationSheetMetalRuleColumn_component.htm">ConfigurationSheetMetalRuleColumn.component</a>, <a href="ConstructionAxes_component.htm">ConstructionAxes.component</a>, <a href="ConstructionAxis_component.htm">ConstructionAxis.component</a>, <a href="ConstructionPlane_component.htm">ConstructionPlane.component</a>, <a href="ConstructionPlanes_component.htm">ConstructionPlanes.component</a>, <a href="ConstructionPoint_component.htm">ConstructionPoint.component</a>, <a href="ConstructionPoints_component.htm">ConstructionPoints.component</a>, <a href="CopyPasteBody_parentComponent.htm">CopyPasteBody.parentComponent</a>, <a href="CustomFeature_parentComponent.htm">CustomFeature.parentComponent</a>, <a href="CustomFeatureParameter_component.htm">CustomFeatureParameter.component</a>, <a href="CutPasteBody_parentComponent.htm">CutPasteBody.parentComponent</a>, <a href="CylinderFeature_parentComponent.htm">CylinderFeature.parentComponent</a>, <a href="DeleteFaceFeature_parentComponent.htm">DeleteFaceFeature.parentComponent</a>, <a href="Design_activeComponent.htm">Design.activeComponent</a>, <a href="Design_rootComponent.htm">Design.rootComponent</a>, <a href="DraftFeature_parentComponent.htm">DraftFeature.parentComponent</a>, <a href="EmbossFeature_parentComponent.htm">EmbossFeature.parentComponent</a>, <a href="ExtendFeature_parentComponent.htm">ExtendFeature.parentComponent</a>, <a href="ExtrudeFeature_parentComponent.htm">ExtrudeFeature.parentComponent</a>, <a href="Feature_parentComponent.htm">Feature.parentComponent</a>, <a href="FilletFeature_parentComponent.htm">FilletFeature.parentComponent</a>, <a href="FlangeFeature_parentComponent.htm">FlangeFeature.parentComponent</a>, <a href="FlatPattern_parentComponent.htm">FlatPattern.parentComponent</a>, <a href="FlatPatternProduct_activeComponent.htm">FlatPatternProduct.activeComponent</a>, <a href="FlatPatternProduct_rootComponent.htm">FlatPatternProduct.rootComponent</a>, <a href="FormFeature_parentComponent.htm">FormFeature.parentComponent</a>, <a href="HemFeature_parentComponent.htm">HemFeature.parentComponent</a>, <a href="HoleFeature_parentComponent.htm">HoleFeature.parentComponent</a>, <a href="Joint_parentComponent.htm">Joint.parentComponent</a>, <a href="JointOrigin_parentComponent.htm">JointOrigin.parentComponent</a>, <a href="LoftFeature_parentComponent.htm">LoftFeature.parentComponent</a>, <a href="MeshBody_parentComponent.htm">MeshBody.parentComponent</a>, <a href="MeshCombineFaceGroupsFeature_parentComponent.htm">MeshCombineFaceGroupsFeature.parentComponent</a>, <a href="MeshCombineFeature_parentComponent.htm">MeshCombineFeature.parentComponent</a>, <a href="MeshConvertFeature_parentComponent.htm">MeshConvertFeature.parentComponent</a>, <a href="MeshFeature_parentComponent.htm">MeshFeature.parentComponent</a>, <a href="MeshGenerateFaceGroupsFeature_parentComponent.htm">MeshGenerateFaceGroupsFeature.parentComponent</a>, <a href="MeshReduceFeature_parentComponent.htm">MeshReduceFeature.parentComponent</a>, <a href="MeshRemeshFeature_parentComponent.htm">MeshRemeshFeature.parentComponent</a>, <a href="MeshRepairFeature_parentComponent.htm">MeshRepairFeature.parentComponent</a>, <a href="MeshReverseNormalFeature_parentComponent.htm">MeshReverseNormalFeature.parentComponent</a>, <a href="MeshSeparateFeature_parentComponent.htm">MeshSeparateFeature.parentComponent</a>, <a href="MeshShellFeature_parentComponent.htm">MeshShellFeature.parentComponent</a>, <a href="MeshSmoothFeature_parentComponent.htm">MeshSmoothFeature.parentComponent</a>, <a href="MirrorFeature_parentComponent.htm">MirrorFeature.parentComponent</a>, <a href="ModelParameter_component.htm">ModelParameter.component</a>, <a href="ModelParameters_component.htm">ModelParameters.component</a>, <a href="MoveFeature_parentComponent.htm">MoveFeature.parentComponent</a>, <a href="Occurrence_component.htm">Occurrence.component</a>, <a href="Occurrence_sourceComponent.htm">Occurrence.sourceComponent</a>, <a href="OffsetFacesFeature_parentComponent.htm">OffsetFacesFeature.parentComponent</a>, <a href="OffsetFeature_parentComponent.htm">OffsetFeature.parentComponent</a>, <a href="PatchFeature_parentComponent.htm">PatchFeature.parentComponent</a>, <a href="PathPatternFeature_parentComponent.htm">PathPatternFeature.parentComponent</a>, <a href="PipeFeature_parentComponent.htm">PipeFeature.parentComponent</a>, <a href="RectangularPatternFeature_parentComponent.htm">RectangularPatternFeature.parentComponent</a>, <a href="RefoldFeature_parentComponent.htm">RefoldFeature.parentComponent</a>, <a href="RemoveFeature_parentComponent.htm">RemoveFeature.parentComponent</a>, <a href="ReplaceFaceFeature_parentComponent.htm">ReplaceFaceFeature.parentComponent</a>, <a href="ReverseNormalFeature_parentComponent.htm">ReverseNormalFeature.parentComponent</a>, <a href="RevolveFeature_parentComponent.htm">RevolveFeature.parentComponent</a>, <a href="RibFeature_parentComponent.htm">RibFeature.parentComponent</a>, <a href="RigidGroup_parentComponent.htm">RigidGroup.parentComponent</a>, <a href="RipFeature_parentComponent.htm">RipFeature.parentComponent</a>, <a href="RuledSurfaceFeature_parentComponent.htm">RuledSurfaceFeature.parentComponent</a>, <a href="RuleFilletFeature_parentComponent.htm">RuleFilletFeature.parentComponent</a>, <a href="ScaleFeature_parentComponent.htm">ScaleFeature.parentComponent</a>, <a href="ShellFeature_parentComponent.htm">ShellFeature.parentComponent</a>, <a href="SilhouetteSplitFeature_parentComponent.htm">SilhouetteSplitFeature.parentComponent</a>, <a href="Sketch_parentComponent.htm">Sketch.parentComponent</a>, <a href="SphereFeature_parentComponent.htm">SphereFeature.parentComponent</a>, <a href="SplitBodyFeature_parentComponent.htm">SplitBodyFeature.parentComponent</a>, <a href="SplitFaceFeature_parentComponent.htm">SplitFaceFeature.parentComponent</a>, <a href="StitchFeature_parentComponent.htm">StitchFeature.parentComponent</a>, <a href="SurfaceDeleteFaceFeature_parentComponent.htm">SurfaceDeleteFaceFeature.parentComponent</a>, <a href="SweepFeature_parentComponent.htm">SweepFeature.parentComponent</a>, <a href="TangentRelationship_parentComponent.htm">TangentRelationship.parentComponent</a>, <a href="TessellateFeature_parentComponent.htm">TessellateFeature.parentComponent</a>, <a href="ThickenFeature_parentComponent.htm">ThickenFeature.parentComponent</a>, <a href="ThreadFeature_parentComponent.htm">ThreadFeature.parentComponent</a>, <a href="TorusFeature_parentComponent.htm">TorusFeature.parentComponent</a>, <a href="TrimFeature_parentComponent.htm">TrimFeature.parentComponent</a>, <a href="UnfoldFeature_parentComponent.htm">UnfoldFeature.parentComponent</a>, <a href="UnstitchFeature_parentComponent.htm">UnstitchFeature.parentComponent</a>, <a href="UntrimFeature_parentComponent.htm">UntrimFeature.parentComponent</a>, <a href="VolumetricCustomFeature_parentComponent.htm">VolumetricCustomFeature.parentComponent</a>, <a href="VolumetricModel_parentComponent.htm">VolumetricModel.parentComponent</a>, <a href="VolumetricModelToMeshFeature_parentComponent.htm">VolumetricModelToMeshFeature.parentComponent</a>, <a href="WebFeature_parentComponent.htm">WebFeature.parentComponent</a>, <a href="WorkingModel_activeComponent.htm">WorkingModel.activeComponent</a>, <a href="WorkingModel_rootComponent.htm">WorkingModel.rootComponent</a>, <a href="WorkingModel_sourceComponent.htm">WorkingModel.sourceComponent</a><h2 class="api">
+            Derived Classes
+          </h2><a href="FlatPatternComponent.htm">FlatPatternComponent</a><h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CreateSetupsFromHoleRecognition_Sample.htm">Create Setups From Hole Recognition API Sample</a></td>
+        <td class="api-list"><p>This sample script demonstrates how to create a correctly oriented setup using Hole Recognition functionality.</p><p>The Fusion Manufacturing Extension is required for Hole Recognition.</p><p>The script starts by opening a sample model from the CAM Samples folder via its URN. The model comprises a 3 way coupling containing holes in various orientations and mounted on a fixture. A reference setup is created for the model using a simple stock mode and offsets. The Hole Recognition feature of the Fusion Manufacturing Extension creates 5 hole groups containing 11 holes between them. For each unique hole group vector captured, a new setup is created and its orientation transformed to match the vector.</p></td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="LibraryItemSample_Sample.htm">Library Item API Sample</a></td>
+        <td class="api-list"><p>Demonstrates how to examine library items using the API.</p>
+<p>To use the sample, create a new Python or C++ script and copy and paste this code, replacing the existing default code. The script will search for and record all components and library items in the current project. They are displayed in a dialog when the script has finished.</p></td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="LoftFeatureSample_Sample.htm">Loft Feature API Sample</a></td>
+        <td class="api-list">Demonstrates creating a new loft feature.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SetViseOriginAsSetupWCSOrigin_Sample.htm">Set Vise Origin As Setup WCS Origin API Sample</a></td>
+        <td class="api-list"><p>This sample script demonstrates how to define our setup WCS origin relative to our vise origin from either a component, a sketch point or a joint origin.</p><p>The Work Coordinate System is a reference point set in our CAM workspace and on our machine. All machine coordinates are drawn from the WCS. This script demonstrates defining the WCS by each of 4 alternative methods:</p><p>Setup by default with no origin defined.</p><p>Setup using vise origin as WCS origin.</p><p>Setup using a sketch point as WCS origin.</p><p>Setup using a joint origin as WCS origin.</p></td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(Component%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

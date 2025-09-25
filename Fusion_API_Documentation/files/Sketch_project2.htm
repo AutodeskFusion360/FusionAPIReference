@@ -1,0 +1,120 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/Sketch_project2.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="09/04/2025">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="Sketch_project2">
+    <meta name="description" content="Sketch.project2 Method">
+    <meta name="topicid" content="GUID-67F0681F-27F2-448B-AF2A-A078918EE578">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Sketch.project2 Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Sketch.project2 Method</h1>
+
+          Parent Object: <a href="Sketch.htm">Sketch</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Sketch/Sketch.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Projects the specified entity or entities onto the X-Y plane of the sketch and returns the created sketch entity(s).</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"sketch_var" is a variable referencing a <a href="Sketch.htm">Sketch</a> object.<code><pre class="api-code">returnValue = sketch_var.<b>project2</b>(entities, isLinked)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"sketch_var" is a variable referencing a <a href="Sketch.htm">Sketch</a> object.<br /><br /><code><pre class="api-code">#include &lt;Fusion/Sketch/Sketch.h&gt;<br /><br />returnValue = sketch_var-&gt;<b>project2</b>(entities, isLinked);<br /></pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;"><a href="SketchEntity.htm">SketchEntity</a>[]</td>
+        <td class="api-list">Returns an array of the sketch entities that were created as a result of the projection.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">entities</td>
+        <td class="api-list">Base[]</td>
+        <td class="api-list">An array containing the entities to project. It can be an array of one for the case where a single entity is being projected. The following types of entities are valid for projection: sketch curves and points, B-Rep bodies (which results in projecting the silhouette of the body), B-Rep edges, B-Rep faces (which results in projecting all of its edges), B-Rep vertices, construction axes, construction points, and construction planes that are perpendicular to the sketch which results in the creation of a line.</td>
+      </tr>
+      <tr>
+        <td class="api-list">isLinked</td>
+        <td class="api-list">boolean</td>
+        <td class="api-list">A Boolean that indicates if the resulting sketch curves will be parametrically linked to the source geometry that was projected. If true, they will be linked. If false, the resulting curves are independent.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version May 2025<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(Sketch.project2%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

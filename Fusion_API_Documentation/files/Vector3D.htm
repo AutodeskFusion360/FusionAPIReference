@@ -1,0 +1,195 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/Vector3D.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="Vector3D">
+    <meta name="description" content="Vector3D Object">
+    <meta name="topicid" content="GUID-9cd7639c-97a9-4011-83f0-64694efe76e0">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>Vector3D Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Vector3D Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::core" and the header file is &lt;Core/Geometry/Vector3D.h&gt;<h2 class="api">
+          Description
+        </h2>Transient 3D vector. This object is a wrapper over 3D vector data and is used as way to pass vector data in and out of the API and as a convenience when operating on vector data. They are created statically using the create method of the Vector3D class.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Vector3D_add.htm">add</a></td>
+        <td class="api-list">Adds a vector to this vector.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Vector3D_angleTo.htm">angleTo</a></td>
+        <td class="api-list">Determines the angle between this vector and the specified vector.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Vector3D_asArray.htm">asArray</a></td>
+        <td class="api-list">Returns the vector coordinates as an array [x, y, z].</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Vector3D_asPoint.htm">asPoint</a></td>
+        <td class="api-list">Returns a new point with the same coordinate values as this vector.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Vector3D_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Vector3D_copy.htm">copy</a></td>
+        <td class="api-list">Creates a copy of this vector.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Vector3D_create.htm">create</a></td>
+        <td class="api-list">Creates a 3D vector object. This object is created statically using the Vector3D.create method.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Vector3D_crossProduct.htm">crossProduct</a></td>
+        <td class="api-list">Returns the cross product between this vector and the specified vector.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Vector3D_dotProduct.htm">dotProduct</a></td>
+        <td class="api-list">Returns the dot product between this vector and the specified vector.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Vector3D_isEqualTo.htm">isEqualTo</a></td>
+        <td class="api-list">Determines if this vector is equal to the specified vector.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Vector3D_isParallelTo.htm">isParallelTo</a></td>
+        <td class="api-list">Determines if the input vector is parallel with this vector.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Vector3D_isPerpendicularTo.htm">isPerpendicularTo</a></td>
+        <td class="api-list">Determines if the input vector is perpendicular to this vector.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Vector3D_normalize.htm">normalize</a></td>
+        <td class="api-list">Makes this vector of unit length. This vector should not be zero length.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Vector3D_scaleBy.htm">scaleBy</a></td>
+        <td class="api-list">Scale this vector by the specified product.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Vector3D_setWithArray.htm">setWithArray</a></td>
+        <td class="api-list">Reset this vector with the coordinate values in an array [x, y, z].</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Vector3D_subtract.htm">subtract</a></td>
+        <td class="api-list">Subtract a vector from this vector.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Vector3D_transformBy.htm">transformBy</a></td>
+        <td class="api-list">Transform this vector by the specified matrix.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Vector3D_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Vector3D_length.htm">length</a></td>
+        <td class="api-list">Get the length of this vector.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Vector3D_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Vector3D_x.htm">x</a></td>
+        <td class="api-list">The x value.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Vector3D_y.htm">y</a></td>
+        <td class="api-list">The y value.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Vector3D_z.htm">z</a></td>
+        <td class="api-list">The z value.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="AngleValueCommandInput_manipulatorXDirection.htm">AngleValueCommandInput.manipulatorXDirection</a>, <a href="AngleValueCommandInput_manipulatorYDirection.htm">AngleValueCommandInput.manipulatorYDirection</a>, <a href="Arc3D_getData.htm">Arc3D.getData</a>, <a href="Arc3D_normal.htm">Arc3D.normal</a>, <a href="Arc3D_referenceVector.htm">Arc3D.referenceVector</a>, <a href="AreaProperties_getPrincipalAxes.htm">AreaProperties.getPrincipalAxes</a>, <a href="ArrangeComponent_upDirection.htm">ArrangeComponent.upDirection</a>, <a href="ArrangeComponent_zeroDirection.htm">ArrangeComponent.zeroDirection</a>, <a href="BallJointMotion_pitchDirectionVector.htm">BallJointMotion.pitchDirectionVector</a>, <a href="BallJointMotion_rollDirectionVector.htm">BallJointMotion.rollDirectionVector</a>, <a href="BallJointMotion_yawDirectionVector.htm">BallJointMotion.yawDirectionVector</a>, <a href="BossFeature_direction.htm">BossFeature.direction</a>, <a href="Camera_upVector.htm">Camera.upVector</a>, <a href="Circle3D_getData.htm">Circle3D.getData</a>, <a href="Circle3D_normal.htm">Circle3D.normal</a>, <a href="Cone_axis.htm">Cone.axis</a>, <a href="Cone_getData.htm">Cone.getData</a>, <a href="CurveEvaluator3D_getCurvature.htm">CurveEvaluator3D.getCurvature</a>, <a href="CurveEvaluator3D_getFirstDerivative.htm">CurveEvaluator3D.getFirstDerivative</a>, <a href="CurveEvaluator3D_getSecondDerivative.htm">CurveEvaluator3D.getSecondDerivative</a>, <a href="CurveEvaluator3D_getTangent.htm">CurveEvaluator3D.getTangent</a>, <a href="CurveEvaluator3D_getThirdDerivative.htm">CurveEvaluator3D.getThirdDerivative</a>, <a href="CustomGraphicsBillBoard_axis.htm">CustomGraphicsBillBoard.axis</a>, <a href="Cylinder_axis.htm">Cylinder.axis</a>, <a href="Cylinder_getData.htm">Cylinder.getData</a>, <a href="CylindricalJointMotion_rotationAxisVector.htm">CylindricalJointMotion.rotationAxisVector</a>, <a href="DirectionCommandInput_manipulatorDirection.htm">DirectionCommandInput.manipulatorDirection</a>, <a href="DistanceValueCommandInput_manipulatorDirection.htm">DistanceValueCommandInput.manipulatorDirection</a>, <a href="Ellipse3D_getData.htm">Ellipse3D.getData</a>, <a href="Ellipse3D_majorAxis.htm">Ellipse3D.majorAxis</a>, <a href="Ellipse3D_normal.htm">Ellipse3D.normal</a>, <a href="EllipticalArc3D_getData.htm">EllipticalArc3D.getData</a>, <a href="EllipticalArc3D_majorAxis.htm">EllipticalArc3D.majorAxis</a>, <a href="EllipticalArc3D_normal.htm">EllipticalArc3D.normal</a>, <a href="EllipticalCone_getAxes.htm">EllipticalCone.getAxes</a>, <a href="EllipticalCone_getData.htm">EllipticalCone.getData</a>, <a href="EllipticalCylinder_axis.htm">EllipticalCylinder.axis</a>, <a href="EllipticalCylinder_getData.htm">EllipticalCylinder.getData</a>, <a href="EllipticalCylinder_majorAxis.htm">EllipticalCylinder.majorAxis</a>, <a href="HoleFeature_direction.htm">HoleFeature.direction</a>, <a href="InfiniteLine3D_direction.htm">InfiniteLine3D.direction</a>, <a href="InfiniteLine3D_getData.htm">InfiniteLine3D.getData</a>, <a href="JointGeometry_primaryAxisVector.htm">JointGeometry.primaryAxisVector</a>, <a href="JointGeometry_secondaryAxisVector.htm">JointGeometry.secondaryAxisVector</a>, <a href="JointGeometry_thirdAxisVector.htm">JointGeometry.thirdAxisVector</a>, <a href="JointOrigin_primaryAxisVector.htm">JointOrigin.primaryAxisVector</a>, <a href="JointOrigin_secondaryAxisVector.htm">JointOrigin.secondaryAxisVector</a>, <a href="JointOrigin_thirdAxisVector.htm">JointOrigin.thirdAxisVector</a>, <a href="JointOriginInput_primaryAxisVector.htm">JointOriginInput.primaryAxisVector</a>, <a href="JointOriginInput_secondaryAxisVector.htm">JointOriginInput.secondaryAxisVector</a>, <a href="JointOriginInput_thirdAxisVector.htm">JointOriginInput.thirdAxisVector</a>, <a href="LinearMachineAxis_direction.htm">LinearMachineAxis.direction</a>, <a href="LinearMachineAxisInput_direction.htm">LinearMachineAxisInput.direction</a>, <a href="Matrix3D_getAsCoordinateSystem.htm">Matrix3D.getAsCoordinateSystem</a>, <a href="Matrix3D_translation.htm">Matrix3D.translation</a>, <a href="MultiAxisRetractAndReconfigureSettings_stockExpansion.htm">MultiAxisRetractAndReconfigureSettings.stockExpansion</a>, <a href="OrientedBoundingBox3D_heightDirection.htm">OrientedBoundingBox3D.heightDirection</a>, <a href="OrientedBoundingBox3D_lengthDirection.htm">OrientedBoundingBox3D.lengthDirection</a>, <a href="OrientedBoundingBox3D_widthDirection.htm">OrientedBoundingBox3D.widthDirection</a>, <a href="PhysicalProperties_getPrincipalAxes.htm">PhysicalProperties.getPrincipalAxes</a>, <a href="PinSlotJointMotion_rotationAxisVector.htm">PinSlotJointMotion.rotationAxisVector</a>, <a href="PinSlotJointMotion_slideDirectionVector.htm">PinSlotJointMotion.slideDirectionVector</a>, <a href="PlanarJointMotion_normalDirectionVector.htm">PlanarJointMotion.normalDirectionVector</a>, <a href="PlanarJointMotion_primarySlideDirectionVector.htm">PlanarJointMotion.primarySlideDirectionVector</a>, <a href="PlanarJointMotion_secondarySlideDirectionVector.htm">PlanarJointMotion.secondarySlideDirectionVector</a>, <a href="Plane_normal.htm">Plane.normal</a>, <a href="Plane_uDirection.htm">Plane.uDirection</a>, <a href="Plane_vDirection.htm">Plane.vDirection</a>, <a href="Point3D_asVector.htm">Point3D.asVector</a>, <a href="Point3D_vectorTo.htm">Point3D.vectorTo</a>, <a href="PolygonMesh_normalVectors.htm">PolygonMesh.normalVectors</a>, <a href="RecognizedHole_axis.htm">RecognizedHole.axis</a>, <a href="RecognizedHoleSegment_axis.htm">RecognizedHoleSegment.axis</a>, <a href="RectangularPatternFeature_directionOne.htm">RectangularPatternFeature.directionOne</a>, <a href="RectangularPatternFeature_directionTwo.htm">RectangularPatternFeature.directionTwo</a>, <a href="RectangularPatternFeatureInput_directionOne.htm">RectangularPatternFeatureInput.directionOne</a>, <a href="RectangularPatternFeatureInput_directionTwo.htm">RectangularPatternFeatureInput.directionTwo</a>, <a href="RevoluteJointMotion_rotationAxisVector.htm">RevoluteJointMotion.rotationAxisVector</a>, <a href="Sketch_xDirection.htm">Sketch.xDirection</a>, <a href="Sketch_yDirection.htm">Sketch.yDirection</a>, <a href="SketchEllipse_majorAxis.htm">SketchEllipse.majorAxis</a>, <a href="SketchEllipticalArc_majorAxis.htm">SketchEllipticalArc.majorAxis</a>, <a href="SliderJointMotion_slideDirectionVector.htm">SliderJointMotion.slideDirectionVector</a>, <a href="SurfaceEvaluator_getCurvature.htm">SurfaceEvaluator.getCurvature</a>, <a href="SurfaceEvaluator_getFirstDerivative.htm">SurfaceEvaluator.getFirstDerivative</a>, <a href="SurfaceEvaluator_getNormalAtParameter.htm">SurfaceEvaluator.getNormalAtParameter</a>, <a href="SurfaceEvaluator_getNormalAtPoint.htm">SurfaceEvaluator.getNormalAtPoint</a>, <a href="SurfaceEvaluator_getSecondDerivative.htm">SurfaceEvaluator.getSecondDerivative</a>, <a href="SurfaceEvaluator_getThirdDerivative.htm">SurfaceEvaluator.getThirdDerivative</a>, <a href="ToEntityExtentDefinition_directionHint.htm">ToEntityExtentDefinition.directionHint</a>, <a href="Torus_axis.htm">Torus.axis</a>, <a href="Torus_getData.htm">Torus.getData</a>, <a href="TriangleMesh_normalVectors.htm">TriangleMesh.normalVectors</a>, <a href="Vector3D_copy.htm">Vector3D.copy</a>, <a href="Vector3D_create.htm">Vector3D.create</a>, <a href="Vector3D_crossProduct.htm">Vector3D.crossProduct</a>, <a href="Vector3DGraphNodeProperty_value.htm">Vector3DGraphNodeProperty.value</a>, <a href="Viewport_frontEyeDirection.htm">Viewport.frontEyeDirection</a>, <a href="Viewport_frontUpDirection.htm">Viewport.frontUpDirection</a>, <a href="VolumetricVectorSample_value.htm">VolumetricVectorSample.value</a><h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CreateSetupsFromHoleRecognition_Sample.htm">Create Setups From Hole Recognition API Sample</a></td>
+        <td class="api-list"><p>This sample script demonstrates how to create a correctly oriented setup using Hole Recognition functionality.</p><p>The Fusion Manufacturing Extension is required for Hole Recognition.</p><p>The script starts by opening a sample model from the CAM Samples folder via its URN. The model comprises a 3 way coupling containing holes in various orientations and mounted on a fixture. A reference setup is created for the model using a simple stock mode and offsets. The Hole Recognition feature of the Fusion Manufacturing Extension creates 5 hole groups containing 11 holes between them. For each unique hole group vector captured, a new setup is created and its orientation transformed to match the vector.</p></td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="moveFeatures_add_Sample.htm">moveFeatures.add</a></td>
+        <td class="api-list">Demonstrates the moveFeatures.add method.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(Vector3D%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,112 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/PlaneAndOffsetsHolePositionDefinition.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="PlaneAndOffsetsHolePositionDefinition">
+    <meta name="description" content="PlaneAndOffsetsHolePositionDefinition Object">
+    <meta name="topicid" content="GUID-f4505541-ac14-4ab8-9b25-51573de1005b">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>PlaneAndOffsetsHolePositionDefinition Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">PlaneAndOffsetsHolePositionDefinition Object
+			</h1>
+              Derived from: <a href="HolePositionDefinition.htm">HolePositionDefinition</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Features/PlaneAndOffsetsHolePositionDefinition.h&gt;<h2 class="api">
+          Description
+        </h2>Provides positioning information for a hole that is positioned on a plane and at a distance from one or two edges.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PlaneAndOffsetsHolePositionDefinition_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PlaneAndOffsetsHolePositionDefinition_edgeOne.htm">edgeOne</a></td>
+        <td class="api-list">The first of 2 edges the hole position is measured from. OffsetOne provides access to the model parameter controlling the offset distance.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PlaneAndOffsetsHolePositionDefinition_edgeTwo.htm">edgeTwo</a></td>
+        <td class="api-list">The second of two edges the hole position is measured from. OffsetTwo provides access to the model parameter controlling the offset distance. This property can return null in the case where only one edge is used.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PlaneAndOffsetsHolePositionDefinition_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PlaneAndOffsetsHolePositionDefinition_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PlaneAndOffsetsHolePositionDefinition_offsetOne.htm">offsetOne</a></td>
+        <td class="api-list">Returns the model parameter controlling the distance from the center of the hole to EdgeOne.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PlaneAndOffsetsHolePositionDefinition_offsetTwo.htm">offsetTwo</a></td>
+        <td class="api-list">Returns the model parameter controlling the distance from the center of the hole to EdgeTwo. This property returns null in the case where only one edge is used.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PlaneAndOffsetsHolePositionDefinition_planarEntity.htm">planarEntity</a></td>
+        <td class="api-list">Returns the plane that defines the orientation and start of the hole.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(PlaneAndOffsetsHolePositionDefinition%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

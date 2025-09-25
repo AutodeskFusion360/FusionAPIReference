@@ -1,0 +1,158 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/Matrix2D.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/8/2014">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="Matrix2D">
+    <meta name="description" content="Matrix2D Object">
+    <meta name="topicid" content="GUID-9bc841aa-a429-4af5-a871-9645d064e070">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>Matrix2D Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Matrix2D Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::core" and the header file is &lt;Core/Geometry/Matrix2D.h&gt;<h2 class="api">
+          Description
+        </h2>Transient 2D 3x3 matrix. This object is a wrapper over 2D matrix data and is used as way to pass matrix data in and out of the API and as a convenience when operating on matrix data. They are created statically using the create method of the Matrix2D class.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Matrix2D_asArray.htm">asArray</a></td>
+        <td class="api-list">Returns the contents of the matrix as a 9 element array.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Matrix2D_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Matrix2D_copy.htm">copy</a></td>
+        <td class="api-list">Creates an independent copy of this matrix.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Matrix2D_create.htm">create</a></td>
+        <td class="api-list">Creates a transient 2D matrix (3x3) object. It is initialized as an identity matrix.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Matrix2D_getAsCoordinateSystem.htm">getAsCoordinateSystem</a></td>
+        <td class="api-list">Gets the matrix data as the components that define a coordinate system.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Matrix2D_getCell.htm">getCell</a></td>
+        <td class="api-list">Gets the value of the specified cell in the 3x3 matrix.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Matrix2D_invert.htm">invert</a></td>
+        <td class="api-list">Invert this matrix.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Matrix2D_isEqualTo.htm">isEqualTo</a></td>
+        <td class="api-list">Compares this matrix with another matrix and returns True if they're identical.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Matrix2D_setCell.htm">setCell</a></td>
+        <td class="api-list">Sets the specified cell in the 3x3 matrix to the specified value.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Matrix2D_setToAlignCoordinateSystems.htm">setToAlignCoordinateSystems</a></td>
+        <td class="api-list">Sets this matrix to be the matrix that maps from the 'from' coordinate system to the 'to' coordinate system.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Matrix2D_setToIdentity.htm">setToIdentity</a></td>
+        <td class="api-list">Resets this matrix to be an identity matrix.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Matrix2D_setToRotateTo.htm">setToRotateTo</a></td>
+        <td class="api-list">Sets to the matrix of rotation that would align the 'from' vector with the 'to' vector.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Matrix2D_setToRotation.htm">setToRotation</a></td>
+        <td class="api-list">Sets this matrix to the matrix of rotation by the specified angle, through the specified origin.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Matrix2D_setWithArray.htm">setWithArray</a></td>
+        <td class="api-list">Sets the contents of the array using a 9 element array.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Matrix2D_setWithCoordinateSystem.htm">setWithCoordinateSystem</a></td>
+        <td class="api-list">Reset this matrix to align with a specific coordinate system.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Matrix2D_transformBy.htm">transformBy</a></td>
+        <td class="api-list">Transforms this matrix using the input matrix.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Matrix2D_determinant.htm">determinant</a></td>
+        <td class="api-list">Returns the determinant of the matrix.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Matrix2D_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Matrix2D_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="Canvas_transform.htm">Canvas.transform</a>, <a href="CanvasInput_transform.htm">CanvasInput.transform</a>, <a href="Matrix2D_copy.htm">Matrix2D.copy</a>, <a href="Matrix2D_create.htm">Matrix2D.create</a><h2 class="api">
+            Version
+          </h2>
+        Introduced in version August 2014<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(Matrix2D%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,219 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/FetchPartNumberForComponents.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="FetchPartNumberForComponents_Sample">
+    <meta name="description" content="Get part number using GraphQL Sample">
+    <meta name="topicid" content="GUID-a2d5ea7a-0b18-4f20-9711-4ab789e4f960">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Get part number using GraphQL</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Get part number using GraphQL</h1>
+    <h2 class="api">
+          Description
+        </h2>Fetches part number of root component and from occurrences via GQL query.<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">"""This file acts as the main module for this script."""
+
+import traceback
+import adsk.core
+import adsk.fusion
+import json
+
+'''
+Overview of the steps demonstrated:
+1. Register the mfgdmDataReady event.
+   Before accessing cloud metadata such as mfgdmModelId, ensure the data is ready.
+   Register the MFGDMDataReadyEventHandler at the beginning of your script execution
+   in the mfgdm_data_ready() method.
+2. Implement the MFGDMDataReadyEventHandler
+   This event fires when the cloud model data is fully initialized and accessible.
+   Use the notify method to access mfgdmModelId from the design or component level.
+3. Access Model IDs and Timestamps
+   Inside the event handler, the script retrieves rootDataComponent from the design.
+   If the mfgdmModelId is available, it stores the model ID and timestamp pair in modelIdsWithTime.
+4. Fetch Part Numbers Using GraphQL
+   The fetchPNFromGql function constructs and sends a GraphQL request to the MFGDM
+   service using the collected modelIdsWithTime. It retrieves part numbers and logs them.
+'''
+
+<span style="color:blue"># Initialize the global variables for the Application and UserInterface objects.</span>
+app = adsk.core.Application.get()
+ui  = app.userInterface
+mfgdm_url = 'mfgdm://v3'
+
+def run(_context: str):
+    """This function is called by Fusion when the script is run."""
+
+    try:
+        mfgdm_data_ready()
+        adsk.autoTerminate(False)
+    except:  <span style="color:blue">#pylint:disable=bare-except</span>
+        app.log(f'Failed:\n{traceback.format_exc()}')
+
+mfgdmDataReadyHandler: adsk.core.MFGDMDataEventHandler = None
+
+class MFGDMDataReadyEventHandler(adsk.core.MFGDMDataEventHandler):
+    """This class handles the mfgdm data ready event."""
+
+    def notify(self, args: adsk.core.MFGDMDataEventArgs):
+        """This method is called when the mfgdm data ready event occurs."""
+        
+        <span style="color:blue"># Empty set to collect unique modelId and time pairs.</span>
+        modelIdsWithTime = set()
+
+        <span style="color:blue"># Get the active design from the document provided by the event.</span>
+        design: adsk.fusion.Design = args.document.products.itemByProductType('DesignProductType')
+        
+        <span style="color:blue"># Get the DataComponent from the root component and add its MFGDM ID and timestamp to the set.</span>
+        data = design.rootDataComponent
+        app.log(f'root model id: {data.mfgdmModelId}, timestamp: {data.timestamp}')
+        if data.mfgdmModelId:
+            modelIdsWithTime.add((data.mfgdmModelId, data.timestamp))
+        else:
+            app.log(f'Root Component does not have a valid mfgdmModelId.')
+        
+        <span style="color:blue"># Add the MFGDM ID and timestamp of each occurrence.</span>
+        for occ in design.rootComponent.allOccurrences:
+            if data := occ.dataComponent:
+                app.log(f'occurrence: {occ.fullPathName}, model id: {data.mfgdmModelId}, timestamp: {data.timestamp}')
+                modelIdsWithTime.add((data.mfgdmModelId, data.timestamp))
+            else:
+                app.log(f'Occurrence does not have DataComponent')
+        
+        <span style="color:blue"># Log information for all components</span>
+        for comp in design.allComponents:
+            app.log(f'comp: {comp.name}, model id: {comp.mfgdmModelId}')
+
+        <span style="color:blue"># Check if modelIdsWithTime is empty before proceeding to fetch part numbers.</span>
+        if not modelIdsWithTime:
+            app.log('No model ID to fetch part number.')
+        else:
+            <span style="color:blue"># Call the function to get the part numbers.</span>
+            for modelId, time in modelIdsWithTime:
+                fetchPNFromGql(modelId, time)
+
+<span style="color:blue"># Connect to the mfgdmDataReady event.</span>
+def mfgdm_data_ready():
+    """Register the MFGDMData ready event handler."""
+    global mfgdmDataReadyHandler
+    mfgdmDataReadyHandler = MFGDMDataReadyEventHandler()
+    app.mfgdmDataReady.add(mfgdmDataReadyHandler)
+
+def fetchPNFromGql(modelId, time):
+    """Fetch part number from the GraphQL endpoint using modelId and time."""
+
+    <span style="color:blue"># Use HTTP Request to query for the part number.</span>
+    request = adsk.core.HttpRequest.create(mfgdm_url, adsk.core.HttpMethods.PostMethod)
+    request.setHeader('Content-type', 'application/json; charset=utf-8')
+
+    <span style="color:blue"># Define the GraphQL query as a string.</span>
+    graphql_query = '''
+        query ($modelId: ID!, $time: DateTime) {
+            model(modelId: $modelId, time: $time) {
+                component {
+                    partNumber {
+                        displayValue
+                    }
+                }
+            }
+        }
+    '''
+
+    <span style="color:blue"># Create a dictionary to represent the GraphQL request payload</span>
+    variables = {'modelId': modelId}
+    <span style="color:blue"># Only pass 'time' if it is not an empty string</span>
+    if time:
+        variables['time'] = time
+
+    payload = {
+        'query': graphql_query,
+        'variables': variables
+    }
+
+    <span style="color:blue"># Convert the payload to a JSON string</span>
+    request.data = json.dumps(payload)
+    app.log(f'json_payload: {request.data}')
+
+    headers = request.headers()
+    app.log(f'headers: {str(headers)}')
+    response = request.executeSync()
+    app.log(f'Response Code: {response.statusCode}')
+
+    if response.statusCode == 200:
+        <span style="color:blue"># Write the result to the TEXT COMMAND window.</span>
+        response_json = json.loads(response.data)
+        app.log(f'Response JSON:\n{json.dumps(response_json)}')
+    else:
+        app.log(f'Failed to fetch part number with status code {response.statusCode}')</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(FetchPartNumberForComponents%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

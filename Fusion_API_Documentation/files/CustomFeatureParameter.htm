@@ -1,0 +1,185 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/CustomFeatureParameter.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="13/01/2021">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="CustomFeatureParameter">
+    <meta name="description" content="CustomFeatureParameter Object">
+    <meta name="topicid" content="GUID-AF98CBF8-DE29-4ACB-8556-C80D3307CCE4">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>CustomFeatureParameter Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">CustomFeatureParameter Object <img src="../images/TestTubeLarge.png" alt="Preview"></h1>
+              Derived from: <a href="ModelParameter.htm">ModelParameter</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Features/CustomFeatureParameter.h&gt;<p class="api-preview"><img src="../images/TestTubeSmall.png" alt="Preview">This functionality is provided as a preview
+				of intended future API capabilities. You are encouraged to use it and report any problems or suggestions using the
+				<a href="https://forums.autodesk.com/t5/fusion-360-api-and-scripts/bd-p/22">Fusion API and Scripts</a> forum.<br><br>
+	
+                Because this is a preview of future functionality, there is the possibility that it will change, which will possibly
+		        break any existing programs that use this functionality. Because of that, you should never deliver any programs that use
+		        any preview capabilities. For a distributed program, you should wait until it has moved from preview to released state.
+		    </p>
+    <h2 class="api">
+          Description
+        </h2>A custom parameter is a parameter that was created as the result of a custom feature being created. It is associated with the custom feature and it's lifetime is the same as the custom feature that owns it.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomFeatureParameter_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomFeatureParameter_deleteMe.htm">deleteMe</a></td>
+        <td class="api-list">Deletes this ModelParameter. As a general rule, model parameters cannot be deleted because features depend on them. However, there are uncommon workflows where a parameter no longer has any dependents and is not automatically deleted. You can use the isDeletable property to see if the parameter is in this state and can successfully be deleted.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomFeatureParameter_attributes.htm">attributes</a></td>
+        <td class="api-list">Returns the collection of attributes associated with this face.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomFeatureParameter_comment.htm">comment</a></td>
+        <td class="api-list">The comment associated with this parameter</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomFeatureParameter_component.htm">component</a></td>
+        <td class="api-list">Returns the Component containing the ModelParameter.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomFeatureParameter_createdBy.htm">createdBy</a></td>
+        <td class="api-list">Returns the object that created this parameter. For example, a feature, a sketch dimension, or a construction plane.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomFeatureParameter_dependencyParameters.htm">dependencyParameters</a></td>
+        <td class="api-list">Returns a list of parameters that this parameter is dependent on.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomFeatureParameter_dependentParameters.htm">dependentParameters</a></td>
+        <td class="api-list">Returns a list of parameters that are dependent on this parameter as a result of this parameter being referenced in their equation.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomFeatureParameter_entityToken.htm">entityToken</a></td>
+        <td class="api-list">Returns a token for the Parameter object. This can be saved and used at a later time with the Design.findEntityByToken method to get back the same parameter.<br/><br/> When using entity tokens it's important to understand that the token string returned for a specific entity can be different over time. However, even if you have two different token strings that were obtained from the same entity, when you use findEntityByToken they will both return the same entity. Because of that you should never compare entity tokens as way to determine what the token represents. Instead, you need to use the findEntityByToken method to get the two entities identified by the tokens and then compare them.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomFeatureParameter_expression.htm">expression</a></td>
+        <td class="api-list">Gets and sets the expression used to calculate the value of the parameter. This is the equivalent of the "Expression" column in the Parameters dialog. Numeric parameters can be defined by a simple expression like "6.25", which will be interpreted based on whatever the default units are for the document. For example, if the units are set to millimeters, the value will be 6.25 mm; if the units are inches, it will be 6.25 inches. The expression can also contain the units so "6.25 in" will always be evaluated as inches regardless of the document units.<br/><br/> An expression can also contain references to other parameters and use equations. For example, the expression "Length / 2" is valid for a numeric parameter as long as there is a numeric parameter named "Length". Expressions can also be used for text parameters, such as concatenating two other text parameters. For example, if there are two existing text parameters named text1 and text2, the expression for another text parameter can be "text1 + text2". More complex equations can also be used with text parameters like "if (Length < 20 mm; 'Short'; 'Long')" where "Length" is a numeric parameter. The resulting string can be obtained using the textValue property.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomFeatureParameter_id.htm">id</a></td>
+        <td class="api-list">Returns the ID of this custom feature parameter.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomFeatureParameter_isDeletable.htm">isDeletable</a></td>
+        <td class="api-list">Gets if this parameter can be deleted. Parameters that have dependents cannot be deleted, and model parameters typically cannot be deleted. However, there is the possibility in uncommon workflows where a model parameter no longer has any dependents, and it was not automatically deleted. In this case, this property will return true, and the deleteMe method can delete the parameter.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomFeatureParameter_isFavorite.htm">isFavorite</a></td>
+        <td class="api-list">Gets and sets whether this parameter is included in the Favorites list in the parameters dialog</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomFeatureParameter_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomFeatureParameter_isVisible.htm">isVisible</a></td>
+        <td class="api-list">Gets and sets if this parameter is visible in the parameters dialog. By default, all new parameters are visible.<br/><br/> This can be useful in cases where the feature can be edited to be in different states where a parameter is only valid in a certain state. You can change the visibility based on the current state of the feature and if that parameter should be available for edit. This implies that you create all the parameters that might be needed and then change their visibility based on the current state of the feature. The parameters that are not visible will not be returned by the ModelParameters collection and are only available through the custom feature they're associated with.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomFeatureParameter_modelParameters.htm">modelParameters</a></td>
+        <td class="api-list">Returns the Collection containing the ModelParameter.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomFeatureParameter_name.htm">name</a></td>
+        <td class="api-list">Gets and sets the name of the parameter. Setting the name can fail if the name is not unique with respect to all other parameters in the design.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomFeatureParameter_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomFeatureParameter_parentCustomFeature.htm">parentCustomFeature</a></td>
+        <td class="api-list">Returns the custom feature this parameter is associated with.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomFeatureParameter_role.htm">role</a></td>
+        <td class="api-list">This property identifies what the parameter is used for. For an extrude, it could be "Depth", for a work plane it could be "Offset".</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomFeatureParameter_textValue.htm">textValue</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Gets and sets the value of the parameter when it is a text parameter. This can be determined by checking the valueType property. Setting this value will cause the current expression to be overwritten. If the parameter is not a text parameter, the value of this property should be ignored and setting will fail.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomFeatureParameter_unit.htm">unit</a></td>
+        <td class="api-list">The unit type associated with this parameter. An empty string is returned for parameters that don't have a unit type.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomFeatureParameter_value.htm">value</a></td>
+        <td class="api-list">Gets and sets the real value (a double) of the parameter in database units. Setting this property will set/reset the expression value for this parameter.<br/><br/> This property is only valid for numeric parameters and will fail for text parameters. You can determine the value type of the parameter by using the valueType property. Use the textValue property to get and set the value of text parameters.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="CustomFeatureParameter_valueType.htm">valueType</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Returns the type of value this parameter is. For a numeric parameter, you can get the value using the value property. For a text parameter, you can get the value using the textValue property.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="CustomFeatureParameters_item.htm">CustomFeatureParameters.item</a>, <a href="CustomFeatureParameters_itemById.htm">CustomFeatureParameters.itemById</a><h2 class="api">
+            Version
+          </h2>
+        Introduced in version January 2021<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2025 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(CustomFeatureParameter%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

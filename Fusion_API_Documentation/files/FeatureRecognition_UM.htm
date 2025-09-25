@@ -1,0 +1,249 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/FeatureRecognition_UM.htm#!">
+    <meta name="contextid" content="Units_UM">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="19/7/2023">
+    <meta name="user-comments" content="enable">
+    <meta name="description" content="">
+    <meta name="topicid" content="GUID-7249049A-3CC8-489C-9187-D9960EB07607">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Feature Recognition in CAM</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+	<link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"/>
+	<script type="text/javascript" src="/view/clientframework/client.js"><!--filler--></script> 
+	<script>
+	  // This turns on the display of the copyright notice which is not visible by default.
+	  // Because the head is removed when used in the web help, this function will only exists
+	  // when the chm help is being created.
+	  window.onload = function() {
+		copyrightElement = document.getElementById('CopyrightNotice');
+		copyrightElement.style.display = 'block';
+	  };
+	</script>
+</head>
+<body>
+<script>
+	function copyCode(language) {
+	// Get the pre element for the specified language.
+	var preElement = document.getElementById(language);
+
+	// Get the text from the element and copy it to the clipboard.
+	var preText = preElement.innerText;
+
+	var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+	if (isIE)
+	{
+	window.clipboardData.setData('Text', preText);
+	}
+	else
+	{
+	navigator.clipboard.writeText(preText);
+	}
+
+	//alert("Code copied to clipboard");
+	}
+</script>
+<link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+	
+<h2 class="api">Feature Recognition in CAM</h2>
+<p Class="api">The CAM library supports feature recognition for holes and pockets. This topic describes the concepts needed to understand and use this capability.</p>
+
+<h2 class="api">Hole Recognition</h2>
+
+<p Class="api">The hole recognition option available via the UI lists all recognized holes and hole groups based on the diameter and segment types.  You can then apply a given template to the recognized holes or hole groups.</p>
+
+<div align="center"><img src="../images/HoleRecognition1.png" border=0 align="middle" alt="2D Matrix" width="725" height="551"></div>
+<br>
+
+<p Class="api">Using the API, you can recognize holes and hole groups using the <code>adsk.cam.RecognizedHole.recognizeHoles(bodies)</code> and <code>adsk.cam.RecognizedHole.recognizeHoleGroups(bodies)</code> methods. They both accept an array of bodies for the input and will return all holes for the body regardless or their orientation. Below is an example of a hole containing all possible segment types. Each segment can be a cylinder, flat face, cone, or torus. A hole <i>signature</i> is the list of segments that define that hole. Two holes are considered the same when they have the same number of segments in the same direction, and each segment must match the geometry of the other segment and have the same dimensions. The segments are in order from the top of the hole to the bottom. The difference between using the recognizeHoles and recognizeHoleGroups is the recongizeHoles method returns a flat list of all the recognized holes. Whereas the recognizeHoleGroups looks at the signatures of the holes found and combines the holes with the same signature into the same RecognizedHoleGroup.</p>
+
+<div align="center"><img src="../images/HoleSegments.png" border=0 align="middle" alt="Hole Segments"></div>
+<br>
+
+
+<p Class="api">Below is some sample code that finds all the hole groups in the first body of the Design and writes out information to the TEXT COMMAND window about the hole groups and holes that were found. A <a href="HoleAndPocketRecognition_Sample.htm">complete sample</a> illustrates using hole recognition to find holes and create operations using that information. One thing to notice about the sample below is that it doesn't activate the CAM workspace. The hole and pocket recognition capabilities can be used within the Design.</p>
+
+<div>
+	<table width="100%" style="font-size:15">
+		<tr>
+			<td align="right"><button onclick="copyCode('Sample1')" class="copy-code">Copy Code</button></td>
+		</tr>
+	</table>
+<pre class="api-code" id="Sample1">import adsk.core, adsk.fusion, adsk.cam, traceback
+
+_app = adsk.core.Application.get()
+_ui = _app.userInterface
+
+def run(context):
+    try:
+        # Get the first body in the root component.
+        des: adsk.fusion.Design = _app.activeDocument.Products.products.itemByProductType('DesignProductType')
+        body = des.rootComponent.bRepBodies[0]
+
+        # Recognize the holes in the body.
+        holeGroups = adsk.cam.RecognizedHoleGroup.recognizeHoleGroups([body])
+        _app.log(f"Hole Group count: {holeGroups.count}")
+
+        # Print out information about the found holes in the TEXT COMMAND window in Fusion.
+        holeGroup: adsk.cam.RecognizedHoleGroup
+        for holeGroup in holeGroups:
+            # Process each hole within this group.
+            _app.log(f"   Holes in Group count: {holeGroup.count}")
+            hole: adsk.cam.RecognizedHole
+            for hole in holeGroup:
+                _app.log(f"      Segments in hole: {hole.segmentCount}")
+                for i in range(hole.segmentCount):
+                    # Display information about each segment of the current hole.
+                    segment: adsk.cam.RecognizedHoleSegment = hole.segment(i)
+
+                    _app.log(f'         Segment {i}')
+                    if segment.holeSegmentType == adsk.cam.HoleSegmentType.HoleSegmentTypeCone:
+                        _app.log(f'            Segment Type: Cone')
+                    elif segment.holeSegmentType == adsk.cam.HoleSegmentType.HoleSegmentTypeFlat:
+                        _app.log(f'            Segment Type: Flat')
+                    elif segment.holeSegmentType == adsk.cam.HoleSegmentType.HoleSegmentTypeCylinder:
+                        _app.log(f'            Segment Type: Cylinder')
+                    elif segment.holeSegmentType == adsk.cam.HoleSegmentType.HoleSegmentTypeTorus:
+                        _app.log(f'            Segment Type: Torus')                  
+		
+    except:
+        _ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
+</pre></div>
+
+
+<h2 class="api">Pocket Recognition</h2>
+<p Class="api">The API for Fusion exposes the algorithm that makes up the "<a href="https://help.autodesk.com/view/fusion360/ENU/?guid=MFG-GEOMETRY-SELECTION-POCKETS">Pocket Recognition</a>" option available in the Fusion UI as part of geometry selection for the 2D Pocket, 2D Contour, and 2D Chamfer strategies. The functionality is intended to streamline programming for parts that contain many pockets.</p>
+
+<p Class="api">In the Fusion user interface, Pocket Recognition allows users to specify a minimum and maximum corner radius and a minimum and maximum depth.  Together with the tool direction, this is used to find all the pockets that would be appropriate to machine with a particular tool of specific radius and cutting length, which is the context in which Pocket Recognition is used in the user interface.  The API exposes this functionality via the <a href="CurveSelections_createNewPocketRecognitionSelection.htm">createNewPocketRecognitionSelection</a> method and requires the same inputs as the user interface.</p>
+
+<p Class="api">However, the API also exposes much more of the underlying algorithm used in the user interface via the RecognizedPockets object. The API provides a more general and customizable interface that is useful for specific applications. The remainder of this page will only be concerned with this more general functionality. Note that the results from the user interface are deliberately restricted to cases that are relatively certain to generate a toolpath that will be safe (non-gouging). Safety is not considered with what's available through the API, and much more care is required when using this functionality. The returned RecognizedPockets object holds a collection of all the pockets in a given solid model that can be reached from a particular tool direction.</p>
+
+<p Class="api">In general, RecognizedPockets can be of these types:
+<ul>
+<li>Pockets with vertical walls parallel to the specified (tool) direction.</li>
+<li>Pockets with closed island boundaries (not necessarily at the same height as the outer boundary).</li>
+<li>Through pockets (no bottom surface at all).</li>
+<li>Pockets with a bottom surface and a variety of corner handling at the corner including fillets, chamfers, sharp corners, and mixtures of these.</li>
+<li>Open contours: pockets with no continuous wall around the bottom of the pocket.</li>
+<li>Pockets with top fillets or chamfers are recognized.</li>
+<li>Nested pockets (with or without shared walls).</li>
+</ul>
+
+The API functions do not support recognizing the following:
+
+<ul>
+<li>Bosses</li>
+<li>Pockets with draft/angled walls</li>
+</ul>
+</p>
+
+<p Class="api">All of the pockets shown in the image below are recognized:</p>
+
+<div align="center"><img src="../images/PocketRecognition2.png" border=0 align="middle" alt="2D Matrix"></div>
+<br>
+
+<p Class="api">Here are some comments on the pockets above:
+<ul>
+<li>A1, light green, basic pocket with bottom</li>
+<li>A2, brown, basic through pocket</li>
+<li>A3, blue, basic pocket with interior concave sharp point (would not be machinable, but is recognized)</li>
+<li>A4, yellow, basic pocket with one much larger corner radius</li>
+<li>A5, green, basic pocket with interior convex sharp point (machinable)</li>
+<li>B1, yellow, bottom fillet</li>
+<li>B2, pink, top fillet, recognized</li>
+<li>B3, purple, bottom chamfer</li>
+<li>B4, orange, top chamfer, recognized</li>
+<li>B5, turquoise pocket with partial floor, is identified with a flat bottom</li>
+<li>C1, red, pocket with island</li>
+<li>C2, turquoise, pocket with higher island, reports the same as C1</li>
+<li>C3, gray, pocket with lower island, will be reported as two pockets: a shallow one on top with no island and another below with an island</li>
+<li>C4, blue, pocket with thru slot, will be reported as two pockets: a shallow one on top and another thru pocket below.</li>
+<li>C5, light green, pocket with thru slot, same as C4, but the slot is not tangent to the pocket wall</li>
+<li>D1, pink, nested pocket, will be reported as two pockets, breadth-first</li>
+<li>D2-D4, purple, orange, and green, and all are the same as D1 with different shared walls</li>
+<li>D5, dark blue, pocket with some higher boundaries, reported as one pocket</li>
+<li>E1, E2, E3, dark blue, orange, and brown, all open pockets with different missing walls</li>
+</ul>
+<br/>
+<h3>Filtering Recognized Pockets</h3>
+<p Class="api">Once the pocket recognition has been run on a solid, the following properties of the RecognizedPocket object are available for additional filtering:</p>
+
+<ul>
+<li>boundaries (multiple)</li>
+<li>islands (multiple)</li>
+<li>depth</li>
+<li>isThrough</li>
+<li>isClosed</li>
+<li>bottomType: Flat, Through, Chamfer, Fillet, Other</li>
+</ul>
+
+<p Class="api">No parameter records whether there is a fillet or chamfer at the top of the pocket.</p>
+
+<p Class="api">A general approach for using this functionality is to write filtering functions that are applied to the collection of pockets returned for a specific tool direction.  The simplest filtering functions could distinguish between several types of pockets, some of which are shown in the picture below:
+
+<ul>
+<li>simple pockets without islands</li>
+<li>through pockets</li>
+<li>pockets with islands</li>
+<li>pockets with depth in a specific range</li>
+</ul>
+</p>
+
+<p Class="api">More complex filters that analyze the properties of the boundary curves could be used to recognize additional pocket types:
+
+<ul>
+<li>slots</li>
+<li>pockets with no interior radius-of-curvature below a specific (tool) diameter</li>
+<li>pockets larger than a certain minimum width or area</li>
+</ul>
+
+<div align="center"><img src="../images/PocketFiltering.png" border=0 align="middle" alt="Pocket Filtering"></div>
+<br>
+
+<p Class="api">Same as with the PocketRecognitionSelection, the associativity is restricted to the entire body. Additionally, the output of RecognizedPockets is new geometry in the form of a <a href="Curve3DPath.htm">Curve3DPath</a> object and not native B-Rep entities since a pocket may be defined by a curve hanging in the middle of a BRepFace (i.e., the orange pocket in the middle row, fourth column). To use the results in operations, you can find the BRepFace or other entity based on a vertex on the Curve3DPath and use it in the PocketRecognitionSelection, which may not work for some pocket types, as seen above.</p>
+
+<br />
+<h3>Multi-Level and Nested Pockets</h3>
+<p Class="api">In the example above showing the various types of pockets that can be recognized, note that the contours in the RecognizedPockets are always planar. For pockets with multiple levels (nested pockets and islands), you can think of horizontal slices through the part that divides the region into areas with a constant depth. The contour is in the plane at the bottom of each slice, and the reported depth is the thickness of the slice. The slices can be easily seen in the UI preview above (although, as already mentioned, the UI does not recognize all of the examples that can be captured in RecognizedPockets. Pockets C1 and C2 (with islands) will be reported as identical pockets, even though the island sticks up farther in C2. C3 is different because the island is lower and generates a second slice.</p>
+
+<p Class="api"Similar considerations are encountered when considering nested pockets (see D1 to D4 in the example).</p>
+
+
+<br />
+<h3>Associativity Considerations</h3>
+<p Class="api">Fusion Manufacturing typically creates geometry associatively, meaning the manufacturing strategies will update automatically if the underlying CAD model is changed. In the User Interface, this is accomplished by providing parameters (min and max depth, min and max corner radius) that define which pockets to find. If the underlying CAD model changes, the entire computation to find the pockets is done again. There is (for example) no ability for the user to say "Exclude this particular pocket" because there is no reliable mechanism that would allow the algorithm to determine where that pocket is when re-computing. This approach is associative for all practical purposes, but it does impose restrictions.</p>
+
+<p Class="api">The RecognizedPockets object in the API also is not associative. The returned contours are new geometry (Curve3DPath) that do not have any relationship to any faces or edges in the model. It can be easily seen in the images above that, in many cases, there is no edge of the original model that corresponds to contour geometry. This is especially true for the complicated interactions in the island and nested pocket cases but it is also an issue for simple pockets that contain fillets or chamfers on the top or bottom edges.</p>
+
+<p Class="api">Same as with the PocketRecognitionSelection, the associativity is restricted to the entire body. Additionally, the output of RecognizedPockets is new geometry in the form of transient geometry objects and not native B-Rep entities since a pocket may be defined by a curve hanging in the middle of a BRepFace (i.e., the orange pocket at C4). To use the results in operations, you can find the adjacent BRepFace or other entity based on a vertex using the <a href="Component_findBRepUsingPoint.htm">findBRepUsingPoint</a> method. This technique is demonstrated in the <a href="HoleAndPocketRecognition_Sample.htm">Hole and Pocket Recogition Sample</a>
+
+<p Class="api">There are also cases where the model doesn't contain geometry that can be used to create the desired pocket operation. In this case, you can create a sketch based on the geometry returned in the Curve3DPath and use it with the SketchSelection. This approach is also demonstrated in the <a href="HoleAndPocketRecognition_Sample.htm">Hole and Pocket Recogition Sample</a>.</p>
+
+
+<br />
+<br />
+<div id="CopyrightNotice" style="display:none;">
+  <hr />
+  <table width="100%" style="font-size:15">
+	<tr>
+	  <td align="left">
+		&copy; Copyright 2025 Autodesk, Inc.
+	  </td>
+	  <td align="right">
+		<a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(FeatureRecognition_UM)">Comment on this page.</a>
+	  </td>
+	</tr>
+  </table>
+</div>
+</body>
+</html>
