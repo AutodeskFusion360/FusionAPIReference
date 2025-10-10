@@ -1,0 +1,1 @@
+Demonstrates the extendFeatures.add method.  To use this sample, have a design open that contains at least one surface body. When you run the sample, you will be prompted to select an open edge of the body.

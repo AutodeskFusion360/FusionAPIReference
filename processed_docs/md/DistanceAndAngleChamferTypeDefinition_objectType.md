@@ -1,0 +1,5 @@
+Parent Object:
+DistanceAndAngleChamferTypeDefinition
+Defined in namespace "adsk::fusion" and the header file is <Fusion/Features/DistanceAndAngleChamferTypeDefinition.h>
+This is a read only property whose value is a string.
+Introduced in version March 2022

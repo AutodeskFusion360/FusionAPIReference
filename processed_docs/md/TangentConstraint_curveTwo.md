@@ -1,0 +1,7 @@
+Parent Object:
+TangentConstraint
+Defined in namespace "adsk::fusion" and the header file is <Fusion/Sketch/TangentConstraint.h>
+This is a read only property whose value is a
+SketchCurve
+.
+Introduced in version August 2014

@@ -1,0 +1,4 @@
+Parent Object:
+ManufacturingModels
+Defined in namespace "adsk::cam" and the header file is <Cam/ManufacturingModels/ManufacturingModels.h>
+Introduced in version March 2024

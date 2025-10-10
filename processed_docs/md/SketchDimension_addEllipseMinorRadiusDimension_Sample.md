@@ -1,0 +1,1 @@
+Demonstrates the SketchDimension.addEllipseMinorRadiusDimension method.

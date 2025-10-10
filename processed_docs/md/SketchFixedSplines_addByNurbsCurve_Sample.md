@@ -1,0 +1,1 @@
+Demonstrates the SketchFixedSplines.addByNurbsCurve method.

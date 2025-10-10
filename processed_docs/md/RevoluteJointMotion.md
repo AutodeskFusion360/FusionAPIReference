@@ -1,0 +1,6 @@
+Derived from:
+JointMotion
+Object
+Defined in namespace "adsk::fusion" and the header file is <Fusion/Components/RevoluteJointMotion.h>
+Represents the set of information specific to a revolute joint.
+Introduced in version July 2015

@@ -1,0 +1,5 @@
+Parent Object:
+MeshBody
+Defined in namespace "adsk::fusion" and the header file is <Fusion/MeshBody/MeshBody.h>
+This is a read/write property whose value is a double.
+Introduced in version December 2017

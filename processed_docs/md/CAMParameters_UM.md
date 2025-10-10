@@ -1,0 +1,16 @@
+Introduction to CAM Parameters
+BooleanParameterValue
+IntegerParameterValue
+StringParameterValue
+FloatParameterValue
+ChoiceParameterValue
+CAM Geometry Selections
+CadObjectParameterValue
+CadContours2dParameterValue
+ChainSelection
+FaceContourSelection
+PocketSelection
+PocketRecognitionSelection
+SilhouetteSelection
+Machine/Avoid Selections
+CAMArrangeParameterValue

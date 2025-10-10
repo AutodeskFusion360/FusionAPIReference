@@ -1,0 +1,52 @@
+Derived from:
+Base
+Object
+Defined in namespace "adsk::fusion" and the header file is <Fusion/Sketch/GeometricConstraint.h>
+The base class for all geometric constraints.
+GeometricConstraintList.item
+,
+GeometricConstraints.item
+CircularPatternConstraint
+,
+CoincidentConstraint
+,
+CoincidentToSurfaceConstraint
+,
+CollinearConstraint
+,
+ConcentricConstraint
+,
+EqualConstraint
+,
+HorizontalConstraint
+,
+HorizontalPointsConstraint
+,
+LineOnPlanarSurfaceConstraint
+,
+LineParallelToPlanarSurfaceConstraint
+,
+MidPointConstraint
+,
+OffsetConstraint
+,
+ParallelConstraint
+,
+PerpendicularConstraint
+,
+PerpendicularToSurfaceConstraint
+,
+PolygonConstraint
+,
+RectangularPatternConstraint
+,
+SmoothConstraint
+,
+SymmetryConstraint
+,
+TangentConstraint
+,
+VerticalConstraint
+,
+VerticalPointsConstraint
+Introduced in version August 2014

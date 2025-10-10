@@ -1,0 +1,7 @@
+Parent Object:
+ArrangeDefinition3DInput
+Defined in namespace "adsk::fusion" and the header file is <Fusion/Arrange/ArrangeDefinition3DInput.h>
+This is a read only property whose value is an
+ArrangeSolverTypes
+.
+Introduced in version January 2025

@@ -1,0 +1,50 @@
+Derived from:
+Base
+Object
+Defined in namespace "adsk::fusion" and the header file is <Fusion/Sketch/SketchEntity.h>
+This object represents all geometry in a sketch, including all the various curves, points, and text.
+CircularPatternConstraint.createdEntities
+,
+CircularPatternConstraint.entities
+,
+CircularPatternConstraintInput.entities
+,
+CoincidentConstraint.entity
+,
+ProfileCurve.sketchEntity
+,
+RectangularPatternConstraint.createdEntities
+,
+RectangularPatternConstraint.entities
+,
+RectangularPatternConstraintInput.entities
+,
+Sketch.createSpunProfile
+,
+Sketch.intersectWithSketchPlane
+,
+Sketch.project2
+,
+Sketch.projectToSurface
+,
+SketchEntityList.item
+,
+SketchLinearDiameterDimension.entityTwo
+,
+SketchLinearDimension.entityOne
+,
+SketchLinearDimension.entityTwo
+,
+SketchOffsetDimension.entityTwo
+,
+SketchTangentDistanceDimension.entityOne
+,
+SymmetryConstraint.entityOne
+,
+SymmetryConstraint.entityTwo
+SketchCurve
+,
+SketchPoint
+,
+SketchText
+Introduced in version August 2014

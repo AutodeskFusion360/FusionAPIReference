@@ -1,0 +1,5 @@
+Parent Object:
+CAM3MFExportMetadataOptions
+Defined in namespace "adsk::cam" and the header file is <Cam/CAM/CAM3MFExportMetadataOptions.h>
+This is a read/write property whose value is a boolean.
+Introduced in version May 2023

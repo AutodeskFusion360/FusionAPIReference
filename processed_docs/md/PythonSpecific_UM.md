@@ -1,0 +1,9 @@
+- Creating Add-Ins with Python
+- Editing and Debugging
+- Reference Arguments
+- Working with Collections and Arrays
+- Object Types
+- Object Equality
+- Code Hints
+- Additional Python Modules
+- Miscellaneous

@@ -1,0 +1,1 @@
+Demonstrates the GeometricConstraints.addCollinear method.

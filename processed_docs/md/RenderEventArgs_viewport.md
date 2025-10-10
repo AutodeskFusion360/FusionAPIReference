@@ -1,0 +1,7 @@
+Parent Object:
+RenderEventArgs
+Defined in namespace "adsk::fusion" and the header file is <Fusion/Render/RenderEventArgs.h>
+This is a read only property whose value is a
+Viewport
+.
+Introduced in version September 2023

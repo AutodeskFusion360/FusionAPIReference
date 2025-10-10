@@ -1,0 +1,4 @@
+Parent Object:
+Arrange3DDefinition
+Defined in namespace "adsk::fusion" and the header file is <Fusion/Arrange/Arrange3DDefinition.h>
+Introduced in version January 2025

@@ -1,0 +1,4 @@
+Parent Object:
+NamedView
+Defined in namespace "adsk::core" and the header file is <Core/Application/NamedView.h>
+Introduced in version September 2023
