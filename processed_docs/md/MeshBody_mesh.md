@@ -1,7 +1,0 @@
-Parent Object:
-MeshBody
-Defined in namespace "adsk::fusion" and the header file is <Fusion/MeshBody/MeshBody.h>
-This is a read only property whose value is a
-PolygonMesh
-.
-Introduced in version August 2014

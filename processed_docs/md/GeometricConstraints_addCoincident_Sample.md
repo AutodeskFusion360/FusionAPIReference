@@ -1,1 +1,0 @@
-Demonstrates the GeometricConstraints.addCoincident method.

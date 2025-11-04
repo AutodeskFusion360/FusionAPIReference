@@ -1,1 +1,0 @@
-Demonstrates the GeometricConstraint.addHorizontalPoints method.

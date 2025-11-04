@@ -1,5 +1,0 @@
-Parent Object:
-FloatProperty
-Defined in namespace "adsk::core" and the header file is <Core/Application/FloatProperty.h>
-This is a read/write property whose value is an array of type double.
-Introduced in version August 2014

@@ -1,7 +1,0 @@
-Parent Object:
-ConfigurationFuture
-Defined in namespace "adsk::fusion" and the header file is <Fusion/Configurations/ConfigurationFuture.h>
-This is a read only property whose value is a
-FutureStates
-.
-Introduced in version January 2025

@@ -1,7 +1,0 @@
-Parent Object:
-TwoDistancesChamferEdgeSet
-Defined in namespace "adsk::fusion" and the header file is <Fusion/Features/TwoDistancesChamferEdgeSet.h>
-This is a read only property whose value is a
-ModelParameter
-.
-Introduced in version December 2020

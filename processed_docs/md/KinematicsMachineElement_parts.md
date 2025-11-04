@@ -1,7 +1,0 @@
-Parent Object:
-KinematicsMachineElement
-Defined in namespace "adsk::cam" and the header file is <Cam/Machine/KinematicsMachineElement.h>
-This is a read only property whose value is a
-MachineParts
-.
-Introduced in version April 2023

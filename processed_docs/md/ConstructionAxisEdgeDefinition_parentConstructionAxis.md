@@ -1,7 +1,0 @@
-Parent Object:
-ConstructionAxisEdgeDefinition
-Defined in namespace "adsk::fusion" and the header file is <Fusion/Construction/ConstructionAxisEdgeDefinition.h>
-This is a read only property whose value is a
-ConstructionAxis
-.
-Introduced in version August 2014

@@ -1,4 +1,0 @@
-Parent Object:
-UnstitchFeatures
-Defined in namespace "adsk::fusion" and the header file is <Fusion/Features/UnstitchFeatures.h>
-Introduced in version July 2015

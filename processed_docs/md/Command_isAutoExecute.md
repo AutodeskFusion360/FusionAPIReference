@@ -1,5 +1,0 @@
-Parent Object:
-Command
-Defined in namespace "adsk::core" and the header file is <Core/UserInterface/Command.h>
-This is a read/write property whose value is a boolean.
-Introduced in version April 2017

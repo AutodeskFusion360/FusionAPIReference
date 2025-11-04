@@ -1,3 +1,0 @@
-Types of pocket bottoms that can exist. Flat represents a standard flat bottom with sharp edges at the walls. (Flat may also have some portions that are through, but may not have any portions that are chamfered or filleted.) Through represents a pocket with no bottom anywhere along the boundary and sharp edges at the walls. Chamfer and fillet represent pockets where that type of feature goes around all edges of the boundary and islands, between the bottom and the walls.  Other represents any other cases, such as a mix of different bottom types for different edges.
-Defined in namespace "adsk::cam" and the header file is <Cam\CamTypeDefs.h>
-Introduced in version July 2023

@@ -1,4 +1,0 @@
-Parent Object:
-SketchDiameterDimension
-Defined in namespace "adsk::fusion" and the header file is <Fusion/Sketch/SketchDiameterDimension.h>
-Introduced in version August 2014

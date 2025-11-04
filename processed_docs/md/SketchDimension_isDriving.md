@@ -1,5 +1,0 @@
-Parent Object:
-SketchDimension
-Defined in namespace "adsk::fusion" and the header file is <Fusion/Sketch/SketchDimension.h>
-This is a read/write property whose value is a boolean.
-Introduced in version July 2015

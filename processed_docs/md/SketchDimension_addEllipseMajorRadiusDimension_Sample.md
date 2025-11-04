@@ -1,1 +1,0 @@
-Demonstrates the SketchDimension.addEllipseMajorRadiusDimension method.

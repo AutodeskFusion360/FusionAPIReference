@@ -1,7 +1,0 @@
-Parent Object:
-Arrange2DProfileOrFaceEnvelopeInput
-Defined in namespace "adsk::fusion" and the header file is <Fusion/Arrange/Arrange2DProfileOrFaceEnvelopeInput.h>
-This is a read/write property whose value is an array of type
-Base
-.
-Introduced in version January 2025

@@ -1,1 +1,0 @@
-Demonstrates the SketchLines.addCenterPointRectangle method.

@@ -1,1 +1,0 @@
-Definition objects are similar to input objects but instead of being used to create new features, definition objects are used to edit existing features.  Another notable difference between an input object and a definition object is that the properties (of the input object) that took a ValueInput object during creation, are now read-only and return a Parameter object.

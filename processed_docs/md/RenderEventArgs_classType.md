@@ -1,4 +1,0 @@
-Parent Object:
-RenderEventArgs
-Defined in namespace "adsk::fusion" and the header file is <Fusion/Render/RenderEventArgs.h>
-Introduced in version September 2023

@@ -1,7 +1,0 @@
-Parent Object:
-GenerateToolpathFuture
-Defined in namespace "adsk::cam" and the header file is <Cam/CAM/GenerateToolpathFuture.h>
-This is a read only property whose value is an
-Operations
-.
-Introduced in version January 2016

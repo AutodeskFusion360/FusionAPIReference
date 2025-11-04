@@ -1,7 +1,0 @@
-Parent Object:
-BRepWireDefinition
-Defined in namespace "adsk::fusion" and the header file is <Fusion/BRep/BRepWireDefinition.h>
-This is a read only property whose value is a
-BRepWireEdgeDefinitions
-.
-Introduced in version September 2020

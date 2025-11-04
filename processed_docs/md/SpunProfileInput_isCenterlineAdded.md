@@ -1,5 +1,0 @@
-Parent Object:
-SpunProfileInput
-Defined in namespace "adsk::fusion" and the header file is <Fusion/Sketch/SpunProfileInput.h>
-This is a read/write property whose value is a boolean.
-Introduced in version January 2025
