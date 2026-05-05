@@ -4,6 +4,8 @@ Documentation and source code references for the Autodesk Fusion API. This repos
 
 This repository includes tooling to convert and index the HTML docs and to create a browsable local index page (`index.htm`) with single-column layout, titles, and client-side search.
 
+[Access a simplified browsing experience for the documentation here](https://autodeskfusion360.github.io/FusionAPIReference/)
+
 ## Repository highlights
 
 - `Fusion_API_Documentation/` — the original HTML documentation and resources. The API pages are under `files/`.
