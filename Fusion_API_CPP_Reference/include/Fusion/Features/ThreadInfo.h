@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -40,7 +40,7 @@ public:
     std::string threadType() const;
     bool threadType(const std::string& value);
 
-    /// Returns the string that defines the thread size. This is
+    /// Returns the string that defines the thread size.
     std::string threadSize() const;
 
     /// Returns and sets the string that defines the thread designation.
@@ -71,6 +71,76 @@ public:
     /// Returns the value that defines the pitch diameter. The units are centimeters.
     double pitchDiameter() const;
 
+    /// Gets and sets if the thread is right or left-handed thread. A value of true indicates a right-handed thread.
+    /// It defaults to true.
+    bool isRightHanded() const;
+    bool isRightHanded(bool value);
+
+    /// Indicates if this ThreadInfo object defines a standard or tapered thread.
+    bool isTapered() const;
+
+    /// Returns the angle of the tapered thread in centimeters.
+    /// 
+    /// This is only valid when isTapered is true.
+    double taperAngle() const;
+
+    /// Returns the Diameter of the tap drill required to create this tap.
+    /// 
+    /// This is only valid when isTapered is true.
+    double taperTapDrillDiameter() const;
+
+    /// Returns the useful length of threads for a tapered thread in centimeters.
+    /// 
+    /// This is only valid when isTapered is true.
+    double taperUsefulThreadLength() const;
+
+    /// The wrench makeup internal diameter for a taper pipe thread, also known as the effective thread diameter,
+    /// is the diameter at the point where the thread engagement occurs when the pipe is tightened with a wrench.
+    /// 
+    /// This is only valid when isTapered is true.
+    double taperWrenchMakeupInternalDiameter() const;
+
+    /// Returns the height of a tapered thread in centimeters.
+    /// 
+    /// This is only valid when isTapered is true.
+    double taperThreadHeight() const;
+
+    /// This method creates a new ThreadInfo object that can be used to create a thread or tapped-hole feature.
+    /// The ThreadInfo object defines the type and size of the thread to create. When creating a thread, the
+    /// type and size of the thread are defined by specifying the thread type, designation, and class. Fusion
+    /// uses this information to look up the full details of the thread in tables delivered with Fusion.
+    /// The ThreadDataQuery object can be used to determine valid input for this information.
+    /// 
+    /// The thread type implicitly defines if the thread is standard or tapered. Tapered threads can only be used
+    /// when creating tapped holes and are not supported for thread features.
+    /// isTapered : Input Boolean that indicates if the thread is straight or tapered.
+    /// isInternal : Input Boolean that indicates if the thread is internal or external. A value of true indicates an internal thread.
+    /// When the ThreadInfo is used to create a tapped hole, this value is ignored since it is always an internal thread.
+    /// threadType : Input string that defines the thread type.
+    /// threadDesignation : Input string that contains the thread designation.
+    /// threadClass : Input string that defines the thread class. This argument is ignored for tapered threads, so an empty string can be used.
+    /// isRightHanded : Input boolean that defines if the thread is right or left-handed.
+    /// Returns the newly created ThreadInfo object or null if the creation failed.
+    static core::Ptr<ThreadInfo> create(bool isTapered, bool isInternal, const std::string& threadType, const std::string& threadDesignation, const std::string& threadClass, bool isRightHanded);
+
+    /// Method that redefines an existing ThreadInfo object. This is typically used to change the thread of an existing
+    /// thread or tapped hole.
+    /// 
+    /// The ThreadInfo object defines the type and size of a thread by specifying the thread type, designation, and class.
+    /// Fusion uses this information to look up the full details of the thread in tables delivered with Fusion. The
+    /// ThreadDataQuery object can be used to determine valid input for this information.
+    /// 
+    /// Tapered threads can only be used when creating or editing tapped holes and are not supported for thread features.
+    /// isTapered : Input Boolean that indicates if the thread is straight or tapered.
+    /// isInternal : Input Boolean that indicates if the thread is internal or external. A value of true indicates an internal thread.
+    /// This value is ignored when the ThreadInfo is used for a tapped hole since they are always internal.
+    /// threadType : Input string that defines the thread type.
+    /// threadDesignation : Input string that defines the thread designation.
+    /// threadClass : Input string that defines the thread class. This argument is ignored for tapered threads.
+    /// isRightHanded : Input Boolean that specifies if the thread is straight or tapered.
+    /// Returns true if the redefinition was successful.
+    bool redefine(bool isTapered, bool isInternal, const std::string& threadType, const std::string& threadDesignation, const std::string& threadClass, bool isRightHanded);
+
     ADSK_FUSION_THREADINFO_API static const char* classType();
     ADSK_FUSION_THREADINFO_API const char* objectType() const override;
     ADSK_FUSION_THREADINFO_API void* queryInterface(const char* id) const override;
@@ -93,6 +163,16 @@ private:
     virtual double majorDiameter_raw() const = 0;
     virtual double minorDiameter_raw() const = 0;
     virtual double pitchDiameter_raw() const = 0;
+    virtual bool isRightHanded_raw() const = 0;
+    virtual bool isRightHanded_raw(bool value) = 0;
+    virtual bool isTapered_raw() const = 0;
+    virtual double taperAngle_raw() const = 0;
+    virtual double taperTapDrillDiameter_raw() const = 0;
+    virtual double taperUsefulThreadLength_raw() const = 0;
+    virtual double taperWrenchMakeupInternalDiameter_raw() const = 0;
+    virtual double taperThreadHeight_raw() const = 0;
+    ADSK_FUSION_THREADINFO_API static ThreadInfo* create_raw(bool isTapered, bool isInternal, const char* threadType, const char* threadDesignation, const char* threadClass, bool isRightHanded);
+    virtual bool redefine_raw(bool isTapered, bool isInternal, const char* threadType, const char* threadDesignation, const char* threadClass, bool isRightHanded) = 0;
 };
 
 // Inline wrappers
@@ -202,6 +282,65 @@ inline double ThreadInfo::minorDiameter() const
 inline double ThreadInfo::pitchDiameter() const
 {
     double res = pitchDiameter_raw();
+    return res;
+}
+
+inline bool ThreadInfo::isRightHanded() const
+{
+    bool res = isRightHanded_raw();
+    return res;
+}
+
+inline bool ThreadInfo::isRightHanded(bool value)
+{
+    return isRightHanded_raw(value);
+}
+
+inline bool ThreadInfo::isTapered() const
+{
+    bool res = isTapered_raw();
+    return res;
+}
+
+inline double ThreadInfo::taperAngle() const
+{
+    double res = taperAngle_raw();
+    return res;
+}
+
+inline double ThreadInfo::taperTapDrillDiameter() const
+{
+    double res = taperTapDrillDiameter_raw();
+    return res;
+}
+
+inline double ThreadInfo::taperUsefulThreadLength() const
+{
+    double res = taperUsefulThreadLength_raw();
+    return res;
+}
+
+inline double ThreadInfo::taperWrenchMakeupInternalDiameter() const
+{
+    double res = taperWrenchMakeupInternalDiameter_raw();
+    return res;
+}
+
+inline double ThreadInfo::taperThreadHeight() const
+{
+    double res = taperThreadHeight_raw();
+    return res;
+}
+
+inline core::Ptr<ThreadInfo> ThreadInfo::create(bool isTapered, bool isInternal, const std::string& threadType, const std::string& threadDesignation, const std::string& threadClass, bool isRightHanded)
+{
+    core::Ptr<ThreadInfo> res = create_raw(isTapered, isInternal, threadType.c_str(), threadDesignation.c_str(), threadClass.c_str(), isRightHanded);
+    return res;
+}
+
+inline bool ThreadInfo::redefine(bool isTapered, bool isInternal, const std::string& threadType, const std::string& threadDesignation, const std::string& threadClass, bool isRightHanded)
+{
+    bool res = redefine_raw(isTapered, isInternal, threadType.c_str(), threadDesignation.c_str(), threadClass.c_str(), isRightHanded);
     return res;
 }
 }// namespace fusion

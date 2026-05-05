@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -50,7 +50,7 @@ public:
 
     /// Gets and sets the desired quality of the rendering. The quality is specified using a
     /// value between 25 and 100, where 75 is the equivalent of "Final" and 100 is
-    /// the same as "Excellent" in the user interface. The default value is 75
+    /// the same as "Excellent" in the user interface. The default value is 75.
     int renderQuality() const;
     bool renderQuality(int value);
 

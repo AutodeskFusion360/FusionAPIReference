@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -29,16 +29,16 @@
 namespace adsk { namespace cam {
 
 /// !!!!! Warning !!!!!
-/// ! This is hidden and not officially supported
+/// ! This is in preview state; please see the help for more info
 /// !!!!! Warning !!!!!
 /// 
-/// The convection defines the temperature-dependent heat loss boundary condition according to Newton's law of cooling
+/// Convection defines the temperature-dependent heat loss boundary condition according to Newton's law of cooling.
 class AdditiveFEAConvection : public core::Base {
 public:
 
-    /// Append a row of data to the convection table
-    /// convectionCoefficient : Convection in W/mm^2-K
-    /// temperature : Temperature in C
+    /// Append a row of data to the convection table.
+    /// convectionCoefficient : Convection in W/mm^2-K.
+    /// temperature : Temperature in C.
     void append(double convectionCoefficient, double temperature);
 
     ADSK_CAM_ADDITIVEFEACONVECTION_API static const char* classType();

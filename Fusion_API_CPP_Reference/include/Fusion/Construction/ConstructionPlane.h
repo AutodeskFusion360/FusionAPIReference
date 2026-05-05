@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -37,6 +37,7 @@ namespace adsk { namespace fusion {
     class BaseFeature;
     class Component;
     class ConstructionPlaneDefinition;
+    class DeriveFeature;
     class Occurrence;
     class TimelineObject;
 }}
@@ -71,7 +72,7 @@ public:
     bool isParametric() const;
 
     /// Indicates if the light bulb (as displayed in the browser) is on.
-    /// A construction plane will only be visible if it's light bulb, and that of it's
+    /// A construction plane will only be visible if its light bulb, and that of its
     /// containing folder and parent component/s are also on.
     bool isLightBulbOn() const;
     bool isLightBulbOn(bool value);
@@ -148,6 +149,14 @@ public:
     /// method to get the two entities identified by the tokens and then compare them.
     std::string entityToken() const;
 
+    /// Returns if this construction plane is derived from another design. If true, the construction plane cannot be deleted.
+    /// You should not attempt to make any edits to the derived construction plane. Any edits made to this derived construction plane will be lost when the derive updates.
+    bool isDerived() const;
+
+    /// Returns the DeriveFeature if this construction plane is derived from another design.
+    /// This property returns null if the construction plane is not derived from another design (i.e. isDerived property returns false).
+    core::Ptr<DeriveFeature> deriveFeature() const;
+
     ADSK_FUSION_CONSTRUCTIONPLANE_API static const char* classType();
     ADSK_FUSION_CONSTRUCTIONPLANE_API const char* objectType() const override;
     ADSK_FUSION_CONSTRUCTIONPLANE_API void* queryInterface(const char* id) const override;
@@ -181,6 +190,8 @@ private:
     virtual core::Matrix3D* transform_raw() const = 0;
     virtual bool transform_raw(core::Matrix3D* value) = 0;
     virtual char* entityToken_raw() const = 0;
+    virtual bool isDerived_raw() const = 0;
+    virtual DeriveFeature* deriveFeature_raw() const = 0;
 };
 
 // Inline wrappers
@@ -349,6 +360,18 @@ inline std::string ConstructionPlane::entityToken() const
         res = p;
         core::DeallocateArray(p);
     }
+    return res;
+}
+
+inline bool ConstructionPlane::isDerived() const
+{
+    bool res = isDerived_raw();
+    return res;
+}
+
+inline core::Ptr<DeriveFeature> ConstructionPlane::deriveFeature() const
+{
+    core::Ptr<DeriveFeature> res = deriveFeature_raw();
     return res;
 }
 }// namespace fusion

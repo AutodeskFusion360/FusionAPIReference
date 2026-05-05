@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -38,7 +38,7 @@ public:
 
     /// Provides access to a mesh body within the collection.
     /// index : The index of the mesh body to return, where an index of 0 is the first mesh body in the collection.
-    /// Returns the specified mesh body or null in the case of a invalid index.
+    /// Returns the specified mesh body or null in the case of an invalid index.
     core::Ptr<MeshBody> item(size_t index) const;
 
     /// Returns the number of mesh bodies in the collection.

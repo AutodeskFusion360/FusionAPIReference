@@ -66,7 +66,11 @@
       </tr>
       <tr>
         <td class="api-list"><a href="Occurrences_addNewComponentCopy.htm">addNewComponentCopy</a></td>
-        <td class="api-list">Method that creates a new occurrence by creating a new component that is a copy of an existing component. This is the equivalent of copying and using the "Paste New" command in the user interface. This is different from the addExistingComponent in that it's not a new instance to the existing component but a new component is created that has it's own definition (sketches, features, etc.) and a new occurrence instance is created to reference this new component.</td>
+        <td class="api-list">Method that creates a new occurrence by creating a new component that is a copy of an existing component. This is the equivalent of copying and using the "Paste New" command in the user interface. This is different from the addExistingComponent in that it's not a new instance to the existing component but a new component is created that has its own definition (sketches, features, etc.) and a new occurrence instance is created to reference this new component.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Occurrences_addNewExternalComponent.htm">addNewExternalComponent</a></td>
+        <td class="api-list">Method that creates a new occurrence by creating a new external component (X-Ref) that is not saved yet. This is similar to the "New Component" command in the UI when creating an external component, where you specify a name and location but the component is created in-memory without being saved immediately. This allows programs to create and populate an external component without needing to save it first, and makes undo possible. The component will be saved automatically when the parent assembly is saved.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="Occurrences_asArray.htm">asArray</a></td>
@@ -141,9 +145,9 @@
       <table width="100%" style="font-size:15">
         <tr>
           <td align="left">
-                © Copyright 2025 Autodesk, Inc.
+                © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(Occurrences%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(Occurrences%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

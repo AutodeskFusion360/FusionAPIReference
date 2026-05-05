@@ -39,7 +39,7 @@
           Parent Object: <a href="ConfigurationParameterCell.htm">ConfigurationParameterCell</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Configurations/ConfigurationParameterCell.h&gt;<h2 class="api">
           Description
         </h2>
-    <p class="api">Gets and sets the value of the parameter in database units. You can use the units property of the associated Parameter object, which you can get from the column, to determine the type of units this parameter is defined in. Setting this property will overwrite any existing expression. This property behaves as read-only when the table is obtained from a DataFile object.</p>
+    <p class="api">Gets and sets the real value (a double) of the parameter in database units. Setting this property will overwrite any existing expression. This property behaves as read-only when the table is obtained from a DataFile object. This property is only valid for numeric parameters and will fail for text parameters. You can determine the value type of the parameter by using the valueType property. Use the textValue property to get and set the value of text parameters.</p>
     <h2 class="api">
           Syntax
         </h2>
@@ -69,9 +69,9 @@
       <table width="100%" style="font-size:15">
         <tr>
           <td align="left">
-                © Copyright 2025 Autodesk, Inc.
+                © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(ConfigurationParameterCell.value%20Function%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(ConfigurationParameterCell.value%20Function%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

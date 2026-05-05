@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -43,8 +43,8 @@ public:
     core::Ptr<Parameter> item(size_t index) const;
 
     /// Returns the specified parameter using the name of the parameter
-    /// as it is displayed in the parameters dialog
-    /// name : The name of the parameter as it is displayed in the parameters dialog
+    /// as it is displayed in the parameters dialog.
+    /// name : The name of the parameter as it is displayed in the parameters dialog.
     /// Returns the specified item or null if an invalid name was specified.
     core::Ptr<Parameter> itemByName(const std::string& name) const;
 

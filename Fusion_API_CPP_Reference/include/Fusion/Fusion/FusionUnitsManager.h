@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -40,7 +40,7 @@ namespace adsk { namespace fusion {
 class FusionUnitsManager : public core::UnitsManager {
 public:
 
-    /// Returns the parent design
+    /// Returns the parent design.
     core::Ptr<Design> design() const;
 
     /// Gets and sets the default distance units for this design. Setting this

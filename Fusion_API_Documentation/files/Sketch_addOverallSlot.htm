@@ -1,0 +1,140 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/Sketch_addOverallSlot.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="22/09/2025">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="Sketch_addOverallSlot">
+    <meta name="description" content="Sketch.addOverallSlot Method">
+    <meta name="topicid" content="GUID-2300C526-4869-4444-858E-A653582B1CB1">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Sketch.addOverallSlot Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Sketch.addOverallSlot Method</h1>
+
+          Parent Object: <a href="Sketch.htm">Sketch</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Sketch/Sketch.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Creates the geometry that represents an overall slot. Geometric constraints are automatically added to the geometry to maintain the slot shape and optionally, dimensions to control the size can be added. The created geometry and constraints are returned.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"sketch_var" is a variable referencing a <a href="Sketch.htm">Sketch</a> object.<code><pre class="api-code"><span style="color:blue"># Uses no optional arguments.</span><br />returnValue = sketch_var.<b>addOverallSlot</b>(startPoint, endPoint, width)<br /><br /><span style="color:blue"># Uses optional arguments.</span><br />returnValue = sketch_var.<b>addOverallSlot</b>(startPoint, endPoint, width, createWidthDimension, length, angle)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"sketch_var" is a variable referencing a <a href="Sketch.htm">Sketch</a> object.<br /><br /><code><pre class="api-code">#include &lt;Fusion/Sketch/Sketch.h&gt;<br /><br /><span style="color:blue">// Uses no optional arguments.</span><br />returnValue = sketch_var-&gt;<b>addOverallSlot</b>(startPoint, endPoint, width);<br /><br /><span style="color:blue">// Uses optional arguments.</span><br />returnValue = sketch_var-&gt;<b>addOverallSlot</b>(startPoint, endPoint, width, createWidthDimension, length, angle);</pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;"><a href="Base.htm">Base</a>[]</td>
+        <td class="api-list">Returns an array containing the start point arc, the end point arc, the two lines that define the slot, the construction line between the two points, and optionally, the construction line the angle is measured from if an angle is specified, and the dimension constraints that were created in the order of length, angle and width.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">startPoint</td>
+        <td class="api-list"><a href="Base.htm">Base</a></td>
+        <td class="api-list">The start point of the slot. It can be a SketchPoint or Point3D object. If a SketchPoint is provided a coincident constraint will be created between the start point of the slot and the provided sketch point.</td>
+      </tr>
+      <tr>
+        <td class="api-list">endPoint</td>
+        <td class="api-list"><a href="Base.htm">Base</a></td>
+        <td class="api-list">The end point of the slot. It can be a SketchPoint or Point3D object. This point defines the length of the slot. If a SketchPoint is provided a coincident constraint is created between the end point of the slot and the provided sketch point.<br/><br/> If either the length or angle argument is provided, the point is not the actual end point but is used to determine the direction of the slot. If both the length and angle arguments are provided this endPoint will be ignored and null can be provided.</td>
+      </tr>
+      <tr>
+        <td class="api-list">width</td>
+        <td class="api-list"><a href="ValueInput.htm">ValueInput</a></td>
+        <td class="api-list">A ValueInput object that defines the width of the slot. The ValueInput can define either a real value or an expression string. If it is a real value, it defines the width of the slot in centimeters.<br/><br/> When using a ValueInput created using a string, it's the same as creating a parameter in the user-interface. You can specify any valid expression, i.e. "5", "5 in", "5 in / 2", "5 + Length" that defines a length.</td>
+      </tr>
+      <tr>
+        <td class="api-list">createWidthDimension</td>
+        <td class="api-list">boolean</td>
+        <td class="api-list">Specifies if a dimension constraint and its associated parameter is created to control the width of the slot.<br /><br /> This is an optional argument whose default value is False.</td>
+      </tr>
+      <tr>
+        <td class="api-list">length</td>
+        <td class="api-list"><a href="ValueInput.htm">ValueInput</a></td>
+        <td class="api-list">Optional argument that defines the overall length of the slot using a ValueInput. If this is provided, it overrides the endPoint and explicitly defines the length of the slot. If the length is specified, a dimension constraint and its associated parameter is created to control the length.<br/><br/> The ValueInput can define either a real value or an expression string. If it is a real value, it defines the length of the slot in centimeters. When it is an expression string, it's the same as creating a parameter in the user-interface. You can specify any valid expression, i.e. "5", "5 in", "5 in / 2", "5 + Length" that defines a length.<br /><br /> This is an optional argument whose default value is null.</td>
+      </tr>
+      <tr>
+        <td class="api-list">angle</td>
+        <td class="api-list"><a href="ValueInput.htm">ValueInput</a></td>
+        <td class="api-list">Optional argument that defines the angle of the slot using a ValueInput. If this is provided, it overrides the endPoint and explicitly defines the angle of the slot. If the angle is specified, a horizontal construction line, a dimension constraint, and its associated parameter is created to control the angle. The angle is measured from a horizontal line that starts at the start point and goes in the positive X direction. The angle is always less than 180 deg. and depending on the location of the end point, the angle will be clockwise or counterclockwise from the horizontal line.<br/><br/> The ValueInput can define either a real value or an expression string. If it is a real value, it defines the angle of the slot in radians. When it is an expression string, it's the same as creating a parameter in the user-interface. You can specify any valid expression, i.e. "45", "45 deg", "180 / 3", "Sweep * 2" that defines an angle.<br /><br /> This is an optional argument whose default value is null.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version November 2025<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2026 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(Sketch.addOverallSlot%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

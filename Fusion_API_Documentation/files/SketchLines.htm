@@ -53,6 +53,10 @@
         <td class="api-list">Creates a chamfer between two sketch lines. In the case where the two input lines cross each other creating an "X" shape, this results in four quadrants where the chamfer can be placed. The point arguments are used to define which of the four quadrants the chamfer should be created in. The two points define which side of the two lines should be kept and the other end will be trimmed by the chamfer. The easiest way to use this is to use the end points of the lines on the side you want to keep. In the case where the lines don't intersect or connect at the end points, there is only one valid quadrant for the chamfer so the points are ignored.</td>
       </tr>
       <tr>
+        <td class="api-list"><a href="SketchLines_addByMidpoint.htm">addByMidpoint</a></td>
+        <td class="api-list">Creates a sketch line where the first point is the midpoint and the second point is one endpoint. The system automatically calculates the other endpoint to create a line where the first point is exactly at the midpoint.</td>
+      </tr>
+      <tr>
         <td class="api-list"><a href="SketchLines_addByTwoPoints.htm">addByTwoPoints</a></td>
         <td class="api-list">Creates a sketch line between the two input points. The input points can be either existing SketchPoints or Point3D objects. If a SketchPoint is used the new line will be based on that sketch point and update if the sketch point is modified.</td>
       </tr>
@@ -169,9 +173,9 @@
       <table width="100%" style="font-size:15">
         <tr>
           <td align="left">
-                © Copyright 2025 Autodesk, Inc.
+                © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(SketchLines%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(SketchLines%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

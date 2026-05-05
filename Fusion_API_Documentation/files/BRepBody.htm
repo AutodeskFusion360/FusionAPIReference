@@ -90,7 +90,7 @@
       </tr>
       <tr>
         <td class="api-list"><a href="BRepBody_moveToComponent.htm">moveToComponent</a></td>
-        <td class="api-list">Moves this body from it's current component into the root component or the component owned by the specified occurrence.</td>
+        <td class="api-list">Moves this body from its current component into the root component or the component owned by the specified occurrence.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="BRepBody_pointContainment.htm">pointContainment</a></td>
@@ -123,7 +123,7 @@
       </tr>
       <tr>
         <td class="api-list"><a href="BRepBody_assemblyContext.htm">assemblyContext</a></td>
-        <td class="api-list">Returns the assembly occurrence (i.e. the occurrence) of this object in an assembly. This is only valid in the case where this BRepBody object is acting as a proxy in an assembly. Returns null in the case where the object is not in the context of an assembly. but is already the native object. Also returns null in the case where this body is transient.</td>
+        <td class="api-list">Returns the assembly occurrence (i.e. the occurrence) of this object in an assembly. This is only valid in the case where this BRepBody object is acting as a proxy in an assembly. Returns null in the case where the object is not in the context of an assembly, but is already the native object. Also returns null in the case where this body is transient.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="BRepBody_attributes.htm">attributes</a></td>
@@ -146,6 +146,10 @@
         <td class="api-list">Returns all of the edges that connect convex faces.</td>
       </tr>
       <tr>
+        <td class="api-list"><a href="BRepBody_deriveFeature.htm">deriveFeature</a></td>
+        <td class="api-list">Returns the DeriveFeature if this BRepBody is derived from another design. This property returns null if the BRepBody is not derived from another design (i.e. isDerived property returns false).</td>
+      </tr>
+      <tr>
         <td class="api-list"><a href="BRepBody_edges.htm">edges</a></td>
         <td class="api-list">Returns a collection of all of the edges in the body.</td>
       </tr>
@@ -158,8 +162,12 @@
         <td class="api-list">Returns a collection of all of the faces in the body.</td>
       </tr>
       <tr>
+        <td class="api-list"><a href="BRepBody_isDerived.htm">isDerived</a></td>
+        <td class="api-list">Returns if this BRepBody is derived from another design. If true, this body cannot be deleted.</td>
+      </tr>
+      <tr>
         <td class="api-list"><a href="BRepBody_isLightBulbOn.htm">isLightBulbOn</a></td>
-        <td class="api-list">Gets and set if the light bulb beside the body node in the browser is on or not. Parent nodes in the browser can have their light bulb off which affects all of their children so this property does not indicate if the body is actually visible, just that it should be visible if all of it's parent nodes are also visible. Use the isVisible property to determine if it's actually visible.<br/><br/> This property is only valid if the IsTransient property is false.</td>
+        <td class="api-list">Gets and sets if the light bulb beside the body node in the browser is on or not. Parent nodes in the browser can have their light bulb off which affects all of their children so this property does not indicate if the body is actually visible, just that it should be visible if all of its parent nodes are also visible. Use the isVisible property to determine if it's actually visible.<br/><br/> This property is only valid if the IsTransient property is false.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="BRepBody_isSelectable.htm">isSelectable</a></td>
@@ -215,7 +223,7 @@
       </tr>
       <tr>
         <td class="api-list"><a href="BRepBody_opacity.htm">opacity</a></td>
-        <td class="api-list">Gets and sets the opacity override assigned to this body. A value of 1.0 specifies that is it completely opaque and a value of 0.0 specifies that is it completely transparent.<br/><br/> This value is not necessarily related to what the user sees because the opacity is inherited. For example, if you this body is in a component and that component's opacity is set to something other than 1.0, the body will also be shown as slightly transparent even though the opacity property for the body will return 1.0. Because the component that contains the body can be referenced as an occurrence in other components and they can have different opacity settings, it's possible that different instances of the same body can display using different opacity levels. To get the opacity that it is being displayed with use the BrepBody.visibleOpacity property.<br/><br/> This is the API equivalent of the "Opacity Control" command available for the body in the browser.</td>
+        <td class="api-list">Gets and sets the opacity override assigned to this body. A value of 1.0 specifies that it is completely opaque and a value of 0.0 specifies that it is completely transparent.<br/><br/> This value is not necessarily related to what the user sees because the opacity is inherited. For example, if this body is in a component and that component's opacity is set to something other than 1.0, the body will also be shown as slightly transparent even though the opacity property for the body will return 1.0. Because the component that contains the body can be referenced as an occurrence in other components and they can have different opacity settings, it's possible that different instances of the same body can display using different opacity levels. To get the opacity that it is being displayed with use the BRepBody.visibleOpacity property.<br/><br/> This is the API equivalent of the "Opacity Control" command available for the body in the browser.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="BRepBody_orientedMinimumBoundingBox.htm">orientedMinimumBoundingBox</a></td>
@@ -251,7 +259,7 @@
       </tr>
       <tr>
         <td class="api-list"><a href="BRepBody_visibleOpacity.htm">visibleOpacity</a></td>
-        <td class="api-list">The user can set an override opacity for components and bodies these opacity overrides combine if children and parent components have overrides. This property returns the actual opacity that is being used to render the body. To set the opacity use the opacity property of the BRepBody object.</td>
+        <td class="api-list">The user can set an override opacity for components and bodies. These opacity overrides combine if children and parent components have overrides. This property returns the actual opacity that is being used to render the body. To set the opacity use the opacity property of the BRepBody object.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="BRepBody_volume.htm">volume</a></td>
@@ -289,9 +297,9 @@
       <table width="100%" style="font-size:15">
         <tr>
           <td align="left">
-                © Copyright 2025 Autodesk, Inc.
+                © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(BRepBody%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(BRepBody%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

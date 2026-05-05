@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -12,6 +12,7 @@
 #include "../../Core/Base.h"
 #include "../FusionTypeDefs.h"
 #include <string>
+#include <vector>
 
 // THIS CLASS WILL BE VISIBLE TO AN API CLIENT.
 // THIS HEADER FILE WILL BE GENERATED FROM NIDL.
@@ -42,7 +43,9 @@ namespace adsk { namespace fusion {
     class BRepBodies;
     class Component;
     class ConfigurationRow;
+    class DeriveFeature;
     class JointList;
+    class MeshBody;
     class OccurrenceList;
     class PhysicalProperties;
     class RigidGroupList;
@@ -160,15 +163,15 @@ public:
     /// Returns true if the activation was successful.
     bool activate();
 
-    /// Moves this occurrence from it's current component into the component owned by the specified occurrence.
+    /// Moves this occurrence from its current component into the component owned by the specified occurrence.
     /// This occurrence and the target occurrence must be in the same context.
     /// targetOccurrence : The target occurrence defines both the component and the transform to apply when moving the occurrence. The
     /// occurrence will be copied into the parent component of the target occurrence and the target occurrence also defines
-    /// the transform of how the occurrence will be copied so that the occurrence maintains it's same position in model space.
+    /// the transform of how the occurrence will be copied so that the occurrence maintains its same position in model space.
     /// Returns the moved Occurrence or null in the case the move failed.
     core::Ptr<Occurrence> moveToComponent(const core::Ptr<Occurrence>& targetOccurrence);
 
-    /// Returns the PhysicalProperties object that has properties for getting the area, density, mass, volume, moments, etc
+    /// Returns the PhysicalProperties object that has properties for getting the area, density, mass, volume, moments, etc.
     /// of this occurrence. Property values will be calculated using the 'LowCalculationAccuracy' setting when using this property
     /// to get the PhysicalProperties object. To specify a higher calculation tolerance, use the getPhysicalProperties method instead.
     /// Returns a PhysicalProperties object that can be used to get the various physical property related values.
@@ -203,7 +206,7 @@ public:
     /// component, not the component they actually exist in.
     core::Ptr<BRepBodies> bRepBodies() const;
 
-    /// Returns the PhysicalProperties object that has properties for getting the area, density, mass, volume, moments, etc
+    /// Returns the PhysicalProperties object that has properties for getting the area, density, mass, volume, moments, etc.
     /// of this occurrence.
     /// accuracy : Specifies the desired level of computational accuracy of the property calculations.
     /// The default value of 'LowCalculationAccuracy' returns results within a +/- 1% error margin.
@@ -314,6 +317,20 @@ public:
     /// is a top level opened design.
     core::Ptr<core::DataComponent> dataComponent() const;
 
+    /// Returns if this occurrence is derived from another design. If true, the occurrence cannot be deleted.
+    /// You should not attempt to make any edits to the component referenced by the derived occurrence. Any edits made to this derived occurrence will be lost when the derive updates.
+    bool isDerived() const;
+
+    /// Returns the DeriveFeature if this occurrence is derived from another design.
+    /// This property returns null if the occurrence is not derived from another design (i.e. isDerived property returns false).
+    core::Ptr<DeriveFeature> deriveFeature() const;
+
+    /// Returns the body proxies for the mesh bodies in the component referenced by this occurrence.
+    /// For example if you get the occurrences from the root component and then use this property to
+    /// get the bodies from those occurrences, the bodies returned will return information in the context of the root
+    /// component, not the component they actually exist in.
+    std::vector<core::Ptr<MeshBody>> meshBodies() const;
+
     ADSK_FUSION_OCCURRENCE_API static const char* classType();
     ADSK_FUSION_OCCURRENCE_API const char* objectType() const override;
     ADSK_FUSION_OCCURRENCE_API void* queryInterface(const char* id) const override;
@@ -377,6 +394,9 @@ private:
     virtual bool initialTransform_raw(core::Matrix3D* value) = 0;
     virtual bool isVaildForEditInitialPosition_raw() const = 0;
     virtual core::DataComponent* dataComponent_raw() const = 0;
+    virtual bool isDerived_raw() const = 0;
+    virtual DeriveFeature* deriveFeature_raw() const = 0;
+    virtual MeshBody** meshBodies_raw(size_t& return_size) const = 0;
 };
 
 // Inline wrappers
@@ -720,6 +740,32 @@ inline bool Occurrence::isVaildForEditInitialPosition() const
 inline core::Ptr<core::DataComponent> Occurrence::dataComponent() const
 {
     core::Ptr<core::DataComponent> res = dataComponent_raw();
+    return res;
+}
+
+inline bool Occurrence::isDerived() const
+{
+    bool res = isDerived_raw();
+    return res;
+}
+
+inline core::Ptr<DeriveFeature> Occurrence::deriveFeature() const
+{
+    core::Ptr<DeriveFeature> res = deriveFeature_raw();
+    return res;
+}
+
+inline std::vector<core::Ptr<MeshBody>> Occurrence::meshBodies() const
+{
+    std::vector<core::Ptr<MeshBody>> res;
+    size_t s;
+
+    MeshBody** p= meshBodies_raw(s);
+    if(p)
+    {
+        res.assign(p, p+s);
+        core::DeallocateArray(p);
+    }
     return res;
 }
 }// namespace fusion

@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -43,7 +43,7 @@ public:
     core::Ptr<SketchPoint> pointTwo() const;
 
     /// The NativeObject is the object outside the context of an assembly and
-    /// in the context of it's parent component.
+    /// in the context of its parent component.
     /// Returns null in the case where this object is not in the context of
     /// an assembly but is already the native object.
     core::Ptr<HorizontalPointsConstraint> nativeObject() const;

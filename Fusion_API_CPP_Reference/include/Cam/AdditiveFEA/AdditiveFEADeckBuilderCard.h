@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -30,11 +30,10 @@
 namespace adsk { namespace cam {
 
 /// !!!!! Warning !!!!!
-/// ! This is hidden and not officially supported
+/// ! This is in preview state; please see the help for more info
 /// !!!!! Warning !!!!!
 /// 
-/// An AdditiveFEADeckBuilderCard is a single card in an additive FEA simulation input
-/// file
+/// An AdditiveFEADeckBuilderCard is a single card in an additive FEA simulation input file.
 class AdditiveFEADeckBuilderCard : public core::Base {
 public:
 

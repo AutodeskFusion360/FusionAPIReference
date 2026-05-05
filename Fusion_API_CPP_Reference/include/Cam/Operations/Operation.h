@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -91,6 +91,18 @@ public:
     core::Ptr<ToolPreset> toolPreset() const;
     bool toolPreset(const core::Ptr<ToolPreset>& value);
 
+    /// !!!!! Warning !!!!!
+    /// ! This is in preview state; please see the help for more info
+    /// !!!!! Warning !!!!!
+    /// 
+    /// Get or set the tool for this operation. The document's tool library will be updated accordingly.
+    /// The tool instance returned is a copy and therefore is not referenced by the operation.
+    /// To change the reference tool of the operation, the new tool must be assigned to the operation, but once set it cannot be unset again.
+    /// Setting the tool is only possible on operation strategies that support reference tools, an exception is thrown otherwise.
+    /// Likewise null is returned if the operation strategy does not support reference tools.
+    core::Ptr<Tool> referenceTool() const;
+    bool referenceTool(const core::Ptr<Tool>& value);
+
     ADSK_CAM_OPERATION_API static const char* classType();
     ADSK_CAM_OPERATION_API const char* objectType() const override;
     ADSK_CAM_OPERATION_API void* queryInterface(const char* id) const override;
@@ -114,6 +126,8 @@ private:
     virtual bool tool_raw(Tool* value) = 0;
     virtual ToolPreset* toolPreset_raw() const = 0;
     virtual bool toolPreset_raw(ToolPreset* value) = 0;
+    virtual Tool* referenceTool_raw() const = 0;
+    virtual bool referenceTool_raw(Tool* value) = 0;
     virtual void placeholderOperation0() {}
     virtual void placeholderOperation1() {}
     virtual void placeholderOperation2() {}
@@ -161,8 +175,6 @@ private:
     virtual void placeholderOperation44() {}
     virtual void placeholderOperation45() {}
     virtual void placeholderOperation46() {}
-    virtual void placeholderOperation47() {}
-    virtual void placeholderOperation48() {}
 };
 
 // Inline wrappers
@@ -272,6 +284,17 @@ inline core::Ptr<ToolPreset> Operation::toolPreset() const
 inline bool Operation::toolPreset(const core::Ptr<ToolPreset>& value)
 {
     return toolPreset_raw(value.get());
+}
+
+inline core::Ptr<Tool> Operation::referenceTool() const
+{
+    core::Ptr<Tool> res = referenceTool_raw();
+    return res;
+}
+
+inline bool Operation::referenceTool(const core::Ptr<Tool>& value)
+{
+    return referenceTool_raw(value.get());
 }
 }// namespace cam
 }// namespace adsk

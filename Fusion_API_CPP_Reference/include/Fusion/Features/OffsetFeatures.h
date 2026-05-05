@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -51,7 +51,7 @@ public:
     /// The number of Offset features in the collection.
     size_t count() const;
 
-    /// Creates a OffsetFeatureInput object. Use properties and methods on this object
+    /// Creates an OffsetFeatureInput object. Use properties and methods on this object
     /// to define the offset feature you want to create and then use the Add method, passing in
     /// the OffsetFeatureInput object to create the feature.
     /// entities : An ObjectCollection containing the BRepFace objects to offset. Additional faces may be

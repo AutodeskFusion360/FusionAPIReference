@@ -135,7 +135,7 @@
       </tr>
       <tr>
         <td class="api-list"><a href="RectangularPatternFeature_inputEntities.htm">inputEntities</a></td>
-        <td class="api-list">Gets and sets the input entities. The collection can contain faces, features, bodies or occurrences. All of the entities must be of a single type. For example, it can't contain features and occurrences but only features or occurrences.<br/><br/> To use this property, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</td>
+        <td class="api-list">Gets and sets the entities to pattern using an ObjectCollection. The collection can contain BRepFace, PartFeature, BRepBody, or Occurrence objects. All of the entities provided must be the same type. For example, it must contain only bodies and can't contain both bodies and faces.<br/><br/> ConstructionPoint, ConstructionAxis, and ConstructionPlane objects can also be patterned. When patterning any construction goemetry, only one entity can be patterned at a time, so the ObjectCollection will always contain a single entity<br/><br/> To use this property, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</td>
       </tr>
       <tr>
         <td class="api-list"><a href="RectangularPatternFeature_isParametric.htm">isParametric</a></td>
@@ -245,9 +245,9 @@
       <table width="100%" style="font-size:15">
         <tr>
           <td align="left">
-                © Copyright 2025 Autodesk, Inc.
+                © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(RectangularPatternFeature%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(RectangularPatternFeature%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

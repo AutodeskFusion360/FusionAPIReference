@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -27,6 +27,8 @@
 
 namespace adsk { namespace drawing {
     class DrawingExportManager;
+    class Sheet;
+    class Sheets;
 }}
 
 namespace adsk { namespace drawing {
@@ -39,6 +41,20 @@ public:
     /// to export the drawing in various formats.
     core::Ptr<DrawingExportManager> exportManager() const;
 
+    /// !!!!! Warning !!!!!
+    /// ! This is hidden and not officially supported
+    /// !!!!! Warning !!!!!
+    /// 
+    /// Returns the Sheets object that provides access to sheets in this drawing.
+    core::Ptr<Sheets> sheets() const;
+
+    /// !!!!! Warning !!!!!
+    /// ! This is hidden and not officially supported
+    /// !!!!! Warning !!!!!
+    /// 
+    /// Returns the current sheet i.e, the active sheet
+    core::Ptr<Sheet> activeSheet() const;
+
     ADSK_DRAWING_DRAWING_API static const char* classType();
     ADSK_DRAWING_DRAWING_API const char* objectType() const override;
     ADSK_DRAWING_DRAWING_API void* queryInterface(const char* id) const override;
@@ -48,6 +64,8 @@ private:
 
     // Raw interface
     virtual DrawingExportManager* exportManager_raw() const = 0;
+    virtual Sheets* sheets_raw() const = 0;
+    virtual Sheet* activeSheet_raw() const = 0;
 };
 
 // Inline wrappers
@@ -55,6 +73,18 @@ private:
 inline core::Ptr<DrawingExportManager> Drawing::exportManager() const
 {
     core::Ptr<DrawingExportManager> res = exportManager_raw();
+    return res;
+}
+
+inline core::Ptr<Sheets> Drawing::sheets() const
+{
+    core::Ptr<Sheets> res = sheets_raw();
+    return res;
+}
+
+inline core::Ptr<Sheet> Drawing::activeSheet() const
+{
+    core::Ptr<Sheet> res = activeSheet_raw();
     return res;
 }
 }// namespace drawing

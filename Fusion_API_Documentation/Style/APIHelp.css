@@ -122,3 +122,36 @@ pre[class*=language-]
 {
     font-size: 13.5px!important;
 }
+
+
+img.width20 {
+  max-width: 20%;
+  height: auto;
+}
+
+img.width30 {
+  max-width: 30%;
+  height: auto;
+}
+
+img.width40 {
+  max-width: 40%;
+  height: auto;
+}
+
+img.width50 {
+  max-width: 50%;
+  height: auto;
+}
+img.width60 {
+  max-width: 60%;
+  height: auto;
+}
+img.width70 {
+  max-width: 70%;
+  height: auto;
+}
+img.width80 {
+  max-width: 80%;
+  height: auto;
+}

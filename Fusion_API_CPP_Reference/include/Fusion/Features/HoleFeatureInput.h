@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -37,8 +37,10 @@ namespace adsk { namespace fusion {
     class BaseFeature;
     class BRepBody;
     class BRepEdge;
+    class ClearanceHoleInfo;
     class Occurrence;
     class SketchPoint;
+    class ThreadInfo;
 }}
 
 namespace adsk { namespace fusion {
@@ -140,7 +142,7 @@ public:
     /// the type of feature this is being used with. For a hole it can be a BRepBody, BRepFace,
     /// BRepVertex, ConstructionPlane, or ConstructionPoint.
     /// matchShape : Indicates if the hole is not contained on the face that the hole should match
-    /// the shape of the entity as if it extended beyond it's current boundaries.
+    /// the shape of the entity as if it extended beyond its current boundaries.
     /// directionHint : Specifies the direction of the hole. This is only used in the case where there are two possible solutions and the hole can
     /// hit the toEntity in either direction.
     /// 
@@ -185,6 +187,73 @@ public:
     std::vector<core::Ptr<BRepBody>> participantBodies() const;
     bool participantBodies(const std::vector<core::Ptr<BRepBody>>& value);
 
+    /// Returns the current type of tap associated with this hole. When a new HoleFeatureInput
+    /// is created, this will default to SimpleHoleTapType, which means the hole will not have
+    /// any tap and will be a simple hole. You can set the tap type by using one of the methods
+    /// to define the specific tap desired.
+    HoleTapTypes holeTapType() const;
+
+    /// This property sets the hole's tap to be "simple", which means that it will not have
+    /// any tap and will be a simple hole. When a new input is created, it defaults to being
+    /// a simple hole.
+    /// Returns true if successful.
+    bool setToSimpleHole();
+
+    /// Sets the hole to be a clearance hole of the size specified by the ClearanceHoleInfo object.
+    /// clearanceHoleInfo : The ClearanceHoleInfo object that specifies the size of the clearance hole.
+    /// Returns true if setting to a clearance hole was successful.
+    bool setToClearanceHole(const core::Ptr<ClearanceHoleInfo>& clearanceHoleInfo);
+
+    /// Sets the hole to be a straight or tapered tapped hole of the size specified by the ThreadInfo object.
+    /// threadInfo : The ThreadInfo object that specifies the thread to use for the tapped hole. Whether it is straight
+    /// or tapered tap is defined by the input ThreadInfo object.
+    /// Returns true if setting to a tapped hole was successful.
+    bool setToTappedHole(const core::Ptr<ThreadInfo>& threadInfo);
+
+    /// Gets and sets if the thread is physical or cosmetic thread. A value of
+    /// true indicates a physical thread. It defaults to false.
+    /// 
+    /// This property is only used when creating a tapped hole, which
+    /// means the setToTappedHole method has been called. Otherwise this
+    /// property is ignored.
+    bool isModeled() const;
+    bool isModeled(bool value);
+
+    /// Gets and sets if this thread is the full length of the hole. It defaults to true.
+    /// 
+    /// This property is only used when creating a tapped hole, which
+    /// means the setToTappedHole method has been called. Otherwise this
+    /// property is ignored.
+    /// 
+    /// The property can only be set to True, which will cause the feature to ignore the
+    /// values of the threadLength and threadOffset properties. Using the setLengthAndOffset
+    /// method will have the side effect of setting this property to false.
+    bool isFullLength() const;
+    bool isFullLength(bool value);
+
+    /// Sets the length and offset of the thread of a tapped hole.
+    /// 
+    /// This method is only used when creating a tapped hole, which
+    /// means the setToTappedHole method has been called. Otherwise calling this
+    /// method will fail.
+    /// 
+    /// By default the isFullLength property is true which means the thread is
+    /// the full length of the hole and there is no offset. Calling this method will have
+    /// the side effect of setting the isFullLength property to false.
+    /// length : Sets the length of the thread.
+    /// offset : Sets the offset of the thread from the start of the hole. A value of zero is valid
+    /// for no offset.
+    /// 
+    bool setLengthAndOffset(const core::Ptr<core::ValueInput>& length, const core::Ptr<core::ValueInput>& offset);
+
+    /// Gets the thread length when the isFullLength property is False. Returns null when the
+    /// isFullLength property is true.
+    core::Ptr<core::ValueInput> threadLength() const;
+
+    /// Gets the thread offset when the isFullLength property is False. Returns null when the
+    /// isFullLength property is true.
+    core::Ptr<core::ValueInput> threadOffset() const;
+
     ADSK_FUSION_HOLEFEATUREINPUT_API static const char* classType();
     ADSK_FUSION_HOLEFEATUREINPUT_API const char* objectType() const override;
     ADSK_FUSION_HOLEFEATUREINPUT_API void* queryInterface(const char* id) const override;
@@ -212,6 +281,17 @@ private:
     virtual bool targetBaseFeature_raw(BaseFeature* value) = 0;
     virtual BRepBody** participantBodies_raw(size_t& return_size) const = 0;
     virtual bool participantBodies_raw(BRepBody** value, size_t value_size) = 0;
+    virtual HoleTapTypes holeTapType_raw() const = 0;
+    virtual bool setToSimpleHole_raw() = 0;
+    virtual bool setToClearanceHole_raw(ClearanceHoleInfo* clearanceHoleInfo) = 0;
+    virtual bool setToTappedHole_raw(ThreadInfo* threadInfo) = 0;
+    virtual bool isModeled_raw() const = 0;
+    virtual bool isModeled_raw(bool value) = 0;
+    virtual bool isFullLength_raw() const = 0;
+    virtual bool isFullLength_raw(bool value) = 0;
+    virtual bool setLengthAndOffset_raw(core::ValueInput* length, core::ValueInput* offset) = 0;
+    virtual core::ValueInput* threadLength_raw() const = 0;
+    virtual core::ValueInput* threadOffset_raw() const = 0;
 };
 
 // Inline wrappers
@@ -336,6 +416,70 @@ inline bool HoleFeatureInput::participantBodies(const std::vector<core::Ptr<BRep
 
     bool res = participantBodies_raw(value_, value.size());
     delete[] value_;
+    return res;
+}
+
+inline HoleTapTypes HoleFeatureInput::holeTapType() const
+{
+    HoleTapTypes res = holeTapType_raw();
+    return res;
+}
+
+inline bool HoleFeatureInput::setToSimpleHole()
+{
+    bool res = setToSimpleHole_raw();
+    return res;
+}
+
+inline bool HoleFeatureInput::setToClearanceHole(const core::Ptr<ClearanceHoleInfo>& clearanceHoleInfo)
+{
+    bool res = setToClearanceHole_raw(clearanceHoleInfo.get());
+    return res;
+}
+
+inline bool HoleFeatureInput::setToTappedHole(const core::Ptr<ThreadInfo>& threadInfo)
+{
+    bool res = setToTappedHole_raw(threadInfo.get());
+    return res;
+}
+
+inline bool HoleFeatureInput::isModeled() const
+{
+    bool res = isModeled_raw();
+    return res;
+}
+
+inline bool HoleFeatureInput::isModeled(bool value)
+{
+    return isModeled_raw(value);
+}
+
+inline bool HoleFeatureInput::isFullLength() const
+{
+    bool res = isFullLength_raw();
+    return res;
+}
+
+inline bool HoleFeatureInput::isFullLength(bool value)
+{
+    return isFullLength_raw(value);
+}
+
+inline bool HoleFeatureInput::setLengthAndOffset(const core::Ptr<core::ValueInput>& length, const core::Ptr<core::ValueInput>& offset)
+{
+    bool res = setLengthAndOffset_raw(length.get(), offset.get());
+    return res;
+}
+
+inline core::Ptr<core::ValueInput> HoleFeatureInput::threadLength() const
+{
+    core::Ptr<core::ValueInput> res = threadLength_raw();
+    return res;
+}
+
+inline core::Ptr<core::ValueInput> HoleFeatureInput::threadOffset() const
+{
+    core::Ptr<core::ValueInput> res = threadOffset_raw();
     return res;
 }
 }// namespace fusion

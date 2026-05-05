@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -35,10 +35,6 @@ namespace adsk { namespace cam {
 
 namespace adsk { namespace cam {
 
-/// !!!!! Warning !!!!!
-/// ! This is in preview state; please see the help for more info
-/// !!!!! Warning !!!!!
-/// 
 /// A CAMTemplateOperationInput provides access to Operation Template parameters for editing, in much the same way as
 /// OperationInput provides access to Operation parameters for editing. Operation Template parameters are slightly different
 /// from Operation parameters, for instance in terms of how tools and geometry selections can be specified, so an OperationInput

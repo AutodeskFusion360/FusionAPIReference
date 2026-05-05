@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -32,6 +32,7 @@ namespace adsk { namespace core {
 }}
 namespace adsk { namespace fusion {
     class BRepFace;
+    class HoleFeature;
     class ModelParameter;
     class Occurrence;
     class ThreadInfo;
@@ -39,7 +40,10 @@ namespace adsk { namespace fusion {
 
 namespace adsk { namespace fusion {
 
-/// Object that represents an existing thread feature in a design.
+/// Object that represents an existing thread feature in a design. The creation of a tapped
+/// hole also results in the creation of a thread feature. There are some limitation when the
+/// thread feature is associated with a hole, which are described in the documentation for the
+/// property or method where the limitation exists.
 class ThreadFeature : public Feature {
 public:
 
@@ -50,6 +54,9 @@ public:
     /// 
     /// To set this property, you need to position the timeline marker to immediately before this feature.
     /// This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
+    /// 
+    /// If the thread feature is associated with a hole (the hole property is not null), this property will
+    /// always return null and will fail if set.
     core::Ptr<BRepFace> inputCylindricalFace() const;
     bool inputCylindricalFace(const core::Ptr<BRepFace>& value);
 
@@ -97,6 +104,9 @@ public:
     /// 
     /// To set this property, you need to position the timeline marker to immediately before this feature.
     /// This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
+    /// 
+    /// If the thread feature is associated with a hole (the hole property is not null), this property will
+    /// always return null and will always return LowEndThreadLocation and will fail if set.
     ThreadLocations threadLocation() const;
     bool threadLocation(ThreadLocations value);
 
@@ -133,8 +143,16 @@ public:
     /// 
     /// To use this property, you need to position the timeline marker to immediately before this feature.
     /// This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
+    /// 
+    /// If the thread feature is associated with a hole (the hole property is not null), this property will
+    /// always return null and will fail if set.
     core::Ptr<core::ObjectCollection> inputCylindricalFaces() const;
     bool inputCylindricalFaces(const core::Ptr<core::ObjectCollection>& value);
+
+    /// If this thread feature is was created as the result of creating a tapped hole, this
+    /// property will return the associated hole feature. If this is a standard thread feature,
+    /// this property will return null.
+    core::Ptr<HoleFeature> hole() const;
 
     ADSK_FUSION_THREADFEATURE_API static const char* classType();
     ADSK_FUSION_THREADFEATURE_API const char* objectType() const override;
@@ -163,6 +181,7 @@ private:
     virtual ThreadFeature* createForAssemblyContext_raw(Occurrence* occurrence) const = 0;
     virtual core::ObjectCollection* inputCylindricalFaces_raw() const = 0;
     virtual bool inputCylindricalFaces_raw(core::ObjectCollection* value) = 0;
+    virtual HoleFeature* hole_raw() const = 0;
 };
 
 // Inline wrappers
@@ -272,6 +291,12 @@ inline core::Ptr<core::ObjectCollection> ThreadFeature::inputCylindricalFaces() 
 inline bool ThreadFeature::inputCylindricalFaces(const core::Ptr<core::ObjectCollection>& value)
 {
     return inputCylindricalFaces_raw(value.get());
+}
+
+inline core::Ptr<HoleFeature> ThreadFeature::hole() const
+{
+    core::Ptr<HoleFeature> res = hole_raw();
+    return res;
 }
 }// namespace fusion
 }// namespace adsk

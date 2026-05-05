@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -10,6 +10,7 @@
 
 #pragma once
 #include "Feature.h"
+#include "../FusionTypeDefs.h"
 
 // THIS CLASS WILL BE VISIBLE TO AN API CLIENT.
 // THIS HEADER FILE WILL BE GENERATED FROM NIDL.
@@ -27,7 +28,9 @@
 
 namespace adsk { namespace fusion {
     class FilletEdgeSets;
+    class FullRoundFilletFaceSets;
     class Occurrence;
+    class RuleFilletSettings;
 }}
 
 namespace adsk { namespace fusion {
@@ -47,7 +50,8 @@ public:
     bool isG2() const;
     bool isG2(bool value);
 
-    /// Gets and sets if a rolling ball solution is to be used in any corners.
+    /// Gets and sets if a rolling ball or setback solution is to be used in any corners. Asymmetric
+    /// fillets always use a setback solution and will ignore this setting.
     /// 
     /// To set this property, you need to position the timeline marker to immediately before this feature.
     /// This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
@@ -76,6 +80,29 @@ public:
     /// Returns the proxy object or null if this isn't the NativeObject.
     core::Ptr<FilletFeature> createForAssemblyContext(const core::Ptr<Occurrence>& occurrence) const;
 
+    /// Returns the full round fillet face sets collection associated with this fillet feature.
+    /// This collection is only valid when the filletFeatureType is FullRoundFilletFeatureType
+    /// and it returns null if the filletFeatureType is not FullRoundFilletFeatureType.
+    core::Ptr<FullRoundFilletFaceSets> fullRoundFilletFaceSets() const;
+
+    /// Returns the FilletFeatureTypes indicating this fillet feature type.
+    FilletFeatureTypes filletFeatureType() const;
+
+    /// Method that converts this feature to another fillet feature type.
+    /// 
+    /// To use this method you need to position the timeline marker to immediately before this feature.
+    /// This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True).
+    /// input : Input a fillet feature input object that defines the desired fillet.
+    /// Use the FilletFeatures.create*Input methods to create a new fillet feature input object.
+    /// This can be a feature input for fillet type, rule fillet type or full round fillet type.
+    /// Returns true if the conversion was successful.
+    bool convert(const core::Ptr<core::Base>& input);
+
+    /// Gets the RuleFilletSettings object for the rule fillet.
+    /// 
+    /// This is valid only when the filletFeatureType is FilletFeatureTypes.RuleFilletFeatureType, otherwise this returns null.
+    core::Ptr<RuleFilletSettings> ruleFilletSettings() const;
+
     ADSK_FUSION_FILLETFEATURE_API static const char* classType();
     ADSK_FUSION_FILLETFEATURE_API const char* objectType() const override;
     ADSK_FUSION_FILLETFEATURE_API void* queryInterface(const char* id) const override;
@@ -93,6 +120,10 @@ private:
     virtual bool isTangentChain_raw(bool value) = 0;
     virtual FilletFeature* nativeObject_raw() const = 0;
     virtual FilletFeature* createForAssemblyContext_raw(Occurrence* occurrence) const = 0;
+    virtual FullRoundFilletFaceSets* fullRoundFilletFaceSets_raw() const = 0;
+    virtual FilletFeatureTypes filletFeatureType_raw() const = 0;
+    virtual bool convert_raw(core::Base* input) = 0;
+    virtual RuleFilletSettings* ruleFilletSettings_raw() const = 0;
 };
 
 // Inline wrappers
@@ -145,6 +176,30 @@ inline core::Ptr<FilletFeature> FilletFeature::nativeObject() const
 inline core::Ptr<FilletFeature> FilletFeature::createForAssemblyContext(const core::Ptr<Occurrence>& occurrence) const
 {
     core::Ptr<FilletFeature> res = createForAssemblyContext_raw(occurrence.get());
+    return res;
+}
+
+inline core::Ptr<FullRoundFilletFaceSets> FilletFeature::fullRoundFilletFaceSets() const
+{
+    core::Ptr<FullRoundFilletFaceSets> res = fullRoundFilletFaceSets_raw();
+    return res;
+}
+
+inline FilletFeatureTypes FilletFeature::filletFeatureType() const
+{
+    FilletFeatureTypes res = filletFeatureType_raw();
+    return res;
+}
+
+inline bool FilletFeature::convert(const core::Ptr<core::Base>& input)
+{
+    bool res = convert_raw(input.get());
+    return res;
+}
+
+inline core::Ptr<RuleFilletSettings> FilletFeature::ruleFilletSettings() const
+{
+    core::Ptr<RuleFilletSettings> res = ruleFilletSettings_raw();
     return res;
 }
 }// namespace fusion

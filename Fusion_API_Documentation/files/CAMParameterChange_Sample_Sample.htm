@@ -79,28 +79,29 @@ def run(context):
         app = adsk.core.Application.get()
         doc = app.activeDocument
         products = doc.products
-        
+
         <span style="color:blue"># Get the CAM product</span>
         cam = adsk.cam.CAM.cast(products.itemByProductType("CAMProductType"))
 
         <span style="color:blue"># List of all setups</span>
         setups = cam.setups
-        
+
         for setup in setups:
             <span style="color:blue"># Change the program name of each setup to 1234</span>
             programNameParam = setup.parameters.itemByName('job_programName')
             programNameParam.expression = "\'1234\'"
-            
+
             for operation in setup.operations:
                 <span style="color:blue"># Change tolerance in all operations</span>
                 toleranceParam = operation.parameters.itemByName('tolerance')
                 toleranceParam.expression = "0.1mm"
-        
+
         <span style="color:blue"># Generate all toolpaths, skipping any that are already valid</span>
         cam.generateAllToolpaths(True)
+
     except:
         if ui:
-            <span style="color:blue">#ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</span></pre>
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
       </div>
       <div id="C++" class="api-code">
         <table width="100%" style="font-size:15">
@@ -144,9 +145,9 @@ extern "C" XI_EXPORT bool run(const char* context)
       <table width="100%" style="font-size:15">
         <tr>
           <td align="left">
-                © Copyright 2025 Autodesk, Inc.
+                © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(CAMParameterChange_Sample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(CAMParameterChange_Sample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

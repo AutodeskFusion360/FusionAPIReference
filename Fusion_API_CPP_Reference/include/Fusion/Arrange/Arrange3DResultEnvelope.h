@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -31,10 +31,6 @@ namespace adsk { namespace core {
 
 namespace adsk { namespace fusion {
 
-/// !!!!! Warning !!!!!
-/// ! This is in preview state; please see the help for more info
-/// !!!!! Warning !!!!!
-/// 
 /// Represents the arrange envelope result of a 3D arrange feature.
 class Arrange3DResultEnvelope : public ArrangeResultEnvelope {
 public:

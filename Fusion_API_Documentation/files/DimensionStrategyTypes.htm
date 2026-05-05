@@ -1,0 +1,109 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/DimensionStrategyTypes.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="29/03/2026">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="DimensionStrategyTypes">
+    <meta name="description" content="Defines the available dimension strategies for auto constraining sketches. These strategies control how dimensions are generated when automatically constraining sketch geometry.">
+    <meta name="topicid" content="GUID-A12EC8B5-7BB0-4D77-83DA-65E237A9A3E6">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>DimensionStrategyTypes Enumerator
+        </title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">DimensionStrategyTypes Enumerator
+        </h1>
+    <h2 class="api">
+          Description
+        </h2>Defines the available dimension strategies for auto constraining sketches. These strategies control how dimensions are generated when automatically constraining sketch geometry.<br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion\FusionTypeDefs.h&gt;<h2 class="api">
+          Methods
+        </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+              Name
+            </td>
+        <td class="api-list" style="width:1px;">
+              Value
+            </td>
+        <td class="api-list">
+              Description
+            </td>
+      </tr>
+      <tr>
+        <td class="api-list">BaselineDimensionStrategyType</td>
+        <td class="api-list" align="right" style="padding-right:10px">2</td>
+        <td class="api-list">All dimensions reference from a single baseline point or edge, creating a series of dimensions that all originate from the same datum.</td>
+      </tr>
+      <tr>
+        <td class="api-list">ChainDimensionStrategyType</td>
+        <td class="api-list" align="right" style="padding-right:10px">1</td>
+        <td class="api-list">Dimensions are arranged sequentially from one end to another, where each dimension references the previous dimension's end point.</td>
+      </tr>
+      <tr>
+        <td class="api-list">DefaultDimensionStrategyType</td>
+        <td class="api-list" align="right" style="padding-right:10px">0</td>
+        <td class="api-list">Use the system's default dimension strategy. This occurs when a new AutoConstrainInput is created and before a specific strategy has been set. When this value is used, the system will automatically select the most appropriate strategy based on the sketch geometry.</td>
+      </tr>
+      <tr>
+        <td class="api-list">EdgeAndAlignedDimensionStrategyType</td>
+        <td class="api-list" align="right" style="padding-right:10px">3</td>
+        <td class="api-list">Dimensions are placed along edges with alignment to the geometry, following the natural orientation of the sketch curves.</td>
+      </tr>
+      <tr>
+        <td class="api-list">EdgeAndAlignedHigherAngleDimPriorityDimensionStrategyType</td>
+        <td class="api-list" align="right" style="padding-right:10px">6</td>
+        <td class="api-list">Edge-aligned dimensioning with higher priority given to angular dimensions over linear dimensions.</td>
+      </tr>
+      <tr>
+        <td class="api-list">EdgeAndAlignedWithBaselineDimensionStrategyType</td>
+        <td class="api-list" align="right" style="padding-right:10px">7</td>
+        <td class="api-list">A combination of edge-aligned dimensioning with baseline dimensioning for different parts of the sketch.</td>
+      </tr>
+      <tr>
+        <td class="api-list">SymmetricAndBaselineDimensionStrategyType</td>
+        <td class="api-list" align="right" style="padding-right:10px">5</td>
+        <td class="api-list">Baseline dimensions combined with automatic detection and handling of symmetric features in the sketch.</td>
+      </tr>
+      <tr>
+        <td class="api-list">SymmetricAndChainDimensionStrategyType</td>
+        <td class="api-list" align="right" style="padding-right:10px">4</td>
+        <td class="api-list">Chain dimensions combined with automatic detection and handling of symmetric features in the sketch.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+          Version
+        </h2>
+        Introduced in version April 2026<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2026 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(DimensionStrategyTypes%20Enum%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

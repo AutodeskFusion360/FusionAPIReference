@@ -67,7 +67,7 @@
       </tr>
       <tr>
         <td class="api-list"><a href="ConfigurationParameterCell_expression.htm">expression</a></td>
-        <td class="api-list">Gets and sets the expression that defines the value of the associated parameter when the parent row is active. This property behaves as read-only when the table is obtained from a DataFile object.</td>
+        <td class="api-list">Gets and sets the expression that defines the value of the associated parameter when the parent row is active. This works for both numeric and text parameters. This property behaves as read-only when the table is obtained from a DataFile object.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="ConfigurationParameterCell_isValid.htm">isValid</a></td>
@@ -86,8 +86,16 @@
         <td class="api-list">Returns the row this cell is in.</td>
       </tr>
       <tr>
+        <td class="api-list"><a href="ConfigurationParameterCell_textValue.htm">textValue</a></td>
+        <td class="api-list">Gets and sets the text value of the parameter when it is a text parameter. This can be determined by checking the valueType property. Setting this value will cause the current expression to be overwritten. This property behaves as read-only when the table is obtained from a DataFile object.</td>
+      </tr>
+      <tr>
         <td class="api-list"><a href="ConfigurationParameterCell_value.htm">value</a></td>
-        <td class="api-list">Gets and sets the value of the parameter in database units. You can use the units property of the associated Parameter object, which you can get from the column, to determine the type of units this parameter is defined in. Setting this property will overwrite any existing expression. This property behaves as read-only when the table is obtained from a DataFile object.</td>
+        <td class="api-list">Gets and sets the real value (a double) of the parameter in database units. Setting this property will overwrite any existing expression. This property behaves as read-only when the table is obtained from a DataFile object. This property is only valid for numeric parameters and will fail for text parameters. You can determine the value type of the parameter by using the valueType property. Use the textValue property to get and set the value of text parameters.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ConfigurationParameterCell_valueType.htm">valueType</a></td>
+        <td class="api-list">Returns the type of value this parameter cell is. For a numeric parameter, you can get the value using the value property. For a text parameter, you can get the value using the textValue property.</td>
       </tr>
     </Table>
     <h2 class="api">
@@ -100,9 +108,9 @@
       <table width="100%" style="font-size:15">
         <tr>
           <td align="left">
-                © Copyright 2025 Autodesk, Inc.
+                © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(ConfigurationParameterCell%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(ConfigurationParameterCell%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

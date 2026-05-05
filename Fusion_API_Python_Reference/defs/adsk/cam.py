@@ -7,6 +7,133 @@ from collections.abc import Iterator
 from . import core
 from . import fusion
 
+class AdditiveFEAAnalysisType():
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    The valid analysis types for an additive FEA simulation.
+    """
+    def __init__(self):
+        pass
+    Thermal = 2
+    Mechanical = 4
+    ThermoMechanical = 24
+
+class AdditiveFEACard():
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    The valid keyword card names for an AdditiveFEADeckBuilderCard in an AdditiveFEADeckBuilder.  Any cards not in this enum can still be made using createGenericCard.
+    """
+    def __init__(self):
+        pass
+    TitleCard = 0
+    STLToleranceCard = 1
+    LayersPerElementCard = 2
+    AmbientTemperatureCard = 3
+    FinalTemperatureCard = 4
+    BuildPlateZBoundsCard = 5
+    STLMapCard = 6
+    ConvectionCard = 7
+    PRMsCard = 8
+    STLsCard = 9
+    BuildPlateXYExtensionCard = 10
+    AdaptivityCard = 11
+    AnalysisTypeCard = 12
+    BinaryOutputCard = 13
+    EnsightOutputCard = 14
+    NoOffCoreCard = 15
+    OnCore1Card = 16
+    CoarseningGenerationsCard = 17
+    EndCard = 18
+    MaterialCard = 19
+    LaserPathGenerationCard = 20
+    TransientCard = 21
+    PropertyScalingCard = 22
+    PowderTypeCard = 23
+    FineLayerCountCard = 24
+    AutomaticTimingCard = 25
+    DiskCheckCard = 26
+    GoldakCard = 27
+    PowderCard = 28
+    AutomaticMeshingCard = 29
+    PowderBedYSymmetryCard = 30
+    NewPRMGenerationMethodCard = 31
+    InitialTemperatureCard = 32
+    EvaporationTemperatureCard = 33
+    RelaxationCard = 34
+    OutputFileFrequencyCard = 35
+    SolutionParametersCard = 36
+    MechanicalRelaxationCard = 37
+
+class AdditiveFEAGenerationType():
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    The valid generation types for an additive FEA simulation.
+    """
+    def __init__(self):
+        pass
+    MeshPreCheck = 0
+    PRM = 1
+    Result = 2
+
+class AdditiveFEAMaterial():
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    The valid materials for PRM generation.  For subsequent part scale models, material properties are automatically loaded from the PRM file.
+    """
+    def __init__(self):
+        pass
+    AISI4340AlloySteel = 0
+    AlSi10Mg = 1
+    CobaltChrome = 2
+    Inconel625 = 3
+    Inconel718 = 4
+    Inconel718Plus = 5
+    SAE304 = 6
+    StainlessSteel174PH = 7
+    StainlessSteel316 = 8
+    Ti6Al4V = 9
+
+class AdditiveFEAPowderType():
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    The valid types for the PowderTypeCard.
+    """
+    def __init__(self):
+        pass
+    Automatic = 0
+    Scaled = 1
+    Custom = 2
+
+class AdditiveFEASTLConfiguration():
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    The STL configuration IDs for the *STLM card.
+    """
+    def __init__(self):
+        pass
+    Part = 1
+    BuildPlate = 2
+    Support = 3
+    Ghost = 4
+
 class AdditiveTechnologies():
     """
     List of technologies a additive machine could have
@@ -22,6 +149,7 @@ class AdditiveTechnologies():
     SLSTechnology = 6
     NATechnology = 7
     OtherTechnology = 8
+    EbeamTechnology = 9
 
 class ArrangePriorityTypes():
     """
@@ -137,6 +265,7 @@ class GeneratedDataType():
     def __init__(self):
         pass
     OptimizedOrientationGeneratedDataType = 0
+    AdditiveFEAGeneratedDataType = 1
 
 class HoleSegmentType():
     """
@@ -161,6 +290,7 @@ class LibraryLocations():
     OnlineSamplesLibraryLocation = 3
     ExternalLibraryLocation = 4
     Fusion360LibraryLocation = 5
+    HubLibraryLocation = 6
 
 class LoopTypes():
     """
@@ -205,10 +335,6 @@ class MachineAxisTypes():
 
 class MachineCoolant():
     """
-    !!!!! Warning !!!!!
-    ! This is in preview state; please see the help for more info
-    !!!!! Warning !!!!!
-    
     Enumeration of possible coolants that a machine can use.
     """
     def __init__(self):
@@ -221,6 +347,43 @@ class MachineCoolant():
     MachineCoolant_SUCTION = 5
     MachineCoolant_FLOOD_MIST = 6
     MachineCoolant_FLOOD_THROUGH_TOOL = 7
+
+class MachineElementInputType():
+    """
+    Enumeration of the types of machine element inputs that can be created.
+    """
+    def __init__(self):
+        pass
+    MultiAxisElement = 0
+    ToolingCapabilityElement = 1
+    ExtruderElement = 2
+    LaserElement = 3
+
+class MachineItemType():
+    """
+    Enumeration of possible MachineItem types.
+    """
+    def __init__(self):
+        pass
+    MachineItemType_TOOL = 0
+    MachineItemType_TOOL_CUTTER = 1
+    MachineItemType_TOOL_NONCUTTER = 2
+    MachineItemType_STOCK = 3
+    MachineItemType_FIXTURE = 4
+    MachineItemType_MODEL = 5
+    MachineItemType_MACHINE_PART = 6
+    MachineItemType_TURRET_ACTIVE_TOOL = 7
+    MachineItemType_TURRET_INACTIVE_TOOL = 8
+    MachineItemType_INVALID = 9
+
+class MachineNonTCPInterpolationMode():
+    """
+    Interpolation modes available for non-TCP motions.
+    """
+    def __init__(self):
+        pass
+    MachineNonTCPInterpolationMode_SynchronizedAxes = 0
+    MachineNonTCPInterpolationMode_IndependentAxes = 1
 
 class MachinePartTypes():
     """
@@ -243,6 +406,16 @@ class MachineResetOptions():
     MachineResetBeforeEveryOperation = 1
     MachineResetOnRewind = 2
     MachineResetBeforeOpAndOnRewind = 3
+
+class MachineTCPInterpolationMode():
+    """
+    Interpolation modes available for TCP motions.
+    """
+    def __init__(self):
+        pass
+    MachineTCPInterpolationMode_SynchronizedAxes = 0
+    MachineTCPInterpolationMode_IndependentAxes = 1
+    MachineTCPInterpolationMode_ToolTip = 2
 
 class MachineTemplate():
     """
@@ -276,6 +449,86 @@ class ModifyUtilityTypes():
     def __init__(self):
         pass
     AdditiveSetupModifyUtility = 0
+
+class MultiAxisDegreesPerMinuteType():
+    """
+    Enumeration of the multi-axis degrees per minute types that can be used in MultiAxisDPMFeedrateSettings and its specializations.
+    """
+    def __init__(self):
+        pass
+    MultiAxisDegreesPerMinuteType_Standard = 0
+    MultiAxisDegreesPerMinuteType_Combination = 1
+
+class MultiAxisFeedMode():
+    """
+    Enumeration of the multi-axis feed modes that can be used in MultiAxisFeedrateSettings and its specializations.
+    """
+    def __init__(self):
+        pass
+    MultiAxisFeedMode_InverseTime = 0
+    MultiAxisFeedMode_DegreesPerMinute = 1
+    MultiAxisFeedMode_ProgrammerdFeedrate = 2
+
+class MultiAxisInverseTimeUnit():
+    """
+    The time unit used to calculate the feedrate for the MultiAxisInverseTimeFeedrateSettings
+    """
+    def __init__(self):
+        pass
+    MultiAxisInverseTimeUnit_Seconds = 0
+    MultiAxisInverseTimeUnit_Minutes = 1
+
+class MultiAxisRetractPreference():
+    """
+    Enumeration of the multi-axis retract preferences that can be used in MultiAxisRetractAndReconfigureSettings.
+    """
+    def __init__(self):
+        pass
+    MultiAxisRetractPreference_RetractAtApex = 0
+    MultiAxisRetractPreference_StayAtApex = 1
+
+class MultiAxisRewindPreference():
+    """
+    Enumeration of the multi-axis rewind preferences that can be used in MultiAxisRetractAndReconfigureSettings.
+    """
+    def __init__(self):
+        pass
+    MultiAxisRewindPreference_RewindAtLinear = 0
+    MultiAxisRewindPreference_RewindAtRapid = 1
+
+class MultiAxisRotationTypes():
+    """
+    Enum for the types of multi-axis rotation for an arrange selection.
+    """
+    def __init__(self):
+        pass
+    MultiAxisRotationType_SingleAxis = 0
+    MultiAxisRotationType_AllAxes = 1
+    MultiAxisRotationType_XYAxes = 2
+    MultiAxisRotationType_XZAxes = 3
+    MultiAxisRotationType_YZAxes = 4
+
+class MultiAxisSingularityLinearizeMethod():
+    """
+    The linearization method the MultiAxisSingularitySettings should use.
+    Different values will be used in different MultiAxisSingularitySettings specializations.
+    """
+    def __init__(self):
+        pass
+    MultiAxisSingularityLinearize_Linear = 0
+    MultiAxisSingularityLinearize_Rotary = 1
+
+class NoteIconColors():
+    """
+    Available colors for the note icon.
+    """
+    def __init__(self):
+        pass
+    Gray = 0
+    Red = 1
+    Blue = 2
+    Green = 3
+    Yellow = 4
 
 class OperationStates():
     """
@@ -415,6 +668,310 @@ class SplitSupportTypes():
     SolidOpenMergedSplitSupportType = 0
     SolidOpenSeparateSplitSupportType = 1
 
+class AdditiveFEAConvection(core.Base):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Convection defines the temperature-dependent heat loss boundary condition according to Newton's law of cooling.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> AdditiveFEAConvection:
+        return AdditiveFEAConvection()
+    def append(self, convectionCoefficient: float, temperature: float) -> None:
+        """
+        Append a row of data to the convection table.
+        convectionCoefficient : Convection in W/mm^2-K.
+        temperature : Temperature in C.
+        """
+        pass
+
+class AdditiveFEADeckBuilder(core.Base):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    The AdditiveFEADeckBuilder supplies methods to generate cards to be used for generating an FEA simulation result.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> AdditiveFEADeckBuilder:
+        return AdditiveFEADeckBuilder()
+    @staticmethod
+    def create() -> AdditiveFEADeckBuilder:
+        """
+        Creates a new AdditiveFEADeckBuilder object.
+        Returns the newly created AdditiveFEADeckBuilder object or null if the creation failed.
+        """
+        return AdditiveFEADeckBuilder()
+    def createSTLMap(self) -> AdditiveFEASTLMap:
+        """
+        Creates a new AdditiveFEASTLMap object to define *STLM data.
+        Returns an initially empty AdditiveFEASTLMap.
+        """
+        return AdditiveFEASTLMap()
+    def createConvection(self) -> AdditiveFEAConvection:
+        """
+        Creates a new AdditiveFEAConvection object to define *CONV data.
+        Returns an initially empty AdditiveFEAConvection table.
+        """
+        return AdditiveFEAConvection()
+    def append(self, card: AdditiveFEADeckBuilderCard) -> None:
+        """
+        Append an input card to the deck.
+        """
+        pass
+    def createGenericCard(self, name: str, value: str) -> AdditiveFEADeckBuilderCard:
+        """
+        Creates a generic key value card.
+        name : The name of the card keyword, e.g. "*TITLE" or "*ADAP".
+        value : The value of the card's argument as a string.
+        Returns the card name-value pair.
+        """
+        return AdditiveFEADeckBuilderCard()
+    def createVoidCard(self, card: AdditiveFEACard) -> AdditiveFEADeckBuilderCard:
+        """
+        Creates a generic enumerated card with no arguments.  Cards that can be created as a void card include:
+        - BinaryOutputCard
+        - EnsightOutputCard
+        - NoOffCoreCard
+        - OnCore1Card
+        - PowderCard
+        - AutomaticMeshingCard
+        - PowderBedYSymmetryCard
+        - NewPRMGenerationMethodCard
+        - EndCard
+        card : The type of card to create, e.g. BinaryOutputCard.
+        Returns the card name-value pair.  For void cards, the value is an empty string.
+        """
+        return AdditiveFEADeckBuilderCard()
+    def createIntCard(self, card: AdditiveFEACard, value: int) -> AdditiveFEADeckBuilderCard:
+        """
+        Creates a generic enumerated card with a single integer argument.  Cards that can be created as an int card include:
+        - AnalysisTypeCard
+        - LayersPerElementCard
+        - CoarseningGenerationsCard
+        - AdaptivityCard
+        - PowderTypeCard
+        - FineLayerCountCard
+        - OutputFileFrequencyCard
+        card : The type of card to create, e.g. LayersPerElementCard.
+        value : The int value argument of the card.
+        Returns the card name-value pair.
+        """
+        return AdditiveFEADeckBuilderCard()
+    def createDoubleCard(self, card: AdditiveFEACard, value: float) -> AdditiveFEADeckBuilderCard:
+        """
+        Creates a generic enumerated card with a single double argument.  Cards that can be created as a double card include:
+        - STLToleranceCard
+        - InitialTemperatureCard
+        - AmbientTemperatureCard
+        - FinalTemperatureCard
+        - EvaporationTemperatureCard
+        - AutomaticTimingCard
+        card : The type of card to create, e.g. STLToleranceCard.
+        value : The double value argument of the card.
+        Returns the card name-value pair.
+        """
+        return AdditiveFEADeckBuilderCard()
+    def createStringCard(self, card: AdditiveFEACard, value: str) -> AdditiveFEADeckBuilderCard:
+        """
+        Creates a generic enumerated card with a single string argument.
+        Card(s) that can be created as a string card include:
+        - TitleCard
+        card : The type of card to create, e.g. TitleCard.
+        value : The string value argument of the card.
+        Returns the card name-value pair.
+        """
+        return AdditiveFEADeckBuilderCard()
+    def createStringArrayCard(self, card: AdditiveFEACard, value: list[str]) -> AdditiveFEADeckBuilderCard:
+        """
+        Creates a generic enumerated card with an array of string arguments.  Cards that can be created as a string array card include:
+        - STLsCard
+        - PRMsCard
+        card : The type of card to create, e.g. STLsCard.
+        value : The string-array value argument of the card.
+        Returns the card name-value pair.
+        """
+        return AdditiveFEADeckBuilderCard()
+    def createBuildPlateZBoundsCard(self, zTop: float, zBottom: float) -> AdditiveFEADeckBuilderCard:
+        """
+        Creates the *DDM! card to define the build plate z position and thickness.
+        zTop : The z coordinate of the top of the build plate in mm.  This should match the bottom z coordinate of the parts or supports.
+        zBottom : The z coordinate of the bottom of the build plate in mm.
+        Returns the *DDM! card name-value pair.
+        """
+        return AdditiveFEADeckBuilderCard()
+    def createDiskCheckCard(self, i1: int, r1: float) -> AdditiveFEADeckBuilderCard:
+        """
+        Creates the *IOBN card to enable or disable the disk check.
+        i1 : Set i1 to a negative value to disable the check, or 0 or a positive value to enable the check.
+        r1 : Unused dummy argument.
+        Returns the *IOBN card name-value pair.
+        """
+        return AdditiveFEADeckBuilderCard()
+    def createSTLMapCard(self, map: AdditiveFEASTLMap) -> AdditiveFEADeckBuilderCard:
+        """
+        Creates the *STLM card to define the STL mapping.
+        map : An AdditiveFEASTLMap object to define the mapping of configuration, PRM, material, and volume fraction for each body.
+        Returns the *STLM card name-value pair.
+        """
+        return AdditiveFEADeckBuilderCard()
+    def createConvectionCard(self, convection: AdditiveFEAConvection) -> AdditiveFEADeckBuilderCard:
+        """
+        Creates the *CONV card to define a convection boundary condition.
+        convection : A convection table defining the temperature-dependent convection coefficients.
+        Returns the *CONV card name-value pair.
+        """
+        return AdditiveFEADeckBuilderCard()
+    def createBuildPlateXYExtensionCard(self, left: float, right: float, front: float, back: float) -> AdditiveFEADeckBuilderCard:
+        """
+        Creates the *SBXY card.  Arguments are per the Fusion view cube, i.e. left is -x, right is +x, front is -y, and back is +y.
+        left : Relative left extension in mm.
+        right : Relative right extension in mm.
+        front : Relative front extension in mm.
+        back : Relative back extension in mm.
+        """
+        return AdditiveFEADeckBuilderCard()
+    def createMaterialCard(self, material: AdditiveFEAMaterial, materialId: int) -> AdditiveFEADeckBuilderCard:
+        """
+        Creates the *MATE card block.
+        material : The type of material to be simulated.
+        materialId : The integer material identifier, typically 1 for single-material simulations.
+        """
+        return AdditiveFEADeckBuilderCard()
+    def createLaserPathGenerationCard(self, power: float, radius: float, speed: float, thickness: float, hatch: float, recoaterTime: float, layerCount: int, initialAngle: float, angleChange: float, xSize: float, ySize: float) -> AdditiveFEADeckBuilderCard:
+        """
+        Creates the *LSRP card.
+        power : Heat source power in W.
+        radius : Radius of the melt pool in mm.
+        speed : Travel speed in mm/s.
+        thickness : Layer thickness in mm.
+        hatch : Hatch spacing (gap width) in mm.
+        recoaterTime : Recoater time in s.
+        layerCount : Number of layers.
+        initialAngle : Initial vector angle in degrees.
+        angleChange : Vector angle change from layer to layer, in degrees.
+        xSize : x size of part in mm.
+        ySize : y size of part in mm.
+        """
+        return AdditiveFEADeckBuilderCard()
+    def createTransientCard(self, startTime: float, endTime: float, initialTimeIncrement: float, maxTimeIncrement: float, minTimeIncrement: float, incrementTol: float, maxCutbacks: int, maxIncrements: int) -> AdditiveFEADeckBuilderCard:
+        """
+        Creates the *TRAN card.
+        startTime : Start time in s.
+        endTime : End time in s.
+        initialTimeIncrement : Initial time increment in s.
+        maxTimeIncrement : Maximum allowable time increment in s.
+        minTimeIncrement : Minimum allowable time increment in s.
+        incrementTol : Incrementation tolerance.
+        maxCutbacks : Maximum number of cutbacks.
+        maxIncrements : Maximum number of increments.
+        """
+        return AdditiveFEADeckBuilderCard()
+    def createPropertyScalingCard(self, conductivityScaling: float, specificHeatScaling: float, elasticModulusScaling: float, emissivityScaling: float) -> AdditiveFEADeckBuilderCard:
+        """
+        Creates the *DDM1 card.
+        conductivityScaling : Scaling factor for thermal conductivity.
+        specificHeatScaling : Scaling factor for specific heat.
+        elasticModulusScaling : Scaling factor for elastic modulus.
+        emissivityScaling : Scaling factor for thermal emissivity.
+        """
+        return AdditiveFEADeckBuilderCard()
+    def createGoldakCard(self, efficiency: float, bAxisMultiplier: float, c1AxisMultiplier: float, c2AxisMultiplier: float, f1Factor: float, f2Factor: float) -> AdditiveFEADeckBuilderCard:
+        """
+        Creates the *GOLD card.  See the figure at the following link for an illustration of the axes:  https://help.autodesk.com/view/NETF/2026/ENU/?guid=GUID-3634FFD9-1976-4556-BE46-ED5850410853
+        efficiency : Efficiency.
+        bAxisMultiplier : b axis multiplier in the local y direction.
+        c1AxisMultiplier : c1 axis multiplier in the local z direction.
+        c2AxisMultiplier : c2 axis multiplier in the local z direction.
+        f1Factor : f1 factor.
+        f2Factor : f2 factor.
+        """
+        return AdditiveFEADeckBuilderCard()
+    def createRelaxationCard(self, iterations: int, scalingFactor: float) -> AdditiveFEADeckBuilderCard:
+        """
+        Creates the *RELA card.
+        iterations : Number of relaxation iterations.
+        scalingFactor : Relaxation scaling factor.
+        """
+        return AdditiveFEADeckBuilderCard()
+    def createSolutionParametersCard(self, maxIterations: int, tolerance: float, maxResidual: float) -> AdditiveFEADeckBuilderCard:
+        """
+        Creates the *SOLU card.
+        maxIterations : Maximum number of iterations.
+        tolerance : Residual tolerance.
+        maxResidual : Maximum residual.
+        
+        """
+        return AdditiveFEADeckBuilderCard()
+    def createMechanicalRelaxationCard(self, isUsed: int, maxIterations: int, scalingFactor: float) -> AdditiveFEADeckBuilderCard:
+        """
+        Creates the *RELM card.
+        isUsed : 1 if mechanical numerical relaxation is used; otherwise, 0 (or other value).
+        maxIterations : Number of relaxation iterations.
+        scalingFactor : Relaxation scaling factor.
+        
+        """
+        return AdditiveFEADeckBuilderCard()
+    @property
+    def cards(self) -> list[AdditiveFEADeckBuilderCard]:
+        """
+        Gets the list of cards that makes up the deck.
+        """
+        return [AdditiveFEADeckBuilderCard()]
+
+class AdditiveFEADeckBuilderCard(core.Base):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    An AdditiveFEADeckBuilderCard is a single card in an additive FEA simulation input file.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> AdditiveFEADeckBuilderCard:
+        return AdditiveFEADeckBuilderCard()
+    @property
+    def name(self) -> str:
+        return str()
+    @property
+    def stringValue(self) -> str:
+        return str()
+    @stringValue.setter
+    def stringValue(self, value: str):
+        pass
+
+class AdditiveFEASTLMap(core.Base):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    The AdditiveFEASTLMap defines the relationship of geometries in STL format to parts, supports, materials, PRM files, and volume fractions or solidities.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> AdditiveFEASTLMap:
+        return AdditiveFEASTLMap()
+    def append(self, configuration: AdditiveFEASTLConfiguration, prmId: int, materialId: int, volumeFraction: float) -> None:
+        """
+        Append a row of *STLM data for a single geometry to the STL map.
+        configuration : Specifies the geometry as either part, support, build plate, or ghost part.  See the definition of the AdditiveFEASTLConfiguration enum.
+        prmId : Maps a set of processing parameters from a PRM file to the geometry.
+        materialId : Maps a set of material properties to the geometry.
+        volumeFraction : Set a volume fraction for the geometry in the range [0, 1].
+        """
+        pass
+
 class ArrangeSelections(core.Base):
     """
     Collection for all arrange selections to be passed to a CAMArrangeParameterValue object.
@@ -468,6 +1025,40 @@ class ArrangeSelections(core.Base):
         The number of items in the collection.
         """
         return int()
+
+class AssemblyComponentGeometry(core.Base):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Represents the 3D geometry and attachment points for a tool component (such as a tool holder or tool block).
+    
+    AssemblyComponentGeometry provides the ability to define custom 3D geometry for tool components using STEP file data,
+    along with joint origins that specify how the component attaches to other parts of the tool assembly (machine side and cutting side).
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> AssemblyComponentGeometry:
+        return AssemblyComponentGeometry()
+    def setStepGeometry(self, stepFileContents: str) -> None:
+        """
+        Use the given step file geometry to set the geometry of the tool item.
+        stepFileContents : Contents of a STEP file as a string that contains the geometry to use for this tool item.
+        """
+        pass
+    @property
+    def isValidGeometry(self) -> bool:
+        """
+        An Assembly Component Geometry instance is valid if we have all of:
+        1. Valid solid geometry representing the shape of the item
+        2. A valid joint origin for both Machine and Cutting side attachments
+        
+        If we are missing any or all of these elements the item is invalid, and will not be used by any tool it
+        is attached to for rendering or simulation purposes.
+        """
+        return bool()
 
 class CAM3MFExportMetadataOptions(core.Base):
     """
@@ -574,6 +1165,178 @@ class CAM3MFExportMetadataOptions(core.Base):
     def modificationDate(self, value: str):
         """
         Modification date of the 3MF File
+        """
+        pass
+
+class CAM3MFExportStructure(core.Base):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Options for the 3MF structure and naming conventions.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> CAM3MFExportStructure:
+        return CAM3MFExportStructure()
+    @property
+    def isBodyEncapsulatedInComponent(self) -> bool:
+        """
+        Flag indicating if each BRepBody or MeshBody should be encapsulated in its own component within the 3MF file.
+        Supports belonging to that body will be included in the same component.
+        By default, this is set to false, meaning that all bodies are exported directly into the parent component alongside their sibling bodies.
+        The additional component is named after the body without any contatenation of parent component names.
+        """
+        return bool()
+    @isBodyEncapsulatedInComponent.setter
+    def isBodyEncapsulatedInComponent(self, value: bool):
+        """
+        Flag indicating if each BRepBody or MeshBody should be encapsulated in its own component within the 3MF file.
+        Supports belonging to that body will be included in the same component.
+        By default, this is set to false, meaning that all bodies are exported directly into the parent component alongside their sibling bodies.
+        The additional component is named after the body without any contatenation of parent component names.
+        """
+        pass
+    @property
+    def isStructureStartingAtRoot(self) -> bool:
+        """
+        Flag indicating if the Item objects in the 3MF file reference only the asset, meaning the product of the Design or Manufacturing Model,
+        or if the hierarchy is simplified to the lowest distinct component level.
+        In the latter case a 3MF with multiple components is produced.
+        By default, this is set to false.
+        """
+        return bool()
+    @isStructureStartingAtRoot.setter
+    def isStructureStartingAtRoot(self, value: bool):
+        """
+        Flag indicating if the Item objects in the 3MF file reference only the asset, meaning the product of the Design or Manufacturing Model,
+        or if the hierarchy is simplified to the lowest distinct component level.
+        In the latter case a 3MF with multiple components is produced.
+        By default, this is set to false.
+        """
+        pass
+    @property
+    def maximumMeshParentCount(self) -> int:
+        """
+        Specifies the maximum number of parents listed in the name property for the mesh. If the number used is higher than the number of available parents, all parents are used.
+        Given a body called Body1 whose assembly context's fullpath is "Manufacturing Models 1:1+ManufacturingModel 1:2+Unsaved (1)1:1+Component1:3",
+        the following results are expected for the maximumMeshParentCount value given with "+" being used for the concatination:
+        
+        <ul>
+        <li>-1 - id="8" name="Manufacturing Models 1:1+ManufacturingModel 1:2+Unsaved (1)1:1+Component1:3+Body1"</li>
+        <li>0 - id="8" name="Body1"</li>
+        <li>1 - id="8" name="Component1:3+Body1"</li>
+        <li>2 - id="8" name="Unsaved (1)1:1+Component1:3+Body1"</li>
+        </ul>
+        
+        By default, this value is set to 1.
+        """
+        return int()
+    @maximumMeshParentCount.setter
+    def maximumMeshParentCount(self, value: int):
+        """
+        Specifies the maximum number of parents listed in the name property for the mesh. If the number used is higher than the number of available parents, all parents are used.
+        Given a body called Body1 whose assembly context's fullpath is "Manufacturing Models 1:1+ManufacturingModel 1:2+Unsaved (1)1:1+Component1:3",
+        the following results are expected for the maximumMeshParentCount value given with "+" being used for the concatination:
+        
+        <ul>
+        <li>-1 - id="8" name="Manufacturing Models 1:1+ManufacturingModel 1:2+Unsaved (1)1:1+Component1:3+Body1"</li>
+        <li>0 - id="8" name="Body1"</li>
+        <li>1 - id="8" name="Component1:3+Body1"</li>
+        <li>2 - id="8" name="Unsaved (1)1:1+Component1:3+Body1"</li>
+        </ul>
+        
+        By default, this value is set to 1.
+        """
+        pass
+    @property
+    def maximumComponentParentCount(self) -> int:
+        """
+        Specifies the maximum number of parents listed in the name property for the component. If the number used is higher than the number of available parents, all parents are used.
+        Given a body called Body1 whose assembly context's fullpath is "Manufacturing Models 1:1+ManufacturingModel 1:2+Unsaved (1)1:1+Component1:3",
+        the following results are expected for the maximumMeshParentCount value given with "+" being used for the concatination:
+         In this example, the component with id 4 contains component with id 5, which contains component with id 6, which in turn contains component with id 7
+        <ul>
+        <li>-1 -
+          <ul>
+            <li>id="7" name="Manufacturing Models 1:1+ManufacturingModel 1:2+Unsaved (1)1:1+Component1:3" </li>
+            <li>id="6" name="Manufacturing Models 1:1+ManufacturingModel 1:2+Unsaved (1)1:1" </li>
+            <li>id="5" name="Manufacturing Models 1:1+ManufacturingModel 1:2" </li>
+            <li>id="4" name="Manufacturing Models 1:1" </li>
+          </ul>
+        </li>
+        <li>0 - 4 contains 5, which contains 6, which contains 7
+          <ul>
+            <li>id="7" name="Component1:3" </li>
+            <li>id="6" name="Unsaved (1)1:1" </li>
+            <li>id="5" name="ManufacturingModel 1:2" </li>
+            <li>id="4" name="Manufacturing Models 1:1" </li>
+          </ul>
+        </li>
+        <li>1 -
+          <ul>
+            <li>id="7" name="Unsaved (1)1:1+Component1:3" </li>
+            <li>id="6" name="ManufacturingModel 1:2+Unsaved (1)1:1" </li>
+            <li>id="5" name="Manufacturing Models 1:1+ManufacturingModel 1:2" </li>
+            <li>id="4" name="Manufacturing Models 1:1" </li>
+          </ul>
+        </li>
+        </ul>
+        
+        By default, this value is set to 0.
+        """
+        return int()
+    @maximumComponentParentCount.setter
+    def maximumComponentParentCount(self, value: int):
+        """
+        Specifies the maximum number of parents listed in the name property for the component. If the number used is higher than the number of available parents, all parents are used.
+        Given a body called Body1 whose assembly context's fullpath is "Manufacturing Models 1:1+ManufacturingModel 1:2+Unsaved (1)1:1+Component1:3",
+        the following results are expected for the maximumMeshParentCount value given with "+" being used for the concatination:
+         In this example, the component with id 4 contains component with id 5, which contains component with id 6, which in turn contains component with id 7
+        <ul>
+        <li>-1 -
+          <ul>
+            <li>id="7" name="Manufacturing Models 1:1+ManufacturingModel 1:2+Unsaved (1)1:1+Component1:3" </li>
+            <li>id="6" name="Manufacturing Models 1:1+ManufacturingModel 1:2+Unsaved (1)1:1" </li>
+            <li>id="5" name="Manufacturing Models 1:1+ManufacturingModel 1:2" </li>
+            <li>id="4" name="Manufacturing Models 1:1" </li>
+          </ul>
+        </li>
+        <li>0 - 4 contains 5, which contains 6, which contains 7
+          <ul>
+            <li>id="7" name="Component1:3" </li>
+            <li>id="6" name="Unsaved (1)1:1" </li>
+            <li>id="5" name="ManufacturingModel 1:2" </li>
+            <li>id="4" name="Manufacturing Models 1:1" </li>
+          </ul>
+        </li>
+        <li>1 -
+          <ul>
+            <li>id="7" name="Unsaved (1)1:1+Component1:3" </li>
+            <li>id="6" name="ManufacturingModel 1:2+Unsaved (1)1:1" </li>
+            <li>id="5" name="Manufacturing Models 1:1+ManufacturingModel 1:2" </li>
+            <li>id="4" name="Manufacturing Models 1:1" </li>
+          </ul>
+        </li>
+        </ul>
+        
+        By default, this value is set to 0.
+        """
+        pass
+    @property
+    def parentNameConcatenationString(self) -> str:
+        """
+        String to be used to concatenate parent names.
+        By default, this is set to "+".
+        """
+        return str()
+    @parentNameConcatenationString.setter
+    def parentNameConcatenationString(self, value: str):
+        """
+        String to be used to concatenate parent names.
+        By default, this is set to "+".
         """
         pass
 
@@ -691,6 +1454,16 @@ class CAMExportManager(core.Base):
         Returns a CAMExportFuture object if the export has started successfully.
         """
         return CAMExportFuture()
+    def createPRMExportOptions(self) -> PRMExportOptions:
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        Creates new PRM export options.
+        Returns new PRM export options.
+        """
+        return PRMExportOptions()
 
 class CAMExportOptions(core.Base):
     """
@@ -866,6 +1639,13 @@ class CAMLibrary(core.Base):
         Returns the URL to the newly created folder
         """
         return core.URL()
+    def doesPathExist(self, url: core.URL) -> bool:
+        """
+        Checks if the given URL points to an existing folder or asset in the library.
+        url : The URL to be checked.
+        Returns true if the URL points to an existing folder or asset, false otherwise.
+        """
+        return bool()
     @property
     def assetTypeName(self) -> str:
         """
@@ -980,6 +1760,13 @@ class CAMParameter(core.Base):
     @staticmethod
     def cast(arg) -> CAMParameter:
         return CAMParameter()
+    def saveExpressionAsUserDefault(self) -> bool:
+        """
+        Saves the current expression as user default value.
+        Throws an exception if the parent is not an operation or does not support user default expressions.
+        Returns true if saving was successful.
+        """
+        return bool()
     @property
     def name(self) -> str:
         """
@@ -1043,6 +1830,34 @@ class CAMParameter(core.Base):
         Reading deprecated parameters is allowed, but setting deprecated parameters will throw an error.
         """
         return bool()
+    @property
+    def fullTitle(self) -> str:
+        """
+        Returns the full title of this parameter as seen in the user interface.
+        This can potentially be more descriptive than the basic title.
+        This title is localized and can change based on the current language.
+        """
+        return str()
+    @property
+    def isVisible(self) -> bool:
+        """
+        Gets if this parameter is visible in the user interface.
+        """
+        return bool()
+    @property
+    def userDefaultExpression(self) -> str:
+        """
+        Gets and sets the userDefaultExpression of this parameter.
+        If no userDefaultExpression is set, the systemDefaultExpression is returned.
+        Throws an exception if the parent is not an operation or does not support user default expressions.
+        """
+        return str()
+    @property
+    def systemDefaultExpression(self) -> str:
+        """
+        Returns the systemDefaultExpression of this parameter.
+        """
+        return str()
 
 class CAMParameters(core.Base):
     """
@@ -1073,6 +1888,12 @@ class CAMParameters(core.Base):
         Returns the specified parameter or null in the case where there is no parameter with the specified id.
         """
         return CAMParameter()
+    def resetToSystemDefaults(self) -> bool:
+        """
+        Resets each parameter to its system default.
+        Returns true if the reset was successful.
+        """
+        return bool()
     @property
     def count(self) -> int:
         """
@@ -1170,10 +1991,6 @@ class CAMTemplate(core.Base):
     @staticmethod
     def createEmpty() -> CAMTemplate:
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Create an empty CAMTemplate
         Returns the newly created template.
         """
@@ -1187,20 +2004,12 @@ class CAMTemplate(core.Base):
         return bool()
     def getHoleSignatureXML(self) -> str:
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Convert hole signature to XML. This will be empty if this is not
         a hole template, or if there is no signature.
         """
         return str()
     def setHoleSignatureXML(self, xmlSnippet: str) -> bool:
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Provide an XML snippet to specify a hole signature. This will
         have no effect if this is not a hole template. This will fail if
         the provided snippet is not valid.
@@ -1240,30 +2049,24 @@ class CAMTemplate(core.Base):
     @property
     def operations(self) -> CAMTemplateOperations:
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
          Expose operations.
         """
         return CAMTemplateOperations()
     @operations.setter
     def operations(self, value: CAMTemplateOperations):
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
          Expose operations.
         """
         pass
+    @property
+    def attributes(self) -> core.Attributes:
+        """
+        Returns the collection of attributes associated with this template.
+        """
+        return core.Attributes()
 
 class CAMTemplateOperationInput(core.Base):
     """
-    !!!!! Warning !!!!!
-    ! This is in preview state; please see the help for more info
-    !!!!! Warning !!!!!
-    
     A CAMTemplateOperationInput provides access to Operation Template parameters for editing, in much the same way as
     OperationInput provides access to Operation parameters for editing. Operation Template parameters are slightly different
     from Operation parameters, for instance in terms of how tools and geometry selections can be specified, so an OperationInput
@@ -1350,10 +2153,6 @@ class CAMTemplateOperationInput(core.Base):
 
 class CAMTemplateOperations(core.Base):
     """
-    !!!!! Warning !!!!!
-    ! This is in preview state; please see the help for more info
-    !!!!! Warning !!!!!
-    
     A list of CAMTemplateOperationInput.
     
     These are stored 'by value' -- get() returns a copy of the element at the given index,
@@ -1758,25 +2557,6 @@ class Machine(core.Base):
     def cast(arg) -> Machine:
         return Machine()
     @staticmethod
-    def createFromTemplate(machineTemplate: MachineTemplate) -> Machine:
-        """
-        Creates a Machine from a template.
-        machineTemplate : The template to act as a base for creating a machine from.
-        Returns the newly created machine with a valid kinematics tree.
-        """
-        return Machine()
-    @staticmethod
-    def createFromFile(location: LibraryLocations, filePath: str) -> Machine:
-        """
-        Creates a Machine from a file.
-        location : The location in the machine library.
-        filePath : The path to a file to act as a base for creating a machine from.
-        The path is relative to the library location given, unless library location is External,
-        then the filePath is expected to be an absolute path.
-        Returns the newly created machine with a valid kinematics tree.
-        """
-        return Machine()
-    @staticmethod
     def create(machineInput: MachineInput) -> Machine:
         """
         Creates a machine from a "MachineInput" input object
@@ -1791,6 +2571,11 @@ class Machine(core.Base):
         True if the machines are equivalent
         """
         return bool()
+    def clearSimulationModel(self) -> None:
+        """
+        Clears the simulation model from the machine.
+        """
+        pass
     @property
     def vendor(self) -> str:
         """
@@ -1870,10 +2655,6 @@ class Machine(core.Base):
     @property
     def hasSimulationModel(self) -> bool:
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Returns true if the machine has a simulation model attached.
         """
         return bool()
@@ -1960,6 +2741,15 @@ class MachineAxis(core.Base):
     @staticmethod
     def cast(arg) -> MachineAxis:
         return MachineAxis()
+    def useContinuousResolution(self) -> None:
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        Specifies the axis moves continuously.
+        """
+        pass
     @property
     def name(self) -> str:
         """
@@ -2017,10 +2807,6 @@ class MachineAxis(core.Base):
     @property
     def toolChangePosition(self) -> float:
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Specifies the value that this axis returns to, prior to a tool change.
         Units are cm for linear axes or radians for rotary axes.
         Will return NaN if tool change position isn't set.
@@ -2029,13 +2815,35 @@ class MachineAxis(core.Base):
     @toolChangePosition.setter
     def toolChangePosition(self, value: float):
         """
+        Specifies the value that this axis returns to, prior to a tool change.
+        Units are cm for linear axes or radians for rotary axes.
+        Will return NaN if tool change position isn't set.
+        """
+        pass
+    @property
+    def resolutionStepSize(self) -> float:
+        """
         !!!!! Warning !!!!!
         ! This is in preview state; please see the help for more info
         !!!!! Warning !!!!!
         
-        Specifies the value that this axis returns to, prior to a tool change.
-        Units are cm for linear axes or radians for rotary axes.
-        Will return NaN if tool change position isn't set.
+        Specifies the discrete step size used for axis movement.
+        The step size should be greater than zero.
+        Returns NaN if no step size is set or the axis move is configured for
+        continuous rotation.
+        """
+        return float()
+    @resolutionStepSize.setter
+    def resolutionStepSize(self, value: float):
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        Specifies the discrete step size used for axis movement.
+        The step size should be greater than zero.
+        Returns NaN if no step size is set or the axis move is configured for
+        continuous rotation.
         """
         pass
 
@@ -2186,6 +2994,15 @@ class MachineAxisInput(core.Base):
     @staticmethod
     def cast(arg) -> MachineAxisInput:
         return MachineAxisInput()
+    def useContinuousResolution(self) -> None:
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        Specifies the axis moves continuously.
+        """
+        pass
     @property
     def axisType(self) -> MachineAxisTypes:
         """
@@ -2237,10 +3054,6 @@ class MachineAxisInput(core.Base):
     @property
     def toolChangePosition(self) -> float:
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Specifies the value that this axis returns to, prior to a tool change.
         Units are cm for linear axes or radians for rotary axes.
         """
@@ -2248,12 +3061,34 @@ class MachineAxisInput(core.Base):
     @toolChangePosition.setter
     def toolChangePosition(self, value: float):
         """
+        Specifies the value that this axis returns to, prior to a tool change.
+        Units are cm for linear axes or radians for rotary axes.
+        """
+        pass
+    @property
+    def resolutionStepSize(self) -> float:
+        """
         !!!!! Warning !!!!!
         ! This is in preview state; please see the help for more info
         !!!!! Warning !!!!!
         
-        Specifies the value that this axis returns to, prior to a tool change.
-        Units are cm for linear axes or radians for rotary axes.
+        Specifies the discrete step size used for axis movement.
+        The step size should be greater than zero.
+        Returns NaN if no step size is set or the axis move is configured for
+        continuous rotation.
+        """
+        return float()
+    @resolutionStepSize.setter
+    def resolutionStepSize(self, value: float):
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        Specifies the discrete step size used for axis movement.
+        The step size should be greater than zero.
+        Returns NaN if no step size is set or the axis move is configured for
+        continuous rotation.
         """
         pass
 
@@ -2394,6 +3229,22 @@ class MachineElement(core.Base):
         """
         return str()
 
+class MachineElementInput(core.Base):
+    """
+    Base class for machine element inputs.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> MachineElementInput:
+        return MachineElementInput()
+    @property
+    def inputType(self) -> MachineElementInputType:
+        """
+        The type of machine element this input will create.
+        """
+        return MachineElementInputType()
+
 class MachineElements(core.Base):
     """
     Collection of machine elements.
@@ -2447,6 +3298,21 @@ class MachineElements(core.Base):
         Returns the number of elements of the requested type. Returns zero if no elements match the specified type ID.
         """
         return int()
+    def createMachineElementInput(self, type: MachineElementInputType) -> MachineElementInput:
+        """
+        Create a new MachineElementInput object for the specified type.
+        This is intedned to be used to create/add new machine elements.
+        type :  The type of machine element to create the input for 
+         A MachineElementInput object 
+        """
+        return MachineElementInput()
+    def addElement(self, input: MachineElementInput) -> MachineElement:
+        """
+        Add a new machine element to the machine.
+        input : A specialization of MachineElementInput class that contains the properties required to create a new machine element.
+         The created MachineElement 
+        """
+        return MachineElement()
     @property
     def count(self) -> int:
         """
@@ -2465,6 +3331,82 @@ class MachineInput(core.Base):
     @staticmethod
     def cast(arg) -> MachineInput:
         return MachineInput()
+
+class MachineInteractionPair(core.Base):
+    """
+    MachineInteractionPair objects control how a pair of MachineItems interact with each other.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> MachineInteractionPair:
+        return MachineInteractionPair()
+    def reset(self) -> bool:
+        """
+        Clear this MachineInteractionPair.
+        This pair will then represent two MachineItems that do not interact.
+        """
+        return bool()
+    @property
+    def item1(self) -> MachineItem:
+        """
+        The first MachineItem involved in this MachineInteractionPair.
+        Returns a MachineItem.
+        """
+        return MachineItem()
+    @property
+    def item2(self) -> MachineItem:
+        """
+        The second MachineItem involved in this MachineInteractionPair.
+        Returns a MachineItem.
+        """
+        return MachineItem()
+    @property
+    def isCheckedForCollisions(self) -> bool:
+        """
+        Whether these MachineItems should be checked for collisions.
+        Returns true if the two MachineItems should be checked for collisions.
+        """
+        return bool()
+    @isCheckedForCollisions.setter
+    def isCheckedForCollisions(self, value: bool):
+        """
+        Whether these MachineItems should be checked for collisions.
+        Returns true if the two MachineItems should be checked for collisions.
+        """
+        pass
+    @property
+    def isIgnored(self) -> bool:
+        """
+        Whether this MachineInteractionPair will be ignored.
+        Returns true if this MachineInteractionPair represents
+        a pair of MachineItems that do not interact.
+        """
+        return bool()
+
+class MachineItem(core.Base):
+    """
+    An item on a machine that can collide.
+    That is, a MachinePart, or something attached to a MachinePart.
+    Create them via InteractionsMachineElement::createMachineItem
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> MachineItem:
+        return MachineItem()
+    @property
+    def itemType(self) -> MachineItemType:
+        """
+        The type of this MachineItem.
+        """
+        return MachineItemType()
+    @property
+    def part(self) -> MachinePart:
+        """
+        The machine part.
+        """
+        return MachinePart()
 
 class MachinePart(core.Base):
     """
@@ -2491,6 +3433,7 @@ class MachinePart(core.Base):
     def parent(self) -> MachinePart:
         """
         Get or set the parent of this part.
+        Returns null if this part is a root part.
         Setting the parent will add this part to the end of the parent's children
         collection. Setting the parent will throw an error if the new parent is this
         part or a child of this part.
@@ -2500,6 +3443,7 @@ class MachinePart(core.Base):
     def parent(self, value: MachinePart):
         """
         Get or set the parent of this part.
+        Returns null if this part is a root part.
         Setting the parent will add this part to the end of the parent's children
         collection. Setting the parent will throw an error if the new parent is this
         part or a child of this part.
@@ -2537,10 +3481,6 @@ class MachinePart(core.Base):
     @property
     def toolStation(self) -> MachineToolStation:
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Get the tool station object for this part.
         Will return null if the part has no tool station assigned.
         """
@@ -2574,10 +3514,6 @@ class MachinePartInput(core.Base):
         return MachineSpindleInput()
     def createToolStationInput(self) -> MachineToolStationInput:
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Creates a new MachineToolStationInput object to be used to create a new MachineToolStation.
         Returns new MachineToolStationInput object.
         """
@@ -2635,10 +3571,6 @@ class MachinePartInput(core.Base):
     @property
     def toolStationInput(self) -> MachineToolStationInput:
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Gets or sets an tool station input object to create a new MachineToolStation with this part.
         Only valid when partType is not Axis.
         """
@@ -2646,10 +3578,6 @@ class MachinePartInput(core.Base):
     @toolStationInput.setter
     def toolStationInput(self, value: MachineToolStationInput):
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Gets or sets an tool station input object to create a new MachineToolStation with this part.
         Only valid when partType is not Axis.
         """
@@ -2827,60 +3755,36 @@ class MachineSpindle(core.Base):
     @property
     def power(self) -> float:
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Specifies the power (kW) for this spindle.
         """
         return float()
     @power.setter
     def power(self, value: float):
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Specifies the power (kW) for this spindle.
         """
         pass
     @property
     def peakTorque(self) -> float:
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Specifies the peak torque (Nm) for this spindle.
         """
         return float()
     @peakTorque.setter
     def peakTorque(self, value: float):
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Specifies the peak torque (Nm) for this spindle.
         """
         pass
     @property
     def peakTorqueSpeed(self) -> float:
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Specifies the speed (rpm) at which this spindle reaches peak torque (Nm).
         """
         return float()
     @peakTorqueSpeed.setter
     def peakTorqueSpeed(self, value: float):
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Specifies the speed (rpm) at which this spindle reaches peak torque (Nm).
         """
         pass
@@ -2933,70 +3837,42 @@ class MachineSpindleInput(core.Base):
     @property
     def power(self) -> float:
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Specifies the power for this spindle.
         """
         return float()
     @power.setter
     def power(self, value: float):
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Specifies the power for this spindle.
         """
         pass
     @property
     def peakTorque(self) -> float:
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Specifies the peak torque for this spindle.
         """
         return float()
     @peakTorque.setter
     def peakTorque(self, value: float):
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Specifies the peak torque for this spindle.
         """
         pass
     @property
     def peakTorqueSpeed(self) -> float:
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Specifies the peak torque speed for this spindle.
         """
         return float()
     @peakTorqueSpeed.setter
     def peakTorqueSpeed(self, value: float):
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Specifies the peak torque speed for this spindle.
         """
         pass
 
 class MachineToolStation(core.Base):
     """
-    !!!!! Warning !!!!!
-    ! This is in preview state; please see the help for more info
-    !!!!! Warning !!!!!
-    
     Object representing a tool station on the machine
     """
     def __init__(self):
@@ -3061,10 +3937,6 @@ class MachineToolStation(core.Base):
 
 class MachineToolStationInput(core.Base):
     """
-    !!!!! Warning !!!!!
-    ! This is in preview state; please see the help for more info
-    !!!!! Warning !!!!!
-    
     Object representing the set of inputs required to create a new MachineToolStation.
     """
     def __init__(self):
@@ -3349,6 +4221,267 @@ class ModifyUtility(core.Base):
     def cast(arg) -> ModifyUtility:
         return ModifyUtility()
 
+class MultiAxisFeedrateSettings(core.Base):
+    """
+    Base class for the multi-axis feedrate settings
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> MultiAxisFeedrateSettings:
+        return MultiAxisFeedrateSettings()
+    @property
+    def feedMode(self) -> MultiAxisFeedMode:
+        """
+        The feedmode to use for the multi axis.
+        """
+        return MultiAxisFeedMode()
+
+class MultiAxisFeedrateSettingsInput(core.Base):
+    """
+    Input class for creating MultiAxisFeedrateSettings objects.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> MultiAxisFeedrateSettingsInput:
+        return MultiAxisFeedrateSettingsInput()
+    @property
+    def feedMode(self) -> MultiAxisFeedMode:
+        """
+        The feed mode to use for the multi-axis feedrate settings.
+        Determines the type of MultiAxisFeedrateSettings that will be created.
+        """
+        return MultiAxisFeedMode()
+    @feedMode.setter
+    def feedMode(self, value: MultiAxisFeedMode):
+        """
+        The feed mode to use for the multi-axis feedrate settings.
+        Determines the type of MultiAxisFeedrateSettings that will be created.
+        """
+        pass
+    @property
+    def dpmType(self) -> MultiAxisDegreesPerMinuteType:
+        """
+        If the feedMode is MultiAxisFeedMode.MultiAxisFeedMode_DegreesPerMinute,
+        determines what type of MultiAxisCombinationDPMFeedrateSettings will create.
+        """
+        return MultiAxisDegreesPerMinuteType()
+    @dpmType.setter
+    def dpmType(self, value: MultiAxisDegreesPerMinuteType):
+        """
+        If the feedMode is MultiAxisFeedMode.MultiAxisFeedMode_DegreesPerMinute,
+        determines what type of MultiAxisCombinationDPMFeedrateSettings will create.
+        """
+        pass
+
+class MultiAxisRetractAndReconfigureSettings(core.Base):
+    """
+    Settings for multi-axis retract and reconfigure.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> MultiAxisRetractAndReconfigureSettings:
+        return MultiAxisRetractAndReconfigureSettings()
+    @property
+    def rewindPreference(self) -> MultiAxisRewindPreference:
+        """
+        The rewind preferece. See MultiAxisRewindPreference values for more details.
+        """
+        return MultiAxisRewindPreference()
+    @rewindPreference.setter
+    def rewindPreference(self, value: MultiAxisRewindPreference):
+        """
+        The rewind preferece. See MultiAxisRewindPreference values for more details.
+        """
+        pass
+    @property
+    def retractPreference(self) -> MultiAxisRetractPreference:
+        """
+        The retract preference. See MultiAxisRetractPreference values for more details.
+        """
+        return MultiAxisRetractPreference()
+    @retractPreference.setter
+    def retractPreference(self, value: MultiAxisRetractPreference):
+        """
+        The retract preference. See MultiAxisRetractPreference values for more details.
+        """
+        pass
+    @property
+    def stockExpansion(self) -> core.Vector3D:
+        """
+        Defines the stock expansion for computing retract moves in rewinds.
+        """
+        return core.Vector3D()
+    @stockExpansion.setter
+    def stockExpansion(self, value: core.Vector3D):
+        """
+        Defines the stock expansion for computing retract moves in rewinds.
+        """
+        pass
+    @property
+    def safeRetractDistance(self) -> float:
+        """
+        The length of the retract moves along the tool axis, to perform a rewind.
+        """
+        return float()
+    @safeRetractDistance.setter
+    def safeRetractDistance(self, value: float):
+        """
+        The length of the retract moves along the tool axis, to perform a rewind.
+        """
+        pass
+    @property
+    def safeRetractFeedrate(self) -> float:
+        """
+        The safe retract feedrate for retract moves.
+        (cm/min)
+        """
+        return float()
+    @safeRetractFeedrate.setter
+    def safeRetractFeedrate(self, value: float):
+        """
+        The safe retract feedrate for retract moves.
+        (cm/min)
+        """
+        pass
+    @property
+    def safePlungeFeedrate(self) -> float:
+        """
+        The safe plunge feedrate for plunge moves.
+        A plunge rate is the speed at which the tool is driven down into the material when starting a cut.
+        It varies depending on the tool and material. Plunging too fast may damage the tip of the cutter.
+        (cm/min)
+        """
+        return float()
+    @safePlungeFeedrate.setter
+    def safePlungeFeedrate(self, value: float):
+        """
+        The safe plunge feedrate for plunge moves.
+        A plunge rate is the speed at which the tool is driven down into the material when starting a cut.
+        It varies depending on the tool and material. Plunging too fast may damage the tip of the cutter.
+        (cm/min)
+        """
+        pass
+
+class MultiAxisSingularityLinearizationSettings(core.Base):
+    """
+    The class for the multi-axis singularity linearization settings.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> MultiAxisSingularityLinearizationSettings:
+        return MultiAxisSingularityLinearizationSettings()
+    @property
+    def linearizeMethod(self) -> MultiAxisSingularityLinearizeMethod:
+        """
+        The linearization method to use for the multi-axis singularity settings.
+        """
+        return MultiAxisSingularityLinearizeMethod()
+    @linearizeMethod.setter
+    def linearizeMethod(self, value: MultiAxisSingularityLinearizeMethod):
+        """
+        The linearization method to use for the multi-axis singularity settings.
+        """
+        pass
+    @property
+    def linearizationTolerance(self) -> float:
+        """
+        The linearization tolerance for the multi-axis singularity settings.
+        """
+        return float()
+    @linearizationTolerance.setter
+    def linearizationTolerance(self, value: float):
+        """
+        The linearization tolerance for the multi-axis singularity settings.
+        """
+        pass
+
+class MultiAxisSingularitySettings(core.Base):
+    """
+    Base class for multi-axis singularity settings.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> MultiAxisSingularitySettings:
+        return MultiAxisSingularitySettings()
+    def createLinearizationSettings(self) -> MultiAxisSingularityLinearizationSettings:
+        """
+        Creates a MultiAxisSingularityLinearizationSettings object.
+        Set this object on the linearizationSettings property to apply the changes.
+        The MultiAxisSingularityLinearizationSettings object created.
+        """
+        return MultiAxisSingularityLinearizationSettings()
+    @property
+    def cone(self) -> float:
+        """
+        The angular distance range between the tool axis vector and the singularity point before the singularity is adjusted.
+        Typically, the angular distance is less than 5 degrees.
+        The further the tool axis is from the singularity, the less visible the fluctuations in the rotary axes are.
+        Value is in radians.
+        """
+        return float()
+    @cone.setter
+    def cone(self, value: float):
+        """
+        The angular distance range between the tool axis vector and the singularity point before the singularity is adjusted.
+        Typically, the angular distance is less than 5 degrees.
+        The further the tool axis is from the singularity, the less visible the fluctuations in the rotary axes are.
+        Value is in radians.
+        """
+        pass
+    @property
+    def angle(self) -> float:
+        """
+        The minimum angular delta movement for the rotary axes before the singularity is adjusted.
+        When fluctuations of the rotary axes are insignificant, this limit prevents adjustment of the tool axis vector.
+        Typically set to 10 degrees or more.
+        Value is in radians.
+        """
+        return float()
+    @angle.setter
+    def angle(self, value: float):
+        """
+        The minimum angular delta movement for the rotary axes before the singularity is adjusted.
+        When fluctuations of the rotary axes are insignificant, this limit prevents adjustment of the tool axis vector.
+        Typically set to 10 degrees or more.
+        Value is in radians.
+        """
+        pass
+    @property
+    def tolerance(self) -> float:
+        """
+        The tolerance value for converting simultaneous multi-axis movements to linear movements when the tool axis is near a singularity.
+        """
+        return float()
+    @tolerance.setter
+    def tolerance(self, value: float):
+        """
+        The tolerance value for converting simultaneous multi-axis movements to linear movements when the tool axis is near a singularity.
+        """
+        pass
+    @property
+    def linearizationSettings(self) -> MultiAxisSingularityLinearizationSettings:
+        """
+        The settings for linearization of moves around the singularity.
+        See MultiAxisSingularityLinearizeMethod for more details.
+        Set this to null to not use linearization.
+        For changes to to this object to take effect, re-assign them to this property.
+        """
+        return MultiAxisSingularityLinearizationSettings()
+    @linearizationSettings.setter
+    def linearizationSettings(self, value: MultiAxisSingularityLinearizationSettings):
+        """
+        The settings for linearization of moves around the singularity.
+        See MultiAxisSingularityLinearizeMethod for more details.
+        Set this to null to not use linearization.
+        For changes to to this object to take effect, re-assign them to this property.
+        """
+        pass
+
 class NCProgramInput(core.Base):
     """
     The NCProgramInput holds all necessary information to create a new NC program.
@@ -3374,6 +4507,8 @@ class NCProgramInput(core.Base):
         For setups and folders all child operations will be added.
         Operations will be post processed in setup order, with operations from the same setup grouped together.
         Setting the nc_program_orderByTool BooleanParameterValue on the parameters property to true will reorder operations across multiple setups to reduce the number of tool changes.
+        When the list of operations is associated to one setup and the setup has defined its job_programName or job_programComment parameters,
+        then those values are applied to the nc_program_name and nc_program_comment parameters accordingly.
         """
         return [OperationBase()]
     @operations.setter
@@ -3384,6 +4519,8 @@ class NCProgramInput(core.Base):
         For setups and folders all child operations will be added.
         Operations will be post processed in setup order, with operations from the same setup grouped together.
         Setting the nc_program_orderByTool BooleanParameterValue on the parameters property to true will reorder operations across multiple setups to reduce the number of tool changes.
+        When the list of operations is associated to one setup and the setup has defined its job_programName or job_programComment parameters,
+        then those values are applied to the nc_program_name and nc_program_comment parameters accordingly.
         """
         pass
     @property
@@ -3860,6 +4997,30 @@ class OperationInput(core.Base):
         The default value is SkipGeneration.
         """
         pass
+    @property
+    def referenceTool(self) -> Tool:
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        Optionally specify the reference tool used by the operation. The ToolLibraries allows the access to Local and Fusion tools.
+        Setting the tool is only possible on operation strategies that support reference tools, an exception is thrown otherwise.
+        Likewise null is returned if the operation strategy does not support reference tools.
+        """
+        return Tool()
+    @referenceTool.setter
+    def referenceTool(self, value: Tool):
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        Optionally specify the reference tool used by the operation. The ToolLibraries allows the access to Local and Fusion tools.
+        Setting the tool is only possible on operation strategies that support reference tools, an exception is thrown otherwise.
+        Likewise null is returned if the operation strategy does not support reference tools.
+        """
+        pass
 
 class Operations(core.Base):
     """
@@ -3980,6 +5141,66 @@ class OperationStrategy(core.Base):
         Returns false otherwise.
         """
         return bool()
+    @property
+    def isMillingStrategy(self) -> bool:
+        """
+        Gets whether given OperationStrategy is a milling strategy.
+        """
+        return bool()
+    @property
+    def isTurningStrategy(self) -> bool:
+        """
+        Gets whether given OperationStrategy is a turning strategy.
+        """
+        return bool()
+    @property
+    def isRotaryStrategy(self) -> bool:
+        """
+        Gets whether given OperationStrategy is a rotary strategy.
+        """
+        return bool()
+    @property
+    def isDrillingStrategy(self) -> bool:
+        """
+        Gets whether given OperationStrategy is a drilling strategy.
+        """
+        return bool()
+    @property
+    def isCuttingStrategy(self) -> bool:
+        """
+        Gets whether given OperationStrategy is a cutting strategy.
+        """
+        return bool()
+    @property
+    def is2DStrategy(self) -> bool:
+        """
+        Gets whether given OperationStrategy is a 2D strategy.
+        """
+        return bool()
+    @property
+    def is3DStrategy(self) -> bool:
+        """
+        Gets whether given OperationStrategy is a 3D strategy.
+        """
+        return bool()
+    @property
+    def isFinishingStrategy(self) -> bool:
+        """
+        Gets whether given OperationStrategy is a finishing strategy.
+        """
+        return bool()
+    @property
+    def isAdditiveStrategy(self) -> bool:
+        """
+        Gets whether given OperationStrategy is an additive strategy.
+        """
+        return bool()
+    @property
+    def isSupportStrategy(self) -> bool:
+        """
+        Gets whether given OperationStrategy is an additive support strategy.
+        """
+        return bool()
 
 class OptimizedOrientationResult(core.Base):
     """
@@ -4065,14 +5286,6 @@ class PostConfiguration(core.Base):
         pass
     @staticmethod
     def cast(arg) -> PostConfiguration:
-        return PostConfiguration()
-    @staticmethod
-    def createFromContent(content: str) -> PostConfiguration:
-        """
-        Creates a PostConfiguration from a file content.
-        content : The content string of a PostConfiguration file to act as a base for creating a PostConfiguration from.
-        Returns the newly created PostConfiguration.
-        """
         return PostConfiguration()
     @property
     def vendor(self) -> str:
@@ -4174,148 +5387,6 @@ class PostConfigurationQuery(core.Base):
         """
         pass
 
-class PostProcessInput(core.Base):
-    """
-    This class defines the properties that pertain to the settings and options required for posting a
-    toolpath to generate a CNC file.  A PostProcessInput object is a required parameter for the
-    postProcessAll() and postProcess() methods on the CAM class.
-    """
-    def __init__(self):
-        pass
-    @staticmethod
-    def cast(arg) -> PostProcessInput:
-        return PostProcessInput()
-    @staticmethod
-    def create(programName: str, postConfiguration: str, outputFolder: str, outputUnits: PostOutputUnitOptions) -> PostProcessInput:
-        """
-        Creates a new PostProcessInput object to be used as an input argument by the postProcess() and postProcessAll()
-        methods on the CAM class for posting toolpaths and generating CNC files.
-        programName : The program name or number.
-        If the post configuration specifies the parameter programNameIsInteger = true, then the program name must be a number.
-        postConfiguration : The full filename (including the path) to the post configuration file (.cps)
-        The post config file can be stored in any path but for convenience you can use the genericPostFolder or the personalPostFolder property on the CAM class to specify
-        the path if your .cps file is stored in either of those locations.  You must add a forward slash (this works for Mac or Windows) to the path defined by these folder
-        properties before the filename (e.g. postConfiguration = cam.genericPostFolder + '/' + 'fanuc.cps')
-        outputFolder : The path for the existing output folder where the .cnc files will be located.  This method will create the specified output folder if it does not already exist.
-        It is not necessary to add a slash to the end of the outputFolder path.  You should use forward slashes in your path definition if you want your script to run on both Mac and Windows.
-        outputUnits : The units option for the CNC output.
-        Valid options are DocumentUnitsOutput, InchesOutput or MillimetersOutput
-        Returns the newly created PostProcessInput object or null if the creation failed.
-        """
-        return PostProcessInput()
-    @property
-    def programName(self) -> str:
-        """
-        Gets and sets the program name or number.
-        If the post configuration specifies the parameter programNameIsInteger = true, then the program name must be a number.
-        """
-        return str()
-    @programName.setter
-    def programName(self, value: str):
-        """
-        Gets and sets the program name or number.
-        If the post configuration specifies the parameter programNameIsInteger = true, then the program name must be a number.
-        """
-        pass
-    @property
-    def programComment(self) -> str:
-        """
-        Gets and sets the program comment.  The default value for this property is an empty string ("").
-        """
-        return str()
-    @programComment.setter
-    def programComment(self, value: str):
-        """
-        Gets and sets the program comment.  The default value for this property is an empty string ("").
-        """
-        pass
-    @property
-    def postConfiguration(self) -> str:
-        """
-        Gets and sets the full filename (including the path) for the post configuration file (.cps)
-        """
-        return str()
-    @postConfiguration.setter
-    def postConfiguration(self, value: str):
-        """
-        Gets and sets the full filename (including the path) for the post configuration file (.cps)
-        """
-        pass
-    @property
-    def outputFolder(self) -> str:
-        """
-        Gets and sets the path for the output folder where the .cnc files will be located.
-        """
-        return str()
-    @outputFolder.setter
-    def outputFolder(self, value: str):
-        """
-        Gets and sets the path for the output folder where the .cnc files will be located.
-        """
-        pass
-    @property
-    def outputUnits(self) -> PostOutputUnitOptions:
-        """
-        Gets and sets the units option for the CNC output.
-        Valid options are DocumentUnitsOutput, InchesOutput or MillimetersOutput
-        """
-        return PostOutputUnitOptions()
-    @outputUnits.setter
-    def outputUnits(self, value: PostOutputUnitOptions):
-        """
-        Gets and sets the units option for the CNC output.
-        Valid options are DocumentUnitsOutput, InchesOutput or MillimetersOutput
-        """
-        pass
-    @property
-    def isOpenInEditor(self) -> bool:
-        """
-        Gets and sets the option if opening the CNC file with the editor after it is created.
-        The default value for this property is true.
-        """
-        return bool()
-    @isOpenInEditor.setter
-    def isOpenInEditor(self, value: bool):
-        """
-        Gets and sets the option if opening the CNC file with the editor after it is created.
-        The default value for this property is true.
-        """
-        pass
-    @property
-    def areToolChangesMinimized(self) -> bool:
-        """
-        Gets and sets that operations may be reordered between setups to minimize the number of tool changes.
-        Operations within each setup will still be executed in the programmed order.
-        This is commonly used for tombstone machining where you have multiple setups.
-        The default value for this property is false.
-        """
-        return bool()
-    @areToolChangesMinimized.setter
-    def areToolChangesMinimized(self, value: bool):
-        """
-        Gets and sets that operations may be reordered between setups to minimize the number of tool changes.
-        Operations within each setup will still be executed in the programmed order.
-        This is commonly used for tombstone machining where you have multiple setups.
-        The default value for this property is false.
-        """
-        pass
-    @property
-    def postProperties(self) -> core.NamedValues:
-        """
-        Gets and sets the list of post properties.
-        Each property has a string name and a ValueInput object.
-        The default value for this is an empty NamedValues.
-        """
-        return core.NamedValues()
-    @postProperties.setter
-    def postProperties(self, value: core.NamedValues):
-        """
-        Gets and sets the list of post properties.
-        Each property has a string name and a ValueInput object.
-        The default value for this is an empty NamedValues.
-        """
-        pass
-
 class PrintSetting(core.Base):
     """
     Object that represents a PrintSetting.
@@ -4396,6 +5467,16 @@ class PrintSetting(core.Base):
         Checks whether the print setting is usable with the given machine.
         """
         return bool()
+    def toXML(self) -> str:
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        Generates and returns the print setting xml content string.
+        Returns print setting xml content string.
+        """
+        return str()
     @property
     def name(self) -> str:
         """
@@ -4607,13 +5688,6 @@ class RecognizedHole(core.Base):
     def cast(arg) -> RecognizedHole:
         return RecognizedHole()
     @staticmethod
-    def recognizeHoles(bodies: list[core.Base]) -> RecognizedHoles:
-        """
-        Returns a collection of all recognized holes.
-        bodies : Model bodies on which to recognize holes.
-        """
-        return RecognizedHoles()
-    @staticmethod
     def recognizeHolesWithInput(bodies: list[core.Base], input: RecognizedHolesInput) -> RecognizedHoles:
         """
         Returns a collection of all recognized holes.
@@ -4628,6 +5702,11 @@ class RecognizedHole(core.Base):
         index : The index of the segment within this hole to return. The first segment in this hole has an index of 0.
         """
         return RecognizedHoleSegment()
+    def getHoleSignatureXML(self) -> str:
+        """
+        Convert hole signature to XML. The result can be used to create a hole template.
+        """
+        return str()
     @property
     def axis(self) -> core.Vector3D:
         """
@@ -4710,13 +5789,6 @@ class RecognizedHoleGroup(core.Base):
         return None
     def __iter__(self) -> Iterator[RecognizedHole]:
         return None
-    @staticmethod
-    def recognizeHoleGroups(bodies: list[core.Base]) -> RecognizedHoleGroups:
-        """
-        Gets all recognized holes and returns them as hole groupings based on similar geometry.
-        bodies : Model bodies on which to recognize holes.
-        """
-        return RecognizedHoleGroups()
     @staticmethod
     def recognizeHoleGroupsWithInput(bodies: list[core.Base], input: RecognizedHolesInput) -> RecognizedHoleGroups:
         """
@@ -4909,7 +5981,7 @@ class RecognizedPocket(core.Base):
     """
     Object that represents a single pocket (an outer boundary with depth and optional islands)
     which has been recognized on the model.
-    See PocketRecognitionSelection for making a selection as in the UI
+    See PocketRecognitionSelection for making a selection as in the UI.
     """
     def __init__(self):
         pass
@@ -4919,10 +5991,23 @@ class RecognizedPocket(core.Base):
     @staticmethod
     def recognizePockets(body: core.Base, attackVector: core.Vector3D) -> RecognizedPockets:
         """
-        Gets all recognized pockets from the given body and returns them
+        Gets all recognized pockets from the given body and returns them.
+        This recognition method does not contain bosses.
         body : Model body on which to recognize pockets
         attackVector : A vector defining the orientation in which to search for pockets. This should be the
         vector pointing down along the tool towards its tip and the pocket floors.
+        """
+        return RecognizedPockets()
+    @staticmethod
+    def recognizePocketsWithInput(input: RecognizedPocketInput) -> RecognizedPockets:
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        Gets all recognized pockets based on the properties in the given input object and returns them.
+        The method is only available with the Machining Extension.
+        input : An input object defining the body and search parameters for recognizing pockets.
         """
         return RecognizedPockets()
     @property
@@ -4964,23 +6049,90 @@ class RecognizedPocket(core.Base):
     @property
     def faces(self) -> list[fusion.BRepFace]:
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Returns all faces making up the pocket.
         """
         return [fusion.BRepFace()]
     @property
     def sharedFaces(self) -> list[fusion.BRepFace]:
         """
+        Returns all faces making up the pocket, which are shared with other pockets.
+        """
+        return [fusion.BRepFace()]
+    @property
+    def attackVector(self) -> core.Vector3D:
+        """
         !!!!! Warning !!!!!
         ! This is in preview state; please see the help for more info
         !!!!! Warning !!!!!
         
-        Returns all faces making up the pocket, which are shared with other pockets.
+        Returns the attack vector that was used to recognize this pocket.
         """
-        return [fusion.BRepFace()]
+        return core.Vector3D()
+
+class RecognizedPocketInput(core.Base):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Input object containing properties used to recognize pockets. Includes bosses along open and closed pockets.
+    The class is only available with the Machining Extension.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> RecognizedPocketInput:
+        return RecognizedPocketInput()
+    @staticmethod
+    def create() -> RecognizedPocketInput:
+        """
+        Creates a new RecognizedPocketInput object.
+        """
+        return RecognizedPocketInput()
+    @property
+    def body(self) -> core.Base:
+        """
+        The body on which to recognize pockets.
+        """
+        return core.Base()
+    @body.setter
+    def body(self, value: core.Base):
+        """
+        The body on which to recognize pockets.
+        """
+        pass
+    @property
+    def attackVectors(self) -> list[core.Vector3D]:
+        """
+        The attack vectors used to recognize pockets.
+        If left empty, this array will be filled with normals of all planar faces on the given body.
+        There vectors should be pointing down along the tool towards its tip and the pocket floors.
+        """
+        return [core.Vector3D()]
+    @attackVectors.setter
+    def attackVectors(self, value: list[core.Vector3D]):
+        """
+        The attack vectors used to recognize pockets.
+        If left empty, this array will be filled with normals of all planar faces on the given body.
+        There vectors should be pointing down along the tool towards its tip and the pocket floors.
+        """
+        pass
+    @property
+    def isIncludingBosses(self) -> bool:
+        """
+        Sets and gets whether bosses should be included in the recognized pockets.
+        Bosses are defined as pockets that protrude above the surrounding model faces and thus only consist of islands without an outer boundary.
+        This value is true by default.
+        """
+        return bool()
+    @isIncludingBosses.setter
+    def isIncludingBosses(self, value: bool):
+        """
+        Sets and gets whether bosses should be included in the recognized pockets.
+        Bosses are defined as pockets that protrude above the surrounding model faces and thus only consist of islands without an outer boundary.
+        This value is true by default.
+        """
+        pass
 
 class RecognizedPockets(core.Base):
     """
@@ -5412,15 +6564,6 @@ class Tool(core.Base):
         Returns the newly created Tool.
         """
         return Tool()
-    @staticmethod
-    def createFromP21File(filename: str) -> Tool:
-        """
-        Creates a Tool object given a P21 file.
-        Throws an error if the given file is not a valid P21 file.
-        filename : The full filename of the P21 file to use to create the Tool.
-        Returns the newly created Tool.
-        """
-        return Tool()
     def toJson(self) -> str:
         """
         Generates and returns a JSON string that contains a description of this tool.
@@ -5440,6 +6583,15 @@ class Tool(core.Base):
         Gets the ToolPresets collection associated with this tool.
         """
         return ToolPresets()
+    @property
+    def description(self) -> str:
+        """
+        Gets the descriptive text about the tool.
+        Includes various pieces of information depending on the tool type.
+        Usually contains the tool number, data describing the tool geometry and the description.
+        In the UI, the same information is displayed in the operation tree or in the tool library table.
+        """
+        return str()
 
 class ToolLibrary(core.Base):
     """
@@ -5505,6 +6657,18 @@ class ToolLibrary(core.Base):
         Returns a new ToolQuery. The query is predefined by given parameter.
         """
         return ToolQuery()
+    def updateTool(self, tool: Tool) -> bool:
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        Update the given tool in the tool library. Will error if the tool does not exist in the library or if
+        the library URL is not set (library was not loaded from a URL).
+        tool : The tool that should be updated and must exist in the library.
+        Returns true if the update was successful.
+        """
+        return bool()
     @property
     def count(self) -> int:
         """
@@ -5705,6 +6869,101 @@ class ToolQueryResult(core.Base):
         """
         return int()
 
+class AdditiveFEAOperation(OperationBase):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    The AdditiveFEAOperation represents a finite element analysis for
+    metal additive manufacturing processes.  The inherited
+    generateToolpath() method can only be called if the Autodesk Fusion
+    Manufacturing Extension is active.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> AdditiveFEAOperation:
+        return AdditiveFEAOperation()
+    @property
+    def logFileContents(self) -> str:
+        """
+        Contents of the human-readable log file generated by the solver.
+        This property can be fetched during execution to monitor
+        progress, or after execution is finished to confirm success or
+        troubleshoot errors.
+        """
+        return str()
+    @property
+    def signalFileContents(self) -> str:
+        """
+        Contents of the machine-readable simsignal file generated by
+        the solver.  Each line of the file is a JSON object.  These
+        signals are meant to be more stable than logFileContents(), but
+        less human-readable.
+        """
+        return str()
+
+class AdditiveFEAOperationInput(OperationInput):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> AdditiveFEAOperationInput:
+        return AdditiveFEAOperationInput()
+    def applyDeck(self, deck: AdditiveFEADeckBuilder) -> None:
+        """
+        Applies the deck builder cards needed for the result calculation.
+        deck : A deck of solver cards.
+        """
+        pass
+    def addSolverFileContent(self, destFileName: str, fileContentsBase64: str) -> None:
+        """
+        Add a file with contents encoded as base64 to the solver's working directory.  This can be used to create PRM files or other resource files that the solver needs.
+        destFileName : The name of the resource file.  This name must match the card that refers to the resource, e.g. in PRMsCard.
+        fileContentsBase64 : The contents of the resource file, encoded as a base64 string.  With PRM files for example, you can either get this string from the print settings using base64PRMData(), or generate a new PRM using AdditiveFEAGenerationType::PRM.
+        """
+        pass
+    def linkDependentThermalInput(self, thermalInput: AdditiveFEAOperationInput) -> None:
+        """
+        Link this mechanical operation input to its weakly-coupled dependent thermal input.
+        thermalInput : The AdditiveFEAOperationInput for the thermal analysis.
+        """
+        pass
+    @property
+    def text(self) -> str:
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        Text contents of the input deck file generated by applyDeck().
+        """
+        return str()
+    @property
+    def base64PRMData(self) -> str:
+        """
+        Contents of the PRM file from the print settings, encoded as a base64 string.
+        """
+        return str()
+    @property
+    def generationType(self) -> AdditiveFEAGenerationType:
+        """
+        Additive FEA operations perform simulations by default.  Setting this property to MeshPreCheck instead will only generate a mesh preview, or PRM will generate a process parameter file.
+        """
+        return AdditiveFEAGenerationType()
+    @generationType.setter
+    def generationType(self, value: AdditiveFEAGenerationType):
+        """
+        Additive FEA operations perform simulations by default.  Setting this property to MeshPreCheck instead will only generate a mesh preview, or PRM will generate a process parameter file.
+        """
+        pass
+
 class AdditiveFFFLimitsMachineElement(MachineElement):
     """
     Machine element representing limits for fused filament fabrication (FFF) machine motion and temperatures.
@@ -5891,6 +7150,20 @@ class AdditivePlatformMachineElement(MachineElement):
     def ceilingClearance(self, value: float):
         """
         Clearance height used for automatically arranging parts which is the distance from the top of the build platform.
+        Units are cm.
+        """
+        pass
+    @property
+    def cornerRadius(self) -> float:
+        """
+        Radius used to round the corners of the build platform.
+        Units are cm.
+        """
+        return float()
+    @cornerRadius.setter
+    def cornerRadius(self, value: float):
+        """
+        Radius used to round the corners of the build platform.
         Units are cm.
         """
         pass
@@ -6115,10 +7388,6 @@ class ArrangeSelection(GeometrySelection):
     @property
     def customQuantity(self) -> int:
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Gets and sets the custom quantity.
         This function is not available in Fusion for Personal Use.
         Throws an exception when calling this function in Fusion for Personal Use.
@@ -6129,10 +7398,6 @@ class ArrangeSelection(GeometrySelection):
     @customQuantity.setter
     def customQuantity(self, value: int):
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Gets and sets the custom quantity.
         This function is not available in Fusion for Personal Use.
         Throws an exception when calling this function in Fusion for Personal Use.
@@ -6143,10 +7408,6 @@ class ArrangeSelection(GeometrySelection):
     @property
     def isUsingCustomQuantity(self) -> bool:
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Gets and sets if custom quantity is used for this element.
         This function is not available in Fusion for Personal Use.
         Throws an exception when calling this function in Fusion for Personal Use.
@@ -6157,14 +7418,66 @@ class ArrangeSelection(GeometrySelection):
     @isUsingCustomQuantity.setter
     def isUsingCustomQuantity(self, value: bool):
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Gets and sets if custom quantity is used for this element.
         This function is not available in Fusion for Personal Use.
         Throws an exception when calling this function in Fusion for Personal Use.
         If isUsingCustomQuantity is false, the global quantity of the operation's parameter "arrange_global_quantity" is used.
+        The default value for this property false.
+        """
+        pass
+    @property
+    def customMultiAxisRotationType(self) -> MultiAxisRotationTypes:
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        Gets and sets the custom multi-axis rotation type.
+        This function is not available in Fusion for Personal Use.
+        To enable any rotation the parameter "arrange_rotation_group" of the operation must be set to true.
+        Note: If customMultiAxisRotationType is called, isUsingCustomMultiAxisRotationType will be set to true automatically.
+        The default value for this property is MultiAxisRotationType_SingleAxis.
+        """
+        return MultiAxisRotationTypes()
+    @customMultiAxisRotationType.setter
+    def customMultiAxisRotationType(self, value: MultiAxisRotationTypes):
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        Gets and sets the custom multi-axis rotation type.
+        This function is not available in Fusion for Personal Use.
+        To enable any rotation the parameter "arrange_rotation_group" of the operation must be set to true.
+        Note: If customMultiAxisRotationType is called, isUsingCustomMultiAxisRotationType will be set to true automatically.
+        The default value for this property is MultiAxisRotationType_SingleAxis.
+        """
+        pass
+    @property
+    def isUsingCustomMultiAxisRotationType(self) -> bool:
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        Gets and sets if custom multi-axis rotation type is used for this element.
+        This function is not available in Fusion for Personal Use.
+        Throws an exception when calling this function in Fusion for Personal Use.
+        If isUsingCustomMultiAxisRotationType is false, the global property of the operation's parameter "arrange_multiaxis_rotation" is used.
+        The default value for this property false.
+        """
+        return bool()
+    @isUsingCustomMultiAxisRotationType.setter
+    def isUsingCustomMultiAxisRotationType(self, value: bool):
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        Gets and sets if custom multi-axis rotation type is used for this element.
+        This function is not available in Fusion for Personal Use.
+        Throws an exception when calling this function in Fusion for Personal Use.
+        If isUsingCustomMultiAxisRotationType is false, the global property of the operation's parameter "arrange_multiaxis_rotation" is used.
         The default value for this property false.
         """
         pass
@@ -6313,24 +7626,6 @@ class CAM(core.Product):
         """
         Checks if all the operations (includes those nested in sub-folders or patterns) in the document are valid and up to date.
         Returns true if the all operations are valid
-        """
-        return bool()
-    def postProcess(self, operations: core.Base, input: PostProcessInput) -> bool:
-        """
-        Post all of the toolpaths (including those nested in sub-folders or patterns) for the specified objects.
-        If post processing fails, an error message can be retrieved from the error log explaining the reason for the failure.
-        operations : An Operation, Setup, Folder, or Pattern object. You can also use an ObjectCollection
-        to specify multiple objects of any of the supported types.
-        input : The PostProcessInput object that defines the post options and parameters.
-        Returns true if successful
-        """
-        return bool()
-    def postProcessAll(self, input: PostProcessInput) -> bool:
-        """
-        Post all of the toolpaths (includes those nested in sub-folders or patterns) in the document.
-        If post processing fails, an error message can be retrieved from the error log explaining the reason for the failure.
-        input : The PostProcessInput object that defines the post options and parameters.
-        Returns true if successful.
         """
         return bool()
     def generateSetupSheet(self, operations: core.Base, format: SetupSheetFormats, folder: str, openDocument: bool = True) -> bool:
@@ -6660,6 +7955,38 @@ class CAM3MFExportOptions(CAMExportOptions):
         The default value is 128.
         """
         pass
+    @property
+    def isSliceDataIncluded(self) -> bool:
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        Flag toggling if slice data which has been generated beforehand by generating the entire setup or the additive toolpath object should be included in the exported file.
+        The default value is false.
+        """
+        return bool()
+    @isSliceDataIncluded.setter
+    def isSliceDataIncluded(self, value: bool):
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        Flag toggling if slice data which has been generated beforehand by generating the entire setup or the additive toolpath object should be included in the exported file.
+        The default value is false.
+        """
+        pass
+    @property
+    def structure(self) -> CAM3MFExportStructure:
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        Sets the structure type and naming convention used for the exported 3MF file.
+        """
+        return CAM3MFExportStructure()
 
 class CAMAdditiveBuildExportOptions(CAMExportOptions):
     """
@@ -6989,6 +8316,40 @@ class ControllerConfigurationMachineElement(MachineElement):
         Maximum block processing rate for the controller.
         """
         pass
+    @property
+    def nonTcpRapidInterpolationMode(self) -> MachineNonTCPInterpolationMode:
+        """
+        Specifies how the CNC machine axes behave during rapid moves when TCP (Tool Center Point) is inactive, as defined in the machine's controller.
+        Independent Axes moves the axes independently at maximum speed, potentially resulting in different completion times for each axis.
+        Synchronized Axes moves the axes together, completing the motion simultaneously, although the tool's tip may deviate from the direct line between the start and finish points.
+        """
+        return MachineNonTCPInterpolationMode()
+    @nonTcpRapidInterpolationMode.setter
+    def nonTcpRapidInterpolationMode(self, value: MachineNonTCPInterpolationMode):
+        """
+        Specifies how the CNC machine axes behave during rapid moves when TCP (Tool Center Point) is inactive, as defined in the machine's controller.
+        Independent Axes moves the axes independently at maximum speed, potentially resulting in different completion times for each axis.
+        Synchronized Axes moves the axes together, completing the motion simultaneously, although the tool's tip may deviate from the direct line between the start and finish points.
+        """
+        pass
+    @property
+    def tcpRapidInterpolationMode(self) -> MachineTCPInterpolationMode:
+        """
+        Specifies how the CNC machine axes behave during rapid moves when TCP (Tool Center Point) is active, as defined in the machine's controller.
+        Independent Axes moves the axes independently at maximum speed, potentially resulting in different completion times for each axis.
+        Synchronized Axes moves the axes together, completing the motion simultaneously, although the tool's tip may deviate from the direct line between the start and finish points.
+        Tool Tip adjusts the linear axes to keep the tool's tip positioned along the direct line between the start and finish points.
+        """
+        return MachineTCPInterpolationMode()
+    @tcpRapidInterpolationMode.setter
+    def tcpRapidInterpolationMode(self, value: MachineTCPInterpolationMode):
+        """
+        Specifies how the CNC machine axes behave during rapid moves when TCP (Tool Center Point) is active, as defined in the machine's controller.
+        Independent Axes moves the axes independently at maximum speed, potentially resulting in different completion times for each axis.
+        Synchronized Axes moves the axes together, completing the motion simultaneously, although the tool's tip may deviate from the direct line between the start and finish points.
+        Tool Tip adjusts the linear axes to keep the tool's tip positioned along the direct line between the start and finish points.
+        """
+        pass
 
 class CurveSelection(GeometrySelection):
     """
@@ -7055,6 +8416,124 @@ class DocumentToolLibrary(ToolLibrary):
         """
         return [Tool()]
 
+class ExtruderMachineElement(MachineElement):
+    """
+    Machine element representing an extruder on a fused filament fabrication (FFF) machine.
+    A machine can have multiple extruders and thus multiple ExtruderMachineElement elements.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> ExtruderMachineElement:
+        return ExtruderMachineElement()
+    @staticmethod
+    def staticTypeId() -> str:
+        """
+        Identifying name for all elements of this type.
+        Pass this to the itemByType or itemById methods of MachineElements to filter to elements of this type.
+        Returns identifier of this type.
+        """
+        return str()
+    def deleteMe(self) -> None:
+        """
+        Delete this extruder element from the machine. Throws an exception when trying to delete the last remaining element.
+        """
+        pass
+    @property
+    def name(self) -> str:
+        """
+        Name of this extruder. Depending on the post, this may be output in the resulting gcode as a comment.
+        """
+        return str()
+    @name.setter
+    def name(self, value: str):
+        """
+        Name of this extruder. Depending on the post, this may be output in the resulting gcode as a comment.
+        """
+        pass
+    @property
+    def offset(self) -> core.Vector3D:
+        """
+        Offset relative to the main extruder. The first extruder has an index of 0 and usually an offset of (0,0,0).
+        """
+        return core.Vector3D()
+    @offset.setter
+    def offset(self, value: core.Vector3D):
+        """
+        Offset relative to the main extruder. The first extruder has an index of 0 and usually an offset of (0,0,0).
+        """
+        pass
+    @property
+    def nozzleDiameter(self) -> float:
+        """
+        Nozzle diameter of this extruder in cm.
+        """
+        return float()
+    @nozzleDiameter.setter
+    def nozzleDiameter(self, value: float):
+        """
+        Nozzle diameter of this extruder in cm.
+        """
+        pass
+    @property
+    def filamentDiameter(self) -> float:
+        """
+        Filament diameter of this extruder in cm.
+        """
+        return float()
+    @filamentDiameter.setter
+    def filamentDiameter(self, value: float):
+        """
+        Filament diameter of this extruder in cm.
+        """
+        pass
+    @property
+    def temperature(self) -> float:
+        """
+        The maximum temperature this extruder can reach in degrees C.
+        """
+        return float()
+    @temperature.setter
+    def temperature(self, value: float):
+        """
+        The maximum temperature this extruder can reach in degrees C.
+        """
+        pass
+    @property
+    def volumePerSecond(self) -> float:
+        """
+        The maximum volume output measured in cm^3/s.
+        """
+        return float()
+    @volumePerSecond.setter
+    def volumePerSecond(self, value: float):
+        """
+        The maximum volume output measured in cm^3/s.
+        """
+        pass
+    @property
+    def isFanAvailable(self) -> bool:
+        """
+        Flag indicating if a fan, whose speed is settable in the post, is available.
+        """
+        return bool()
+    @isFanAvailable.setter
+    def isFanAvailable(self, value: bool):
+        """
+        Flag indicating if a fan, whose speed is settable in the post, is available.
+        """
+        pass
+
+class ExtruderMachineElementInput(MachineElementInput):
+    """
+    Specialization of MachineElementInput for creating an additive FFF extruder element.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> ExtruderMachineElementInput:
+        return ExtruderMachineElementInput()
+
 class FloatParameterValue(ParameterValue):
     """
     A parameter value that is a floating point value.
@@ -7104,6 +8583,65 @@ class IntegerParameterValue(ParameterValue):
         Get or set the value of the parameter.
         """
         pass
+
+class InteractionsMachineElement(MachineElement):
+    """
+    Machine element representing the machine's interactions.
+    This controls how MachineItems interact with each other.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> InteractionsMachineElement:
+        return InteractionsMachineElement()
+    def __len__(self) -> int:
+        return 0
+    def __getitem__(self, index: int) -> MachineInteractionPair:
+        return None
+    def __iter__(self) -> Iterator[MachineInteractionPair]:
+        return None
+    @staticmethod
+    def staticTypeId() -> str:
+        """
+        Identifying name for all elements of this type.
+        Pass this to the itemByType or itemById methods of MachineElements to filter to elements of this type.
+        Returns identifier of this type.
+        """
+        return str()
+    def item(self, index: int) -> MachineInteractionPair:
+        """
+        Get the MachineInteractionPair at index in this collection.
+        index : The index of the MachineInteractionPair.
+        The MachineInteractionPair at index.
+        """
+        return MachineInteractionPair()
+    def apply(self, setting: MachineInteractionPair) -> bool:
+        """
+        Add an MachineInteractionPair.
+        This will overwrite any existing MachineInteractionPair with the same item1 and item2.
+        """
+        return bool()
+    def createMachineInteractionPair(self, item1: MachineItem, item2: MachineItem) -> MachineInteractionPair:
+        """
+        Create a MachineInteractionPair that will control how the two items interact.
+        """
+        return MachineInteractionPair()
+    def createMachineItem(self, type: MachineItemType, part: MachinePart) -> MachineItem:
+        """
+        Create a MachineItem.
+        """
+        return MachineItem()
+    def resetMachineInteractionPairs(self) -> bool:
+        """
+        Restore all MachineInteractionPairs to their defaults.
+        """
+        return bool()
+    @property
+    def count(self) -> int:
+        """
+        Get the number of pairs in this collection.
+        """
+        return int()
 
 class KinematicsMachineElement(MachineElement):
     """
@@ -7418,6 +8956,235 @@ class MachineLibrary(CAMLibrary):
         """
         return [Machine()]
 
+class MultiAxisDPMFeedrateSettings(MultiAxisFeedrateSettings):
+    """
+    Specialization of MultiAxisFeedrateSettings for standard degrees per minute feedrates.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> MultiAxisDPMFeedrateSettings:
+        return MultiAxisDPMFeedrateSettings()
+    @property
+    def dpmType(self) -> MultiAxisDegreesPerMinuteType:
+        """
+        The DPM settings type
+        """
+        return MultiAxisDegreesPerMinuteType()
+    @property
+    def maximumFeedrate(self) -> float:
+        """
+        The maximum feedrate value that can be output.
+        """
+        return float()
+    @maximumFeedrate.setter
+    def maximumFeedrate(self, value: float):
+        """
+        The maximum feedrate value that can be output.
+        """
+        pass
+    @property
+    def outputTolerance(self) -> float:
+        """
+        The tolerance for deciding whether to output a feedrate value or not. It helps to minimize the output of multi-axis feedrate numbers.
+        If the feedrate value is within this tolerance of the previous feedrate value, then it is set to the previous value.
+        Value is in deg/min.
+        """
+        return float()
+    @outputTolerance.setter
+    def outputTolerance(self, value: float):
+        """
+        The tolerance for deciding whether to output a feedrate value or not. It helps to minimize the output of multi-axis feedrate numbers.
+        If the feedrate value is within this tolerance of the previous feedrate value, then it is set to the previous value.
+        Value is in deg/min.
+        """
+        pass
+
+class MultiAxisInverseTimeFeedrateSettings(MultiAxisFeedrateSettings):
+    """
+    Specialization of MultiAxisFeedrateSettings for inverse time feedrates.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> MultiAxisInverseTimeFeedrateSettings:
+        return MultiAxisInverseTimeFeedrateSettings()
+    @property
+    def maximumFeedrate(self) -> float:
+        """
+        The maximum feedrate value that can be output.
+        """
+        return float()
+    @maximumFeedrate.setter
+    def maximumFeedrate(self, value: float):
+        """
+        The maximum feedrate value that can be output.
+        """
+        pass
+    @property
+    def inverseTimeUnit(self) -> MultiAxisInverseTimeUnit:
+        """
+        The time units for calculating the inverse from.
+        """
+        return MultiAxisInverseTimeUnit()
+    @inverseTimeUnit.setter
+    def inverseTimeUnit(self, value: MultiAxisInverseTimeUnit):
+        """
+        The time units for calculating the inverse from.
+        """
+        pass
+
+class MultiAxisMachineElement(MachineElement):
+    """
+    Machine element representing multi-axis machine settings.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> MultiAxisMachineElement:
+        return MultiAxisMachineElement()
+    @staticmethod
+    def staticTypeId() -> str:
+        """
+        Identifying name for all elements of this type.
+        Pass this to the itemByType or itemById methods of MachineElements to filter to elements of this type.
+        Returns identifier of this type.
+        """
+        return str()
+    def deleteMe(self) -> None:
+        """
+        Delete this multi-axis machine element from the machine.
+        """
+        pass
+    def createSingularitySettings(self) -> MultiAxisSingularitySettings:
+        """
+        Creates a MultiAxisSingularitySettings object.
+        Set this object on the singularitySettings property to apply the changes.
+        The MultiAxisSingularitySettings object created.
+        """
+        return MultiAxisSingularitySettings()
+    def createFeedrateSettingsInput(self) -> MultiAxisFeedrateSettingsInput:
+        """
+        Creates a MultiAxisFeedrateSettingsInput object to be used as input for creating MultiAxisFeedrateSettings objects.
+         The MultiAxisFeedrateSettingsInput object 
+        """
+        return MultiAxisFeedrateSettingsInput()
+    def createFeedrateSettings(self, input: MultiAxisFeedrateSettingsInput) -> MultiAxisFeedrateSettings:
+        """
+        Creates a MultiAxisFeedrateSettings specialized object from the given input.
+        input : The input object containing the settings to create the MultiAxisFeedrateSettings object.
+        Set this object on the feedrateSettings property to apply the changes.
+        The specialized MultiAxisFeedrateSettings object created from the input.
+        """
+        return MultiAxisFeedrateSettings()
+    def createRetractAndReconfigureSettings(self) -> MultiAxisRetractAndReconfigureSettings:
+        """
+        Creates a MultiAxisRetractAndReconfigureSettings object.
+        Set this object on the retractAndReconfigureSettings property to apply the changes.
+        The MultiAxisRetractAndReconfigureSettings object created.
+        """
+        return MultiAxisRetractAndReconfigureSettings()
+    @property
+    def isUsingVirtualTooltip(self) -> bool:
+        """
+        Specifies if the position of the virtual tool tip (tool end) should be output. Only relevant for rotary head axes.
+        """
+        return bool()
+    @isUsingVirtualTooltip.setter
+    def isUsingVirtualTooltip(self, value: bool):
+        """
+        Specifies if the position of the virtual tool tip (tool end) should be output. Only relevant for rotary head axes.
+        """
+        pass
+    @property
+    def singularitySettings(self) -> MultiAxisSingularitySettings:
+        """
+        The multi-axis kinematics settings for this machine.
+        For changes to to this object to take effect, re-assign them to this property.
+        To not use multi-axis kinematics, set this to null.
+        """
+        return MultiAxisSingularitySettings()
+    @singularitySettings.setter
+    def singularitySettings(self, value: MultiAxisSingularitySettings):
+        """
+        The multi-axis kinematics settings for this machine.
+        For changes to to this object to take effect, re-assign them to this property.
+        To not use multi-axis kinematics, set this to null.
+        """
+        pass
+    @property
+    def feedrateSettings(self) -> MultiAxisFeedrateSettings:
+        """
+        The multi-axis feedrate settings for this machine.
+        For changes to to this object to take effect, re-assign them to this property.
+        Cannot be set to null.
+        """
+        return MultiAxisFeedrateSettings()
+    @feedrateSettings.setter
+    def feedrateSettings(self, value: MultiAxisFeedrateSettings):
+        """
+        The multi-axis feedrate settings for this machine.
+        For changes to to this object to take effect, re-assign them to this property.
+        Cannot be set to null.
+        """
+        pass
+    @property
+    def retractAndReconfigureSettings(self) -> MultiAxisRetractAndReconfigureSettings:
+        """
+        The multi-axis retract and reconfigure settings for this machine.
+        For changes to to this object to take effect, re-assign them to this property.
+        To not use multi-axis retract and reconfigure, set this to null.
+        """
+        return MultiAxisRetractAndReconfigureSettings()
+    @retractAndReconfigureSettings.setter
+    def retractAndReconfigureSettings(self, value: MultiAxisRetractAndReconfigureSettings):
+        """
+        The multi-axis retract and reconfigure settings for this machine.
+        For changes to to this object to take effect, re-assign them to this property.
+        To not use multi-axis retract and reconfigure, set this to null.
+        """
+        pass
+    @property
+    def isUsingTiltedWorkplane(self) -> bool:
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        Specifies if tilted workplane command (e.g., G68.2, G254, PLANE SPATIAL, CYCLE800) should be output for 3+2 operations.
+        """
+        return bool()
+    @isUsingTiltedWorkplane.setter
+    def isUsingTiltedWorkplane(self, value: bool):
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        Specifies if tilted workplane command (e.g., G68.2, G254, PLANE SPATIAL, CYCLE800) should be output for 3+2 operations.
+        """
+        pass
+
+class MultiAxisMachineElementInput(MachineElementInput):
+    """
+    Specialization of MachineElementInput for creating a multi-axis machine element.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> MultiAxisMachineElementInput:
+        return MultiAxisMachineElementInput()
+
+class MultiAxisProgrammedFeedrateSettings(MultiAxisFeedrateSettings):
+    """
+    Specialization of MultiAxisFeedrateSettings for programmed feedrates.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> MultiAxisProgrammedFeedrateSettings:
+        return MultiAxisProgrammedFeedrateSettings()
+
 class NCProgram(OperationBase):
     """
     Object that represents an existing NC program.
@@ -7596,6 +9363,34 @@ class Operation(OperationBase):
         Get or set the tool preset to be used. Must be a valid preset of the already assigned tool. Returns null if the operation has no tool or preset.
         """
         pass
+    @property
+    def referenceTool(self) -> Tool:
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        Get or set the tool for this operation. The document's tool library will be updated accordingly.
+        The tool instance returned is a copy and therefore is not referenced by the operation.
+        To change the reference tool of the operation, the new tool must be assigned to the operation, but once set it cannot be unset again.
+        Setting the tool is only possible on operation strategies that support reference tools, an exception is thrown otherwise.
+        Likewise null is returned if the operation strategy does not support reference tools.
+        """
+        return Tool()
+    @referenceTool.setter
+    def referenceTool(self, value: Tool):
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        Get or set the tool for this operation. The document's tool library will be updated accordingly.
+        The tool instance returned is a copy and therefore is not referenced by the operation.
+        To change the reference tool of the operation, the new tool must be assigned to the operation, but once set it cannot be unset again.
+        Setting the tool is only possible on operation strategies that support reference tools, an exception is thrown otherwise.
+        Likewise null is returned if the operation strategy does not support reference tools.
+        """
+        pass
 
 class OptimizedOrientationResults(GeneratedData):
     """
@@ -7691,10 +9486,6 @@ class PostLibrary(CAMLibrary):
 
 class PostProcessingMachineElement(MachineElement):
     """
-    !!!!! Warning !!!!!
-    ! This is in preview state; please see the help for more info
-    !!!!! Warning !!!!!
-    
     Machine element representing the post processor and post properties.
     """
     def __init__(self):
@@ -7800,6 +9591,21 @@ class PrintSettingLibrary(CAMLibrary):
         Returns the PrintSetting for a valid URL, returns null otherwise.
         """
         return [PrintSetting()]
+
+class PRMExportOptions(CAMExportOptions):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    PRM export options for additive FEA.  A PRM file can only be
+    exported if the Autodesk Fusion Manufacturing Extension is active.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> PRMExportOptions:
+        return PRMExportOptions()
 
 class RotaryMachineAxis(MachineAxis):
     """
@@ -8283,6 +10089,111 @@ class StringParameterValue(ParameterValue):
         """
         pass
 
+class ToolBlock(Tool):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Represents a Tool Block.
+    
+    A tool block is a type of tool that can have 3D geometry associated with it. 3D geometry can be supplied to represent
+    the shape of the tool block instead of an auto-generated shape derived from parameters.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> ToolBlock:
+        return ToolBlock()
+    @property
+    def geometry(self) -> AssemblyComponentGeometry:
+        """
+        Get or set the geometry and attachment points for this tool block.
+        
+        A Null Object represents a tool without any 3D data associated.
+        
+        """
+        return AssemblyComponentGeometry()
+    @geometry.setter
+    def geometry(self, value: AssemblyComponentGeometry):
+        """
+        Get or set the geometry and attachment points for this tool block.
+        
+        A Null Object represents a tool without any 3D data associated.
+        
+        """
+        pass
+
+class ToolingCapabilitiesMachineElement(MachineElement):
+    """
+    Machine element representing the tooling capabilities of a machine.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> ToolingCapabilitiesMachineElement:
+        return ToolingCapabilitiesMachineElement()
+    @staticmethod
+    def staticTypeId() -> str:
+        """
+        Identifying name for all elements of this type.
+        Pass this to the itemByType or itemById methods of MachineElements to filter to elements of this type.
+        Returns identifier of this type.
+        """
+        return str()
+    @property
+    def isToolChangerAutomatic(self) -> bool:
+        """
+        If your machine has an automatic tool changer, set this to true.
+        For machines with manual tool change capabilities, set this to false.
+        """
+        return bool()
+    @isToolChangerAutomatic.setter
+    def isToolChangerAutomatic(self, value: bool):
+        """
+        If your machine has an automatic tool changer, set this to true.
+        For machines with manual tool change capabilities, set this to false.
+        """
+        pass
+    @property
+    def isToolPreloadSupported(self) -> bool:
+        """
+        If your machine has a staging function for the tool changer, set this to true.
+        For machines without staging tool change capabilities, set this to false.
+        """
+        return bool()
+    @isToolPreloadSupported.setter
+    def isToolPreloadSupported(self, value: bool):
+        """
+        If your machine has a staging function for the tool changer, set this to true.
+        For machines without staging tool change capabilities, set this to false.
+        """
+        pass
+    @property
+    def maxToolCount(self) -> int:
+        """
+        Property that represents the maximum number of tools available in the tool magazine,
+        or the maximum number of tools that can be programmed in the control.
+        """
+        return int()
+    @maxToolCount.setter
+    def maxToolCount(self, value: int):
+        """
+        Property that represents the maximum number of tools available in the tool magazine,
+        or the maximum number of tools that can be programmed in the control.
+        """
+        pass
+
+class ToolingCapabilitiesMachineElementInput(MachineElementInput):
+    """
+    Input class for creating ToolingCapabilitiesMachineElement objects.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> ToolingCapabilitiesMachineElementInput:
+        return ToolingCapabilitiesMachineElementInput()
+
 class ToolLibraries(CAMLibrary):
     """
     The ToolLibraries object provides utilities to access, import and update tool libraries.
@@ -8327,6 +10238,41 @@ class ToolLibraries(CAMLibrary):
         Returns a new ToolQuery. The query is predefined by given parameter.
         """
         return ToolQuery()
+
+class TurningTool(Tool):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Represents a Turning Tool.
+    
+    A turning tool is comprised of an insert and potentially a holder. 3D geometry can be supplied to represent
+    the shape of the holder instead of the auto-generated shape derived from parameters.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> TurningTool:
+        return TurningTool()
+    @property
+    def holderGeometry(self) -> AssemblyComponentGeometry:
+        """
+        Get or set the geometry and attachment points for the holder for this turning tool.
+        
+        A Null Object represents a tool without any 3D data associated.
+        
+        """
+        return AssemblyComponentGeometry()
+    @holderGeometry.setter
+    def holderGeometry(self, value: AssemblyComponentGeometry):
+        """
+        Get or set the geometry and attachment points for the holder for this turning tool.
+        
+        A Null Object represents a tool without any 3D data associated.
+        
+        """
+        pass
 
 class CAMPattern(CAMFolder):
     """
@@ -8539,6 +10485,32 @@ class MachineAvoidDirectSelection(MachineAvoidSelectionBase):
     def inputGeometry(self, value: list[core.Base]):
         """
         Get or set the value of the input geometry.
+        """
+        pass
+
+class MultiAxisCombinationDPMFeedrateSettings(MultiAxisDPMFeedrateSettings):
+    """
+    Specialization of MultiAxisDPMFeedrateSettings for degrees per minute feedrates that require a combination of linear and rotary movements.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> MultiAxisCombinationDPMFeedrateSettings:
+        return MultiAxisCombinationDPMFeedrateSettings()
+    @property
+    def pulseWeight(self) -> float:
+        """
+        The pulse weight ratio for the rotary axes when DPM feedrates are output as a combination of linear and rotary movements.
+        The pulse weight is a scale factor based on the rotary axes accuracy compared to the linear axes accuracy.
+        For example, it should be set to .1 when the linear axes are output on .0001 increments and the rotary axes on .001 increments.
+        """
+        return float()
+    @pulseWeight.setter
+    def pulseWeight(self, value: float):
+        """
+        The pulse weight ratio for the rotary axes when DPM feedrates are output as a combination of linear and rotary movements.
+        The pulse weight is a scale factor based on the rotary axes accuracy compared to the linear axes accuracy.
+        For example, it should be set to .1 when the linear axes are output on .0001 increments and the rotary axes on .001 increments.
         """
         pass
 

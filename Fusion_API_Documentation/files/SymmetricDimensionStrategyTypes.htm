@@ -1,0 +1,94 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/SymmetricDimensionStrategyTypes.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="29/03/2026">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="SymmetricDimensionStrategyTypes">
+    <meta name="description" content="Defines dimension strategies for symmetric geometry. These strategies control how dimensions are created when symmetric features are detected in the sketch.">
+    <meta name="topicid" content="GUID-DD497F1D-0B20-49E8-A875-F55BA9B8517E">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>SymmetricDimensionStrategyTypes Enumerator
+        </title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">SymmetricDimensionStrategyTypes Enumerator
+        </h1>
+    <h2 class="api">
+          Description
+        </h2>Defines dimension strategies for symmetric geometry. These strategies control how dimensions are created when symmetric features are detected in the sketch.<br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion\FusionTypeDefs.h&gt;<h2 class="api">
+          Methods
+        </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+              Name
+            </td>
+        <td class="api-list" style="width:1px;">
+              Value
+            </td>
+        <td class="api-list">
+              Description
+            </td>
+      </tr>
+      <tr>
+        <td class="api-list">CenterToEndSymmetricDimensionStrategyType</td>
+        <td class="api-list" align="right" style="padding-right:10px">3</td>
+        <td class="api-list">Dimensions are created from the center line or center point of the symmetric feature to one edge.</td>
+      </tr>
+      <tr>
+        <td class="api-list">CenterToEndWithSymmetryConstraintSymmetricDimensionStrategyType</td>
+        <td class="api-list" align="right" style="padding-right:10px">4</td>
+        <td class="api-list">Dimensions are created from center to end, and explicit symmetry constraints are added to ensure the feature remains symmetric when dimensions are changed.</td>
+      </tr>
+      <tr>
+        <td class="api-list">DefaultSymmetricDimensionStrategyType</td>
+        <td class="api-list" align="right" style="padding-right:10px">0</td>
+        <td class="api-list">Use the system's default symmetric dimension strategy. This occurs when a new AutoConstrainInput is created and before a specific strategy has been set. When this value is used, the system will automatically select the most appropriate strategy based on the sketch geometry. This setting only applies when symmetric dimensioning strategies are used.</td>
+      </tr>
+      <tr>
+        <td class="api-list">EndToCenterSymmetricDimensionStrategyType</td>
+        <td class="api-list" align="right" style="padding-right:10px">2</td>
+        <td class="api-list">Dimensions are created from one edge of the symmetric feature to its center line or center point.</td>
+      </tr>
+      <tr>
+        <td class="api-list">EndToEndSymmetricDimensionStrategyType</td>
+        <td class="api-list" align="right" style="padding-right:10px">1</td>
+        <td class="api-list">Dimensions span from one end of the symmetric feature to the other end, creating a single dimension across the entire symmetric feature.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+          Version
+        </h2>
+        Introduced in version April 2026<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2026 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(SymmetricDimensionStrategyTypes%20Enum%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

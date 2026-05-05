@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -41,9 +41,13 @@ namespace adsk { namespace fusion {
 class CircularPatternFeatureInput : public core::Base {
 public:
 
-    /// Gets and sets the input entities. The collection can contain faces, features, bodies or occurrences.
-    /// All of the entities must be of a single type. For example, it can't contain features and occurrences
-    /// but only features or occurrences.
+    /// Gets and sets the input entities. The collection can contain BRepFace, PartFeature, BRepBody, or Occurrence
+    /// objects. All of the entities provided must be the same type. For example, it must contain only bodies and can't
+    /// contain both bodies and faces.
+    /// 
+    /// You can also pattern ConstructionPoint, ConstructionAxis, and ConstructionPlane objects. When patterning any
+    /// construction goemetry, only one entity can be patterned at a time, so the ObjectCollection must contain a
+    /// single item.
     core::Ptr<core::ObjectCollection> inputEntities() const;
     bool inputEntities(const core::Ptr<core::ObjectCollection>& value);
 

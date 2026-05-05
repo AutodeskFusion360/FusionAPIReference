@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -34,12 +34,8 @@ namespace adsk { namespace fusion {
 
 namespace adsk { namespace fusion {
 
-/// !!!!! Warning !!!!!
-/// ! This is in preview state; please see the help for more info
-/// !!!!! Warning !!!!!
-/// 
 /// Provides access to the Arrange features in a component and provides the functionality
-/// to create new Arrange features
+/// to create new Arrange features.
 class ArrangeFeatures : public core::Base {
 public:
 
@@ -69,7 +65,7 @@ public:
     /// input : The ArrangeFeature2DInput or ArrangeFeature3DInput object that defines the required information needed to create a new Arrange feature.
     /// An ArrangeFeatureInput object is the logical equivalent to the command dialog when creating an Arrange feature.
     /// It provides access to the various options and collects all of the required input when creating an Arrange feature and
-    /// call the add method is the API equivalent to clicking the OK button on the command dialog to create the Arrange feature.
+    /// calling the add method is the API equivalent to clicking the OK button on the command dialog to create the Arrange feature.
     /// Returns the newly created ArrangeFeature object.
     core::Ptr<ArrangeFeature> add(const core::Ptr<ArrangeFeatureInput>& input);
 

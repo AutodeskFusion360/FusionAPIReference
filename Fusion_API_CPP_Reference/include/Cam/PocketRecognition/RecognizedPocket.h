@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -28,6 +28,7 @@
 #endif
 
 namespace adsk { namespace cam {
+    class RecognizedPocketInput;
     class RecognizedPockets;
 }}
 namespace adsk { namespace core {
@@ -42,11 +43,12 @@ namespace adsk { namespace cam {
 
 /// Object that represents a single pocket (an outer boundary with depth and optional islands)
 /// which has been recognized on the model.
-/// See PocketRecognitionSelection for making a selection as in the UI
+/// See PocketRecognitionSelection for making a selection as in the UI.
 class RecognizedPocket : public core::Base {
 public:
 
-    /// Gets all recognized pockets from the given body and returns them
+    /// Gets all recognized pockets from the given body and returns them.
+    /// This recognition method does not contain bosses.
     /// body : Model body on which to recognize pockets
     /// attackVector : A vector defining the orientation in which to search for pockets. This should be the
     /// vector pointing down along the tool towards its tip and the pocket floors.
@@ -70,19 +72,27 @@ public:
     /// Returns the type of bottom edge this pocket has.
     RecognizedPocketBottomType bottomType() const;
 
-    /// !!!!! Warning !!!!!
-    /// ! This is in preview state; please see the help for more info
-    /// !!!!! Warning !!!!!
-    /// 
     /// Returns all faces making up the pocket.
     std::vector<core::Ptr<fusion::BRepFace>> faces() const;
+
+    /// Returns all faces making up the pocket, which are shared with other pockets.
+    std::vector<core::Ptr<fusion::BRepFace>> sharedFaces() const;
 
     /// !!!!! Warning !!!!!
     /// ! This is in preview state; please see the help for more info
     /// !!!!! Warning !!!!!
     /// 
-    /// Returns all faces making up the pocket, which are shared with other pockets.
-    std::vector<core::Ptr<fusion::BRepFace>> sharedFaces() const;
+    /// Gets all recognized pockets based on the properties in the given input object and returns them.
+    /// The method is only available with the Machining Extension.
+    /// input : An input object defining the body and search parameters for recognizing pockets.
+    static core::Ptr<RecognizedPockets> recognizePocketsWithInput(const core::Ptr<RecognizedPocketInput>& input);
+
+    /// !!!!! Warning !!!!!
+    /// ! This is in preview state; please see the help for more info
+    /// !!!!! Warning !!!!!
+    /// 
+    /// Returns the attack vector that was used to recognize this pocket.
+    core::Ptr<core::Vector3D> attackVector() const;
 
     ADSK_CAM_RECOGNIZEDPOCKET_API static const char* classType();
     ADSK_CAM_RECOGNIZEDPOCKET_API const char* objectType() const override;
@@ -101,6 +111,8 @@ private:
     virtual RecognizedPocketBottomType bottomType_raw() const = 0;
     virtual fusion::BRepFace** faces_raw(size_t& return_size) const = 0;
     virtual fusion::BRepFace** sharedFaces_raw(size_t& return_size) const = 0;
+    ADSK_CAM_RECOGNIZEDPOCKET_API static RecognizedPockets* recognizePocketsWithInput_raw(RecognizedPocketInput* input);
+    virtual core::Vector3D* attackVector_raw() const = 0;
 };
 
 // Inline wrappers
@@ -188,6 +200,18 @@ inline std::vector<core::Ptr<fusion::BRepFace>> RecognizedPocket::sharedFaces() 
         res.assign(p, p+s);
         core::DeallocateArray(p);
     }
+    return res;
+}
+
+inline core::Ptr<RecognizedPockets> RecognizedPocket::recognizePocketsWithInput(const core::Ptr<RecognizedPocketInput>& input)
+{
+    core::Ptr<RecognizedPockets> res = recognizePocketsWithInput_raw(input.get());
+    return res;
+}
+
+inline core::Ptr<core::Vector3D> RecognizedPocket::attackVector() const
+{
+    core::Ptr<core::Vector3D> res = attackVector_raw();
     return res;
 }
 }// namespace cam

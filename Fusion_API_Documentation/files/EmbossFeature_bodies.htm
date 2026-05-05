@@ -34,16 +34,9 @@
         </script></head>
   <body>
     <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
-    <h1 class="api">EmbossFeature.bodies Property<img src="../images/TestTubeLarge.png"></h1>
+    <h1 class="api">EmbossFeature.bodies Property</h1>
 
-          Parent Object: <a href="EmbossFeature.htm">EmbossFeature</a><p class="api-preview"><img src="../images/TestTubeSmall.png" alt="Preview">This functionality is provided as a preview
-				  of intended future API capabilities. You are encouraged to use it and report any problems or suggestions using the
-				  <a href="https://forums.autodesk.com/t5/fusion-360-api-and-scripts/bd-p/22">Fusion API and Scripts</a> forum.<br><br>
-
-				  Because this is a preview of future functionality, there is the possibility that it will change, which will possibly
-				  break any existing programs that use this functionality. Because of that, you should never deliver any programs that use
-				  any preview capabilities. For a distributed program, you should wait until it has moved from preview to released state.
-			  </p><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Features/EmbossFeature.h&gt;<h2 class="api">
+          Parent Object: <a href="EmbossFeature.htm">EmbossFeature</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Features/EmbossFeature.h&gt;<h2 class="api">
           Description
         </h2>
     <p class="api">Returns the bodies that were modified or created by this feature. This property works for both parametric and non-parametric features.<br/><br/> For a BaseFeature, this property has two different behaviors depending on if the BaseFeature is active for edit or not. When the base feature is active, this property returns the bodies owned by the base feature or the source bodies. When the base feature is not active, this property returns the result bodies.<br/><br/> When a body is added to a base feature, that body is owned by the base feature and is only seen in the UI when the base feature is active. This body is referred to as a "source body". Fusion creates a parametric copy of the body when you exit the base feature. This copy is referred to as the "result body," and it is used for subsequent modeling operations.<br/><br/> You can map between the source and result bodies by using their position within the bodies returned. To get a valid list of result bodies, you should roll the timeline to immediately after the base feature node in the timeline. Otherwise, subsequent operations could have done something to cause one or more bodies to no longer be available.</p>
@@ -76,9 +69,9 @@
       <table width="100%" style="font-size:15">
         <tr>
           <td align="left">
-                © Copyright 2025 Autodesk, Inc.
+                © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(EmbossFeature.bodies%20Function%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(EmbossFeature.bodies%20Function%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

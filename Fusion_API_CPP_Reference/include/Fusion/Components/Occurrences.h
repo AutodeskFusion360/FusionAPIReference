@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -30,6 +30,7 @@
 
 namespace adsk { namespace core {
     class DataFile;
+    class DataFolder;
     class Matrix3D;
 }}
 namespace adsk { namespace fusion {
@@ -94,7 +95,7 @@ public:
     /// Method that creates a new occurrence by creating a new component that is a copy of an existing
     /// component. This is the equivalent of copying and using the "Paste New" command in the user interface. This
     /// is different from the addExistingComponent in that it's not a new instance to the existing component but a
-    /// new component is created that has it's own definition (sketches, features, etc.) and a new occurrence instance
+    /// new component is created that has its own definition (sketches, features, etc.) and a new occurrence instance
     /// is created to reference this new component.
     /// component : The existing component to create a copy of.
     /// transform : A transform that defines the location for the new occurrence
@@ -109,6 +110,20 @@ public:
     /// transform : A transform that defines the location for the new occurrence.
     /// Returns the newly created occurrence or null if the add failed.
     core::Ptr<Occurrence> addFromConfiguration(const core::Ptr<ConfigurationRow>& configurationRow, const core::Ptr<core::Matrix3D>& transform);
+
+    /// Method that creates a new occurrence by creating a new external component (X-Ref) that is
+    /// not saved yet. This is similar to the "New Component" command in the UI when creating an
+    /// external component, where you specify a name and location but the component is created
+    /// in-memory without being saved immediately. This allows programs to create and populate
+    /// an external component without needing to save it first, and makes undo possible.
+    /// The component will be saved automatically when the parent assembly is saved.
+    /// componentName : The name for the new external component.
+    /// targetFolder : The DataFolder where the component will be saved when the parent assembly is saved.
+    /// transform : A transform that defines the location for the new occurrence.
+    /// Returns the newly created occurrence or null if the creation failed. The component
+    /// referenced by the occurrence can be edited but is not saved until the parent assembly
+    /// is saved.
+    core::Ptr<Occurrence> addNewExternalComponent(const std::string& componentName, const core::Ptr<core::DataFolder>& targetFolder, const core::Ptr<core::Matrix3D>& transform);
 
     typedef Occurrence iterable_type;
     template <class OutputIterator> void copyTo(OutputIterator result);
@@ -131,6 +146,7 @@ private:
     virtual Occurrence** asArray_raw(size_t& return_size) const = 0;
     virtual Occurrence* addNewComponentCopy_raw(Component* component, core::Matrix3D* transform) = 0;
     virtual Occurrence* addFromConfiguration_raw(ConfigurationRow* configurationRow, core::Matrix3D* transform) = 0;
+    virtual Occurrence* addNewExternalComponent_raw(const char* componentName, core::DataFolder* targetFolder, core::Matrix3D* transform) = 0;
 };
 
 // Inline wrappers
@@ -200,6 +216,12 @@ inline core::Ptr<Occurrence> Occurrences::addNewComponentCopy(const core::Ptr<Co
 inline core::Ptr<Occurrence> Occurrences::addFromConfiguration(const core::Ptr<ConfigurationRow>& configurationRow, const core::Ptr<core::Matrix3D>& transform)
 {
     core::Ptr<Occurrence> res = addFromConfiguration_raw(configurationRow.get(), transform.get());
+    return res;
+}
+
+inline core::Ptr<Occurrence> Occurrences::addNewExternalComponent(const std::string& componentName, const core::Ptr<core::DataFolder>& targetFolder, const core::Ptr<core::Matrix3D>& transform)
+{
+    core::Ptr<Occurrence> res = addNewExternalComponent_raw(componentName.c_str(), targetFolder.get(), transform.get());
     return res;
 }
 

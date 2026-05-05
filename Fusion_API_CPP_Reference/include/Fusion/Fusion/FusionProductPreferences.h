@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -32,11 +32,11 @@ namespace adsk { namespace fusion {
 class FusionProductPreferences : public core::ProductPreferences {
 public:
 
-    /// Gets and sets the Active Component Visibility option
+    /// Gets and sets the Active Component Visibility option.
     bool isActiveComponentVisibilityUsed() const;
     bool isActiveComponentVisibilityUsed(bool value);
 
-    /// Gets and sets the default modeling type setting
+    /// Gets and sets the default modeling type setting.
     DefaultDesignTypeOptions defaultDesignType() const;
     bool defaultDesignType(DefaultDesignTypeOptions value);
 
@@ -44,17 +44,17 @@ public:
     DefaultWorkspaces defaultWorkspace() const;
     bool defaultWorkspace(DefaultWorkspaces value);
 
-    /// Gets and sets the Animate joint preview option
+    /// Gets and sets the Animate joint preview option.
     bool isJointPreviewAnimated() const;
     bool isJointPreviewAnimated(bool value);
 
-    /// Gets and sets the Allow 3D sketching of lines and splines option
+    /// Gets and sets the Allow 3D sketching of lines and splines option,
     /// which controls if 3D sketching is allowed or if sketching is forced to
     /// be on the x-y plane of the sketch.
     bool is3DSketchingAllowed() const;
     bool is3DSketchingAllowed(bool value);
 
-    /// Gets and sets the Show ghosted result body option
+    /// Gets and sets the Show ghosted result body option.
     bool isGhostedResultBodyShown() const;
     bool isGhostedResultBodyShown(bool value);
 
@@ -62,11 +62,17 @@ public:
     bool isDimensionEditedWhenCreated() const;
     bool isDimensionEditedWhenCreated(bool value);
 
+    /// !!!!! Warning !!!!!
+    /// ! This has been retired; please see the help for more info
+    /// !!!!! Warning !!!!!
+    /// 
     /// Gets and sets if the view is re-oriented to view the newly created sketch.
+    /// This property has been replaced by the isAutoLookAtSketch2 property, which
+    /// provides the full capabilities.
     bool isAutoLookAtSketch() const;
     bool isAutoLookAtSketch(bool value);
 
-    /// Gets and Sets if geometry, not in the active sketch plane, is to be automatically projected.
+    /// Gets and sets if geometry, not in the active sketch plane, is to be automatically projected.
     bool isAutoProjectGeometry() const;
     bool isAutoProjectGeometry(bool value);
 
@@ -97,8 +103,15 @@ public:
     bool isEnableArrangeAndSimplifyTools() const;
     bool isEnableArrangeAndSimplifyTools(bool value);
 
+    /// Gets and sets if the first Component within another component should be
+    /// grounded to parent automatically.
     bool isFirstComponentGroundToParent() const;
     bool isFirstComponentGroundToParent(bool value);
+
+    /// Gets and sets if the view is re-oriented to view the newly created sketch,
+    /// and if it is re-oriented, if the camera uses the current camera settings or is orthographic.
+    AutoLookAtSketchSettings isAutoLookAtSketch2() const;
+    bool isAutoLookAtSketch2(AutoLookAtSketchSettings value);
 
     ADSK_FUSION_FUSIONPRODUCTPREFERENCES_API static const char* classType();
     ADSK_FUSION_FUSIONPRODUCTPREFERENCES_API const char* objectType() const override;
@@ -138,6 +151,8 @@ private:
     virtual bool isEnableArrangeAndSimplifyTools_raw(bool value) = 0;
     virtual bool isFirstComponentGroundToParent_raw() const = 0;
     virtual bool isFirstComponentGroundToParent_raw(bool value) = 0;
+    virtual AutoLookAtSketchSettings isAutoLookAtSketch2_raw() const = 0;
+    virtual bool isAutoLookAtSketch2_raw(AutoLookAtSketchSettings value) = 0;
 };
 
 // Inline wrappers
@@ -305,6 +320,17 @@ inline bool FusionProductPreferences::isFirstComponentGroundToParent() const
 inline bool FusionProductPreferences::isFirstComponentGroundToParent(bool value)
 {
     return isFirstComponentGroundToParent_raw(value);
+}
+
+inline AutoLookAtSketchSettings FusionProductPreferences::isAutoLookAtSketch2() const
+{
+    AutoLookAtSketchSettings res = isAutoLookAtSketch2_raw();
+    return res;
+}
+
+inline bool FusionProductPreferences::isAutoLookAtSketch2(AutoLookAtSketchSettings value)
+{
+    return isAutoLookAtSketch2_raw(value);
 }
 }// namespace fusion
 }// namespace adsk

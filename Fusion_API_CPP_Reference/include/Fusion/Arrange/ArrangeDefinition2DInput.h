@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -32,10 +32,6 @@ namespace adsk { namespace core {
 
 namespace adsk { namespace fusion {
 
-/// !!!!! Warning !!!!!
-/// ! This is in preview state; please see the help for more info
-/// !!!!! Warning !!!!!
-/// 
 /// This object defines all of the settings associated with a 2D arrangement. This is used
 /// for both rectangular and true shape arrangements, but some properties are ignored
 /// in some cases.
@@ -50,7 +46,7 @@ public:
     /// 
     /// This value will become a parameter when the arrangement is created. When created with a real value it must be a whole number.
     /// You can also use a string where it is interpreted the same as when entered in the command dialog. The expression must result
-    /// in a unitless whole number. It's also possible to use an equation like "Total / 4" where "Total" is an existing parameter and be
+    /// in a unitless whole number. It's also possible to use an equation like "Total / 4" where "Total" is an existing parameter and must be
     /// evenly divided by four.
     core::Ptr<core::ValueInput> globalQuantity() const;
     bool globalQuantity(const core::Ptr<core::ValueInput>& value);
@@ -72,8 +68,9 @@ public:
     /// 
     /// This value will become a parameter when the arrangement is created. If the ValueInput is created using a
     /// real number it is in radians. If you use a string, it is evaluated the same as a value would be in the command
-    /// dialog and uses degrees as the units. For example, if you specify "45" it will result in a 45 degree  grain
-    /// direction. Using a string you can also define an equation for the expression, "PartAngle / 2" where "PartAngle"
+    /// dialog and uses degrees as the units. For example, if you specify "45" it will result in a 45 degree grain
+    /// direction. Using a string you can also define an equation for the expression, such as "PartAngle / 2" where "PartAngle"
+    /// is an existing parameter.
     core::Ptr<core::ValueInput> grainDirection() const;
     bool grainDirection(const core::Ptr<core::ValueInput>& value);
 

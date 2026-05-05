@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -41,7 +41,11 @@ class Parameter : public core::Base {
 public:
 
     /// Gets and sets the real value (a double) of the parameter in database units.
-    /// Setting this property will set/reset the expression value of the parameter
+    /// Setting this property will set/reset the expression value for this parameter.
+    /// 
+    /// This property is only valid for numeric parameters and will fail for text parameters.
+    /// You can determine the value type of the parameter by using the valueType property.
+    /// Use the textValue property to get and set the value of text parameters.
     double value() const;
     bool value(double value);
 
@@ -55,7 +59,12 @@ public:
     /// 
     /// An expression can also contain references to other parameters and use equations.
     /// For example, the expression "Length / 2" is valid for a numeric parameter as long as
-    /// there is a numeric parameter named "Length".
+    /// there is a numeric parameter named "Length". Expressions can also be used for text parameters,
+    /// such as concatenating two other text parameters. For example, if there are two existing text
+    /// parameters named text1 and text2, the expression for another text parameter can be "text1 + text2".
+    /// More complex equations can also be used with text parameters like
+    /// "if (Length < 20 mm; 'Short'; 'Long')" where "Length" is a numeric parameter.
+    /// The resulting string can be obtained using the textValue property.
     std::string expression() const;
     bool expression(const std::string& value);
 
@@ -68,7 +77,7 @@ public:
     /// that don't have a unit type.
     std::string unit() const;
 
-    /// The comment associated with this parameter
+    /// The comment associated with this parameter.
     std::string comment() const;
     bool comment(const std::string& value);
 
@@ -105,6 +114,18 @@ public:
     /// Returns a list of parameters that this parameter is dependent on.
     core::Ptr<ParameterList> dependencyParameters() const;
 
+    /// Gets and sets the value of the parameter when it is a text parameter. This can be
+    /// determined by checking the valueType property. Setting this value
+    /// will cause the current expression to be overwritten. If the parameter
+    /// is not a text parameter, the value of this property should be ignored and setting will fail.
+    std::string textValue() const;
+    bool textValue(const std::string& value);
+
+    /// Returns the type of value this parameter is. For a numeric parameter, you can
+    /// get the value using the value property. For a text parameter, you can get the
+    /// value using the textValue property.
+    ParameterValueTypes valueType() const;
+
     ADSK_FUSION_PARAMETER_API static const char* classType();
     ADSK_FUSION_PARAMETER_API const char* objectType() const override;
     ADSK_FUSION_PARAMETER_API void* queryInterface(const char* id) const override;
@@ -129,6 +150,9 @@ private:
     virtual core::Attributes* attributes_raw() const = 0;
     virtual char* entityToken_raw() const = 0;
     virtual ParameterList* dependencyParameters_raw() const = 0;
+    virtual char* textValue_raw() const = 0;
+    virtual bool textValue_raw(const char* value) = 0;
+    virtual ParameterValueTypes valueType_raw() const = 0;
     virtual void placeholderParameter0() {}
     virtual void placeholderParameter1() {}
     virtual void placeholderParameter2() {}
@@ -142,9 +166,6 @@ private:
     virtual void placeholderParameter10() {}
     virtual void placeholderParameter11() {}
     virtual void placeholderParameter12() {}
-    virtual void placeholderParameter13() {}
-    virtual void placeholderParameter14() {}
-    virtual void placeholderParameter15() {}
 };
 
 // Inline wrappers
@@ -272,6 +293,30 @@ inline std::string Parameter::entityToken() const
 inline core::Ptr<ParameterList> Parameter::dependencyParameters() const
 {
     core::Ptr<ParameterList> res = dependencyParameters_raw();
+    return res;
+}
+
+inline std::string Parameter::textValue() const
+{
+    std::string res;
+
+    char* p= textValue_raw();
+    if (p)
+    {
+        res = p;
+        core::DeallocateArray(p);
+    }
+    return res;
+}
+
+inline bool Parameter::textValue(const std::string& value)
+{
+    return textValue_raw(value.c_str());
+}
+
+inline ParameterValueTypes Parameter::valueType() const
+{
+    ParameterValueTypes res = valueType_raw();
     return res;
 }
 }// namespace fusion

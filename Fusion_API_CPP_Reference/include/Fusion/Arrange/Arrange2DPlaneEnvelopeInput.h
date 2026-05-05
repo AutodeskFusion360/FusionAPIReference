@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -34,10 +34,6 @@ namespace adsk { namespace fusion {
 
 namespace adsk { namespace fusion {
 
-/// !!!!! Warning !!!!!
-/// ! This is in preview state; please see the help for more info
-/// !!!!! Warning !!!!!
-/// 
 /// This object is used to specify the input needed to define a 2D rectangular envelope.
 class Arrange2DPlaneEnvelopeInput : public Arrange2DEnvelopeInput {
 public:
@@ -92,7 +88,7 @@ public:
     /// 
     /// This value will become a parameter when the arrangement is created. When created with a real value it must be a whole number.
     /// You can also use a string where it is interpreted the same as when entered in the command dialog. The expression must result
-    /// in a unitless whole number. It's also possible to use an equation like "Total / 4" where "Total" is an existing parameter and be
+    /// in a unitless whole number. It's also possible to use an equation like "Total / 4" where "Total" is an existing parameter and must be
     /// evenly divided by four.
     core::Ptr<core::ValueInput> quantity() const;
     bool quantity(const core::Ptr<core::ValueInput>& value);

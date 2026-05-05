@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -88,6 +88,10 @@ public:
     core::Ptr<ThreadInfo> threadInfo() const;
     bool threadInfo(const core::Ptr<ThreadInfo>& value);
 
+    /// !!!!! Warning !!!!!
+    /// ! This has been retired; please see the help for more info
+    /// !!!!! Warning !!!!!
+    /// 
     /// Gets and sets if the thread is right or left-handed thread. A value of true indicates a right-handed thread.
     /// It defaults to true.
     bool isRightHanded() const;

@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -36,7 +36,7 @@ namespace adsk { namespace fusion {
 
 namespace adsk { namespace fusion {
 
-/// This class defines the methods and properties that pertain to the definition of a extend feature.
+/// This class defines the methods and properties that pertain to the definition of an extend feature.
 class ExtendFeatureInput : public core::Base {
 public:
 

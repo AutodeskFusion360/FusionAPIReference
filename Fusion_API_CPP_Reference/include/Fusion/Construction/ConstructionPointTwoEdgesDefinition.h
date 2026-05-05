@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -38,8 +38,8 @@ public:
     core::Ptr<core::Base> edgeTwo() const;
 
     /// Redefines the input geometry of the construction point.
-    /// edgeOne : The first B-Rep edge or sketch line
-    /// edgeTwo : The second B-Rep edge or sketch line
+    /// edgeOne : The first B-Rep edge or sketch line.
+    /// edgeTwo : The second B-Rep edge or sketch line.
     /// Returns true if the redefinition of the Construction Point is successful.
     bool redefine(const core::Ptr<core::Base>& edgeOne, const core::Ptr<core::Base>& edgeTwo);
 

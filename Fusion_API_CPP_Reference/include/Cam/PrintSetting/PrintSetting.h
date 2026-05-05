@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -101,6 +101,14 @@ public:
     /// Checks whether the print setting is usable with the given machine.
     bool isCompatibleWithMachine(const core::Ptr<Machine>& machine);
 
+    /// !!!!! Warning !!!!!
+    /// ! This is in preview state; please see the help for more info
+    /// !!!!! Warning !!!!!
+    /// 
+    /// Generates and returns the print setting xml content string.
+    /// Returns print setting xml content string.
+    std::string toXML() const;
+
     typedef PrintSettingItem iterable_type;
     template <class OutputIterator> void copyTo(OutputIterator result);
 
@@ -129,6 +137,7 @@ private:
     virtual size_t count_raw() const = 0;
     virtual bool syncWithMachine_raw(Machine* machine) = 0;
     virtual bool isCompatibleWithMachine_raw(Machine* machine) = 0;
+    virtual char* toXML_raw() const = 0;
 };
 
 // Inline wrappers
@@ -256,6 +265,19 @@ inline bool PrintSetting::syncWithMachine(const core::Ptr<Machine>& machine)
 inline bool PrintSetting::isCompatibleWithMachine(const core::Ptr<Machine>& machine)
 {
     bool res = isCompatibleWithMachine_raw(machine.get());
+    return res;
+}
+
+inline std::string PrintSetting::toXML() const
+{
+    std::string res;
+
+    char* p= toXML_raw();
+    if (p)
+    {
+        res = p;
+        core::DeallocateArray(p);
+    }
     return res;
 }
 

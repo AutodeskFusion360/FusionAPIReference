@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -31,6 +31,7 @@ namespace adsk { namespace core {
     class ValueInput;
 }}
 namespace adsk { namespace fusion {
+    class AsymmetricFilletEdgeSetInput;
     class ChordLengthFilletEdgeSetInput;
     class ConstantRadiusFilletEdgeSetInput;
     class FilletEdgeSetInput;
@@ -108,6 +109,24 @@ public:
     /// Returns the newly created ChordLengthFilletEdgeSetInput. This object provides access to additional settings.
     core::Ptr<ChordLengthFilletEdgeSetInput> addChordLengthEdgeSet(const core::Ptr<core::ObjectCollection>& entities, const core::Ptr<core::ValueInput>& chordLength, bool isTangentChain);
 
+    /// Adds an asymmetric fillet edge set to the fillet feature input. Some settings are initialized with a
+    /// default value and can be set by modifying properties on the returned AsymmetricFilletEdgeSetInput object.
+    /// entities : An ObjectCollection containing the BRepEdge, BRepFace, and Feature objects to be filleted. If the isTangentChain argument is true
+    /// additional edges or faces may also get filleted if they are tangentially connected to any of the
+    /// input edges or faces.
+    /// offsetOne : A ValueInput object that defines the offset of the fillet in the first direction. If the ValueInput uses
+    /// a real then it is interpreted as centimeters. If it is a string then the units
+    /// can be defined as part of the string (i.e. "2 in") or if no units are specified
+    /// it is interpreted using the current default units for length.
+    /// offsetTwo : A ValueInput object that defines the offset of the fillet in the second direction. If the ValueInput uses
+    /// a real then it is interpreted as centimeters. If it is a string then the units
+    /// can be defined as part of the string (i.e. "2 in") or if no units are specified
+    /// it is interpreted using the current default units for length.
+    /// isTangentChain : A boolean value for setting whether or not edges or faces that are tangentially connected to
+    /// the input edges or faces will also be filleted.
+    /// Returns the newly created AsymmetricFilletEdgeSetInput. This object provides access to additional settings.
+    core::Ptr<AsymmetricFilletEdgeSetInput> addAsymmetricRadiusEdgeSet(const core::Ptr<core::ObjectCollection>& entities, const core::Ptr<core::ValueInput>& offsetOne, const core::Ptr<core::ValueInput>& offsetTwo, bool isTangentChain);
+
     typedef FilletEdgeSetInput iterable_type;
     template <class OutputIterator> void copyTo(OutputIterator result);
 
@@ -124,6 +143,7 @@ private:
     virtual ConstantRadiusFilletEdgeSetInput* addConstantRadiusEdgeSet_raw(core::ObjectCollection* entities, core::ValueInput* radius, bool isTangentChain) = 0;
     virtual VariableRadiusFilletEdgeSetInput* addVariableRadiusEdgeSet_raw(core::ObjectCollection* tangentEdges, core::ValueInput* startRadius, core::ValueInput* endRadius, bool isTangentChain) = 0;
     virtual ChordLengthFilletEdgeSetInput* addChordLengthEdgeSet_raw(core::ObjectCollection* entities, core::ValueInput* chordLength, bool isTangentChain) = 0;
+    virtual AsymmetricFilletEdgeSetInput* addAsymmetricRadiusEdgeSet_raw(core::ObjectCollection* entities, core::ValueInput* offsetOne, core::ValueInput* offsetTwo, bool isTangentChain) = 0;
 };
 
 // Inline wrappers
@@ -155,6 +175,12 @@ inline core::Ptr<VariableRadiusFilletEdgeSetInput> FilletEdgeSetInputs::addVaria
 inline core::Ptr<ChordLengthFilletEdgeSetInput> FilletEdgeSetInputs::addChordLengthEdgeSet(const core::Ptr<core::ObjectCollection>& entities, const core::Ptr<core::ValueInput>& chordLength, bool isTangentChain)
 {
     core::Ptr<ChordLengthFilletEdgeSetInput> res = addChordLengthEdgeSet_raw(entities.get(), chordLength.get(), isTangentChain);
+    return res;
+}
+
+inline core::Ptr<AsymmetricFilletEdgeSetInput> FilletEdgeSetInputs::addAsymmetricRadiusEdgeSet(const core::Ptr<core::ObjectCollection>& entities, const core::Ptr<core::ValueInput>& offsetOne, const core::Ptr<core::ValueInput>& offsetTwo, bool isTangentChain)
+{
+    core::Ptr<AsymmetricFilletEdgeSetInput> res = addAsymmetricRadiusEdgeSet_raw(entities.get(), offsetOne.get(), offsetTwo.get(), isTangentChain);
     return res;
 }
 

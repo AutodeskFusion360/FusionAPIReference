@@ -1,0 +1,197 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/PMIImportedDimension.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="29/03/2026">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="PMIImportedDimension">
+    <meta name="description" content="PMIImportedDimension Object">
+    <meta name="topicid" content="GUID-9243CF3F-70A1-4903-B0E7-2C2088B3D69E">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>PMIImportedDimension Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">PMIImportedDimension Object <img src="../images/TestTubeLarge.png" alt="Preview"></h1>
+              Derived from: <a href="PMIAnnotation.htm">PMIAnnotation</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/PMI/PMIImportedDimension.h&gt;<p class="api-preview"><img src="../images/TestTubeSmall.png" alt="Preview">This functionality is provided as a preview
+				of intended future API capabilities. You are encouraged to use it and report any problems or suggestions using the
+				<a href="https://forums.autodesk.com/t5/fusion-360-api-and-scripts/bd-p/22">Fusion API and Scripts</a> forum.<br><br>
+	
+                Because this is a preview of future functionality, there is the possibility that it will change, which will possibly
+		        break any existing programs that use this functionality. Because of that, you should never deliver any programs that use
+		        any preview capabilities. For a distributed program, you should wait until it has moved from preview to released state.
+		    </p>
+    <h2 class="api">
+          Description
+        </h2>Defines an imported PMI which includes data related to dimensions.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIImportedDimension_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIImportedDimension_convertImportedToFusionPMI.htm">convertImportedToFusionPMI</a></td>
+        <td class="api-list">Converts this PMIAnnotation to a Fusion PMIAnnotation if it is of supported type and has valid reference geometry.<br/><br/> Supported types are:<br/><br/> Imported PMI annotation (PMIImportedDimension) and valid reference geometry is converted to Hole/Thread Note PMI.<br/><br/> Imported PMI annotation (PMIImportedNote) and valid reference geometry is converted to Leader Line Note PMI.<br/><br/> Imported PMI folder (PMIImportedFolder) which includes information about a Hole Note is converted to Hole/Thread Note PMI.<br/><br/> The converted PMIAnnotation can then be edited.<br/><br/> After successful conversion, the new PMIAnnotation will be added to the collection of PMI in the component, and the original PMIAnnotation will be removed. If it fails to convert, the original PMIAnnotation remains unchanged.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIImportedDimension_createForAssemblyContext.htm">createForAssemblyContext</a></td>
+        <td class="api-list">Creates or returns a proxy for the native object - i.e. a new object that represents this object but adds the assembly context defined by the input occurrence.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIImportedDimension_deleteMe.htm">deleteMe</a></td>
+        <td class="api-list">Deletes the PMI.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIImportedDimension_isHoleAnnotation.htm">isHoleAnnotation</a></td>
+        <td class="api-list">Indicates if the PMI is representing a hole or not.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIImportedDimension_markUpToDate.htm">markUpToDate</a></td>
+        <td class="api-list">Marks the PMI as up-to-date and dismisses warnings.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIImportedDimension_angleRelatorType.htm">angleRelatorType</a></td>
+        <td class="api-list">The measured angle as a type.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIImportedDimension_assemblyContext.htm">assemblyContext</a></td>
+        <td class="api-list">Returns the assembly occurrence (i.e. the occurrence) of this object in an assembly. This is only valid in the case where this is acting as a proxy in an assembly. Returns null in the case where the object is not in the context of an assembly but is already the native object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIImportedDimension_errorOrWarningMessage.htm">errorOrWarningMessage</a></td>
+        <td class="api-list">If there are errors or warnings in the PMI, this property will return a string that contains the error or warning message. Otherwise it returns an empty string. Only applies to PMI that has an associated parametric Feature.<br/><br/> Returns empty string for other PMI types that don't have a parametric Feature.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIImportedDimension_healthState.htm">healthState</a></td>
+        <td class="api-list">Gets the health state of the PMI. Only applies to PMI that have a timeline object, in Parametric Modelling.<br/><br/> Returns UnknownFeatureHealthState for other PMI types that don't have a parametric Feature.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIImportedDimension_holeType.htm">holeType</a></td>
+        <td class="api-list">Gets the type of the hole. Requires the dimension to be associated with a hole.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIImportedDimension_isDeletable.htm">isDeletable</a></td>
+        <td class="api-list">Indicates if this PMI can be deleted.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIImportedDimension_isLightBulbOn.htm">isLightBulbOn</a></td>
+        <td class="api-list">Indicates if the light bulb (as displayed in the browser) is on.<br/><br/> A PMI will only be visible if its light bulb, the containing folder's light bulb, the collection's and the component's light bulbs are all on.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIImportedDimension_isOutOfDate.htm">isOutOfDate</a></td>
+        <td class="api-list">Indicates if this PMI is outdated and needs to be recomputed. This typically happens when the geometry or parameters that the PMI references have been modified. Applicable for both imported and created PMI, regardless of whether they are parametric or not.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIImportedDimension_isParametric.htm">isParametric</a></td>
+        <td class="api-list">Indicates if this PMI is parametric or not.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIImportedDimension_isSuppressed.htm">isSuppressed</a></td>
+        <td class="api-list">Indicates if this PMI is suppressed. Only applies to PMI that has an associated parametric Feature.<br/><br/> Returns false for other PMI types that don't have a parametric Feature.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIImportedDimension_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIImportedDimension_isVisible.htm">isVisible</a></td>
+        <td class="api-list">Indicates if the PMI is visible. This property is affected by the AssemblyContext (parent component) of the PMI.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIImportedDimension_name.htm">name</a></td>
+        <td class="api-list">Gets and sets the name of the PMI as it is shown in the browser.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIImportedDimension_nativeObject.htm">nativeObject</a></td>
+        <td class="api-list">The NativeObject is the object outside the context of an assembly and in the context of its parent component. Returns null in the case where this object is not in the context of an assembly but is already the native object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIImportedDimension_nominalDistance.htm">nominalDistance</a></td>
+        <td class="api-list">Gets the PMIGeometricValue used to define the nominal distance of the annotated dimension in cm. When querying, if the nominal distance is not set, the value will be 0 and hasValue property will be false.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIImportedDimension_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIImportedDimension_parentComponent.htm">parentComponent</a></td>
+        <td class="api-list">Gets the component this PMI belongs to.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIImportedDimension_referencedEntities.htm">referencedEntities</a></td>
+        <td class="api-list">Returns an array of referenced entities for this PMI.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIImportedDimension_shaftTolerance.htm">shaftTolerance</a></td>
+        <td class="api-list">Gets the PMIGeometricValueTolerance for the shaft diameter of the annotated hole if a shaft tolerance exists.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIImportedDimension_timelineObject.htm">timelineObject</a></td>
+        <td class="api-list">Gets the timeline object associated with this PMI. Only applies to PMI that has an associated timeline feature.<br/><br/> Returns null if the PMI does not have an associated timeline feature.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIImportedDimension_type.htm">type</a></td>
+        <td class="api-list">Gets the type of this PMI annotation.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="PMIImportedDimension_createForAssemblyContext.htm">PMIImportedDimension.createForAssemblyContext</a>, <a href="PMIImportedDimension_nativeObject.htm">PMIImportedDimension.nativeObject</a>, <a href="PMIImportedDimensions_item.htm">PMIImportedDimensions.item</a>, <a href="PMIImportedDimensions_itemByName.htm">PMIImportedDimensions.itemByName</a>, <a href="PMIImportedDimensions_itemsByEntities.htm">PMIImportedDimensions.itemsByEntities</a>, <a href="PMIImportedDimensions_itemsByTypes.htm">PMIImportedDimensions.itemsByTypes</a><h2 class="api">
+            Version
+          </h2>
+        Introduced in version April 2026<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2026 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(PMIImportedDimension%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

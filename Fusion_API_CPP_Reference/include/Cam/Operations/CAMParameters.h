@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -50,6 +50,10 @@ public:
     /// The number of items in the collection.
     size_t count() const;
 
+    /// Resets each parameter to its system default.
+    /// Returns true if the reset was successful.
+    bool resetToSystemDefaults();
+
     typedef CAMParameter iterable_type;
     template <class OutputIterator> void copyTo(OutputIterator result);
 
@@ -64,6 +68,7 @@ private:
     virtual CAMParameter* item_raw(size_t index) const = 0;
     virtual CAMParameter* itemByName_raw(const char* internalName) const = 0;
     virtual size_t count_raw() const = 0;
+    virtual bool resetToSystemDefaults_raw() = 0;
 };
 
 // Inline wrappers
@@ -83,6 +88,12 @@ inline core::Ptr<CAMParameter> CAMParameters::itemByName(const std::string& inte
 inline size_t CAMParameters::count() const
 {
     size_t res = count_raw();
+    return res;
+}
+
+inline bool CAMParameters::resetToSystemDefaults()
+{
+    bool res = resetToSystemDefaults_raw();
     return res;
 }
 

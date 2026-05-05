@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -38,6 +38,7 @@ namespace adsk { namespace fusion {
 /// ! This is in preview state; please see the help for more info
 /// !!!!! Warning !!!!!
 /// 
+/// Object that represents a model to mesh feature.
 class VolumetricModelToMeshFeature : public Feature {
 public:
 

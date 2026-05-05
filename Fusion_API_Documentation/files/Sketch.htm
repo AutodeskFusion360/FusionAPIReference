@@ -49,8 +49,20 @@
               </td>
       </tr>
       <tr>
+        <td class="api-list"><a href="Sketch_addCenterPointSlot.htm">addCenterPointSlot</a></td>
+        <td class="api-list">Creates the geometry that represents a slot where the first point defines the center of the slot and the second point defines the direction and half-length. Geometric constraints are automatically added to the geometry to maintain the slot shape and optionally, dimensions to control the size can be added. The created geometry and constraints are returned.</td>
+      </tr>
+      <tr>
         <td class="api-list"><a href="Sketch_addCenterToCenterSlot.htm">addCenterToCenterSlot</a></td>
         <td class="api-list">Creates the geometry that represents a slot. Geometric constraints are automatically added to the geometry to maintain the slot shape and optionally, dimensions to control the size can be added. The created geometry and constraints are returned.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_addOverallSlot.htm">addOverallSlot</a></td>
+        <td class="api-list">Creates the geometry that represents an overall slot. Geometric constraints are automatically added to the geometry to maintain the slot shape and optionally, dimensions to control the size can be added. The created geometry and constraints are returned.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_autoConstrain.htm">autoConstrain</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Auto constrains the sketch using the information provided by the input object. This returns a single locally computed solution.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="Sketch_classType.htm">classType</a></td>
@@ -59,6 +71,10 @@
       <tr>
         <td class="api-list"><a href="Sketch_copy.htm">copy</a></td>
         <td class="api-list">Copies the specified sketch entities, applying the specified transform. Any geometric or dimension constraints associated with the entities will automatically be copied, if possible. For example, if there is a horizontal dimension and the transform defines a rotation then it will not be included in the result. This same behavior can be seen when performing a copy/paste operation in the user interface.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_createAutoConstrainInput.htm">createAutoConstrainInput</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Creates a new AutoConstrainInput object associated with this sketch. The input object is used to define the various options when adding dimension and geometric constraints to help constrain a sketch. The returned object has all options defined with default values and additional constraints can be applied by passing this into the autoConstrain method.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="Sketch_createForAssemblyContext.htm">createForAssemblyContext</a></td>
@@ -175,7 +191,7 @@
       </tr>
       <tr>
         <td class="api-list"><a href="Sketch_attributes.htm">attributes</a></td>
-        <td class="api-list">Returns the collection of attributes associated with this face.</td>
+        <td class="api-list">Returns the collection of attributes associated with this sketch.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="Sketch_baseOrFormFeature.htm">baseOrFormFeature</a></td>
@@ -184,6 +200,10 @@
       <tr>
         <td class="api-list"><a href="Sketch_boundingBox.htm">boundingBox</a></td>
         <td class="api-list">Returns the 3D bounding box of the sketch</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sketch_deriveFeature.htm">deriveFeature</a></td>
+        <td class="api-list">Returns the DeriveFeature if this sketch is derived from another design. This property returns null if the sketch is not derived from another design (i.e. isDerived property returns false).</td>
       </tr>
       <tr>
         <td class="api-list"><a href="Sketch_entityToken.htm">entityToken</a></td>
@@ -210,12 +230,16 @@
         <td class="api-list">Gets and sets whether construction geometry in the sketch is displayed. This provides access to the "Construction Geometries" setting in the "SKETCH PALETTE".</td>
       </tr>
       <tr>
+        <td class="api-list"><a href="Sketch_isDerived.htm">isDerived</a></td>
+        <td class="api-list">Returns if this sketch is derived from another design. If true, the sketch cannot be deleted. You should not attempt to make any edits to the derived sketch. Any edits made to this derived sketch will be lost when the derive updates.</td>
+      </tr>
+      <tr>
         <td class="api-list"><a href="Sketch_isFullyConstrained.htm">isFullyConstrained</a></td>
         <td class="api-list">Indicates if this sketch is fully constrained.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="Sketch_isLightBulbOn.htm">isLightBulbOn</a></td>
-        <td class="api-list">Gets and set if the light bulb beside the sketch node in the browser is on or not. Parent nodes in the browser can have their light bulb off which affects all of their children so this property does not indicate if the body is actually visible, just that it should be visible if all of it's parent nodes are also visible. Use the isVisible property to determine if it's actually visible.</td>
+        <td class="api-list">Gets and set if the light bulb beside the sketch node in the browser is on or not. Parent nodes in the browser can have their light bulb off which affects all of their children so this property does not indicate if the body is actually visible, just that it should be visible if all of its parent nodes are also visible. Use the isVisible property to determine if it's actually visible.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="Sketch_isModelSliced.htm">isModelSliced</a></td>
@@ -243,7 +267,7 @@
       </tr>
       <tr>
         <td class="api-list"><a href="Sketch_nativeObject.htm">nativeObject</a></td>
-        <td class="api-list">The NativeObject is the object outside the context of an assembly and in the context of it's parent component. Returns null in the case where this object is not in the context of an assembly but is already the native object.</td>
+        <td class="api-list">The NativeObject is the object outside the context of an assembly and in the context of its parent component. Returns null in the case where this object is not in the context of an assembly but is already the native object.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="Sketch_objectType.htm">objectType</a></td>
@@ -308,7 +332,7 @@
     </Table>
     <h2 class="api">
             Accessed From
-          </h2><a href="BaseFeature_sketches.htm">BaseFeature.sketches</a>, <a href="CircularPatternConstraint_parentSketch.htm">CircularPatternConstraint.parentSketch</a>, <a href="CoincidentConstraint_parentSketch.htm">CoincidentConstraint.parentSketch</a>, <a href="CoincidentToSurfaceConstraint_parentSketch.htm">CoincidentToSurfaceConstraint.parentSketch</a>, <a href="CollinearConstraint_parentSketch.htm">CollinearConstraint.parentSketch</a>, <a href="ConcentricConstraint_parentSketch.htm">ConcentricConstraint.parentSketch</a>, <a href="EqualConstraint_parentSketch.htm">EqualConstraint.parentSketch</a>, <a href="GeometricConstraint_parentSketch.htm">GeometricConstraint.parentSketch</a>, <a href="HorizontalConstraint_parentSketch.htm">HorizontalConstraint.parentSketch</a>, <a href="HorizontalPointsConstraint_parentSketch.htm">HorizontalPointsConstraint.parentSketch</a>, <a href="LineOnPlanarSurfaceConstraint_parentSketch.htm">LineOnPlanarSurfaceConstraint.parentSketch</a>, <a href="LineParallelToPlanarSurfaceConstraint_parentSketch.htm">LineParallelToPlanarSurfaceConstraint.parentSketch</a>, <a href="MidPointConstraint_parentSketch.htm">MidPointConstraint.parentSketch</a>, <a href="OffsetConstraint_parentSketch.htm">OffsetConstraint.parentSketch</a>, <a href="ParallelConstraint_parentSketch.htm">ParallelConstraint.parentSketch</a>, <a href="PerpendicularConstraint_parentSketch.htm">PerpendicularConstraint.parentSketch</a>, <a href="PerpendicularToSurfaceConstraint_parentSketch.htm">PerpendicularToSurfaceConstraint.parentSketch</a>, <a href="PolygonConstraint_parentSketch.htm">PolygonConstraint.parentSketch</a>, <a href="Profile_parentSketch.htm">Profile.parentSketch</a>, <a href="ProfileCurve_parentSketch.htm">ProfileCurve.parentSketch</a>, <a href="RectangularPatternConstraint_parentSketch.htm">RectangularPatternConstraint.parentSketch</a>, <a href="Sketch_createForAssemblyContext.htm">Sketch.createForAssemblyContext</a>, <a href="Sketch_nativeObject.htm">Sketch.nativeObject</a>, <a href="SketchAngularDimension_parentSketch.htm">SketchAngularDimension.parentSketch</a>, <a href="SketchArc_parentSketch.htm">SketchArc.parentSketch</a>, <a href="SketchCircle_parentSketch.htm">SketchCircle.parentSketch</a>, <a href="SketchConcentricCircleDimension_parentSketch.htm">SketchConcentricCircleDimension.parentSketch</a>, <a href="SketchConicCurve_parentSketch.htm">SketchConicCurve.parentSketch</a>, <a href="SketchControlPointSpline_parentSketch.htm">SketchControlPointSpline.parentSketch</a>, <a href="SketchCurve_parentSketch.htm">SketchCurve.parentSketch</a>, <a href="SketchDiameterDimension_parentSketch.htm">SketchDiameterDimension.parentSketch</a>, <a href="SketchDimension_parentSketch.htm">SketchDimension.parentSketch</a>, <a href="SketchDistanceBetweenLineAndPlanarSurfaceDimension_parentSketch.htm">SketchDistanceBetweenLineAndPlanarSurfaceDimension.parentSketch</a>, <a href="SketchDistanceBetweenPointAndSurfaceDimension_parentSketch.htm">SketchDistanceBetweenPointAndSurfaceDimension.parentSketch</a>, <a href="SketchEllipse_parentSketch.htm">SketchEllipse.parentSketch</a>, <a href="SketchEllipseMajorRadiusDimension_parentSketch.htm">SketchEllipseMajorRadiusDimension.parentSketch</a>, <a href="SketchEllipseMinorRadiusDimension_parentSketch.htm">SketchEllipseMinorRadiusDimension.parentSketch</a>, <a href="SketchEllipticalArc_parentSketch.htm">SketchEllipticalArc.parentSketch</a>, <a href="SketchEntity_parentSketch.htm">SketchEntity.parentSketch</a>, <a href="Sketches_add.htm">Sketches.add</a>, <a href="Sketches_addToBaseOrFormFeature.htm">Sketches.addToBaseOrFormFeature</a>, <a href="Sketches_addWithoutEdges.htm">Sketches.addWithoutEdges</a>, <a href="Sketches_item.htm">Sketches.item</a>, <a href="Sketches_itemByName.htm">Sketches.itemByName</a>, <a href="SketchFittedSpline_parentSketch.htm">SketchFittedSpline.parentSketch</a>, <a href="SketchFixedSpline_parentSketch.htm">SketchFixedSpline.parentSketch</a>, <a href="SketchLine_parentSketch.htm">SketchLine.parentSketch</a>, <a href="SketchLinearDiameterDimension_parentSketch.htm">SketchLinearDiameterDimension.parentSketch</a>, <a href="SketchLinearDimension_parentSketch.htm">SketchLinearDimension.parentSketch</a>, <a href="SketchOffsetCurvesDimension_parentSketch.htm">SketchOffsetCurvesDimension.parentSketch</a>, <a href="SketchOffsetDimension_parentSketch.htm">SketchOffsetDimension.parentSketch</a>, <a href="SketchPoint_parentSketch.htm">SketchPoint.parentSketch</a>, <a href="SketchRadialDimension_parentSketch.htm">SketchRadialDimension.parentSketch</a>, <a href="SketchTangentDistanceDimension_parentSketch.htm">SketchTangentDistanceDimension.parentSketch</a>, <a href="SketchText_parentSketch.htm">SketchText.parentSketch</a>, <a href="SmoothConstraint_parentSketch.htm">SmoothConstraint.parentSketch</a>, <a href="SymmetryConstraint_parentSketch.htm">SymmetryConstraint.parentSketch</a>, <a href="TangentConstraint_parentSketch.htm">TangentConstraint.parentSketch</a>, <a href="VerticalConstraint_parentSketch.htm">VerticalConstraint.parentSketch</a>, <a href="VerticalPointsConstraint_parentSketch.htm">VerticalPointsConstraint.parentSketch</a><h2 class="api">
+          </h2><a href="AutoConstrainInput_parentSketch.htm">AutoConstrainInput.parentSketch</a>, <a href="BaseFeature_sketches.htm">BaseFeature.sketches</a>, <a href="CircularPatternConstraint_parentSketch.htm">CircularPatternConstraint.parentSketch</a>, <a href="CoincidentConstraint_parentSketch.htm">CoincidentConstraint.parentSketch</a>, <a href="CoincidentToSurfaceConstraint_parentSketch.htm">CoincidentToSurfaceConstraint.parentSketch</a>, <a href="CollinearConstraint_parentSketch.htm">CollinearConstraint.parentSketch</a>, <a href="ConcentricConstraint_parentSketch.htm">ConcentricConstraint.parentSketch</a>, <a href="EqualConstraint_parentSketch.htm">EqualConstraint.parentSketch</a>, <a href="GeometricConstraint_parentSketch.htm">GeometricConstraint.parentSketch</a>, <a href="HorizontalConstraint_parentSketch.htm">HorizontalConstraint.parentSketch</a>, <a href="HorizontalPointsConstraint_parentSketch.htm">HorizontalPointsConstraint.parentSketch</a>, <a href="LineOnPlanarSurfaceConstraint_parentSketch.htm">LineOnPlanarSurfaceConstraint.parentSketch</a>, <a href="LineParallelToPlanarSurfaceConstraint_parentSketch.htm">LineParallelToPlanarSurfaceConstraint.parentSketch</a>, <a href="MidPointConstraint_parentSketch.htm">MidPointConstraint.parentSketch</a>, <a href="OffsetConstraint_parentSketch.htm">OffsetConstraint.parentSketch</a>, <a href="ParallelConstraint_parentSketch.htm">ParallelConstraint.parentSketch</a>, <a href="PerpendicularConstraint_parentSketch.htm">PerpendicularConstraint.parentSketch</a>, <a href="PerpendicularToSurfaceConstraint_parentSketch.htm">PerpendicularToSurfaceConstraint.parentSketch</a>, <a href="PolygonConstraint_parentSketch.htm">PolygonConstraint.parentSketch</a>, <a href="Profile_parentSketch.htm">Profile.parentSketch</a>, <a href="ProfileCurve_parentSketch.htm">ProfileCurve.parentSketch</a>, <a href="RectangularPatternConstraint_parentSketch.htm">RectangularPatternConstraint.parentSketch</a>, <a href="Sketch_createForAssemblyContext.htm">Sketch.createForAssemblyContext</a>, <a href="Sketch_nativeObject.htm">Sketch.nativeObject</a>, <a href="SketchAngularDimension_parentSketch.htm">SketchAngularDimension.parentSketch</a>, <a href="SketchArc_parentSketch.htm">SketchArc.parentSketch</a>, <a href="SketchCircle_parentSketch.htm">SketchCircle.parentSketch</a>, <a href="SketchConcentricCircleDimension_parentSketch.htm">SketchConcentricCircleDimension.parentSketch</a>, <a href="SketchConicCurve_parentSketch.htm">SketchConicCurve.parentSketch</a>, <a href="SketchControlPointSpline_parentSketch.htm">SketchControlPointSpline.parentSketch</a>, <a href="SketchCurve_parentSketch.htm">SketchCurve.parentSketch</a>, <a href="SketchDiameterDimension_parentSketch.htm">SketchDiameterDimension.parentSketch</a>, <a href="SketchDimension_parentSketch.htm">SketchDimension.parentSketch</a>, <a href="SketchDistanceBetweenLineAndPlanarSurfaceDimension_parentSketch.htm">SketchDistanceBetweenLineAndPlanarSurfaceDimension.parentSketch</a>, <a href="SketchDistanceBetweenPointAndSurfaceDimension_parentSketch.htm">SketchDistanceBetweenPointAndSurfaceDimension.parentSketch</a>, <a href="SketchEllipse_parentSketch.htm">SketchEllipse.parentSketch</a>, <a href="SketchEllipseMajorRadiusDimension_parentSketch.htm">SketchEllipseMajorRadiusDimension.parentSketch</a>, <a href="SketchEllipseMinorRadiusDimension_parentSketch.htm">SketchEllipseMinorRadiusDimension.parentSketch</a>, <a href="SketchEllipticalArc_parentSketch.htm">SketchEllipticalArc.parentSketch</a>, <a href="SketchEntity_parentSketch.htm">SketchEntity.parentSketch</a>, <a href="Sketches_add.htm">Sketches.add</a>, <a href="Sketches_addToBaseOrFormFeature.htm">Sketches.addToBaseOrFormFeature</a>, <a href="Sketches_addWithoutEdges.htm">Sketches.addWithoutEdges</a>, <a href="Sketches_item.htm">Sketches.item</a>, <a href="Sketches_itemByName.htm">Sketches.itemByName</a>, <a href="SketchFittedSpline_parentSketch.htm">SketchFittedSpline.parentSketch</a>, <a href="SketchFixedSpline_parentSketch.htm">SketchFixedSpline.parentSketch</a>, <a href="SketchLine_parentSketch.htm">SketchLine.parentSketch</a>, <a href="SketchLinearDiameterDimension_parentSketch.htm">SketchLinearDiameterDimension.parentSketch</a>, <a href="SketchLinearDimension_parentSketch.htm">SketchLinearDimension.parentSketch</a>, <a href="SketchOffsetCurvesDimension_parentSketch.htm">SketchOffsetCurvesDimension.parentSketch</a>, <a href="SketchOffsetDimension_parentSketch.htm">SketchOffsetDimension.parentSketch</a>, <a href="SketchPoint_parentSketch.htm">SketchPoint.parentSketch</a>, <a href="SketchRadialDimension_parentSketch.htm">SketchRadialDimension.parentSketch</a>, <a href="SketchTangentDistanceDimension_parentSketch.htm">SketchTangentDistanceDimension.parentSketch</a>, <a href="SketchText_parentSketch.htm">SketchText.parentSketch</a>, <a href="SmoothConstraint_parentSketch.htm">SmoothConstraint.parentSketch</a>, <a href="SymmetryConstraint_parentSketch.htm">SymmetryConstraint.parentSketch</a>, <a href="TangentConstraint_parentSketch.htm">TangentConstraint.parentSketch</a>, <a href="VerticalConstraint_parentSketch.htm">VerticalConstraint.parentSketch</a>, <a href="VerticalPointsConstraint_parentSketch.htm">VerticalPointsConstraint.parentSketch</a><h2 class="api">
             Samples
           </h2>
     <Table class="api-list">
@@ -349,9 +373,9 @@
       <table width="100%" style="font-size:15">
         <tr>
           <td align="left">
-                © Copyright 2025 Autodesk, Inc.
+                © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(Sketch%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(Sketch%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

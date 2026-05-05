@@ -9,7 +9,7 @@
     <meta name="release" content="NA">
     <meta name="book" content="Developer">
     <meta name="component" content="Fusion-360-API">
-    <meta name="created" content="04/09/2025">
+    <meta name="created" content="08/04/2026">
     <meta name="user-comments" content="enable">
     <meta name="contextid" content="APIWhatsNew">
     <meta name="description" content="">
@@ -34,123 +34,82 @@
     <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
     <div class="body">
       <h1 class="api">
-          What's New For the September 2025 Release
+          What's New For the April 2026 Release
         </h1><h3 class="API">Enhancements</h3>
 <ol>
 <li>
-<p Class="Normal"><b><mark>Breaking Changes Coming to the New Assembly Constraint Functionality</mark></b><br>
-The last release introduced the API for the new assembly constraint functionality. It was a preview feature. In this release, the feature remains a preview, and no changes have been made to the API. However, in the next release, the API for assembly constraints will undergo a complete change. This is why new functionality is released as a preview feature, allowing us to gather feedback about the API or feature while still maintaining the flexibility to make changes. If you've written any code using the existing assembly constraints, be prepared to make adjustments in the next release. The interface is undergoing slight changes, and additional functionality will be added. The names of some of the associated objects will also be changing. 
+<p class="Normal"><b><mark>New Zero Doc State</mark></b><br>
+The behavior of Fusion has changed in this release so there is now a "Zero Doc" state. This means that Fusion can be running with no open document. This wasn't possible before, because if you had a single document open and closed it, Fusion would automatically create a new document. Now, if no document is open, the Home page is shown. This could impact some existing programs that expect an active document or active design to always be available. The <a href="Application_activeDocument.htm">activeDocument</a>, <a href="Application_activeProduct.htm">activeProduct</a>, and <a href="Application_activeViewport.htm">activeViewport</a> properties on the Application object now return null when no document is open. You'll need to test your scripts and add-ins to make sure they handle this new case correctly. 
 </p>
 </li>
 
 <li>
-<p Class="Normal"><b>Assembly User Interface Changes</b><br>
-In the last release, there was a change to how the assembly functionality is provided in the user interface. It was a preview feature that limited those who could enable it. That option has been removed, and the UI behaves as before. However, a new preview, called "Part and Assembly Design Workflow," has an even greater impact. It's a private preview feature, and for those who have access, it is turned on by default in this release. When this feature is enabled, the UI layout changes, and not all elements are accessible through the API. As a result, some custom commands created by add-ins may not be available. If you are a Fusion Insider, you have access to this new preview and are encouraged to test your commands. If they're not available when the preview is enabled, there's currently no alternative except to disable the preview and revert to the previous UI layout. API access to this new UI layout will be available in the future.</p>
+<p class="Normal"><b>API Support for Product Manufacturing Information (PMI)</b><br>
+PMI is Product Manufacturing Information, such as 3D annotations, GD&T (geometric dimensions and tolerances), and other manufacturing information, which gets added to a 3D CAD model. Fusion supports importing files from other CAD applications that contain PMI and now also supports adding PMI information to models. The new API supports querying imported PMI, and creating and editing PMI data. There are a significant number of new objects and functions listed below to support this.</p>
 </li>
 
 <li>
-<p Class="Normal"><b>Support for Text Parameters</b><br>
-There's new functionality in Fusion that will make many people happy, and there is API support for some of it. The first part of this is the ability to create parameters with text values. The API fully supports creating, querying, and editing these new types of parameters. To support this, when adding a parameter, you can specify the unit type as "Text". Also, the Parameter object now supports the <a href="Parameter_valueType.htm">valueType</a> and <a href="Parameter_textValue.htm">textValue</a> properties, so you can determine if a parameter is this new type and get and set the value of the parameter.</p>
-
-<p Class="Normal">The related piece is the ability to create parametric sketch text that uses parameters. The API doesn't yet support this. Watch for it in an upcoming release.</p>
+<p class="Normal"><b>Cloud Folder Dialog</b><br>
+The API supports displaying several different dialogs to allow the user to select files and folders. One dialog that was missing supports the selection of a cloud folder. This is needed when you need to save a new file to the user's chosen folder. The new <a href="CloudFolderDialog.htm">CloudFolderDialog</a> object supports this capability.</p>
 </li>
 
 <li>
-<p Class="Normal"><b>Full API Support for the Emboss Feature</b><br>
-The Emboss feature has been available in Fusion for a long time, but it has had minimal API support. Now, the API provides full support for the <a href="EmbossFeatures.htm">Emboss</a> feature. You can perform all actions in the API that are available through the user interface. It is a preview feature in this release to allow us to make any needed changes based on feedback, but we don't expect the preview to last long.</p></li>
-
-<li>
-<p Class="Normal"><b>Full API Support for Tapped and Clearance Holes</b><br>
-This is another case where the functionality has been available in Fusion for quite some time, and the API is now catching up. The API now has full support for tapped and clearance holes. Many new properties have been added to the HoleFeatureInput and HoleInput objects. The full list is shown below.</p></li>
-
-<li>
-<p Class="Normal"><b>Thicken Feature Enhancement</b><br>
-In this release, Fusion has enhanced the thicken feature to support a rounded thicken, where only sharp thickens were previously supported. A thickenType property is now supported on the <a href="ThickenFeatureInput_thickenType.htm">ThickenFeatureInput</a> and <a href="ThickenFeature_thickenType.htm">ThickenFeature</a> objects.</p></li>
-
-<li>
-<p Class="Normal"><b>Full Round Fillet Support</b><br>
-Here's another one where the API is catching up with the product. The API now has full support for the full round option when creating a fillet feature. Previously, a FullRoundFilletFeature object existed, but it only supported basic feature functionality and lacked support for creating or querying full round fillet features. The FullRoundFilletFeature object has been retired since the full round functionality is now part of the FilletFeature object.</p></li>
-
-<li>
-<p Class="Normal"><b>Full API Support for the New Hem Feature</b><br>
-There is a new sheet metal feature that most of you may not be aware of yet, as it is a preview feature and is currently only available to a select few. However, the API was implemented concurrently with the feature and is exposed in the API as the <a href="HemFeatures.htm">Hem</a> feature. Just like the feature, this API is also a preview and could still change before it is released.</p></li>
-
-<li>
-<p Class="Normal"><b>Support for Replacing Standard Components in Configurations</b><br>
-A new capability supported by configurations is the ability to replace a standard component in an assembly. API supported has also been added through the new <a href="ConfigurationInsertStandardDesignColumn.htm">ConfigurationInsertStandardDesignColumn</a>, <a href="ConfigurationReplaceDesigns.htm">ConfigurationReplaceDesigns</a>, <a href="ConfigurationReplaceDesign.htm">ConfigurationReplaceDesign</a>, and <a href="ConfigurationInsertStandardDesignCell.htm">ConfigurationInsertStandardDesignCell</a> objects.</p>
+<p class="Normal"><b>API Support for Isoparametric Sketch Curves</b><br>
+The API supports the new IsoParametric sketch curves. Through the <a href="SketchCurves_sketchIsoparametricCurves.htm">SketchCurves.sketchIsoparametricCurves</a> property, you can access the new <a href="SketchIsoparametricCurves.htm">SketchIsoparametricCurves</a> collection object, which supports the ability to create new isoparametric sketch curves and access and edit existing isoparametric sketch curves.</p>
 </li>
 
 <li>
-<p Class="Normal"><b>Arrange Feature</b><br>
-The API for the Arrange feature has graduated from preview to full support.</p>
+<p class="Normal"><b>Compatibility Preferences</b><br>
+There is a new category of preferences in the Preferences dialog: Compatibility. These are exposed by the API through the <a href="CompatibilityPreferences.htm">CompatibilityPreferences</a> object, which is accessed through the <a href="Preferences_compatibilityPreferences.htm">Application.preferences.compatibilityPreferences</a> property.</p>
 </li>
 
 <li>
-<p Class="Normal"><b>Part Number and Description Changes</b><br>
-This was also in the last "What's New", but because the migration of hubs to support the new collaborative editing is an ongoing process and many of you haven't seen the effects yet, it's being included here again.</p>
-
-<p Class="Normal">As part of new functionality coming to support <a href="https://help.autodesk.com/view/fusion360/ENU/?guid=TC-COLLAB-EDIT">collaborative editing</a>, some changes have been made to Fusion and the API. The biggest change is that the part number and description properties of the Component object now store and retrieve data from the cloud, rather than the design. This change only applies to files that exist within a hub where concurrent editing has been enabled, so the impact is limited. You can check for this by using the new <a href="DataHub_isCollaborativeEditingEnabled.htm">DataHub.isCollaborativeEditingEnabled</a> property.</p>
-
-<p Class="Normal">When this is enabled, there are two things you'll likely notice. The first difference is in performance when using the partNumber and description properties of the Component object. This is because getting and setting these values is no longer a local operation, but rather uses the cloud to perform these tasks.</p>
-
-<p Class="Normal">Another change is that the cloud data associated with a component, where this data is saved, doesn't exist until the document that contains the component has been saved. The bigger change is that the part number and description can no longer be set until the document containing the component has been saved. These properties can't be set until the document is saved because the component and its properties aren't available on the cloud until the document is saved. You can read more about this in the new <a href="MFGDMAPI_UM.htm">MFGDM API user manual topic</a>.</p>
-</li>
-
-<li>
-<p Class="Normal"><b>Additional Mesh Feature Support</b><br>
-A significant portion of the Mesh functionality was released as preview functionality in the last release. There was an oversight that the properties to access three of the features were missing on the Features collection object. This has been corrected with the addition of the <a href="Features_meshConvertFeatures.htm">Features.meshConvertFeatures</a>, <a href="Features_meshSeparateFeatures.htm">Features.meshSeparateFeatures</a>, and <a href="Features_meshReverseNormalFeatures.htm">Features.meshReverseNormalFeatures</a> properties.
+<p class="Normal"><b>Enhanced Mesh Functionality</b><br>
+There are two significant enhancements related to mesh bodies. The first is the addition of the <a href="Occurrence_meshBodies.htm">meshBodies</a> property to the Occurrence object. This lets you get a mesh body in the context of the occurrence. This means that when you get the mesh body, you are getting a proxy of the body that is transformed to provide its current position with respect to the root coordinate system. The other enhancement is the addition of the <a href="MeshBody_silhouette.htm">MeshBody.silhouette</a> method that returns the silhouette of a mesh body with respect to a specified direction.
 </p>
 </li>
 
 <li>
-<p Class="Normal"><b>Control the Visibility of JointOrigins</b><br>
-The <a href="Component_isJointOriginsFolderLightBulbOn.htm">isJointOriginsFolderLightBulbOn</a> has been added to the Component object so you can turn on/off the display of all joint origins in a component.</p>
+<p class="Normal"><b>Enhancements to Document Versions</b><br>
+Changes have been happening related to versions and milestones. Some new API functionality has been added to provide access to these new concepts. A new <a href="FileOpenContext.htm">FileOpenContext</a> object has been added that lets you define additional information about a document and then use that context when opening a document to get the specific document and associated information that you want. In addition to the document context, there is also the new <a href="Document_canAdvanceToLatest.htm">Document.canAdvanceToLatest</a> property and the <a href="Document_advanceToLatest.htm">Document.advanceToLatest</a> method to update an open document to the latest.
+</p>
 </li>
 
 <li>
-<p Class="Normal"><b>User Manual Update for Icons</b><br>
-The <a href="UserInterface_UM.htm#IconsForCommands">Command Icons</a> section of the User Interface topic in the API User Manual has been updated with the latest information regarding SVG file support and icons for the various user interface themes.
+<p class="Normal"><b>CAM Additive FEA</b><br>
+You'll notice many new objects in the list related to additive FEA. This is preview functionality related to FEA analysis of additive metal parts.
+</p>
+</li>
+
+<li>
+<p class="Normal"><b><mark>API For the New Assembly Constraint Functionality is Still in Progress</mark></b><br>
+The July release began introducing some of the API for the new assembly constraint functionality. It is a preview feature, and since July, the functionality has been modified in Fusion, necessitating an API change. The changes are still ongoing, so nothing has changed in the November release. However, they will change in January, so if you start using this API, be aware that your existing code will need to be updated to function correctly. 
+</p>
 </li>
 </ol>
 
-<h3 class="API">CAM API Changes</h3>
+<h3 class="API">Fixes</h3>
 <ol>
 <li>
-<p Class="Normal">The CAMParameter object has been enhanced with several new properties: <a href="CAMParameter_fullTitle.htm">fullTitle</a>, <a href="CAMParameter_isVisible.htm">isVisible</a>, <a href="CAMParameter_userDefaultExpression.htm">userDefaultExpression</a>, <a href="CAMParameter_systemDefaultExpression.htm">systemDefaultExpression</a>, and <a href="CAMParameter_saveExpressionAsUserDefault.htm">saveExpressionAsUserDefault</a>. Also, the method <a href="CAMParameters_resetToSystemDefaults.htm">CAMParameters.resetToSystemDefaults</a> was added to reset all parameters to their default values.
-</p>
+<p class="Normal">
+A problem was reported with changing the extent type of an existing hole. It now works as expected.</p>
 </li>
 
 <li>
-<p Class="Normal">The CAMLibrary object now supports the <a href="CAMLibrary_doesPathExist.htm">doesPathExist</a> method to make it easy to check if a path exists.</p>
+<p class="Normal">
+There were some problems reported with text box command inputs, where they weren't displaying correctly with the new display themes. This is now fixed.</p>
 </li>
 
 <li>
-<p Class="Normal">A lot of new functionality was added to support defining machines using the API. You can see a long list below.</p>
+<p class="Normal">
+Some issues were found with the motion links API. It should all be working correctly now.</p>
 </li>
 </ol>
 
-<h3 class="api">Fixes</h3>
-<ol>
-<li>
-<p Class="Normal">
-When using the Documents.open method, there is an argument to specify whether the document should be opened visibly. This worked quite a while ago, but has been broken. It now functions as expected and will open a document invisibly.</p>
-</li>
-
-<li>
-<p Class="Normal">
-design_oneBETU4 reported a problem on the <a href="https://forums.autodesk.com/t5/fusion-api-and-scripts-forum/can-t-get-sketchtext-eplode-method-to-return-curves-in-python/td-p/13671798">forum</a> about getting back results when exploding text in a sketch. This has been fixed.</p>
-</li>
-
-<li>
-<p Class="Normal">
-alasdair_scott2DJBH reported a problem on the <a href="https://forums.autodesk.com/t5/fusion-api-and-scripts-forum/api-bug-occurrence-islightbulbon-did-not-work-properly/td-p/9531468">forum</a> about isLightBulbOn property of the Occurrence object not behaving correctly. It works now.</p>
-</li>
-</ol>
-
-<h3 class="api">Custom Features</h3>
-<p Class="Normal">
-	Custom Features is a new functionality that is currently in preview. This release has nothing new for custom features, but we still encourage you to try it and let us know your thoughts. You can learn more about it in the <a href="CustomFeatures_UM.htm">Custom Feature</a> topic in the API User Manual. There are also two add-in samples referenced in that document that you can use to see the functionality.</p>
-<p Class="Normal">
+<h3 class="API">Custom Features</h3>
+<p class="Normal">
+	Custom Features is new functionality that is currently in preview. This release includes no new custom feature functionality, but we still encourage you to try it and let us know your thoughts. You can learn more about it in the <a href="CustomFeatures_UM.htm">Custom Feature</a> topic in the API User Manual. There are also two add-in samples referenced in that document that you can use to see the functionality.</p>
+<p class="Normal">
 	<mark>This functionality is provided as a preview of intended future API capabilities. You are encouraged to use it and report any problems or suggestions using the <a href="https://forums.autodesk.com/t5/fusion-api-and-scripts-forum/bd-p/fusion-api-scripts-forum-en">Fusion API and Scripts Forum</a>. However, because this previews future functionality, it may change, breaking any existing programs that use it. Therefore, you should never deliver programs that utilize any preview capabilities.</mark>
 </p>
 <br><h2 class="api">
@@ -166,160 +125,220 @@ alasdair_scott2DJBH reported a problem on the <a href="https://forums.autodesk.c
             </td>
         </tr>
         <tr>
-          <td class="api-list"><a href="ClearanceHoleDataQuery.htm">ClearanceHoleDataQuery</a></td>
-          <td class="api-list">This object provides methods to query the clearance hole to find valid definitions for creating a clearance hole.</td>
+          <td class="api-list"><a href="AdditiveFEAConvection.htm">AdditiveFEAConvection</a></td>
+          <td class="api-list">Convection defines the temperature-dependent heat loss boundary condition according to Newton's law of cooling.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="ClearanceHoleInfo.htm">ClearanceHoleInfo</a></td>
-          <td class="api-list">This object defines the methods and properties that define the size of a clearance hole. This object is used to create new hole features whose size is defined as a clearance hole for a specific size fastener. A new ClearanceHoleInfo object is created by using the ClearanceHoleInfo.create method. To determine valid values when creating a ClearanceHoleInfo object, you can use the ClearanceHoleDataQuery object, which is statically created using the ClearanceHoleDataQuery.create method.<br/><br/> If the ClearanceHoleInfo object is obtained from an existing HoleFeature object, modifying properties on the returned ClearanceHoleInfo object will modify the feature.</td>
+          <td class="api-list"><a href="AdditiveFEADeckBuilder.htm">AdditiveFEADeckBuilder</a></td>
+          <td class="api-list">The AdditiveFEADeckBuilder supplies methods to generate cards to be used for generating an FEA simulation result.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="ConfigurationInsertStandardDesignCell.htm">ConfigurationInsertStandardDesignCell</a></td>
-          <td class="api-list">Represents a single cell within a top or custom theme configuration table that controls which design is used for an inserted standard design. Use the parent column to get the occurrence being modified.</td>
+          <td class="api-list"><a href="AdditiveFEADeckBuilderCard.htm">AdditiveFEADeckBuilderCard</a></td>
+          <td class="api-list">An AdditiveFEADeckBuilderCard is a single card in an additive FEA simulation input file.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="ConfigurationInsertStandardDesignColumn.htm">ConfigurationInsertStandardDesignColumn</a></td>
-          <td class="api-list">This object represents a column in the table that controls which design should be referenced by an occurrence. The column contains a list of designs that have been specified for that column. One of the designs is specified for each cell in the column. That design will be referenced by the occurrence when the row that cell is in is active.</td>
+          <td class="api-list"><a href="AdditiveFEAOperation.htm">AdditiveFEAOperation</a></td>
+          <td class="api-list">The AdditiveFEAOperation represents a finite element analysis for metal additive manufacturing processes.  The inherited generateToolpath() method can only be called if the Autodesk Fusion Manufacturing Extension is active.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="ConfigurationReplaceDesign.htm">ConfigurationReplaceDesign</a></td>
-          <td class="api-list">This object represents an individual ConfigurationReplaceDesign object that has been defined for a ConfigurationReplaceDesignColumn. Multiple ConfigurationReplaceDesign objects can be defined for a column and then one of those ConfigurationReplaceDesign objects is specified in each cell of the column.</td>
+          <td class="api-list"><a href="AdditiveFEAOperationInput.htm">AdditiveFEAOperationInput</a></td>
+          <td class="api-list"></td>
         </tr>
         <tr>
-          <td class="api-list"><a href="ConfigurationReplaceDesigns.htm">ConfigurationReplaceDesigns</a></td>
-          <td class="api-list">Collection object that provides access to all the ConfigurationReplaceDesign objects that have been defined for a ConfigurationReplaceDesignColumn. You can also use this collection to define new replace designs that will then be available when specifying which design to use in a cell.</td>
+          <td class="api-list"><a href="AdditiveFEASTLMap.htm">AdditiveFEASTLMap</a></td>
+          <td class="api-list">The AdditiveFEASTLMap defines the relationship of geometries in STL format to parts, supports, materials, PRM files, and volume fractions or solidities.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="DoubleHemFeatureDefinition.htm">DoubleHemFeatureDefinition</a></td>
-          <td class="api-list">The definition for a double hem.</td>
+          <td class="api-list"><a href="AssemblyComponentGeometry.htm">AssemblyComponentGeometry</a></td>
+          <td class="api-list">Represents the 3D geometry and attachment points for a tool component (such as a tool holder or tool block).<br/><br/> AssemblyComponentGeometry provides the ability to define custom 3D geometry for tool components using STEP file data, along with joint origins that specify how the component attaches to other parts of the tool assembly (machine side and cutting side).</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="EmbossFeature.htm">EmbossFeature</a></td>
-          <td class="api-list">Object that represents an existing emboss feature in a design.</td>
+          <td class="api-list"><a href="CAM3MFExportStructure.htm">CAM3MFExportStructure</a></td>
+          <td class="api-list">Options for the 3MF structure and naming conventions.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="EmbossFeatureInput.htm">EmbossFeatureInput</a></td>
-          <td class="api-list">This class defines the methods and properties that pertain to the definition of an emboss feature.</td>
+          <td class="api-list"><a href="CloudFolderDialog.htm">CloudFolderDialog</a></td>
+          <td class="api-list">Represents a cloud folder dialog, which is a dialog that is used to prompt the user to select a folder on the Fusion web client. It is created by using the UserInterface.createCloudFolderDialog method.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="EmbossFeatures.htm">EmbossFeatures</a></td>
-          <td class="api-list">Collection that provides access to all of the existing emboss features in a component and supports the ability to create new emboss features.</td>
+          <td class="api-list"><a href="CompatibilityPreferences.htm">CompatibilityPreferences</a></td>
+          <td class="api-list">The CompatibilityPreferences object provides access to compatibility and troubleshooting related preferences.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="FlatHemFeatureDefinition.htm">FlatHemFeatureDefinition</a></td>
-          <td class="api-list">The definition for a flat hem.</td>
+          <td class="api-list"><a href="FileOpenContext.htm">FileOpenContext</a></td>
+          <td class="api-list">An object that represents context information for opening a file.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="FullRoundFilletFaceSet.htm">FullRoundFilletFaceSet</a></td>
-          <td class="api-list">The class for the full round fillet face set.</td>
+          <td class="api-list"><a href="IsoparametricCurveInput.htm">IsoparametricCurveInput</a></td>
+          <td class="api-list">The input object that defines the required input to create an isoparametric curve when using the SketchIsoparametricCurves.add method. This object is created using the SketchIsoparametricCurves.createInput method.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="FullRoundFilletFaceSets.htm">FullRoundFilletFaceSets</a></td>
-          <td class="api-list">Collection that provides access to all existing full round fillet face sets associated with a full round fillet feature or a FullRoundFilletFeatureInput object, and allows adding new full round fillet face sets.</td>
+          <td class="api-list"><a href="PMIAnnotation.htm">PMIAnnotation</a></td>
+          <td class="api-list">A Base class representing a PMI (Product Manufacturing Information) annotation in a component.<br/><br/> This can either be PMI that was imported alongside the model, or Fusion specific PMI.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="FullRoundFilletFeatureInput.htm">FullRoundFilletFeatureInput</a></td>
-          <td class="api-list">This class defines the methods and properties that pertain to the definition of a full round fillet feature.</td>
+          <td class="api-list"><a href="PMIAnnotations.htm">PMIAnnotations</a></td>
+          <td class="api-list">Provides access to the all the PMI (Product Manufacturing Information) in a component.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="HemFeature.htm">HemFeature</a></td>
-          <td class="api-list">Defines a hem feature, providing methods to redefine the type of hem.</td>
+          <td class="api-list"><a href="PMICreatedAnnotation.htm">PMICreatedAnnotation</a></td>
+          <td class="api-list">A Base class representing a PMI created in Fusion.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="HemFeatureDefinition.htm">HemFeatureDefinition</a></td>
-          <td class="api-list">A Base class to return the information used to define the HemFeature.</td>
+          <td class="api-list"><a href="PMIDatumModifier.htm">PMIDatumModifier</a></td>
+          <td class="api-list">Represents a datum modifier used in PMI datum references. A datum modifier provides additional information about how a datum is applied.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="HemFeatureInput.htm">HemFeatureInput</a></td>
-          <td class="api-list">This class defines the methods and properties that pertain to the definition of a hem feature.</td>
+          <td class="api-list"><a href="PMIDatumReference.htm">PMIDatumReference</a></td>
+          <td class="api-list">Represents a datum reference used in PMI geometric tolerances. A datum reference identifies a datum feature and includes any modifiers that apply to it.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="HemFeatures.htm">HemFeatures</a></td>
-          <td class="api-list">Collection that provides access to all of the existing hem features in a design and supports the ability to create new hem features.</td>
+          <td class="api-list"><a href="PMIDatumTarget.htm">PMIDatumTarget</a></td>
+          <td class="api-list">Represents a datum target belonging to an PMIImportedGDTDatum. A datum target is used to define a specific location on a PMI GDT Datum.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="InteractionsMachineElement.htm">InteractionsMachineElement</a></td>
-          <td class="api-list">Machine element representing the machine's interactions. This controls how MachineItems interact with each other.</td>
+          <td class="api-list"><a href="PMIDisplaySettings.htm">PMIDisplaySettings</a></td>
+          <td class="api-list">Represents display settings related to the PMIAnnotation display. Includes information such as unit and formatting.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="MachineElementInput.htm">MachineElementInput</a></td>
-          <td class="api-list">Base class for machine element inputs.</td>
+          <td class="api-list"><a href="PMIGeometricValue.htm">PMIGeometricValue</a></td>
+          <td class="api-list">Represents a value that can be associated with a PMIAnnotation, such as a diameter value.<br/><br/> Includes information about the value, whether it is overriden and any associated tolerance.<br/><br/> This class has two main uses:<br/><br/> - to retrieve the values from a PMIAnnotation (e.g. PMIImportedDimension)<br/><br/> - to define input values in PMI creation input objects (e.g. PMIHoleThreadNoteInput)</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="MachineInteractionPair.htm">MachineInteractionPair</a></td>
-          <td class="api-list">MachineInteractionPair objects control how a pair of MachineItems interact with each other.</td>
+          <td class="api-list"><a href="PMIGeometricValueTolerance.htm">PMIGeometricValueTolerance</a></td>
+          <td class="api-list">Represents a tolerance value that can be associated with a PMIGeometricValue.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="MachineItem.htm">MachineItem</a></td>
-          <td class="api-list">An item on a machine that can collide. That is, a MachinePart, or something attached to a MachinePart. Create them via InteractionsMachineElement::createMachineItem</td>
+          <td class="api-list"><a href="PMIHoleThreadNote.htm">PMIHoleThreadNote</a></td>
+          <td class="api-list">Defines a created PMI which includes data corresponding to Hole/Thread Note PMI. Provides access to information such as tolerances, thread information, and units.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="MultiAxisCombinationDPMFeedrateSettings.htm">MultiAxisCombinationDPMFeedrateSettings</a></td>
-          <td class="api-list">Specialization of MultiAxisDPMFeedrateSettings for degrees per minute feedrates that require a combination of linear and rotary movements.</td>
+          <td class="api-list"><a href="PMIHoleThreadNoteInput.htm">PMIHoleThreadNoteInput</a></td>
+          <td class="api-list">A class that defines the input used to create a Hole/Thread Note PMI.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="MultiAxisDPMFeedrateSettings.htm">MultiAxisDPMFeedrateSettings</a></td>
-          <td class="api-list">Specialization of MultiAxisFeedrateSettings for standard degrees per minute feedrates.</td>
+          <td class="api-list"><a href="PMIHoleThreadNotes.htm">PMIHoleThreadNotes</a></td>
+          <td class="api-list">Provides access to the all the PMIHoleThreadNote objects in a component.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="MultiAxisFeedrateSettings.htm">MultiAxisFeedrateSettings</a></td>
-          <td class="api-list">Base class for the multi-axis feedrate settings</td>
+          <td class="api-list"><a href="PMIImportedDimension.htm">PMIImportedDimension</a></td>
+          <td class="api-list">Defines an imported PMI which includes data related to dimensions.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="MultiAxisFeedrateSettingsInput.htm">MultiAxisFeedrateSettingsInput</a></td>
-          <td class="api-list">Input class for creating MultiAxisFeedrateSettings objects.</td>
+          <td class="api-list"><a href="PMIImportedDimensions.htm">PMIImportedDimensions</a></td>
+          <td class="api-list">Provides access to the all the PMIImportedDimension objects in a component.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="MultiAxisInverseTimeFeedrateSettings.htm">MultiAxisInverseTimeFeedrateSettings</a></td>
-          <td class="api-list">Specialization of MultiAxisFeedrateSettings for inverse time feedrates.</td>
+          <td class="api-list"><a href="PMIImportedFolder.htm">PMIImportedFolder</a></td>
+          <td class="api-list">Defines a container of other PMI objects (including sub-folders).<br/><br/> A PMIAnnotations can contain multiple PMI of this type, and is typically used to group the PMI within a PMIAnnotations.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="MultiAxisMachineElement.htm">MultiAxisMachineElement</a></td>
-          <td class="api-list">Machine element representing multi-axis machine settings.</td>
+          <td class="api-list"><a href="PMIImportedFolders.htm">PMIImportedFolders</a></td>
+          <td class="api-list">Provides access to the all the PMIImportedFolder objects in a component.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="MultiAxisMachineElementInput.htm">MultiAxisMachineElementInput</a></td>
-          <td class="api-list">Specialization of MachineElementInput for creating a multi-axis machine element.</td>
+          <td class="api-list"><a href="PMIImportedGDTDatum.htm">PMIImportedGDTDatum</a></td>
+          <td class="api-list">Defines an imported PMI which includes data related to a GDT Datum.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="MultiAxisProgrammedFeedrateSettings.htm">MultiAxisProgrammedFeedrateSettings</a></td>
-          <td class="api-list">Specialization of MultiAxisFeedrateSettings for programmed feedrates.</td>
+          <td class="api-list"><a href="PMIImportedGDTDatums.htm">PMIImportedGDTDatums</a></td>
+          <td class="api-list">Provides access to the all the PMIImportedGDTDatum objects in a component.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="MultiAxisRetractAndReconfigureSettings.htm">MultiAxisRetractAndReconfigureSettings</a></td>
-          <td class="api-list">Settings for multi-axis retract and reconfigure.</td>
+          <td class="api-list"><a href="PMIImportedGeometricTolerance.htm">PMIImportedGeometricTolerance</a></td>
+          <td class="api-list">Defines an imported PMI which includes data related to geometric tolerances.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="MultiAxisSingularityLinearizationSettings.htm">MultiAxisSingularityLinearizationSettings</a></td>
-          <td class="api-list">The class for the multi-axis singularity linearization settings.</td>
+          <td class="api-list"><a href="PMIImportedGeometricTolerances.htm">PMIImportedGeometricTolerances</a></td>
+          <td class="api-list">Provides access to the all the PMIImportedGeometricTolerance objects in a component.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="MultiAxisSingularitySettings.htm">MultiAxisSingularitySettings</a></td>
-          <td class="api-list">Base class for multi-axis singularity settings.</td>
+          <td class="api-list"><a href="PMIImportedGraphical.htm">PMIImportedGraphical</a></td>
+          <td class="api-list">Defines an imported PMI which only includes graphical data.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="OpenHemFeatureDefinition.htm">OpenHemFeatureDefinition</a></td>
-          <td class="api-list">The definition for an open hem.</td>
+          <td class="api-list"><a href="PMIImportedGraphicals.htm">PMIImportedGraphicals</a></td>
+          <td class="api-list">Provides access to the all the PMIImportedGraphical objects in a component.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="RolledHemFeatureDefinition.htm">RolledHemFeatureDefinition</a></td>
-          <td class="api-list">The definition for a rolled hem.</td>
+          <td class="api-list"><a href="PMIImportedNote.htm">PMIImportedNote</a></td>
+          <td class="api-list">Defines an imported PMI note.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="RopeHemFeatureDefinition.htm">RopeHemFeatureDefinition</a></td>
-          <td class="api-list">The definition for a rope hem.</td>
+          <td class="api-list"><a href="PMIImportedNotes.htm">PMIImportedNotes</a></td>
+          <td class="api-list">Provides access to the all the PMIImportedNote objects in a component.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="TeardropHemFeatureDefinition.htm">TeardropHemFeatureDefinition</a></td>
-          <td class="api-list">The definition for a teardrop hem.</td>
+          <td class="api-list"><a href="PMIImportedSurfaceTexture.htm">PMIImportedSurfaceTexture</a></td>
+          <td class="api-list">Defines an imported PMI which includes data related to surface texture.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="ToolingCapabilitiesMachineElement.htm">ToolingCapabilitiesMachineElement</a></td>
-          <td class="api-list">Machine element representing the tooling capabilities of a machine.</td>
+          <td class="api-list"><a href="PMIImportedSurfaceTextures.htm">PMIImportedSurfaceTextures</a></td>
+          <td class="api-list">Provides access to the all the PMIImportedSurfaceTexture objects in a component.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="ToolingCapabilitiesMachineElementInput.htm">ToolingCapabilitiesMachineElementInput</a></td>
-          <td class="api-list">Input class for creating ToolingCapabilitiesMachineElement objects.</td>
+          <td class="api-list"><a href="PMIInput.htm">PMIInput</a></td>
+          <td class="api-list">A Base class for all PMI creation input types. The different types of PMI creation inputs are derived from this base class.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="PMILeaderLineNote.htm">PMILeaderLineNote</a></td>
+          <td class="api-list">Defines a created PMI which includes data corresponding to Notes.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="PMILeaderLineNoteInput.htm">PMILeaderLineNoteInput</a></td>
+          <td class="api-list">A class that defines the input used to create a Note PMI.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="PMILeaderLineNotes.htm">PMILeaderLineNotes</a></td>
+          <td class="api-list">Provides access to the all the PMILeaderLineNote objects in a component.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="PMILineBreakSegment.htm">PMILineBreakSegment</a></td>
+          <td class="api-list">Represents a segment defining a new line (or a line break). Used to define the text used by a PMI.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="PMIRoughness.htm">PMIRoughness</a></td>
+          <td class="api-list">Represents roughness data used in surface texture PMI. Contains information about surface roughness parameters.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="PMISegment.htm">PMISegment</a></td>
+          <td class="api-list">A base class for all the segments used to define the text of a PMI.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="PMISettings.htm">PMISettings</a></td>
+          <td class="api-list">Provides access to the PMISettings of a document.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="PMISymbolSegment.htm">PMISymbolSegment</a></td>
+          <td class="api-list">Represents a segment containing a symbol used to define the text of a PMI.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="PMITextSegment.htm">PMITextSegment</a></td>
+          <td class="api-list">Represents a segment of text used to define the text of a PMI. The text can include any number of characters.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="PRMExportOptions.htm">PRMExportOptions</a></td>
+          <td class="api-list">PRM export options for additive FEA.  A PRM file can only be exported if the Autodesk Fusion Manufacturing Extension is active.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="RecognizedPocketInput.htm">RecognizedPocketInput</a></td>
+          <td class="api-list">Input object containing properties used to recognize pockets. Includes bosses along open and closed pockets. The class is only available with the Machining Extension.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="SketchIsoparametricCurve.htm">SketchIsoparametricCurve</a></td>
+          <td class="api-list">This object represents the result of creating isoparametric curves. It contains the definition of how the curves are created and the resulting sketch curves.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="SketchIsoparametricCurves.htm">SketchIsoparametricCurves</a></td>
+          <td class="api-list">The collection of isoparametric curves in a sketch. This provides access to the existing isoparametric curves and supports the method to create new isoparametric curves.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="ToolBlock.htm">ToolBlock</a></td>
+          <td class="api-list">Represents a Tool Block.<br/><br/> A tool block is a type of tool that can have 3D geometry associated with it. 3D geometry can be supplied to represent the shape of the tool block instead of an auto-generated shape derived from parameters.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="TurningTool.htm">TurningTool</a></td>
+          <td class="api-list">Represents a Turning Tool.<br/><br/> A turning tool is comprised of an insert and potentially a holder. 3D geometry can be supplied to represent the shape of the holder instead of the auto-generated shape derived from parameters.</td>
         </tr>
       </Table>
       <h2 class="api">
@@ -335,348 +354,184 @@ alasdair_scott2DJBH reported a problem on the <a href="https://forums.autodesk.c
             </td>
         </tr>
         <tr>
-          <td class="api-list"><a href="AdditivePlatformMachineElement_cornerRadius.htm">AdditivePlatformMachineElement.cornerRadius</a></td>
-          <td class="api-list">Radius used to round the corners of the build platform. Units are cm.</td>
+          <td class="api-list"><a href="ArrangeSelection_customMultiAxisRotationType.htm">ArrangeSelection.customMultiAxisRotationType</a></td>
+          <td class="api-list">Gets and sets the custom multi-axis rotation type. This function is not available in Fusion for Personal Use. To enable any rotation the parameter "arrange_rotation_group" of the operation must be set to true. Note: If customMultiAxisRotationType is called, isUsingCustomMultiAxisRotationType will be set to true automatically. The default value for this property is MultiAxisRotationType_SingleAxis.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="CAMLibrary_doesPathExist.htm">CAMLibrary.doesPathExist</a></td>
-          <td class="api-list">Checks if the given URL points to an existing folder or asset in the library.</td>
+          <td class="api-list"><a href="ArrangeSelection_isUsingCustomMultiAxisRotationType.htm">ArrangeSelection.isUsingCustomMultiAxisRotationType</a></td>
+          <td class="api-list">Gets and sets if custom multi-axis rotation type is used for this element. This function is not available in Fusion for Personal Use. Throws an exception when calling this function in Fusion for Personal Use. If isUsingCustomMultiAxisRotationType is false, the global property of the operation's parameter "arrange_multiaxis_rotation" is used. The default value for this property false.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="CAMParameter_fullTitle.htm">CAMParameter.fullTitle</a></td>
-          <td class="api-list">Returns the full title of this parameter as seen in the user interface. This can potentially be more descriptive than the basic title. This title is localized and can change based on the current language.</td>
+          <td class="api-list"><a href="BaseComponent_pmiAnnotations.htm">BaseComponent.pmiAnnotations</a></td>
+          <td class="api-list">Returns the PMI collection associated with this component. This provides access to the existing PMI and supports the creation of new PMI.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="CAMParameter_isVisible.htm">CAMParameter.isVisible</a></td>
-          <td class="api-list">Gets if this parameter is visible in the user interface.</td>
+          <td class="api-list"><a href="CAM3MFExportOptions_structure.htm">CAM3MFExportOptions.structure</a></td>
+          <td class="api-list">Sets the structure type and naming convention used for the exported 3MF file.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="CAMParameter_saveExpressionAsUserDefault.htm">CAMParameter.saveExpressionAsUserDefault</a></td>
-          <td class="api-list">Saves the current expression as user default value. Throws an exception if the parent is not an operation or does not support user default expressions.</td>
+          <td class="api-list"><a href="CAMExportManager_createPRMExportOptions.htm">CAMExportManager.createPRMExportOptions</a></td>
+          <td class="api-list">Creates new PRM export options.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="CAMParameter_systemDefaultExpression.htm">CAMParameter.systemDefaultExpression</a></td>
-          <td class="api-list">Returns the systemDefaultExpression of this parameter.</td>
+          <td class="api-list"><a href="Component_pmiAnnotations.htm">Component.pmiAnnotations</a></td>
+          <td class="api-list">Returns the PMI collection associated with this component. This provides access to the existing PMI and supports the creation of new PMI.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="CAMParameter_userDefaultExpression.htm">CAMParameter.userDefaultExpression</a></td>
-          <td class="api-list">Gets and sets the userDefaultExpression of this parameter. If no userDefaultExpression is set, the systemDefaultExpression is returned. Throws an exception if the parent is not an operation or does not support user default expressions.</td>
+          <td class="api-list"><a href="Design_pmiSettings.htm">Design.pmiSettings</a></td>
+          <td class="api-list">Returns a manager for settings associated with Product Manufacturing Information (PMI) in this design.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="CAMParameters_resetToSystemDefaults.htm">CAMParameters.resetToSystemDefaults</a></td>
-          <td class="api-list">Resets each parameter to its system default.</td>
+          <td class="api-list"><a href="Document_advanceToLatest.htm">Document.advanceToLatest</a></td>
+          <td class="api-list">Advance to Latest enables this capability to update assembly with all work-in-progress changes.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="CAMTemplateLibrary_doesPathExist.htm">CAMTemplateLibrary.doesPathExist</a></td>
-          <td class="api-list">Checks if the given URL points to an existing folder or asset in the library.</td>
+          <td class="api-list"><a href="Document_canAdvanceToLatest.htm">Document.canAdvanceToLatest</a></td>
+          <td class="api-list">Indicates if the document can be advanced to the latest change.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="Component_isJointOriginsFolderLightBulbOn.htm">Component.isJointOriginsFolderLightBulbOn</a></td>
-          <td class="api-list">Gets and sets if the light bulb of the joint origins folder as seen in the browser is on or off. This controls the visibility of the joint origins in this occurrence. The light bulb for the folder is component specific and will turn off the joints for all occurrences referencing the component.</td>
+          <td class="api-list"><a href="Documents_openUsingContext.htm">Documents.openUsingContext</a></td>
+          <td class="api-list">Opens a previously saved document using additional context information to control how the file is opened. This method allows opening a specific version or state of a document based on the provided context, such as a timestamp that identifies a particular point in the document's history.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="ConfigurationColumns_addInsertStandardDesignColumn.htm">ConfigurationColumns.addInsertStandardDesignColumn</a></td>
-          <td class="api-list">Add a new column to control which standard design is used for an inserted design. If an inserted column already exists for the occurrence, the existing column is returned.<br/><br/> This is only valid for ConfigurationTopTable and ConfigurationCustomThemeTable objects and will fail for all other table types.</td>
+          <td class="api-list"><a href="DocumentToolLibrary_updateTool.htm">DocumentToolLibrary.updateTool</a></td>
+          <td class="api-list">Update the given tool in the tool library. Will error if the tool does not exist in the library or if the library URL is not set (library was not loaded from a URL).</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="ControllerConfigurationMachineElement_nonTcpRapidInterpolationMode.htm">ControllerConfigurationMachineElement.nonTcpRapidInterpolationMode</a></td>
-          <td class="api-list">Specifies how the CNC machine axes behave during rapid moves when TCP (Tool Center Point) is inactive, as defined in the machine's controller. Independent Axes moves the axes independently at maximum speed, potentially resulting in different completion times for each axis. Synchronized Axes moves the axes together, completing the motion simultaneously, although the tool's tip may deviate from the direct line between the start and finish points.</td>
+          <td class="api-list"><a href="DrawingDocument_advanceToLatest.htm">DrawingDocument.advanceToLatest</a></td>
+          <td class="api-list">Advance to Latest enables this capability to update assembly with all work-in-progress changes.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="ControllerConfigurationMachineElement_tcpRapidInterpolationMode.htm">ControllerConfigurationMachineElement.tcpRapidInterpolationMode</a></td>
-          <td class="api-list">Specifies how the CNC machine axes behave during rapid moves when TCP (Tool Center Point) is active, as defined in the machine's controller. Independent Axes moves the axes independently at maximum speed, potentially resulting in different completion times for each axis. Synchronized Axes moves the axes together, completing the motion simultaneously, although the tool's tip may deviate from the direct line between the start and finish points. Tool Tip adjusts the linear axes to keep the tool's tip positioned along the direct line between the start and finish points.</td>
+          <td class="api-list"><a href="DrawingDocument_canAdvanceToLatest.htm">DrawingDocument.canAdvanceToLatest</a></td>
+          <td class="api-list">Indicates if the document can be advanced to the latest change.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="CustomFeatureParameter_textValue.htm">CustomFeatureParameter.textValue</a></td>
-          <td class="api-list">Gets and sets the value of the parameter when it is a text parameter. This can be determined by checking the valueType property. Setting this value will cause the current expression to be overwritten. If the parameter is not a text parameter, the value of this property should be ignored and setting will fail.</td>
+          <td class="api-list"><a href="FlatPatternComponent_pmiAnnotations.htm">FlatPatternComponent.pmiAnnotations</a></td>
+          <td class="api-list">Returns the PMI collection associated with this component. This provides access to the existing PMI and supports the creation of new PMI.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="CustomFeatureParameter_valueType.htm">CustomFeatureParameter.valueType</a></td>
-          <td class="api-list">Returns the type of value this parameter is. For a numeric parameter, you can get the value using the value property. For a text parameter, you can get the value using the textValue property.</td>
+          <td class="api-list"><a href="FlatPatternProduct_pmiSettings.htm">FlatPatternProduct.pmiSettings</a></td>
+          <td class="api-list">Returns a manager for settings associated with Product Manufacturing Information (PMI) in this design.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="Features_embossFeatures.htm">Features.embossFeatures</a></td>
-          <td class="api-list">Returns the collection that provides access to the emboss features within the component and supports the creation of new emboss features.</td>
+          <td class="api-list"><a href="FusionDocument_advanceToLatest.htm">FusionDocument.advanceToLatest</a></td>
+          <td class="api-list">Advance to Latest enables this capability to update assembly with all work-in-progress changes.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="Features_hemFeatures.htm">Features.hemFeatures</a></td>
-          <td class="api-list">Returns the collection that provides access to the existing Hem features.</td>
+          <td class="api-list"><a href="FusionDocument_canAdvanceToLatest.htm">FusionDocument.canAdvanceToLatest</a></td>
+          <td class="api-list">Indicates if the document can be advanced to the latest change.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="Features_meshConvertFeatures.htm">Features.meshConvertFeatures</a></td>
-          <td class="api-list">Returns the collection that provides access to the mesh convert features within the component and supports the creation of new mesh convert features.</td>
+          <td class="api-list"><a href="LinearMachineAxis_resolutionStepSize.htm">LinearMachineAxis.resolutionStepSize</a></td>
+          <td class="api-list">Specifies the discrete step size used for axis movement. The step size should be greater than zero. Returns NaN if no step size is set or the axis move is configured for continuous rotation.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="Features_meshReverseNormalFeatures.htm">Features.meshReverseNormalFeatures</a></td>
-          <td class="api-list">Returns the collection that provides access to the mesh reverse normal features within the component and supports the creation of new mesh reverse normal features.</td>
+          <td class="api-list"><a href="LinearMachineAxis_useContinuousResolution.htm">LinearMachineAxis.useContinuousResolution</a></td>
+          <td class="api-list">Specifies the axis moves continuously.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="Features_meshSeparateFeatures.htm">Features.meshSeparateFeatures</a></td>
-          <td class="api-list">Returns the collection that provides access to the mesh separate features within the component and supports the creation of new mesh separate features.</td>
+          <td class="api-list"><a href="LinearMachineAxisInput_resolutionStepSize.htm">LinearMachineAxisInput.resolutionStepSize</a></td>
+          <td class="api-list">Specifies the discrete step size used for axis movement. The step size should be greater than zero. Returns NaN if no step size is set or the axis move is configured for continuous rotation.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="FilletFeature_convert.htm">FilletFeature.convert</a></td>
-          <td class="api-list">Method that converts this feature to another fillet feature type.<br/><br/> To use this method you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True).</td>
+          <td class="api-list"><a href="LinearMachineAxisInput_useContinuousResolution.htm">LinearMachineAxisInput.useContinuousResolution</a></td>
+          <td class="api-list">Specifies the axis moves continuously.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="FilletFeature_filletFeatureType.htm">FilletFeature.filletFeatureType</a></td>
-          <td class="api-list">Returns the FilletFeatureTypes indicating this fillet feature type.</td>
+          <td class="api-list"><a href="MachineAxis_resolutionStepSize.htm">MachineAxis.resolutionStepSize</a></td>
+          <td class="api-list">Specifies the discrete step size used for axis movement. The step size should be greater than zero. Returns NaN if no step size is set or the axis move is configured for continuous rotation.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="FilletFeature_fullRoundFilletFaceSets.htm">FilletFeature.fullRoundFilletFaceSets</a></td>
-          <td class="api-list">Returns the full round fillet face sets collection associated with this fillet feature. This collection is only valid when the filletFeatureType is FullRoundFilletFeatureType and it returns null if the filletFeatureType is not FullRoundFilletFeatureType.</td>
+          <td class="api-list"><a href="MachineAxis_useContinuousResolution.htm">MachineAxis.useContinuousResolution</a></td>
+          <td class="api-list">Specifies the axis moves continuously.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="FilletFeatures_addFullRoundFillet.htm">FilletFeatures.addFullRoundFillet</a></td>
-          <td class="api-list">Creates a new full round fillet feature.</td>
+          <td class="api-list"><a href="MachineAxisInput_resolutionStepSize.htm">MachineAxisInput.resolutionStepSize</a></td>
+          <td class="api-list">Specifies the discrete step size used for axis movement. The step size should be greater than zero. Returns NaN if no step size is set or the axis move is configured for continuous rotation.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="FilletFeatures_createFullRoundFilletInput.htm">FilletFeatures.createFullRoundFilletInput</a></td>
-          <td class="api-list">Creates a FullRoundFilletFeatureInput object. Use properties and methods on this object to define the fillet you want to create and then use the addFullRoundFillet method, passing in the FullRoundFilletFeatureInput object.</td>
+          <td class="api-list"><a href="MachineAxisInput_useContinuousResolution.htm">MachineAxisInput.useContinuousResolution</a></td>
+          <td class="api-list">Specifies the axis moves continuously.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="FlatPatternComponent_isJointOriginsFolderLightBulbOn.htm">FlatPatternComponent.isJointOriginsFolderLightBulbOn</a></td>
-          <td class="api-list">Gets and sets if the light bulb of the joint origins folder as seen in the browser is on or off. This controls the visibility of the joint origins in this occurrence. The light bulb for the folder is component specific and will turn off the joints for all occurrences referencing the component.</td>
+          <td class="api-list"><a href="MeshBody_silhouette.htm">MeshBody.silhouette</a></td>
+          <td class="api-list">Calculates the silhouette of a mesh for a given orientation.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="FusionProductPreferences_isAutoLookAtSketch2.htm">FusionProductPreferences.isAutoLookAtSketch2</a></td>
-          <td class="api-list">Gets and sets if the view is re-oriented to view the newly created sketch, and if it is re-oriented, if the camera uses the current camera settings or is orthographic.</td>
+          <td class="api-list"><a href="MeshCombineFeatureInput_algorithmType.htm">MeshCombineFeatureInput.algorithmType</a></td>
+          <td class="api-list">Gets and sets the used algorithm for the join, cut and intersect operation types. Default value is LegacyMeshCombineAlgorithmType. This setting is only effective in non-parametric mode. In parametric mode the algorithm type is always LegacyMeshCombineAlgorithmType.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="HoleFeature_clearanceHoleInfo.htm">HoleFeature.clearanceHoleInfo</a></td>
-          <td class="api-list">Returns the information used to define a clearance hole. This returns a ClearanceHoleInfo object when the holeTapType returns ClearanceHoleTapType. Otherwise this property returns null.</td>
+          <td class="api-list"><a href="MultiAxisMachineElement_isUsingTiltedWorkplane.htm">MultiAxisMachineElement.isUsingTiltedWorkplane</a></td>
+          <td class="api-list">Specifies if tilted workplane command (e.g., G68.2, G254, PLANE SPATIAL, CYCLE800) should be output for 3+2 operations.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="HoleFeature_holeTapType.htm">HoleFeature.holeTapType</a></td>
-          <td class="api-list">This property returns the current type of tap associated with this hole. You can set the tap type by using one of the following methods: setToSimpleHole, setToClearanceHole, or setToTappedHole.</td>
+          <td class="api-list"><a href="Occurrence_meshBodies.htm">Occurrence.meshBodies</a></td>
+          <td class="api-list">Returns the body proxies for the mesh bodies in the component referenced by this occurrence. For example if you get the occurrences from the root component and then use this property to get the bodies from those occurrences, the bodies returned will return information in the context of the root component, not the component they actually exist in.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="HoleFeature_setToClearanceHole.htm">HoleFeature.setToClearanceHole</a></td>
-          <td class="api-list">Sets the hole to be a clearance hole of the size specified by the ClearanceHoleInfo object.</td>
+          <td class="api-list"><a href="Operation_referenceTool.htm">Operation.referenceTool</a></td>
+          <td class="api-list">Get or set the tool for this operation. The document's tool library will be updated accordingly. The tool instance returned is a copy and therefore is not referenced by the operation. To change the reference tool of the operation, the new tool must be assigned to the operation, but once set it cannot be unset again. Setting the tool is only possible on operation strategies that support reference tools, an exception is thrown otherwise. Likewise null is returned if the operation strategy does not support reference tools.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="HoleFeature_setToSimpleHole.htm">HoleFeature.setToSimpleHole</a></td>
-          <td class="api-list">This method sets the hole's tap to be "simple," which means that the hole will not have any tap and will be a simple hole.</td>
+          <td class="api-list"><a href="OperationInput_referenceTool.htm">OperationInput.referenceTool</a></td>
+          <td class="api-list">Optionally specify the reference tool used by the operation. The ToolLibraries allows the access to Local and Fusion tools. Setting the tool is only possible on operation strategies that support reference tools, an exception is thrown otherwise. Likewise null is returned if the operation strategy does not support reference tools.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="HoleFeature_setToTappedHole.htm">HoleFeature.setToTappedHole</a></td>
-          <td class="api-list">Sets the hole to be a straight or tapered tapped hole of the size specified by the ThreadInfo object.</td>
+          <td class="api-list"><a href="Preferences_compatibilityPreferences.htm">Preferences.compatibilityPreferences</a></td>
+          <td class="api-list">Gets the CompatibilityPreferences object, which provides access to the various compatibility and troubleshouting preferences.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="HoleFeature_tappedHoleInfo.htm">HoleFeature.tappedHoleInfo</a></td>
-          <td class="api-list">This property returns the information used to define a tapped hole. Otherwise, this property returns null.</td>
+          <td class="api-list"><a href="RecognizedPocket_attackVector.htm">RecognizedPocket.attackVector</a></td>
+          <td class="api-list">Returns the attack vector that was used to recognize this pocket.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="HoleFeature_thread.htm">HoleFeature.thread</a></td>
-          <td class="api-list">When a tapped hole is created, a thread feature is also automatically created and controls the tapped threads. The thread feature is tied to the hole and is not displayed in the timeline and is suppressed if the hole is suppressed and deleted if the hole is deleted. This property returns the thread feature associated with this hole if it is a tapped hole. It returns null for all other hole types.</td>
+          <td class="api-list"><a href="RecognizedPocket_recognizePocketsWithInput.htm">RecognizedPocket.recognizePocketsWithInput</a></td>
+          <td class="api-list">Gets all recognized pockets based on the properties in the given input object and returns them. The method is only available with the Machining Extension.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="HoleFeatureInput_holeTapType.htm">HoleFeatureInput.holeTapType</a></td>
-          <td class="api-list">Returns the current type of tap associated with this hole. When a new HoleFeatureInput is created, this will default to SimpleHoleTapType, which means the hole will not have any tap and will be a simple hole. You can set the tap type by using one of the methods to define the specific tap desired.</td>
+          <td class="api-list"><a href="RotaryMachineAxis_resolutionStepSize.htm">RotaryMachineAxis.resolutionStepSize</a></td>
+          <td class="api-list">Specifies the discrete step size used for axis movement. The step size should be greater than zero. Returns NaN if no step size is set or the axis move is configured for continuous rotation.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="HoleFeatureInput_isFullLength.htm">HoleFeatureInput.isFullLength</a></td>
-          <td class="api-list">Gets and sets if this thread is the full length of the hole. It defaults to true.<br/><br/> This property is only used when creating a tapped hole, which means the setToTappedHole method has been called. Otherwise this property is ignored.<br/><br/> The property can only be set to True, which will cause the feature to ignore the values of the threadLength and threadOffset properties. Using the setLengthAndOffset method will have the side effect of setting this property to false.</td>
+          <td class="api-list"><a href="RotaryMachineAxis_useContinuousResolution.htm">RotaryMachineAxis.useContinuousResolution</a></td>
+          <td class="api-list">Specifies the axis moves continuously.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="HoleFeatureInput_isModeled.htm">HoleFeatureInput.isModeled</a></td>
-          <td class="api-list">Gets and sets if the thread is physical or cosmetic thread. A value of true indicates a physical thread. It defaults to false.<br/><br/> This property is only used when creating a tapped hole, which means the setToTappedHole method has been called. Otherwise this property is ignored.</td>
+          <td class="api-list"><a href="RotaryMachineAxisInput_resolutionStepSize.htm">RotaryMachineAxisInput.resolutionStepSize</a></td>
+          <td class="api-list">Specifies the discrete step size used for axis movement. The step size should be greater than zero. Returns NaN if no step size is set or the axis move is configured for continuous rotation.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="HoleFeatureInput_setLengthAndOffset.htm">HoleFeatureInput.setLengthAndOffset</a></td>
-          <td class="api-list">Sets the length and offset of the thread of a tapped hole.<br/><br/> This method is only used when creating a tapped hole, which means the setToTappedHole method has been called. Otherwise calling this method will fail.<br/><br/> By default the isFullLength property is true which means the thread is the full length of the hole and there is no offset. Calling this method will have the side effect of setting the isFullLength property to false.</td>
+          <td class="api-list"><a href="RotaryMachineAxisInput_useContinuousResolution.htm">RotaryMachineAxisInput.useContinuousResolution</a></td>
+          <td class="api-list">Specifies the axis moves continuously.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="HoleFeatureInput_setToClearanceHole.htm">HoleFeatureInput.setToClearanceHole</a></td>
-          <td class="api-list">Sets the hole to be a clearance hole of the size specified by the ClearanceHoleInfo object.</td>
+          <td class="api-list"><a href="SketchCurves_sketchIsoparametricCurves.htm">SketchCurves.sketchIsoparametricCurves</a></td>
+          <td class="api-list">Returns the isoparametric curves collection associated with this sketch. This provides access to the existing isoparametric curves and supports the creation of new isoparametric curves.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="HoleFeatureInput_setToSimpleHole.htm">HoleFeatureInput.setToSimpleHole</a></td>
-          <td class="api-list">This property sets the hole's tap to be "simple", which means that it will not have any tap and will be a simple hole. When a new input is created, it defaults to being a simple hole.</td>
+          <td class="api-list"><a href="ToolLibrary_updateTool.htm">ToolLibrary.updateTool</a></td>
+          <td class="api-list">Update the given tool in the tool library. Will error if the tool does not exist in the library or if the library URL is not set (library was not loaded from a URL).</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="HoleFeatureInput_setToTappedHole.htm">HoleFeatureInput.setToTappedHole</a></td>
-          <td class="api-list">Sets the hole to be a straight or tapered tapped hole of the size specified by the ThreadInfo object.</td>
+          <td class="api-list"><a href="UserInterface_createCloudFolderDialog.htm">UserInterface.createCloudFolderDialog</a></td>
+          <td class="api-list">Creates a new CloudFolderDialog object which provides the ability to show a folder selection dialog to the user that allows them to choose a folder from Fusion web client.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="HoleFeatureInput_threadLength.htm">HoleFeatureInput.threadLength</a></td>
-          <td class="api-list">Gets the thread length when the isFullLength property is False. Returns null when the isFullLength property is true.</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="HoleFeatureInput_threadOffset.htm">HoleFeatureInput.threadOffset</a></td>
-          <td class="api-list">Gets the thread offset when the isFullLength property is False. Returns null when the isFullLength property is true.</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="Joints_addInferredJoint.htm">Joints.addInferredJoint</a></td>
-          <td class="api-list">Creates a new inferred joint.</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="Joints_createInferredJointInput.htm">Joints.createInferredJointInput</a></td>
-          <td class="api-list">Creates a joint input to define an inferred joint. Use functionality on the returned InferredJointInput to define the input needed to infer a joint.</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="Machine_clearSimulationModel.htm">Machine.clearSimulationModel</a></td>
-          <td class="api-list">Clears the simulation model from the machine.</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="MachineElements_addElement.htm">MachineElements.addElement</a></td>
-          <td class="api-list">Add a new machine element to the machine.</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="MachineElements_createMachineElementInput.htm">MachineElements.createMachineElementInput</a></td>
-          <td class="api-list">Create a new MachineElementInput object for the specified type. This is intedned to be used to create/add new machine elements.</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="MachineLibrary_doesPathExist.htm">MachineLibrary.doesPathExist</a></td>
-          <td class="api-list">Checks if the given URL points to an existing folder or asset in the library.</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="ModelParameter_textValue.htm">ModelParameter.textValue</a></td>
-          <td class="api-list">Gets and sets the value of the parameter when it is a text parameter. This can be determined by checking the valueType property. Setting this value will cause the current expression to be overwritten. If the parameter is not a text parameter, the value of this property should be ignored and setting will fail.</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="ModelParameter_valueType.htm">ModelParameter.valueType</a></td>
-          <td class="api-list">Returns the type of value this parameter is. For a numeric parameter, you can get the value using the value property. For a text parameter, you can get the value using the textValue property.</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="OperationStrategy_is2DStrategy.htm">OperationStrategy.is2DStrategy</a></td>
-          <td class="api-list">Gets whether given OperationStrategy is a 2D strategy.</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="OperationStrategy_is3DStrategy.htm">OperationStrategy.is3DStrategy</a></td>
-          <td class="api-list">Gets whether given OperationStrategy is a 3D strategy.</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="OperationStrategy_isAdditiveStrategy.htm">OperationStrategy.isAdditiveStrategy</a></td>
-          <td class="api-list">Gets whether given OperationStrategy is an additive strategy.</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="OperationStrategy_isCuttingStrategy.htm">OperationStrategy.isCuttingStrategy</a></td>
-          <td class="api-list">Gets whether given OperationStrategy is a cutting strategy.</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="OperationStrategy_isDrillingStrategy.htm">OperationStrategy.isDrillingStrategy</a></td>
-          <td class="api-list">Gets whether given OperationStrategy is a drilling strategy.</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="OperationStrategy_isFinishingStrategy.htm">OperationStrategy.isFinishingStrategy</a></td>
-          <td class="api-list">Gets whether given OperationStrategy is a finishing strategy.</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="OperationStrategy_isMillingStrategy.htm">OperationStrategy.isMillingStrategy</a></td>
-          <td class="api-list">Gets whether given OperationStrategy is a milling strategy.</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="OperationStrategy_isRotaryStrategy.htm">OperationStrategy.isRotaryStrategy</a></td>
-          <td class="api-list">Gets whether given OperationStrategy is a rotary strategy.</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="OperationStrategy_isSupportStrategy.htm">OperationStrategy.isSupportStrategy</a></td>
-          <td class="api-list">Gets whether given OperationStrategy is an additive support strategy.</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="OperationStrategy_isTurningStrategy.htm">OperationStrategy.isTurningStrategy</a></td>
-          <td class="api-list">Gets whether given OperationStrategy is a turning strategy.</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="Parameter_textValue.htm">Parameter.textValue</a></td>
-          <td class="api-list">Gets and sets the value of the parameter when it is a text parameter. This can be determined by checking the valueType property. Setting this value will cause the current expression to be overwritten. If the parameter is not a text parameter, the value of this property should be ignored and setting will fail.</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="Parameter_valueType.htm">Parameter.valueType</a></td>
-          <td class="api-list">Returns the type of value this parameter is. For a numeric parameter, you can get the value using the value property. For a text parameter, you can get the value using the textValue property.</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="PostLibrary_doesPathExist.htm">PostLibrary.doesPathExist</a></td>
-          <td class="api-list">Checks if the given URL points to an existing folder or asset in the library.</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="PrintSettingLibrary_doesPathExist.htm">PrintSettingLibrary.doesPathExist</a></td>
-          <td class="api-list">Checks if the given URL points to an existing folder or asset in the library.</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="StockMaterialLibrary_doesPathExist.htm">StockMaterialLibrary.doesPathExist</a></td>
-          <td class="api-list">Checks if the given URL points to an existing folder or asset in the library.</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="ThickenFeature_thickenType.htm">ThickenFeature.thickenType</a></td>
-          <td class="api-list">Gets and sets the thicken type for the thicken.<br/><br/> To set this property, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="ThickenFeatureInput_thickenType.htm">ThickenFeatureInput.thickenType</a></td>
-          <td class="api-list">The thicken type used when creating a thicken. The default value is SharpThickenType.</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="ThreadDataQuery_create.htm">ThreadDataQuery.create</a></td>
-          <td class="api-list">Static method to create a new ThreadDataQuery object. The ThreadDataQuery object is a utility object that provides methods to query for the valid thread definitions defined in Fusion. This object provides similar functionality as the Thread and Hole command dialogs to find valid thread types, designations and classes which can be used to create thread and tapped hole features.</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="ThreadDataQuery_isTapered.htm">ThreadDataQuery.isTapered</a></td>
-          <td class="api-list">Returns if this ThreadDataQuery was created to query for standard or tapered threads.</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="ThreadFeature_hole.htm">ThreadFeature.hole</a></td>
-          <td class="api-list">If this thread feature is was created as the result of creating a tapped hole, this property will return the associated hole feature. If this is a standard thread feature, this property will return null.</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="ThreadInfo_create.htm">ThreadInfo.create</a></td>
-          <td class="api-list">This method creates a new ThreadInfo object that can be used to create a thread or tapped-hole feature. The ThreadInfo object defines the type and size of the thread to create. When creating a thread, the type and size of the thread are defined by specifying the thread type, designation, and class. Fusion uses this information to look up the full details of the thread in tables delivered with Fusion. The ThreadDataQuery object can be used to determine valid input for this information.<br/><br/> The thread type implicitly defines if the thread is standard or tapered. Tapered threads can only be used when creating tapped holes and are not supported for thread features.</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="ThreadInfo_isRightHanded.htm">ThreadInfo.isRightHanded</a></td>
-          <td class="api-list">Gets and sets if the thread is right or left-handed thread. A value of true indicates a right-handed thread. It defaults to true.</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="ThreadInfo_isTapered.htm">ThreadInfo.isTapered</a></td>
-          <td class="api-list">Indicates if this ThreadInfo object defines a standard or tapered thread.</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="ThreadInfo_redefine.htm">ThreadInfo.redefine</a></td>
-          <td class="api-list">Method that redefines an existing ThreadInfo object. This is typically used to change the thread of an existing thread or tapped hole.<br/><br/> The ThreadInfo object defines the type and size of a thread by specifying the thread type, designation, and class. Fusion uses this information to look up the full details of the thread in tables delivered with Fusion. The ThreadDataQuery object can be used to determine valid input for this information.<br/><br/> Tapered threads can only be used when creating or editing tapped holes and are not supported for thread features.</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="ThreadInfo_taperAngle.htm">ThreadInfo.taperAngle</a></td>
-          <td class="api-list">Returns the angle of the tapered thread in centimeters.<br/><br/> This is only valid when isTapered is true.</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="ThreadInfo_taperTapDrillDiameter.htm">ThreadInfo.taperTapDrillDiameter</a></td>
-          <td class="api-list">Returns the Diameter of the tap drill required to create this tap.<br/><br/> This is only valid when isTapered is true.</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="ThreadInfo_taperThreadHeight.htm">ThreadInfo.taperThreadHeight</a></td>
-          <td class="api-list">Returns the height of a tapered thread in centimeters. This is only valid when isTapered is true.</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="ThreadInfo_taperUsefulThreadLength.htm">ThreadInfo.taperUsefulThreadLength</a></td>
-          <td class="api-list">Returns the useful length of threads for a tapered thread in centimeters.<br/><br/> This is only valid when isTapered is true.</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="ThreadInfo_taperWrenchMakeupInternalDiameter.htm">ThreadInfo.taperWrenchMakeupInternalDiameter</a></td>
-          <td class="api-list">The wrench makeup internal diameter for a taper pipe thread, also known as the effective thread diameter, is the diameter at the point where the thread engagement occurs when the pipe is tightened with a wrench.<br/><br/> This is only valid when isTapered is true.</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="ToolLibraries_doesPathExist.htm">ToolLibraries.doesPathExist</a></td>
-          <td class="api-list">Checks if the given URL points to an existing folder or asset in the library.</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="UserParameter_textValue.htm">UserParameter.textValue</a></td>
-          <td class="api-list">Gets and sets the value of the parameter when it is a text parameter. This can be determined by checking the valueType property. Setting this value will cause the current expression to be overwritten. If the parameter is not a text parameter, the value of this property should be ignored and setting will fail.</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="UserParameter_valueType.htm">UserParameter.valueType</a></td>
-          <td class="api-list">Returns the type of value this parameter is. For a numeric parameter, you can get the value using the value property. For a text parameter, you can get the value using the textValue property.</td>
+          <td class="api-list"><a href="WorkingModel_pmiSettings.htm">WorkingModel.pmiSettings</a></td>
+          <td class="api-list">Returns a manager for settings associated with Product Manufacturing Information (PMI) in this design.</td>
         </tr>
       </Table><br><p>
         <font size="1">
-          Help created: Thursday, September 4, 2025 6:53 AM</font>
+          Help created: Wednesday, April 8, 2026 2:37 PM</font>
       </p><br><br><div id="CopyrightNotice" style="display:none;">
         <hr>
         <table width="100%" style="font-size:15">
           <tr>
             <td align="left">
-                © Copyright 2025 Autodesk, Inc.
+                © Copyright 2026 Autodesk, Inc.
               </td>
-            <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(Whats%20New)">Comment on this page.</a></td>
+            <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(Whats%20New)">Comment on this page.</a></td>
           </tr>
         </table>
       </div>

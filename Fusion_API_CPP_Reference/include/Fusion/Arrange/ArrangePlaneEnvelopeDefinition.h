@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -32,10 +32,6 @@ namespace adsk { namespace fusion {
 
 namespace adsk { namespace fusion {
 
-/// !!!!! Warning !!!!!
-/// ! This is in preview state; please see the help for more info
-/// !!!!! Warning !!!!!
-/// 
 /// The ArrangePlaneEnvelope object represents an arrange envelope defined
 /// by a construction plane. This defines the settings of the envelope and the
 /// EnvelopeResult provides access to the resulting envelope and its contents.
@@ -47,11 +43,11 @@ public:
     bool plane(const core::Ptr<ConstructionPlane>& value);
 
     /// Returns the parameter that controls the length of the envelope frame. This defines the
-    /// You can modify the value by using the properties on the returned ModelParameter object.
+    /// size of the envelope frame. You can modify the value by using the properties on the returned ModelParameter object.
     core::Ptr<ModelParameter> length() const;
 
     /// Returns the parameter that controls the width of the envelope frame. This defines the
-    /// You can modify the value by using the properties on the returned ModelParameter object.
+    /// size of the envelope frame. You can modify the value by using the properties on the returned ModelParameter object.
     core::Ptr<ModelParameter> width() const;
 
     /// Returns the parameter that controls the X offset of the frame from the origin of the

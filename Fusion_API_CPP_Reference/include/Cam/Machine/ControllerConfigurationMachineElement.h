@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -10,6 +10,7 @@
 
 #pragma once
 #include "MachineElement.h"
+#include "../CamTypeDefs.h"
 #include <string>
 
 // THIS CLASS WILL BE VISIBLE TO AN API CLIENT.
@@ -53,6 +54,19 @@ public:
     size_t maxBlockProcessingSpeed() const;
     bool maxBlockProcessingSpeed(size_t value);
 
+    /// Specifies how the CNC machine axes behave during rapid moves when TCP (Tool Center Point) is inactive, as defined in the machine's controller.
+    /// Independent Axes moves the axes independently at maximum speed, potentially resulting in different completion times for each axis.
+    /// Synchronized Axes moves the axes together, completing the motion simultaneously, although the tool's tip may deviate from the direct line between the start and finish points.
+    MachineNonTCPInterpolationMode nonTcpRapidInterpolationMode() const;
+    bool nonTcpRapidInterpolationMode(MachineNonTCPInterpolationMode value);
+
+    /// Specifies how the CNC machine axes behave during rapid moves when TCP (Tool Center Point) is active, as defined in the machine's controller.
+    /// Independent Axes moves the axes independently at maximum speed, potentially resulting in different completion times for each axis.
+    /// Synchronized Axes moves the axes together, completing the motion simultaneously, although the tool's tip may deviate from the direct line between the start and finish points.
+    /// Tool Tip adjusts the linear axes to keep the tool's tip positioned along the direct line between the start and finish points.
+    MachineTCPInterpolationMode tcpRapidInterpolationMode() const;
+    bool tcpRapidInterpolationMode(MachineTCPInterpolationMode value);
+
     ADSK_CAM_CONTROLLERCONFIGURATIONMACHINEELEMENT_API static const char* classType();
     ADSK_CAM_CONTROLLERCONFIGURATIONMACHINEELEMENT_API const char* objectType() const override;
     ADSK_CAM_CONTROLLERCONFIGURATIONMACHINEELEMENT_API void* queryInterface(const char* id) const override;
@@ -67,6 +81,10 @@ private:
     virtual bool maxNormalSpeed_raw(double value) = 0;
     virtual size_t maxBlockProcessingSpeed_raw() const = 0;
     virtual bool maxBlockProcessingSpeed_raw(size_t value) = 0;
+    virtual MachineNonTCPInterpolationMode nonTcpRapidInterpolationMode_raw() const = 0;
+    virtual bool nonTcpRapidInterpolationMode_raw(MachineNonTCPInterpolationMode value) = 0;
+    virtual MachineTCPInterpolationMode tcpRapidInterpolationMode_raw() const = 0;
+    virtual bool tcpRapidInterpolationMode_raw(MachineTCPInterpolationMode value) = 0;
 };
 
 // Inline wrappers
@@ -110,6 +128,28 @@ inline size_t ControllerConfigurationMachineElement::maxBlockProcessingSpeed() c
 inline bool ControllerConfigurationMachineElement::maxBlockProcessingSpeed(size_t value)
 {
     return maxBlockProcessingSpeed_raw(value);
+}
+
+inline MachineNonTCPInterpolationMode ControllerConfigurationMachineElement::nonTcpRapidInterpolationMode() const
+{
+    MachineNonTCPInterpolationMode res = nonTcpRapidInterpolationMode_raw();
+    return res;
+}
+
+inline bool ControllerConfigurationMachineElement::nonTcpRapidInterpolationMode(MachineNonTCPInterpolationMode value)
+{
+    return nonTcpRapidInterpolationMode_raw(value);
+}
+
+inline MachineTCPInterpolationMode ControllerConfigurationMachineElement::tcpRapidInterpolationMode() const
+{
+    MachineTCPInterpolationMode res = tcpRapidInterpolationMode_raw();
+    return res;
+}
+
+inline bool ControllerConfigurationMachineElement::tcpRapidInterpolationMode(MachineTCPInterpolationMode value)
+{
+    return tcpRapidInterpolationMode_raw(value);
 }
 }// namespace cam
 }// namespace adsk

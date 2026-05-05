@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -51,7 +51,7 @@ public:
     /// The number of Extend features in the collection.
     size_t count() const;
 
-    /// Creates a ExtendFeatureInput object. Use properties and methods on this object
+    /// Creates an ExtendFeatureInput object. Use properties and methods on this object
     /// to define the extend feature you want to create and then use the Add method, passing in
     /// the ExtendFeatureInput object.
     /// edges : The surface edges to extend.

@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -28,6 +28,7 @@
 #endif
 
 namespace adsk { namespace core {
+    class Attributes;
     class BoundingBox3D;
     class Point3D;
 }}
@@ -69,7 +70,7 @@ public:
     /// specific entity can be different over time. However, even if you have two different token
     /// strings that were obtained from the same entity, when you use findEntityByToken they
     /// will both return the same entity. Because of that you should never compare entity tokens
-    /// as way to determine what the token represents. Instead, you need to use the findEntityByToken
+    /// as a way to determine what the token represents. Instead, you need to use the findEntityByToken
     /// method to get the two entities identified by the tokens and then compare them.
     /// 
     /// This is only valid for faces that exist in the design, (the isTemporary
@@ -98,6 +99,9 @@ public:
     /// Returns if the face group is planar or not.
     bool isPlanar() const;
 
+    /// Returns the collection of attributes associated with this face group.
+    core::Ptr<core::Attributes> attributes() const;
+
     ADSK_FUSION_FACEGROUP_API static const char* classType();
     ADSK_FUSION_FACEGROUP_API const char* objectType() const override;
     ADSK_FUSION_FACEGROUP_API void* queryInterface(const char* id) const override;
@@ -116,6 +120,7 @@ private:
     virtual FaceGroup* nativeObject_raw() const = 0;
     virtual FaceGroup* createForAssemblyContext_raw(Occurrence* occurrence) const = 0;
     virtual bool isPlanar_raw() const = 0;
+    virtual core::Attributes* attributes_raw() const = 0;
 };
 
 // Inline wrappers
@@ -184,6 +189,12 @@ inline core::Ptr<FaceGroup> FaceGroup::createForAssemblyContext(const core::Ptr<
 inline bool FaceGroup::isPlanar() const
 {
     bool res = isPlanar_raw();
+    return res;
+}
+
+inline core::Ptr<core::Attributes> FaceGroup::attributes() const
+{
+    core::Ptr<core::Attributes> res = attributes_raw();
     return res;
 }
 }// namespace fusion

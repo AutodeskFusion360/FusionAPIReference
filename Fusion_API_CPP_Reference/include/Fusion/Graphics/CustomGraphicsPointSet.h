@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -39,11 +39,11 @@ class CustomGraphicsPointSet : public CustomGraphicsEntity {
 public:
 
     /// Gets and sets the coordinates used to define the position of the custom graphics points.
-    /// If no indexList is specified, every coordinate will be drawn using a custom graphics point,
+    /// If no indexList is specified, every coordinate will be drawn using a custom graphics point.
     core::Ptr<CustomGraphicsCoordinates> coordinates() const;
     bool coordinates(const core::Ptr<CustomGraphicsCoordinates>& value);
 
-    /// An list of indices that specify which coordinates from the coordinate list to draw points for.
+    /// A list of indices that specify which coordinates from the coordinate list to draw points for.
     /// If this is an empty array, then all of the coordinates are used.
     std::vector<int> indexList() const;
     bool indexList(const std::vector<int>& value);

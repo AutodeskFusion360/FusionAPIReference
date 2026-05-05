@@ -82,7 +82,7 @@
       </tr>
       <tr>
         <td class="api-list"><a href="WorkingModel_findAttributes.htm">findAttributes</a></td>
-        <td class="api-list">Find attributes attached to objects in this product that match the group and or attribute name. This does not find attributes attached directly to the Product or Document objects but finds the attributes attached to entities within the product.<br/><br/> The search string for both the groupName and attributeName arguments can be either an absolute name value, or a regular expression. With an absolute name, the search string must match the entire groupName or attributeName, including case. An empty string will match everything. For example if you have an attribute group named "MyStuff" that contains the attribute "Length1", using the search string "MyStuff" as the group name and "Length1" as the attribute name will find the attributes with those names. Searching for "MyStuff" as the group name and "" as the attribute name will find all attributes that have "MyStuff" as the group name.<br/><br/> Regular expressions provide a more flexible way of searching. To use a regular expression, prefix the input string for the groupName or attributeName arguments with "re:". The regular expression much match the entire group or attribute name. For example if you have a group that contains attributes named "Length1", "Length2", "Width1", and "Width2" and want to find any of the length attributes you can use a regular expression using the string "re:Length.*". For more information on attributes see the Attributes topic in the user manual.</td>
+        <td class="api-list">Find attributes attached to objects in this product that match the group and or attribute name. This does not find attributes attached directly to the Product or Document objects but finds the attributes attached to entities within the product.<br/><br/> The search string for both the groupName and attributeName arguments can be either an absolute name value, or a regular expression. With an absolute name, the search string must match the entire groupName or attributeName, including case. An empty string will match everything. For example if you have an attribute group named "MyStuff" that contains the attribute "Length1", using the search string "MyStuff" as the group name and "Length1" as the attribute name will find the attributes with those names. Searching for "MyStuff" as the group name and "" as the attribute name will find all attributes that have "MyStuff" as the group name.<br/><br/> Regular expressions provide a more flexible way of searching. To use a regular expression, prefix the input string for the groupName or attributeName arguments with "re:". The regular expression much match the entire group or attribute name. For example, if you have a group that contains attributes named "Length1", "Length2", "Width1", and "Width2" and want to find any of the length attributes you can use a regular expression using the string "re:Length.*". For more information on attributes see the Attributes topic in the user manual.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="WorkingModel_findEntityByToken.htm">findEntityByToken</a></td>
@@ -95,6 +95,10 @@
       <tr>
         <td class="api-list"><a href="WorkingModel_physicalProperties.htm">physicalProperties</a></td>
         <td class="api-list">Returns the PhysicalProperties object that has properties for getting the area, density, mass, volume, moments, etc for a collection of 3D solid objects.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="WorkingModel_setGroundPlaneOffset.htm">setGroundPlaneOffset</a></td>
+        <td class="api-list">Sets the offset of the ground plane. If the isAdpativeGroundPlane property is true, setting the offset will change isAdaptiveGroundPlane to false. The offset value is an offset relative to the current position of the ground plane.<br/><br/> One example of how this method can be used is to set the isAdaptiveGroundPlane property to true, which will position the ground plane at the bottom of the part. By doing this, you know the current position of the ground plane. Then calling this method with a value of -2.0 will reposition the ground plane 2 cm below the part. If you called this method again with a value of -1.0 the ground plane will be moved an additional 1 cm away from the geometry, since this is defining an offset relative to the current position.</td>
       </tr>
     </Table>
     <h2 class="api">
@@ -111,7 +115,7 @@
       </tr>
       <tr>
         <td class="api-list"><a href="WorkingModel_activeComponent.htm">activeComponent</a></td>
-        <td class="api-list">Returns the component that is current being edited. This can return the root component or another component within the design.</td>
+        <td class="api-list">Returns the component that is currently being edited. This can return the root component or another component within the design.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="WorkingModel_activeEditObject.htm">activeEditObject</a></td>
@@ -143,7 +147,7 @@
       </tr>
       <tr>
         <td class="api-list"><a href="WorkingModel_configurationRowId.htm">configurationRowId</a></td>
-        <td class="api-list">Returns the ID of the row that defines this configuration. Use the isCongiguration property to determine if this Design is a configuration or not. If this is not a configuration, this property returns an empty string.</td>
+        <td class="api-list">Returns the ID of the row that defines this configuration. Use the isConfiguration property to determine if this Design is a configuration or not. If this is not a configuration, this property returns an empty string.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="WorkingModel_configurationTopTable.htm">configurationTopTable</a></td>
@@ -152,6 +156,14 @@
       <tr>
         <td class="api-list"><a href="WorkingModel_contactSets.htm">contactSets</a></td>
         <td class="api-list">Returns the contact sets associated with this design.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="WorkingModel_derivedParameters.htm">derivedParameters</a></td>
+        <td class="api-list">Returns a read only list of all parameters that are derived into the design. This includes the user parameters and model parameters from all derives in this design.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="WorkingModel_designIntent.htm">designIntent</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img><p>Gets and sets the use intent of this design. Changing the design intent from one type to another is not supported in all cases. Below is a list of cases where it is expected to fail: <ul><li>Assembly to Part where the assembly design has child components.</li> <li>Hybrid to Part where the hybrid design has child components</li> </ol></p> <p>The following are cases that are supported: <ul><li>Assembly to Part where the assembly does not contain any child components.</li> <ul>Part to Assembly when the part does not contain any bodies.</li> <ul>Part to Assembly(with bodies) - should succeed but will have modeling enabled (Hybrid)</li> <ul>Part to Hybrid</li> <ul>Hybrid to Assembly</li> <ul>Hybrid-to Part when the hybrid design contains no child components.</li> </p> <p>Setting the type will do nothing and is a no-op.</p></td>
       </tr>
       <tr>
         <td class="api-list"><a href="WorkingModel_designPlasticRules.htm">designPlasticRules</a></td>
@@ -174,6 +186,10 @@
         <td class="api-list">Returns a specialized UnitsManager that can set the default length units and work with parameters.</td>
       </tr>
       <tr>
+        <td class="api-list"><a href="WorkingModel_isAdaptiveGroundPlane.htm">isAdaptiveGroundPlane</a></td>
+        <td class="api-list">Gets and sets if the position of the ground plane for this design is adaptive. If true, the ground plane will automatically move to be just below the model. The orientation of the ground plane is always normal to the "up" direction as defined by the view cube.</td>
+      </tr>
+      <tr>
         <td class="api-list"><a href="WorkingModel_isConfiguration.htm">isConfiguration</a></td>
         <td class="api-list">Gets if this design is a configuration. If this returns true, the configurationRowId can be used to get the row used to define this configuration. Also, when this is true, the design is essentially read-only and edits are either blocked from taking place or cannot be saved.</td>
       </tr>
@@ -188,6 +204,10 @@
       <tr>
         <td class="api-list"><a href="WorkingModel_isContactSetAnalysis.htm">isContactSetAnalysis</a></td>
         <td class="api-list">Gets and sets whether contact analysis is done using contact sets or between all bodies, independent of any contact sets. If True and the isContactAnalysisEnabled property is True then contact analysis is performed using contact sets. If False and isContactAnalysisEnabled is True, then contact analysis is performed between all bodies. If isContactAnalysisEnabled is False then no contact analysis is performed.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="WorkingModel_isModelingInAssemblyEnabled.htm">isModelingInAssemblyEnabled</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>If this design is an assembly, this property gets and sets if the modeling functionality is enabled. If this design is a part or hybrid design, the value of this property should be ignored.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="WorkingModel_isRootComponentActive.htm">isRootComponentActive</a></td>
@@ -218,8 +238,16 @@
         <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
       </tr>
       <tr>
+        <td class="api-list"><a href="WorkingModel_objectVisibility.htm">objectVisibility</a></td>
+        <td class="api-list">Returns the ObjectVisibility object associated with this design which controls which objects are displayed in the graphics window. This is the equivalent of the "Object Visibility" settings in the Display Settings drop-down in the navigation toolbar at the bottom of the Fusion graphics window.</td>
+      </tr>
+      <tr>
         <td class="api-list"><a href="WorkingModel_parentDocument.htm">parentDocument</a></td>
         <td class="api-list">Returns the parent Document object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="WorkingModel_pmiSettings.htm">pmiSettings</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Returns a manager for settings associated with Product Manufacturing Information (PMI) in this design.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="WorkingModel_productType.htm">productType</a></td>
@@ -259,7 +287,7 @@
       </tr>
       <tr>
         <td class="api-list"><a href="WorkingModel_userParameters.htm">userParameters</a></td>
-        <td class="api-list">Returns the collection of User Parameters in a design</td>
+        <td class="api-list">Returns the collection of User Parameters in a design.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="WorkingModel_workspaces.htm">workspaces</a></td>
@@ -274,9 +302,9 @@
       <table width="100%" style="font-size:15">
         <tr>
           <td align="left">
-                © Copyright 2025 Autodesk, Inc.
+                © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(WorkingModel%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(WorkingModel%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

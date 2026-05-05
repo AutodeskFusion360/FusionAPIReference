@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -60,8 +60,8 @@ public:
     /// cloud rendering process.
     core::Ptr<Rendering> rendering() const;
 
-    /// Returns if the Render workspace for this Design is active or not. Returns
-    /// true if the workspace is active.
+    /// Returns whether the Render workspace for this Design is active. Returns
+    /// true if the workspace is active, false otherwise.
     bool isRenderWorkspaceActive() const;
 
     /// Activates the Render workspace for this design. If the workspace is already

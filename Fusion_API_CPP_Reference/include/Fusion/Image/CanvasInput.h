@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -88,8 +88,8 @@ public:
     core::Ptr<core::Plane> plane() const;
 
     /// Gets and sets the transform of the canvas. This allows you to control the position, rotation,
-    /// scaling, and flipping. The X and Y axes defined by the matrix, must be perpendicular to one another.
-    /// The directions of the X and Y axes defines the orientation of the image.
+    /// scaling, and flipping. The X and Y axes defined by the matrix must be perpendicular to one another.
+    /// The directions of the X and Y axes define the orientation of the image.
     /// 
     /// This is a 3x3 matrix where the third column controls the position of the canvas and is relative to
     /// the parameter space of the plane defined by the specified planar face or construction plane.

@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -28,6 +28,7 @@
 
 namespace adsk { namespace cam {
     class CAM3MFExportMetadataOptions;
+    class CAM3MFExportStructure;
 }}
 
 namespace adsk { namespace cam {
@@ -98,6 +99,22 @@ public:
     int volumetricDataResolution() const;
     bool volumetricDataResolution(int value);
 
+    /// !!!!! Warning !!!!!
+    /// ! This is in preview state; please see the help for more info
+    /// !!!!! Warning !!!!!
+    /// 
+    /// Flag toggling if slice data which has been generated beforehand by generating the entire setup or the additive toolpath object should be included in the exported file.
+    /// The default value is false.
+    bool isSliceDataIncluded() const;
+    bool isSliceDataIncluded(bool value);
+
+    /// !!!!! Warning !!!!!
+    /// ! This is in preview state; please see the help for more info
+    /// !!!!! Warning !!!!!
+    /// 
+    /// Sets the structure type and naming convention used for the exported 3MF file.
+    core::Ptr<CAM3MFExportStructure> structure() const;
+
     ADSK_CAM_CAM3MFEXPORTOPTIONS_API static const char* classType();
     ADSK_CAM_CAM3MFEXPORTOPTIONS_API const char* objectType() const override;
     ADSK_CAM_CAM3MFEXPORTOPTIONS_API void* queryInterface(const char* id) const override;
@@ -125,6 +142,9 @@ private:
     virtual bool isVolumetricDataIncluded_raw(bool value) = 0;
     virtual int volumetricDataResolution_raw() const = 0;
     virtual bool volumetricDataResolution_raw(int value) = 0;
+    virtual bool isSliceDataIncluded_raw() const = 0;
+    virtual bool isSliceDataIncluded_raw(bool value) = 0;
+    virtual CAM3MFExportStructure* structure_raw() const = 0;
 };
 
 // Inline wrappers
@@ -232,6 +252,23 @@ inline int CAM3MFExportOptions::volumetricDataResolution() const
 inline bool CAM3MFExportOptions::volumetricDataResolution(int value)
 {
     return volumetricDataResolution_raw(value);
+}
+
+inline bool CAM3MFExportOptions::isSliceDataIncluded() const
+{
+    bool res = isSliceDataIncluded_raw();
+    return res;
+}
+
+inline bool CAM3MFExportOptions::isSliceDataIncluded(bool value)
+{
+    return isSliceDataIncluded_raw(value);
+}
+
+inline core::Ptr<CAM3MFExportStructure> CAM3MFExportOptions::structure() const
+{
+    core::Ptr<CAM3MFExportStructure> res = structure_raw();
+    return res;
 }
 }// namespace cam
 }// namespace adsk

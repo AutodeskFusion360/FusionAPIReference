@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -37,10 +37,6 @@ namespace adsk { namespace fusion {
 
 namespace adsk { namespace fusion {
 
-/// !!!!! Warning !!!!!
-/// ! This is in preview state; please see the help for more info
-/// !!!!! Warning !!!!!
-/// 
 /// Defines a component within an arrangement. This specifies an occurrence along with additional
 /// arrangement information. This object is the API equivalent of a single line within the component
 /// list shown in the Arrange dialog. This object is used for both the creation of a new Arrange
@@ -64,7 +60,7 @@ public:
     int quantity() const;
     bool quantity(int value);
 
-    /// Specifies if the direction is flipped from it's default direction.
+    /// Specifies if the direction is flipped from its default direction.
     /// 
     /// For a component defined by a face the default direction is defined by the selected face
     /// and the isGlobalDirectionFaceUp property of the Arrange2DDefinition associated with the

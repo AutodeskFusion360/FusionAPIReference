@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -12,6 +12,7 @@
 #include "../../Core/Base.h"
 #include "../FusionTypeDefs.h"
 #include <string>
+#include <vector>
 
 // THIS CLASS WILL BE VISIBLE TO AN API CLIENT.
 // THIS HEADER FILE WILL BE GENERATED FROM NIDL.
@@ -35,6 +36,7 @@ namespace adsk { namespace fusion {
     class Component;
     class JointGeometry;
     class JointMotion;
+    class MotionLink;
     class Occurrence;
     class TimelineObject;
 }}
@@ -178,7 +180,7 @@ public:
     bool setAsBallJointMotion(JointDirections pitchDirection, JointDirections yawDirection, const core::Ptr<JointGeometry>& geometry = NULL, const core::Ptr<core::Base>& customPitchDirection = NULL, const core::Ptr<core::Base>& customYawDirection = NULL);
 
     /// The NativeObject is the object outside the context of an assembly and
-    /// in the context of it's parent component.
+    /// in the context of its parent component.
     /// Returns null in the case where this object is not in the context of
     /// an assembly but is already the native object.
     core::Ptr<AsBuiltJoint> nativeObject() const;
@@ -235,6 +237,9 @@ public:
     /// no longer available.
     core::Ptr<core::Matrix3D> transform() const;
 
+    /// Returns the MotionLink objects that this joint is involved in.
+    std::vector<core::Ptr<MotionLink>> motionLinks() const;
+
     ADSK_FUSION_ASBUILTJOINT_API static const char* classType();
     ADSK_FUSION_ASBUILTJOINT_API const char* objectType() const override;
     ADSK_FUSION_ASBUILTJOINT_API void* queryInterface(const char* id) const override;
@@ -271,6 +276,7 @@ private:
     virtual core::Attributes* attributes_raw() const = 0;
     virtual char* entityToken_raw() const = 0;
     virtual core::Matrix3D* transform_raw() const = 0;
+    virtual MotionLink** motionLinks_raw(size_t& return_size) const = 0;
 };
 
 // Inline wrappers
@@ -450,6 +456,20 @@ inline std::string AsBuiltJoint::entityToken() const
 inline core::Ptr<core::Matrix3D> AsBuiltJoint::transform() const
 {
     core::Ptr<core::Matrix3D> res = transform_raw();
+    return res;
+}
+
+inline std::vector<core::Ptr<MotionLink>> AsBuiltJoint::motionLinks() const
+{
+    std::vector<core::Ptr<MotionLink>> res;
+    size_t s;
+
+    MotionLink** p= motionLinks_raw(s);
+    if(p)
+    {
+        res.assign(p, p+s);
+        core::DeallocateArray(p);
+    }
     return res;
 }
 }// namespace fusion

@@ -1,0 +1,146 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/RuleFilletSettings.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="22/09/2025">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="RuleFilletSettings">
+    <meta name="description" content="RuleFilletSettings Object">
+    <meta name="topicid" content="GUID-0C54FE1B-B489-466E-BBFB-E7FC8F5E3A8B">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>RuleFilletSettings Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">RuleFilletSettings Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Features/RuleFilletSettings.h&gt;<h2 class="api">
+          Description
+        </h2>The settings for the rule fillet feature.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RuleFilletSettings_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RuleFilletSettings_setByAllEdges.htm">setByAllEdges</a></td>
+        <td class="api-list">Method that adds an array of BRepFace and/or Feature objects to have all their edges filleted. Calling this method will set ruleType to RuleFilletRuleTypes.AllEdgesRuleFilletRuleType.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RuleFilletSettings_setByBetweenFacesOrFeatures.htm">setByBetweenFacesOrFeatures</a></td>
+        <td class="api-list">Method that adds two sets of BRepFace and/or Feature objects to have the edges between them filleted. Call this method will set ruleType to RuleFilletRuleTypes.BetweenFacesOrFeaturesRuleFilletRuleType.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RuleFilletSettings_setToAsymmetric.htm">setToAsymmetric</a></td>
+        <td class="api-list">Changes the radius type to be asymmetric.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RuleFilletSettings_setToConstantRadius.htm">setToConstantRadius</a></td>
+        <td class="api-list">Changes the radius type to be constant.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RuleFilletSettings_asymmetricOffsetOne.htm">asymmetricOffsetOne</a></td>
+        <td class="api-list">Gets the parameter controlling the first offset of this asymmetric rule fillet. This property will return null when isConstantRadius is true. To edit the offset, use properties on the parameter to change the value of the parameter.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RuleFilletSettings_asymmetricOffsetTwo.htm">asymmetricOffsetTwo</a></td>
+        <td class="api-list">Gets the parameter controlling the second offset of this asymmetric rule fillet. This property will return null when isConstantRadius is true. To edit the offset, use properties on the parameter to change the value of the parameter.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RuleFilletSettings_facesOrFeatures.htm">facesOrFeatures</a></td>
+        <td class="api-list">Gets an array of BRepFace and/or Feature objects that have all their edges filleted. This returns an empty array if ruleType is not RuleFilletRuleTypes.AllEdgesRuleFilletRuleType.<br/><br/> To use this property, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True).</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RuleFilletSettings_facesOrFeaturesOne.htm">facesOrFeaturesOne</a></td>
+        <td class="api-list">Gets the first array of BRepFace and/or Feature objects for between faces/features rule fillet. This returns an empty array if ruleType is not RuleFilletRuleTypes.BetweenFacesOrFeaturesRuleFilletRuleType.<br/><br/> To use this property, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True).</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RuleFilletSettings_facesOrFeaturesTwo.htm">facesOrFeaturesTwo</a></td>
+        <td class="api-list">Gets the second array of BRepFace and/or Feature objects for between faces/features rule fillet. This returns an empty array if ruleType is not RuleFilletRuleTypes.BetweenFacesOrFeaturesRuleFilletRuleType.<br/><br/> To use this property, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True).</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RuleFilletSettings_isConstantRadius.htm">isConstantRadius</a></td>
+        <td class="api-list">Gets and sets if the rule fillet is a constant or asymmetric radius type.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RuleFilletSettings_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RuleFilletSettings_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RuleFilletSettings_radius.htm">radius</a></td>
+        <td class="api-list">Gets the parameter controlling the radius of a constant radius rule fillet. This property will return null when isConstantRadius is false. To edit the radius, use properties on the parameter to change the value of the parameter.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RuleFilletSettings_ruleType.htm">ruleType</a></td>
+        <td class="api-list">Gets the rule type for the rule fillet.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="RuleFilletSettings_topologyType.htm">topologyType</a></td>
+        <td class="api-list">Gets and sets the topology type of the rule fillet.<br/><br/> To set this property, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True).</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="FilletFeature_ruleFilletSettings.htm">FilletFeature.ruleFilletSettings</a><h2 class="api">
+            Version
+          </h2>
+        Introduced in version November 2025<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2026 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(RuleFilletSettings%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

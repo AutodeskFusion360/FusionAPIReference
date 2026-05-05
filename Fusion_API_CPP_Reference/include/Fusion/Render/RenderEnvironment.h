@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -40,8 +40,8 @@ public:
 
     /// Statically creates a RenderEnvironment which can be used to set the environment for
     /// a scene using the SceneSettings.backgroundEnvironment property.
-    /// fullFilename : 
-    /// 
+    /// fullFilename : The full path and filename of the custom environment file to load.
+    /// Returns the RenderEnvironment object or null if the file could not be loaded.
     static core::Ptr<RenderEnvironment> loadCustomEnvironment(const std::string& fullFilename);
 
     /// Returns true if this environment is a custom environment.

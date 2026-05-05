@@ -1,0 +1,79 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/OffsetFacesFeatureInput_distance.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="22/09/2025">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="OffsetFacesFeatureInput_distance">
+    <meta name="description" content="OffsetFacesFeatureInput.distance Property">
+    <meta name="topicid" content="GUID-AB371349-7AEC-452E-A8BB-F53AFB8DE2F1">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>OffsetFacesFeatureInput.distance Property</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">OffsetFacesFeatureInput.distance Property</h1>
+
+          Parent Object: <a href="OffsetFacesFeatureInput.htm">OffsetFacesFeatureInput</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Features/OffsetFacesFeatureInput.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">The distance of the offset. A positive value offsets the faces in the direction of the face normal. A negative value goes in the other direction.<br/><br/> This is a ValueInput object that can be created using either createByReal or createByString. When a real ValueInput is used, the value is centimeters. When a string ValueInput is used, it defines the expression of the parameter that will be created to control the feature and any valid expression that defines a distance can be used.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"offsetFacesFeatureInput_var" is a variable referencing an OffsetFacesFeatureInput object.</span><br /><br /><code><pre class="api-code"><span style="color:blue"># Get the value of the property.</span><br />propertyValue = offsetFacesFeatureInput_var.<b>distance<br /><br /><span style="color:blue"># Set the value of the property.</span><br />offsetFacesFeatureInput_var.<b>distance</b> = propertyValue</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"offsetFacesFeatureInput_var" is a variable referencing an OffsetFacesFeatureInput object.<br /><code><pre class="api-code">#include &lt;Fusion/Features/OffsetFacesFeatureInput.h&gt;<br /><br /><span style="color:blue">// Get the value of the property.</span><br />Ptr&lt;ValueInput&gt; propertyValue = offsetFacesFeatureInput_var-&gt;<b>distance</b>();<br /><br /><span style="color:blue">// Set the value of the property, where value_var is a ValueInput.</span><br />bool returnValue = offsetFacesFeatureInput_var-&gt;<b>distance</b>(value_var);</pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Property Value
+          </h2>This is a read/write property whose value is a <a href="ValueInput.htm">ValueInput</a>.<h2 class="api">
+            Version
+          </h2>
+        Introduced in version November 2025<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2026 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(OffsetFacesFeatureInput.distance%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

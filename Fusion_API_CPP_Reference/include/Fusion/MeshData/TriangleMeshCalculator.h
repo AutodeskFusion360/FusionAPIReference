@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -62,7 +62,7 @@ public:
     double surfaceTolerance() const;
     bool surfaceTolerance(double value);
 
-    /// Specifies the maximum side of any triangle in the mesh. A value of 0 (the default)
+    /// Specifies the maximum side length of any triangle in the mesh. A value of 0 (the default)
     /// indicates that no maximum length is specified. The value is specified in centimeters.
     double maxSideLength() const;
     bool maxSideLength(double value);

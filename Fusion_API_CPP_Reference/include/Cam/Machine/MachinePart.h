@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -48,6 +48,7 @@ public:
     core::Ptr<MachineParts> children() const;
 
     /// Get or set the parent of this part.
+    /// Returns null if this part is a root part.
     /// Setting the parent will add this part to the end of the parent's children
     /// collection. Setting the parent will throw an error if the new parent is this
     /// part or a child of this part.
@@ -71,10 +72,6 @@ public:
     /// Will return null if the part has no spindle assigned.
     core::Ptr<MachineSpindle> spindle() const;
 
-    /// !!!!! Warning !!!!!
-    /// ! This is in preview state; please see the help for more info
-    /// !!!!! Warning !!!!!
-    /// 
     /// Get the tool station object for this part.
     /// Will return null if the part has no tool station assigned.
     core::Ptr<MachineToolStation> toolStation() const;

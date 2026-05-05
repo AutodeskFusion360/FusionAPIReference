@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -29,7 +29,7 @@
 
 namespace adsk { namespace fusion {
 
-/// Used to get and set the current value of a value associated with a sheet metal rule. A value
+/// Used to get and set the current value associated with a sheet metal rule. A value
 /// can be gotten or set using a string or a double. A string can contain equations and unit specifiers
 /// whereas a double defines the size in centimeters. In the user-interface, the user is always
 /// setting the string expression. However, when programming it is typically more convenient to set

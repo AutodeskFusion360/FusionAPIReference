@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -68,6 +68,27 @@ public:
     /// Reading deprecated parameters is allowed, but setting deprecated parameters will throw an error.
     bool isDeprecated() const;
 
+    /// Returns the full title of this parameter as seen in the user interface.
+    /// This can potentially be more descriptive than the basic title.
+    /// This title is localized and can change based on the current language.
+    std::string fullTitle() const;
+
+    /// Gets if this parameter is visible in the user interface.
+    bool isVisible() const;
+
+    /// Gets and sets the userDefaultExpression of this parameter.
+    /// If no userDefaultExpression is set, the systemDefaultExpression is returned.
+    /// Throws an exception if the parent is not an operation or does not support user default expressions.
+    std::string userDefaultExpression() const;
+
+    /// Returns the systemDefaultExpression of this parameter.
+    std::string systemDefaultExpression() const;
+
+    /// Saves the current expression as user default value.
+    /// Throws an exception if the parent is not an operation or does not support user default expressions.
+    /// Returns true if saving was successful.
+    bool saveExpressionAsUserDefault();
+
     ADSK_CAM_CAMPARAMETER_API static const char* classType();
     ADSK_CAM_CAMPARAMETER_API const char* objectType() const override;
     ADSK_CAM_CAMPARAMETER_API void* queryInterface(const char* id) const override;
@@ -86,6 +107,11 @@ private:
     virtual bool isEditable_raw() const = 0;
     virtual ParameterValue* value_raw() const = 0;
     virtual bool isDeprecated_raw() const = 0;
+    virtual char* fullTitle_raw() const = 0;
+    virtual bool isVisible_raw() const = 0;
+    virtual char* userDefaultExpression_raw() const = 0;
+    virtual char* systemDefaultExpression_raw() const = 0;
+    virtual bool saveExpressionAsUserDefault_raw() = 0;
 };
 
 // Inline wrappers
@@ -181,6 +207,57 @@ inline core::Ptr<ParameterValue> CAMParameter::value() const
 inline bool CAMParameter::isDeprecated() const
 {
     bool res = isDeprecated_raw();
+    return res;
+}
+
+inline std::string CAMParameter::fullTitle() const
+{
+    std::string res;
+
+    char* p= fullTitle_raw();
+    if (p)
+    {
+        res = p;
+        core::DeallocateArray(p);
+    }
+    return res;
+}
+
+inline bool CAMParameter::isVisible() const
+{
+    bool res = isVisible_raw();
+    return res;
+}
+
+inline std::string CAMParameter::userDefaultExpression() const
+{
+    std::string res;
+
+    char* p= userDefaultExpression_raw();
+    if (p)
+    {
+        res = p;
+        core::DeallocateArray(p);
+    }
+    return res;
+}
+
+inline std::string CAMParameter::systemDefaultExpression() const
+{
+    std::string res;
+
+    char* p= systemDefaultExpression_raw();
+    if (p)
+    {
+        res = p;
+        core::DeallocateArray(p);
+    }
+    return res;
+}
+
+inline bool CAMParameter::saveExpressionAsUserDefault()
+{
+    bool res = saveExpressionAsUserDefault_raw();
     return res;
 }
 }// namespace cam

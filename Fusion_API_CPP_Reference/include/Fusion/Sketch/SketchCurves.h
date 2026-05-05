@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -36,6 +36,7 @@ namespace adsk { namespace fusion {
     class SketchEllipticalArcs;
     class SketchFittedSplines;
     class SketchFixedSplines;
+    class SketchIsoparametricCurves;
     class SketchLines;
 }}
 
@@ -100,6 +101,11 @@ public:
     /// creation of new control point splines.
     core::Ptr<SketchControlPointSplines> sketchControlPointSplines() const;
 
+    /// Returns the isoparametric curves collection associated with this sketch.
+    /// This provides access to the existing isoparametric curves and supports the
+    /// creation of new isoparametric curves.
+    core::Ptr<SketchIsoparametricCurves> sketchIsoparametricCurves() const;
+
     typedef SketchCurve iterable_type;
     template <class OutputIterator> void copyTo(OutputIterator result);
 
@@ -122,6 +128,7 @@ private:
     virtual SketchFixedSplines* sketchFixedSplines_raw() const = 0;
     virtual SketchConicCurves* sketchConicCurves_raw() const = 0;
     virtual SketchControlPointSplines* sketchControlPointSplines_raw() const = 0;
+    virtual SketchIsoparametricCurves* sketchIsoparametricCurves_raw() const = 0;
 };
 
 // Inline wrappers
@@ -189,6 +196,12 @@ inline core::Ptr<SketchConicCurves> SketchCurves::sketchConicCurves() const
 inline core::Ptr<SketchControlPointSplines> SketchCurves::sketchControlPointSplines() const
 {
     core::Ptr<SketchControlPointSplines> res = sketchControlPointSplines_raw();
+    return res;
+}
+
+inline core::Ptr<SketchIsoparametricCurves> SketchCurves::sketchIsoparametricCurves() const
+{
+    core::Ptr<SketchIsoparametricCurves> res = sketchIsoparametricCurves_raw();
     return res;
 }
 

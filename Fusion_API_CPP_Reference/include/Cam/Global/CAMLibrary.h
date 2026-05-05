@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -80,6 +80,11 @@ public:
     /// Returns the URL to the newly created folder
     core::Ptr<core::URL> createFolder(const core::Ptr<core::URL>& parentUrl, const std::string& folderName);
 
+    /// Checks if the given URL points to an existing folder or asset in the library.
+    /// url : The URL to be checked.
+    /// Returns true if the URL points to an existing folder or asset, false otherwise.
+    bool doesPathExist(const core::Ptr<core::URL>& url) const;
+
     ADSK_CAM_CAMLIBRARY_API static const char* classType();
     ADSK_CAM_CAMLIBRARY_API const char* objectType() const override;
     ADSK_CAM_CAMLIBRARY_API void* queryInterface(const char* id) const override;
@@ -96,6 +101,7 @@ private:
     virtual bool deleteFolder_raw(core::URL* url) = 0;
     virtual bool deleteAsset_raw(core::URL* url) = 0;
     virtual core::URL* createFolder_raw(core::URL* parentUrl, const char* folderName) = 0;
+    virtual bool doesPathExist_raw(core::URL* url) const = 0;
     virtual void placeholderCAMLibrary0() {}
     virtual void placeholderCAMLibrary1() {}
     virtual void placeholderCAMLibrary2() {}
@@ -119,7 +125,6 @@ private:
     virtual void placeholderCAMLibrary20() {}
     virtual void placeholderCAMLibrary21() {}
     virtual void placeholderCAMLibrary22() {}
-    virtual void placeholderCAMLibrary23() {}
 };
 
 // Inline wrappers
@@ -199,6 +204,12 @@ inline bool CAMLibrary::deleteAsset(const core::Ptr<core::URL>& url)
 inline core::Ptr<core::URL> CAMLibrary::createFolder(const core::Ptr<core::URL>& parentUrl, const std::string& folderName)
 {
     core::Ptr<core::URL> res = createFolder_raw(parentUrl.get(), folderName.c_str());
+    return res;
+}
+
+inline bool CAMLibrary::doesPathExist(const core::Ptr<core::URL>& url) const
+{
+    bool res = doesPathExist_raw(url.get());
     return res;
 }
 }// namespace cam

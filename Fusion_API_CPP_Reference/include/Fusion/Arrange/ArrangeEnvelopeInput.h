@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -32,10 +32,6 @@ namespace adsk { namespace core {
 
 namespace adsk { namespace fusion {
 
-/// !!!!! Warning !!!!!
-/// ! This is in preview state; please see the help for more info
-/// !!!!! Warning !!!!!
-/// 
 /// The base class used to define the arrange envelope when creating an Arrange feature.
 class ArrangeEnvelopeInput : public core::Base {
 public:
@@ -71,8 +67,8 @@ public:
     core::Ptr<core::ValueInput> frameWidth() const;
     bool frameWidth(const core::Ptr<core::ValueInput>& value);
 
-    /// Specifies the minimum clearance between components in the arrangement. for a 3D layout this
-    /// also specified the distance between the components in the Z direction.
+    /// Specifies the minimum clearance between components in the arrangement. For a 3D layout, this
+    /// also specifies the distance between the components in the Z direction.
     /// 
     /// This value will become a parameter when the arrangement is created. If the ValueInput is created
     /// using a real number it is in centimeters. If you use a string, it is evaluated the same as a value

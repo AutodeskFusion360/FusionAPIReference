@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -53,7 +53,7 @@ public:
     /// The number of Untrim features in the collection.
     size_t count() const;
 
-    /// Creates a UntrimFeatureInput object that defines the input needed to create a untrim feature. Use the input
+    /// Creates an UntrimFeatureInput object that defines the input needed to create an untrim feature. Use the input
     /// object to define the input to create the desired feature and then use the Add method, passing in the UntrimFeatureInput object.
     /// faces : An array of BRepFace objects that will have the loops of the specified type removed.
     /// Only loops that do not have a connected face can be removed (the edges in the loop have a single face).
@@ -63,7 +63,7 @@ public:
     /// Returns the newly created UntrimFeatureInput object or null if the creation failed.
     core::Ptr<UntrimFeatureInput> createInputFromFaces(const std::vector<core::Ptr<BRepFace>>& faces, UntrimLoopTypes untrimLoopType, const core::Ptr<core::ValueInput>& extensionDistance = NULL) const;
 
-    /// Creates a UntrimFeatureInput object that defines the input needed to create a untrim feature. Use the input
+    /// Creates an UntrimFeatureInput object that defines the input needed to create an untrim feature. Use the input
     /// object to define the input to create the desired feature and then use the Add method, passing in the UntrimFeatureInput object.
     /// loops : Input the entities that define loops to remove.
     /// Only loops that do not have a connected face can be removed (the edges in the loop have a single face)

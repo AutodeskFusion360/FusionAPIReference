@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -33,7 +33,7 @@ namespace adsk { namespace core {
 
 namespace adsk { namespace fusion {
 
-/// This class defines the methods and properties that pertain to the definition of a single side of boss feature
+/// This class defines the methods and properties that pertain to the definition of a single side of boss feature.
 class BossFeatureSideInput : public core::Base {
 public:
 
@@ -67,11 +67,11 @@ public:
     /// 
     void setCountersink(const core::Ptr<core::ValueInput>& diameter, const core::Ptr<core::ValueInput>& holeDiameter, const core::Ptr<core::ValueInput>& holeMajorDiameter, const core::Ptr<core::ValueInput>& depth, const core::Ptr<core::ValueInput>& countersinkAngle = NULL);
 
-    /// Get or set boss alignment shape. This usually corresponds to the alignment shape of the boss counterpart.
+    /// Gets or sets boss alignment shape. This usually corresponds to the alignment shape of the boss counterpart.
     BossAlignmentTypes alignmentType() const;
     bool alignmentType(BossAlignmentTypes value);
 
-    /// Get or set hole extent this feature represents. For top side only through hole extent is accepted.
+    /// Gets or sets hole extent this feature represents. For top side only through hole extent is accepted.
     BossHoleExtentTypes holeExtentType() const;
     bool holeExtentType(BossHoleExtentTypes value);
 
@@ -89,142 +89,142 @@ public:
     /// 
     void clearRibExtent();
 
-    /// Get or set offset clearance as additional small offset from the selected parting plane and position point.
+    /// Gets or sets offset clearance as additional small offset from the selected parting plane and position point.
     core::Ptr<core::ValueInput> offsetClearance() const;
     bool offsetClearance(const core::Ptr<core::ValueInput>& value);
 
-    /// Get or set boss shank diameter.
+    /// Gets or sets boss shank diameter.
     core::Ptr<core::ValueInput> diameter() const;
     bool diameter(const core::Ptr<core::ValueInput>& value);
 
-    /// Get or set shank draft angle.
+    /// Gets or sets shank draft angle.
     core::Ptr<core::ValueInput> draftAngle() const;
     bool draftAngle(const core::Ptr<core::ValueInput>& value);
 
-    /// Get or set alignment diameter.
+    /// Gets or sets alignment diameter.
     core::Ptr<core::ValueInput> alignmentDiameter() const;
     bool alignmentDiameter(const core::Ptr<core::ValueInput>& value);
 
-    /// Get or set alignment depth.
+    /// Gets or sets alignment depth.
     core::Ptr<core::ValueInput> alignmentDepth() const;
     bool alignmentDepth(const core::Ptr<core::ValueInput>& value);
 
-    /// Get or set alignment draft angle.
+    /// Gets or sets alignment draft angle.
     core::Ptr<core::ValueInput> alignmentDraftAngle() const;
     bool alignmentDraftAngle(const core::Ptr<core::ValueInput>& value);
 
-    /// Get or set hole diameter.
+    /// Gets or sets hole diameter.
     core::Ptr<core::ValueInput> holeDiameter() const;
     bool holeDiameter(const core::Ptr<core::ValueInput>& value);
 
-    /// Get or set hole draft angle.
+    /// Gets or sets hole draft angle.
     core::Ptr<core::ValueInput> holeDraftAngle() const;
     bool holeDraftAngle(const core::Ptr<core::ValueInput>& value);
 
-    /// Get or set hole depth with respect to hole extent type.
+    /// Gets or sets hole depth with respect to hole extent type.
     /// If hole extent type is set to BossHoleThrough parameter is ignored. If hole extent type is BossBlindFull
     /// the parameter is a distance from farthest face. If hole extent type is set to BossBlindDepth the parameter
     /// is a distance from start face of the hole.
     core::Ptr<core::ValueInput> holeDepth() const;
     bool holeDepth(const core::Ptr<core::ValueInput>& value);
 
-    /// Get or set major hole diameter for counterbore or countersink hole.
+    /// Gets or sets major hole diameter for counterbore or countersink hole.
     /// This input is ignored for blank boss or boss with simple hole.
     core::Ptr<core::ValueInput> holeMajorDiameter() const;
     bool holeMajorDiameter(const core::Ptr<core::ValueInput>& value);
 
-    /// Get or set major hole depth for counterbore and countersink hole or material thickness under screw head
+    /// Gets or sets major hole depth for counterbore and countersink hole or material thickness under screw head
     /// based on hole orientation in a boss feature. This input is ignored for blank boss or boss with simple hole.
     core::Ptr<core::ValueInput> holeMajorDepth() const;
     bool holeMajorDepth(const core::Ptr<core::ValueInput>& value);
 
-    /// Get or set major hole draft angle for counterbore and countersink hole.
+    /// Gets or sets major hole draft angle for counterbore and countersink hole.
     /// This input is ignored for blank boss or boss with simple hole.
     core::Ptr<core::ValueInput> holeMajorDraftAngle() const;
     bool holeMajorDraftAngle(const core::Ptr<core::ValueInput>& value);
 
-    /// Get or set countersink angle for countersink hole. This input is used only for countersink hole.
+    /// Gets or sets countersink angle for countersink hole. This input is used only for countersink hole.
     core::Ptr<core::ValueInput> holeCountersinkAngle() const;
     bool holeCountersinkAngle(const core::Ptr<core::ValueInput>& value);
 
-    /// Get or set blend radius of the boss shank and participant body.
+    /// Gets or sets blend radius of the boss shank and participant body.
     core::Ptr<core::ValueInput> rootRadius() const;
     bool rootRadius(const core::Ptr<core::ValueInput>& value);
 
-    /// Get or set blend radius of the boss shank top parting face.
+    /// Gets or sets blend radius of the boss shank top parting face.
     core::Ptr<core::ValueInput> tipRadius() const;
     bool tipRadius(const core::Ptr<core::ValueInput>& value);
 
-    /// Get or set blend radius of the boss alignment tip.
+    /// Gets or sets blend radius of the boss alignment tip.
     core::Ptr<core::ValueInput> alignmentTipRadius() const;
     bool alignmentTipRadius(const core::Ptr<core::ValueInput>& value);
 
-    /// Get or set blend radius of the boss alignment root.
+    /// Gets or sets blend radius of the boss alignment root.
     core::Ptr<core::ValueInput> alignmentRootRadius() const;
     bool alignmentRootRadius(const core::Ptr<core::ValueInput>& value);
 
-    /// Get or set blend radius of the hole start.
+    /// Gets or sets blend radius of the hole start.
     core::Ptr<core::ValueInput> holeStartRadius() const;
     bool holeStartRadius(const core::Ptr<core::ValueInput>& value);
 
-    /// Get or set blend radius of the hole end.
+    /// Gets or sets blend radius of the hole end.
     core::Ptr<core::ValueInput> holeEndRadius() const;
     bool holeEndRadius(const core::Ptr<core::ValueInput>& value);
 
-    /// Get or set blend radius of major hole counterbore.
+    /// Gets or sets blend radius of major hole counterbore.
     core::Ptr<core::ValueInput> holeMajorTipRadius() const;
     bool holeMajorTipRadius(const core::Ptr<core::ValueInput>& value);
 
-    /// Get or set blend radius of major hole counterbore root.
+    /// Gets or sets blend radius of major hole counterbore root.
     core::Ptr<core::ValueInput> holeMajorRootRadius() const;
     bool holeMajorRootRadius(const core::Ptr<core::ValueInput>& value);
 
-    /// Get or set ribs length measured from the shank axis.
+    /// Gets or sets ribs length measured from the shank axis.
     core::Ptr<core::ValueInput> ribLength() const;
     bool ribLength(const core::Ptr<core::ValueInput>& value);
 
-    /// Get or set ribs offset from the top face or alignment face.
+    /// Gets or sets ribs offset from the top face or alignment face.
     core::Ptr<core::ValueInput> ribOffset() const;
     bool ribOffset(const core::Ptr<core::ValueInput>& value);
 
-    /// Get or set ribs thickness.
+    /// Gets or sets ribs thickness.
     core::Ptr<core::ValueInput> ribThickness() const;
     bool ribThickness(const core::Ptr<core::ValueInput>& value);
 
-    /// Get or set ribs draft angle.
+    /// Gets or sets ribs draft angle.
     core::Ptr<core::ValueInput> ribDraftAngle() const;
     bool ribDraftAngle(const core::Ptr<core::ValueInput>& value);
 
-    /// Get or set rib outer draft angle.
+    /// Gets or sets rib outer draft angle.
     core::Ptr<core::ValueInput> ribOuterDraftAngle() const;
     bool ribOuterDraftAngle(const core::Ptr<core::ValueInput>& value);
 
-    /// Get or set size of rib chamfer or fillet.
+    /// Gets or sets size of rib chamfer or fillet.
     core::Ptr<core::ValueInput> ribCutSize() const;
     bool ribCutSize(const core::Ptr<core::ValueInput>& value);
 
-    /// Get or set rib chamfer angle. This input is used only for rib with chamfer.
+    /// Gets or sets rib chamfer angle. This input is used only for rib with chamfer.
     core::Ptr<core::ValueInput> ribChamferAngle() const;
     bool ribChamferAngle(const core::Ptr<core::ValueInput>& value);
 
-    /// Get or set rib outer tip blend radius.
+    /// Gets or sets rib outer tip blend radius.
     core::Ptr<core::ValueInput> ribTipRadius() const;
     bool ribTipRadius(const core::Ptr<core::ValueInput>& value);
 
-    /// Get or set rib base root blend radius.
+    /// Gets or sets rib base root blend radius.
     core::Ptr<core::ValueInput> ribRootRadius() const;
     bool ribRootRadius(const core::Ptr<core::ValueInput>& value);
 
-    /// Get or set rotation angle of the first rib from the reference vector.
+    /// Gets or sets rotation angle of the first rib from the reference vector.
     /// Reference vector is X-axis of the parent sketch from selected sketch point(s).
     core::Ptr<core::ValueInput> ribRotation() const;
     bool ribRotation(const core::Ptr<core::ValueInput>& value);
 
-    /// Get or set total angle for ribs distribution. Default is 360 deg.
+    /// Gets or sets total angle for ribs distribution. Default is 360 deg.
     core::Ptr<core::ValueInput> ribTotalAngle() const;
     bool ribTotalAngle(const core::Ptr<core::ValueInput>& value);
 
-    /// Get or set number of ribs.
+    /// Gets or sets number of ribs.
     core::Ptr<core::ValueInput> ribCount() const;
     bool ribCount(const core::Ptr<core::ValueInput>& value);
 

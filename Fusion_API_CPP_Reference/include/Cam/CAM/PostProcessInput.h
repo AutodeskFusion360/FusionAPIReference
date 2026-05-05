@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -36,6 +36,10 @@ namespace adsk { namespace core {
 
 namespace adsk { namespace cam {
 
+/// !!!!! Warning !!!!!
+/// ! This has been retired; please see the help for more info
+/// !!!!! Warning !!!!!
+/// 
 /// This class defines the properties that pertain to the settings and options required for posting a
 /// toolpath to generate a CNC file.  A PostProcessInput object is a required parameter for the
 /// postProcessAll() and postProcess() methods on the CAM class.

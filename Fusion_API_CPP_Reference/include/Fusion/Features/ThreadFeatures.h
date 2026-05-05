@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -38,6 +38,10 @@ namespace adsk { namespace fusion {
 
 /// Collection that provides access to all of the existing thread features in a component
 /// and supports the ability to create new thread features.
+/// 
+/// The creation of a tapped hole also results in the creation of a thread feature. These
+/// thread features are also returned by this collection, even though they aren't present
+/// in the timeline and are represented by the hole feature.
 class ThreadFeatures : public core::Base {
 public:
 
@@ -49,6 +53,10 @@ public:
     /// The number of thread features in the collection.
     size_t count() const;
 
+    /// !!!!! Warning !!!!!
+    /// ! This has been retired; please see the help for more info
+    /// !!!!! Warning !!!!!
+    /// 
     /// Property that returns the ThreadDataQuery object. When creating a thread, the type and size of the thread
     /// is specified by referencing thread information defined in one of the XML files in the ThreadData folder.
     /// The ThreadDataQuery is an object that supports methods to query the existing threads defined in these files.
@@ -69,6 +77,10 @@ public:
     /// Returns the newly created ThreadFeatureInput object or null/None if the creation failed.
     core::Ptr<ThreadFeatureInput> createInput(const core::Ptr<core::Base>& inputCylindricalFaces, const core::Ptr<ThreadInfo>& threadInfo) const;
 
+    /// !!!!! Warning !!!!!
+    /// ! This has been retired; please see the help for more info
+    /// !!!!! Warning !!!!!
+    /// 
     /// Method that creates a new ThreadInfo object that can be used in creating thread features.
     /// The ThreadInfo object that defines the type and size of the thread to create. When creating a thread, the type and size
     /// of the thread is specified by referencing thread information defined in one of the XML files in the ThreadData folder within

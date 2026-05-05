@@ -1,0 +1,213 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/PMICreatedAnnotation.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="29/03/2026">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="PMICreatedAnnotation">
+    <meta name="description" content="PMICreatedAnnotation Object">
+    <meta name="topicid" content="GUID-4CA36D77-A4F1-45A0-A532-C30AA8147227">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>PMICreatedAnnotation Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">PMICreatedAnnotation Object <img src="../images/TestTubeLarge.png" alt="Preview"></h1>
+              Derived from: <a href="PMIAnnotation.htm">PMIAnnotation</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/PMI/PMICreatedAnnotation.h&gt;<p class="api-preview"><img src="../images/TestTubeSmall.png" alt="Preview">This functionality is provided as a preview
+				of intended future API capabilities. You are encouraged to use it and report any problems or suggestions using the
+				<a href="https://forums.autodesk.com/t5/fusion-360-api-and-scripts/bd-p/22">Fusion API and Scripts</a> forum.<br><br>
+	
+                Because this is a preview of future functionality, there is the possibility that it will change, which will possibly
+		        break any existing programs that use this functionality. Because of that, you should never deliver any programs that use
+		        any preview capabilities. For a distributed program, you should wait until it has moved from preview to released state.
+		    </p>
+    <h2 class="api">
+          Description
+        </h2>A Base class representing a PMI created in Fusion.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMICreatedAnnotation_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMICreatedAnnotation_convertImportedToFusionPMI.htm">convertImportedToFusionPMI</a></td>
+        <td class="api-list">Converts this PMIAnnotation to a Fusion PMIAnnotation if it is of supported type and has valid reference geometry.<br/><br/> Supported types are:<br/><br/> Imported PMI annotation (PMIImportedDimension) and valid reference geometry is converted to Hole/Thread Note PMI.<br/><br/> Imported PMI annotation (PMIImportedNote) and valid reference geometry is converted to Leader Line Note PMI.<br/><br/> Imported PMI folder (PMIImportedFolder) which includes information about a Hole Note is converted to Hole/Thread Note PMI.<br/><br/> The converted PMIAnnotation can then be edited.<br/><br/> After successful conversion, the new PMIAnnotation will be added to the collection of PMI in the component, and the original PMIAnnotation will be removed. If it fails to convert, the original PMIAnnotation remains unchanged.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMICreatedAnnotation_deleteMe.htm">deleteMe</a></td>
+        <td class="api-list">Deletes the PMI.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMICreatedAnnotation_markUpToDate.htm">markUpToDate</a></td>
+        <td class="api-list">Marks the PMI as up-to-date and dismisses warnings.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMICreatedAnnotation_annotationTargetPoint.htm">annotationTargetPoint</a></td>
+        <td class="api-list">Gets the point on the annotation plane where the leader line meets the annotated geometry.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMICreatedAnnotation_annotationTextPoint.htm">annotationTextPoint</a></td>
+        <td class="api-list">Gets and sets the point on the annotation plane where the PMI text is anchored.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMICreatedAnnotation_assemblyContext.htm">assemblyContext</a></td>
+        <td class="api-list">Returns the assembly occurrence (i.e. the occurrence) of this object in an assembly. This is only valid in the case where this is acting as a proxy in an assembly. Returns null in the case where the object is not in the context of an assembly but is already the native object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMICreatedAnnotation_errorOrWarningMessage.htm">errorOrWarningMessage</a></td>
+        <td class="api-list">If there are errors or warnings in the PMI, this property will return a string that contains the error or warning message. Otherwise it returns an empty string. Only applies to PMI that has an associated parametric Feature.<br/><br/> Returns empty string for other PMI types that don't have a parametric Feature.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMICreatedAnnotation_hasImportedGeometry.htm">hasImportedGeometry</a></td>
+        <td class="api-list">Gets whether the created PMI was converted from an imported PMI and therefore whether it has original graphics/geometry that can be shown.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMICreatedAnnotation_healthState.htm">healthState</a></td>
+        <td class="api-list">Gets the health state of the PMI. Only applies to PMI that have a timeline object, in Parametric Modelling.<br/><br/> Returns UnknownFeatureHealthState for other PMI types that don't have a parametric Feature.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMICreatedAnnotation_horizontalAlignment.htm">horizontalAlignment</a></td>
+        <td class="api-list">Gets and sets the horizontal alignment of the PMI text relative to its anchor point.<br/><br/> This determines how the text box is positioned relative to the text placement point.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMICreatedAnnotation_isDeletable.htm">isDeletable</a></td>
+        <td class="api-list">Indicates if this PMI can be deleted.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMICreatedAnnotation_isLightBulbOn.htm">isLightBulbOn</a></td>
+        <td class="api-list">Indicates if the light bulb (as displayed in the browser) is on.<br/><br/> A PMI will only be visible if its light bulb, the containing folder's light bulb, the collection's and the component's light bulbs are all on.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMICreatedAnnotation_isOutOfDate.htm">isOutOfDate</a></td>
+        <td class="api-list">Indicates if this PMI is outdated and needs to be recomputed. This typically happens when the geometry or parameters that the PMI references have been modified. Applicable for both imported and created PMI, regardless of whether they are parametric or not.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMICreatedAnnotation_isParametric.htm">isParametric</a></td>
+        <td class="api-list">Indicates if this PMI is parametric or not.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMICreatedAnnotation_isPerpendicularLine.htm">isPerpendicularLine</a></td>
+        <td class="api-list">Gets and sets whether the PMI text is perpendicular to the leader line or parallel to it.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMICreatedAnnotation_isShowImportedGeometry.htm">isShowImportedGeometry</a></td>
+        <td class="api-list">Gets and sets whether the original graphics/geometry of the PMI should be visible. Only supported for PMI that has been converted from imported data.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMICreatedAnnotation_isSuppressed.htm">isSuppressed</a></td>
+        <td class="api-list">Indicates if this PMI is suppressed. Only applies to PMI that has an associated parametric Feature.<br/><br/> Returns false for other PMI types that don't have a parametric Feature.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMICreatedAnnotation_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMICreatedAnnotation_isVisible.htm">isVisible</a></td>
+        <td class="api-list">Indicates if the PMI is visible. This property is affected by the AssemblyContext (parent component) of the PMI.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMICreatedAnnotation_leaderLineExtension.htm">leaderLineExtension</a></td>
+        <td class="api-list">Gets and sets the length of the leader line extension.<br/><br/> This value extends the leader line in the direction determined by the perpendicular setting.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMICreatedAnnotation_name.htm">name</a></td>
+        <td class="api-list">Gets and sets the name of the PMI as it is shown in the browser.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMICreatedAnnotation_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMICreatedAnnotation_parentComponent.htm">parentComponent</a></td>
+        <td class="api-list">Gets the component this PMI belongs to.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMICreatedAnnotation_plainText.htm">plainText</a></td>
+        <td class="api-list">This is a convenience property that provides the plain-text representation of the PMI text. It iterates through the segments and concatenates their text representation.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMICreatedAnnotation_plane.htm">plane</a></td>
+        <td class="api-list">Gets the plane of the PMI.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMICreatedAnnotation_referencedEntities.htm">referencedEntities</a></td>
+        <td class="api-list">Returns an array of referenced entities for this PMI.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMICreatedAnnotation_segments.htm">segments</a></td>
+        <td class="api-list">Gets and sets the list of PMISegments used to define the PMI text.<br/><br/> The segments can be any combination of PMITextSegment, PMISymbolSegment and PMILineBreakSegment objects.<br/><br/> Changing this property will result in changing the displayed text of the PMI.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMICreatedAnnotation_timelineObject.htm">timelineObject</a></td>
+        <td class="api-list">Gets the timeline object associated with this PMI. Only applies to PMI that has an associated timeline feature.<br/><br/> Returns null if the PMI does not have an associated timeline feature.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMICreatedAnnotation_type.htm">type</a></td>
+        <td class="api-list">Gets the type of this PMI annotation.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMICreatedAnnotation_verticalAlignment.htm">verticalAlignment</a></td>
+        <td class="api-list">Gets and sets the vertical alignment of the PMI text relative to its anchor point.<br/><br/> This determines the vertical positioning of the text box relative to the calculated text placement point.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Derived Classes
+          </h2><a href="PMIHoleThreadNote.htm">PMIHoleThreadNote</a>, <a href="PMILeaderLineNote.htm">PMILeaderLineNote</a><h2 class="api">
+            Version
+          </h2>
+        Introduced in version April 2026<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2026 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(PMICreatedAnnotation%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

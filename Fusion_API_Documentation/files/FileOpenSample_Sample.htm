@@ -1,0 +1,171 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/FileOpenSample.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="FileOpenSample_Sample">
+    <meta name="description" content="File Open Sample Sample">
+    <meta name="topicid" content="GUID-a7f8e9d0-1b2c-3d4e-5f6a-7b8c9d0e1f2a">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>File Open Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">File Open Sample</h1>
+    <h2 class="api">
+          Description
+        </h2>Demonstrates how to open files using the Open API and OpenUsingContext API. The sample shows how to open a file at the tip (latest version) and how to open historical versions of a file. It uses the Open API to open files at tip and iterate through historical versions, and the OpenUsingContext API to open file using FileOpenContext .<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">import adsk.core
+
+app = adsk.core.Application.get()
+ui  = app.userInterface
+
+def run(context):
+    try:
+        Open()
+        OpenUsingContext()      
+
+    except Exception as e:
+        message('Failed:\n{}'.format(e))
+
+<span style="color:blue"># Function to open file using Open API</span>
+def Open():
+    try:
+        data_file = showOpenDialog('Select a File to Open via Open API')
+        if data_file:
+            <span style="color:blue"># Open the file at tip</span>
+            app.documents.open(data_file)
+
+            <span style="color:blue"># Open the historical changes of file</span>
+            if data_file.versions.count &gt; 1:
+                for idx, df in enumerate(data_file.versions):
+                    if idx == 0:  <span style="color:blue"># Skip first index since it's already opened</span>
+                        continue
+                    app.documents.open(df)
+
+            message("Successfully opened via Open API")
+    except Exception as e:
+        message('Failed:\n{}'.format(e))
+
+<span style="color:blue"># Function to open file using OpenUsingContext API</span>
+def OpenUsingContext():
+    try:
+        data_file = showOpenDialog('Select a File to Open via OpenUsingContext API')
+        if data_file:
+            fileOpenCtx = adsk.core.FileOpenContext.create()
+            <span style="color:blue"># Open the file at tip</span>
+            <span style="color:blue"># Empty timestamp opens the latest version</span>
+            app.documents.openUsingContext(data_file, fileOpenCtx)
+
+            if data_file.versions.count &gt; 1:
+                <span style="color:blue"># Open the file at historical property commit</span>
+                <span style="color:blue"># Get timestamp from GQLAPI</span>
+                fileOpenCtx.timestamp = '2026-01-13T05:27:24.657Z'
+                app.documents.openUsingContext(data_file, fileOpenCtx)
+
+            message("Successfully opened via OpenUsingContext API")
+    except Exception as e:
+        message('Failed:\n{}'.format(e))
+
+
+<span style="color:blue"># Function to show file open dialog and return selected DataFile</span>
+def showOpenDialog(title):
+    try:
+        <span style="color:blue"># Set styles of file dialog.</span>
+        fileDlg = ui.createCloudFileDialog()
+        fileDlg.isMultiSelectEnabled = False
+        fileDlg.title = title
+        fileDlg.filter = '*'
+        
+        <span style="color:blue"># Show file open dialog</span>
+        dlgResult = fileDlg.showOpen()
+        if dlgResult == adsk.core.DialogResults.DialogOK:
+            <span style="color:blue"># Get the selected DataFile</span>
+            data_file = fileDlg.dataFile
+            if data_file:
+                return data_file
+            else:
+                message("No file selected")
+                return None
+        else:
+            message("Dialog was cancelled")
+            return None       
+
+    except Exception as e:
+        message('Failed:\n{}'.format(e))
+        return None
+      
+<span style="color:blue"># Utility function to display message in Fusion UI message box and console</span>
+def message(msg, displayMessage = True):
+    if ui and displayMessage:
+        ui.messageBox(msg)
+    print(msg)</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2026 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(FileOpenSample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

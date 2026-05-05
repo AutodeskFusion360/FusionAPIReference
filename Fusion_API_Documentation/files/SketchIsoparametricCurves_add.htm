@@ -1,0 +1,115 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/SketchIsoparametricCurves_add.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="29/03/2026">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="SketchIsoparametricCurves_add">
+    <meta name="description" content="SketchIsoparametricCurves.add Method">
+    <meta name="topicid" content="GUID-0AA373CB-B36C-453E-9CCD-9D9742EB911E">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>SketchIsoparametricCurves.add Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">SketchIsoparametricCurves.add Method</h1>
+
+          Parent Object: <a href="SketchIsoparametricCurves.htm">SketchIsoparametricCurves</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Sketch/SketchIsoparametricCurves.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Creates sketch geometry that represents isoparametric curves on a face. An isoparametric curve follows the surface in either the U or V parametric direction at a constant parameter value. This results in the creation of associative isoparametric curves, which means they remain associated with the face and will update if the model changes. You can create a non-associative result by using the addUnlinked method..<br/><br/> The created curves can be accessed through the returned SketchIsoparametricCurve object and they are also available in the appropriate collections. For example, any lines will also be in the SketchLines collection.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"sketchIsoparametricCurves_var" is a variable referencing a <a href="SketchIsoparametricCurves.htm">SketchIsoparametricCurves</a> object.<code><pre class="api-code">returnValue = sketchIsoparametricCurves_var.<b>add</b>(input)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"sketchIsoparametricCurves_var" is a variable referencing a <a href="SketchIsoparametricCurves.htm">SketchIsoparametricCurves</a> object.<br /><br /><code><pre class="api-code">#include &lt;Fusion/Sketch/SketchIsoparametricCurves.h&gt;<br /><br />returnValue = sketchIsoparametricCurves_var-&gt;<b>add</b>(input);<br /></pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;"><a href="SketchIsoparametricCurve.htm">SketchIsoparametricCurve</a></td>
+        <td class="api-list">Returns the SketchIsoparametricCurve object that was created as a result of the isoparametric curve operation.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">input</td>
+        <td class="api-list"><a href="IsoparametricCurveInput.htm">IsoparametricCurveInput</a></td>
+        <td class="api-list">The IsoparametricCurveInput object that specifies the input needed to create the isoparametric curve(s).</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version April 2026<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2026 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(SketchIsoparametricCurves.add%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

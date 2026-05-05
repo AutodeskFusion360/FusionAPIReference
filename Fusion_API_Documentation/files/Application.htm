@@ -95,23 +95,23 @@
       </tr>
       <tr>
         <td class="api-list"><a href="Application_activeDocument.htm">activeDocument</a></td>
-        <td class="api-list">Returns the current active document.</td>
+        <td class="api-list">Returns the current active document.<br/><br/> This will return null if no documents are currently open.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="Application_activeEditObject.htm">activeEditObject</a></td>
-        <td class="api-list">Returns the current edit target as seen in the user interface. This edit target is defined as the container object that will be added to if something is created. For example, a component can be an edit target so that when new bodies are created they are added to that component. A sketch can also be an edit target.</td>
+        <td class="api-list">Returns the current edit target as seen in the user interface. This edit target is defined as the container object that will be added to if new entities are created. For example, a component can be an edit target so that when new bodies are created they are added to that component. A sketch can also be an edit target.<br/><br/> This will return null if no documents are currently open.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="Application_activeProduct.htm">activeProduct</a></td>
-        <td class="api-list">Returns the current active product.</td>
+        <td class="api-list">Returns the current active product.<br/><br/> This will return null if no documents are currently open.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="Application_activeViewport.htm">activeViewport</a></td>
-        <td class="api-list">Returns the currently active graphics view.</td>
+        <td class="api-list">Returns the currently active graphics view.<br/><br/> This will return null if no documents are currently open.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="Application_applicationFolders.htm">applicationFolders</a></td>
-        <td class="api-list">Returns the ApplicationFolders object which provides access to the paths of various folders associated with Fusion.</td>
+        <td class="api-list">Returns the ApplicationFolders object which provides access to the paths of folders associated with Fusion, such as the installation folder, user options folder, and user data folder.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="Application_currentUser.htm">currentUser</a></td>
@@ -119,7 +119,7 @@
       </tr>
       <tr>
         <td class="api-list"><a href="Application_data.htm">data</a></td>
-        <td class="api-list">Returns the Data object which provides access the files.</td>
+        <td class="api-list">Returns the Data object which provides access to the files.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="Application_documents.htm">documents</a></td>
@@ -143,11 +143,11 @@
       </tr>
       <tr>
         <td class="api-list"><a href="Application_importManager.htm">importManager</a></td>
-        <td class="api-list">Returns the ImportManager. You use the ImportManager to import files (of various neutral formats.) into existing components or new document.</td>
+        <td class="api-list">Returns the ImportManager. You use the ImportManager to import Fusion native and neutral formats such as STEP, IGES, SAT, and OBJ into existing components or new documents.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="Application_isComponentColorsDisplayed.htm">isComponentColorsDisplayed</a></td>
-        <td class="api-list">Get and sets if component colors are used when displaying the components within a design. This is the API equivalent of the "Display Component Colors" command.</td>
+        <td class="api-list">Gets and sets if component colors are used when displaying the components within a design. This is the API equivalent of the "Display Component Colors" command.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="Application_isOffLine.htm">isOffLine</a></td>
@@ -162,12 +162,16 @@
         <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
       </tr>
       <tr>
+        <td class="api-list"><a href="Application_lightingEnvironment.htm">lightingEnvironment</a></td>
+        <td class="api-list">Gets and sets the current lighting environment to use when rendering the graphics.</td>
+      </tr>
+      <tr>
         <td class="api-list"><a href="Application_materialLibraries.htm">materialLibraries</a></td>
         <td class="api-list">Returns the collection of material libraries currently available.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="Application_measureManager.htm">measureManager</a></td>
-        <td class="api-list">Get the MeasureManager object which can be used to perform measurements of geometry.</td>
+        <td class="api-list">Gets the MeasureManager object which can be used to perform measurements of geometry.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="Application_objectType.htm">objectType</a></td>
@@ -187,7 +191,7 @@
       </tr>
       <tr>
         <td class="api-list"><a href="Application_supportedProductTypes.htm">supportedProductTypes</a></td>
-        <td class="api-list">Returns an array containing the names of the products types currently supported by Fusion. For example, the name returned for Fusion is "DesignProductType". These product type names are used to identify specific products in some other API functions such as the productType property on the Workspace and ToolbarPanel objects.</td>
+        <td class="api-list">Returns an array containing the names of the product types currently supported by Fusion. For example, the name returned for Fusion is "DesignProductType". These product type names are used to identify specific products in other API functions such as the productType property on the Workspace and ToolbarPanel objects.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="Application_userId.htm">userId</a></td>
@@ -244,7 +248,7 @@
       </tr>
       <tr>
         <td class="api-list"><a href="Application_documentClosed.htm">documentClosed</a></td>
-        <td class="api-list">The DocumentClosed event fires at the VERY end of a document being closed. The Document object is not longer available because it has been closed.</td>
+        <td class="api-list">The DocumentClosed event fires at the VERY end of a document being closed. The Document object is no longer available because it has been closed.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="Application_documentClosing.htm">documentClosing</a></td>
@@ -284,7 +288,7 @@
       </tr>
       <tr>
         <td class="api-list"><a href="Application_insertingFromURL.htm">insertingFromURL</a></td>
-        <td class="api-list">The insertingFromURL event fires when the user has clicked a link in a web page that uses the Fusion protocol handler to insert a file as new component. This event is fired at the beginning of the request but before Fusion has take any action so that it's still possible to cancel the operation.</td>
+        <td class="api-list">The insertingFromURL event fires when the user has clicked a link in a web page that uses the Fusion protocol handler to insert a file as new component. This event is fired at the beginning of the request but before Fusion has taken any action so that it's still possible to cancel the operation.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="Application_mfgdmDataReady.htm">mfgdmDataReady</a></td>
@@ -296,11 +300,11 @@
       </tr>
       <tr>
         <td class="api-list"><a href="Application_openedFromURL.htm">openedFromURL</a></td>
-        <td class="api-list">The openedFromURL event fires after the user has clicked a link in a web page that uses the Fusion protocol handler to create a new using an existing file as the initial contents and that operation has completed.</td>
+        <td class="api-list">The openedFromURL event fires after the user has clicked a link in a web page that uses the Fusion protocol handler to create a new file using an existing file as the initial contents and that operation has completed.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="Application_openingFromURL.htm">openingFromURL</a></td>
-        <td class="api-list">The openingFromURL event fires when the user has clicked a link in a web page that uses the Fusion protocol handler to create a new file using an existing file as the initial contents. This event is fired at the beginning of the request but before Fusion has take any action so that it's still possible to cancel the operation.</td>
+        <td class="api-list">The openingFromURL event fires when the user has clicked a link in a web page that uses the Fusion protocol handler to create a new file using an existing file as the initial contents. This event is fired at the beginning of the request but before Fusion has taken any action so that it's still possible to cancel the operation.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="Application_startupCompleted.htm">startupCompleted</a></td>
@@ -317,9 +321,9 @@
       <table width="100%" style="font-size:15">
         <tr>
           <td align="left">
-                © Copyright 2025 Autodesk, Inc.
+                © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(Application%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(Application%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

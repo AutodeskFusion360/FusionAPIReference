@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -35,6 +35,7 @@ namespace adsk { namespace fusion {
     class ConfigurationColumn;
     class ConfigurationFeatureAspectColumn;
     class ConfigurationInsertColumn;
+    class ConfigurationInsertStandardDesignColumn;
     class ConfigurationParameterColumn;
     class ConfigurationPropertyColumn;
     class ConfigurationSuppressColumn;
@@ -149,6 +150,15 @@ public:
     /// Returns an array of the columns created. They are in order of standard, fastener type, and size.
     std::vector<core::Ptr<ConfigurationFeatureAspectColumn>> addClearanceTypeColumns(const core::Ptr<HoleFeature>& holeFeature, ConfigurationClearanceHoleColumns holeClearanceColumns);
 
+    /// Add a new column to control which standard design is used for an inserted design.
+    /// If an insert column already exists for the occurrence, the existing column is returned.
+    /// 
+    /// This is only valid for ConfigurationTopTable and ConfigurationCustomThemeTable objects
+    /// and will fail for all other table types.
+    /// occurrence : The occurrence that references a standard design.
+    /// Returns the new column or null in the case of failure.
+    core::Ptr<ConfigurationInsertStandardDesignColumn> addInsertStandardDesignColumn(const core::Ptr<Occurrence>& occurrence);
+
     typedef ConfigurationColumn iterable_type;
     template <class OutputIterator> void copyTo(OutputIterator result);
 
@@ -171,6 +181,7 @@ private:
     virtual ConfigurationFeatureAspectColumn** addThreadTypeColumns_raw(Feature* threadFeature, ConfigurationThreadColumns threadColumns, size_t& return_size) = 0;
     virtual ConfigurationFeatureAspectColumn* addFeatureAspectColumn_raw(core::Base* feature, ConfigurationFeatureAspectTypes aspectType) = 0;
     virtual ConfigurationFeatureAspectColumn** addClearanceTypeColumns_raw(HoleFeature* holeFeature, ConfigurationClearanceHoleColumns holeClearanceColumns, size_t& return_size) = 0;
+    virtual ConfigurationInsertStandardDesignColumn* addInsertStandardDesignColumn_raw(Occurrence* occurrence) = 0;
 };
 
 // Inline wrappers
@@ -254,6 +265,12 @@ inline std::vector<core::Ptr<ConfigurationFeatureAspectColumn>> ConfigurationCol
         res.assign(p, p+s);
         core::DeallocateArray(p);
     }
+    return res;
+}
+
+inline core::Ptr<ConfigurationInsertStandardDesignColumn> ConfigurationColumns::addInsertStandardDesignColumn(const core::Ptr<Occurrence>& occurrence)
+{
+    core::Ptr<ConfigurationInsertStandardDesignColumn> res = addInsertStandardDesignColumn_raw(occurrence.get());
     return res;
 }
 

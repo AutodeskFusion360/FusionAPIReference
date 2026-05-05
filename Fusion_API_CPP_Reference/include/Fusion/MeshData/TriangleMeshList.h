@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -38,11 +38,11 @@ public:
 
     /// Returns the specified triangle meshes.
     /// index : The index of the mesh to return where the first item has an index of 0.
-    /// Returns the specified mesh or null in the case of invalid index.
+    /// Returns the specified mesh or null in the case of an invalid index.
     core::Ptr<TriangleMesh> item(size_t index) const;
 
     /// Returns the mesh with the tightest surface tolerance. This can return null
-    /// in the case the list is empty, i.e. Count is 0.
+    /// in the case the list is empty, i.e., Count is 0.
     core::Ptr<TriangleMesh> bestMesh() const;
 
     /// Returns the number of meshes in the collection.

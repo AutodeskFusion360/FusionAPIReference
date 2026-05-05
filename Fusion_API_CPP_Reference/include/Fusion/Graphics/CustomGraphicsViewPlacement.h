@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -35,7 +35,7 @@ namespace adsk { namespace fusion {
 
 /// Positions custom graphics relative to one of the four corners of the view. Graphics positioned
 /// this way will always appear on top of the model graphics. This is typically used to display
-/// legends are small interactive tools.
+/// legends or small interactive tools.
 class CustomGraphicsViewPlacement : public core::Base {
 public:
 

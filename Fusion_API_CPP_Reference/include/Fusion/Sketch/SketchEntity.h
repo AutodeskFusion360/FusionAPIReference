@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -80,7 +80,7 @@ public:
     core::Ptr<core::BoundingBox3D> boundingBox() const;
 
     /// Deletes the entity from the sketch.
-    /// Returns true is the delete was successful.
+    /// Returns true if the delete was successful.
     bool deleteMe();
 
     /// Returns the referenced entity in the case where IsReference
@@ -104,7 +104,7 @@ public:
     /// Indicates if this sketch entity is fully constrained.
     bool isFullyConstrained() const;
 
-    /// Returns the collection of attributes associated with this face.
+    /// Returns the collection of attributes associated with this sketch entity.
     core::Ptr<core::Attributes> attributes() const;
 
     /// Returns a token for the SketchEntity object. This can be saved and used at a later

@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -48,7 +48,7 @@ public:
 
     /// Returns the specified construction plane using the name of the construction
     /// plane as it is displayed in the browser.
-    /// name : The name of the construction plane as it is displayed in the browser
+    /// name : The name of the construction plane as it is displayed in the browser.
     /// Returns the specified item or null if an invalid name was specified.
     core::Ptr<ConstructionPlane> itemByName(const std::string& name) const;
 
@@ -59,7 +59,7 @@ public:
     /// occurrenceForCreation : A creation occurrence is needed if the input is in another component AND the
     /// construction plane is not in the root component. The occurrenceForCreation is analogous
     /// to the active occurrence in the UI.
-    /// Returns a ConstructionPlaneInput object
+    /// Returns a ConstructionPlaneInput object.
     core::Ptr<ConstructionPlaneInput> createInput(const core::Ptr<Occurrence>& occurrenceForCreation = NULL) const;
 
     /// Creates and adds a new ConstructionPlane using the creation parameters in

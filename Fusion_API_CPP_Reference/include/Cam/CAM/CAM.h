@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -42,6 +42,7 @@ namespace adsk { namespace cam {
     class PostProcessInput;
     class SetupChangeEvent;
     class SetupEvent;
+    class SetupGroups;
     class Setups;
 }}
 namespace adsk { namespace core {
@@ -101,6 +102,10 @@ public:
     /// Returns true if the all operations are valid
     bool checkAllToolpaths();
 
+    /// !!!!! Warning !!!!!
+    /// ! This has been retired; please see the help for more info
+    /// !!!!! Warning !!!!!
+    /// 
     /// Post all of the toolpaths (including those nested in sub-folders or patterns) for the specified objects.
     /// If post processing fails, an error message can be retrieved from the error log explaining the reason for the failure.
     /// operations : An Operation, Setup, Folder, or Pattern object. You can also use an ObjectCollection
@@ -109,6 +114,10 @@ public:
     /// Returns true if successful
     bool postProcess(const core::Ptr<core::Base>& operations, const core::Ptr<PostProcessInput>& input);
 
+    /// !!!!! Warning !!!!!
+    /// ! This has been retired; please see the help for more info
+    /// !!!!! Warning !!!!!
+    /// 
     /// Post all of the toolpaths (includes those nested in sub-folders or patterns) in the document.
     /// If post processing fails, an error message can be retrieved from the error log explaining the reason for the failure.
     /// input : The PostProcessInput object that defines the post options and parameters.
@@ -254,6 +263,14 @@ public:
     /// to import in various formats.
     core::Ptr<CAMImportManager> importManager() const;
 
+    /// !!!!! Warning !!!!!
+    /// ! This is hidden and not officially supported
+    /// !!!!! Warning !!!!!
+    /// 
+    /// Returns the SetupGroups collection that provides access to existing Setup Groups.
+    /// A Setup Group is a collection of Setup objects that are intended to be machined at the same time.
+    core::Ptr<SetupGroups> setupGroups() const;
+
     ADSK_CAM_CAM_API static const char* classType();
     ADSK_CAM_CAM_API const char* objectType() const override;
     ADSK_CAM_CAM_API void* queryInterface(const char* id) const override;
@@ -300,6 +317,7 @@ private:
     virtual void clearMissingReferences_raw() = 0;
     virtual DocumentStockMaterialLibrary* documentStockMaterialLibrary_raw() const = 0;
     virtual CAMImportManager* importManager_raw() const = 0;
+    virtual SetupGroups* setupGroups_raw() const = 0;
 };
 
 // Inline wrappers
@@ -563,6 +581,12 @@ inline core::Ptr<DocumentStockMaterialLibrary> CAM::documentStockMaterialLibrary
 inline core::Ptr<CAMImportManager> CAM::importManager() const
 {
     core::Ptr<CAMImportManager> res = importManager_raw();
+    return res;
+}
+
+inline core::Ptr<SetupGroups> CAM::setupGroups() const
+{
+    core::Ptr<SetupGroups> res = setupGroups_raw();
     return res;
 }
 }// namespace cam

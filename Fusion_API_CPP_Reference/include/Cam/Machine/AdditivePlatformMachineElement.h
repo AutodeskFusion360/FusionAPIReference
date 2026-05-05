@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -66,6 +66,11 @@ public:
     double ceilingClearance() const;
     bool ceilingClearance(double value);
 
+    /// Radius used to round the corners of the build platform.
+    /// Units are cm.
+    double cornerRadius() const;
+    bool cornerRadius(double value);
+
     ADSK_CAM_ADDITIVEPLATFORMMACHINEELEMENT_API static const char* classType();
     ADSK_CAM_ADDITIVEPLATFORMMACHINEELEMENT_API const char* objectType() const override;
     ADSK_CAM_ADDITIVEPLATFORMMACHINEELEMENT_API void* queryInterface(const char* id) const override;
@@ -85,6 +90,8 @@ private:
     virtual bool frameWidth_raw(double value) = 0;
     virtual double ceilingClearance_raw() const = 0;
     virtual bool ceilingClearance_raw(double value) = 0;
+    virtual double cornerRadius_raw() const = 0;
+    virtual bool cornerRadius_raw(double value) = 0;
 };
 
 // Inline wrappers
@@ -155,6 +162,17 @@ inline double AdditivePlatformMachineElement::ceilingClearance() const
 inline bool AdditivePlatformMachineElement::ceilingClearance(double value)
 {
     return ceilingClearance_raw(value);
+}
+
+inline double AdditivePlatformMachineElement::cornerRadius() const
+{
+    double res = cornerRadius_raw();
+    return res;
+}
+
+inline bool AdditivePlatformMachineElement::cornerRadius(double value)
+{
+    return cornerRadius_raw(value);
 }
 }// namespace cam
 }// namespace adsk

@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -131,7 +131,7 @@ public:
     double cameraFocalLength() const;
     bool cameraFocalLength(double value);
 
-    /// Gets and sets if the exposure of the camera as specified using the "Exposure Value" (EV). Valid
+    /// Gets and sets the exposure of the camera as specified using the "Exposure Value" (EV). Valid
     /// values are between -15.0 and 25.0, inclusive.
     double cameraExposure() const;
     bool cameraExposure(double value);
@@ -141,7 +141,7 @@ public:
     bool isDepthOfFieldEnabled() const;
     bool isDepthOfFieldEnabled(bool value);
 
-    /// When the isDepthofFieldEnabled property is true, this point is used as the center of focus.
+    /// When the isDepthOfFieldEnabled property is true, this point is used as the center of focus.
     /// All objects that are the same distance from the camera as this point will be in focus.
     /// Any geometry that is closer or further away from the camera than this point will appear more out of focus.
     /// 

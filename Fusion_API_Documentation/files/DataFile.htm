@@ -69,6 +69,10 @@
         <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Creates a new CopyFileInput object that is used to create a copy of any DataFile.</td>
       </tr>
       <tr>
+        <td class="api-list"><a href="DataFile_createDataVersion.htm">createDataVersion</a></td>
+        <td class="api-list">Creates a version of this DataFile at tip.</td>
+      </tr>
+      <tr>
         <td class="api-list"><a href="DataFile_createMilestone.htm">createMilestone</a></td>
         <td class="api-list">Makes the version this DataFile represents a milestone.</td>
       </tr>
@@ -78,7 +82,7 @@
       </tr>
       <tr>
         <td class="api-list"><a href="DataFile_download.htm">download</a></td>
-        <td class="api-list">Performs a synchronous or asynchronous download of this DataFile. Only DataFiles that represent non-Fusion data can be downloaded. For example, this will work for TXT or XLS files but will fail for F3D files.<br/><br/> When using this in its synchronous mode, Fusion is frozen during the download and the call will not return until the download is complete or has failed. When using this in its asynchronous mode, calling this method will start the download process and the call return before the download is complete. The event on the provided handler will be called notifying you when the download is complete.</td>
+        <td class="api-list">Performs a synchronous or asynchronous download of this DataFile. Only DataFiles that represent non-Fusion data can be downloaded. For example, this will work for TXT or XLS files but will fail for F3D files.<br/><br/> When using this in its synchronous mode, Fusion is frozen during the download and the call will not return until the download is complete or has failed. When using this in its asynchronous mode, calling this method will start the download process and the call will return before the download is complete. The event on the provided handler will be called notifying you when the download is complete.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="DataFile_move.htm">move</a></td>
@@ -90,7 +94,7 @@
       </tr>
       <tr>
         <td class="api-list"><a href="DataFile_refresh.htm">refresh</a></td>
-        <td class="api-list">Refreshes the data associated with a DataFile object to be up to date with the associated cloud data. The DataFile returned by the API reflects the local representation of the DataFile as used by the Data Panel. This is method is only useful in very limited cases and should rarely be used. In most cases the local representation will match the actual data on the cloud. In rare occasions where Fusion was off-line while the cloud processing of DataFile is completed or the DataFile is not in the folder shown in the Data Panel. Getting a DataFileFolder contents forces an update of the local data for all of the data files it contains so they will all be up to date.</td>
+        <td class="api-list">Refreshes the data associated with a DataFile object to be up to date with the associated cloud data. The DataFile returned by the API reflects the local representation of the DataFile as used by the Data Panel. This method is only useful in very limited cases and should rarely be used. In most cases the local representation will match the actual data on the cloud. In rare occasions where Fusion was off-line while the cloud processing of DataFile is completed or the DataFile is not in the folder shown in the Data Panel. Getting a DataFileFolder contents forces an update of the local data for all of the data files it contains so they will all be up to date.</td>
       </tr>
     </Table>
     <h2 class="api">
@@ -107,11 +111,11 @@
       </tr>
       <tr>
         <td class="api-list"><a href="DataFile_childReferences.htm">childReferences</a></td>
-        <td class="api-list">Returns a collection of DataFiles that are the children (referenced designs) this datafile references.</td>
+        <td class="api-list">Returns a collection of DataFiles that are the children (referenced designs) this DataFile references.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="DataFile_configurationRowId.htm">configurationRowId</a></td>
-        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Returns the ID of the row that defines this configuration. Use the isCongiguration property to determine if this Design is a configuration or not. If this is not a configuration, this property returns an empty string.</td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Returns the ID of the row that defines this configuration. Use the isConfiguration property to determine if this Design is a configuration or not. If this is not a configuration, this property returns an empty string.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="DataFile_configurationTable.htm">configurationTable</a></td>
@@ -123,7 +127,7 @@
       </tr>
       <tr>
         <td class="api-list"><a href="DataFile_dataObject.htm">dataObject</a></td>
-        <td class="api-list">Starts the process to get the raw binary data associated with this DataFile. Because the data exists on the cloud, a DataObjectFuture is returned that you can use to monitor the state of downloading the data and then getting the raw data once it is available.<br/><br/> Only DataFiles that represent non-Fusion data can accessed. For example, this will work for TXT or XLS files but will fail for F3D files.</td>
+        <td class="api-list">Starts the process to get the raw binary data associated with this DataFile. Because the data exists on the cloud, a DataObjectFuture is returned that you can use to monitor the state of downloading the data and then getting the raw data once it is available.<br/><br/> Only DataFiles that represent non-Fusion data can be accessed. For example, this will work for TXT or XLS files but will fail for F3D files.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="DataFile_dateCreated.htm">dateCreated</a></td>
@@ -148,15 +152,15 @@
       </tr>
       <tr>
         <td class="api-list"><a href="DataFile_hasChildReferences.htm">hasChildReferences</a></td>
-        <td class="api-list">Gets if this datafile has children, (i.e. a Fusion Design containing referenced components).</td>
+        <td class="api-list">Gets if this DataFile has children, (i.e. a Fusion Design containing referenced components).</td>
       </tr>
       <tr>
         <td class="api-list"><a href="DataFile_hasOutofDateChildReferences.htm">hasOutofDateChildReferences</a></td>
-        <td class="api-list">Gets if this datafile has Children (referenced components) that are out of date (not the latest version).</td>
+        <td class="api-list">Gets if this DataFile has children (referenced components) that are out of date (not the latest version).</td>
       </tr>
       <tr>
         <td class="api-list"><a href="DataFile_hasParentReferences.htm">hasParentReferences</a></td>
-        <td class="api-list">Gets if this datafile has parents, (i.e. this is a child being referenced in another Fusion design).</td>
+        <td class="api-list">Gets if this DataFile has parents, (i.e. this is a child being referenced in another Fusion design).</td>
       </tr>
       <tr>
         <td class="api-list"><a href="DataFile_id.htm">id</a></td>
@@ -168,7 +172,7 @@
       </tr>
       <tr>
         <td class="api-list"><a href="DataFile_isComplete.htm">isComplete</a></td>
-        <td class="api-list">Returns if the DataFile is fully processed. This is especially useful when a new file is being saved or uploaded. The initial call to save or upload the file returns when the process has started but processing continues on the cloud. This property will return true when all of the processing has been completed and all information related to the Datafile is now available.</td>
+        <td class="api-list">Returns if the DataFile is fully processed. This is especially useful when a new file is being saved or uploaded. The initial call to save or upload the file returns when the process has started but processing continues on the cloud. This property will return true when all of the processing has been completed and all information related to the DataFile is now available.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="DataFile_isConfiguration.htm">isConfiguration</a></td>
@@ -184,11 +188,11 @@
       </tr>
       <tr>
         <td class="api-list"><a href="DataFile_isMilestone.htm">isMilestone</a></td>
-        <td class="api-list">Returns if the version this Datafile represents is a milestone. Returns true if it is a milestone.</td>
+        <td class="api-list">Returns if the version this DataFile represents is a milestone. Returns true if it is a milestone.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="DataFile_isReadOnly.htm">isReadOnly</a></td>
-        <td class="api-list">Gets if this file is currently read-only or not. A file can be read-only for various reasons. For example, if you are running with a "Fusion for Personal Use license" and have not designate the file to be editable or if someone else is editing the file.</td>
+        <td class="api-list">Gets if this file is currently read-only or not. A file can be read-only for several reasons. For example, if you are running with a "Fusion for Personal Use license" and have not designated the file to be editable, or if someone else is editing the file.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="DataFile_isValid.htm">isValid</a></td>
@@ -200,7 +204,7 @@
       </tr>
       <tr>
         <td class="api-list"><a href="DataFile_latestVersion.htm">latestVersion</a></td>
-        <td class="api-list">Returns the latest version of the DataFile. It can return a reference to the same DataFile is this DataFile is the latest version.</td>
+        <td class="api-list">Returns the latest version of the DataFile. It can return a reference to the same DataFile if this DataFile is the latest version.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="DataFile_latestVersionNumber.htm">latestVersionNumber</a></td>
@@ -232,7 +236,7 @@
       </tr>
       <tr>
         <td class="api-list"><a href="DataFile_parentReferences.htm">parentReferences</a></td>
-        <td class="api-list">Returns a collection DataFiles collection that are the parents (designs that reference) this datafile.</td>
+        <td class="api-list">Returns a DataFiles collection that contains the parents (designs that reference) of this DataFile.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="DataFile_publicLink.htm">publicLink</a></td>
@@ -241,6 +245,10 @@
       <tr>
         <td class="api-list"><a href="DataFile_sharedLink.htm">sharedLink</a></td>
         <td class="api-list">Returns the SharedLink object associated with this DataFile. You can use the SharedLink object to enable a shared link and set its behavior and to get the shared link URL.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="DataFile_thumbnail.htm">thumbnail</a></td>
+        <td class="api-list">Starts the process to get the thumbnail image data associated with this DataFile. Because the data exists on the cloud, a DataObjectFuture is returned that you can use to monitor the state of downloading the thumbnail and then getting the image once it is available.<br/><br/> The data returned is a 256x256 PNG image. For cases where the DataFile does not have an associated thumbnail, the dataObject property of the returned DataObjectFuture will return null and the state property will return 'FailedFutureState'.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="DataFile_versionId.htm">versionId</a></td>
@@ -294,9 +302,9 @@
       <table width="100%" style="font-size:15">
         <tr>
           <td align="left">
-                © Copyright 2025 Autodesk, Inc.
+                © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(DataFile%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(DataFile%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

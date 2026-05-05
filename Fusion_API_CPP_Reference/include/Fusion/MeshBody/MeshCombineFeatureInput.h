@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -76,6 +76,12 @@ public:
     core::Ptr<BaseFeature> targetBaseFeature() const;
     bool targetBaseFeature(const core::Ptr<BaseFeature>& value);
 
+    /// Gets and sets the used algorithm for the join, cut and intersect operation types. Default value is
+    /// LegacyMeshCombineAlgorithmType. This setting is only effective in non-parametric mode.
+    /// In parametric mode the algorithm type is always LegacyMeshCombineAlgorithmType.
+    MeshCombineAlgorithmTypes algorithmType() const;
+    bool algorithmType(MeshCombineAlgorithmTypes value);
+
     ADSK_FUSION_MESHCOMBINEFEATUREINPUT_API static const char* classType();
     ADSK_FUSION_MESHCOMBINEFEATUREINPUT_API const char* objectType() const override;
     ADSK_FUSION_MESHCOMBINEFEATUREINPUT_API void* queryInterface(const char* id) const override;
@@ -96,6 +102,8 @@ private:
     virtual bool isKeepToolBodies_raw(bool value) = 0;
     virtual BaseFeature* targetBaseFeature_raw() const = 0;
     virtual bool targetBaseFeature_raw(BaseFeature* value) = 0;
+    virtual MeshCombineAlgorithmTypes algorithmType_raw() const = 0;
+    virtual bool algorithmType_raw(MeshCombineAlgorithmTypes value) = 0;
 };
 
 // Inline wrappers
@@ -178,6 +186,17 @@ inline core::Ptr<BaseFeature> MeshCombineFeatureInput::targetBaseFeature() const
 inline bool MeshCombineFeatureInput::targetBaseFeature(const core::Ptr<BaseFeature>& value)
 {
     return targetBaseFeature_raw(value.get());
+}
+
+inline MeshCombineAlgorithmTypes MeshCombineFeatureInput::algorithmType() const
+{
+    MeshCombineAlgorithmTypes res = algorithmType_raw();
+    return res;
+}
+
+inline bool MeshCombineFeatureInput::algorithmType(MeshCombineAlgorithmTypes value)
+{
+    return algorithmType_raw(value);
 }
 }// namespace fusion
 }// namespace adsk

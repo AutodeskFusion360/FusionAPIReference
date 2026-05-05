@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -50,7 +50,7 @@ public:
     core::Ptr<BossFeature> nativeObject() const;
 
     /// Creates or returns a proxy for the native object
-    /// - i.e. a new object that represents this object but adds the assembly context
+    /// - i.e., a new object that represents this object but adds the assembly context
     /// defined by the input occurrence.
     /// occurrence : The occurrence that defines the context to create the proxy in.
     /// Returns the proxy object or null if this isn't the NativeObject.

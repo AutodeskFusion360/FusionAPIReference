@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -46,7 +46,7 @@ public:
     /// you must first call the edit method of the base or form feature, use this method to create
     /// the mesh body, and then call the finishEdit method of the base or form feature. The base
     /// or form feature must be in an "edit" state to be able to add any additional items to it.
-    /// fullFilename : The full filename (path and file) of a STL, OBJ or 3MF file.
+    /// fullFilename : The full filename (path and file) of an STL, OBJ or 3MF file.
     /// units : The units to use when importing the file.
     /// baseOrFormFeature : The BaseFeature or FormFeature object that this mesh body will be associated with. This is an optional
     /// requirement. It is required in a parametric modeling design but is ignored in a direct modeling design.
@@ -57,22 +57,22 @@ public:
 
     /// Provides access to a mesh body within the collection.
     /// index : The index of the mesh body to return, where an index of 0 is the first mesh body in the collection.
-    /// Returns the specified mesh body or null in the case of a invalid index.
+    /// Returns the specified mesh body or null in the case of an invalid index.
     core::Ptr<MeshBody> item(size_t index) const;
 
     /// Returns the number of mesh bodies in the collection.
     size_t count() const;
 
     /// Creates a new mesh body using the mesh description provided.
-    /// coordinates : Input array of doubles that defines the X, Y, Z coordinates of each node in the mesh. Each set of three numbers define
+    /// coordinates : Input array of doubles that defines the X, Y, Z coordinates of each node in the mesh. Each set of three numbers defines
     /// the coordinates of a node.
     /// coordinateIndexList : An array of integers that represent indices into the coordinates to define the vertices of the triangles. If an empty
-    /// array is provided, then it's assumed that the first three coordinates defines the first triangle, the next three define
+    /// array is provided, then it's assumed that the first three coordinates define the first triangle, the next three define
     /// the second triangle, and so on.
     /// normalVectors : An array of doubles that represent the x, y, z components of the normals at each coordinate. There should be a normal defined
     /// for each coordinate. If an empty array is provided for the normal vectors, Fusion will automatically calculate normal vectors
     /// that are 90 degrees to the face of the triangle, making it appear flat.
-    /// normalIndexList : An array of integers that represent indices into the normal vectors to define the which vector corresponds to which vertex. This
+    /// normalIndexList : An array of integers that represent indices into the normal vectors to define which vector corresponds to which vertex. This
     /// should be the same size as the vertex index list. If an empty array is input and normal vectors are provided, it is assumed that
     /// the normals match up one-to-one to each coordinate.
     /// Returns the newly created MeshBody object or null in the case of a failure.

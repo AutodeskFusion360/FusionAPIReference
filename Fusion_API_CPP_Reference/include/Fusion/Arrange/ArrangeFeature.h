@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -38,10 +38,6 @@ namespace adsk { namespace fusion {
 
 namespace adsk { namespace fusion {
 
-/// !!!!! Warning !!!!!
-/// ! This is in preview state; please see the help for more info
-/// !!!!! Warning !!!!!
-/// 
 /// Represents an Arrange feature within a component.
 class ArrangeFeature : public Feature {
 public:
@@ -77,7 +73,7 @@ public:
     std::vector<core::Ptr<ArrangeComponent>> unusedComponents() const;
 
     /// The NativeObject is the object outside the context of an assembly and
-    /// in the context of it's parent component.
+    /// in the context of its parent component.
     /// Returns null in the case where this object is not in the context of
     /// an assembly but is already the native object.
     core::Ptr<ArrangeFeature> nativeObject() const;
@@ -93,7 +89,8 @@ public:
     /// and the current localized name is also provided. The values follow the API rules, where all length values are in centimeters,
     /// and areas are in square centimeters. The returned JSON may include additional values in the future, so code consuming this
     /// output should be tolerant of new fields.
-    /// A JSON string containing the arrangement statistics, or an empty string if the operation fails.
+    /// 
+    /// Returns an empty string in the case it failed to get any statistics.
     std::string arrangeStatistics() const;
 
     ADSK_FUSION_ARRANGEFEATURE_API static const char* classType();

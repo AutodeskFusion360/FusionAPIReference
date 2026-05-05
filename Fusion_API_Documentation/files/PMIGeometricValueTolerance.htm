@@ -1,0 +1,185 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/PMIGeometricValueTolerance.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="29/03/2026">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="PMIGeometricValueTolerance">
+    <meta name="description" content="PMIGeometricValueTolerance Object">
+    <meta name="topicid" content="GUID-022E6005-DA79-49DC-9BD7-A1B9FDEEB2BC">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>PMIGeometricValueTolerance Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">PMIGeometricValueTolerance Object <img src="../images/TestTubeLarge.png" alt="Preview"></h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/PMI/PMIGeometricValueTolerance.h&gt;<p class="api-preview"><img src="../images/TestTubeSmall.png" alt="Preview">This functionality is provided as a preview
+				of intended future API capabilities. You are encouraged to use it and report any problems or suggestions using the
+				<a href="https://forums.autodesk.com/t5/fusion-360-api-and-scripts/bd-p/22">Fusion API and Scripts</a> forum.<br><br>
+	
+                Because this is a preview of future functionality, there is the possibility that it will change, which will possibly
+		        break any existing programs that use this functionality. Because of that, you should never deliver any programs that use
+		        any preview capabilities. For a distributed program, you should wait until it has moved from preview to released state.
+		    </p>
+    <h2 class="api">
+          Description
+        </h2>Represents a tolerance value that can be associated with a PMIGeometricValue.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIGeometricValueTolerance_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIGeometricValueTolerance_create.htm">create</a></td>
+        <td class="api-list">Create a transient PMIGeometricValueTolerance object. The default value set is to not have tolerances (hasTolerances = false).</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIGeometricValueTolerance_setDeviation.htm">setDeviation</a></td>
+        <td class="api-list">Sets this object to have deviation tolerance with the specified upper and lower values.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIGeometricValueTolerance_setLimitsFitsLinear.htm">setLimitsFitsLinear</a></td>
+        <td class="api-list">Sets this object to have hole/shaft fit tolerance displayed on one line. The object will also have updated upper and lower tolerance values (used for information only).</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIGeometricValueTolerance_setLimitsFitsSizeLimits.htm">setLimitsFitsSizeLimits</a></td>
+        <td class="api-list">Sets this object to have hole/shaft fit tolerance displayed as size limits. The object will also have updated upper and lower tolerance values (used for information only). Displays the minimum and maximum values in parenthesis.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIGeometricValueTolerance_setLimitsFitsStacked.htm">setLimitsFitsStacked</a></td>
+        <td class="api-list">Sets this object to have hole/shaft fit tolerance displayed as stacked lines. The object will also have updated upper and lower tolerance values (used for information only).</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIGeometricValueTolerance_setLimitsFitsTolerance.htm">setLimitsFitsTolerance</a></td>
+        <td class="api-list">Sets this object to have hole/shaft fit tolerance displayed as tolerance values. The object will also have updated upper and lower tolerance values (used for information only). Displays the upper and lower tolerance values in parenthesis.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIGeometricValueTolerance_setLimitsLinear.htm">setLimitsLinear</a></td>
+        <td class="api-list">Sets this object to have limits linear tolerance with the specified minimum and maximum values. Displayed as values on one line.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIGeometricValueTolerance_setLimitsStacked.htm">setLimitsStacked</a></td>
+        <td class="api-list">Sets this object to have limits stacked tolerance with the specified minimum and maximum values. Displayed as stacked lines.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIGeometricValueTolerance_setMAX.htm">setMAX</a></td>
+        <td class="api-list">Sets this object to have MAX tolerance type. The tolerance is defined and displayed as MAX.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIGeometricValueTolerance_setMIN.htm">setMIN</a></td>
+        <td class="api-list">Sets this object to have MIN tolerance type. The tolerance is defined and displayed as MIN.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIGeometricValueTolerance_setSymmetric.htm">setSymmetric</a></td>
+        <td class="api-list">Sets this object to have symmetric tolerance with the specified value.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIGeometricValueTolerance_hasLowerTolerance.htm">hasLowerTolerance</a></td>
+        <td class="api-list">Gets whether there is a lower tolerance value set.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIGeometricValueTolerance_hasToleranceClass.htm">hasToleranceClass</a></td>
+        <td class="api-list">Gets whether there is a tolerance class set.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIGeometricValueTolerance_hasTolerances.htm">hasTolerances</a></td>
+        <td class="api-list">Gets and sets whether the tolerances are set or not on the object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIGeometricValueTolerance_hasToleranceType.htm">hasToleranceType</a></td>
+        <td class="api-list">Gets whether there is tolerance type set.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIGeometricValueTolerance_hasUpperTolerance.htm">hasUpperTolerance</a></td>
+        <td class="api-list">Gets whether there is an upper tolerance value set.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIGeometricValueTolerance_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIGeometricValueTolerance_lowerTolerance.htm">lowerTolerance</a></td>
+        <td class="api-list">Gets the lower tolerance value in cm. Returns 0 if there is no lower tolerance value set.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIGeometricValueTolerance_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIGeometricValueTolerance_toleranceClassDeviation.htm">toleranceClassDeviation</a></td>
+        <td class="api-list">Gets the tolerance class deviation value. Returns empty string if there is no tolerance class deviation value set.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIGeometricValueTolerance_toleranceClassGrade.htm">toleranceClassGrade</a></td>
+        <td class="api-list">Gets the tolerance class grade value. Returns empty string if there is no tolerance class grade value set.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIGeometricValueTolerance_toleranceType.htm">toleranceType</a></td>
+        <td class="api-list">The tolerance type.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIGeometricValueTolerance_upperTolerance.htm">upperTolerance</a></td>
+        <td class="api-list">Gets the upper tolerance value in cm. Returns 0 if there is no upper tolerance value set.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="PMIGeometricValue_tolerance.htm">PMIGeometricValue.tolerance</a>, <a href="PMIGeometricValueTolerance_create.htm">PMIGeometricValueTolerance.create</a>, <a href="PMIHoleThreadNote_shaftTolerance.htm">PMIHoleThreadNote.shaftTolerance</a>, <a href="PMIHoleThreadNoteInput_shaftTolerance.htm">PMIHoleThreadNoteInput.shaftTolerance</a>, <a href="PMIImportedDimension_shaftTolerance.htm">PMIImportedDimension.shaftTolerance</a><h2 class="api">
+            Version
+          </h2>
+        Introduced in version April 2026<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2026 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(PMIGeometricValueTolerance%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

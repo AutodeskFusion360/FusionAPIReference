@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -30,6 +30,7 @@
 
 namespace adsk { namespace core {
     class Point3D;
+    class ValueInput;
 }}
 namespace adsk { namespace fusion {
     class SketchTextDefinition;
@@ -43,11 +44,19 @@ namespace adsk { namespace fusion {
 class SketchTextInput : public core::Base {
 public:
 
-    /// Gets and sets the height of the text in centimeters.
+    /// !!!!! Warning !!!!!
+    /// ! This has been retired; please see the help for more info
+    /// !!!!! Warning !!!!!
+    /// 
+    /// This property has been retired and replaced by the height2 property.
     double height() const;
     bool height(double value);
 
-    /// Gets and sets the text.
+    /// Gets and sets the displayed text. This represents the text that results from evaluating the input formatted text. For example,
+    /// if the formatted text is "'Length: ' + lengthParam", this property will return "Length: 3.0 in".
+    /// 
+    /// Setting this property will overwrite any equation defined by the expression and replace it with simple text. Use the
+    /// expression property to be able to define a full expression.
     std::string text() const;
     bool text(const std::string& value);
 
@@ -122,6 +131,22 @@ public:
     /// of the appropriate type and can be used to make any additional changes to the text.
     core::Ptr<SketchTextDefinition> definition() const;
 
+    /// Gets and sets the expression of the parameter that will be created when this SketchText is created. It can be a simple string
+    /// or it can be an expression that combines text with parameter values. Simple text must be enclosed within single quotes,
+    /// the same as it is required in the TEXT command dialog.
+    /// 
+    /// An example of a valid expression is: "'Length: ' + lengthParam" and will result in "Length: 3.0 mm". The expression
+    /// result can be obtained by using the text property on the created SketchTextInput object.
+    std::string expression() const;
+    bool expression(const std::string& value);
+
+    /// Gets and sets the ValueInput that defines the height of the text. This value is used to create a
+    /// parameter that will control the height of the text. It can be a value where it defines the height
+    /// of the text in centimeters, or it can be a string where it defines the equation of the parameter
+    /// and must evaluate to a valid length.
+    core::Ptr<core::ValueInput> height2() const;
+    bool height2(const core::Ptr<core::ValueInput>& value);
+
     ADSK_FUSION_SKETCHTEXTINPUT_API static const char* classType();
     ADSK_FUSION_SKETCHTEXTINPUT_API const char* objectType() const override;
     ADSK_FUSION_SKETCHTEXTINPUT_API void* queryInterface(const char* id) const override;
@@ -150,6 +175,10 @@ private:
     virtual bool setAsAlongPath_raw(core::Base* path, bool isAbovePath, core::HorizontalAlignments horizontalAlignment, double characterSpacing) = 0;
     virtual bool setAsMultiLine_raw(core::Base* cornerPoint, core::Base* diagonalPoint, core::HorizontalAlignments horizontalAlignment, core::VerticalAlignments verticalAlignment, double characterSpacing) = 0;
     virtual SketchTextDefinition* definition_raw() const = 0;
+    virtual char* expression_raw() const = 0;
+    virtual bool expression_raw(const char* value) = 0;
+    virtual core::ValueInput* height2_raw() const = 0;
+    virtual bool height2_raw(core::ValueInput* value) = 0;
 };
 
 // Inline wrappers
@@ -278,6 +307,35 @@ inline core::Ptr<SketchTextDefinition> SketchTextInput::definition() const
 {
     core::Ptr<SketchTextDefinition> res = definition_raw();
     return res;
+}
+
+inline std::string SketchTextInput::expression() const
+{
+    std::string res;
+
+    char* p= expression_raw();
+    if (p)
+    {
+        res = p;
+        core::DeallocateArray(p);
+    }
+    return res;
+}
+
+inline bool SketchTextInput::expression(const std::string& value)
+{
+    return expression_raw(value.c_str());
+}
+
+inline core::Ptr<core::ValueInput> SketchTextInput::height2() const
+{
+    core::Ptr<core::ValueInput> res = height2_raw();
+    return res;
+}
+
+inline bool SketchTextInput::height2(const core::Ptr<core::ValueInput>& value)
+{
+    return height2_raw(value.get());
 }
 }// namespace fusion
 }// namespace adsk

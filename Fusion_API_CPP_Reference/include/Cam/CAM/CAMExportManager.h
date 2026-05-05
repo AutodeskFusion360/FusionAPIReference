@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -33,6 +33,7 @@ namespace adsk { namespace cam {
     class CAMExportFuture;
     class CAMExportOptions;
     class CAMFormlabsExportOptions;
+    class PRMExportOptions;
 }}
 
 namespace adsk { namespace cam {
@@ -77,6 +78,14 @@ public:
     /// Returns new CAMAutodeskCLDExportOptions.
     core::Ptr<CAMAutodeskCLDExportOptions> createAutodeskCLDExportOptions();
 
+    /// !!!!! Warning !!!!!
+    /// ! This is in preview state; please see the help for more info
+    /// !!!!! Warning !!!!!
+    /// 
+    /// Creates new PRM export options.
+    /// Returns new PRM export options.
+    core::Ptr<PRMExportOptions> createPRMExportOptions();
+
     ADSK_CAM_CAMEXPORTMANAGER_API static const char* classType();
     ADSK_CAM_CAMEXPORTMANAGER_API const char* objectType() const override;
     ADSK_CAM_CAMEXPORTMANAGER_API void* queryInterface(const char* id) const override;
@@ -91,6 +100,7 @@ private:
     virtual CAMAdditiveBuildExportOptions* createCAMAdditiveBuildExportOptions_raw() = 0;
     virtual CAMExportFuture* executeWithExportFuture_raw(CAMExportOptions* exportOptions) = 0;
     virtual CAMAutodeskCLDExportOptions* createAutodeskCLDExportOptions_raw() = 0;
+    virtual PRMExportOptions* createPRMExportOptions_raw() = 0;
 };
 
 // Inline wrappers
@@ -128,6 +138,12 @@ inline core::Ptr<CAMExportFuture> CAMExportManager::executeWithExportFuture(cons
 inline core::Ptr<CAMAutodeskCLDExportOptions> CAMExportManager::createAutodeskCLDExportOptions()
 {
     core::Ptr<CAMAutodeskCLDExportOptions> res = createAutodeskCLDExportOptions_raw();
+    return res;
+}
+
+inline core::Ptr<PRMExportOptions> CAMExportManager::createPRMExportOptions()
+{
+    core::Ptr<PRMExportOptions> res = createPRMExportOptions_raw();
     return res;
 }
 }// namespace cam

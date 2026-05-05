@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -33,6 +33,7 @@ namespace adsk { namespace core {
 }}
 namespace adsk { namespace fusion {
     class BRepFace;
+    class DeriveFeature;
     class Occurrence;
     class TimelineObject;
 }}
@@ -86,7 +87,7 @@ public:
 
     /// Gets and sets the filename of the image used for the decal. When getting this property,
     /// the filename returned is the file that was used when the decal was initially created.
-    /// it's possible the file may no longer exist.
+    /// It's possible the file may no longer exist.
     /// 
     /// When setting this property, it is the full filename to the image to use for the decal.
     /// PNG, JPEG, and TIFF files are supported.
@@ -97,8 +98,8 @@ public:
     /// cases where the original image file is no longer available but you need the image
     /// for some other purpose.
     /// filename : The full filename of the image to save, including the extension of the file, which
-    /// controls what format the image file will be. If file extension is other than png, jpg
-    /// or tiff, then by default png extension will be added to the filename.
+    /// controls what format the image file will be. If the file extension is other than png, jpg,
+    /// or tiff, then by default a png extension will be added to the filename.
     /// This method will fail if a file with the specified filename already exists.
     /// If you want to overwrite the file, you'll need to delete it first before
     /// calling this method.
@@ -154,7 +155,7 @@ public:
     /// specific entity can be different over time. However, even if you have two different token
     /// strings that were obtained from the same entity, when you use findEntityByToken they
     /// will both return the same entity. Because of that you should never compare entity tokens
-    /// as way to determine what the token represents. Instead, you need to use the findEntityByToken
+    /// as a way to determine what the token represents. Instead, you need to use the findEntityByToken
     /// method to get the two entities identified by the tokens and then compare them.
     std::string entityToken() const;
 
@@ -165,7 +166,7 @@ public:
     core::Ptr<Occurrence> assemblyContext() const;
 
     /// The NativeObject is the object outside the context of an assembly and
-    /// in the context of it's parent component.
+    /// in the context of its parent component.
     /// Returns null in the case where this object is not in the context of
     /// an assembly but is already the native object.
     core::Ptr<Decal> nativeObject() const;
@@ -179,6 +180,14 @@ public:
 
     /// Returns the timeline object associated with the creation of this decal.
     core::Ptr<TimelineObject> timelineObject() const;
+
+    /// Returns if this decal is derived from another design. If true, the decal cannot be deleted.
+    /// You should not attempt to make any edits to the derived decal. Any edits made to this derived decal will be lost when the derive updates.
+    bool isDerived() const;
+
+    /// Returns the DeriveFeature if this decal is derived from another design.
+    /// This property returns null if the decal is not derived from another design (i.e. isDerived property returns false).
+    core::Ptr<DeriveFeature> deriveFeature() const;
 
     ADSK_FUSION_DECAL_API static const char* classType();
     ADSK_FUSION_DECAL_API const char* objectType() const override;
@@ -208,6 +217,8 @@ private:
     virtual Decal* nativeObject_raw() const = 0;
     virtual Decal* createForAssemblyContext_raw(Occurrence* occurrence) const = 0;
     virtual TimelineObject* timelineObject_raw() const = 0;
+    virtual bool isDerived_raw() const = 0;
+    virtual DeriveFeature* deriveFeature_raw() const = 0;
 };
 
 // Inline wrappers
@@ -359,6 +370,18 @@ inline core::Ptr<Decal> Decal::createForAssemblyContext(const core::Ptr<Occurren
 inline core::Ptr<TimelineObject> Decal::timelineObject() const
 {
     core::Ptr<TimelineObject> res = timelineObject_raw();
+    return res;
+}
+
+inline bool Decal::isDerived() const
+{
+    bool res = isDerived_raw();
+    return res;
+}
+
+inline core::Ptr<DeriveFeature> Decal::deriveFeature() const
+{
+    core::Ptr<DeriveFeature> res = deriveFeature_raw();
     return res;
 }
 }// namespace fusion

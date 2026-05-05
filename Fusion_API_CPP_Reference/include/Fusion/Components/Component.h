@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -57,6 +57,7 @@ namespace adsk { namespace fusion {
     class Joints;
     class MeshBodies;
     class ModelParameters;
+    class MotionLinks;
     class Occurrence;
     class PhysicalProperties;
     class Profile;
@@ -72,7 +73,7 @@ namespace adsk { namespace fusion {
 
 /// Represents a component in the data model.
 /// A component represents a set of geometry, features, and parameters that make up an item in the design.
-/// A component can be referenced multiple times into a design with a Occurrence object.
+/// A component can be referenced multiple times into a design with an Occurrence object.
 class Component : public BaseComponent {
 public:
 
@@ -186,7 +187,7 @@ public:
     core::Ptr<core::Material> material() const;
     bool material(const core::Ptr<core::Material>& value);
 
-    /// Returns the PhysicalProperties object that has properties for getting the area, density, mass, volume, moments, etc
+    /// Returns the PhysicalProperties object that has properties for getting the area, density, mass, volume, moments, etc.
     /// of this component. Property values will be calculated using the 'LowCalculationAccuracy' setting when using this property
     /// to get the PhysicalProperties object. To specify a higher calculation tolerance, use the getPhysicalProperties method instead.
     /// Returns a PhysicalProperties object that can be used to get the various physical property related values.
@@ -223,7 +224,7 @@ public:
     bool isBodiesFolderLightBulbOn() const;
     bool isBodiesFolderLightBulbOn(bool value);
 
-    /// Returns the PhysicalProperties object that has properties for getting the area, density, mass, volume, moments, etc
+    /// Returns the PhysicalProperties object that has properties for getting the area, density, mass, volume, moments, etc.
     /// of this component.
     /// accuracy : Specifies the desired level of computational accuracy of the property calculations.
     /// The default value of 'LowCalculationAccuracy' returns results within a +/- 1% error margin.
@@ -314,12 +315,20 @@ public:
     /// The ID is also the same ID used by PIM (Product Information Model).
     std::string id() const;
 
+    /// !!!!! Warning !!!!!
+    /// ! This has been retired; please see the help for more info
+    /// !!!!! Warning !!!!!
+    /// 
     /// Returns all tangent relationships in this component and any sub components. The tangent relationships returned are all
     /// in the context of this component so any tangent relationships in sub components will be proxies. This is primarily useful when used
     /// from the root component because Fusion flattens the assembly structure, including tangent relationships, when manipulating
     /// an assembly.
     std::vector<core::Ptr<TangentRelationship>> allTangentRelationships() const;
 
+    /// !!!!! Warning !!!!!
+    /// ! This has been retired; please see the help for more info
+    /// !!!!! Warning !!!!!
+    /// 
     /// Returns the collection of tangent relationships associated with this component.
     core::Ptr<TangentRelationships> tangentRelationships() const;
 
@@ -414,6 +423,16 @@ public:
     /// structure, including joints, when manipulating an assembly.
     std::vector<core::Ptr<AssemblyConstraint>> allAssemblyConstraints() const;
 
+    /// Gets and sets if the light bulb of the joint origins folder as seen in the browser is on or off.
+    /// This controls the visibility of the joint origins in this occurrence. The light bulb for the
+    /// folder is component specific and will turn off the joints for all occurrences referencing
+    /// the component.
+    bool isJointOriginsFolderLightBulbOn() const;
+    bool isJointOriginsFolderLightBulbOn(bool value);
+
+    /// Returns the collection of MotionLinks associated with this component.
+    core::Ptr<MotionLinks> motionLinks() const;
+
     ADSK_FUSION_COMPONENT_API static const char* classType();
     ADSK_FUSION_COMPONENT_API const char* objectType() const override;
     ADSK_FUSION_COMPONENT_API void* queryInterface(const char* id) const override;
@@ -493,6 +512,9 @@ private:
     virtual char* mfgdmModelId_raw() const = 0;
     virtual AssemblyConstraints* assemblyConstraints_raw() const = 0;
     virtual AssemblyConstraint** allAssemblyConstraints_raw(size_t& return_size) const = 0;
+    virtual bool isJointOriginsFolderLightBulbOn_raw() const = 0;
+    virtual bool isJointOriginsFolderLightBulbOn_raw(bool value) = 0;
+    virtual MotionLinks* motionLinks_raw() const = 0;
     virtual void placeholderComponent0() {}
     virtual void placeholderComponent1() {}
     virtual void placeholderComponent2() {}
@@ -675,9 +697,6 @@ private:
     virtual void placeholderComponent179() {}
     virtual void placeholderComponent180() {}
     virtual void placeholderComponent181() {}
-    virtual void placeholderComponent182() {}
-    virtual void placeholderComponent183() {}
-    virtual void placeholderComponent184() {}
 };
 
 // Inline wrappers
@@ -1204,6 +1223,23 @@ inline std::vector<core::Ptr<AssemblyConstraint>> Component::allAssemblyConstrai
         res.assign(p, p+s);
         core::DeallocateArray(p);
     }
+    return res;
+}
+
+inline bool Component::isJointOriginsFolderLightBulbOn() const
+{
+    bool res = isJointOriginsFolderLightBulbOn_raw();
+    return res;
+}
+
+inline bool Component::isJointOriginsFolderLightBulbOn(bool value)
+{
+    return isJointOriginsFolderLightBulbOn_raw(value);
+}
+
+inline core::Ptr<MotionLinks> Component::motionLinks() const
+{
+    core::Ptr<MotionLinks> res = motionLinks_raw();
     return res;
 }
 }// namespace fusion

@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -30,6 +30,8 @@
 namespace adsk { namespace fusion {
     class FilletFeature;
     class FilletFeatureInput;
+    class FullRoundFilletFeatureInput;
+    class RuleFilletFeatureInput;
 }}
 
 namespace adsk { namespace fusion {
@@ -65,6 +67,32 @@ public:
     /// Returns the specified item or null if the specified name was not found.
     core::Ptr<FilletFeature> itemByName(const std::string& name) const;
 
+    /// Creates a FullRoundFilletFeatureInput object. Use properties and methods on this object
+    /// to define the fillet you want to create and then use the addFullRoundFillet method, passing in
+    /// the FullRoundFilletFeatureInput object.
+    /// Returns the newly created FullRoundFilletFeatureInput object or null if the creation failed.
+    core::Ptr<FullRoundFilletFeatureInput> createFullRoundFilletInput() const;
+
+    /// Creates a new full round fillet feature.
+    /// input : A FullRoundFilletFeatureInput object that defines the desired fillet.
+    /// Use the createFullRoundFilletInput method to create a new FullRoundFilletFeatureInput object
+    /// and then use methods on it (the FullRoundFilletFeatureInput object) to define the fillet.
+    /// Returns the newly created FilletFeature object or null if the creation failed.
+    core::Ptr<FilletFeature> addFullRoundFillet(const core::Ptr<FullRoundFilletFeatureInput>& input);
+
+    /// Creates a RuleFilletFeatureInput object. Use properties and methods on this object
+    /// to define the fillet you want to create and then use the addRuleFillet method, passing in
+    /// the RuleFilletFeatureInput object.
+    /// Returns the newly created RuleFilletFeatureInput object or null if the creation failed.
+    core::Ptr<RuleFilletFeatureInput> createRuleFilletInput() const;
+
+    /// Creates a new rule fillet feature.
+    /// input : A RuleFilletFeatureInput object that defines the desired fillet.
+    /// Use the createRuleFilletInput method to create a new RuleFilletFeatureInput object
+    /// and then use methods on it(the RuleFilletFeatureInput object) to define the fillet.
+    /// Returns the newly created FilletFeature object or null if the creation failed.
+    core::Ptr<FilletFeature> addRuleFillet(const core::Ptr<RuleFilletFeatureInput>& input);
+
     typedef FilletFeature iterable_type;
     template <class OutputIterator> void copyTo(OutputIterator result);
 
@@ -81,6 +109,10 @@ private:
     virtual FilletFeatureInput* createInput_raw() const = 0;
     virtual FilletFeature* add_raw(FilletFeatureInput* input) = 0;
     virtual FilletFeature* itemByName_raw(const char* name) const = 0;
+    virtual FullRoundFilletFeatureInput* createFullRoundFilletInput_raw() const = 0;
+    virtual FilletFeature* addFullRoundFillet_raw(FullRoundFilletFeatureInput* input) = 0;
+    virtual RuleFilletFeatureInput* createRuleFilletInput_raw() const = 0;
+    virtual FilletFeature* addRuleFillet_raw(RuleFilletFeatureInput* input) = 0;
 };
 
 // Inline wrappers
@@ -112,6 +144,30 @@ inline core::Ptr<FilletFeature> FilletFeatures::add(const core::Ptr<FilletFeatur
 inline core::Ptr<FilletFeature> FilletFeatures::itemByName(const std::string& name) const
 {
     core::Ptr<FilletFeature> res = itemByName_raw(name.c_str());
+    return res;
+}
+
+inline core::Ptr<FullRoundFilletFeatureInput> FilletFeatures::createFullRoundFilletInput() const
+{
+    core::Ptr<FullRoundFilletFeatureInput> res = createFullRoundFilletInput_raw();
+    return res;
+}
+
+inline core::Ptr<FilletFeature> FilletFeatures::addFullRoundFillet(const core::Ptr<FullRoundFilletFeatureInput>& input)
+{
+    core::Ptr<FilletFeature> res = addFullRoundFillet_raw(input.get());
+    return res;
+}
+
+inline core::Ptr<RuleFilletFeatureInput> FilletFeatures::createRuleFilletInput() const
+{
+    core::Ptr<RuleFilletFeatureInput> res = createRuleFilletInput_raw();
+    return res;
+}
+
+inline core::Ptr<FilletFeature> FilletFeatures::addRuleFillet(const core::Ptr<RuleFilletFeatureInput>& input)
+{
+    core::Ptr<FilletFeature> res = addRuleFillet_raw(input.get());
     return res;
 }
 

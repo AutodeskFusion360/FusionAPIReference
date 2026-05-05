@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -88,15 +88,29 @@ public:
     core::Ptr<MachineAxisRange> physicalRange() const;
     bool physicalRange(const core::Ptr<MachineAxisRange>& value);
 
-    /// !!!!! Warning !!!!!
-    /// ! This is in preview state; please see the help for more info
-    /// !!!!! Warning !!!!!
-    /// 
     /// Specifies the value that this axis returns to, prior to a tool change.
     /// Units are cm for linear axes or radians for rotary axes.
     /// Will return NaN if tool change position isn't set.
     double toolChangePosition() const;
     bool toolChangePosition(double value);
+
+    /// !!!!! Warning !!!!!
+    /// ! This is in preview state; please see the help for more info
+    /// !!!!! Warning !!!!!
+    /// 
+    /// Specifies the axis moves continuously.
+    void useContinuousResolution();
+
+    /// !!!!! Warning !!!!!
+    /// ! This is in preview state; please see the help for more info
+    /// !!!!! Warning !!!!!
+    /// 
+    /// Specifies the discrete step size used for axis movement.
+    /// The step size should be greater than zero.
+    /// Returns NaN if no step size is set or the axis move is configured for
+    /// continuous rotation.
+    double resolutionStepSize() const;
+    bool resolutionStepSize(double value);
 
     ADSK_CAM_MACHINEAXIS_API static const char* classType();
     ADSK_CAM_MACHINEAXIS_API const char* objectType() const override;
@@ -120,6 +134,9 @@ private:
     virtual bool physicalRange_raw(MachineAxisRange* value) = 0;
     virtual double toolChangePosition_raw() const = 0;
     virtual bool toolChangePosition_raw(double value) = 0;
+    virtual void useContinuousResolution_raw() = 0;
+    virtual double resolutionStepSize_raw() const = 0;
+    virtual bool resolutionStepSize_raw(double value) = 0;
     virtual void placeholderMachineAxis0() {}
     virtual void placeholderMachineAxis1() {}
     virtual void placeholderMachineAxis2() {}
@@ -135,9 +152,6 @@ private:
     virtual void placeholderMachineAxis12() {}
     virtual void placeholderMachineAxis13() {}
     virtual void placeholderMachineAxis14() {}
-    virtual void placeholderMachineAxis15() {}
-    virtual void placeholderMachineAxis16() {}
-    virtual void placeholderMachineAxis17() {}
 };
 
 // Inline wrappers
@@ -225,6 +239,22 @@ inline double MachineAxis::toolChangePosition() const
 inline bool MachineAxis::toolChangePosition(double value)
 {
     return toolChangePosition_raw(value);
+}
+
+inline void MachineAxis::useContinuousResolution()
+{
+    useContinuousResolution_raw();
+}
+
+inline double MachineAxis::resolutionStepSize() const
+{
+    double res = resolutionStepSize_raw();
+    return res;
+}
+
+inline bool MachineAxis::resolutionStepSize(double value)
+{
+    return resolutionStepSize_raw(value);
 }
 }// namespace cam
 }// namespace adsk

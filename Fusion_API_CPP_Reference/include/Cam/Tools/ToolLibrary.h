@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -74,6 +74,16 @@ public:
     /// Returns a new ToolQuery. The query is predefined by given parameter.
     core::Ptr<ToolQuery> createQuery() const;
 
+    /// !!!!! Warning !!!!!
+    /// ! This is in preview state; please see the help for more info
+    /// !!!!! Warning !!!!!
+    /// 
+    /// Update the given tool in the tool library. Will error if the tool does not exist in the library or if
+    /// the library URL is not set (library was not loaded from a URL).
+    /// tool : The tool that should be updated and must exist in the library.
+    /// Returns true if the update was successful.
+    bool updateTool(const core::Ptr<Tool>& tool);
+
     typedef Tool iterable_type;
     template <class OutputIterator> void copyTo(OutputIterator result);
 
@@ -93,6 +103,7 @@ private:
     virtual bool remove_raw(size_t index) = 0;
     virtual char* toJson_raw() const = 0;
     virtual ToolQuery* createQuery_raw() const = 0;
+    virtual bool updateTool_raw(Tool* tool) = 0;
     virtual void placeholderToolLibrary0() {}
     virtual void placeholderToolLibrary1() {}
     virtual void placeholderToolLibrary2() {}
@@ -118,7 +129,6 @@ private:
     virtual void placeholderToolLibrary22() {}
     virtual void placeholderToolLibrary23() {}
     virtual void placeholderToolLibrary24() {}
-    virtual void placeholderToolLibrary25() {}
 };
 
 // Inline wrappers
@@ -175,6 +185,12 @@ inline std::string ToolLibrary::toJson() const
 inline core::Ptr<ToolQuery> ToolLibrary::createQuery() const
 {
     core::Ptr<ToolQuery> res = createQuery_raw();
+    return res;
+}
+
+inline bool ToolLibrary::updateTool(const core::Ptr<Tool>& tool)
+{
+    bool res = updateTool_raw(tool.get());
     return res;
 }
 

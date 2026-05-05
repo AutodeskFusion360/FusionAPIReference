@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -45,6 +45,7 @@ namespace adsk { namespace fusion {
     class Design;
     class OccurrenceList;
     class Occurrences;
+    class PMIAnnotations;
 }}
 
 namespace adsk { namespace fusion {
@@ -158,6 +159,14 @@ public:
     /// existing decals and supports the creation of new decals.
     core::Ptr<Decals> decals() const;
 
+    /// !!!!! Warning !!!!!
+    /// ! This is in preview state; please see the help for more info
+    /// !!!!! Warning !!!!!
+    /// 
+    /// Returns the PMI collection associated with this component.
+    /// This provides access to the existing PMI and supports the creation of new PMI.
+    core::Ptr<PMIAnnotations> pmiAnnotations() const;
+
     ADSK_FUSION_BASECOMPONENT_API static const char* classType();
     ADSK_FUSION_BASECOMPONENT_API const char* objectType() const override;
     ADSK_FUSION_BASECOMPONENT_API void* queryInterface(const char* id) const override;
@@ -183,6 +192,7 @@ private:
     virtual core::PropertyGroups* propertyGroups_raw() const = 0;
     virtual core::DataComponent* dataComponent_raw() const = 0;
     virtual Decals* decals_raw() const = 0;
+    virtual PMIAnnotations* pmiAnnotations_raw() const = 0;
     virtual void placeholderBaseComponent0() {}
     virtual void placeholderBaseComponent1() {}
     virtual void placeholderBaseComponent2() {}
@@ -229,7 +239,6 @@ private:
     virtual void placeholderBaseComponent43() {}
     virtual void placeholderBaseComponent44() {}
     virtual void placeholderBaseComponent45() {}
-    virtual void placeholderBaseComponent46() {}
 };
 
 // Inline wrappers
@@ -339,6 +348,12 @@ inline core::Ptr<core::DataComponent> BaseComponent::dataComponent() const
 inline core::Ptr<Decals> BaseComponent::decals() const
 {
     core::Ptr<Decals> res = decals_raw();
+    return res;
+}
+
+inline core::Ptr<PMIAnnotations> BaseComponent::pmiAnnotations() const
+{
+    core::Ptr<PMIAnnotations> res = pmiAnnotations_raw();
     return res;
 }
 }// namespace fusion

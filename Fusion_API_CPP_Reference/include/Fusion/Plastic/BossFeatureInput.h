@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -39,7 +39,7 @@ namespace adsk { namespace fusion {
 
 namespace adsk { namespace fusion {
 
-/// This class defines the methods and properties that pertain to the definition of a boss feature or a boss connection
+/// This class defines the methods and properties that pertain to the definition of a boss feature or a boss connection.
 class BossFeatureInput : public core::Base {
 public:
 
@@ -57,7 +57,7 @@ public:
     /// In order for geometry to be transformed correctly, an Occurrence for creation needs to be
     /// specified when the boss feature is created based on geometry (e.g. point) in another
     /// component AND (the boss) is not in the root component.
-    /// The CreationOccurrence is analogous to the active occurrence in the UI
+    /// The CreationOccurrence is analogous to the active occurrence in the UI.
     /// A value of null indicates that everything is in the context of a single component.
     /// The occurrence provided sets scope for detection of target participant bodies.
     core::Ptr<Occurrence> creationOccurrence() const;
@@ -96,11 +96,11 @@ public:
     core::Ptr<BossFeatureSideInput> side2() const;
     bool side2(const core::Ptr<BossFeatureSideInput>& value);
 
-    /// Get or set if the boss feature (or boss connection) goes in the default direction or is reversed.
+    /// Gets or sets if the boss feature (or boss connection) goes in the default direction or is reversed.
     bool isDefaultDirection() const;
     bool isDefaultDirection(bool value);
 
-    /// Get or set offset of the parting face from the selected position point.
+    /// Gets or sets offset of the parting face from the selected position point.
     core::Ptr<core::ValueInput> offset() const;
     bool offset(const core::Ptr<core::ValueInput>& value);
 

@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -52,7 +52,7 @@ public:
     double kFactor() const;
     bool kFactor(double value);
 
-    /// The value used for miter, rip, and seam, gaps. Use the returned SheetMetalRuleValue
+    /// The value used for miter, rip, and seam gaps. Use the returned SheetMetalRuleValue
     /// object to get and set the current value of the gap.
     core::Ptr<SheetMetalRuleValue> gap() const;
 
@@ -79,8 +79,9 @@ public:
     /// Gets and sets the relief shape to use when two bends intersect.
     /// 
     /// When set to square or round relief shape, the value of the twoBendReliefPlacement
-    /// property will be set to IntersectionTwoBendReliefPlacement. For a round relief
-    /// shape you can change the twoBendReliefPlacment property to TangentTwoBendReliefPlacement.
+    /// property will be set to IntersectionTwoBendReliefPlacement by default. For round and square relief
+    /// shapes you can change the twoBendReliefPlacement property to VertexTwoBendReliefPlacement.
+    /// For round shapes, you can also use TangentTwoBendReliefPlacement.
     TwoBendReliefShapes twoBendReliefShape() const;
     bool twoBendReliefShape(TwoBendReliefShapes value);
 
@@ -89,7 +90,7 @@ public:
     /// get and set the current value of the relief size.
     core::Ptr<SheetMetalRuleValue> twoBendReliefSize() const;
 
-    /// Gets and sets the relief placement for a two bend relief shape. When the relief shape
+    /// Gets and sets the relief placement for a two-bend relief shape. When the relief shape
     /// is round, both intersection and tangent are valid placements. For square shape, only
     /// intersection is valid. For all other shapes, this property will return NoTwoBendReliefPlacement
     /// because the placement option is not used.
@@ -109,7 +110,7 @@ public:
     /// returns null if the sheet metal rule is in the library.
     core::Ptr<Design> parentDesign() const;
 
-    /// This gets and sets which rule in a library is the default rule. This is only
+    /// Gets and sets which rule in a library is the default rule. This is only
     /// valid for rules in a library and will fail for rules in a design.
     bool isDefault() const;
     bool isDefault(bool value);
@@ -120,7 +121,7 @@ public:
 
     /// Deletes the rule from the design or library. If the rule is in the
     /// library and set as the default rule, you cannot delete it. If the
-    /// rule is in a design and is used by a component you cannot use it.
+    /// rule is in a design and is used by a component, you cannot delete it.
     /// Returns true if the delete was successful.
     bool deleteMe();
 

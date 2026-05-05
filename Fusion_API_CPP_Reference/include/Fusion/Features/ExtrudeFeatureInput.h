@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -146,7 +146,7 @@ public:
     bool creationOccurrence(const core::Ptr<Occurrence>& value);
 
     /// Specifies if the extrusion should be created as a solid or surface. If
-    /// it's a surface then there aren't any end caps and it's open. When a ExtrudeFeature
+    /// it's a surface then there aren't any end caps and it's open. When an ExtrudeFeature
     /// input is created, this is initialized to true so a solid will be created if it's not changed.
     bool isSolid() const;
     bool isSolid(bool value);
@@ -165,7 +165,7 @@ public:
     /// Gets and sets the extent used to define the start of the extrusion. When a new ExtrudeFeatureInput
     /// object is created the start extent is initialized to be the profile plane but you can change it
     /// to a profile plane with offset or from an object by setting this property with either a
-    /// OffsetStartDefinition or a EntityStartDefinition object. You can get either one
+    /// OffsetStartDefinition or an EntityStartDefinition object. You can get either one
     /// of those objects by using the static create method on the class.
     core::Ptr<ExtentDefinition> startExtent() const;
     bool startExtent(const core::Ptr<ExtentDefinition>& value);

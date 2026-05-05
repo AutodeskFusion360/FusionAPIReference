@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -31,6 +31,9 @@
 namespace adsk { namespace cam {
     class CAMTemplateOperations;
     class Operation;
+}}
+namespace adsk { namespace core {
+    class Attributes;
 }}
 
 namespace adsk { namespace cam {
@@ -78,39 +81,26 @@ public:
     /// Whether or not this is a hole template
     bool isHoleTemplate() const;
 
-    /// !!!!! Warning !!!!!
-    /// ! This is in preview state; please see the help for more info
-    /// !!!!! Warning !!!!!
-    /// 
     /// Convert hole signature to XML. This will be empty if this is not
     /// a hole template, or if there is no signature.
     std::string getHoleSignatureXML();
 
-    /// !!!!! Warning !!!!!
-    /// ! This is in preview state; please see the help for more info
-    /// !!!!! Warning !!!!!
-    /// 
     /// Provide an XML snippet to specify a hole signature. This will
     /// have no effect if this is not a hole template. This will fail if
     /// the provided snippet is not valid.
     /// This will return true on success, false on failure.
     bool setHoleSignatureXML(const std::string& xmlSnippet);
 
-    /// !!!!! Warning !!!!!
-    /// ! This is in preview state; please see the help for more info
-    /// !!!!! Warning !!!!!
-    /// 
     ///  Expose operations.
     core::Ptr<CAMTemplateOperations> operations() const;
     bool operations(const core::Ptr<CAMTemplateOperations>& value);
 
-    /// !!!!! Warning !!!!!
-    /// ! This is in preview state; please see the help for more info
-    /// !!!!! Warning !!!!!
-    /// 
     /// Create an empty CAMTemplate
     /// Returns the newly created template.
     static core::Ptr<CAMTemplate> createEmpty();
+
+    /// Returns the collection of attributes associated with this template.
+    core::Ptr<core::Attributes> attributes() const;
 
     ADSK_CAM_CAMTEMPLATE_API static const char* classType();
     ADSK_CAM_CAMTEMPLATE_API const char* objectType() const override;
@@ -135,6 +125,7 @@ private:
     virtual CAMTemplateOperations* operations_raw() const = 0;
     virtual bool operations_raw(CAMTemplateOperations* value) = 0;
     ADSK_CAM_CAMTEMPLATE_API static CAMTemplate* createEmpty_raw();
+    virtual core::Attributes* attributes_raw() const = 0;
 };
 
 // Inline wrappers
@@ -254,6 +245,12 @@ inline bool CAMTemplate::operations(const core::Ptr<CAMTemplateOperations>& valu
 inline core::Ptr<CAMTemplate> CAMTemplate::createEmpty()
 {
     core::Ptr<CAMTemplate> res = createEmpty_raw();
+    return res;
+}
+
+inline core::Ptr<core::Attributes> CAMTemplate::attributes() const
+{
+    core::Ptr<core::Attributes> res = attributes_raw();
     return res;
 }
 }// namespace cam

@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -32,6 +32,7 @@ namespace adsk { namespace core {
     class Plane;
 }}
 namespace adsk { namespace fusion {
+    class DeriveFeature;
     class Occurrence;
     class TimelineObject;
 }}
@@ -84,7 +85,7 @@ public:
 
     /// Gets and sets the filename of the image used for the canvas. When getting this property,
     /// the filename returned is the file that was used when the canvas was initially created.
-    /// it's possible the file may no longer exist.
+    /// It's possible the file may no longer exist.
     /// 
     /// When setting this property, it is the full filename to the image to use for the canvas.
     /// PNG, JPEG, and TIFF files are supported.
@@ -108,7 +109,7 @@ public:
     core::Ptr<core::Plane> plane() const;
 
     /// Gets and sets the transform of the canvas. This allows you to control the position, rotation,
-    /// scaling, and flipping. The X and Y axes defined by the matrix and must be perpendicular to one another.
+    /// scaling, and flipping. The X and Y axes defined by the matrix must be perpendicular to one another.
     /// 
     /// This is a 3x3 matrix where the third column controls the position of the canvas and
     /// defines the position using 2D coordinates in the model space.
@@ -141,7 +142,7 @@ public:
     /// specific entity can be different over time. However, even if you have two different token
     /// strings that were obtained from the same entity, when you use findEntityByToken they
     /// will both return the same entity. Because of that you should never compare entity tokens
-    /// as way to determine what the token represents. Instead, you need to use the findEntityByToken
+    /// as a way to determine what the token represents. Instead, you need to use the findEntityByToken
     /// method to get the two entities identified by the tokens and then compare them.
     std::string entityToken() const;
 
@@ -152,7 +153,7 @@ public:
     core::Ptr<Occurrence> assemblyContext() const;
 
     /// The NativeObject is the object outside the context of an assembly and
-    /// in the context of it's parent component.
+    /// in the context of its parent component.
     /// Returns null in the case where this object is not in the context of
     /// an assembly but is already the native object.
     core::Ptr<Canvas> nativeObject() const;
@@ -166,6 +167,14 @@ public:
 
     /// Returns the timeline object associated with the creation of this canvas.
     core::Ptr<TimelineObject> timelineObject() const;
+
+    /// Returns if this canvas is derived from another design. If true, the canvas cannot be deleted.
+    /// You should not attempt to make any edits to the derived canvas. Any edits made to this derived canvas will be lost when the derive updates.
+    bool isDerived() const;
+
+    /// Returns the DeriveFeature if this canvas is derived from another design.
+    /// This property returns null if the canvas is not derived from another design (i.e. isDerived property returns false).
+    core::Ptr<DeriveFeature> deriveFeature() const;
 
     ADSK_FUSION_CANVAS_API static const char* classType();
     ADSK_FUSION_CANVAS_API const char* objectType() const override;
@@ -204,6 +213,8 @@ private:
     virtual Canvas* nativeObject_raw() const = 0;
     virtual Canvas* createForAssemblyContext_raw(Occurrence* occurrence) const = 0;
     virtual TimelineObject* timelineObject_raw() const = 0;
+    virtual bool isDerived_raw() const = 0;
+    virtual DeriveFeature* deriveFeature_raw() const = 0;
 };
 
 // Inline wrappers
@@ -391,6 +402,18 @@ inline core::Ptr<Canvas> Canvas::createForAssemblyContext(const core::Ptr<Occurr
 inline core::Ptr<TimelineObject> Canvas::timelineObject() const
 {
     core::Ptr<TimelineObject> res = timelineObject_raw();
+    return res;
+}
+
+inline bool Canvas::isDerived() const
+{
+    bool res = isDerived_raw();
+    return res;
+}
+
+inline core::Ptr<DeriveFeature> Canvas::deriveFeature() const
+{
+    core::Ptr<DeriveFeature> res = deriveFeature_raw();
     return res;
 }
 }// namespace fusion

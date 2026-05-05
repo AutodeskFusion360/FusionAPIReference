@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -55,7 +55,7 @@ public:
     /// existingPlasticRule : The existing PlasticRule object you want to copy. This can be a rule from the
     /// library or the design.
     /// name : The name to assign to the new plastic rule. This name must be unique with respect to other
-    /// plastic rules in the design or library it's created in.
+    /// plastic rules in the design or library its created in.
     /// Returns the new PlasticRule object or will assert in the case where it fails.
     core::Ptr<PlasticRule> addByCopy(const core::Ptr<PlasticRule>& existingPlasticRule, const std::string& name);
 

@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -93,7 +93,7 @@ public:
     /// In the cases where there aren't any end faces this property will return Nothing.
     core::Ptr<BRepFaces> endFaces() const;
 
-    /// Property that returns a object that provides access to all of the faces created around the perimeter of the feature.
+    /// Property that returns an object that provides access to all of the faces created around the perimeter of the feature.
     core::Ptr<BRepFaces> sideFaces() const;
 
     /// The NativeObject is the object outside the context of an assembly and

@@ -1,0 +1,110 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/DocumentCreation.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="DocumentCreation_Sample">
+    <meta name="description" content="Create document as part, assembly, or hybrid intent. Sample">
+    <meta name="topicid" content="GUID-7105bf44-52db-4067-abca-afd73c24e954">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Create document as part, assembly, or hybrid intent.</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Create document as part, assembly, or hybrid intent.</h1>
+    <h2 class="api">
+          Description
+        </h2>Creates a new document that is either a part, assembly, or hybrid intent.<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">import adsk.core, adsk.fusion
+
+def run(context):
+    try:
+        app = adsk.core.Application.get()
+        
+        <span style="color:blue"># Specify if a hybrid, part, or assembly document should be created. If</span>
+        <span style="color:blue"># both are False, it defaults to creating a hybrid document.</span>
+        createPart = False
+        createAssembly = False
+
+        <span style="color:blue"># Create a new document. The Documents.add method always creates a hybrid document.</span>
+        new_HybridDoc = app.documents.add(adsk.core.DocumentTypes.FusionDesignDocumentType)
+        design: adsk.fusion.Design = new_HybridDoc.products.itemByProductType('DesignProductType')
+
+        <span style="color:blue"># If a part or assembly document is wanted, modify the hybrid document to be the correct type.</span>
+        if createPart:        
+            <span style="color:blue"># Sets the intent to be a part design.</span>
+            design.designIntent = adsk.fusion.DesignIntentTypes.PartDesignIntentType
+        elif createAssembly:
+            <span style="color:blue"># Sets the intent to be an assembly design.</span>
+            design.designIntent = adsk.fusion.DesignIntentTypes.AssemblyDesignIntentType
+    except:
+        pass</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2026 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(DocumentCreation%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

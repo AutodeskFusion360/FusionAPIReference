@@ -62,8 +62,53 @@
         </h2>
     <div id="tabs">
       <ul>
+        <li><a href="#Python">Python</a></li>
         <li><a href="#C++">C++</a></li>
       </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">import adsk.core, adsk.fusion, traceback
+
+def run(context):
+    ui = None
+    try:
+        app = adsk.core.Application.get()
+        ui  = app.userInterface
+       
+        <span style="color:blue"># get active design        </span>
+        product = app.activeProduct
+        design = adsk.fusion.Design.cast(product)
+         
+        <span style="color:blue"># get the root component</span>
+        rootComp = design.rootComponent
+
+        <span style="color:blue"># get features</span>
+        features = rootComp.features
+        ripFeatures = features.ripFeatures
+
+        <span style="color:blue"># get geometry from body to create a rip</span>
+        brepBodies = rootComp.bRepBodies
+        body = brepBodies.item(0)
+        edges = body.edges
+        vertices = body.vertices
+
+        <span style="color:blue"># create a between points rip</span>
+        gapDistance = adsk.core.ValueInput.createByReal(1.23)
+        offset1 = adsk.core.ValueInput.createByReal(2.34)
+        ripFeatureInput = ripFeatures.createRipFeatureInput()
+        edge = edges.item(40)
+        vertex = vertices.item(9)
+        ripFeatureInput.setBetweenPoints(edge, vertex, gapDistance, offset1)
+        ripFeature = ripFeatures.add(ripFeatureInput)
+           
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
       <div id="C++" class="api-code">
         <table width="100%" style="font-size:15">
           <tr>
@@ -85,9 +130,9 @@
 #include &lt;Fusion/BRep/BRepVertex.h&gt;
 #include &lt;Fusion/BRep/BRepVertices.h&gt;
 #include &lt;Fusion/Features/Features.h&gt;
-#include &lt;Fusion/Features/RipFeature.h&gt;
-#include &lt;Fusion/Features/RipFeatureInput.h&gt;
-#include &lt;Fusion/Features/RipFeatures.h&gt;
+#include &lt;Fusion/SheetMetal/RipFeature.h&gt;
+#include &lt;Fusion/SheetMetal/RipFeatureInput.h&gt;
+#include &lt;Fusion/SheetMetal/RipFeatures.h&gt;
 #include &lt;Fusion/Fusion/Design.h&gt;
 
 
@@ -162,9 +207,9 @@ extern "C" XI_EXPORT bool run(const char* context)
       <table width="100%" style="font-size:15">
         <tr>
           <td align="left">
-                © Copyright 2025 Autodesk, Inc.
+                © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(RipFeatureSample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(RipFeatureSample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

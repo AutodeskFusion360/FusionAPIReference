@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -50,7 +50,7 @@ public:
     /// Returns the sketch or null if there isn't a sketch with that name.
     core::Ptr<Sketch> itemByName(const std::string& name) const;
 
-    /// Returns the number of sketches in a component
+    /// Returns the number of sketches in a component.
     size_t count() const;
 
     /// Creates a new sketch on the specified planar entity.

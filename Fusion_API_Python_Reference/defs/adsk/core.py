@@ -50,7 +50,7 @@ class CommandTerminationReason():
     Defines the termination reason for a command.
     Commands can be terminated for a number of different reasons, and
     based on the reason commands have to do different things during
-    termination so this enum defines various reasons for termination
+    termination so this enum defines the reasons for termination such as user cancellation, completion, or error.
     """
     def __init__(self):
         pass
@@ -197,7 +197,10 @@ class GenericErrors():
 
 class GraphicsDrivers():
     """
-    A list of the valid graphics drivers.
+    A list of the graphics driver that are supported for various settings in Fusion.
+    Not all of the values are valid for certain settings, and the valid options can
+    be different on Windows and Mac. Check the options available in the user interface
+    and limit your choices to those.
     """
     def __init__(self):
         pass
@@ -206,6 +209,10 @@ class GraphicsDrivers():
     AutoSelectGraphicsDriver = 2
     OpenGLCoreProfileGraphicsDriver = 3
     OpenGLGraphicsDriver = 4
+    WarpGraphicsDriver = 5
+    DesktopGLGraphicsDriver = 6
+    OpenGLESGraphicsDriver = 7
+    VulkanGraphicsDriver = 8
 
 class GraphicsPresets():
     """
@@ -365,6 +372,19 @@ class KeyCodes():
     F12KeyCode = 16777275
     MenuKeyCode = 16777301
 
+class LightingEnvironments():
+    """
+    Defines the list of available lighting environments.
+    """
+    def __init__(self):
+        pass
+    DarkSkyLightingEnvironment = 0
+    GreyRoomLightingEnvironment = 1
+    PhotoBoothLightingEnvironment = 2
+    TranquilityBlueLightingEnvironment = 3
+    InfinityPoolLightingEnvironment = 4
+    RiverRubiconLightingEnvironment = 5
+
 class ListControlDisplayTypes():
     """
     The different types of items that can be displayed in a list control.
@@ -497,7 +517,7 @@ class PaletteDockingOptions():
 
 class PaletteDockingStates():
     """
-    Defines the various docking states that a palette can be in.
+    Defines the docking states that a palette can be in, such as floating, or docked to the top, bottom, left, or right of the main window.
     """
     def __init__(self):
         pass
@@ -509,7 +529,7 @@ class PaletteDockingStates():
 
 class PaletteSnapOptions():
     """
-    Defines the various positions that a palette can be snapped to another palette.
+    Defines the positions that a palette can be snapped to another palette, such as top, left, or right.
     """
     def __init__(self):
         pass
@@ -540,6 +560,7 @@ class ProgrammingLanguages():
     PromptForLanguage = 0
     PythonProgrammingLanguage = 1
     CPPProgramminglanguage = 2
+    TypeScriptProgrammingLanguage = 3
 
 class ProjectedTextureMapTypes():
     """
@@ -689,10 +710,9 @@ class UserInterfaceThemes():
     """
     def __init__(self):
         pass
-    ClassicUserInterfaceTheme = 0
     LightGrayUserInterfaceTheme = 1
     DarkBlueUserInterfaceTheme = 2
-    DarkGrayUserInterfaceTheme = 3
+    DeviceUserInterfaceTheme = 4
 
 class UserLanguages():
     """
@@ -971,7 +991,8 @@ class Appearance(Base):
         """
         Returns a collection of the entities currently using this appearance. This
         property is only valid for an appearance in a Design and where the IsUsed
-        property returns true. The collection returned can contain
+        property returns true. The collection returned can contain bodies, faces, or occurrences
+        that have this appearance applied.
         """
         return ObjectCollection()
     @property
@@ -1119,7 +1140,7 @@ class Application(Base):
         type is FileLogType, the message is written to Fusion's app log file which is the same file where Fusion writes
         all of its log messages. You can get the path and filename of the current log file by using the TEXT COMMAND window.
         In the lower-right corner you can choose "Txt", "Py", or "Js". Choose the "Txt" option and type "paths.get" in the
-        input field and press return. A list of all of the various paths used by Fusion will be displayed in the TEXT COMMAND
+        input field and press return. A list of all paths used by Fusion, such as installation paths, user data paths, and log file paths, will be displayed in the TEXT COMMAND
         window. The line for "AppLogFilePath" has the full path to the log file.
         """
         pass
@@ -1159,7 +1180,7 @@ class Application(Base):
     def unregisterCustomEvent(self, eventId: str) -> bool:
         """
         Unregisters an existing CustomEvent.
-        eventId : Th unique ID of the custom event you want to unregister.
+        eventId : The unique ID of the custom event you want to unregister.
         Returns True if the unregister succeeded.
         """
         return bool()
@@ -1181,33 +1202,41 @@ class Application(Base):
     def activeDocument(self) -> Document:
         """
         Returns the current active document.
+        
+        This will return null if no documents are currently open.
         """
         return Document()
     @property
     def activeProduct(self) -> Product:
         """
         Returns the current active product.
+        
+        This will return null if no documents are currently open.
         """
         return Product()
     @property
     def activeViewport(self) -> Viewport:
         """
         Returns the currently active graphics view.
+        
+        This will return null if no documents are currently open.
         """
         return Viewport()
     @property
     def activeEditObject(self) -> Base:
         """
         Returns the current edit target as seen in the user interface. This edit target
-        is defined as the container object that will be added to if something is created.
+        is defined as the container object that will be added to if new entities are created.
         For example, a component can be an edit target so that when new bodies are created they
         are added to that component. A sketch can also be an edit target.
+        
+        This will return null if no documents are currently open.
         """
         return Base()
     @property
     def data(self) -> Data:
         """
-        Returns the Data object which provides access the files.
+        Returns the Data object which provides access to the files.
         """
         return Data()
     @property
@@ -1277,10 +1306,10 @@ class Application(Base):
     @property
     def supportedProductTypes(self) -> list[str]:
         """
-        Returns an array containing the names of the products types currently
+        Returns an array containing the names of the product types currently
         supported by Fusion. For example, the name returned for Fusion is
         "DesignProductType". These product type names are used to identify
-        specific products in some other API functions such as the productType
+        specific products in other API functions such as the productType
         property on the Workspace and ToolbarPanel objects.
         """
         return [str()]
@@ -1288,7 +1317,7 @@ class Application(Base):
     def importManager(self) -> ImportManager:
         """
         Returns the ImportManager. You use the ImportManager
-        to import files (of various neutral formats.) into existing components or new document.
+        to import Fusion native and neutral formats such as STEP, IGES, SAT, and OBJ into existing components or new documents.
         """
         return ImportManager()
     @property
@@ -1355,7 +1384,7 @@ class Application(Base):
         The insertingFromURL event fires when the user has clicked a link in a web
         page that uses the Fusion protocol handler to insert a file as new component.
         This event is fired at the beginning of the request but before Fusion has
-        take any action so that it's still possible to cancel the operation.
+        taken any action so that it's still possible to cancel the operation.
         """
         return WebRequestEvent()
     @property
@@ -1372,7 +1401,7 @@ class Application(Base):
         The openingFromURL event fires when the user has clicked a link in a web
         page that uses the Fusion protocol handler to create a new file using an
         existing file as the initial contents. This event is fired at the beginning
-        of the request but before Fusion has take any action so that it's still
+        of the request but before Fusion has taken any action so that it's still
         possible to cancel the operation.
         """
         return WebRequestEvent()
@@ -1380,7 +1409,7 @@ class Application(Base):
     def openedFromURL(self) -> WebRequestEvent:
         """
         The openedFromURL event fires after the user has clicked a link in a web
-        page that uses the Fusion protocol handler to create a new using an existing
+        page that uses the Fusion protocol handler to create a new file using an existing
         file as the initial contents and that operation has completed.
         """
         return WebRequestEvent()
@@ -1407,7 +1436,7 @@ class Application(Base):
     def documentClosed(self) -> DocumentEvent:
         """
         The DocumentClosed event fires at the VERY end of a document being closed. The
-        Document object is not longer available because it has been closed.
+        Document object is no longer available because it has been closed.
         """
         return DocumentEvent()
     @property
@@ -1460,7 +1489,7 @@ class Application(Base):
     @property
     def measureManager(self) -> MeasureManager:
         """
-        Get the MeasureManager object which can be used to perform measurements of geometry.
+        Gets the MeasureManager object which can be used to perform measurements of geometry.
         """
         return MeasureManager()
     @property
@@ -1496,22 +1525,22 @@ class Application(Base):
     @property
     def isComponentColorsDisplayed(self) -> bool:
         """
-        Get and sets if component colors are used when displaying the components within a design.
+        Gets and sets if component colors are used when displaying the components within a design.
         This is the API equivalent of the "Display Component Colors" command.
         """
         return bool()
     @isComponentColorsDisplayed.setter
     def isComponentColorsDisplayed(self, value: bool):
         """
-        Get and sets if component colors are used when displaying the components within a design.
+        Gets and sets if component colors are used when displaying the components within a design.
         This is the API equivalent of the "Display Component Colors" command.
         """
         pass
     @property
     def applicationFolders(self) -> ApplicationFolders:
         """
-        Returns the ApplicationFolders object which provides access to the paths of various folders
-        associated with Fusion.
+        Returns the ApplicationFolders object which provides access to the paths of folders
+        associated with Fusion, such as the installation folder, user options folder, and user data folder.
         """
         return ApplicationFolders()
     @property
@@ -1521,6 +1550,18 @@ class Application(Base):
         properties to IDs and structure from the data model is ready.
         """
         return MFGDMDataEvent()
+    @property
+    def lightingEnvironment(self) -> LightingEnvironments:
+        """
+        Gets and sets the current lighting environment to use when rendering the graphics.
+        """
+        return LightingEnvironments()
+    @lightingEnvironment.setter
+    def lightingEnvironment(self, value: LightingEnvironments):
+        """
+        Gets and sets the current lighting environment to use when rendering the graphics.
+        """
+        pass
 
 class ApplicationCommandEventHandler(EventHandler):
     """
@@ -1560,7 +1601,8 @@ class ApplicationEventHandler(EventHandler):
 
 class ApplicationFolders(Base):
     """
-    The ApplicationFolders object provides access to the paths of various folders associated with Fusion.
+    The ApplicationFolders object provides access to the paths of folders associated with Fusion,
+    such as the installation folder, user options folder, and user data folder.
     """
     def __init__(self):
         pass
@@ -1602,7 +1644,7 @@ class ApplicationFolders(Base):
     @property
     def userDataPath(self) -> str:
         """
-        Returns the path where some user-specific data is stored.
+        Returns the path where user-specific data such as add-ins, scripts, and custom content is stored.
         """
         return str()
     @property
@@ -1764,7 +1806,7 @@ class BoundingBox2D(Base):
     Transient object that represents a 2D bounding box. A 2D bounding box is a rectangle box that is parallel
     to the x and y axes. The box is defined by a minimum point (smallest x-y values) and maximum point (largest x-y values).
     This object is a wrapper for these points and serves as a way to pass bounding box information
-    in and out of functions. It also provides some convenience function when working with the bounding box data.
+    in and out of functions. It also provides convenience functions such as expanding, checking containment, and getting dimensions when working with the bounding box data.
     They are created statically using the create method of the BoundingBox2D class.
     """
     def __init__(self):
@@ -1847,10 +1889,10 @@ class BoundingBox3D(Base):
     """
     Transient object that represents a 3D bounding box.
     It defines a rectangular box whose sides are parallel to the model space x, y, and z
-    planes. Because of the fixed orientation of the box it can be fully defined
+    planes. Because of the fixed orientation of the box, it can be fully defined
     by two points at opposing corners; the min and max points. This object is usually
     used to provide a rough approximation of the volume in space that an entity occupies.
-    It also provides some convenience function when working with the bounding box data.
+    It also provides convenience functions such as expanding, checking containment, and getting dimensions when working with the bounding box data.
     They are created statically using the create method of the BoundingBox3D class.
     """
     def __init__(self):
@@ -2453,6 +2495,60 @@ class CloudFileDialog(Base):
         """
         pass
 
+class CloudFolderDialog(Base):
+    """
+    Represents a cloud folder dialog, which is a dialog that is used to prompt the user
+    to select a folder on the Fusion web client. It is created by using the
+    UserInterface.createCloudFolderDialog method.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> CloudFolderDialog:
+        return CloudFolderDialog()
+    def showDialog(self) -> DialogResults:
+        """
+        Displays a modal dialog allowing the user to select a folder. The return value
+        can be used to determine if the dialog was canceled without selecting a folder.
+        The dataFolder property can be used to get the selected folder.
+        Returns an enum value indicating which button was clicked on the dialog.
+        """
+        return DialogResults()
+    @property
+    def title(self) -> str:
+        """
+        Gets or sets the title displayed on the dialog.
+        """
+        return str()
+    @title.setter
+    def title(self, value: str):
+        """
+        Gets or sets the title displayed on the dialog.
+        """
+        pass
+    @property
+    def initialFolder(self) -> DataFolder:
+        """
+        Before the dialog is displayed this is used to get and set the initial folder that is shown when
+        the dialog is displayed. It defaults to the DataFolder that is currently active in the Data Panel.
+        """
+        return DataFolder()
+    @initialFolder.setter
+    def initialFolder(self, value: DataFolder):
+        """
+        Before the dialog is displayed this is used to get and set the initial folder that is shown when
+        the dialog is displayed. It defaults to the DataFolder that is currently active in the Data Panel.
+        """
+        pass
+    @property
+    def dataFolder(self) -> DataFolder:
+        """
+        Gets the folder selected by the user in the dialog. This property is
+        used after the showDialog method has been called to retrieve the folder
+        selected by the user.
+        """
+        return DataFolder()
+
 class Color(Base):
     """
     The Color class wraps all of the information that defines a simple color.
@@ -2550,7 +2646,7 @@ class Color(Base):
 class Command(Base):
     """
     The Command class contains all of the functionality needed by a command to gather
-    various command input from a user, provide previews, and create the final result
+    command input from a user (such as selections, values, and choices), provide previews, and create the final result
     which is also encapsulated within a transaction so it can be undone.
     """
     def __init__(self):
@@ -2960,8 +3056,8 @@ class Command(Base):
         cases you may need more control over the selection. For example, you might want to allow the user to
         selection construction planes and planar faces, which can easily be controlled by defining those as
         valid entities for selection in the SelectionCommandInput object. But if you only want to allow the
-        user to select planes that are parallel then you need some dynamic control over the selection, which
-        can be done using the preSelect event.
+        user to select planes that are parallel then you need dynamic control over the selection, which
+        can be done using the preSelect event to filter selections based on geometric criteria.
         
         In the example of selecting parallel planes, you would still set the valid selection types for the
         SelectionCommandInput to allow selection of construction planes and planar faces. This will limit
@@ -3131,7 +3227,7 @@ class CommandCreatedEventHandler(EventHandler):
 
 class CommandDefinition(Base):
     """
-    The CommandDefinition is the base class of the various types of commands. Command types are based
+    The CommandDefinition is the base class of command types such as ButtonDefinition, CheckBoxDefinition, and DropDownCommandDefinition. Command types are based
     on the type of control used to execute them in the user-interface. For example, most commands will
     use a ButtonDefinition since they're executed using a button in the user-interface. A command definition
     contains the information that defines the user-interface. For example, the name and icon. The command
@@ -3958,9 +4054,176 @@ class CommandInputs(Base):
         """
         return int()
 
+class CompatibilityPreferences(Base):
+    """
+    The CompatibilityPreferences object provides access to compatibility and troubleshooting
+    related preferences.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> CompatibilityPreferences:
+        return CompatibilityPreferences()
+    @property
+    def isHighDPIScaling(self) -> bool:
+        """
+        Gets and sets if high DPI scaling is used.
+        """
+        return bool()
+    @isHighDPIScaling.setter
+    def isHighDPIScaling(self, value: bool):
+        """
+        Gets and sets if high DPI scaling is used.
+        """
+        pass
+    @property
+    def qtRenderingInterface(self) -> GraphicsDrivers:
+        """
+        Gets and sets the graphics system to use when rendering Qt.  Not all of the drivers defined
+        in the enum can be used. Use the Preferences command to check for the current valid options. The
+        options can be different on Windows and Mac.
+        """
+        return GraphicsDrivers()
+    @qtRenderingInterface.setter
+    def qtRenderingInterface(self, value: GraphicsDrivers):
+        """
+        Gets and sets the graphics system to use when rendering Qt.  Not all of the drivers defined
+        in the enum can be used. Use the Preferences command to check for the current valid options. The
+        options can be different on Windows and Mac.
+        """
+        pass
+    @property
+    def chromiumGraphicsBackend(self) -> GraphicsDrivers:
+        """
+        Gets and sets the graphics system to use for the Chromium graphics backend.
+        Not all of the drivers defined in the enum can be used. Use the Preferences
+        command to check for the current valid options. The options can be different
+        on Windows and Mac.
+        """
+        return GraphicsDrivers()
+    @chromiumGraphicsBackend.setter
+    def chromiumGraphicsBackend(self, value: GraphicsDrivers):
+        """
+        Gets and sets the graphics system to use for the Chromium graphics backend.
+        Not all of the drivers defined in the enum can be used. Use the Preferences
+        command to check for the current valid options. The options can be different
+        on Windows and Mac.
+        """
+        pass
+    @property
+    def isAcceleratedDataTransfer(self) -> bool:
+        """
+        Gets and sets if accelerated data transfer is enabled.
+        """
+        return bool()
+    @isAcceleratedDataTransfer.setter
+    def isAcceleratedDataTransfer(self, value: bool):
+        """
+        Gets and sets if accelerated data transfer is enabled.
+        """
+        pass
+    @property
+    def isCompatibleLegacyDataTransfer(self) -> bool:
+        """
+        Gets and sets if legacy data transfer compatibility is enabled.
+        """
+        return bool()
+    @isCompatibleLegacyDataTransfer.setter
+    def isCompatibleLegacyDataTransfer(self, value: bool):
+        """
+        Gets and sets if legacy data transfer compatibility is enabled.
+        """
+        pass
+    @property
+    def isEventPerformanceLogged(self) -> bool:
+        """
+        Gets and sets if event performance is logged.
+        """
+        return bool()
+    @isEventPerformanceLogged.setter
+    def isEventPerformanceLogged(self, value: bool):
+        """
+        Gets and sets if event performance is logged.
+        """
+        pass
+    @property
+    def isCacheGraphicsOnDocumentSave(self) -> bool:
+        """
+        Gets and sets if graphics are cached in the document when it is saved.
+        """
+        return bool()
+    @isCacheGraphicsOnDocumentSave.setter
+    def isCacheGraphicsOnDocumentSave(self, value: bool):
+        """
+        Gets and sets if graphics are cached in the document when it is saved.
+        """
+        pass
+    @property
+    def isUseLatestSpaceMouseDriver(self) -> bool:
+        """
+        Gets and sets if the latest or the legacy driver should be used as the
+        space mouse driver.
+        """
+        return bool()
+    @isUseLatestSpaceMouseDriver.setter
+    def isUseLatestSpaceMouseDriver(self, value: bool):
+        """
+        Gets and sets if the latest or the legacy driver should be used as the
+        space mouse driver.
+        """
+        pass
+    @property
+    def isOverrideChromiumGPUWorkarounds(self) -> bool:
+        """
+        Gets and sets if the Chromium GPU workarounds should be overridden.
+        """
+        return bool()
+    @isOverrideChromiumGPUWorkarounds.setter
+    def isOverrideChromiumGPUWorkarounds(self, value: bool):
+        """
+        Gets and sets if the Chromium GPU workarounds should be overridden.
+        """
+        pass
+    @property
+    def isLogHTTPRequestAndResponseBodies(self) -> bool:
+        """
+        Gets or sets a value indicating whether HTTP request and response bodies are included in log output.
+        """
+        return bool()
+    @isLogHTTPRequestAndResponseBodies.setter
+    def isLogHTTPRequestAndResponseBodies(self, value: bool):
+        """
+        Gets or sets a value indicating whether HTTP request and response bodies are included in log output.
+        """
+        pass
+    @property
+    def recoverSaveScanFrequency(self) -> int:
+        """
+        Gets and sets the frequency for recover save scan in minutes. It is a value greater than 0.
+        """
+        return int()
+    @recoverSaveScanFrequency.setter
+    def recoverSaveScanFrequency(self, value: int):
+        """
+        Gets and sets the frequency for recover save scan in minutes. It is a value greater than 0.
+        """
+        pass
+    @property
+    def isWindowParentingForPalettesEnforced(self) -> bool:
+        """
+        Gets or sets a value indicating whether window parenting is enforced for command palettes.
+        """
+        return bool()
+    @isWindowParentingForPalettesEnforced.setter
+    def isWindowParentingForPalettesEnforced(self, value: bool):
+        """
+        Gets or sets a value indicating whether window parenting is enforced for command palettes.
+        """
+        pass
+
 class ControlDefinition(Base):
     """
-    The ControlDefinition is the base class for the various types of control definitions.
+    The ControlDefinition is the base class for control definition types such as ButtonDefinition, CheckBoxDefinition, and DropDownCommandDefinition.
     You can use properties on the control definition to define the look and behavior of
     the control.
     """
@@ -4039,7 +4302,7 @@ class Curve2D(Base):
         """
         Transforms this curve in 2D space.
         matrix : A 2D matrix that defines the transform to apply to the curve.
-        Return true if the transform was successful.
+        Returns true if the transform was successful.
         """
         return bool()
     @property
@@ -4068,7 +4331,7 @@ class Curve3D(Base):
         """
         Transforms this curve in 3D space.
         matrix : A 3D matrix that defines the transform to apply to the curve.
-        Return true if the transform was successful.
+        Returns true if the transform was successful.
         """
         return bool()
     @property
@@ -4119,7 +4382,7 @@ class Curve3DPath(Base):
 class CurveEvaluator2D(Base):
     """
     2D curve evaluator that is obtained from a transient curve and allows you to perform
-    various evaluations on the curve.
+    evaluations on the curve, such as getting points, tangents, curvatures, and derivatives at parameter positions.
     """
     def __init__(self):
         pass
@@ -4215,7 +4478,7 @@ class CurveEvaluator2D(Base):
         If the point does not lie on the curve, the parameter of the nearest point on the curve will generally be returned.
         point : The point to get the curve parameter value at.
         parameter : The output parameter position corresponding to the point.
-        Returns true of the parameter was successfully returned.
+        Returns true if the parameter was successfully returned.
         """
         return (bool(), float())
     def getParameterExtents(self) -> tuple[bool, float, float]:
@@ -4321,7 +4584,7 @@ class CurveEvaluator2D(Base):
 class CurveEvaluator3D(Base):
     """
     3D curve evaluator that is obtained from a transient curve and allows you to perform
-    various evaluations on the curve.
+    evaluations on the curve, such as getting points, tangents, curvatures, and derivatives at parameter positions.
     """
     def __init__(self):
         pass
@@ -4398,7 +4661,7 @@ class CurveEvaluator3D(Base):
         If the point does not lie on the curve, the parameter of the nearest point on the curve will generally be returned.
         point : The point to get the curve parameter value at.
         parameter : The output parameter position corresponding to the point.
-        Returns true of the parameter was successfully returned.
+        Returns true if the parameter was successfully returned.
         """
         return (bool(), float())
     def getParameterExtents(self) -> tuple[bool, float, float]:
@@ -4554,7 +4817,7 @@ class Data(Base):
         return bool()
     def findFileById(self, id: str) -> DataFile:
         """
-        Returns the DataFile identified by the input id. This can fail is there isn't a DataFile identified
+        Returns the DataFile identified by the input id. This can fail if there isn't a DataFile identified
         with the specified id or if the current user doesn't have privileges to access the file.
         id : The full id of the file will be something similar to that shown below. The version argument can be
         omitted which will result in getting the latest version.
@@ -4631,7 +4894,7 @@ class Data(Base):
     def personalUseLimits(self) -> PersonalUseLimits:
         """
         If the user is running with a "Fusion for Personal Use license", this property
-        will return a peronalUseLimits object which provides information about
+        will return a personalUseLimits object which provides information about
         file limits associated with the license. If the user is running with any other
         license type, this property will return null.
         """
@@ -4751,7 +5014,7 @@ class DataFile(Base):
         
         When using this in its synchronous mode, Fusion is frozen during the download and the call will not
         return until the download is complete or has failed. When using this in its asynchronous mode,
-        calling this method will start the download process and the call return before the download is
+        calling this method will start the download process and the call will return before the download is
         complete. The event on the provided handler will be called notifying you when the download is complete.
         path : The full path and optionally the filename used on the local file system for the file. If the path
         doesn't exist it will be created. If only a path is specified, the name and file extension associated
@@ -4765,7 +5028,7 @@ class DataFile(Base):
         """
         Refreshes the data associated with a DataFile object to be up to date with the associated cloud data.
         The DataFile returned by the API reflects the local representation of the DataFile as used by the Data Panel.
-        This is method is only useful in very limited cases and should rarely be used. In most cases the local
+        This method is only useful in very limited cases and should rarely be used. In most cases the local
         representation will match the actual data on the cloud. In rare occasions where Fusion was off-line while
         the cloud processing of DataFile is completed or the DataFile is not in the folder shown in the Data Panel.
         Getting a DataFileFolder contents forces an update of the local data for all of the data files it contains
@@ -4826,6 +5089,13 @@ class DataFile(Base):
         can be retrieved through the DataFileFuture object.
         """
         return DataFileFuture()
+    def createDataVersion(self, versionDescription: str) -> bool:
+        """
+        Creates a version of this DataFile at tip.
+        versionDescription : The versionDescription is visible in the History Panel.
+        Returns true when Create Version Job is triggered.
+        """
+        return bool()
     @property
     def name(self) -> str:
         """
@@ -4886,7 +5156,7 @@ class DataFile(Base):
     def latestVersion(self) -> DataFile:
         """
         Returns the latest version of the DataFile. It can return a reference
-        to the same DataFile is this DataFile is the latest version.
+        to the same DataFile if this DataFile is the latest version.
         """
         return DataFile()
     @property
@@ -4922,31 +5192,31 @@ class DataFile(Base):
     @property
     def hasOutofDateChildReferences(self) -> bool:
         """
-        Gets if this datafile has Children (referenced components) that are out of date (not the latest version).
+        Gets if this DataFile has children (referenced components) that are out of date (not the latest version).
         """
         return bool()
     @property
     def hasChildReferences(self) -> bool:
         """
-        Gets if this datafile has children, (i.e. a Fusion Design containing referenced components).
+        Gets if this DataFile has children, (i.e. a Fusion Design containing referenced components).
         """
         return bool()
     @property
     def hasParentReferences(self) -> bool:
         """
-        Gets if this datafile has parents, (i.e. this is a child being referenced in another Fusion design).
+        Gets if this DataFile has parents, (i.e. this is a child being referenced in another Fusion design).
         """
         return bool()
     @property
     def childReferences(self) -> DataFiles:
         """
-        Returns a collection of DataFiles that are the children (referenced designs) this datafile references.
+        Returns a collection of DataFiles that are the children (referenced designs) this DataFile references.
         """
         return DataFiles()
     @property
     def parentReferences(self) -> DataFiles:
         """
-        Returns a collection DataFiles collection that are the parents (designs that reference) this datafile.
+        Returns a DataFiles collection that contains the parents (designs that reference) of this DataFile.
         """
         return DataFiles()
     @property
@@ -4971,9 +5241,9 @@ class DataFile(Base):
     @property
     def isReadOnly(self) -> bool:
         """
-        Gets if this file is currently read-only or not. A file can be read-only for various
+        Gets if this file is currently read-only or not. A file can be read-only for several
         reasons. For example, if you are running with a "Fusion for Personal Use license" and
-        have not designate the file to be editable or if someone else is editing the file.
+        have not designated the file to be editable, or if someone else is editing the file.
         """
         return bool()
     @property
@@ -4982,7 +5252,7 @@ class DataFile(Base):
         Returns if the DataFile is fully processed. This is especially useful when a new file is being saved or uploaded.
         The initial call to save or upload the file returns when the process has started but processing continues on the cloud.
         This property will return true when all of the processing has been completed and all information related to
-        the Datafile is now available.
+        the DataFile is now available.
         """
         return bool()
     @property
@@ -5047,7 +5317,7 @@ class DataFile(Base):
         !!!!! Warning !!!!!
         
         Returns the ID of the row that defines this configuration. Use the
-        isCongiguration property to determine if this Design is a configuration
+        isConfiguration property to determine if this Design is a configuration
         or not. If this is not a configuration, this property returns an
         empty string.
         """
@@ -5068,7 +5338,7 @@ class DataFile(Base):
     @property
     def isMilestone(self) -> bool:
         """
-        Returns if the version this Datafile represents is a milestone. Returns true if it
+        Returns if the version this DataFile represents is a milestone. Returns true if it
         is a milestone.
         """
         return bool()
@@ -5097,8 +5367,19 @@ class DataFile(Base):
         on the cloud, a DataObjectFuture is returned that you can use to monitor the state of downloading the
         data and then getting the raw data once it is available.
         
-        Only DataFiles that represent non-Fusion data can accessed. For example, this will work for TXT or XLS files but will
+        Only DataFiles that represent non-Fusion data can be accessed. For example, this will work for TXT or XLS files but will
         fail for F3D files.
+        """
+        return DataObjectFuture()
+    @property
+    def thumbnail(self) -> DataObjectFuture:
+        """
+        Starts the process to get the thumbnail image data associated with this DataFile. Because the data exists
+        on the cloud, a DataObjectFuture is returned that you can use to monitor the state of downloading the
+        thumbnail and then getting the image once it is available.
+        
+        The data returned is a 256x256 PNG image. For cases where the DataFile does not have an associated thumbnail,
+        the dataObject property of the returned DataObjectFuture will return null and the state property will return 'FailedFutureState'.
         """
         return DataObjectFuture()
 
@@ -5114,7 +5395,7 @@ class DataFileFuture(Base):
     @property
     def dataFile(self) -> DataFile:
         """
-        Returns the DataFile when the upload is complete (uplodeState returns UploadFinished).
+        Returns the DataFile when the upload is complete (uploadState returns UploadFinished).
         Returns null if the upload is still running or has failed.
         """
         return DataFile()
@@ -5182,26 +5463,26 @@ class DataFolder(Base):
         Uploads a single file to this directory.
         filename : The full filename of the file to upload.
         The upload process is asynchronous which means that this method
-        will return before the upload process had completed. The returned
+        will return before the upload process has completed. The returned
         DataFileFuture object can be used to check on the current state of the
         upload to determine if it is still uploading, is complete, or has failed.
-        If it is complete the final DataFinal can be retrieved through the
+        If it is complete the final DataFile can be retrieved through the
         DataFileFuture object.
         """
         return DataFileFuture()
     def uploadAssembly(self, filenames: list[str]) -> DataFileFuture:
         """
-        Uploads a set of files that represent an assembly There should only
+        Uploads a set of files that represent an assembly. There should only
         be a single top-level assembly file but there can be any number of other
         files that represent sub-assemblies.
         filenames : An array of strings that contains the list of all of the files that
         are part of the assembly. The name of the top-level assembly file
         must be the first file in the array.
         The upload process is asynchronous which means that this method
-        will return before the upload process had completed. The returned
+        will return before the upload process has completed. The returned
         DataFileFuture object can be used to check on the current state of the
         upload to determine if it is still uploading, is complete, or has failed.
-        If it is complete the final DataFinal can be retrieved through the
+        If it is complete the final DataFile can be retrieved through the
         DataFileFuture object.
         """
         return DataFileFuture()
@@ -5265,7 +5546,7 @@ class DataFolder(Base):
 
 class DataFolders(Base):
     """
-    Collection object the provides a list of data folders.
+    Collection object that provides a list of data folders.
     """
     def __init__(self):
         pass
@@ -5431,8 +5712,8 @@ class DataHubs(Base):
 class DataObject(Base):
     """
     The DataObject provides access to the raw data that represents a logical entity. Typically,
-    it is the bytes of a stored file, but it can also be something like the image data that
-    could be stored within another file.
+    it is the bytes of a stored file, but it can also be image data such as thumbnail images
+    that are stored within another file.
     """
     def __init__(self):
         pass
@@ -5670,7 +5951,7 @@ class Document(Base):
         return bool()
     def updateAllReferences(self) -> bool:
         """
-        Updates all out of date external references. This is equivalent to clicking the "Out of Date"
+        Updates all out of date external references. This is equivalent to clicking the "Refresh"
         button in the Quick Access Toolbar to update all out of date external references.
         """
         return bool()
@@ -5683,6 +5964,22 @@ class Document(Base):
         is provided a default name will be used.
         versionDescription : The description associated with the version. If an empty string is provided, a default description will be used.
         Returns true if saving the document as a milestone was successful.
+        """
+        return bool()
+    def saveDataVersion(self, versionDescription: str) -> bool:
+        """
+        Creates a version on a dirty document by implicitly saving it first.
+        This method is not applicable when saving a document for the first time.
+        In that case, you must use the Document.saveAs method. You can determine if a
+        document has been saved by checking the value of the isSaved property.
+        versionDescription : The description associated with the data version.
+        Returns true if saving the document with data version was successful.
+        """
+        return bool()
+    def advanceToLatest(self) -> bool:
+        """
+        Advance to Latest enables this capability to update assembly with all work-in-progress changes.
+        Returns true if the operation was successful.
         """
         return bool()
     @property
@@ -5805,6 +6102,13 @@ class Document(Base):
         this ID to match the completion of the save operation on the cloud to the original document.
         """
         return str()
+    @property
+    def canAdvanceToLatest(self) -> bool:
+        """
+        Indicates if the document can be advanced to the latest change.
+        Returns true if the document can be advanced to the latest change.
+        """
+        return bool()
 
 class DocumentEventHandler(EventHandler):
     """
@@ -5948,6 +6252,17 @@ class Documents(Base):
         """
         Opens an item that has previously been saved.
         dataFile : The item to open.
+        visible : Specifies if the document should be opened visibly or not.
+        Returns the open document or null if the open failed.
+        """
+        return Document()
+    def openUsingContext(self, dataFile: DataFile, fileOpenContext: FileOpenContext, visible: bool = True) -> Document:
+        """
+        Opens a previously saved document using additional context information to control how the file is opened.
+        This method allows opening a specific version or state of a document based on the provided context,
+        such as a timestamp that identifies a particular point in the document's history.
+        dataFile : The item to open.
+        fileOpenContext : The additional context information about the file to open. This is obtained by using the create method on the FileOpenContext object.
         visible : Specifies if the document should be opened visibly or not.
         Returns the open document or null if the open failed.
         """
@@ -6280,6 +6595,41 @@ class FileDialog(Base):
         """
         pass
 
+class FileOpenContext(Base):
+    """
+    An object that represents context information for opening a file.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> FileOpenContext:
+        return FileOpenContext()
+    @staticmethod
+    def create() -> FileOpenContext:
+        """
+        Creates a new FileOpenContext object with empty timestamp string.
+        Returns FileOpenContext object which provides information that is needed to open Data File.
+        """
+        return FileOpenContext()
+    @property
+    def timestamp(self) -> str:
+        """
+        Gets and sets the timestamp associated with the file open operation.
+        The timestamp is an ISO 8601-formatted UTC string (e.g., "2026-01-12T08:24:46.398Z") that identifies
+        a specific point in the document's history. This timestamp can be obtained by making a
+        history GraphQL call that returns history timestamps.
+        """
+        return str()
+    @timestamp.setter
+    def timestamp(self, value: str):
+        """
+        Gets and sets the timestamp associated with the file open operation.
+        The timestamp is an ISO 8601-formatted UTC string (e.g., "2026-01-12T08:24:46.398Z") that identifies
+        a specific point in the document's history. This timestamp can be obtained by making a
+        history GraphQL call that returns history timestamps.
+        """
+        pass
+
 class FolderDialog(Base):
     """
     Provides access to a folder selection dialog to allow the user to select a folder.
@@ -6384,13 +6734,17 @@ class GeneralPreferences(Base):
     @property
     def graphicsDriver(self) -> GraphicsDrivers:
         """
-        Gets and sets the graphics driver used to display the graphics.
+        Gets and sets the graphics driver used to display the graphics. Not all of the drivers defined
+        in the enum can be used. Use the Preferences command to check for the current valid options. The
+        options can be different on Windows and Mac.
         """
         return GraphicsDrivers()
     @graphicsDriver.setter
     def graphicsDriver(self, value: GraphicsDrivers):
         """
-        Gets and sets the graphics driver used to display the graphics.
+        Gets and sets the graphics driver used to display the graphics. Not all of the drivers defined
+        in the enum can be used. Use the Preferences command to check for the current valid options. The
+        options can be different on Windows and Mac.
         """
         pass
     @property
@@ -6615,6 +6969,13 @@ class GeneralPreferences(Base):
         Gets and sets which color theme is used by the user interface.
         """
         pass
+    @property
+    def activeUserInterfaceTheme(self) -> UserInterfaceThemes:
+        """
+        Gets the active user interface theme. This property is only different from userInterfaceTheme
+        in the case the theme is DeviceUserInterfaceTheme. In that case the theme used will be returned.
+        """
+        return UserInterfaceThemes()
 
 class GraphicsPreferences(Base):
     """
@@ -7709,7 +8070,7 @@ class MaterialLibrary(Base):
         Gets if this is a native material library. Native libraries are
         those that are delivered with Fusion and are always available. And
         non-native libraries are user created. If This returns True then there
-        are some limitations to what can be done with the library. For example,
+        are limitations to what can be done with the library. For example,
         if this is a native material library it cannot be unloaded.
         """
         return bool()
@@ -7853,7 +8214,7 @@ class Matrix2D(Base):
     def getCell(self, row: int, column: int) -> float:
         """
         Gets the value of the specified cell in the 3x3 matrix.
-        row : The index of the row. The first row has in index of 0
+        row : The index of the row. The first row has an index of 0.
         column : The index of the column. The first column has an index of 0
         Returns the value at [row][column].
         """
@@ -7861,7 +8222,7 @@ class Matrix2D(Base):
     def setCell(self, row: int, column: int, value: float) -> bool:
         """
         Sets the specified cell in the 3x3 matrix to the specified value.
-        row : The index of the row. The first row has in index of 0
+        row : The index of the row. The first row has an index of 0.
         column : The index of the column. The first column has an index of 0
         value : The new value of the cell.
         Returns true if successful.
@@ -7960,7 +8321,7 @@ class Matrix3D(Base):
         return Matrix3D()
     def setToIdentity(self) -> bool:
         """
-        Resets this matrix to an identify matrix.
+        Resets this matrix to an identity matrix.
         Returns true if successful.
         """
         return bool()
@@ -8005,7 +8366,7 @@ class Matrix3D(Base):
     def getCell(self, row: int, column: int) -> float:
         """
         Gets the value of the specified cell in the 4x4 matrix.
-        row : The index of the row. The first row has in index of 0
+        row : The index of the row. The first row has an index of 0.
         column : The index of the column. The first column has an index of 0
         The cell value at [row][column].
         """
@@ -8013,8 +8374,8 @@ class Matrix3D(Base):
     def setCell(self, row: int, column: int, value: float) -> bool:
         """
         Sets the specified cell in the 4x4 matrix to the specified value.
-        row : The index of the row. The first row has in index of 0
-        column : The index of the column. The first column has an index of 0
+        row : The index of the row. The first row has an index of 0.
+        column : The index of the column. The first column has an index of 0.
         value : The new cell value.
         Returns true if successful.
         """
@@ -8066,7 +8427,7 @@ class Matrix3D(Base):
         return bool()
     def setToRotation(self, angle: float, axis: Vector3D, origin: Point3D) -> bool:
         """
-        Sets this matrix to the matrix of rotation by the specified angle, through the specified origin, around the specified axis
+        Sets this matrix to the matrix of rotation by the specified angle, through the specified origin, around the specified axis.
         angle : The rotation angle in radians.
         axis : The axis of rotation.
         origin : The origin point of the axis of rotation.
@@ -8248,7 +8609,7 @@ class Milestones(Base):
         return Milestone()
     def itemByName(self, name: str) -> Milestone:
         """
-        Returns the milestone specified using its name..
+        Returns the milestone specified using its name.
         name : The name of the milestone to return.
         Returns the Milestone object or null if a milestone with the specified name is not found.
         """
@@ -8595,7 +8956,7 @@ class ObjectCollection(Base):
         of the occurrences. The code below converts the vector into a standard list so it can be used to create an ObjectCollection.
         
         <code><pre class="api-code">occList = list(root.Occurrences.asArray())
-        objColl = adsk.core.ObjectCollection.craeteWithArray(occList)</pre></code>
+        objColl = adsk.core.ObjectCollection.createWithArray(occList)</pre></code>
         
         Returns the newly created ObjectCollection or null in the case of failure.
         """
@@ -8668,7 +9029,7 @@ class OrientedBoundingBox3D(Base):
     """
     Transient object that represents an oriented 3D bounding box. An oriented 3D bounding box is a rectangular box that
     can be in any orientation in model space. They are created statically using the create method of the OrientedBoundingBox3D class
-    and are used by some functions to return oriented box information.
+    and are used by functions such as collision detection and spatial queries to return oriented box information.
     """
     def __init__(self):
         pass
@@ -8719,13 +9080,13 @@ class OrientedBoundingBox3D(Base):
     @property
     def centerPoint(self) -> Point3D:
         """
-        Gets and sets the centerPoint point of the oriented box.
+        Gets and sets the center point of the oriented box.
         """
         return Point3D()
     @centerPoint.setter
     def centerPoint(self, value: Point3D):
         """
-        Gets and sets the centerPoint point of the oriented box.
+        Gets and sets the center point of the oriented box.
         """
         pass
     @property
@@ -9197,8 +9558,8 @@ class Point2D(Base):
     def create(x: float = 0.0, y: float = 0.0) -> Point2D:
         """
         Creates a transient 2D point object.
-        x : The x coordinate of the point
-        y : The y coordinate of the point
+        x : The x coordinate of the point.
+        y : The y coordinate of the point.
         Returns the new Point2D object or null if the creation failed.
         """
         return Point2D()
@@ -9225,8 +9586,8 @@ class Point2D(Base):
         return float()
     def asArray(self) -> list[float]:
         """
-        Get coordinate data of the point
-        Returns the coordinate data of the point as an array
+        Get coordinate data of the point.
+        Returns the coordinate data of the point as an array.
         """
         return [float()]
     def isEqualTo(self, point: Point2D) -> bool:
@@ -9243,7 +9604,7 @@ class Point2D(Base):
         """
         Sets the coordinates of the point using an array as input.
         coordinates : An array that defines the coordinates of the point
-        Returns true if successful
+        Returns true if successful.
         """
         return bool()
     def set(self, x: float, y: float) -> bool:
@@ -9251,34 +9612,34 @@ class Point2D(Base):
         Sets the coordinates of the point by specifying the x, y coordinates.
         x : The x coordinate of the point.
         y : The y coordinate of the point.
-        Returns true if successful
+        Returns true if successful.
         """
         return bool()
     def transformBy(self, matrix: Matrix2D) -> bool:
         """
         Transforms the point using the provided matrix.
         matrix : The Matrix2D object that defines the transformation
-        Returns true if successful
+        Returns true if successful.
         """
         return bool()
     def asVector(self) -> Vector2D:
         """
         Defines a vector using the coordinates of the point.
-        Returns a Vector2D object
+        Returns a Vector2D object.
         """
         return Vector2D()
     def translateBy(self, vector: Vector2D) -> bool:
         """
         Translates the point using the provided vector.
         vector : The vector to use to translate the point
-        Returns true if successful
+        Returns true if successful.
         """
         return bool()
     def vectorTo(self, point: Point2D) -> Vector2D:
         """
         Returns a vector from this point to another point.
         point : The other point to use to create the vector
-        Returns a Vector2D object
+        Returns a Vector2D object.
         """
         return Vector2D()
     def isEqualToByTolerance(self, point: Point2D, tolerance: float) -> bool:
@@ -9329,8 +9690,8 @@ class Point3D(Base):
     def create(x: float = 0.0, y: float = 0.0, z: float = 0.0) -> Point3D:
         """
         Creates a transient 3D point object.
-        x : The x coordinate of the point
-        y : The y coordinate of the point
+        x : The x coordinate of the point.
+        y : The y coordinate of the point.
         z : The z coordinate of the point
         Returns the new Point3D object or null if the creation failed.
         """
@@ -9531,6 +9892,13 @@ class Preferences(Base):
         Gets the APIPreferences object, which provides access to the various preferences associated with the API.
         """
         return APIPreferences()
+    @property
+    def compatibilityPreferences(self) -> CompatibilityPreferences:
+        """
+        Gets the CompatibilityPreferences object, which provides access to the various compatibility
+        and troubleshouting preferences.
+        """
+        return CompatibilityPreferences()
 
 class Product(Base):
     """
@@ -9558,7 +9926,7 @@ class Product(Base):
         
         Regular expressions provide a more flexible way of searching. To use a regular expression,
         prefix the input string for the groupName or attributeName arguments with "re:". The regular
-        expression much match the entire group or attribute name. For example if you have a group that
+        expression much match the entire group or attribute name. For example, if you have a group that
         contains attributes named "Length1", "Length2", "Width1", and "Width2" and want to find any
         of the length attributes you can use a regular expression using the string "re:Length.*". For more
         information on attributes see the Attributes topic in the user manual.
@@ -11113,6 +11481,11 @@ class SelectionFilters(Base):
     CustomGraphics = "CustomGraphics"
     FaceGroups = "FaceGroups"
     VolumetricModel = "VolumetricModel"
+    OperationBase = "OperationBase"
+    Setup = "Setup"
+    Operation = "Operation"
+    NCProgram = "NCProgram"
+    CAMFolder = "CAMFolder"
 
 class Selections(Base):
     """
@@ -11321,7 +11694,8 @@ class SelectionSets(Base):
 class SharedLink(Base):
     """
     Provides access to the URL that can be used to share this DataFile with others. This object
-    also provides access to the various settings that control the link's behavior.
+    also provides access to the settings that control the link's behavior, such as whether sharing
+    is enabled, whether downloads are allowed, and password requirements.
     """
     def __init__(self):
         pass
@@ -11362,7 +11736,7 @@ class SharedLink(Base):
     def linkURL(self) -> str:
         """
         Returns the URL of the shared link. Returns an empty string in the case where isShared
-        is False.
+        is false.
         """
         return str()
     @property
@@ -11614,7 +11988,7 @@ class Surface(Base):
 class SurfaceEvaluator(Base):
     """
     Surface evaluator that is obtained from a transient surface and allows you to perform
-    various evaluations on the surface.
+    evaluations on the surface, such as getting points, normals, derivatives, and parameter ranges at parameter positions.
     """
     def __init__(self):
         pass
@@ -11627,10 +12001,10 @@ class SurfaceEvaluator(Base):
         parametric space of the surface.
         parametricCurve : The parameter space curve to map into this surface's parameter space.
         Returns an ObjectCollection containing one or more curves.
-        When the SufaceEvaluatior is obtained from a face, and the curve cuts across internal
+        When the SurfaceEvaluator is obtained from a face, and the curve cuts across internal
         boundaries of the face, multiple curves are returned. The returned curves are trimmed
         to the boundaries of the face.
-        If the SurfaceEvaluator is obtained from a geometry object, a single curve returned
+        If the SurfaceEvaluator is obtained from a geometry object, a single curve is returned
         because there are no boundaries with which to trim the curve.
         The type of curve(s) returned depends on the shape of the input curve and surface.
         """
@@ -11645,8 +12019,8 @@ class SurfaceEvaluator(Base):
         Getting an iso curve is limited to a SurfaceEvaluator that is obtained from a BRepFace. It will
         fail when the SurfaceEvaluator is obtained from a geometry object (Plane, Sphere, Torus,
         Cylinder, Cone, EllipticalCone, EllipticalCylinder, or NurbsSurface).
-        parameter : The parameter at which to extract the curve
-        isUDirection : A bool that indicates whether to extract the curve from the U or V direction
+        parameter : The parameter at which to extract the curve.
+        isUDirection : A bool that indicates whether to extract the curve from the U or V direction.
         Returns an ObjectCollection that contains one or more curves.
         Multiple curves are returned when the SurfaceEvaluator is obtained from a Face
         and the curve cuts across internal boundaries. The resulting curves are trimmed to the
@@ -11738,7 +12112,7 @@ class SurfaceEvaluator(Base):
         If the point does not lie on the surface, the parameter of the nearest point on the surface will generally be returned.
         point : The point to get the curve parameter value at.
         parameter : The output parameter position corresponding to the point.
-        Returns true of the parameter was successfully returned.
+        Returns true if the parameter was successfully returned.
         """
         return (bool(), Point2D())
     def getPointsAtParameters(self, parameters: list[Point2D]) -> tuple[bool, list[Point3D]]:
@@ -11874,13 +12248,13 @@ class SurfaceEvaluator(Base):
     @property
     def isClosedInU(self) -> bool:
         """
-        Returns if the surface is closed (forms a loop) in the U direction
+        Returns if the surface is closed (forms a loop) in the U direction.
         """
         return bool()
     @property
     def isClosedInV(self) -> bool:
         """
-        Returns if the surface is closed (forms a loop) in the V direction
+        Returns if the surface is closed (forms a loop) in the V direction.
         """
         return bool()
     @property
@@ -11896,8 +12270,9 @@ class SurfaceEvaluator(Base):
 
 class TextureMapControl(Base):
     """
-    Provides access to the various settings that control how a texture is applied to a body or mesh.
-    This is the base class for the various texture mapping techniques.
+    Provides access to the settings that control how a texture is applied to a body or mesh,
+    such as transform, reset, and projection type settings.
+    This is the base class for texture mapping techniques including projected and 3D texture mapping.
     """
     def __init__(self):
         pass
@@ -13122,6 +13497,13 @@ class UserInterface(Base):
         Returns the created CloudFileDialog object that you can use to define the contents of and display a standard file dialog.
         """
         return CloudFileDialog()
+    def createCloudFolderDialog(self) -> CloudFolderDialog:
+        """
+        Creates a new CloudFolderDialog object which provides the ability to show a folder selection dialog
+        to the user that allows them to choose a folder from Fusion web client.
+        Returns the created CloudFolderDialog object that you can use to define the contents of and display a cloud folder dialog.
+        """
+        return CloudFolderDialog()
     @property
     def activeSelections(self) -> Selections:
         """
@@ -13553,7 +13935,7 @@ class Vector2D(Base):
         """
         Sets the definition of the vector by specifying an array containing the x and y coordinates.
         coordinates : An array that specifies the values for the x and y coordinates of the vector.
-        Returns true if successful
+        Returns true if successful.
         """
         return bool()
     def scaleBy(self, scale: float) -> bool:
@@ -13652,7 +14034,7 @@ class Vector3D(Base):
     def asPoint(self) -> Point3D:
         """
         Returns a new point with the same coordinate values as this vector.
-        Return the new point.
+        Returns the new point.
         """
         return Point3D()
     def copy(self) -> Vector3D:
@@ -13899,7 +14281,7 @@ class Viewport(Base):
         Gets and sets the camera associated with the view.
         The camera returned is a copy of the current camera
         settings of the view. Editing the properties of the
-        camera will have no affect on the viewport until the
+        camera will have no effect on the viewport until the
         camera is assigned back to the viewport.
         """
         return Camera()
@@ -13909,7 +14291,7 @@ class Viewport(Base):
         Gets and sets the camera associated with the view.
         The camera returned is a copy of the current camera
         settings of the view. Editing the properties of the
-        camera will have no affect on the viewport until the
+        camera will have no effect on the viewport until the
         camera is assigned back to the viewport.
         """
         pass
@@ -14638,7 +15020,7 @@ class ApplicationEvent(Event):
 class ApplicationEventArgs(EventArgs):
     """
     The ApplicationEventArgs provides information associated with an application event.
-    Note that some properties are not available on every event
+    Note that not all properties are available on every event type.
     """
     def __init__(self):
         pass
@@ -14712,10 +15094,10 @@ class Arc2D(Curve2D):
         Gets all of the data defining the arc.
         center : The output center point of the arc.
         radius : The output radius of the arc.
-        startAngle : The output start angle of the arc in radians, where 0 is along the x axis.
-        endAngle : The output end angle of the arc in radians, where 0 is along the x axis.
+        startAngle : The output start angle of the arc in radians, where 0 is along the X-axis.
+        endAngle : The output end angle of the arc in radians, where 0 is along the X-axis.
         isClockwise : The output value that indicates if the sweep direction is clockwise or counterclockwise.
-        Returns true if successful
+        Returns true if successful.
         """
         return (bool(), Point2D(), float(), float(), float(), bool())
     def set(self, center: Point2D, radius: float, startAngle: float, endAngle: float, isClockwise: bool) -> bool:
@@ -14723,10 +15105,10 @@ class Arc2D(Curve2D):
         Sets all of the data defining the arc.
         center : A Point2D object defining the center position of the arc.
         radius : The radius of the arc.
-        startAngle : The start angle of the arc in radians, where 0 is along the x axis.
-        endAngle : The end angle of the arc in radians, where 0 is along the x axis.
+        startAngle : The start angle of the arc in radians, where 0 is along the X-axis.
+        endAngle : The end angle of the arc in radians, where 0 is along the X-axis.
         isClockwise : Indicates if the sweep direction is clockwise or counterclockwise.
-        Returns true if redefining the arc is successful
+        Returns true if redefining the arc is successful.
         """
         return bool()
     @property
@@ -14756,25 +15138,25 @@ class Arc2D(Curve2D):
     @property
     def startAngle(self) -> float:
         """
-        Gets and sets the start angle of the arc in radians, where 0 is along the x axis.
+        Gets and sets the start angle of the arc in radians, where 0 is along the X-axis.
         """
         return float()
     @startAngle.setter
     def startAngle(self, value: float):
         """
-        Gets and sets the start angle of the arc in radians, where 0 is along the x axis.
+        Gets and sets the start angle of the arc in radians, where 0 is along the X-axis.
         """
         pass
     @property
     def endAngle(self) -> float:
         """
-        Gets and sets the end angle of the arc in radians, where 0 is along the x axis.
+        Gets and sets the end angle of the arc in radians, where 0 is along the X-axis.
         """
         return float()
     @endAngle.setter
     def endAngle(self, value: float):
         """
-        Gets and sets the end angle of the arc in radians, where 0 is along the x axis.
+        Gets and sets the end angle of the arc in radians, where 0 is along the X-axis.
         """
         pass
     @property
@@ -14851,7 +15233,7 @@ class Arc3D(Curve3D):
         normal : The new normal vector.
         referenceVector : The new reference vector from which the start and end angles are measured from.
         The reference vector must be perpendicular to the normal vector.
-        Returns true if successful
+        Returns true if successful.
         """
         return bool()
     def copy(self) -> Arc3D:
@@ -14871,7 +15253,7 @@ class Arc3D(Curve3D):
         This angle is measured from the reference vector using the right hand rule around the normal vector.
         endAngle : The output end angle in radians.
         This angle is measured from the reference vector using the right hand rule around the normal vector.
-        Returns true if successful
+        Returns true if successful.
         """
         return (bool(), Point3D(), Vector3D(), Vector3D(), float(), float(), float())
     def set(self, center: Point3D, normal: Vector3D, referenceVector: Vector3D, radius: float, startAngle: float, endAngle: float) -> bool:
@@ -14887,7 +15269,7 @@ class Arc3D(Curve3D):
         This angle is measured from the reference vector using the right hand rule around the normal vector.
         endAngle : The end angle in radians.
         This angle is measured from the reference vector using the right hand rule around the normal vector.
-        Returns true if successful
+        Returns true if successful.
         """
         return bool()
     @property
@@ -15337,7 +15719,7 @@ class Circle2D(Curve2D):
         Sets all of the data defining the circle.
         center : A point that defines the center position of the circle.
         radius : The radius of the circle.
-        Returns true if redefining the circle is successful
+        Returns true if redefining the circle is successful.
         """
         return bool()
     @property
@@ -15418,7 +15800,7 @@ class Circle3D(Curve3D):
         center : The output center point of the circle.
         normal : The output normal vector.
         radius : The output radius of the circle.
-        Returns true if successful
+        Returns true if successful.
         """
         return (bool(), Point3D(), Vector3D(), float())
     def set(self, center: Point3D, normal: Vector3D, radius: float) -> bool:
@@ -15428,7 +15810,7 @@ class Circle3D(Curve3D):
         normal : The normal vector of the circle.
         The plane through the center point and perpendicular to the normal vector defines the plane of the circle.
         radius : The radius of the circle.
-        Returns true if successful
+        Returns true if successful.
         """
         return bool()
     @property
@@ -15863,8 +16245,8 @@ class CopyDesignFileInput(CopyFileInput):
     ! This is in preview state; please see the help for more info
     !!!!! Warning !!!!!
     
-    Input object that defines the various settings that apply when copying a design file,
-    including whether associated drawings and/or references external components are also
+    Input object that defines the settings that apply when copying a design file,
+    including whether associated drawings and/or referenced external components are also
     copied.
     """
     def __init__(self):
@@ -15927,14 +16309,14 @@ class CustomEvent(Event):
     def eventId(self) -> str:
         """
         Returns the id that was assigned to this event when it was registered. Each
-        custom event has it's own unique id.
+        custom event has its own unique id.
         """
         return str()
 
 class CustomEventArgs(EventArgs):
     """
     The ApplicationEventArgs provides information associated with an application event.
-    Note that some properties are not available on every event
+    Note that not all properties are available on every event type.
     """
     def __init__(self):
         pass
@@ -16413,7 +16795,7 @@ class DocumentEvent(Event):
 class DocumentEventArgs(EventArgs):
     """
     The DocumentEventArgs provides information associated with a document event.
-    Note that some properties are not available on every event
+    Note that not all properties are available on every event type
     - for example, the Document is not available on the DocumentOpening event because
     the Document is not yet available.
     """
@@ -16678,10 +17060,10 @@ class Ellipse2D(Curve2D):
         Creates a transient 2D ellipse by specifying a center position, major and minor axes,
         and major and minor radii.
         center : A Point2D object that defines the center of the ellipse.
-        majorAxis : The major axis of the ellipse
-        majorRadius : The major radius of the of the ellipse.
-        minorRadius : The minor radius of the of the ellipse.
-        Returns the new Ellipse 2D object or null if the creation failed.
+        majorAxis : The major axis of the ellipse.
+        majorRadius : The major radius of the ellipse.
+        minorRadius : The minor radius of the ellipse.
+        Returns the new Ellipse2D object or null if the creation failed.
         """
         return Ellipse2D()
     def copy(self) -> Ellipse2D:
@@ -16695,8 +17077,8 @@ class Ellipse2D(Curve2D):
         Gets all of the data defining the ellipse.
         center : The output center point of the ellipse.
         majorAxis : The output major axis of the ellipse.
-        majorRadius : The output major radius of the of the ellipse.
-        minorRadius : The output minor radius of the of the ellipse.
+        majorRadius : The output major radius of the ellipse.
+        minorRadius : The output minor radius of the ellipse.
         Returns true if successful.
         """
         return (bool(), Point2D(), Vector2D(), float(), float())
@@ -16705,8 +17087,8 @@ class Ellipse2D(Curve2D):
         Sets all of the data defining the ellipse.
         center : A Point2D object that defines the center of the ellipse.
         majorAxis : The major axis of the ellipse.
-        majorRadius : The major radius of the of the ellipse.
-        minorRadius : The minor radius of the of the ellipse.
+        majorRadius : The major radius of the ellipse.
+        minorRadius : The minor radius of the ellipse.
         Returns true if redefining the ellipse is successful.
         """
         return bool()
@@ -16783,9 +17165,9 @@ class Ellipse3D(Curve3D):
         center : The center point of the ellipse.
         normal : The normal vector of the ellipse.
         The plane through the center point and perpendicular to the normal vector defines the plane of the ellipse.
-        majorAxis : The major axis of the ellipse
-        majorRadius : The major radius of the of the ellipse.
-        minorRadius : The minor radius of the of the ellipse.
+        majorAxis : The major axis of the ellipse.
+        majorRadius : The major radius of the ellipse.
+        minorRadius : The minor radius of the ellipse.
         Returns the new Ellipse 3D object or null if the creation failed.
         """
         return Ellipse3D()
@@ -16800,9 +17182,9 @@ class Ellipse3D(Curve3D):
         Gets all of the data defining the ellipse.
         center : The output center point of the ellipse.
         normal : The output normal vector of the ellipse.
-        majorAxis : The output major axis of the ellipse
-        majorRadius : The output major radius of the of the ellipse.
-        minorRadius : The output minor radius of the of the ellipse.
+        majorAxis : The output major axis of the ellipse.
+        majorRadius : The output major radius of the ellipse.
+        minorRadius : The output minor radius of the ellipse.
         Returns true if successful.
         """
         return (bool(), Point3D(), Vector3D(), Vector3D(), float(), float())
@@ -16813,8 +17195,8 @@ class Ellipse3D(Curve3D):
         normal : The normal vector of the ellipse.
         The plane through the center point and perpendicular to the normal vector defines the plane of the ellipse.
         majorAxis : The major axis of the ellipse.
-        majorRadius : The major radius of the of the ellipse.
-        minorRadius : The minor radius of the of the ellipse.
+        majorRadius : The major radius of the ellipse.
+        minorRadius : The minor radius of the ellipse.
         Returns true if successful.
         """
         return bool()
@@ -16893,11 +17275,11 @@ class EllipticalArc2D(Curve2D):
     @staticmethod
     def create(center: Point2D, majorAxis: Vector2D, majorRadius: float, minorRadius: float, startAngle: float, endAngle: float) -> EllipticalArc2D:
         """
-        Creates a transient 2D elliptical arc
+        Creates a transient 2D elliptical arc.
         center : A Point2D object that defines the center of the elliptical arc.
-        majorAxis : The major axis of the elliptical arc
-        majorRadius : The major radius of the of the elliptical arc.
-        minorRadius : The minor radius of the of the elliptical arc.
+        majorAxis : The major axis of the elliptical arc.
+        majorRadius : The major radius of the elliptical arc.
+        minorRadius : The minor radius of the elliptical arc.
         startAngle : The start angle of the elliptical arc in radians, where 0 is along the major axis.
         endAngle : The end angle of the elliptical arc in radians, where 0 is along the major axis.
         Returns the newly created elliptical arc or null if the creation failed.
@@ -16914,11 +17296,11 @@ class EllipticalArc2D(Curve2D):
         Gets all of the data defining the elliptical arc.
         center : The output center point of the elliptical arc.
         majorAxis : The output major axis of the elliptical arc.
-        majorRadius : The output major radius of the of the elliptical arc.
-        minorRadius : The output minor radius of the of the elliptical arc.
+        majorRadius : The output major radius of the elliptical arc.
+        minorRadius : The output minor radius of the elliptical arc.
         startAngle : The output start angle of the elliptical arc in radians, where 0 is along the major axis.
         endAngle : The output end angle of the elliptical arc in radians, where 0 is along the major axis.
-        Returns true if successful
+        Returns true if successful.
         """
         return (bool(), Point2D(), Vector2D(), float(), float(), float(), float())
     def set(self, center: Point2D, majorAxis: Vector2D, majorRadius: float, minorRadius: float, startAngle: float, endAngle: float) -> bool:
@@ -16926,11 +17308,11 @@ class EllipticalArc2D(Curve2D):
         Sets all of the data defining the elliptical arc.
         center : A Point2D object that defines the center of the elliptical arc.
         majorAxis : The major axis of the elliptical arc.
-        majorRadius : The major radius of the of the elliptical arc.
-        minorRadius : The minor radius of the of the elliptical arc.
+        majorRadius : The major radius of the elliptical arc.
+        minorRadius : The minor radius of the elliptical arc.
         startAngle : The start angle of the elliptical arc in radians, where 0 is along the major axis.
         endAngle : The end angle of the elliptical arc in radians, where 0 is along the major axis.
-        Returns true if redefining the elliptical arc is successful
+        Returns true if redefining the elliptical arc is successful.
         """
         return bool()
     @property
@@ -17014,7 +17396,7 @@ class EllipticalArc2D(Curve2D):
     @property
     def isCircular(self) -> bool:
         """
-        Gets if the elliptical arc is the geometric equivalent of a circular arc
+        Gets if the elliptical arc is the geometric equivalent of a circular arc.
         """
         return bool()
     @property
@@ -17054,8 +17436,8 @@ class EllipticalArc3D(Curve3D):
         center : The center point of the elliptical arc.
         normal : The normal vector of the elliptical arc.
         majorAxis : The major axis of the elliptical arc.
-        majorRadius : The major radius of the of the elliptical arc.
-        minorRadius : The minor radius of the of the elliptical arc.
+        majorRadius : The major radius of the elliptical arc.
+        minorRadius : The minor radius of the elliptical arc.
         startAngle : The start angle of the elliptical arc in radians, where 0 is along the major axis.
         endAngle : The end angle of the elliptical arc in radians, where 0 is along the major axis.
         Returns the newly created elliptical arc or null if the creation failed.
@@ -17073,8 +17455,8 @@ class EllipticalArc3D(Curve3D):
         center : The output center point of the elliptical arc.
         normal : The output normal vector of the elliptical arc.
         majorAxis : The output major axis of the elliptical arc.
-        majorRadius : The output major radius of the of the elliptical arc.
-        minorRadius : The output minor radius of the of the elliptical arc.
+        majorRadius : The output major radius of the elliptical arc.
+        minorRadius : The output minor radius of the elliptical arc.
         startAngle : The output start angle of the elliptical arc in radians, where 0 is along the major axis.
         endAngle : The output end angle of the elliptical arc in radians, where 0 is along the major axis.
         Returns true if successful.
@@ -17086,8 +17468,8 @@ class EllipticalArc3D(Curve3D):
         center : The center point of the elliptical arc.
         normal : The normal vector of the elliptical arc.
         majorAxis : The major axis of the elliptical arc.
-        majorRadius : The major radius of the of the elliptical arc.
-        minorRadius : The minor radius of the of the elliptical arc.
+        majorRadius : The major radius of the elliptical arc.
+        minorRadius : The minor radius of the elliptical arc.
         startAngle : The start angle of the elliptical arc in radians, where 0 is along the major axis.
         endAngle : The end angle of the elliptical arc in radians, where 0 is along the major axis.
         Returns true if successful.
@@ -17543,7 +17925,7 @@ class FloatProperty(Property):
     @property
     def units(self) -> str:
         """
-        Gets the units that the value of this property is returned in. The String returned is a
+        Gets the units that the value of this property is returned in. The string returned is a
         valid Fusion unit string. An empty string indicates a unitless value.
         """
         return str()
@@ -17941,7 +18323,7 @@ class InfiniteLine3D(Curve3D):
         """
         Intersect this line with a curve to get the intersection point(s).
         curve : The intersecting curve.
-        The curve can be a Line3D, InfininteLine3D, Circle3D, Arc3D, EllipticalArc3D, Ellipse3D,
+        The curve can be a Line3D, InfiniteLine3D, Circle3D, Arc3D, EllipticalArc3D, Ellipse3D,
         or NurbsCurve3D.
         Returns a collection of the intersection points.
         """
@@ -18219,8 +18601,8 @@ class Line2D(Curve2D):
     def create(startPoint: Point2D, endPoint: Point2D) -> Line2D:
         """
         Creates a transient line.
-        startPoint : The start point of the line
-        endPoint : The end point of the line
+        startPoint : The start point of the line.
+        endPoint : The end point of the line.
         Returns the new Line2D object or null if the creation failed.
         """
         return Line2D()
@@ -18241,9 +18623,9 @@ class Line2D(Curve2D):
     def set(self, startPoint: Point2D, endPoint: Point2D) -> bool:
         """
         Sets all of the data defining the line segment.
-        startPoint : The start point of the line
-        endPoint : The end point of the line
-        Returns true if redefining the line is successful
+        startPoint : The start point of the line.
+        endPoint : The end point of the line.
+        Returns true if redefining the line is successful.
         """
         return bool()
     @property
@@ -18306,7 +18688,7 @@ class Line3D(Curve3D):
     def asInfiniteLine(self) -> InfiniteLine3D:
         """
         Creates an equivalent InfiniteLine3D.
-        Returns an equivalent InfiniteLine3D
+        Returns an equivalent InfiniteLine3D.
         """
         return InfiniteLine3D()
     def isColinearTo(self, line: Line3D) -> bool:
@@ -18320,9 +18702,9 @@ class Line3D(Curve3D):
         """
         Intersect this line with a curve to get the intersection point(s).
         curve : The intersecting curve.
-        The curve can be a Line3D, InfininteLine3D, Circle3D, Arc3D, EllipticalArc3D, Ellipse3D,
+        The curve can be a Line3D, InfiniteLine3D, Circle3D, Arc3D, EllipticalArc3D, Ellipse3D,
         or NurbsCurve3D.
-        Returns a collection of the intersection points
+        Returns a collection of the intersection points.
         """
         return ObjectCollection()
     def intersectWithSurface(self, surface: Surface) -> ObjectCollection:
@@ -18690,8 +19072,8 @@ class NurbsCurve2D(Curve2D):
     def createNonRational(controlPoints: list[Point2D], degree: int, knots: list[float], isPeriodic: bool) -> NurbsCurve2D:
         """
         Creates a transient 2D NURBS non-rational b-spline object.
-        controlPoints : An array of control point that define the path of the spline
-        degree : The degree of curvature of the spline
+        controlPoints : An array of control points that define the path of the spline.
+        degree : The degree of curvature of the spline.
         knots : An array of numbers that define the knot vector of the spline. The knots is an array of (>=degree + N + 1) numbers, where N is the number of control points.
         isPeriodic : A bool specifying if the spline is to be Periodic. A periodic spline has a start point and
         end point that meet forming a closed loop.
@@ -18702,8 +19084,8 @@ class NurbsCurve2D(Curve2D):
     def createRational(controlPoints: list[Point2D], degree: int, knots: list[float], weights: list[float], isPeriodic: bool) -> NurbsCurve2D:
         """
         Creates a transient 2D NURBS rational b-spline object.
-        controlPoints : An array of control point that define the path of the spline
-        degree : The degree of curvature of the spline
+        controlPoints : An array of control points that define the path of the spline.
+        degree : The degree of curvature of the spline.
         knots : An array of numbers that define the knot vector of the spline. The knots is an array of (>=degree + N + 1) numbers, where N is the number of control points.
         weights : An array of numbers that define the weights for the spline.
         isPeriodic : A bool specifying if the spline is to be Periodic. A periodic curve has a start point and
@@ -18720,7 +19102,7 @@ class NurbsCurve2D(Curve2D):
     def getData(self) -> tuple[bool, list[Point2D], int, list[float], bool, list[float], bool]:
         """
         Gets the data that defines a transient 2D NURBS rational b-spline object.
-        controlPoints : The output array of control point that define the path of the spline.
+        controlPoints : The output array of control points that define the path of the spline.
         degree : The output degree of curvature of the spline.
         knots : The output array of numbers that define the knots of the spline.
         isRational : The output value indicating if the spline is rational. A rational spline will have a weight value
@@ -18734,15 +19116,15 @@ class NurbsCurve2D(Curve2D):
     def set(self, controlPoints: list[Point2D], degree: int, knots: list[float], isRational: bool, weights: list[float], isPeriodic: bool) -> bool:
         """
         Sets the data that defines a transient 2D NURBS rational b-spline object.
-        controlPoints : The array of control point that define the path of the spline
-        degree : The degree of curvature of the spline
+        controlPoints : The array of control points that define the path of the spline.
+        degree : The degree of curvature of the spline.
         knots : An array of numbers that define the knots of the spline.
         isRational : A bool indicating if the spline is rational. A rational spline must have a weight value
         for each control point.
         weights : An array of numbers that define the weights for the spline.
         isPeriodic : A bool specifying if the spline is to be Periodic. A periodic curve has a start point and
         end point that meet (with curvature continuity) forming a closed loop.
-        Returns true if successful
+        Returns true if successful.
         """
         return bool()
     def extract(self, startParam: float, endParam: float) -> NurbsCurve2D:
@@ -18761,7 +19143,7 @@ class NurbsCurve2D(Curve2D):
         curve merging with the start point of the other curve. The curves are forced
         to join even if they are not physically touching so you will typically want
         to make sure the end and start points of the curves are where you expect them to be.
-        nurbsCurve : The NURBS curve to combine with
+        nurbsCurve : The NURBS curve to combine with.
         Returns a new NurbsCurve2D object.
         """
         return NurbsCurve2D()
@@ -18777,31 +19159,31 @@ class NurbsCurve2D(Curve2D):
     @property
     def controlPointCount(self) -> int:
         """
-        Gets the number of control points that define the curve
+        Gets the number of control points that define the curve.
         """
         return int()
     @property
     def degree(self) -> int:
         """
-        Returns the degree of the curve
+        Returns the degree of the curve.
         """
         return int()
     @property
     def knotCount(self) -> int:
         """
-        Returns the knot count of the curve
+        Returns the knot count of the curve.
         """
         return int()
     @property
     def isRational(self) -> bool:
         """
-        Returns if the curve is rational or non-rational type
+        Returns if the curve is rational or non-rational type.
         """
         return bool()
     @property
     def isClosed(self) -> bool:
         """
-        Returns if the curve is closed
+        Returns if the curve is closed.
         """
         return bool()
     @property
@@ -18838,7 +19220,7 @@ class NurbsCurve3D(Curve3D):
     def createNonRational(controlPoints: list[Point3D], degree: int, knots: list[float], isPeriodic: bool) -> NurbsCurve3D:
         """
         Creates a transient 3D NURBS non-rational b-spline object.
-        controlPoints : An array of control point that define the path of the spline.
+        controlPoints : An array of control points that define the path of the spline.
         degree : The degree of curvature of the spline.
         knots : An array of numbers that define the knot vector of the spline. The knots is an array of (>=degree + N + 1) numbers, where N is the number of control points.
         isPeriodic : A bool specifying if the spline is to be Periodic. A periodic spline has a start point and
@@ -18850,7 +19232,7 @@ class NurbsCurve3D(Curve3D):
     def createRational(controlPoints: list[Point3D], degree: int, knots: list[float], weights: list[float], isPeriodic: bool) -> NurbsCurve3D:
         """
         Creates a transient 3D NURBS rational b-spline object.
-        controlPoints : An array of control point that define the path of the spline.
+        controlPoints : An array of control points that define the path of the spline.
         degree : The degree of curvature of the spline.
         knots : An array of numbers that define the knot vector of the spline. The knots is an array of (>=degree + N + 1) numbers, where N is the number of control points.
         weights : An array of numbers that define the weight at each control point.
@@ -18862,7 +19244,7 @@ class NurbsCurve3D(Curve3D):
     def getData(self) -> tuple[bool, list[Point3D], int, list[float], bool, list[float], bool]:
         """
         Gets the data that defines a transient 3D NURBS rational b-spline object.
-        controlPoints : The output array of control point that define the path of the spline.
+        controlPoints : The output array of control points that define the path of the spline.
         degree : The output degree of curvature of the spline.
         knots : The output array of numbers that define the knot vector of the spline.
         isRational : The output value indicating if the spline is rational. A rational spline will have a weight value
@@ -18876,7 +19258,7 @@ class NurbsCurve3D(Curve3D):
     def set(self, controlPoints: list[Point3D], degree: int, knots: list[float], isRational: bool, weights: list[float], isPeriodic: bool) -> bool:
         """
         Sets the data that defines a transient 3D NURBS rational b-spline object.
-        controlPoints : The array of control point that define the path of the spline.
+        controlPoints : The array of control points that define the path of the spline.
         degree : The degree of curvature of the spline.
         knots : An array of numbers that define the knot vector of the spline.
         isRational : A bool value indicating if the spline is rational. A rational spline must have a weight value
@@ -19029,7 +19411,7 @@ class NurbsSurface(Surface):
         weights : An array of weights that corresponds to the control points of the surface.
         propertiesU : The properties (NurbsSurfaceProperties) of the surface in the U direction.
         propertiesV : The properties (NurbsSurfaceProperties) of the surface in the V direction.
-        Returns true if successful
+        Returns true if successful.
         """
         return bool()
     def copy(self) -> NurbsSurface:
@@ -19071,7 +19453,7 @@ class NurbsSurface(Surface):
     @property
     def knotCountV(self) -> int:
         """
-        Gets thekKnot count in the V direction.
+        Gets the knot count in the V direction.
         """
         return int()
     @property
@@ -19101,7 +19483,7 @@ class NurbsSurface(Surface):
     @property
     def knotsV(self) -> list[float]:
         """
-        Get the knot vector from the V direction
+        Get the knot vector from the V direction.
         """
         return [float()]
 
@@ -19198,7 +19580,7 @@ class Plane(Surface):
         """
         Intersect this plane with a curve to get the intersection point(s).
         curve : The intersecting curve.
-        The curve can be a Line3D, InfininteLine3D, Circle3D, Arc3D, EllipticalArc3D, Ellipse3D,
+        The curve can be a Line3D, InfiniteLine3D, Circle3D, Arc3D, EllipticalArc3D, Ellipse3D,
         or NurbsCurve3D.
         Returns a collection of the intersection points.
         """
@@ -19364,7 +19746,8 @@ class Polyline3D(Curve3D):
 
 class ProjectedTextureMapControl(TextureMapControl):
     """
-    Provides access to the various settings that control how a projected texture is applied to a body.
+    Provides access to the settings that control how a projected texture is applied to a body,
+    including the projection type (planar, box, spherical, or cylindrical), transform, and cap settings.
     """
     def __init__(self):
         pass
@@ -19501,6 +19884,11 @@ class SelectionCommandInput(CommandInput):
     CustomGraphics = "CustomGraphics"
     FaceGroups = "FaceGroups"
     VolumetricModel = "VolumetricModel"
+    OperationBase = "OperationBase"
+    Setup = "Setup"
+    Operation = "Operation"
+    NCProgram = "NCProgram"
+    CAMFolder = "CAMFolder"
     def addSelectionFilter(self, filter: str) -> bool:
         """
         Adds an additional filter to the existing filter list.
@@ -20079,8 +20467,8 @@ class StringValueCommandInput(CommandInput):
     def isValueError(self) -> bool:
         """
         Specifies if the current value shown is valid or not. Any string is valid for a
-        StringValueCommandInput, but you many have some criteria that the string needs
-        to meet for it to be valid in your application. You use the command's validateInputs
+        StringValueCommandInput, but you may have criteria that the string needs
+        to meet for it to be valid in your application, such as format requirements or value ranges. You use the command's validateInputs
         event to verify that inputs are valid and control whether the "OK" button is enabled
         or not, and you can also set this property on specific StringValueCommandInputs objects
         to indicate to the user that a specific value is not correct. When this property is
@@ -20092,8 +20480,8 @@ class StringValueCommandInput(CommandInput):
     def isValueError(self, value: bool):
         """
         Specifies if the current value shown is valid or not. Any string is valid for a
-        StringValueCommandInput, but you many have some criteria that the string needs
-        to meet for it to be valid in your application. You use the command's validateInputs
+        StringValueCommandInput, but you may have criteria that the string needs
+        to meet for it to be valid in your application, such as format requirements or value ranges. You use the command's validateInputs
         event to verify that inputs are valid and control whether the "OK" button is enabled
         or not, and you can also set this property on specific StringValueCommandInputs objects
         to indicate to the user that a specific value is not correct. When this property is
@@ -20581,7 +20969,8 @@ class TextCommandPalette(Palette):
 
 class TextureMapControl3D(TextureMapControl):
     """
-    Provides access to the various settings that control how a 3D texture is applied to a body.
+    Provides access to the settings that control how a 3D texture is applied to a body,
+    including the transform that defines the position and orientation of the texture.
     """
     def __init__(self):
         pass
@@ -21918,7 +22307,7 @@ class WebRequestEventArgs(EventArgs):
     """
     The WebRequestEventArgs provides information associated with a web request event. These
     are events fired as a result of a Fusion protocol handler being invoked from a web page.
-    Note that some properties are not available on every event.
+    Note that not all properties are available on every event type.
     """
     def __init__(self):
         pass

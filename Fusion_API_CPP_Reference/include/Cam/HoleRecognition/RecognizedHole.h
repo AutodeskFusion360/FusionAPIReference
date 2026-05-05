@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -11,6 +11,7 @@
 #pragma once
 #include "../../Core/Base.h"
 #include "../CamTypeDefs.h"
+#include <string>
 #include <vector>
 
 // THIS CLASS WILL BE VISIBLE TO AN API CLIENT.
@@ -94,6 +95,9 @@ public:
     /// input : Input object that contains filtering settings
     static core::Ptr<RecognizedHoles> recognizeHolesWithInput(const std::vector<core::Ptr<core::Base>>& bodies, const core::Ptr<RecognizedHolesInput>& input);
 
+    /// Convert hole signature to XML. The result can be used to create a hole template.
+    std::string getHoleSignatureXML();
+
     ADSK_CAM_RECOGNIZEDHOLE_API static const char* classType();
     ADSK_CAM_RECOGNIZEDHOLE_API const char* objectType() const override;
     ADSK_CAM_RECOGNIZEDHOLE_API void* queryInterface(const char* id) const override;
@@ -116,6 +120,7 @@ private:
     virtual bool hasErrors_raw() const = 0;
     virtual bool isThrough_raw() const = 0;
     ADSK_CAM_RECOGNIZEDHOLE_API static RecognizedHoles* recognizeHolesWithInput_raw(core::Base** bodies, size_t bodies_size, RecognizedHolesInput* input);
+    virtual char* getHoleSignatureXML_raw() = 0;
 };
 
 // Inline wrappers
@@ -211,6 +216,19 @@ inline core::Ptr<RecognizedHoles> RecognizedHole::recognizeHolesWithInput(const 
 
     core::Ptr<RecognizedHoles> res = recognizeHolesWithInput_raw(bodies_, bodies.size(), input.get());
     delete[] bodies_;
+    return res;
+}
+
+inline std::string RecognizedHole::getHoleSignatureXML()
+{
+    std::string res;
+
+    char* p= getHoleSignatureXML_raw();
+    if (p)
+    {
+        res = p;
+        core::DeallocateArray(p);
+    }
     return res;
 }
 }// namespace cam

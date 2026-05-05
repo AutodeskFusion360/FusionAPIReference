@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -47,6 +47,7 @@ namespace adsk { namespace fusion {
     class BRepVertices;
     class BRepWires;
     class Component;
+    class DeriveFeature;
     class MeshManager;
     class Occurrence;
     class PhysicalProperties;
@@ -169,7 +170,7 @@ public:
     /// Returns the assembly occurrence (i.e. the occurrence) of this
     /// object in an assembly. This is only valid in the case where this
     /// BRepBody object is acting as a proxy in an assembly. Returns null
-    /// in the case where the object is not in the context of an assembly.
+    /// in the case where the object is not in the context of an assembly,
     /// but is already the native object. Also returns null in the case
     /// where this body is transient.
     core::Ptr<Occurrence> assemblyContext() const;
@@ -185,7 +186,7 @@ public:
     /// 
     /// This method is only valid if the IsTransient property is false.
     /// occurrence : The occurrence that defines the context for the created proxy.
-    /// Returns the new BRepBoy proxy or null if this isn't the NativeObject.
+    /// Returns the new BRepBody proxy or null if this isn't the NativeObject.
     core::Ptr<BRepBody> createForAssemblyContext(const core::Ptr<Occurrence>& occurrence) const;
 
     /// Creates a new component and occurrence within the component that currently owns this body.
@@ -193,16 +194,16 @@ public:
     /// obtained by using the parentComponent property of the BRepBody object.
     /// 
     /// This method is only valid if the IsTransient property is false.
-    /// Returns the BRrepBody in the new component or null in the case the creation failed.
+    /// Returns the BRepBody in the new component or null in the case the creation failed.
     core::Ptr<BRepBody> createComponent();
 
-    /// Moves this body from it's current component into the root component or the component owned by the
+    /// Moves this body from its current component into the root component or the component owned by the
     /// specified occurrence.
     /// target : The target can be either the root component or an occurrence.
     /// 
     /// In the case where an occurrence is specified, the body will be moved into the parent component of the target
     /// occurrence and the target occurrence defines the transform of how the body will be copied so that the body
-    /// maintains it's same position with respect to the assembly.
+    /// maintains its same position with respect to the assembly.
     /// Returns the moved BRepBody or null in the case the move failed.
     core::Ptr<BRepBody> moveToComponent(const core::Ptr<core::Base>& target);
 
@@ -211,10 +212,10 @@ public:
     /// 
     /// In the case where an occurrence is specified, the body will be copied into the parent component of the target
     /// occurrence and the target occurrence defines the transform of how the body will be copied so that the body
-    /// maintains it's same position with respect to the assembly.
+    /// maintains its same position with respect to the assembly.
     /// 
     /// If target is null, then a copy of the body is created in the owning component of the original body.
-    /// Returns the moved BRepBody or null in the case the move failed.
+    /// Returns the copied BRepBody or null in the case the copy failed.
     core::Ptr<BRepBody> copyToComponent(const core::Ptr<core::Base>& target);
 
     /// Returns the PhysicalProperties object that has properties for getting the area, density, mass, volume, moments, etc
@@ -224,11 +225,11 @@ public:
     /// Returns a PhysicalProperties object that can be used to get the various physical property related values.
     core::Ptr<PhysicalProperties> physicalProperties() const;
 
-    /// Gets and set if the light bulb beside the body node in the
+    /// Gets and sets if the light bulb beside the body node in the
     /// browser is on or not. Parent nodes in the browser can have their light
     /// bulb off which affects all of their children so this property does not
     /// indicate if the body is actually visible, just that it should be visible
-    /// if all of it's parent nodes are also visible. Use the isVisible property
+    /// if all of its parent nodes are also visible. Use the isVisible property
     /// to determine if it's actually visible.
     /// 
     /// This property is only valid if the IsTransient property is false.
@@ -265,21 +266,21 @@ public:
     std::vector<core::Ptr<core::Base>> findByTempId(int tempId);
 
     /// Gets and sets the opacity override assigned to this body. A value of 1.0 specifies
-    /// that is it completely opaque and a value of 0.0 specifies that is it completely transparent.
+    /// that it is completely opaque and a value of 0.0 specifies that it is completely transparent.
     /// 
     /// This value is not necessarily related to what the user sees because the opacity is inherited.
-    /// For example, if you this body is in a component and that component's opacity is set to something
+    /// For example, if this body is in a component and that component's opacity is set to something
     /// other than 1.0, the body will also be shown as slightly transparent even though the opacity
     /// property for the body will return 1.0. Because the component that contains the body can be
     /// referenced as an occurrence in other components and they can have different opacity settings,
     /// it's possible that different instances of the same body can display using different opacity levels.
-    /// To get the opacity that it is being displayed with use the BrepBody.visibleOpacity property.
+    /// To get the opacity that it is being displayed with use the BRepBody.visibleOpacity property.
     /// 
     /// This is the API equivalent of the "Opacity Control" command available for the body in the browser.
     double opacity() const;
     bool opacity(double value);
 
-    /// The user can set an override opacity for components and bodies these opacity overrides combine if
+    /// The user can set an override opacity for components and bodies. These opacity overrides combine if
     /// children and parent components have overrides. This property returns the actual opacity that is
     /// being used to render the body. To set the opacity use the opacity property of the BRepBody object.
     double visibleOpacity() const;
@@ -330,6 +331,13 @@ public:
 
     /// Returns a bounding box that tightly fits this body.
     core::Ptr<core::BoundingBox3D> preciseBoundingBox() const;
+
+    /// Returns if this BRepBody is derived from another design. If true, this body cannot be deleted.
+    bool isDerived() const;
+
+    /// Returns the DeriveFeature if this BRepBody is derived from another design.
+    /// This property returns null if the BRepBody is not derived from another design (i.e. isDerived property returns false).
+    core::Ptr<DeriveFeature> deriveFeature() const;
 
     ADSK_FUSION_BREPBODY_API static const char* classType();
     ADSK_FUSION_BREPBODY_API const char* objectType() const override;
@@ -393,6 +401,8 @@ private:
     virtual bool isSheetMetal_raw() const = 0;
     virtual core::OrientedBoundingBox3D* orientedMinimumBoundingBox_raw() const = 0;
     virtual core::BoundingBox3D* preciseBoundingBox_raw() const = 0;
+    virtual bool isDerived_raw() const = 0;
+    virtual DeriveFeature* deriveFeature_raw() const = 0;
 };
 
 // Inline wrappers
@@ -740,6 +750,18 @@ inline core::Ptr<core::OrientedBoundingBox3D> BRepBody::orientedMinimumBoundingB
 inline core::Ptr<core::BoundingBox3D> BRepBody::preciseBoundingBox() const
 {
     core::Ptr<core::BoundingBox3D> res = preciseBoundingBox_raw();
+    return res;
+}
+
+inline bool BRepBody::isDerived() const
+{
+    bool res = isDerived_raw();
+    return res;
+}
+
+inline core::Ptr<DeriveFeature> BRepBody::deriveFeature() const
+{
+    core::Ptr<DeriveFeature> res = deriveFeature_raw();
     return res;
 }
 }// namespace fusion

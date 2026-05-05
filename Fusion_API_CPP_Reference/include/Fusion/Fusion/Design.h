@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -42,15 +42,18 @@ namespace adsk { namespace fusion {
     class Components;
     class ConfigurationTopTable;
     class ContactSets;
+    class DerivedParameter;
     class ExportManager;
     class FusionUnitsManager;
     class InterferenceInput;
     class InterferenceResults;
+    class ObjectVisibility;
     class Occurrence;
     class Parameter;
     class ParameterList;
     class PhysicalProperties;
     class PlasticRules;
+    class PMISettings;
     class RenderManager;
     class SheetMetalRules;
     class Snapshots;
@@ -84,7 +87,7 @@ public:
     /// are added to that component. A sketch can also be an edit target.
     core::Ptr<core::Base> activeEditObject() const;
 
-    /// Returns the component that is current being edited. This can return the root component
+    /// Returns the component that is currently being edited. This can return the root component
     /// or another component within the design.
     core::Ptr<Component> activeComponent() const;
 
@@ -95,7 +98,7 @@ public:
     /// Returns the timeline associated with this design.
     core::Ptr<Timeline> timeline() const;
 
-    /// Returns the collection of User Parameters in a design
+    /// Returns the collection of User Parameters in a design.
     core::Ptr<UserParameters> userParameters() const;
 
     /// Returns a read only list of all parameters in the design. This includes
@@ -215,13 +218,13 @@ public:
     /// used in the order they exist within the arrays. For example, the parameter at index 0 will use the value at index 0.
     /// 
     /// If you use the createByString method to create the ValueInput, the expression of the parameter will be edited, and
-    /// the effect is the same as interactively editing the expression.When you set the expression, you can include units,
-    /// references to other parameters, and math operators and functions.For example, "(Length / 3) * cos(Angle)" is a valid
+    /// the effect is the same as interactively editing the expression. When you set the expression, you can include units,
+    /// references to other parameters, and math operators and functions. For example, "(Length / 3) * cos(Angle)" is a valid
     /// expression for a distance parameter if the parameters "Length" and "Angle" already exist.
     /// 
     /// If you use the createByReal method, the value is assigned directly and is always in the internal units for the unit
-    /// type associated with the parameter.For example, if the parameter is a length, the value will ALWAYS be used as
-    /// centimeters. If the parameter is an angle, the value will ALWAYS be used as radians.This is because the default design
+    /// type associated with the parameter. For example, if the parameter is a length, the value will ALWAYS be used as
+    /// centimeters. If the parameter is an angle, the value will ALWAYS be used as radians. This is because the default design
     /// unit types for length are ignored, and internal units are ALWAYS used.
     /// Returns true if setting all of the parameters was successful. Setting multiple parameters is either all or none. If it
     /// fails to set any parameters, none of them are updated, and the method will return false.
@@ -262,7 +265,7 @@ public:
     bool isConfiguration() const;
 
     /// Returns the ID of the row that defines this configuration. Use the
-    /// isCongiguration property to determine if this Design is a configuration
+    /// isConfiguration property to determine if this Design is a configuration
     /// or not. If this is not a configuration, this property returns an
     /// empty string.
     std::string configurationRowId() const;
@@ -279,6 +282,80 @@ public:
     /// 
     /// Get the root DataComponent in this design. This is only available for top level designs.
     core::Ptr<core::DataComponent> rootDataComponent() const;
+
+    /// Returns the ObjectVisibility object associated with this design which controls
+    /// which objects are displayed in the graphics window. This is the equivalent of
+    /// the "Object Visibility" settings in the Display Settings drop-down in the navigation
+    /// toolbar at the bottom of the Fusion graphics window.
+    core::Ptr<ObjectVisibility> objectVisibility() const;
+
+    /// Gets and sets if the position of the ground plane for this design is adaptive.
+    /// If true, the ground plane will automatically move to be just below the model.
+    /// The orientation of the ground plane is always normal to the "up" direction
+    /// as defined by the view cube.
+    bool isAdaptiveGroundPlane() const;
+    bool isAdaptiveGroundPlane(bool value);
+
+    /// Sets the offset of the ground plane. If the isAdpativeGroundPlane property is true,
+    /// setting the offset will change isAdaptiveGroundPlane to false. The offset value is
+    /// an offset relative to the current position of the ground plane.
+    /// 
+    /// One example of how this method can be used is to set the isAdaptiveGroundPlane
+    /// property to true, which will position the ground plane at the bottom of the part.
+    /// By doing this, you know the current position of the ground plane. Then calling
+    /// this method with a value of -2.0 will reposition the ground plane 2 cm below the part.
+    /// If you called this method again with a value of -1.0 the ground plane will be moved
+    /// an additional 1 cm away from the geometry, since this is defining an offset relative
+    /// to the current position.
+    /// offset : Defines the relative offset based on the current position of the ground plane. The
+    /// offset is in centimeters, and a positive value will move it towards the design geometry
+    /// and a negative value away from the geometry.
+    /// Returns true if setting the offset was successful.
+    bool setGroundPlaneOffset(double offset);
+
+    /// Returns a read only list of all parameters that are derived into the design. This includes
+    /// the user parameters and model parameters from all derives in this design.
+    std::vector<core::Ptr<DerivedParameter>> derivedParameters() const;
+
+    /// !!!!! Warning !!!!!
+    /// ! This is in preview state; please see the help for more info
+    /// !!!!! Warning !!!!!
+    /// 
+    /// If this design is an assembly, this property gets and sets if the modeling functionality
+    /// is enabled. If this design is a part or hybrid design, the value of this property should be ignored.
+    bool isModelingInAssemblyEnabled() const;
+    bool isModelingInAssemblyEnabled(bool value);
+
+    /// !!!!! Warning !!!!!
+    /// ! This is in preview state; please see the help for more info
+    /// !!!!! Warning !!!!!
+    /// 
+    /// <p>Gets and sets the use intent of this design. Changing the design intent from one
+    /// type to another is not supported in all cases. Below is a list of cases where it
+    /// is expected to fail:
+    /// <ul><li>Assembly to Part where the assembly design has child components.</li>
+    /// <li>Hybrid to Part where the hybrid design has child components</li>
+    /// </ol></p>
+    /// <p>The following are cases that are supported:
+    /// <ul><li>Assembly to Part where the assembly does not contain any child components.</li>
+    /// <ul>Part to Assembly when the part does not contain any bodies.</li>
+    /// <ul>Part to Assembly(with bodies) - should succeed but will have modeling enabled (Hybrid)</li>
+    /// <ul>Part to Hybrid</li>
+    /// <ul>Hybrid to Assembly</li>
+    /// <ul>Hybrid-to Part when the hybrid design contains no child components.</li>
+    /// </p>
+    /// <p>Setting the type will do nothing and is a no-op.</p>
+    DesignIntentTypes designIntent() const;
+    bool designIntent(DesignIntentTypes value);
+
+    /// !!!!! Warning !!!!!
+    /// ! This is in preview state; please see the help for more info
+    /// !!!!! Warning !!!!!
+    /// 
+    /// Returns a manager for settings associated with Product Manufacturing Information (PMI) in this design.
+    /// Returns the PMISettings if they exist for the current document, or null. PMI settings only exist if the
+    /// document contains Fusion-authored PMI.
+    core::Ptr<PMISettings> pmiSettings() const;
 
     ADSK_FUSION_DESIGN_API static const char* classType();
     ADSK_FUSION_DESIGN_API const char* objectType() const override;
@@ -329,6 +406,16 @@ private:
     virtual PlasticRules* designPlasticRules_raw() const = 0;
     virtual PlasticRules* libraryPlasticRules_raw() const = 0;
     virtual core::DataComponent* rootDataComponent_raw() const = 0;
+    virtual ObjectVisibility* objectVisibility_raw() const = 0;
+    virtual bool isAdaptiveGroundPlane_raw() const = 0;
+    virtual bool isAdaptiveGroundPlane_raw(bool value) = 0;
+    virtual bool setGroundPlaneOffset_raw(double offset) = 0;
+    virtual DerivedParameter** derivedParameters_raw(size_t& return_size) const = 0;
+    virtual bool isModelingInAssemblyEnabled_raw() const = 0;
+    virtual bool isModelingInAssemblyEnabled_raw(bool value) = 0;
+    virtual DesignIntentTypes designIntent_raw() const = 0;
+    virtual bool designIntent_raw(DesignIntentTypes value) = 0;
+    virtual PMISettings* pmiSettings_raw() const = 0;
     virtual void placeholderDesign0() {}
     virtual void placeholderDesign1() {}
     virtual void placeholderDesign2() {}
@@ -406,16 +493,6 @@ private:
     virtual void placeholderDesign74() {}
     virtual void placeholderDesign75() {}
     virtual void placeholderDesign76() {}
-    virtual void placeholderDesign77() {}
-    virtual void placeholderDesign78() {}
-    virtual void placeholderDesign79() {}
-    virtual void placeholderDesign80() {}
-    virtual void placeholderDesign81() {}
-    virtual void placeholderDesign82() {}
-    virtual void placeholderDesign83() {}
-    virtual void placeholderDesign84() {}
-    virtual void placeholderDesign85() {}
-    virtual void placeholderDesign86() {}
 };
 
 // Inline wrappers
@@ -684,6 +761,71 @@ inline core::Ptr<PlasticRules> Design::libraryPlasticRules() const
 inline core::Ptr<core::DataComponent> Design::rootDataComponent() const
 {
     core::Ptr<core::DataComponent> res = rootDataComponent_raw();
+    return res;
+}
+
+inline core::Ptr<ObjectVisibility> Design::objectVisibility() const
+{
+    core::Ptr<ObjectVisibility> res = objectVisibility_raw();
+    return res;
+}
+
+inline bool Design::isAdaptiveGroundPlane() const
+{
+    bool res = isAdaptiveGroundPlane_raw();
+    return res;
+}
+
+inline bool Design::isAdaptiveGroundPlane(bool value)
+{
+    return isAdaptiveGroundPlane_raw(value);
+}
+
+inline bool Design::setGroundPlaneOffset(double offset)
+{
+    bool res = setGroundPlaneOffset_raw(offset);
+    return res;
+}
+
+inline std::vector<core::Ptr<DerivedParameter>> Design::derivedParameters() const
+{
+    std::vector<core::Ptr<DerivedParameter>> res;
+    size_t s;
+
+    DerivedParameter** p= derivedParameters_raw(s);
+    if(p)
+    {
+        res.assign(p, p+s);
+        core::DeallocateArray(p);
+    }
+    return res;
+}
+
+inline bool Design::isModelingInAssemblyEnabled() const
+{
+    bool res = isModelingInAssemblyEnabled_raw();
+    return res;
+}
+
+inline bool Design::isModelingInAssemblyEnabled(bool value)
+{
+    return isModelingInAssemblyEnabled_raw(value);
+}
+
+inline DesignIntentTypes Design::designIntent() const
+{
+    DesignIntentTypes res = designIntent_raw();
+    return res;
+}
+
+inline bool Design::designIntent(DesignIntentTypes value)
+{
+    return designIntent_raw(value);
+}
+
+inline core::Ptr<PMISettings> Design::pmiSettings() const
+{
+    core::Ptr<PMISettings> res = pmiSettings_raw();
     return res;
 }
 }// namespace fusion

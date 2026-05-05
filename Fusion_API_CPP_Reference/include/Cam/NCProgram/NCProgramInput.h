@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -49,6 +49,8 @@ public:
     /// For setups and folders all child operations will be added.
     /// Operations will be post processed in setup order, with operations from the same setup grouped together.
     /// Setting the nc_program_orderByTool BooleanParameterValue on the parameters property to true will reorder operations across multiple setups to reduce the number of tool changes.
+    /// When the list of operations is associated to one setup and the setup has defined its job_programName or job_programComment parameters,
+    /// then those values are applied to the nc_program_name and nc_program_comment parameters accordingly.
     std::vector<core::Ptr<OperationBase>> operations() const;
     bool operations(const std::vector<core::Ptr<OperationBase>>& value);
 

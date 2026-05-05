@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -28,14 +28,10 @@
 
 namespace adsk { namespace fusion {
 
-/// !!!!! Warning !!!!!
-/// ! This has been retired; please see the help for more info
-/// !!!!! Warning !!!!!
-/// 
-/// Defines the inputs for a AllExtentDefinition object.
-/// This defines a feature extent where the direction can be positive, negative, or symmetric.
-/// Setting the direction to Symmetric specifies that the extrusion is through-all,
-/// and goes in both directions.
+/// Defines the inputs for an AllExtentDefinition object. This is used when defining the extent
+/// for a hole feature. Some other features, like extrude, support defining the extents independently
+/// in both directions. In that case you need to create a ThroughAllExtentDefinition and apply it for
+/// the extent direction you want a through all type.
 class AllExtentDefinition : public ExtentDefinition {
 public:
 

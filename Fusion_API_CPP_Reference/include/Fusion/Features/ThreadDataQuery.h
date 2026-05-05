@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -73,7 +73,8 @@ public:
     /// Returns the specified unit or an empty string if an invalid thread type was specified.
     std::string threadTypeUnit(const std::string& threadType) const;
 
-    /// Method that gets the recommended thread data for a given model diameter.
+    /// Method that gets the recommended thread data for a given cylinder diameter. This method
+    /// is only valid for straight threads and will fail for tapered threads.
     /// modelDiameter : The diameter of the cylinder the thread will be placed on. The units are centimeters.
     /// isInternal : Indicates if the thread is an internal or external thread.
     /// threadType : Specifies the thread type to query the thread data.
@@ -87,6 +88,17 @@ public:
 
     /// Gets the default thread type for metric threads.
     std::string defaultMetricThreadType() const;
+
+    /// Static method to create a new ThreadDataQuery object. The ThreadDataQuery object is a utility object that
+    /// provides methods to query for the valid thread definitions defined in Fusion. This object provides similar
+    /// functionality as the Thread and Hole command dialogs to find valid thread types, designations and classes which can
+    /// be used to create thread and tapped hole features.
+    /// isTapered : Specifies if you want to query for standard or tapered holes.
+    /// Returns a ThreadDataQuery object.
+    static core::Ptr<ThreadDataQuery> create(bool isTapered = false);
+
+    /// Returns if this ThreadDataQuery was created to query for standard or tapered threads.
+    bool isTapered() const;
 
     ADSK_FUSION_THREADDATAQUERY_API static const char* classType();
     ADSK_FUSION_THREADDATAQUERY_API const char* objectType() const override;
@@ -105,6 +117,8 @@ private:
     virtual bool recommendThreadData_raw(double modelDiameter, bool isInternal, const char* threadType, char*& designation, char*& threadClass) const = 0;
     virtual char* defaultInchThreadType_raw() const = 0;
     virtual char* defaultMetricThreadType_raw() const = 0;
+    ADSK_FUSION_THREADDATAQUERY_API static ThreadDataQuery* create_raw(bool isTapered);
+    virtual bool isTapered_raw() const = 0;
 };
 
 // Inline wrappers
@@ -263,6 +277,18 @@ inline std::string ThreadDataQuery::defaultMetricThreadType() const
         res = p;
         core::DeallocateArray(p);
     }
+    return res;
+}
+
+inline core::Ptr<ThreadDataQuery> ThreadDataQuery::create(bool isTapered)
+{
+    core::Ptr<ThreadDataQuery> res = create_raw(isTapered);
+    return res;
+}
+
+inline bool ThreadDataQuery::isTapered() const
+{
+    bool res = isTapered_raw();
     return res;
 }
 }// namespace fusion

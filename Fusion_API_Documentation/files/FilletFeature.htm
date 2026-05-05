@@ -135,7 +135,7 @@
       </tr>
       <tr>
         <td class="api-list"><a href="FilletFeature_isRollingBallCorner.htm">isRollingBallCorner</a></td>
-        <td class="api-list">Gets and sets if a rolling ball solution is to be used in any corners.<br/><br/> To set this property, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</td>
+        <td class="api-list">Gets and sets if a rolling ball or setback solution is to be used in any corners. Asymmetric fillets always use a setback solution and will ignore this setting.<br/><br/> To set this property, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</td>
       </tr>
       <tr>
         <td class="api-list"><a href="FilletFeature_isSuppressed.htm">isSuppressed</a></td>
@@ -170,13 +170,17 @@
         <td class="api-list">Returns the parent component that owns this feature.</td>
       </tr>
       <tr>
+        <td class="api-list"><a href="FilletFeature_ruleFilletSettings.htm">ruleFilletSettings</a></td>
+        <td class="api-list">Gets the RuleFilletSettings object for the rule fillet.<br/><br/> This is valid only when the filletFeatureType is FilletFeatureTypes.RuleFilletFeatureType, otherwise this returns null.</td>
+      </tr>
+      <tr>
         <td class="api-list"><a href="FilletFeature_timelineObject.htm">timelineObject</a></td>
         <td class="api-list">Returns the timeline object associated with this feature.</td>
       </tr>
     </Table>
     <h2 class="api">
             Accessed From
-          </h2><a href="FilletFeature_createForAssemblyContext.htm">FilletFeature.createForAssemblyContext</a>, <a href="FilletFeature_nativeObject.htm">FilletFeature.nativeObject</a>, <a href="FilletFeatures_add.htm">FilletFeatures.add</a>, <a href="FilletFeatures_addFullRoundFillet.htm">FilletFeatures.addFullRoundFillet</a>, <a href="FilletFeatures_item.htm">FilletFeatures.item</a>, <a href="FilletFeatures_itemByName.htm">FilletFeatures.itemByName</a><h2 class="api">
+          </h2><a href="FilletFeature_createForAssemblyContext.htm">FilletFeature.createForAssemblyContext</a>, <a href="FilletFeature_nativeObject.htm">FilletFeature.nativeObject</a>, <a href="FilletFeatures_add.htm">FilletFeatures.add</a>, <a href="FilletFeatures_addFullRoundFillet.htm">FilletFeatures.addFullRoundFillet</a>, <a href="FilletFeatures_addRuleFillet.htm">FilletFeatures.addRuleFillet</a>, <a href="FilletFeatures_item.htm">FilletFeatures.item</a>, <a href="FilletFeatures_itemByName.htm">FilletFeatures.itemByName</a><h2 class="api">
             Samples
           </h2>
     <Table class="api-list">
@@ -217,9 +221,9 @@ Running the sample script will modify various settings of each fillet and change
       <table width="100%" style="font-size:15">
         <tr>
           <td align="left">
-                © Copyright 2025 Autodesk, Inc.
+                © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(FilletFeature%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(FilletFeature%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

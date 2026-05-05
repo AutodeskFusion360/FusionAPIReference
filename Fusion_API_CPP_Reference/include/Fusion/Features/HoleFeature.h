@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -37,11 +37,14 @@ namespace adsk { namespace fusion {
     class BRepBody;
     class BRepEdge;
     class BRepFaces;
+    class ClearanceHoleInfo;
     class ExtentDefinition;
     class HolePositionDefinition;
     class ModelParameter;
     class Occurrence;
     class SketchPoint;
+    class ThreadFeature;
+    class ThreadInfo;
 }}
 
 namespace adsk { namespace fusion {
@@ -64,7 +67,7 @@ public:
     /// 
     /// If there is a thread associated with the hole the thread definition controls
     /// the diameter of the hole. Even though there is a parameter for the diameter,
-    /// it's value is ignored when there is a thread.
+    /// its value is ignored when there is a thread.
     core::Ptr<ModelParameter> holeDiameter() const;
 
     /// Returns the model parameter controlling the angle of the tip of the hole. The tip angle of
@@ -161,7 +164,7 @@ public:
     /// the type of feature this is being used with. For a hole it can be a BRepBody, BRepFace,
     /// BRepVertex, ConstructionPlane, or ConstructionPoint.
     /// matchShape : Indicates if the hole is not contained on the face that the hole should match
-    /// the shape of the entity as if it extended beyond it's current boundaries.
+    /// the shape of the entity as if it extended beyond its current boundaries.
     /// directionHint : Specifies the direction of the hole. This is only used in the case where there are two possible solutions and the hole can
     /// hit the toEntity in either direction.
     /// 
@@ -287,6 +290,42 @@ public:
     std::vector<core::Ptr<BRepBody>> participantBodies() const;
     bool participantBodies(const std::vector<core::Ptr<BRepBody>>& value);
 
+    /// This property returns the current type of tap associated with this hole. You can set the tap type
+    /// by using one of the following methods: setToSimpleHole, setToClearanceHole, or setToTappedHole.
+    HoleTapTypes holeTapType() const;
+
+    /// This method sets the hole's tap to be "simple," which means that the hole will not have any
+    /// tap and will be a simple hole.
+    /// Returns true if successful.
+    bool setToSimpleHole();
+
+    /// Sets the hole to be a clearance hole of the size specified by the ClearanceHoleInfo object.
+    /// clearanceHoleInfo : The ClearanceHoleInfo object that specifies the size of the clearance hole.
+    /// Returns true if setting to a clearance hole was successful.
+    bool setToClearanceHole(const core::Ptr<ClearanceHoleInfo>& clearanceHoleInfo);
+
+    /// Returns the information used to define a clearance hole. This returns a
+    /// ClearanceHoleInfo object when the holeTapType returns ClearanceHoleTapType. Otherwise
+    /// this property returns null.
+    core::Ptr<ClearanceHoleInfo> clearanceHoleInfo() const;
+
+    /// Sets the hole to be a straight or tapered tapped hole of the size specified by the ThreadInfo object.
+    /// threadInfo : The ThreadInfo object that specifies the thread to use for the tapped hole. Whether it is straight
+    /// or tapered tap is defined by the input ThreadInfo object.
+    /// Returns true if setting to a tapped hole was successful.
+    bool setToTappedHole(const core::Ptr<ThreadInfo>& threadInfo);
+
+    /// This property returns the information used to define a tapped hole.
+    /// Otherwise, this property returns null.
+    core::Ptr<ThreadInfo> tappedHoleInfo() const;
+
+    /// When a tapped hole is created, a thread feature is also automatically created and controls
+    /// the tapped threads. The thread feature is tied to the hole and is not displayed in the timeline
+    /// and is suppressed if the hole is suppressed and deleted if the hole is deleted. This property
+    /// returns the thread feature associated with this hole if it is a tapped hole. It returns null
+    /// for all other hole types.
+    core::Ptr<ThreadFeature> thread() const;
+
     ADSK_FUSION_HOLEFEATURE_API static const char* classType();
     ADSK_FUSION_HOLEFEATURE_API const char* objectType() const override;
     ADSK_FUSION_HOLEFEATURE_API void* queryInterface(const char* id) const override;
@@ -326,6 +365,13 @@ private:
     virtual HoleFeature* createForAssemblyContext_raw(Occurrence* occurrence) const = 0;
     virtual BRepBody** participantBodies_raw(size_t& return_size) const = 0;
     virtual bool participantBodies_raw(BRepBody** value, size_t value_size) = 0;
+    virtual HoleTapTypes holeTapType_raw() const = 0;
+    virtual bool setToSimpleHole_raw() = 0;
+    virtual bool setToClearanceHole_raw(ClearanceHoleInfo* clearanceHoleInfo) = 0;
+    virtual ClearanceHoleInfo* clearanceHoleInfo_raw() const = 0;
+    virtual bool setToTappedHole_raw(ThreadInfo* threadInfo) = 0;
+    virtual ThreadInfo* tappedHoleInfo_raw() const = 0;
+    virtual ThreadFeature* thread_raw() const = 0;
 };
 
 // Inline wrappers
@@ -525,6 +571,48 @@ inline bool HoleFeature::participantBodies(const std::vector<core::Ptr<BRepBody>
 
     bool res = participantBodies_raw(value_, value.size());
     delete[] value_;
+    return res;
+}
+
+inline HoleTapTypes HoleFeature::holeTapType() const
+{
+    HoleTapTypes res = holeTapType_raw();
+    return res;
+}
+
+inline bool HoleFeature::setToSimpleHole()
+{
+    bool res = setToSimpleHole_raw();
+    return res;
+}
+
+inline bool HoleFeature::setToClearanceHole(const core::Ptr<ClearanceHoleInfo>& clearanceHoleInfo)
+{
+    bool res = setToClearanceHole_raw(clearanceHoleInfo.get());
+    return res;
+}
+
+inline core::Ptr<ClearanceHoleInfo> HoleFeature::clearanceHoleInfo() const
+{
+    core::Ptr<ClearanceHoleInfo> res = clearanceHoleInfo_raw();
+    return res;
+}
+
+inline bool HoleFeature::setToTappedHole(const core::Ptr<ThreadInfo>& threadInfo)
+{
+    bool res = setToTappedHole_raw(threadInfo.get());
+    return res;
+}
+
+inline core::Ptr<ThreadInfo> HoleFeature::tappedHoleInfo() const
+{
+    core::Ptr<ThreadInfo> res = tappedHoleInfo_raw();
+    return res;
+}
+
+inline core::Ptr<ThreadFeature> HoleFeature::thread() const
+{
+    core::Ptr<ThreadFeature> res = thread_raw();
     return res;
 }
 }// namespace fusion

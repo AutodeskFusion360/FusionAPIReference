@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -54,7 +54,7 @@ public:
 
     /// Returns the current offset. If the EntityExtentDefinition object has been created statically and isn't associated with
     /// a feature this will return a ValueInput object. If the EntityExtentDefinition object is obtained from a feature this
-    /// will return a ModelParameter object. You can use properties of the parameter to edit it's value which will result in
+    /// will return a ModelParameter object. You can use properties of the parameter to edit its value which will result in
     /// the feature updating.
     core::Ptr<core::Base> offset() const;
 

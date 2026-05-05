@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -79,12 +79,12 @@ public:
 
     /// Returns an EllipticalArc3D object which provides geometric information in world space.
     /// The returned geometry takes into account the assembly context and the position of the
-    /// sketch in it's parent component, which means the geometry will be returned in the root
+    /// sketch in its parent component, which means the geometry will be returned in the root
     /// component space.
     core::Ptr<core::EllipticalArc3D> worldGeometry() const;
 
     /// The NativeObject is the object outside the context of an assembly and
-    /// in the context of it's parent component.
+    /// in the context of its parent component.
     /// Returns null in the case where this object is not in the context of
     /// an assembly but is already the native object.
     core::Ptr<SketchEllipticalArc> nativeObject() const;

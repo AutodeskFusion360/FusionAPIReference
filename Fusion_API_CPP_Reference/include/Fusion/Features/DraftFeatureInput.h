@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -47,7 +47,8 @@ public:
     std::vector<core::Ptr<BRepFace>> inputFaces() const;
     bool inputFaces(const std::vector<core::Ptr<BRepFace>>& value);
 
-    /// Gets and sets the plane that defines the direction in which the draft is applied. This can be a planar BrepFace, or a ConstructionPlane.
+    /// Gets and sets the plane that defines the direction in which the draft is applied. This is also referred to
+    /// as the pull direction. This can be defined using either a planar BRepFace or a ConstructionPlane.
     core::Ptr<core::Base> plane() const;
     bool plane(const core::Ptr<core::Base>& value);
 
@@ -56,24 +57,26 @@ public:
     bool isTangentChain() const;
     bool isTangentChain(bool value);
 
-    /// Gets and sets if the direction of the draft is flipped.
+    /// Gets and sets if the direction of the draft is flipped. This defaults to false.
     bool isDirectionFlipped() const;
     bool isDirectionFlipped(bool value);
 
     /// Defines the draft to be defined so that a single angle is used for all drafts.
     /// If the isSymmetric is true then the faces are split along the parting plane and drafted
     /// independently using the same angle.
-    /// isSymmetric : Set to 'true' if the faces are to be split along the plane and drafted symmetrically. This
+    /// isSymmetric : Set to true if the faces are to be split along the plane or parting line and drafted symmetrically. This
     /// will have the side effect of setting the isSymmetric property to the same value.
     /// angle : The ValueInput object that defines the angle of the draft. This can be a positive or negative
     /// value which will affect the direction of the draft along with the isDirectionFlipped property.
     /// Returns true if successful
     bool setSingleAngle(bool isSymmetric, const core::Ptr<core::ValueInput>& angle);
 
-    /// Defines both angles to use when the surfaces are split along the draft plane and
-    /// the faces on each side of the plane are drafted independently from the other side.
-    /// angleOne : The ValueInput object that defines the angle for the faces on the first side of the draft plane.
-    /// angleTwo : The ValueInput object that defines the angle for the faces on the second side of the draft plane.
+    /// Defines both angles to use when the surfaces are split along the draft plane or parting line and
+    /// the faces on each side of the plane are drafted independently.
+    /// angleOne : The ValueInput object that defines the angle for the faces on the first side of the draft plane
+    /// or parting line.
+    /// angleTwo : The ValueInput object that defines the angle for the faces on the second side of the draft plane
+    /// or parting line.
     /// Returns true if successful
     bool setTwoAngles(const core::Ptr<core::ValueInput>& angleOne, const core::Ptr<core::ValueInput>& angleTwo);
 

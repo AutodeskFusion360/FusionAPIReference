@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -12,6 +12,10 @@
 
 namespace adsk { namespace volume {
 
+/// !!!!! Warning !!!!!
+/// ! This is in preview state; please see the help for more info
+/// !!!!! Warning !!!!!
+/// 
 /// Types of interpolation functions for the control point maps.
 enum ControlPointInterpolators
 {
@@ -25,6 +29,10 @@ enum ControlPointInterpolators
     SmoothInterpolator
 };
 
+/// !!!!! Warning !!!!!
+/// ! This is in preview state; please see the help for more info
+/// !!!!! Warning !!!!!
+/// 
 /// Types of graph output nodes for the main graph.
 enum GraphOutputNodeTypes
 {
@@ -54,6 +62,10 @@ enum GraphOutputNodeTypes
     CellTextureShapeOutputNodeType
 };
 
+/// !!!!! Warning !!!!!
+/// ! This is in preview state; please see the help for more info
+/// !!!!! Warning !!!!!
+/// 
 /// Graph types for a volumetric model.
 enum GraphTypes
 {
@@ -63,6 +75,10 @@ enum GraphTypes
     CellGraphType
 };
 
+/// !!!!! Warning !!!!!
+/// ! This is in preview state; please see the help for more info
+/// !!!!! Warning !!!!!
+/// 
 /// Different types that graph nodes input and output types can be.
 enum NodePinTypes
 {

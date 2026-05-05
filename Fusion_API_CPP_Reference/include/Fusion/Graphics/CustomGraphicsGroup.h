@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -45,7 +45,7 @@ namespace adsk { namespace fusion {
 
 namespace adsk { namespace fusion {
 
-/// Represents of group of custom graphics entities. A group can also own other graphics groups.
+/// Represents a group of custom graphics entities. A group can also own other graphics groups.
 class CustomGraphicsGroup : public CustomGraphicsEntity {
 public:
 
@@ -64,14 +64,14 @@ public:
 
     /// Adds a new CustomGraphicsMesh entity to this group.
     /// coordinates : The CustomGraphicsCoordinates object that defines the coordinates of the vertices of the mesh.
-    /// A CustomGrahpicsCoordinates object can be created using the static create method of the CustomGraphicsCoordinates class.
+    /// A CustomGraphicsCoordinates object can be created using the static create method of the CustomGraphicsCoordinates class.
     /// coordinateIndexList : An array of integers that represent indices into the coordinates to define the vertices of the triangles. If an empty
-    /// array is provided, then it's assumed that the first three coordinates defines the first triangle, the next three define
+    /// array is provided, then it is assumed that the first three coordinates define the first triangle, the next three define
     /// the second triangle, and so on.
     /// normalVectors : An array of doubles that represent the x, y, z components of the normals at each coordinate. There should be a normal defined
     /// for each coordinate. If an empty array is provided for the normal vectors, Fusion will automatically calculate normal vectors
     /// that are 90 degrees to the face of the triangle, making it appear flat.
-    /// normalIndexList : An array of integers that represent indices into the normal vectors to define the which vector corresponds to which vertex. This
+    /// normalIndexList : An array of integers that represent indices into the normal vectors to define which vector corresponds to which vertex. This
     /// should be the same size as the vertex index list. If an empty array is input and normal vectors are provided, it is assumed that
     /// the normals match up one-to-one to each coordinate.
     /// Returns the new CustomGraphicsMesh object or null in the case of a failure.
@@ -123,8 +123,8 @@ public:
 
     /// Adds a new CustomGraphicsText entity to this group. This will be displayed as a single line of text.
     /// It is placed so that the upper-left corner is at the point defined and the text will be parallel
-    /// to the X-Y plane of the world coordinate system and in the X direction. To change it's position relative
-    /// to the input point you can change the horizontal and vertical justification on the returned CustomGrahicsText
+    /// to the X-Y plane of the world coordinate system and in the X direction. To change its position relative
+    /// to the input point you can change the horizontal and vertical justification on the returned CustomGraphicsText
     /// object. You can also reorient the text by changing the transform of the returned CustomGraphicsText object.
     /// formattedText : The text string to be displayed. Overall formatting can be defined using properties on the returned
     /// CustomGraphicsText object. Formatting overrides can be defined within the string using formatting codes.

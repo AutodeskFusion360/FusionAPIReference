@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -32,10 +32,6 @@ namespace adsk { namespace fusion {
 
 namespace adsk { namespace fusion {
 
-/// !!!!! Warning !!!!!
-/// ! This is in preview state; please see the help for more info
-/// !!!!! Warning !!!!!
-/// 
 /// The Arrange3DEnvelope object represents an 3D arrange envelope.
 class Arrange3DEnvelopeDefinition : public ArrangeEnvelopeDefinition {
 public:
@@ -45,15 +41,15 @@ public:
     bool plane(const core::Ptr<ConstructionPlane>& value);
 
     /// Returns the parameter that controls the length of the envelope volume. This defines the
-    /// You can modify the value by using the properties on the returned ModelParameter object.
+    /// size of the envelope volume. You can modify the value by using the properties on the returned ModelParameter object.
     core::Ptr<ModelParameter> length() const;
 
     /// Returns the parameter that controls the width of the envelope volume. This defines the
-    /// You can modify the value by using the properties on the returned ModelParameter object.
+    /// size of the envelope volume. You can modify the value by using the properties on the returned ModelParameter object.
     core::Ptr<ModelParameter> width() const;
 
     /// Returns the parameter that controls the height of the envelope volume. This defines the
-    /// You can modify the value by using the properties on the returned ModelParameter object.
+    /// size of the envelope volume. You can modify the value by using the properties on the returned ModelParameter object.
     core::Ptr<ModelParameter> height() const;
 
     /// Returns the parameter that controls the X offset of the envelope volume from the origin of

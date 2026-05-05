@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -35,6 +35,7 @@ namespace adsk { namespace fusion {
     class BaseFeature;
     class Component;
     class ConstructionPointDefinition;
+    class DeriveFeature;
     class Occurrence;
     class TimelineObject;
 }}
@@ -66,7 +67,7 @@ public:
     bool isDeletable() const;
 
     /// Indicates if the light bulb (as displayed in the browser) is on.
-    /// A construction point will only be visible if it's light bulb, and that of it's
+    /// A construction point will only be visible if its light bulb, and that of its
     /// containing folder and parent component/s are also on.
     bool isLightBulbOn() const;
     bool isLightBulbOn(bool value);
@@ -133,6 +134,14 @@ public:
     /// method to get the two entities identified by the tokens and then compare them.
     std::string entityToken() const;
 
+    /// Returns if this construction point is derived from another design. If true, the construction point cannot be deleted.
+    /// You should not attempt to make any edits to the derived construction point. Any edits made to this derived construction point will be lost when the derive updates.
+    bool isDerived() const;
+
+    /// Returns the DeriveFeature if this construction point is derived from another design.
+    /// This property returns null if the construction point is not derived from another design (i.e. isDerived property returns false).
+    core::Ptr<DeriveFeature> deriveFeature() const;
+
     ADSK_FUSION_CONSTRUCTIONPOINT_API static const char* classType();
     ADSK_FUSION_CONSTRUCTIONPOINT_API const char* objectType() const override;
     ADSK_FUSION_CONSTRUCTIONPOINT_API void* queryInterface(const char* id) const override;
@@ -162,6 +171,8 @@ private:
     virtual FeatureHealthStates healthState_raw() const = 0;
     virtual char* errorOrWarningMessage_raw() const = 0;
     virtual char* entityToken_raw() const = 0;
+    virtual bool isDerived_raw() const = 0;
+    virtual DeriveFeature* deriveFeature_raw() const = 0;
 };
 
 // Inline wrappers
@@ -308,6 +319,18 @@ inline std::string ConstructionPoint::entityToken() const
         res = p;
         core::DeallocateArray(p);
     }
+    return res;
+}
+
+inline bool ConstructionPoint::isDerived() const
+{
+    bool res = isDerived_raw();
+    return res;
+}
+
+inline core::Ptr<DeriveFeature> ConstructionPoint::deriveFeature() const
+{
+    core::Ptr<DeriveFeature> res = deriveFeature_raw();
     return res;
 }
 }// namespace fusion

@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -143,6 +143,15 @@ public:
     /// Returns a list of the sketch lines that were created to represent the polygon or null in the case of bad input.
     core::Ptr<SketchLineList> addEdgePolygon(const core::Ptr<core::Base>& pointOne, const core::Ptr<core::Base>& pointTwo, bool isRight, int edgeCount);
 
+    /// Creates a sketch line where the first point is the midpoint and the second point
+    /// is one endpoint. The system automatically calculates the other endpoint to create
+    /// a line where the first point is exactly at the midpoint.
+    /// midPoint : The midpoint of the line. It can be a SketchPoint or Point3D object.
+    /// secondPoint : One endpoint of the line. It can be a SketchPoint or Point3D object.
+    /// The other endpoint will be calculated automatically.
+    /// Returns the newly created SketchLine object or null if the creation failed.
+    core::Ptr<SketchLine> addByMidpoint(const core::Ptr<core::Base>& midPoint, const core::Ptr<core::Base>& secondPoint);
+
     typedef SketchLine iterable_type;
     template <class OutputIterator> void copyTo(OutputIterator result);
 
@@ -164,6 +173,7 @@ private:
     virtual SketchLine* addAngleChamfer_raw(SketchLine* firstLine, core::Point3D* firstLinePoint, SketchLine* secondLine, core::Point3D* secondLinePoint, double distance, double angle) = 0;
     virtual SketchLineList* addScribedPolygon_raw(core::Base* centerPoint, int edgeCount, double angle, double radius, bool isInscribed) = 0;
     virtual SketchLineList* addEdgePolygon_raw(core::Base* pointOne, core::Base* pointTwo, bool isRight, int edgeCount) = 0;
+    virtual SketchLine* addByMidpoint_raw(core::Base* midPoint, core::Base* secondPoint) = 0;
 };
 
 // Inline wrappers
@@ -225,6 +235,12 @@ inline core::Ptr<SketchLineList> SketchLines::addScribedPolygon(const core::Ptr<
 inline core::Ptr<SketchLineList> SketchLines::addEdgePolygon(const core::Ptr<core::Base>& pointOne, const core::Ptr<core::Base>& pointTwo, bool isRight, int edgeCount)
 {
     core::Ptr<SketchLineList> res = addEdgePolygon_raw(pointOne.get(), pointTwo.get(), isRight, edgeCount);
+    return res;
+}
+
+inline core::Ptr<SketchLine> SketchLines::addByMidpoint(const core::Ptr<core::Base>& midPoint, const core::Ptr<core::Base>& secondPoint)
+{
+    core::Ptr<SketchLine> res = addByMidpoint_raw(midPoint.get(), secondPoint.get());
     return res;
 }
 

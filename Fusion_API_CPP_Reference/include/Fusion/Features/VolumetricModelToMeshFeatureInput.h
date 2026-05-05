@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -36,7 +36,7 @@ namespace adsk { namespace fusion {
 /// ! This is in preview state; please see the help for more info
 /// !!!!! Warning !!!!!
 /// 
-/// A input object for creating a volumetric model to mesh feature.
+/// An input object for creating a volumetric model to mesh feature.
 class VolumetricModelToMeshFeatureInput : public core::Base {
 public:
 
@@ -72,7 +72,7 @@ public:
     bool isSmallShellsRemoved() const;
     bool isSmallShellsRemoved(bool value);
 
-    /// Gets and Sets the small mesh threshold used to determine if a mesh shell is considered small.
+    /// Gets and sets the small mesh threshold used to determine if a mesh shell is considered small.
     /// The value is a fraction of the total mesh area and must be between 0 and 1. The default is 0.02.
     core::Ptr<core::ValueInput> smallShellThreshold() const;
     bool smallShellThreshold(const core::Ptr<core::ValueInput>& value);

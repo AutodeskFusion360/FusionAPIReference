@@ -1,0 +1,313 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/PMIHoleThreadNote.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="29/03/2026">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="PMIHoleThreadNote">
+    <meta name="description" content="PMIHoleThreadNote Object">
+    <meta name="topicid" content="GUID-77E1F259-658A-4409-A8BC-943C72A48D30">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>PMIHoleThreadNote Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">PMIHoleThreadNote Object <img src="../images/TestTubeLarge.png" alt="Preview"></h1>
+              Derived from: <a href="PMICreatedAnnotation.htm">PMICreatedAnnotation</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/PMI/PMIHoleThreadNote.h&gt;<p class="api-preview"><img src="../images/TestTubeSmall.png" alt="Preview">This functionality is provided as a preview
+				of intended future API capabilities. You are encouraged to use it and report any problems or suggestions using the
+				<a href="https://forums.autodesk.com/t5/fusion-360-api-and-scripts/bd-p/22">Fusion API and Scripts</a> forum.<br><br>
+	
+                Because this is a preview of future functionality, there is the possibility that it will change, which will possibly
+		        break any existing programs that use this functionality. Because of that, you should never deliver any programs that use
+		        any preview capabilities. For a distributed program, you should wait until it has moved from preview to released state.
+		    </p>
+    <h2 class="api">
+          Description
+        </h2>Defines a created PMI which includes data corresponding to Hole/Thread Note PMI. Provides access to information such as tolerances, thread information, and units.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_convertImportedToFusionPMI.htm">convertImportedToFusionPMI</a></td>
+        <td class="api-list">Converts this PMIAnnotation to a Fusion PMIAnnotation if it is of supported type and has valid reference geometry.<br/><br/> Supported types are:<br/><br/> Imported PMI annotation (PMIImportedDimension) and valid reference geometry is converted to Hole/Thread Note PMI.<br/><br/> Imported PMI annotation (PMIImportedNote) and valid reference geometry is converted to Leader Line Note PMI.<br/><br/> Imported PMI folder (PMIImportedFolder) which includes information about a Hole Note is converted to Hole/Thread Note PMI.<br/><br/> The converted PMIAnnotation can then be edited.<br/><br/> After successful conversion, the new PMIAnnotation will be added to the collection of PMI in the component, and the original PMIAnnotation will be removed. If it fails to convert, the original PMIAnnotation remains unchanged.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_createForAssemblyContext.htm">createForAssemblyContext</a></td>
+        <td class="api-list">Creates or returns a proxy for the native object - i.e. a new object that represents this object but adds the assembly context defined by the input occurrence.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_deleteMe.htm">deleteMe</a></td>
+        <td class="api-list">Deletes the PMI.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_markUpToDate.htm">markUpToDate</a></td>
+        <td class="api-list">Marks the PMI as up-to-date and dismisses warnings.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_annotationTargetPoint.htm">annotationTargetPoint</a></td>
+        <td class="api-list">Gets the point on the annotation plane where the leader line meets the annotated geometry.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_annotationTextPoint.htm">annotationTextPoint</a></td>
+        <td class="api-list">Gets and sets the point on the annotation plane where the PMI text is anchored.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_assemblyContext.htm">assemblyContext</a></td>
+        <td class="api-list">Returns the assembly occurrence (i.e. the occurrence) of this object in an assembly. This is only valid in the case where this is acting as a proxy in an assembly. Returns null in the case where the object is not in the context of an assembly but is already the native object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_counterboreDepth.htm">counterboreDepth</a></td>
+        <td class="api-list">Gets and sets the PMIGeometricValue used to define the depth of the counterbore segment of the hole in cm. Not applicable for bosses.<br/><br/> When querying, if the counterbore depth is not set, the value will be 0 and hasValue property will be false.<br/><br/> When setting, it is possible to also add tolerances to the object set by setting the tolerance property of the PMIGeometricValue object.<br/><br/> Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).<br/><br/> Updating this value will reset the segments in the PMI.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_counterboreDiameter.htm">counterboreDiameter</a></td>
+        <td class="api-list">Gets and sets the PMIGeometricValue used to define the diameter of the counterbore segment of the hole in cm. Not applicable for bosses.<br/><br/> When querying, if the counterbore diameter is not set, the value will be 0 and hasValue property will be false.<br/><br/> When setting, it is possible to also add tolerances to the object set by setting the tolerance property of the PMIGeometricValue object.<br/><br/> Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).<br/><br/> Updating this value will reset the segments in the PMI.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_counterboreRadius.htm">counterboreRadius</a></td>
+        <td class="api-list">Gets and sets the PMIGeometricValue used to define the radius of the counterbore segment of the hole in cm. Not applicable for bosses.<br/><br/> When querying, if the counterbore radius is not set, the value will be 0 and hasValue property will be false.<br/><br/> When setting, it is possible to also add tolerances to the object set by setting the tolerance property of the PMIGeometricValue object.<br/><br/> Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).<br/><br/> Updating this value will reset the segments in the PMI.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_countersinkAngle.htm">countersinkAngle</a></td>
+        <td class="api-list">Gets and sets the PMIGeometricValue used to define the angle of the countersink segment of the hole in radians. Not applicable for bosses.<br/><br/> When querying, if the countersink angle is not set, the value will be 0 and hasValue property will be false. When setting, this value does not have tolerances, and will not be taken into account.<br/><br/> Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).<br/><br/> Updating this value will reset the segments in the PMI.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_countersinkDiameter.htm">countersinkDiameter</a></td>
+        <td class="api-list">Gets and sets the PMIGeometricValue used to define the diameter of the countersink segment of the hole in cm. Not applicable for bosses.<br/><br/> When querying, if the countersink diameter is not set, the value will be 0 and hasValue property will be false. When setting, it is possible to also add tolerances to the object set by setting the tolerance property of the PMIGeometricValue object.<br/><br/> Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).<br/><br/> Updating this value will reset the segments in the PMI.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_depth.htm">depth</a></td>
+        <td class="api-list">Gets and sets the PMIGeometricValue used to define the depth of the hole in cm. In the case of bosses, it represents the height of the boss.<br/><br/> When querying, if the depth is not set, the value will be 0 and hasValue property will be false.<br/><br/> When setting, it is possible to also add tolerances to the object set by setting the tolerance property of the PMIGeometricValue object.<br/><br/> Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).<br/><br/> Updating this value will reset the segments in the PMI.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_diameter.htm">diameter</a></td>
+        <td class="api-list">Gets and sets the PMIGeometricValue used to define the diameter of the annotated hole or boss in cm.<br/><br/> When querying, if the diameter is not set, the value will be 0 and hasValue property will be false.<br/><br/> When setting, it is possible to also add tolerances to the object set by setting the tolerance property of the PMIGeometricValue object.<br/><br/> Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).<br/><br/> Updating this value will reset the segments in the PMI.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_errorOrWarningMessage.htm">errorOrWarningMessage</a></td>
+        <td class="api-list">If there are errors or warnings in the PMI, this property will return a string that contains the error or warning message. Otherwise it returns an empty string. Only applies to PMI that has an associated parametric Feature.<br/><br/> Returns empty string for other PMI types that don't have a parametric Feature.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_hasImportedGeometry.htm">hasImportedGeometry</a></td>
+        <td class="api-list">Gets whether the created PMI was converted from an imported PMI and therefore whether it has original graphics/geometry that can be shown.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_hasSecondaryDisplaySettings.htm">hasSecondaryDisplaySettings</a></td>
+        <td class="api-list">Gets and sets whether there are secondary display settings defined for the Hole/Thread Note PMI.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_healthState.htm">healthState</a></td>
+        <td class="api-list">Gets the health state of the PMI. Only applies to PMI that have a timeline object, in Parametric Modelling.<br/><br/> Returns UnknownFeatureHealthState for other PMI types that don't have a parametric Feature.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_holeType.htm">holeType</a></td>
+        <td class="api-list">Gets the type of the hole.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_horizontalAlignment.htm">horizontalAlignment</a></td>
+        <td class="api-list">Gets and sets the horizontal alignment of the PMI text relative to its anchor point.<br/><br/> This determines how the text box is positioned relative to the text placement point.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_isDeletable.htm">isDeletable</a></td>
+        <td class="api-list">Indicates if this PMI can be deleted.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_isFlipHoleNormal.htm">isFlipHoleNormal</a></td>
+        <td class="api-list">Gets and sets whether the hole normal should be treated as flipped, resulting in the hole top to be placed at the lowest found face of the hole.<br/><br/> This is applicable only to complex holes, in other cases the value is ignored.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_isHoleAnnotation.htm">isHoleAnnotation</a></td>
+        <td class="api-list">Indicates whether the PMI is representing a hole or a boss.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_isLightBulbOn.htm">isLightBulbOn</a></td>
+        <td class="api-list">Indicates if the light bulb (as displayed in the browser) is on.<br/><br/> A PMI will only be visible if its light bulb, the containing folder's light bulb, the collection's and the component's light bulbs are all on.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_isOutOfDate.htm">isOutOfDate</a></td>
+        <td class="api-list">Indicates if this PMI is outdated and needs to be recomputed. This typically happens when the geometry or parameters that the PMI references have been modified. Applicable for both imported and created PMI, regardless of whether they are parametric or not.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_isParametric.htm">isParametric</a></td>
+        <td class="api-list">Indicates if this PMI is parametric or not.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_isPerpendicularLine.htm">isPerpendicularLine</a></td>
+        <td class="api-list">Gets and sets whether the PMI text is perpendicular to the leader line or parallel to it.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_isShowImportedGeometry.htm">isShowImportedGeometry</a></td>
+        <td class="api-list">Gets and sets whether the original graphics/geometry of the PMI should be visible. Only supported for PMI that has been converted from imported data.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_isSuppressed.htm">isSuppressed</a></td>
+        <td class="api-list">Indicates if this PMI is suppressed. Only applies to PMI that has an associated parametric Feature.<br/><br/> Returns false for other PMI types that don't have a parametric Feature.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_isThreaded.htm">isThreaded</a></td>
+        <td class="api-list">Gets and sets whether the hole or the boss has a thread associated.<br/><br/> Setting this to false will result in all thread information being removed.<br/><br/> Updating this value will reset the segments in the PMI.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_isThreadedThrough.htm">isThreadedThrough</a></td>
+        <td class="api-list">Gets and sets whether the hole or boss is threaded all the way through.<br/><br/> Setting this to true will remove the thread depth information.<br/><br/> Updating this value will reset the segments in the PMI.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_isThrough.htm">isThrough</a></td>
+        <td class="api-list">Gets and sets whether the hole should be considered a through hole.<br/><br/> Setting this to true will remove the depth information related to the PMI.<br/><br/> Setting this to false will result in a default depth set without tolerance.<br/><br/> Updating this value will reset the segments in the PMI.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_isVisible.htm">isVisible</a></td>
+        <td class="api-list">Indicates if the PMI is visible. This property is affected by the AssemblyContext (parent component) of the PMI.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_isWantQuantityNote.htm">isWantQuantityNote</a></td>
+        <td class="api-list">Indicates if the quantity is visible in the graphics.<br/><br/> Updating this value will reset the segments in the PMI.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_isWantSelectAllMatchingHoles.htm">isWantSelectAllMatchingHoles</a></td>
+        <td class="api-list">Gets and sets whether the Hole/Thread Note PMI should represent all the matching holes in the design.<br/><br/> While this can be set to true on existing PMI, it does not always ensures that all matching holes are included.<br/><br/> Updating this value will result in the referenced entities being updated to include all matching holes.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_leaderLineExtension.htm">leaderLineExtension</a></td>
+        <td class="api-list">Gets and sets the length of the leader line extension.<br/><br/> This value extends the leader line in the direction determined by the perpendicular setting.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_name.htm">name</a></td>
+        <td class="api-list">Gets and sets the name of the PMI as it is shown in the browser.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_nativeObject.htm">nativeObject</a></td>
+        <td class="api-list">The NativeObject is the object outside the context of an assembly and in the context of its parent component. Returns null in the case where this object is not in the context of an assembly but is already the native object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_parentComponent.htm">parentComponent</a></td>
+        <td class="api-list">Gets the component this PMI belongs to.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_plainText.htm">plainText</a></td>
+        <td class="api-list">This is a convenience property that provides the plain-text representation of the PMI text. It iterates through the segments and concatenates their text representation.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_plane.htm">plane</a></td>
+        <td class="api-list">Gets the plane of the PMI.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_primaryDisplaySettings.htm">primaryDisplaySettings</a></td>
+        <td class="api-list">Gets and sets the primary display settings for the Hole/Thread Note PMI.<br/><br/> This will always be existent, and includes information about format and units.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_quantity.htm">quantity</a></td>
+        <td class="api-list">Gets the number of holes/bosses the Hole/Thread Note PMI is associated with.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_radius.htm">radius</a></td>
+        <td class="api-list">Gets and sets the PMIGeometricValue used to define the radius of the hole in cm. Not applicable for bosses.<br/><br/> When querying, if the radius is not set, the value will be 0 and hasValue property will be false.<br/><br/> When setting, it is possible to also add tolerances to the object set by setting the tolerance property of the PMIGeometricValue object.<br/><br/> Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).<br/><br/> Updating this value will reset the segments in the PMI.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_referencedEntities.htm">referencedEntities</a></td>
+        <td class="api-list">Returns an array of referenced entities for this PMI.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_secondaryDisplaySettings.htm">secondaryDisplaySettings</a></td>
+        <td class="api-list">Gets and sets the secondary display settings for the Hole/Thread Note PMI.<br/><br/> This will not always be existent, based on the hasSecondaryDisplaySettings value.<br/><br/> Setting this value will also set hasSecondaryDisplaySettings to true.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_segments.htm">segments</a></td>
+        <td class="api-list">Gets and sets the list of PMISegments used to define the PMI text.<br/><br/> The segments can be any combination of PMITextSegment, PMISymbolSegment and PMILineBreakSegment objects.<br/><br/> Changing this property will result in changing the displayed text of the PMI.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_shaftTolerance.htm">shaftTolerance</a></td>
+        <td class="api-list">Gets and sets the PMIGeometricValueTolerance for the shaft diameter of the annotated hole if a shaft tolerance exists.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_threadDepth.htm">threadDepth</a></td>
+        <td class="api-list">Gets and sets the PMIGeometricValue used to define the thread depth of the hole in cm. In the case of bosses, it represents the thread length of the boss.<br/><br/> When querying, if the thread depth is not set, the value will be 0 and hasValue property will be false.<br/><br/> When setting, it is possible to also add tolerances to the object set by setting the tolerance property of the PMIGeometricValue object.<br/><br/> Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).<br/><br/> Updating this value will reset the segments in the PMI.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_threadInfo.htm">threadInfo</a></td>
+        <td class="api-list">Gets and sets the ThreadInfo object associated with the hole/thread note.<br/><br/> Returns null if the hole is not threaded.<br/><br/> Updating this value will reset the segments in the PMI.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_timelineObject.htm">timelineObject</a></td>
+        <td class="api-list">Gets the timeline object associated with this PMI. Only applies to PMI that has an associated timeline feature.<br/><br/> Returns null if the PMI does not have an associated timeline feature.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_type.htm">type</a></td>
+        <td class="api-list">Gets the type of this PMI annotation.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMIHoleThreadNote_verticalAlignment.htm">verticalAlignment</a></td>
+        <td class="api-list">Gets and sets the vertical alignment of the PMI text relative to its anchor point.<br/><br/> This determines the vertical positioning of the text box relative to the calculated text placement point.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="PMIHoleThreadNote_createForAssemblyContext.htm">PMIHoleThreadNote.createForAssemblyContext</a>, <a href="PMIHoleThreadNote_nativeObject.htm">PMIHoleThreadNote.nativeObject</a>, <a href="PMIHoleThreadNotes_add.htm">PMIHoleThreadNotes.add</a>, <a href="PMIHoleThreadNotes_item.htm">PMIHoleThreadNotes.item</a>, <a href="PMIHoleThreadNotes_itemByName.htm">PMIHoleThreadNotes.itemByName</a>, <a href="PMIHoleThreadNotes_itemsByEntities.htm">PMIHoleThreadNotes.itemsByEntities</a><h2 class="api">
+            Version
+          </h2>
+        Introduced in version April 2026<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2026 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(PMIHoleThreadNote%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

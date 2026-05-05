@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -67,9 +67,9 @@ public:
     /// Gets the direction used as the primary direction for the two translational degrees of
     /// freedom. The value of this property is automatically set when setting the normalDirection.
     /// When reading this value it can return XAxisJointDirection, YAxisJointDirection, ZAxisJointDirection,
-    /// or CustomJointDirection. If it's CustomJointDirection then the direction the direction can be
+    /// or CustomJointDirection. If it's CustomJointDirection then the direction can be
     /// determined using the primarySlideDirectionVector and the entity controlling the direction can
-    /// be get and set using the customPrimarySlideDirectionEntity.
+    /// be gotten and set using the customPrimarySlideDirectionEntity.
     JointDirections primarySlideDirection() const;
 
     /// Returns the direction of the primary slide direction. This property will return null in the case

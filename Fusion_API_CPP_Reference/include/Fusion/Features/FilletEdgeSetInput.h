@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -45,6 +45,9 @@ public:
     /// Gets and sets the continuity of the fillet edge set. Valid values are
     /// TangentSurfaceContinuityType and CurvatureSurfaceContinuityType. The default
     /// is TangentSurfaceContinuityType.
+    /// 
+    /// For an asymmetric fillet edge set, this must always be tangent continuity (G1)
+    /// and setting it to another value will fail.
     SurfaceContinuityTypes continuity() const;
     bool continuity(SurfaceContinuityTypes value);
 

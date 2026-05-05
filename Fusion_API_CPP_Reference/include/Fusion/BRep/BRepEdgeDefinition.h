@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -40,7 +40,7 @@ class BRepEdgeDefinition : public core::Base {
 public:
 
     /// Gets and sets the associate ID of this edge definition. This ID will be copied to the corresponding
-    /// edge when the BRepBodyDefinition is used to create a BrepBody. It is used internally by Fusion as
+    /// edge when the BRepBodyDefinition is used to create a BRepBody. It is used internally by Fusion as
     /// the identifier for the edge and is used for tracking this geometry for parametric recomputes.
     int associativeID() const;
     bool associativeID(int value);

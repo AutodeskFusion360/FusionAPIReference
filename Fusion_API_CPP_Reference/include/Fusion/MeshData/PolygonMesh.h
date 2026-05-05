@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -69,7 +69,7 @@ public:
     /// Returns the normal vectors as an array of floats. There is one normal vector for each index.
     std::vector<float> normalVectorsAsFloat() const;
 
-    /// Returns the normal vectors as an array of Vector 3D objects. There is one normal vector for each index.
+    /// Returns the normal vectors as an array of Vector3D objects. There is one normal vector for each index.
     std::vector<core::Ptr<core::Vector3D>> normalVectors() const;
 
     /// Returns the index values that index into the NodeCoordinates and NormalVectors arrays to
@@ -104,7 +104,7 @@ public:
     /// !!!!! Warning !!!!!
     /// 
     /// Returns the wall thickness per node in cm. This property calculates the wall thickness of the mesh,
-    /// i.e. the distance of a surface of the mesh to the opposing surface.
+    /// i.e., the distance of a surface of the mesh to the opposing surface.
     std::vector<float> wallThickness() const;
 
     ADSK_FUSION_POLYGONMESH_API static const char* classType();

@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -32,11 +32,15 @@ namespace adsk { namespace fusion {
 
 namespace adsk { namespace fusion {
 
-/// A ConstructionPointInput is a throwaway object used to create a ConstructionPoint
-/// The usage pattern is
+/// A ConstructionPointInput is a throwaway object used to create a ConstructionPoint.
+/// The usage pattern is:
+/// 
 /// a. create a ConstructionPointInput (ConstructionPoints.CreateInput)
+/// 
 /// b. call one of the member functions to specify how the ConstructionPoint is created
+/// 
 /// c. create the ConstructionPoint (call ConstructionPoints.Add)
+/// 
 /// d. stop referencing the ConstructionPointInput (so it gets deleted).
 class ConstructionPointInput : public core::Base {
 public:
@@ -46,8 +50,8 @@ public:
     /// The edges can be B-Rep edges or sketch lines.
     /// This can result in a parametric or non-parametric construction point depending
     /// on whether the parent component is parametric or is a direct edit component.
-    /// edgeOne : The first B-Rep edge or sketch line
-    /// edgeTwo : The second B-Rep edge or sketch line
+    /// edgeOne : The first B-Rep edge or sketch line.
+    /// edgeTwo : The second B-Rep edge or sketch line.
     /// Returns true if the creation of the ConstructionPointInput is successful.
     bool setByTwoEdges(const core::Ptr<core::Base>& edgeOne, const core::Ptr<core::Base>& edgeTwo);
 

@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -92,6 +92,13 @@ public:
     /// Returns the proxy object or null if this is not the NativeObject.
     core::Ptr<ThickenFeature> createForAssemblyContext(const core::Ptr<Occurrence>& occurrence) const;
 
+    /// Gets and sets the thicken type for the thicken.
+    /// 
+    /// To set this property, you need to position the timeline marker to immediately before this feature.
+    /// This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
+    ThickenTypes thickenType() const;
+    bool thickenType(ThickenTypes value);
+
     ADSK_FUSION_THICKENFEATURE_API static const char* classType();
     ADSK_FUSION_THICKENFEATURE_API const char* objectType() const override;
     ADSK_FUSION_THICKENFEATURE_API void* queryInterface(const char* id) const override;
@@ -111,6 +118,8 @@ private:
     virtual bool isChainSelection_raw() const = 0;
     virtual ThickenFeature* nativeObject_raw() const = 0;
     virtual ThickenFeature* createForAssemblyContext_raw(Occurrence* occurrence) const = 0;
+    virtual ThickenTypes thickenType_raw() const = 0;
+    virtual bool thickenType_raw(ThickenTypes value) = 0;
 };
 
 // Inline wrappers
@@ -176,6 +185,17 @@ inline core::Ptr<ThickenFeature> ThickenFeature::createForAssemblyContext(const 
 {
     core::Ptr<ThickenFeature> res = createForAssemblyContext_raw(occurrence.get());
     return res;
+}
+
+inline ThickenTypes ThickenFeature::thickenType() const
+{
+    ThickenTypes res = thickenType_raw();
+    return res;
+}
+
+inline bool ThickenFeature::thickenType(ThickenTypes value)
+{
+    return thickenType_raw(value);
 }
 }// namespace fusion
 }// namespace adsk

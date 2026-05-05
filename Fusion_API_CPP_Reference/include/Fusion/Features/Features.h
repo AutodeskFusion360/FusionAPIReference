@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -38,17 +38,21 @@ namespace adsk { namespace fusion {
     class CoilFeatures;
     class CombineFeatures;
     class CopyPasteBodies;
+    class CornerClosureFeatures;
     class CustomFeatures;
     class CutPasteBodies;
     class CylinderFeatures;
     class DeleteFaceFeatures;
+    class DeriveFeatures;
     class DraftFeatures;
+    class EmbossFeatures;
     class ExtendFeatures;
     class ExtrudeFeatures;
     class Feature;
     class FilletFeatures;
     class FlangeFeatures;
     class FormFeatures;
+    class HemFeatures;
     class HoleFeatures;
     class LoftFeatures;
     class MergeFacesFeatures;
@@ -59,6 +63,7 @@ namespace adsk { namespace fusion {
     class MeshPlaneCutFeatures;
     class MeshReduceFeatures;
     class MeshRemeshFeatures;
+    class MeshRemoveFeatures;
     class MeshRepairFeatures;
     class MeshReverseNormalFeatures;
     class MeshSeparateFeatures;
@@ -118,7 +123,7 @@ public:
     /// Returns the specified item or null if an invalid index was specified.
     core::Ptr<Feature> item(size_t index) const;
 
-    /// Returns the number of bodies in the collection.
+    /// Returns the number of features in the collection.
     size_t count() const;
 
     /// Returns the collection that provides access to the extrude features within the component
@@ -293,7 +298,11 @@ public:
     /// supports the creation of new loft features.
     core::Ptr<LoftFeatures> loftFeatures() const;
 
-    /// Returns the collection that provides access to the existing form features.
+    /// !!!!! Warning !!!!!
+    /// ! This has been retired; please see the help for more info
+    /// !!!!! Warning !!!!!
+    /// 
+    /// Returns the collection that provides access to the existing rule fillet features.
     core::Ptr<RuleFilletFeatures> ruleFilletFeatures() const;
 
     /// Function that returns the specified feature using the name of the feature.
@@ -423,7 +432,7 @@ public:
     core::Ptr<MeshPlaneCutFeatures> meshPlaneCutFeatures() const;
 
     /// !!!!! Warning !!!!!
-    /// ! This is hidden and not officially supported
+    /// ! This is in preview state; please see the help for more info
     /// !!!!! Warning !!!!!
     /// 
     /// Returns the collection that provides access to the mesh convert features
@@ -445,7 +454,7 @@ public:
     core::Ptr<MergeFacesFeatures> mergeFacesFeatures() const;
 
     /// !!!!! Warning !!!!!
-    /// ! This is hidden and not officially supported
+    /// ! This is in preview state; please see the help for more info
     /// !!!!! Warning !!!!!
     /// 
     /// Returns the collection that provides access to the mesh separate features
@@ -453,7 +462,7 @@ public:
     core::Ptr<MeshSeparateFeatures> meshSeparateFeatures() const;
 
     /// !!!!! Warning !!!!!
-    /// ! This is hidden and not officially supported
+    /// ! This is in preview state; please see the help for more info
     /// !!!!! Warning !!!!!
     /// 
     /// Returns the collection that provides access to the mesh reverse normal features
@@ -483,6 +492,32 @@ public:
     /// Returns the collection that provides access to the Volumetric Model to Mesh features
     /// within the component and supports the creation of new Volumetric Model to Mesh features.
     core::Ptr<VolumetricModelToMeshFeatures> volumetricModelToMeshFeatures() const;
+
+    /// Returns the collection that provides access to the emboss features
+    /// within the component and supports the creation of new emboss features.
+    core::Ptr<EmbossFeatures> embossFeatures() const;
+
+    /// Returns the collection that provides access to the existing Hem features.
+    core::Ptr<HemFeatures> hemFeatures() const;
+
+    /// !!!!! Warning !!!!!
+    /// ! This is in preview state; please see the help for more info
+    /// !!!!! Warning !!!!!
+    /// 
+    /// Returns the collection that provides access to the mesh remove features
+    /// within the component and supports the creation of new mesh remove features.
+    core::Ptr<MeshRemoveFeatures> meshRemoveFeatures() const;
+
+    /// Returns the collection that provides access to the Derive features
+    /// within the component and supports the creation of new Derive features.
+    core::Ptr<DeriveFeatures> deriveFeatures() const;
+
+    /// !!!!! Warning !!!!!
+    /// ! This is in preview state; please see the help for more info
+    /// !!!!! Warning !!!!!
+    /// 
+    /// Returns the collection that provides access to the existing Corner Closure features.
+    core::Ptr<CornerClosureFeatures> cornerClosureFeatures() const;
 
     typedef Feature iterable_type;
     template <class OutputIterator> void copyTo(OutputIterator result);
@@ -571,6 +606,11 @@ private:
     virtual ArrangeFeatures* arrangeFeatures_raw() const = 0;
     virtual VolumetricCustomFeatures* volumetricCustomFeatures_raw() const = 0;
     virtual VolumetricModelToMeshFeatures* volumetricModelToMeshFeatures_raw() const = 0;
+    virtual EmbossFeatures* embossFeatures_raw() const = 0;
+    virtual HemFeatures* hemFeatures_raw() const = 0;
+    virtual MeshRemoveFeatures* meshRemoveFeatures_raw() const = 0;
+    virtual DeriveFeatures* deriveFeatures_raw() const = 0;
+    virtual CornerClosureFeatures* cornerClosureFeatures_raw() const = 0;
 };
 
 // Inline wrappers
@@ -1028,6 +1068,36 @@ inline core::Ptr<VolumetricCustomFeatures> Features::volumetricCustomFeatures() 
 inline core::Ptr<VolumetricModelToMeshFeatures> Features::volumetricModelToMeshFeatures() const
 {
     core::Ptr<VolumetricModelToMeshFeatures> res = volumetricModelToMeshFeatures_raw();
+    return res;
+}
+
+inline core::Ptr<EmbossFeatures> Features::embossFeatures() const
+{
+    core::Ptr<EmbossFeatures> res = embossFeatures_raw();
+    return res;
+}
+
+inline core::Ptr<HemFeatures> Features::hemFeatures() const
+{
+    core::Ptr<HemFeatures> res = hemFeatures_raw();
+    return res;
+}
+
+inline core::Ptr<MeshRemoveFeatures> Features::meshRemoveFeatures() const
+{
+    core::Ptr<MeshRemoveFeatures> res = meshRemoveFeatures_raw();
+    return res;
+}
+
+inline core::Ptr<DeriveFeatures> Features::deriveFeatures() const
+{
+    core::Ptr<DeriveFeatures> res = deriveFeatures_raw();
+    return res;
+}
+
+inline core::Ptr<CornerClosureFeatures> Features::cornerClosureFeatures() const
+{
+    core::Ptr<CornerClosureFeatures> res = cornerClosureFeatures_raw();
     return res;
 }
 

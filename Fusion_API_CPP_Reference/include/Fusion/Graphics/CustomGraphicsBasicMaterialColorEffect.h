@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -61,7 +61,7 @@ public:
     static core::Ptr<CustomGraphicsBasicMaterialColorEffect> create(const core::Ptr<core::Color>& diffuseColor, const core::Ptr<core::Color>& ambientColor = core::Ptr<core::Color>(), const core::Ptr<core::Color>& specularColor = core::Ptr<core::Color>(), const core::Ptr<core::Color>& emissiveColor = core::Ptr<core::Color>(), double glossiness = 5.0, double opacity = 1.0);
 
     /// Gets and sets the emissiveColor associated with this CustomGraphicsBasicMaterialColorEffect object.
-    /// The emissive color is the primary color of the entity
+    /// The emissive color is the primary color of the entity.
     core::Ptr<core::Color> emissiveColor() const;
     bool emissiveColor(const core::Ptr<core::Color>& value);
 
@@ -76,8 +76,16 @@ public:
     bool diffuseColor(const core::Ptr<core::Color>& value);
 
     /// Gets and sets the specularColor associated with this CustomGraphicsBasicMaterialColorEffect object.
-    /// The specular color is the color of reflected light (highlights) as it is reflected off of a shiny surface. This is
-    /// commonly white or a lighter shade of the emissive color.
+    /// The specular color is the color of reflected light (highlights) as it is reflected off of a shiny surface.
+    /// For most materials, using white or a light color for the specular color is common practice. This will make
+    /// the highlights appear bright and noticeable, mimicking how light sources typically reflect off shiny surfaces.
+    /// 
+    /// For colored metallic or glossy materials, you might choose a specular color that is tinted based on the material's
+    /// color. For example, gold might have a yellowish specular color, and copper might have an orange-reddish specular color.
+    /// 
+    /// Generally, non-metallic materials (like plastics, ceramics, etc.) have specular colors that are less influenced by the
+    /// object's base color and more influenced by the light's color. On the other hand, metallic materials tend to have
+    /// specular highlights that are colored by the material itself.
     core::Ptr<core::Color> specularColor() const;
     bool specularColor(const core::Ptr<core::Color>& value);
 

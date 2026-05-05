@@ -1,0 +1,144 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/AutoConstrainSample.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="AutoConstrainSample_Sample">
+    <meta name="description" content="AutoConstrain Sample Sample">
+    <meta name="topicid" content="GUID-4806e14a-bbc6-11f0-aa73-d0f4053ea620">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>AutoConstrain Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">AutoConstrain Sample</h1>
+    <h2 class="api">
+          Description
+        </h2>Demonstrates using the AutoConstrain API to automatically add geometric constraints and dimensions to a sketch. This sample creates a simple sketch with a rectangle and circle, then applies automatic constraints using the origin point as a datum.<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">import adsk.core, adsk.fusion, traceback
+
+def run(context):
+    ui = None
+    try:
+        app = adsk.core.Application.get()
+        ui = app.userInterface
+        
+        <span style="color:blue"># Create a new document</span>
+        doc = app.documents.add(adsk.core.DocumentTypes.FusionDesignDocumentType)
+        
+        product = app.activeProduct
+        design = adsk.fusion.Design.cast(product)
+        rootComp = design.rootComponent
+        
+        <span style="color:blue"># Create a sketch on XY plane</span>
+        sketches = rootComp.sketches
+        sketch = sketches.add(rootComp.xYConstructionPlane)
+        
+        <span style="color:blue"># Create simple geometry: Rectangle + Circle</span>
+        sketchLines = sketch.sketchCurves.sketchLines
+        rectangleLines = sketchLines.addTwoPointRectangle(
+            adsk.core.Point3D.create(0, 0, 0),
+            adsk.core.Point3D.create(10, 5, 0)
+        )
+        
+        circles = sketch.sketchCurves.sketchCircles
+        circle = circles.addByCenterRadius(
+            adsk.core.Point3D.create(5, 2.5, 0),
+            2
+        )
+        
+        <span style="color:blue"># Create AutoConstrainInput</span>
+        autoConstrainInput = sketch.createAutoConstrainInput()
+        
+        <span style="color:blue"># Set the origin point as datum</span>
+        originPoint = sketch.originPoint
+        autoConstrainInput.datumPoint = originPoint
+        
+        <span style="color:blue"># Execute autoConstrain</span>
+        result = sketch.autoConstrain(autoConstrainInput)
+        
+        <span style="color:blue"># Get results</span>
+        addedConstraints = len(result.addedConstraints)
+        addedDimensions = len(result.addedDimensions)
+        isFullyConstrained = result.isFullyConstrained
+        
+        <span style="color:blue"># Log AutoConstrain results</span>
+        app.log(f'AutoConstrain Results:')
+        app.log(f'  Datum Point: Origin')
+        app.log(f'  Added Constraints: {addedConstraints}')
+        app.log(f'  Added Dimensions: {addedDimensions}')
+        app.log(f'  Is Fully Constrained: {isFullyConstrained}')
+        
+        
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2026 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(AutoConstrainSample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -56,7 +56,7 @@ public:
     /// can be defined as part of the string (i.e. "2 in") or if no units are specified
     /// it is interpreted using the current default units for length.
     /// isTangentChain : A boolean value for setting whether or not edges that are tangentially connected to
-    /// the input edges (if any) will also be filleted.
+    /// the input edges will also be filleted.
     /// Returns true if the set of edges was successfully added to the FilletFeatureInput.
     bool addConstantRadiusEdgeSet(const core::Ptr<core::ObjectCollection>& edges, const core::Ptr<core::ValueInput>& radius, bool isTangentChain);
 
@@ -103,6 +103,8 @@ public:
     bool isG2(bool value);
 
     /// Gets and sets if a rolling ball or setback solution is to be used in any corners.
+    /// For an asymmetric fillet only a setback solution is supported, so any asymmetric
+    /// edge sets will ignore this setting and will always be a setback corner.
     bool isRollingBallCorner() const;
     bool isRollingBallCorner(bool value);
 
@@ -128,7 +130,7 @@ public:
     /// can be defined as part of the string (i.e. "2 in") or if no units are specified
     /// it is interpreted using the current default units for length.
     /// isTangentChain : A boolean value for setting whether or not edges that are tangentially connected to
-    /// the input edges (if any) will also be filleted.
+    /// the input edges or faces will also be filleted.
     /// Returns true if the set of edges was successfully added to the FilletFeatureInput.
     bool addChordLengthEdgeSet(const core::Ptr<core::ObjectCollection>& edges, const core::Ptr<core::ValueInput>& chordLength, bool isTangentChain);
 

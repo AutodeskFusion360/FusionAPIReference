@@ -1,0 +1,174 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/MotionLink.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="22/09/2025">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="MotionLink">
+    <meta name="description" content="MotionLink Object">
+    <meta name="topicid" content="GUID-33E960B0-7158-4A1D-8F74-6AFD987C9339">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>MotionLink Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">MotionLink Object
+			</h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Components/MotionLink.h&gt;<h2 class="api">
+          Description
+        </h2>A MotionLink in a design.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MotionLink_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MotionLink_createForAssemblyContext.htm">createForAssemblyContext</a></td>
+        <td class="api-list">Creates or returns a proxy for the native object - i.e. a new object that represents this object but adds the assembly context defined by the input occurrence.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MotionLink_deleteMe.htm">deleteMe</a></td>
+        <td class="api-list">Deletes this MotionLink.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MotionLink_setMotionData.htm">setMotionData</a></td>
+        <td class="api-list">Method that sets the motion data.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MotionLink_assemblyContext.htm">assemblyContext</a></td>
+        <td class="api-list">Returns the assembly occurrence (i.e. the occurrence) of this object in an assembly. This is only valid in the case where this is acting as a proxy in an assembly. Returns null in the case where the object is not in the context of an assembly but is already the native object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MotionLink_attributes.htm">attributes</a></td>
+        <td class="api-list">Returns the collection of attributes associated with this MotionLink.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MotionLink_entityToken.htm">entityToken</a></td>
+        <td class="api-list">Returns a token for the MotionLink object. This can be saved and used at a later time with the Design.findEntityByToken method to get back the same MotionLink.<br/><br/> When using entity tokens it's important to understand that the token string returned for a specific entity can be different over time. However, even if you have two different token strings that were obtained from the same entity, when you use findEntityByToken they will both return the same entity. Because of that you should never compare entity tokens as way to determine what the token represents. Instead, you need to use the findEntityByToken method to get the two entities identified by the tokens and then compare them.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MotionLink_errorOrWarningMessage.htm">errorOrWarningMessage</a></td>
+        <td class="api-list">Returns the error or warning message in the case where the healthState property returns either WarningFeatureHealthState or ErrorFeatureHealthState. Otherwise this property returns an empty string.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MotionLink_healthState.htm">healthState</a></td>
+        <td class="api-list">Returns the current health state of the MotionLink.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MotionLink_isReversed.htm">isReversed</a></td>
+        <td class="api-list">Gets and sets whether the motion is reversed or not.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MotionLink_isSuppressed.htm">isSuppressed</a></td>
+        <td class="api-list">Gets and sets if this MotionLink is suppressed.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MotionLink_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MotionLink_jointOne.htm">jointOne</a></td>
+        <td class="api-list">Gets the first joint for this MotionLink.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MotionLink_jointTwo.htm">jointTwo</a></td>
+        <td class="api-list">Gets the second joint for this MotionLink. This can return null if the linked motions are from the same joint.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MotionLink_motionOne.htm">motionOne</a></td>
+        <td class="api-list">Gets the first motion type.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MotionLink_motionTwo.htm">motionTwo</a></td>
+        <td class="api-list">Gets the second motion type.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MotionLink_name.htm">name</a></td>
+        <td class="api-list">Gets and sets the name of the MotionLink.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MotionLink_nativeObject.htm">nativeObject</a></td>
+        <td class="api-list">The NativeObject is the object outside the context of an assembly and in the context of its parent component. Returns null in the case where this object is not in the context of an assembly but is already the native object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MotionLink_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MotionLink_parentComponent.htm">parentComponent</a></td>
+        <td class="api-list">Returns the parent component that owns this MotionLink.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MotionLink_timelineObject.htm">timelineObject</a></td>
+        <td class="api-list">Returns the timeline object associated with this MotionLink.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MotionLink_valueOne.htm">valueOne</a></td>
+        <td class="api-list">Returns the ModelParameter for the first motion link value.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="MotionLink_valueTwo.htm">valueTwo</a></td>
+        <td class="api-list">Returns the ModelParameter for the second motion link value.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="AsBuiltJoint_motionLinks.htm">AsBuiltJoint.motionLinks</a>, <a href="Joint_motionLinks.htm">Joint.motionLinks</a>, <a href="MotionLink_createForAssemblyContext.htm">MotionLink.createForAssemblyContext</a>, <a href="MotionLink_nativeObject.htm">MotionLink.nativeObject</a>, <a href="MotionLinks_add.htm">MotionLinks.add</a>, <a href="MotionLinks_item.htm">MotionLinks.item</a>, <a href="MotionLinks_itemByName.htm">MotionLinks.itemByName</a><h2 class="api">
+            Version
+          </h2>
+        Introduced in version November 2025<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2026 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(MotionLink%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

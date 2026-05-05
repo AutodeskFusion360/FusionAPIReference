@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -103,10 +103,6 @@ public:
     bool isUsingCustomRotationZ() const;
     bool isUsingCustomRotationZ(bool value);
 
-    /// !!!!! Warning !!!!!
-    /// ! This is in preview state; please see the help for more info
-    /// !!!!! Warning !!!!!
-    /// 
     /// Gets and sets the custom quantity.
     /// This function is not available in Fusion for Personal Use.
     /// Throws an exception when calling this function in Fusion for Personal Use.
@@ -115,10 +111,6 @@ public:
     size_t customQuantity() const;
     bool customQuantity(size_t value);
 
-    /// !!!!! Warning !!!!!
-    /// ! This is in preview state; please see the help for more info
-    /// !!!!! Warning !!!!!
-    /// 
     /// Gets and sets if custom quantity is used for this element.
     /// This function is not available in Fusion for Personal Use.
     /// Throws an exception when calling this function in Fusion for Personal Use.
@@ -126,6 +118,30 @@ public:
     /// The default value for this property false.
     bool isUsingCustomQuantity() const;
     bool isUsingCustomQuantity(bool value);
+
+    /// !!!!! Warning !!!!!
+    /// ! This is in preview state; please see the help for more info
+    /// !!!!! Warning !!!!!
+    /// 
+    /// Gets and sets the custom multi-axis rotation type.
+    /// This function is not available in Fusion for Personal Use.
+    /// To enable any rotation the parameter "arrange_rotation_group" of the operation must be set to true.
+    /// Note: If customMultiAxisRotationType is called, isUsingCustomMultiAxisRotationType will be set to true automatically.
+    /// The default value for this property is MultiAxisRotationType_SingleAxis.
+    MultiAxisRotationTypes customMultiAxisRotationType() const;
+    bool customMultiAxisRotationType(MultiAxisRotationTypes value);
+
+    /// !!!!! Warning !!!!!
+    /// ! This is in preview state; please see the help for more info
+    /// !!!!! Warning !!!!!
+    /// 
+    /// Gets and sets if custom multi-axis rotation type is used for this element.
+    /// This function is not available in Fusion for Personal Use.
+    /// Throws an exception when calling this function in Fusion for Personal Use.
+    /// If isUsingCustomMultiAxisRotationType is false, the global property of the operation's parameter "arrange_multiaxis_rotation" is used.
+    /// The default value for this property false.
+    bool isUsingCustomMultiAxisRotationType() const;
+    bool isUsingCustomMultiAxisRotationType(bool value);
 
     ADSK_CAM_ARRANGESELECTION_API static const char* classType();
     ADSK_CAM_ARRANGESELECTION_API const char* objectType() const override;
@@ -155,6 +171,10 @@ private:
     virtual bool customQuantity_raw(size_t value) = 0;
     virtual bool isUsingCustomQuantity_raw() const = 0;
     virtual bool isUsingCustomQuantity_raw(bool value) = 0;
+    virtual MultiAxisRotationTypes customMultiAxisRotationType_raw() const = 0;
+    virtual bool customMultiAxisRotationType_raw(MultiAxisRotationTypes value) = 0;
+    virtual bool isUsingCustomMultiAxisRotationType_raw() const = 0;
+    virtual bool isUsingCustomMultiAxisRotationType_raw(bool value) = 0;
 };
 
 // Inline wrappers
@@ -267,6 +287,28 @@ inline bool ArrangeSelection::isUsingCustomQuantity() const
 inline bool ArrangeSelection::isUsingCustomQuantity(bool value)
 {
     return isUsingCustomQuantity_raw(value);
+}
+
+inline MultiAxisRotationTypes ArrangeSelection::customMultiAxisRotationType() const
+{
+    MultiAxisRotationTypes res = customMultiAxisRotationType_raw();
+    return res;
+}
+
+inline bool ArrangeSelection::customMultiAxisRotationType(MultiAxisRotationTypes value)
+{
+    return customMultiAxisRotationType_raw(value);
+}
+
+inline bool ArrangeSelection::isUsingCustomMultiAxisRotationType() const
+{
+    bool res = isUsingCustomMultiAxisRotationType_raw();
+    return res;
+}
+
+inline bool ArrangeSelection::isUsingCustomMultiAxisRotationType(bool value)
+{
+    return isUsingCustomMultiAxisRotationType_raw(value);
 }
 }// namespace cam
 }// namespace adsk

@@ -70,7 +70,7 @@
       </tr>
       <tr>
         <td class="api-list"><a href="DraftFeature_setTwoAngles.htm">setTwoAngles</a></td>
-        <td class="api-list">Changes the definition of the feature so that the surfaces are split along the draft plane and the faces on each side of the plane are drafted independently from the other side.<br/><br/> To use this method, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</td>
+        <td class="api-list">Changes the definition of the feature so that the surfaces are split along the draft plane or parting line and the faces on each side of the plane are drafted independently.<br/><br/> To use this method, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</td>
       </tr>
     </Table>
     <h2 class="api">
@@ -139,7 +139,7 @@
       </tr>
       <tr>
         <td class="api-list"><a href="DraftFeature_isTangentChain.htm">isTangentChain</a></td>
-        <td class="api-list">Gets and sets if any faces that are tangentially connected to any of the input faces will also be included in setting InputEntities. It defaults to true.<br/><br/> To set this property, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</td>
+        <td class="api-list">Gets and sets if any faces that are tangentially connected to any of the input faces will also be drafted. It defaults to true.<br/><br/> To set this property, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</td>
       </tr>
       <tr>
         <td class="api-list"><a href="DraftFeature_isValid.htm">isValid</a></td>
@@ -167,7 +167,7 @@
       </tr>
       <tr>
         <td class="api-list"><a href="DraftFeature_plane.htm">plane</a></td>
-        <td class="api-list">Gets and sets the plane that defines the direction in which the draft is applied. This can be a planar BrepFace, or a ConstructionPlane.<br/><br/> To set this property, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</td>
+        <td class="api-list">Gets and sets the plane that defines the direction in which the draft is applied. This is also referred to as the pull direction. This can be defined using either a planar BrepFace, or a ConstructionPlane.<br/><br/> To set this property, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</td>
       </tr>
       <tr>
         <td class="api-list"><a href="DraftFeature_timelineObject.htm">timelineObject</a></td>
@@ -201,9 +201,9 @@
       <table width="100%" style="font-size:15">
         <tr>
           <td align="left">
-                © Copyright 2025 Autodesk, Inc.
+                © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(DraftFeature%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(DraftFeature%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

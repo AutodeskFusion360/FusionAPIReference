@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -27,7 +27,12 @@
 
 namespace adsk { namespace fusion {
 
-/// Object that represents an existing rule fillet feature in a design.
+/// !!!!! Warning !!!!!
+/// ! This has been retired; please see the help for more info
+/// !!!!! Warning !!!!!
+/// 
+/// This object is obsolete. You should use the FilletFeature to access a rule fillet feature.
+/// The FilletFeature.filletFeatureType can be used to determine if a FilletFeature is a rule fillet feature or not.
 class RuleFilletFeature : public Feature {
 public:
 

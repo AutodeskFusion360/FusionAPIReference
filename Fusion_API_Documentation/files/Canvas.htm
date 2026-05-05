@@ -90,12 +90,20 @@
         <td class="api-list">Returns the assembly occurrence (i.e. the occurrence) of this object in an assembly. This is only valid in the case where this is acting as a proxy in an assembly. Returns null in the case where the object is not in the context of an assembly but is already the native object.</td>
       </tr>
       <tr>
+        <td class="api-list"><a href="Canvas_deriveFeature.htm">deriveFeature</a></td>
+        <td class="api-list">Returns the DeriveFeature if this canvas is derived from another design. This property returns null if the canvas is not derived from another design (i.e. isDerived property returns false).</td>
+      </tr>
+      <tr>
         <td class="api-list"><a href="Canvas_entityToken.htm">entityToken</a></td>
-        <td class="api-list">Returns a token for the Canvas object. This can be saved and used at a later time with the Design.findEntityByToken method to get back the same canvas.<br/><br/> When using entity tokens it's important to understand that the token string returned for a specific entity can be different over time. However, even if you have two different token strings that were obtained from the same entity, when you use findEntityByToken they will both return the same entity. Because of that you should never compare entity tokens as way to determine what the token represents. Instead, you need to use the findEntityByToken method to get the two entities identified by the tokens and then compare them.</td>
+        <td class="api-list">Returns a token for the Canvas object. This can be saved and used at a later time with the Design.findEntityByToken method to get back the same canvas.<br/><br/> When using entity tokens it's important to understand that the token string returned for a specific entity can be different over time. However, even if you have two different token strings that were obtained from the same entity, when you use findEntityByToken they will both return the same entity. Because of that you should never compare entity tokens as a way to determine what the token represents. Instead, you need to use the findEntityByToken method to get the two entities identified by the tokens and then compare them.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="Canvas_imageFilename.htm">imageFilename</a></td>
-        <td class="api-list">Gets and sets the filename of the image used for the canvas. When getting this property, the filename returned is the file that was used when the canvas was initially created. it's possible the file may no longer exist.<br/><br/> When setting this property, it is the full filename to the image to use for the canvas. PNG, JPEG, and TIFF files are supported.</td>
+        <td class="api-list">Gets and sets the filename of the image used for the canvas. When getting this property, the filename returned is the file that was used when the canvas was initially created. It's possible the file may no longer exist.<br/><br/> When setting this property, it is the full filename to the image to use for the canvas. PNG, JPEG, and TIFF files are supported.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Canvas_isDerived.htm">isDerived</a></td>
+        <td class="api-list">Returns if this canvas is derived from another design. If true, the canvas cannot be deleted. You should not attempt to make any edits to the derived canvas. Any edits made to this derived canvas will be lost when the derive updates.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="Canvas_isDisplayedThrough.htm">isDisplayedThrough</a></td>
@@ -127,7 +135,7 @@
       </tr>
       <tr>
         <td class="api-list"><a href="Canvas_nativeObject.htm">nativeObject</a></td>
-        <td class="api-list">The NativeObject is the object outside the context of an assembly and in the context of it's parent component. Returns null in the case where this object is not in the context of an assembly but is already the native object.</td>
+        <td class="api-list">The NativeObject is the object outside the context of an assembly and in the context of its parent component. Returns null in the case where this object is not in the context of an assembly but is already the native object.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="Canvas_objectType.htm">objectType</a></td>
@@ -151,7 +159,7 @@
       </tr>
       <tr>
         <td class="api-list"><a href="Canvas_transform.htm">transform</a></td>
-        <td class="api-list">Gets and sets the transform of the canvas. This allows you to control the position, rotation, scaling, and flipping. The X and Y axes defined by the matrix and must be perpendicular to one another.<br/><br/> This is a 3x3 matrix where the third column controls the position of the canvas and defines the position using 2D coordinates in the model space.</td>
+        <td class="api-list">Gets and sets the transform of the canvas. This allows you to control the position, rotation, scaling, and flipping. The X and Y axes defined by the matrix must be perpendicular to one another.<br/><br/> This is a 3x3 matrix where the third column controls the position of the canvas and defines the position using 2D coordinates in the model space.</td>
       </tr>
     </Table>
     <h2 class="api">
@@ -164,9 +172,9 @@
       <table width="100%" style="font-size:15">
         <tr>
           <td align="left">
-                © Copyright 2025 Autodesk, Inc.
+                © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(Canvas%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(Canvas%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

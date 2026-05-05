@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -53,9 +53,13 @@ public:
     /// Creates a CircularPatternFeatureInput object. Use properties and methods on this object
     /// to define the circular pattern you want to create and then use the Add method, passing in
     /// the CircularPatternFeatureInput object.
-    /// inputEntities : The collection can contain faces, features, bodies or occurrences.
-    /// All of the entities must be of a single type. For example, it can't contain features and occurrences
-    /// but only features or occurrences.
+    /// inputEntities : An ObjectCollection of the entities to pattern. The collection can contain BRepFace, PartFeature, BRepBody, or Occurrence
+    /// objects. All of the entities provided must be the same type. For example, it must contain only bodies and can't
+    /// contain both bodies and faces.
+    /// 
+    /// You can also pattern ConstructionPoint, ConstructionAxis, and ConstructionPlane objects. When patterning any
+    /// construction goemetry, only one entity can be patterned at a time, so the ObjectCollection must contain a
+    /// single item.
     /// axis : Input linear entity or the entity has axis that defines axis of circular pattern. This can be a sketch line, linear edge,
     /// construction axis, an edge/sketch curve that defines an axis (circle, etc.) or a face that defines an axis (cylinder, cone, torus, etc.).
     /// Returns the newly created CircularPatternFeatureInput object or null if the creation failed.

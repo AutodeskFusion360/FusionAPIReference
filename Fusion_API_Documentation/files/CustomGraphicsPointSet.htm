@@ -62,7 +62,7 @@
       </tr>
       <tr>
         <td class="api-list"><a href="CustomGraphicsPointSet_setOpacity.htm">setOpacity</a></td>
-        <td class="api-list">Sets the opacity of the graphics entity. By default, when a new entity is it is completely opaque and does not override the opacity defined by the material.</td>
+        <td class="api-list">Sets the opacity of the graphics entity. By default, when a new entity is created it is completely opaque and does not override the opacity defined by the material.</td>
       </tr>
     </Table>
     <h2 class="api">
@@ -83,7 +83,7 @@
       </tr>
       <tr>
         <td class="api-list"><a href="CustomGraphicsPointSet_boundingBox.htm">boundingBox</a></td>
-        <td class="api-list">Returns a box oriented parallel to the world x-y-x axes that contains the graphics entity. Depending on whether the graphics are drawn in model space or screen space this will return the bounding box in either centimeters (model) or pixels (screen). In the case where it returns the bounding box in pixel space, the Z coordinates of the box will be 0 and can be ignored.</td>
+        <td class="api-list">Returns a box oriented parallel to the world x-y-z axes that contains the graphics entity. Depending on whether the graphics are drawn in model space or screen space this will return the bounding box in either centimeters (model) or pixels (screen). In the case where it returns the bounding box in pixel space, the Z coordinates of the box will be 0 and can be ignored.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="CustomGraphicsPointSet_color.htm">color</a></td>
@@ -91,7 +91,7 @@
       </tr>
       <tr>
         <td class="api-list"><a href="CustomGraphicsPointSet_coordinates.htm">coordinates</a></td>
-        <td class="api-list">Gets and sets the coordinates used to define the position of the custom graphics points. If no indexList is specified, every coordinate will be drawn using a custom graphics point,</td>
+        <td class="api-list">Gets and sets the coordinates used to define the position of the custom graphics points. If no indexList is specified, every coordinate will be drawn using a custom graphics point.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="CustomGraphicsPointSet_cullMode.htm">cullMode</a></td>
@@ -99,7 +99,7 @@
       </tr>
       <tr>
         <td class="api-list"><a href="CustomGraphicsPointSet_depthPriority.htm">depthPriority</a></td>
-        <td class="api-list">Gets and sets the depth priority associated with the graphics entity. The depth priority defines how one graphics entity will be drawn with respect to another entity. This is useful when there are entities that lie in the same space so it's ambiguous which should be drawn on the other. For example, if you draw a curve on a planar mesh and want the curve to be completely visible. You can set the depth priority of the curve to be greater than the mesh so it will be drawn after the mesh and will remain visible.<br/><br/> When a new graphics entity is created it's default depth priority is 0.</td>
+        <td class="api-list">Gets and sets the depth priority associated with the graphics entity. The depth priority defines how one graphics entity will be drawn with respect to another entity. This is useful when there are entities that lie in the same space so it's ambiguous which should be drawn on top of the other. For example, if you draw a curve on a planar mesh and want the curve to be completely visible. You can set the depth priority of the curve to be greater than the mesh so it will be drawn after the mesh and will remain visible.<br/><br/> When a new graphics entity is created its default depth priority is 0.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="CustomGraphicsPointSet_id.htm">id</a></td>
@@ -107,7 +107,7 @@
       </tr>
       <tr>
         <td class="api-list"><a href="CustomGraphicsPointSet_indexList.htm">indexList</a></td>
-        <td class="api-list">An list of indices that specify which coordinates from the coordinate list to draw points for. If this is an empty array, then all of the coordinates are used.</td>
+        <td class="api-list">A list of indices that specify which coordinates from the coordinate list to draw points for. If this is an empty array, then all of the coordinates are used.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="CustomGraphicsPointSet_isSelectable.htm">isSelectable</a></td>
@@ -164,9 +164,9 @@
       <table width="100%" style="font-size:15">
         <tr>
           <td align="left">
-                © Copyright 2025 Autodesk, Inc.
+                © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(CustomGraphicsPointSet%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(CustomGraphicsPointSet%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

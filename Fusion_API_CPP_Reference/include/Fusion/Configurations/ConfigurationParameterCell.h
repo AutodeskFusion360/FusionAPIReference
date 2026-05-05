@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -10,6 +10,7 @@
 
 #pragma once
 #include "ConfigurationCell.h"
+#include "../FusionTypeDefs.h"
 #include <string>
 
 // THIS CLASS WILL BE VISIBLE TO AN API CLIENT.
@@ -41,16 +42,31 @@ public:
     core::Ptr<ConfigurationParameterColumn> parentColumn() const;
 
     /// Gets and sets the expression that defines the value of the associated parameter when the parent row
-    /// is active. This property behaves as read-only when the table is obtained from a DataFile object.
+    /// is active. This works for both numeric and text parameters. This property behaves as read-only when
+    /// the table is obtained from a DataFile object.
     std::string expression() const;
     bool expression(const std::string& value);
 
-    /// Gets and sets the value of the parameter in database units. You can use the units property of the associated
-    /// Parameter object, which you can get from the column, to determine the type of units this parameter is
-    /// defined in. Setting this property will overwrite any existing expression. This property behaves as read-only
+    /// Gets and sets the real value (a double) of the parameter in database units.
+    /// Setting this property will overwrite any existing expression. This property behaves as read-only
     /// when the table is obtained from a DataFile object.
+    /// This property is only valid for numeric parameters and will fail for text parameters.
+    /// You can determine the value type of the parameter by using the valueType property.
+    /// Use the textValue property to get and set the value of text parameters.
     double value() const;
     bool value(double value);
+
+    /// Gets and sets the text value of the parameter when it is a text parameter. This can
+    /// be determined by checking the valueType property. Setting this value will cause the
+    /// current expression to be overwritten. This property behaves as read-only when the
+    /// table is obtained from a DataFile object.
+    std::string textValue() const;
+    bool textValue(const std::string& value);
+
+    /// Returns the type of value this parameter cell is. For a numeric parameter, you can
+    /// get the value using the value property. For a text parameter, you can get the
+    /// value using the textValue property.
+    ParameterValueTypes valueType() const;
 
     ADSK_FUSION_CONFIGURATIONPARAMETERCELL_API static const char* classType();
     ADSK_FUSION_CONFIGURATIONPARAMETERCELL_API const char* objectType() const override;
@@ -65,6 +81,9 @@ private:
     virtual bool expression_raw(const char* value) = 0;
     virtual double value_raw() const = 0;
     virtual bool value_raw(double value) = 0;
+    virtual char* textValue_raw() const = 0;
+    virtual bool textValue_raw(const char* value) = 0;
+    virtual ParameterValueTypes valueType_raw() const = 0;
 };
 
 // Inline wrappers
@@ -102,6 +121,30 @@ inline double ConfigurationParameterCell::value() const
 inline bool ConfigurationParameterCell::value(double value)
 {
     return value_raw(value);
+}
+
+inline std::string ConfigurationParameterCell::textValue() const
+{
+    std::string res;
+
+    char* p= textValue_raw();
+    if (p)
+    {
+        res = p;
+        core::DeallocateArray(p);
+    }
+    return res;
+}
+
+inline bool ConfigurationParameterCell::textValue(const std::string& value)
+{
+    return textValue_raw(value.c_str());
+}
+
+inline ParameterValueTypes ConfigurationParameterCell::valueType() const
+{
+    ParameterValueTypes res = valueType_raw();
+    return res;
 }
 }// namespace fusion
 }// namespace adsk

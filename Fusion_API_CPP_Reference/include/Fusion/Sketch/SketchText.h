@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -34,6 +34,7 @@ namespace adsk { namespace core {
     class Point3D;
 }}
 namespace adsk { namespace fusion {
+    class ModelParameter;
     class Occurrence;
     class SketchCurve;
     class SketchLineList;
@@ -46,11 +47,23 @@ namespace adsk { namespace fusion {
 class SketchText : public SketchEntity {
 public:
 
-    /// Gets and sets the height of the text in centimeters.
+    /// !!!!! Warning !!!!!
+    /// ! This has been retired; please see the help for more info
+    /// !!!!! Warning !!!!!
+    /// 
+    /// This property has been retired and you should instead use the heightParameter
+    /// property to access the parameter controlling the text height and use its
+    /// properties to get and set the height.
     double height() const;
     bool height(double value);
 
-    /// Gets and sets the text. This is a simple string and ignores any formatting defined within the text.
+    /// !!!!! Warning !!!!!
+    /// ! This has been retired; please see the help for more info
+    /// !!!!! Warning !!!!!
+    /// 
+    /// This property has been retired and you should now use the textValue and expression
+    /// properties of the Parameter object associated with this SketchText, which you can
+    /// obtain by using the SketchText.textParameter property.
     std::string text() const;
     bool text(const std::string& value);
 
@@ -127,7 +140,7 @@ public:
     core::Ptr<SketchTextDefinition> definition() const;
 
     /// The NativeObject is the object outside the context of an assembly and
-    /// in the context of it's parent component.
+    /// in the context of its parent component.
     /// Returns null in the case where this object is not in the context of
     /// an assembly but is already the native object.
     core::Ptr<SketchText> nativeObject() const;
@@ -137,6 +150,16 @@ public:
     /// occurrence : The occurrence that defines the context to create the proxy in.
     /// Returns the proxy object or null if this isn't the NativeObject.
     core::Ptr<SketchText> createForAssemblyContext(const core::Ptr<Occurrence>& occurrence) const;
+
+    /// Returns the model parameter that was created when the sketch text was created that
+    /// controls the contents of the sketch text. To edit the text, you can use
+    /// the expression and textValue properties of the returned ModelParameter object.
+    core::Ptr<ModelParameter> textParameter() const;
+
+    /// Returns the model parameter that was created when the sketch text was created
+    /// that controls the height of the sketch text. To edit the height, you can use
+    /// the expression and value properties of the returned ModelParameter object.
+    core::Ptr<ModelParameter> heightParameter() const;
 
     ADSK_FUSION_SKETCHTEXT_API static const char* classType();
     ADSK_FUSION_SKETCHTEXT_API const char* objectType() const override;
@@ -170,6 +193,8 @@ private:
     virtual SketchTextDefinition* definition_raw() const = 0;
     virtual SketchText* nativeObject_raw() const = 0;
     virtual SketchText* createForAssemblyContext_raw(Occurrence* occurrence) const = 0;
+    virtual ModelParameter* textParameter_raw() const = 0;
+    virtual ModelParameter* heightParameter_raw() const = 0;
 };
 
 // Inline wrappers
@@ -337,6 +362,18 @@ inline core::Ptr<SketchText> SketchText::nativeObject() const
 inline core::Ptr<SketchText> SketchText::createForAssemblyContext(const core::Ptr<Occurrence>& occurrence) const
 {
     core::Ptr<SketchText> res = createForAssemblyContext_raw(occurrence.get());
+    return res;
+}
+
+inline core::Ptr<ModelParameter> SketchText::textParameter() const
+{
+    core::Ptr<ModelParameter> res = textParameter_raw();
+    return res;
+}
+
+inline core::Ptr<ModelParameter> SketchText::heightParameter() const
+{
+    core::Ptr<ModelParameter> res = heightParameter_raw();
     return res;
 }
 }// namespace fusion

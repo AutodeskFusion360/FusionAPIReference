@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -71,19 +71,11 @@ public:
     /// Returns new MachineSpindleInput object.
     core::Ptr<MachineSpindleInput> createSpindleInput();
 
-    /// !!!!! Warning !!!!!
-    /// ! This is in preview state; please see the help for more info
-    /// !!!!! Warning !!!!!
-    /// 
     /// Gets or sets an tool station input object to create a new MachineToolStation with this part.
     /// Only valid when partType is not Axis.
     core::Ptr<MachineToolStationInput> toolStationInput() const;
     bool toolStationInput(const core::Ptr<MachineToolStationInput>& value);
 
-    /// !!!!! Warning !!!!!
-    /// ! This is in preview state; please see the help for more info
-    /// !!!!! Warning !!!!!
-    /// 
     /// Creates a new MachineToolStationInput object to be used to create a new MachineToolStation.
     /// Returns new MachineToolStationInput object.
     core::Ptr<MachineToolStationInput> createToolStationInput();

@@ -54,7 +54,7 @@
       </tr>
       <tr>
         <td class="api-list"><a href="SheetMetalRule_deleteMe.htm">deleteMe</a></td>
-        <td class="api-list">Deletes the rule from the design or library. If the rule is in the library and set as the default rule, you cannot delete it. If the rule is in a design and is used by a component you cannot use it.</td>
+        <td class="api-list">Deletes the rule from the design or library. If the rule is in the library and set as the default rule, you cannot delete it. If the rule is in a design and is used by a component, you cannot delete it.</td>
       </tr>
     </Table>
     <h2 class="api">
@@ -75,11 +75,11 @@
       </tr>
       <tr>
         <td class="api-list"><a href="SheetMetalRule_gap.htm">gap</a></td>
-        <td class="api-list">The value used for miter, rip, and seam, gaps. Use the returned SheetMetalRuleValue object to get and set the current value of the gap.</td>
+        <td class="api-list">The value used for miter, rip, and seam gaps. Use the returned SheetMetalRuleValue object to get and set the current value of the gap.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="SheetMetalRule_isDefault.htm">isDefault</a></td>
-        <td class="api-list">This gets and sets which rule in a library is the default rule. This is only valid for rules in a library and will fail for rules in a design.</td>
+        <td class="api-list">Gets and sets which rule in a library is the default rule. This is only valid for rules in a library and will fail for rules in a design.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="SheetMetalRule_isUsed.htm">isUsed</a></td>
@@ -135,11 +135,11 @@
       </tr>
       <tr>
         <td class="api-list"><a href="SheetMetalRule_twoBendReliefPlacement.htm">twoBendReliefPlacement</a></td>
-        <td class="api-list">Gets and sets the relief placement for a two bend relief shape. When the relief shape is round, both intersection and tangent are valid placements. For square shape, only intersection is valid. For all other shapes, this property will return NoTwoBendReliefPlacement because the placement option is not used.</td>
+        <td class="api-list">Gets and sets the relief placement for a two-bend relief shape. When the relief shape is round, both intersection and tangent are valid placements. For square shape, only intersection is valid. For all other shapes, this property will return NoTwoBendReliefPlacement because the placement option is not used.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="SheetMetalRule_twoBendReliefShape.htm">twoBendReliefShape</a></td>
-        <td class="api-list">Gets and sets the relief shape to use when two bends intersect.<br/><br/> When set to square or round relief shape, the value of the twoBendReliefPlacement property will be set to IntersectionTwoBendReliefPlacement. For a round relief shape you can change the twoBendReliefPlacment property to TangentTwoBendReliefPlacement.</td>
+        <td class="api-list">Gets and sets the relief shape to use when two bends intersect.<br/><br/> When set to square or round relief shape, the value of the twoBendReliefPlacement property will be set to IntersectionTwoBendReliefPlacement by default. For round and square relief shapes you can change the twoBendReliefPlacement property to VertexTwoBendReliefPlacement. For round shapes, you can also use TangentTwoBendReliefPlacement.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="SheetMetalRule_twoBendReliefSize.htm">twoBendReliefSize</a></td>
@@ -153,6 +153,23 @@
     <h2 class="api">
             Accessed From
           </h2><a href="Component_activeSheetMetalRule.htm">Component.activeSheetMetalRule</a>, <a href="ConfigurationSheetMetalRuleCell_sheetMetalRule.htm">ConfigurationSheetMetalRuleCell.sheetMetalRule</a>, <a href="FlatPatternComponent_activeSheetMetalRule.htm">FlatPatternComponent.activeSheetMetalRule</a>, <a href="SheetMetalRules_addByCopy.htm">SheetMetalRules.addByCopy</a>, <a href="SheetMetalRules_item.htm">SheetMetalRules.item</a>, <a href="SheetMetalRules_itemByName.htm">SheetMetalRules.itemByName</a><h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sheet Metal Rules Sample_Sample.htm">Sheet Metal Rules Sample</a></td>
+        <td class="api-list">Demonstrates creating adding a sheet metal rule.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
             Version
           </h2>
         Introduced in version November 2022<br><br><div id="CopyrightNotice" style="display:none;">
@@ -160,9 +177,9 @@
       <table width="100%" style="font-size:15">
         <tr>
           <td align="left">
-                © Copyright 2025 Autodesk, Inc.
+                © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(SheetMetalRule%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(SheetMetalRule%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

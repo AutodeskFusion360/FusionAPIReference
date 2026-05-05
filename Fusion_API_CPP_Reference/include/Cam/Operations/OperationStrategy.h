@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -54,6 +54,36 @@ public:
     /// Returns false otherwise.
     bool isGenerationAllowed() const;
 
+    /// Gets whether given OperationStrategy is a milling strategy.
+    bool isMillingStrategy() const;
+
+    /// Gets whether given OperationStrategy is a turning strategy.
+    bool isTurningStrategy() const;
+
+    /// Gets whether given OperationStrategy is a rotary strategy.
+    bool isRotaryStrategy() const;
+
+    /// Gets whether given OperationStrategy is a drilling strategy.
+    bool isDrillingStrategy() const;
+
+    /// Gets whether given OperationStrategy is a cutting strategy.
+    bool isCuttingStrategy() const;
+
+    /// Gets whether given OperationStrategy is a 2D strategy.
+    bool is2DStrategy() const;
+
+    /// Gets whether given OperationStrategy is a 3D strategy.
+    bool is3DStrategy() const;
+
+    /// Gets whether given OperationStrategy is a finishing strategy.
+    bool isFinishingStrategy() const;
+
+    /// Gets whether given OperationStrategy is an additive strategy.
+    bool isAdditiveStrategy() const;
+
+    /// Gets whether given OperationStrategy is an additive support strategy.
+    bool isSupportStrategy() const;
+
     ADSK_CAM_OPERATIONSTRATEGY_API static const char* classType();
     ADSK_CAM_OPERATIONSTRATEGY_API const char* objectType() const override;
     ADSK_CAM_OPERATIONSTRATEGY_API void* queryInterface(const char* id) const override;
@@ -67,6 +97,16 @@ private:
     virtual char* title_raw() const = 0;
     virtual char* description_raw() const = 0;
     virtual bool isGenerationAllowed_raw() const = 0;
+    virtual bool isMillingStrategy_raw() const = 0;
+    virtual bool isTurningStrategy_raw() const = 0;
+    virtual bool isRotaryStrategy_raw() const = 0;
+    virtual bool isDrillingStrategy_raw() const = 0;
+    virtual bool isCuttingStrategy_raw() const = 0;
+    virtual bool is2DStrategy_raw() const = 0;
+    virtual bool is3DStrategy_raw() const = 0;
+    virtual bool isFinishingStrategy_raw() const = 0;
+    virtual bool isAdditiveStrategy_raw() const = 0;
+    virtual bool isSupportStrategy_raw() const = 0;
 };
 
 // Inline wrappers
@@ -119,6 +159,66 @@ inline std::string OperationStrategy::description() const
 inline bool OperationStrategy::isGenerationAllowed() const
 {
     bool res = isGenerationAllowed_raw();
+    return res;
+}
+
+inline bool OperationStrategy::isMillingStrategy() const
+{
+    bool res = isMillingStrategy_raw();
+    return res;
+}
+
+inline bool OperationStrategy::isTurningStrategy() const
+{
+    bool res = isTurningStrategy_raw();
+    return res;
+}
+
+inline bool OperationStrategy::isRotaryStrategy() const
+{
+    bool res = isRotaryStrategy_raw();
+    return res;
+}
+
+inline bool OperationStrategy::isDrillingStrategy() const
+{
+    bool res = isDrillingStrategy_raw();
+    return res;
+}
+
+inline bool OperationStrategy::isCuttingStrategy() const
+{
+    bool res = isCuttingStrategy_raw();
+    return res;
+}
+
+inline bool OperationStrategy::is2DStrategy() const
+{
+    bool res = is2DStrategy_raw();
+    return res;
+}
+
+inline bool OperationStrategy::is3DStrategy() const
+{
+    bool res = is3DStrategy_raw();
+    return res;
+}
+
+inline bool OperationStrategy::isFinishingStrategy() const
+{
+    bool res = isFinishingStrategy_raw();
+    return res;
+}
+
+inline bool OperationStrategy::isAdditiveStrategy() const
+{
+    bool res = isAdditiveStrategy_raw();
+    return res;
+}
+
+inline bool OperationStrategy::isSupportStrategy() const
+{
+    bool res = isSupportStrategy_raw();
     return res;
 }
 }// namespace cam

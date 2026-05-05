@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -48,7 +48,7 @@ public:
     /// a single face and the isChainFaces property on the input will be true. The position and orientation of
     /// the decal is based on this face and the decal can wrap onto other faces in the body.
     /// 
-    /// If the isChainFace property is false, the decal will only be applied to the provided faces where the
+    /// If the isChainFaces property is false, the decal will only be applied to the provided faces where the
     /// first face is used to calculate the position and orientation of the decal.
     std::vector<core::Ptr<BRepFace>> faces() const;
     bool faces(const std::vector<core::Ptr<BRepFace>>& value);
@@ -103,7 +103,7 @@ public:
     /// 
     /// In order for geometry to be transformed correctly, an Occurrence for creation needs to be
     /// specified when the decal is created based on geometry in another component AND (the decal) is
-    /// not in the root component. The CreationOccurrence is analogous to the active occurrence in the UI
+    /// not in the root component. The CreationOccurrence is analogous to the active occurrence in the UI.
     core::Ptr<Occurrence> creationOccurrence() const;
     bool creationOccurrence(const core::Ptr<Occurrence>& value);
 

@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -58,10 +58,10 @@ public:
     bool isSelectable() const;
     bool isSelectable(bool value);
 
-    /// Sets the opacity of the graphics entity. By default, when a new entity is it is
+    /// Sets the opacity of the graphics entity. By default, when a new entity is created it is
     /// completely opaque and does not override the opacity defined by the material.
     /// opacity : The opacity value where 1.0 is completely opaque and 0.0 is completely transparent.
-    /// isOverride : Indicates if this entities opacity will override the opacity defined by the material.
+    /// isOverride : Indicates if this entity's opacity will override the opacity defined by the material.
     /// If true, it will override the material opacity and if false the opacity values will
     /// accumulate.
     /// Returns true if setting the opacity information was successful.
@@ -69,7 +69,7 @@ public:
 
     /// Gets the opacity of the graphics entity.
     /// opacity : The opacity value where 1.0 is completely opaque and 0.0 is completely transparent.
-    /// isOverride : Indicates if this entities opacity will override the opacity defined by the material.
+    /// isOverride : Indicates if this entity's opacity will override the opacity defined by the material.
     /// If true, it will override the material opacity and if false the opacity values will
     /// accumulate.
     /// Returns true if getting the opacity information was successful.
@@ -83,12 +83,12 @@ public:
 
     /// Gets and sets the depth priority associated with the graphics entity. The depth priority defines
     /// how one graphics entity will be drawn with respect to another entity. This is useful when there
-    /// are entities that lie in the same space so it's ambiguous which should be drawn on the other. For
+    /// are entities that lie in the same space so it's ambiguous which should be drawn on top of the other. For
     /// example, if you draw a curve on a planar mesh and want the curve to be completely visible. You can
     /// set the depth priority of the curve to be greater than the mesh so it will be drawn after the mesh
     /// and will remain visible.
     /// 
-    /// When a new graphics entity is created it's default depth priority is 0.
+    /// When a new graphics entity is created its default depth priority is 0.
     int depthPriority() const;
     bool depthPriority(int value);
 
@@ -117,7 +117,7 @@ public:
     std::string id() const;
     bool id(const std::string& value);
 
-    /// Returns a box oriented parallel to the world x-y-x axes that contains the graphics entity.
+    /// Returns a box oriented parallel to the world x-y-z axes that contains the graphics entity.
     /// Depending on whether the graphics are drawn in model space or screen space this will return
     /// the bounding box in either centimeters (model) or pixels (screen). In the case where it
     /// returns the bounding box in pixel space, the Z coordinates of the box will be 0 and can be ignored.

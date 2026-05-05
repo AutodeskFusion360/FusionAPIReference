@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -34,10 +34,6 @@ namespace adsk { namespace fusion {
 
 namespace adsk { namespace fusion {
 
-/// !!!!! Warning !!!!!
-/// ! This is in preview state; please see the help for more info
-/// !!!!! Warning !!!!!
-/// 
 /// The ArrangeOccurrence object represents a single occurrence within an Arrange
 /// envelope.
 class ArrangeOccurrenceResult : public core::Base {
@@ -47,7 +43,7 @@ public:
     core::Ptr<Occurrence> occurrence() const;
 
     /// The ArrangeComponent from the Arrange definition that resulted in the
-    /// create of this occurrence.
+    /// creation of this occurrence.
     core::Ptr<ArrangeComponent> arrangeComponent() const;
 
     /// The Arrange envelope this occurrence is within.

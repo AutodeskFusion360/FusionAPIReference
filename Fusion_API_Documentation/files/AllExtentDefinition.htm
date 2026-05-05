@@ -36,9 +36,7 @@
               Derived from: <a href="ExtentDefinition.htm">ExtentDefinition</a> Object
             <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Features/AllExtentDefinition.h&gt;<h2 class="api">
           Description
-        </h2><mark>This object is retired. See more information in the 'Remarks' section below.</mark><br/><br/>Defines the inputs for an AllExtentDefinition object. This defines a feature extent where the direction can be positive, negative, or symmetric. Setting the direction to Symmetric specifies that the extrusion is through-all, and goes in both directions.<h2 class="api">
-		    Remarks
-		  </h2>This object is retired. Extents are now defined independently for both directions. To get the equivalent of what this object provided, you will create a ThroughAllExtentDefinition and apply it for the extent direction you want a through all type of extrusion.<h2 class="api">
+        </h2><mark>This object is retired. See more information in the 'Remarks' section below.</mark><br/><br/>Defines the inputs for an AllExtentDefinition object. This is used when defining the extent for a hole feature. Some other features, like extrude, support defining the extents independently in both directions. In that case you need to create a ThroughAllExtentDefinition and apply it for the extent direction you want a through all type.<h2 class="api">
             Methods
           </h2>
     <Table class="api-list">
@@ -92,9 +90,9 @@
       <table width="100%" style="font-size:15">
         <tr>
           <td align="left">
-                © Copyright 2025 Autodesk, Inc.
+                © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(AllExtentDefinition%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(AllExtentDefinition%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

@@ -12,7 +12,7 @@
     <meta name="created" content="09/11/2022">
     <meta name="user-comments" content="enable">
     <meta name="contextid" content="TwoBendReliefPlacements">
-    <meta name="description" content="The placement options for a two bend relief.">
+    <meta name="description" content="The placement options for a two-bend relief.">
     <meta name="topicid" content="GUID-D1365951-4FF3-4731-B946-94305DC7FC41">
     <meta name="experiencelevel" content="expert">
     <meta name="audience" content="programmer">
@@ -35,7 +35,7 @@
         </h1>
     <h2 class="api">
           Description
-        </h2>The placement options for a two bend relief.<br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion\FusionTypeDefs.h&gt;<h2 class="api">
+        </h2>The placement options for a two-bend relief.<br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion\FusionTypeDefs.h&gt;<h2 class="api">
           Methods
         </h2>
     <Table class="api-list">
@@ -53,17 +53,22 @@
       <tr>
         <td class="api-list">IntersectionTwoBendReliefPlacement</td>
         <td class="api-list" align="right" style="padding-right:10px">1</td>
-        <td class="api-list">Specifies that the center point of the two bend relief shape is located at the intersection of the bend center lines. This is the only valid placement option for square two bend relief shapes. For round shapes, this and tangent placement is valid.</td>
+        <td class="api-list">Specifies that the center point of the two-bend relief shape is located at the intersection of the bend center lines. This is valid for both round and square two-bend relief shapes.</td>
       </tr>
       <tr>
         <td class="api-list">NoTwoBendReliefPlacement</td>
         <td class="api-list" align="right" style="padding-right:10px">0</td>
-        <td class="api-list">Specifies that no two bend relief placement is defined. This is returned for all two bend relief shapes except for round and square shapes.</td>
+        <td class="api-list">Specifies that no two-bend relief placement is defined. This is returned for all two-bend relief shapes except for round and square shapes.</td>
       </tr>
       <tr>
         <td class="api-list">TangentTwoBendReliefPlacement</td>
         <td class="api-list" align="right" style="padding-right:10px">2</td>
-        <td class="api-list">Specifies that the shape of the two bend relief is tangential to the flange sides. This is only used for round to bend relief shapes where this or intersection placement is valid.</td>
+        <td class="api-list">Specifies that the shape of the two-bend relief is tangential to the flange sides. This is only valid for round two-bend relief shapes.</td>
+      </tr>
+      <tr>
+        <td class="api-list">VertexTwoBendReliefPlacement</td>
+        <td class="api-list" align="right" style="padding-right:10px">3</td>
+        <td class="api-list">Specifies that the center point of the two-bend relief shape is located at the vertex where the flanges meet. This is valid for both round and square two-bend relief shapes.</td>
       </tr>
     </Table>
     <h2 class="api">
@@ -74,9 +79,9 @@
       <table width="100%" style="font-size:15">
         <tr>
           <td align="left">
-                © Copyright 2025 Autodesk, Inc.
+                © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(TwoBendReliefPlacements%20Enum%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(TwoBendReliefPlacements%20Enum%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

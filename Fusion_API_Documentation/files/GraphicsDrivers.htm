@@ -12,7 +12,7 @@
     <meta name="created" content="">
     <meta name="user-comments" content="enable">
     <meta name="contextid" content="GraphicsDrivers">
-    <meta name="description" content="A list of the valid graphics drivers.">
+    <meta name="description" content="A list of the graphics driver that are supported for various settings in Fusion. Not all of the values are valid for certain settings, and the valid options can be different on Windows and Mac. Check the options available in the user interface and limit your choices to those.">
     <meta name="topicid" content="GUID-1ed39e26-a76c-45de-a4c5-2a36dcc1ff0b">
     <meta name="experiencelevel" content="expert">
     <meta name="audience" content="programmer">
@@ -35,7 +35,7 @@
         </h1>
     <h2 class="api">
           Description
-        </h2>A list of the valid graphics drivers.<br>Defined in namespace "adsk::core" and the header file is &lt;Core\CoreTypeDefs.h&gt;<h2 class="api">
+        </h2>A list of the graphics driver that are supported for various settings in Fusion. Not all of the values are valid for certain settings, and the valid options can be different on Windows and Mac. Check the options available in the user interface and limit your choices to those.<br>Defined in namespace "adsk::core" and the header file is &lt;Core\CoreTypeDefs.h&gt;<h2 class="api">
           Methods
         </h2>
     <Table class="api-list">
@@ -53,27 +53,47 @@
       <tr>
         <td class="api-list">AutoSelectGraphicsDriver</td>
         <td class="api-list" align="right" style="padding-right:10px">2</td>
-        <td class="api-list">Let Fusion automatically select the Graphics Driver. This option applies to both Windows and Mac.</td>
+        <td class="api-list">Let Fusion automatically select the Graphics Driver.</td>
+      </tr>
+      <tr>
+        <td class="api-list">DesktopGLGraphicsDriver</td>
+        <td class="api-list" align="right" style="padding-right:10px">6</td>
+        <td class="api-list">Desktop GL graphics driver.</td>
       </tr>
       <tr>
         <td class="api-list">DirectX11GraphicsDriver</td>
         <td class="api-list" align="right" style="padding-right:10px">1</td>
-        <td class="api-list">DirectX 11 Graphics Driver. This option only applies to Windows.</td>
+        <td class="api-list">DirectX 11 Graphics Driver.</td>
       </tr>
       <tr>
         <td class="api-list">DirectX9GraphicsDriver</td>
         <td class="api-list" align="right" style="padding-right:10px">0</td>
-        <td class="api-list">DirectX 9 Graphics Driver. This option only applies to Windows.</td>
+        <td class="api-list">DirectX 9 Graphics Driver.</td>
       </tr>
       <tr>
         <td class="api-list">OpenGLCoreProfileGraphicsDriver</td>
         <td class="api-list" align="right" style="padding-right:10px">3</td>
-        <td class="api-list">OpenGL Core Profile Graphics Driver. This option only applies to Mac.</td>
+        <td class="api-list">OpenGL Core Profile Graphics Driver.</td>
+      </tr>
+      <tr>
+        <td class="api-list">OpenGLESGraphicsDriver</td>
+        <td class="api-list" align="right" style="padding-right:10px">7</td>
+        <td class="api-list">Open GL ES graphics driver.</td>
       </tr>
       <tr>
         <td class="api-list">OpenGLGraphicsDriver</td>
         <td class="api-list" align="right" style="padding-right:10px">4</td>
-        <td class="api-list">OpenGL Graphics Driver. This option only applies to Mac.</td>
+        <td class="api-list">OpenGL Graphics Driver.</td>
+      </tr>
+      <tr>
+        <td class="api-list">VulkanGraphicsDriver</td>
+        <td class="api-list" align="right" style="padding-right:10px">8</td>
+        <td class="api-list">Vulkan graphics driver.</td>
+      </tr>
+      <tr>
+        <td class="api-list">WarpGraphicsDriver</td>
+        <td class="api-list" align="right" style="padding-right:10px">5</td>
+        <td class="api-list">Warp (Software DirectX) graphics driver.</td>
       </tr>
     </Table>
     <h2 class="api">
@@ -84,9 +104,9 @@
       <table width="100%" style="font-size:15">
         <tr>
           <td align="left">
-                © Copyright 2025 Autodesk, Inc.
+                © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(GraphicsDrivers%20Enum%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(GraphicsDrivers%20Enum%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

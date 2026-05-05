@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -37,7 +37,7 @@ namespace adsk { namespace fusion {
 
 namespace adsk { namespace fusion {
 
-/// A ConstructionPlaneInput is a throwaway object used to create a ConstructionPlane
+/// A ConstructionPlaneInput is a throwaway object used to create a ConstructionPlane.
 /// The usage pattern is:
 /// a. create a ConstructionPlaneInput (ConstructionPlanes.CreateInput)
 /// b. call one of the member functions to specify how the ConstructionPlane is created
@@ -59,8 +59,8 @@ public:
     /// face or construction plane at a specified distance. This can result in
     /// a parametric or non-parametric construction plane depending on whether the parent
     /// component is parametric or is a direct edit component.
-    /// planarEntity : A plane, planar face or construction plane from which to create the offset plane
-    /// offset : ValueInput object that specifies the offset distance for the plane
+    /// planarEntity : A plane, planar face or construction plane from which to create the offset plane.
+    /// offset : ValueInput object that specifies the offset distance for the plane.
     /// Returns true if the construction plane definition is successful.
     bool setByOffset(const core::Ptr<core::Base>& planarEntity, const core::Ptr<core::ValueInput>& offset);
 
@@ -68,8 +68,8 @@ public:
     /// at a specified angle. This can result in a parametric or non-parametric construction
     /// plane depending on whether the parent component is parametric or is a direct edit
     /// component.
-    /// linearEntity : The axis about which to rotate the plane
-    /// angle : The angle at which to create the plane
+    /// linearEntity : The axis about which to rotate the plane.
+    /// angle : The angle at which to create the plane.
     /// planarEntity : The planar face or construction plane the angle is measured from.
     /// Returns true if the construction plane definition is successful.
     bool setByAngle(const core::Ptr<core::Base>& linearEntity, const core::Ptr<core::ValueInput>& angle, const core::Ptr<core::Base>& planarEntity);
@@ -78,8 +78,8 @@ public:
     /// conical face at a specified point. This can result in a parametric or non-parametric construction
     /// plane depending on whether the parent component is parametric or is a direct edit
     /// component.
-    /// tangentFace : A cylindrical or conical face to create the plane tangent to
-    /// angle : The angle relative to the planarEntity input at which to create the tangent plane
+    /// tangentFace : A cylindrical or conical face to create the plane tangent to.
+    /// angle : The angle relative to the planarEntity input at which to create the tangent plane.
     /// planarEntity : The planar face or construction plane the tangent is measured from.
     /// Returns true if the construction plane definition is successful.
     bool setByTangent(const core::Ptr<BRepFace>& tangentFace, const core::Ptr<core::ValueInput>& angle, const core::Ptr<core::Base>& planarEntity);
@@ -141,7 +141,7 @@ public:
     /// In order for geometry to be transformed correctly, an Occurrence for creation needs to be
     /// specified when the ConstructionPlane is created based on geometry (e.g. a planarEntity)
     /// in another component AND (the ConstructionPlane) is not in the root component.
-    /// The CreationOccurrence is analogous to the active occurrence in the UI
+    /// The CreationOccurrence is analogous to the active occurrence in the UI.
     core::Ptr<Occurrence> creationOccurrence() const;
     bool creationOccurrence(const core::Ptr<Occurrence>& value);
 

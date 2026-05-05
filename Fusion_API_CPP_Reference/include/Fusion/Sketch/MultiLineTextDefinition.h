@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -40,7 +40,7 @@ public:
 
     /// Returns the four sketch lines that define the boundary of the sketch text. By adding constraints to these lines
     /// you can associatively control the size, position and angle of the sketch text. If the MultiLineTextDefinition
-    /// object is obtained from a SketchTextInput object, this property will return null because the text and it's
+    /// object is obtained from a SketchTextInput object, this property will return null because the text and its
     /// associated lines have not been created yet.
     std::vector<core::Ptr<SketchLine>> rectangleLines() const;
 

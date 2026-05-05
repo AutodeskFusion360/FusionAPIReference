@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -79,6 +79,11 @@ public:
     core::Ptr<Occurrence> creationOccurrence() const;
     bool creationOccurrence(const core::Ptr<Occurrence>& value);
 
+    /// The thicken type used when creating a thicken.
+    /// The default value is SharpThickenType.
+    ThickenTypes thickenType() const;
+    bool thickenType(ThickenTypes value);
+
     ADSK_FUSION_THICKENFEATUREINPUT_API static const char* classType();
     ADSK_FUSION_THICKENFEATUREINPUT_API const char* objectType() const override;
     ADSK_FUSION_THICKENFEATUREINPUT_API void* queryInterface(const char* id) const override;
@@ -101,6 +106,8 @@ private:
     virtual bool targetBaseFeature_raw(BaseFeature* value) = 0;
     virtual Occurrence* creationOccurrence_raw() const = 0;
     virtual bool creationOccurrence_raw(Occurrence* value) = 0;
+    virtual ThickenTypes thickenType_raw() const = 0;
+    virtual bool thickenType_raw(ThickenTypes value) = 0;
 };
 
 // Inline wrappers
@@ -180,6 +187,17 @@ inline core::Ptr<Occurrence> ThickenFeatureInput::creationOccurrence() const
 inline bool ThickenFeatureInput::creationOccurrence(const core::Ptr<Occurrence>& value)
 {
     return creationOccurrence_raw(value.get());
+}
+
+inline ThickenTypes ThickenFeatureInput::thickenType() const
+{
+    ThickenTypes res = thickenType_raw();
+    return res;
+}
+
+inline bool ThickenFeatureInput::thickenType(ThickenTypes value)
+{
+    return thickenType_raw(value);
 }
 }// namespace fusion
 }// namespace adsk

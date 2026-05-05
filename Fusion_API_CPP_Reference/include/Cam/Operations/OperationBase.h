@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -193,6 +193,25 @@ public:
     /// Returns if remove was successful.
     bool removeReferences(const core::Ptr<core::Base>& entity, bool removeFromChildren);
 
+    /// !!!!! Warning !!!!!
+    /// ! This is hidden and not officially supported
+    /// !!!!! Warning !!!!!
+    /// 
+    /// The color of the note icon. This represents the color of the note icon in the browser, which is displayed next to the operation name when the operation has notes.
+    /// Returns the color of the note icon.
+    NoteIconColors noteIconColor() const;
+    bool noteIconColor(NoteIconColors value);
+
+    /// !!!!! Warning !!!!!
+    /// ! This is hidden and not officially supported
+    /// !!!!! Warning !!!!!
+    /// 
+    /// INTERNAL USE ONLY
+    /// Will be deprecated by CAM-52402
+    /// Returns the full message log for this operation. The log contains all messages (errors, warnings,
+    /// hints, information, and debug) produced during generation or validation, one per line with type and timestamp.
+    std::string messageLog() const;
+
     ADSK_CAM_OPERATIONBASE_API static const char* classType();
     ADSK_CAM_OPERATIONBASE_API const char* objectType() const override;
     ADSK_CAM_OPERATIONBASE_API void* queryInterface(const char* id) const override;
@@ -236,6 +255,9 @@ private:
     virtual bool hasMissingReferences_raw() = 0;
     virtual bool duplicate_raw() = 0;
     virtual bool removeReferences_raw(core::Base* entity, bool removeFromChildren) = 0;
+    virtual NoteIconColors noteIconColor_raw() const = 0;
+    virtual bool noteIconColor_raw(NoteIconColors value) = 0;
+    virtual char* messageLog_raw() const = 0;
     virtual void placeholderOperationBase0() {}
     virtual void placeholderOperationBase1() {}
     virtual void placeholderOperationBase2() {}
@@ -262,9 +284,6 @@ private:
     virtual void placeholderOperationBase23() {}
     virtual void placeholderOperationBase24() {}
     virtual void placeholderOperationBase25() {}
-    virtual void placeholderOperationBase26() {}
-    virtual void placeholderOperationBase27() {}
-    virtual void placeholderOperationBase28() {}
 };
 
 // Inline wrappers
@@ -505,6 +524,30 @@ inline bool OperationBase::duplicate()
 inline bool OperationBase::removeReferences(const core::Ptr<core::Base>& entity, bool removeFromChildren)
 {
     bool res = removeReferences_raw(entity.get(), removeFromChildren);
+    return res;
+}
+
+inline NoteIconColors OperationBase::noteIconColor() const
+{
+    NoteIconColors res = noteIconColor_raw();
+    return res;
+}
+
+inline bool OperationBase::noteIconColor(NoteIconColors value)
+{
+    return noteIconColor_raw(value);
+}
+
+inline std::string OperationBase::messageLog() const
+{
+    std::string res;
+
+    char* p= messageLog_raw();
+    if (p)
+    {
+        res = p;
+        core::DeallocateArray(p);
+    }
     return res;
 }
 }// namespace cam

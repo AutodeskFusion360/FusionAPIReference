@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -35,6 +35,7 @@ namespace adsk { namespace fusion {
     class BaseFeature;
     class Component;
     class ConstructionAxisDefinition;
+    class DeriveFeature;
     class Occurrence;
     class TimelineObject;
 }}
@@ -70,7 +71,7 @@ public:
     bool isDeletable() const;
 
     /// Indicates if the light bulb (as displayed in the browser) is on.
-    /// A construction axis will only be visible if it's light bulb, and that of it's
+    /// A construction axis will only be visible if its light bulb, and that of its
     /// containing folder and parent component/s are also on.
     bool isLightBulbOn() const;
     bool isLightBulbOn(bool value);
@@ -98,7 +99,7 @@ public:
     core::Ptr<Occurrence> assemblyContext() const;
 
     /// The NativeObject is the object outside the context of an assembly and
-    /// in the context of it's parent component.
+    /// in the context of its parent component.
     /// Returns null in the case where this object is not in the context of
     /// an assembly but is already the native object.
     core::Ptr<ConstructionAxis> nativeObject() const;
@@ -135,6 +136,14 @@ public:
     /// method to get the two entities identified by the tokens and then compare them.
     std::string entityToken() const;
 
+    /// Returns if this construction axis is derived from another design. If true, the construction axis cannot be deleted.
+    /// You should not attempt to make any edits to the derived construction axis. Any edits made to this derived construction axis will be lost when the derive updates.
+    bool isDerived() const;
+
+    /// Returns the DeriveFeature if this construction axis is derived from another design.
+    /// This property returns null if the construction axis is not derived from another design (i.e. isDerived property returns false).
+    core::Ptr<DeriveFeature> deriveFeature() const;
+
     ADSK_FUSION_CONSTRUCTIONAXIS_API static const char* classType();
     ADSK_FUSION_CONSTRUCTIONAXIS_API const char* objectType() const override;
     ADSK_FUSION_CONSTRUCTIONAXIS_API void* queryInterface(const char* id) const override;
@@ -164,6 +173,8 @@ private:
     virtual FeatureHealthStates healthState_raw() const = 0;
     virtual char* errorOrWarningMessage_raw() const = 0;
     virtual char* entityToken_raw() const = 0;
+    virtual bool isDerived_raw() const = 0;
+    virtual DeriveFeature* deriveFeature_raw() const = 0;
 };
 
 // Inline wrappers
@@ -310,6 +321,18 @@ inline std::string ConstructionAxis::entityToken() const
         res = p;
         core::DeallocateArray(p);
     }
+    return res;
+}
+
+inline bool ConstructionAxis::isDerived() const
+{
+    bool res = isDerived_raw();
+    return res;
+}
+
+inline core::Ptr<DeriveFeature> ConstructionAxis::deriveFeature() const
+{
+    core::Ptr<DeriveFeature> res = deriveFeature_raw();
     return res;
 }
 }// namespace fusion

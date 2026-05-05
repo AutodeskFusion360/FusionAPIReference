@@ -241,9 +241,7 @@ if buttonControl:
 <h3 class="api">Icon File Format</h3>
 <p Class="api">Both SVG and PNG files are supported for icons. Support for SVG is more recent, and is the preferred format, especially for icons that do not contain text. However PNG format is still supported.</p>
 
-<p Class="api">When using SVG files, they must be compatible with the SVG Tiny 1.2 profile. In most cases, this is not a severe limitation because most recent SVG enhancements are not commonly used when creating icons. If an SVG is used that contains new SVG elements, it can still be used; however, because those elements are unknown, they are ignored, and the resulting image may not render as expected.</p>
-
-<p Class="api">The requirement to use SVG Tiny 1.2 is a limitation of a component that Fusion uses, and later versions of SVG are expected to be supported in the future.</p>
+<p Class="api">Fusion supports SVG 1.2 and also the more common features of SVG 2.0 including <symbol>, <marker>, <pattern>, <mask>, and <filter> elements. If an SVG is used that contains any unsupported elements, it can still be used; however, because those elements are unknown, they are ignored, and the resulting image may not render as expected.</p>
 
 <h4 class="api">High DPI Scaling</h4>
 <p Class="api">As mentioned earlier, icons should be thought of as 16x16 pixels or 32x32 pixels; however, when Fusion is used on a high-resolution display, higher-resolution icons are needed to ensure they look good. Because of this, for the small icon, there is a 16x16 pixel icon for a standard display and a 32x32 pixel icon for a high-resolution display. For the large icon there is a 32x32 pixel icon for a standard display and a 64x64 pixel icon for a high-resolution display. It would seem there are effectively three sizes: 16x16, 32x32, and 64x64. However, that is incorrect because the 32x32 pixel icon for the small icon is not interchangeable for the 32x32 pixel icon for the large icon. The 16x16 and 32x32 pixel images for the small icon are designed to meet the previously discussed goals; the line weight remains constant, and the details become smaller and more simplified. The 32x32 and 64x64 pixel images for the large icon use the same line weight as the smaller icon, but can have more detail. Therefore, there are four images in total: two for the small icon and two for the large icon. If a needed icon file is missing, Fusion will use an existing icon and scale it as needed.</p>
@@ -256,12 +254,13 @@ if buttonControl:
 </p>
 
 
-<h4 class="api">Behavior Tokens</h4>
-<p Class="api">These tokens define images used for specific cases within Fusion. They are typically the same as the standard image but with different coloring.
+<h4 class="api">Theme Tokens</h4>
+<p Class="api">These tokens define images used for specific themes within Fusion. They are typically the same as the standard image but with different coloring.
 <ul> 
-<li>-normal – Identifies the image as the standard, normal image. Example: 16x16-normal.svg. normal is also implied if there is no token specified, so 16x16.svg is the same as 16x16-normal.svg. This is used as the normal icon when the Fusion Classic theme is active.</li>
 <li>-light_gray – Identifies the image to be used when the user has enabled “Light Gray” as the user interface theme. If this isn’t defined, the normal icon is used. Example: 16x16@2x-light_gray.svg</li>
 <li>-dark_blue – Identifies the image to be used when the user has enabled “Dark Blue” as the user interface theme. If this isn’t defined, the normal icon is used. Example: 32x32-dark_blue.svg</li>
+<li>-normal – Identifies the image as the standard, normal image. Example: 16x16-normal.svg. normal is also implied if there is no token specified, so 16x16.svg is the same as 16x16-normal.svg. This is used as a fallback image if the more specific -light_gray or -dark_blue images are missing.</li>
+<li>No Theme token behaves the same as the -normal token. For example, if 16x16-normal.svg is missing but 16x16.png exists, 16x16.png will be used.</li>
 </ul>
 </p>
 
@@ -358,10 +357,10 @@ buttonControl = fileDropDown.controls.addCommand(myCommandDef, 'ThreeDprintCmdDe
   <table width="100%" style="font-size:15">
 	<tr>
 	  <td align="left">
-		&copy; Copyright 2025 Autodesk, Inc.
+		&copy; Copyright 2026 Autodesk, Inc.
 	  </td>
 	  <td align="right">
-		<a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(UserInterface_UM)">Comment on this page.</a>
+		<a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(UserInterface_UM)">Comment on this page.</a>
 	  </td>
 	</tr>
   </table>

@@ -99,7 +99,7 @@
       </tr>
       <tr>
         <td class="api-list"><a href="SketchText_attributes.htm">attributes</a></td>
-        <td class="api-list">Returns the collection of attributes associated with this face.</td>
+        <td class="api-list">Returns the collection of attributes associated with this sketch entity.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="SketchText_boundaryLines.htm">boundaryLines</a></td>
@@ -127,7 +127,11 @@
       </tr>
       <tr>
         <td class="api-list"><a href="SketchText_height.htm">height</a></td>
-        <td class="api-list">Gets and sets the height of the text in centimeters.</td>
+        <td class="api-list"><mark>**RETIRED**</mark> This property has been retired and you should instead use the heightParameter property to access the parameter controlling the text height and use its properties to get and set the height.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchText_heightParameter.htm">heightParameter</a></td>
+        <td class="api-list">Returns the model parameter that was created when the sketch text was created that controls the height of the sketch text. To edit the height, you can use the expression and value properties of the returned ModelParameter object.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="SketchText_is2D.htm">is2D</a></td>
@@ -171,7 +175,7 @@
       </tr>
       <tr>
         <td class="api-list"><a href="SketchText_nativeObject.htm">nativeObject</a></td>
-        <td class="api-list">The NativeObject is the object outside the context of an assembly and in the context of it's parent component. Returns null in the case where this object is not in the context of an assembly but is already the native object.</td>
+        <td class="api-list">The NativeObject is the object outside the context of an assembly and in the context of its parent component. Returns null in the case where this object is not in the context of an assembly but is already the native object.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="SketchText_objectType.htm">objectType</a></td>
@@ -195,7 +199,11 @@
       </tr>
       <tr>
         <td class="api-list"><a href="SketchText_text.htm">text</a></td>
-        <td class="api-list">Gets and sets the text. This is a simple string and ignores any formatting defined within the text.</td>
+        <td class="api-list"><mark>**RETIRED**</mark> This property has been retired and you should now use the textValue and expression properties of the Parameter object associated with this SketchText, which you can obtain by using the SketchText.textParameter property.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchText_textParameter.htm">textParameter</a></td>
+        <td class="api-list">Returns the model parameter that was created when the sketch text was created that controls the contents of the sketch text. To edit the text, you can use the expression and textValue properties of the returned ModelParameter object.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="SketchText_textStyle.htm">textStyle</a></td>
@@ -229,9 +237,9 @@
       <table width="100%" style="font-size:15">
         <tr>
           <td align="left">
-                © Copyright 2025 Autodesk, Inc.
+                © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(SketchText%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(SketchText%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

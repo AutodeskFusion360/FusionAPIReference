@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -146,7 +146,7 @@ public:
     /// Returns the newly created temporary BRepBody object or null in the case of failure.
     core::Ptr<BRepBody> createCylinderOrCone(const core::Ptr<core::Point3D>& pointOne, double pointOneRadius, const core::Ptr<core::Point3D>& pointTwo, double pointTwoRadius);
 
-    /// Creates a temporary elliptical solid cylinder or cone BrepBody object.
+    /// Creates a temporary elliptical solid cylinder or cone BRepBody object.
     /// pointOne : A point at one end of the cylinder or cone.
     /// pointOneMajorRadius : The major radius of the cylinder or cone at the point one end, in centimeters.
     /// pointOneMinorRadius : The minor radius of the cylinder or cone at the point one end, in centimeters.

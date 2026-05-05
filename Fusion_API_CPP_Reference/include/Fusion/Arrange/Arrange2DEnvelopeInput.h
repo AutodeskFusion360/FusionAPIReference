@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -27,16 +27,12 @@
 
 namespace adsk { namespace fusion {
 
-/// !!!!! Warning !!!!!
-/// ! This is in preview state; please see the help for more info
-/// !!!!! Warning !!!!!
-/// 
 /// The Arrange2DEnvelopeInput is a base class used to define the various settings common to
 /// the envelopes defined by a plane or by profiles and planar faces.
 class Arrange2DEnvelopeInput : public ArrangeEnvelopeInput {
 public:
 
-    /// Specifies if the arrangement of objects is so they are above or X-Y plane of the envelope.
+    /// Specifies if the arrangement of objects is so they are above the X-Y plane of the envelope.
     /// Defaults to false so the objects are above the construction plane, profile or face.
     bool isFlipped() const;
     bool isFlipped(bool value);

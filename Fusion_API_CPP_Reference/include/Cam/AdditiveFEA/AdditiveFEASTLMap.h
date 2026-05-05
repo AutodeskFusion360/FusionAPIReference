@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -29,18 +29,18 @@
 namespace adsk { namespace cam {
 
 /// !!!!! Warning !!!!!
-/// ! This is hidden and not officially supported
+/// ! This is in preview state; please see the help for more info
 /// !!!!! Warning !!!!!
 /// 
-/// The AdditiveFEASTLMap defines relationship of geometries in STL format to parts, supports, materials, PRM files, and volume fractions or solidities
+/// The AdditiveFEASTLMap defines the relationship of geometries in STL format to parts, supports, materials, PRM files, and volume fractions or solidities.
 class AdditiveFEASTLMap : public core::Base {
 public:
 
-    /// Append a row of *STLM data for a single geometry to the STL map
-    /// configuration : Specifies the geometry as either part, support, build plate, or ghost part.  See the definition of the AdditiveFEASTLConfiguration enum
-    /// prmId : Maps a set of processing parameters from a PRM file to the geometry
-    /// materialId : Maps a set of material properties to the geometry
-    /// volumeFraction : Set a volume fraction for the geometry in the range [0, 1]
+    /// Append a row of *STLM data for a single geometry to the STL map.
+    /// configuration : Specifies the geometry as either part, support, build plate, or ghost part.  See the definition of the AdditiveFEASTLConfiguration enum.
+    /// prmId : Maps a set of processing parameters from a PRM file to the geometry.
+    /// materialId : Maps a set of material properties to the geometry.
+    /// volumeFraction : Set a volume fraction for the geometry in the range [0, 1].
     void append(AdditiveFEASTLConfiguration configuration, int prmId, int materialId, double volumeFraction);
 
     ADSK_CAM_ADDITIVEFEASTLMAP_API static const char* classType();

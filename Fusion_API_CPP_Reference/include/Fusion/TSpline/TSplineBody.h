@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -40,7 +40,7 @@ namespace adsk { namespace fusion {
 class TSplineBody : public core::Base {
 public:
 
-    /// Gets and sets the name of the body. If setting this property, there is the side-effect
+    /// Gets and sets the name of the body. If setting this property, there is a side effect
     /// that the B-Rep body created from this T-Spline body is also renamed.
     std::string name() const;
     bool name(const std::string& value);
@@ -65,7 +65,7 @@ public:
     /// specific entity can be different over time. However, even if you have two different token
     /// strings that were obtained from the same entity, when you use findEntityByToken they
     /// will both return the same entity. Because of that you should never compare entity tokens
-    /// as way to determine what the token represents. Instead, you need to use the findEntityByToken
+    /// as a way to determine what the token represents. Instead, you need to use the findEntityByToken
     /// method to get the two entities identified by the tokens and then compare them.
     std::string entityToken() const;
 

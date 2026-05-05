@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -38,9 +38,12 @@ namespace adsk { namespace core {
     class Vector3D;
 }}
 namespace adsk { namespace fusion {
+    class AutoConstrainInput;
+    class AutoConstrainResult;
     class BRepBody;
     class BRepFace;
     class Component;
+    class DeriveFeature;
     class GeometricConstraints;
     class Occurrence;
     class Profiles;
@@ -108,7 +111,7 @@ public:
     /// Intersects the specified body with the sketch plane and creates new
     /// curves representing the intersection.
     /// body : The body to be intersected by the sketch.
-    /// Returns a collection of the sketch entities that were created a a result of the
+    /// Returns a collection of the sketch entities that were created as a result of the
     /// cut.
     core::Ptr<core::ObjectCollection> projectCutEdges(const core::Ptr<BRepBody>& body);
 
@@ -284,7 +287,7 @@ public:
     core::Ptr<Occurrence> assemblyContext() const;
 
     /// The NativeObject is the object outside the context of an assembly and
-    /// in the context of it's parent component.
+    /// in the context of its parent component.
     /// Returns null in the case where this object is not in the context of
     /// an assembly but is already the native object.
     core::Ptr<Sketch> nativeObject() const;
@@ -316,7 +319,7 @@ public:
     /// Returns true if the operation was successful.
     bool redefine(const core::Ptr<core::Base>& planarEntity);
 
-    /// Returns the collection of attributes associated with this face.
+    /// Returns the collection of attributes associated with this sketch.
     core::Ptr<core::Attributes> attributes() const;
 
     /// This property returns the base or form feature that this sketch is associated with. It returns
@@ -373,7 +376,7 @@ public:
     /// browser is on or not. Parent nodes in the browser can have their light
     /// bulb off which affects all of their children so this property does not
     /// indicate if the body is actually visible, just that it should be visible
-    /// if all of it's parent nodes are also visible. Use the isVisible property
+    /// if all of its parent nodes are also visible. Use the isVisible property
     /// to determine if it's actually visible.
     bool isLightBulbOn() const;
     bool isLightBulbOn(bool value);
@@ -445,7 +448,8 @@ public:
     /// between the end point of the slot and the provided sketch point.
     /// 
     /// If the length or angle arguments are provided, the point is not the actual end point
-    /// but is used to determine the direction of the slot.
+    /// but is used to determine the direction of the slot. If both the length and angle arguments
+    /// are provided this endPoint will be ignored and null can be provided.
     /// width : A ValueInput object that defines the width of the slot. The ValueInput can define either
     /// a real value or an expression string. If it is a real value, it defines the width of the
     /// slot in centimeters.
@@ -473,7 +477,7 @@ public:
     /// it defines the angle of the slot in radians. When it is an expression string, it's the same as
     /// creating a parameter in the user-interface. You can specify any valid expression, i.e. "45", "45 deg",
     /// "180 / 3", "Sweep * 2" that defines an angle.
-    /// Returns an array containing the start point arc, the end arc, the two lines that define the slot, the construction
+    /// Returns an array containing the start point arc, the end point arc, the two lines that define the slot, the construction
     /// line between the two points, and optionally, the construction line the angle is measured from if an angle is specified, and
     /// the dimension constraints that were created in the order of width, length, and angle.
     std::vector<core::Ptr<core::Base>> addCenterToCenterSlot(const core::Ptr<core::Base>& startPoint, const core::Ptr<core::Base>& endPoint, const core::Ptr<core::ValueInput>& width, bool createWidthDimension = false, const core::Ptr<core::ValueInput>& length = NULL, const core::Ptr<core::ValueInput>& angle = NULL);
@@ -491,6 +495,131 @@ public:
     /// are independent.
     /// Returns an array of the sketch entities that were created as a result of the projection.
     std::vector<core::Ptr<SketchEntity>> project2(const std::vector<core::Ptr<core::Base>>& entities, bool isLinked);
+
+    /// Creates the geometry that represents a slot where the first point defines the center of the slot
+    /// and the second point defines the direction and half-length. Geometric constraints are automatically
+    /// added to the geometry to maintain the slot shape and optionally, dimensions to control
+    /// the size can be added. The created geometry and constraints are returned.
+    /// centerPoint : The center point of the slot. It can be a SketchPoint or Point3D object. If a SketchPoint
+    /// is provided a coincident constraint will be created between the center point of the slot
+    /// and the provided sketch point.
+    /// endPoint : A point that defines the direction and half-length of the slot. It can be a SketchPoint or Point3D object.
+    /// The distance from the center point to this point represents half the total length of the slot.
+    /// If a SketchPoint is provided a coincident constraint is created between the end point of the slot
+    /// and the provided sketch point.
+    /// 
+    /// If the halfLength or angle arguments are provided, the point is not the actual end point
+    /// but is used to determine the direction of the slot. If both the halfLength and angle arguments
+    /// are provided this endPoint will be ignored and null can be provided.
+    /// width : A ValueInput object that defines the width of the slot. The ValueInput can define either
+    /// a real value or an expression string. If it is a real value, it defines the width of the
+    /// slot in centimeters.
+    /// 
+    /// When using a ValueInput created using a string, it's the same as creating a parameter in the user-interface.
+    /// You can specify any valid expression, i.e. "5", "5 in", "5 in / 2", "5 + Length" that defines a length.
+    /// createWidthDimension : Specifies if a dimension constraint and its associated parameter is created to control the width
+    /// of the slot.
+    /// halfLength : Optional argument that defines half the length of the slot using a ValueInput. If this is provided, it
+    /// overrides the endPoint distance and explicitly defines half the length of the slot. If the half length is specified,
+    /// a dimension constraint and its associated parameter is created to control the length.
+    /// 
+    /// The ValueInput can define either a real value or an expression string. If it is a real value,
+    /// it defines half the length of the slot in centimeters. When it is an expression string, it's the same as
+    /// creating a parameter in the user-interface. You can specify any valid expression, i.e. "2.5", "2.5 in",
+    /// "5 in / 4", "HalfLength" that defines a length.
+    /// angle : Optional argument that defines the angle of the slot using a ValueInput. If this is provided, it
+    /// overrides the endPoint and explicitly defines the angle of the slot. If the angle is specified,
+    /// a horizontal construction line, a dimension constraint, and its associated parameter is created to control the angle.
+    /// The angle is measured from a horizontal line that starts at the center point and goes in the positive
+    /// X direction. The angle is always less than 180 deg. and depending on the location of the direction point, the angle
+    /// will be clockwise or counterclockwise from the horizontal line.
+    /// 
+    /// The ValueInput can define either a real value or an expression string. If it is a real value,
+    /// it defines the angle of the slot in radians. When it is an expression string, it's the same as
+    /// creating a parameter in the user-interface. You can specify any valid expression, i.e. "45", "45 deg",
+    /// "180 / 3", "Sweep * 2" that defines an angle.
+    /// Returns an array containing the start point arc, the end point arc, the two lines that define the slot, the construction
+    /// line between the start and end point, and optionally, the construction line the angle is measured from if an angle is specified, and
+    /// the dimension constraints that were created in the order of width, half length, and angle.
+    std::vector<core::Ptr<core::Base>> addCenterPointSlot(const core::Ptr<core::Base>& centerPoint, const core::Ptr<core::Base>& endPoint, const core::Ptr<core::ValueInput>& width, bool createWidthDimension = false, const core::Ptr<core::ValueInput>& halfLength = NULL, const core::Ptr<core::ValueInput>& angle = NULL);
+
+    /// Creates the geometry that represents an overall slot. Geometric constraints are automatically
+    /// added to the geometry to maintain the slot shape and optionally, dimensions to control
+    /// the size can be added. The created geometry and constraints are returned.
+    /// startPoint : The start point of the slot. It can be a SketchPoint or Point3D object. If a SketchPoint
+    /// is provided a coincident constraint will be created between the start point of the slot
+    /// and the provided sketch point.
+    /// endPoint : The end point of the slot. It can be a SketchPoint or Point3D object. This point defines
+    /// the length of the slot. If a SketchPoint is provided a coincident constraint is created
+    /// between the end point of the slot and the provided sketch point.
+    /// 
+    /// If either the length or angle argument is provided, the point is not the actual end point
+    /// but is used to determine the direction of the slot. If both the length and angle arguments
+    /// are provided this endPoint will be ignored and null can be provided.
+    /// width : A ValueInput object that defines the width of the slot. The ValueInput can define either
+    /// a real value or an expression string. If it is a real value, it defines the width of the
+    /// slot in centimeters.
+    /// 
+    /// When using a ValueInput created using a string, it's the same as creating a parameter in the user-interface.
+    /// You can specify any valid expression, i.e. "5", "5 in", "5 in / 2", "5 + Length" that defines a length.
+    /// createWidthDimension : Specifies if a dimension constraint and its associated parameter is created to control the width
+    /// of the slot.
+    /// length : Optional argument that defines the overall length of the slot using a ValueInput. If this is provided, it
+    /// overrides the endPoint and explicitly defines the length of the slot. If the length is specified,
+    /// a dimension constraint and its associated parameter is created to control the length.
+    /// 
+    /// The ValueInput can define either a real value or an expression string. If it is a real value,
+    /// it defines the length of the slot in centimeters. When it is an expression string, it's the same as
+    /// creating a parameter in the user-interface. You can specify any valid expression, i.e. "5", "5 in",
+    /// "5 in / 2", "5 + Length" that defines a length.
+    /// angle : Optional argument that defines the angle of the slot using a ValueInput. If this is provided, it
+    /// overrides the endPoint and explicitly defines the angle of the slot. If the angle is specified,
+    /// a horizontal construction line, a dimension constraint, and its associated parameter is created to control the angle.
+    /// The angle is measured from a horizontal line that starts at the start point and goes in the positive
+    /// X direction. The angle is always less than 180 deg. and depending on the location of the end point, the angle
+    /// will be clockwise or counterclockwise from the horizontal line.
+    /// 
+    /// The ValueInput can define either a real value or an expression string. If it is a real value,
+    /// it defines the angle of the slot in radians. When it is an expression string, it's the same as
+    /// creating a parameter in the user-interface. You can specify any valid expression, i.e. "45", "45 deg",
+    /// "180 / 3", "Sweep * 2" that defines an angle.
+    /// Returns an array containing the start point arc, the end point arc, the two lines that define the slot, the construction
+    /// line between the two points, and optionally, the construction line the angle is measured from if an angle is specified, and
+    /// the dimension constraints that were created in the order of length, angle and width.
+    std::vector<core::Ptr<core::Base>> addOverallSlot(const core::Ptr<core::Base>& startPoint, const core::Ptr<core::Base>& endPoint, const core::Ptr<core::ValueInput>& width, bool createWidthDimension = false, const core::Ptr<core::ValueInput>& length = NULL, const core::Ptr<core::ValueInput>& angle = NULL);
+
+    /// Returns if this sketch is derived from another design. If true, the sketch cannot be deleted.
+    /// You should not attempt to make any edits to the derived sketch. Any edits made to this derived sketch will be lost when the derive updates.
+    bool isDerived() const;
+
+    /// Returns the DeriveFeature if this sketch is derived from another design.
+    /// This property returns null if the sketch is not derived from another design (i.e. isDerived property returns false).
+    core::Ptr<DeriveFeature> deriveFeature() const;
+
+    /// !!!!! Warning !!!!!
+    /// ! This is in preview state; please see the help for more info
+    /// !!!!! Warning !!!!!
+    /// 
+    /// Creates a new AutoConstrainInput object associated with this sketch. The input object is
+    /// used to define the various options when adding dimension and geometric constraints to
+    /// help constrain a sketch. The returned object has all options defined with default values
+    /// and additional constraints can be applied by passing this into the autoConstrain method.
+    /// Returns the newly created AutoConstrainInput object. Validation of sketch suitability
+    /// (entity count, entitlements, fully constrained status, 3D vs 2D, etc.) is performed
+    /// when the autoConstrain method is called, not during input creation.
+    core::Ptr<AutoConstrainInput> createAutoConstrainInput() const;
+
+    /// !!!!! Warning !!!!!
+    /// ! This is in preview state; please see the help for more info
+    /// !!!!! Warning !!!!!
+    /// 
+    /// Auto constrains the sketch using the information provided by the input object. This returns
+    /// a single locally computed solution.
+    /// input : The AutoConstrainInput object that defines the various settings to use when fully constraining the sketch.
+    /// The input object must be associated with this sketch (created by this sketch's createAutoConstrainInput method).
+    /// Returns an AutoConstrainResult object where information about how the sketch was constrained
+    /// can be obtained. Returns null in the case of a failure or if the input is invalid.
+    core::Ptr<AutoConstrainResult> autoConstrain(const core::Ptr<AutoConstrainInput>& input);
 
     ADSK_FUSION_SKETCH_API static const char* classType();
     ADSK_FUSION_SKETCH_API const char* objectType() const override;
@@ -571,6 +700,12 @@ private:
     virtual SpunProfileInput* createSpunProfileInput_raw(core::Base** entities, size_t entities_size, core::Base* axis) = 0;
     virtual core::Base** addCenterToCenterSlot_raw(core::Base* startPoint, core::Base* endPoint, core::ValueInput* width, bool createWidthDimension, core::ValueInput* length, core::ValueInput* angle, size_t& return_size) = 0;
     virtual SketchEntity** project2_raw(core::Base** entities, size_t entities_size, bool isLinked, size_t& return_size) = 0;
+    virtual core::Base** addCenterPointSlot_raw(core::Base* centerPoint, core::Base* endPoint, core::ValueInput* width, bool createWidthDimension, core::ValueInput* halfLength, core::ValueInput* angle, size_t& return_size) = 0;
+    virtual core::Base** addOverallSlot_raw(core::Base* startPoint, core::Base* endPoint, core::ValueInput* width, bool createWidthDimension, core::ValueInput* length, core::ValueInput* angle, size_t& return_size) = 0;
+    virtual bool isDerived_raw() const = 0;
+    virtual DeriveFeature* deriveFeature_raw() const = 0;
+    virtual AutoConstrainInput* createAutoConstrainInput_raw() const = 0;
+    virtual AutoConstrainResult* autoConstrain_raw(AutoConstrainInput* input) = 0;
 };
 
 // Inline wrappers
@@ -1084,6 +1219,58 @@ inline std::vector<core::Ptr<SketchEntity>> Sketch::project2(const std::vector<c
         res.assign(p, p+s);
         core::DeallocateArray(p);
     }
+    return res;
+}
+
+inline std::vector<core::Ptr<core::Base>> Sketch::addCenterPointSlot(const core::Ptr<core::Base>& centerPoint, const core::Ptr<core::Base>& endPoint, const core::Ptr<core::ValueInput>& width, bool createWidthDimension, const core::Ptr<core::ValueInput>& halfLength, const core::Ptr<core::ValueInput>& angle)
+{
+    std::vector<core::Ptr<core::Base>> res;
+    size_t s;
+
+    core::Base** p= addCenterPointSlot_raw(centerPoint.get(), endPoint.get(), width.get(), createWidthDimension, halfLength.get(), angle.get(), s);
+    if(p)
+    {
+        res.assign(p, p+s);
+        core::DeallocateArray(p);
+    }
+    return res;
+}
+
+inline std::vector<core::Ptr<core::Base>> Sketch::addOverallSlot(const core::Ptr<core::Base>& startPoint, const core::Ptr<core::Base>& endPoint, const core::Ptr<core::ValueInput>& width, bool createWidthDimension, const core::Ptr<core::ValueInput>& length, const core::Ptr<core::ValueInput>& angle)
+{
+    std::vector<core::Ptr<core::Base>> res;
+    size_t s;
+
+    core::Base** p= addOverallSlot_raw(startPoint.get(), endPoint.get(), width.get(), createWidthDimension, length.get(), angle.get(), s);
+    if(p)
+    {
+        res.assign(p, p+s);
+        core::DeallocateArray(p);
+    }
+    return res;
+}
+
+inline bool Sketch::isDerived() const
+{
+    bool res = isDerived_raw();
+    return res;
+}
+
+inline core::Ptr<DeriveFeature> Sketch::deriveFeature() const
+{
+    core::Ptr<DeriveFeature> res = deriveFeature_raw();
+    return res;
+}
+
+inline core::Ptr<AutoConstrainInput> Sketch::createAutoConstrainInput() const
+{
+    core::Ptr<AutoConstrainInput> res = createAutoConstrainInput_raw();
+    return res;
+}
+
+inline core::Ptr<AutoConstrainResult> Sketch::autoConstrain(const core::Ptr<AutoConstrainInput>& input)
+{
+    core::Ptr<AutoConstrainResult> res = autoConstrain_raw(input.get());
     return res;
 }
 }// namespace fusion

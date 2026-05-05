@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -13,6 +13,7 @@
 #include "../FusionTypeDefs.h"
 #include "../../Core/CoreTypeDefs.h"
 #include <string>
+#include <vector>
 
 // THIS CLASS WILL BE VISIBLE TO AN API CLIENT.
 // THIS HEADER FILE WILL BE GENERATED FROM NIDL.
@@ -34,6 +35,8 @@ namespace adsk { namespace core {
     class BoundingBox3D;
     class Material;
     class OrientedBoundingBox3D;
+    class Plane;
+    class Polyline3D;
     class TextureMapControl;
 }}
 namespace adsk { namespace fusion {
@@ -89,7 +92,7 @@ public:
     core::Ptr<Occurrence> assemblyContext() const;
 
     /// The NativeObject is the object outside the context of an assembly and
-    /// in the context of it's parent component.
+    /// in the context of its parent component.
     /// Returns null in the case where this object is not in the context of
     /// an assembly but is already the native object.
     core::Ptr<MeshBody> nativeObject() const;
@@ -150,7 +153,7 @@ public:
     /// specific entity can be different over time. However, even if you have two different token
     /// strings that were obtained from the same entity, when you use findEntityByToken they
     /// will both return the same entity. Because of that you should never compare entity tokens
-    /// as way to determine what the token represents. Instead, you need to use the findEntityByToken
+    /// as a way to determine what the token represents. Instead, you need to use the findEntityByToken
     /// method to get the two entities identified by the tokens and then compare them.
     std::string entityToken() const;
 
@@ -258,13 +261,13 @@ public:
     /// ! This is in preview state; please see the help for more info
     /// !!!!! Warning !!!!!
     /// 
-    /// Moves this mesh body from it's current component into the root component or the component owned by the
+    /// Moves this mesh body from its current component into the root component or the component owned by the
     /// specified occurrence.
     /// target : The target can be either the root component or an occurrence.
     /// 
     /// In the case where an occurrence is specified, the mesh body will be moved into the parent component of the target
     /// occurrence and the target occurrence defines the transform of how the mesh body will be copied so that the body
-    /// maintains it's same position with respect to the assembly.
+    /// maintains its same position with respect to the assembly.
     /// Returns the moved mesh body or null in the case the move failed.
     core::Ptr<MeshBody> moveToComponent(const core::Ptr<core::Base>& target);
 
@@ -277,9 +280,20 @@ public:
     /// 
     /// In the case where an occurrence is specified, the mesh body will be copied into the parent component of the target
     /// occurrence and the target occurrence defines the transform of how the mesh body will be copied so that the body
-    /// maintains it's same position with respect to the assembly.
+    /// maintains its same position with respect to the assembly.
     /// Returns the moved mesh body or null in the case the move failed.
     core::Ptr<MeshBody> copyToComponent(const core::Ptr<core::Base>& target);
+
+    /// !!!!! Warning !!!!!
+    /// ! This is in preview state; please see the help for more info
+    /// !!!!! Warning !!!!!
+    /// 
+    /// Calculates the silhouette of a mesh for a given orientation.
+    /// plane : Plane specifies the orienation for which the silhouette is calculated. The silhouette is calculated along the normal
+    /// of the plane and projected on the plane after the calculation.
+    /// The results are returned as a list of polylines 3d objects. If the calculation fails,
+    /// no polyline 3d objects are returned.
+    std::vector<core::Ptr<core::Polyline3D>> silhouette(const core::Ptr<core::Plane>& plane);
 
     ADSK_FUSION_MESHBODY_API static const char* classType();
     ADSK_FUSION_MESHBODY_API const char* objectType() const override;
@@ -329,6 +343,7 @@ private:
     virtual bool cut_raw() = 0;
     virtual MeshBody* moveToComponent_raw(core::Base* target) = 0;
     virtual MeshBody* copyToComponent_raw(core::Base* target) = 0;
+    virtual core::Polyline3D** silhouette_raw(core::Plane* plane, size_t& return_size) = 0;
 };
 
 // Inline wrappers
@@ -578,6 +593,20 @@ inline core::Ptr<MeshBody> MeshBody::moveToComponent(const core::Ptr<core::Base>
 inline core::Ptr<MeshBody> MeshBody::copyToComponent(const core::Ptr<core::Base>& target)
 {
     core::Ptr<MeshBody> res = copyToComponent_raw(target.get());
+    return res;
+}
+
+inline std::vector<core::Ptr<core::Polyline3D>> MeshBody::silhouette(const core::Ptr<core::Plane>& plane)
+{
+    std::vector<core::Ptr<core::Polyline3D>> res;
+    size_t s;
+
+    core::Polyline3D** p= silhouette_raw(plane.get(), s);
+    if(p)
+    {
+        res.assign(p, p+s);
+        core::DeallocateArray(p);
+    }
     return res;
 }
 }// namespace fusion

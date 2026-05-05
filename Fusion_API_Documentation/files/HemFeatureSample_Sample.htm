@@ -62,8 +62,65 @@
         </h2>
     <div id="tabs">
       <ul>
+        <li><a href="#Python">Python</a></li>
         <li><a href="#C++">C++</a></li>
       </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">import adsk.core, adsk.fusion, traceback
+
+def run(context):
+    ui = None
+    try:
+        app = adsk.core.Application.get()
+        ui  = app.userInterface
+       
+        <span style="color:blue"># get active design        </span>
+        product = app.activeProduct
+        design = adsk.fusion.Design.cast(product)
+         
+        <span style="color:blue"># get the root component</span>
+        rootComp = design.rootComponent
+
+        <span style="color:blue"># get features</span>
+        features = rootComp.features
+        hemFeatures = features.hemFeatures
+
+        <span style="color:blue"># get geometry from body to create hems</span>
+        brepBodies = rootComp.bRepBodies
+        body = brepBodies.item(0)
+        edges = body.edges
+
+        <span style="color:blue"># get inputs for an open hem</span>
+        gap = adsk.core.ValueInput.createByReal(0.2)
+        length = adsk.core.ValueInput.createByReal(2.0)
+        openHemFeatureInput = hemFeatures.createHemFeatureInput()
+        edge = edges.item(0)
+        isFlipped = False
+        bendPositionType = adsk.fusion.BendPositionTypes.StartEdgeBendPositionType;
+
+        <span style="color:blue"># create an open hem using specified values</span>
+        openHemFeatureInput.setOpenHem(edge, length, gap, isFlipped, bendPositionType)
+        hemFeature = hemFeatures.add(openHemFeatureInput)
+
+        <span style="color:blue"># get inputs for a rolled hem</span>
+        radius = adsk.core.ValueInput.createByReal(0.3)
+        angle = adsk.core.ValueInput.createByReal(4.5)
+        rolledHemFeatureInput = hemFeatures.createHemFeatureInput()
+        edge = edges.item(5)
+
+        <span style="color:blue"># use same flip and bend position as before to create a rolled hem</span>
+        rolledHemFeatureInput.setRolledHem(edge, radius, angle, isFlipped, bendPositionType)
+        hemFeature = hemFeatures.add(rolledHemFeatureInput)
+           
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
       <div id="C++" class="api-code">
         <table width="100%" style="font-size:15">
           <tr>
@@ -81,9 +138,9 @@
 #include &lt;Fusion/BRep/BRepEdge.h&gt;
 #include &lt;Fusion/BRep/BRepEdges.h&gt;
 #include &lt;Fusion/Features/Features.h&gt;
-#include &lt;Fusion/Features/HemFeature.h&gt;
-#include &lt;Fusion/Features/HemFeatureInput.h&gt;
-#include &lt;Fusion/Features/HemFeatures.h&gt;
+#include &lt;Fusion/SheetMetal/HemFeature.h&gt;
+#include &lt;Fusion/SheetMetal/HemFeatureInput.h&gt;
+#include &lt;Fusion/SheetMetal/HemFeatures.h&gt;
 #include &lt;Fusion/Fusion/Design.h&gt;
 
 using namespace adsk::core;
@@ -142,7 +199,7 @@ extern "C" XI_EXPORT bool run(const char* context)
 
     bool isFlipped = false;
 
-    BendPositionTypes bendPositionType = BendPositionTypes::BendStartEdge;
+    BendPositionTypes bendPositionType = BendPositionTypes::StartEdgeBendPositionType;
 
 
     <span style="color:blue">// Create the feature</span>
@@ -155,12 +212,9 @@ extern "C" XI_EXPORT bool run(const char* context)
 
     Ptr&lt;HemFeatureInput&gt; rolledHemFeatureInput = hemFeatures-&gt;createHemFeatureInput();
 
-    Ptr&lt;BRepEdge&gt; edge = edges-&gt;item(4);
+    Ptr&lt;BRepEdge&gt; edge = edges-&gt;item(5);
 
-    bool isFlipped = false;
-
-    BendPositionTypes bendPositionType = BendPositionTypes::BendStartEdge;
-
+    <span style="color:blue">// Use same bend position and flip options as previous hem</span>
 
     <span style="color:blue">// Create the feature</span>
     Ptr&lt;HemFeature&gt; rolledHemFeature = hemFeatures-&gt;add(rolledHemFeatureInput);
@@ -174,9 +228,9 @@ extern "C" XI_EXPORT bool run(const char* context)
       <table width="100%" style="font-size:15">
         <tr>
           <td align="left">
-                © Copyright 2025 Autodesk, Inc.
+                © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(HemFeatureSample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(HemFeatureSample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

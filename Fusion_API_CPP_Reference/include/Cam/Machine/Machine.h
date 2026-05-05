@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -142,21 +142,9 @@ public:
     /// Gets the list of elements that make up this machine.
     core::Ptr<MachineElements> elements() const;
 
-    /// !!!!! Warning !!!!!
-    /// ! This is in preview state; please see the help for more info
-    /// !!!!! Warning !!!!!
-    /// 
     /// Returns true if the machine has a simulation model attached.
     bool hasSimulationModel() const;
 
-    /// !!!!! Warning !!!!!
-    /// ! This is hidden and not officially supported
-    /// !!!!! Warning !!!!!
-    /// 
-    /// !!!!! Warning !!!!!
-    /// ! This is in preview state; please see the help for more info
-    /// !!!!! Warning !!!!!
-    /// 
     /// Clears the simulation model from the machine.
     void clearSimulationModel();
 

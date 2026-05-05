@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -33,9 +33,9 @@ namespace adsk { namespace core {
 namespace adsk { namespace fusion {
 
 /// Specifies that custom graphics are to be scaled relative to the view (pixels) and not model space.
-/// If this is applied to some custom graphics then they will stat the same size on the screen regardless
+/// If this is applied to some custom graphics then they will stay the same size on the screen regardless
 /// of the user zooming in or out. This is commonly used for glyphs and other interactive widgets so they don't
-/// don't get too large or too small.
+/// get too large or too small.
 class CustomGraphicsViewScale : public core::Base {
 public:
 

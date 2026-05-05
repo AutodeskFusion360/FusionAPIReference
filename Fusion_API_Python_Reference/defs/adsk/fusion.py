@@ -8,10 +8,6 @@ from . import core
 
 class ArrangePriorities():
     """
-    !!!!! Warning !!!!!
-    ! This is in preview state; please see the help for more info
-    !!!!! Warning !!!!!
-    
     Defines the different types of arrange priorities that are supported.
     """
     def __init__(self):
@@ -24,10 +20,6 @@ class ArrangePriorities():
 
 class ArrangeRotationTypes():
     """
-    !!!!! Warning !!!!!
-    ! This is in preview state; please see the help for more info
-    !!!!! Warning !!!!!
-    
     Defines the different types of rotations supported.
     """
     def __init__(self):
@@ -40,10 +32,6 @@ class ArrangeRotationTypes():
 
 class ArrangeSolverTypes():
     """
-    !!!!! Warning !!!!!
-    ! This is in preview state; please see the help for more info
-    !!!!! Warning !!!!!
-    
     Defines the different types of arrangement solvers that are supported.
     """
     def __init__(self):
@@ -51,6 +39,28 @@ class ArrangeSolverTypes():
     Arrange2DTrueShapeSolverType = 0
     Arrange2DRectangularSolverType = 1
     Arrange3DSolverType = 2
+
+class AutoLookAtSketchSettings():
+    """
+    The different options for the AutoLookAtSketch preference setting.
+    """
+    def __init__(self):
+        pass
+    OffAutoLookAtSketchSetting = 0
+    UserCameraAutoLookAtSketchSetting = 1
+    AlwaysOrthographicAutoLookAtSketchSetting = 2
+
+class BendPositionTypes():
+    """
+    Bend location types used for creating flanges and hems.
+    """
+    def __init__(self):
+        pass
+    LegacyBendPositionType = 0
+    OutsideBendPositionType = 1
+    InsideBendPositionType = 2
+    StartEdgeBendPositionType = 3
+    TangentToSideBendPositionType = 4
 
 class BendReliefShapes():
     """
@@ -194,6 +204,16 @@ class ChamferCornerTypes():
     MiterCornerType = 1
     BlendCornertype = 2
 
+class ClearanceHoleFits():
+    """
+    List of the different types of fit that a clearance hole can be.
+    """
+    def __init__(self):
+        pass
+    CloseClearanceHoleFit = 0
+    NormalClearanceHoleFit = 1
+    LooseClearanceHoleFit = 2
+
 class CoilFeatureSectionPositions():
     """
     List of the section positions of coil feature.
@@ -271,6 +291,81 @@ class ConfigurationThreadColumns():
     TaperedSize_DesignationColumns = 5
     TaperedDesignationColumns = 6
 
+class CornerBendTransitionTypes():
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    The different bend transition types for corner closures.
+    """
+    def __init__(self):
+        pass
+    SmoothCornerBendTransitionType = 0
+    StraightLineCornerBendTransitionType = 1
+    TrimToBendCornerBendTransitionType = 2
+
+class CornerClosureFeatureDefinitionTypes():
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    The different types of corner closures that can be created.
+    """
+    def __init__(self):
+        pass
+    UndefinedCornerClosureFeatureDefinitionType = 0
+    TwoBendCornerClosureFeatureDefinitionType = 1
+    ThreeBendCornerClosureFeatureDefinitionType = 2
+
+class CornerThreeBendReliefShapeTypes():
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    The different relief shapes for three-bend corner closures.
+    """
+    def __init__(self):
+        pass
+    NoReplacementCornerThreeBendReliefShapeType = 0
+    IntersectionCornerThreeBendReliefShapeType = 1
+    FullRoundCornerThreeBendReliefShapeType = 2
+    RoundWithRadiusCornerThreeBendReliefShapeType = 3
+
+class CornerTwoBendReliefPlacementTypes():
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    The different placement types for two-bend corner relief.
+    """
+    def __init__(self):
+        pass
+    TangentCornerTwoBendReliefPlacementType = 0
+    IntersectionCornerTwoBendReliefPlacementType = 1
+    VertexCornerTwoBendReliefPlacementType = 2
+
+class CornerTwoBendReliefShapeTypes():
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    The different relief shapes for two-bend corner closures.
+    """
+    def __init__(self):
+        pass
+    RoundCornerTwoBendReliefShapeType = 0
+    SquareCornerTwoBendReliefShapeType = 1
+    TearCornerTwoBendReliefShapeType = 2
+    TrimToBendCornerTwoBendReliefShapeType = 3
+    LinearWeldCornerTwoBendReliefShapeType = 4
+    ArcWeldCornerTwoBendReliefShapeType = 5
+    LaserWeldCornerTwoBendReliefShapeType = 6
+
 class CustomGraphicsBillBoardStyles():
     """
     Specifies the different styles that can be used to control billboarding.
@@ -328,6 +423,20 @@ class DeleteMeError():
         pass
     ParameterReferencedByOtherParameterError = 200
 
+class DesignIntentTypes():
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    The different types of design intent.
+    """
+    def __init__(self):
+        pass
+    PartDesignIntentType = 0
+    AssemblyDesignIntentType = 1
+    HybridDesignIntentType = 2
+
 class DesignTypes():
     """
     Fusion design types
@@ -346,6 +455,22 @@ class DimensionOrientations():
     AlignedDimensionOrientation = 0
     HorizontalDimensionOrientation = 1
     VerticalDimensionOrientation = 2
+
+class DimensionStrategyTypes():
+    """
+    Defines the available dimension strategies for auto constraining sketches. These strategies
+    control how dimensions are generated when automatically constraining sketch geometry.
+    """
+    def __init__(self):
+        pass
+    DefaultDimensionStrategyType = 0
+    ChainDimensionStrategyType = 1
+    BaselineDimensionStrategyType = 2
+    EdgeAndAlignedDimensionStrategyType = 3
+    SymmetricAndChainDimensionStrategyType = 4
+    SymmetricAndBaselineDimensionStrategyType = 5
+    EdgeAndAlignedHigherAngleDimPriorityDimensionStrategyType = 6
+    EdgeAndAlignedWithBaselineDimensionStrategyType = 7
 
 class DistanceUnits():
     """
@@ -420,6 +545,34 @@ class FeatureOperations():
     NewBodyFeatureOperation = 3
     NewComponentFeatureOperation = 4
 
+class FilletFeatureTypes():
+    """
+    List of the fillet feature types.
+    """
+    def __init__(self):
+        pass
+    FilletFeatureType = 0
+    RuleFilletFeatureType = 1
+    FullRoundFilletFeatureType = 2
+
+class HemFeatureDefinitionTypes():
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    The different types of hems that can be created.
+    """
+    def __init__(self):
+        pass
+    UndefinedHemFeatureDefinitionType = 0
+    FlatHemFeatureDefinitionType = 1
+    OpenHemFeatureDefinitionType = 2
+    RolledHemFeatureDefinitionType = 3
+    TeardropHemFeatureDefinitionType = 4
+    RopeHemFeatureDefinitionType = 5
+    DoubleHemFeatureDefinitionType = 6
+
 class HoleEdgePositions():
     """
     List of the valid edge positions for holes.
@@ -430,6 +583,17 @@ class HoleEdgePositions():
     EdgeMidPointPosition = 1
     EdgeEndPointPosition = 2
 
+class HoleTapTypes():
+    """
+    List of the valid tap types for holes.
+    """
+    def __init__(self):
+        pass
+    SimpleHoleTapType = 0
+    ClearanceHoleTapType = 1
+    TappedHoleTapType = 2
+    TaperTappedHoleTapType = 3
+
 class HoleTypes():
     """
     List of the different types of holes.
@@ -439,6 +603,17 @@ class HoleTypes():
     SimpleHoleType = 0
     CounterboreHoleType = 1
     CountersinkHoleType = 2
+
+class InterLoopDimensionStrategyTypes():
+    """
+    Defines dimension strategies for sketches with multiple loops. These strategies control how
+    dimensions are created between different loops (profiles) within the same sketch.
+    """
+    def __init__(self):
+        pass
+    DefaultInterLoopDimensionStrategyType = 0
+    ChainInterLoopDimensionStrategyType = 1
+    BaselineInterLoopDimensionStrategyType = 2
 
 class JointDirections():
     """
@@ -480,6 +655,25 @@ class JointKeyPointTypes():
     MiddleKeyPoint = 1
     EndKeyPoint = 2
     CenterKeyPoint = 3
+
+class JointMotionTypes():
+    """
+    List of the various types of motions of joints.
+    """
+    def __init__(self):
+        pass
+    BallJointPitchMotionType = 0
+    BallJointRollMotionType = 1
+    BallJointYawMotionType = 2
+    CylindricalJointRotateMotionType = 3
+    CylindricalJointSlideMotionType = 4
+    PinSlotJointRotateMotionType = 5
+    PinSlotJointSlideMotionType = 6
+    PlanarJointRotateMotionType = 7
+    PlanarJointSlideOneMotionType = 8
+    PlanarJointSlideTwoMotionType = 9
+    RevoluteJointRotateMotionType = 10
+    SliderJointSlideMotionType = 11
 
 class JointQuadrantAngleTypes():
     """
@@ -531,6 +725,42 @@ class JointTypes():
     PlanarJointType = 5
     BallJointType = 6
     InferredJointType = 7
+
+class LeaderLineNotePlaneTypes():
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Specifies the plane type used for Leader Line Note PMI positioning.
+    
+    This defines whether there is a referenced face/edge used in generating the plane positioning.
+    """
+    def __init__(self):
+        pass
+    UnknownLeaderLineNotePlaneType = 0
+    NormalToFaceLeaderLineNotePlaneType = 1
+    NormalToCustomFaceLeaderLineNotePlaneType = 2
+    NormalToCircularEdgeLeaderLineNotePlaneType = 3
+    AxisCylinderAndConeLeaderLineNotePlaneType = 4
+    PrincipalXYLeaderLineNotePlaneType = 5
+    PrincipalYZLeaderLineNotePlaneType = 6
+    PrincipalZXLeaderLineNotePlaneType = 7
+
+class LinearDiameterDimensionPreferenceTypes():
+    """
+    Defines preferences for linear diameter dimensions in sketches. Linear diameter dimensions
+    measure the diameter of circular or rotational features using a centerline and parallel edges
+    or points, rather than directly dimensioning a circle or arc. The dimension displays with the
+    Ø symbol and measures the full diameter across the feature. This dimensioning style is commonly
+    used for turned components and rotational features in machining drawings, where you dimension
+    the diameter using a centerline as the reference rather than the circular geometry itself.
+    """
+    def __init__(self):
+        pass
+    DefaultLinearDiameterDimensionPreferenceType = 0
+    PreferLinearDiameterDimensionPreferenceType = 1
+    AvoidLinearDiameterDimensionPreferenceType = 2
 
 class LineStylePatterns():
     """
@@ -591,6 +821,19 @@ class MassUnits():
     OunceMassUnits = 3
     TonMassUnits = 4
     SlugMassUnits = 5
+
+class MeshCombineAlgorithmTypes():
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Specify the combine method for the mesh.
+    """
+    def __init__(self):
+        pass
+    LegacyMeshCombineAlgorithmType = 0
+    EnhancedMeshCombineAlgorithmType = 1
 
 class MeshCombineOperationTypes():
     """
@@ -741,6 +984,8 @@ class MeshRepairRebuildTypes():
     PreserveSharpEdgesMeshRepairRebuildType = 1
     AccurateMeshRepairRebuildType = 2
     BlockyMeshRepairRebuildType = 3
+    AdaptiveMeshRepairRebuildType = 4
+    AdaptivePreserveSharpEdgesMeshRepairRebuildType = 5
 
 class MeshRepairTypes():
     """
@@ -756,6 +1001,7 @@ class MeshRepairTypes():
     StitchAndRemoveMeshRepairType = 1
     WrapMeshRepairType = 2
     RebuildMeshRepairType = 3
+    OneTouchFixMeshRepairType = 4
 
 class MeshSeparateTypes():
     """
@@ -794,6 +1040,15 @@ class OffsetCornerTypes():
     LinearOffsetCornerType = 1
     ExtendedOffsetCornerType = 2
 
+class ParameterValueTypes():
+    """
+    Specifies the different types of values that a parameter can be.
+    """
+    def __init__(self):
+        pass
+    NumericParameterValueType = 0
+    TextParameterValueType = 1
+
 class PatternComputeOptions():
     """
     List of the compute options for mirroring and patterning features in the parametric modeling environment.
@@ -823,6 +1078,7 @@ class PatternEntityTypes():
     FeaturesPatternType = 1
     BodiesPatternType = 2
     OccurrencesPatternType = 3
+    ConstructionGeometryPatternType = 4
 
 class PipeSectionTypes():
     """
@@ -833,6 +1089,304 @@ class PipeSectionTypes():
     CircularPipeSectionType = 0
     SquarePipeSectionType = 1
     TriangularPipeSectionType = 2
+
+class PMIAngleRelatorTypes():
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Defines the measured angle on an angular dimension.
+    """
+    def __init__(self):
+        pass
+    InvalidPMIAngleRelatorType = 0
+    EqualPMIAngleRelatorType = 1
+    LargePMIAngleRelatorType = 2
+    SmallPMIAngleRelatorType = 3
+
+class PMIDatumModifierTypes():
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Specifies the various types of datum modifiers that can be associated with a datum reference.
+    """
+    def __init__(self):
+        pass
+    FreeStatePMIDatumModifierType = 0
+    BasicPMIDatumModifierType = 1
+    TranslationPMIDatumModifierType = 2
+    LeastMaterialRequirementPMIDatumModifierType = 3
+    MaximumMaterialRequirementPMIDatumModifierType = 4
+    PointPMIDatumModifierType = 5
+    LinePMIDatumModifierType = 6
+    PlanePMIDatumModifierType = 7
+    OrientationPMIDatumModifierType = 8
+    AnyCrossSectionPMIDatumModifierType = 9
+    AnyLongitudinalSectionPMIDatumModifierType = 10
+    ContactingFeaturePMIDatumModifierType = 11
+    DistancingVariablePMIDatumModifierType = 12
+    DegreeOfFreedomConstraintXPMIDatumModifierType = 13
+    DegreeOfFreedomConstraintYPMIDatumModifierType = 14
+    DegreeOfFreedomConstraintZPMIDatumModifierType = 15
+    DegreeOfFreedomConstraintUPMIDatumModifierType = 16
+    DegreeOfFreedomConstraintVPMIDatumModifierType = 17
+    DegreeOfFreedomConstraintWPMIDatumModifierType = 18
+    MinorDiameterPMIDatumModifierType = 19
+    MajorDiameterPMIDatumModifierType = 20
+    PitchDiameterPMIDatumModifierType = 21
+    CircularOrCylindricalPMIDatumModifierType = 22
+    DistancePMIDatumModifierType = 23
+    ProjectedPMIDatumModifierType = 24
+    SphericalPMIDatumModifierType = 25
+
+class PMIDatumTargetTypes():
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Specifies the various types of a datum target.
+    """
+    def __init__(self):
+        pass
+    PointPMIDatumTargetType = 0
+    LinePMIDatumTargetType = 1
+    AreaPMIDatumTargetType = 2
+    CirclePMIDatumTargetType = 3
+    RectanglePMIDatumTargetType = 4
+
+class PMILaySymbolTypes():
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Defines the lay symbol type, which indicates the direction of predominant surface pattern.
+    """
+    def __init__(self):
+        pass
+    NonePMILaySymbolType = 0
+    ParallelPMILaySymbolType = 1
+    PerpendicularPMILaySymbolType = 2
+    CrosshatchPMILaySymbolType = 3
+    MultidirectionalPMILaySymbolType = 4
+    CircularPMILaySymbolType = 5
+    RadialPMILaySymbolType = 6
+    ParticulatePMILaySymbolType = 7
+
+class PMISegmentTypes():
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Specifies the various types of PMISegment that can be used to define the text of a PMI.
+    Used by both the PMIInput and PMICreatedAnnotation.
+    """
+    def __init__(self):
+        pass
+    TextPMISegmentType = 0
+    SymbolPMISegmentType = 1
+    LineBreakPMISegmentType = 2
+
+class PMIStandardTypes():
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Specifies the PMI standard types.
+    """
+    def __init__(self):
+        pass
+    ASMEPMIStandardType = 0
+    ISOPMIStandardType = 1
+
+class PMISurfaceTextureParameterTypes():
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Specifies the surface texture parameter type.
+    """
+    def __init__(self):
+        pass
+    MeanRoughnessPMISurfaceTextureParameterType = 0
+    MaximumRoughnessDepthPMISurfaceTextureParameterType = 1
+    MeanRoughnessDepthPMISurfaceTextureParameterType = 2
+    WavinessPMISurfaceTextureParameterType = 3
+
+class PMISurfaceTextureStandardTypes():
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Specifies the surface texture standard used for the PMI.
+    """
+    def __init__(self):
+        pass
+    UnknownPMISurfaceTextureStandardType = 0
+    JISPMISurfaceTextureStandardType = 1
+    ISOPMISurfaceTextureStandardType = 2
+    DINPMISurfaceTextureStandardType = 3
+    GBPMISurfaceTextureStandardType = 4
+    ESKDPMISurfaceTextureStandardType = 5
+    ANSI_Y1436_1993PMISurfaceTextureStandardType = 6
+    ASME_Y1436M_1996PMISurfaceTextureStandardType = 7
+    ISO_1302_1992PMISurfaceTextureStandardType = 8
+    DIN_EN_ISO_1302_1992PMISurfaceTextureStandardType = 9
+    ISO_1302_2002PMISurfaceTextureStandardType = 10
+    DIN_EN_ISO_1302_2002PMISurfaceTextureStandardType = 11
+
+class PMISurfaceTextureTypes():
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Defines the type of surface texture PMI.
+    """
+    def __init__(self):
+        pass
+    OpenPMISurfaceTextureType = 0
+    RemovalRequiredPMISurfaceTextureType = 1
+    RemovalProhibitedPMISurfaceTextureType = 2
+
+class PMISymbolTypes():
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Specifies the available symbols that can be used to create a PMISymbolSegment.
+    
+    These symbols represent GDT (Geometric Dimensioning and Tolerancing) and manufacturing symbols.
+    """
+    def __init__(self):
+        pass
+    DiameterPMISymbolType = 0
+    TolerancePMISymbolType = 1
+    DegreesPMISymbolType = 2
+    SquarenessPMISymbolType = 3
+    CenterLinePMISymbolType = 4
+    PositionPMISymbolType = 5
+    CounterborePMISymbolType = 6
+    CountersinkPMISymbolType = 7
+    DepthPMISymbolType = 8
+    ConicalTaperPMISymbolType = 9
+    SlopePMISymbolType = 10
+    NotEqualPMISymbolType = 11
+    EnvelopePMISymbolType = 12
+    FreeStatePMISymbolType = 13
+    LeastMaterialConditionPMISymbolType = 14
+    MaximumMaterialConditionPMISymbolType = 15
+    ProjectedTolerancePMISymbolType = 16
+    StraightnessPMISymbolType = 17
+    CylindricityPMISymbolType = 18
+    AngularityPMISymbolType = 19
+    SymmetryPMISymbolType = 20
+    FlatnessPMISymbolType = 21
+    LineProfilePMISymbolType = 22
+    PerpendicularityPMISymbolType = 23
+    ConcentricityPMISymbolType = 24
+    TotalRunoutPMISymbolType = 25
+    CircularityPMISymbolType = 26
+    SurfaceProfilePMISymbolType = 27
+    ParallelismPMISymbolType = 28
+    CircularRunoutPMISymbolType = 29
+
+class PMIToleranceTypes():
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Specifies the various types of tolerances that can be associated with PMIGeometricValue.
+    """
+    def __init__(self):
+        pass
+    SymmetricPMIToleranceType = 0
+    DeviationPMIToleranceType = 1
+    LimitsStackedPMIToleranceType = 2
+    LimitsLinearPMIToleranceType = 3
+    MAXPMIToleranceType = 4
+    MINPMIToleranceType = 5
+    LimitsFitsStackedPMIToleranceType = 6
+    LimitsFitsLinearPMIToleranceType = 7
+    LimitsFitsSizeLimitsPMIToleranceType = 8
+    LimitsFitsTolerancePMIToleranceType = 9
+
+class PMITypes():
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Specifies the various types of PMI (Product Manufacturing Information).
+    """
+    def __init__(self):
+        pass
+    UnknownPMIType = 0
+    FolderPMIType = 1
+    GraphicalPMIType = 2
+    DiameterDimensionPMIType = 3
+    RadiusDimensionPMIType = 4
+    MinorDiameterDimensionPMIType = 5
+    MajorDiameterDimensionPMIType = 6
+    MinorRadiusDimensionPMIType = 7
+    MajorRadiusDimensionPMIType = 8
+    CurveLengthDimensionPMIType = 9
+    ThicknessDimensionPMIType = 10
+    AngularSizeDimensionPMIType = 11
+    LinearDimensionPMIType = 12
+    CenterOuterDimensionPMIType = 13
+    CenterInnerDimensionPMIType = 14
+    OuterOuterDimensionPMIType = 15
+    OuterInnerDimensionPMIType = 16
+    InnerInnerDimensionPMIType = 17
+    CurvedDimensionPMIType = 18
+    AngularLocationDimensionPMIType = 19
+    GDTDatumPMIType = 20
+    FlatnessPMIType = 21
+    RoundnessPMIType = 22
+    StraightnessPMIType = 23
+    AngularityPMIType = 24
+    CylindricityPMIType = 25
+    CoaxialityPMIType = 26
+    ParallelismPMIType = 27
+    PerpendicularityPMIType = 28
+    PositionPMIType = 29
+    SurfaceProfilePMIType = 30
+    LineProfilePMIType = 31
+    ConcentricityPMIType = 32
+    SymmetryPMIType = 33
+    CircularRunoutPMIType = 34
+    TotalRunoutPMIType = 35
+    NotePMIType = 36
+    SurfaceTexturePMIType = 37
+    HoleNotePMIType = 38
+
+class PMIUnitTypes():
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Specifies the units to be used in displaying the PMIAnnotation.
+    """
+    def __init__(self):
+        pass
+    UseDocumentUnitPMIUnitType = 0
+    MillimetersPMIUnitType = 1
+    CentimetersPMIUnitType = 2
+    MetersPMIUnitType = 3
+    InchesPMIUnitType = 4
+    FeetPMIUnitType = 5
 
 class PointContainment():
     """
@@ -924,6 +1478,25 @@ class RuledSurfaceTypes():
     TangentRuledSurfaceType = 0
     NormalRuledSurfaceType = 1
     DirectionRuledSurfaceType = 2
+
+class RuleFilletRuleTypes():
+    """
+    List of the rule types of rule fillet.
+    """
+    def __init__(self):
+        pass
+    AllEdgesRuleFilletRuleType = 0
+    BetweenFacesOrFeaturesRuleFilletRuleType = 1
+
+class RuleFilletTopologyTypes():
+    """
+    List of the topology types of rule fillet.
+    """
+    def __init__(self):
+        pass
+    RoundsAndFilletsRuleFilletTopologyType = 0
+    RoundsOnlyRuleFilletTopologyType = 1
+    FilletsOnlyRuleFilletTopologyType = 2
 
 class ShellTypes():
     """
@@ -1066,6 +1639,19 @@ class SweepSolidOrientationTypes():
     RigidSolidOrientationType = 1
     AlignedSolidOrientationType = 2
 
+class SymmetricDimensionStrategyTypes():
+    """
+    Defines dimension strategies for symmetric geometry. These strategies control how dimensions
+    are created when symmetric features are detected in the sketch.
+    """
+    def __init__(self):
+        pass
+    DefaultSymmetricDimensionStrategyType = 0
+    EndToEndSymmetricDimensionStrategyType = 1
+    EndToCenterSymmetricDimensionStrategyType = 2
+    CenterToEndSymmetricDimensionStrategyType = 3
+    CenterToEndWithSymmetryConstraintSymmetricDimensionStrategyType = 4
+
 class TessellateRefinementTypes():
     """
     !!!!! Warning !!!!!
@@ -1114,6 +1700,15 @@ class TextStyles():
     TextStyleItalic = 2
     TextStyleUnderline = 4
 
+class ThickenTypes():
+    """
+    List of Thicken Types
+    """
+    def __init__(self):
+        pass
+    SharpThickenType = 0
+    RoundedThickenType = 1
+
 class ThinExtrudeWallLocation():
     """
     List of Thin Extrude Wall Locations
@@ -1157,13 +1752,14 @@ class TriangleMeshQualityOptions():
 
 class TwoBendReliefPlacements():
     """
-    The placement options for a two bend relief.
+    The placement options for a two-bend relief.
     """
     def __init__(self):
         pass
     NoTwoBendReliefPlacement = 0
     IntersectionTwoBendReliefPlacement = 1
     TangentTwoBendReliefPlacement = 2
+    VertexTwoBendReliefPlacement = 3
 
 class TwoBendReliefShapes():
     """
@@ -1177,6 +1773,7 @@ class TwoBendReliefShapes():
     TrimToBendTwoBendReliefShape = 3
     LinearWeldTwoBendReliefShape = 4
     ArcWeldTwoBendReliefShape = 5
+    LaserWeldTwoBendReliefShape = 6
 
 class UnitSystems():
     """
@@ -1562,10 +2159,6 @@ class AreaProperties(core.Base):
 
 class ArrangeComponent(core.Base):
     """
-    !!!!! Warning !!!!!
-    ! This is in preview state; please see the help for more info
-    !!!!! Warning !!!!!
-    
     Defines a component within an arrangement. This specifies an occurrence along with additional
     arrangement information. This object is the API equivalent of a single line within the component
     list shown in the Arrange dialog. This object is used for both the creation of a new Arrange
@@ -1631,7 +2224,7 @@ class ArrangeComponent(core.Base):
     @property
     def isDirectionFlipped(self) -> bool:
         """
-        Specifies if the direction is flipped from it's default direction.
+        Specifies if the direction is flipped from its default direction.
         
         For a component defined by a face the default direction is defined by the selected face
         and the isGlobalDirectionFaceUp property of the Arrange2DDefinition associated with the
@@ -1647,7 +2240,7 @@ class ArrangeComponent(core.Base):
     @isDirectionFlipped.setter
     def isDirectionFlipped(self, value: bool):
         """
-        Specifies if the direction is flipped from it's default direction.
+        Specifies if the direction is flipped from its default direction.
         
         For a component defined by a face the default direction is defined by the selected face
         and the isGlobalDirectionFaceUp property of the Arrange2DDefinition associated with the
@@ -1760,12 +2353,8 @@ class ArrangeComponent(core.Base):
 
 class ArrangeComponents(core.Base):
     """
-    !!!!! Warning !!!!!
-    ! This is in preview state; please see the help for more info
-    !!!!! Warning !!!!!
-    
     The collection of ArrangeComponent objects associated with an arrangement. This provides
-    access to existing ArrangeComponent objects and supports adding new components to the
+    access to existing ArrangeComponent objects and supports adding new components to
     the arrangement. An ArrangeComponent object defines an occurrence along with additional
     arrangement information. This object is used for both the creation of a new Arrange
     feature and querying and modifying an existing Arrange feature.
@@ -1814,10 +2403,6 @@ class ArrangeComponents(core.Base):
 
 class ArrangeDefinition(core.Base):
     """
-    !!!!! Warning !!!!!
-    ! This is in preview state; please see the help for more info
-    !!!!! Warning !!!!!
-    
     The ArrangeDefinition object is the base class for the ArrangeDefinition2D and ArrangeDefinition3D
     objects. It provides access to the information that defines an existing Arrange feature.
     """
@@ -1835,17 +2420,13 @@ class ArrangeDefinition(core.Base):
     @property
     def isCreateCopies(self) -> bool:
         """
-        Gets if the original components were moved to create the arrangement or copied were created.
+        Gets if the original components were moved to create the arrangement or copies were created.
         This value can only be set when creating a new arrangement.
         """
         return bool()
 
 class ArrangeDefinitionInput(core.Base):
     """
-    !!!!! Warning !!!!!
-    ! This is in preview state; please see the help for more info
-    !!!!! Warning !!!!!
-    
     The ArrangeDefinition object is the base class for the ArrangeDefinition2D and ArrangeDefinition3D
     objects. It provides access to the information that defines an existing Arrange feature.
     """
@@ -1863,24 +2444,20 @@ class ArrangeDefinitionInput(core.Base):
     @property
     def isCreateCopies(self) -> bool:
         """
-        Gets and set if the original components will be moved or copied to create the arrangement.
+        Gets and sets if the original components will be moved or copied to create the arrangement.
         This defaults to true.
         """
         return bool()
     @isCreateCopies.setter
     def isCreateCopies(self, value: bool):
         """
-        Gets and set if the original components will be moved or copied to create the arrangement.
+        Gets and sets if the original components will be moved or copied to create the arrangement.
         This defaults to true.
         """
         pass
 
 class ArrangeEnvelopeDefinition(core.Base):
     """
-    !!!!! Warning !!!!!
-    ! This is in preview state; please see the help for more info
-    !!!!! Warning !!!!!
-    
     The ArrangeEnvelope object is the base class for the different types of arrangement
     envelopes and provides access to the information that defines the envelope(s). This
     defines the settings of the envelope and the EnvelopeResult provides access to the
@@ -1935,10 +2512,6 @@ class ArrangeEnvelopeDefinition(core.Base):
 
 class ArrangeEnvelopeInput(core.Base):
     """
-    !!!!! Warning !!!!!
-    ! This is in preview state; please see the help for more info
-    !!!!! Warning !!!!!
-    
     The base class used to define the arrange envelope when creating an Arrange feature.
     """
     def __init__(self):
@@ -2023,8 +2596,8 @@ class ArrangeEnvelopeInput(core.Base):
     @property
     def objectSpacing(self) -> core.ValueInput:
         """
-        Specifies the minimum clearance between components in the arrangement. for a 3D layout this
-        also specified the distance between the components in the Z direction.
+        Specifies the minimum clearance between components in the arrangement. For a 3D layout, this
+        also specifies the distance between the components in the Z direction.
         
         This value will become a parameter when the arrangement is created. If the ValueInput is created
         using a real number it is in centimeters. If you use a string, it is evaluated the same as a value
@@ -2037,8 +2610,8 @@ class ArrangeEnvelopeInput(core.Base):
     @objectSpacing.setter
     def objectSpacing(self, value: core.ValueInput):
         """
-        Specifies the minimum clearance between components in the arrangement. for a 3D layout this
-        also specified the distance between the components in the Z direction.
+        Specifies the minimum clearance between components in the arrangement. For a 3D layout, this
+        also specifies the distance between the components in the Z direction.
         
         This value will become a parameter when the arrangement is created. If the ValueInput is created
         using a real number it is in centimeters. If you use a string, it is evaluated the same as a value
@@ -2051,10 +2624,6 @@ class ArrangeEnvelopeInput(core.Base):
 
 class ArrangeFeatureInput(core.Base):
     """
-    !!!!! Warning !!!!!
-    ! This is in preview state; please see the help for more info
-    !!!!! Warning !!!!!
-    
     The ArrangeFeatureInput object is the base class for the different types of input
     objects used to create an arrange feature.
     """
@@ -2151,12 +2720,8 @@ class ArrangeFeatureInput(core.Base):
 
 class ArrangeFeatures(core.Base):
     """
-    !!!!! Warning !!!!!
-    ! This is in preview state; please see the help for more info
-    !!!!! Warning !!!!!
-    
     Provides access to the Arrange features in a component and provides the functionality
-    to create new Arrange features
+    to create new Arrange features.
     """
     def __init__(self):
         pass
@@ -2200,7 +2765,7 @@ class ArrangeFeatures(core.Base):
         input : The ArrangeFeature2DInput or ArrangeFeature3DInput object that defines the required information needed to create a new Arrange feature.
         An ArrangeFeatureInput object is the logical equivalent to the command dialog when creating an Arrange feature.
         It provides access to the various options and collects all of the required input when creating an Arrange feature and
-        call the add method is the API equivalent to clicking the OK button on the command dialog to create the Arrange feature.
+        calling the add method is the API equivalent to clicking the OK button on the command dialog to create the Arrange feature.
         Returns the newly created ArrangeFeature object.
         """
         return ArrangeFeature()
@@ -2213,10 +2778,6 @@ class ArrangeFeatures(core.Base):
 
 class ArrangeOccurrenceResult(core.Base):
     """
-    !!!!! Warning !!!!!
-    ! This is in preview state; please see the help for more info
-    !!!!! Warning !!!!!
-    
     The ArrangeOccurrence object represents a single occurrence within an Arrange
     envelope.
     """
@@ -2235,7 +2796,7 @@ class ArrangeOccurrenceResult(core.Base):
     def arrangeComponent(self) -> ArrangeComponent:
         """
         The ArrangeComponent from the Arrange definition that resulted in the
-        create of this occurrence.
+        creation of this occurrence.
         """
         return ArrangeComponent()
     @property
@@ -2247,10 +2808,6 @@ class ArrangeOccurrenceResult(core.Base):
 
 class ArrangeOccurrenceResults(core.Base):
     """
-    !!!!! Warning !!!!!
-    ! This is in preview state; please see the help for more info
-    !!!!! Warning !!!!!
-    
     A collection that contains the occurrences in an Arrange envelope.
     """
     def __init__(self):
@@ -2280,10 +2837,6 @@ class ArrangeOccurrenceResults(core.Base):
 
 class ArrangeResultEnvelope(core.Base):
     """
-    !!!!! Warning !!!!!
-    ! This is in preview state; please see the help for more info
-    !!!!! Warning !!!!!
-    
     The ArrangeResult object represents the results of an arrangement
     for a single envelope.
     """
@@ -2328,10 +2881,6 @@ class ArrangeResultEnvelope(core.Base):
 
 class ArrangeResultEnvelopes(core.Base):
     """
-    !!!!! Warning !!!!!
-    ! This is in preview state; please see the help for more info
-    !!!!! Warning !!!!!
-    
     Provides access to the results of an arrangement. For 3D arrangements, this will always
     contain a single result. For plane or profile envelopes this can contain multiple envelope results.
     """
@@ -2566,7 +3115,7 @@ class AsBuiltJoint(core.Base):
     def nativeObject(self) -> AsBuiltJoint:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -2651,6 +3200,12 @@ class AsBuiltJoint(core.Base):
         no longer available.
         """
         return core.Matrix3D()
+    @property
+    def motionLinks(self) -> list[MotionLink]:
+        """
+        Returns the MotionLink objects that this joint is involved in.
+        """
+        return [MotionLink()]
 
 class AsBuiltJointInput(core.Base):
     """
@@ -2939,7 +3494,7 @@ class AssemblyConstraint(core.Base):
     def nativeObject(self) -> AssemblyConstraint:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -3100,6 +3655,86 @@ class AssemblyConstraints(core.Base):
         Returns the number of assembly constraint objects in the collection.
         """
         return int()
+
+class AutoConstrainInput(core.Base):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    The AutoConstrainInput object is used to define the various options when adding dimension
+    and geometric constraints to help constrain a sketch.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> AutoConstrainInput:
+        return AutoConstrainInput()
+    @property
+    def datumPoint(self) -> SketchPoint:
+        """
+        Gets and sets an optional datum point that the dimensions will be based on. This defaults to null,
+        which indicates there is no datum point specified. When no datum point is provided, AutoConstrain
+        will automatically select an appropriate datum based on the sketch content and geometry.
+        """
+        return SketchPoint()
+    @datumPoint.setter
+    def datumPoint(self, value: SketchPoint):
+        """
+        Gets and sets an optional datum point that the dimensions will be based on. This defaults to null,
+        which indicates there is no datum point specified. When no datum point is provided, AutoConstrain
+        will automatically select an appropriate datum based on the sketch content and geometry.
+        """
+        pass
+    @property
+    def parentSketch(self) -> Sketch:
+        """
+        Returns the Sketch this object is associated with and where the dimension and geometric constraints
+        will be added when the autoConstrain method is called. This property is read-only and is set when
+        the input object is created by the sketch's createAutoConstrainInput method.
+        """
+        return Sketch()
+
+class AutoConstrainResult(core.Base):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Provides the result information after a sketch auto constrain operation has been executed.
+    This object contains details about what constraints and dimensions were added and whether
+    the sketch was successfully fully constrained.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> AutoConstrainResult:
+        return AutoConstrainResult()
+    @property
+    def addedDimensions(self) -> list[SketchDimension]:
+        """
+        Returns an array of the SketchDimension objects that were added to constrain the sketch.
+        If no dimensions were added during the auto constrain operation, this property returns
+        an empty array.
+        """
+        return [SketchDimension()]
+    @property
+    def addedConstraints(self) -> list[GeometricConstraint]:
+        """
+        Returns an array of the GeometricConstraint objects that were added to constrain the sketch.
+        If no geometric constraints were added during the auto constrain operation, this property
+        returns an empty array.
+        """
+        return [GeometricConstraint()]
+    @property
+    def isFullyConstrained(self) -> bool:
+        """
+        Indicates if the auto constrain operation successfully auto constrained the sketch. Returns true if
+        the sketch is fully constrained after the operation, false otherwise. A value of false may indicate
+        that additional constraints are needed or that the current sketch geometry cannot be fully constrained
+        with the current settings.
+        """
+        return bool()
 
 class BaseComponent(core.Base):
     """
@@ -3265,6 +3900,17 @@ class BaseComponent(core.Base):
         existing decals and supports the creation of new decals.
         """
         return Decals()
+    @property
+    def pmiAnnotations(self) -> PMIAnnotations:
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        Returns the PMI collection associated with this component.
+        This provides access to the existing PMI and supports the creation of new PMI.
+        """
+        return PMIAnnotations()
 
 class BaseFeatures(core.Base):
     """
@@ -3310,7 +3956,7 @@ class BaseFeatures(core.Base):
 
 class BossFeatureInput(core.Base):
     """
-    This class defines the methods and properties that pertain to the definition of a boss feature or a boss connection
+    This class defines the methods and properties that pertain to the definition of a boss feature or a boss connection.
     """
     def __init__(self):
         pass
@@ -3368,7 +4014,7 @@ class BossFeatureInput(core.Base):
         In order for geometry to be transformed correctly, an Occurrence for creation needs to be
         specified when the boss feature is created based on geometry (e.g. point) in another
         component AND (the boss) is not in the root component.
-        The CreationOccurrence is analogous to the active occurrence in the UI
+        The CreationOccurrence is analogous to the active occurrence in the UI.
         A value of null indicates that everything is in the context of a single component.
         The occurrence provided sets scope for detection of target participant bodies.
         """
@@ -3379,7 +4025,7 @@ class BossFeatureInput(core.Base):
         In order for geometry to be transformed correctly, an Occurrence for creation needs to be
         specified when the boss feature is created based on geometry (e.g. point) in another
         component AND (the boss) is not in the root component.
-        The CreationOccurrence is analogous to the active occurrence in the UI
+        The CreationOccurrence is analogous to the active occurrence in the UI.
         A value of null indicates that everything is in the context of a single component.
         The occurrence provided sets scope for detection of target participant bodies.
         """
@@ -3435,25 +4081,25 @@ class BossFeatureInput(core.Base):
     @property
     def isDefaultDirection(self) -> bool:
         """
-        Get or set if the boss feature (or boss connection) goes in the default direction or is reversed.
+        Gets or sets if the boss feature (or boss connection) goes in the default direction or is reversed.
         """
         return bool()
     @isDefaultDirection.setter
     def isDefaultDirection(self, value: bool):
         """
-        Get or set if the boss feature (or boss connection) goes in the default direction or is reversed.
+        Gets or sets if the boss feature (or boss connection) goes in the default direction or is reversed.
         """
         pass
     @property
     def offset(self) -> core.ValueInput:
         """
-        Get or set offset of the parting face from the selected position point.
+        Gets or sets offset of the parting face from the selected position point.
         """
         return core.ValueInput()
     @offset.setter
     def offset(self, value: core.ValueInput):
         """
-        Get or set offset of the parting face from the selected position point.
+        Gets or sets offset of the parting face from the selected position point.
         """
         pass
 
@@ -3513,7 +4159,7 @@ class BossFeatures(core.Base):
 
 class BossFeatureSideInput(core.Base):
     """
-    This class defines the methods and properties that pertain to the definition of a single side of boss feature
+    This class defines the methods and properties that pertain to the definition of a single side of boss feature.
     """
     def __init__(self):
         pass
@@ -3575,25 +4221,25 @@ class BossFeatureSideInput(core.Base):
     @property
     def alignmentType(self) -> BossAlignmentTypes:
         """
-        Get or set boss alignment shape. This usually corresponds to the alignment shape of the boss counterpart.
+        Gets or sets boss alignment shape. This usually corresponds to the alignment shape of the boss counterpart.
         """
         return BossAlignmentTypes()
     @alignmentType.setter
     def alignmentType(self, value: BossAlignmentTypes):
         """
-        Get or set boss alignment shape. This usually corresponds to the alignment shape of the boss counterpart.
+        Gets or sets boss alignment shape. This usually corresponds to the alignment shape of the boss counterpart.
         """
         pass
     @property
     def holeExtentType(self) -> BossHoleExtentTypes:
         """
-        Get or set hole extent this feature represents. For top side only through hole extent is accepted.
+        Gets or sets hole extent this feature represents. For top side only through hole extent is accepted.
         """
         return BossHoleExtentTypes()
     @holeExtentType.setter
     def holeExtentType(self, value: BossHoleExtentTypes):
         """
-        Get or set hole extent this feature represents. For top side only through hole extent is accepted.
+        Gets or sets hole extent this feature represents. For top side only through hole extent is accepted.
         """
         pass
     @property
@@ -3611,103 +4257,103 @@ class BossFeatureSideInput(core.Base):
     @property
     def offsetClearance(self) -> core.ValueInput:
         """
-        Get or set offset clearance as additional small offset from the selected parting plane and position point.
+        Gets or sets offset clearance as additional small offset from the selected parting plane and position point.
         """
         return core.ValueInput()
     @offsetClearance.setter
     def offsetClearance(self, value: core.ValueInput):
         """
-        Get or set offset clearance as additional small offset from the selected parting plane and position point.
+        Gets or sets offset clearance as additional small offset from the selected parting plane and position point.
         """
         pass
     @property
     def diameter(self) -> core.ValueInput:
         """
-        Get or set boss shank diameter.
+        Gets or sets boss shank diameter.
         """
         return core.ValueInput()
     @diameter.setter
     def diameter(self, value: core.ValueInput):
         """
-        Get or set boss shank diameter.
+        Gets or sets boss shank diameter.
         """
         pass
     @property
     def draftAngle(self) -> core.ValueInput:
         """
-        Get or set shank draft angle.
+        Gets or sets shank draft angle.
         """
         return core.ValueInput()
     @draftAngle.setter
     def draftAngle(self, value: core.ValueInput):
         """
-        Get or set shank draft angle.
+        Gets or sets shank draft angle.
         """
         pass
     @property
     def alignmentDiameter(self) -> core.ValueInput:
         """
-        Get or set alignment diameter.
+        Gets or sets alignment diameter.
         """
         return core.ValueInput()
     @alignmentDiameter.setter
     def alignmentDiameter(self, value: core.ValueInput):
         """
-        Get or set alignment diameter.
+        Gets or sets alignment diameter.
         """
         pass
     @property
     def alignmentDepth(self) -> core.ValueInput:
         """
-        Get or set alignment depth.
+        Gets or sets alignment depth.
         """
         return core.ValueInput()
     @alignmentDepth.setter
     def alignmentDepth(self, value: core.ValueInput):
         """
-        Get or set alignment depth.
+        Gets or sets alignment depth.
         """
         pass
     @property
     def alignmentDraftAngle(self) -> core.ValueInput:
         """
-        Get or set alignment draft angle.
+        Gets or sets alignment draft angle.
         """
         return core.ValueInput()
     @alignmentDraftAngle.setter
     def alignmentDraftAngle(self, value: core.ValueInput):
         """
-        Get or set alignment draft angle.
+        Gets or sets alignment draft angle.
         """
         pass
     @property
     def holeDiameter(self) -> core.ValueInput:
         """
-        Get or set hole diameter.
+        Gets or sets hole diameter.
         """
         return core.ValueInput()
     @holeDiameter.setter
     def holeDiameter(self, value: core.ValueInput):
         """
-        Get or set hole diameter.
+        Gets or sets hole diameter.
         """
         pass
     @property
     def holeDraftAngle(self) -> core.ValueInput:
         """
-        Get or set hole draft angle.
+        Gets or sets hole draft angle.
         """
         return core.ValueInput()
     @holeDraftAngle.setter
     def holeDraftAngle(self, value: core.ValueInput):
         """
-        Get or set hole draft angle.
+        Gets or sets hole draft angle.
         """
         pass
     @property
     def holeDepth(self) -> core.ValueInput:
         """
-        Get or set hole depth with respect to hole extent type.
+        Gets or sets hole depth with respect to hole extent type.
         If hole extent type is set to BossHoleThrough parameter is ignored. If hole extent type is BossBlindFull
         the parameter is a distance from farthest face. If hole extent type is set to BossBlindDepth the parameter
         is a distance from start face of the hole.
@@ -3716,7 +4362,7 @@ class BossFeatureSideInput(core.Base):
     @holeDepth.setter
     def holeDepth(self, value: core.ValueInput):
         """
-        Get or set hole depth with respect to hole extent type.
+        Gets or sets hole depth with respect to hole extent type.
         If hole extent type is set to BossHoleThrough parameter is ignored. If hole extent type is BossBlindFull
         the parameter is a distance from farthest face. If hole extent type is set to BossBlindDepth the parameter
         is a distance from start face of the hole.
@@ -3725,297 +4371,297 @@ class BossFeatureSideInput(core.Base):
     @property
     def holeMajorDiameter(self) -> core.ValueInput:
         """
-        Get or set major hole diameter for counterbore or countersink hole.
+        Gets or sets major hole diameter for counterbore or countersink hole.
         This input is ignored for blank boss or boss with simple hole.
         """
         return core.ValueInput()
     @holeMajorDiameter.setter
     def holeMajorDiameter(self, value: core.ValueInput):
         """
-        Get or set major hole diameter for counterbore or countersink hole.
+        Gets or sets major hole diameter for counterbore or countersink hole.
         This input is ignored for blank boss or boss with simple hole.
         """
         pass
     @property
     def holeMajorDepth(self) -> core.ValueInput:
         """
-        Get or set major hole depth for counterbore and countersink hole or material thickness under screw head
+        Gets or sets major hole depth for counterbore and countersink hole or material thickness under screw head
         based on hole orientation in a boss feature. This input is ignored for blank boss or boss with simple hole.
         """
         return core.ValueInput()
     @holeMajorDepth.setter
     def holeMajorDepth(self, value: core.ValueInput):
         """
-        Get or set major hole depth for counterbore and countersink hole or material thickness under screw head
+        Gets or sets major hole depth for counterbore and countersink hole or material thickness under screw head
         based on hole orientation in a boss feature. This input is ignored for blank boss or boss with simple hole.
         """
         pass
     @property
     def holeMajorDraftAngle(self) -> core.ValueInput:
         """
-        Get or set major hole draft angle for counterbore and countersink hole.
+        Gets or sets major hole draft angle for counterbore and countersink hole.
         This input is ignored for blank boss or boss with simple hole.
         """
         return core.ValueInput()
     @holeMajorDraftAngle.setter
     def holeMajorDraftAngle(self, value: core.ValueInput):
         """
-        Get or set major hole draft angle for counterbore and countersink hole.
+        Gets or sets major hole draft angle for counterbore and countersink hole.
         This input is ignored for blank boss or boss with simple hole.
         """
         pass
     @property
     def holeCountersinkAngle(self) -> core.ValueInput:
         """
-        Get or set countersink angle for countersink hole. This input is used only for countersink hole.
+        Gets or sets countersink angle for countersink hole. This input is used only for countersink hole.
         """
         return core.ValueInput()
     @holeCountersinkAngle.setter
     def holeCountersinkAngle(self, value: core.ValueInput):
         """
-        Get or set countersink angle for countersink hole. This input is used only for countersink hole.
+        Gets or sets countersink angle for countersink hole. This input is used only for countersink hole.
         """
         pass
     @property
     def rootRadius(self) -> core.ValueInput:
         """
-        Get or set blend radius of the boss shank and participant body.
+        Gets or sets blend radius of the boss shank and participant body.
         """
         return core.ValueInput()
     @rootRadius.setter
     def rootRadius(self, value: core.ValueInput):
         """
-        Get or set blend radius of the boss shank and participant body.
+        Gets or sets blend radius of the boss shank and participant body.
         """
         pass
     @property
     def tipRadius(self) -> core.ValueInput:
         """
-        Get or set blend radius of the boss shank top parting face.
+        Gets or sets blend radius of the boss shank top parting face.
         """
         return core.ValueInput()
     @tipRadius.setter
     def tipRadius(self, value: core.ValueInput):
         """
-        Get or set blend radius of the boss shank top parting face.
+        Gets or sets blend radius of the boss shank top parting face.
         """
         pass
     @property
     def alignmentTipRadius(self) -> core.ValueInput:
         """
-        Get or set blend radius of the boss alignment tip.
+        Gets or sets blend radius of the boss alignment tip.
         """
         return core.ValueInput()
     @alignmentTipRadius.setter
     def alignmentTipRadius(self, value: core.ValueInput):
         """
-        Get or set blend radius of the boss alignment tip.
+        Gets or sets blend radius of the boss alignment tip.
         """
         pass
     @property
     def alignmentRootRadius(self) -> core.ValueInput:
         """
-        Get or set blend radius of the boss alignment root.
+        Gets or sets blend radius of the boss alignment root.
         """
         return core.ValueInput()
     @alignmentRootRadius.setter
     def alignmentRootRadius(self, value: core.ValueInput):
         """
-        Get or set blend radius of the boss alignment root.
+        Gets or sets blend radius of the boss alignment root.
         """
         pass
     @property
     def holeStartRadius(self) -> core.ValueInput:
         """
-        Get or set blend radius of the hole start.
+        Gets or sets blend radius of the hole start.
         """
         return core.ValueInput()
     @holeStartRadius.setter
     def holeStartRadius(self, value: core.ValueInput):
         """
-        Get or set blend radius of the hole start.
+        Gets or sets blend radius of the hole start.
         """
         pass
     @property
     def holeEndRadius(self) -> core.ValueInput:
         """
-        Get or set blend radius of the hole end.
+        Gets or sets blend radius of the hole end.
         """
         return core.ValueInput()
     @holeEndRadius.setter
     def holeEndRadius(self, value: core.ValueInput):
         """
-        Get or set blend radius of the hole end.
+        Gets or sets blend radius of the hole end.
         """
         pass
     @property
     def holeMajorTipRadius(self) -> core.ValueInput:
         """
-        Get or set blend radius of major hole counterbore.
+        Gets or sets blend radius of major hole counterbore.
         """
         return core.ValueInput()
     @holeMajorTipRadius.setter
     def holeMajorTipRadius(self, value: core.ValueInput):
         """
-        Get or set blend radius of major hole counterbore.
+        Gets or sets blend radius of major hole counterbore.
         """
         pass
     @property
     def holeMajorRootRadius(self) -> core.ValueInput:
         """
-        Get or set blend radius of major hole counterbore root.
+        Gets or sets blend radius of major hole counterbore root.
         """
         return core.ValueInput()
     @holeMajorRootRadius.setter
     def holeMajorRootRadius(self, value: core.ValueInput):
         """
-        Get or set blend radius of major hole counterbore root.
+        Gets or sets blend radius of major hole counterbore root.
         """
         pass
     @property
     def ribLength(self) -> core.ValueInput:
         """
-        Get or set ribs length measured from the shank axis.
+        Gets or sets ribs length measured from the shank axis.
         """
         return core.ValueInput()
     @ribLength.setter
     def ribLength(self, value: core.ValueInput):
         """
-        Get or set ribs length measured from the shank axis.
+        Gets or sets ribs length measured from the shank axis.
         """
         pass
     @property
     def ribOffset(self) -> core.ValueInput:
         """
-        Get or set ribs offset from the top face or alignment face.
+        Gets or sets ribs offset from the top face or alignment face.
         """
         return core.ValueInput()
     @ribOffset.setter
     def ribOffset(self, value: core.ValueInput):
         """
-        Get or set ribs offset from the top face or alignment face.
+        Gets or sets ribs offset from the top face or alignment face.
         """
         pass
     @property
     def ribThickness(self) -> core.ValueInput:
         """
-        Get or set ribs thickness.
+        Gets or sets ribs thickness.
         """
         return core.ValueInput()
     @ribThickness.setter
     def ribThickness(self, value: core.ValueInput):
         """
-        Get or set ribs thickness.
+        Gets or sets ribs thickness.
         """
         pass
     @property
     def ribDraftAngle(self) -> core.ValueInput:
         """
-        Get or set ribs draft angle.
+        Gets or sets ribs draft angle.
         """
         return core.ValueInput()
     @ribDraftAngle.setter
     def ribDraftAngle(self, value: core.ValueInput):
         """
-        Get or set ribs draft angle.
+        Gets or sets ribs draft angle.
         """
         pass
     @property
     def ribOuterDraftAngle(self) -> core.ValueInput:
         """
-        Get or set rib outer draft angle.
+        Gets or sets rib outer draft angle.
         """
         return core.ValueInput()
     @ribOuterDraftAngle.setter
     def ribOuterDraftAngle(self, value: core.ValueInput):
         """
-        Get or set rib outer draft angle.
+        Gets or sets rib outer draft angle.
         """
         pass
     @property
     def ribCutSize(self) -> core.ValueInput:
         """
-        Get or set size of rib chamfer or fillet.
+        Gets or sets size of rib chamfer or fillet.
         """
         return core.ValueInput()
     @ribCutSize.setter
     def ribCutSize(self, value: core.ValueInput):
         """
-        Get or set size of rib chamfer or fillet.
+        Gets or sets size of rib chamfer or fillet.
         """
         pass
     @property
     def ribChamferAngle(self) -> core.ValueInput:
         """
-        Get or set rib chamfer angle. This input is used only for rib with chamfer.
+        Gets or sets rib chamfer angle. This input is used only for rib with chamfer.
         """
         return core.ValueInput()
     @ribChamferAngle.setter
     def ribChamferAngle(self, value: core.ValueInput):
         """
-        Get or set rib chamfer angle. This input is used only for rib with chamfer.
+        Gets or sets rib chamfer angle. This input is used only for rib with chamfer.
         """
         pass
     @property
     def ribTipRadius(self) -> core.ValueInput:
         """
-        Get or set rib outer tip blend radius.
+        Gets or sets rib outer tip blend radius.
         """
         return core.ValueInput()
     @ribTipRadius.setter
     def ribTipRadius(self, value: core.ValueInput):
         """
-        Get or set rib outer tip blend radius.
+        Gets or sets rib outer tip blend radius.
         """
         pass
     @property
     def ribRootRadius(self) -> core.ValueInput:
         """
-        Get or set rib base root blend radius.
+        Gets or sets rib base root blend radius.
         """
         return core.ValueInput()
     @ribRootRadius.setter
     def ribRootRadius(self, value: core.ValueInput):
         """
-        Get or set rib base root blend radius.
+        Gets or sets rib base root blend radius.
         """
         pass
     @property
     def ribRotation(self) -> core.ValueInput:
         """
-        Get or set rotation angle of the first rib from the reference vector.
+        Gets or sets rotation angle of the first rib from the reference vector.
         Reference vector is X-axis of the parent sketch from selected sketch point(s).
         """
         return core.ValueInput()
     @ribRotation.setter
     def ribRotation(self, value: core.ValueInput):
         """
-        Get or set rotation angle of the first rib from the reference vector.
+        Gets or sets rotation angle of the first rib from the reference vector.
         Reference vector is X-axis of the parent sketch from selected sketch point(s).
         """
         pass
     @property
     def ribTotalAngle(self) -> core.ValueInput:
         """
-        Get or set total angle for ribs distribution. Default is 360 deg.
+        Gets or sets total angle for ribs distribution. Default is 360 deg.
         """
         return core.ValueInput()
     @ribTotalAngle.setter
     def ribTotalAngle(self, value: core.ValueInput):
         """
-        Get or set total angle for ribs distribution. Default is 360 deg.
+        Gets or sets total angle for ribs distribution. Default is 360 deg.
         """
         pass
     @property
     def ribCount(self) -> core.ValueInput:
         """
-        Get or set number of ribs.
+        Gets or sets number of ribs.
         """
         return core.ValueInput()
     @ribCount.setter
     def ribCount(self, value: core.ValueInput):
         """
-        Get or set number of ribs.
+        Gets or sets number of ribs.
         """
         pass
 
@@ -4346,7 +4992,7 @@ class BRepBody(core.Base):
         
         This method is only valid if the IsTransient property is false.
         occurrence : The occurrence that defines the context for the created proxy.
-        Returns the new BRepBoy proxy or null if this isn't the NativeObject.
+        Returns the new BRepBody proxy or null if this isn't the NativeObject.
         """
         return BRepBody()
     def createComponent(self) -> BRepBody:
@@ -4356,18 +5002,18 @@ class BRepBody(core.Base):
         obtained by using the parentComponent property of the BRepBody object.
         
         This method is only valid if the IsTransient property is false.
-        Returns the BRrepBody in the new component or null in the case the creation failed.
+        Returns the BRepBody in the new component or null in the case the creation failed.
         """
         return BRepBody()
     def moveToComponent(self, target: core.Base) -> BRepBody:
         """
-        Moves this body from it's current component into the root component or the component owned by the
+        Moves this body from its current component into the root component or the component owned by the
         specified occurrence.
         target : The target can be either the root component or an occurrence.
         
         In the case where an occurrence is specified, the body will be moved into the parent component of the target
         occurrence and the target occurrence defines the transform of how the body will be copied so that the body
-        maintains it's same position with respect to the assembly.
+        maintains its same position with respect to the assembly.
         Returns the moved BRepBody or null in the case the move failed.
         """
         return BRepBody()
@@ -4378,10 +5024,10 @@ class BRepBody(core.Base):
         
         In the case where an occurrence is specified, the body will be copied into the parent component of the target
         occurrence and the target occurrence defines the transform of how the body will be copied so that the body
-        maintains it's same position with respect to the assembly.
+        maintains its same position with respect to the assembly.
         
         If target is null, then a copy of the body is created in the owning component of the original body.
-        Returns the moved BRepBody or null in the case the move failed.
+        Returns the copied BRepBody or null in the case the copy failed.
         """
         return BRepBody()
     def convert(self, options: BRepConvertOptions) -> BRepBody:
@@ -4610,7 +5256,7 @@ class BRepBody(core.Base):
         Returns the assembly occurrence (i.e. the occurrence) of this
         object in an assembly. This is only valid in the case where this
         BRepBody object is acting as a proxy in an assembly. Returns null
-        in the case where the object is not in the context of an assembly.
+        in the case where the object is not in the context of an assembly,
         but is already the native object. Also returns null in the case
         where this body is transient.
         """
@@ -4636,11 +5282,11 @@ class BRepBody(core.Base):
     @property
     def isLightBulbOn(self) -> bool:
         """
-        Gets and set if the light bulb beside the body node in the
+        Gets and sets if the light bulb beside the body node in the
         browser is on or not. Parent nodes in the browser can have their light
         bulb off which affects all of their children so this property does not
         indicate if the body is actually visible, just that it should be visible
-        if all of it's parent nodes are also visible. Use the isVisible property
+        if all of its parent nodes are also visible. Use the isVisible property
         to determine if it's actually visible.
         
         This property is only valid if the IsTransient property is false.
@@ -4649,11 +5295,11 @@ class BRepBody(core.Base):
     @isLightBulbOn.setter
     def isLightBulbOn(self, value: bool):
         """
-        Gets and set if the light bulb beside the body node in the
+        Gets and sets if the light bulb beside the body node in the
         browser is on or not. Parent nodes in the browser can have their light
         bulb off which affects all of their children so this property does not
         indicate if the body is actually visible, just that it should be visible
-        if all of it's parent nodes are also visible. Use the isVisible property
+        if all of its parent nodes are also visible. Use the isVisible property
         to determine if it's actually visible.
         
         This property is only valid if the IsTransient property is false.
@@ -4676,15 +5322,15 @@ class BRepBody(core.Base):
     def opacity(self) -> float:
         """
         Gets and sets the opacity override assigned to this body. A value of 1.0 specifies
-        that is it completely opaque and a value of 0.0 specifies that is it completely transparent.
+        that it is completely opaque and a value of 0.0 specifies that it is completely transparent.
         
         This value is not necessarily related to what the user sees because the opacity is inherited.
-        For example, if you this body is in a component and that component's opacity is set to something
+        For example, if this body is in a component and that component's opacity is set to something
         other than 1.0, the body will also be shown as slightly transparent even though the opacity
         property for the body will return 1.0. Because the component that contains the body can be
         referenced as an occurrence in other components and they can have different opacity settings,
         it's possible that different instances of the same body can display using different opacity levels.
-        To get the opacity that it is being displayed with use the BrepBody.visibleOpacity property.
+        To get the opacity that it is being displayed with use the BRepBody.visibleOpacity property.
         
         This is the API equivalent of the "Opacity Control" command available for the body in the browser.
         """
@@ -4693,15 +5339,15 @@ class BRepBody(core.Base):
     def opacity(self, value: float):
         """
         Gets and sets the opacity override assigned to this body. A value of 1.0 specifies
-        that is it completely opaque and a value of 0.0 specifies that is it completely transparent.
+        that it is completely opaque and a value of 0.0 specifies that it is completely transparent.
         
         This value is not necessarily related to what the user sees because the opacity is inherited.
-        For example, if you this body is in a component and that component's opacity is set to something
+        For example, if this body is in a component and that component's opacity is set to something
         other than 1.0, the body will also be shown as slightly transparent even though the opacity
         property for the body will return 1.0. Because the component that contains the body can be
         referenced as an occurrence in other components and they can have different opacity settings,
         it's possible that different instances of the same body can display using different opacity levels.
-        To get the opacity that it is being displayed with use the BrepBody.visibleOpacity property.
+        To get the opacity that it is being displayed with use the BRepBody.visibleOpacity property.
         
         This is the API equivalent of the "Opacity Control" command available for the body in the browser.
         """
@@ -4709,7 +5355,7 @@ class BRepBody(core.Base):
     @property
     def visibleOpacity(self) -> float:
         """
-        The user can set an override opacity for components and bodies these opacity overrides combine if
+        The user can set an override opacity for components and bodies. These opacity overrides combine if
         children and parent components have overrides. This property returns the actual opacity that is
         being used to render the body. To set the opacity use the opacity property of the BRepBody object.
         """
@@ -4778,6 +5424,19 @@ class BRepBody(core.Base):
         Returns a bounding box that tightly fits this body.
         """
         return core.BoundingBox3D()
+    @property
+    def isDerived(self) -> bool:
+        """
+        Returns if this BRepBody is derived from another design. If true, this body cannot be deleted.
+        """
+        return bool()
+    @property
+    def deriveFeature(self) -> DeriveFeature:
+        """
+        Returns the DeriveFeature if this BRepBody is derived from another design.
+        This property returns null if the BRepBody is not derived from another design (i.e. isDerived property returns false).
+        """
+        return DeriveFeature()
 
 class BRepBodyDefinition(core.Base):
     """
@@ -5349,7 +6008,7 @@ class BRepEdgeDefinition(core.Base):
     def associativeID(self) -> int:
         """
         Gets and sets the associate ID of this edge definition. This ID will be copied to the corresponding
-        edge when the BRepBodyDefinition is used to create a BrepBody. It is used internally by Fusion as
+        edge when the BRepBodyDefinition is used to create a BRepBody. It is used internally by Fusion as
         the identifier for the edge and is used for tracking this geometry for parametric recomputes.
         """
         return int()
@@ -5357,7 +6016,7 @@ class BRepEdgeDefinition(core.Base):
     def associativeID(self, value: int):
         """
         Gets and sets the associate ID of this edge definition. This ID will be copied to the corresponding
-        edge when the BRepBodyDefinition is used to create a BrepBody. It is used internally by Fusion as
+        edge when the BRepBodyDefinition is used to create a BRepBody. It is used internally by Fusion as
         the identifier for the edge and is used for tracking this geometry for parametric recomputes.
         """
         pass
@@ -5670,7 +6329,7 @@ class BRepFaceDefinition(core.Base):
     def associativeID(self) -> int:
         """
         Gets and sets the associate ID of this face definition. This ID will be copied to the corresponding
-        face when the BRepBodyDefinition is used to create a BrepBody. It is used by Fusion as
+        face when the BRepBodyDefinition is used to create a BRepBody. It is used by Fusion as
         the identifier for the face and is used for tracking this geometry for parametric recomputes.
         """
         return int()
@@ -5678,7 +6337,7 @@ class BRepFaceDefinition(core.Base):
     def associativeID(self, value: int):
         """
         Gets and sets the associate ID of this face definition. This ID will be copied to the corresponding
-        face when the BRepBodyDefinition is used to create a BrepBody. It is used by Fusion as
+        face when the BRepBodyDefinition is used to create a BRepBody. It is used by Fusion as
         the identifier for the face and is used for tracking this geometry for parametric recomputes.
         """
         pass
@@ -6663,7 +7322,7 @@ class BRepWireEdgeDefinition(core.Base):
     def associativeID(self) -> int:
         """
         Gets and sets the associate ID of this B-Rep wire definition. This ID will be copied to the corresponding
-        edge when the BRepBodyDefinition is used to create a BrepBody. It is used by Fusion as
+        edge when the BRepBodyDefinition is used to create a BRepBody. It is used by Fusion as
         the identifier for the edge and is used for tracking this geometry for parametric recomputes.
         """
         return int()
@@ -6671,7 +7330,7 @@ class BRepWireEdgeDefinition(core.Base):
     def associativeID(self, value: int):
         """
         Gets and sets the associate ID of this B-Rep wire definition. This ID will be copied to the corresponding
-        edge when the BRepBodyDefinition is used to create a BrepBody. It is used by Fusion as
+        edge when the BRepBodyDefinition is used to create a BRepBody. It is used by Fusion as
         the identifier for the edge and is used for tracking this geometry for parametric recomputes.
         """
         pass
@@ -6935,7 +7594,7 @@ class Canvas(core.Base):
         """
         Gets and sets the filename of the image used for the canvas. When getting this property,
         the filename returned is the file that was used when the canvas was initially created.
-        it's possible the file may no longer exist.
+        It's possible the file may no longer exist.
         
         When setting this property, it is the full filename to the image to use for the canvas.
         PNG, JPEG, and TIFF files are supported.
@@ -6946,7 +7605,7 @@ class Canvas(core.Base):
         """
         Gets and sets the filename of the image used for the canvas. When getting this property,
         the filename returned is the file that was used when the canvas was initially created.
-        it's possible the file may no longer exist.
+        It's possible the file may no longer exist.
         
         When setting this property, it is the full filename to the image to use for the canvas.
         PNG, JPEG, and TIFF files are supported.
@@ -6962,7 +7621,7 @@ class Canvas(core.Base):
     def transform(self) -> core.Matrix2D:
         """
         Gets and sets the transform of the canvas. This allows you to control the position, rotation,
-        scaling, and flipping. The X and Y axes defined by the matrix and must be perpendicular to one another.
+        scaling, and flipping. The X and Y axes defined by the matrix must be perpendicular to one another.
         
         This is a 3x3 matrix where the third column controls the position of the canvas and
         defines the position using 2D coordinates in the model space.
@@ -6972,7 +7631,7 @@ class Canvas(core.Base):
     def transform(self, value: core.Matrix2D):
         """
         Gets and sets the transform of the canvas. This allows you to control the position, rotation,
-        scaling, and flipping. The X and Y axes defined by the matrix and must be perpendicular to one another.
+        scaling, and flipping. The X and Y axes defined by the matrix must be perpendicular to one another.
         
         This is a 3x3 matrix where the third column controls the position of the canvas and
         defines the position using 2D coordinates in the model space.
@@ -7010,7 +7669,7 @@ class Canvas(core.Base):
         specific entity can be different over time. However, even if you have two different token
         strings that were obtained from the same entity, when you use findEntityByToken they
         will both return the same entity. Because of that you should never compare entity tokens
-        as way to determine what the token represents. Instead, you need to use the findEntityByToken
+        as a way to determine what the token represents. Instead, you need to use the findEntityByToken
         method to get the two entities identified by the tokens and then compare them.
         """
         return str()
@@ -7027,7 +7686,7 @@ class Canvas(core.Base):
     def nativeObject(self) -> Canvas:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -7038,6 +7697,20 @@ class Canvas(core.Base):
         Returns the timeline object associated with the creation of this canvas.
         """
         return TimelineObject()
+    @property
+    def isDerived(self) -> bool:
+        """
+        Returns if this canvas is derived from another design. If true, the canvas cannot be deleted.
+        You should not attempt to make any edits to the derived canvas. Any edits made to this derived canvas will be lost when the derive updates.
+        """
+        return bool()
+    @property
+    def deriveFeature(self) -> DeriveFeature:
+        """
+        Returns the DeriveFeature if this canvas is derived from another design.
+        This property returns null if the canvas is not derived from another design (i.e. isDerived property returns false).
+        """
+        return DeriveFeature()
 
 class Canvases(core.Base):
     """
@@ -7237,8 +7910,8 @@ class CanvasInput(core.Base):
     def transform(self) -> core.Matrix2D:
         """
         Gets and sets the transform of the canvas. This allows you to control the position, rotation,
-        scaling, and flipping. The X and Y axes defined by the matrix, must be perpendicular to one another.
-        The directions of the X and Y axes defines the orientation of the image.
+        scaling, and flipping. The X and Y axes defined by the matrix must be perpendicular to one another.
+        The directions of the X and Y axes define the orientation of the image.
         
         This is a 3x3 matrix where the third column controls the position of the canvas and is relative to
         the parameter space of the plane defined by the specified planar face or construction plane.
@@ -7248,8 +7921,8 @@ class CanvasInput(core.Base):
     def transform(self, value: core.Matrix2D):
         """
         Gets and sets the transform of the canvas. This allows you to control the position, rotation,
-        scaling, and flipping. The X and Y axes defined by the matrix, must be perpendicular to one another.
-        The directions of the X and Y axes defines the orientation of the image.
+        scaling, and flipping. The X and Y axes defined by the matrix must be perpendicular to one another.
+        The directions of the X and Y axes define the orientation of the image.
         
         This is a 3x3 matrix where the third column controls the position of the canvas and is relative to
         the parameter space of the plane defined by the specified planar face or construction plane.
@@ -7628,17 +8301,25 @@ class CircularPatternFeatureInput(core.Base):
     @property
     def inputEntities(self) -> core.ObjectCollection:
         """
-        Gets and sets the input entities. The collection can contain faces, features, bodies or occurrences.
-        All of the entities must be of a single type. For example, it can't contain features and occurrences
-        but only features or occurrences.
+        Gets and sets the input entities. The collection can contain BRepFace, PartFeature, BRepBody, or Occurrence
+        objects. All of the entities provided must be the same type. For example, it must contain only bodies and can't
+        contain both bodies and faces.
+        
+        You can also pattern ConstructionPoint, ConstructionAxis, and ConstructionPlane objects. When patterning any
+        construction goemetry, only one entity can be patterned at a time, so the ObjectCollection must contain a
+        single item.
         """
         return core.ObjectCollection()
     @inputEntities.setter
     def inputEntities(self, value: core.ObjectCollection):
         """
-        Gets and sets the input entities. The collection can contain faces, features, bodies or occurrences.
-        All of the entities must be of a single type. For example, it can't contain features and occurrences
-        but only features or occurrences.
+        Gets and sets the input entities. The collection can contain BRepFace, PartFeature, BRepBody, or Occurrence
+        objects. All of the entities provided must be the same type. For example, it must contain only bodies and can't
+        contain both bodies and faces.
+        
+        You can also pattern ConstructionPoint, ConstructionAxis, and ConstructionPlane objects. When patterning any
+        construction goemetry, only one entity can be patterned at a time, so the ObjectCollection must contain a
+        single item.
         """
         pass
     @property
@@ -7762,9 +8443,13 @@ class CircularPatternFeatures(core.Base):
         Creates a CircularPatternFeatureInput object. Use properties and methods on this object
         to define the circular pattern you want to create and then use the Add method, passing in
         the CircularPatternFeatureInput object.
-        inputEntities : The collection can contain faces, features, bodies or occurrences.
-        All of the entities must be of a single type. For example, it can't contain features and occurrences
-        but only features or occurrences.
+        inputEntities : An ObjectCollection of the entities to pattern. The collection can contain BRepFace, PartFeature, BRepBody, or Occurrence
+        objects. All of the entities provided must be the same type. For example, it must contain only bodies and can't
+        contain both bodies and faces.
+        
+        You can also pattern ConstructionPoint, ConstructionAxis, and ConstructionPlane objects. When patterning any
+        construction goemetry, only one entity can be patterned at a time, so the ObjectCollection must contain a
+        single item.
         axis : Input linear entity or the entity has axis that defines axis of circular pattern. This can be a sketch line, linear edge,
         construction axis, an edge/sketch curve that defines an axis (circle, etc.) or a face that defines an axis (cylinder, cone, torus, etc.).
         Returns the newly created CircularPatternFeatureInput object or null if the creation failed.
@@ -7792,6 +8477,134 @@ class CircularPatternFeatures(core.Base):
         The number of circular pattern features in the collection.
         """
         return int()
+
+class ClearanceHoleDataQuery(core.Base):
+    """
+    This object provides methods to query the clearance hole to find valid definitions for creating
+    a clearance hole.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> ClearanceHoleDataQuery:
+        return ClearanceHoleDataQuery()
+    @staticmethod
+    def create() -> ClearanceHoleDataQuery:
+        """
+        Static method to create a new ClearanceHoleDataQuery object. The ClearanceHoleDataQuery object
+        is a utility object that provides methods to query for the valid clearance hole definitions
+        defined in Fusion. This object provides similar functionality as the hole command dialog to
+        find valid clearance standards, fastener types, and sizes, which can be used to create clearance
+        hole features.
+        Returns a ClearanceHoleDataQuery object.
+        """
+        return ClearanceHoleDataQuery()
+    def standardCustomName(self, standard: str) -> str:
+        """
+        Method that returns the custom name for a given standard. The custom name is the localized name
+        of the standard using the current language specified for Fusion.
+        standard : The standard you want to get the custom name for.
+        Returns the specified custom name or an empty string if an invalid standard is specified.
+        """
+        return str()
+    def allFastenerTypes(self, standard: str) -> list[str]:
+        """
+        This method returns an array of all the available fastener types for the given standard.
+        To get the available standards, use the allStandards property.
+        standard : The standard to search within.
+        Returns the specified fastener types or an empty array if an invalid standard is specified.
+        """
+        return [str()]
+    def allSizes(self, standard: str, fastenerType: str) -> list[str]:
+        """
+        This method returns an array of all the sizes for the given standard and fastener type. Valid standards and
+        fastener types can be obtained using the allStandards and allFastenerTypes functions.
+        standard : The standard to search within.
+        fastenerType : The fastener type in the specified standard to search within.
+        Returns the specified sizes or empty array if an invalid standard or fastener type is specified.
+        """
+        return [str()]
+    @property
+    def allStandards(self) -> list[str]:
+        """
+        This method returns an array of all the available standards. The standards' names are always
+        English. This English name should be used in the other methods that take the standard as an
+        input argument. If you need to display the standard name to the user, you can use the
+        standardCustomName method To get the localized name.
+        """
+        return [str()]
+
+class ClearanceHoleInfo(core.Base):
+    """
+    This object defines the methods and properties that define the size of a clearance hole. This object is used
+    to create new hole features whose size is defined as a clearance hole for a specific size fastener. A new
+    ClearanceHoleInfo object is created by using the ClearanceHoleInfo.create method. To determine valid values
+    when creating a ClearanceHoleInfo object, you can use the ClearanceHoleDataQuery object, which is statically
+    created using the ClearanceHoleDataQuery.create method.
+    
+    If the ClearanceHoleInfo object is obtained from an existing HoleFeature object, modifying properties on
+    the returned ClearanceHoleInfo object will modify the feature.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> ClearanceHoleInfo:
+        return ClearanceHoleInfo()
+    @staticmethod
+    def create(standard: str, fastenerType: str, size: str, fit: ClearanceHoleFits) -> ClearanceHoleInfo:
+        """
+        Method that creates a new ClearanceHoleInfo object to use in creating clearance holes.
+        The ClearanceHoleInfo object defines the type, size, and fit of the clearance hole to create.
+        Fusion uses this information to look up the full details of the clearance hole in tables delivered
+        with Fusion. The ClearanceHoleDataQuery object can be used to determine valid input for this information.
+        It's statically created using the ClearanceHoleDataQuery.create method.
+        standard : Input string that specifies the standard.
+        fastenerType : Input string that specifies the fastener type.
+        size : Input string that specifies the fastener size.
+        fit : Input enum value that specifies the fit of the fastener within the hole.
+        Returns the newly created ClearanceHoleInfo object or null if the creation failed.
+        """
+        return ClearanceHoleInfo()
+    def redefine(self, standard: str, fastenerType: str, size: str, fit: ClearanceHoleFits) -> bool:
+        """
+        Method that redefines the values associated with an existing ClearanceHoleInfo object. This is
+        done to modify an existing clearance hole. The ClearanceHoleInfo object defines the type, size,
+        and fit of the clearance hole to create. Fusion uses this information to look up the full details
+        of the clearance hole in tables delivered with Fusion. The ClearanceHoleDataQuery object can be
+        used to determine valid input for this information.
+        standard : Input string that specifies the standard.
+        fastenerType : Input string that specifies the fastener type.
+        size : Input string that specifies the fastener size.
+        fit : Input enum value that specifies the amount of clearance between the hole and the fastener.
+        Returns true if the redefinition was successful.
+        """
+        return bool()
+    @property
+    def standard(self) -> str:
+        """
+        Returns the string that defines the standard. This is typically obtained by using the
+        ClearanceHoleDataQuery object.
+        """
+        return str()
+    @property
+    def fastenerType(self) -> str:
+        """
+        Returns the string that defines the fastener type.
+        """
+        return str()
+    @property
+    def size(self) -> str:
+        """
+        Returns the string that defines the fastener size the clearance hole is sized for.
+        """
+        return str()
+    @property
+    def fit(self) -> ClearanceHoleFits:
+        """
+        Returns the enum value that defines the amount of clearance
+        between the hole and the fastener.
+        """
+        return ClearanceHoleFits()
 
 class CoilFeatureInput(core.Base):
     """
@@ -8525,6 +9338,17 @@ class ConfigurationColumns(core.Base):
         Returns an array of the columns created. They are in order of standard, fastener type, and size.
         """
         return [ConfigurationFeatureAspectColumn()]
+    def addInsertStandardDesignColumn(self, occurrence: Occurrence) -> ConfigurationInsertStandardDesignColumn:
+        """
+        Add a new column to control which standard design is used for an inserted design.
+        If an insert column already exists for the occurrence, the existing column is returned.
+        
+        This is only valid for ConfigurationTopTable and ConfigurationCustomThemeTable objects
+        and will fail for all other table types.
+        occurrence : The occurrence that references a standard design.
+        Returns the new column or null in the case of failure.
+        """
+        return ConfigurationInsertStandardDesignColumn()
     @property
     def count(self) -> int:
         """
@@ -8759,6 +9583,89 @@ class ConfigurationPlasticRuleColumns(core.Base):
     def count(self) -> int:
         """
         Returns the number of columns in the table where the name column is not included.
+        """
+        return int()
+
+class ConfigurationReplaceDesign(core.Base):
+    """
+    This object represents an individual ConfigurationReplaceDesign object that has been defined for a
+    ConfigurationReplaceDesignColumn. Multiple ConfigurationReplaceDesign objects can be defined for a
+    column and then one of those ConfigurationReplaceDesign objects is specified in each cell of the column.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> ConfigurationReplaceDesign:
+        return ConfigurationReplaceDesign()
+    def deleteMe(self) -> bool:
+        """
+        Deletes this ConfigurationReplaceDesign.
+        Returns true if the deletion was successful.
+        """
+        return bool()
+    @property
+    def name(self) -> str:
+        """
+        Gets the name of the ConfigurationReplaceDesign object.
+        """
+        return str()
+    @property
+    def dataFile(self) -> core.DataFile:
+        """
+        Gets the Design object associated with this ConfigurationReplaceDesign object.
+        This must be a DataFile object that represents a standard design, not a configured design.
+        """
+        return core.DataFile()
+
+class ConfigurationReplaceDesigns(core.Base):
+    """
+    Collection object that provides access to all the ConfigurationReplaceDesign objects
+    that have been defined for a ConfigurationReplaceDesignColumn. You can also use this
+    collection to define new replace designs that will then be available when specifying which
+    design to use in a cell.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> ConfigurationReplaceDesigns:
+        return ConfigurationReplaceDesigns()
+    def __len__(self) -> int:
+        return 0
+    def __getitem__(self, index: int) -> ConfigurationReplaceDesign:
+        return None
+    def __iter__(self) -> Iterator[ConfigurationReplaceDesign]:
+        return None
+    def item(self, index: int) -> ConfigurationReplaceDesign:
+        """
+        A method that returns the specified ConfigurationReplaceDesign object using an index into the collection.
+        index : The index of the ConfigurationReplaceDesign object to return, where the first row is index 0.
+        Returns the specified ConfigurationReplaceDesign object or null if an invalid index was specified.
+        """
+        return ConfigurationReplaceDesign()
+    def itemByName(self, name: str) -> ConfigurationReplaceDesign:
+        """
+        A method that returns the ConfigurationReplaceDesign object with the specified name.
+        name : The name of the ConfigurationReplaceDesign object to return.
+        Returns the specified ConfigurationReplaceDesign object or null if a ConfigurationReplaceDesign
+        object with the specified name does not exist.
+        """
+        return ConfigurationReplaceDesign()
+    def add(self, name: str, dataFile: core.DataFile) -> ConfigurationReplaceDesign:
+        """
+        Adds a new ConfigurationReplaceDesign object to the column. The ConfigurationReplaceDesign objects
+        associated with the column can be used in the cells in the column.
+        name : The name of the new ConfigurationReplaceDesign object. The name must be unique with respect to the
+        other ConfigurationReplaceDesign objects defined for this column. An empty string can be provided,
+        which will cause Fusion to use a default naming scheme to create a name.
+        dataFile : A DataFile object that defines which Design to use. This must be a DataFile object that represents
+        a standard design, not a configured design.
+        Returns the newly created ConfigurationReplaceDesign.
+        """
+        return ConfigurationReplaceDesign()
+    @property
+    def count(self) -> int:
+        """
+        Returns the number of ConfigurationReplaceDesign objects defined for the column.
         """
         return int()
 
@@ -9115,7 +10022,7 @@ class ConstructionAxis(core.Base):
     def isLightBulbOn(self) -> bool:
         """
         Indicates if the light bulb (as displayed in the browser) is on.
-        A construction axis will only be visible if it's light bulb, and that of it's
+        A construction axis will only be visible if its light bulb, and that of its
         containing folder and parent component/s are also on.
         """
         return bool()
@@ -9123,7 +10030,7 @@ class ConstructionAxis(core.Base):
     def isLightBulbOn(self, value: bool):
         """
         Indicates if the light bulb (as displayed in the browser) is on.
-        A construction axis will only be visible if it's light bulb, and that of it's
+        A construction axis will only be visible if its light bulb, and that of its
         containing folder and parent component/s are also on.
         """
         pass
@@ -9168,7 +10075,7 @@ class ConstructionAxis(core.Base):
     def nativeObject(self) -> ConstructionAxis:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -9213,6 +10120,20 @@ class ConstructionAxis(core.Base):
         method to get the two entities identified by the tokens and then compare them.
         """
         return str()
+    @property
+    def isDerived(self) -> bool:
+        """
+        Returns if this construction axis is derived from another design. If true, the construction axis cannot be deleted.
+        You should not attempt to make any edits to the derived construction axis. Any edits made to this derived construction axis will be lost when the derive updates.
+        """
+        return bool()
+    @property
+    def deriveFeature(self) -> DeriveFeature:
+        """
+        Returns the DeriveFeature if this construction axis is derived from another design.
+        This property returns null if the construction axis is not derived from another design (i.e. isDerived property returns false).
+        """
+        return DeriveFeature()
 
 class ConstructionAxisDefinition(core.Base):
     """
@@ -9434,7 +10355,7 @@ class ConstructionPlane(core.Base):
     def isLightBulbOn(self) -> bool:
         """
         Indicates if the light bulb (as displayed in the browser) is on.
-        A construction plane will only be visible if it's light bulb, and that of it's
+        A construction plane will only be visible if its light bulb, and that of its
         containing folder and parent component/s are also on.
         """
         return bool()
@@ -9442,7 +10363,7 @@ class ConstructionPlane(core.Base):
     def isLightBulbOn(self, value: bool):
         """
         Indicates if the light bulb (as displayed in the browser) is on.
-        A construction plane will only be visible if it's light bulb, and that of it's
+        A construction plane will only be visible if its light bulb, and that of its
         containing folder and parent component/s are also on.
         """
         pass
@@ -9565,6 +10486,20 @@ class ConstructionPlane(core.Base):
         method to get the two entities identified by the tokens and then compare them.
         """
         return str()
+    @property
+    def isDerived(self) -> bool:
+        """
+        Returns if this construction plane is derived from another design. If true, the construction plane cannot be deleted.
+        You should not attempt to make any edits to the derived construction plane. Any edits made to this derived construction plane will be lost when the derive updates.
+        """
+        return bool()
+    @property
+    def deriveFeature(self) -> DeriveFeature:
+        """
+        Returns the DeriveFeature if this construction plane is derived from another design.
+        This property returns null if the construction plane is not derived from another design (i.e. isDerived property returns false).
+        """
+        return DeriveFeature()
 
 class ConstructionPlaneDefinition(core.Base):
     """
@@ -9584,7 +10519,7 @@ class ConstructionPlaneDefinition(core.Base):
 
 class ConstructionPlaneInput(core.Base):
     """
-    A ConstructionPlaneInput is a throwaway object used to create a ConstructionPlane
+    A ConstructionPlaneInput is a throwaway object used to create a ConstructionPlane.
     The usage pattern is:
     a. create a ConstructionPlaneInput (ConstructionPlanes.CreateInput)
     b. call one of the member functions to specify how the ConstructionPlane is created
@@ -9613,8 +10548,8 @@ class ConstructionPlaneInput(core.Base):
         face or construction plane at a specified distance. This can result in
         a parametric or non-parametric construction plane depending on whether the parent
         component is parametric or is a direct edit component.
-        planarEntity : A plane, planar face or construction plane from which to create the offset plane
-        offset : ValueInput object that specifies the offset distance for the plane
+        planarEntity : A plane, planar face or construction plane from which to create the offset plane.
+        offset : ValueInput object that specifies the offset distance for the plane.
         Returns true if the construction plane definition is successful.
         """
         return bool()
@@ -9624,8 +10559,8 @@ class ConstructionPlaneInput(core.Base):
         at a specified angle. This can result in a parametric or non-parametric construction
         plane depending on whether the parent component is parametric or is a direct edit
         component.
-        linearEntity : The axis about which to rotate the plane
-        angle : The angle at which to create the plane
+        linearEntity : The axis about which to rotate the plane.
+        angle : The angle at which to create the plane.
         planarEntity : The planar face or construction plane the angle is measured from.
         Returns true if the construction plane definition is successful.
         """
@@ -9636,8 +10571,8 @@ class ConstructionPlaneInput(core.Base):
         conical face at a specified point. This can result in a parametric or non-parametric construction
         plane depending on whether the parent component is parametric or is a direct edit
         component.
-        tangentFace : A cylindrical or conical face to create the plane tangent to
-        angle : The angle relative to the planarEntity input at which to create the tangent plane
+        tangentFace : A cylindrical or conical face to create the plane tangent to.
+        angle : The angle relative to the planarEntity input at which to create the tangent plane.
         planarEntity : The planar face or construction plane the tangent is measured from.
         Returns true if the construction plane definition is successful.
         """
@@ -9725,7 +10660,7 @@ class ConstructionPlaneInput(core.Base):
         In order for geometry to be transformed correctly, an Occurrence for creation needs to be
         specified when the ConstructionPlane is created based on geometry (e.g. a planarEntity)
         in another component AND (the ConstructionPlane) is not in the root component.
-        The CreationOccurrence is analogous to the active occurrence in the UI
+        The CreationOccurrence is analogous to the active occurrence in the UI.
         """
         return Occurrence()
     @creationOccurrence.setter
@@ -9734,7 +10669,7 @@ class ConstructionPlaneInput(core.Base):
         In order for geometry to be transformed correctly, an Occurrence for creation needs to be
         specified when the ConstructionPlane is created based on geometry (e.g. a planarEntity)
         in another component AND (the ConstructionPlane) is not in the root component.
-        The CreationOccurrence is analogous to the active occurrence in the UI
+        The CreationOccurrence is analogous to the active occurrence in the UI.
         """
         pass
     @property
@@ -9791,7 +10726,7 @@ class ConstructionPlanes(core.Base):
         """
         Returns the specified construction plane using the name of the construction
         plane as it is displayed in the browser.
-        name : The name of the construction plane as it is displayed in the browser
+        name : The name of the construction plane as it is displayed in the browser.
         Returns the specified item or null if an invalid name was specified.
         """
         return ConstructionPlane()
@@ -9801,7 +10736,7 @@ class ConstructionPlanes(core.Base):
         occurrenceForCreation : A creation occurrence is needed if the input is in another component AND the
         construction plane is not in the root component. The occurrenceForCreation is analogous
         to the active occurrence in the UI.
-        Returns a ConstructionPlaneInput object
+        Returns a ConstructionPlaneInput object.
         """
         return ConstructionPlaneInput()
     def add(self, input: ConstructionPlaneInput) -> ConstructionPlane:
@@ -9889,7 +10824,7 @@ class ConstructionPoint(core.Base):
     def isLightBulbOn(self) -> bool:
         """
         Indicates if the light bulb (as displayed in the browser) is on.
-        A construction point will only be visible if it's light bulb, and that of it's
+        A construction point will only be visible if its light bulb, and that of its
         containing folder and parent component/s are also on.
         """
         return bool()
@@ -9897,7 +10832,7 @@ class ConstructionPoint(core.Base):
     def isLightBulbOn(self, value: bool):
         """
         Indicates if the light bulb (as displayed in the browser) is on.
-        A construction point will only be visible if it's light bulb, and that of it's
+        A construction point will only be visible if its light bulb, and that of its
         containing folder and parent component/s are also on.
         """
         pass
@@ -9992,6 +10927,20 @@ class ConstructionPoint(core.Base):
         method to get the two entities identified by the tokens and then compare them.
         """
         return str()
+    @property
+    def isDerived(self) -> bool:
+        """
+        Returns if this construction point is derived from another design. If true, the construction point cannot be deleted.
+        You should not attempt to make any edits to the derived construction point. Any edits made to this derived construction point will be lost when the derive updates.
+        """
+        return bool()
+    @property
+    def deriveFeature(self) -> DeriveFeature:
+        """
+        Returns the DeriveFeature if this construction point is derived from another design.
+        This property returns null if the construction point is not derived from another design (i.e. isDerived property returns false).
+        """
+        return DeriveFeature()
 
 class ConstructionPointDefinition(core.Base):
     """
@@ -10012,11 +10961,15 @@ class ConstructionPointDefinition(core.Base):
 
 class ConstructionPointInput(core.Base):
     """
-    A ConstructionPointInput is a throwaway object used to create a ConstructionPoint
-    The usage pattern is
+    A ConstructionPointInput is a throwaway object used to create a ConstructionPoint.
+    The usage pattern is:
+    
     a. create a ConstructionPointInput (ConstructionPoints.CreateInput)
+    
     b. call one of the member functions to specify how the ConstructionPoint is created
+    
     c. create the ConstructionPoint (call ConstructionPoints.Add)
+    
     d. stop referencing the ConstructionPointInput (so it gets deleted).
     """
     def __init__(self):
@@ -10031,8 +10984,8 @@ class ConstructionPointInput(core.Base):
         The edges can be B-Rep edges or sketch lines.
         This can result in a parametric or non-parametric construction point depending
         on whether the parent component is parametric or is a direct edit component.
-        edgeOne : The first B-Rep edge or sketch line
-        edgeTwo : The second B-Rep edge or sketch line
+        edgeOne : The first B-Rep edge or sketch line.
+        edgeTwo : The second B-Rep edge or sketch line.
         Returns true if the creation of the ConstructionPointInput is successful.
         """
         return bool()
@@ -10332,6 +11285,346 @@ class CopyPasteBodies(core.Base):
         The number of Copy/Paste Body features in the collection.
         """
         return int()
+
+class CornerClosureFeatureDefinition(core.Base):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    A Base class to return the information used to define the CornerClosureFeature.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> CornerClosureFeatureDefinition:
+        return CornerClosureFeatureDefinition()
+    @property
+    def dominantEdge(self) -> BRepEdge:
+        """
+        Gets the dominant edge for the corner closure.
+        
+        To set this property, you need to position the timeline marker to immediately before this feature.
+        This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
+        
+        After setting the edge, the definitionType property on CornerClosureFeature should be examined
+        to determine whether the corner is two-bend or three-bend, as after the setting another edge
+        the type of corner might be altered.
+        """
+        return BRepEdge()
+    @dominantEdge.setter
+    def dominantEdge(self, value: BRepEdge):
+        """
+        Gets the dominant edge for the corner closure.
+        
+        To set this property, you need to position the timeline marker to immediately before this feature.
+        This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
+        
+        After setting the edge, the definitionType property on CornerClosureFeature should be examined
+        to determine whether the corner is two-bend or three-bend, as after the setting another edge
+        the type of corner might be altered.
+        """
+        pass
+    @property
+    def submissiveEdge(self) -> BRepEdge:
+        """
+        Gets and sets the submissive edge for the corner closure.
+        
+        To set this property, you need to position the timeline marker to immediately before this feature.
+        This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
+        
+        After setting the edge, the definitionType property on CornerClosureFeature should be examined
+        to determine whether the corner is two-bend or three-bend, as after the setting another edge
+        the type of corner might be altered.
+        """
+        return BRepEdge()
+    @submissiveEdge.setter
+    def submissiveEdge(self, value: BRepEdge):
+        """
+        Gets and sets the submissive edge for the corner closure.
+        
+        To set this property, you need to position the timeline marker to immediately before this feature.
+        This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
+        
+        After setting the edge, the definitionType property on CornerClosureFeature should be examined
+        to determine whether the corner is two-bend or three-bend, as after the setting another edge
+        the type of corner might be altered.
+        """
+        pass
+    @property
+    def miterGap(self) -> ModelParameter:
+        """
+        Gets the miter gap for the corner closure.
+        """
+        return ModelParameter()
+    @property
+    def isExtendAligned(self) -> bool:
+        """
+        Gets and sets whether the corner closure extends aligned to the edges.
+        
+        To set this property, you need to position the timeline marker to immediately before this feature.
+        This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
+        """
+        return bool()
+    @isExtendAligned.setter
+    def isExtendAligned(self, value: bool):
+        """
+        Gets and sets whether the corner closure extends aligned to the edges.
+        
+        To set this property, you need to position the timeline marker to immediately before this feature.
+        This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
+        """
+        pass
+    @property
+    def bendTransition(self) -> CornerBendTransitionTypes:
+        """
+        Gets and sets the bend transition type for the corner closure.
+        
+        To set this property, you need to position the timeline marker to immediately before this feature.
+        This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
+        """
+        return CornerBendTransitionTypes()
+    @bendTransition.setter
+    def bendTransition(self, value: CornerBendTransitionTypes):
+        """
+        Gets and sets the bend transition type for the corner closure.
+        
+        To set this property, you need to position the timeline marker to immediately before this feature.
+        This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
+        """
+        pass
+
+class CornerClosureFeatureInput(core.Base):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    This class defines the methods and properties that pertain to the definition of a corner closure feature.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> CornerClosureFeatureInput:
+        return CornerClosureFeatureInput()
+    def setTwoBendCornerClosure(self, parameters: TwoBendCornerClosureInputDefinition) -> bool:
+        """
+        Sets the corner closure input with the values to be used to create a two-bend corner closure feature.
+        Before using this method, the definitionType property should be examined
+        to determine whether the corner is two-bend or three-bend, as this method is only applicable
+        for two-bend corner closures.
+        parameters : A TwoBendCornerClosureParameters object that encapsulates all the required parameters for creating
+        a two-bend corner closure feature. This includes miter gap, alignment settings, bend transition type,
+        relief shape, relief size, and relief placement options.
+        Returns true if defining the corner closure is successful.
+        """
+        return bool()
+    def setThreeBendCornerClosure(self, parameters: ThreeBendCornerClosureInputDefinition) -> bool:
+        """
+        Sets the corner closure input with the values to be used to create a three-bend corner closure feature.
+        Before using this method, the definitionType property should be examined
+        to determine whether the corner is two-bend or three-bend, as this method is only applicable
+        for three-bend corner closures.
+        parameters : A ThreeBendCornerClosureParameters object that encapsulates all the required parameters for creating
+        a three-bend corner closure feature. This includes miter gap, alignment settings, bend transition type,
+        relief shape, and relief radius options.
+        Returns true if defining the corner closure is successful.
+        """
+        return bool()
+    @property
+    def definitionType(self) -> CornerClosureFeatureDefinitionTypes:
+        """
+        Gets the type of corner closure defined.
+        """
+        return CornerClosureFeatureDefinitionTypes()
+    @property
+    def dominantEdge(self) -> BRepEdge:
+        """
+        Gets and sets the dominant edge for the corner closure
+        
+        After setting the edge, the definitionType property should be examined
+        to determine whether the corner is two-bend or three-bend, as after the setting another edge
+        the type of corner might be altered.
+        """
+        return BRepEdge()
+    @dominantEdge.setter
+    def dominantEdge(self, value: BRepEdge):
+        """
+        Gets and sets the dominant edge for the corner closure
+        
+        After setting the edge, the definitionType property should be examined
+        to determine whether the corner is two-bend or three-bend, as after the setting another edge
+        the type of corner might be altered.
+        """
+        pass
+    @property
+    def submissiveEdge(self) -> BRepEdge:
+        """
+        Gets and sets the submissive edge for the corner closure
+        
+        After setting the edge, the definitionType property should be examined
+        to determine whether the corner is two-bend or three-bend, as after the setting another edge
+        the type of corner might be altered.
+        """
+        return BRepEdge()
+    @submissiveEdge.setter
+    def submissiveEdge(self, value: BRepEdge):
+        """
+        Gets and sets the submissive edge for the corner closure
+        
+        After setting the edge, the definitionType property should be examined
+        to determine whether the corner is two-bend or three-bend, as after the setting another edge
+        the type of corner might be altered.
+        """
+        pass
+
+class CornerClosureFeatures(core.Base):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Collection that provides access to all of the existing corner closure features in a design and supports the ability to create new corner closure features.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> CornerClosureFeatures:
+        return CornerClosureFeatures()
+    def __len__(self) -> int:
+        return 0
+    def __getitem__(self, index: int) -> CornerClosureFeature:
+        return None
+    def __iter__(self) -> Iterator[CornerClosureFeature]:
+        return None
+    def item(self, index: int) -> CornerClosureFeature:
+        """
+        Function that returns the specified corner closure feature using an index into the collection.
+        index : The index of the item within the collection to return. The first item in the collection has an index of 0.
+        Returns the specified item or null if an invalid index was specified.
+        """
+        return CornerClosureFeature()
+    def itemByName(self, name: str) -> CornerClosureFeature:
+        """
+        Function that returns the specified corner closure feature using the name of the feature.
+        name : The name of the feature within the collection to return. This is the name seen in the timeline.
+        Returns the specified item or null if the specified name was not found.
+        """
+        return CornerClosureFeature()
+    def createInput(self, dominantEdge: BRepEdge, submissiveEdge: BRepEdge) -> CornerClosureFeatureInput:
+        """
+        Creates a CornerClosureFeatureInput object. Use methods on this object to define the corner closure you want
+        to create and then use the add method, passing in the CornerClosureFeatureInput object.
+        dominantEdge : The BRepEdge that defines the dominant edge of the corner closure.
+        submissiveEdge : The BRepEdge that defines the submissive edge of the corner closure.
+        Returns the newly created CornerClosureFeatureInput object or null if the creation failed.
+        """
+        return CornerClosureFeatureInput()
+    def add(self, input: CornerClosureFeatureInput) -> CornerClosureFeature:
+        """
+        Creates a new Corner Closure feature.
+        input : A CornerClosureFeatureInput object that defines the desired corner closure. Use the createCornerClosureFeatureInput
+        method to create a new CornerClosureFeatureInput object and then use methods on it
+        (the CornerClosureFeatureInput object) to define the corner closure.
+        Returns the newly created CornerClosureFeature object or null if the creation failed.
+        """
+        return CornerClosureFeature()
+    @property
+    def count(self) -> int:
+        """
+        The number of corner closure features in the collection.
+        """
+        return int()
+
+class CornerClosureInputDefinition(core.Base):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Defines the common input properties shared by both two-bend and three-bend corner closure features.
+    This class provides the fundamental properties required for any corner closure operation, including miter gap,
+    alignment settings, and bend transition behavior.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> CornerClosureInputDefinition:
+        return CornerClosureInputDefinition()
+    @property
+    def miterGap(self) -> core.ValueInput:
+        """
+        Gets and sets the gap distance for the miter in the corner closure.
+        This value defines the spacing between the sheets at the corner miter joint.
+        If this property is not set (null) and useSheetMetalRuleMiterGap is false,
+        the miter gap value will be taken from the Sheet Metal Rule as a fallback.
+        """
+        return core.ValueInput()
+    @miterGap.setter
+    def miterGap(self, value: core.ValueInput):
+        """
+        Gets and sets the gap distance for the miter in the corner closure.
+        This value defines the spacing between the sheets at the corner miter joint.
+        If this property is not set (null) and useSheetMetalRuleMiterGap is false,
+        the miter gap value will be taken from the Sheet Metal Rule as a fallback.
+        """
+        pass
+    @property
+    def isExtendAligned(self) -> bool:
+        """
+        Gets and sets a value indicating whether the corner closure extends aligned to the edges.
+        When true, the corner closure will extend in alignment with the adjacent edges.
+        When false, the corner closure will use the default extension behavior.
+        The default value is true.
+        """
+        return bool()
+    @isExtendAligned.setter
+    def isExtendAligned(self, value: bool):
+        """
+        Gets and sets a value indicating whether the corner closure extends aligned to the edges.
+        When true, the corner closure will extend in alignment with the adjacent edges.
+        When false, the corner closure will use the default extension behavior.
+        The default value is true.
+        """
+        pass
+    @property
+    def bendTransition(self) -> CornerBendTransitionTypes:
+        """
+        Gets and sets the bend transition type for the corner closure.
+        This determines how the bend transitions are handled at the corner intersection.
+        The default value is TrimToBendCornerBendTransitionType.
+        """
+        return CornerBendTransitionTypes()
+    @bendTransition.setter
+    def bendTransition(self, value: CornerBendTransitionTypes):
+        """
+        Gets and sets the bend transition type for the corner closure.
+        This determines how the bend transitions are handled at the corner intersection.
+        The default value is TrimToBendCornerBendTransitionType.
+        """
+        pass
+    @property
+    def isUseSheetMetalRuleMiterGap(self) -> bool:
+        """
+        Gets and sets whether to use the miter gap value from the Sheet Metal Rule.
+        When true, the miter gap value is taken from the active Sheet Metal Rule and any value set in the miterGap property is ignored.
+        When false (default), the behavior depends on the miterGap property:
+          - If miterGap is set: uses the specified value
+          - If miterGap is not set (null): uses the value from the Sheet Metal Rule as a fallback
+        The default value is false.
+        """
+        return bool()
+    @isUseSheetMetalRuleMiterGap.setter
+    def isUseSheetMetalRuleMiterGap(self, value: bool):
+        """
+        Gets and sets whether to use the miter gap value from the Sheet Metal Rule.
+        When true, the miter gap value is taken from the active Sheet Metal Rule and any value set in the miterGap property is ignored.
+        When false (default), the behavior depends on the miterGap property:
+          - If miterGap is set: uses the specified value
+          - If miterGap is not set (null): uses the value from the Sheet Metal Rule as a fallback
+        The default value is false.
+        """
+        pass
 
 class CurvatureCombAnalyses(core.Base):
     """
@@ -11049,10 +12342,10 @@ class CustomGraphicsEntity(core.Base):
         return bool()
     def setOpacity(self, opacity: float, isOverride: bool) -> bool:
         """
-        Sets the opacity of the graphics entity. By default, when a new entity is it is
+        Sets the opacity of the graphics entity. By default, when a new entity is created it is
         completely opaque and does not override the opacity defined by the material.
         opacity : The opacity value where 1.0 is completely opaque and 0.0 is completely transparent.
-        isOverride : Indicates if this entities opacity will override the opacity defined by the material.
+        isOverride : Indicates if this entity's opacity will override the opacity defined by the material.
         If true, it will override the material opacity and if false the opacity values will
         accumulate.
         Returns true if setting the opacity information was successful.
@@ -11062,7 +12355,7 @@ class CustomGraphicsEntity(core.Base):
         """
         Gets the opacity of the graphics entity.
         opacity : The opacity value where 1.0 is completely opaque and 0.0 is completely transparent.
-        isOverride : Indicates if this entities opacity will override the opacity defined by the material.
+        isOverride : Indicates if this entity's opacity will override the opacity defined by the material.
         If true, it will override the material opacity and if false the opacity values will
         accumulate.
         Returns true if getting the opacity information was successful.
@@ -11117,12 +12410,12 @@ class CustomGraphicsEntity(core.Base):
         """
         Gets and sets the depth priority associated with the graphics entity. The depth priority defines
         how one graphics entity will be drawn with respect to another entity. This is useful when there
-        are entities that lie in the same space so it's ambiguous which should be drawn on the other. For
+        are entities that lie in the same space so it's ambiguous which should be drawn on top of the other. For
         example, if you draw a curve on a planar mesh and want the curve to be completely visible. You can
         set the depth priority of the curve to be greater than the mesh so it will be drawn after the mesh
         and will remain visible.
         
-        When a new graphics entity is created it's default depth priority is 0.
+        When a new graphics entity is created its default depth priority is 0.
         """
         return int()
     @depthPriority.setter
@@ -11130,12 +12423,12 @@ class CustomGraphicsEntity(core.Base):
         """
         Gets and sets the depth priority associated with the graphics entity. The depth priority defines
         how one graphics entity will be drawn with respect to another entity. This is useful when there
-        are entities that lie in the same space so it's ambiguous which should be drawn on the other. For
+        are entities that lie in the same space so it's ambiguous which should be drawn on top of the other. For
         example, if you draw a curve on a planar mesh and want the curve to be completely visible. You can
         set the depth priority of the curve to be greater than the mesh so it will be drawn after the mesh
         and will remain visible.
         
-        When a new graphics entity is created it's default depth priority is 0.
+        When a new graphics entity is created its default depth priority is 0.
         """
         pass
     @property
@@ -11202,7 +12495,7 @@ class CustomGraphicsEntity(core.Base):
     @property
     def boundingBox(self) -> core.BoundingBox3D:
         """
-        Returns a box oriented parallel to the world x-y-x axes that contains the graphics entity.
+        Returns a box oriented parallel to the world x-y-z axes that contains the graphics entity.
         Depending on whether the graphics are drawn in model space or screen space this will return
         the bounding box in either centimeters (model) or pixels (screen). In the case where it
         returns the bounding box in pixel space, the Z coordinates of the box will be 0 and can be ignored.
@@ -11325,7 +12618,7 @@ class CustomGraphicsViewPlacement(core.Base):
     """
     Positions custom graphics relative to one of the four corners of the view. Graphics positioned
     this way will always appear on top of the model graphics. This is typically used to display
-    legends are small interactive tools.
+    legends or small interactive tools.
     """
     def __init__(self):
         pass
@@ -11420,9 +12713,9 @@ class CustomGraphicsViewPlacement(core.Base):
 class CustomGraphicsViewScale(core.Base):
     """
     Specifies that custom graphics are to be scaled relative to the view (pixels) and not model space.
-    If this is applied to some custom graphics then they will stat the same size on the screen regardless
+    If this is applied to some custom graphics then they will stay the same size on the screen regardless
     of the user zooming in or out. This is commonly used for glyphs and other interactive widgets so they don't
-    don't get too large or too small.
+    get too large or too small.
     """
     def __init__(self):
         pass
@@ -11640,8 +12933,8 @@ class Decal(core.Base):
         cases where the original image file is no longer available but you need the image
         for some other purpose.
         filename : The full filename of the image to save, including the extension of the file, which
-        controls what format the image file will be. If file extension is other than png, jpg
-        or tiff, then by default png extension will be added to the filename.
+        controls what format the image file will be. If the file extension is other than png, jpg,
+        or tiff, then by default a png extension will be added to the filename.
         This method will fail if a file with the specified filename already exists.
         If you want to overwrite the file, you'll need to delete it first before
         calling this method.
@@ -11752,7 +13045,7 @@ class Decal(core.Base):
         """
         Gets and sets the filename of the image used for the decal. When getting this property,
         the filename returned is the file that was used when the decal was initially created.
-        it's possible the file may no longer exist.
+        It's possible the file may no longer exist.
         
         When setting this property, it is the full filename to the image to use for the decal.
         PNG, JPEG, and TIFF files are supported.
@@ -11763,7 +13056,7 @@ class Decal(core.Base):
         """
         Gets and sets the filename of the image used for the decal. When getting this property,
         the filename returned is the file that was used when the decal was initially created.
-        it's possible the file may no longer exist.
+        It's possible the file may no longer exist.
         
         When setting this property, it is the full filename to the image to use for the decal.
         PNG, JPEG, and TIFF files are supported.
@@ -11816,7 +13109,7 @@ class Decal(core.Base):
         specific entity can be different over time. However, even if you have two different token
         strings that were obtained from the same entity, when you use findEntityByToken they
         will both return the same entity. Because of that you should never compare entity tokens
-        as way to determine what the token represents. Instead, you need to use the findEntityByToken
+        as a way to determine what the token represents. Instead, you need to use the findEntityByToken
         method to get the two entities identified by the tokens and then compare them.
         """
         return str()
@@ -11833,7 +13126,7 @@ class Decal(core.Base):
     def nativeObject(self) -> Decal:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -11844,6 +13137,20 @@ class Decal(core.Base):
         Returns the timeline object associated with the creation of this decal.
         """
         return TimelineObject()
+    @property
+    def isDerived(self) -> bool:
+        """
+        Returns if this decal is derived from another design. If true, the decal cannot be deleted.
+        You should not attempt to make any edits to the derived decal. Any edits made to this derived decal will be lost when the derive updates.
+        """
+        return bool()
+    @property
+    def deriveFeature(self) -> DeriveFeature:
+        """
+        Returns the DeriveFeature if this decal is derived from another design.
+        This property returns null if the decal is not derived from another design (i.e. isDerived property returns false).
+        """
+        return DeriveFeature()
 
 class DecalInput(core.Base):
     """
@@ -11862,7 +13169,7 @@ class DecalInput(core.Base):
         a single face and the isChainFaces property on the input will be true. The position and orientation of
         the decal is based on this face and the decal can wrap onto other faces in the body.
         
-        If the isChainFace property is false, the decal will only be applied to the provided faces where the
+        If the isChainFaces property is false, the decal will only be applied to the provided faces where the
         first face is used to calculate the position and orientation of the decal.
         """
         return [BRepFace()]
@@ -11873,7 +13180,7 @@ class DecalInput(core.Base):
         a single face and the isChainFaces property on the input will be true. The position and orientation of
         the decal is based on this face and the decal can wrap onto other faces in the body.
         
-        If the isChainFace property is false, the decal will only be applied to the provided faces where the
+        If the isChainFaces property is false, the decal will only be applied to the provided faces where the
         first face is used to calculate the position and orientation of the decal.
         """
         pass
@@ -12107,6 +13414,145 @@ class DeleteFaceFeatures(core.Base):
         """
         return int()
 
+class DeriveFeatureInput(core.Base):
+    """
+    This class defines the methods and properties that pertain to the definition of a derive feature.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> DeriveFeatureInput:
+        return DeriveFeatureInput()
+    @property
+    def sourceDesign(self) -> Design:
+        """
+        The Design that is obtained from the input DataFile. You can use the API to access various elements within the
+        design to add them to the list of elements to be derived.
+        """
+        return Design()
+    @property
+    def sourceEntities(self) -> list[core.Base]:
+        """
+        The array of entities that will be derived. These can be any entity that is supported by derive.
+        For example, BRepBody, MeshBody, Sketch, ConstructionPlane, Occurrence, Component(rootComponent), FlatPattern, Canvas etc.
+        """
+        return [core.Base()]
+    @sourceEntities.setter
+    def sourceEntities(self, value: list[core.Base]):
+        """
+        The array of entities that will be derived. These can be any entity that is supported by derive.
+        For example, BRepBody, MeshBody, Sketch, ConstructionPlane, Occurrence, Component(rootComponent), FlatPattern, Canvas etc.
+        """
+        pass
+    @property
+    def excludedEntities(self) -> list[core.Base]:
+        """
+        The array of entities that will be excluded from the sourceEntities. These can be any entity that is supported by derive.
+        For example, BRepBody, MeshBody, Sketch, ConstructionPlane, Occurrence, Component(rootComponent), FlatPattern, Canvas etc.
+        """
+        return [core.Base()]
+    @excludedEntities.setter
+    def excludedEntities(self, value: list[core.Base]):
+        """
+        The array of entities that will be excluded from the sourceEntities. These can be any entity that is supported by derive.
+        For example, BRepBody, MeshBody, Sketch, ConstructionPlane, Occurrence, Component(rootComponent), FlatPattern, Canvas etc.
+        """
+        pass
+    @property
+    def isIncludeFavoriteParameters(self) -> bool:
+        """
+        Gets or sets whether favorite parameters in the source design are derived or not.
+        """
+        return bool()
+    @isIncludeFavoriteParameters.setter
+    def isIncludeFavoriteParameters(self, value: bool):
+        """
+        Gets or sets whether favorite parameters in the source design are derived or not.
+        """
+        pass
+    @property
+    def isIncludeComponentParameters(self) -> bool:
+        """
+        Gets or sets whether all feature parameters from all selected components
+        from the source design are derived or not.
+        """
+        return bool()
+    @isIncludeComponentParameters.setter
+    def isIncludeComponentParameters(self, value: bool):
+        """
+        Gets or sets whether all feature parameters from all selected components
+        from the source design are derived or not.
+        """
+        pass
+    @property
+    def isPlaceObjectsAtOrigin(self) -> bool:
+        """
+        Gets or sets whether to place all derived objects at the origin in
+        the destination design or not.
+        """
+        return bool()
+    @isPlaceObjectsAtOrigin.setter
+    def isPlaceObjectsAtOrigin(self, value: bool):
+        """
+        Gets or sets whether to place all derived objects at the origin in
+        the destination design or not.
+        """
+        pass
+
+class DeriveFeatures(core.Base):
+    """
+    Collection that provides access to all of the existing derive features in a component
+    and supports the ability to create new derive features.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> DeriveFeatures:
+        return DeriveFeatures()
+    def __len__(self) -> int:
+        return 0
+    def __getitem__(self, index: int) -> DeriveFeature:
+        return None
+    def __iter__(self) -> Iterator[DeriveFeature]:
+        return None
+    def item(self, index: int) -> DeriveFeature:
+        """
+        Function that returns the specified derive feature using an index into the collection.
+        index : The index of the item within the collection to return. The first item in the collection has an index of 0.
+        Returns the specified item or null if an invalid index was specified.
+        """
+        return DeriveFeature()
+    def createInput(self, sourceDesign: Design) -> DeriveFeatureInput:
+        """
+        Creates a DeriveFeatureInput object. Use properties and methods on this object
+        to define the derive you want to create and then use the Add method, passing in
+        the DeriveFeatureInput object.
+        sourceDesign : The Design that will be derived.
+        Returns a DeriveFeatureInput or null if the creation failed.
+        """
+        return DeriveFeatureInput()
+    def add(self, input: DeriveFeatureInput) -> DeriveFeature:
+        """
+        Creates a new derive feature.
+        input : A DeriveFeatureInput object that defines the desired derive. Use the createInput method
+        to create a new DeriveFeatureInput object and then use methods on it to define the derive.
+        Returns the newly created DeriveFeature object or null if the creation failed.
+        """
+        return DeriveFeature()
+    def itemByName(self, name: str) -> DeriveFeature:
+        """
+        Function that returns the specified derive feature using the name of the feature.
+        name : The name of the feature within the collection to return. This is the name seen in the timeline.
+        Returns the specified item or null if the specified name was not found.
+        """
+        return DeriveFeature()
+    @property
+    def count(self) -> int:
+        """
+        The number of derive features in the collection.
+        """
+        return int()
+
 class DraftAnalyses(core.Base):
     """
     Provides access to any draft analyses results in the design.
@@ -12160,7 +13606,7 @@ class DraftFeatureInput(core.Base):
         Defines the draft to be defined so that a single angle is used for all drafts.
         If the isSymmetric is true then the faces are split along the parting plane and drafted
         independently using the same angle.
-        isSymmetric : Set to 'true' if the faces are to be split along the plane and drafted symmetrically. This
+        isSymmetric : Set to true if the faces are to be split along the plane or parting line and drafted symmetrically. This
         will have the side effect of setting the isSymmetric property to the same value.
         angle : The ValueInput object that defines the angle of the draft. This can be a positive or negative
         value which will affect the direction of the draft along with the isDirectionFlipped property.
@@ -12169,10 +13615,12 @@ class DraftFeatureInput(core.Base):
         return bool()
     def setTwoAngles(self, angleOne: core.ValueInput, angleTwo: core.ValueInput) -> bool:
         """
-        Defines both angles to use when the surfaces are split along the draft plane and
-        the faces on each side of the plane are drafted independently from the other side.
-        angleOne : The ValueInput object that defines the angle for the faces on the first side of the draft plane.
-        angleTwo : The ValueInput object that defines the angle for the faces on the second side of the draft plane.
+        Defines both angles to use when the surfaces are split along the draft plane or parting line and
+        the faces on each side of the plane are drafted independently.
+        angleOne : The ValueInput object that defines the angle for the faces on the first side of the draft plane
+        or parting line.
+        angleTwo : The ValueInput object that defines the angle for the faces on the second side of the draft plane
+        or parting line.
         Returns true if successful
         """
         return bool()
@@ -12193,13 +13641,15 @@ class DraftFeatureInput(core.Base):
     @property
     def plane(self) -> core.Base:
         """
-        Gets and sets the plane that defines the direction in which the draft is applied. This can be a planar BrepFace, or a ConstructionPlane.
+        Gets and sets the plane that defines the direction in which the draft is applied. This is also referred to
+        as the pull direction. This can be defined using either a planar BRepFace or a ConstructionPlane.
         """
         return core.Base()
     @plane.setter
     def plane(self, value: core.Base):
         """
-        Gets and sets the plane that defines the direction in which the draft is applied. This can be a planar BrepFace, or a ConstructionPlane.
+        Gets and sets the plane that defines the direction in which the draft is applied. This is also referred to
+        as the pull direction. This can be defined using either a planar BRepFace or a ConstructionPlane.
         """
         pass
     @property
@@ -12219,13 +13669,13 @@ class DraftFeatureInput(core.Base):
     @property
     def isDirectionFlipped(self) -> bool:
         """
-        Gets and sets if the direction of the draft is flipped.
+        Gets and sets if the direction of the draft is flipped. This defaults to false.
         """
         return bool()
     @isDirectionFlipped.setter
     def isDirectionFlipped(self, value: bool):
         """
-        Gets and sets if the direction of the draft is flipped.
+        Gets and sets if the direction of the draft is flipped. This defaults to false.
         """
         pass
     @property
@@ -12330,6 +13780,220 @@ class DraftFeatures(core.Base):
     def count(self) -> int:
         """
         The number of draft features in the collection.
+        """
+        return int()
+
+class EmbossFeatureInput(core.Base):
+    """
+    This class defines the methods and properties that pertain to the definition of an emboss feature.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> EmbossFeatureInput:
+        return EmbossFeatureInput()
+    @property
+    def profiles(self) -> list[core.Base]:
+        """
+        Gets and sets an array of Profile objects that define the shape of the emboss.
+        The profile argument can be Profile and SketchText objects.
+        When multiple objects are used, all profiles and sketch texts must be co-planar.
+        """
+        return [core.Base()]
+    @profiles.setter
+    def profiles(self, value: list[core.Base]):
+        """
+        Gets and sets an array of Profile objects that define the shape of the emboss.
+        The profile argument can be Profile and SketchText objects.
+        When multiple objects are used, all profiles and sketch texts must be co-planar.
+        """
+        pass
+    @property
+    def inputFaces(self) -> list[BRepFace]:
+        """
+        Gets and sets an array of BRepFace objects that define the faces the emboss will be performed on. By default,
+        faces that are tangent to any of the input faces are also used. Use the isTangentChain property of the
+        EmbossFeatureInput object to disable the use of tangent faces. If multiple inputFaces are provided, they must
+        all be on the same body.
+        """
+        return [BRepFace()]
+    @inputFaces.setter
+    def inputFaces(self, value: list[BRepFace]):
+        """
+        Gets and sets an array of BRepFace objects that define the faces the emboss will be performed on. By default,
+        faces that are tangent to any of the input faces are also used. Use the isTangentChain property of the
+        EmbossFeatureInput object to disable the use of tangent faces. If multiple inputFaces are provided, they must
+        all be on the same body.
+        """
+        pass
+    @property
+    def isTangentChain(self) -> bool:
+        """
+        Gets and sets whether any faces that are tangentially connected to any of the input faces will
+        also be used. By default this property is true.
+        """
+        return bool()
+    @isTangentChain.setter
+    def isTangentChain(self, value: bool):
+        """
+        Gets and sets whether any faces that are tangentially connected to any of the input faces will
+        also be used. By default this property is true.
+        """
+        pass
+    @property
+    def depth(self) -> core.ValueInput:
+        """
+        Gets and sets the ValueInput object that defines the depth of the emboss. A positive value results in the emboss
+        protruding out of the body and the negative value results in the emboss going into the body.
+        """
+        return core.ValueInput()
+    @depth.setter
+    def depth(self, value: core.ValueInput):
+        """
+        Gets and sets the ValueInput object that defines the depth of the emboss. A positive value results in the emboss
+        protruding out of the body and the negative value results in the emboss going into the body.
+        """
+        pass
+    @property
+    def horizontalDistance(self) -> core.ValueInput:
+        """
+        Gets and sets the horizontal offset distance. This defaults to zero.
+        """
+        return core.ValueInput()
+    @horizontalDistance.setter
+    def horizontalDistance(self, value: core.ValueInput):
+        """
+        Gets and sets the horizontal offset distance. This defaults to zero.
+        """
+        pass
+    @property
+    def verticalDistance(self) -> core.ValueInput:
+        """
+        Gets and sets the vertical offset distance. This defaults to zero.
+        """
+        return core.ValueInput()
+    @verticalDistance.setter
+    def verticalDistance(self, value: core.ValueInput):
+        """
+        Gets and sets the vertical offset distance. This defaults to zero.
+        """
+        pass
+    @property
+    def rotationAngle(self) -> core.ValueInput:
+        """
+        Gets and sets the rotation angle. This defaults to zero.
+        """
+        return core.ValueInput()
+    @rotationAngle.setter
+    def rotationAngle(self, value: core.ValueInput):
+        """
+        Gets and sets the rotation angle. This defaults to zero.
+        """
+        pass
+    @property
+    def targetBaseFeature(self) -> BaseFeature:
+        """
+        When creating a feature that is owned by a base feature, set this property to the
+        base feature you want to associate the new feature with. By default, this is null,
+        meaning it will not be associated with a base feature.
+        
+        Because of a current limitation, if you want to create a feature associated with a base
+        feature, you must set this property AND call the startEdit method of the base feature,
+        create the feature, and then call the finishEdit method of the base feature. The base
+        feature must be in an "edit" state to be able to add any additional items to it.
+        """
+        return BaseFeature()
+    @targetBaseFeature.setter
+    def targetBaseFeature(self, value: BaseFeature):
+        """
+        When creating a feature that is owned by a base feature, set this property to the
+        base feature you want to associate the new feature with. By default, this is null,
+        meaning it will not be associated with a base feature.
+        
+        Because of a current limitation, if you want to create a feature associated with a base
+        feature, you must set this property AND call the startEdit method of the base feature,
+        create the feature, and then call the finishEdit method of the base feature. The base
+        feature must be in an "edit" state to be able to add any additional items to it.
+        """
+        pass
+    @property
+    def creationOccurrence(self) -> Occurrence:
+        """
+        In order for geometry to be transformed correctly, an Occurrence for creation needs to be
+        specified when the emboss feature is created based on geometry (e.g. a profile and/or face(s))
+        in another component AND (the emboss feature) is not in the root component.
+        The creationOccurrence is analogous to the active occurrence in the UI
+        """
+        return Occurrence()
+    @creationOccurrence.setter
+    def creationOccurrence(self, value: Occurrence):
+        """
+        In order for geometry to be transformed correctly, an Occurrence for creation needs to be
+        specified when the emboss feature is created based on geometry (e.g. a profile and/or face(s))
+        in another component AND (the emboss feature) is not in the root component.
+        The creationOccurrence is analogous to the active occurrence in the UI
+        """
+        pass
+
+class EmbossFeatures(core.Base):
+    """
+    Collection that provides access to all of the existing emboss features in a component
+    and supports the ability to create new emboss features.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> EmbossFeatures:
+        return EmbossFeatures()
+    def __len__(self) -> int:
+        return 0
+    def __getitem__(self, index: int) -> EmbossFeature:
+        return None
+    def __iter__(self) -> Iterator[EmbossFeature]:
+        return None
+    def item(self, index: int) -> EmbossFeature:
+        """
+        Function that returns the specified emboss feature using an index into the collection.
+        index : The index of the item within the collection to return. The first item in the collection has an index of 0.
+        Returns the specified item or null if an invalid index was specified.
+        """
+        return EmbossFeature()
+    def itemByName(self, name: str) -> EmbossFeature:
+        """
+        Function that returns the specified emboss feature using the name of the feature.
+        name : The name of the feature within the collection to return. This is the name seen in the timeline.
+        Returns the specified item or null if the specified name was not found.
+        """
+        return EmbossFeature()
+    def createInput(self, profiles: list[core.Base], faces: list[BRepFace], depth: core.ValueInput) -> EmbossFeatureInput:
+        """
+        Creates an EmbossFeatureInput object. Use properties and methods on this object
+        to define the emboss feature you want to create and then use the Add method, passing in
+        the EmbossFeatureInput object to create the feature.
+        profiles : An array of Profile objects that define the shape of the emboss.
+        The profile argument can be Profile and SketchText objects.
+        When multiple objects are used, all profiles and sketch texts must be co-planar.
+        faces : An array of BRepFace objects that define the faces the emboss will be performed on. By default,
+        faces that are tangent to any of the input faces are also used. Use the isTangentChain property
+        on the input object to disable the use of tangent faces.
+        depth : A ValueInput object that defines the depth of the emboss. A positive value results in the emboss
+        protruding out of the body and a negative value results in the emboss going into the body.
+        Returns the newly created EmbossFeatureInput object or null if the creation failed.
+        """
+        return EmbossFeatureInput()
+    def add(self, input: EmbossFeatureInput) -> EmbossFeature:
+        """
+        Creates a new emboss feature.
+        input : An EmbossFeatureInput object that defines the desired emboss feature. Use the createInput
+        method to create a new EmbossFeatureInput object and then use methods on the EmbossFeatureInput
+        object to define the emboss feature.
+        Returns the newly created EmbossFeature object or null if the creation failed.
+        """
+        return EmbossFeature()
+    @property
+    def count(self) -> int:
+        """
+        The number of emboss features in the collection.
         """
         return int()
 
@@ -12520,7 +14184,7 @@ class ExportOptions(core.Base):
 
 class ExtendFeatureInput(core.Base):
     """
-    This class defines the methods and properties that pertain to the definition of a extend feature.
+    This class defines the methods and properties that pertain to the definition of an extend feature.
     """
     def __init__(self):
         pass
@@ -12641,7 +14305,7 @@ class ExtendFeatures(core.Base):
         return ExtendFeature()
     def createInput(self, edges: core.ObjectCollection, distance: core.ValueInput, extendType: SurfaceExtendTypes, isChainingEnabled: bool = True) -> ExtendFeatureInput:
         """
-        Creates a ExtendFeatureInput object. Use properties and methods on this object
+        Creates an ExtendFeatureInput object. Use properties and methods on this object
         to define the extend feature you want to create and then use the Add method, passing in
         the ExtendFeatureInput object.
         edges : The surface edges to extend.
@@ -12832,7 +14496,7 @@ class ExtrudeFeatureInput(core.Base):
     def isSolid(self) -> bool:
         """
         Specifies if the extrusion should be created as a solid or surface. If
-        it's a surface then there aren't any end caps and it's open. When a ExtrudeFeature
+        it's a surface then there aren't any end caps and it's open. When an ExtrudeFeature
         input is created, this is initialized to true so a solid will be created if it's not changed.
         """
         return bool()
@@ -12840,7 +14504,7 @@ class ExtrudeFeatureInput(core.Base):
     def isSolid(self, value: bool):
         """
         Specifies if the extrusion should be created as a solid or surface. If
-        it's a surface then there aren't any end caps and it's open. When a ExtrudeFeature
+        it's a surface then there aren't any end caps and it's open. When an ExtrudeFeature
         input is created, this is initialized to true so a solid will be created if it's not changed.
         """
         pass
@@ -12876,7 +14540,7 @@ class ExtrudeFeatureInput(core.Base):
         Gets and sets the extent used to define the start of the extrusion. When a new ExtrudeFeatureInput
         object is created the start extent is initialized to be the profile plane but you can change it
         to a profile plane with offset or from an object by setting this property with either a
-        OffsetStartDefinition or a EntityStartDefinition object. You can get either one
+        OffsetStartDefinition or an EntityStartDefinition object. You can get either one
         of those objects by using the static create method on the class.
         """
         return ExtentDefinition()
@@ -12886,7 +14550,7 @@ class ExtrudeFeatureInput(core.Base):
         Gets and sets the extent used to define the start of the extrusion. When a new ExtrudeFeatureInput
         object is created the start extent is initialized to be the profile plane but you can change it
         to a profile plane with offset or from an object by setting this property with either a
-        OffsetStartDefinition or a EntityStartDefinition object. You can get either one
+        OffsetStartDefinition or an EntityStartDefinition object. You can get either one
         of those objects by using the static create method on the class.
         """
         pass
@@ -13155,7 +14819,7 @@ class FaceGroup(core.Base):
         specific entity can be different over time. However, even if you have two different token
         strings that were obtained from the same entity, when you use findEntityByToken they
         will both return the same entity. Because of that you should never compare entity tokens
-        as way to determine what the token represents. Instead, you need to use the findEntityByToken
+        as a way to determine what the token represents. Instead, you need to use the findEntityByToken
         method to get the two entities identified by the tokens and then compare them.
         
         This is only valid for faces that exist in the design, (the isTemporary
@@ -13186,6 +14850,12 @@ class FaceGroup(core.Base):
         Returns if the face group is planar or not.
         """
         return bool()
+    @property
+    def attributes(self) -> core.Attributes:
+        """
+        Returns the collection of attributes associated with this face group.
+        """
+        return core.Attributes()
 
 class FaceGroups(core.Base):
     """
@@ -13468,7 +15138,7 @@ class Features(core.Base):
     @property
     def count(self) -> int:
         """
-        Returns the number of bodies in the collection.
+        Returns the number of features in the collection.
         """
         return int()
     @property
@@ -13751,12 +15421,6 @@ class Features(core.Base):
         """
         return LoftFeatures()
     @property
-    def ruleFilletFeatures(self) -> RuleFilletFeatures:
-        """
-        Returns the collection that provides access to the existing form features.
-        """
-        return RuleFilletFeatures()
-    @property
     def surfaceDeleteFaceFeatures(self) -> SurfaceDeleteFaceFeatures:
         """
         Returns the collection that provides access to the existing Surface Delete Face features.
@@ -13933,6 +15597,17 @@ class Features(core.Base):
         """
         return RipFeatures()
     @property
+    def meshConvertFeatures(self) -> MeshConvertFeatures:
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        Returns the collection that provides access to the mesh convert features
+        within the component and supports the creation of new mesh convert features.
+        """
+        return MeshConvertFeatures()
+    @property
     def meshCombineFaceGroupsFeatures(self) -> MeshCombineFaceGroupsFeatures:
         """
         !!!!! Warning !!!!!
@@ -13952,6 +15627,28 @@ class Features(core.Base):
         as a feature in the browser.
         """
         return MergeFacesFeatures()
+    @property
+    def meshSeparateFeatures(self) -> MeshSeparateFeatures:
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        Returns the collection that provides access to the mesh separate features
+        within the component and supports the creation of new mesh separate features.
+        """
+        return MeshSeparateFeatures()
+    @property
+    def meshReverseNormalFeatures(self) -> MeshReverseNormalFeatures:
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        Returns the collection that provides access to the mesh reverse normal features
+        within the component and supports the creation of new mesh reverse normal features.
+        """
+        return MeshReverseNormalFeatures()
     @property
     def arrangeFeatures(self) -> ArrangeFeatures:
         """
@@ -13985,6 +15682,47 @@ class Features(core.Base):
         within the component and supports the creation of new Volumetric Model to Mesh features.
         """
         return VolumetricModelToMeshFeatures()
+    @property
+    def embossFeatures(self) -> EmbossFeatures:
+        """
+        Returns the collection that provides access to the emboss features
+        within the component and supports the creation of new emboss features.
+        """
+        return EmbossFeatures()
+    @property
+    def hemFeatures(self) -> HemFeatures:
+        """
+        Returns the collection that provides access to the existing Hem features.
+        """
+        return HemFeatures()
+    @property
+    def meshRemoveFeatures(self) -> MeshRemoveFeatures:
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        Returns the collection that provides access to the mesh remove features
+        within the component and supports the creation of new mesh remove features.
+        """
+        return MeshRemoveFeatures()
+    @property
+    def deriveFeatures(self) -> DeriveFeatures:
+        """
+        Returns the collection that provides access to the Derive features
+        within the component and supports the creation of new Derive features.
+        """
+        return DeriveFeatures()
+    @property
+    def cornerClosureFeatures(self) -> CornerClosureFeatures:
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        Returns the collection that provides access to the existing Corner Closure features.
+        """
+        return CornerClosureFeatures()
 
 class FilletEdgeSet(core.Base):
     """
@@ -14068,6 +15806,9 @@ class FilletEdgeSetInput(core.Base):
         Gets and sets the continuity of the fillet edge set. Valid values are
         TangentSurfaceContinuityType and CurvatureSurfaceContinuityType. The default
         is TangentSurfaceContinuityType.
+        
+        For an asymmetric fillet edge set, this must always be tangent continuity (G1)
+        and setting it to another value will fail.
         """
         return SurfaceContinuityTypes()
     @continuity.setter
@@ -14076,6 +15817,9 @@ class FilletEdgeSetInput(core.Base):
         Gets and sets the continuity of the fillet edge set. Valid values are
         TangentSurfaceContinuityType and CurvatureSurfaceContinuityType. The default
         is TangentSurfaceContinuityType.
+        
+        For an asymmetric fillet edge set, this must always be tangent continuity (G1)
+        and setting it to another value will fail.
         """
         pass
     @property
@@ -14180,6 +15924,26 @@ class FilletEdgeSetInputs(core.Base):
         Returns the newly created ChordLengthFilletEdgeSetInput. This object provides access to additional settings.
         """
         return ChordLengthFilletEdgeSetInput()
+    def addAsymmetricRadiusEdgeSet(self, entities: core.ObjectCollection, offsetOne: core.ValueInput, offsetTwo: core.ValueInput, isTangentChain: bool) -> AsymmetricFilletEdgeSetInput:
+        """
+        Adds an asymmetric fillet edge set to the fillet feature input. Some settings are initialized with a
+        default value and can be set by modifying properties on the returned AsymmetricFilletEdgeSetInput object.
+        entities : An ObjectCollection containing the BRepEdge, BRepFace, and Feature objects to be filleted. If the isTangentChain argument is true
+        additional edges or faces may also get filleted if they are tangentially connected to any of the
+        input edges or faces.
+        offsetOne : A ValueInput object that defines the offset of the fillet in the first direction. If the ValueInput uses
+        a real then it is interpreted as centimeters. If it is a string then the units
+        can be defined as part of the string (i.e. "2 in") or if no units are specified
+        it is interpreted using the current default units for length.
+        offsetTwo : A ValueInput object that defines the offset of the fillet in the second direction. If the ValueInput uses
+        a real then it is interpreted as centimeters. If it is a string then the units
+        can be defined as part of the string (i.e. "2 in") or if no units are specified
+        it is interpreted using the current default units for length.
+        isTangentChain : A boolean value for setting whether or not edges or faces that are tangentially connected to
+        the input edges or faces will also be filleted.
+        Returns the newly created AsymmetricFilletEdgeSetInput. This object provides access to additional settings.
+        """
+        return AsymmetricFilletEdgeSetInput()
     @property
     def count(self) -> int:
         """
@@ -14283,6 +16047,28 @@ class FilletEdgeSets(core.Base):
         Returns the newly created FilletEdgeSet.
         """
         return ChordLengthFilletEdgeSet()
+    def addAsymmetricRadiusEdgeSet(self, entities: core.ObjectCollection, offsetOne: core.ValueInput, offsetTwo: core.ValueInput, isTangentChain: bool) -> AsymmetricFilletEdgeSet:
+        """
+        Adds an asymmetric fillet edge set to the fillet feature.
+        
+        To use this method, you need to position the timeline marker to immediately before this feature.
+        This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
+        entities : An ObjectCollection containing the BRepEdge, BRepFace, and Feature objects to be filleted. If the isTangentChain argument is true
+        additional edges or faces may also get filleted if they are tangentially connected to any of the
+        input edges or faces.
+        offsetOne : A ValueInput object that defines the offset distance of the fillet in the first direction. If the ValueInput uses
+        a real then it is interpreted as centimeters. If it is a string then the units
+        can be defined as part of the string (i.e. "2 in") or if no units are specified
+        it is interpreted using the current default units for length.
+        offsetTwo : A ValueInput object that defines the offset distance of the fillet in the second direction. If the ValueInput uses
+        a real then it is interpreted as centimeters. If it is a string then the units
+        can be defined as part of the string (i.e. "2 in") or if no units are specified
+        it is interpreted using the current default units for length.
+        isTangentChain : A boolean value for setting whether or not edges or faces that are tangentially connected to
+        the input edges or faces will also be filleted.
+        Returns the newly created AsymmetricFilletEdgeSet.
+        """
+        return AsymmetricFilletEdgeSet()
     @property
     def count(self) -> int:
         """
@@ -14304,12 +16090,16 @@ class FilletFeatureInput(core.Base):
     def isRollingBallCorner(self) -> bool:
         """
         Gets and sets if a rolling ball or setback solution is to be used in any corners.
+        For an asymmetric fillet only a setback solution is supported, so any asymmetric
+        edge sets will ignore this setting and will always be a setback corner.
         """
         return bool()
     @isRollingBallCorner.setter
     def isRollingBallCorner(self, value: bool):
         """
         Gets and sets if a rolling ball or setback solution is to be used in any corners.
+        For an asymmetric fillet only a setback solution is supported, so any asymmetric
+        edge sets will ignore this setting and will always be a setback corner.
         """
         pass
     @property
@@ -14391,6 +16181,40 @@ class FilletFeatures(core.Base):
         Function that returns the specified fillet feature using the name of the feature.
         name : The name of the feature within the collection to return. This is the name seen in the timeline.
         Returns the specified item or null if the specified name was not found.
+        """
+        return FilletFeature()
+    def createFullRoundFilletInput(self) -> FullRoundFilletFeatureInput:
+        """
+        Creates a FullRoundFilletFeatureInput object. Use properties and methods on this object
+        to define the fillet you want to create and then use the addFullRoundFillet method, passing in
+        the FullRoundFilletFeatureInput object.
+        Returns the newly created FullRoundFilletFeatureInput object or null if the creation failed.
+        """
+        return FullRoundFilletFeatureInput()
+    def addFullRoundFillet(self, input: FullRoundFilletFeatureInput) -> FilletFeature:
+        """
+        Creates a new full round fillet feature.
+        input : A FullRoundFilletFeatureInput object that defines the desired fillet.
+        Use the createFullRoundFilletInput method to create a new FullRoundFilletFeatureInput object
+        and then use methods on it (the FullRoundFilletFeatureInput object) to define the fillet.
+        Returns the newly created FilletFeature object or null if the creation failed.
+        """
+        return FilletFeature()
+    def createRuleFilletInput(self) -> RuleFilletFeatureInput:
+        """
+        Creates a RuleFilletFeatureInput object. Use properties and methods on this object
+        to define the fillet you want to create and then use the addRuleFillet method, passing in
+        the RuleFilletFeatureInput object.
+        Returns the newly created RuleFilletFeatureInput object or null if the creation failed.
+        """
+        return RuleFilletFeatureInput()
+    def addRuleFillet(self, input: RuleFilletFeatureInput) -> FilletFeature:
+        """
+        Creates a new rule fillet feature.
+        input : A RuleFilletFeatureInput object that defines the desired fillet.
+        Use the createRuleFilletInput method to create a new RuleFilletFeatureInput object
+        and then use methods on it(the RuleFilletFeatureInput object) to define the fillet.
+        Returns the newly created FilletFeature object or null if the creation failed.
         """
         return FilletFeature()
     @property
@@ -14477,6 +16301,163 @@ class FormFeatures(core.Base):
         The number of Form features in the collection.
         """
         return int()
+
+class FullRoundFilletFaceSet(core.Base):
+    """
+    The class for the full round fillet face set.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> FullRoundFilletFaceSet:
+        return FullRoundFilletFaceSet()
+    def deleteMe(self) -> bool:
+        """
+        Deletes the full round fillet face set from the fillet.
+        
+        When this face set is associated with an existing fillet feature, to use this method you
+        need to position the timeline marker to immediately before this feature.
+        This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True).
+        Returns true if the operation was successful.
+        """
+        return bool()
+    @property
+    def centerFace(self) -> BRepFace:
+        """
+        Gets the center face associated with this full round fillet face set.
+        When a center face has tangentially connected faces then
+        all the tangentially connected faces will be filleted automatically.
+        
+        When this face set is associated with an existing fillet feature, to get the center face you
+        need to position the timeline marker to immediately before this feature.
+        This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True).
+        """
+        return BRepFace()
+    @property
+    def sideOneFaces(self) -> list[BRepFace]:
+        """
+        Gets the side one faces.
+        
+        When this face set is associated with an existing fillet feature, to get the side one faces you
+        need to position the timeline marker to immediately before this feature.
+        This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True).
+        """
+        return [BRepFace()]
+    @property
+    def sideTwoFaces(self) -> list[BRepFace]:
+        """
+        Gets the side two faces.
+        
+        When this face set is associated with an existing fillet feature, to get the side two faces you
+        need to position the timeline marker to immediately before this feature.
+        This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True).
+        """
+        return [BRepFace()]
+    @property
+    def areAutomaticSideFaces(self) -> bool:
+        """
+        Property that returns a boolean value indicating whether the side faces are used as automatically inferred side faces.
+        It returns true indicating that the side faces are not being shown in the dialog when the user edits the feature.
+        Calling the setSideFaces method will cause this property to be changed to false.
+        """
+        return bool()
+
+class FullRoundFilletFaceSets(core.Base):
+    """
+    Collection that provides access to all existing full round fillet face sets associated with a full round fillet feature
+    or a FullRoundFilletFeatureInput object, and allows adding new full round fillet face sets.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> FullRoundFilletFaceSets:
+        return FullRoundFilletFaceSets()
+    def __len__(self) -> int:
+        return 0
+    def __getitem__(self, index: int) -> FullRoundFilletFaceSet:
+        return None
+    def __iter__(self) -> Iterator[FullRoundFilletFaceSet]:
+        return None
+    def item(self, index: int) -> FullRoundFilletFaceSet:
+        """
+        Function that returns the specified full round fillet face set using an index into the collection.
+        index : The index of the item within the collection to return. The first item in the collection has an index of 0.
+        Returns the specified item or null if an invalid index was specified.
+        """
+        return FullRoundFilletFaceSet()
+    def add(self, centerFace: BRepFace, sideOneFaces: list[BRepFace], sideTwoFaces: list[BRepFace], areAutomaticSideFaces: bool = True) -> FullRoundFilletFaceSet:
+        """
+        Adds a set of faces to be filleted to the full round fillet feature.
+        
+        When this face set is associated with an existing fillet feature, to use this method you
+        need to position the timeline marker to immediately before this feature.
+        This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True).
+        centerFace : Input a BRepFace object that specifies the center face to be filleted.
+        
+        When specifying a center face which has tangentially connected faces then
+        all the tangentially connected faces will be filleted automatically.
+        sideOneFaces : Input array of BRepFace objects to specify the side one faces.
+        Only one BRepFace object which is adjacent to the center face can be provided if you set areAutomaticSideFaces to true.
+        sideTwoFaces : Input array of BRepFace objects to specify the side two faces.
+        Only one BRepFace object which is adjacent to the center face can be provided if you set areAutomaticSideFaces to true.
+        areAutomaticSideFaces : Optional input boolean that specifies whether the input side faces are used as automatically inferred side faces.
+        It defaults to true, which results in the side faces not being shown in the dialog when the user edits the feature.
+        The same as when the user infers the side faces from the center face selection.
+        When this is set to false, the side faces will be shown in the dialog as if the user had used the side face selection inputs when creating the feature.
+        For the default to apply the input must meet the requirements that one side one face and one side two face is input
+        and those faces are connected to the center face.
+        Returns the newly created FullRoundFilletFaceSet or null in the case of failure.
+        """
+        return FullRoundFilletFaceSet()
+    @property
+    def count(self) -> int:
+        """
+        The number of full round fillet face sets in the collection.
+        """
+        return int()
+
+class FullRoundFilletFeatureInput(core.Base):
+    """
+    This class defines the methods and properties that pertain to the definition of a full round fillet feature.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> FullRoundFilletFeatureInput:
+        return FullRoundFilletFeatureInput()
+    @property
+    def targetBaseFeature(self) -> BaseFeature:
+        """
+        When creating a feature that is owned by a base feature, set this property to the
+        base feature you want to associate the new feature with. By default, this is null,
+        meaning it will not be associated with a base feature.
+        
+        Because of a current limitation, if you want to create a feature associated with a base
+        feature, you must set this property AND call the startEdit method of the base feature,
+        create the feature, and then call the finishEdit method of the base feature. The base
+        feature must be in an "edit" state to be able to add any additional items to it.
+        """
+        return BaseFeature()
+    @targetBaseFeature.setter
+    def targetBaseFeature(self, value: BaseFeature):
+        """
+        When creating a feature that is owned by a base feature, set this property to the
+        base feature you want to associate the new feature with. By default, this is null,
+        meaning it will not be associated with a base feature.
+        
+        Because of a current limitation, if you want to create a feature associated with a base
+        feature, you must set this property AND call the startEdit method of the base feature,
+        create the feature, and then call the finishEdit method of the base feature. The base
+        feature must be in an "edit" state to be able to add any additional items to it.
+        """
+        pass
+    @property
+    def faceSets(self) -> FullRoundFilletFaceSets:
+        """
+        Gets the FullRoundFilletFaceSets object that provides support to create the face
+        sets that will be used to create the full round fillet.
+        """
+        return FullRoundFilletFaceSets()
 
 class GeometricConstraint(core.Base):
     """
@@ -15140,6 +17121,194 @@ class GeometricRelationships(core.Base):
         """
         return int()
 
+class HemFeatureDefinition(core.Base):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    A Base class to return the information used to define the HemFeature.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> HemFeatureDefinition:
+        return HemFeatureDefinition()
+    @property
+    def hemEdge(self) -> BRepEdge:
+        """
+        Gets and sets the input edge for a hem
+        """
+        return BRepEdge()
+    @hemEdge.setter
+    def hemEdge(self, value: BRepEdge):
+        """
+        Gets and sets the input edge for a hem
+        """
+        pass
+    @property
+    def isFlipped(self) -> bool:
+        """
+        Gets the flip direction for an open hem.
+        """
+        return bool()
+    @isFlipped.setter
+    def isFlipped(self, value: bool):
+        """
+        Gets the flip direction for an open hem.
+        """
+        pass
+    @property
+    def bendPositionType(self) -> BendPositionTypes:
+        """
+        Gets the bend position type for a hem.
+        """
+        return BendPositionTypes()
+    @bendPositionType.setter
+    def bendPositionType(self, value: BendPositionTypes):
+        """
+        Gets the bend position type for a hem.
+        """
+        pass
+
+class HemFeatureInput(core.Base):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    This class defines the methods and properties that pertain to the definition of a hem feature.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> HemFeatureInput:
+        return HemFeatureInput()
+    def setFlatHem(self, edge: BRepEdge, length: core.ValueInput, isFlipped: bool, bendPositionType: BendPositionTypes) -> bool:
+        """
+        Sets the hem input with the values to be used in order to create a flat hem feature.
+        edge : The BRepEdge that defines the location of the hem.
+        length : The length of the hem.
+        isFlipped : Indicates if the hem direction is flipped.
+        bendPositionType : The bend location type for the hem.
+        Returns true if defining the hem is successful.
+        """
+        return bool()
+    def setOpenHem(self, edge: BRepEdge, length: core.ValueInput, gap: core.ValueInput, isFlipped: bool, bendPositionType: BendPositionTypes) -> bool:
+        """
+        Sets the hem input with the values to be used in order to create an open hem feature.
+        edge : The BRepEdge that defines the location of the hem.
+        length : The length of the hem.
+        gap : The gap distance of the hem.
+        isFlipped : Indicates if the hem direction is flipped.
+        bendPositionType : The bend location type for the hem.
+        Returns true if defining the hem is successful.
+        """
+        return bool()
+    def setRolledHem(self, edge: BRepEdge, radius: core.ValueInput, angle: core.ValueInput, isFlipped: bool, bendPositionType: BendPositionTypes) -> bool:
+        """
+        Sets the hem input with the values to be used in order to create a rolled hem feature.
+        edge : The BRepEdge that defines the location of the hem.
+        radius : The radius of the rolled hem.
+        angle : The angle of the rolled hem.
+        isFlipped : Indicates if the hem direction is flipped.
+        bendPositionType : The bend location type for the hem.
+        Returns true if defining the hem is successful.
+        """
+        return bool()
+    def setRopeHem(self, edge: BRepEdge, length: core.ValueInput, gap: core.ValueInput, radius: core.ValueInput, isFlipped: bool, bendPositionType: BendPositionTypes) -> bool:
+        """
+        Sets the hem input with the values to be used in order to create a rope hem feature.
+        edge : The BRepEdge that defines the location of the hem.
+        length : The length of the rope hem.
+        gap : The gap distance of the hem.
+        radius : The radius of the rope hem.
+        isFlipped : Indicates if the hem direction is flipped.
+        bendPositionType : The bend location type for the hem.
+        Returns true if defining the hem is successful.
+        """
+        return bool()
+    def setTeardropHem(self, edge: BRepEdge, radius: core.ValueInput, length: core.ValueInput, gap: core.ValueInput, isFlipped: bool, bendPositionType: BendPositionTypes) -> bool:
+        """
+        Sets the hem input with the values to be used in order to create a teardrop hem feature.
+        edge : The BRepEdge that defines the location of the hem.
+        radius : The radius of the teardrop hem.
+        length : The angle of the teardrop hem.
+        gap : The gap distance of the hem.
+        isFlipped : Indicates if the hem direction is flipped.
+        bendPositionType : The bend location type for the hem.
+        Returns true if defining the hem is successful.
+        """
+        return bool()
+    def setDoubleHem(self, edge: BRepEdge, gap: core.ValueInput, length: core.ValueInput, setback: core.ValueInput, isFlipped: bool, bendPositionType: BendPositionTypes) -> bool:
+        """
+        Sets the hem input with the values to be used in order to create a double hem feature.
+        edge : The BRepEdge that defines the location of the hem.
+        gap : The gap distance of the hem.
+        length : The length of the double hem.
+        setback : The setback of the double hem.
+        isFlipped : Indicates if the hem direction is flipped.
+        bendPositionType : The bend location type for the hem.
+        Returns true if defining the hem is successful.
+        """
+        return bool()
+
+class HemFeatures(core.Base):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Collection that provides access to all of the existing hem features in a design and supports the ability to create new hem features.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> HemFeatures:
+        return HemFeatures()
+    def __len__(self) -> int:
+        return 0
+    def __getitem__(self, index: int) -> HemFeature:
+        return None
+    def __iter__(self) -> Iterator[HemFeature]:
+        return None
+    def item(self, index: int) -> HemFeature:
+        """
+        Function that returns the specified hem feature using an index into the collection.
+        index : The index of the item within the collection to return. The first item in the collection has an index of 0.
+        Returns the specified item or null if an invalid index was specified.
+        """
+        return HemFeature()
+    def itemByName(self, name: str) -> HemFeature:
+        """
+        Function that returns the specified hem feature using the name of the feature.
+        name : The name of the feature within the collection to return. This is the name seen in the timeline.
+        Returns the specified item or null if the specified name was not found.
+        """
+        return HemFeature()
+    def createHemFeatureInput(self) -> HemFeatureInput:
+        """
+        Creates a HemFeatureInput object. Use methods on this object to define the hem you want
+        to create and then use the add method, passing in the HemFeatureInput object.
+        Returns the newly created HemFeatureInput object or null if the creation failed.
+        """
+        return HemFeatureInput()
+    def add(self, input: HemFeatureInput) -> HemFeature:
+        """
+        Creates a new Hem feature.
+        input : A HemFeatureInput object that defines the desired hem. Use the createInput
+        method to create a new HemFeatureInput object and then use methods on it
+        (the HemFeatureInput object) to define the hem.
+        Returns the newly created HemFeature object or null if the creation failed.
+        """
+        return HemFeature()
+    @property
+    def count(self) -> int:
+        """
+        The number of hem features in the collection.
+        """
+        return int()
+
 class HoleFeatureInput(core.Base):
     """
     This class defines the methods and properties that pertain to the definition of a hole
@@ -15249,7 +17418,7 @@ class HoleFeatureInput(core.Base):
         the type of feature this is being used with. For a hole it can be a BRepBody, BRepFace,
         BRepVertex, ConstructionPlane, or ConstructionPoint.
         matchShape : Indicates if the hole is not contained on the face that the hole should match
-        the shape of the entity as if it extended beyond it's current boundaries.
+        the shape of the entity as if it extended beyond its current boundaries.
         directionHint : Specifies the direction of the hole. This is only used in the case where there are two possible solutions and the hole can
         hit the toEntity in either direction.
         
@@ -15265,6 +17434,46 @@ class HoleFeatureInput(core.Base):
         opposite the normal of the sketch. The points can be from multiple sketches but they
         must all be co-planar.
         Returns true if successful.
+        """
+        return bool()
+    def setToSimpleHole(self) -> bool:
+        """
+        This property sets the hole's tap to be "simple", which means that it will not have
+        any tap and will be a simple hole. When a new input is created, it defaults to being
+        a simple hole.
+        Returns true if successful.
+        """
+        return bool()
+    def setToClearanceHole(self, clearanceHoleInfo: ClearanceHoleInfo) -> bool:
+        """
+        Sets the hole to be a clearance hole of the size specified by the ClearanceHoleInfo object.
+        clearanceHoleInfo : The ClearanceHoleInfo object that specifies the size of the clearance hole.
+        Returns true if setting to a clearance hole was successful.
+        """
+        return bool()
+    def setToTappedHole(self, threadInfo: ThreadInfo) -> bool:
+        """
+        Sets the hole to be a straight or tapered tapped hole of the size specified by the ThreadInfo object.
+        threadInfo : The ThreadInfo object that specifies the thread to use for the tapped hole. Whether it is straight
+        or tapered tap is defined by the input ThreadInfo object.
+        Returns true if setting to a tapped hole was successful.
+        """
+        return bool()
+    def setLengthAndOffset(self, length: core.ValueInput, offset: core.ValueInput) -> bool:
+        """
+        Sets the length and offset of the thread of a tapped hole.
+        
+        This method is only used when creating a tapped hole, which
+        means the setToTappedHole method has been called. Otherwise calling this
+        method will fail.
+        
+        By default the isFullLength property is true which means the thread is
+        the full length of the hole and there is no offset. Calling this method will have
+        the side effect of setting the isFullLength property to false.
+        length : Sets the length of the thread.
+        offset : Sets the offset of the thread from the start of the hole. A value of zero is valid
+        for no offset.
+        
         """
         return bool()
     @property
@@ -15363,6 +17572,79 @@ class HoleFeatureInput(core.Base):
         possible intersecting bodies can be computed.
         """
         pass
+    @property
+    def holeTapType(self) -> HoleTapTypes:
+        """
+        Returns the current type of tap associated with this hole. When a new HoleFeatureInput
+        is created, this will default to SimpleHoleTapType, which means the hole will not have
+        any tap and will be a simple hole. You can set the tap type by using one of the methods
+        to define the specific tap desired.
+        """
+        return HoleTapTypes()
+    @property
+    def isModeled(self) -> bool:
+        """
+        Gets and sets if the thread is physical or cosmetic thread. A value of
+        true indicates a physical thread. It defaults to false.
+        
+        This property is only used when creating a tapped hole, which
+        means the setToTappedHole method has been called. Otherwise this
+        property is ignored.
+        """
+        return bool()
+    @isModeled.setter
+    def isModeled(self, value: bool):
+        """
+        Gets and sets if the thread is physical or cosmetic thread. A value of
+        true indicates a physical thread. It defaults to false.
+        
+        This property is only used when creating a tapped hole, which
+        means the setToTappedHole method has been called. Otherwise this
+        property is ignored.
+        """
+        pass
+    @property
+    def isFullLength(self) -> bool:
+        """
+        Gets and sets if this thread is the full length of the hole. It defaults to true.
+        
+        This property is only used when creating a tapped hole, which
+        means the setToTappedHole method has been called. Otherwise this
+        property is ignored.
+        
+        The property can only be set to True, which will cause the feature to ignore the
+        values of the threadLength and threadOffset properties. Using the setLengthAndOffset
+        method will have the side effect of setting this property to false.
+        """
+        return bool()
+    @isFullLength.setter
+    def isFullLength(self, value: bool):
+        """
+        Gets and sets if this thread is the full length of the hole. It defaults to true.
+        
+        This property is only used when creating a tapped hole, which
+        means the setToTappedHole method has been called. Otherwise this
+        property is ignored.
+        
+        The property can only be set to True, which will cause the feature to ignore the
+        values of the threadLength and threadOffset properties. Using the setLengthAndOffset
+        method will have the side effect of setting this property to false.
+        """
+        pass
+    @property
+    def threadLength(self) -> core.ValueInput:
+        """
+        Gets the thread length when the isFullLength property is False. Returns null when the
+        isFullLength property is true.
+        """
+        return core.ValueInput()
+    @property
+    def threadOffset(self) -> core.ValueInput:
+        """
+        Gets the thread offset when the isFullLength property is False. Returns null when the
+        isFullLength property is true.
+        """
+        return core.ValueInput()
 
 class HoleFeatures(core.Base):
     """
@@ -15814,6 +18096,109 @@ class IsoCurveAnalyses(core.Base):
         """
         return int()
 
+class IsoparametricCurveInput(core.Base):
+    """
+    The input object that defines the required input to create an isoparametric curve
+    when using the SketchIsoparametricCurves.add method. This object is created using the
+    SketchIsoparametricCurves.createInput method.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> IsoparametricCurveInput:
+        return IsoparametricCurveInput()
+    def setSingle(self, isPhysical: bool, distance: core.ValueInput) -> bool:
+        """
+        Defines that a single isoparametric curve will be created and its position
+        is defined by its distance from the edge of the surface. The direction is
+        defined using the isUDirection property.
+        isPhysical : Specifies if the offset of the curve from the edge of the surface is defined
+        by a physical distance or a proportional distance along the surface where it is defined
+        as a value from 0 to 1. A value of true indicates it is the physical distance.
+        distance : The distance of the curve from the edge of the surface. If isPhysical is true
+        this is a physical distance. If the ValueInput is defined using a real value
+        this is the offset in centimeters. If the ValueInput is defined using a string
+        it is used as the expression of the parameter that will be created to control
+        the offset, and should be able to be evaluated as a distance.
+        
+        If isPhysical is false, this defines the proportional offset of the surface from
+        the edge where the value can be 0 to 1. If a ValueInput is defined using a real
+        value it can be 0 to 1. If the ValueInput is defined using a string it is used
+        as the expression of the parameter that will be created to control the offset and
+        should be able to be evaluated as a unitless value.
+        Returns true if successful.
+        """
+        return bool()
+    def setDistributed(self, quantity: core.ValueInput) -> bool:
+        """
+        Defines that one or more isoparametric curves will be created along the U or V
+        parameter curves of the face. The direction is defined using the isUDirection
+        property.
+        quantity : The number of isoparametric curves to create. They are evenly distributed
+        on the face. If a ValueInput is defined using a real value, it should be
+        a whole number or it will be rounded to the nearest whole number. If a ValueInput
+        is defined using a string, it is used as the expression of the parameter that will
+        be created to control the number of curves and should be able to be evaluated as
+        a unitless value.
+        Returns true if successful.
+        """
+        return bool()
+    @property
+    def face(self) -> BRepFace:
+        """
+        Gets and sets the BRepFace on which to create the isoparametric curve.
+        """
+        return BRepFace()
+    @face.setter
+    def face(self, value: BRepFace):
+        """
+        Gets and sets the BRepFace on which to create the isoparametric curve.
+        """
+        pass
+    @property
+    def isUDirection(self) -> bool:
+        """
+        Gets and sets the direction of the isoparametric curve on the surface.
+        The curve follows the surface in either the U or V parametric direction.
+        True indicates the U direction, which is also the default when the input
+        is created.
+        """
+        return bool()
+    @isUDirection.setter
+    def isUDirection(self, value: bool):
+        """
+        Gets and sets the direction of the isoparametric curve on the surface.
+        The curve follows the surface in either the U or V parametric direction.
+        True indicates the U direction, which is also the default when the input
+        is created.
+        """
+        pass
+    @property
+    def isSingle(self) -> bool:
+        """
+        Gets if a single or distributed curve creation has been specified. To change
+        the type, call either the setSingle or setDistributed methods.
+        """
+        return bool()
+    @property
+    def isPhysicalOffset(self) -> bool:
+        """
+        Gets how the distance of the single curve from the face edge is defined by a
+        distance or proportionally. This property only applies when the isSingle property
+        is True. A value of true indicates it is defined using a physical offset. To change
+        how the offset is defined use the setSingle method.
+        """
+        return bool()
+    @property
+    def quantityOrDistance(self) -> core.ValueInput:
+        """
+        Gets the quantity or distance value to be used when creating the isoparametric curve.
+        If the isSingle property returns true, this is the distance of the curve from the
+        edge of the face. If the isSingle property is false, this is the quantity of curves
+        in the result. To set this, use either the setDistributed or setSingle methods.
+        """
+        return core.ValueInput()
+
 class Joint(core.Base):
     """
     A joint in a design.
@@ -16026,7 +18411,7 @@ class Joint(core.Base):
         Returns the parameter controlling the angle between the two input geometries. This is effectively the
         angle between the two primary axes of the two joint geometries.
         
-        This property will return null in the case where the jointType property returns InferredJointType
+        This property will return null in the case where the jointType property returns InferredJointType.
         """
         return ModelParameter()
     @property
@@ -16083,7 +18468,7 @@ class Joint(core.Base):
     def nativeObject(self) -> Joint:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -16252,6 +18637,12 @@ class Joint(core.Base):
         only valid when the jointType property returns InferredJointType. Otherwise, it returns null.
         """
         return GeometricRelationships()
+    @property
+    def motionLinks(self) -> list[MotionLink]:
+        """
+        Returns the MotionLink objects that this joint is involved in.
+        """
+        return [MotionLink()]
 
 class JointGeometry(core.Base):
     """
@@ -17045,7 +19436,7 @@ class JointOrigin(core.Base):
     def nativeObject(self) -> JointOrigin:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -18169,7 +20560,7 @@ class MeshBodies(core.Base):
         you must first call the edit method of the base or form feature, use this method to create
         the mesh body, and then call the finishEdit method of the base or form feature. The base
         or form feature must be in an "edit" state to be able to add any additional items to it.
-        fullFilename : The full filename (path and file) of a STL, OBJ or 3MF file.
+        fullFilename : The full filename (path and file) of an STL, OBJ or 3MF file.
         units : The units to use when importing the file.
         baseOrFormFeature : The BaseFeature or FormFeature object that this mesh body will be associated with. This is an optional
         requirement. It is required in a parametric modeling design but is ignored in a direct modeling design.
@@ -18182,21 +20573,21 @@ class MeshBodies(core.Base):
         """
         Provides access to a mesh body within the collection.
         index : The index of the mesh body to return, where an index of 0 is the first mesh body in the collection.
-        Returns the specified mesh body or null in the case of a invalid index.
+        Returns the specified mesh body or null in the case of an invalid index.
         """
         return MeshBody()
     def addByTriangleMeshData(self, coordinates: list[float], coordinateIndexList: list[int], normalVectors: list[float], normalIndexList: list[int]) -> MeshBody:
         """
         Creates a new mesh body using the mesh description provided.
-        coordinates : Input array of doubles that defines the X, Y, Z coordinates of each node in the mesh. Each set of three numbers define
+        coordinates : Input array of doubles that defines the X, Y, Z coordinates of each node in the mesh. Each set of three numbers defines
         the coordinates of a node.
         coordinateIndexList : An array of integers that represent indices into the coordinates to define the vertices of the triangles. If an empty
-        array is provided, then it's assumed that the first three coordinates defines the first triangle, the next three define
+        array is provided, then it's assumed that the first three coordinates define the first triangle, the next three define
         the second triangle, and so on.
         normalVectors : An array of doubles that represent the x, y, z components of the normals at each coordinate. There should be a normal defined
         for each coordinate. If an empty array is provided for the normal vectors, Fusion will automatically calculate normal vectors
         that are 90 degrees to the face of the triangle, making it appear flat.
-        normalIndexList : An array of integers that represent indices into the normal vectors to define the which vector corresponds to which vertex. This
+        normalIndexList : An array of integers that represent indices into the normal vectors to define which vector corresponds to which vertex. This
         should be the same size as the vertex index list. If an empty array is input and normal vectors are provided, it is assumed that
         the normals match up one-to-one to each coordinate.
         Returns the newly created MeshBody object or null in the case of a failure.
@@ -18283,13 +20674,13 @@ class MeshBody(core.Base):
         ! This is in preview state; please see the help for more info
         !!!!! Warning !!!!!
         
-        Moves this mesh body from it's current component into the root component or the component owned by the
+        Moves this mesh body from its current component into the root component or the component owned by the
         specified occurrence.
         target : The target can be either the root component or an occurrence.
         
         In the case where an occurrence is specified, the mesh body will be moved into the parent component of the target
         occurrence and the target occurrence defines the transform of how the mesh body will be copied so that the body
-        maintains it's same position with respect to the assembly.
+        maintains its same position with respect to the assembly.
         Returns the moved mesh body or null in the case the move failed.
         """
         return MeshBody()
@@ -18304,10 +20695,23 @@ class MeshBody(core.Base):
         
         In the case where an occurrence is specified, the mesh body will be copied into the parent component of the target
         occurrence and the target occurrence defines the transform of how the mesh body will be copied so that the body
-        maintains it's same position with respect to the assembly.
+        maintains its same position with respect to the assembly.
         Returns the moved mesh body or null in the case the move failed.
         """
         return MeshBody()
+    def silhouette(self, plane: core.Plane) -> list[core.Polyline3D]:
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        Calculates the silhouette of a mesh for a given orientation.
+        plane : Plane specifies the orienation for which the silhouette is calculated. The silhouette is calculated along the normal
+        of the plane and projected on the plane after the calculation.
+        The results are returned as a list of polylines 3d objects. If the calculation fails,
+        no polyline 3d objects are returned.
+        """
+        return [core.Polyline3D()]
     @property
     def name(self) -> str:
         """
@@ -18387,7 +20791,7 @@ class MeshBody(core.Base):
     def nativeObject(self) -> MeshBody:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -18492,7 +20896,7 @@ class MeshBody(core.Base):
         specific entity can be different over time. However, even if you have two different token
         strings that were obtained from the same entity, when you use findEntityByToken they
         will both return the same entity. Because of that you should never compare entity tokens
-        as way to determine what the token represents. Instead, you need to use the findEntityByToken
+        as a way to determine what the token represents. Instead, you need to use the findEntityByToken
         method to get the two entities identified by the tokens and then compare them.
         """
         return str()
@@ -18646,7 +21050,7 @@ class MeshBodyList(core.Base):
         """
         Provides access to a mesh body within the collection.
         index : The index of the mesh body to return, where an index of 0 is the first mesh body in the collection.
-        Returns the specified mesh body or null in the case of a invalid index.
+        Returns the specified mesh body or null in the case of an invalid index.
         """
         return MeshBody()
     @property
@@ -18871,6 +21275,22 @@ class MeshCombineFeatureInput(core.Base):
         feature, you must set this property AND call the startEdit method of the base feature,
         create the feature, and then call the finishEdit method of the base feature. The base
         feature must be in an "edit" state to be able to add any additional items to it.
+        """
+        pass
+    @property
+    def algorithmType(self) -> MeshCombineAlgorithmTypes:
+        """
+        Gets and sets the used algorithm for the join, cut and intersect operation types. Default value is
+        LegacyMeshCombineAlgorithmType. This setting is only effective in non-parametric mode.
+        In parametric mode the algorithm type is always LegacyMeshCombineAlgorithmType.
+        """
+        return MeshCombineAlgorithmTypes()
+    @algorithmType.setter
+    def algorithmType(self, value: MeshCombineAlgorithmTypes):
+        """
+        Gets and sets the used algorithm for the join, cut and intersect operation types. Default value is
+        LegacyMeshCombineAlgorithmType. This setting is only effective in non-parametric mode.
+        In parametric mode the algorithm type is always LegacyMeshCombineAlgorithmType.
         """
         pass
 
@@ -19700,6 +22120,119 @@ class MeshRemeshFeatures(core.Base):
     def count(self) -> int:
         """
         The number of mesh re-mesh features in the collection.
+        """
+        return int()
+
+class MeshRemoveFeatureInput(core.Base):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    This class defines the methods and properties that pertain to the definition of a mesh remove
+    feature.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> MeshRemoveFeatureInput:
+        return MeshRemoveFeatureInput()
+    @property
+    def inputBodies(self) -> list[MeshBody]:
+        """
+        Gets and sets the input meshes.
+        """
+        return [MeshBody()]
+    @inputBodies.setter
+    def inputBodies(self, value: list[MeshBody]):
+        """
+        Gets and sets the input meshes.
+        """
+        pass
+    @property
+    def targetBaseFeature(self) -> BaseFeature:
+        """
+        When creating a feature that is owned by a base feature, set this property to the
+        base feature you want to associate the new feature with. By default, this is null,
+        meaning it will not be associated with a base feature.
+        
+        Because of a current limitation, if you want to create a feature associated with a base
+        feature, you must set this property AND call the startEdit method of the base feature,
+        create the feature, and then call the finishEdit method of the base feature. The base
+        feature must be in an "edit" state to be able to add any additional items to it.
+        """
+        return BaseFeature()
+    @targetBaseFeature.setter
+    def targetBaseFeature(self, value: BaseFeature):
+        """
+        When creating a feature that is owned by a base feature, set this property to the
+        base feature you want to associate the new feature with. By default, this is null,
+        meaning it will not be associated with a base feature.
+        
+        Because of a current limitation, if you want to create a feature associated with a base
+        feature, you must set this property AND call the startEdit method of the base feature,
+        create the feature, and then call the finishEdit method of the base feature. The base
+        feature must be in an "edit" state to be able to add any additional items to it.
+        """
+        pass
+
+class MeshRemoveFeatures(core.Base):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Collection that provides access to all of the existing mesh remove features in a component
+    and supports the ability to create new mesh remove features.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> MeshRemoveFeatures:
+        return MeshRemoveFeatures()
+    def __len__(self) -> int:
+        return 0
+    def __getitem__(self, index: int) -> MeshRemoveFeature:
+        return None
+    def __iter__(self) -> Iterator[MeshRemoveFeature]:
+        return None
+    def item(self, index: int) -> MeshRemoveFeature:
+        """
+        Function that returns the specified mesh remove feature using an index into the collection.
+        index : The index of the item within the collection to return. The first item in the collection has an index of 0.
+        Returns the specified item or null if an invalid index was specified.
+        """
+        return MeshRemoveFeature()
+    def createInput(self, inputBodies: list[MeshBody]) -> MeshRemoveFeatureInput:
+        """
+        Creates a MeshRemoveFeatureInput object. Use properties and methods on this object
+        to define the mesh remove feature you want to create and then use the add method, passing in
+        the MeshRemoveFeatureInput object.
+        inputBodies : A array with mesh bodies in a parametric design.
+        Returns the newly created MeshRemoveFeatureInput object or null if the creation failed.
+        """
+        return MeshRemoveFeatureInput()
+    def add(self, input: MeshRemoveFeatureInput) -> list[MeshRemoveFeature]:
+        """
+        Creates a mesh remove feature. Works only in parametric mode.
+        input : A MeshRemoveFeatureInput object that defines the desired mesh remove feature. Use the createInput
+        method to create a new MeshRemoveFeatureInput object and then use methods on it
+        (the MeshRemoveFeatureInput object) to define the removal.
+        When successfull, a MeshRemoveFeature is created for each MeshBody that was input.
+        An array of the created MeshRemoveFeature objects is returned.
+        """
+        return [MeshRemoveFeature()]
+    def itemByName(self, name: str) -> MeshRemoveFeature:
+        """
+        Function that returns the specified mesh remove feature using the name of the feature.
+        name : The name of the feature within the collection to return. This is the name seen in the timeline.
+        Returns the specified item or null if the specified name was not found.
+        """
+        return MeshRemoveFeature()
+    @property
+    def count(self) -> int:
+        """
+        The number of mesh remove features in the collection.
         """
         return int()
 
@@ -20639,6 +23172,342 @@ class ModelParameters(core.Base):
         """
         return Component()
 
+class MotionLink(core.Base):
+    """
+    A MotionLink in a design.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> MotionLink:
+        return MotionLink()
+    def setMotionData(self, motionOne: JointMotionTypes, valueOne: core.ValueInput, motionTwo: JointMotionTypes, valueTwo: core.ValueInput, isReversed: bool = False) -> bool:
+        """
+        Method that sets the motion data.
+        motionOne : Specifies the first motion to link.
+        valueOne : Specifies the first motion link value. If the ValueInput uses a real then it is interpreted as centimeters for length and radians for angle.
+        If it is a string then the units can be defined as part of the string (i.e. "2 in" or "60 deg") or if no units are specified it is interpreted using the current default units for length or angle.
+        motionTwo : Specifies the second motion to link.
+        valueTwo : Specifies the second motion link value. If the ValueInput uses a real then it is interpreted as centimeters for length and radians for angle.
+        If it is a string then the units can be defined as part of the string (i.e. "2 in" or "60 deg") or if no units are specified it is interpreted using the current default units for length or angle.
+        isReversed : Optional argument that specifies whether to reverse the direction of the motion.
+        Returns true if successful.
+        """
+        return bool()
+    def deleteMe(self) -> bool:
+        """
+        Deletes this MotionLink.
+        Returns true if the delete is successful.
+        """
+        return bool()
+    def createForAssemblyContext(self, occurrence: Occurrence) -> MotionLink:
+        """
+        Creates or returns a proxy for the native object
+        - i.e. a new object that represents this object but adds the assembly context
+        defined by the input occurrence.
+        occurrence : The occurrence that defines the context to create the proxy in.
+        Returns the proxy object or null if this isn't the NativeObject.
+        """
+        return MotionLink()
+    @property
+    def parentComponent(self) -> Component:
+        """
+        Returns the parent component that owns this MotionLink.
+        """
+        return Component()
+    @property
+    def name(self) -> str:
+        """
+        Gets and sets the name of the MotionLink.
+        """
+        return str()
+    @name.setter
+    def name(self, value: str):
+        """
+        Gets and sets the name of the MotionLink.
+        """
+        pass
+    @property
+    def jointOne(self) -> core.Base:
+        """
+        Gets the first joint for this MotionLink.
+        """
+        return core.Base()
+    @property
+    def jointTwo(self) -> core.Base:
+        """
+        Gets the second joint for this MotionLink. This can return null if the linked motions are from the same joint.
+        """
+        return core.Base()
+    @property
+    def motionOne(self) -> JointMotionTypes:
+        """
+        Gets the first motion type.
+        """
+        return JointMotionTypes()
+    @property
+    def motionTwo(self) -> JointMotionTypes:
+        """
+        Gets the second motion type.
+        """
+        return JointMotionTypes()
+    @property
+    def valueOne(self) -> ModelParameter:
+        """
+        Returns the ModelParameter for the first motion link value.
+        """
+        return ModelParameter()
+    @property
+    def valueTwo(self) -> ModelParameter:
+        """
+        Returns the ModelParameter for the second motion link value.
+        """
+        return ModelParameter()
+    @property
+    def isReversed(self) -> bool:
+        """
+        Gets and sets whether the motion is reversed or not.
+        """
+        return bool()
+    @isReversed.setter
+    def isReversed(self, value: bool):
+        """
+        Gets and sets whether the motion is reversed or not.
+        """
+        pass
+    @property
+    def timelineObject(self) -> TimelineObject:
+        """
+        Returns the timeline object associated with this MotionLink.
+        """
+        return TimelineObject()
+    @property
+    def nativeObject(self) -> MotionLink:
+        """
+        The NativeObject is the object outside the context of an assembly and
+        in the context of its parent component.
+        Returns null in the case where this object is not in the context of
+        an assembly but is already the native object.
+        """
+        return MotionLink()
+    @property
+    def assemblyContext(self) -> Occurrence:
+        """
+        Returns the assembly occurrence (i.e. the occurrence) of this object
+        in an assembly. This is only valid in the case where this is acting
+        as a proxy in an assembly. Returns null in the case where the object
+        is not in the context of an assembly but is already the native object.
+        """
+        return Occurrence()
+    @property
+    def isSuppressed(self) -> bool:
+        """
+        Gets and sets if this MotionLink is suppressed.
+        """
+        return bool()
+    @isSuppressed.setter
+    def isSuppressed(self, value: bool):
+        """
+        Gets and sets if this MotionLink is suppressed.
+        """
+        pass
+    @property
+    def attributes(self) -> core.Attributes:
+        """
+        Returns the collection of attributes associated with this MotionLink.
+        """
+        return core.Attributes()
+    @property
+    def healthState(self) -> FeatureHealthStates:
+        """
+        Returns the current health state of the MotionLink.
+        """
+        return FeatureHealthStates()
+    @property
+    def errorOrWarningMessage(self) -> str:
+        """
+        Returns the error or warning message in the case where the healthState property returns either
+        WarningFeatureHealthState or ErrorFeatureHealthState. Otherwise this property returns an empty string.
+        """
+        return str()
+    @property
+    def entityToken(self) -> str:
+        """
+        Returns a token for the MotionLink object. This can be saved and used at a later
+        time with the Design.findEntityByToken method to get back the same MotionLink.
+        
+        When using entity tokens it's important to understand that the token string returned for a
+        specific entity can be different over time. However, even if you have two different token
+        strings that were obtained from the same entity, when you use findEntityByToken they
+        will both return the same entity. Because of that you should never compare entity tokens
+        as way to determine what the token represents. Instead, you need to use the findEntityByToken
+        method to get the two entities identified by the tokens and then compare them.
+        """
+        return str()
+
+class MotionLinkInput(core.Base):
+    """
+    Defines all of the information required to create a new MotionLink. This object provides
+    equivalent functionality to the MotionLink command dialog in that it gathers the required
+    information to create a MotionLink.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> MotionLinkInput:
+        return MotionLinkInput()
+    @property
+    def jointOne(self) -> core.Base:
+        """
+        Gets and sets the first Joint or AsBuiltJoint for this MotionLink. When you link two motions from the same joint, a valid joint should have its joint motion type of BallJointType, CylindricalJointType, PinSlotJointType or PlanarJointType.
+        A joint whose joint motion is a RigidJointMotion type is never valid as the first joint..
+        """
+        return core.Base()
+    @jointOne.setter
+    def jointOne(self, value: core.Base):
+        """
+        Gets and sets the first Joint or AsBuiltJoint for this MotionLink. When you link two motions from the same joint, a valid joint should have its joint motion type of BallJointType, CylindricalJointType, PinSlotJointType or PlanarJointType.
+        A joint whose joint motion is a RigidJointMotion type is never valid as the first joint..
+        """
+        pass
+    @property
+    def jointTwo(self) -> core.Base:
+        """
+        Gets and sets the second Joint or AsBuiltJoint for this MotionLink. This can be a joint or null, when this is set to null then the two motions are from the same joint specified by jointOne.
+        A joint whose joint motion is a RigidJointMotion type is never valid as the second joint.
+        """
+        return core.Base()
+    @jointTwo.setter
+    def jointTwo(self, value: core.Base):
+        """
+        Gets and sets the second Joint or AsBuiltJoint for this MotionLink. This can be a joint or null, when this is set to null then the two motions are from the same joint specified by jointOne.
+        A joint whose joint motion is a RigidJointMotion type is never valid as the second joint.
+        """
+        pass
+    @property
+    def motionOne(self) -> JointMotionTypes:
+        """
+        Gets and sets the first motion type.
+        """
+        return JointMotionTypes()
+    @motionOne.setter
+    def motionOne(self, value: JointMotionTypes):
+        """
+        Gets and sets the first motion type.
+        """
+        pass
+    @property
+    def motionTwo(self) -> JointMotionTypes:
+        """
+        Gets and sets the second motion type.
+        """
+        return JointMotionTypes()
+    @motionTwo.setter
+    def motionTwo(self, value: JointMotionTypes):
+        """
+        Gets and sets the second motion type.
+        """
+        pass
+    @property
+    def valueOne(self) -> core.ValueInput:
+        """
+        Gets and sets the first motion link value. If the ValueInput uses a real then it is interpreted as centimeters for length and radians for angle.
+        If it is a string then the units can be defined as part of the string (i.e. "2 in" or "60 deg") or if no units are specified it is interpreted using the current default units for length or angle.
+        """
+        return core.ValueInput()
+    @valueOne.setter
+    def valueOne(self, value: core.ValueInput):
+        """
+        Gets and sets the first motion link value. If the ValueInput uses a real then it is interpreted as centimeters for length and radians for angle.
+        If it is a string then the units can be defined as part of the string (i.e. "2 in" or "60 deg") or if no units are specified it is interpreted using the current default units for length or angle.
+        """
+        pass
+    @property
+    def valueTwo(self) -> core.ValueInput:
+        """
+        Gets and sets the second motion link value. If the ValueInput uses a real then it is interpreted as centimeters for length and radians for angle.
+        If it is a string then the units can be defined as part of the string (i.e. "2 in" or "60 deg") or if no units are specified it is interpreted using the current default units for length or angle.
+        """
+        return core.ValueInput()
+    @valueTwo.setter
+    def valueTwo(self, value: core.ValueInput):
+        """
+        Gets and sets the second motion link value. If the ValueInput uses a real then it is interpreted as centimeters for length and radians for angle.
+        If it is a string then the units can be defined as part of the string (i.e. "2 in" or "60 deg") or if no units are specified it is interpreted using the current default units for length or angle.
+        """
+        pass
+    @property
+    def isReversed(self) -> bool:
+        """
+        Gets and sets whether the direction of the motion is reversed or not.
+        """
+        return bool()
+    @isReversed.setter
+    def isReversed(self, value: bool):
+        """
+        Gets and sets whether the direction of the motion is reversed or not.
+        """
+        pass
+
+class MotionLinks(core.Base):
+    """
+    The collection of MotionLinks in this component. This provides access to all existing MotionLinks
+    and supports the ability to create new MotionLinks.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> MotionLinks:
+        return MotionLinks()
+    def __len__(self) -> int:
+        return 0
+    def __getitem__(self, index: int) -> MotionLink:
+        return None
+    def __iter__(self) -> Iterator[MotionLink]:
+        return None
+    def item(self, index: int) -> MotionLink:
+        """
+        Function that returns the specified MotionLink using an index into the collection.
+        index : The index of the item within the collection to return. The first item in the collection has an index of 0.
+        Returns the specified item or null if an invalid index was specified.
+        """
+        return MotionLink()
+    def createInput(self, jointOne: core.Base, jointTwo: core.Base = None) -> MotionLinkInput:
+        """
+        Creates a MotionLinkInput object, which is the API equivalent to the Motion Link command dialog.
+        You can use methods and properties on the returned object to set the desired options, similar to
+        providing input and setting options in the MotionLink command dialog. Once the settings are defined
+        you call the MotionLinks.add method passing in the MotionLinkInput object to create the actual MotionLink.
+        jointOne : Inputs the first Joint or AsBuiltJoint to link its motion(s). If the jointTwo is set to null, then two motions from the jointOne will be linked,
+        and in this case a valid Joint or AsBuiltJoint for jointOne should have its joint motion type of BallJointType, CylindricalJointType, PinSlotJointType or PlanarJointType.
+        A Joint or AsBuiltJoint whose joint motion is a RigidJointMotion type is never valid as the first joint.
+        jointTwo : Inputs the second Joint or AsBuiltJoint to link its motion. If this is set to null, then the two motions from the jointOne will be linked.
+        A Joint or AsBuiltJoint whose joint motion is a RigidJointMotion type is never valid as the second joint.
+        Returns the MotionLinkInput object or null if the creation failed.
+        """
+        return MotionLinkInput()
+    def add(self, input: MotionLinkInput) -> MotionLink:
+        """
+        Creates a new MotionLink.
+        input : The MotionLinkInput object that defines various inputs that fully define a MotionLink.
+        A MotionLinkInput object is created using the MotionLinks.createInput method.
+        Returns the newly created MotionLink or null in the case of failure.
+        """
+        return MotionLink()
+    def itemByName(self, name: str) -> MotionLink:
+        """
+        Function that returns the specified MotionLink using a name.
+        name : The name of the item within the collection to return.
+        Returns the specified item or null if an invalid name was specified.
+        """
+        return MotionLink()
+    @property
+    def count(self) -> int:
+        """
+        Returns number of MotionLinks in the collection.
+        """
+        return int()
+
 class MoveFeatureDefinition(core.Base):
     """
     A Base class to return the information used to define a Move feature.
@@ -20846,6 +23715,174 @@ class MoveFeatures(core.Base):
         """
         return int()
 
+class ObjectVisibility(core.Base):
+    """
+    An object that provides control over which objects are displayed in the graphics window.
+    This is the equivalent of the "Object Visibility" settings in the Display Settings drop-down
+    in the navigation toolbar at the bottom of the Fusion graphics window.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> ObjectVisibility:
+        return ObjectVisibility()
+    @property
+    def isAllObjectsVisible(self) -> bool:
+        """
+        Sets if all objects are visible or hidden. When setting this property it
+        will set the value of all other properties of this object to true or false.
+        When getting this property, if it is true, then all other properties are true.
+        If false, one or more other properties are false.
+        """
+        return bool()
+    @isAllObjectsVisible.setter
+    def isAllObjectsVisible(self, value: bool):
+        """
+        Sets if all objects are visible or hidden. When setting this property it
+        will set the value of all other properties of this object to true or false.
+        When getting this property, if it is true, then all other properties are true.
+        If false, one or more other properties are false.
+        """
+        pass
+    @property
+    def isOriginPlanesVisible(self) -> bool:
+        """
+        Gets and sets if the origin construction planes of all components, local or
+        referenced by this design, are visible in the graphics window.
+        """
+        return bool()
+    @isOriginPlanesVisible.setter
+    def isOriginPlanesVisible(self, value: bool):
+        """
+        Gets and sets if the origin construction planes of all components, local or
+        referenced by this design, are visible in the graphics window.
+        """
+        pass
+    @property
+    def isOriginAxesVisible(self) -> bool:
+        """
+        Gets and sets if the origin construction axes of all components, local or
+        referenced by this design, are visible in the graphics window.
+        """
+        return bool()
+    @isOriginAxesVisible.setter
+    def isOriginAxesVisible(self, value: bool):
+        """
+        Gets and sets if the origin construction axes of all components, local or
+        referenced by this design, are visible in the graphics window.
+        """
+        pass
+    @property
+    def isOriginPointsVisible(self) -> bool:
+        """
+        Gets and sets if the origin construction points of all components, local or
+        referenced by this design, are visible in the graphics window.
+        """
+        return bool()
+    @isOriginPointsVisible.setter
+    def isOriginPointsVisible(self, value: bool):
+        """
+        Gets and sets if the origin construction points of all components, local or
+        referenced by this design, are visible in the graphics window.
+        """
+        pass
+    @property
+    def isUserWorkPlanesVisible(self) -> bool:
+        """
+        Gets and sets if the user created construction planes of all components, local or
+        referenced by this design, are visible in the graphics window.
+        """
+        return bool()
+    @isUserWorkPlanesVisible.setter
+    def isUserWorkPlanesVisible(self, value: bool):
+        """
+        Gets and sets if the user created construction planes of all components, local or
+        referenced by this design, are visible in the graphics window.
+        """
+        pass
+    @property
+    def isUserWorkAxesVisible(self) -> bool:
+        """
+        Gets and sets if the user created construction axes of all components, local or
+        referenced by this design, are visible in the graphics window.
+        """
+        return bool()
+    @isUserWorkAxesVisible.setter
+    def isUserWorkAxesVisible(self, value: bool):
+        """
+        Gets and sets if the user created construction axes of all components, local or
+        referenced by this design, are visible in the graphics window.
+        """
+        pass
+    @property
+    def isUserWorkPointsVisible(self) -> bool:
+        """
+        Gets and sets if the user created construction points of all components, local or
+        referenced by this design, are visible in the graphics window.
+        """
+        return bool()
+    @isUserWorkPointsVisible.setter
+    def isUserWorkPointsVisible(self, value: bool):
+        """
+        Gets and sets if the user created construction points of all components, local or
+        referenced by this design, are visible in the graphics window.
+        """
+        pass
+    @property
+    def isSketchesVisible(self) -> bool:
+        """
+        Gets and sets if the sketches in all components, local or referenced by this design,
+        are visible in the graphics window.
+        """
+        return bool()
+    @isSketchesVisible.setter
+    def isSketchesVisible(self, value: bool):
+        """
+        Gets and sets if the sketches in all components, local or referenced by this design,
+        are visible in the graphics window.
+        """
+        pass
+    @property
+    def isJointOriginsVisible(self) -> bool:
+        """
+        Gets and sets if the glyphs for joint origins in all components, local or referenced by this design,
+        are visible in the graphics window.
+        """
+        return bool()
+    @isJointOriginsVisible.setter
+    def isJointOriginsVisible(self, value: bool):
+        """
+        Gets and sets if the glyphs for joint origins in all components, local or referenced by this design,
+        are visible in the graphics window.
+        """
+        pass
+    @property
+    def isJointOriginAxesVisible(self) -> bool:
+        """
+        Gets and sets if the axes lines shown in the glyphs for joint origins in all components, local or
+        referenced by this design, are visible in the graphics window.
+        """
+        return bool()
+    @isJointOriginAxesVisible.setter
+    def isJointOriginAxesVisible(self, value: bool):
+        """
+        Gets and sets if the axes lines shown in the glyphs for joint origins in all components, local or
+        referenced by this design, are visible in the graphics window.
+        """
+        pass
+    @property
+    def isJointsVisible(self) -> bool:
+        """
+        Gets and sets if the glyphs for joints in all components, local or referenced by this design, are visible.
+        """
+        return bool()
+    @isJointsVisible.setter
+    def isJointsVisible(self, value: bool):
+        """
+        Gets and sets if the glyphs for joints in all components, local or referenced by this design, are visible.
+        """
+        pass
+
 class Occurrence(core.Base):
     """
     Represents an occurrence of a component at any level within a subassembly.
@@ -20882,17 +23919,17 @@ class Occurrence(core.Base):
         return bool()
     def moveToComponent(self, targetOccurrence: Occurrence) -> Occurrence:
         """
-        Moves this occurrence from it's current component into the component owned by the specified occurrence.
+        Moves this occurrence from its current component into the component owned by the specified occurrence.
         This occurrence and the target occurrence must be in the same context.
         targetOccurrence : The target occurrence defines both the component and the transform to apply when moving the occurrence. The
         occurrence will be copied into the parent component of the target occurrence and the target occurrence also defines
-        the transform of how the occurrence will be copied so that the occurrence maintains it's same position in model space.
+        the transform of how the occurrence will be copied so that the occurrence maintains its same position in model space.
         Returns the moved Occurrence or null in the case the move failed.
         """
         return Occurrence()
     def getPhysicalProperties(self, accuracy: CalculationAccuracy = CalculationAccuracy.LowCalculationAccuracy) -> PhysicalProperties:
         """
-        Returns the PhysicalProperties object that has properties for getting the area, density, mass, volume, moments, etc
+        Returns the PhysicalProperties object that has properties for getting the area, density, mass, volume, moments, etc.
         of this occurrence.
         accuracy : Specifies the desired level of computational accuracy of the property calculations.
         The default value of 'LowCalculationAccuracy' returns results within a +/- 1% error margin.
@@ -21098,7 +24135,7 @@ class Occurrence(core.Base):
     @property
     def physicalProperties(self) -> PhysicalProperties:
         """
-        Returns the PhysicalProperties object that has properties for getting the area, density, mass, volume, moments, etc
+        Returns the PhysicalProperties object that has properties for getting the area, density, mass, volume, moments, etc.
         of this occurrence. Property values will be calculated using the 'LowCalculationAccuracy' setting when using this property
         to get the PhysicalProperties object. To specify a higher calculation tolerance, use the getPhysicalProperties method instead.
         Returns a PhysicalProperties object that can be used to get the various physical property related values.
@@ -21286,6 +24323,29 @@ class Occurrence(core.Base):
         is a top level opened design.
         """
         return core.DataComponent()
+    @property
+    def isDerived(self) -> bool:
+        """
+        Returns if this occurrence is derived from another design. If true, the occurrence cannot be deleted.
+        You should not attempt to make any edits to the component referenced by the derived occurrence. Any edits made to this derived occurrence will be lost when the derive updates.
+        """
+        return bool()
+    @property
+    def deriveFeature(self) -> DeriveFeature:
+        """
+        Returns the DeriveFeature if this occurrence is derived from another design.
+        This property returns null if the occurrence is not derived from another design (i.e. isDerived property returns false).
+        """
+        return DeriveFeature()
+    @property
+    def meshBodies(self) -> list[MeshBody]:
+        """
+        Returns the body proxies for the mesh bodies in the component referenced by this occurrence.
+        For example if you get the occurrences from the root component and then use this property to
+        get the bodies from those occurrences, the bodies returned will return information in the context of the root
+        component, not the component they actually exist in.
+        """
+        return [MeshBody()]
 
 class OccurrenceList(core.Base):
     """
@@ -21394,7 +24454,7 @@ class Occurrences(core.Base):
         Method that creates a new occurrence by creating a new component that is a copy of an existing
         component. This is the equivalent of copying and using the "Paste New" command in the user interface. This
         is different from the addExistingComponent in that it's not a new instance to the existing component but a
-        new component is created that has it's own definition (sketches, features, etc.) and a new occurrence instance
+        new component is created that has its own definition (sketches, features, etc.) and a new occurrence instance
         is created to reference this new component.
         component : The existing component to create a copy of.
         transform : A transform that defines the location for the new occurrence
@@ -21410,6 +24470,22 @@ class Occurrences(core.Base):
         configurationRow : The row that specifies which configuration to use.
         transform : A transform that defines the location for the new occurrence.
         Returns the newly created occurrence or null if the add failed.
+        """
+        return Occurrence()
+    def addNewExternalComponent(self, componentName: str, targetFolder: core.DataFolder, transform: core.Matrix3D) -> Occurrence:
+        """
+        Method that creates a new occurrence by creating a new external component (X-Ref) that is
+        not saved yet. This is similar to the "New Component" command in the UI when creating an
+        external component, where you specify a name and location but the component is created
+        in-memory without being saved immediately. This allows programs to create and populate
+        an external component without needing to save it first, and makes undo possible.
+        The component will be saved automatically when the parent assembly is saved.
+        componentName : The name for the new external component.
+        targetFolder : The DataFolder where the component will be saved when the parent assembly is saved.
+        transform : A transform that defines the location for the new occurrence.
+        Returns the newly created occurrence or null if the creation failed. The component
+        referenced by the occurrence can be edited but is not saved until the parent assembly
+        is saved.
         """
         return Occurrence()
     @property
@@ -21526,10 +24602,85 @@ class OffsetConstraintInput(core.Base):
         """
         pass
 
+class OffsetFacesFeatureInput(core.Base):
+    """
+    Object that represents an existing Offset Faces feature in a design.
+    Offset Faces features are created in the UI using the "Offset Face" or "Press Pull" command.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> OffsetFacesFeatureInput:
+        return OffsetFacesFeatureInput()
+    @property
+    def faces(self) -> list[BRepFace]:
+        """
+        An array of BRepFace objects you want to offset. These faces can exist on multiple bodies
+        and in multiple components. They cannot be in an externally referenced component.
+        """
+        return [BRepFace()]
+    @faces.setter
+    def faces(self, value: list[BRepFace]):
+        """
+        An array of BRepFace objects you want to offset. These faces can exist on multiple bodies
+        and in multiple components. They cannot be in an externally referenced component.
+        """
+        pass
+    @property
+    def distance(self) -> core.ValueInput:
+        """
+        The distance of the offset. A positive value offsets the faces in the direction of the face
+        normal. A negative value goes in the other direction.
+        
+        This is a ValueInput object that can be created using either createByReal or createByString.
+        When a real ValueInput is used, the value is centimeters. When a string ValueInput is used, it
+        defines the expression of the parameter that will be created to control the feature and any
+        valid expression that defines a distance can be used.
+        """
+        return core.ValueInput()
+    @distance.setter
+    def distance(self, value: core.ValueInput):
+        """
+        The distance of the offset. A positive value offsets the faces in the direction of the face
+        normal. A negative value goes in the other direction.
+        
+        This is a ValueInput object that can be created using either createByReal or createByString.
+        When a real ValueInput is used, the value is centimeters. When a string ValueInput is used, it
+        defines the expression of the parameter that will be created to control the feature and any
+        valid expression that defines a distance can be used.
+        """
+        pass
+    @property
+    def targetBaseFeature(self) -> BaseFeature:
+        """
+        When creating a feature that is owned by a base feature, set this property to the
+        base feature you want to associate the new feature with. By default, this is null,
+        meaning it will not be associated with a base feature.
+        
+        Because of a current limitation, if you want to create a feature associated with a base
+        feature, you must set this property AND call the startEdit method of the base feature,
+        create the feature, and then call the finishEdit method of the base feature. The base
+        feature must be in an "edit" state to be able to add any additional items to it.
+        """
+        return BaseFeature()
+    @targetBaseFeature.setter
+    def targetBaseFeature(self, value: BaseFeature):
+        """
+        When creating a feature that is owned by a base feature, set this property to the
+        base feature you want to associate the new feature with. By default, this is null,
+        meaning it will not be associated with a base feature.
+        
+        Because of a current limitation, if you want to create a feature associated with a base
+        feature, you must set this property AND call the startEdit method of the base feature,
+        create the feature, and then call the finishEdit method of the base feature. The base
+        feature must be in an "edit" state to be able to add any additional items to it.
+        """
+        pass
+
 class OffsetFacesFeatures(core.Base):
     """
     Collection that provides access to all of the existing Offset Faces features in a design.
-    Offset Face features are created in the UI using the "Press Pull" command.
+    Offset Face features are created in the UI using the "Offset Face" or "Press Pull" command.
     """
     def __init__(self):
         pass
@@ -21557,6 +24708,33 @@ class OffsetFacesFeatures(core.Base):
         Returns the specified item or null if the specified name was not found.
         """
         return OffsetFacesFeature()
+    def createInput(self, faces: list[BRepFace], distance: core.ValueInput) -> OffsetFacesFeatureInput:
+        """
+        Creates an OffsetFacesFeatureInput object. Use properties and methods on this object
+        to define the offset feature you want to create and then use the add method, passing in
+        the OffsetFacesFeatureInput object to create the feature.
+        faces : An array of BRepFace objects to offset. These faces can exist on multiple bodies
+        and in multiple components. They cannot be in an externally referenced component.
+        distance : The distance of the offset. A positive value offsets the faces in the direction of the face
+        normal. A negative value goes in the other direction.
+        
+        This is a ValueInput object that can be created using either createByReal or createByString.
+        When a real ValueInput is used, the value is centimeters. When a string ValueInput is used, it
+        defines the expression of the parameter that will be created to control the feature and any
+        valid expression that defines a distance can be used.
+        Returns the newly created OffsetFacesFeatureInput object or null if the creation failed.
+        """
+        return OffsetFacesFeatureInput()
+    def add(self, input: OffsetFacesFeatureInput) -> OffsetFacesFeature:
+        """
+        Creates a new offset feature.
+        input : An OffsetFacesFeatureInput object that defines the desired offset faces feature. Use the
+        createInput method to create a new OffsetFacesFeatureInput object and then use methods on it
+        (the OffsetFacesFeatureInput object) to define the offset feature.
+        Returns the newly created OffsetFacesFeature object or null if the creation failed.
+        Returns nothing in the case where the feature is non-parametric.
+        """
+        return OffsetFacesFeature()
     @property
     def count(self) -> int:
         """
@@ -21567,7 +24745,7 @@ class OffsetFacesFeatures(core.Base):
 
 class OffsetFeatureInput(core.Base):
     """
-    This class defines the methods and properties that pertain to the definition of a offset feature.
+    This class defines the methods and properties that pertain to the definition of an offset feature.
     """
     def __init__(self):
         pass
@@ -21676,7 +24854,7 @@ class OffsetFeatures(core.Base):
         return OffsetFeature()
     def createInput(self, entities: core.ObjectCollection, distance: core.ValueInput, operation: FeatureOperations, isChainSelection: bool = True) -> OffsetFeatureInput:
         """
-        Creates a OffsetFeatureInput object. Use properties and methods on this object
+        Creates an OffsetFeatureInput object. Use properties and methods on this object
         to define the offset feature you want to create and then use the Add method, passing in
         the OffsetFeatureInput object to create the feature.
         entities : An ObjectCollection containing the BRepFace objects to offset. Additional faces may be
@@ -21727,14 +24905,22 @@ class Parameter(core.Base):
     def value(self) -> float:
         """
         Gets and sets the real value (a double) of the parameter in database units.
-        Setting this property will set/reset the expression value of the parameter
+        Setting this property will set/reset the expression value for this parameter.
+        
+        This property is only valid for numeric parameters and will fail for text parameters.
+        You can determine the value type of the parameter by using the valueType property.
+        Use the textValue property to get and set the value of text parameters.
         """
         return float()
     @value.setter
     def value(self, value: float):
         """
         Gets and sets the real value (a double) of the parameter in database units.
-        Setting this property will set/reset the expression value of the parameter
+        Setting this property will set/reset the expression value for this parameter.
+        
+        This property is only valid for numeric parameters and will fail for text parameters.
+        You can determine the value type of the parameter by using the valueType property.
+        Use the textValue property to get and set the value of text parameters.
         """
         pass
     @property
@@ -21750,7 +24936,12 @@ class Parameter(core.Base):
         
         An expression can also contain references to other parameters and use equations.
         For example, the expression "Length / 2" is valid for a numeric parameter as long as
-        there is a numeric parameter named "Length".
+        there is a numeric parameter named "Length". Expressions can also be used for text parameters,
+        such as concatenating two other text parameters. For example, if there are two existing text
+        parameters named text1 and text2, the expression for another text parameter can be "text1 + text2".
+        More complex equations can also be used with text parameters like
+        "if (Length < 20 mm; 'Short'; 'Long')" where "Length" is a numeric parameter.
+        The resulting string can be obtained using the textValue property.
         """
         return str()
     @expression.setter
@@ -21766,7 +24957,12 @@ class Parameter(core.Base):
         
         An expression can also contain references to other parameters and use equations.
         For example, the expression "Length / 2" is valid for a numeric parameter as long as
-        there is a numeric parameter named "Length".
+        there is a numeric parameter named "Length". Expressions can also be used for text parameters,
+        such as concatenating two other text parameters. For example, if there are two existing text
+        parameters named text1 and text2, the expression for another text parameter can be "text1 + text2".
+        More complex equations can also be used with text parameters like
+        "if (Length < 20 mm; 'Short'; 'Long')" where "Length" is a numeric parameter.
+        The resulting string can be obtained using the textValue property.
         """
         pass
     @property
@@ -21793,13 +24989,13 @@ class Parameter(core.Base):
     @property
     def comment(self) -> str:
         """
-        The comment associated with this parameter
+        The comment associated with this parameter.
         """
         return str()
     @comment.setter
     def comment(self, value: str):
         """
-        The comment associated with this parameter
+        The comment associated with this parameter.
         """
         pass
     @property
@@ -21859,6 +25055,32 @@ class Parameter(core.Base):
         Returns a list of parameters that this parameter is dependent on.
         """
         return ParameterList()
+    @property
+    def textValue(self) -> str:
+        """
+        Gets and sets the value of the parameter when it is a text parameter. This can be
+        determined by checking the valueType property. Setting this value
+        will cause the current expression to be overwritten. If the parameter
+        is not a text parameter, the value of this property should be ignored and setting will fail.
+        """
+        return str()
+    @textValue.setter
+    def textValue(self, value: str):
+        """
+        Gets and sets the value of the parameter when it is a text parameter. This can be
+        determined by checking the valueType property. Setting this value
+        will cause the current expression to be overwritten. If the parameter
+        is not a text parameter, the value of this property should be ignored and setting will fail.
+        """
+        pass
+    @property
+    def valueType(self) -> ParameterValueTypes:
+        """
+        Returns the type of value this parameter is. For a numeric parameter, you can
+        get the value using the value property. For a text parameter, you can get the
+        value using the textValue property.
+        """
+        return ParameterValueTypes()
 
 class ParameterList(core.Base):
     """
@@ -21893,8 +25115,8 @@ class ParameterList(core.Base):
     def itemByName(self, name: str) -> Parameter:
         """
         Returns the specified parameter using the name of the parameter
-        as it is displayed in the parameters dialog
-        name : The name of the parameter as it is displayed in the parameters dialog
+        as it is displayed in the parameters dialog.
+        name : The name of the parameter as it is displayed in the parameters dialog.
         Returns the specified item or null if an invalid name was specified.
         """
         return Parameter()
@@ -22433,17 +25655,25 @@ class PathPatternFeatureInput(core.Base):
     @property
     def inputEntities(self) -> core.ObjectCollection:
         """
-        Gets and sets the input entities. The collection can contain faces, features, bodies or occurrences.
-        All of the entities must be of a single type. For example, it can't contain features and occurrences
-        but only features or occurrences.
+        Gets and sets the input entities. The collection can contain BRepFace, PartFeature, BRepBody, or Occurrence
+        objects. All of the entities provided must be the same type. For example, it must contain only bodies and can't
+        contain both bodies and faces.
+        
+        You can also pattern ConstructionPoint, ConstructionAxis, and ConstructionPlane objects. When patterning any
+        construction goemetry, only one entity can be patterned at a time, so the ObjectCollection must contain a
+        single item.
         """
         return core.ObjectCollection()
     @inputEntities.setter
     def inputEntities(self, value: core.ObjectCollection):
         """
-        Gets and sets the input entities. The collection can contain faces, features, bodies or occurrences.
-        All of the entities must be of a single type. For example, it can't contain features and occurrences
-        but only features or occurrences.
+        Gets and sets the input entities. The collection can contain BRepFace, PartFeature, BRepBody, or Occurrence
+        objects. All of the entities provided must be the same type. For example, it must contain only bodies and can't
+        contain both bodies and faces.
+        
+        You can also pattern ConstructionPoint, ConstructionAxis, and ConstructionPlane objects. When patterning any
+        construction goemetry, only one entity can be patterned at a time, so the ObjectCollection must contain a
+        single item.
         """
         pass
     @property
@@ -22615,9 +25845,13 @@ class PathPatternFeatures(core.Base):
         Creates a PathPatternFeatureInput object. Use properties and methods on this object
         to define the path pattern you want to create and then use the Add method, passing in
         the PathPatternFeatureInput object.
-        inputEntities : The collection can contain faces, features, bodies or occurrences.
-        All of the entities must be of a single type. For example, it can't contain features and occurrences
-        but only features or occurrences.
+        inputEntities : An ObjectCollection of the entities to pattern. The collection can contain BRepFace, PartFeature, BRepBody, or Occurrence
+        objects. All of the entities provided must be the same type. For example, it must contain only bodies and can't
+        contain both bodies and faces.
+        
+        You can also pattern ConstructionPoint, ConstructionAxis, and ConstructionPlane objects. When patterning any
+        construction goemetry, only one entity can be patterned at a time, so the ObjectCollection must contain a
+        single item.
         path : The Path object that represents a single set of connected curves along which to drive the pattern.
         quantity : Specifies the number of instances in the first direction.
         distance : Specifies the distance. How this value is used depends on the value of the PatternDistanceType property. A
@@ -23330,7 +26564,7 @@ class PlasticRules(core.Base):
         existingPlasticRule : The existing PlasticRule object you want to copy. This can be a rule from the
         library or the design.
         name : The name to assign to the new plastic rule. This name must be unique with respect to other
-        plastic rules in the design or library it's created in.
+        plastic rules in the design or library its created in.
         Returns the new PlasticRule object or will assert in the case where it fails.
         """
         return PlasticRule()
@@ -23390,6 +26624,1602 @@ class PlasticRuleValue(core.Base):
         """
         Gets and sets the value of the plastic rule value in centimeters. Setting
         this value will create a new expression that is equivalent to the new value.
+        """
+        pass
+
+class PMIAnnotation(core.Base):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    A Base class representing a PMI (Product Manufacturing Information) annotation in a component.
+    
+    This can either be PMI that was imported alongside the model, or Fusion specific PMI.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> PMIAnnotation:
+        return PMIAnnotation()
+    def deleteMe(self) -> bool:
+        """
+        Deletes the PMI.
+        Returns a true if the delete was successful, false otherwise.
+        """
+        return bool()
+    def markUpToDate(self) -> bool:
+        """
+        Marks the PMI as up-to-date and dismisses warnings.
+        Returns false if the warnings cannot be dismissed without changes and the PMI remains out of date.
+        """
+        return bool()
+    def convertImportedToFusionPMI(self) -> PMIAnnotation:
+        """
+        Converts this PMIAnnotation to a Fusion PMIAnnotation if it is of supported type and has valid reference geometry.
+        
+        Supported types are:
+        
+        Imported PMI annotation (PMIImportedDimension) and valid reference geometry is converted to Hole/Thread Note PMI.
+        
+        Imported PMI annotation (PMIImportedNote) and valid reference geometry is converted to Leader Line Note PMI.
+        
+        Imported PMI folder (PMIImportedFolder) which includes information about a Hole Note is converted to Hole/Thread Note PMI.
+        
+        The converted PMIAnnotation can then be edited.
+        
+        After successful conversion, the new PMIAnnotation will be added to the collection of PMI in the component, and the original
+        PMIAnnotation will be removed.
+        If it fails to convert, the original PMIAnnotation remains unchanged.
+        Returns the converted Fusion PMIAnnotation or null in the case of failure to convert.
+        
+        The type of the object returned is the base class PMIAnnotation.
+        """
+        return PMIAnnotation()
+    @property
+    def assemblyContext(self) -> Occurrence:
+        """
+        Returns the assembly occurrence (i.e. the occurrence) of this object
+        in an assembly. This is only valid in the case where this is acting
+        as a proxy in an assembly. Returns null in the case where the object
+        is not in the context of an assembly but is already the native object.
+        """
+        return Occurrence()
+    @property
+    def name(self) -> str:
+        """
+        Gets and sets the name of the PMI as it is shown in the browser.
+        """
+        return str()
+    @name.setter
+    def name(self, value: str):
+        """
+        Gets and sets the name of the PMI as it is shown in the browser.
+        """
+        pass
+    @property
+    def type(self) -> PMITypes:
+        """
+        Gets the type of this PMI annotation.
+        """
+        return PMITypes()
+    @property
+    def isDeletable(self) -> bool:
+        """
+        Indicates if this PMI can be deleted.
+        """
+        return bool()
+    @property
+    def isLightBulbOn(self) -> bool:
+        """
+        Indicates if the light bulb (as displayed in the browser) is on.
+        
+        A PMI will only be visible if its light bulb, the containing folder's light bulb,
+        the collection's and the component's light bulbs are all on.
+        """
+        return bool()
+    @isLightBulbOn.setter
+    def isLightBulbOn(self, value: bool):
+        """
+        Indicates if the light bulb (as displayed in the browser) is on.
+        
+        A PMI will only be visible if its light bulb, the containing folder's light bulb,
+        the collection's and the component's light bulbs are all on.
+        """
+        pass
+    @property
+    def isVisible(self) -> bool:
+        """
+        Indicates if the PMI is visible.
+        This property is affected by the AssemblyContext (parent component) of the PMI.
+        """
+        return bool()
+    @property
+    def parentComponent(self) -> Component:
+        """
+        Gets the component this PMI belongs to.
+        """
+        return Component()
+    @property
+    def isParametric(self) -> bool:
+        """
+        Indicates if this PMI is parametric or not.
+        """
+        return bool()
+    @property
+    def timelineObject(self) -> TimelineObject:
+        """
+        Gets the timeline object associated with this PMI.
+        Only applies to PMI that has an associated timeline feature.
+        
+        Returns null if the PMI does not have an associated timeline feature.
+        """
+        return TimelineObject()
+    @property
+    def healthState(self) -> FeatureHealthStates:
+        """
+        Gets the health state of the PMI. Only applies to PMI that have a timeline object, in Parametric Modelling.
+        
+        Returns UnknownFeatureHealthState for other PMI types that don't have a parametric Feature.
+        """
+        return FeatureHealthStates()
+    @property
+    def errorOrWarningMessage(self) -> str:
+        """
+        If there are errors or warnings in the PMI, this property will
+        return a string that contains the error or warning message.
+        Otherwise it returns an empty string. Only applies to PMI that has
+        an associated parametric Feature.
+        
+        Returns empty string for other PMI types that don't have a parametric Feature.
+        """
+        return str()
+    @property
+    def isSuppressed(self) -> bool:
+        """
+        Indicates if this PMI is suppressed. Only applies to PMI that has
+        an associated parametric Feature.
+        
+        Returns false for other PMI types that don't have a parametric Feature.
+        """
+        return bool()
+    @isSuppressed.setter
+    def isSuppressed(self, value: bool):
+        """
+        Indicates if this PMI is suppressed. Only applies to PMI that has
+        an associated parametric Feature.
+        
+        Returns false for other PMI types that don't have a parametric Feature.
+        """
+        pass
+    @property
+    def isOutOfDate(self) -> bool:
+        """
+        Indicates if this PMI is outdated and needs to be recomputed.
+        This typically happens when the geometry or parameters that the PMI
+        references have been modified. Applicable for both imported and created PMI,
+        regardless of whether they are parametric or not.
+        """
+        return bool()
+    @property
+    def referencedEntities(self) -> list[core.Base]:
+        """
+        Returns an array of referenced entities for this PMI.
+        """
+        return [core.Base()]
+
+class PMIAnnotations(core.Base):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Provides access to the all the PMI (Product Manufacturing Information) in a component.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> PMIAnnotations:
+        return PMIAnnotations()
+    def __len__(self) -> int:
+        return 0
+    def __getitem__(self, index: int) -> PMIAnnotation:
+        return None
+    def __iter__(self) -> Iterator[PMIAnnotation]:
+        return None
+    def item(self, index: int) -> PMIAnnotation:
+        """
+        Gets the specified PMI using an index into the collection.
+        index : The index of the item within the collection to return. The first item in the collection has an index of 0.
+        Returns the specified item or null if an invalid index was specified.
+        
+        The type of the object returned is the base class PMIAnnotation.
+        """
+        return PMIAnnotation()
+    def itemByName(self, name: str) -> PMIAnnotation:
+        """
+        Gets the specified PMI from the collection using a name.
+        name : The name of the PMI within the collection to return.
+        Returns the specified item or null if no item with the specified name was found.
+        
+        The type of the object returned is the base class PMIAnnotation.
+        """
+        return PMIAnnotation()
+    def itemsByTypes(self, types: list[int]) -> list[PMIAnnotation]:
+        """
+        Gets all the PMI from the collection that match the specified PMI types.
+        types : An array of PMITypes that specifies the types of PMI to return. If an empty array or null is passed,
+        all the PMI from the collection will be returned regardless of type.
+        Returns an array of PMI objects that match the specified types, or an empty array if no matching PMI were found.
+        
+        The type of the objects returned is the base class PMIAnnotation.
+        """
+        return [PMIAnnotation()]
+    def itemsByEntities(self, entities: list[core.Base], types: list[int] = None) -> list[PMIAnnotation]:
+        """
+        Gets all the PMI from the collection that are associated with the specified geometric entities and optionally match the specified PMI types.
+        
+        This is useful for finding PMI that reference specific geometric features.
+        entities : An array of core.Base objects that represent the geometric entities to search for associated PMI. These can be BRepFace,
+        BRepEdge or BRepVertex objects. The function will return the PMI that references any of these entities in their geometric associations.
+        
+        For example, a Diameter Dimension PMI associated with a cylindrical face, a Hole/Thread Note PMI associated with faces that define a hole feature,
+        or a Leader Line Note PMI associated with an edge or vertex.
+        types : An optional array of PMITypes that filters the results to include only PMI that matches the type presented in the specified types. If an empty array or null
+        is passed, all the PMI associated with the specified geometric entities will be returned, regardless of type.
+        Returns an array of PMI objects that are associated with the specified entities and match the type filter (if provided)
+        or an empty array if no matching PMI were found.
+        
+        The type of the objects returned is the base class PMIAnnotation.
+        """
+        return [PMIAnnotation()]
+    @property
+    def count(self) -> int:
+        """
+        Gets the number of PMI in the collection. PMIFolders are included in this count.
+        """
+        return int()
+    @property
+    def importedFolders(self) -> PMIImportedFolders:
+        """
+        Gets the PMIImportedFolders collection.
+        """
+        return PMIImportedFolders()
+    @property
+    def importedDimensions(self) -> PMIImportedDimensions:
+        """
+        Gets the PMIImportedDimensions collection.
+        """
+        return PMIImportedDimensions()
+    @property
+    def importedNotes(self) -> PMIImportedNotes:
+        """
+        Gets the PMIImportedNotes collection.
+        """
+        return PMIImportedNotes()
+    @property
+    def importedSurfaceTextures(self) -> PMIImportedSurfaceTextures:
+        """
+        Gets the PMIImportedSurfaceTextures collection.
+        """
+        return PMIImportedSurfaceTextures()
+    @property
+    def importedGeometricTolerances(self) -> PMIImportedGeometricTolerances:
+        """
+        Gets the PMIImportedGeometricTolerances collection.
+        """
+        return PMIImportedGeometricTolerances()
+    @property
+    def importedGraphicals(self) -> PMIImportedGraphicals:
+        """
+        Gets the PMIImportedGraphicals collection.
+        """
+        return PMIImportedGraphicals()
+    @property
+    def importedGDTDatums(self) -> PMIImportedGDTDatums:
+        """
+        Gets the PMIImportedGDTDatums collection.
+        """
+        return PMIImportedGDTDatums()
+    @property
+    def holeThreadNotes(self) -> PMIHoleThreadNotes:
+        """
+        Gets the PMIHoleThreadNotes collection.
+        """
+        return PMIHoleThreadNotes()
+    @property
+    def leaderLineNotes(self) -> PMILeaderLineNotes:
+        """
+        Gets the PMILeaderLineNotes collection.
+        """
+        return PMILeaderLineNotes()
+
+class PMIDatumModifier(core.Base):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Represents a datum modifier used in PMI datum references.
+    A datum modifier provides additional information about how a datum is applied.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> PMIDatumModifier:
+        return PMIDatumModifier()
+    @property
+    def type(self) -> PMIDatumModifierTypes:
+        """
+        Gets the type of the datum modifier.
+        
+        This is a read-only property because imported PMI cannot be edited.
+        """
+        return PMIDatumModifierTypes()
+    @property
+    def hasValue(self) -> bool:
+        """
+        Gets whether there is a value associated with this modifier.
+        
+        This is a read-only property because imported PMI cannot be edited.
+        """
+        return bool()
+    @property
+    def value(self) -> float:
+        """
+        Gets the value associated with this modifier, if hasValue is true.
+        
+        Returns 0 if hasValue is false.
+        
+        This is a read-only property because imported PMI cannot be edited.
+        """
+        return float()
+
+class PMIDatumReference(core.Base):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Represents a datum reference used in PMI geometric tolerances.
+    A datum reference identifies a datum feature and includes any modifiers that apply to it.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> PMIDatumReference:
+        return PMIDatumReference()
+    @property
+    def referenceDatum(self) -> PMIAnnotation:
+        """
+        Gets the PMIAnnotation that represents the referenced datum, or null if no reference exists.
+        
+        This is a read-only property because imported PMI cannot be edited.
+        """
+        return PMIAnnotation()
+    @property
+    def modifiers(self) -> list[PMIDatumModifier]:
+        """
+        Gets an array of datum modifiers associated with this datum reference.
+        
+        This is a read-only property because imported PMI cannot be edited.
+        """
+        return [PMIDatumModifier()]
+
+class PMIDatumTarget(core.Base):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Represents a datum target belonging to an PMIImportedGDTDatum.
+    A datum target is used to define a specific location on a PMI GDT Datum.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> PMIDatumTarget:
+        return PMIDatumTarget()
+    @property
+    def targetId(self) -> str:
+        """
+        Gets the id of this datum target.
+        
+        This is a read-only property because imported PMI cannot be edited.
+        """
+        return str()
+    @property
+    def type(self) -> PMIDatumTargetTypes:
+        """
+        Gets the type of this datum target.
+        
+        This is a read-only property because imported PMI cannot be edited.
+        """
+        return PMIDatumTargetTypes()
+    @property
+    def lengths(self) -> list[float]:
+        """
+        Gets the array of lengths defining this datum target, if any.
+        
+        This is a read-only property because imported PMI cannot be edited.
+        """
+        return [float()]
+    @property
+    def orientation(self) -> core.Matrix3D:
+        """
+        Gets the orientation of this datum target.
+        
+        This is a read-only property because imported PMI cannot be edited.
+        """
+        return core.Matrix3D()
+    @property
+    def hasPointTarget(self) -> bool:
+        """
+        Gets whether there is a point associated with this datum target.
+        
+        This is a read-only property because imported PMI cannot be edited.
+        """
+        return bool()
+    @property
+    def pointTarget(self) -> core.Point3D:
+        """
+        Gets the point target of this datum target.
+        
+        This is a read-only property because imported PMI cannot be edited.
+        """
+        return core.Point3D()
+    @property
+    def curveTargets(self) -> list[core.Curve3D]:
+        """
+        Gets the curves being targeted by this datum target, if any.
+        
+        This is a read-only property because imported PMI cannot be edited.
+        """
+        return [core.Curve3D()]
+
+class PMIDisplaySettings(core.Base):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Represents display settings related to the PMIAnnotation display.
+    Includes information such as unit and formatting.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> PMIDisplaySettings:
+        return PMIDisplaySettings()
+    @staticmethod
+    def create() -> PMIDisplaySettings:
+        """
+        Create a transient PMIDisplaySettings object.
+        
+        The default values are:
+        - unitType = UseDocumentUnitPMIUnitType
+        
+        - precision = use document settings
+        
+        - leadingZeros = true
+        
+        - trailingZeros = use document settings
+        
+        - unitAbbreviation = false
+        """
+        return PMIDisplaySettings()
+    @property
+    def unitType(self) -> PMIUnitTypes:
+        """
+        Gets and sets the unit type to be used in displaying the PMI.
+        """
+        return PMIUnitTypes()
+    @unitType.setter
+    def unitType(self, value: PMIUnitTypes):
+        """
+        Gets and sets the unit type to be used in displaying the PMI.
+        """
+        pass
+    @property
+    def precision(self) -> int:
+        """
+        Gets and sets the precision (number of decimal places) to be used when displaying values.
+        
+        The value set should be between 0 and 8 inclusive.
+        """
+        return int()
+    @precision.setter
+    def precision(self, value: int):
+        """
+        Gets and sets the precision (number of decimal places) to be used when displaying values.
+        
+        The value set should be between 0 and 8 inclusive.
+        """
+        pass
+    @property
+    def hasLeadingZeros(self) -> bool:
+        """
+        Gets and sets whether to show leading zeros in the display.
+        """
+        return bool()
+    @hasLeadingZeros.setter
+    def hasLeadingZeros(self, value: bool):
+        """
+        Gets and sets whether to show leading zeros in the display.
+        """
+        pass
+    @property
+    def hasTrailingZeros(self) -> bool:
+        """
+        Gets and sets whether to show trailing zeros in the display.
+        """
+        return bool()
+    @hasTrailingZeros.setter
+    def hasTrailingZeros(self, value: bool):
+        """
+        Gets and sets whether to show trailing zeros in the display.
+        """
+        pass
+    @property
+    def hasUnitAbbreviation(self) -> bool:
+        """
+        Gets and sets whether to show unit abbreviation in the display.
+        """
+        return bool()
+    @hasUnitAbbreviation.setter
+    def hasUnitAbbreviation(self, value: bool):
+        """
+        Gets and sets whether to show unit abbreviation in the display.
+        """
+        pass
+
+class PMIGeometricValue(core.Base):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Represents a value that can be associated with a PMIAnnotation, such as a diameter value.
+    
+    Includes information about the value, whether it is overriden and any associated tolerance.
+    
+    This class has two main uses:
+    
+    - to retrieve the values from a PMIAnnotation (e.g. PMIImportedDimension)
+    
+    - to define input values in PMI creation input objects (e.g. PMIHoleThreadNoteInput)
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> PMIGeometricValue:
+        return PMIGeometricValue()
+    @staticmethod
+    def create() -> PMIGeometricValue:
+        """
+        Create a transient PMIGeometricValue object.
+        
+        The default properties are hasValue = false, value = 0, and tolerance with hasTolerances = false.
+        """
+        return PMIGeometricValue()
+    @property
+    def hasValue(self) -> bool:
+        """
+        Gets and sets whether there is a value associated with the geometric value.
+        
+        If set to true, the value will be displayed in the graphics, while also stored as data in the PMI.
+        Setting this to true will also require setting a value, as the default is 0.
+        """
+        return bool()
+    @hasValue.setter
+    def hasValue(self, value: bool):
+        """
+        Gets and sets whether there is a value associated with the geometric value.
+        
+        If set to true, the value will be displayed in the graphics, while also stored as data in the PMI.
+        Setting this to true will also require setting a value, as the default is 0.
+        """
+        pass
+    @property
+    def isOverriddenValue(self) -> bool:
+        """
+        Gets whether the value has been overridden.
+        """
+        return bool()
+    @property
+    def value(self) -> float:
+        """
+        Gets and sets the value associated with this object in cm or radians.
+        
+        Setting this will also set hasValue and isOverriddenValue to true.
+        """
+        return float()
+    @value.setter
+    def value(self, value: float):
+        """
+        Gets and sets the value associated with this object in cm or radians.
+        
+        Setting this will also set hasValue and isOverriddenValue to true.
+        """
+        pass
+    @property
+    def tolerance(self) -> PMIGeometricValueTolerance:
+        """
+        Gets and sets the tolerance associated with this geometric value.
+        """
+        return PMIGeometricValueTolerance()
+    @tolerance.setter
+    def tolerance(self, value: PMIGeometricValueTolerance):
+        """
+        Gets and sets the tolerance associated with this geometric value.
+        """
+        pass
+
+class PMIGeometricValueTolerance(core.Base):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Represents a tolerance value that can be associated with a PMIGeometricValue.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> PMIGeometricValueTolerance:
+        return PMIGeometricValueTolerance()
+    @staticmethod
+    def create() -> PMIGeometricValueTolerance:
+        """
+        Create a transient PMIGeometricValueTolerance object.
+        The default value set is to not have tolerances (hasTolerances = false).
+        """
+        return PMIGeometricValueTolerance()
+    def setSymmetric(self, tolerance: float) -> bool:
+        """
+        Sets this object to have symmetric tolerance with the specified value.
+        tolerance : The value of the tolerance in cm.
+        Returns true if the operation is successful, false otherwise.
+        """
+        return bool()
+    def setDeviation(self, upperTolerance: float, lowerTolerance: float) -> bool:
+        """
+        Sets this object to have deviation tolerance with the specified upper and lower values.
+        upperTolerance : The value of the upper tolerance in cm.
+        lowerTolerance : The value of the lower tolerance in cm.
+        Returns true if the operation is successful, false otherwise.
+        """
+        return bool()
+    def setLimitsStacked(self, minValue: float, maxValue: float) -> bool:
+        """
+        Sets this object to have limits stacked tolerance with the specified minimum and maximum values.
+        Displayed as stacked lines.
+        minValue : The value of the minimum limit in cm.
+        maxValue : The value of the maximum limit in cm.
+        Returns true if the operation is successful, false otherwise.
+        """
+        return bool()
+    def setLimitsLinear(self, minValue: float, maxValue: float) -> bool:
+        """
+        Sets this object to have limits linear tolerance with the specified minimum and maximum values.
+        Displayed as values on one line.
+        minValue : The value of the minimum limit in cm.
+        maxValue : The value of the maximum limit in cm.
+        Returns true if the operation is successful, false otherwise.
+        """
+        return bool()
+    def setMAX(self) -> bool:
+        """
+        Sets this object to have MAX tolerance type.
+        The tolerance is defined and displayed as MAX.
+        Returns true if the operation is successful, false otherwise.
+        """
+        return bool()
+    def setMIN(self) -> bool:
+        """
+        Sets this object to have MIN tolerance type.
+        The tolerance is defined and displayed as MIN.
+        Returns true if the operation is successful, false otherwise.
+        """
+        return bool()
+    def setLimitsFitsStacked(self, size: float, holeFit: str, shaftFit: str) -> bool:
+        """
+        Sets this object to have hole/shaft fit tolerance displayed as stacked lines.
+        The object will also have updated upper and lower tolerance values (used for information only).
+        size : The nominal distance (size) of the hole. Used to check validity of fits.
+        holeFit : The hole fit value (e.g., "H7").
+        shaftFit : The shaft fit value (e.g., "h7").
+        Returns true if the operation is successful, false otherwise.
+        """
+        return bool()
+    def setLimitsFitsLinear(self, size: float, holeFit: str, shaftFit: str) -> bool:
+        """
+        Sets this object to have hole/shaft fit tolerance displayed on one line.
+        The object will also have updated upper and lower tolerance values (used for information only).
+        size : The nominal distance (size) of the hole. Used to check validity of fits.
+        holeFit : The hole fit value (e.g., "H7").
+        shaftFit : The shaft fit value (e.g., "h7").
+        Returns true if the operation is successful, false otherwise.
+        """
+        return bool()
+    def setLimitsFitsSizeLimits(self, size: float, holeFit: str, shaftFit: str) -> bool:
+        """
+        Sets this object to have hole/shaft fit tolerance displayed as size limits.
+        The object will also have updated upper and lower tolerance values (used for information only).
+        Displays the minimum and maximum values in parenthesis.
+        size : The nominal distance (size) of the hole. Used to check validity of fits.
+        holeFit : The hole fit value (e.g., "H7")
+        shaftFit : The shaft fit value (e.g., "h7")
+        Returns true if the operation is successful, false otherwise.
+        """
+        return bool()
+    def setLimitsFitsTolerance(self, size: float, holeFit: str, shaftFit: str) -> bool:
+        """
+        Sets this object to have hole/shaft fit tolerance displayed as tolerance values.
+        The object will also have updated upper and lower tolerance values (used for information only).
+        Displays the upper and lower tolerance values in parenthesis.
+        size : The nominal distance (size) of the hole. Used to check validity of fits.
+        holeFit : The hole fit value (e.g., "H7").
+        shaftFit : The shaft fit value (e.g., "h7").
+        Returns true if the operation is successful, false otherwise.
+        """
+        return bool()
+    @property
+    def hasTolerances(self) -> bool:
+        """
+        Gets and sets whether the tolerances are set or not on the object.
+        """
+        return bool()
+    @hasTolerances.setter
+    def hasTolerances(self, value: bool):
+        """
+        Gets and sets whether the tolerances are set or not on the object.
+        """
+        pass
+    @property
+    def hasLowerTolerance(self) -> bool:
+        """
+        Gets whether there is a lower tolerance value set.
+        """
+        return bool()
+    @property
+    def lowerTolerance(self) -> float:
+        """
+        Gets the lower tolerance value in cm.
+        Returns 0 if there is no lower tolerance value set.
+        """
+        return float()
+    @property
+    def hasUpperTolerance(self) -> bool:
+        """
+        Gets whether there is an upper tolerance value set.
+        """
+        return bool()
+    @property
+    def upperTolerance(self) -> float:
+        """
+        Gets the upper tolerance value in cm.
+        Returns 0 if there is no upper tolerance value set.
+        """
+        return float()
+    @property
+    def hasToleranceClass(self) -> bool:
+        """
+        Gets whether there is a tolerance class set.
+        """
+        return bool()
+    @property
+    def toleranceClassDeviation(self) -> str:
+        """
+        Gets the tolerance class deviation value.
+        Returns empty string if there is no tolerance class deviation value set.
+        """
+        return str()
+    @property
+    def toleranceClassGrade(self) -> str:
+        """
+        Gets the tolerance class grade value.
+        Returns empty string if there is no tolerance class grade value set.
+        """
+        return str()
+    @property
+    def hasToleranceType(self) -> bool:
+        """
+        Gets whether there is tolerance type set.
+        """
+        return bool()
+    @property
+    def toleranceType(self) -> PMIToleranceTypes:
+        """
+        The tolerance type.
+        """
+        return PMIToleranceTypes()
+
+class PMIHoleThreadNotes(core.Base):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Provides access to the all the PMIHoleThreadNote objects in a component.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> PMIHoleThreadNotes:
+        return PMIHoleThreadNotes()
+    def __len__(self) -> int:
+        return 0
+    def __getitem__(self, index: int) -> PMIHoleThreadNote:
+        return None
+    def __iter__(self) -> Iterator[PMIHoleThreadNote]:
+        return None
+    def item(self, index: int) -> PMIHoleThreadNote:
+        """
+        Gets the specified PMIHoleThreadNote using an index into the collection.
+        index : The index of the item within the collection to return. The first item in the collection has an index of 0.
+        Returns the specified item or null if an invalid index was specified.
+        """
+        return PMIHoleThreadNote()
+    def itemByName(self, name: str) -> PMIHoleThreadNote:
+        """
+        Gets the specified PMIHoleThreadNote from the collection using a name.
+        name : The name of the PMIHoleThreadNote within the collection to return.
+        Returns the specified item or null if no item with the specified name was found.
+        """
+        return PMIHoleThreadNote()
+    def itemsByEntities(self, entities: list[core.Base]) -> list[PMIHoleThreadNote]:
+        """
+        Gets all the PMIHoleThreadNote from the collection that are associated with the specified geometric entities.
+        
+        This is useful for finding PMIHoleThreadNote that reference specific geometric features.
+        entities : An array of core.Base objects that represent the geometric entities to search for associated PMI. These can be BRepFace,
+        BRepEdge or BRepVertex objects. The function will return the PMIHoleThreadNote that references any of these entities in their geometric associations.
+        Returns an array of PMIHoleThreadNote objects that are associated with the specified entities and match the type filter (if provided)
+        or an empty array if no matching PMI were found.
+        """
+        return [PMIHoleThreadNote()]
+    def createInput(self, faces: list[BRepFace]) -> PMIHoleThreadNoteInput:
+        """
+        Creates a PMIHoleThreadNoteInput object that is in turn used to create a Hole/Thread Note PMI.
+        faces : BRepFace array that contains the faces which the Hole/Thread Note will be associated with.
+        
+        The faces must be:
+        
+        a. A subset of the faces that define one/multiple geometric holes. (e.g. cylindrical face that belongs to a counterbore hole, planar
+        face that belongs to a blind hole, etc.). In the case of a complex hole (neither simple, counterbore or countersink),
+        the faces provided should be the faces the PMI is related to.
+        
+        b. A set of faces that define geometric bosses. Supported types are cylindrical bosses.
+        The set can define a group of such holes/bosses that would be associated and to the same PMI.
+        
+        Native objects will be used when setting the faces.
+        Returns a PMIHoleThreadNoteInput object.
+        """
+        return PMIHoleThreadNoteInput()
+    def add(self, input: PMIHoleThreadNoteInput) -> PMIHoleThreadNote:
+        """
+        Creates a new Hole/Thread Note using the creation parameters in the PMIHoleThreadNoteInput.
+        input : A PMIHoleThreadNoteInput object.
+        Returns the newly created PMIHoleThreadNote or null if the creation failed.
+        """
+        return PMIHoleThreadNote()
+    @property
+    def count(self) -> int:
+        """
+        Gets the number of PMIHoleThreadNote in the collection.
+        """
+        return int()
+
+class PMIImportedDimensions(core.Base):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Provides access to the all the PMIImportedDimension objects in a component.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> PMIImportedDimensions:
+        return PMIImportedDimensions()
+    def __len__(self) -> int:
+        return 0
+    def __getitem__(self, index: int) -> PMIImportedDimension:
+        return None
+    def __iter__(self) -> Iterator[PMIImportedDimension]:
+        return None
+    def item(self, index: int) -> PMIImportedDimension:
+        """
+        Gets the specified PMIImportedDimension using an index into the collection.
+        index : The index of the item within the collection to return. The first item in the collection has an index of 0.
+        Returns the specified item or null if an invalid index was specified.
+        """
+        return PMIImportedDimension()
+    def itemByName(self, name: str) -> PMIImportedDimension:
+        """
+        Gets the specified PMIImportedDimension from the collection using a name.
+        name : The name of the PMIImportedDimension within the collection to return.
+        Returns the specified item or null if no item with the specified name was found.
+        """
+        return PMIImportedDimension()
+    def itemsByTypes(self, types: list[int]) -> list[PMIImportedDimension]:
+        """
+        Gets all the PMIImportedDimension from the collection that match the specified PMI types.
+        types : An array of PMITypes that specifies the types of PMI to return. If an empty array or null is passed,
+        all the PMIImportedDimension from the collection will be returned regardless of type.
+        Returns an array of PMI objects that match the specified types, or an empty array if no matching PMI were found.
+        """
+        return [PMIImportedDimension()]
+    def itemsByEntities(self, entities: list[core.Base], types: list[int] = None) -> list[PMIImportedDimension]:
+        """
+        Gets all the PMIImportedDimension from the collection that are associated with the specified geometric entities and optionally match the specified PMI types.
+        
+        This is useful for finding PMIImportedDimension that reference specific geometric features.
+        entities : An array of core.Base objects that represent the geometric entities to search for associated PMI. These can be BRepFace,
+        BRepEdge or BRepVertex objects. The function will return the PMIImportedDimension that references any of these entities in their geometric associations.
+        
+        For example, a Diameter Dimension PMI associated with a cylindrical face.
+        types : An optional array of PMITypes that filters the results to include only PMI that matches the type presented in the specified types. If an empty array or null
+        is passed, all the PMIImportedDimension associated with the specified geometric entities will be returned, regardless of type.
+        Returns an array of PMIImportedDimension objects that are associated with the specified entities and match the type filter (if provided)
+        or an empty array if no matching PMI were found.
+        """
+        return [PMIImportedDimension()]
+    @property
+    def count(self) -> int:
+        """
+        Gets the number of PMIImportedDimensions in the collection.
+        """
+        return int()
+
+class PMIImportedFolders(core.Base):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Provides access to the all the PMIImportedFolder objects in a component.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> PMIImportedFolders:
+        return PMIImportedFolders()
+    def __len__(self) -> int:
+        return 0
+    def __getitem__(self, index: int) -> PMIImportedFolder:
+        return None
+    def __iter__(self) -> Iterator[PMIImportedFolder]:
+        return None
+    def item(self, index: int) -> PMIImportedFolder:
+        """
+        Gets the specified PMIImportedFolder using an index into the collection.
+        index : The index of the item within the collection to return. The first item in the collection has an index of 0.
+        Returns the specified item or null if an invalid index was specified.
+        """
+        return PMIImportedFolder()
+    def itemByName(self, name: str) -> PMIImportedFolder:
+        """
+        Gets the specified PMIImportedFolder from the collection using a name.
+        name : The name of the PMIImportedFolder within the collection to return.
+        Returns the specified item or null if no item with the specified name was found.
+        """
+        return PMIImportedFolder()
+    @property
+    def count(self) -> int:
+        """
+        Gets the number of PMIImportedFolders in the collection.
+        """
+        return int()
+
+class PMIImportedGDTDatums(core.Base):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Provides access to the all the PMIImportedGDTDatum objects in a component.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> PMIImportedGDTDatums:
+        return PMIImportedGDTDatums()
+    def __len__(self) -> int:
+        return 0
+    def __getitem__(self, index: int) -> PMIImportedGDTDatum:
+        return None
+    def __iter__(self) -> Iterator[PMIImportedGDTDatum]:
+        return None
+    def item(self, index: int) -> PMIImportedGDTDatum:
+        """
+        Gets the specified PMIImportedGDTDatum using an index into the collection.
+        index : The index of the item within the collection to return. The first item in the collection has an index of 0.
+        Returns the specified item or null if an invalid index was specified.
+        """
+        return PMIImportedGDTDatum()
+    def itemByName(self, name: str) -> PMIImportedGDTDatum:
+        """
+        Gets the specified PMIImportedGDTDatum from the collection using a name.
+        name : The name of the PMIImportedGDTDatum within the collection to return.
+        Returns the specified item or null if no item with the specified name was found.
+        """
+        return PMIImportedGDTDatum()
+    def itemsByEntities(self, entities: list[core.Base]) -> list[PMIImportedGDTDatum]:
+        """
+        Gets all the PMIImportedGDTDatum from the collection that are associated with the specified geometric entities.
+        
+        This is useful for finding PMIImportedGDTDatum that reference specific geometric features.
+        entities : An array of core.Base objects that represent the geometric entities to search for associated PMI. These can be BRepFace,
+        BRepEdge or BRepVertex objects. The function will return the PMIImportedGDTDatum that references any of these entities in their geometric associations.
+        Returns an array of PMIImportedGDTDatum objects that are associated with the specified entities and match the type filter (if provided)
+        or an empty array if no matching PMI were found.
+        """
+        return [PMIImportedGDTDatum()]
+    @property
+    def count(self) -> int:
+        """
+        Gets the number of PMIImportedGDTDatum in the collection.
+        """
+        return int()
+
+class PMIImportedGeometricTolerances(core.Base):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Provides access to the all the PMIImportedGeometricTolerance objects in a component.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> PMIImportedGeometricTolerances:
+        return PMIImportedGeometricTolerances()
+    def __len__(self) -> int:
+        return 0
+    def __getitem__(self, index: int) -> PMIImportedGeometricTolerance:
+        return None
+    def __iter__(self) -> Iterator[PMIImportedGeometricTolerance]:
+        return None
+    def item(self, index: int) -> PMIImportedGeometricTolerance:
+        """
+        Gets the specified PMIImportedGeometricTolerance using an index into the collection.
+        index : The index of the item within the collection to return. The first item in the collection has an index of 0.
+        Returns the specified item or null if an invalid index was specified.
+        """
+        return PMIImportedGeometricTolerance()
+    def itemByName(self, name: str) -> PMIImportedGeometricTolerance:
+        """
+        Gets the specified PMIImportedGeometricTolerance from the collection using a name.
+        name : The name of the PMIImportedGeometricTolerance within the collection to return.
+        Returns the specified item or null if no item with the specified name was found.
+        """
+        return PMIImportedGeometricTolerance()
+    def itemsByTypes(self, types: list[int]) -> list[PMIImportedGeometricTolerance]:
+        """
+        Gets all the PMIImportedGeometricTolerance from the collection that match the specified PMI types.
+        types : An array of PMITypes that specifies the types of PMI to return. If an empty array or null is passed,
+        all the PMIImportedGeometricTolerance from the collection will be returned regardless of type.
+        Returns an array of PMI objects that match the specified types, or an empty array if no matching PMI were found.
+        """
+        return [PMIImportedGeometricTolerance()]
+    def itemsByEntities(self, entities: list[core.Base], types: list[int] = None) -> list[PMIImportedGeometricTolerance]:
+        """
+        Gets all the PMIImportedGeometricTolerance from the collection that are associated with the specified geometric entities and optionally match the specified PMI types.
+        
+        This is useful for finding PMIImportedGeometricTolerance that reference specific geometric features.
+        entities : An array of core.Base objects that represent the geometric entities to search for associated PMI. These can be BRepFace,
+        BRepEdge or BRepVertex objects. The function will return the PMIImportedGeometricTolerance that references any of these entities in their geometric associations.
+        types : An optional array of PMITypes that filters the results to include only PMI that matches the type presented in the specified types. If an empty array or null
+        is passed, all the PMIImportedGeometricTolerance associated with the specified geometric entities will be returned, regardless of type.
+        Returns an array of PMIImportedGeometricTolerance objects that are associated with the specified entities and match the type filter (if provided)
+        or an empty array if no matching PMI were found.
+        """
+        return [PMIImportedGeometricTolerance()]
+    @property
+    def count(self) -> int:
+        """
+        Gets the number of PMIImportedGeometricTolerance in the collection.
+        """
+        return int()
+
+class PMIImportedGraphicals(core.Base):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Provides access to the all the PMIImportedGraphical objects in a component.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> PMIImportedGraphicals:
+        return PMIImportedGraphicals()
+    def __len__(self) -> int:
+        return 0
+    def __getitem__(self, index: int) -> PMIImportedGraphical:
+        return None
+    def __iter__(self) -> Iterator[PMIImportedGraphical]:
+        return None
+    def item(self, index: int) -> PMIImportedGraphical:
+        """
+        Gets the specified PMIImportedGraphical using an index into the collection.
+        index : The index of the item within the collection to return. The first item in the collection has an index of 0.
+        Returns the specified item or null if an invalid index was specified.
+        """
+        return PMIImportedGraphical()
+    def itemByName(self, name: str) -> PMIImportedGraphical:
+        """
+        Gets the specified PMIImportedGraphical from the collection using a name.
+        name : The name of the PMIImportedGraphical within the collection to return.
+        Returns the specified item or null if no item with the specified name was found.
+        """
+        return PMIImportedGraphical()
+    def itemsByEntities(self, entities: list[core.Base]) -> list[PMIImportedGraphical]:
+        """
+        Gets all the PMIImportedGraphical from the collection that are associated with the specified geometric entities.
+        
+        This is useful for finding PMIImportedGraphical that reference specific geometric features.
+        entities : An array of core.Base objects that represent the geometric entities to search for associated PMI. These can be BRepFace,
+        BRepEdge or BRepVertex objects. The function will return the PMIImportedGraphical that references any of these entities in their geometric associations.
+        Returns an array of PMIImportedGraphical objects that are associated with the specified entities and match the type filter (if provided)
+        or an empty array if no matching PMI were found.
+        """
+        return [PMIImportedGraphical()]
+    @property
+    def count(self) -> int:
+        """
+        Gets the number of PMIImportedGraphical in the collection.
+        """
+        return int()
+
+class PMIImportedNotes(core.Base):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Provides access to the all the PMIImportedNote objects in a component.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> PMIImportedNotes:
+        return PMIImportedNotes()
+    def __len__(self) -> int:
+        return 0
+    def __getitem__(self, index: int) -> PMIImportedNote:
+        return None
+    def __iter__(self) -> Iterator[PMIImportedNote]:
+        return None
+    def item(self, index: int) -> PMIImportedNote:
+        """
+        Gets the specified PMIImportedNote using an index into the collection.
+        index : The index of the item within the collection to return. The first item in the collection has an index of 0.
+        Returns the specified item or null if an invalid index was specified.
+        """
+        return PMIImportedNote()
+    def itemByName(self, name: str) -> PMIImportedNote:
+        """
+        Gets the specified PMIImportedNote from the collection using a name.
+        name : The name of the PMIImportedNote within the collection to return.
+        Returns the specified item or null if no item with the specified name was found.
+        """
+        return PMIImportedNote()
+    def itemsByEntities(self, entities: list[core.Base]) -> list[PMIImportedNote]:
+        """
+        Gets all the PMIImportedNote from the collection that are associated with the specified geometric entities.
+        
+        This is useful for finding PMIImportedNote that reference specific geometric features.
+        entities : An array of core.Base objects that represent the geometric entities to search for associated PMI. These can be BRepFace,
+        BRepEdge or BRepVertex objects. The function will return the PMIImportedNote that references any of these entities in their geometric associations.
+        Returns an array of PMIImportedNote objects that are associated with the specified entities and match the type filter (if provided)
+        or an empty array if no matching PMI were found.
+        """
+        return [PMIImportedNote()]
+    @property
+    def count(self) -> int:
+        """
+        Gets the number of PMIImportedNote in the collection.
+        """
+        return int()
+
+class PMIImportedSurfaceTextures(core.Base):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Provides access to the all the PMIImportedSurfaceTexture objects in a component.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> PMIImportedSurfaceTextures:
+        return PMIImportedSurfaceTextures()
+    def __len__(self) -> int:
+        return 0
+    def __getitem__(self, index: int) -> PMIImportedSurfaceTexture:
+        return None
+    def __iter__(self) -> Iterator[PMIImportedSurfaceTexture]:
+        return None
+    def item(self, index: int) -> PMIImportedSurfaceTexture:
+        """
+        Gets the specified PMIImportedSurfaceTexture using an index into the collection.
+        index : The index of the item within the collection to return. The first item in the collection has an index of 0.
+        Returns the specified item or null if an invalid index was specified.
+        """
+        return PMIImportedSurfaceTexture()
+    def itemByName(self, name: str) -> PMIImportedSurfaceTexture:
+        """
+        Gets the specified PMIImportedSurfaceTexture from the collection using a name.
+        name : The name of the PMIImportedSurfaceTexture within the collection to return.
+        Returns the specified item or null if no item with the specified name was found.
+        """
+        return PMIImportedSurfaceTexture()
+    def itemsByEntities(self, entities: list[core.Base]) -> list[PMIImportedSurfaceTexture]:
+        """
+        Gets all the PMIImportedSurfaceTexture from the collection that are associated with the specified geometric entities.
+        
+        This is useful for finding PMIImportedSurfaceTexture that reference specific geometric features.
+        entities : An array of core.Base objects that represent the geometric entities to search for associated PMI. These can be BRepFace,
+        BRepEdge or BRepVertex objects. The function will return the PMIImportedSurfaceTexture that references any of these entities in their geometric associations.
+        Returns an array of PMIImportedSurfaceTexture objects that are associated with the specified entities and match the type filter (if provided)
+        or an empty array if no matching PMI were found.
+        """
+        return [PMIImportedSurfaceTexture()]
+    @property
+    def count(self) -> int:
+        """
+        Gets the number of PMIImportedSurfaceTexture in the collection.
+        """
+        return int()
+
+class PMIInput(core.Base):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    A Base class for all PMI creation input types. The different types of PMI creation inputs are derived from this base class.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> PMIInput:
+        return PMIInput()
+    @property
+    def isPerpendicularLine(self) -> bool:
+        """
+        Controls whether the PMI text is perpendicular to the leader line or parallel to it.
+        """
+        return bool()
+    @isPerpendicularLine.setter
+    def isPerpendicularLine(self, value: bool):
+        """
+        Controls whether the PMI text is perpendicular to the leader line or parallel to it.
+        """
+        pass
+    @property
+    def horizontalAlignment(self) -> core.HorizontalAlignments:
+        """
+        Controls the horizontal alignment of the PMI text relative to its anchor point.
+        
+        This determines how the text box is positioned relative to the text placement point.
+        """
+        return core.HorizontalAlignments()
+    @horizontalAlignment.setter
+    def horizontalAlignment(self, value: core.HorizontalAlignments):
+        """
+        Controls the horizontal alignment of the PMI text relative to its anchor point.
+        
+        This determines how the text box is positioned relative to the text placement point.
+        """
+        pass
+    @property
+    def verticalAlignment(self) -> core.VerticalAlignments:
+        """
+        Controls the vertical alignment of the PMI text relative to its anchor point.
+        
+        This determines the vertical positioning of the text box relative to the calculated text placement point.
+        """
+        return core.VerticalAlignments()
+    @verticalAlignment.setter
+    def verticalAlignment(self, value: core.VerticalAlignments):
+        """
+        Controls the vertical alignment of the PMI text relative to its anchor point.
+        
+        This determines the vertical positioning of the text box relative to the calculated text placement point.
+        """
+        pass
+    @property
+    def plane(self) -> core.Plane:
+        """
+        Get the annotation plane of the PMI.
+        
+        This plane determines the plane in which the PMI text and graphics are drawn.
+        The plane is relative to the geometry's component space where the PMI is being created.
+        """
+        return core.Plane()
+    @property
+    def annotationTextPoint(self) -> core.Point3D:
+        """
+        Gets and sets the annotation point where the leader line starts.
+        
+        This point must be a valid point on the annotation plane.
+        The point is relative to the geometry's component space where the PMI is being created.
+        """
+        return core.Point3D()
+    @annotationTextPoint.setter
+    def annotationTextPoint(self, value: core.Point3D):
+        """
+        Gets and sets the annotation point where the leader line starts.
+        
+        This point must be a valid point on the annotation plane.
+        The point is relative to the geometry's component space where the PMI is being created.
+        """
+        pass
+    @property
+    def leaderLineExtension(self) -> float:
+        """
+        Gets and sets the length of the leader line extension in cm.
+        
+        This value extends the leader line in the direction determined by the perpendicular setting.
+        """
+        return float()
+    @leaderLineExtension.setter
+    def leaderLineExtension(self, value: float):
+        """
+        Gets and sets the length of the leader line extension in cm.
+        
+        This value extends the leader line in the direction determined by the perpendicular setting.
+        """
+        pass
+    @property
+    def segments(self) -> list[PMISegment]:
+        """
+        Gets and sets the list of PMISegments used to define the PMI text.
+        
+        The segments can be any combination of PMITextSegment, PMISymbolSegment and PMILineBreakSegment objects.
+        
+        Changing this property will result in changing the displayed text of the PMI.
+        """
+        return [PMISegment()]
+    @segments.setter
+    def segments(self, value: list[PMISegment]):
+        """
+        Gets and sets the list of PMISegments used to define the PMI text.
+        
+        The segments can be any combination of PMITextSegment, PMISymbolSegment and PMILineBreakSegment objects.
+        
+        Changing this property will result in changing the displayed text of the PMI.
+        """
+        pass
+    @property
+    def isShowImportedGeometry(self) -> bool:
+        """
+        Gets and sets whether the original graphics/geometry of the PMI should be visible.
+        
+        Applicable only to PMI that has been converted.
+        """
+        return bool()
+    @isShowImportedGeometry.setter
+    def isShowImportedGeometry(self, value: bool):
+        """
+        Gets and sets whether the original graphics/geometry of the PMI should be visible.
+        
+        Applicable only to PMI that has been converted.
+        """
+        pass
+
+class PMILeaderLineNotes(core.Base):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Provides access to the all the PMILeaderLineNote objects in a component.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> PMILeaderLineNotes:
+        return PMILeaderLineNotes()
+    def __len__(self) -> int:
+        return 0
+    def __getitem__(self, index: int) -> PMILeaderLineNote:
+        return None
+    def __iter__(self) -> Iterator[PMILeaderLineNote]:
+        return None
+    def item(self, index: int) -> PMILeaderLineNote:
+        """
+        Gets the specified PMILeaderLineNote using an index into the collection.
+        index : The index of the item within the collection to return. The first item in the collection has an index of 0.
+        Returns the specified item or null if an invalid index was specified.
+        """
+        return PMILeaderLineNote()
+    def itemByName(self, name: str) -> PMILeaderLineNote:
+        """
+        Gets the specified PMILeaderLineNote from the collection using a name.
+        name : The name of the PMILeaderLineNote within the collection to return.
+        Returns the specified item or null if no item with the specified name was found.
+        """
+        return PMILeaderLineNote()
+    def itemsByEntities(self, entities: list[core.Base]) -> list[PMILeaderLineNote]:
+        """
+        Gets all the PMILeaderLineNote from the collection that are associated with the specified geometric entities.
+        
+        This is useful for finding PMILeaderLineNote that reference specific geometric features.
+        entities : An array of core.Base objects that represent the geometric entities to search for associated PMI. These can be BRepFace,
+        BRepEdge or BRepVertex objects. The function will return the PMILeaderLineNote that references any of these entities in their geometric associations.
+        Returns an array of PMILeaderLineNote objects that are associated with the specified entities and match the type filter (if provided)
+        or an empty array if no matching PMI were found.
+        """
+        return [PMILeaderLineNote()]
+    def createInput(self, entity: core.Base) -> PMILeaderLineNoteInput:
+        """
+        Creates a PMILeaderLineNoteInput object that is in turn used to create a Leader Line Note PMI.
+        entity : A core.Base object that represents the geometric entity to which the Note PMI will be associated.
+        
+        This can be a BRepFace, BRepEdge, or BRepVertex object. For BRepEdge objects, only linear, circular
+        and elliptical edges are supported. The note will be positioned relative to this entity and will
+        maintain its association with the entity geometry.
+        Native object will be used when setting the entity geometry.
+        Returns a PMILeaderLineNoteInput object.
+        """
+        return PMILeaderLineNoteInput()
+    def add(self, input: PMILeaderLineNoteInput) -> PMILeaderLineNote:
+        """
+        Creates a new Leader Line Note using the creation parameters in the PMILeaderLineNoteInput.
+        input : A PMILeaderLineNoteInput object.
+        Returns the newly created PMILeaderLineNote or null if the creation failed.
+        """
+        return PMILeaderLineNote()
+    @property
+    def count(self) -> int:
+        """
+        Gets the number of PMILeaderLineNote in the collection.
+        """
+        return int()
+
+class PMIRoughness(core.Base):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Represents roughness data used in surface texture PMI.
+    Contains information about surface roughness parameters.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> PMIRoughness:
+        return PMIRoughness()
+    @property
+    def hasValue(self) -> bool:
+        """
+        Returns whether this PMIRoughness object has a valid value.
+        """
+        return bool()
+    @property
+    def length(self) -> float:
+        """
+        Gets the length value of the roughness measurement in cm.
+        
+        Requires hasValue to be true.
+        
+        This is a read-only property because imported PMI cannot be edited.
+        """
+        return float()
+    @property
+    def value(self) -> float:
+        """
+        Gets the value of the roughness measurement.
+        
+        Requires hasValue to be true.
+        
+        This is a read-only property because imported PMI cannot be edited.
+        """
+        return float()
+    @property
+    def parameterType(self) -> PMISurfaceTextureParameterTypes:
+        """
+        Gets the parameter type of the surface texture measurement.
+        
+        Requires hasValue to be true.
+        
+        This is a read-only property because imported PMI cannot be edited.
+        """
+        return PMISurfaceTextureParameterTypes()
+    @property
+    def isMaximum(self) -> bool:
+        """
+        Gets whether this represents a maximum value.
+        
+        Requires hasValue to be true.
+        
+        This is a read-only property because imported PMI cannot be edited.
+        """
+        return bool()
+
+class PMISegment(core.Base):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    A base class for all the segments used to define the text of a PMI.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> PMISegment:
+        return PMISegment()
+    @property
+    def type(self) -> PMISegmentTypes:
+        """
+        Returns the PMISegmentTypes associated with this PMISegment.
+        """
+        return PMISegmentTypes()
+
+class PMISettings(core.Base):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Provides access to the PMISettings of a document.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> PMISettings:
+        return PMISettings()
+    @property
+    def parentDesign(self) -> Design:
+        """
+        Gets the parent design.
+        """
+        return Design()
+    @property
+    def pmiStandardType(self) -> PMIStandardTypes:
+        """
+        Gets and sets the PMI standard type used by the document.
+        """
+        return PMIStandardTypes()
+    @pmiStandardType.setter
+    def pmiStandardType(self, value: PMIStandardTypes):
+        """
+        Gets and sets the PMI standard type used by the document.
+        """
+        pass
+    @property
+    def annotationSize(self) -> float:
+        """
+        Gets and sets the size of PMI graphics in the document in cm.
+        """
+        return float()
+    @annotationSize.setter
+    def annotationSize(self, value: float):
+        """
+        Gets and sets the size of PMI graphics in the document in cm.
+        """
+        pass
+    @property
+    def defaultTolerance(self) -> float:
+        """
+        Gets and sets the default tolerance value used for PMI creation in cm.
+        """
+        return float()
+    @defaultTolerance.setter
+    def defaultTolerance(self, value: float):
+        """
+        Gets and sets the default tolerance value used for PMI creation in cm.
         """
         pass
 
@@ -23463,7 +28293,7 @@ class PolygonMesh(core.Base):
     @property
     def normalVectors(self) -> list[core.Vector3D]:
         """
-        Returns the normal vectors as an array of Vector 3D objects. There is one normal vector for each index.
+        Returns the normal vectors as an array of Vector3D objects. There is one normal vector for each index.
         """
         return [core.Vector3D()]
     @property
@@ -23516,7 +28346,7 @@ class PolygonMesh(core.Base):
         !!!!! Warning !!!!!
         
         Returns the wall thickness per node in cm. This property calculates the wall thickness of the mesh,
-        i.e. the distance of a surface of the mesh to the opposing surface.
+        i.e., the distance of a surface of the mesh to the opposing surface.
         """
         return [float()]
 
@@ -23589,7 +28419,7 @@ class Profile(core.Base):
     def nativeObject(self) -> Profile:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -23687,7 +28517,7 @@ class ProfileCurve(core.Base):
     def nativeObject(self) -> ProfileCurve:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -23779,7 +28609,7 @@ class ProfileLoop(core.Base):
     def nativeObject(self) -> ProfileLoop:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -24088,17 +28918,25 @@ class RectangularPatternFeatureInput(core.Base):
     @property
     def inputEntities(self) -> core.ObjectCollection:
         """
-        Gets and sets the input entities. The collection can contain faces, features, bodies or occurrences.
-        All of the entities must be of a single type. For example, it can't contain features and occurrences
-        but only features or occurrences.
+        Gets and sets the input entities. The collection can contain BRepFace, PartFeature, BRepBody, or Occurrence
+        objects. All of the entities provided must be the same type. For example, it must contain only bodies and can't
+        contain both bodies and faces.
+        
+        You can also pattern ConstructionPoint, ConstructionAxis, and ConstructionPlane objects. When patterning any
+        construction goemetry, only one entity can be patterned at a time, so the ObjectCollection must contain a
+        single item.
         """
         return core.ObjectCollection()
     @inputEntities.setter
     def inputEntities(self, value: core.ObjectCollection):
         """
-        Gets and sets the input entities. The collection can contain faces, features, bodies or occurrences.
-        All of the entities must be of a single type. For example, it can't contain features and occurrences
-        but only features or occurrences.
+        Gets and sets the input entities. The collection can contain BRepFace, PartFeature, BRepBody, or Occurrence
+        objects. All of the entities provided must be the same type. For example, it must contain only bodies and can't
+        contain both bodies and faces.
+        
+        You can also pattern ConstructionPoint, ConstructionAxis, and ConstructionPlane objects. When patterning any
+        construction goemetry, only one entity can be patterned at a time, so the ObjectCollection must contain a
+        single item.
         """
         pass
     @property
@@ -24434,8 +29272,8 @@ class RenderEnvironment(core.Base):
         """
         Statically creates a RenderEnvironment which can be used to set the environment for
         a scene using the SceneSettings.backgroundEnvironment property.
-        fullFilename : 
-        
+        fullFilename : The full path and filename of the custom environment file to load.
+        Returns the RenderEnvironment object or null if the file could not be loaded.
         """
         return RenderEnvironment()
     @property
@@ -24612,7 +29450,7 @@ class Rendering(core.Base):
         """
         Gets and sets the desired quality of the rendering. The quality is specified using a
         value between 25 and 100, where 75 is the equivalent of "Final" and 100 is
-        the same as "Excellent" in the user interface. The default value is 75
+        the same as "Excellent" in the user interface. The default value is 75.
         """
         return int()
     @renderQuality.setter
@@ -24620,7 +29458,7 @@ class Rendering(core.Base):
         """
         Gets and sets the desired quality of the rendering. The quality is specified using a
         value between 25 and 100, where 75 is the equivalent of "Final" and 100 is
-        the same as "Excellent" in the user interface. The default value is 75
+        the same as "Excellent" in the user interface. The default value is 75.
         """
         pass
     @property
@@ -24739,8 +29577,8 @@ class RenderManager(core.Base):
     @property
     def isRenderWorkspaceActive(self) -> bool:
         """
-        Returns if the Render workspace for this Design is active or not. Returns
-        true if the workspace is active.
+        Returns whether the Render workspace for this Design is active. Returns
+        true if the workspace is active, false otherwise.
         """
         return bool()
     @property
@@ -25337,7 +30175,7 @@ class RigidGroup(core.Base):
     def nativeObject(self) -> RigidGroup:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -25815,41 +30653,289 @@ class RuledSurfaceFeatures(core.Base):
         """
         return int()
 
-class RuleFilletFeatures(core.Base):
+class RuleFilletFeatureInput(core.Base):
     """
-    Collection that provides access to all of the existing rule fillet features in a design.
+    This class defines the methods and properties that pertain to the definition of a rule fillet feature.
     """
     def __init__(self):
         pass
     @staticmethod
-    def cast(arg) -> RuleFilletFeatures:
-        return RuleFilletFeatures()
-    def __len__(self) -> int:
-        return 0
-    def __getitem__(self, index: int) -> RuleFilletFeature:
-        return None
-    def __iter__(self) -> Iterator[RuleFilletFeature]:
-        return None
-    def item(self, index: int) -> RuleFilletFeature:
+    def cast(arg) -> RuleFilletFeatureInput:
+        return RuleFilletFeatureInput()
+    def setAsymmetricOffsets(self, offsetOne: core.ValueInput, offsetTwo: core.ValueInput) -> bool:
         """
-        Function that returns the specified rule fillet feature using an index into the collection.
-        index : The index of the item within the collection to return. The first item in the collection has an index of 0.
-        Returns the specified item or null if an invalid index was specified.
+        Sets the fillet to be an asymmetric fillet and defines the two offsets.
+        offsetOne : A ValueInput object that defines the offset distance of the fillet in the first direction. If the ValueInput uses
+        a real then it is interpreted as centimeters. If it is a string, then the units
+        can be defined as part of the string (i.e. "2 in") or if no units are specified
+        it is interpreted using the current default units for length.
+        offsetTwo : A ValueInput object that defines the offset distance of the fillet in the second direction. If the ValueInput uses
+        a real, then it is interpreted as centimeters. If it is a string, then the units
+        can be defined as part of the string (i.e. "2 in") or if no units are specified
+        it is interpreted using the current default units for length.
+        Returns true if successful.
         """
-        return RuleFilletFeature()
-    def itemByName(self, name: str) -> RuleFilletFeature:
+        return bool()
+    def setByAllEdges(self, facesOrFeatures: list[core.Base]) -> bool:
         """
-        Function that returns the specified rule fillet feature using the name of the feature.
-        name : The name of the feature within the collection to return. This is the name seen in the timeline.
-        Returns the specified item or null if the specified name was not found.
+        Method that adds an array of BRepFace and/or Feature objects to have all their edges to be filleted.
+        Calling this method will set ruleType to RuleFilletRuleTypes.AllEdgesRuleFilletRuleType.
+        facesOrFeatures : Input faces and/or features to have all their edges to be filleted.
+        Returns true if the operation was successful.
         """
-        return RuleFilletFeature()
+        return bool()
+    def setByBetweenFacesOrFeatures(self, facesOrFeaturesOne: list[core.Base], facesOrFeaturesTwo: list[core.Base]) -> bool:
+        """
+        Method that adds two sets of BRepFace and/or Feature objects to have the edges between them filleted.
+        Call this method will set ruleType to RuleFilletRuleTypes.BetweenFacesOrFeaturesRuleFilletRuleType.
+        facesOrFeaturesOne : Input first array of BRepFace and/or Feature objects.
+        facesOrFeaturesTwo : Input second array of BRepFace and/or Feature objects.
+        Returns true if the operation was successful.
+        """
+        return bool()
     @property
-    def count(self) -> int:
+    def targetBaseFeature(self) -> BaseFeature:
         """
-        The number of rule fillet features in the collection.
+        When creating a feature that is owned by a base feature, set this property to the
+        base feature you want to associate the new feature with. By default, this is null,
+        meaning it will not be associated with a base feature.
+        
+        Because of a current limitation, if you want to create a feature associated with a base
+        feature, you must set this property AND call the startEdit method of the base feature,
+        create the feature, and then call the finishEdit method of the base feature. The base
+        feature must be in an "edit" state to be able to add any additional items to it.
         """
-        return int()
+        return BaseFeature()
+    @targetBaseFeature.setter
+    def targetBaseFeature(self, value: BaseFeature):
+        """
+        When creating a feature that is owned by a base feature, set this property to the
+        base feature you want to associate the new feature with. By default, this is null,
+        meaning it will not be associated with a base feature.
+        
+        Because of a current limitation, if you want to create a feature associated with a base
+        feature, you must set this property AND call the startEdit method of the base feature,
+        create the feature, and then call the finishEdit method of the base feature. The base
+        feature must be in an "edit" state to be able to add any additional items to it.
+        """
+        pass
+    @property
+    def ruleType(self) -> RuleFilletRuleTypes:
+        """
+        Gets the rule type for the rule fillet.
+        """
+        return RuleFilletRuleTypes()
+    @property
+    def radius(self) -> core.ValueInput:
+        """
+        Gets and sets the radius of the fillet. Setting this will set the fillet to a constant radius fillet and
+        any asymmetric information will be lost. Returns null in the case the fillet is asymmetric.
+        """
+        return core.ValueInput()
+    @radius.setter
+    def radius(self, value: core.ValueInput):
+        """
+        Gets and sets the radius of the fillet. Setting this will set the fillet to a constant radius fillet and
+        any asymmetric information will be lost. Returns null in the case the fillet is asymmetric.
+        """
+        pass
+    @property
+    def asymmetricOffsetOne(self) -> core.ValueInput:
+        """
+        Returns the current first offset for an asymmetric fillet. Use setAsymmetricOffsets to set
+        the offsets. Returns null in the case where the fillet is a constant radius fillet.
+        """
+        return core.ValueInput()
+    @property
+    def asymmetricOffsetTwo(self) -> core.ValueInput:
+        """
+        Returns the current second offset for an asymmetric fillet. Use setAsymmetricOffsets to set
+        the offsets. Returns null in the case where the fillet is a constant radius fillet.
+        """
+        return core.ValueInput()
+    @property
+    def topologyType(self) -> RuleFilletTopologyTypes:
+        """
+        Gets and sets the topology type of the rule fillet.
+        """
+        return RuleFilletTopologyTypes()
+    @topologyType.setter
+    def topologyType(self, value: RuleFilletTopologyTypes):
+        """
+        Gets and sets the topology type of the rule fillet.
+        """
+        pass
+    @property
+    def isRollingBallCorner(self) -> bool:
+        """
+        Gets and sets if a rolling ball or setback solution is to be used in any corners. A value of true will create a rolling ball fillet.
+        """
+        return bool()
+    @isRollingBallCorner.setter
+    def isRollingBallCorner(self, value: bool):
+        """
+        Gets and sets if a rolling ball or setback solution is to be used in any corners. A value of true will create a rolling ball fillet.
+        """
+        pass
+    @property
+    def facesOrFeatures(self) -> list[core.Base]:
+        """
+        Gets an array of BRepFace and/or Feature objects that are to have all their edges filleted.
+        This is applicable only when ruleType is RuleFilletRuleTypes.AllEdgesRuleFilletRuleType.
+        This is set by the setByAllEdges method.
+        """
+        return [core.Base()]
+    @property
+    def facesOrFeaturesOne(self) -> list[core.Base]:
+        """
+        Gets the first array of BRepFace and/or Feature objects for between faces/features rule fillet.
+        This is applicable only when ruleType is RuleFilletRuleTypes.BetweenFacesOrFeaturesRuleFilletRuleType.
+        This is set by the setByBetweenFacesOrFeatures method.
+        """
+        return [core.Base()]
+    @property
+    def facesOrFeaturesTwo(self) -> list[core.Base]:
+        """
+        Gets the second array of BRepFace and/or Feature objects for between faces/features rule fillet.
+        This is applicable only when ruleType is RuleFilletRuleTypes.BetweenFacesOrFeaturesRuleFilletRuleType.
+        This is set by the setByBetweenFacesOrFeatures method.
+        """
+        return [core.Base()]
+
+class RuleFilletSettings(core.Base):
+    """
+    The settings for the rule fillet feature.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> RuleFilletSettings:
+        return RuleFilletSettings()
+    def setToConstantRadius(self, radius: core.ValueInput) -> bool:
+        """
+        Changes the radius type to be constant.
+        radius : Input ValueInput object that defines the radius of the rule fillet. If the ValueInput uses
+        a real value then it is interpreted as centimeters. If it is a string then the units
+        can be defined as part of the string (i.e. "2 in") or if no units are specified it is
+        interpreted using the current document units for length.
+        
+        """
+        return bool()
+    def setToAsymmetric(self, offsetOne: core.ValueInput, offsetTwo: core.ValueInput) -> bool:
+        """
+        Changes the radius type to be asymmetric.
+        offsetOne : Input ValueInput object that defines the first offset of the asymmetric rule fillet. If the ValueInput uses
+        a real value then it is interpreted as centimeters. If it is a string then the units
+        can be defined as part of the string (i.e. "2 in") or if no units are specified it is
+        interpreted using the current document units for length.
+        offsetTwo : Input ValueInput object that defines the second offset of the asymmetric rule fillet. If the ValueInput uses
+        a real value then it is interpreted as centimeters. If it is a string then the units
+        can be defined as part of the string (i.e. "2 in") or if no units are specified it is
+        interpreted using the current document units for length.
+        
+        """
+        return bool()
+    def setByAllEdges(self, facesOrFeatures: list[core.Base]) -> bool:
+        """
+        Method that adds an array of BRepFace and/or Feature objects to have all their edges filleted.
+        Calling this method will set ruleType to RuleFilletRuleTypes.AllEdgesRuleFilletRuleType.
+        facesOrFeatures : Input faces and/or features to have all their edges to be filleted.
+        Returns true if the operation was successful.
+        """
+        return bool()
+    def setByBetweenFacesOrFeatures(self, facesOrFeaturesOne: list[core.Base], facesOrFeaturesTwo: list[core.Base]) -> bool:
+        """
+        Method that adds two sets of BRepFace and/or Feature objects to have the edges between them filleted.
+        Call this method will set ruleType to RuleFilletRuleTypes.BetweenFacesOrFeaturesRuleFilletRuleType.
+        facesOrFeaturesOne : Input first array of BRepFace and/or Feature objects.
+        facesOrFeaturesTwo : Input second array of BRepFace and/or Feature objects.
+        Returns true if the operation was successful.
+        """
+        return bool()
+    @property
+    def ruleType(self) -> RuleFilletRuleTypes:
+        """
+        Gets the rule type for the rule fillet.
+        """
+        return RuleFilletRuleTypes()
+    @property
+    def isConstantRadius(self) -> bool:
+        """
+        Gets and sets if the rule fillet is a constant or asymmetric radius type.
+        """
+        return bool()
+    @property
+    def radius(self) -> ModelParameter:
+        """
+        Gets the parameter controlling the radius of a constant radius rule fillet.
+        This property will return null when isConstantRadius is false.
+        To edit the radius, use properties on the parameter to change the value of the parameter.
+        """
+        return ModelParameter()
+    @property
+    def asymmetricOffsetOne(self) -> ModelParameter:
+        """
+        Gets the parameter controlling the first offset of this asymmetric rule fillet.
+        This property will return null when isConstantRadius is true.
+        To edit the offset, use properties on the parameter to change the value of the parameter.
+        """
+        return ModelParameter()
+    @property
+    def asymmetricOffsetTwo(self) -> ModelParameter:
+        """
+        Gets the parameter controlling the second offset of this asymmetric rule fillet.
+        This property will return null when isConstantRadius is true.
+        To edit the offset, use properties on the parameter to change the value of the parameter.
+        """
+        return ModelParameter()
+    @property
+    def topologyType(self) -> RuleFilletTopologyTypes:
+        """
+        Gets and sets the topology type of the rule fillet.
+        
+        To set this property, you need to position the timeline marker to immediately before this feature.
+        This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True).
+        """
+        return RuleFilletTopologyTypes()
+    @topologyType.setter
+    def topologyType(self, value: RuleFilletTopologyTypes):
+        """
+        Gets and sets the topology type of the rule fillet.
+        
+        To set this property, you need to position the timeline marker to immediately before this feature.
+        This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True).
+        """
+        pass
+    @property
+    def facesOrFeatures(self) -> list[core.Base]:
+        """
+        Gets an array of BRepFace and/or Feature objects that have all their edges filleted.
+        This returns an empty array if ruleType is not RuleFilletRuleTypes.AllEdgesRuleFilletRuleType.
+        
+        To use this property, you need to position the timeline marker to immediately before this feature.
+        This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True).
+        """
+        return [core.Base()]
+    @property
+    def facesOrFeaturesOne(self) -> list[core.Base]:
+        """
+        Gets the first array of BRepFace and/or Feature objects for between faces/features rule fillet.
+        This returns an empty array if ruleType is not RuleFilletRuleTypes.BetweenFacesOrFeaturesRuleFilletRuleType.
+        
+        To use this property, you need to position the timeline marker to immediately before this feature.
+        This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True).
+        """
+        return [core.Base()]
+    @property
+    def facesOrFeaturesTwo(self) -> list[core.Base]:
+        """
+        Gets the second array of BRepFace and/or Feature objects for between faces/features rule fillet.
+        This returns an empty array if ruleType is not RuleFilletRuleTypes.BetweenFacesOrFeaturesRuleFilletRuleType.
+        
+        To use this property, you need to position the timeline marker to immediately before this feature.
+        This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True).
+        """
+        return [core.Base()]
 
 class ScaleFeatureInput(core.Base):
     """
@@ -26276,14 +31362,14 @@ class SceneSettings(core.Base):
     @property
     def cameraExposure(self) -> float:
         """
-        Gets and sets if the exposure of the camera as specified using the "Exposure Value" (EV). Valid
+        Gets and sets the exposure of the camera as specified using the "Exposure Value" (EV). Valid
         values are between -15.0 and 25.0, inclusive.
         """
         return float()
     @cameraExposure.setter
     def cameraExposure(self, value: float):
         """
-        Gets and sets if the exposure of the camera as specified using the "Exposure Value" (EV). Valid
+        Gets and sets the exposure of the camera as specified using the "Exposure Value" (EV). Valid
         values are between -15.0 and 25.0, inclusive.
         """
         pass
@@ -26304,7 +31390,7 @@ class SceneSettings(core.Base):
     @property
     def centerOfFocus(self) -> core.Point3D:
         """
-        When the isDepthofFieldEnabled property is true, this point is used as the center of focus.
+        When the isDepthOfFieldEnabled property is true, this point is used as the center of focus.
         All objects that are the same distance from the camera as this point will be in focus.
         Any geometry that is closer or further away from the camera than this point will appear more out of focus.
         
@@ -26315,7 +31401,7 @@ class SceneSettings(core.Base):
     @centerOfFocus.setter
     def centerOfFocus(self, value: core.Point3D):
         """
-        When the isDepthofFieldEnabled property is true, this point is used as the center of focus.
+        When the isDepthOfFieldEnabled property is true, this point is used as the center of focus.
         All objects that are the same distance from the camera as this point will be in focus.
         Any geometry that is closer or further away from the camera than this point will appear more out of focus.
         
@@ -26626,7 +31712,7 @@ class SheetMetalRule(core.Base):
         """
         Deletes the rule from the design or library. If the rule is in the
         library and set as the default rule, you cannot delete it. If the
-        rule is in a design and is used by a component you cannot use it.
+        rule is in a design and is used by a component, you cannot delete it.
         Returns true if the delete was successful.
         """
         return bool()
@@ -26668,7 +31754,7 @@ class SheetMetalRule(core.Base):
     @property
     def gap(self) -> SheetMetalRuleValue:
         """
-        The value used for miter, rip, and seam, gaps. Use the returned SheetMetalRuleValue
+        The value used for miter, rip, and seam gaps. Use the returned SheetMetalRuleValue
         object to get and set the current value of the gap.
         """
         return SheetMetalRuleValue()
@@ -26718,8 +31804,9 @@ class SheetMetalRule(core.Base):
         Gets and sets the relief shape to use when two bends intersect.
         
         When set to square or round relief shape, the value of the twoBendReliefPlacement
-        property will be set to IntersectionTwoBendReliefPlacement. For a round relief
-        shape you can change the twoBendReliefPlacment property to TangentTwoBendReliefPlacement.
+        property will be set to IntersectionTwoBendReliefPlacement by default. For round and square relief
+        shapes you can change the twoBendReliefPlacement property to VertexTwoBendReliefPlacement.
+        For round shapes, you can also use TangentTwoBendReliefPlacement.
         """
         return TwoBendReliefShapes()
     @twoBendReliefShape.setter
@@ -26728,8 +31815,9 @@ class SheetMetalRule(core.Base):
         Gets and sets the relief shape to use when two bends intersect.
         
         When set to square or round relief shape, the value of the twoBendReliefPlacement
-        property will be set to IntersectionTwoBendReliefPlacement. For a round relief
-        shape you can change the twoBendReliefPlacment property to TangentTwoBendReliefPlacement.
+        property will be set to IntersectionTwoBendReliefPlacement by default. For round and square relief
+        shapes you can change the twoBendReliefPlacement property to VertexTwoBendReliefPlacement.
+        For round shapes, you can also use TangentTwoBendReliefPlacement.
         """
         pass
     @property
@@ -26743,7 +31831,7 @@ class SheetMetalRule(core.Base):
     @property
     def twoBendReliefPlacement(self) -> TwoBendReliefPlacements:
         """
-        Gets and sets the relief placement for a two bend relief shape. When the relief shape
+        Gets and sets the relief placement for a two-bend relief shape. When the relief shape
         is round, both intersection and tangent are valid placements. For square shape, only
         intersection is valid. For all other shapes, this property will return NoTwoBendReliefPlacement
         because the placement option is not used.
@@ -26752,7 +31840,7 @@ class SheetMetalRule(core.Base):
     @twoBendReliefPlacement.setter
     def twoBendReliefPlacement(self, value: TwoBendReliefPlacements):
         """
-        Gets and sets the relief placement for a two bend relief shape. When the relief shape
+        Gets and sets the relief placement for a two-bend relief shape. When the relief shape
         is round, both intersection and tangent are valid placements. For square shape, only
         intersection is valid. For all other shapes, this property will return NoTwoBendReliefPlacement
         because the placement option is not used.
@@ -26788,14 +31876,14 @@ class SheetMetalRule(core.Base):
     @property
     def isDefault(self) -> bool:
         """
-        This gets and sets which rule in a library is the default rule. This is only
+        Gets and sets which rule in a library is the default rule. This is only
         valid for rules in a library and will fail for rules in a design.
         """
         return bool()
     @isDefault.setter
     def isDefault(self, value: bool):
         """
-        This gets and sets which rule in a library is the default rule. This is only
+        Gets and sets which rule in a library is the default rule. This is only
         valid for rules in a library and will fail for rules in a design.
         """
         pass
@@ -26851,7 +31939,7 @@ class SheetMetalRules(core.Base):
         existingSheetMetalRule : The existing SheetMetalRule object you want to copy. This can be a rule from the
         library or the design.
         name : The name to assign to the new sheet metal rule. This name must be unique with respect to other
-        sheet metal rules in the design or library it's created in.
+        sheet metal rules in the design or library its created in.
         Returns the new SheetMetalRule object or will assert in the case where it fails.
         """
         return SheetMetalRule()
@@ -26864,7 +31952,7 @@ class SheetMetalRules(core.Base):
 
 class SheetMetalRuleValue(core.Base):
     """
-    Used to get and set the current value of a value associated with a sheet metal rule. A value
+    Used to get and set the current value associated with a sheet metal rule. A value
     can be gotten or set using a string or a double. A string can contain equations and unit specifiers
     whereas a double defines the size in centimeters. In the user-interface, the user is always
     setting the string expression. However, when programming it is typically more convenient to set
@@ -27240,7 +32328,7 @@ class Sketch(core.Base):
         Intersects the specified body with the sketch plane and creates new
         curves representing the intersection.
         body : The body to be intersected by the sketch.
-        Returns a collection of the sketch entities that were created a a result of the
+        Returns a collection of the sketch entities that were created as a result of the
         cut.
         """
         return core.ObjectCollection()
@@ -27418,7 +32506,8 @@ class Sketch(core.Base):
         between the end point of the slot and the provided sketch point.
         
         If the length or angle arguments are provided, the point is not the actual end point
-        but is used to determine the direction of the slot.
+        but is used to determine the direction of the slot. If both the length and angle arguments
+        are provided this endPoint will be ignored and null can be provided.
         width : A ValueInput object that defines the width of the slot. The ValueInput can define either
         a real value or an expression string. If it is a real value, it defines the width of the
         slot in centimeters.
@@ -27446,7 +32535,7 @@ class Sketch(core.Base):
         it defines the angle of the slot in radians. When it is an expression string, it's the same as
         creating a parameter in the user-interface. You can specify any valid expression, i.e. "45", "45 deg",
         "180 / 3", "Sweep * 2" that defines an angle.
-        Returns an array containing the start point arc, the end arc, the two lines that define the slot, the construction
+        Returns an array containing the start point arc, the end point arc, the two lines that define the slot, the construction
         line between the two points, and optionally, the construction line the angle is measured from if an angle is specified, and
         the dimension constraints that were created in the order of width, length, and angle.
         """
@@ -27467,6 +32556,131 @@ class Sketch(core.Base):
         Returns an array of the sketch entities that were created as a result of the projection.
         """
         return [SketchEntity()]
+    def addCenterPointSlot(self, centerPoint: core.Base, endPoint: core.Base, width: core.ValueInput, createWidthDimension: bool = False, halfLength: core.ValueInput = None, angle: core.ValueInput = None) -> list[core.Base]:
+        """
+        Creates the geometry that represents a slot where the first point defines the center of the slot
+        and the second point defines the direction and half-length. Geometric constraints are automatically
+        added to the geometry to maintain the slot shape and optionally, dimensions to control
+        the size can be added. The created geometry and constraints are returned.
+        centerPoint : The center point of the slot. It can be a SketchPoint or Point3D object. If a SketchPoint
+        is provided a coincident constraint will be created between the center point of the slot
+        and the provided sketch point.
+        endPoint : A point that defines the direction and half-length of the slot. It can be a SketchPoint or Point3D object.
+        The distance from the center point to this point represents half the total length of the slot.
+        If a SketchPoint is provided a coincident constraint is created between the end point of the slot
+        and the provided sketch point.
+        
+        If the halfLength or angle arguments are provided, the point is not the actual end point
+        but is used to determine the direction of the slot. If both the halfLength and angle arguments
+        are provided this endPoint will be ignored and null can be provided.
+        width : A ValueInput object that defines the width of the slot. The ValueInput can define either
+        a real value or an expression string. If it is a real value, it defines the width of the
+        slot in centimeters.
+        
+        When using a ValueInput created using a string, it's the same as creating a parameter in the user-interface.
+        You can specify any valid expression, i.e. "5", "5 in", "5 in / 2", "5 + Length" that defines a length.
+        createWidthDimension : Specifies if a dimension constraint and its associated parameter is created to control the width
+        of the slot.
+        halfLength : Optional argument that defines half the length of the slot using a ValueInput. If this is provided, it
+        overrides the endPoint distance and explicitly defines half the length of the slot. If the half length is specified,
+        a dimension constraint and its associated parameter is created to control the length.
+        
+        The ValueInput can define either a real value or an expression string. If it is a real value,
+        it defines half the length of the slot in centimeters. When it is an expression string, it's the same as
+        creating a parameter in the user-interface. You can specify any valid expression, i.e. "2.5", "2.5 in",
+        "5 in / 4", "HalfLength" that defines a length.
+        angle : Optional argument that defines the angle of the slot using a ValueInput. If this is provided, it
+        overrides the endPoint and explicitly defines the angle of the slot. If the angle is specified,
+        a horizontal construction line, a dimension constraint, and its associated parameter is created to control the angle.
+        The angle is measured from a horizontal line that starts at the center point and goes in the positive
+        X direction. The angle is always less than 180 deg. and depending on the location of the direction point, the angle
+        will be clockwise or counterclockwise from the horizontal line.
+        
+        The ValueInput can define either a real value or an expression string. If it is a real value,
+        it defines the angle of the slot in radians. When it is an expression string, it's the same as
+        creating a parameter in the user-interface. You can specify any valid expression, i.e. "45", "45 deg",
+        "180 / 3", "Sweep * 2" that defines an angle.
+        Returns an array containing the start point arc, the end point arc, the two lines that define the slot, the construction
+        line between the start and end point, and optionally, the construction line the angle is measured from if an angle is specified, and
+        the dimension constraints that were created in the order of width, half length, and angle.
+        """
+        return [core.Base()]
+    def addOverallSlot(self, startPoint: core.Base, endPoint: core.Base, width: core.ValueInput, createWidthDimension: bool = False, length: core.ValueInput = None, angle: core.ValueInput = None) -> list[core.Base]:
+        """
+        Creates the geometry that represents an overall slot. Geometric constraints are automatically
+        added to the geometry to maintain the slot shape and optionally, dimensions to control
+        the size can be added. The created geometry and constraints are returned.
+        startPoint : The start point of the slot. It can be a SketchPoint or Point3D object. If a SketchPoint
+        is provided a coincident constraint will be created between the start point of the slot
+        and the provided sketch point.
+        endPoint : The end point of the slot. It can be a SketchPoint or Point3D object. This point defines
+        the length of the slot. If a SketchPoint is provided a coincident constraint is created
+        between the end point of the slot and the provided sketch point.
+        
+        If either the length or angle argument is provided, the point is not the actual end point
+        but is used to determine the direction of the slot. If both the length and angle arguments
+        are provided this endPoint will be ignored and null can be provided.
+        width : A ValueInput object that defines the width of the slot. The ValueInput can define either
+        a real value or an expression string. If it is a real value, it defines the width of the
+        slot in centimeters.
+        
+        When using a ValueInput created using a string, it's the same as creating a parameter in the user-interface.
+        You can specify any valid expression, i.e. "5", "5 in", "5 in / 2", "5 + Length" that defines a length.
+        createWidthDimension : Specifies if a dimension constraint and its associated parameter is created to control the width
+        of the slot.
+        length : Optional argument that defines the overall length of the slot using a ValueInput. If this is provided, it
+        overrides the endPoint and explicitly defines the length of the slot. If the length is specified,
+        a dimension constraint and its associated parameter is created to control the length.
+        
+        The ValueInput can define either a real value or an expression string. If it is a real value,
+        it defines the length of the slot in centimeters. When it is an expression string, it's the same as
+        creating a parameter in the user-interface. You can specify any valid expression, i.e. "5", "5 in",
+        "5 in / 2", "5 + Length" that defines a length.
+        angle : Optional argument that defines the angle of the slot using a ValueInput. If this is provided, it
+        overrides the endPoint and explicitly defines the angle of the slot. If the angle is specified,
+        a horizontal construction line, a dimension constraint, and its associated parameter is created to control the angle.
+        The angle is measured from a horizontal line that starts at the start point and goes in the positive
+        X direction. The angle is always less than 180 deg. and depending on the location of the end point, the angle
+        will be clockwise or counterclockwise from the horizontal line.
+        
+        The ValueInput can define either a real value or an expression string. If it is a real value,
+        it defines the angle of the slot in radians. When it is an expression string, it's the same as
+        creating a parameter in the user-interface. You can specify any valid expression, i.e. "45", "45 deg",
+        "180 / 3", "Sweep * 2" that defines an angle.
+        Returns an array containing the start point arc, the end point arc, the two lines that define the slot, the construction
+        line between the two points, and optionally, the construction line the angle is measured from if an angle is specified, and
+        the dimension constraints that were created in the order of length, angle and width.
+        """
+        return [core.Base()]
+    def createAutoConstrainInput(self) -> AutoConstrainInput:
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        Creates a new AutoConstrainInput object associated with this sketch. The input object is
+        used to define the various options when adding dimension and geometric constraints to
+        help constrain a sketch. The returned object has all options defined with default values
+        and additional constraints can be applied by passing this into the autoConstrain method.
+        Returns the newly created AutoConstrainInput object. Validation of sketch suitability
+        (entity count, entitlements, fully constrained status, 3D vs 2D, etc.) is performed
+        when the autoConstrain method is called, not during input creation.
+        """
+        return AutoConstrainInput()
+    def autoConstrain(self, input: AutoConstrainInput) -> AutoConstrainResult:
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        Auto constrains the sketch using the information provided by the input object. This returns
+        a single locally computed solution.
+        input : The AutoConstrainInput object that defines the various settings to use when fully constraining the sketch.
+        The input object must be associated with this sketch (created by this sketch's createAutoConstrainInput method).
+        Returns an AutoConstrainResult object where information about how the sketch was constrained
+        can be obtained. Returns null in the case of a failure or if the input is invalid.
+        """
+        return AutoConstrainResult()
     @property
     def name(self) -> str:
         """
@@ -27707,7 +32921,7 @@ class Sketch(core.Base):
     def nativeObject(self) -> Sketch:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -27742,7 +32956,7 @@ class Sketch(core.Base):
     @property
     def attributes(self) -> core.Attributes:
         """
-        Returns the collection of attributes associated with this face.
+        Returns the collection of attributes associated with this sketch.
         """
         return core.Attributes()
     @property
@@ -27807,7 +33021,7 @@ class Sketch(core.Base):
         browser is on or not. Parent nodes in the browser can have their light
         bulb off which affects all of their children so this property does not
         indicate if the body is actually visible, just that it should be visible
-        if all of it's parent nodes are also visible. Use the isVisible property
+        if all of its parent nodes are also visible. Use the isVisible property
         to determine if it's actually visible.
         """
         return bool()
@@ -27818,7 +33032,7 @@ class Sketch(core.Base):
         browser is on or not. Parent nodes in the browser can have their light
         bulb off which affects all of their children so this property does not
         indicate if the body is actually visible, just that it should be visible
-        if all of it's parent nodes are also visible. Use the isVisible property
+        if all of its parent nodes are also visible. Use the isVisible property
         to determine if it's actually visible.
         """
         pass
@@ -27878,6 +33092,20 @@ class Sketch(core.Base):
         This provides access to the "Construction Geometries" setting in the "SKETCH PALETTE".
         """
         pass
+    @property
+    def isDerived(self) -> bool:
+        """
+        Returns if this sketch is derived from another design. If true, the sketch cannot be deleted.
+        You should not attempt to make any edits to the derived sketch. Any edits made to this derived sketch will be lost when the derive updates.
+        """
+        return bool()
+    @property
+    def deriveFeature(self) -> DeriveFeature:
+        """
+        Returns the DeriveFeature if this sketch is derived from another design.
+        This property returns null if the sketch is not derived from another design (i.e. isDerived property returns false).
+        """
+        return DeriveFeature()
 
 class SketchArcs(core.Base):
     """
@@ -28236,6 +33464,14 @@ class SketchCurves(core.Base):
         creation of new control point splines.
         """
         return SketchControlPointSplines()
+    @property
+    def sketchIsoparametricCurves(self) -> SketchIsoparametricCurves:
+        """
+        Returns the isoparametric curves collection associated with this sketch.
+        This provides access to the existing isoparametric curves and supports the
+        creation of new isoparametric curves.
+        """
+        return SketchIsoparametricCurves()
 
 class SketchDimension(core.Base):
     """
@@ -28697,7 +33933,7 @@ class SketchEntity(core.Base):
     def deleteMe(self) -> bool:
         """
         Deletes the entity from the sketch.
-        Returns true is the delete was successful.
+        Returns true if the delete was successful.
         """
         return bool()
     @property
@@ -28806,7 +34042,7 @@ class SketchEntity(core.Base):
     @property
     def attributes(self) -> core.Attributes:
         """
-        Returns the collection of attributes associated with this face.
+        Returns the collection of attributes associated with this sketch entity.
         """
         return core.Attributes()
     @property
@@ -28932,7 +34168,7 @@ class Sketches(core.Base):
     @property
     def count(self) -> int:
         """
-        Returns the number of sketches in a component
+        Returns the number of sketches in a component.
         """
         return int()
 
@@ -29010,6 +34246,219 @@ class SketchFixedSplines(core.Base):
     def count(self) -> int:
         """
         Returns the number of fitted splines in the sketch.
+        """
+        return int()
+
+class SketchIsoparametricCurve(core.Base):
+    """
+    This object represents the result of creating isoparametric curves. It contains the
+    definition of how the curves are created and the resulting sketch curves.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> SketchIsoparametricCurve:
+        return SketchIsoparametricCurve()
+    def setSingle(self, isPhysical: bool, distance: core.ValueInput) -> bool:
+        """
+        Redefines that a single isoparametric curve will be created and its position
+        is defined by its distance from the edge of the surface. The direction is
+        defined using the isUDirection property.
+        isPhysical : Specifies if the offset of the curve from the edge of the surface is defined
+        by a physical distance or a proportional distance along the surface where it is defined
+        as a value from 0 to 1. A value of true indicates it is the physical distance.
+        distance : The distance of the curve from the edge of the surface. If isPhysical is true
+        this is a physical distance. If the ValueInput is defined using a real value
+        this is the offset in centimeters. If the ValueInput is defined using a string
+        it is used as the expression of the parameter that will be created to control
+        the offset, and should be able to be evaluated as a distance.
+        
+        If isPhysical is false, this defines the proportional offset of the surface from
+        the edge where the value can be 0 to 1. If a ValueInput is defined using a real
+        value it can be 0 to 1. If the ValueInput is defined using a string it is used
+        as the expression of the parameter that will be created to control the offset and
+        should be able to be evaluated as a unitless value.
+        Returns true if successful.
+        """
+        return bool()
+    def setDistributed(self, quantity: core.ValueInput) -> bool:
+        """
+        Redefines that one or more isoparametric curves will be created along the U or V
+        parameter curves of the face. The direction is defined using the isUDirection
+        property.
+        quantity : The number of isoparametric curves to create. They are evenly distributed
+        on the face. If a ValueInput is defined using a real value, it should be
+        a whole number or it will be rounded to the nearest whole number. If a ValueInput
+        is defined using a string, it is used as the expression of the parameter that will
+        be created to control the number of curves and should be able to be evaluated as
+        a unitless value.
+        Returns true if successful.
+        """
+        return bool()
+    def deleteMe(self) -> bool:
+        """
+        Deletes this SketchIsoparametricCurve object. Deleting this object deletes the definition and the
+        association the sketch curves have as isoparametric curves so they become regular sketch curves.
+        Returns true if successful.
+        """
+        return bool()
+    def createForAssemblyContext(self, occurrence: Occurrence) -> SketchIsoparametricCurve:
+        """
+        Creates or returns a proxy for the native object
+        - i.e. a new object that represents this object but adds the assembly context
+        defined by the input occurrence.
+        occurrence : The occurrence that defines the context to create the proxy in.
+        Returns the proxy object or null if this isn't the NativeObject.
+        """
+        return SketchIsoparametricCurve()
+    @property
+    def face(self) -> BRepFace:
+        """
+        Gets and sets the BRepFace that the curves are calculated for.
+        """
+        return BRepFace()
+    @face.setter
+    def face(self, value: BRepFace):
+        """
+        Gets and sets the BRepFace that the curves are calculated for.
+        """
+        pass
+    @property
+    def isUDirection(self) -> bool:
+        """
+        Gets and sets the direction of the isoparametric curve on the surface.
+        The curve follows the surface in either the U or V parametric direction.
+        True indicates the U direction, which is also the default when the input
+        is created.
+        """
+        return bool()
+    @isUDirection.setter
+    def isUDirection(self, value: bool):
+        """
+        Gets and sets the direction of the isoparametric curve on the surface.
+        The curve follows the surface in either the U or V parametric direction.
+        True indicates the U direction, which is also the default when the input
+        is created.
+        """
+        pass
+    @property
+    def isSingle(self) -> bool:
+        """
+        Gets if a single or distributed curve creation is defined. To change
+        the type, call either the setSingle or setDistributed methods.
+        """
+        return bool()
+    @property
+    def isPhysicalOffset(self) -> bool:
+        """
+        Gets how the distance of the single curve from the face edge is defined by a
+        distance or proportionally. This property only applies when the isSingle property
+        is True. A value of true indicates it is defined using a physical offset. To change
+        how the offset is defined use the setSingle method.
+        """
+        return bool()
+    @property
+    def quantityOrDistance(self) -> ModelParameter:
+        """
+        Returns the parameter that controls the quantity or offset distance of the curves.
+        If the isSingle property returns true, the parameter controls the distance of the curve from the
+        edge of the face. If the isSingle property is false, the parameter controls the quantity of curves
+        in the result. To change the values, use the returned ModelParameter object.
+        """
+        return ModelParameter()
+    @property
+    def resultCurves(self) -> list[SketchCurve]:
+        """
+        Returns the sketch curves that were created as isoparametric curves.
+        """
+        return [SketchCurve()]
+    @property
+    def assemblyContext(self) -> Occurrence:
+        """
+        Returns the assembly occurrence (i.e. the occurrence) of this object
+        in an assembly. This is only valid in the case where this is acting
+        as a proxy in an assembly. Returns null in the case where the object
+        is not in the context of an assembly but is already the native object.
+        """
+        return Occurrence()
+    @property
+    def nativeObject(self) -> SketchIsoparametricCurve:
+        """
+        The NativeObject is the object outside the context of an assembly and
+        in the context of its parent component.
+        Returns null in the case where this object is not in the context of
+        an assembly but is already the native object.
+        """
+        return SketchIsoparametricCurve()
+
+class SketchIsoparametricCurves(core.Base):
+    """
+    The collection of isoparametric curves in a sketch. This provides access to the existing
+    isoparametric curves and supports the method to create new isoparametric curves.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> SketchIsoparametricCurves:
+        return SketchIsoparametricCurves()
+    def __len__(self) -> int:
+        return 0
+    def __getitem__(self, index: int) -> SketchIsoparametricCurve:
+        return None
+    def __iter__(self) -> Iterator[SketchIsoparametricCurve]:
+        return None
+    def item(self, index: int) -> SketchIsoparametricCurve:
+        """
+        Function that returns the specified isoparametric curve using an index into the collection.
+        index : The index of the item within the collection to return. The first item in the collection has an index of 0.
+        Returns the specified item or null if an invalid index was specified.
+        """
+        return SketchIsoparametricCurve()
+    def createInput(self, face: BRepFace) -> IsoparametricCurveInput:
+        """
+        Creates a new IsoparametricCurveInput object that is used to specify the input needed
+        to create new isoparametric curves.
+        face : The BRepFace on which to create the isoparametric curve.
+        Returns the newly created IsoparametricCurveInput object or null if the creation failed.
+        """
+        return IsoparametricCurveInput()
+    def add(self, input: IsoparametricCurveInput) -> SketchIsoparametricCurve:
+        """
+        Creates sketch geometry that represents isoparametric curves on a face.
+        An isoparametric curve follows the surface in either the U or V parametric
+        direction at a constant parameter value. This results in the creation of
+        associative isoparametric curves, which means they remain associated with
+        the face and will update if the model changes. You can create a non-associative
+        result by using the addUnlinked method..
+        
+        The created curves can be accessed through the returned SketchIsoparametricCurve
+        object and they are also available in the appropriate collections. For example,
+        any lines will also be in the SketchLines collection.
+        input : The IsoparametricCurveInput object that specifies the input needed to create the
+        isoparametric curve(s).
+        Returns the SketchIsoparametricCurve object that was created as a result of the
+        isoparametric curve operation.
+        """
+        return SketchIsoparametricCurve()
+    def addUnlinked(self, input: IsoparametricCurveInput) -> list[SketchCurve]:
+        """
+        Creates sketch geometry that represents isoparametric curves on a face.
+        An isoparametric curve follows the surface in either the U or V parametric
+        direction at a constant parameter value. This method calculates and creates
+        sketch geometry that represents the isoparametric curves but all intelligence
+        about how they were created is lost and the result is regular sketch curves.
+        
+        To create parametric isoparametric curves, use the add method.
+        input : The IsoparametricCurveInput object that specifies the input needed to create the
+        isoparametric curve(s). This is created using the createInput method.
+        An array of sketch curves that were created as a result of the isoparametric
+        curve operation.
+        """
+        return [SketchCurve()]
+    @property
+    def count(self) -> int:
+        """
+        Returns the number of isoparametric curves in the sketch.
         """
         return int()
 
@@ -29175,6 +34624,17 @@ class SketchLines(core.Base):
         Returns a list of the sketch lines that were created to represent the polygon or null in the case of bad input.
         """
         return SketchLineList()
+    def addByMidpoint(self, midPoint: core.Base, secondPoint: core.Base) -> SketchLine:
+        """
+        Creates a sketch line where the first point is the midpoint and the second point
+        is one endpoint. The system automatically calculates the other endpoint to create
+        a line where the first point is exactly at the midpoint.
+        midPoint : The midpoint of the line. It can be a SketchPoint or Point3D object.
+        secondPoint : One endpoint of the line. It can be a SketchPoint or Point3D object.
+        The other endpoint will be calculated automatically.
+        Returns the newly created SketchLine object or null if the creation failed.
+        """
+        return SketchLine()
     @property
     def count(self) -> int:
         """
@@ -29317,27 +34777,23 @@ class SketchTextInput(core.Base):
         """
         return bool()
     @property
-    def height(self) -> float:
-        """
-        Gets and sets the height of the text in centimeters.
-        """
-        return float()
-    @height.setter
-    def height(self, value: float):
-        """
-        Gets and sets the height of the text in centimeters.
-        """
-        pass
-    @property
     def text(self) -> str:
         """
-        Gets and sets the text.
+        Gets and sets the displayed text. This represents the text that results from evaluating the input formatted text. For example,
+        if the formatted text is "'Length: ' + lengthParam", this property will return "Length: 3.0 in".
+        
+        Setting this property will overwrite any equation defined by the expression and replace it with simple text. Use the
+        expression property to be able to define a full expression.
         """
         return str()
     @text.setter
     def text(self, value: str):
         """
-        Gets and sets the text.
+        Gets and sets the displayed text. This represents the text that results from evaluating the input formatted text. For example,
+        if the formatted text is "'Length: ' + lengthParam", this property will return "Length: 3.0 in".
+        
+        Setting this property will overwrite any equation defined by the expression and replace it with simple text. Use the
+        expression property to be able to define a full expression.
         """
         pass
     @property
@@ -29398,6 +34854,46 @@ class SketchTextInput(core.Base):
         of the appropriate type and can be used to make any additional changes to the text.
         """
         return SketchTextDefinition()
+    @property
+    def expression(self) -> str:
+        """
+        Gets and sets the expression of the parameter that will be created when this SketchText is created. It can be a simple string
+        or it can be an expression that combines text with parameter values. Simple text must be enclosed within single quotes,
+        the same as it is required in the TEXT command dialog.
+        
+        An example of a valid expression is: "'Length: ' + lengthParam" and will result in "Length: 3.0 mm". The expression
+        result can be obtained by using the text property on the created SketchTextInput object.
+        """
+        return str()
+    @expression.setter
+    def expression(self, value: str):
+        """
+        Gets and sets the expression of the parameter that will be created when this SketchText is created. It can be a simple string
+        or it can be an expression that combines text with parameter values. Simple text must be enclosed within single quotes,
+        the same as it is required in the TEXT command dialog.
+        
+        An example of a valid expression is: "'Length: ' + lengthParam" and will result in "Length: 3.0 mm". The expression
+        result can be obtained by using the text property on the created SketchTextInput object.
+        """
+        pass
+    @property
+    def height2(self) -> core.ValueInput:
+        """
+        Gets and sets the ValueInput that defines the height of the text. This value is used to create a
+        parameter that will control the height of the text. It can be a value where it defines the height
+        of the text in centimeters, or it can be a string where it defines the equation of the parameter
+        and must evaluate to a valid length.
+        """
+        return core.ValueInput()
+    @height2.setter
+    def height2(self, value: core.ValueInput):
+        """
+        Gets and sets the ValueInput that defines the height of the text. This value is used to create a
+        parameter that will control the height of the text. It can be a value where it defines the height
+        of the text in centimeters, or it can be a string where it defines the equation of the parameter
+        and must evaluate to a valid length.
+        """
+        pass
 
 class SketchTexts(core.Base):
     """
@@ -29429,16 +34925,22 @@ class SketchTexts(core.Base):
         Returns the newly created SketchText object or null in the case of failure.
         """
         return SketchText()
-    def createInput2(self, formattedText: str, height: float) -> SketchTextInput:
+    def createInput3(self, expression: str, height: core.ValueInput) -> SketchTextInput:
         """
         Creates a SketchTextInput object that is used to define the additional input to create text. The SketchTextInput
         object is equivalent to the Sketch Text dialog in that it collects all of the input required to create sketch text.
-        You must call setAsFitOnPath, setAsAlongPath, or setAsMultiLine methods to define one of the three types of text and
-        can use other and define any
-        setAs Once the properties of the SketchTextInput object have been defined, use the add method
+        You must call setAsFitOnPath, setAsAlongPath, or setAsMultiLine methods to define one of the three types of text.
+        Once the properties of the SketchTextInput object have been defined, pass the SketchTextInput to the add method
         to create the sketch text.
-        formattedText : The text used for the sketch text. This is a simple string as no additional formatting is currently supported.
-        height : The height of the text in centimeters.
+        expression : This defines the expression of the parameter that will be created when this SketchText is created. It can be a simple string
+        or it can be an expression that combines text with parameter values. Simple text must be enclosed within single quotes,
+        the same as it is required in the TEXT command dialog.
+        
+        An example of a valid expression is: "'Length: ' + lengthParam" and will result in "Length: 3.0 mm". The expression
+        result can be obtained by using the text property on the created SketchTextInput object.
+        height : A ValueInput that defines the height of the text. This value is used to create a parameter that will control
+        the height of the text. It can be a value where it defines the height of the text in centimeters, or it can
+        be a string where it defines the equation of the parameter and must evaluate to a valid length.
         Returns a SketchTextInput object that can be used to set additional formatting and is used as input to the add method.
         """
         return SketchTextInput()
@@ -30617,269 +36119,6 @@ class SweepFeatures(core.Base):
         """
         return int()
 
-class TangentRelationship(core.Base):
-    """
-    A tangent relationship in a design.
-    """
-    def __init__(self):
-        pass
-    @staticmethod
-    def cast(arg) -> TangentRelationship:
-        return TangentRelationship()
-    def deleteMe(self) -> bool:
-        """
-        Deletes this tangent relationship.
-        Returns true if the delete is successful.
-        """
-        return bool()
-    def createForAssemblyContext(self, occurrence: Occurrence) -> TangentRelationship:
-        """
-        Creates or returns a proxy for the native object
-        - i.e. a new object that represents this object but adds the assembly context
-        defined by the input occurrence.
-        occurrence : The occurrence that defines the context to create the proxy in.
-        Returns the proxy object or null if this isn't the NativeObject.
-        """
-        return TangentRelationship()
-    @property
-    def parentComponent(self) -> Component:
-        """
-        Returns the parent component that owns this tangent relationship.
-        """
-        return Component()
-    @property
-    def name(self) -> str:
-        """
-        Gets and sets the name of the tangent relationship.
-        """
-        return str()
-    @name.setter
-    def name(self, value: str):
-        """
-        Gets and sets the name of the tangent relationship.
-        """
-        pass
-    @property
-    def faceOne(self) -> core.Base:
-        """
-        Gets and sets the first BRepFace object that will remain tangent to the set of specified tangent faces.
-        
-        To set this property, you need to position the timeline marker to immediately before this
-        tangent relationship. This can be accomplished using the following code:
-        thisTangentRelationship.timelineObject.rollTo(True)
-        """
-        return core.Base()
-    @faceOne.setter
-    def faceOne(self, value: core.Base):
-        """
-        Gets and sets the first BRepFace object that will remain tangent to the set of specified tangent faces.
-        
-        To set this property, you need to position the timeline marker to immediately before this
-        tangent relationship. This can be accomplished using the following code:
-        thisTangentRelationship.timelineObject.rollTo(True)
-        """
-        pass
-    @property
-    def tangentFaces(self) -> core.Base:
-        """
-        Gets and sets a single BRepFace object that is part of the body that faceOne will remain
-        tangent to. All of the faces of the body will be used when computing the tangent relationship.
-        
-        To set this property, you need to position the timeline marker to immediately before this
-        tangent relationship. This can be accomplished using the following code:
-        thisTangentRelationship.timelineObject.rollTo(True)
-        """
-        return core.Base()
-    @tangentFaces.setter
-    def tangentFaces(self, value: core.Base):
-        """
-        Gets and sets a single BRepFace object that is part of the body that faceOne will remain
-        tangent to. All of the faces of the body will be used when computing the tangent relationship.
-        
-        To set this property, you need to position the timeline marker to immediately before this
-        tangent relationship. This can be accomplished using the following code:
-        thisTangentRelationship.timelineObject.rollTo(True)
-        """
-        pass
-    @property
-    def timelineObject(self) -> TimelineObject:
-        """
-        Returns the timeline object associated with this tangent relationship.
-        """
-        return TimelineObject()
-    @property
-    def nativeObject(self) -> TangentRelationship:
-        """
-        The native object is the tangent relationship in the context of the
-        component it was created within.
-        
-        Returns null in the case where this object is not in the context of
-        an assembly but is already the native object.
-        """
-        return TangentRelationship()
-    @property
-    def assemblyContext(self) -> Occurrence:
-        """
-        Returns the assembly occurrence (i.e. the occurrence) of this object
-        in an assembly. This is only valid in the case where this is acting
-        as a proxy in an assembly. Returns null in the case where the object
-        is not in the context of an assembly but is already the native object.
-        """
-        return Occurrence()
-    @property
-    def isSuppressed(self) -> bool:
-        """
-        Gets and sets if this tangent relationship is suppressed.
-        """
-        return bool()
-    @isSuppressed.setter
-    def isSuppressed(self, value: bool):
-        """
-        Gets and sets if this tangent relationship is suppressed.
-        """
-        pass
-    @property
-    def attributes(self) -> core.Attributes:
-        """
-        Returns the collection of attributes associated with this tangent relationship.
-        """
-        return core.Attributes()
-    @property
-    def healthState(self) -> FeatureHealthStates:
-        """
-        Returns the current health state of the tangent relationship.
-        """
-        return FeatureHealthStates()
-    @property
-    def errorOrWarningMessage(self) -> str:
-        """
-        Returns the error or warning message in the case where the healthState property returns either
-        WarningFeatureHealthState or ErrorFeatureHealthState. Otherwise this property returns an empty string.
-        """
-        return str()
-    @property
-    def occurrenceOne(self) -> Occurrence:
-        """
-        Returns the first of two occurrences that this tangent relationship defines a relationship between.
-        """
-        return Occurrence()
-    @property
-    def occurrenceTwo(self) -> Occurrence:
-        """
-        Returns the second of two occurrences that this tangent relationship defines a relationship between.
-        """
-        return Occurrence()
-    @property
-    def entityToken(self) -> str:
-        """
-        Returns a token for the TangentRelationship object. This can be saved and used at a later
-        time with the Design.findEntityByToken method to get back the same tangent relationship.
-        
-        When using entity tokens it's important to understand that the token string returned for a
-        specific entity can be different over time. However, even if you have two different token
-        strings that were obtained from the same entity, when you use findEntityByToken they
-        will both return the same entity. Because of that you should never compare entity tokens
-        as way to determine what the token represents. Instead, you need to use the findEntityByToken
-        method to get the two entities identified by the tokens and then compare them.
-        """
-        return str()
-
-class TangentRelationshipInput(core.Base):
-    """
-    Defines all of the information required to create a new tangent relationship. This object provides
-    equivalent functionality to the Tangent Relationship command dialog in that it gathers the required
-    information to create a tangent relationship.
-    """
-    def __init__(self):
-        pass
-    @staticmethod
-    def cast(arg) -> TangentRelationshipInput:
-        return TangentRelationshipInput()
-    @property
-    def faceOne(self) -> BRepFace:
-        """
-        Gets and sets the first BRepFace object that will remain tangent to the set of specified tangent faces.
-        """
-        return BRepFace()
-    @faceOne.setter
-    def faceOne(self, value: BRepFace):
-        """
-        Gets and sets the first BRepFace object that will remain tangent to the set of specified tangent faces.
-        """
-        pass
-    @property
-    def tangentFaces(self) -> core.Base:
-        """
-        Gets and sets a single BRepFace object that is part of the body that faceOne will remain tangent to. All
-        of the faces of the body will be used when computing the tangent relationship.
-        """
-        return core.Base()
-    @tangentFaces.setter
-    def tangentFaces(self, value: core.Base):
-        """
-        Gets and sets a single BRepFace object that is part of the body that faceOne will remain tangent to. All
-        of the faces of the body will be used when computing the tangent relationship.
-        """
-        pass
-
-class TangentRelationships(core.Base):
-    """
-    The collection of Tangent Relationships in this component. This provides access to all existing tangent relationships
-    and supports the ability to create new tangent relationships.
-    """
-    def __init__(self):
-        pass
-    @staticmethod
-    def cast(arg) -> TangentRelationships:
-        return TangentRelationships()
-    def __len__(self) -> int:
-        return 0
-    def __getitem__(self, index: int) -> TangentRelationship:
-        return None
-    def __iter__(self) -> Iterator[TangentRelationship]:
-        return None
-    def item(self, index: int) -> TangentRelationship:
-        """
-        Function that returns the specified tangent relationship using an index into the collection.
-        index : The index of the item within the collection to return. The first item in the collection has an index of 0.
-        Returns the specified item or null if an invalid index was specified.
-        """
-        return TangentRelationship()
-    def createInput(self, faceOne: BRepFace, tangentFaces: core.Base) -> TangentRelationshipInput:
-        """
-        Creates a TangentRelationshipInput object, which is the API equivalent to the Tangent Relationship
-        command dialog. You use methods and properties on the returned class to set the desired options,
-        similar to providing input in the Tangent Relationship command dialog. Once the settings are defined
-        you call the TangentRelationships.add method passing in the TangentRelationshipInput object to create
-        the actual TangentRelationship.
-        faceOne : A BRepFace object that will remain tangent to the set of specified tangent faces.
-        tangentFaces : A single BRepFace object that is part of the body that faceOne will remain tangent to. All
-        of the faces of the body will be used when computing the tangent relationship.
-        Returns the TangentRelationshipInput object or null if the creation failed.
-        """
-        return TangentRelationshipInput()
-    def add(self, input: TangentRelationshipInput) -> TangentRelationship:
-        """
-        Creates a new tangent relationship between two components.
-        input : The TangentRelationshipInput object that defines the geometry and various inputs that fully define a tangent
-        relationship. A TangentRelationshipInput object is created using the TangentRelationships.createInput method.
-        Returns the newly created TangentRelationship or null in the case of failure.
-        """
-        return TangentRelationship()
-    def itemByName(self, name: str) -> TangentRelationship:
-        """
-        Function that returns the specified tangent relationship using a name.
-        name : The name of the item within the collection to return.
-        Returns the specified item or null if an invalid name was specified.
-        """
-        return TangentRelationship()
-    @property
-    def count(self) -> int:
-        """
-        Returns number of TangentRelationship objects in the collection.
-        """
-        return int()
-
 class TemporaryBRepManager(core.Base):
     """
     A utility object that provides functionality to create and manipulate B-Rep data outside
@@ -31012,7 +36251,7 @@ class TemporaryBRepManager(core.Base):
         return BRepBody()
     def createEllipticalCylinderOrCone(self, pointOne: core.Point3D, pointOneMajorRadius: float, pointOneMinorRadius: float, pointTwo: core.Point3D, pointTwoMajorRadius: float, majorAxisDirection: core.Vector3D) -> BRepBody:
         """
-        Creates a temporary elliptical solid cylinder or cone BrepBody object.
+        Creates a temporary elliptical solid cylinder or cone BRepBody object.
         pointOne : A point at one end of the cylinder or cone.
         pointOneMajorRadius : The major radius of the cylinder or cone at the point one end, in centimeters.
         pointOneMinorRadius : The minor radius of the cylinder or cone at the point one end, in centimeters.
@@ -31438,6 +36677,20 @@ class ThickenFeatureInput(core.Base):
         The CreationOccurrence is analogous to the active occurrence in the UI
         """
         pass
+    @property
+    def thickenType(self) -> ThickenTypes:
+        """
+        The thicken type used when creating a thicken.
+        The default value is SharpThickenType.
+        """
+        return ThickenTypes()
+    @thickenType.setter
+    def thickenType(self, value: ThickenTypes):
+        """
+        The thicken type used when creating a thicken.
+        The default value is SharpThickenType.
+        """
+        pass
 
 class ThickenFeatures(core.Base):
     """
@@ -31511,6 +36764,17 @@ class ThreadDataQuery(core.Base):
     @staticmethod
     def cast(arg) -> ThreadDataQuery:
         return ThreadDataQuery()
+    @staticmethod
+    def create(isTapered: bool = False) -> ThreadDataQuery:
+        """
+        Static method to create a new ThreadDataQuery object. The ThreadDataQuery object is a utility object that
+        provides methods to query for the valid thread definitions defined in Fusion. This object provides similar
+        functionality as the Thread and Hole command dialogs to find valid thread types, designations and classes which can
+        be used to create thread and tapped hole features.
+        isTapered : Specifies if you want to query for standard or tapered holes.
+        Returns a ThreadDataQuery object.
+        """
+        return ThreadDataQuery()
     def allSizes(self, threadType: str) -> list[str]:
         """
         Returns an array/list of all the available thread sizes for a given thread type. You can
@@ -31554,7 +36818,8 @@ class ThreadDataQuery(core.Base):
         return str()
     def recommendThreadData(self, modelDiameter: float, isInternal: bool, threadType: str) -> tuple[bool, str, str]:
         """
-        Method that gets the recommended thread data for a given model diameter.
+        Method that gets the recommended thread data for a given cylinder diameter. This method
+        is only valid for straight threads and will fail for tapered threads.
         modelDiameter : The diameter of the cylinder the thread will be placed on. The units are centimeters.
         isInternal : Indicates if the thread is an internal or external thread.
         threadType : Specifies the thread type to query the thread data.
@@ -31584,6 +36849,12 @@ class ThreadDataQuery(core.Base):
         Gets the default thread type for metric threads.
         """
         return str()
+    @property
+    def isTapered(self) -> bool:
+        """
+        Returns if this ThreadDataQuery was created to query for standard or tapered threads.
+        """
+        return bool()
 
 class ThreadFeatureInput(core.Base):
     """
@@ -31714,20 +36985,6 @@ class ThreadFeatureInput(core.Base):
         """
         pass
     @property
-    def isRightHanded(self) -> bool:
-        """
-        Gets and sets if the thread is right or left-handed thread. A value of true indicates a right-handed thread.
-        It defaults to true.
-        """
-        return bool()
-    @isRightHanded.setter
-    def isRightHanded(self, value: bool):
-        """
-        Gets and sets if the thread is right or left-handed thread. A value of true indicates a right-handed thread.
-        It defaults to true.
-        """
-        pass
-    @property
     def inputCylindricalFaces(self) -> core.ObjectCollection:
         """
         Gets and sets the cylindrical input faces.
@@ -31770,6 +37027,10 @@ class ThreadFeatures(core.Base):
     """
     Collection that provides access to all of the existing thread features in a component
     and supports the ability to create new thread features.
+    
+    The creation of a tapped hole also results in the creation of a thread feature. These
+    thread features are also returned by this collection, even though they aren't present
+    in the timeline and are represented by the hole feature.
     """
     def __init__(self):
         pass
@@ -31806,22 +37067,6 @@ class ThreadFeatures(core.Base):
         Returns the newly created ThreadFeatureInput object or null/None if the creation failed.
         """
         return ThreadFeatureInput()
-    def createThreadInfo(self, isInternal: bool, threadType: str, threadDesignation: str, threadClass: str) -> ThreadInfo:
-        """
-        Method that creates a new ThreadInfo object that can be used in creating thread features.
-        The ThreadInfo object that defines the type and size of the thread to create. When creating a thread, the type and size
-        of the thread is specified by referencing thread information defined in one of the XML files in the ThreadData folder within
-        the Fusion install folder. You can use the ThreadDataQuery object to query these XML files to find the specific thread you
-        want to create. The ThreadDataQuery object can be obtained by using the ThreadFeatures.threadDataQuery property.
-        isInternal : Input Boolean that indicates if the thread is an internal or external thread. A value of true indicates an internal thread.
-        threadType : Input string that defines the thread type.
-        threadDesignation : Input string that contains the thread designation.
-        This is input as the full thread designation that will be used in a drawing for the thread call-out.
-        The nominal size and pitch information are extracted from the designation.
-        threadClass : Input string that defines the thread class.
-        Returns the newly created ThreadInfo object or null if the creation failed.
-        """
-        return ThreadInfo()
     def add(self, input: ThreadFeatureInput) -> ThreadFeature:
         """
         Creates a new thread feature.
@@ -31844,14 +37089,6 @@ class ThreadFeatures(core.Base):
         The number of thread features in the collection.
         """
         return int()
-    @property
-    def threadDataQuery(self) -> ThreadDataQuery:
-        """
-        Property that returns the ThreadDataQuery object. When creating a thread, the type and size of the thread
-        is specified by referencing thread information defined in one of the XML files in the ThreadData folder.
-        The ThreadDataQuery is an object that supports methods to query the existing threads defined in these files.
-        """
-        return ThreadDataQuery()
 
 class ThreadInfo(core.Base):
     """
@@ -31865,6 +37102,47 @@ class ThreadInfo(core.Base):
     @staticmethod
     def cast(arg) -> ThreadInfo:
         return ThreadInfo()
+    @staticmethod
+    def create(isTapered: bool, isInternal: bool, threadType: str, threadDesignation: str, threadClass: str, isRightHanded: bool) -> ThreadInfo:
+        """
+        This method creates a new ThreadInfo object that can be used to create a thread or tapped-hole feature.
+        The ThreadInfo object defines the type and size of the thread to create. When creating a thread, the
+        type and size of the thread are defined by specifying the thread type, designation, and class. Fusion
+        uses this information to look up the full details of the thread in tables delivered with Fusion.
+        The ThreadDataQuery object can be used to determine valid input for this information.
+        
+        The thread type implicitly defines if the thread is standard or tapered. Tapered threads can only be used
+        when creating tapped holes and are not supported for thread features.
+        isTapered : Input Boolean that indicates if the thread is straight or tapered.
+        isInternal : Input Boolean that indicates if the thread is internal or external. A value of true indicates an internal thread.
+        When the ThreadInfo is used to create a tapped hole, this value is ignored since it is always an internal thread.
+        threadType : Input string that defines the thread type.
+        threadDesignation : Input string that contains the thread designation.
+        threadClass : Input string that defines the thread class. This argument is ignored for tapered threads, so an empty string can be used.
+        isRightHanded : Input boolean that defines if the thread is right or left-handed.
+        Returns the newly created ThreadInfo object or null if the creation failed.
+        """
+        return ThreadInfo()
+    def redefine(self, isTapered: bool, isInternal: bool, threadType: str, threadDesignation: str, threadClass: str, isRightHanded: bool) -> bool:
+        """
+        Method that redefines an existing ThreadInfo object. This is typically used to change the thread of an existing
+        thread or tapped hole.
+        
+        The ThreadInfo object defines the type and size of a thread by specifying the thread type, designation, and class.
+        Fusion uses this information to look up the full details of the thread in tables delivered with Fusion. The
+        ThreadDataQuery object can be used to determine valid input for this information.
+        
+        Tapered threads can only be used when creating or editing tapped holes and are not supported for thread features.
+        isTapered : Input Boolean that indicates if the thread is straight or tapered.
+        isInternal : Input Boolean that indicates if the thread is internal or external. A value of true indicates an internal thread.
+        This value is ignored when the ThreadInfo is used for a tapped hole since they are always internal.
+        threadType : Input string that defines the thread type.
+        threadDesignation : Input string that defines the thread designation.
+        threadClass : Input string that defines the thread class. This argument is ignored for tapered threads.
+        isRightHanded : Input Boolean that specifies if the thread is straight or tapered.
+        Returns true if the redefinition was successful.
+        """
+        return bool()
     @property
     def threadType(self) -> str:
         """
@@ -31880,7 +37158,7 @@ class ThreadInfo(core.Base):
     @property
     def threadSize(self) -> str:
         """
-        Returns the string that defines the thread size. This is
+        Returns the string that defines the thread size.
         """
         return str()
     @property
@@ -31949,6 +37227,67 @@ class ThreadInfo(core.Base):
     def pitchDiameter(self) -> float:
         """
         Returns the value that defines the pitch diameter. The units are centimeters.
+        """
+        return float()
+    @property
+    def isRightHanded(self) -> bool:
+        """
+        Gets and sets if the thread is right or left-handed thread. A value of true indicates a right-handed thread.
+        It defaults to true.
+        """
+        return bool()
+    @isRightHanded.setter
+    def isRightHanded(self, value: bool):
+        """
+        Gets and sets if the thread is right or left-handed thread. A value of true indicates a right-handed thread.
+        It defaults to true.
+        """
+        pass
+    @property
+    def isTapered(self) -> bool:
+        """
+        Indicates if this ThreadInfo object defines a standard or tapered thread.
+        """
+        return bool()
+    @property
+    def taperAngle(self) -> float:
+        """
+        Returns the angle of the tapered thread in centimeters.
+        
+        This is only valid when isTapered is true.
+        """
+        return float()
+    @property
+    def taperTapDrillDiameter(self) -> float:
+        """
+        Returns the Diameter of the tap drill required to create this tap.
+        
+        This is only valid when isTapered is true.
+        """
+        return float()
+    @property
+    def taperUsefulThreadLength(self) -> float:
+        """
+        Returns the useful length of threads for a tapered thread in centimeters.
+        
+        This is only valid when isTapered is true.
+        """
+        return float()
+    @property
+    def taperWrenchMakeupInternalDiameter(self) -> float:
+        """
+        The wrench makeup internal diameter for a taper pipe thread, also known as the effective thread diameter,
+        is the diameter at the point where the thread engagement occurs when the pipe is tightened with a wrench.
+        
+        This is only valid when isTapered is true.
+        """
+        return float()
+    @property
+    def taperThreadHeight(self) -> float:
+        """
+        Returns the height of a tapered thread in centimeters.
+        
+        This is only valid when isTapered is true.
         """
         return float()
 
@@ -32423,14 +37762,14 @@ class TriangleMeshCalculator(core.Base):
     @property
     def maxSideLength(self) -> float:
         """
-        Specifies the maximum side of any triangle in the mesh. A value of 0 (the default)
+        Specifies the maximum side length of any triangle in the mesh. A value of 0 (the default)
         indicates that no maximum length is specified. The value is specified in centimeters.
         """
         return float()
     @maxSideLength.setter
     def maxSideLength(self, value: float):
         """
-        Specifies the maximum side of any triangle in the mesh. A value of 0 (the default)
+        Specifies the maximum side length of any triangle in the mesh. A value of 0 (the default)
         indicates that no maximum length is specified. The value is specified in centimeters.
         """
         pass
@@ -32492,14 +37831,14 @@ class TriangleMeshList(core.Base):
         """
         Returns the specified triangle meshes.
         index : The index of the mesh to return where the first item has an index of 0.
-        Returns the specified mesh or null in the case of invalid index.
+        Returns the specified mesh or null in the case of an invalid index.
         """
         return TriangleMesh()
     @property
     def bestMesh(self) -> TriangleMesh:
         """
         Returns the mesh with the tightest surface tolerance. This can return null
-        in the case the list is empty, i.e. Count is 0.
+        in the case the list is empty, i.e., Count is 0.
         """
         return TriangleMesh()
     @property
@@ -32715,14 +38054,14 @@ class TSplineBody(core.Base):
     @property
     def name(self) -> str:
         """
-        Gets and sets the name of the body. If setting this property, there is the side-effect
+        Gets and sets the name of the body. If setting this property, there is a side effect
         that the B-Rep body created from this T-Spline body is also renamed.
         """
         return str()
     @name.setter
     def name(self, value: str):
         """
-        Gets and sets the name of the body. If setting this property, there is the side-effect
+        Gets and sets the name of the body. If setting this property, there is a side effect
         that the B-Rep body created from this T-Spline body is also renamed.
         """
         pass
@@ -32742,7 +38081,7 @@ class TSplineBody(core.Base):
         specific entity can be different over time. However, even if you have two different token
         strings that were obtained from the same entity, when you use findEntityByToken they
         will both return the same entity. Because of that you should never compare entity tokens
-        as way to determine what the token represents. Instead, you need to use the findEntityByToken
+        as a way to determine what the token represents. Instead, you need to use the findEntityByToken
         method to get the two entities identified by the tokens and then compare them.
         """
         return str()
@@ -32841,7 +38180,7 @@ class UnstitchFeatures(core.Base):
 
 class UntrimFeatureInput(core.Base):
     """
-    This class defines the methods and properties that pertain to the definition of a Untrim feature.
+    This class defines the methods and properties that pertain to the definition of an Untrim feature.
     """
     def __init__(self):
         pass
@@ -32927,7 +38266,7 @@ class UntrimFeatures(core.Base):
         return UntrimFeature()
     def createInputFromFaces(self, faces: list[BRepFace], untrimLoopType: UntrimLoopTypes, extensionDistance: core.ValueInput = None) -> UntrimFeatureInput:
         """
-        Creates a UntrimFeatureInput object that defines the input needed to create a untrim feature. Use the input
+        Creates an UntrimFeatureInput object that defines the input needed to create an untrim feature. Use the input
         object to define the input to create the desired feature and then use the Add method, passing in the UntrimFeatureInput object.
         faces : An array of BRepFace objects that will have the loops of the specified type removed.
         Only loops that do not have a connected face can be removed (the edges in the loop have a single face).
@@ -32939,7 +38278,7 @@ class UntrimFeatures(core.Base):
         return UntrimFeatureInput()
     def createInputFromLoops(self, loops: list[BRepLoop], extensionDistance: core.ValueInput = None) -> UntrimFeatureInput:
         """
-        Creates a UntrimFeatureInput object that defines the input needed to create a untrim feature. Use the input
+        Creates an UntrimFeatureInput object that defines the input needed to create an untrim feature. Use the input
         object to define the input to create the desired feature and then use the Add method, passing in the UntrimFeatureInput object.
         loops : Input the entities that define loops to remove.
         Only loops that do not have a connected face can be removed (the edges in the loop have a single face)
@@ -33014,20 +38353,25 @@ class UserParameters(core.Base):
         for lengths. If the "units" argument is a valid angle unit the value will be interpreted as 5 radians.
         
         If the ValueInput was created using a string, the string is used as-is for the expression of the parameter.
-        This means if there are units as part of the string it must evaluate to the same unit type as that specified
-        by the "units" argument and if no units are specified it will use the current default units specified for
-        the current document. For example, if the ValueInput was created with the string "5 in", then the "units"
-        argument must define any valid length so they are compatible. If the ValueInput was created with the string "5",
-        any unit type can be used and the result will be 5 of that unit.
+        For value parameters, this means if there are units as part of the string, it must evaluate to the same unit
+        type as that specified by the "units" argument and if no units are specified it will use the current default
+        units specified for the current document. For example, if the ValueInput was created with the string "5 in",
+        then the "units" argument must define any valid length so they are compatible. If the ValueInput was created
+        with the string "5", any unit type can be used and the result will be 5 of that unit.
+        
+        If the "units" argument is "Text" then a text parameter will be created using the value provided as the expression.
         
         When using a ValueInput created using a string, it's the same as creating a parameter in the user-interface.
         You can specify any valid expression, i.e. "5", "5 in", "5 in / 2", "5 + Length", etc. and you can choose
         from many different types of units. The only requirement is that the units must match in type. For example,
         they must both be lengths, or they must both be angles.
-        units : The units to use for the value of the parameter.
-        Units specified must match the units specified (if any) in the ValueInput object.
         
-        To create a parameter with no units you can specify either an empty string.
+        When creating a Boolean parameter, you should use the createByBoolean method of the ValueInput object.
+        units : The units to use for the value of the parameter. The use of any of the measurement units will result in the
+        creation of a numeric parameter. The units specified must match the units specified (if any) in the ValueInput object.
+        
+        To create a parameter with no units, you can specify an empty string as the units, which will also create a
+        numeric parameter. To create a text parameter, use "Text" as the unit type.
         comment : The comment to display in the parameters dialog. Specify an empty string ("") for no comment
         Returns the newly created UserParameter or null if the creation failed.
         """
@@ -33051,16 +38395,24 @@ class UserParameters(core.Base):
         Function that imports a list of user parameters from a csv file.
         
         The format of the csv file is as follows:
-        It must have at least two rows - Header followed by a row of parameter.
-        It must be encoded in UTF8 format.
-        It must contain at least six columns - name, unit, expression, value, comment, and favorite
-        where favorite is either true or false.
-        The columns must only have a comma delimiter.
-        Any locale will work but no thousands.
-        expression column support double quotes.
-        comment can either be single line or multi line. If multi line, it must be in double quotes.
         
-        Here is an example of a csv file with two rows
+        - It must have at least two rows - Header followed by a row of parameters.
+        
+        - It must be encoded in UTF8 format.
+        
+        - It must contain at least six columns - name, unit, expression, value, comment, and favorite,
+        where favorite is either true or false.
+        
+        - The columns must only have a comma delimiter.
+        
+        - Any locale will work but no thousands separators.
+        
+        - The expression column supports double quotes.
+        
+        - The comment can either be single line or multi-line. If multi-line, it must be in double quotes.
+        
+        Here is an example of a csv file with two rows:
+        
         Name,Unit,Expression,Value,Comments,Favorite
         p1,mm,32 mm,32,the first parameter,FALSE
         
@@ -33088,7 +38440,7 @@ class VolumetricCustomFeatureInput(core.Base):
     ! This is in preview state; please see the help for more info
     !!!!! Warning !!!!!
     
-    A input object for creating a volumetric custom feature.
+    An input object for creating a volumetric custom feature.
     """
     def __init__(self):
         pass
@@ -33175,7 +38527,7 @@ class VolumetricModelToMeshFeatureInput(core.Base):
     ! This is in preview state; please see the help for more info
     !!!!! Warning !!!!!
     
-    A input object for creating a volumetric model to mesh feature.
+    An input object for creating a volumetric model to mesh feature.
     """
     def __init__(self):
         pass
@@ -33273,14 +38625,14 @@ class VolumetricModelToMeshFeatureInput(core.Base):
     @property
     def smallShellThreshold(self) -> core.ValueInput:
         """
-        Gets and Sets the small mesh threshold used to determine if a mesh shell is considered small.
+        Gets and sets the small mesh threshold used to determine if a mesh shell is considered small.
         The value is a fraction of the total mesh area and must be between 0 and 1. The default is 0.02.
         """
         return core.ValueInput()
     @smallShellThreshold.setter
     def smallShellThreshold(self, value: core.ValueInput):
         """
-        Gets and Sets the small mesh threshold used to determine if a mesh shell is considered small.
+        Gets and sets the small mesh threshold used to determine if a mesh shell is considered small.
         The value is a fraction of the total mesh area and must be between 0 and 1. The default is 0.02.
         """
         pass
@@ -33447,6 +38799,31 @@ class AccessibilityAnalysis(Analysis):
     def cast(arg) -> AccessibilityAnalysis:
         return AccessibilityAnalysis()
 
+class AllExtentDefinition(ExtentDefinition):
+    """
+    Defines the inputs for an AllExtentDefinition object. This is used when defining the extent
+    for a hole feature. Some other features, like extrude, support defining the extents independently
+    in both directions. In that case you need to create a ThroughAllExtentDefinition and apply it for
+    the extent direction you want a through all type.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> AllExtentDefinition:
+        return AllExtentDefinition()
+    @property
+    def direction(self) -> ExtentDirections:
+        """
+        Gets and sets the direction of the extent.
+        """
+        return ExtentDirections()
+    @direction.setter
+    def direction(self, value: ExtentDirections):
+        """
+        Gets and sets the direction of the extent.
+        """
+        pass
+
 class AlongEdgeRipFeatureDefinition(RipFeatureDefinition):
     """
     The definition for an along edge rip.
@@ -33540,7 +38917,7 @@ class AlongPathTextDefinition(SketchTextDefinition):
 
 class AngleExtentDefinition(ExtentDefinition):
     """
-    Defines the inputs for a AngleExtentDefinition object.
+    Defines the inputs for an AngleExtentDefinition object.
     This feature extent is defined by an angle as well as whether the extent is symmetric or only in one direction.
     If the extent is not symmetric, a positive or negative angle can be used to control the direction.
     """
@@ -33573,10 +38950,6 @@ class AngleExtentDefinition(ExtentDefinition):
 
 class Arrange2DDefinition(ArrangeDefinition):
     """
-    !!!!! Warning !!!!!
-    ! This is in preview state; please see the help for more info
-    !!!!! Warning !!!!!
-    
     This object defines all of the settings associated with a 2D arrangement. This is used
     for both rectangular and true shape arrangements, but some properties are ignored
     in some cases.
@@ -33651,10 +39024,6 @@ class Arrange2DDefinition(ArrangeDefinition):
 
 class Arrange2DEnvelopeInput(ArrangeEnvelopeInput):
     """
-    !!!!! Warning !!!!!
-    ! This is in preview state; please see the help for more info
-    !!!!! Warning !!!!!
-    
     The Arrange2DEnvelopeInput is a base class used to define the various settings common to
     the envelopes defined by a plane or by profiles and planar faces.
     """
@@ -33666,24 +39035,20 @@ class Arrange2DEnvelopeInput(ArrangeEnvelopeInput):
     @property
     def isFlipped(self) -> bool:
         """
-        Specifies if the arrangement of objects is so they are above or X-Y plane of the envelope.
+        Specifies if the arrangement of objects is so they are above the X-Y plane of the envelope.
         Defaults to false so the objects are above the construction plane, profile or face.
         """
         return bool()
     @isFlipped.setter
     def isFlipped(self, value: bool):
         """
-        Specifies if the arrangement of objects is so they are above or X-Y plane of the envelope.
+        Specifies if the arrangement of objects is so they are above the X-Y plane of the envelope.
         Defaults to false so the objects are above the construction plane, profile or face.
         """
         pass
 
 class Arrange3DDefinition(ArrangeDefinition):
     """
-    !!!!! Warning !!!!!
-    ! This is in preview state; please see the help for more info
-    !!!!! Warning !!!!!
-    
     This object defines all of the settings associated with a 3D arrangement.
     """
     def __init__(self):
@@ -33694,10 +39059,6 @@ class Arrange3DDefinition(ArrangeDefinition):
 
 class Arrange3DEnvelopeDefinition(ArrangeEnvelopeDefinition):
     """
-    !!!!! Warning !!!!!
-    ! This is in preview state; please see the help for more info
-    !!!!! Warning !!!!!
-    
     The Arrange3DEnvelope object represents an 3D arrange envelope.
     """
     def __init__(self):
@@ -33721,21 +39082,21 @@ class Arrange3DEnvelopeDefinition(ArrangeEnvelopeDefinition):
     def length(self) -> ModelParameter:
         """
         Returns the parameter that controls the length of the envelope volume. This defines the
-        You can modify the value by using the properties on the returned ModelParameter object.
+        size of the envelope volume. You can modify the value by using the properties on the returned ModelParameter object.
         """
         return ModelParameter()
     @property
     def width(self) -> ModelParameter:
         """
         Returns the parameter that controls the width of the envelope volume. This defines the
-        You can modify the value by using the properties on the returned ModelParameter object.
+        size of the envelope volume. You can modify the value by using the properties on the returned ModelParameter object.
         """
         return ModelParameter()
     @property
     def height(self) -> ModelParameter:
         """
         Returns the parameter that controls the height of the envelope volume. This defines the
-        You can modify the value by using the properties on the returned ModelParameter object.
+        size of the envelope volume. You can modify the value by using the properties on the returned ModelParameter object.
         """
         return ModelParameter()
     @property
@@ -33765,10 +39126,6 @@ class Arrange3DEnvelopeDefinition(ArrangeEnvelopeDefinition):
 
 class Arrange3DEnvelopeInput(ArrangeEnvelopeInput):
     """
-    !!!!! Warning !!!!!
-    ! This is in preview state; please see the help for more info
-    !!!!! Warning !!!!!
-    
     This object is used to specify the input needed to define a 3D envelope.
     """
     def __init__(self):
@@ -33941,10 +39298,6 @@ class Arrange3DEnvelopeInput(ArrangeEnvelopeInput):
 
 class Arrange3DResultEnvelope(ArrangeResultEnvelope):
     """
-    !!!!! Warning !!!!!
-    ! This is in preview state; please see the help for more info
-    !!!!! Warning !!!!!
-    
     Represents the arrange envelope result of a 3D arrange feature.
     """
     def __init__(self):
@@ -33962,10 +39315,6 @@ class Arrange3DResultEnvelope(ArrangeResultEnvelope):
 
 class ArrangeDefinition2DInput(ArrangeDefinitionInput):
     """
-    !!!!! Warning !!!!!
-    ! This is in preview state; please see the help for more info
-    !!!!! Warning !!!!!
-    
     This object defines all of the settings associated with a 2D arrangement. This is used
     for both rectangular and true shape arrangements, but some properties are ignored
     in some cases.
@@ -33994,7 +39343,7 @@ class ArrangeDefinition2DInput(ArrangeDefinitionInput):
         
         This value will become a parameter when the arrangement is created. When created with a real value it must be a whole number.
         You can also use a string where it is interpreted the same as when entered in the command dialog. The expression must result
-        in a unitless whole number. It's also possible to use an equation like "Total / 4" where "Total" is an existing parameter and be
+        in a unitless whole number. It's also possible to use an equation like "Total / 4" where "Total" is an existing parameter and must be
         evenly divided by four.
         """
         return core.ValueInput()
@@ -34005,7 +39354,7 @@ class ArrangeDefinition2DInput(ArrangeDefinitionInput):
         
         This value will become a parameter when the arrangement is created. When created with a real value it must be a whole number.
         You can also use a string where it is interpreted the same as when entered in the command dialog. The expression must result
-        in a unitless whole number. It's also possible to use an equation like "Total / 4" where "Total" is an existing parameter and be
+        in a unitless whole number. It's also possible to use an equation like "Total / 4" where "Total" is an existing parameter and must be
         evenly divided by four.
         """
         pass
@@ -34049,8 +39398,9 @@ class ArrangeDefinition2DInput(ArrangeDefinitionInput):
         
         This value will become a parameter when the arrangement is created. If the ValueInput is created using a
         real number it is in radians. If you use a string, it is evaluated the same as a value would be in the command
-        dialog and uses degrees as the units. For example, if you specify "45" it will result in a 45 degree  grain
-        direction. Using a string you can also define an equation for the expression, "PartAngle / 2" where "PartAngle"
+        dialog and uses degrees as the units. For example, if you specify "45" it will result in a 45 degree grain
+        direction. Using a string you can also define an equation for the expression, such as "PartAngle / 2" where "PartAngle"
+        is an existing parameter.
         """
         return core.ValueInput()
     @grainDirection.setter
@@ -34061,17 +39411,14 @@ class ArrangeDefinition2DInput(ArrangeDefinitionInput):
         
         This value will become a parameter when the arrangement is created. If the ValueInput is created using a
         real number it is in radians. If you use a string, it is evaluated the same as a value would be in the command
-        dialog and uses degrees as the units. For example, if you specify "45" it will result in a 45 degree  grain
-        direction. Using a string you can also define an equation for the expression, "PartAngle / 2" where "PartAngle"
+        dialog and uses degrees as the units. For example, if you specify "45" it will result in a 45 degree grain
+        direction. Using a string you can also define an equation for the expression, such as "PartAngle / 2" where "PartAngle"
+        is an existing parameter.
         """
         pass
 
 class ArrangeDefinition3DInput(ArrangeDefinitionInput):
     """
-    !!!!! Warning !!!!!
-    ! This is in preview state; please see the help for more info
-    !!!!! Warning !!!!!
-    
     This object defines all of the settings associated with a 3D arrangement.
     """
     def __init__(self):
@@ -34082,10 +39429,6 @@ class ArrangeDefinition3DInput(ArrangeDefinitionInput):
 
 class ArrangeFeature(Feature):
     """
-    !!!!! Warning !!!!!
-    ! This is in preview state; please see the help for more info
-    !!!!! Warning !!!!!
-    
     Represents an Arrange feature within a component.
     """
     def __init__(self):
@@ -34151,7 +39494,7 @@ class ArrangeFeature(Feature):
     def nativeObject(self) -> ArrangeFeature:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -34163,16 +39506,13 @@ class ArrangeFeature(Feature):
         and the current localized name is also provided. The values follow the API rules, where all length values are in centimeters,
         and areas are in square centimeters. The returned JSON may include additional values in the future, so code consuming this
         output should be tolerant of new fields.
-        A JSON string containing the arrangement statistics, or an empty string if the operation fails.
+        
+        Returns an empty string in the case it failed to get any statistics.
         """
         return str()
 
 class ArrangePlaneEnvelopeDefinition(ArrangeEnvelopeDefinition):
     """
-    !!!!! Warning !!!!!
-    ! This is in preview state; please see the help for more info
-    !!!!! Warning !!!!!
-    
     The ArrangePlaneEnvelope object represents an arrange envelope defined
     by a construction plane. This defines the settings of the envelope and the
     EnvelopeResult provides access to the resulting envelope and its contents.
@@ -34198,14 +39538,14 @@ class ArrangePlaneEnvelopeDefinition(ArrangeEnvelopeDefinition):
     def length(self) -> ModelParameter:
         """
         Returns the parameter that controls the length of the envelope frame. This defines the
-        You can modify the value by using the properties on the returned ModelParameter object.
+        size of the envelope frame. You can modify the value by using the properties on the returned ModelParameter object.
         """
         return ModelParameter()
     @property
     def width(self) -> ModelParameter:
         """
         Returns the parameter that controls the width of the envelope frame. This defines the
-        You can modify the value by using the properties on the returned ModelParameter object.
+        size of the envelope frame. You can modify the value by using the properties on the returned ModelParameter object.
         """
         return ModelParameter()
     @property
@@ -34242,10 +39582,6 @@ class ArrangePlaneEnvelopeDefinition(ArrangeEnvelopeDefinition):
 
 class ArrangePlaneResultEnvelope(ArrangeResultEnvelope):
     """
-    !!!!! Warning !!!!!
-    ! This is in preview state; please see the help for more info
-    !!!!! Warning !!!!!
-    
     Represents the arrange result of a single envelope that is defined on a plane.
     """
     def __init__(self):
@@ -34256,7 +39592,7 @@ class ArrangePlaneResultEnvelope(ArrangeResultEnvelope):
     @property
     def boundingBox(self) -> core.BoundingBox2D:
         """
-        The bounding box of the this result. The coordinates are defined
+        The bounding box of this result. The coordinates are defined
         using the coordinate system of the construction plane used to
         define the envelope.
         """
@@ -34264,10 +39600,6 @@ class ArrangePlaneResultEnvelope(ArrangeResultEnvelope):
 
 class ArrangeProfileOrFaceEnvelopeDefinition(ArrangeEnvelopeDefinition):
     """
-    !!!!! Warning !!!!!
-    ! This is in preview state; please see the help for more info
-    !!!!! Warning !!!!!
-    
     The ArrangeProfileEnvelopeDefinition object represents envelopes defined by a profile or
     face in an Arrange feature. This defines the settings of the envelope and the
     EnvelopeResult provides access to the resulting envelope and its contents.
@@ -34296,10 +39628,6 @@ class ArrangeProfileOrFaceEnvelopeDefinition(ArrangeEnvelopeDefinition):
 
 class ArrangeProfileOrFaceResultEnvelope(ArrangeResultEnvelope):
     """
-    !!!!! Warning !!!!!
-    ! This is in preview state; please see the help for more info
-    !!!!! Warning !!!!!
-    
     Represents the arrange envelope result of a profile or face defined arrange feature.
     """
     def __init__(self):
@@ -34313,6 +39641,132 @@ class ArrangeProfileOrFaceResultEnvelope(ArrangeResultEnvelope):
         Returns the Profile or BRepFace object that defines the shape of this result envelope.
         """
         return core.Base()
+
+class AsymmetricFilletEdgeSet(FilletEdgeSet):
+    """
+    Provides access to the edges and the parameters associated with an asymmetric fillet.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> AsymmetricFilletEdgeSet:
+        return AsymmetricFilletEdgeSet()
+    @property
+    def edges(self) -> core.ObjectCollection:
+        """
+        Gets and sets an ObjectCollection containing the BRepEdge, BRepFace, and Feature that are filleted.
+        If the isTangentChain argument is true additional edges or faces may also get filleted if they are tangentially
+        connected to any of the input edges or faces.
+        
+        To use this property, you need to position the timeline marker to immediately before this feature.
+        This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
+        """
+        return core.ObjectCollection()
+    @edges.setter
+    def edges(self, value: core.ObjectCollection):
+        """
+        Gets and sets an ObjectCollection containing the BRepEdge, BRepFace, and Feature that are filleted.
+        If the isTangentChain argument is true additional edges or faces may also get filleted if they are tangentially
+        connected to any of the input edges or faces.
+        
+        To use this property, you need to position the timeline marker to immediately before this feature.
+        This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
+        """
+        pass
+    @property
+    def offsetOne(self) -> ModelParameter:
+        """
+        Returns the model parameter that controls the offset distance of the fillet in the first direction
+        You can edit the offset by using the properties on the returned ModelParameter object.
+        """
+        return ModelParameter()
+    @property
+    def offsetTwo(self) -> ModelParameter:
+        """
+        Returns the model parameter that controls the offset distance of the fillet in the second direction
+        You can edit the offset by using the properties on the returned ModelParameter object.
+        """
+        return ModelParameter()
+    @property
+    def isFlipped(self) -> bool:
+        """
+        Gets and sets if offsets are reversed. If false, offsetOne is applied to the first direction
+        and offsetTwo to the second direction. Setting to true reverses this.
+        
+        To use this property, you need to position the timeline marker to immediately before this feature.
+        This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
+        """
+        return bool()
+    @isFlipped.setter
+    def isFlipped(self, value: bool):
+        """
+        Gets and sets if offsets are reversed. If false, offsetOne is applied to the first direction
+        and offsetTwo to the second direction. Setting to true reverses this.
+        
+        To use this property, you need to position the timeline marker to immediately before this feature.
+        This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
+        """
+        pass
+
+class AsymmetricFilletEdgeSetInput(FilletEdgeSetInput):
+    """
+    Provides access to the edges and the parameters associated with an asymmetric fillet.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> AsymmetricFilletEdgeSetInput:
+        return AsymmetricFilletEdgeSetInput()
+    @property
+    def offsetOne(self) -> core.ValueInput:
+        """
+        Gets and sets a ValueInput object that defines the first offset of the asymmetric fillet.
+        If the ValueInput uses a real value then it is interpreted as centimeters. If it is a string
+        then the units can be defined as part of the string (i.e. "2 in") or if no units are
+        specified it is interpreted using the current document units for length.
+        """
+        return core.ValueInput()
+    @offsetOne.setter
+    def offsetOne(self, value: core.ValueInput):
+        """
+        Gets and sets a ValueInput object that defines the first offset of the asymmetric fillet.
+        If the ValueInput uses a real value then it is interpreted as centimeters. If it is a string
+        then the units can be defined as part of the string (i.e. "2 in") or if no units are
+        specified it is interpreted using the current document units for length.
+        """
+        pass
+    @property
+    def offsetTwo(self) -> core.ValueInput:
+        """
+        Gets and sets a ValueInput object that defines the second offset value of the asymmetric fillet.
+        If the ValueInput uses a real value then it is interpreted as centimeters. If it is a string
+        then the units can be defined as part of the string (i.e. "2 in") or if no units are
+        specified it is interpreted using the current document units for length.
+        """
+        return core.ValueInput()
+    @offsetTwo.setter
+    def offsetTwo(self, value: core.ValueInput):
+        """
+        Gets and sets a ValueInput object that defines the second offset value of the asymmetric fillet.
+        If the ValueInput uses a real value then it is interpreted as centimeters. If it is a string
+        then the units can be defined as part of the string (i.e. "2 in") or if no units are
+        specified it is interpreted using the current document units for length.
+        """
+        pass
+    @property
+    def isFlipped(self) -> bool:
+        """
+        Gets and sets if offsets are reversed. If false, offsetOne is applied to the first direction
+        and offsetTwo to the second direction. Setting to true reverses this.
+        """
+        return bool()
+    @isFlipped.setter
+    def isFlipped(self, value: bool):
+        """
+        Gets and sets if offsets are reversed. If false, offsetOne is applied to the first direction
+        and offsetTwo to the second direction. Setting to true reverses this.
+        """
+        pass
 
 class AtCenterHolePositionDefinition(HolePositionDefinition):
     """
@@ -34710,7 +40164,7 @@ class BossFeature(Feature):
     def createForAssemblyContext(self, occurrence: Occurrence) -> BossFeature:
         """
         Creates or returns a proxy for the native object
-        - i.e. a new object that represents this object but adds the assembly context
+        - i.e., a new object that represents this object but adds the assembly context
         defined by the input occurrence.
         occurrence : The occurrence that defines the context to create the proxy in.
         Returns the proxy object or null if this isn't the NativeObject.
@@ -35526,7 +40980,7 @@ class CircularPatternConstraint(GeometricConstraint):
     def nativeObject(self) -> CircularPatternConstraint:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -35553,9 +41007,13 @@ class CircularPatternFeature(Feature):
     @property
     def inputEntities(self) -> core.ObjectCollection:
         """
-        Gets and sets the input entities. The collection can contain faces, features, bodies or occurrences.
-        All of the entities must be of a single type. For example, it can't contain features and occurrences
-        but only features or occurrences.
+        Gets and sets the entities to pattern using an ObjectCollection. The collection can contain BRepFace,
+        PartFeature, BRepBody, or Occurrence objects. All of the entities provided must be the same type.
+        For example, it must contain only bodies and can't contain both bodies and faces.
+        
+        ConstructionPoint, ConstructionAxis, and ConstructionPlane objects can also be patterned. When patterning any
+        construction goemetry, only one entity can be patterned at a time, so the ObjectCollection will always contain a
+        single entity
         
         To use this property, you need to position the timeline marker to immediately before this feature.
         This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
@@ -35564,9 +41022,13 @@ class CircularPatternFeature(Feature):
     @inputEntities.setter
     def inputEntities(self, value: core.ObjectCollection):
         """
-        Gets and sets the input entities. The collection can contain faces, features, bodies or occurrences.
-        All of the entities must be of a single type. For example, it can't contain features and occurrences
-        but only features or occurrences.
+        Gets and sets the entities to pattern using an ObjectCollection. The collection can contain BRepFace,
+        PartFeature, BRepBody, or Occurrence objects. All of the entities provided must be the same type.
+        For example, it must contain only bodies and can't contain both bodies and faces.
+        
+        ConstructionPoint, ConstructionAxis, and ConstructionPlane objects can also be patterned. When patterning any
+        construction goemetry, only one entity can be patterned at a time, so the ObjectCollection will always contain a
+        single entity
         
         To use this property, you need to position the timeline marker to immediately before this feature.
         This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
@@ -35740,7 +41202,7 @@ class CoincidentConstraint(GeometricConstraint):
     def nativeObject(self) -> CoincidentConstraint:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -35780,7 +41242,7 @@ class CoincidentToSurfaceConstraint(GeometricConstraint):
     def nativeObject(self) -> CoincidentToSurfaceConstraint:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -35820,7 +41282,7 @@ class CollinearConstraint(GeometricConstraint):
     def nativeObject(self) -> CollinearConstraint:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -35939,7 +41401,7 @@ class Component(BaseComponent):
     """
     Represents a component in the data model.
     A component represents a set of geometry, features, and parameters that make up an item in the design.
-    A component can be referenced multiple times into a design with a Occurrence object.
+    A component can be referenced multiple times into a design with an Occurrence object.
     """
     def __init__(self):
         pass
@@ -35992,7 +41454,7 @@ class Component(BaseComponent):
         return core.DataFileFuture()
     def getPhysicalProperties(self, accuracy: CalculationAccuracy = CalculationAccuracy.LowCalculationAccuracy) -> PhysicalProperties:
         """
-        Returns the PhysicalProperties object that has properties for getting the area, density, mass, volume, moments, etc
+        Returns the PhysicalProperties object that has properties for getting the area, density, mass, volume, moments, etc.
         of this component.
         accuracy : Specifies the desired level of computational accuracy of the property calculations.
         The default value of 'LowCalculationAccuracy' returns results within a +/- 1% error margin.
@@ -36219,7 +41681,7 @@ class Component(BaseComponent):
     @property
     def physicalProperties(self) -> PhysicalProperties:
         """
-        Returns the PhysicalProperties object that has properties for getting the area, density, mass, volume, moments, etc
+        Returns the PhysicalProperties object that has properties for getting the area, density, mass, volume, moments, etc.
         of this component. Property values will be calculated using the 'LowCalculationAccuracy' setting when using this property
         to get the PhysicalProperties object. To specify a higher calculation tolerance, use the getPhysicalProperties method instead.
         Returns a PhysicalProperties object that can be used to get the various physical property related values.
@@ -36389,21 +41851,6 @@ class Component(BaseComponent):
         """
         return str()
     @property
-    def allTangentRelationships(self) -> list[TangentRelationship]:
-        """
-        Returns all tangent relationships in this component and any sub components. The tangent relationships returned are all
-        in the context of this component so any tangent relationships in sub components will be proxies. This is primarily useful when used
-        from the root component because Fusion flattens the assembly structure, including tangent relationships, when manipulating
-        an assembly.
-        """
-        return [TangentRelationship()]
-    @property
-    def tangentRelationships(self) -> TangentRelationships:
-        """
-        Returns the collection of tangent relationships associated with this component.
-        """
-        return TangentRelationships()
-    @property
     def flatPattern(self) -> FlatPattern:
         """
         Gets the existing flat pattern or returns null in the case where a flat pattern doesn't exist in this component.
@@ -36522,6 +41969,30 @@ class Component(BaseComponent):
         structure, including joints, when manipulating an assembly.
         """
         return [AssemblyConstraint()]
+    @property
+    def isJointOriginsFolderLightBulbOn(self) -> bool:
+        """
+        Gets and sets if the light bulb of the joint origins folder as seen in the browser is on or off.
+        This controls the visibility of the joint origins in this occurrence. The light bulb for the
+        folder is component specific and will turn off the joints for all occurrences referencing
+        the component.
+        """
+        return bool()
+    @isJointOriginsFolderLightBulbOn.setter
+    def isJointOriginsFolderLightBulbOn(self, value: bool):
+        """
+        Gets and sets if the light bulb of the joint origins folder as seen in the browser is on or off.
+        This controls the visibility of the joint origins in this occurrence. The light bulb for the
+        folder is component specific and will turn off the joints for all occurrences referencing
+        the component.
+        """
+        pass
+    @property
+    def motionLinks(self) -> MotionLinks:
+        """
+        Returns the collection of MotionLinks associated with this component.
+        """
+        return MotionLinks()
 
 class ConcentricConstraint(GeometricConstraint):
     """
@@ -36557,7 +42028,7 @@ class ConcentricConstraint(GeometricConstraint):
     def nativeObject(self) -> ConcentricConstraint:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -36926,6 +42397,97 @@ class ConfigurationInsertColumn(ConfigurationColumn):
         """
         return ConfigurationTable()
 
+class ConfigurationInsertStandardDesignCell(ConfigurationCell):
+    """
+    Represents a single cell within a top or custom theme configuration table that controls which design is
+    used for an inserted standard design. Use the parent column to get the occurrence being modified.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> ConfigurationInsertStandardDesignCell:
+        return ConfigurationInsertStandardDesignCell()
+    @property
+    def parentColumn(self) -> ConfigurationInsertStandardDesignColumn:
+        """
+        Returns the column this cell is in.
+        """
+        return ConfigurationInsertStandardDesignColumn()
+    @property
+    def replaceDesign(self) -> ConfigurationReplaceDesign:
+        """
+        Gets and sets which ConfigurationReplaceDesign object will be used when the row
+        this cell is in is active. When setting this property, only ConfigurationReplaceDesign objects
+        defined for the parent column of this cell can be used.
+        """
+        return ConfigurationReplaceDesign()
+    @replaceDesign.setter
+    def replaceDesign(self, value: ConfigurationReplaceDesign):
+        """
+        Gets and sets which ConfigurationReplaceDesign object will be used when the row
+        this cell is in is active. When setting this property, only ConfigurationReplaceDesign objects
+        defined for the parent column of this cell can be used.
+        """
+        pass
+
+class ConfigurationInsertStandardDesignColumn(ConfigurationColumn):
+    """
+    This object represents a column in the table that controls which design
+    should be referenced by an occurrence. The column contains a list of
+    designs that have been specified for that column. One of the designs is
+    specified for each cell in the column. That design will be referenced
+    by the occurrence when the row that cell is in is active.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> ConfigurationInsertStandardDesignColumn:
+        return ConfigurationInsertStandardDesignColumn()
+    def getCell(self, rowIndex: int) -> ConfigurationInsertStandardDesignCell:
+        """
+        Gets the cell in this column at the specified row. The first row has an
+        index of 0 and does not include the header row.
+        rowIndex : The index of the row to return the cell for. The first row has an index of 0.
+        Returns the specified cell if successful and null if an invalid index was specified.
+        """
+        return ConfigurationInsertStandardDesignCell()
+    def getCellByRowName(self, rowName: str) -> ConfigurationInsertStandardDesignCell:
+        """
+        Gets the cell in this column at the row specified by its name.
+        rowName : The name of the row to return the cell for.
+        Returns the specified cell if successful and null if the name is not found.
+        """
+        return ConfigurationInsertStandardDesignCell()
+    def getCellByRowId(self, rowId: str) -> ConfigurationInsertStandardDesignCell:
+        """
+        Gets the cell in this column at the row specified by its ID.
+        rowId : The ID of the row to return the cell for.
+        Returns the specified cell if successful and null if the id is not found.
+        """
+        return ConfigurationInsertStandardDesignCell()
+    @property
+    def occurrence(self) -> Occurrence:
+        """
+        Returns the occurrence being controlled by this column.
+        
+        This property returns null when the table being queried was obtained from a DataFile object.
+        """
+        return Occurrence()
+    @property
+    def replaceDesigns(self) -> ConfigurationReplaceDesigns:
+        """
+        Provides access to the list of replace designs that have been defined for this column. Using
+        the returned collection you can define new ConfigurationReplaceDesign objects. Use the
+        cells in the column to specify which one of the defined replace designs is used for a specific row.
+        """
+        return ConfigurationReplaceDesigns()
+    @property
+    def parentTable(self) -> ConfigurationTable:
+        """
+        Returns the parent table this column is in.
+        """
+        return ConfigurationTable()
+
 class ConfigurationJointSnapCell(ConfigurationCell):
     """
     This object represents a joint snap that has been defined for a ConfigurationJointSnapColumn.
@@ -37091,34 +42653,66 @@ class ConfigurationParameterCell(ConfigurationCell):
     def expression(self) -> str:
         """
         Gets and sets the expression that defines the value of the associated parameter when the parent row
-        is active. This property behaves as read-only when the table is obtained from a DataFile object.
+        is active. This works for both numeric and text parameters. This property behaves as read-only when
+        the table is obtained from a DataFile object.
         """
         return str()
     @expression.setter
     def expression(self, value: str):
         """
         Gets and sets the expression that defines the value of the associated parameter when the parent row
-        is active. This property behaves as read-only when the table is obtained from a DataFile object.
+        is active. This works for both numeric and text parameters. This property behaves as read-only when
+        the table is obtained from a DataFile object.
         """
         pass
     @property
     def value(self) -> float:
         """
-        Gets and sets the value of the parameter in database units. You can use the units property of the associated
-        Parameter object, which you can get from the column, to determine the type of units this parameter is
-        defined in. Setting this property will overwrite any existing expression. This property behaves as read-only
+        Gets and sets the real value (a double) of the parameter in database units.
+        Setting this property will overwrite any existing expression. This property behaves as read-only
         when the table is obtained from a DataFile object.
+        This property is only valid for numeric parameters and will fail for text parameters.
+        You can determine the value type of the parameter by using the valueType property.
+        Use the textValue property to get and set the value of text parameters.
         """
         return float()
     @value.setter
     def value(self, value: float):
         """
-        Gets and sets the value of the parameter in database units. You can use the units property of the associated
-        Parameter object, which you can get from the column, to determine the type of units this parameter is
-        defined in. Setting this property will overwrite any existing expression. This property behaves as read-only
+        Gets and sets the real value (a double) of the parameter in database units.
+        Setting this property will overwrite any existing expression. This property behaves as read-only
         when the table is obtained from a DataFile object.
+        This property is only valid for numeric parameters and will fail for text parameters.
+        You can determine the value type of the parameter by using the valueType property.
+        Use the textValue property to get and set the value of text parameters.
         """
         pass
+    @property
+    def textValue(self) -> str:
+        """
+        Gets and sets the text value of the parameter when it is a text parameter. This can
+        be determined by checking the valueType property. Setting this value will cause the
+        current expression to be overwritten. This property behaves as read-only when the
+        table is obtained from a DataFile object.
+        """
+        return str()
+    @textValue.setter
+    def textValue(self, value: str):
+        """
+        Gets and sets the text value of the parameter when it is a text parameter. This can
+        be determined by checking the valueType property. Setting this value will cause the
+        current expression to be overwritten. This property behaves as read-only when the
+        table is obtained from a DataFile object.
+        """
+        pass
+    @property
+    def valueType(self) -> ParameterValueTypes:
+        """
+        Returns the type of value this parameter cell is. For a numeric parameter, you can
+        get the value using the value property. For a text parameter, you can get the
+        value using the textValue property.
+        """
+        return ParameterValueTypes()
 
 class ConfigurationParameterColumn(ConfigurationColumn):
     """
@@ -38500,8 +44094,8 @@ class ConstructionPointTwoEdgesDefinition(ConstructionPointDefinition):
     def redefine(self, edgeOne: core.Base, edgeTwo: core.Base) -> bool:
         """
         Redefines the input geometry of the construction point.
-        edgeOne : The first B-Rep edge or sketch line
-        edgeTwo : The second B-Rep edge or sketch line
+        edgeOne : The first B-Rep edge or sketch line.
+        edgeTwo : The second B-Rep edge or sketch line.
         Returns true if the redefinition of the Construction Point is successful.
         """
         return bool()
@@ -38539,6 +44133,47 @@ class CopyPasteBody(Feature):
         This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
         """
         return core.ObjectCollection()
+
+class CornerClosureFeature(Feature):
+    """
+    Defines a corner closure feature, providing methods to redefine the type of corner closure.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> CornerClosureFeature:
+        return CornerClosureFeature()
+    def createForAssemblyContext(self, occurrence: Occurrence) -> CornerClosureFeature:
+        """
+        Creates or returns a proxy for the native object
+        - i.e. a new object that represents this object but adds the assembly context
+        defined by the input occurrence.
+        occurrence : The occurrence that defines the context to create the proxy in.
+        Returns the proxy object or null if this is not the NativeObject.
+        """
+        return CornerClosureFeature()
+    @property
+    def definitionType(self) -> CornerClosureFeatureDefinitionTypes:
+        """
+        Gets the type of corner closure defined.
+        """
+        return CornerClosureFeatureDefinitionTypes()
+    @property
+    def definition(self) -> CornerClosureFeatureDefinition:
+        """
+        Returns the CornerClosureFeatureDefinition object which provides access to the information
+        defining this CornerClosureFeature and the ability to edit it.
+        """
+        return CornerClosureFeatureDefinition()
+    @property
+    def nativeObject(self) -> CornerClosureFeature:
+        """
+        The NativeObject is the object outside the context of an assembly and
+        in the context of its parent component.
+        Returns null in the case where this object is not in the context of
+        an assembly but is already the native object.
+        """
+        return CornerClosureFeature()
 
 class CurvatureCombAnalysis(Analysis):
     """
@@ -38788,14 +44423,14 @@ class CustomGraphicsBasicMaterialColorEffect(CustomGraphicsColorEffect):
     def emissiveColor(self) -> core.Color:
         """
         Gets and sets the emissiveColor associated with this CustomGraphicsBasicMaterialColorEffect object.
-        The emissive color is the primary color of the entity
+        The emissive color is the primary color of the entity.
         """
         return core.Color()
     @emissiveColor.setter
     def emissiveColor(self, value: core.Color):
         """
         Gets and sets the emissiveColor associated with this CustomGraphicsBasicMaterialColorEffect object.
-        The emissive color is the primary color of the entity
+        The emissive color is the primary color of the entity.
         """
         pass
     @property
@@ -38830,16 +44465,32 @@ class CustomGraphicsBasicMaterialColorEffect(CustomGraphicsColorEffect):
     def specularColor(self) -> core.Color:
         """
         Gets and sets the specularColor associated with this CustomGraphicsBasicMaterialColorEffect object.
-        The specular color is the color of reflected light (highlights) as it is reflected off of a shiny surface. This is
-        commonly white or a lighter shade of the emissive color.
+        The specular color is the color of reflected light (highlights) as it is reflected off of a shiny surface.
+        For most materials, using white or a light color for the specular color is common practice. This will make
+        the highlights appear bright and noticeable, mimicking how light sources typically reflect off shiny surfaces.
+        
+        For colored metallic or glossy materials, you might choose a specular color that is tinted based on the material's
+        color. For example, gold might have a yellowish specular color, and copper might have an orange-reddish specular color.
+        
+        Generally, non-metallic materials (like plastics, ceramics, etc.) have specular colors that are less influenced by the
+        object's base color and more influenced by the light's color. On the other hand, metallic materials tend to have
+        specular highlights that are colored by the material itself.
         """
         return core.Color()
     @specularColor.setter
     def specularColor(self, value: core.Color):
         """
         Gets and sets the specularColor associated with this CustomGraphicsBasicMaterialColorEffect object.
-        The specular color is the color of reflected light (highlights) as it is reflected off of a shiny surface. This is
-        commonly white or a lighter shade of the emissive color.
+        The specular color is the color of reflected light (highlights) as it is reflected off of a shiny surface.
+        For most materials, using white or a light color for the specular color is common practice. This will make
+        the highlights appear bright and noticeable, mimicking how light sources typically reflect off shiny surfaces.
+        
+        For colored metallic or glossy materials, you might choose a specular color that is tinted based on the material's
+        color. For example, gold might have a yellowish specular color, and copper might have an orange-reddish specular color.
+        
+        Generally, non-metallic materials (like plastics, ceramics, etc.) have specular colors that are less influenced by the
+        object's base color and more influenced by the light's color. On the other hand, metallic materials tend to have
+        specular highlights that are colored by the material itself.
         """
         pass
     @property
@@ -38976,7 +44627,7 @@ class CustomGraphicsCurve(CustomGraphicsEntity):
 
 class CustomGraphicsGroup(CustomGraphicsEntity):
     """
-    Represents of group of custom graphics entities. A group can also own other graphics groups.
+    Represents a group of custom graphics entities. A group can also own other graphics groups.
     """
     def __init__(self):
         pass
@@ -39007,14 +44658,14 @@ class CustomGraphicsGroup(CustomGraphicsEntity):
         """
         Adds a new CustomGraphicsMesh entity to this group.
         coordinates : The CustomGraphicsCoordinates object that defines the coordinates of the vertices of the mesh.
-        A CustomGrahpicsCoordinates object can be created using the static create method of the CustomGraphicsCoordinates class.
+        A CustomGraphicsCoordinates object can be created using the static create method of the CustomGraphicsCoordinates class.
         coordinateIndexList : An array of integers that represent indices into the coordinates to define the vertices of the triangles. If an empty
-        array is provided, then it's assumed that the first three coordinates defines the first triangle, the next three define
+        array is provided, then it is assumed that the first three coordinates define the first triangle, the next three define
         the second triangle, and so on.
         normalVectors : An array of doubles that represent the x, y, z components of the normals at each coordinate. There should be a normal defined
         for each coordinate. If an empty array is provided for the normal vectors, Fusion will automatically calculate normal vectors
         that are 90 degrees to the face of the triangle, making it appear flat.
-        normalIndexList : An array of integers that represent indices into the normal vectors to define the which vector corresponds to which vertex. This
+        normalIndexList : An array of integers that represent indices into the normal vectors to define which vector corresponds to which vertex. This
         should be the same size as the vertex index list. If an empty array is input and normal vectors are provided, it is assumed that
         the normals match up one-to-one to each coordinate.
         Returns the new CustomGraphicsMesh object or null in the case of a failure.
@@ -39074,8 +44725,8 @@ class CustomGraphicsGroup(CustomGraphicsEntity):
         """
         Adds a new CustomGraphicsText entity to this group. This will be displayed as a single line of text.
         It is placed so that the upper-left corner is at the point defined and the text will be parallel
-        to the X-Y plane of the world coordinate system and in the X direction. To change it's position relative
-        to the input point you can change the horizontal and vertical justification on the returned CustomGrahicsText
+        to the X-Y plane of the world coordinate system and in the X direction. To change its position relative
+        to the input point you can change the horizontal and vertical justification on the returned CustomGraphicsText
         object. You can also reorient the text by changing the transform of the returned CustomGraphicsText object.
         formattedText : The text string to be displayed. Overall formatting can be defined using properties on the returned
         CustomGraphicsText object. Formatting overrides can be defined within the string using formatting codes.
@@ -39355,27 +45006,27 @@ class CustomGraphicsPointSet(CustomGraphicsEntity):
     def coordinates(self) -> CustomGraphicsCoordinates:
         """
         Gets and sets the coordinates used to define the position of the custom graphics points.
-        If no indexList is specified, every coordinate will be drawn using a custom graphics point,
+        If no indexList is specified, every coordinate will be drawn using a custom graphics point.
         """
         return CustomGraphicsCoordinates()
     @coordinates.setter
     def coordinates(self, value: CustomGraphicsCoordinates):
         """
         Gets and sets the coordinates used to define the position of the custom graphics points.
-        If no indexList is specified, every coordinate will be drawn using a custom graphics point,
+        If no indexList is specified, every coordinate will be drawn using a custom graphics point.
         """
         pass
     @property
     def indexList(self) -> list[int]:
         """
-        An list of indices that specify which coordinates from the coordinate list to draw points for.
+        A list of indices that specify which coordinates from the coordinate list to draw points for.
         If this is an empty array, then all of the coordinates are used.
         """
         return [int()]
     @indexList.setter
     def indexList(self, value: list[int]):
         """
-        An list of indices that specify which coordinates from the coordinate list to draw points for.
+        A list of indices that specify which coordinates from the coordinate list to draw points for.
         If this is an empty array, then all of the coordinates are used.
         """
         pass
@@ -39860,6 +45511,144 @@ class DeleteFaceFeature(Feature):
         """
         return DeleteFaceFeature()
 
+class DerivedParameter(Parameter):
+    """
+    Represents a parameter that is derived from another design.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> DerivedParameter:
+        return DerivedParameter()
+    @property
+    def deriveFeature(self) -> DeriveFeature:
+        """
+        Returns the DeriveFeature that derives this parameter from another design.
+        """
+        return DeriveFeature()
+
+class DeriveFeature(Feature):
+    """
+    Object that represents an existing derive feature in a design.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> DeriveFeature:
+        return DeriveFeature()
+    def createForAssemblyContext(self, occurrence: Occurrence) -> DeriveFeature:
+        """
+        Creates or returns a proxy for the native object
+        - i.e. a new object that represents this object but adds the assembly context
+        defined by the input occurrence.
+        occurrence : The occurrence that defines the context to create the proxy in.
+        Returns the proxy object or null if this isn't the NativeObject.
+        """
+        return DeriveFeature()
+    def setSourceEntities(self, entities: list[core.Base], excludedEntities: list[core.Base]) -> bool:
+        """
+        Sets the array of entities that are derived.
+        """
+        return bool()
+    def breakLink(self) -> bool:
+        """
+        Method that breaks the link between the source design and the destination design.
+        The derived objects are converted to base features and added to the Timeline.
+        Returns true if the break link was successful.
+        """
+        return bool()
+    def getSourceEntity(self, derivedEntity: core.Base) -> core.Base:
+        """
+        Method that returns the source entity for a derived entity.
+        derivedEntity : Input an entity (e.g. a BRepBody, MeshBody, Sketch, SketchEntity, ConstructionPlane, Occurrence, Canvas etc.)
+        that was derived by this DeriveFeature.
+        Returns the source entity for the derived entity or null if it failed.
+        """
+        return core.Base()
+    def getDerivedEntity(self, sourceEntity: core.Base) -> core.Base:
+        """
+        Method that returns the derived entity for a source entity.
+        sourceEntity : Input an entity (e.g. a BRepBody, MeshBody, Sketch, SketchEntity, ConstructionPlane, Occurrence, Canvas etc.)
+        from the sourceDesign that is derived by this DeriveFeature.
+        Returns the derived entity for the source entity or null if it failed.
+        """
+        return core.Base()
+    @property
+    def nativeObject(self) -> DeriveFeature:
+        """
+        The NativeObject is the object outside the context of an assembly and
+        in the context of its parent component.
+        Returns null in the case where this object is not in the context of
+        an assembly but is already the native object.
+        """
+        return DeriveFeature()
+    @property
+    def sourceDesign(self) -> Design:
+        """
+        The source Design of this derive feature. You can use the API to access various elements within the
+        design to add them to the list of elements to be derived.
+        """
+        return Design()
+    @property
+    def sourceEntities(self) -> list[core.Base]:
+        """
+        The array of entities that are derived.
+        """
+        return [core.Base()]
+    @property
+    def excludedEntities(self) -> list[core.Base]:
+        """
+        The array of entities that are excluded from the derived set.
+        """
+        return [core.Base()]
+    @property
+    def isIncludeFavoriteParameters(self) -> bool:
+        """
+        Gets or sets whether favorite parameters in source design are derived or not.
+        """
+        return bool()
+    @isIncludeFavoriteParameters.setter
+    def isIncludeFavoriteParameters(self, value: bool):
+        """
+        Gets or sets whether favorite parameters in source design are derived or not.
+        """
+        pass
+    @property
+    def isIncludeComponentParameters(self) -> bool:
+        """
+        Gets or sets whether all feature parameters from all derived components
+        from the source design are derived or not.
+        """
+        return bool()
+    @isIncludeComponentParameters.setter
+    def isIncludeComponentParameters(self, value: bool):
+        """
+        Gets or sets whether all feature parameters from all derived components
+        from the source design are derived or not.
+        """
+        pass
+    @property
+    def isPlaceObjectsAtOrigin(self) -> bool:
+        """
+        Gets or sets whether to place all derived objects at the origin in
+        the destination design or not.
+        """
+        return bool()
+    @isPlaceObjectsAtOrigin.setter
+    def isPlaceObjectsAtOrigin(self, value: bool):
+        """
+        Gets or sets whether to place all derived objects at the origin in
+        the destination design or not.
+        """
+        pass
+    @property
+    def documentReference(self) -> core.DocumentReference:
+        """
+        Returns the DocumentReference for this derived design.
+        Through the DocumentReference object you can modify the version and get other information associated with the reference.
+        """
+        return core.DocumentReference()
+
 class Design(core.Product):
     """
     Object that represents an open Fusion design. This derives from the
@@ -39956,13 +45745,13 @@ class Design(core.Product):
         used in the order they exist within the arrays. For example, the parameter at index 0 will use the value at index 0.
         
         If you use the createByString method to create the ValueInput, the expression of the parameter will be edited, and
-        the effect is the same as interactively editing the expression.When you set the expression, you can include units,
-        references to other parameters, and math operators and functions.For example, "(Length / 3) * cos(Angle)" is a valid
+        the effect is the same as interactively editing the expression. When you set the expression, you can include units,
+        references to other parameters, and math operators and functions. For example, "(Length / 3) * cos(Angle)" is a valid
         expression for a distance parameter if the parameters "Length" and "Angle" already exist.
         
         If you use the createByReal method, the value is assigned directly and is always in the internal units for the unit
-        type associated with the parameter.For example, if the parameter is a length, the value will ALWAYS be used as
-        centimeters. If the parameter is an angle, the value will ALWAYS be used as radians.This is because the default design
+        type associated with the parameter. For example, if the parameter is a length, the value will ALWAYS be used as
+        centimeters. If the parameter is an angle, the value will ALWAYS be used as radians. This is because the default design
         unit types for length are ignored, and internal units are ALWAYS used.
         Returns true if setting all of the parameters was successful. Setting multiple parameters is either all or none. If it
         fails to set any parameters, none of them are updated, and the method will return false.
@@ -39976,6 +45765,25 @@ class Design(core.Product):
         Returns the ConfigurationTable that defines the configurations for this design.
         """
         return ConfigurationTopTable()
+    def setGroundPlaneOffset(self, offset: float) -> bool:
+        """
+        Sets the offset of the ground plane. If the isAdpativeGroundPlane property is true,
+        setting the offset will change isAdaptiveGroundPlane to false. The offset value is
+        an offset relative to the current position of the ground plane.
+        
+        One example of how this method can be used is to set the isAdaptiveGroundPlane
+        property to true, which will position the ground plane at the bottom of the part.
+        By doing this, you know the current position of the ground plane. Then calling
+        this method with a value of -2.0 will reposition the ground plane 2 cm below the part.
+        If you called this method again with a value of -1.0 the ground plane will be moved
+        an additional 1 cm away from the geometry, since this is defining an offset relative
+        to the current position.
+        offset : Defines the relative offset based on the current position of the ground plane. The
+        offset is in centimeters, and a positive value will move it towards the design geometry
+        and a negative value away from the geometry.
+        Returns true if setting the offset was successful.
+        """
+        return bool()
     @property
     def designType(self) -> DesignTypes:
         """
@@ -40017,7 +45825,7 @@ class Design(core.Product):
     @property
     def activeComponent(self) -> Component:
         """
-        Returns the component that is current being edited. This can return the root component
+        Returns the component that is currently being edited. This can return the root component
         or another component within the design.
         """
         return Component()
@@ -40037,7 +45845,7 @@ class Design(core.Product):
     @property
     def userParameters(self) -> UserParameters:
         """
-        Returns the collection of User Parameters in a design
+        Returns the collection of User Parameters in a design.
         """
         return UserParameters()
     @property
@@ -40188,7 +45996,7 @@ class Design(core.Product):
     def configurationRowId(self) -> str:
         """
         Returns the ID of the row that defines this configuration. Use the
-        isCongiguration property to determine if this Design is a configuration
+        isConfiguration property to determine if this Design is a configuration
         or not. If this is not a configuration, this property returns an
         empty string.
         """
@@ -40215,6 +46023,122 @@ class Design(core.Product):
         Get the root DataComponent in this design. This is only available for top level designs.
         """
         return core.DataComponent()
+    @property
+    def objectVisibility(self) -> ObjectVisibility:
+        """
+        Returns the ObjectVisibility object associated with this design which controls
+        which objects are displayed in the graphics window. This is the equivalent of
+        the "Object Visibility" settings in the Display Settings drop-down in the navigation
+        toolbar at the bottom of the Fusion graphics window.
+        """
+        return ObjectVisibility()
+    @property
+    def isAdaptiveGroundPlane(self) -> bool:
+        """
+        Gets and sets if the position of the ground plane for this design is adaptive.
+        If true, the ground plane will automatically move to be just below the model.
+        The orientation of the ground plane is always normal to the "up" direction
+        as defined by the view cube.
+        """
+        return bool()
+    @isAdaptiveGroundPlane.setter
+    def isAdaptiveGroundPlane(self, value: bool):
+        """
+        Gets and sets if the position of the ground plane for this design is adaptive.
+        If true, the ground plane will automatically move to be just below the model.
+        The orientation of the ground plane is always normal to the "up" direction
+        as defined by the view cube.
+        """
+        pass
+    @property
+    def derivedParameters(self) -> list[DerivedParameter]:
+        """
+        Returns a read only list of all parameters that are derived into the design. This includes
+        the user parameters and model parameters from all derives in this design.
+        """
+        return [DerivedParameter()]
+    @property
+    def isModelingInAssemblyEnabled(self) -> bool:
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        If this design is an assembly, this property gets and sets if the modeling functionality
+        is enabled. If this design is a part or hybrid design, the value of this property should be ignored.
+        """
+        return bool()
+    @isModelingInAssemblyEnabled.setter
+    def isModelingInAssemblyEnabled(self, value: bool):
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        If this design is an assembly, this property gets and sets if the modeling functionality
+        is enabled. If this design is a part or hybrid design, the value of this property should be ignored.
+        """
+        pass
+    @property
+    def designIntent(self) -> DesignIntentTypes:
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        <p>Gets and sets the use intent of this design. Changing the design intent from one
+        type to another is not supported in all cases. Below is a list of cases where it
+        is expected to fail:
+        <ul><li>Assembly to Part where the assembly design has child components.</li>
+        <li>Hybrid to Part where the hybrid design has child components</li>
+        </ol></p>
+        <p>The following are cases that are supported:
+        <ul><li>Assembly to Part where the assembly does not contain any child components.</li>
+        <ul>Part to Assembly when the part does not contain any bodies.</li>
+        <ul>Part to Assembly(with bodies) - should succeed but will have modeling enabled (Hybrid)</li>
+        <ul>Part to Hybrid</li>
+        <ul>Hybrid to Assembly</li>
+        <ul>Hybrid-to Part when the hybrid design contains no child components.</li>
+        </p>
+        <p>Setting the type will do nothing and is a no-op.</p>
+        """
+        return DesignIntentTypes()
+    @designIntent.setter
+    def designIntent(self, value: DesignIntentTypes):
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        <p>Gets and sets the use intent of this design. Changing the design intent from one
+        type to another is not supported in all cases. Below is a list of cases where it
+        is expected to fail:
+        <ul><li>Assembly to Part where the assembly design has child components.</li>
+        <li>Hybrid to Part where the hybrid design has child components</li>
+        </ol></p>
+        <p>The following are cases that are supported:
+        <ul><li>Assembly to Part where the assembly does not contain any child components.</li>
+        <ul>Part to Assembly when the part does not contain any bodies.</li>
+        <ul>Part to Assembly(with bodies) - should succeed but will have modeling enabled (Hybrid)</li>
+        <ul>Part to Hybrid</li>
+        <ul>Hybrid to Assembly</li>
+        <ul>Hybrid-to Part when the hybrid design contains no child components.</li>
+        </p>
+        <p>Setting the type will do nothing and is a no-op.</p>
+        """
+        pass
+    @property
+    def pmiSettings(self) -> PMISettings:
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        Returns a manager for settings associated with Product Manufacturing Information (PMI) in this design.
+        Returns the PMISettings if they exist for the current document, or null. PMI settings only exist if the
+        document contains Fusion-authored PMI.
+        """
+        return PMISettings()
 
 class DistanceAndAngleChamferEdgeSet(ChamferEdgeSet):
     """
@@ -40310,6 +46234,38 @@ class DistanceExtentDefinition(ExtentDefinition):
         """
         return ModelParameter()
 
+class DoubleHemFeatureDefinition(HemFeatureDefinition):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    The definition for a double hem.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> DoubleHemFeatureDefinition:
+        return DoubleHemFeatureDefinition()
+    @property
+    def gap(self) -> ModelParameter:
+        """
+        Gets the gap for a double hem.
+        """
+        return ModelParameter()
+    @property
+    def length(self) -> ModelParameter:
+        """
+        Gets the length for a double hem.
+        """
+        return ModelParameter()
+    @property
+    def setback(self) -> ModelParameter:
+        """
+        Gets the setback for a double hem.
+        """
+        return ModelParameter()
+
 class DraftAnalysis(Analysis):
     """
     Represents any existing Draft Analysis that exist in the design.
@@ -40337,7 +46293,7 @@ class DraftFeature(Feature):
         
         To use this method, you need to position the timeline marker to immediately before this feature.
         This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
-        isSymmetric : Set to 'true' if the faces are to be split along the plane and drafted symmetrically. This
+        isSymmetric : Set to true if the faces are to be split along the plane or parting line and drafted symmetrically. This
         will have the side effect of setting the isSymmetric property to the same value.
         angle : The ValueInput object that defines the angle of the draft. This can be a positive or negative
         value which will affect the direction of the draft along with the isDirectionFlipped property.
@@ -40346,13 +46302,15 @@ class DraftFeature(Feature):
         return bool()
     def setTwoAngles(self, angleOne: core.ValueInput, angleTwo: core.ValueInput) -> bool:
         """
-        Changes the definition of the feature so that the surfaces are split along the draft plane and
-        the faces on each side of the plane are drafted independently from the other side.
+        Changes the definition of the feature so that the surfaces are split along the draft plane or
+        parting line and the faces on each side of the plane are drafted independently.
         
         To use this method, you need to position the timeline marker to immediately before this feature.
         This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
-        angleOne : The ValueInput object that defines the angle for the faces on the first side of the draft plane.
-        angleTwo : The ValueInput object that defines the angle for the faces on the second side of the draft plane.
+        angleOne : The ValueInput object that defines the angle for the faces on the first side of the draft plane
+        or parting line.
+        angleTwo : The ValueInput object that defines the angle for the faces on the second side of the draft plane
+        or parting line.
         Returns true if successful
         """
         return bool()
@@ -40388,7 +46346,8 @@ class DraftFeature(Feature):
     @property
     def plane(self) -> core.Base:
         """
-        Gets and sets the plane that defines the direction in which the draft is applied. This can be a planar BrepFace, or a ConstructionPlane.
+        Gets and sets the plane that defines the direction in which the draft is applied. This is also referred to
+        as the pull direction. This can be defined using either a planar BrepFace, or a ConstructionPlane.
         
         To set this property, you need to position the timeline marker to immediately before this feature.
         This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
@@ -40397,7 +46356,8 @@ class DraftFeature(Feature):
     @plane.setter
     def plane(self, value: core.Base):
         """
-        Gets and sets the plane that defines the direction in which the draft is applied. This can be a planar BrepFace, or a ConstructionPlane.
+        Gets and sets the plane that defines the direction in which the draft is applied. This is also referred to
+        as the pull direction. This can be defined using either a planar BrepFace, or a ConstructionPlane.
         
         To set this property, you need to position the timeline marker to immediately before this feature.
         This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
@@ -40406,8 +46366,8 @@ class DraftFeature(Feature):
     @property
     def isTangentChain(self) -> bool:
         """
-        Gets and sets if any faces that are tangentially connected to any of
-        the input faces will also be included in setting InputEntities. It defaults to true.
+        Gets and sets if any faces that are tangentially connected to any of the input faces will also be drafted.
+        It defaults to true.
         
         To set this property, you need to position the timeline marker to immediately before this feature.
         This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
@@ -40416,8 +46376,8 @@ class DraftFeature(Feature):
     @isTangentChain.setter
     def isTangentChain(self, value: bool):
         """
-        Gets and sets if any faces that are tangentially connected to any of
-        the input faces will also be included in setting InputEntities. It defaults to true.
+        Gets and sets if any faces that are tangentially connected to any of the input faces will also be drafted.
+        It defaults to true.
         
         To set this property, you need to position the timeline marker to immediately before this feature.
         This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
@@ -40615,6 +46575,127 @@ class DXFSketchExportOptions(ExportOptions):
         """
         pass
 
+class EmbossFeature(Feature):
+    """
+    Object that represents an existing emboss feature in a design.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> EmbossFeature:
+        return EmbossFeature()
+    def createForAssemblyContext(self, occurrence: Occurrence) -> EmbossFeature:
+        """
+        Creates or returns a proxy for the native object
+        - i.e. a new object that represents this object but adds the assembly context
+        defined by the input occurrence.
+        occurrence : The occurrence that defines the context to create the proxy in.
+        Returns the proxy object or null if this is not the NativeObject.
+        """
+        return EmbossFeature()
+    @property
+    def profiles(self) -> list[core.Base]:
+        """
+        Gets and sets the set Profile objects that define the shape of the emboss.
+        The profile argument can be Profile and SketchText objects.
+        When multiple objects are used, all profiles and sketch texts must be co-planar.
+        
+        To use this property, you need to position the timeline marker to immediately before this feature.
+        This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
+        """
+        return [core.Base()]
+    @profiles.setter
+    def profiles(self, value: list[core.Base]):
+        """
+        Gets and sets the set Profile objects that define the shape of the emboss.
+        The profile argument can be Profile and SketchText objects.
+        When multiple objects are used, all profiles and sketch texts must be co-planar.
+        
+        To use this property, you need to position the timeline marker to immediately before this feature.
+        This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
+        """
+        pass
+    @property
+    def inputFaces(self) -> list[BRepFace]:
+        """
+        Gets and sets an array of BRepFace objects that define the faces the emboss will be performed on. The
+        value of the isTangentChain property controls if faces that are tangent to any of the specified faces
+        are also included.
+        
+        To use this property, you need to position the timeline marker to immediately before this feature.
+        This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
+        """
+        return [BRepFace()]
+    @inputFaces.setter
+    def inputFaces(self, value: list[BRepFace]):
+        """
+        Gets and sets an array of BRepFace objects that define the faces the emboss will be performed on. The
+        value of the isTangentChain property controls if faces that are tangent to any of the specified faces
+        are also included.
+        
+        To use this property, you need to position the timeline marker to immediately before this feature.
+        This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
+        """
+        pass
+    @property
+    def isTangentChain(self) -> bool:
+        """
+        Gets and sets whether any faces that are tangentially connected to any of the input faces will
+        also be used.
+        
+        To use this property, you need to position the timeline marker to immediately before this feature.
+        This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
+        """
+        return bool()
+    @isTangentChain.setter
+    def isTangentChain(self, value: bool):
+        """
+        Gets and sets whether any faces that are tangentially connected to any of the input faces will
+        also be used.
+        
+        To use this property, you need to position the timeline marker to immediately before this feature.
+        This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
+        """
+        pass
+    @property
+    def depth(self) -> ModelParameter:
+        """
+        Returns the parameter that controls the depth of the emboss. A positive value results in the emboss
+        protruding out of the body and the negative value results in the emboss going into the body. To
+        edit the depth, use properties on the returned ModelParameter.
+        """
+        return ModelParameter()
+    @property
+    def horizontalDistance(self) -> ModelParameter:
+        """
+        Returns the parameter that controls the horizontal offset distance. To
+        edit the offset, use properties on the returned ModelParameter.
+        """
+        return ModelParameter()
+    @property
+    def verticalDistance(self) -> ModelParameter:
+        """
+        Returns the parameter that controls the vertical offset distance. To
+        edit the offset, use properties on the returned ModelParameter.
+        """
+        return ModelParameter()
+    @property
+    def rotationAngle(self) -> ModelParameter:
+        """
+        Returns the parameter that controls the rotation angle. To
+        edit the angle, use properties on the returned ModelParameter.
+        """
+        return ModelParameter()
+    @property
+    def nativeObject(self) -> EmbossFeature:
+        """
+        The NativeObject is the object outside the context of an assembly and
+        in the context of its parent component.
+        Returns null in the case where this object is not in the context of
+        an assembly but is already the native object.
+        """
+        return EmbossFeature()
+
 class EqualConstraint(GeometricConstraint):
     """
     An equal constraint in a sketch.
@@ -40649,7 +46730,7 @@ class EqualConstraint(GeometricConstraint):
     def nativeObject(self) -> EqualConstraint:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -41181,6 +47262,18 @@ class FilletFeature(Feature):
         Returns the proxy object or null if this isn't the NativeObject.
         """
         return FilletFeature()
+    def convert(self, input: core.Base) -> bool:
+        """
+        Method that converts this feature to another fillet feature type.
+        
+        To use this method you need to position the timeline marker to immediately before this feature.
+        This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True).
+        input : Input a fillet feature input object that defines the desired fillet.
+        Use the FilletFeatures.create*Input methods to create a new fillet feature input object.
+        This can be a feature input for fillet type, rule fillet type or full round fillet type.
+        Returns true if the conversion was successful.
+        """
+        return bool()
     @property
     def edgeSets(self) -> FilletEdgeSets:
         """
@@ -41190,7 +47283,8 @@ class FilletFeature(Feature):
     @property
     def isRollingBallCorner(self) -> bool:
         """
-        Gets and sets if a rolling ball solution is to be used in any corners.
+        Gets and sets if a rolling ball or setback solution is to be used in any corners. Asymmetric
+        fillets always use a setback solution and will ignore this setting.
         
         To set this property, you need to position the timeline marker to immediately before this feature.
         This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
@@ -41199,7 +47293,8 @@ class FilletFeature(Feature):
     @isRollingBallCorner.setter
     def isRollingBallCorner(self, value: bool):
         """
-        Gets and sets if a rolling ball solution is to be used in any corners.
+        Gets and sets if a rolling ball or setback solution is to be used in any corners. Asymmetric
+        fillets always use a setback solution and will ignore this setting.
         
         To set this property, you need to position the timeline marker to immediately before this feature.
         This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
@@ -41214,6 +47309,28 @@ class FilletFeature(Feature):
         an assembly but is already the native object.
         """
         return FilletFeature()
+    @property
+    def fullRoundFilletFaceSets(self) -> FullRoundFilletFaceSets:
+        """
+        Returns the full round fillet face sets collection associated with this fillet feature.
+        This collection is only valid when the filletFeatureType is FullRoundFilletFeatureType
+        and it returns null if the filletFeatureType is not FullRoundFilletFeatureType.
+        """
+        return FullRoundFilletFaceSets()
+    @property
+    def filletFeatureType(self) -> FilletFeatureTypes:
+        """
+        Returns the FilletFeatureTypes indicating this fillet feature type.
+        """
+        return FilletFeatureTypes()
+    @property
+    def ruleFilletSettings(self) -> RuleFilletSettings:
+        """
+        Gets the RuleFilletSettings object for the rule fillet.
+        
+        This is valid only when the filletFeatureType is FilletFeatureTypes.RuleFilletFeatureType, otherwise this returns null.
+        """
+        return RuleFilletSettings()
 
 class FitOnPathTextDefintion(SketchTextDefinition):
     """
@@ -41258,6 +47375,26 @@ class FlangeFeature(Feature):
     @staticmethod
     def cast(arg) -> FlangeFeature:
         return FlangeFeature()
+
+class FlatHemFeatureDefinition(HemFeatureDefinition):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    The definition for a flat hem.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> FlatHemFeatureDefinition:
+        return FlatHemFeatureDefinition()
+    @property
+    def length(self) -> ModelParameter:
+        """
+        Gets the length for a flat hem.
+        """
+        return ModelParameter()
 
 class FlatPattern(Feature):
     """
@@ -41496,25 +47633,25 @@ class FusionProductPreferences(core.ProductPreferences):
     @property
     def isActiveComponentVisibilityUsed(self) -> bool:
         """
-        Gets and sets the Active Component Visibility option
+        Gets and sets the Active Component Visibility option.
         """
         return bool()
     @isActiveComponentVisibilityUsed.setter
     def isActiveComponentVisibilityUsed(self, value: bool):
         """
-        Gets and sets the Active Component Visibility option
+        Gets and sets the Active Component Visibility option.
         """
         pass
     @property
     def defaultDesignType(self) -> DefaultDesignTypeOptions:
         """
-        Gets and sets the default modeling type setting
+        Gets and sets the default modeling type setting.
         """
         return DefaultDesignTypeOptions()
     @defaultDesignType.setter
     def defaultDesignType(self, value: DefaultDesignTypeOptions):
         """
-        Gets and sets the default modeling type setting
+        Gets and sets the default modeling type setting.
         """
         pass
     @property
@@ -41532,19 +47669,19 @@ class FusionProductPreferences(core.ProductPreferences):
     @property
     def isJointPreviewAnimated(self) -> bool:
         """
-        Gets and sets the Animate joint preview option
+        Gets and sets the Animate joint preview option.
         """
         return bool()
     @isJointPreviewAnimated.setter
     def isJointPreviewAnimated(self, value: bool):
         """
-        Gets and sets the Animate joint preview option
+        Gets and sets the Animate joint preview option.
         """
         pass
     @property
     def is3DSketchingAllowed(self) -> bool:
         """
-        Gets and sets the Allow 3D sketching of lines and splines option
+        Gets and sets the Allow 3D sketching of lines and splines option,
         which controls if 3D sketching is allowed or if sketching is forced to
         be on the x-y plane of the sketch.
         """
@@ -41552,7 +47689,7 @@ class FusionProductPreferences(core.ProductPreferences):
     @is3DSketchingAllowed.setter
     def is3DSketchingAllowed(self, value: bool):
         """
-        Gets and sets the Allow 3D sketching of lines and splines option
+        Gets and sets the Allow 3D sketching of lines and splines option,
         which controls if 3D sketching is allowed or if sketching is forced to
         be on the x-y plane of the sketch.
         """
@@ -41560,13 +47697,13 @@ class FusionProductPreferences(core.ProductPreferences):
     @property
     def isGhostedResultBodyShown(self) -> bool:
         """
-        Gets and sets the Show ghosted result body option
+        Gets and sets the Show ghosted result body option.
         """
         return bool()
     @isGhostedResultBodyShown.setter
     def isGhostedResultBodyShown(self, value: bool):
         """
-        Gets and sets the Show ghosted result body option
+        Gets and sets the Show ghosted result body option.
         """
         pass
     @property
@@ -41582,27 +47719,15 @@ class FusionProductPreferences(core.ProductPreferences):
         """
         pass
     @property
-    def isAutoLookAtSketch(self) -> bool:
-        """
-        Gets and sets if the view is re-oriented to view the newly created sketch.
-        """
-        return bool()
-    @isAutoLookAtSketch.setter
-    def isAutoLookAtSketch(self, value: bool):
-        """
-        Gets and sets if the view is re-oriented to view the newly created sketch.
-        """
-        pass
-    @property
     def isAutoProjectGeometry(self) -> bool:
         """
-        Gets and Sets if geometry, not in the active sketch plane, is to be automatically projected.
+        Gets and sets if geometry, not in the active sketch plane, is to be automatically projected.
         """
         return bool()
     @isAutoProjectGeometry.setter
     def isAutoProjectGeometry(self, value: bool):
         """
-        Gets and Sets if geometry, not in the active sketch plane, is to be automatically projected.
+        Gets and sets if geometry, not in the active sketch plane, is to be automatically projected.
         """
         pass
     @property
@@ -41681,9 +47806,31 @@ class FusionProductPreferences(core.ProductPreferences):
         pass
     @property
     def isFirstComponentGroundToParent(self) -> bool:
+        """
+        Gets and sets if the first Component within another component should be
+        grounded to parent automatically.
+        """
         return bool()
     @isFirstComponentGroundToParent.setter
     def isFirstComponentGroundToParent(self, value: bool):
+        """
+        Gets and sets if the first Component within another component should be
+        grounded to parent automatically.
+        """
+        pass
+    @property
+    def isAutoLookAtSketch2(self) -> AutoLookAtSketchSettings:
+        """
+        Gets and sets if the view is re-oriented to view the newly created sketch,
+        and if it is re-oriented, if the camera uses the current camera settings or is orthographic.
+        """
+        return AutoLookAtSketchSettings()
+    @isAutoLookAtSketch2.setter
+    def isAutoLookAtSketch2(self, value: AutoLookAtSketchSettings):
+        """
+        Gets and sets if the view is re-oriented to view the newly created sketch,
+        and if it is re-oriented, if the camera uses the current camera settings or is orthographic.
+        """
         pass
 
 class FusionUnitsManager(core.UnitsManager):
@@ -41702,7 +47849,7 @@ class FusionUnitsManager(core.UnitsManager):
     @property
     def design(self) -> Design:
         """
-        Returns the parent design
+        Returns the parent design.
         """
         return Design()
     @property
@@ -41838,7 +47985,7 @@ class HoleFeature(Feature):
         the type of feature this is being used with. For a hole it can be a BRepBody, BRepFace,
         BRepVertex, ConstructionPlane, or ConstructionPoint.
         matchShape : Indicates if the hole is not contained on the face that the hole should match
-        the shape of the entity as if it extended beyond it's current boundaries.
+        the shape of the entity as if it extended beyond its current boundaries.
         directionHint : Specifies the direction of the hole. This is only used in the case where there are two possible solutions and the hole can
         hit the toEntity in either direction.
         
@@ -41953,6 +48100,28 @@ class HoleFeature(Feature):
         Returns the proxy object or null if this isn't the NativeObject.
         """
         return HoleFeature()
+    def setToSimpleHole(self) -> bool:
+        """
+        This method sets the hole's tap to be "simple," which means that the hole will not have any
+        tap and will be a simple hole.
+        Returns true if successful.
+        """
+        return bool()
+    def setToClearanceHole(self, clearanceHoleInfo: ClearanceHoleInfo) -> bool:
+        """
+        Sets the hole to be a clearance hole of the size specified by the ClearanceHoleInfo object.
+        clearanceHoleInfo : The ClearanceHoleInfo object that specifies the size of the clearance hole.
+        Returns true if setting to a clearance hole was successful.
+        """
+        return bool()
+    def setToTappedHole(self, threadInfo: ThreadInfo) -> bool:
+        """
+        Sets the hole to be a straight or tapered tapped hole of the size specified by the ThreadInfo object.
+        threadInfo : The ThreadInfo object that specifies the thread to use for the tapped hole. Whether it is straight
+        or tapered tap is defined by the input ThreadInfo object.
+        Returns true if setting to a tapped hole was successful.
+        """
+        return bool()
     @property
     def position(self) -> core.Point3D:
         """
@@ -41979,7 +48148,7 @@ class HoleFeature(Feature):
         
         If there is a thread associated with the hole the thread definition controls
         the diameter of the hole. Even though there is a parameter for the diameter,
-        it's value is ignored when there is a thread.
+        its value is ignored when there is a thread.
         """
         return ModelParameter()
     @property
@@ -42089,6 +48258,38 @@ class HoleFeature(Feature):
         This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
         """
         pass
+    @property
+    def holeTapType(self) -> HoleTapTypes:
+        """
+        This property returns the current type of tap associated with this hole. You can set the tap type
+        by using one of the following methods: setToSimpleHole, setToClearanceHole, or setToTappedHole.
+        """
+        return HoleTapTypes()
+    @property
+    def clearanceHoleInfo(self) -> ClearanceHoleInfo:
+        """
+        Returns the information used to define a clearance hole. This returns a
+        ClearanceHoleInfo object when the holeTapType returns ClearanceHoleTapType. Otherwise
+        this property returns null.
+        """
+        return ClearanceHoleInfo()
+    @property
+    def tappedHoleInfo(self) -> ThreadInfo:
+        """
+        This property returns the information used to define a tapped hole.
+        Otherwise, this property returns null.
+        """
+        return ThreadInfo()
+    @property
+    def thread(self) -> ThreadFeature:
+        """
+        When a tapped hole is created, a thread feature is also automatically created and controls
+        the tapped threads. The thread feature is tied to the hole and is not displayed in the timeline
+        and is suppressed if the hole is suppressed and deleted if the hole is deleted. This property
+        returns the thread feature associated with this hole if it is a tapped hole. It returns null
+        for all other hole types.
+        """
+        return ThreadFeature()
 
 class HorizontalConstraint(GeometricConstraint):
     """
@@ -42118,7 +48319,7 @@ class HorizontalConstraint(GeometricConstraint):
     def nativeObject(self) -> HorizontalConstraint:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -42158,7 +48359,7 @@ class HorizontalPointsConstraint(GeometricConstraint):
     def nativeObject(self) -> HorizontalPointsConstraint:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -42218,7 +48419,7 @@ class LineOnPlanarSurfaceConstraint(GeometricConstraint):
     def nativeObject(self) -> LineOnPlanarSurfaceConstraint:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -42258,7 +48459,7 @@ class LineParallelToPlanarSurfaceConstraint(GeometricConstraint):
     def nativeObject(self) -> LineParallelToPlanarSurfaceConstraint:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -42638,7 +48839,7 @@ class MeshConvertFeature(Feature):
     def nativeObject(self) -> MeshConvertFeature:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -42693,7 +48894,7 @@ class MidPointConstraint(GeometricConstraint):
     def nativeObject(self) -> MidPointConstraint:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -43354,7 +49555,7 @@ class MultiLineTextDefinition(SketchTextDefinition):
         """
         Returns the four sketch lines that define the boundary of the sketch text. By adding constraints to these lines
         you can associatively control the size, position and angle of the sketch text. If the MultiLineTextDefinition
-        object is obtained from a SketchTextInput object, this property will return null because the text and it's
+        object is obtained from a SketchTextInput object, this property will return null because the text and its
         associated lines have not been created yet.
         """
         return [SketchLine()]
@@ -43617,7 +49818,7 @@ class OffsetConstraint(GeometricConstraint):
     def nativeObject(self) -> OffsetConstraint:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -43632,12 +49833,53 @@ class OffsetConstraint(GeometricConstraint):
 class OffsetFacesFeature(Feature):
     """
     Object that represents an existing Offset Faces feature in a design.
-    Offset Face features are created in the UI using the "Press Pull" command.
+    Offset Faces features are created in the UI using the "Offset Face" or "Press Pull" command.
     """
     def __init__(self):
         pass
     @staticmethod
     def cast(arg) -> OffsetFacesFeature:
+        return OffsetFacesFeature()
+    def createForAssemblyContext(self, occurrence: Occurrence) -> OffsetFacesFeature:
+        """
+        Creates or returns a proxy for the native object
+        - i.e. a new object that represents this object but adds the assembly context
+        defined by the input occurrence.
+        occurrence : The occurrence that defines the context to create the proxy in.
+        Returns the proxy object or null if this isn't the NativeObject.
+        """
+        return OffsetFacesFeature()
+    @property
+    def distance(self) -> ModelParameter:
+        """
+        Returns the parameter that controls the offset distance. You can modify
+        the distance by using the properties of the returned ModelParameter object.
+        """
+        return ModelParameter()
+    @property
+    def inputFaces(self) -> list[BRepFace]:
+        """
+        Returns an array of BRepFace objects that were offset. The timeline must be rolled
+        back to immediately before this feature when getting or setting this property
+        so the faces are available.
+        """
+        return [BRepFace()]
+    @inputFaces.setter
+    def inputFaces(self, value: list[BRepFace]):
+        """
+        Returns an array of BRepFace objects that were offset. The timeline must be rolled
+        back to immediately before this feature when getting or setting this property
+        so the faces are available.
+        """
+        pass
+    @property
+    def nativeObject(self) -> OffsetFacesFeature:
+        """
+        The NativeObject is the object outside the context of an assembly and
+        in the context of its parent component.
+        Returns null in the case where this object is not in the context of
+        an assembly but is already the native object.
+        """
         return OffsetFacesFeature()
 
 class OffsetFeature(Feature):
@@ -43789,6 +50031,32 @@ class OnEdgeHolePositionDefinition(HolePositionDefinition):
         """
         return HoleEdgePositions()
 
+class OpenHemFeatureDefinition(HemFeatureDefinition):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    The definition for an open hem.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> OpenHemFeatureDefinition:
+        return OpenHemFeatureDefinition()
+    @property
+    def gap(self) -> ModelParameter:
+        """
+        Gets the gap for an open hem.
+        """
+        return ModelParameter()
+    @property
+    def length(self) -> ModelParameter:
+        """
+        Gets the length for an open hem.
+        """
+        return ModelParameter()
+
 class ParallelConstraint(GeometricConstraint):
     """
     A parallel constraint in a sketch.
@@ -43823,7 +50091,7 @@ class ParallelConstraint(GeometricConstraint):
     def nativeObject(self) -> ParallelConstraint:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -44099,9 +50367,13 @@ class PathPatternFeature(Feature):
     @property
     def inputEntities(self) -> core.ObjectCollection:
         """
-        Gets and sets the input entities. The collection can contain faces, features, bodies or occurrences.
-        All of the entities must be of a single type. For example, it can't contain features and occurrences
-        but only features or occurrences.
+        Gets and sets the entities to pattern using an ObjectCollection. The collection can contain BRepFace,
+        PartFeature, BRepBody, or Occurrence objects. All of the entities provided must be the same type.
+        For example, it must contain only bodies and can't contain both bodies and faces.
+        
+        ConstructionPoint, ConstructionAxis, and ConstructionPlane objects can also be patterned. When patterning any
+        construction goemetry, only one entity can be patterned at a time, so the ObjectCollection will always contain a
+        single entity
         
         To use this property, you need to position the timeline marker to immediately before this feature.
         This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
@@ -44110,9 +50382,13 @@ class PathPatternFeature(Feature):
     @inputEntities.setter
     def inputEntities(self, value: core.ObjectCollection):
         """
-        Gets and sets the input entities. The collection can contain faces, features, bodies or occurrences.
-        All of the entities must be of a single type. For example, it can't contain features and occurrences
-        but only features or occurrences.
+        Gets and sets the entities to pattern using an ObjectCollection. The collection can contain BRepFace,
+        PartFeature, BRepBody, or Occurrence objects. All of the entities provided must be the same type.
+        For example, it must contain only bodies and can't contain both bodies and faces.
+        
+        ConstructionPoint, ConstructionAxis, and ConstructionPlane objects can also be patterned. When patterning any
+        construction goemetry, only one entity can be patterned at a time, so the ObjectCollection will always contain a
+        single entity
         
         To use this property, you need to position the timeline marker to immediately before this feature.
         This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
@@ -44348,7 +50624,7 @@ class PerpendicularConstraint(GeometricConstraint):
     def nativeObject(self) -> PerpendicularConstraint:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -44388,7 +50664,7 @@ class PerpendicularToSurfaceConstraint(GeometricConstraint):
     def nativeObject(self) -> PerpendicularToSurfaceConstraint:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -44723,7 +50999,7 @@ class PipeFeature(Feature):
     @property
     def sideFaces(self) -> BRepFaces:
         """
-        Property that returns a object that provides access to all of the faces created around the perimeter of the feature.
+        Property that returns an object that provides access to all of the faces created around the perimeter of the feature.
         """
         return BRepFaces()
     @property
@@ -44817,9 +51093,9 @@ class PlanarJointMotion(JointMotion):
         Gets the direction used as the primary direction for the two translational degrees of
         freedom. The value of this property is automatically set when setting the normalDirection.
         When reading this value it can return XAxisJointDirection, YAxisJointDirection, ZAxisJointDirection,
-        or CustomJointDirection. If it's CustomJointDirection then the direction the direction can be
+        or CustomJointDirection. If it's CustomJointDirection then the direction can be
         determined using the primarySlideDirectionVector and the entity controlling the direction can
-        be get and set using the customPrimarySlideDirectionEntity.
+        be gotten and set using the customPrimarySlideDirectionEntity.
         """
         return JointDirections()
     @property
@@ -44974,6 +51250,1211 @@ class PlaneAndOffsetsHolePositionDefinition(HolePositionDefinition):
         to EdgeTwo. This property returns null in the case where only one edge is used.
         """
         return ModelParameter()
+
+class PMICreatedAnnotation(PMIAnnotation):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    A Base class representing a PMI created in Fusion.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> PMICreatedAnnotation:
+        return PMICreatedAnnotation()
+    @property
+    def isPerpendicularLine(self) -> bool:
+        """
+        Gets and sets whether the PMI text is perpendicular to the leader line or parallel to it.
+        """
+        return bool()
+    @isPerpendicularLine.setter
+    def isPerpendicularLine(self, value: bool):
+        """
+        Gets and sets whether the PMI text is perpendicular to the leader line or parallel to it.
+        """
+        pass
+    @property
+    def horizontalAlignment(self) -> core.HorizontalAlignments:
+        """
+        Gets and sets the horizontal alignment of the PMI text relative to its anchor point.
+        
+        This determines how the text box is positioned relative to the text placement point.
+        """
+        return core.HorizontalAlignments()
+    @horizontalAlignment.setter
+    def horizontalAlignment(self, value: core.HorizontalAlignments):
+        """
+        Gets and sets the horizontal alignment of the PMI text relative to its anchor point.
+        
+        This determines how the text box is positioned relative to the text placement point.
+        """
+        pass
+    @property
+    def verticalAlignment(self) -> core.VerticalAlignments:
+        """
+        Gets and sets the vertical alignment of the PMI text relative to its anchor point.
+        
+        This determines the vertical positioning of the text box relative to the calculated text placement point.
+        """
+        return core.VerticalAlignments()
+    @verticalAlignment.setter
+    def verticalAlignment(self, value: core.VerticalAlignments):
+        """
+        Gets and sets the vertical alignment of the PMI text relative to its anchor point.
+        
+        This determines the vertical positioning of the text box relative to the calculated text placement point.
+        """
+        pass
+    @property
+    def leaderLineExtension(self) -> float:
+        """
+        Gets and sets the length of the leader line extension.
+        
+        This value extends the leader line in the direction determined by the perpendicular setting.
+        """
+        return float()
+    @leaderLineExtension.setter
+    def leaderLineExtension(self, value: float):
+        """
+        Gets and sets the length of the leader line extension.
+        
+        This value extends the leader line in the direction determined by the perpendicular setting.
+        """
+        pass
+    @property
+    def plane(self) -> core.Plane:
+        """
+        Gets the plane of the PMI.
+        """
+        return core.Plane()
+    @property
+    def annotationTextPoint(self) -> core.Point3D:
+        """
+        Gets and sets the point on the annotation plane where the PMI text is anchored.
+        """
+        return core.Point3D()
+    @annotationTextPoint.setter
+    def annotationTextPoint(self, value: core.Point3D):
+        """
+        Gets and sets the point on the annotation plane where the PMI text is anchored.
+        """
+        pass
+    @property
+    def annotationTargetPoint(self) -> core.Point3D:
+        """
+        Gets the point on the annotation plane where the leader line meets the annotated geometry.
+        """
+        return core.Point3D()
+    @property
+    def segments(self) -> list[PMISegment]:
+        """
+        Gets and sets the list of PMISegments used to define the PMI text.
+        
+        The segments can be any combination of PMITextSegment, PMISymbolSegment and PMILineBreakSegment objects.
+        
+        Changing this property will result in changing the displayed text of the PMI.
+        """
+        return [PMISegment()]
+    @segments.setter
+    def segments(self, value: list[PMISegment]):
+        """
+        Gets and sets the list of PMISegments used to define the PMI text.
+        
+        The segments can be any combination of PMITextSegment, PMISymbolSegment and PMILineBreakSegment objects.
+        
+        Changing this property will result in changing the displayed text of the PMI.
+        """
+        pass
+    @property
+    def plainText(self) -> str:
+        """
+        This is a convenience property that provides the plain-text representation of the PMI text.
+        It iterates through the segments and concatenates their text representation.
+        """
+        return str()
+    @property
+    def isShowImportedGeometry(self) -> bool:
+        """
+        Gets and sets whether the original graphics/geometry of the PMI should be visible.
+        Only supported for PMI that has been converted from imported data.
+        """
+        return bool()
+    @isShowImportedGeometry.setter
+    def isShowImportedGeometry(self, value: bool):
+        """
+        Gets and sets whether the original graphics/geometry of the PMI should be visible.
+        Only supported for PMI that has been converted from imported data.
+        """
+        pass
+    @property
+    def hasImportedGeometry(self) -> bool:
+        """
+        Gets whether the created PMI was converted from an imported PMI and therefore whether it
+        has original graphics/geometry that can be shown.
+        """
+        return bool()
+
+class PMIHoleThreadNoteInput(PMIInput):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    A class that defines the input used to create a Hole/Thread Note PMI.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> PMIHoleThreadNoteInput:
+        return PMIHoleThreadNoteInput()
+    @property
+    def faces(self) -> list[BRepFace]:
+        """
+        An array of BRepFace objects the Hole/Thread Note would be associated to. These faces can be a subset of the group
+        of faces defining a geometric hole, or faces defining bosses. The faces must represent equivalent geometry (e.g. holes defined
+        by the faces should have the same properties such as type, diameter, thread, etc.).
+        
+        In the case of bosses, the set of faces represents the cylindrical faces from a group of bosses.
+        
+        These faces should not be in different components, but can be in different bodies within the same component.
+        Native object will be used when setting the faces.
+        """
+        return [BRepFace()]
+    @faces.setter
+    def faces(self, value: list[BRepFace]):
+        """
+        An array of BRepFace objects the Hole/Thread Note would be associated to. These faces can be a subset of the group
+        of faces defining a geometric hole, or faces defining bosses. The faces must represent equivalent geometry (e.g. holes defined
+        by the faces should have the same properties such as type, diameter, thread, etc.).
+        
+        In the case of bosses, the set of faces represents the cylindrical faces from a group of bosses.
+        
+        These faces should not be in different components, but can be in different bodies within the same component.
+        Native object will be used when setting the faces.
+        """
+        pass
+    @property
+    def isWantSelectAllMatchingHoles(self) -> bool:
+        """
+        Gets and sets whether the Hole/Thread Note PMI should represent all the matching holes in the design.
+        """
+        return bool()
+    @isWantSelectAllMatchingHoles.setter
+    def isWantSelectAllMatchingHoles(self, value: bool):
+        """
+        Gets and sets whether the Hole/Thread Note PMI should represent all the matching holes in the design.
+        """
+        pass
+    @property
+    def primaryDisplaySettings(self) -> PMIDisplaySettings:
+        """
+        Gets and sets the primary display settings for the Hole/Thread Note PMI.
+        This will always be existent, and includes information about format and units.
+        """
+        return PMIDisplaySettings()
+    @primaryDisplaySettings.setter
+    def primaryDisplaySettings(self, value: PMIDisplaySettings):
+        """
+        Gets and sets the primary display settings for the Hole/Thread Note PMI.
+        This will always be existent, and includes information about format and units.
+        """
+        pass
+    @property
+    def hasSecondaryDisplaySettings(self) -> bool:
+        """
+        Gets and sets whether there are secondary display settings defined for the Hole/Thread Note PMI.
+        """
+        return bool()
+    @hasSecondaryDisplaySettings.setter
+    def hasSecondaryDisplaySettings(self, value: bool):
+        """
+        Gets and sets whether there are secondary display settings defined for the Hole/Thread Note PMI.
+        """
+        pass
+    @property
+    def secondaryDisplaySettings(self) -> PMIDisplaySettings:
+        """
+        Gets and sets the secondary display settings for the Hole/Thread Note PMI.
+        This will not always be existent. Setting this value will also set hasSecondaryDisplaySettings to true.
+        """
+        return PMIDisplaySettings()
+    @secondaryDisplaySettings.setter
+    def secondaryDisplaySettings(self, value: PMIDisplaySettings):
+        """
+        Gets and sets the secondary display settings for the Hole/Thread Note PMI.
+        This will not always be existent. Setting this value will also set hasSecondaryDisplaySettings to true.
+        """
+        pass
+    @property
+    def isWantQuantityNote(self) -> bool:
+        """
+        Gets and sets whether the quantity is visible in the graphics.
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        return bool()
+    @isWantQuantityNote.setter
+    def isWantQuantityNote(self, value: bool):
+        """
+        Gets and sets whether the quantity is visible in the graphics.
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        pass
+    @property
+    def diameter(self) -> PMIGeometricValue:
+        """
+        Gets and sets the PMIGeometricValue used to define the diameter of the annotated hole or boss in cm.
+        It is possible to also add tolerances to the object set by setting the tolerance property of the PMIGeometricValue object.
+        
+        Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        return PMIGeometricValue()
+    @diameter.setter
+    def diameter(self, value: PMIGeometricValue):
+        """
+        Gets and sets the PMIGeometricValue used to define the diameter of the annotated hole or boss in cm.
+        It is possible to also add tolerances to the object set by setting the tolerance property of the PMIGeometricValue object.
+        
+        Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        pass
+    @property
+    def shaftTolerance(self) -> PMIGeometricValueTolerance:
+        """
+        Gets and sets the PMIGeometricValueTolerance for the shaft diameter of the annotated hole if a shaft tolerance exists.
+        """
+        return PMIGeometricValueTolerance()
+    @shaftTolerance.setter
+    def shaftTolerance(self, value: PMIGeometricValueTolerance):
+        """
+        Gets and sets the PMIGeometricValueTolerance for the shaft diameter of the annotated hole if a shaft tolerance exists.
+        """
+        pass
+    @property
+    def isThrough(self) -> bool:
+        """
+        Gets and sets whether the hole should be considered a through hole.
+        
+        Setting this to true will remove the depth information related to the PMI.
+        Setting this to false will result in the depth being passed to PMI creation.
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        return bool()
+    @isThrough.setter
+    def isThrough(self, value: bool):
+        """
+        Gets and sets whether the hole should be considered a through hole.
+        
+        Setting this to true will remove the depth information related to the PMI.
+        Setting this to false will result in the depth being passed to PMI creation.
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        pass
+    @property
+    def depth(self) -> PMIGeometricValue:
+        """
+        Gets and sets the PMIGeometricValue used to define the depth of the hole in cm.
+        
+        In the case of bosses, it represents the height of the boss.
+        When setting, it is possible to also add tolerances to the object set by setting the tolerance property of the PMIGeometricValue object.
+        
+        Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        return PMIGeometricValue()
+    @depth.setter
+    def depth(self, value: PMIGeometricValue):
+        """
+        Gets and sets the PMIGeometricValue used to define the depth of the hole in cm.
+        
+        In the case of bosses, it represents the height of the boss.
+        When setting, it is possible to also add tolerances to the object set by setting the tolerance property of the PMIGeometricValue object.
+        
+        Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        pass
+    @property
+    def radius(self) -> PMIGeometricValue:
+        """
+        Gets and sets the PMIGeometricValue used to define the radius of the hole in cm. Not applicable for bosses.
+        
+        When setting, it is possible to also add tolerances to the object set by setting the tolerance property of the PMIGeometricValue object.
+        
+        Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        return PMIGeometricValue()
+    @radius.setter
+    def radius(self, value: PMIGeometricValue):
+        """
+        Gets and sets the PMIGeometricValue used to define the radius of the hole in cm. Not applicable for bosses.
+        
+        When setting, it is possible to also add tolerances to the object set by setting the tolerance property of the PMIGeometricValue object.
+        
+        Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        pass
+    @property
+    def isThreaded(self) -> bool:
+        """
+        Gets and sets whether the hole or the boss has a thread associated.
+        
+        Setting this to false will result in all thread information being ignored.
+        Setting this to true requires the thread information to also be set.
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        return bool()
+    @isThreaded.setter
+    def isThreaded(self, value: bool):
+        """
+        Gets and sets whether the hole or the boss has a thread associated.
+        
+        Setting this to false will result in all thread information being ignored.
+        Setting this to true requires the thread information to also be set.
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        pass
+    @property
+    def threadInfo(self) -> ThreadInfo:
+        """
+        Gets and sets the ThreadInfo object associated with the hole/thread note.
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        return ThreadInfo()
+    @threadInfo.setter
+    def threadInfo(self, value: ThreadInfo):
+        """
+        Gets and sets the ThreadInfo object associated with the hole/thread note.
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        pass
+    @property
+    def isThreadedThrough(self) -> bool:
+        """
+        Gets and sets whether the hole or boss is threaded all the way through.
+        Setting this to true will remove the thread depth information.
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        return bool()
+    @isThreadedThrough.setter
+    def isThreadedThrough(self, value: bool):
+        """
+        Gets and sets whether the hole or boss is threaded all the way through.
+        Setting this to true will remove the thread depth information.
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        pass
+    @property
+    def threadDepth(self) -> PMIGeometricValue:
+        """
+        Gets and sets the PMIGeometricValue used to define the thread depth of the hole in cm. In the case of bosses, it represents the thread length of the boss.
+        
+        When setting, it is possible to also add tolerances to the object set by setting the tolerances property of the PMIGeometricValue object.
+        
+        Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        return PMIGeometricValue()
+    @threadDepth.setter
+    def threadDepth(self, value: PMIGeometricValue):
+        """
+        Gets and sets the PMIGeometricValue used to define the thread depth of the hole in cm. In the case of bosses, it represents the thread length of the boss.
+        
+        When setting, it is possible to also add tolerances to the object set by setting the tolerances property of the PMIGeometricValue object.
+        
+        Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        pass
+    @property
+    def counterboreDiameter(self) -> PMIGeometricValue:
+        """
+        Gets and sets the PMIGeometricValue used to define the diameter of the counterbore segment of the hole in cm. Not applicable for bosses.
+        
+        When setting, it is possible to also add tolerances to the object set by setting the tolerances property of the PMIGeometricValue object.
+        
+        Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        return PMIGeometricValue()
+    @counterboreDiameter.setter
+    def counterboreDiameter(self, value: PMIGeometricValue):
+        """
+        Gets and sets the PMIGeometricValue used to define the diameter of the counterbore segment of the hole in cm. Not applicable for bosses.
+        
+        When setting, it is possible to also add tolerances to the object set by setting the tolerances property of the PMIGeometricValue object.
+        
+        Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        pass
+    @property
+    def counterboreDepth(self) -> PMIGeometricValue:
+        """
+        Gets and sets the PMIGeometricValue used to define the depth of the counterbore segment of the hole in cm. Not applicable for bosses.
+        
+        When setting, it is possible to also add tolerances to the object set by setting the tolerances property of the PMIGeometricValue object.
+        
+        Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        return PMIGeometricValue()
+    @counterboreDepth.setter
+    def counterboreDepth(self, value: PMIGeometricValue):
+        """
+        Gets and sets the PMIGeometricValue used to define the depth of the counterbore segment of the hole in cm. Not applicable for bosses.
+        
+        When setting, it is possible to also add tolerances to the object set by setting the tolerances property of the PMIGeometricValue object.
+        
+        Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        pass
+    @property
+    def counterboreRadius(self) -> PMIGeometricValue:
+        """
+        Gets and sets the PMIGeometricValue used to define the radius of the counterbore segment of the hole in cm. Not applicable for bosses.
+        
+        When setting, it is possible to also add tolerances to the object set by setting the tolerances property of the PMIGeometricValue object.
+        
+        Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        return PMIGeometricValue()
+    @counterboreRadius.setter
+    def counterboreRadius(self, value: PMIGeometricValue):
+        """
+        Gets and sets the PMIGeometricValue used to define the radius of the counterbore segment of the hole in cm. Not applicable for bosses.
+        
+        When setting, it is possible to also add tolerances to the object set by setting the tolerances property of the PMIGeometricValue object.
+        
+        Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        pass
+    @property
+    def countersinkDiameter(self) -> PMIGeometricValue:
+        """
+        Gets and sets the PMIGeometricValue used to define the diameter of the countersink segment of the hole in cm. Not applicable for bosses.
+        
+        When setting, it is possible to also add tolerances to the object set by setting the tolerances property of the PMIGeometricValue object.
+        
+        Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        return PMIGeometricValue()
+    @countersinkDiameter.setter
+    def countersinkDiameter(self, value: PMIGeometricValue):
+        """
+        Gets and sets the PMIGeometricValue used to define the diameter of the countersink segment of the hole in cm. Not applicable for bosses.
+        
+        When setting, it is possible to also add tolerances to the object set by setting the tolerances property of the PMIGeometricValue object.
+        
+        Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        pass
+    @property
+    def countersinkAngle(self) -> PMIGeometricValue:
+        """
+        Gets and sets the PMIGeometricValue used to define the angle of the countersink segment of the hole in radians. Not applicable for bosses.
+        
+        When setting, this value does not have tolerances, and will not be taken into account.
+        
+        Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        return PMIGeometricValue()
+    @countersinkAngle.setter
+    def countersinkAngle(self, value: PMIGeometricValue):
+        """
+        Gets and sets the PMIGeometricValue used to define the angle of the countersink segment of the hole in radians. Not applicable for bosses.
+        
+        When setting, this value does not have tolerances, and will not be taken into account.
+        
+        Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        pass
+    @property
+    def isHoleAnnotation(self) -> bool:
+        """
+        Gets whether the PMI is representing a hole or a boss.
+        """
+        return bool()
+    @property
+    def isFlipHoleNormal(self) -> bool:
+        """
+        Gets and sets whether the hole normal should be treated as flipped, resulting in the hole top to be placed at the lowest found face of the hole.
+        
+        This is applicable only to complex holes, in other cases the value is ignored.
+        """
+        return bool()
+    @isFlipHoleNormal.setter
+    def isFlipHoleNormal(self, value: bool):
+        """
+        Gets and sets whether the hole normal should be treated as flipped, resulting in the hole top to be placed at the lowest found face of the hole.
+        
+        This is applicable only to complex holes, in other cases the value is ignored.
+        """
+        pass
+
+class PMIImportedDimension(PMIAnnotation):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Defines an imported PMI which includes data related to dimensions.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> PMIImportedDimension:
+        return PMIImportedDimension()
+    def createForAssemblyContext(self, occurrence: Occurrence) -> PMIImportedDimension:
+        """
+        Creates or returns a proxy for the native object
+        - i.e. a new object that represents this object but adds the assembly context
+        defined by the input occurrence.
+        occurrence : The occurrence that defines the context to create the proxy in.
+        Returns the proxy object or null if this isn't the NativeObject.
+        """
+        return PMIImportedDimension()
+    def isHoleAnnotation(self) -> bool:
+        """
+        Indicates if the PMI is representing a hole or not.
+        """
+        return bool()
+    @property
+    def nativeObject(self) -> PMIImportedDimension:
+        """
+        The NativeObject is the object outside the context of an assembly and
+        in the context of its parent component.
+        Returns null in the case where this object is not in the context of
+        an assembly but is already the native object.
+        """
+        return PMIImportedDimension()
+    @property
+    def nominalDistance(self) -> PMIGeometricValue:
+        """
+        Gets the PMIGeometricValue used to define the nominal distance of the annotated dimension in cm.
+        When querying, if the nominal distance is not set, the value will be 0 and hasValue property will be false.
+        """
+        return PMIGeometricValue()
+    @property
+    def shaftTolerance(self) -> PMIGeometricValueTolerance:
+        """
+        Gets the PMIGeometricValueTolerance for the shaft diameter of the annotated hole if a shaft tolerance exists.
+        """
+        return PMIGeometricValueTolerance()
+    @property
+    def angleRelatorType(self) -> PMIAngleRelatorTypes:
+        """
+        The measured angle as a type.
+        """
+        return PMIAngleRelatorTypes()
+    @property
+    def holeType(self) -> HoleTypes:
+        """
+        Gets the type of the hole.
+        Requires the dimension to be associated with a hole.
+        """
+        return HoleTypes()
+
+class PMIImportedFolder(PMIAnnotation):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Defines a container of other PMI objects (including sub-folders).
+    
+    A PMIAnnotations can contain multiple PMI of this type, and is typically used to group the PMI within a PMIAnnotations.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> PMIImportedFolder:
+        return PMIImportedFolder()
+    def createForAssemblyContext(self, occurrence: Occurrence) -> PMIImportedFolder:
+        """
+        Creates or returns a proxy for the native object
+        - i.e. a new object that represents this object but adds the assembly context
+        defined by the input occurrence.
+        occurrence : The occurrence that defines the context to create the proxy in.
+        Returns the proxy object or null if this isn't the NativeObject.
+        """
+        return PMIImportedFolder()
+    @property
+    def nativeObject(self) -> PMIImportedFolder:
+        """
+        The NativeObject is the object outside the context of an assembly and
+        in the context of its parent component.
+        Returns null in the case where this object is not in the context of
+        an assembly but is already the native object.
+        """
+        return PMIImportedFolder()
+    @property
+    def containedPMI(self) -> list[PMIAnnotation]:
+        """
+        Returns the PMI objects within this folder PMI. This excludes PMI contained within folders that are within this folder.
+        
+        The type of the objects returned is the base class PMIAnnotation.
+        """
+        return [PMIAnnotation()]
+
+class PMIImportedGDTDatum(PMIAnnotation):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Defines an imported PMI which includes data related to a GDT Datum.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> PMIImportedGDTDatum:
+        return PMIImportedGDTDatum()
+    def createForAssemblyContext(self, occurrence: Occurrence) -> PMIImportedGDTDatum:
+        """
+        Creates or returns a proxy for the native object
+        - i.e. a new object that represents this object but adds the assembly context
+        defined by the input occurrence.
+        occurrence : The occurrence that defines the context to create the proxy in.
+        Returns the proxy object or null if this isn't the NativeObject.
+        """
+        return PMIImportedGDTDatum()
+    @property
+    def nativeObject(self) -> PMIImportedGDTDatum:
+        """
+        The NativeObject is the object outside the context of an assembly and
+        in the context of its parent component.
+        Returns null in the case where this object is not in the context of
+        an assembly but is already the native object.
+        """
+        return PMIImportedGDTDatum()
+    @property
+    def label(self) -> str:
+        """
+        Gets the label of this Datum.
+        
+        This is a read-only property because imported PMI cannot be edited.
+        """
+        return str()
+    @property
+    def datumTargets(self) -> list[PMIDatumTarget]:
+        """
+        Gets an array of datum targets associated with this datum, if any.
+        
+        This is a read-only property because imported PMI cannot be edited.
+        """
+        return [PMIDatumTarget()]
+
+class PMIImportedGeometricTolerance(PMIAnnotation):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Defines an imported PMI which includes data related to geometric tolerances.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> PMIImportedGeometricTolerance:
+        return PMIImportedGeometricTolerance()
+    def createForAssemblyContext(self, occurrence: Occurrence) -> PMIImportedGeometricTolerance:
+        """
+        Creates or returns a proxy for the native object
+        - i.e. a new object that represents this object but adds the assembly context
+        defined by the input occurrence.
+        occurrence : The occurrence that defines the context to create the proxy in.
+        Returns the proxy object or null if this isn't the NativeObject.
+        """
+        return PMIImportedGeometricTolerance()
+    @property
+    def nativeObject(self) -> PMIImportedGeometricTolerance:
+        """
+        The NativeObject is the object outside the context of an assembly and
+        in the context of its parent component.
+        Returns null in the case where this object is not in the context of
+        an assembly but is already the native object.
+        """
+        return PMIImportedGeometricTolerance()
+    @property
+    def tolerance(self) -> float:
+        """
+        Gets the tolerance value of the geometric tolerance in cm.
+        
+        This is a read-only property because imported PMI cannot be edited.
+        """
+        return float()
+    @property
+    def datumReferences(self) -> list[PMIDatumReference]:
+        """
+        Gets an array of datum references associated with this geometric tolerance.
+        
+        This is a read-only property because imported PMI cannot be edited.
+        """
+        return [PMIDatumReference()]
+
+class PMIImportedGraphical(PMIAnnotation):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Defines an imported PMI which only includes graphical data.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> PMIImportedGraphical:
+        return PMIImportedGraphical()
+    def createForAssemblyContext(self, occurrence: Occurrence) -> PMIImportedGraphical:
+        """
+        Creates or returns a proxy for the native object
+        - i.e. a new object that represents this object but adds the assembly context
+        defined by the input occurrence.
+        occurrence : The occurrence that defines the context to create the proxy in.
+        Returns the proxy object or null if this isn't the NativeObject.
+        """
+        return PMIImportedGraphical()
+    @property
+    def nativeObject(self) -> PMIImportedGraphical:
+        """
+        The NativeObject is the object outside the context of an assembly and
+        in the context of its parent component.
+        Returns null in the case where this object is not in the context of
+        an assembly but is already the native object.
+        """
+        return PMIImportedGraphical()
+
+class PMIImportedNote(PMIAnnotation):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Defines an imported PMI note.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> PMIImportedNote:
+        return PMIImportedNote()
+    def createForAssemblyContext(self, occurrence: Occurrence) -> PMIImportedNote:
+        """
+        Creates or returns a proxy for the native object
+        - i.e. a new object that represents this object but adds the assembly context
+        defined by the input occurrence.
+        occurrence : The occurrence that defines the context to create the proxy in.
+        Returns the proxy object or null if this isn't the NativeObject.
+        """
+        return PMIImportedNote()
+    @property
+    def nativeObject(self) -> PMIImportedNote:
+        """
+        The NativeObject is the object outside the context of an assembly and
+        in the context of its parent component.
+        Returns null in the case where this object is not in the context of
+        an assembly but is already the native object.
+        """
+        return PMIImportedNote()
+    @property
+    def note(self) -> str:
+        """
+        Gets the text content of the note.
+        """
+        return str()
+    @property
+    def reference(self) -> PMIAnnotation:
+        """
+        Gets the PMI referenced by this note.
+        Returns the referenced PMI, or null if no reference is specified.
+        """
+        return PMIAnnotation()
+
+class PMIImportedSurfaceTexture(PMIAnnotation):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Defines an imported PMI which includes data related to surface texture.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> PMIImportedSurfaceTexture:
+        return PMIImportedSurfaceTexture()
+    def createForAssemblyContext(self, occurrence: Occurrence) -> PMIImportedSurfaceTexture:
+        """
+        Creates or returns a proxy for the native object
+        - i.e. a new object that represents this object but adds the assembly context
+        defined by the input occurrence.
+        occurrence : The occurrence that defines the context to create the proxy in.
+        Returns the proxy object or null if this isn't the NativeObject.
+        """
+        return PMIImportedSurfaceTexture()
+    @property
+    def nativeObject(self) -> PMIImportedSurfaceTexture:
+        """
+        The NativeObject is the object outside the context of an assembly and
+        in the context of its parent component.
+        Returns null in the case where this object is not in the context of
+        an assembly but is already the native object.
+        """
+        return PMIImportedSurfaceTexture()
+    @property
+    def surfaceTextureType(self) -> PMISurfaceTextureTypes:
+        """
+        Gets the surface texture type.
+        """
+        return PMISurfaceTextureTypes()
+    @property
+    def standard(self) -> PMISurfaceTextureStandardTypes:
+        """
+        Gets the surface texture standard used.
+        """
+        return PMISurfaceTextureStandardTypes()
+    @property
+    def hasRoughness(self) -> bool:
+        """
+        Indicates whether a roughness value is defined.
+        """
+        return bool()
+    @property
+    def roughness(self) -> float:
+        """
+        Gets the roughness value in micrometers.
+        Requires hasRoughness to be true.
+        """
+        return float()
+    @property
+    def hasRoughnessLimits(self) -> bool:
+        """
+        Indicates whether roughness limits (minimum and maximum) are defined.
+        """
+        return bool()
+    @property
+    def minimumRoughness(self) -> float:
+        """
+        Gets the minimum roughness value in micrometers.
+        Requires hasRoughnessLimits to be true.
+        """
+        return float()
+    @property
+    def maximumRoughness(self) -> float:
+        """
+        Gets the maximum roughness value in micrometers.
+        Requires hasRoughnessLimits to be true.
+        """
+        return float()
+    @property
+    def laySymbolType(self) -> PMILaySymbolTypes:
+        """
+        Gets the lay symbol type.
+        """
+        return PMILaySymbolTypes()
+    @property
+    def hasProcessingAllowance(self) -> bool:
+        """
+        Indicates whether a processing allowance value is defined.
+        """
+        return bool()
+    @property
+    def processingAllowance(self) -> float:
+        """
+        Gets the processing allowance value.
+        Requires hasProcessingAllowance to be true.
+        """
+        return float()
+    @property
+    def hasProcessingAllowanceTolerances(self) -> bool:
+        """
+        Indicates whether processing allowance tolerances are defined.
+        """
+        return bool()
+    @property
+    def processingAllowanceLowerTolerance(self) -> float:
+        """
+        Gets the lower tolerance for processing allowance.
+        Requires hasProcessingAllowanceTolerances to be true.
+        """
+        return float()
+    @property
+    def processingAllowanceUpperTolerance(self) -> float:
+        """
+        Gets the upper tolerance for processing allowance.
+        Requires hasProcessingAllowanceTolerances to be true.
+        """
+        return float()
+    @property
+    def machineMethod(self) -> str:
+        """
+        Gets the machine method description.
+        """
+        return str()
+    @property
+    def isModifier(self) -> bool:
+        """
+        Indicates whether this surface texture has a modifier.
+        """
+        return bool()
+    @property
+    def cutoff(self) -> PMIRoughness:
+        """
+        Gets the cutoff roughness data.
+        """
+        return PMIRoughness()
+    @property
+    def secondaryRoughness(self) -> PMIRoughness:
+        """
+        Gets the secondary roughness data.
+        """
+        return PMIRoughness()
+    @property
+    def tertiaryRoughness(self) -> PMIRoughness:
+        """
+        Gets the tertiary roughness data.
+        """
+        return PMIRoughness()
+    @property
+    def waviness(self) -> PMIRoughness:
+        """
+        Gets the waviness data.
+        """
+        return PMIRoughness()
+
+class PMILeaderLineNoteInput(PMIInput):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    A class that defines the input used to create a Note PMI.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> PMILeaderLineNoteInput:
+        return PMILeaderLineNoteInput()
+    def setAnnotationPlane(self, planeType: LeaderLineNotePlaneTypes, face: BRepFace = None) -> bool:
+        """
+        Sets the annotation plane for Leader Line Note PMI.
+        planeType : The type of annotation plane to create.
+        
+        Creation of Leader Line Note PMI on Unknown plane type is not supported.
+        face : An optional input face to define the plane.
+        
+        Required if the planeType is NormalToCustomFaceLeaderLineNotePlaneType.
+        
+        Required if the planeType is NormalToFaceLeaderLineNotePlaneType and the face must be an adjacent face to the geometry.
+        
+        For other plane types, this parameter is ignored.
+        True if the plane has been set successfully.
+        """
+        return bool()
+    @property
+    def geometry(self) -> core.Base:
+        """
+        The geometric entity to which the Note PMI will be associated.
+        
+        This can be a BRepFace, BRepEdge, or BRepVertex object. For BRepEdge objects, only linear, circular
+        and elliptical edges are supported. The note will be positioned relative to this entity and will
+        maintain its association with the entity geometry.
+        
+        Setting the geometry will set a default annotation plane and target point.
+        Resetting the geometry will reset to default annotation plane and target point.
+        Native object will be used when setting the geometry.
+        """
+        return core.Base()
+    @geometry.setter
+    def geometry(self, value: core.Base):
+        """
+        The geometric entity to which the Note PMI will be associated.
+        
+        This can be a BRepFace, BRepEdge, or BRepVertex object. For BRepEdge objects, only linear, circular
+        and elliptical edges are supported. The note will be positioned relative to this entity and will
+        maintain its association with the entity geometry.
+        
+        Setting the geometry will set a default annotation plane and target point.
+        Resetting the geometry will reset to default annotation plane and target point.
+        Native object will be used when setting the geometry.
+        """
+        pass
+    @property
+    def annotationTargetPoint(self) -> core.Point3D:
+        """
+        Gets and sets the annotation point on the geometry that the leader line note is associated with.
+        
+        This can be a point on the BRepFace, BRepEdge or BRepVertex, depending on the geometry.
+        The point is relative to the geometry's component space where the PMI is being created.
+        """
+        return core.Point3D()
+    @annotationTargetPoint.setter
+    def annotationTargetPoint(self, value: core.Point3D):
+        """
+        Gets and sets the annotation point on the geometry that the leader line note is associated with.
+        
+        This can be a point on the BRepFace, BRepEdge or BRepVertex, depending on the geometry.
+        The point is relative to the geometry's component space where the PMI is being created.
+        """
+        pass
+    @property
+    def annotationPlaneType(self) -> LeaderLineNotePlaneTypes:
+        """
+        Get the LeaderLineNotePlaneTypes that the Leader Line Note PMI is currently using.
+        """
+        return LeaderLineNotePlaneTypes()
+    @property
+    def annotationPlaneReferencedFace(self) -> BRepFace:
+        """
+        The BRepFace used as the alternate plane for the leader line note, if there's any.
+        
+        Applicable when the planeType is NormalToCustomFaceLeaderLineNotePlaneType or NormalToFaceLeaderLineNotePlaneType
+        """
+        return BRepFace()
+    @property
+    def supportedAnnotationPlaneTypes(self) -> list[int]:
+        """
+        A helper method to get all available annotation plane types that can be set on this Leader Line Note PMI.
+        """
+        return [int()]
+    @property
+    def adjacentPlanarFaces(self) -> list[BRepFace]:
+        """
+        Adjacent planar faces to the geometry that can be used to define the annotation plane with type NormalToFaceLeaderLineNotePlaneType.
+        """
+        return [BRepFace()]
+
+class PMILineBreakSegment(PMISegment):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Represents a segment defining a new line (or a line break).
+    Used to define the text used by a PMI.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> PMILineBreakSegment:
+        return PMILineBreakSegment()
+    @staticmethod
+    def create() -> PMILineBreakSegment:
+        """
+        Create a transient PMILineBreakSegment object.
+        The newly created PMILineBreakSegment.
+        """
+        return PMILineBreakSegment()
+
+class PMISymbolSegment(PMISegment):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Represents a segment containing a symbol used to define the text of a PMI.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> PMISymbolSegment:
+        return PMISymbolSegment()
+    @staticmethod
+    def create(pmiSymbolType: PMISymbolTypes) -> PMISymbolSegment:
+        """
+        Create a transient PMISymbolSegment object.
+        pmiSymbolType : The symbol this segment represents.
+        The newly created PMISymbolSegment.
+        """
+        return PMISymbolSegment()
+    @property
+    def pmiSymbolType(self) -> PMISymbolTypes:
+        """
+        Gets and sets the symbol of this segment.
+        """
+        return PMISymbolTypes()
+    @pmiSymbolType.setter
+    def pmiSymbolType(self, value: PMISymbolTypes):
+        """
+        Gets and sets the symbol of this segment.
+        """
+        pass
+
+class PMITextSegment(PMISegment):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Represents a segment of text used to define the text of a PMI.
+    The text can include any number of characters.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> PMITextSegment:
+        return PMITextSegment()
+    @staticmethod
+    def create(text: str) -> PMITextSegment:
+        """
+        Create a transient PMITextSegment object.
+        text : A string defining the text of the segment.
+        The newly created PMITextSegment.
+        """
+        return PMITextSegment()
+    @property
+    def text(self) -> str:
+        """
+        Gets and sets the text of this segment.
+        """
+        return str()
+    @text.setter
+    def text(self, value: str):
+        """
+        Gets and sets the text of this segment.
+        """
+        pass
 
 class PointHolePositionDefinition(HolePositionDefinition):
     """
@@ -45249,7 +52730,7 @@ class RectangularPatternConstraint(GeometricConstraint):
     def nativeObject(self) -> RectangularPatternConstraint:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -45276,9 +52757,13 @@ class RectangularPatternFeature(Feature):
     @property
     def inputEntities(self) -> core.ObjectCollection:
         """
-        Gets and sets the input entities. The collection can contain faces, features, bodies or occurrences.
-        All of the entities must be of a single type. For example, it can't contain features and occurrences
-        but only features or occurrences.
+        Gets and sets the entities to pattern using an ObjectCollection. The collection can contain BRepFace,
+        PartFeature, BRepBody, or Occurrence objects. All of the entities provided must be the same type.
+        For example, it must contain only bodies and can't contain both bodies and faces.
+        
+        ConstructionPoint, ConstructionAxis, and ConstructionPlane objects can also be patterned. When patterning any
+        construction goemetry, only one entity can be patterned at a time, so the ObjectCollection will always contain a
+        single entity
         
         To use this property, you need to position the timeline marker to immediately before this feature.
         This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
@@ -45287,9 +52772,13 @@ class RectangularPatternFeature(Feature):
     @inputEntities.setter
     def inputEntities(self, value: core.ObjectCollection):
         """
-        Gets and sets the input entities. The collection can contain faces, features, bodies or occurrences.
-        All of the entities must be of a single type. For example, it can't contain features and occurrences
-        but only features or occurrences.
+        Gets and sets the entities to pattern using an ObjectCollection. The collection can contain BRepFace,
+        PartFeature, BRepBody, or Occurrence objects. All of the entities provided must be the same type.
+        For example, it must contain only bodies and can't contain both bodies and faces.
+        
+        ConstructionPoint, ConstructionAxis, and ConstructionPlane objects can also be patterned. When patterning any
+        construction goemetry, only one entity can be patterned at a time, so the ObjectCollection will always contain a
+        single entity
         
         To use this property, you need to position the timeline marker to immediately before this feature.
         This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
@@ -46142,6 +53631,64 @@ class RipFeature(Feature):
         """
         return RipFeature()
 
+class RolledHemFeatureDefinition(HemFeatureDefinition):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    The definition for a rolled hem.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> RolledHemFeatureDefinition:
+        return RolledHemFeatureDefinition()
+    @property
+    def radius(self) -> ModelParameter:
+        """
+        Gets the radius for a rolled hem.
+        """
+        return ModelParameter()
+    @property
+    def angle(self) -> ModelParameter:
+        """
+        Gets the angle for a rolled hem.
+        """
+        return ModelParameter()
+
+class RopeHemFeatureDefinition(HemFeatureDefinition):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    The definition for a rope hem.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> RopeHemFeatureDefinition:
+        return RopeHemFeatureDefinition()
+    @property
+    def radius(self) -> ModelParameter:
+        """
+        Gets the radius for a rope hem.
+        """
+        return ModelParameter()
+    @property
+    def gap(self) -> ModelParameter:
+        """
+        Gets the gap for a rope hem.
+        """
+        return ModelParameter()
+    @property
+    def length(self) -> ModelParameter:
+        """
+        Gets the length for a rope hem.
+        """
+        return ModelParameter()
+
 class RuledSurfaceFeature(Feature):
     """
     Object that represents an existing RuledSurface feature in a design.
@@ -46281,16 +53828,6 @@ class RuledSurfaceFeature(Feature):
         The default value is rounded.
         """
         pass
-
-class RuleFilletFeature(Feature):
-    """
-    Object that represents an existing rule fillet feature in a design.
-    """
-    def __init__(self):
-        pass
-    @staticmethod
-    def cast(arg) -> RuleFilletFeature:
-        return RuleFilletFeature()
 
 class SATExportOptions(ExportOptions):
     """
@@ -46727,7 +54264,7 @@ class SketchAngularDimension(SketchDimension):
     def nativeObject(self) -> SketchAngularDimension:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -46767,7 +54304,7 @@ class SketchConcentricCircleDimension(SketchDimension):
     def nativeObject(self) -> SketchConcentricCircleDimension:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -46886,7 +54423,7 @@ class SketchDiameterDimension(SketchDimension):
     def nativeObject(self) -> SketchDiameterDimension:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -46926,7 +54463,7 @@ class SketchDistanceBetweenLineAndPlanarSurfaceDimension(SketchDimension):
     def nativeObject(self) -> SketchDistanceBetweenLineAndPlanarSurfaceDimension:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -46966,7 +54503,7 @@ class SketchDistanceBetweenPointAndSurfaceDimension(SketchDimension):
     def nativeObject(self) -> SketchDistanceBetweenPointAndSurfaceDimension:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -47000,7 +54537,7 @@ class SketchEllipseMajorRadiusDimension(SketchDimension):
     def nativeObject(self) -> SketchEllipseMajorRadiusDimension:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -47034,7 +54571,7 @@ class SketchEllipseMinorRadiusDimension(SketchDimension):
     def nativeObject(self) -> SketchEllipseMinorRadiusDimension:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -47074,7 +54611,7 @@ class SketchLinearDiameterDimension(SketchDimension):
     def nativeObject(self) -> SketchLinearDiameterDimension:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -47120,7 +54657,7 @@ class SketchLinearDimension(SketchDimension):
     def nativeObject(self) -> SketchLinearDimension:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -47155,7 +54692,7 @@ class SketchOffsetCurvesDimension(SketchDimension):
     def nativeObject(self) -> SketchOffsetCurvesDimension:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -47195,7 +54732,7 @@ class SketchOffsetDimension(SketchDimension):
     def nativeObject(self) -> SketchOffsetDimension:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -47265,7 +54802,7 @@ class SketchPoint(SketchEntity):
         """
         Returns a Point3D object which provides the position of the sketch point in world space.
         The returned coordinate takes into account the assembly context and the position of the
-        sketch in it's parent component, which means the coordinate will be returned in the root
+        sketch in its parent component, which means the coordinate will be returned in the root
         component space.
         """
         return core.Point3D()
@@ -47273,7 +54810,7 @@ class SketchPoint(SketchEntity):
     def nativeObject(self) -> SketchPoint:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -47364,7 +54901,7 @@ class SketchRadialDimension(SketchDimension):
     def nativeObject(self) -> SketchRadialDimension:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -47405,7 +54942,7 @@ class SketchTangentDistanceDimension(SketchDimension):
     def nativeObject(self) -> SketchTangentDistanceDimension:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -47463,30 +55000,6 @@ class SketchText(SketchEntity):
         Returns the proxy object or null if this isn't the NativeObject.
         """
         return SketchText()
-    @property
-    def height(self) -> float:
-        """
-        Gets and sets the height of the text in centimeters.
-        """
-        return float()
-    @height.setter
-    def height(self, value: float):
-        """
-        Gets and sets the height of the text in centimeters.
-        """
-        pass
-    @property
-    def text(self) -> str:
-        """
-        Gets and sets the text. This is a simple string and ignores any formatting defined within the text.
-        """
-        return str()
-    @text.setter
-    def text(self, value: str):
-        """
-        Gets and sets the text. This is a simple string and ignores any formatting defined within the text.
-        """
-        pass
     @property
     def fontName(self) -> str:
         """
@@ -47547,11 +55060,27 @@ class SketchText(SketchEntity):
     def nativeObject(self) -> SketchText:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
         return SketchText()
+    @property
+    def textParameter(self) -> ModelParameter:
+        """
+        Returns the model parameter that was created when the sketch text was created that
+        controls the contents of the sketch text. To edit the text, you can use
+        the expression and textValue properties of the returned ModelParameter object.
+        """
+        return ModelParameter()
+    @property
+    def heightParameter(self) -> ModelParameter:
+        """
+        Returns the model parameter that was created when the sketch text was created
+        that controls the height of the sketch text. To edit the height, you can use
+        the expression and value properties of the returned ModelParameter object.
+        """
+        return ModelParameter()
 
 class SliderJointMotion(JointMotion):
     """
@@ -47676,7 +55205,7 @@ class SmoothConstraint(GeometricConstraint):
     def nativeObject(self) -> SmoothConstraint:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -48396,7 +55925,7 @@ class SweepFeature(Feature):
     @property
     def sideFaces(self) -> BRepFaces:
         """
-        Property that returns a object that provides access to all of the faces created around the perimeter of the feature.
+        Property that returns an object that provides access to all of the faces created around the perimeter of the feature.
         """
         return BRepFaces()
     @property
@@ -48679,7 +56208,7 @@ class SymmetricExtentDefinition(ExtentDefinition):
         """
         Returns the current extent distance. If the SymmetricExtentDefinition object has been created statically and isn't associated with
         a feature this will return a ValueInput object. If the SymmetricExtentDefinition object is obtained from a feature this
-        will return a ModelParameter object. You can use properties of the parameter to edit it's value which will result in
+        will return a ModelParameter object. You can use properties of the parameter to edit its value which will result in
         the feature updating.
         """
         return core.Base()
@@ -48688,7 +56217,7 @@ class SymmetricExtentDefinition(ExtentDefinition):
         """
         Returns the current taper angle. If the SymmetricExtentDefinition object has been created statically and isn't associated with
         a feature this will return a ValueInput object. If the SymmetricExtentDefinition object is obtained from a feature this
-        will return a ModelParameter object. You can use properties of the parameter to edit it's value which will result in
+        will return a ModelParameter object. You can use properties of the parameter to edit its value which will result in
         the feature updating.
         """
         return core.Base()
@@ -48733,7 +56262,7 @@ class SymmetryConstraint(GeometricConstraint):
     def nativeObject(self) -> SymmetryConstraint:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -48773,11 +56302,43 @@ class TangentConstraint(GeometricConstraint):
     def nativeObject(self) -> TangentConstraint:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
         return TangentConstraint()
+
+class TeardropHemFeatureDefinition(HemFeatureDefinition):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    The definition for a teardrop hem.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> TeardropHemFeatureDefinition:
+        return TeardropHemFeatureDefinition()
+    @property
+    def radius(self) -> ModelParameter:
+        """
+        Gets the radius for a teardrop hem.
+        """
+        return ModelParameter()
+    @property
+    def length(self) -> ModelParameter:
+        """
+        Gets the length for a teardrop hem.
+        """
+        return ModelParameter()
+    @property
+    def gap(self) -> ModelParameter:
+        """
+        Gets the gap for a teardrop hem.
+        """
+        return ModelParameter()
 
 class ThickenFeature(Feature):
     """
@@ -48886,10 +56447,31 @@ class ThickenFeature(Feature):
         an assembly but is already the native object.
         """
         return ThickenFeature()
+    @property
+    def thickenType(self) -> ThickenTypes:
+        """
+        Gets and sets the thicken type for the thicken.
+        
+        To set this property, you need to position the timeline marker to immediately before this feature.
+        This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
+        """
+        return ThickenTypes()
+    @thickenType.setter
+    def thickenType(self, value: ThickenTypes):
+        """
+        Gets and sets the thicken type for the thicken.
+        
+        To set this property, you need to position the timeline marker to immediately before this feature.
+        This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
+        """
+        pass
 
 class ThreadFeature(Feature):
     """
-    Object that represents an existing thread feature in a design.
+    Object that represents an existing thread feature in a design. The creation of a tapped
+    hole also results in the creation of a thread feature. There are some limitation when the
+    thread feature is associated with a hole, which are described in the documentation for the
+    property or method where the limitation exists.
     """
     def __init__(self):
         pass
@@ -48928,6 +56510,9 @@ class ThreadFeature(Feature):
         
         To set this property, you need to position the timeline marker to immediately before this feature.
         This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
+        
+        If the thread feature is associated with a hole (the hole property is not null), this property will
+        always return null and will fail if set.
         """
         return BRepFace()
     @inputCylindricalFace.setter
@@ -48940,6 +56525,9 @@ class ThreadFeature(Feature):
         
         To set this property, you need to position the timeline marker to immediately before this feature.
         This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
+        
+        If the thread feature is associated with a hole (the hole property is not null), this property will
+        always return null and will fail if set.
         """
         pass
     @property
@@ -49008,6 +56596,9 @@ class ThreadFeature(Feature):
         
         To set this property, you need to position the timeline marker to immediately before this feature.
         This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
+        
+        If the thread feature is associated with a hole (the hole property is not null), this property will
+        always return null and will always return LowEndThreadLocation and will fail if set.
         """
         return ThreadLocations()
     @threadLocation.setter
@@ -49018,6 +56609,9 @@ class ThreadFeature(Feature):
         
         To set this property, you need to position the timeline marker to immediately before this feature.
         This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
+        
+        If the thread feature is associated with a hole (the hole property is not null), this property will
+        always return null and will always return LowEndThreadLocation and will fail if set.
         """
         pass
     @property
@@ -49076,6 +56670,9 @@ class ThreadFeature(Feature):
         
         To use this property, you need to position the timeline marker to immediately before this feature.
         This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
+        
+        If the thread feature is associated with a hole (the hole property is not null), this property will
+        always return null and will fail if set.
         """
         return core.ObjectCollection()
     @inputCylindricalFaces.setter
@@ -49085,6 +56682,194 @@ class ThreadFeature(Feature):
         
         To use this property, you need to position the timeline marker to immediately before this feature.
         This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
+        
+        If the thread feature is associated with a hole (the hole property is not null), this property will
+        always return null and will fail if set.
+        """
+        pass
+    @property
+    def hole(self) -> HoleFeature:
+        """
+        If this thread feature is was created as the result of creating a tapped hole, this
+        property will return the associated hole feature. If this is a standard thread feature,
+        this property will return null.
+        """
+        return HoleFeature()
+
+class ThreeBendCornerClosureFeatureDefinition(CornerClosureFeatureDefinition):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    The definition for a three bend corner closure.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> ThreeBendCornerClosureFeatureDefinition:
+        return ThreeBendCornerClosureFeatureDefinition()
+    @property
+    def threeBendReliefShape(self) -> CornerThreeBendReliefShapeTypes:
+        """
+        Gets and sets the relief shape for the three-bend corner.
+        
+        To set this property, you need to position the timeline marker to immediately before this feature.
+        This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
+        """
+        return CornerThreeBendReliefShapeTypes()
+    @threeBendReliefShape.setter
+    def threeBendReliefShape(self, value: CornerThreeBendReliefShapeTypes):
+        """
+        Gets and sets the relief shape for the three-bend corner.
+        
+        To set this property, you need to position the timeline marker to immediately before this feature.
+        This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
+        """
+        pass
+    @property
+    def threeBendReliefRadius(self) -> ModelParameter:
+        """
+        Gets the radius of the three-bend relief.
+        """
+        return ModelParameter()
+    @property
+    def isUseSheetMetalRuleDefaults(self) -> bool:
+        """
+        Gets and sets whether to use default values from the Sheet Metal Rule for all three-bend relief parameters
+        (shape and radius).
+        
+        When set to true, the relief shape and radius are retrieved from the active Sheet Metal Rule.
+        When set to false (default), the explicitly set values for these parameters are used.
+        
+        To set this property, you need to position the timeline marker to immediately before this feature.
+        This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
+        
+        The default value is false.
+        """
+        return bool()
+    @isUseSheetMetalRuleDefaults.setter
+    def isUseSheetMetalRuleDefaults(self, value: bool):
+        """
+        Gets and sets whether to use default values from the Sheet Metal Rule for all three-bend relief parameters
+        (shape and radius).
+        
+        When set to true, the relief shape and radius are retrieved from the active Sheet Metal Rule.
+        When set to false (default), the explicitly set values for these parameters are used.
+        
+        To set this property, you need to position the timeline marker to immediately before this feature.
+        This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
+        
+        The default value is false.
+        """
+        pass
+    @property
+    def isUseSheetMetalRuleMiterGap(self) -> bool:
+        """
+        Gets and sets whether to use the miter gap value from the Sheet Metal Rule.
+        
+        When set to true, the miter gap value is retrieved from the active Sheet Metal Rule.
+        When set to false (default), the explicitly set miterGap value is used.
+        
+        To set this property, you need to position the timeline marker to immediately before this feature.
+        This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
+        
+        The default value is false.
+        """
+        return bool()
+    @isUseSheetMetalRuleMiterGap.setter
+    def isUseSheetMetalRuleMiterGap(self, value: bool):
+        """
+        Gets and sets whether to use the miter gap value from the Sheet Metal Rule.
+        
+        When set to true, the miter gap value is retrieved from the active Sheet Metal Rule.
+        When set to false (default), the explicitly set miterGap value is used.
+        
+        To set this property, you need to position the timeline marker to immediately before this feature.
+        This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
+        
+        The default value is false.
+        """
+        pass
+
+class ThreeBendCornerClosureInputDefinition(CornerClosureInputDefinition):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Defines the input properties required for creating a three-bend corner closure feature.
+    This input definition provides a structured way to organize and validate the parameters before passing them to the
+    setThreeBendCornerClosure method.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> ThreeBendCornerClosureInputDefinition:
+        return ThreeBendCornerClosureInputDefinition()
+    @staticmethod
+    def create() -> ThreeBendCornerClosureInputDefinition:
+        """
+        Creates a ThreeBendCornerClosureParameters object that can be used to define parameters for a three-bend corner closure.
+        Use properties on this object to set the relief shape, relief radius, miter gap, alignment settings,
+        and bend transition type before passing it to the setThreeBendCornerClosure method.
+        Returns the newly created ThreeBendCornerClosureParameters object or null if the creation failed.
+        """
+        return ThreeBendCornerClosureInputDefinition()
+    @property
+    def threeBendReliefShape(self) -> CornerThreeBendReliefShapeTypes:
+        """
+        Gets and sets the relief shape for the three-bend corner.
+        This defines the geometric shape used to relieve stress at the corner where three bends meet.
+        This property is ignored when useSheetMetalRuleDefaults is set to true.
+        The default value is RoundWithRadiusCornerThreeBendReliefShapeType.
+        """
+        return CornerThreeBendReliefShapeTypes()
+    @threeBendReliefShape.setter
+    def threeBendReliefShape(self, value: CornerThreeBendReliefShapeTypes):
+        """
+        Gets and sets the relief shape for the three-bend corner.
+        This defines the geometric shape used to relieve stress at the corner where three bends meet.
+        This property is ignored when useSheetMetalRuleDefaults is set to true.
+        The default value is RoundWithRadiusCornerThreeBendReliefShapeType.
+        """
+        pass
+    @property
+    def threeBendReliefRadius(self) -> core.ValueInput:
+        """
+        Gets and sets the radius of the three-bend relief.
+        This parameter is only valid when the threeBendReliefShape is RoundWithRadiusCornerThreeBendReliefShapeType.
+        For other relief shapes, this value is ignored.
+        This property is ignored when useSheetMetalRuleDefaults is set to true.
+        """
+        return core.ValueInput()
+    @threeBendReliefRadius.setter
+    def threeBendReliefRadius(self, value: core.ValueInput):
+        """
+        Gets and sets the radius of the three-bend relief.
+        This parameter is only valid when the threeBendReliefShape is RoundWithRadiusCornerThreeBendReliefShapeType.
+        For other relief shapes, this value is ignored.
+        This property is ignored when useSheetMetalRuleDefaults is set to true.
+        """
+        pass
+    @property
+    def isUseSheetMetalRuleDefaults(self) -> bool:
+        """
+        Gets and sets whether to use default relief values from the Sheet Metal Rule.
+        When true, all relief parameters (shape and radius) are taken from the active Sheet Metal Rule,
+        and any values set in threeBendReliefShape and threeBendReliefRadius properties are ignored.
+        When false (default), the relief parameters must be explicitly set using the respective properties.
+        The default value is false.
+        """
+        return bool()
+    @isUseSheetMetalRuleDefaults.setter
+    def isUseSheetMetalRuleDefaults(self, value: bool):
+        """
+        Gets and sets whether to use default relief values from the Sheet Metal Rule.
+        When true, all relief parameters (shape and radius) are taken from the active Sheet Metal Rule,
+        and any values set in threeBendReliefShape and threeBendReliefRadius properties are ignored.
+        When false (default), the relief parameters must be explicitly set using the respective properties.
+        The default value is false.
         """
         pass
 
@@ -49218,7 +57003,7 @@ class ToEntityExtentDefinition(ExtentDefinition):
         """
         Returns the current offset. If the EntityExtentDefinition object has been created statically and isn't associated with
         a feature this will return a ValueInput object. If the EntityExtentDefinition object is obtained from a feature this
-        will return a ModelParameter object. You can use properties of the parameter to edit it's value which will result in
+        will return a ModelParameter object. You can use properties of the parameter to edit its value which will result in
         the feature updating.
         """
         return core.Base()
@@ -49345,6 +57130,223 @@ class TrimFeature(Feature):
         an assembly but is already the native object.
         """
         return TrimFeature()
+
+class TwoBendCornerClosureFeatureDefinition(CornerClosureFeatureDefinition):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    The definition for a two bend corner closure.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> TwoBendCornerClosureFeatureDefinition:
+        return TwoBendCornerClosureFeatureDefinition()
+    @property
+    def twoBendReliefShape(self) -> CornerTwoBendReliefShapeTypes:
+        """
+        Gets and sets the relief shape for the two-bend corner.
+        
+        To set this property, you need to position the timeline marker to immediately before this feature.
+        This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
+        """
+        return CornerTwoBendReliefShapeTypes()
+    @twoBendReliefShape.setter
+    def twoBendReliefShape(self, value: CornerTwoBendReliefShapeTypes):
+        """
+        Gets and sets the relief shape for the two-bend corner.
+        
+        To set this property, you need to position the timeline marker to immediately before this feature.
+        This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
+        """
+        pass
+    @property
+    def twoBendReliefSize(self) -> ModelParameter:
+        """
+        Gets the size of the two-bend relief.
+        """
+        return ModelParameter()
+    @property
+    def twoBendReliefPlacement(self) -> CornerTwoBendReliefPlacementTypes:
+        """
+        Gets and sets the placement of the two-bend relief.
+        
+        To set this property, you need to position the timeline marker to immediately before this feature.
+        This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
+        """
+        return CornerTwoBendReliefPlacementTypes()
+    @twoBendReliefPlacement.setter
+    def twoBendReliefPlacement(self, value: CornerTwoBendReliefPlacementTypes):
+        """
+        Gets and sets the placement of the two-bend relief.
+        
+        To set this property, you need to position the timeline marker to immediately before this feature.
+        This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
+        """
+        pass
+    @property
+    def isUseSheetMetalRuleDefaults(self) -> bool:
+        """
+        Gets and sets whether to use default values from the Sheet Metal Rule for all two-bend relief parameters
+        (shape, size, and placement).
+        
+        When set to true, the relief shape, size, and placement are retrieved from the active Sheet Metal Rule.
+        When set to false (default), the explicitly set values for these parameters are used.
+        
+        To set this property, you need to position the timeline marker to immediately before this feature.
+        This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
+        
+        The default value is false.
+        """
+        return bool()
+    @isUseSheetMetalRuleDefaults.setter
+    def isUseSheetMetalRuleDefaults(self, value: bool):
+        """
+        Gets and sets whether to use default values from the Sheet Metal Rule for all two-bend relief parameters
+        (shape, size, and placement).
+        
+        When set to true, the relief shape, size, and placement are retrieved from the active Sheet Metal Rule.
+        When set to false (default), the explicitly set values for these parameters are used.
+        
+        To set this property, you need to position the timeline marker to immediately before this feature.
+        This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
+        
+        The default value is false.
+        """
+        pass
+    @property
+    def isUseSheetMetalRuleMiterGap(self) -> bool:
+        """
+        Gets and sets whether to use the miter gap value from the Sheet Metal Rule.
+        
+        When set to true, the miter gap value is retrieved from the active Sheet Metal Rule.
+        When set to false (default), the explicitly set miterGap value is used.
+        
+        To set this property, you need to position the timeline marker to immediately before this feature.
+        This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
+        
+        The default value is false.
+        """
+        return bool()
+    @isUseSheetMetalRuleMiterGap.setter
+    def isUseSheetMetalRuleMiterGap(self, value: bool):
+        """
+        Gets and sets whether to use the miter gap value from the Sheet Metal Rule.
+        
+        When set to true, the miter gap value is retrieved from the active Sheet Metal Rule.
+        When set to false (default), the explicitly set miterGap value is used.
+        
+        To set this property, you need to position the timeline marker to immediately before this feature.
+        This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)
+        
+        The default value is false.
+        """
+        pass
+
+class TwoBendCornerClosureInputDefinition(CornerClosureInputDefinition):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Defines the input properties required for creating a two-bend corner closure feature.
+    This input definition provides a structured way to organize and validate the parameters before passing them to the
+    setTwoBendCornerClosure method.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> TwoBendCornerClosureInputDefinition:
+        return TwoBendCornerClosureInputDefinition()
+    @staticmethod
+    def create() -> TwoBendCornerClosureInputDefinition:
+        """
+        Creates a TwoBendCornerClosureParameters object that can be used to define parameters for a two-bend corner closure.
+        Use properties on this object to set the relief shape, relief size, relief placement, miter gap, alignment settings,
+        and bend transition type before passing it to the setTwoBendCornerClosure method.
+        Returns the newly created TwoBendCornerClosureParameters object or null if the creation failed.
+        """
+        return TwoBendCornerClosureInputDefinition()
+    @property
+    def twoBendReliefShape(self) -> CornerTwoBendReliefShapeTypes:
+        """
+        Gets and sets the relief shape for the two-bend corner.
+        This defines the geometric shape used to relieve stress at the corner where two bends meet.
+        This property is ignored when useSheetMetalRuleDefaults is set to true.
+        The default value is RoundCornerTwoBendReliefShapeType.
+        """
+        return CornerTwoBendReliefShapeTypes()
+    @twoBendReliefShape.setter
+    def twoBendReliefShape(self, value: CornerTwoBendReliefShapeTypes):
+        """
+        Gets and sets the relief shape for the two-bend corner.
+        This defines the geometric shape used to relieve stress at the corner where two bends meet.
+        This property is ignored when useSheetMetalRuleDefaults is set to true.
+        The default value is RoundCornerTwoBendReliefShapeType.
+        """
+        pass
+    @property
+    def twoBendReliefSize(self) -> core.ValueInput:
+        """
+        Gets and sets the size of the two-bend relief.
+        This parameter is only valid when the twoBendReliefShape is RoundCornerTwoBendReliefShapeType
+        or SquareCornerTwoBendReliefShapeType. For other relief shapes, this value is ignored.
+        This property is ignored when useSheetMetalRuleDefaults is set to true.
+        """
+        return core.ValueInput()
+    @twoBendReliefSize.setter
+    def twoBendReliefSize(self, value: core.ValueInput):
+        """
+        Gets and sets the size of the two-bend relief.
+        This parameter is only valid when the twoBendReliefShape is RoundCornerTwoBendReliefShapeType
+        or SquareCornerTwoBendReliefShapeType. For other relief shapes, this value is ignored.
+        This property is ignored when useSheetMetalRuleDefaults is set to true.
+        """
+        pass
+    @property
+    def twoBendReliefPlacement(self) -> CornerTwoBendReliefPlacementTypes:
+        """
+        Gets and sets the placement of the two-bend relief.
+        This parameter controls where the relief feature is positioned relative to the bend intersection.
+        This parameter is only valid when the twoBendReliefShape is RoundCornerTwoBendReliefShapeType
+        or SquareCornerTwoBendReliefShapeType. For other relief shapes, this value is ignored.
+        This property is ignored when useSheetMetalRuleDefaults is set to true.
+        The default value is TangentCornerTwoBendReliefPlacementType.
+        """
+        return CornerTwoBendReliefPlacementTypes()
+    @twoBendReliefPlacement.setter
+    def twoBendReliefPlacement(self, value: CornerTwoBendReliefPlacementTypes):
+        """
+        Gets and sets the placement of the two-bend relief.
+        This parameter controls where the relief feature is positioned relative to the bend intersection.
+        This parameter is only valid when the twoBendReliefShape is RoundCornerTwoBendReliefShapeType
+        or SquareCornerTwoBendReliefShapeType. For other relief shapes, this value is ignored.
+        This property is ignored when useSheetMetalRuleDefaults is set to true.
+        The default value is TangentCornerTwoBendReliefPlacementType.
+        """
+        pass
+    @property
+    def isUseSheetMetalRuleDefaults(self) -> bool:
+        """
+        Gets and sets whether to use default relief values from the Sheet Metal Rule.
+        When true, all relief parameters (shape, size, and placement) are taken from the active Sheet Metal Rule,
+        and any values set in twoBendReliefShape, twoBendReliefSize, and twoBendReliefPlacement properties are ignored.
+        When false (default), the relief parameters must be explicitly set using the respective properties.
+        The default value is false.
+        """
+        return bool()
+    @isUseSheetMetalRuleDefaults.setter
+    def isUseSheetMetalRuleDefaults(self, value: bool):
+        """
+        Gets and sets whether to use default relief values from the Sheet Metal Rule.
+        When true, all relief parameters (shape, size, and placement) are taken from the active Sheet Metal Rule,
+        and any values set in twoBendReliefShape, twoBendReliefSize, and twoBendReliefPlacement properties are ignored.
+        When false (default), the relief parameters must be explicitly set using the respective properties.
+        The default value is false.
+        """
+        pass
 
 class TwoDistancesChamferEdgeSet(ChamferEdgeSet):
     """
@@ -49813,7 +57815,7 @@ class VerticalConstraint(GeometricConstraint):
     def nativeObject(self) -> VerticalConstraint:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -49853,7 +57855,7 @@ class VerticalPointsConstraint(GeometricConstraint):
     def nativeObject(self) -> VerticalPointsConstraint:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -49906,6 +57908,7 @@ class VolumetricModelToMeshFeature(Feature):
     ! This is in preview state; please see the help for more info
     !!!!! Warning !!!!!
     
+    Object that represents a model to mesh feature.
     """
     def __init__(self):
         pass
@@ -50096,10 +58099,6 @@ class ZebraAnalysis(Analysis):
 
 class Arrange2DPlaneEnvelopeInput(Arrange2DEnvelopeInput):
     """
-    !!!!! Warning !!!!!
-    ! This is in preview state; please see the help for more info
-    !!!!! Warning !!!!!
-    
     This object is used to specify the input needed to define a 2D rectangular envelope.
     """
     def __init__(self):
@@ -50226,7 +58225,7 @@ class Arrange2DPlaneEnvelopeInput(Arrange2DEnvelopeInput):
         
         This value will become a parameter when the arrangement is created. When created with a real value it must be a whole number.
         You can also use a string where it is interpreted the same as when entered in the command dialog. The expression must result
-        in a unitless whole number. It's also possible to use an equation like "Total / 4" where "Total" is an existing parameter and be
+        in a unitless whole number. It's also possible to use an equation like "Total / 4" where "Total" is an existing parameter and must be
         evenly divided by four.
         """
         return core.ValueInput()
@@ -50237,7 +58236,7 @@ class Arrange2DPlaneEnvelopeInput(Arrange2DEnvelopeInput):
         
         This value will become a parameter when the arrangement is created. When created with a real value it must be a whole number.
         You can also use a string where it is interpreted the same as when entered in the command dialog. The expression must result
-        in a unitless whole number. It's also possible to use an equation like "Total / 4" where "Total" is an existing parameter and be
+        in a unitless whole number. It's also possible to use an equation like "Total / 4" where "Total" is an existing parameter and must be
         evenly divided by four.
         """
         pass
@@ -50270,10 +58269,6 @@ class Arrange2DPlaneEnvelopeInput(Arrange2DEnvelopeInput):
 
 class Arrange2DProfileOrFaceEnvelopeInput(Arrange2DEnvelopeInput):
     """
-    !!!!! Warning !!!!!
-    ! This is in preview state; please see the help for more info
-    !!!!! Warning !!!!!
-    
     This object is used to specify the input needed to define an envelope using profiles and planar
     faces to define the envelope shapes.
     """
@@ -50417,6 +58412,109 @@ class FlatPatternProduct(Design):
         """
         return FlatPattern()
 
+class HemFeature(FlangeFeature):
+    """
+    Defines a hem feature, providing methods to redefine the type of hem.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> HemFeature:
+        return HemFeature()
+    def redefineAsFlatHem(self, length: core.ValueInput, isFlipped: bool, bendPositionType: BendPositionTypes) -> bool:
+        """
+        Redefines the hem as a flat hem.
+        length : The length of the hem.
+        isFlipped : Indicates if the hem direction is flipped.
+        bendPositionType : The bend location type for the hem.
+        Returns true if defining the hem is successful.
+        """
+        return bool()
+    def redefineAsOpenHem(self, length: core.ValueInput, gap: core.ValueInput, isFlipped: bool, bendPositionType: BendPositionTypes) -> bool:
+        """
+        Redefines the hem as an open hem.
+        length : The length of the hem.
+        gap : The gap distance of the hem.
+        isFlipped : Indicates if the hem direction is flipped.
+        bendPositionType : The bend location type for the hem.
+        Returns true if defining the hem is successful.
+        """
+        return bool()
+    def redefineAsRolledHem(self, radius: core.ValueInput, angle: core.ValueInput, isFlipped: bool, bendPositionType: BendPositionTypes) -> bool:
+        """
+        Redefines the hem as a rolled hem.
+        radius : The radius of the rolled hem.
+        angle : The angle of the rolled hem.
+        isFlipped : Indicates if the hem direction is flipped.
+        bendPositionType : The bend location type for the hem.
+        Returns true if defining the hem is successful.
+        """
+        return bool()
+    def redefineAsRopeHem(self, length: core.ValueInput, gap: core.ValueInput, radius: core.ValueInput, isFlipped: bool, bendPositionType: BendPositionTypes) -> bool:
+        """
+        Redefines the hem as a rope hem.
+        length : The length of the rope hem.
+        gap : The gap distance of the hem.
+        radius : The radius of the rope hem.
+        isFlipped : Indicates if the hem direction is flipped.
+        bendPositionType : The bend location type for the hem.
+        Returns true if defining the hem is successful.
+        """
+        return bool()
+    def redefineAsTeardropHem(self, radius: core.ValueInput, length: core.ValueInput, gap: core.ValueInput, isFlipped: bool, bendPositionType: BendPositionTypes) -> bool:
+        """
+        Redefines the hem as a teardrop hem.
+        radius : The radius of the teardrop hem.
+        length : The length of the teardrop hem.
+        gap : The gap distance of the hem.
+        isFlipped : Indicates if the hem direction is flipped.
+        bendPositionType : The bend location type for the hem.
+        Returns true if defining the hem is successful.
+        """
+        return bool()
+    def redefineAsDoubleHem(self, gap: core.ValueInput, length: core.ValueInput, setback: core.ValueInput, isFlipped: bool, bendPositionType: BendPositionTypes) -> bool:
+        """
+        Redefines the hem as a double hem.
+        gap : The gap distance of the hem.
+        length : The length of the double hem.
+        setback : The setback of the double hem.
+        isFlipped : Indicates if the hem direction is flipped.
+        bendPositionType : The bend location type for the hem.
+        Returns true if defining the hem is successful.
+        """
+        return bool()
+    def createForAssemblyContext(self, occurrence: Occurrence) -> HemFeature:
+        """
+        Creates or returns a proxy for the native object
+        - i.e. a new object that represents this object but adds the assembly context
+        defined by the input occurrence.
+        occurrence : The occurrence that defines the context to create the proxy in.
+        Returns the proxy object or null if this is not the NativeObject.
+        """
+        return HemFeature()
+    @property
+    def definitionType(self) -> HemFeatureDefinitionTypes:
+        """
+        Gets the type of hem defined.
+        """
+        return HemFeatureDefinitionTypes()
+    @property
+    def definition(self) -> HemFeatureDefinition:
+        """
+        Returns the HemFeatureDefinition object which provides access to the information
+        defining this HemFeature and the ability to edit it.
+        """
+        return HemFeatureDefinition()
+    @property
+    def nativeObject(self) -> HemFeature:
+        """
+        The NativeObject is the object outside the context of an assembly and
+        in the context of its parent component.
+        Returns null in the case where this object is not in the context of
+        an assembly but is already the native object.
+        """
+        return HemFeature()
+
 class MeshCombineFaceGroupsFeature(MeshFeature):
     """
     !!!!! Warning !!!!!
@@ -50467,7 +58565,7 @@ class MeshCombineFaceGroupsFeature(MeshFeature):
     def nativeObject(self) -> MeshCombineFaceGroupsFeature:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -50554,7 +58652,7 @@ class MeshCombineFeature(MeshFeature):
     def nativeObject(self) -> MeshCombineFeature:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -50642,7 +58740,7 @@ class MeshGenerateFaceGroupsFeature(MeshFeature):
     def nativeObject(self) -> MeshGenerateFaceGroupsFeature:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -50740,7 +58838,7 @@ class MeshReduceFeature(MeshFeature):
     def nativeObject(self) -> MeshReduceFeature:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -50843,11 +58941,49 @@ class MeshRemeshFeature(MeshFeature):
     def nativeObject(self) -> MeshRemeshFeature:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
         return MeshRemeshFeature()
+
+class MeshRemoveFeature(MeshFeature):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Object that represents an existing mesh remove feature in a design.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> MeshRemoveFeature:
+        return MeshRemoveFeature()
+    def createForAssemblyContext(self, occurrence: Occurrence) -> MeshRemoveFeature:
+        """
+        Creates or returns a proxy for the native object
+        - i.e. a new object that represents this object but adds the assembly context
+        defined by the input occurrence.
+        occurrence : The occurrence that defines the context to create the proxy in.
+        Returns the proxy object or null if this isn't the NativeObject.
+        """
+        return MeshRemoveFeature()
+    @property
+    def inputBodies(self) -> list[MeshBody]:
+        """
+        Gets the input meshes.
+        """
+        return [MeshBody()]
+    @property
+    def nativeObject(self) -> MeshRemoveFeature:
+        """
+        The NativeObject is the object outside the context of an assembly and
+        in the context of its parent component.
+        Returns null in the case where this object is not in the context of
+        an assembly but is already the native object.
+        """
+        return MeshRemoveFeature()
 
 class MeshRepairFeature(MeshFeature):
     """
@@ -50937,7 +59073,7 @@ class MeshRepairFeature(MeshFeature):
     def nativeObject(self) -> MeshRepairFeature:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -50989,7 +59125,7 @@ class MeshReverseNormalFeature(MeshFeature):
     def nativeObject(self) -> MeshReverseNormalFeature:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -51077,7 +59213,7 @@ class MeshSeparateFeature(MeshFeature):
     def nativeObject(self) -> MeshSeparateFeature:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -51136,7 +59272,7 @@ class MeshShellFeature(MeshFeature):
     def nativeObject(self) -> MeshShellFeature:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -51195,11 +59331,619 @@ class MeshSmoothFeature(MeshFeature):
     def nativeObject(self) -> MeshSmoothFeature:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
         return MeshSmoothFeature()
+
+class PMIHoleThreadNote(PMICreatedAnnotation):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Defines a created PMI which includes data corresponding to Hole/Thread Note PMI.
+    Provides access to information such as tolerances, thread information, and units.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> PMIHoleThreadNote:
+        return PMIHoleThreadNote()
+    def createForAssemblyContext(self, occurrence: Occurrence) -> PMIHoleThreadNote:
+        """
+        Creates or returns a proxy for the native object
+        - i.e. a new object that represents this object but adds the assembly context
+        defined by the input occurrence.
+        occurrence : The occurrence that defines the context to create the proxy in.
+        Returns the proxy object or null if this isn't the NativeObject.
+        """
+        return PMIHoleThreadNote()
+    @property
+    def nativeObject(self) -> PMIHoleThreadNote:
+        """
+        The NativeObject is the object outside the context of an assembly and
+        in the context of its parent component.
+        Returns null in the case where this object is not in the context of
+        an assembly but is already the native object.
+        """
+        return PMIHoleThreadNote()
+    @property
+    def isWantSelectAllMatchingHoles(self) -> bool:
+        """
+        Gets and sets whether the Hole/Thread Note PMI should represent all the matching holes in the design.
+        
+        While this can be set to true on existing PMI, it does not always ensures that all matching holes are included.
+        
+        Updating this value will result in the referenced entities being updated to include all matching holes.
+        """
+        return bool()
+    @isWantSelectAllMatchingHoles.setter
+    def isWantSelectAllMatchingHoles(self, value: bool):
+        """
+        Gets and sets whether the Hole/Thread Note PMI should represent all the matching holes in the design.
+        
+        While this can be set to true on existing PMI, it does not always ensures that all matching holes are included.
+        
+        Updating this value will result in the referenced entities being updated to include all matching holes.
+        """
+        pass
+    @property
+    def primaryDisplaySettings(self) -> PMIDisplaySettings:
+        """
+        Gets and sets the primary display settings for the Hole/Thread Note PMI.
+        
+        This will always be existent, and includes information about format and units.
+        """
+        return PMIDisplaySettings()
+    @primaryDisplaySettings.setter
+    def primaryDisplaySettings(self, value: PMIDisplaySettings):
+        """
+        Gets and sets the primary display settings for the Hole/Thread Note PMI.
+        
+        This will always be existent, and includes information about format and units.
+        """
+        pass
+    @property
+    def hasSecondaryDisplaySettings(self) -> bool:
+        """
+        Gets and sets whether there are secondary display settings defined for the Hole/Thread Note PMI.
+        """
+        return bool()
+    @hasSecondaryDisplaySettings.setter
+    def hasSecondaryDisplaySettings(self, value: bool):
+        """
+        Gets and sets whether there are secondary display settings defined for the Hole/Thread Note PMI.
+        """
+        pass
+    @property
+    def secondaryDisplaySettings(self) -> PMIDisplaySettings:
+        """
+        Gets and sets the secondary display settings for the Hole/Thread Note PMI.
+        
+        This will not always be existent, based on the hasSecondaryDisplaySettings value.
+        
+        Setting this value will also set hasSecondaryDisplaySettings to true.
+        """
+        return PMIDisplaySettings()
+    @secondaryDisplaySettings.setter
+    def secondaryDisplaySettings(self, value: PMIDisplaySettings):
+        """
+        Gets and sets the secondary display settings for the Hole/Thread Note PMI.
+        
+        This will not always be existent, based on the hasSecondaryDisplaySettings value.
+        
+        Setting this value will also set hasSecondaryDisplaySettings to true.
+        """
+        pass
+    @property
+    def isWantQuantityNote(self) -> bool:
+        """
+        Indicates if the quantity is visible in the graphics.
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        return bool()
+    @isWantQuantityNote.setter
+    def isWantQuantityNote(self, value: bool):
+        """
+        Indicates if the quantity is visible in the graphics.
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        pass
+    @property
+    def diameter(self) -> PMIGeometricValue:
+        """
+        Gets and sets the PMIGeometricValue used to define the diameter of the annotated hole or boss in cm.
+        
+        When querying, if the diameter is not set, the value will be 0 and hasValue property will be false.
+        
+        When setting, it is possible to also add tolerances to the object set by setting the tolerance property of the PMIGeometricValue object.
+        
+        Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        return PMIGeometricValue()
+    @diameter.setter
+    def diameter(self, value: PMIGeometricValue):
+        """
+        Gets and sets the PMIGeometricValue used to define the diameter of the annotated hole or boss in cm.
+        
+        When querying, if the diameter is not set, the value will be 0 and hasValue property will be false.
+        
+        When setting, it is possible to also add tolerances to the object set by setting the tolerance property of the PMIGeometricValue object.
+        
+        Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        pass
+    @property
+    def shaftTolerance(self) -> PMIGeometricValueTolerance:
+        """
+        Gets and sets the PMIGeometricValueTolerance for the shaft diameter of the annotated hole if a shaft tolerance exists.
+        """
+        return PMIGeometricValueTolerance()
+    @shaftTolerance.setter
+    def shaftTolerance(self, value: PMIGeometricValueTolerance):
+        """
+        Gets and sets the PMIGeometricValueTolerance for the shaft diameter of the annotated hole if a shaft tolerance exists.
+        """
+        pass
+    @property
+    def isThrough(self) -> bool:
+        """
+        Gets and sets whether the hole should be considered a through hole.
+        
+        Setting this to true will remove the depth information related to the PMI.
+        
+        Setting this to false will result in a default depth set without tolerance.
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        return bool()
+    @isThrough.setter
+    def isThrough(self, value: bool):
+        """
+        Gets and sets whether the hole should be considered a through hole.
+        
+        Setting this to true will remove the depth information related to the PMI.
+        
+        Setting this to false will result in a default depth set without tolerance.
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        pass
+    @property
+    def depth(self) -> PMIGeometricValue:
+        """
+        Gets and sets the PMIGeometricValue used to define the depth of the hole in cm. In the case of bosses, it represents the height of the boss.
+        
+        When querying, if the depth is not set, the value will be 0 and hasValue property will be false.
+        
+        When setting, it is possible to also add tolerances to the object set by setting the tolerance property of the PMIGeometricValue object.
+        
+        Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        return PMIGeometricValue()
+    @depth.setter
+    def depth(self, value: PMIGeometricValue):
+        """
+        Gets and sets the PMIGeometricValue used to define the depth of the hole in cm. In the case of bosses, it represents the height of the boss.
+        
+        When querying, if the depth is not set, the value will be 0 and hasValue property will be false.
+        
+        When setting, it is possible to also add tolerances to the object set by setting the tolerance property of the PMIGeometricValue object.
+        
+        Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        pass
+    @property
+    def radius(self) -> PMIGeometricValue:
+        """
+        Gets and sets the PMIGeometricValue used to define the radius of the hole in cm. Not applicable for bosses.
+        
+        When querying, if the radius is not set, the value will be 0 and hasValue property will be false.
+        
+        When setting, it is possible to also add tolerances to the object set by setting the tolerance property of the PMIGeometricValue object.
+        
+        Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        return PMIGeometricValue()
+    @radius.setter
+    def radius(self, value: PMIGeometricValue):
+        """
+        Gets and sets the PMIGeometricValue used to define the radius of the hole in cm. Not applicable for bosses.
+        
+        When querying, if the radius is not set, the value will be 0 and hasValue property will be false.
+        
+        When setting, it is possible to also add tolerances to the object set by setting the tolerance property of the PMIGeometricValue object.
+        
+        Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        pass
+    @property
+    def isThreaded(self) -> bool:
+        """
+        Gets and sets whether the hole or the boss has a thread associated.
+        
+        Setting this to false will result in all thread information being removed.
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        return bool()
+    @isThreaded.setter
+    def isThreaded(self, value: bool):
+        """
+        Gets and sets whether the hole or the boss has a thread associated.
+        
+        Setting this to false will result in all thread information being removed.
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        pass
+    @property
+    def threadInfo(self) -> ThreadInfo:
+        """
+        Gets and sets the ThreadInfo object associated with the hole/thread note.
+        
+        Returns null if the hole is not threaded.
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        return ThreadInfo()
+    @threadInfo.setter
+    def threadInfo(self, value: ThreadInfo):
+        """
+        Gets and sets the ThreadInfo object associated with the hole/thread note.
+        
+        Returns null if the hole is not threaded.
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        pass
+    @property
+    def isThreadedThrough(self) -> bool:
+        """
+        Gets and sets whether the hole or boss is threaded all the way through.
+        
+        Setting this to true will remove the thread depth information.
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        return bool()
+    @isThreadedThrough.setter
+    def isThreadedThrough(self, value: bool):
+        """
+        Gets and sets whether the hole or boss is threaded all the way through.
+        
+        Setting this to true will remove the thread depth information.
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        pass
+    @property
+    def threadDepth(self) -> PMIGeometricValue:
+        """
+        Gets and sets the PMIGeometricValue used to define the thread depth of the hole in cm. In the case of bosses, it represents the thread length of the boss.
+        
+        When querying, if the thread depth is not set, the value will be 0 and hasValue property will be false.
+        
+        When setting, it is possible to also add tolerances to the object set by setting the tolerance property of the PMIGeometricValue object.
+        
+        Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        return PMIGeometricValue()
+    @threadDepth.setter
+    def threadDepth(self, value: PMIGeometricValue):
+        """
+        Gets and sets the PMIGeometricValue used to define the thread depth of the hole in cm. In the case of bosses, it represents the thread length of the boss.
+        
+        When querying, if the thread depth is not set, the value will be 0 and hasValue property will be false.
+        
+        When setting, it is possible to also add tolerances to the object set by setting the tolerance property of the PMIGeometricValue object.
+        
+        Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        pass
+    @property
+    def counterboreDiameter(self) -> PMIGeometricValue:
+        """
+        Gets and sets the PMIGeometricValue used to define the diameter of the counterbore segment of the hole in cm. Not applicable for bosses.
+        
+        When querying, if the counterbore diameter is not set, the value will be 0 and hasValue property will be false.
+        
+        When setting, it is possible to also add tolerances to the object set by setting the tolerance property of the PMIGeometricValue object.
+        
+        Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        return PMIGeometricValue()
+    @counterboreDiameter.setter
+    def counterboreDiameter(self, value: PMIGeometricValue):
+        """
+        Gets and sets the PMIGeometricValue used to define the diameter of the counterbore segment of the hole in cm. Not applicable for bosses.
+        
+        When querying, if the counterbore diameter is not set, the value will be 0 and hasValue property will be false.
+        
+        When setting, it is possible to also add tolerances to the object set by setting the tolerance property of the PMIGeometricValue object.
+        
+        Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        pass
+    @property
+    def counterboreDepth(self) -> PMIGeometricValue:
+        """
+        Gets and sets the PMIGeometricValue used to define the depth of the counterbore segment of the hole in cm. Not applicable for bosses.
+        
+        When querying, if the counterbore depth is not set, the value will be 0 and hasValue property will be false.
+        
+        When setting, it is possible to also add tolerances to the object set by setting the tolerance property of the PMIGeometricValue object.
+        
+        Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        return PMIGeometricValue()
+    @counterboreDepth.setter
+    def counterboreDepth(self, value: PMIGeometricValue):
+        """
+        Gets and sets the PMIGeometricValue used to define the depth of the counterbore segment of the hole in cm. Not applicable for bosses.
+        
+        When querying, if the counterbore depth is not set, the value will be 0 and hasValue property will be false.
+        
+        When setting, it is possible to also add tolerances to the object set by setting the tolerance property of the PMIGeometricValue object.
+        
+        Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        pass
+    @property
+    def counterboreRadius(self) -> PMIGeometricValue:
+        """
+        Gets and sets the PMIGeometricValue used to define the radius of the counterbore segment of the hole in cm. Not applicable for bosses.
+        
+        When querying, if the counterbore radius is not set, the value will be 0 and hasValue property will be false.
+        
+        When setting, it is possible to also add tolerances to the object set by setting the tolerance property of the PMIGeometricValue object.
+        
+        Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        return PMIGeometricValue()
+    @counterboreRadius.setter
+    def counterboreRadius(self, value: PMIGeometricValue):
+        """
+        Gets and sets the PMIGeometricValue used to define the radius of the counterbore segment of the hole in cm. Not applicable for bosses.
+        
+        When querying, if the counterbore radius is not set, the value will be 0 and hasValue property will be false.
+        
+        When setting, it is possible to also add tolerances to the object set by setting the tolerance property of the PMIGeometricValue object.
+        
+        Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        pass
+    @property
+    def countersinkDiameter(self) -> PMIGeometricValue:
+        """
+        Gets and sets the PMIGeometricValue used to define the diameter of the countersink segment of the hole in cm. Not applicable for bosses.
+        
+        When querying, if the countersink diameter is not set, the value will be 0 and hasValue property will be false.
+        When setting, it is possible to also add tolerances to the object set by setting the tolerance property of the PMIGeometricValue object.
+        
+        Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        return PMIGeometricValue()
+    @countersinkDiameter.setter
+    def countersinkDiameter(self, value: PMIGeometricValue):
+        """
+        Gets and sets the PMIGeometricValue used to define the diameter of the countersink segment of the hole in cm. Not applicable for bosses.
+        
+        When querying, if the countersink diameter is not set, the value will be 0 and hasValue property will be false.
+        When setting, it is possible to also add tolerances to the object set by setting the tolerance property of the PMIGeometricValue object.
+        
+        Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        pass
+    @property
+    def countersinkAngle(self) -> PMIGeometricValue:
+        """
+        Gets and sets the PMIGeometricValue used to define the angle of the countersink segment of the hole in radians. Not applicable for bosses.
+        
+        When querying, if the countersink angle is not set, the value will be 0 and hasValue property will be false.
+        When setting, this value does not have tolerances, and will not be taken into account.
+        
+        Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        return PMIGeometricValue()
+    @countersinkAngle.setter
+    def countersinkAngle(self, value: PMIGeometricValue):
+        """
+        Gets and sets the PMIGeometricValue used to define the angle of the countersink segment of the hole in radians. Not applicable for bosses.
+        
+        When querying, if the countersink angle is not set, the value will be 0 and hasValue property will be false.
+        When setting, this value does not have tolerances, and will not be taken into account.
+        
+        Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).
+        
+        Updating this value will reset the segments in the PMI.
+        """
+        pass
+    @property
+    def isHoleAnnotation(self) -> bool:
+        """
+        Indicates whether the PMI is representing a hole or a boss.
+        """
+        return bool()
+    @property
+    def holeType(self) -> HoleTypes:
+        """
+        Gets the type of the hole.
+        """
+        return HoleTypes()
+    @property
+    def quantity(self) -> int:
+        """
+        Gets the number of holes/bosses the Hole/Thread Note PMI is associated with.
+        """
+        return int()
+    @property
+    def isFlipHoleNormal(self) -> bool:
+        """
+        Gets and sets whether the hole normal should be treated as flipped, resulting in the hole top to be placed at the lowest found face of the hole.
+        
+        This is applicable only to complex holes, in other cases the value is ignored.
+        """
+        return bool()
+    @isFlipHoleNormal.setter
+    def isFlipHoleNormal(self, value: bool):
+        """
+        Gets and sets whether the hole normal should be treated as flipped, resulting in the hole top to be placed at the lowest found face of the hole.
+        
+        This is applicable only to complex holes, in other cases the value is ignored.
+        """
+        pass
+
+class PMILeaderLineNote(PMICreatedAnnotation):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Defines a created PMI which includes data corresponding to Notes.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> PMILeaderLineNote:
+        return PMILeaderLineNote()
+    def createForAssemblyContext(self, occurrence: Occurrence) -> PMILeaderLineNote:
+        """
+        Creates or returns a proxy for the native object
+        - i.e. a new object that represents this object but adds the assembly context
+        defined by the input occurrence.
+        occurrence : The occurrence that defines the context to create the proxy in.
+        Returns the proxy object or null if this isn't the NativeObject.
+        """
+        return PMILeaderLineNote()
+    def setAnnotationTargetPoint(self, annotationTargetPoint: core.Point3D) -> bool:
+        """
+        Sets the point on the annotation plane where the leader line meets the annotated geometry.
+        annotationTargetPoint : The point on the annotated geometry.
+        Returns true if the annotation target point has been set successfully, false otherwise.
+        """
+        return bool()
+    def setAnnotationPlane(self, planeType: LeaderLineNotePlaneTypes, face: BRepFace = None) -> bool:
+        """
+        Sets the annotation plane for Leader Line Note PMI.
+        planeType : The type of annotation plane to create.
+        
+        Setting Leader Line Note PMI to Unknown plane type is not supported.
+        face : An optional input face to define the plane.
+        
+        Required if the planeType is NormalToCustomFaceLeaderLineNotePlaneType.
+        
+        Required if the planeType is NormalToFaceLeaderLineNotePlaneType and the face must be an adjacent face to the geometry.
+        
+        For other plane types, this parameter is ignored.
+        True if the plane has been set successfully, false otherwise.
+        """
+        return bool()
+    @property
+    def nativeObject(self) -> PMILeaderLineNote:
+        """
+        The NativeObject is the object outside the context of an assembly and
+        in the context of its parent component.
+        Returns null in the case where this object is not in the context of
+        an assembly but is already the native object.
+        """
+        return PMILeaderLineNote()
+    @property
+    def geometry(self) -> core.Base:
+        """
+        The geometric entity to which the Note PMI is associated.
+        
+        This can be a BRepFace, BRepEdge or BRepVertex object. For BRepEdge objects, only linear, circular
+        and elliptical edges are supported. The note will be positioned relative to this entity and will
+        maintain its association with the entity geometry.
+        
+        The geometry obtained is equivalent to referencedEntities[0].
+        
+        Setting the geometry will set a default annotation plane and target point.
+        Resetting the geometry will reset to default annotation plane and target point.
+        Native object will be used when setting the geometry.
+        """
+        return core.Base()
+    @geometry.setter
+    def geometry(self, value: core.Base):
+        """
+        The geometric entity to which the Note PMI is associated.
+        
+        This can be a BRepFace, BRepEdge or BRepVertex object. For BRepEdge objects, only linear, circular
+        and elliptical edges are supported. The note will be positioned relative to this entity and will
+        maintain its association with the entity geometry.
+        
+        The geometry obtained is equivalent to referencedEntities[0].
+        
+        Setting the geometry will set a default annotation plane and target point.
+        Resetting the geometry will reset to default annotation plane and target point.
+        Native object will be used when setting the geometry.
+        """
+        pass
+    @property
+    def annotationPlaneType(self) -> LeaderLineNotePlaneTypes:
+        """
+        Gets the LeaderLineNotePlaneTypes that the Leader Line Note PMI is currently using.
+        """
+        return LeaderLineNotePlaneTypes()
+    @property
+    def annotationPlaneReferencedFace(self) -> BRepFace:
+        """
+        Gets the BRepFace used as the alternate plane for the leader line note, if there's any.
+        
+        Applicable when the planeType is NormalToCustomFaceLeaderLineNotePlaneType or NormalToFaceLeaderLineNotePlaneType.
+        """
+        return BRepFace()
+    @property
+    def supportedAnnotationPlaneTypes(self) -> list[int]:
+        """
+        Gets the available annotation plane types that can be set on this Leader Line Note PMI.
+        """
+        return [int()]
+    @property
+    def adjacentPlanarFaces(self) -> list[BRepFace]:
+        """
+        Gets the adjacent planar faces to the geometry that can be used to define the annotation plane with type NormalToFaceLeaderLineNotePlaneType.
+        """
+        return [BRepFace()]
 
 class SketchArc(SketchCurve):
     """
@@ -51268,7 +60012,7 @@ class SketchArc(SketchCurve):
         """
         Returns an Arc3D object which provides geometric information in world space.
         The returned geometry takes into account the assembly context and the position of the
-        sketch in it's parent component, which means the geometry will be returned in the root
+        sketch in its parent component, which means the geometry will be returned in the root
         component space.
         """
         return core.Arc3D()
@@ -51276,7 +60020,7 @@ class SketchArc(SketchCurve):
     def nativeObject(self) -> SketchArc:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -51318,7 +60062,7 @@ class SketchCircle(SketchCurve):
         """
         Returns a Point3D object which provides the position of the sketch point in world space.
         The returned coordinate takes into account the assembly context and the position of the
-        sketch in it's parent component, which means the coordinate will be returned in the root
+        sketch in its parent component, which means the coordinate will be returned in the root
         component space.
         """
         return core.Circle3D()
@@ -51346,7 +60090,7 @@ class SketchCircle(SketchCurve):
     def nativeObject(self) -> SketchCircle:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -51420,7 +60164,7 @@ class SketchConicCurve(SketchCurve):
     def nativeObject(self) -> SketchConicCurve:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -51525,7 +60269,7 @@ class SketchControlPointSpline(SketchCurve):
     def nativeObject(self) -> SketchControlPointSpline:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -51653,7 +60397,7 @@ class SketchEllipse(SketchCurve):
         """
         Returns an Ellipse3D object which provides geometric information in world space.
         The returned geometry takes into account the assembly context and the position of the
-        sketch in it's parent component, which means the geometry will be returned in the root
+        sketch in its parent component, which means the geometry will be returned in the root
         component space.
         """
         return core.Ellipse3D()
@@ -51661,7 +60405,7 @@ class SketchEllipse(SketchCurve):
     def nativeObject(self) -> SketchEllipse:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -51783,7 +60527,7 @@ class SketchEllipticalArc(SketchCurve):
         """
         Returns an EllipticalArc3D object which provides geometric information in world space.
         The returned geometry takes into account the assembly context and the position of the
-        sketch in it's parent component, which means the geometry will be returned in the root
+        sketch in its parent component, which means the geometry will be returned in the root
         component space.
         """
         return core.EllipticalArc3D()
@@ -51791,7 +60535,7 @@ class SketchEllipticalArc(SketchCurve):
     def nativeObject(self) -> SketchEllipticalArc:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -51950,9 +60694,9 @@ class SketchFittedSpline(SketchCurve):
     @property
     def worldGeometry(self) -> core.NurbsCurve3D:
         """
-        Returns an NurbsCurve3D object which provides geometric information in world space.
+        Returns a NurbsCurve3D object which provides geometric information in world space.
         The returned geometry takes into account the assembly context and the position of the
-        sketch in it's parent component, which means the geometry will be returned in the root
+        sketch in its parent component, which means the geometry will be returned in the root
         component space.
         """
         return core.NurbsCurve3D()
@@ -51960,7 +60704,7 @@ class SketchFittedSpline(SketchCurve):
     def nativeObject(self) -> SketchFittedSpline:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -52040,7 +60784,7 @@ class SketchFixedSpline(SketchCurve):
     def nativeObject(self) -> SketchFixedSpline:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -52090,7 +60834,7 @@ class SketchLine(SketchCurve):
         """
         Returns a Line3D object which provides geometric information in world space.
         The returned geometry takes into account the assembly context and the position of the
-        sketch in it's parent component, which means the geometry will be returned in the root
+        sketch in its parent component, which means the geometry will be returned in the root
         component space.
         """
         return core.Line3D()
@@ -52098,7 +60842,7 @@ class SketchLine(SketchCurve):
     def nativeObject(self) -> SketchLine:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """
@@ -52213,7 +60957,7 @@ class TessellateFeature(MeshFeature):
     def nativeObject(self) -> TessellateFeature:
         """
         The NativeObject is the object outside the context of an assembly and
-        in the context of it's parent component.
+        in the context of its parent component.
         Returns null in the case where this object is not in the context of
         an assembly but is already the native object.
         """

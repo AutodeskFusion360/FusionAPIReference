@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -28,10 +28,6 @@
 
 namespace adsk { namespace fusion {
 
-/// !!!!! Warning !!!!!
-/// ! This is in preview state; please see the help for more info
-/// !!!!! Warning !!!!!
-/// 
 /// The ArrangeDefinition object is the base class for the ArrangeDefinition2D and ArrangeDefinition3D
 /// objects. It provides access to the information that defines an existing Arrange feature.
 class ArrangeDefinitionInput : public core::Base {
@@ -40,7 +36,7 @@ public:
     /// Gets the type of arrange feature defined by this definition.
     ArrangeSolverTypes solverType() const;
 
-    /// Gets and set if the original components will be moved or copied to create the arrangement.
+    /// Gets and sets if the original components will be moved or copied to create the arrangement.
     /// This defaults to true.
     bool isCreateCopies() const;
     bool isCreateCopies(bool value);

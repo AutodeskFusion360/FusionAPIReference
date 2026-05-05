@@ -1,0 +1,161 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/PMILeaderLineNoteInput.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="29/03/2026">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="PMILeaderLineNoteInput">
+    <meta name="description" content="PMILeaderLineNoteInput Object">
+    <meta name="topicid" content="GUID-5CDC501A-6885-48C6-AC61-59D783CB22A6">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>PMILeaderLineNoteInput Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">PMILeaderLineNoteInput Object <img src="../images/TestTubeLarge.png" alt="Preview"></h1>
+              Derived from: <a href="PMIInput.htm">PMIInput</a> Object
+            <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/PMI/PMILeaderLineNoteInput.h&gt;<p class="api-preview"><img src="../images/TestTubeSmall.png" alt="Preview">This functionality is provided as a preview
+				of intended future API capabilities. You are encouraged to use it and report any problems or suggestions using the
+				<a href="https://forums.autodesk.com/t5/fusion-360-api-and-scripts/bd-p/22">Fusion API and Scripts</a> forum.<br><br>
+	
+                Because this is a preview of future functionality, there is the possibility that it will change, which will possibly
+		        break any existing programs that use this functionality. Because of that, you should never deliver any programs that use
+		        any preview capabilities. For a distributed program, you should wait until it has moved from preview to released state.
+		    </p>
+    <h2 class="api">
+          Description
+        </h2>A class that defines the input used to create a Note PMI.<h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMILeaderLineNoteInput_classType.htm">classType</a></td>
+        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMILeaderLineNoteInput_setAnnotationPlane.htm">setAnnotationPlane</a></td>
+        <td class="api-list">Sets the annotation plane for Leader Line Note PMI.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMILeaderLineNoteInput_adjacentPlanarFaces.htm">adjacentPlanarFaces</a></td>
+        <td class="api-list">Adjacent planar faces to the geometry that can be used to define the annotation plane with type NormalToFaceLeaderLineNotePlaneType.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMILeaderLineNoteInput_annotationPlaneReferencedFace.htm">annotationPlaneReferencedFace</a></td>
+        <td class="api-list">The BRepFace used as the alternate plane for the leader line note, if there's any.<br/><br/> Applicable when the planeType is NormalToCustomFaceLeaderLineNotePlaneType or NormalToFaceLeaderLineNotePlaneType</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMILeaderLineNoteInput_annotationPlaneType.htm">annotationPlaneType</a></td>
+        <td class="api-list">Get the LeaderLineNotePlaneTypes that the Leader Line Note PMI is currently using.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMILeaderLineNoteInput_annotationTargetPoint.htm">annotationTargetPoint</a></td>
+        <td class="api-list">Gets and sets the annotation point on the geometry that the leader line note is associated with.<br/><br/> This can be a point on the BRepFace, BRepEdge or BRepVertex, depending on the geometry. The point is relative to the geometry's component space where the PMI is being created.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMILeaderLineNoteInput_annotationTextPoint.htm">annotationTextPoint</a></td>
+        <td class="api-list">Gets and sets the annotation point where the leader line starts.<br/><br/> This point must be a valid point on the annotation plane. The point is relative to the geometry's component space where the PMI is being created.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMILeaderLineNoteInput_geometry.htm">geometry</a></td>
+        <td class="api-list">The geometric entity to which the Note PMI will be associated.<br/><br/> This can be a BRepFace, BRepEdge, or BRepVertex object. For BRepEdge objects, only linear, circular and elliptical edges are supported. The note will be positioned relative to this entity and will maintain its association with the entity geometry.<br/><br/> Setting the geometry will set a default annotation plane and target point. Resetting the geometry will reset to default annotation plane and target point. Native object will be used when setting the geometry.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMILeaderLineNoteInput_horizontalAlignment.htm">horizontalAlignment</a></td>
+        <td class="api-list">Controls the horizontal alignment of the PMI text relative to its anchor point.<br/><br/> This determines how the text box is positioned relative to the text placement point.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMILeaderLineNoteInput_isPerpendicularLine.htm">isPerpendicularLine</a></td>
+        <td class="api-list">Controls whether the PMI text is perpendicular to the leader line or parallel to it.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMILeaderLineNoteInput_isShowImportedGeometry.htm">isShowImportedGeometry</a></td>
+        <td class="api-list">Gets and sets whether the original graphics/geometry of the PMI should be visible.<br/><br/> Applicable only to PMI that has been converted.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMILeaderLineNoteInput_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMILeaderLineNoteInput_leaderLineExtension.htm">leaderLineExtension</a></td>
+        <td class="api-list">Gets and sets the length of the leader line extension in cm.<br/><br/> This value extends the leader line in the direction determined by the perpendicular setting.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMILeaderLineNoteInput_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMILeaderLineNoteInput_plane.htm">plane</a></td>
+        <td class="api-list">Get the annotation plane of the PMI.<br/><br/> This plane determines the plane in which the PMI text and graphics are drawn. The plane is relative to the geometry's component space where the PMI is being created.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMILeaderLineNoteInput_segments.htm">segments</a></td>
+        <td class="api-list">Gets and sets the list of PMISegments used to define the PMI text.<br/><br/> The segments can be any combination of PMITextSegment, PMISymbolSegment and PMILineBreakSegment objects.<br/><br/> Changing this property will result in changing the displayed text of the PMI.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMILeaderLineNoteInput_supportedAnnotationPlaneTypes.htm">supportedAnnotationPlaneTypes</a></td>
+        <td class="api-list">A helper method to get all available annotation plane types that can be set on this Leader Line Note PMI.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="PMILeaderLineNoteInput_verticalAlignment.htm">verticalAlignment</a></td>
+        <td class="api-list">Controls the vertical alignment of the PMI text relative to its anchor point.<br/><br/> This determines the vertical positioning of the text box relative to the calculated text placement point.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="PMILeaderLineNotes_createInput.htm">PMILeaderLineNotes.createInput</a><h2 class="api">
+            Version
+          </h2>
+        Introduced in version April 2026<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2026 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(PMILeaderLineNoteInput%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

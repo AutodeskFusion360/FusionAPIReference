@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -30,6 +30,7 @@
 
 namespace adsk { namespace cam {
     class MachineElement;
+    class MachineElementInput;
 }}
 
 namespace adsk { namespace cam {
@@ -69,6 +70,17 @@ public:
     /// Returns the number of elements of the requested type. Returns zero if no elements match the specified type ID.
     size_t countByType(const std::string& typeId) const;
 
+    /// Create a new MachineElementInput object for the specified type.
+    /// This is intedned to be used to create/add new machine elements.
+    /// type :  The type of machine element to create the input for 
+    ///  A MachineElementInput object 
+    core::Ptr<MachineElementInput> createMachineElementInput(MachineElementInputType type) const;
+
+    /// Add a new machine element to the machine.
+    /// input : A specialization of MachineElementInput class that contains the properties required to create a new machine element.
+    ///  The created MachineElement 
+    core::Ptr<MachineElement> addElement(const core::Ptr<MachineElementInput>& input);
+
     typedef MachineElement iterable_type;
     template <class OutputIterator> void copyTo(OutputIterator result);
 
@@ -86,6 +98,8 @@ private:
     virtual MachineElement* itemById_raw(const char* typeId, const char* elementId) const = 0;
     virtual size_t count_raw() const = 0;
     virtual size_t countByType_raw(const char* typeId) const = 0;
+    virtual MachineElementInput* createMachineElementInput_raw(MachineElementInputType type) const = 0;
+    virtual MachineElement* addElement_raw(MachineElementInput* input) = 0;
 };
 
 // Inline wrappers
@@ -131,6 +145,18 @@ inline size_t MachineElements::count() const
 inline size_t MachineElements::countByType(const std::string& typeId) const
 {
     size_t res = countByType_raw(typeId.c_str());
+    return res;
+}
+
+inline core::Ptr<MachineElementInput> MachineElements::createMachineElementInput(MachineElementInputType type) const
+{
+    core::Ptr<MachineElementInput> res = createMachineElementInput_raw(type);
+    return res;
+}
+
+inline core::Ptr<MachineElement> MachineElements::addElement(const core::Ptr<MachineElementInput>& input)
+{
+    core::Ptr<MachineElement> res = addElement_raw(input.get());
     return res;
 }
 

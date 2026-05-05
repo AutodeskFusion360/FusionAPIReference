@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -70,6 +70,16 @@ public:
     AutomaticGenerationModes generationMode() const;
     bool generationMode(AutomaticGenerationModes value);
 
+    /// !!!!! Warning !!!!!
+    /// ! This is in preview state; please see the help for more info
+    /// !!!!! Warning !!!!!
+    /// 
+    /// Optionally specify the reference tool used by the operation. The ToolLibraries allows the access to Local and Fusion tools.
+    /// Setting the tool is only possible on operation strategies that support reference tools, an exception is thrown otherwise.
+    /// Likewise null is returned if the operation strategy does not support reference tools.
+    core::Ptr<Tool> referenceTool() const;
+    bool referenceTool(const core::Ptr<Tool>& value);
+
     ADSK_CAM_OPERATIONINPUT_API static const char* classType();
     ADSK_CAM_OPERATIONINPUT_API const char* objectType() const override;
     ADSK_CAM_OPERATIONINPUT_API void* queryInterface(const char* id) const override;
@@ -88,6 +98,8 @@ private:
     virtual bool displayName_raw(const char* value) = 0;
     virtual AutomaticGenerationModes generationMode_raw() const = 0;
     virtual bool generationMode_raw(AutomaticGenerationModes value) = 0;
+    virtual Tool* referenceTool_raw() const = 0;
+    virtual bool referenceTool_raw(Tool* value) = 0;
     virtual void placeholderOperationInput0() {}
     virtual void placeholderOperationInput1() {}
     virtual void placeholderOperationInput2() {}
@@ -140,8 +152,6 @@ private:
     virtual void placeholderOperationInput49() {}
     virtual void placeholderOperationInput50() {}
     virtual void placeholderOperationInput51() {}
-    virtual void placeholderOperationInput52() {}
-    virtual void placeholderOperationInput53() {}
 };
 
 // Inline wrappers
@@ -214,6 +224,17 @@ inline AutomaticGenerationModes OperationInput::generationMode() const
 inline bool OperationInput::generationMode(AutomaticGenerationModes value)
 {
     return generationMode_raw(value);
+}
+
+inline core::Ptr<Tool> OperationInput::referenceTool() const
+{
+    core::Ptr<Tool> res = referenceTool_raw();
+    return res;
+}
+
+inline bool OperationInput::referenceTool(const core::Ptr<Tool>& value)
+{
+    return referenceTool_raw(value.get());
 }
 }// namespace cam
 }// namespace adsk

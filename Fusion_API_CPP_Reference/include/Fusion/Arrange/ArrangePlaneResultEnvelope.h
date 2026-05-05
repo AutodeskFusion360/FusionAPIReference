@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -31,15 +31,11 @@ namespace adsk { namespace core {
 
 namespace adsk { namespace fusion {
 
-/// !!!!! Warning !!!!!
-/// ! This is in preview state; please see the help for more info
-/// !!!!! Warning !!!!!
-/// 
 /// Represents the arrange result of a single envelope that is defined on a plane.
 class ArrangePlaneResultEnvelope : public ArrangeResultEnvelope {
 public:
 
-    /// The bounding box of the this result. The coordinates are defined
+    /// The bounding box of this result. The coordinates are defined
     /// using the coordinate system of the construction plane used to
     /// define the envelope.
     core::Ptr<core::BoundingBox2D> boundingBox() const;

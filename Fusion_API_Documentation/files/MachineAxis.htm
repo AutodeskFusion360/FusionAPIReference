@@ -52,6 +52,10 @@
         <td class="api-list"><a href="MachineAxis_classType.htm">classType</a></td>
         <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
       </tr>
+      <tr>
+        <td class="api-list"><a href="MachineAxis_useContinuousResolution.htm">useContinuousResolution</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Specifies the axis moves continuously.</td>
+      </tr>
     </Table>
     <h2 class="api">
             Properties
@@ -94,8 +98,12 @@
         <td class="api-list">Range of possible values for this axis. Units are cm for linear axes or radians for rotary axes.</td>
       </tr>
       <tr>
+        <td class="api-list"><a href="MachineAxis_resolutionStepSize.htm">resolutionStepSize</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Specifies the discrete step size used for axis movement. The step size should be greater than zero. Returns NaN if no step size is set or the axis move is configured for continuous rotation.</td>
+      </tr>
+      <tr>
         <td class="api-list"><a href="MachineAxis_toolChangePosition.htm">toolChangePosition</a></td>
-        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Specifies the value that this axis returns to, prior to a tool change. Units are cm for linear axes or radians for rotary axes. Will return NaN if tool change position isn't set.</td>
+        <td class="api-list">Specifies the value that this axis returns to, prior to a tool change. Units are cm for linear axes or radians for rotary axes. Will return NaN if tool change position isn't set.</td>
       </tr>
     </Table>
     <h2 class="api">
@@ -110,9 +118,9 @@
       <table width="100%" style="font-size:15">
         <tr>
           <td align="left">
-                © Copyright 2025 Autodesk, Inc.
+                © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(MachineAxis%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(MachineAxis%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

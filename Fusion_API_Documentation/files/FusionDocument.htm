@@ -53,6 +53,10 @@
         <td class="api-list">Causes this document to become the active document in the user interface.</td>
       </tr>
       <tr>
+        <td class="api-list"><a href="FusionDocument_advanceToLatest.htm">advanceToLatest</a></td>
+        <td class="api-list">Advance to Latest enables this capability to update assembly with all work-in-progress changes.</td>
+      </tr>
+      <tr>
         <td class="api-list"><a href="FusionDocument_classType.htm">classType</a></td>
         <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
       </tr>
@@ -69,12 +73,16 @@
         <td class="api-list">Performs a Save As on this document. This saves the currently open document to the specified location and this document becomes the saved document. If this is a new document that has never been saved you must use the SaveAs method in order to specify the location and name. You can determine if the document has been saved by checking the value of the isSaved property.</td>
       </tr>
       <tr>
+        <td class="api-list"><a href="FusionDocument_saveDataVersion.htm">saveDataVersion</a></td>
+        <td class="api-list">Creates a version on a dirty document by implicitly saving it first. This method is not applicable when saving a document for the first time. In that case, you must use the Document.saveAs method. You can determine if a document has been saved by checking the value of the isSaved property.</td>
+      </tr>
+      <tr>
         <td class="api-list"><a href="FusionDocument_saveMilestone.htm">saveMilestone</a></td>
         <td class="api-list">Saves the document as a new milestone. This method is not applicable when saving a document for the first time. In that case, you must use the SaveAs method. You can determine if a document has been saved by checking the value of the isSaved property.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="FusionDocument_updateAllReferences.htm">updateAllReferences</a></td>
-        <td class="api-list">Updates all out of date external references. This is equivalent to clicking the "Out of Date" button in the Quick Access Toolbar to update all out of date external references.</td>
+        <td class="api-list">Updates all out of date external references. This is equivalent to clicking the "Refresh" button in the Quick Access Toolbar to update all out of date external references.</td>
       </tr>
     </Table>
     <h2 class="api">
@@ -96,6 +104,10 @@
       <tr>
         <td class="api-list"><a href="FusionDocument_attributes.htm">attributes</a></td>
         <td class="api-list">Returns the collection of attributes associated with this document.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="FusionDocument_canAdvanceToLatest.htm">canAdvanceToLatest</a></td>
+        <td class="api-list">Indicates if the document can be advanced to the latest change.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="FusionDocument_creationId.htm">creationId</a></td>
@@ -183,9 +195,9 @@
       <table width="100%" style="font-size:15">
         <tr>
           <td align="left">
-                © Copyright 2025 Autodesk, Inc.
+                © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(FusionDocument%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(FusionDocument%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

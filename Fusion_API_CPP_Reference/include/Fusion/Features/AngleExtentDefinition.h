@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -31,7 +31,7 @@ namespace adsk { namespace fusion {
 
 namespace adsk { namespace fusion {
 
-/// Defines the inputs for a AngleExtentDefinition object.
+/// Defines the inputs for an AngleExtentDefinition object.
 /// This feature extent is defined by an angle as well as whether the extent is symmetric or only in one direction.
 /// If the extent is not symmetric, a positive or negative angle can be used to control the direction.
 class AngleExtentDefinition : public ExtentDefinition {

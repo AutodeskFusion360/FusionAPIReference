@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2025 Autodesk, Inc. All rights reserved.
+// Copyright 2026 Autodesk, Inc. All rights reserved.
 //
 // Use of this software is subject to the terms of the Autodesk license
 // agreement provided at the time of installation or download, or which
@@ -29,6 +29,7 @@
 
 namespace adsk { namespace core {
     class Point3D;
+    class ValueInput;
 }}
 namespace adsk { namespace fusion {
     class SketchText;
@@ -70,16 +71,35 @@ public:
     /// Returns the newly created SketchText object or null in the case of failure.
     core::Ptr<SketchText> add(const core::Ptr<SketchTextInput>& input);
 
-    /// Creates a SketchTextInput object that is used to define the additional input to create text. The SketchTextInput
-    /// object is equivalent to the Sketch Text dialog in that it collects all of the input required to create sketch text.
-    /// You must call setAsFitOnPath, setAsAlongPath, or setAsMultiLine methods to define one of the three types of text and
-    /// can use other and define any
-    /// setAs Once the properties of the SketchTextInput object have been defined, use the add method
-    /// to create the sketch text.
-    /// formattedText : The text used for the sketch text. This is a simple string as no additional formatting is currently supported.
+    /// !!!!! Warning !!!!!
+    /// ! This has been retired; please see the help for more info
+    /// !!!!! Warning !!!!!
+    /// 
+    /// This method has been retired and replaced by createInput3. Use the new method to define text using an expression
+    /// that can combine literal text with parameter values.
+    /// formattedText : The text used for the sketch text. This is the equivalent of the text that would be entered into the "Text" command
+    /// dialog. It can be a simple string or it can be an expression that combines text with parameter values. In the case
+    /// of a simple string, no quotes are needed, but for an expression, text should be quoted using a single quote.
     /// height : The height of the text in centimeters.
     /// Returns a SketchTextInput object that can be used to set additional formatting and is used as input to the add method.
     core::Ptr<SketchTextInput> createInput2(const std::string& formattedText, double height);
+
+    /// Creates a SketchTextInput object that is used to define the additional input to create text. The SketchTextInput
+    /// object is equivalent to the Sketch Text dialog in that it collects all of the input required to create sketch text.
+    /// You must call setAsFitOnPath, setAsAlongPath, or setAsMultiLine methods to define one of the three types of text.
+    /// Once the properties of the SketchTextInput object have been defined, pass the SketchTextInput to the add method
+    /// to create the sketch text.
+    /// expression : This defines the expression of the parameter that will be created when this SketchText is created. It can be a simple string
+    /// or it can be an expression that combines text with parameter values. Simple text must be enclosed within single quotes,
+    /// the same as it is required in the TEXT command dialog.
+    /// 
+    /// An example of a valid expression is: "'Length: ' + lengthParam" and will result in "Length: 3.0 mm". The expression
+    /// result can be obtained by using the text property on the created SketchTextInput object.
+    /// height : A ValueInput that defines the height of the text. This value is used to create a parameter that will control
+    /// the height of the text. It can be a value where it defines the height of the text in centimeters, or it can
+    /// be a string where it defines the equation of the parameter and must evaluate to a valid length.
+    /// Returns a SketchTextInput object that can be used to set additional formatting and is used as input to the add method.
+    core::Ptr<SketchTextInput> createInput3(const std::string& expression, const core::Ptr<core::ValueInput>& height);
 
     typedef SketchText iterable_type;
     template <class OutputIterator> void copyTo(OutputIterator result);
@@ -97,6 +117,7 @@ private:
     virtual SketchTextInput* createInput_raw(const char* formattedText, double height, core::Point3D* position) = 0;
     virtual SketchText* add_raw(SketchTextInput* input) = 0;
     virtual SketchTextInput* createInput2_raw(const char* formattedText, double height) = 0;
+    virtual SketchTextInput* createInput3_raw(const char* expression, core::ValueInput* height) = 0;
 };
 
 // Inline wrappers
@@ -128,6 +149,12 @@ inline core::Ptr<SketchText> SketchTexts::add(const core::Ptr<SketchTextInput>& 
 inline core::Ptr<SketchTextInput> SketchTexts::createInput2(const std::string& formattedText, double height)
 {
     core::Ptr<SketchTextInput> res = createInput2_raw(formattedText.c_str(), height);
+    return res;
+}
+
+inline core::Ptr<SketchTextInput> SketchTexts::createInput3(const std::string& expression, const core::Ptr<core::ValueInput>& height)
+{
+    core::Ptr<SketchTextInput> res = createInput3_raw(expression.c_str(), height.get());
     return res;
 }
 

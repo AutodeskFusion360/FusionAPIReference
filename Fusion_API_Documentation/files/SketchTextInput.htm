@@ -86,12 +86,20 @@
         <td class="api-list">Returns the SketchTextDefinition object associated with this input. When the SketchTextInput is first created this property will return null. Once one of the "set" methods have been called, this will return the SketchTextDefinition of the appropriate type and can be used to make any additional changes to the text.</td>
       </tr>
       <tr>
+        <td class="api-list"><a href="SketchTextInput_expression.htm">expression</a></td>
+        <td class="api-list">Gets and sets the expression of the parameter that will be created when this SketchText is created. It can be a simple string or it can be an expression that combines text with parameter values. Simple text must be enclosed within single quotes, the same as it is required in the TEXT command dialog.<br/><br/> An example of a valid expression is: "'Length: ' + lengthParam" and will result in "Length: 3.0 mm". The expression result can be obtained by using the text property on the created SketchTextInput object.</td>
+      </tr>
+      <tr>
         <td class="api-list"><a href="SketchTextInput_fontName.htm">fontName</a></td>
         <td class="api-list">Gets and sets the name of the font to use.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="SketchTextInput_height.htm">height</a></td>
-        <td class="api-list">Gets and sets the height of the text in centimeters.</td>
+        <td class="api-list"><mark>**RETIRED**</mark> This property has been retired and replaced by the height2 property.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="SketchTextInput_height2.htm">height2</a></td>
+        <td class="api-list">Gets and sets the ValueInput that defines the height of the text. This value is used to create a parameter that will control the height of the text. It can be a value where it defines the height of the text in centimeters, or it can be a string where it defines the equation of the parameter and must evaluate to a valid length.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="SketchTextInput_isHorizontalFlip.htm">isHorizontalFlip</a></td>
@@ -115,7 +123,7 @@
       </tr>
       <tr>
         <td class="api-list"><a href="SketchTextInput_text.htm">text</a></td>
-        <td class="api-list">Gets and sets the text.</td>
+        <td class="api-list">Gets and sets the displayed text. This represents the text that results from evaluating the input formatted text. For example, if the formatted text is "'Length: ' + lengthParam", this property will return "Length: 3.0 in".<br/><br/> Setting this property will overwrite any equation defined by the expression and replace it with simple text. Use the expression property to be able to define a full expression.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="SketchTextInput_textStyle.htm">textStyle</a></td>
@@ -124,7 +132,7 @@
     </Table>
     <h2 class="api">
             Accessed From
-          </h2><a href="SketchTexts_createInput.htm">SketchTexts.createInput</a>, <a href="SketchTexts_createInput2.htm">SketchTexts.createInput2</a><h2 class="api">
+          </h2><a href="SketchTexts_createInput.htm">SketchTexts.createInput</a>, <a href="SketchTexts_createInput2.htm">SketchTexts.createInput2</a>, <a href="SketchTexts_createInput3.htm">SketchTexts.createInput3</a><h2 class="api">
             Samples
           </h2>
     <Table class="api-list">
@@ -149,9 +157,9 @@
       <table width="100%" style="font-size:15">
         <tr>
           <td align="left">
-                © Copyright 2025 Autodesk, Inc.
+                © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20September 2025%20API%20Help%20(SketchTextInput%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(SketchTextInput%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>
