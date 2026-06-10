@@ -36,7 +36,9 @@
               Derived from: <a href="Base.htm">Base</a> Object
             <br>Defined in namespace "adsk::core" and the header file is &lt;Core/UserInterface/ToolbarPanels.h&gt;<h2 class="api">
           Description
-        </h2>Provides access to a set of toolbar panels. Many toolbar panels exist and their visibility is determined by the active workspace. A panel can be associated with one or more workspaces and when the associated workspace is active, the panel is made visible.<br/><br/> This collection is associated with a workspace and possibly a tab in the toolbar for that workspace. If this collection is from a toolbar tab, the collection order is the left-to-right order of panels in the toolbar tab.<h2 class="api">
+        </h2>
+    <p class="api">Provides access to a set of toolbar panels. Many toolbar panels exist and their visibility is determined by the active workspace. A panel can be associated with one or more workspaces and when the associated workspace is active, the panel is made visible.<br/><br/> This collection is associated with a workspace and possibly a tab in the toolbar for that workspace. If this collection is from a toolbar tab, the collection order is the left-to-right order of panels in the toolbar tab.</p>
+    <h2 class="api">
             Methods
           </h2>
     <Table class="api-list">
@@ -50,19 +52,27 @@
       </tr>
       <tr>
         <td class="api-list"><a href="ToolbarPanels_add.htm">add</a></td>
-        <td class="api-list">Creates a new ToolbarPanel. The panel is initially empty. Use the associated ToolbarControls collection to add buttons.<br/><br/> If this collection is associated with a tab, the new panel will be added to that tab. If this collection is not associated with a tab, the new panel will be added to the end of the "Tools" Tab. A "Tools" tab will be created for you if it does not currently exist for this collection's workspace.</td>
+        <td class="api-list">
+          <p class="api">Creates a new ToolbarPanel. The panel is initially empty. Use the associated ToolbarControls collection to add buttons.<br/><br/> If this collection is associated with a tab, the new panel will be added to that tab. If this collection is not associated with a tab, the new panel will be added to the end of the "Tools" Tab. A "Tools" tab will be created for you if it does not currently exist for this collection's workspace.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="ToolbarPanels_classType.htm">classType</a></td>
-        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+        <td class="api-list">
+          <p class="api">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="ToolbarPanels_item.htm">item</a></td>
-        <td class="api-list">Returns the specified toolbar panel using an index into the collection. When iterating by index, the panels are returned in the same order as they are shown in the user interface.</td>
+        <td class="api-list">
+          <p class="api">Returns the specified toolbar panel using an index into the collection. When iterating by index, the panels are returned in the same order as they are shown in the user interface.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="ToolbarPanels_itemById.htm">itemById</a></td>
-        <td class="api-list">Returns the ToolbarPanel at the specified ID.</td>
+        <td class="api-list">
+          <p class="api">Returns the ToolbarPanel at the specified ID.</p>
+        </td>
       </tr>
     </Table>
     <h2 class="api">
@@ -183,7 +193,7 @@
           <td align="left">
                 © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(ToolbarPanels%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(ToolbarPanels%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

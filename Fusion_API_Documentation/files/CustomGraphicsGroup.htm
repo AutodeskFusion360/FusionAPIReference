@@ -36,7 +36,9 @@
               Derived from: <a href="CustomGraphicsEntity.htm">CustomGraphicsEntity</a> Object
             <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Graphics/CustomGraphicsGroup.h&gt;<h2 class="api">
           Description
-        </h2>Represents a group of custom graphics entities. A group can also own other graphics groups.<h2 class="api">
+        </h2>
+    <p class="api">Represents a group of custom graphics entities. A group can also own other graphics groups.</p>
+    <h2 class="api">
             Methods
           </h2>
     <Table class="api-list">
@@ -50,51 +52,75 @@
       </tr>
       <tr>
         <td class="api-list"><a href="CustomGraphicsGroup_addBRepBody.htm">addBRepBody</a></td>
-        <td class="api-list">Adds a new CustomGraphicsBRepBody object to this group. This displays a real or transient BRepBody object as custom graphics. No relationship exists back to the original input body so if it is changed, the custom graphics will not change.<br/><br/> The body associated with the CustomGraphicsBRep body is a copy of the original input body. Equivalent Faces, Edges, and vertices can be found by using the indexes in the collection. For example if you have a face of the original body and find that it is at index 24 in the BRepFaces collection of that body, the equivalent face in the custom graphics body will also be at index 24. This works as long as the original body is not modified in any way.</td>
+        <td class="api-list">
+          <p class="api">Adds a new CustomGraphicsBRepBody object to this group. This displays a real or transient BRepBody object as custom graphics. No relationship exists back to the original input body so if it is changed, the custom graphics will not change.<br/><br/> The body associated with the CustomGraphicsBRep body is a copy of the original input body. Equivalent Faces, Edges, and vertices can be found by using the indexes in the collection. For example if you have a face of the original body and find that it is at index 24 in the BRepFaces collection of that body, the equivalent face in the custom graphics body will also be at index 24. This works as long as the original body is not modified in any way.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="CustomGraphicsGroup_addCurve.htm">addCurve</a></td>
-        <td class="api-list">Adds a new CustomGraphicsCurve entity to this group. A CustomGraphicsCurve is a wireframe graphic that is based on any object derived from Curve3D (except InfiniteLine3D). This is useful when drawing curved geometry where the alternative is to stroke the smooth curve and draw it as a series of lines. Using this you can directly use the curve and Fusion will automatically take care of creating the correct display for the current level of detail.</td>
+        <td class="api-list">
+          <p class="api">Adds a new CustomGraphicsCurve entity to this group. A CustomGraphicsCurve is a wireframe graphic that is based on any object derived from Curve3D (except InfiniteLine3D). This is useful when drawing curved geometry where the alternative is to stroke the smooth curve and draw it as a series of lines. Using this you can directly use the curve and Fusion will automatically take care of creating the correct display for the current level of detail.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="CustomGraphicsGroup_addGroup.htm">addGroup</a></td>
-        <td class="api-list">Creates a new, empty CustomGraphicsGroup that is owned by this CustomGraphicsGroup.</td>
+        <td class="api-list">
+          <p class="api">Creates a new, empty CustomGraphicsGroup that is owned by this CustomGraphicsGroup.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="CustomGraphicsGroup_addLines.htm">addLines</a></td>
-        <td class="api-list">Adds a new CustomGraphicsLines entity to this group.</td>
+        <td class="api-list">
+          <p class="api">Adds a new CustomGraphicsLines entity to this group.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="CustomGraphicsGroup_addMesh.htm">addMesh</a></td>
-        <td class="api-list">Adds a new CustomGraphicsMesh entity to this group.</td>
+        <td class="api-list">
+          <p class="api">Adds a new CustomGraphicsMesh entity to this group.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="CustomGraphicsGroup_addPointSet.htm">addPointSet</a></td>
-        <td class="api-list">Adds a new CustomGraphicsPointSet entity to this group. This will be displayed as one or more points where all of the points will display using the same image.</td>
+        <td class="api-list">
+          <p class="api">Adds a new CustomGraphicsPointSet entity to this group. This will be displayed as one or more points where all of the points will display using the same image.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="CustomGraphicsGroup_addText.htm">addText</a></td>
-        <td class="api-list">Adds a new CustomGraphicsText entity to this group. This will be displayed as a single line of text. It is placed so that the upper-left corner is at the point defined and the text will be parallel to the X-Y plane of the world coordinate system and in the X direction. To change its position relative to the input point you can change the horizontal and vertical justification on the returned CustomGraphicsText object. You can also reorient the text by changing the transform of the returned CustomGraphicsText object.</td>
+        <td class="api-list">
+          <p class="api">Adds a new CustomGraphicsText entity to this group. This will be displayed as a single line of text. It is placed so that the upper-left corner is at the point defined and the text will be parallel to the X-Y plane of the world coordinate system and in the X direction. To change its position relative to the input point you can change the horizontal and vertical justification on the returned CustomGraphicsText object. You can also reorient the text by changing the transform of the returned CustomGraphicsText object.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="CustomGraphicsGroup_classType.htm">classType</a></td>
-        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+        <td class="api-list">
+          <p class="api">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="CustomGraphicsGroup_deleteMe.htm">deleteMe</a></td>
-        <td class="api-list">Deletes the entity from the custom graphics group.</td>
+        <td class="api-list">
+          <p class="api">Deletes the entity from the custom graphics group.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="CustomGraphicsGroup_getOpacity.htm">getOpacity</a></td>
-        <td class="api-list">Gets the opacity of the graphics entity.</td>
+        <td class="api-list">
+          <p class="api">Gets the opacity of the graphics entity.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="CustomGraphicsGroup_item.htm">item</a></td>
-        <td class="api-list">Function that returns the specified custom graphics entity within this group. This also includes any child graphics groups.</td>
+        <td class="api-list">
+          <p class="api">Function that returns the specified custom graphics entity within this group. This also includes any child graphics groups.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="CustomGraphicsGroup_setOpacity.htm">setOpacity</a></td>
-        <td class="api-list">Sets the opacity of the graphics entity. By default, when a new entity is created it is completely opaque and does not override the opacity defined by the material.</td>
+        <td class="api-list">
+          <p class="api">Sets the opacity of the graphics entity. By default, when a new entity is created it is completely opaque and does not override the opacity defined by the material.</p>
+        </td>
       </tr>
     </Table>
     <h2 class="api">
@@ -190,7 +216,7 @@
           <td align="left">
                 © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(CustomGraphicsGroup%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(CustomGraphicsGroup%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

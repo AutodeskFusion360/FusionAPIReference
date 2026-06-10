@@ -36,7 +36,9 @@
               Derived from: <a href="Base.htm">Base</a> Object
             <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/BRep/TemporaryBRepManager.h&gt;<h2 class="api">
           Description
-        </h2>A utility object that provides functionality to create and manipulate B-Rep data outside the context of a document. The provides direct access to the modeling core without the overhead of parametrics, persistence, transactions, or graphics. It also provides a way of directly defining and creating B-Rep data.<h2 class="api">
+        </h2>
+    <p class="api">A utility object that provides functionality to create and manipulate B-Rep data outside the context of a document. The provides direct access to the modeling core without the overhead of parametrics, persistence, transactions, or graphics. It also provides a way of directly defining and creating B-Rep data.</p>
+    <h2 class="api">
             Methods
           </h2>
     <Table class="api-list">
@@ -50,87 +52,129 @@
       </tr>
       <tr>
         <td class="api-list"><a href="TemporaryBRepManager_booleanOperation.htm">booleanOperation</a></td>
-        <td class="api-list">Performs the specified Boolean operation between the two input bodies. The input bodies need not be solid but can be faces that are combined or trimmed.</td>
+        <td class="api-list">
+          <p class="api">Performs the specified Boolean operation between the two input bodies. The input bodies need not be solid but can be faces that are combined or trimmed.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="TemporaryBRepManager_classType.htm">classType</a></td>
-        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+        <td class="api-list">
+          <p class="api">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="TemporaryBRepManager_copy.htm">copy</a></td>
-        <td class="api-list">Creates a temporary copy of the input BRepBody, BRepFace, or BRepEdge object.</td>
+        <td class="api-list">
+          <p class="api">Creates a temporary copy of the input BRepBody, BRepFace, or BRepEdge object.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="TemporaryBRepManager_createBox.htm">createBox</a></td>
-        <td class="api-list">Creates a new temporary solid box BRepBody object.</td>
+        <td class="api-list">
+          <p class="api">Creates a new temporary solid box BRepBody object.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="TemporaryBRepManager_createCylinderOrCone.htm">createCylinderOrCone</a></td>
-        <td class="api-list">Creates a temporary solid cylinder or cone BRepBody object.</td>
+        <td class="api-list">
+          <p class="api">Creates a temporary solid cylinder or cone BRepBody object.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="TemporaryBRepManager_createEllipticalCylinderOrCone.htm">createEllipticalCylinderOrCone</a></td>
-        <td class="api-list">Creates a temporary elliptical solid cylinder or cone BRepBody object.</td>
+        <td class="api-list">
+          <p class="api">Creates a temporary elliptical solid cylinder or cone BRepBody object.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="TemporaryBRepManager_createFaceFromPlanarWires.htm">createFaceFromPlanarWires</a></td>
-        <td class="api-list">Creates a body from multiple wires that all lie within the same plane. Multiple wires are used when creating a plane with interior holes. One wire defines the outer shape and the other wires define the interior loops of the created face.</td>
+        <td class="api-list">
+          <p class="api">Creates a body from multiple wires that all lie within the same plane. Multiple wires are used when creating a plane with interior holes. One wire defines the outer shape and the other wires define the interior loops of the created face.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="TemporaryBRepManager_createFromFile.htm">createFromFile</a></td>
-        <td class="api-list">Creates new BRepBody objects based on the contents of the specified file.</td>
+        <td class="api-list">
+          <p class="api">Creates new BRepBody objects based on the contents of the specified file.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="TemporaryBRepManager_createHelixWire.htm">createHelixWire</a></td>
-        <td class="api-list">Creates a B-Rep body that contains a wire with a single edge that represents a helical curve.</td>
+        <td class="api-list">
+          <p class="api">Creates a B-Rep body that contains a wire with a single edge that represents a helical curve.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="TemporaryBRepManager_createProjectedBodyOutline.htm">createProjectedBodyOutline</a></td>
-        <td class="api-list">Computes the approximate outline of a body. The outline is the loops formed from projecting the non-occluded silhouette curves of the body onto a plane. The outline is returned as a temporary BRepBody consisting of planar BRepFace objects whose boundaries form the outline.<br/><br/> The computed outline can be an approximation i.e. not precise. This is to make it useful in cases where robustness is more important than precision. For most cases, a precise analytical result is computed, but in some cases, the silhouette of a curved surface may be approximated by a series of straight lines. Even though it's an approximation you can control the tolerance of the approximation. A tighter tolerance will result in a longer compute time.</td>
+        <td class="api-list">
+          <p class="api">Computes the approximate outline of a body. The outline is the loops formed from projecting the non-occluded silhouette curves of the body onto a plane. The outline is returned as a temporary BRepBody consisting of planar BRepFace objects whose boundaries form the outline.<br/><br/> The computed outline can be an approximation i.e. not precise. This is to make it useful in cases where robustness is more important than precision. For most cases, a precise analytical result is computed, but in some cases, the silhouette of a curved surface may be approximated by a series of straight lines. Even though it's an approximation you can control the tolerance of the approximation. A tighter tolerance will result in a longer compute time.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="TemporaryBRepManager_createRuledSurface.htm">createRuledSurface</a></td>
-        <td class="api-list">Creates a new body by creating a ruled surface between the two input wire bodies.</td>
+        <td class="api-list">
+          <p class="api">Creates a new body by creating a ruled surface between the two input wire bodies.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="TemporaryBRepManager_createSilhouetteCurves.htm">createSilhouetteCurves</a></td>
-        <td class="api-list">Calculates the silhouette curve geometry for a given face as viewed from a given direction.</td>
+        <td class="api-list">
+          <p class="api">Calculates the silhouette curve geometry for a given face as viewed from a given direction.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="TemporaryBRepManager_createSphere.htm">createSphere</a></td>
-        <td class="api-list">Creates a temporary spherical BRepBody object.</td>
+        <td class="api-list">
+          <p class="api">Creates a temporary spherical BRepBody object.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="TemporaryBRepManager_createTorus.htm">createTorus</a></td>
-        <td class="api-list">Creates a temporary toroidal BRepBody object.</td>
+        <td class="api-list">
+          <p class="api">Creates a temporary toroidal BRepBody object.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="TemporaryBRepManager_createWireFromCurves.htm">createWireFromCurves</a></td>
-        <td class="api-list">Give an array of curve geometry objects, this method creates a new wire body.</td>
+        <td class="api-list">
+          <p class="api">Give an array of curve geometry objects, this method creates a new wire body.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="TemporaryBRepManager_deleteFaces.htm">deleteFaces</a></td>
-        <td class="api-list">Deletes one or more faces from a temporary BRepBody. The body that will be modified is determined by getting the parent body of the input faces.</td>
+        <td class="api-list">
+          <p class="api">Deletes one or more faces from a temporary BRepBody. The body that will be modified is determined by getting the parent body of the input faces.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="TemporaryBRepManager_exportToFile.htm">exportToFile</a></td>
-        <td class="api-list">Exports the input bodies to the specified file.</td>
+        <td class="api-list">
+          <p class="api">Exports the input bodies to the specified file.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="TemporaryBRepManager_get.htm">get</a></td>
-        <td class="api-list">Gets the TempoaryBRepManager object. This object provides access to functionality to create an manipulate temporary B-Rep data outside the context of a document.</td>
+        <td class="api-list">
+          <p class="api">Gets the TempoaryBRepManager object. This object provides access to functionality to create an manipulate temporary B-Rep data outside the context of a document.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="TemporaryBRepManager_imprintOverlapBodies.htm">imprintOverlapBodies</a></td>
-        <td class="api-list">Method that finds regions of faces on two bodies which overlap and creates new bodies where the faces are split at the edges of the overlaps. This does not modify the original bodies but creates new temporary bodies that contain the imprints.</td>
+        <td class="api-list">
+          <p class="api">Method that finds regions of faces on two bodies which overlap and creates new bodies where the faces are split at the edges of the overlaps. This does not modify the original bodies but creates new temporary bodies that contain the imprints.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="TemporaryBRepManager_planeIntersection.htm">planeIntersection</a></td>
-        <td class="api-list">Calculates the intersection between the input body and plane and creates a wire body that represents the intersection curves.</td>
+        <td class="api-list">
+          <p class="api">Calculates the intersection between the input body and plane and creates a wire body that represents the intersection curves.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="TemporaryBRepManager_transform.htm">transform</a></td>
-        <td class="api-list">Transforms the input body using the specified transformation matrix.</td>
+        <td class="api-list">
+          <p class="api">Transforms the input body using the specified transformation matrix.</p>
+        </td>
       </tr>
     </Table>
     <h2 class="api">
@@ -183,7 +227,7 @@
           <td align="left">
                 © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(TemporaryBRepManager%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(TemporaryBRepManager%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

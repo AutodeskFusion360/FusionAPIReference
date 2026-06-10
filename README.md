@@ -1,5 +1,7 @@
 # FusionAPIReference
 
+**Updated as of Fusion May 2026 Major Release**
+
 Documentation and source code references for the Autodesk Fusion API. This repository gathers the official HTML documentation, C++ header files, and Python object definitions into a single, local reference corpus intended for both developers and tooling (including LLMs/RAG).
 
 This repository includes tooling to convert and index the HTML docs and to create a browsable local index page (`index.htm`) with single-column layout, titles, and client-side search.

@@ -36,7 +36,9 @@
               Derived from: <a href="Base.htm">Base</a> Object
             <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Features/ThreadInfo.h&gt;<h2 class="api">
           Description
-        </h2>This class defines the methods and properties that define the type and size of a thread. This object is used to create and query thread and tapped (straight and tapered) hole features. A new ThreadInfo object is created by using the ThreadInfo.create method. If the ThreadInfo object is obtained from an existing thread or hole feature, modifying the ThreadInfo object will modify the feature.<h2 class="api">
+        </h2>
+    <p class="api">This class defines the methods and properties that define the type and size of a thread. This object is used to create and query thread and tapped (straight and tapered) hole features. A new ThreadInfo object is created by using the ThreadInfo.create method. If the ThreadInfo object is obtained from an existing thread or hole feature, modifying the ThreadInfo object will modify the feature.</p>
+    <h2 class="api">
             Methods
           </h2>
     <Table class="api-list">
@@ -50,15 +52,21 @@
       </tr>
       <tr>
         <td class="api-list"><a href="ThreadInfo_classType.htm">classType</a></td>
-        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+        <td class="api-list">
+          <p class="api">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="ThreadInfo_create.htm">create</a></td>
-        <td class="api-list">This method creates a new ThreadInfo object that can be used to create a thread or tapped-hole feature. The ThreadInfo object defines the type and size of the thread to create. When creating a thread, the type and size of the thread are defined by specifying the thread type, designation, and class. Fusion uses this information to look up the full details of the thread in tables delivered with Fusion. The ThreadDataQuery object can be used to determine valid input for this information.<br/><br/> The thread type implicitly defines if the thread is standard or tapered. Tapered threads can only be used when creating tapped holes and are not supported for thread features.</td>
+        <td class="api-list">
+          <p class="api">This method creates a new ThreadInfo object that can be used to create a thread or tapped-hole feature. The ThreadInfo object defines the type and size of the thread to create. When creating a thread, the type and size of the thread are defined by specifying the thread type, designation, and class. Fusion uses this information to look up the full details of the thread in tables delivered with Fusion. The ThreadDataQuery object can be used to determine valid input for this information.<br/><br/> The thread type implicitly defines if the thread is standard or tapered. Tapered threads can only be used when creating tapped holes and are not supported for thread features.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="ThreadInfo_redefine.htm">redefine</a></td>
-        <td class="api-list">Method that redefines an existing ThreadInfo object. This is typically used to change the thread of an existing thread or tapped hole.<br/><br/> The ThreadInfo object defines the type and size of a thread by specifying the thread type, designation, and class. Fusion uses this information to look up the full details of the thread in tables delivered with Fusion. The ThreadDataQuery object can be used to determine valid input for this information.<br/><br/> Tapered threads can only be used when creating or editing tapped holes and are not supported for thread features.</td>
+        <td class="api-list">
+          <p class="api">Method that redefines an existing ThreadInfo object. This is typically used to change the thread of an existing thread or tapped hole.<br/><br/> The ThreadInfo object defines the type and size of a thread by specifying the thread type, designation, and class. Fusion uses this information to look up the full details of the thread in tables delivered with Fusion. The ThreadDataQuery object can be used to determine valid input for this information.<br/><br/> Tapered threads can only be used when creating or editing tapped holes and are not supported for thread features.</p>
+        </td>
       </tr>
     </Table>
     <h2 class="api">
@@ -179,7 +187,7 @@
           <td align="left">
                 © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(ThreadInfo%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(ThreadInfo%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

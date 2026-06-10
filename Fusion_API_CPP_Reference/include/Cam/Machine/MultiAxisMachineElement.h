@@ -89,10 +89,6 @@ public:
     /// The MultiAxisRetractAndReconfigureSettings object created.
     core::Ptr<MultiAxisRetractAndReconfigureSettings> createRetractAndReconfigureSettings();
 
-    /// !!!!! Warning !!!!!
-    /// ! This is in preview state; please see the help for more info
-    /// !!!!! Warning !!!!!
-    /// 
     /// Specifies if tilted workplane command (e.g., G68.2, G254, PLANE SPATIAL, CYCLE800) should be output for 3+2 operations.
     bool isUsingTiltedWorkplane() const;
     bool isUsingTiltedWorkplane(bool value);

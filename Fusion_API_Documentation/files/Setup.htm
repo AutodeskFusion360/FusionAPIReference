@@ -36,7 +36,9 @@
               Derived from: <a href="OperationBase.htm">OperationBase</a> Object
             <br>Defined in namespace "adsk::cam" and the header file is &lt;Cam/CAM/Setup.h&gt;<h2 class="api">
           Description
-        </h2>Object that represents an existing Setup.<h2 class="api">
+        </h2>
+    <p class="api">Object that represents an existing Setup.</p>
+    <h2 class="api">
             Methods
           </h2>
     <Table class="api-list">
@@ -50,67 +52,99 @@
       </tr>
       <tr>
         <td class="api-list"><a href="Setup_activate.htm">activate</a></td>
-        <td class="api-list">Sets this object as the default container.</td>
+        <td class="api-list">
+          <p class="api">Sets this object as the default container.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Setup_additiveContainerByType.htm">additiveContainerByType</a></td>
-        <td class="api-list">Returns the additive container with the specified type.</td>
+        <td class="api-list">
+          <p class="api">Returns the additive container with the specified type.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Setup_classType.htm">classType</a></td>
-        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+        <td class="api-list">
+          <p class="api">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Setup_copyAfter.htm">copyAfter</a></td>
-        <td class="api-list">Creates a duplicate of the operation in the tree after the given operation. Throws an exception if a not allowed copy operation is made for example copying a operation out of a setup.</td>
+        <td class="api-list">
+          <p class="api">Creates a duplicate of the operation in the tree after the given operation. Throws an exception if a not allowed copy operation is made for example copying a operation out of a setup.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Setup_copyBefore.htm">copyBefore</a></td>
-        <td class="api-list">Creates a duplicate of the operation in the tree before the given operation. Throws an exception if a not allowed copy operation is made for example copying a operation out of a setup.</td>
+        <td class="api-list">
+          <p class="api">Creates a duplicate of the operation in the tree before the given operation. Throws an exception if a not allowed copy operation is made for example copying a operation out of a setup.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Setup_copyInto.htm">copyInto</a></td>
-        <td class="api-list">Creates a duplicate of the operation into the given container. You can only copy into containers, such as setups or folders. Copied operation will be copied at the end of all operations already in the container. Throws an exception if a not allowed copy operation is made for example copying a setup into a setup.</td>
+        <td class="api-list">
+          <p class="api">Creates a duplicate of the operation into the given container. You can only copy into containers, such as setups or folders. Copied operation will be copied at the end of all operations already in the container. Throws an exception if a not allowed copy operation is made for example copying a setup into a setup.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Setup_createFromCAMTemplate.htm">createFromCAMTemplate</a></td>
-        <td class="api-list"><mark>**RETIRED**</mark> Create new operations, folders, or patterns from the specified CAMTemplate. They are added to the end of the parent setup.</td>
+        <td class="api-list">
+          <p class="api"><mark>**RETIRED**</mark> Create new operations, folders, or patterns from the specified CAMTemplate. They are added to the end of the parent setup.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Setup_createFromCAMTemplate2.htm">createFromCAMTemplate2</a></td>
-        <td class="api-list">Create new operations, folders, or patterns from the specified CAMTemplate. They are added to the end of the parent setup.</td>
+        <td class="api-list">
+          <p class="api">Create new operations, folders, or patterns from the specified CAMTemplate. They are added to the end of the parent setup.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Setup_createFromTemplate.htm">createFromTemplate</a></td>
-        <td class="api-list"><mark>**RETIRED**</mark> Create and add operations, folders or patterns from the specified template file to the end of this setup.</td>
+        <td class="api-list">
+          <p class="api"><mark>**RETIRED**</mark> Create and add operations, folders or patterns from the specified template file to the end of this setup.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Setup_createFromTemplateXML.htm">createFromTemplateXML</a></td>
-        <td class="api-list"><mark>**RETIRED**</mark> Create and add operations, folders or patterns from the specified template content XML to the end of this setup.</td>
+        <td class="api-list">
+          <p class="api"><mark>**RETIRED**</mark> Create and add operations, folders or patterns from the specified template content XML to the end of this setup.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Setup_deleteMe.htm">deleteMe</a></td>
-        <td class="api-list">Deletes the operation from the document. In case of a setup or folder, all containing child operations will be deleted as well. Note: Child classes may overwrite this function and throw an exception if the object cannot be deleted.</td>
+        <td class="api-list">
+          <p class="api">Deletes the operation from the document. In case of a setup or folder, all containing child operations will be deleted as well. Note: Child classes may overwrite this function and throw an exception if the object cannot be deleted.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Setup_duplicate.htm">duplicate</a></td>
-        <td class="api-list">Creates a duplicate of the operation in the tree after the itself.</td>
+        <td class="api-list">
+          <p class="api">Creates a duplicate of the operation in the tree after the itself.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Setup_modifyUtility.htm">modifyUtility</a></td>
-        <td class="api-list">Get ModifyUtility for the current operation by given utility type.</td>
+        <td class="api-list">
+          <p class="api">Get ModifyUtility for the current operation by given utility type.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Setup_moveAfter.htm">moveAfter</a></td>
-        <td class="api-list">Move operation in tree after the given operation. Throws an exception if a not allowed move is made for example moving a operation out of a setup.</td>
+        <td class="api-list">
+          <p class="api">Move operation in tree after the given operation. Throws an exception if a not allowed move is made for example moving a operation out of a setup.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Setup_moveBefore.htm">moveBefore</a></td>
-        <td class="api-list">Move operation in tree before the given operation. Throws an exception if a not allowed move is made for example moving a operation out of a setup.</td>
+        <td class="api-list">
+          <p class="api">Move operation in tree before the given operation. Throws an exception if a not allowed move is made for example moving a operation out of a setup.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Setup_moveInto.htm">moveInto</a></td>
-        <td class="api-list">Move operation in tree into the given container. This only works with setups, patterns and folders. Moved operation will be moved at the end of all operations already in the container. Throws an exception if a not allowed move is made for example moving a setup into a setup.</td>
+        <td class="api-list">
+          <p class="api">Move operation in tree into the given container. This only works with setups, patterns and folders. Moved operation will be moved at the end of all operations already in the container. Throws an exception if a not allowed move is made for example moving a setup into a setup.</p>
+        </td>
       </tr>
     </Table>
     <h2 class="api">
@@ -208,6 +242,10 @@
       <tr>
         <td class="api-list"><a href="Setup_name.htm">name</a></td>
         <td class="api-list">Gets and sets the name of the operation as seen in the browser.&nbsp;This name is unique as compared to the names of all other operations in the document.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Setup_noteIconColor.htm">noteIconColor</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>The color of the note icon. This represents the color of the note icon in the browser, which is displayed next to the operation name when the operation has notes.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="Setup_notes.htm">notes</a></td>
@@ -347,7 +385,7 @@
           <td align="left">
                 © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(Setup%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(Setup%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

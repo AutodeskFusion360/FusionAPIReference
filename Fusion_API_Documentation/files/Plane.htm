@@ -36,7 +36,9 @@
               Derived from: <a href="Surface.htm">Surface</a> Object
             <br>Defined in namespace "adsk::core" and the header file is &lt;Core/Geometry/Plane.h&gt;<h2 class="api">
           Description
-        </h2>Transient plane. A transient plane is not displayed or saved in a document. Transient planes are used as a wrapper to work with raw plane information. A transient plane has no boundaries or size, but is infinite and is represented by a position, a normal, and an orientation in space. They are created statically using the create method of the Plane class.<h2 class="api">
+        </h2>
+    <p class="api">Transient plane. A transient plane is not displayed or saved in a document. Transient planes are used as a wrapper to work with raw plane information. A transient plane has no boundaries or size, but is infinite and is represented by a position, a normal, and an orientation in space. They are created statically using the create method of the Plane class.</p>
+    <h2 class="api">
             Methods
           </h2>
     <Table class="api-list">
@@ -50,63 +52,93 @@
       </tr>
       <tr>
         <td class="api-list"><a href="Plane_classType.htm">classType</a></td>
-        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+        <td class="api-list">
+          <p class="api">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Plane_copy.htm">copy</a></td>
-        <td class="api-list">Creates and returns an independent copy of this Plane object.</td>
+        <td class="api-list">
+          <p class="api">Creates and returns an independent copy of this Plane object.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Plane_create.htm">create</a></td>
-        <td class="api-list">Creates a transient plane object by specifying an origin and a normal direction.</td>
+        <td class="api-list">
+          <p class="api">Creates a transient plane object by specifying an origin and a normal direction.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Plane_createUsingDirections.htm">createUsingDirections</a></td>
-        <td class="api-list">Creates a transient plane object by specifying an origin along with U and V directions.</td>
+        <td class="api-list">
+          <p class="api">Creates a transient plane object by specifying an origin along with U and V directions.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Plane_intersectWithCurve.htm">intersectWithCurve</a></td>
-        <td class="api-list">Intersect this plane with a curve to get the intersection point(s).</td>
+        <td class="api-list">
+          <p class="api">Intersect this plane with a curve to get the intersection point(s).</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Plane_intersectWithLine.htm">intersectWithLine</a></td>
-        <td class="api-list">Creates a 3D point at the intersection of this plane and a line.</td>
+        <td class="api-list">
+          <p class="api">Creates a 3D point at the intersection of this plane and a line.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Plane_intersectWithPlane.htm">intersectWithPlane</a></td>
-        <td class="api-list">Creates an infinite line at the intersection of this plane with another plane.</td>
+        <td class="api-list">
+          <p class="api">Creates an infinite line at the intersection of this plane with another plane.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Plane_intersectWithSurface.htm">intersectWithSurface</a></td>
-        <td class="api-list">Intersect this plane with a surface to get the intersection point(s).</td>
+        <td class="api-list">
+          <p class="api">Intersect this plane with a surface to get the intersection point(s).</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Plane_isCoPlanarTo.htm">isCoPlanarTo</a></td>
-        <td class="api-list">Checks if this plane is coplanar with another plane.</td>
+        <td class="api-list">
+          <p class="api">Checks if this plane is coplanar with another plane.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Plane_isParallelToLine.htm">isParallelToLine</a></td>
-        <td class="api-list">Checks if this plane is parallel to a line.</td>
+        <td class="api-list">
+          <p class="api">Checks if this plane is parallel to a line.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Plane_isParallelToPlane.htm">isParallelToPlane</a></td>
-        <td class="api-list">Checks if this plane is parallel to another plane.</td>
+        <td class="api-list">
+          <p class="api">Checks if this plane is parallel to another plane.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Plane_isPerpendicularToLine.htm">isPerpendicularToLine</a></td>
-        <td class="api-list">Checks if this plane is perpendicular to a line.</td>
+        <td class="api-list">
+          <p class="api">Checks if this plane is perpendicular to a line.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Plane_isPerpendicularToPlane.htm">isPerpendicularToPlane</a></td>
-        <td class="api-list">Checks if this plane is perpendicular to another plane.</td>
+        <td class="api-list">
+          <p class="api">Checks if this plane is perpendicular to another plane.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Plane_setUVDirections.htm">setUVDirections</a></td>
-        <td class="api-list">Sets the U and V directions of the plane.</td>
+        <td class="api-list">
+          <p class="api">Sets the U and V directions of the plane.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Plane_transformBy.htm">transformBy</a></td>
-        <td class="api-list">Updates this surface by transforming it with a given input matrix.</td>
+        <td class="api-list">
+          <p class="api">Updates this surface by transforming it with a given input matrix.</p>
+        </td>
       </tr>
     </Table>
     <h2 class="api">
@@ -166,7 +198,7 @@
           <td align="left">
                 © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(Plane%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(Plane%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

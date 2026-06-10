@@ -36,7 +36,9 @@
               Derived from: <a href="CommandInput.htm">CommandInput</a> Object
             <br>Defined in namespace "adsk::core" and the header file is &lt;Core/UserInterface/TriadCommandInput.h&gt;<h2 class="api">
           Description
-        </h2>Represents a command input that displays a triad and allows the user to control translation rotation, and scaling. Using properties on the input you can choose which controls are available to the user. This displays inputs in the command dialog where the user can enter values and also displays a manipulator in the graphics window to allow them to graphically set the values. The input boxes are displayed in the dialog when the isVisible property of the command input is true. The manipulator is displayed in the graphics window when both the isVisible and isEnabled properties are true.<br/><br/> It will often be useful to first create a GroupCommandInput and then create the TriadCommandInput within the group so it's apparent to the user these items are related and they can be collapsed to reduce clutter in the dialog. This also allows you to label the set of displayed inputs by using the name of the GroupCommandInput.<h2 class="api">
+        </h2>
+    <p class="api">Represents a command input that displays a triad and allows the user to control translation rotation, and scaling. Using properties on the input you can choose which controls are available to the user. This displays inputs in the command dialog where the user can enter values and also displays a manipulator in the graphics window to allow them to graphically set the values. The input boxes are displayed in the dialog when the isVisible property of the command input is true. The manipulator is displayed in the graphics window when both the isVisible and isEnabled properties are true.<br/><br/> It will often be useful to first create a GroupCommandInput and then create the TriadCommandInput within the group so it's apparent to the user these items are related and they can be collapsed to reduce clutter in the dialog. This also allows you to label the set of displayed inputs by using the name of the GroupCommandInput.</p>
+    <h2 class="api">
             Methods
           </h2>
     <Table class="api-list">
@@ -50,47 +52,69 @@
       </tr>
       <tr>
         <td class="api-list"><a href="TriadCommandInput_classType.htm">classType</a></td>
-        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+        <td class="api-list">
+          <p class="api">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="TriadCommandInput_deleteMe.htm">deleteMe</a></td>
-        <td class="api-list">Deletes this Command input.</td>
+        <td class="api-list">
+          <p class="api">Deletes this Command input.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="TriadCommandInput_hideAll.htm">hideAll</a></td>
-        <td class="api-list">Hides all controls.</td>
+        <td class="api-list">
+          <p class="api">Hides all controls.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="TriadCommandInput_hideAllRotations.htm">hideAllRotations</a></td>
-        <td class="api-list">Sets all rotation related controls to be invisible. This is useful if you are only using translations or scaling.</td>
+        <td class="api-list">
+          <p class="api">Sets all rotation related controls to be invisible. This is useful if you are only using translations or scaling.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="TriadCommandInput_hideAllScaling.htm">hideAllScaling</a></td>
-        <td class="api-list">Sets all scaling related controls to be invisible. This is useful if you are only using translations or rotations.</td>
+        <td class="api-list">
+          <p class="api">Sets all scaling related controls to be invisible. This is useful if you are only using translations or rotations.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="TriadCommandInput_setFlipVisibility.htm">setFlipVisibility</a></td>
-        <td class="api-list">A convenience method to turn on and off the visibility of the horizontal and vertical flip controls.</td>
+        <td class="api-list">
+          <p class="api">A convenience method to turn on and off the visibility of the horizontal and vertical flip controls.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="TriadCommandInput_setFullVisibility.htm">setFullVisibility</a></td>
-        <td class="api-list">A convenience method to turn on and off the visibility of commonly used controls in a triad. These include the X, Y, and Z axis translations, the X, Y, and Z axis rotations, scaling in the X, Y, and Z directions, scaling on the X-Y, Y-Z and Z-X planes, translation on the X-Y, Y-Z, and Z-X planes, and the origin move.</td>
+        <td class="api-list">
+          <p class="api">A convenience method to turn on and off the visibility of commonly used controls in a triad. These include the X, Y, and Z axis translations, the X, Y, and Z axis rotations, scaling in the X, Y, and Z directions, scaling on the X-Y, Y-Z and Z-X planes, translation on the X-Y, Y-Z, and Z-X planes, and the origin move.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="TriadCommandInput_setPlanarMoveVisibility.htm">setPlanarMoveVisibility</a></td>
-        <td class="api-list">A convenience method to turn on and off the visibility of the X-Y, Y-Z, and Z-X planar translation controls.</td>
+        <td class="api-list">
+          <p class="api">A convenience method to turn on and off the visibility of the X-Y, Y-Z, and Z-X planar translation controls.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="TriadCommandInput_setRotateVisibility.htm">setRotateVisibility</a></td>
-        <td class="api-list">A convenience method to turn on and off the visibility of the X, Y, and Z axis rotation controls.</td>
+        <td class="api-list">
+          <p class="api">A convenience method to turn on and off the visibility of the X, Y, and Z axis rotation controls.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="TriadCommandInput_setScaleVisibility.htm">setScaleVisibility</a></td>
-        <td class="api-list">A convenience method to turn on and off the visibility of the controls that define scaling in the X, Y, and Z direction and the X-Y, Y-Z, and Z-X planes.</td>
+        <td class="api-list">
+          <p class="api">A convenience method to turn on and off the visibility of the controls that define scaling in the X, Y, and Z direction and the X-Y, Y-Z, and Z-X planes.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="TriadCommandInput_setTranslateVisibility.htm">setTranslateVisibility</a></td>
-        <td class="api-list">A convenience method to turn on and off the visibility of the X, Y, and Z translation controls.</td>
+        <td class="api-list">
+          <p class="api">A convenience method to turn on and off the visibility of the X, Y, and Z translation controls.</p>
+        </td>
       </tr>
     </Table>
     <h2 class="api">
@@ -390,7 +414,7 @@
           <td align="left">
                 © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(TriadCommandInput%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(TriadCommandInput%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

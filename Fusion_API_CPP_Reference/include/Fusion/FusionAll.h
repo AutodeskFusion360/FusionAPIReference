@@ -73,6 +73,7 @@
 #include <Fusion/Configurations/ConfigurationAppearanceTable.h>
 #include <Fusion/Configurations/ConfigurationTable.h>
 #include <Fusion/Configurations/ConfigurationColumns.h>
+#include <Fusion/Configurations/ConfigurationRuleConstraint.h>
 #include <Fusion/Configurations/ConfigurationSuppressCell.h>
 #include <Fusion/Configurations/ConfigurationThemeColumn.h>
 #include <Fusion/Configurations/ConfigurationAppearanceCell.h>
@@ -131,6 +132,7 @@
 #include <Fusion/Features/SweepFeatureInput.h>
 #include <Fusion/Features/SilhouetteSplitFeature.h>
 #include <Fusion/Features/LoftSection.h>
+#include <Fusion/Features/VolumetricModelFeature.h>
 #include <Fusion/Features/LoftPointTangentEndCondition.h>
 #include <Fusion/Features/MirrorFeature.h>
 #include <Fusion/Features/UntrimFeature.h>
@@ -225,6 +227,7 @@
 #include <Fusion/Features/SphereFeature.h>
 #include <Fusion/Features/DeleteFaceFeature.h>
 #include <Fusion/Features/EmbossFeature.h>
+#include <Fusion/Features/VolumetricModelFeatureInput.h>
 #include <Fusion/Features/SurfaceDeleteFaceFeature.h>
 #include <Fusion/Features/ExtentDefinition.h>
 #include <Fusion/Features/CustomFeatureDependency.h>
@@ -305,6 +308,7 @@
 #include <Fusion/Features/OffsetFacesFeatureInput.h>
 #include <Fusion/Features/FilletFeatures.h>
 #include <Fusion/Features/SymmetricExtentDefinition.h>
+#include <Fusion/Features/VolumetricModelFeatures.h>
 #include <Fusion/Features/SilhouetteSplitFeatures.h>
 #include <Fusion/Features/MoveFeatureFreeMoveDefinition.h>
 #include <Fusion/Features/SplitBodyFeature.h>
@@ -386,6 +390,9 @@
 #include <Fusion/Render/Rendering.h>
 #include <Fusion/Render/RenderFuture.h>
 #include <Fusion/Render/SceneSettings.h>
+#include <Fusion/Animation/Storyboard.h>
+#include <Fusion/Animation/AnimationManager.h>
+#include <Fusion/Animation/Storyboards.h>
 #include <Fusion/PMI/PMIImportedGraphicals.h>
 #include <Fusion/PMI/PMIAnnotations.h>
 #include <Fusion/PMI/PMIImportedGeometricTolerances.h>
@@ -474,6 +481,8 @@
 #include <Fusion/Components/PlanarJointMotion.h>
 #include <Fusion/Components/Joints.h>
 #include <Fusion/Components/JointList.h>
+#include <Fusion/Construction/UserCoordinateSystems.h>
+#include <Fusion/Construction/UserCoordinateSystemGeometry.h>
 #include <Fusion/Construction/ConstructionAxisNormalToFaceAtPointDefinition.h>
 #include <Fusion/Construction/ConstructionPlane.h>
 #include <Fusion/Construction/ConstructionPoints.h>
@@ -488,6 +497,7 @@
 #include <Fusion/Construction/ConstructionPlanes.h>
 #include <Fusion/Construction/ConstructionAxis.h>
 #include <Fusion/Construction/ConstructionPlaneTangentAtPointDefinition.h>
+#include <Fusion/Construction/ConstructionPlaneAtAngleOnCurvedFaceDefinition.h>
 #include <Fusion/Construction/ConstructionPointThreePlanesDefinition.h>
 #include <Fusion/Construction/ConstructionPlaneTwoEdgesDefinition.h>
 #include <Fusion/Construction/ConstructionAxisEdgeDefinition.h>
@@ -500,6 +510,8 @@
 #include <Fusion/Construction/ConstructionAxisCircularFaceDefinition.h>
 #include <Fusion/Construction/ConstructionPointTwoEdgesDefinition.h>
 #include <Fusion/Construction/ConstructionPlaneInput.h>
+#include <Fusion/Construction/UserCoordinateSystemInput.h>
+#include <Fusion/Construction/UserCoordinateSystem.h>
 #include <Fusion/Construction/ConstructionPlaneThreePointsDefinition.h>
 #include <Fusion/Construction/ConstructionPlaneOffsetDefinition.h>
 #include <Fusion/Construction/ConstructionAxisDefinition.h>

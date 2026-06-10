@@ -36,7 +36,9 @@
               Derived from: <a href="Base.htm">Base</a> Object
             <br>Defined in namespace "adsk::core" and the header file is &lt;Core/Geometry/Matrix3D.h&gt;<h2 class="api">
           Description
-        </h2>Transient 3D 4x4 matrix. This object is a wrapper over 3D matrix data and is used as way to pass matrix data in and out of the API and as a convenience when operating on matrix data. They are created statically using the create method of the Matrix3D class.<h2 class="api">
+        </h2>
+    <p class="api">Transient 3D 4x4 matrix. This object is a wrapper over 3D matrix data and is used as way to pass matrix data in and out of the API and as a convenience when operating on matrix data. They are created statically using the create method of the Matrix3D class.</p>
+    <h2 class="api">
             Methods
           </h2>
     <Table class="api-list">
@@ -50,67 +52,99 @@
       </tr>
       <tr>
         <td class="api-list"><a href="Matrix3D_asArray.htm">asArray</a></td>
-        <td class="api-list">Returns the contents of the matrix as a 16 element array.</td>
+        <td class="api-list">
+          <p class="api">Returns the contents of the matrix as a 16 element array.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Matrix3D_classType.htm">classType</a></td>
-        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+        <td class="api-list">
+          <p class="api">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Matrix3D_copy.htm">copy</a></td>
-        <td class="api-list">Creates an independent copy of this matrix.</td>
+        <td class="api-list">
+          <p class="api">Creates an independent copy of this matrix.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Matrix3D_create.htm">create</a></td>
-        <td class="api-list">Creates a transient 3d matrix object. It is initialized as an identity matrix and is created statically using the Matrix3D.create method.</td>
+        <td class="api-list">
+          <p class="api">Creates a transient 3d matrix object. It is initialized as an identity matrix and is created statically using the Matrix3D.create method.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Matrix3D_getAsCoordinateSystem.htm">getAsCoordinateSystem</a></td>
-        <td class="api-list">Gets the matrix data as the components that define a coordinate system.</td>
+        <td class="api-list">
+          <p class="api">Gets the matrix data as the components that define a coordinate system.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Matrix3D_getCell.htm">getCell</a></td>
-        <td class="api-list">Gets the value of the specified cell in the 4x4 matrix.</td>
+        <td class="api-list">
+          <p class="api">Gets the value of the specified cell in the 4x4 matrix.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Matrix3D_invert.htm">invert</a></td>
-        <td class="api-list">Inverts this matrix.</td>
+        <td class="api-list">
+          <p class="api">Inverts this matrix.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Matrix3D_isEqualTo.htm">isEqualTo</a></td>
-        <td class="api-list">Compares this matrix with another matrix and returns True if they're identical.</td>
+        <td class="api-list">
+          <p class="api">Compares this matrix with another matrix and returns True if they're identical.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Matrix3D_setCell.htm">setCell</a></td>
-        <td class="api-list">Sets the specified cell in the 4x4 matrix to the specified value.</td>
+        <td class="api-list">
+          <p class="api">Sets the specified cell in the 4x4 matrix to the specified value.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Matrix3D_setToAlignCoordinateSystems.htm">setToAlignCoordinateSystems</a></td>
-        <td class="api-list">Sets this matrix to be the matrix that maps from the 'from' coordinate system to the 'to' coordinate system.</td>
+        <td class="api-list">
+          <p class="api">Sets this matrix to be the matrix that maps from the 'from' coordinate system to the 'to' coordinate system.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Matrix3D_setToIdentity.htm">setToIdentity</a></td>
-        <td class="api-list">Resets this matrix to an identity matrix.</td>
+        <td class="api-list">
+          <p class="api">Resets this matrix to an identity matrix.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Matrix3D_setToRotateTo.htm">setToRotateTo</a></td>
-        <td class="api-list">Sets to the matrix of rotation that would align the 'from' vector with the 'to' vector. The optional axis argument may be used when the two vectors are perpendicular and in opposite directions to specify a specific solution, but is otherwise ignored</td>
+        <td class="api-list">
+          <p class="api">Sets to the matrix of rotation that would align the 'from' vector with the 'to' vector. The optional axis argument may be used when the two vectors are perpendicular and in opposite directions to specify a specific solution, but is otherwise ignored</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Matrix3D_setToRotation.htm">setToRotation</a></td>
-        <td class="api-list">Sets this matrix to the matrix of rotation by the specified angle, through the specified origin, around the specified axis.</td>
+        <td class="api-list">
+          <p class="api">Sets this matrix to the matrix of rotation by the specified angle, through the specified origin, around the specified axis.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Matrix3D_setWithArray.htm">setWithArray</a></td>
-        <td class="api-list">Sets the contents of the array using a 16 element array.</td>
+        <td class="api-list">
+          <p class="api">Sets the contents of the array using a 16 element array.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Matrix3D_setWithCoordinateSystem.htm">setWithCoordinateSystem</a></td>
-        <td class="api-list">Sets the matrix based on the components of a coordinate system.</td>
+        <td class="api-list">
+          <p class="api">Sets the matrix based on the components of a coordinate system.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Matrix3D_transformBy.htm">transformBy</a></td>
-        <td class="api-list">Transforms this matrix using the input matrix.</td>
+        <td class="api-list">
+          <p class="api">Transforms this matrix using the input matrix.</p>
+        </td>
       </tr>
     </Table>
     <h2 class="api">
@@ -144,7 +178,7 @@
     </Table>
     <h2 class="api">
             Accessed From
-          </h2><a href="AsBuiltJoint_transform.htm">AsBuiltJoint.transform</a>, <a href="ConstructionPlane_transform.htm">ConstructionPlane.transform</a>, <a href="CustomGraphicsBRepBody_transform.htm">CustomGraphicsBRepBody.transform</a>, <a href="CustomGraphicsCurve_transform.htm">CustomGraphicsCurve.transform</a>, <a href="CustomGraphicsEntity_transform.htm">CustomGraphicsEntity.transform</a>, <a href="CustomGraphicsGroup_transform.htm">CustomGraphicsGroup.transform</a>, <a href="CustomGraphicsLines_transform.htm">CustomGraphicsLines.transform</a>, <a href="CustomGraphicsMesh_transform.htm">CustomGraphicsMesh.transform</a>, <a href="CustomGraphicsPointSet_transform.htm">CustomGraphicsPointSet.transform</a>, <a href="CustomGraphicsText_transform.htm">CustomGraphicsText.transform</a>, <a href="Decal_transform.htm">Decal.transform</a>, <a href="DecalInput_transform.htm">DecalInput.transform</a>, <a href="Joint_geometryOneTransform.htm">Joint.geometryOneTransform</a>, <a href="Joint_geometryTwoTransform.htm">Joint.geometryTwoTransform</a>, <a href="JointOrigin_transform.htm">JointOrigin.transform</a>, <a href="Matrix3D_copy.htm">Matrix3D.copy</a>, <a href="Matrix3D_create.htm">Matrix3D.create</a>, <a href="Matrix3DGraphNodeProperty_value.htm">Matrix3DGraphNodeProperty.value</a>, <a href="MoveFeature_transform.htm">MoveFeature.transform</a>, <a href="MoveFeatureFreeMoveDefinition_transform.htm">MoveFeatureFreeMoveDefinition.transform</a>, <a href="MoveFeatureInput_transform.htm">MoveFeatureInput.transform</a>, <a href="Occurrence_initialTransform.htm">Occurrence.initialTransform</a>, <a href="Occurrence_transform.htm">Occurrence.transform</a>, <a href="Occurrence_transform2.htm">Occurrence.transform2</a>, <a href="OptimizedOrientationResult_transformation.htm">OptimizedOrientationResult.transformation</a>, <a href="PatternElement_transform.htm">PatternElement.transform</a>, <a href="PMIDatumTarget_orientation.htm">PMIDatumTarget.orientation</a>, <a href="ProjectedTextureMapControl_transform.htm">ProjectedTextureMapControl.transform</a>, <a href="SectionAnalysis_initialPosition.htm">SectionAnalysis.initialPosition</a>, <a href="SectionAnalysis_transform.htm">SectionAnalysis.transform</a>, <a href="SectionAnalysisInput_initialPosition.htm">SectionAnalysisInput.initialPosition</a>, <a href="SectionAnalysisInput_transform.htm">SectionAnalysisInput.transform</a>, <a href="Setup_workCoordinateSystem.htm">Setup.workCoordinateSystem</a>, <a href="Sketch_transform.htm">Sketch.transform</a>, <a href="SVGImportOptions_transform.htm">SVGImportOptions.transform</a>, <a href="TextureMapControl3D_transform.htm">TextureMapControl3D.transform</a>, <a href="TriadCommandInput_lastTransform.htm">TriadCommandInput.lastTransform</a>, <a href="TriadCommandInput_positionTransform.htm">TriadCommandInput.positionTransform</a>, <a href="TriadCommandInput_transform.htm">TriadCommandInput.transform</a>, <a href="Viewport_modelToViewSpaceTransform.htm">Viewport.modelToViewSpaceTransform</a><h2 class="api">
+          </h2><a href="AsBuiltJoint_transform.htm">AsBuiltJoint.transform</a>, <a href="ConstructionPlane_transform.htm">ConstructionPlane.transform</a>, <a href="CustomGraphicsBRepBody_transform.htm">CustomGraphicsBRepBody.transform</a>, <a href="CustomGraphicsCurve_transform.htm">CustomGraphicsCurve.transform</a>, <a href="CustomGraphicsEntity_transform.htm">CustomGraphicsEntity.transform</a>, <a href="CustomGraphicsGroup_transform.htm">CustomGraphicsGroup.transform</a>, <a href="CustomGraphicsLines_transform.htm">CustomGraphicsLines.transform</a>, <a href="CustomGraphicsMesh_transform.htm">CustomGraphicsMesh.transform</a>, <a href="CustomGraphicsPointSet_transform.htm">CustomGraphicsPointSet.transform</a>, <a href="CustomGraphicsText_transform.htm">CustomGraphicsText.transform</a>, <a href="Decal_transform.htm">Decal.transform</a>, <a href="DecalInput_transform.htm">DecalInput.transform</a>, <a href="Joint_geometryOneTransform.htm">Joint.geometryOneTransform</a>, <a href="Joint_geometryTwoTransform.htm">Joint.geometryTwoTransform</a>, <a href="JointOrigin_transform.htm">JointOrigin.transform</a>, <a href="Matrix3D_copy.htm">Matrix3D.copy</a>, <a href="Matrix3D_create.htm">Matrix3D.create</a>, <a href="Matrix3DGraphNodeProperty_value.htm">Matrix3DGraphNodeProperty.value</a>, <a href="MoveFeature_transform.htm">MoveFeature.transform</a>, <a href="MoveFeatureFreeMoveDefinition_transform.htm">MoveFeatureFreeMoveDefinition.transform</a>, <a href="MoveFeatureInput_transform.htm">MoveFeatureInput.transform</a>, <a href="Occurrence_initialTransform.htm">Occurrence.initialTransform</a>, <a href="Occurrence_transform.htm">Occurrence.transform</a>, <a href="Occurrence_transform2.htm">Occurrence.transform2</a>, <a href="OptimizedOrientationResult_transformation.htm">OptimizedOrientationResult.transformation</a>, <a href="PatternElement_transform.htm">PatternElement.transform</a>, <a href="PMIDatumTarget_orientation.htm">PMIDatumTarget.orientation</a>, <a href="ProjectedTextureMapControl_transform.htm">ProjectedTextureMapControl.transform</a>, <a href="SectionAnalysis_initialPosition.htm">SectionAnalysis.initialPosition</a>, <a href="SectionAnalysis_transform.htm">SectionAnalysis.transform</a>, <a href="SectionAnalysisInput_initialPosition.htm">SectionAnalysisInput.initialPosition</a>, <a href="SectionAnalysisInput_transform.htm">SectionAnalysisInput.transform</a>, <a href="Setup_workCoordinateSystem.htm">Setup.workCoordinateSystem</a>, <a href="Sketch_transform.htm">Sketch.transform</a>, <a href="SVGImportOptions_transform.htm">SVGImportOptions.transform</a>, <a href="TextureMapControl3D_transform.htm">TextureMapControl3D.transform</a>, <a href="TriadCommandInput_lastTransform.htm">TriadCommandInput.lastTransform</a>, <a href="TriadCommandInput_positionTransform.htm">TriadCommandInput.positionTransform</a>, <a href="TriadCommandInput_transform.htm">TriadCommandInput.transform</a>, <a href="UserCoordinateSystem_transform.htm">UserCoordinateSystem.transform</a>, <a href="Viewport_modelToViewSpaceTransform.htm">Viewport.modelToViewSpaceTransform</a><h2 class="api">
             Samples
           </h2>
     <Table class="api-list">
@@ -171,7 +205,7 @@
           <td align="left">
                 © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(Matrix3D%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(Matrix3D%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

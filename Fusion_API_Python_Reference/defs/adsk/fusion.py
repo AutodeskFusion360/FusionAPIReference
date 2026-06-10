@@ -557,10 +557,6 @@ class FilletFeatureTypes():
 
 class HemFeatureDefinitionTypes():
     """
-    !!!!! Warning !!!!!
-    ! This is in preview state; please see the help for more info
-    !!!!! Warning !!!!!
-    
     The different types of hems that can be created.
     """
     def __init__(self):
@@ -1399,6 +1395,16 @@ class PointContainment():
     PointOutsidePointContainment = 2
     UnknownPointContainment = 3
 
+class RecordingModeTypes():
+    """
+    List of the various types of recording mode.
+    """
+    def __init__(self):
+        pass
+    RecordingModeStartFromTime0 = 0
+    RecordingModeOverlappedByHalfSeconds = 1
+    RecordingModeSequential = 2
+
 class RenderAspectRatios():
     """
     Types that indicate the output aspect ratio when rendering a scene. This is
@@ -1800,6 +1806,34 @@ class UntrimLoopTypes():
     InternalLoopsUntrimType = 2
     ManualLoopsUntrimType = 3
 
+class UserCoordinateSystemGeometryTypes():
+    """
+    List of the different types of ways that geometry for a user coordinate system can be defined.
+    """
+    def __init__(self):
+        pass
+    ConstructionPointUserCoordinateSystemGeometryType = 0
+    SketchPointUserCoordinateSystemGeometryType = 1
+    VertexUserCoordinateSystemGeometryType = 2
+    EdgeUserCoordinateSystemGeometryType = 3
+    SketchCurveUserCoordinateSystemGeometryType = 4
+    ProfileUserCoordinateSystemGeometryType = 5
+    PlanarFaceUserCoordinateSystemGeometryType = 6
+    NonPlanarFaceUserCoordinateSystemGeometryType = 7
+    ConstructionPlaneUserCoordinateSystemGeometryType = 8
+    ConstructionAxisUserCoordinateSystemGeometryType = 9
+
+class UserCoordinateSystemKeyPointTypes():
+    """
+    List of the different key point positions that can be used when defining the geometry for a user coordinate system.
+    """
+    def __init__(self):
+        pass
+    StartUserCoordinateSystemKeyPointType = 0
+    MiddleUserCoordinateSystemKeyPointType = 1
+    EndUserCoordinateSystemKeyPointType = 2
+    CenterUserCoordinateSystemKeyPointType = 3
+
 class ViewCorners():
     """
     Specifies which of the four view corners custom graphics will be drawn in relation to. The
@@ -2062,6 +2096,72 @@ class Analysis(core.Base):
         tokens and then compare them.
         """
         return str()
+
+class AnimationManager(core.Base):
+    """
+    Provides access to the animation functionality in Fusion and is accessed from the Design object.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> AnimationManager:
+        return AnimationManager()
+    def activateAnimationWorkspace(self) -> bool:
+        """
+        Activates the Animation workspace for this design. If the workspace is already
+        active, nothing happens and it remains active.
+        Returns true if the activation was successful or if the Animation workspace was already active.
+        """
+        return bool()
+    @property
+    def activeStoryboard(self) -> Storyboard:
+        """
+        Returns the active storyboard in this Animation.
+        """
+        return Storyboard()
+    @property
+    def parentDesign(self) -> Design:
+        """
+        Returns the parent Design this AnimationManager was obtained from.
+        """
+        return Design()
+    @property
+    def isAnimationWorkspaceActive(self) -> bool:
+        """
+        Returns if the Animation workspace for this Design is active or not. Returns
+        true if the workspace is active.
+        """
+        return bool()
+    @property
+    def storyboards(self) -> Storyboards:
+        """
+        Collection that provides access to all of the existing storyboards in an animation and supports the ability to create new storyboards.
+        """
+        return Storyboards()
+    @property
+    def recordingMode(self) -> RecordingModeTypes:
+        """
+        Gets and sets the recording mode setting.
+        """
+        return RecordingModeTypes()
+    @recordingMode.setter
+    def recordingMode(self, value: RecordingModeTypes):
+        """
+        Gets and sets the recording mode setting.
+        """
+        pass
+    @property
+    def isWatermarkShown(self) -> bool:
+        """
+        Gets and sets whether to show text watermark in cavas when the view recording is off.
+        """
+        return bool()
+    @isWatermarkShown.setter
+    def isWatermarkShown(self, value: bool):
+        """
+        Gets and sets whether to show text watermark in cavas when the view recording is off.
+        """
+        pass
 
 class AreaProperties(core.Base):
     """
@@ -3911,6 +4011,18 @@ class BaseComponent(core.Base):
         This provides access to the existing PMI and supports the creation of new PMI.
         """
         return PMIAnnotations()
+    @property
+    def userCoordinateSystems(self) -> UserCoordinateSystems:
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        Returns the user coordinate systems collection associated with this component.
+        This provides access to the existing user coordinate systems and supports
+        the creation of new user coordinate systems.
+        """
+        return UserCoordinateSystems()
 
 class BaseFeatures(core.Base):
     """
@@ -5065,6 +5177,41 @@ class BRepBody(core.Base):
         Returns a PhysicalProperties object that can be used to get the various physical property related values.
         """
         return PhysicalProperties()
+    def findThicknessAtFace(self, face: BRepFace, hitPoint: core.Point3D = None) -> tuple[bool, float]:
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        Finds the thickness of the body at the specified face by casting a ray from the
+        face along its inward normal and measuring the distance to the first opposite
+        face of the body that is hit.
+        face : Specifies a planar BRepFace on the body from which to measure the thickness.
+        thickness : The output thickness value in centimeters.
+        hitPoint : An optional Point3D that specifies the point on the face from which to cast the ray.
+        The point must lie on the given face. If not specified, a point is automatically
+        chosen on the face.
+        Returns true if the thickness was successfully determined. Returns false if it
+        could not be determined, for example if the face is non-planar or has no
+        parallel opposite face.
+        """
+        return (bool(), float())
+    def convertToSheetMetal(self, baseFace: BRepFace, sheetMetalRule: SheetMetalRule) -> bool:
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        Converts the current BRepBody to a sheet metal body.
+        This is applicable only if the body is not already a sheet metal body (isSheetMetal is false).
+        baseFace : Specifies a BRepFace that will be used to determine the thickness of the body.
+        sheetMetalRule : If the parent component is a standard component, this method will convert it to a sheet metal component.
+        The specified design or library sheet metal rule will be copied and applied as the active sheet metal rule of the sheet metal component.
+        The Thickness value of the copied sheet metal rule will be changed to the thickness determined by the baseFace of this BRepBody.
+        If the parent component is already a sheet metal component, this argument will be ignored and the active sheet metal rule will be used.
+        Returns true if the conversion was successful. Returns false in the case of failure.
+        """
+        return bool()
     @property
     def parentComponent(self) -> Component:
         """
@@ -10134,6 +10281,26 @@ class ConstructionAxis(core.Base):
         This property returns null if the construction axis is not derived from another design (i.e. isDerived property returns false).
         """
         return DeriveFeature()
+    @property
+    def isUCSGeometry(self) -> bool:
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        Returns true if this ConstructionAxis is part of a User Coordinate System (UCS).
+        """
+        return bool()
+    @property
+    def parentUCS(self) -> UserCoordinateSystem:
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        Returns the UCS this ConstructionAxis is part of. Returns null if this axis is not part of a UCS.
+        """
+        return UserCoordinateSystem()
 
 class ConstructionAxisDefinition(core.Base):
     """
@@ -10500,6 +10667,26 @@ class ConstructionPlane(core.Base):
         This property returns null if the construction plane is not derived from another design (i.e. isDerived property returns false).
         """
         return DeriveFeature()
+    @property
+    def isUCSGeometry(self) -> bool:
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        Returns true if this ConstructionPlane is part of a User Coordinate System (UCS).
+        """
+        return bool()
+    @property
+    def parentUCS(self) -> UserCoordinateSystem:
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        Returns the UCS this ConstructionPlane is part of. Returns null if this plane is not part of a UCS.
+        """
+        return UserCoordinateSystem()
 
 class ConstructionPlaneDefinition(core.Base):
     """
@@ -10652,6 +10839,20 @@ class ConstructionPlaneInput(core.Base):
         point : A BRepVertex, SketchPoint, ConstructionPoint, or Point3D that defines the offset distance.
         A Point3D is only valid in a direct-edit design. In that case a non-parametric result is created.
         Returns true if construction plane definition is successful.
+        """
+        return bool()
+    def setByAngleOnCurvedFace(self, curvedFace: core.Base, angle: core.ValueInput, planarEntity: core.Base) -> bool:
+        """
+        This input method is for creating a construction plane through the axis inferred
+        from a cylindrical or conical curved face at a specified angle. This can result in
+        a parametric or non-parametric construction plane depending on whether the parent
+        component is parametric or is a direct edit component.
+        curvedFace : The cylindrical or conical curved face from which the axis of rotation is inferred.
+        angle : The angle at which to create the plane.
+        planarEntity : The planar face or construction plane the angle is measured from.
+        A zero angle creates a plane whose normal is aligned with this plane's normal,
+        so the result is deterministic when an explicit planarEntity is provided.
+        Returns true if the construction plane definition is successful.
         """
         return bool()
     @property
@@ -10941,6 +11142,26 @@ class ConstructionPoint(core.Base):
         This property returns null if the construction point is not derived from another design (i.e. isDerived property returns false).
         """
         return DeriveFeature()
+    @property
+    def isUCSGeometry(self) -> bool:
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        Returns true if this ConstructionPoint is part of a User Coordinate System (UCS).
+        """
+        return bool()
+    @property
+    def parentUCS(self) -> UserCoordinateSystem:
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        Returns the UCS this ConstructionPoint is part of. Returns null if this point is not part of a UCS.
+        """
+        return UserCoordinateSystem()
 
 class ConstructionPointDefinition(core.Base):
     """
@@ -15723,6 +15944,17 @@ class Features(core.Base):
         Returns the collection that provides access to the existing Corner Closure features.
         """
         return CornerClosureFeatures()
+    @property
+    def volumetricModelFeatures(self) -> VolumetricModelFeatures:
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        Returns the collection that provides access to volumetric model features within the component
+        and supports the creation of new volumetric model features.
+        """
+        return VolumetricModelFeatures()
 
 class FilletEdgeSet(core.Base):
     """
@@ -17123,10 +17355,6 @@ class GeometricRelationships(core.Base):
 
 class HemFeatureDefinition(core.Base):
     """
-    !!!!! Warning !!!!!
-    ! This is in preview state; please see the help for more info
-    !!!!! Warning !!!!!
-    
     A Base class to return the information used to define the HemFeature.
     """
     def __init__(self):
@@ -17173,10 +17401,6 @@ class HemFeatureDefinition(core.Base):
 
 class HemFeatureInput(core.Base):
     """
-    !!!!! Warning !!!!!
-    ! This is in preview state; please see the help for more info
-    !!!!! Warning !!!!!
-    
     This class defines the methods and properties that pertain to the definition of a hem feature.
     """
     def __init__(self):
@@ -17255,10 +17479,6 @@ class HemFeatureInput(core.Base):
 
 class HemFeatures(core.Base):
     """
-    !!!!! Warning !!!!!
-    ! This is in preview state; please see the help for more info
-    !!!!! Warning !!!!!
-    
     Collection that provides access to all of the existing hem features in a design and supports the ability to create new hem features.
     """
     def __init__(self):
@@ -20712,6 +20932,15 @@ class MeshBody(core.Base):
         no polyline 3d objects are returned.
         """
         return [core.Polyline3D()]
+    def calculateCollisionsWithRay(self, originPoint: core.Point3D, rayDirection: core.Vector3D) -> list[core.Point3D]:
+        """
+        Finds all points that are intersected by the specified ray.
+        originPoint : Input point that defines the origin of the ray. The search for entities begins at this point.
+        rayDirection : Input vector that defines the direction of the ray. The ray is infinite so the length of the vector is ignored.
+        The results are returned as a list of Point3D objects. If no collisions are found the list is empty. The points are sorted
+        by distance, i.e. the closest points to the origin are first.
+        """
+        return [core.Point3D()]
     @property
     def name(self) -> str:
         """
@@ -24942,6 +25171,11 @@ class Parameter(core.Base):
         More complex equations can also be used with text parameters like
         "if (Length < 20 mm; 'Short'; 'Long')" where "Length" is a numeric parameter.
         The resulting string can be obtained using the textValue property.
+        
+        When setting the expression of a text parameter to a literal string value, the string must be
+        enclosed in single quotes (e.g. "'Hello Fusion'"). An unquoted value like "Hello Fusion" will
+        fail to parse because the tokens are interpreted as symbols rather than literal text. If you
+        want to set a plain string value without managing quotes, use the textValue property instead.
         """
         return str()
     @expression.setter
@@ -24963,6 +25197,11 @@ class Parameter(core.Base):
         More complex equations can also be used with text parameters like
         "if (Length < 20 mm; 'Short'; 'Long')" where "Length" is a numeric parameter.
         The resulting string can be obtained using the textValue property.
+        
+        When setting the expression of a text parameter to a literal string value, the string must be
+        enclosed in single quotes (e.g. "'Hello Fusion'"). An unquoted value like "Hello Fusion" will
+        fail to parse because the tokens are interpreted as symbols rather than literal text. If you
+        want to set a plain string value without managing quotes, use the textValue property instead.
         """
         pass
     @property
@@ -26861,7 +27100,7 @@ class PMIAnnotations(core.Base):
         
         This is useful for finding PMI that reference specific geometric features.
         entities : An array of core.Base objects that represent the geometric entities to search for associated PMI. These can be BRepFace,
-        BRepEdge or BRepVertex objects. The function will return the PMI that references any of these entities in their geometric associations.
+        BRepEdge, BRepVertex, or BRepBody objects. The function will return the PMI that references any of these entities in their geometric associations.
         
         For example, a Diameter Dimension PMI associated with a cylindrical face, a Hole/Thread Note PMI associated with faces that define a hole feature,
         or a Leader Line Note PMI associated with an edge or vertex.
@@ -27405,20 +27644,20 @@ class PMIGeometricValueTolerance(core.Base):
     @property
     def hasToleranceClass(self) -> bool:
         """
-        Gets whether there is a tolerance class set.
+        Gets whether there is a hole tolerance class set.
         """
         return bool()
     @property
     def toleranceClassDeviation(self) -> str:
         """
-        Gets the tolerance class deviation value.
+        Gets the hole tolerance class deviation value.
         Returns empty string if there is no tolerance class deviation value set.
         """
         return str()
     @property
     def toleranceClassGrade(self) -> str:
         """
-        Gets the tolerance class grade value.
+        Gets the hole tolerance class grade value.
         Returns empty string if there is no tolerance class grade value set.
         """
         return str()
@@ -27434,6 +27673,26 @@ class PMIGeometricValueTolerance(core.Base):
         The tolerance type.
         """
         return PMIToleranceTypes()
+    @property
+    def hasShaftToleranceClass(self) -> bool:
+        """
+        Gets whether there is a shaft tolerance class set.
+        """
+        return bool()
+    @property
+    def shaftToleranceClassDeviation(self) -> str:
+        """
+        Gets the shaft tolerance class deviation value.
+        Returns empty string if there is no tolerance class deviation value set.
+        """
+        return str()
+    @property
+    def shaftToleranceClassGrade(self) -> str:
+        """
+        Gets the shaft tolerance class grade value.
+        Returns empty string if there is no tolerance class grade value set.
+        """
+        return str()
 
 class PMIHoleThreadNotes(core.Base):
     """
@@ -27473,8 +27732,8 @@ class PMIHoleThreadNotes(core.Base):
         Gets all the PMIHoleThreadNote from the collection that are associated with the specified geometric entities.
         
         This is useful for finding PMIHoleThreadNote that reference specific geometric features.
-        entities : An array of core.Base objects that represent the geometric entities to search for associated PMI. These can be BRepFace,
-        BRepEdge or BRepVertex objects. The function will return the PMIHoleThreadNote that references any of these entities in their geometric associations.
+        entities : An array of core.Base objects that represent the geometric entities to search for associated PMI. These can be BRepFace
+        or BRepBody objects. The function will return the PMIHoleThreadNote that references any of these entities in their geometric associations.
         Returns an array of PMIHoleThreadNote objects that are associated with the specified entities and match the type filter (if provided)
         or an empty array if no matching PMI were found.
         """
@@ -27558,7 +27817,7 @@ class PMIImportedDimensions(core.Base):
         
         This is useful for finding PMIImportedDimension that reference specific geometric features.
         entities : An array of core.Base objects that represent the geometric entities to search for associated PMI. These can be BRepFace,
-        BRepEdge or BRepVertex objects. The function will return the PMIImportedDimension that references any of these entities in their geometric associations.
+        BRepEdge, BRepVertex, or BRepBody objects. The function will return the PMIImportedDimension that references any of these entities in their geometric associations.
         
         For example, a Diameter Dimension PMI associated with a cylindrical face.
         types : An optional array of PMITypes that filters the results to include only PMI that matches the type presented in the specified types. If an empty array or null
@@ -27653,7 +27912,7 @@ class PMIImportedGDTDatums(core.Base):
         
         This is useful for finding PMIImportedGDTDatum that reference specific geometric features.
         entities : An array of core.Base objects that represent the geometric entities to search for associated PMI. These can be BRepFace,
-        BRepEdge or BRepVertex objects. The function will return the PMIImportedGDTDatum that references any of these entities in their geometric associations.
+        BRepEdge, BRepVertex, or BRepBody objects. The function will return the PMIImportedGDTDatum that references any of these entities in their geometric associations.
         Returns an array of PMIImportedGDTDatum objects that are associated with the specified entities and match the type filter (if provided)
         or an empty array if no matching PMI were found.
         """
@@ -27712,7 +27971,7 @@ class PMIImportedGeometricTolerances(core.Base):
         
         This is useful for finding PMIImportedGeometricTolerance that reference specific geometric features.
         entities : An array of core.Base objects that represent the geometric entities to search for associated PMI. These can be BRepFace,
-        BRepEdge or BRepVertex objects. The function will return the PMIImportedGeometricTolerance that references any of these entities in their geometric associations.
+        BRepEdge, BRepVertex, or BRepBody objects. The function will return the PMIImportedGeometricTolerance that references any of these entities in their geometric associations.
         types : An optional array of PMITypes that filters the results to include only PMI that matches the type presented in the specified types. If an empty array or null
         is passed, all the PMIImportedGeometricTolerance associated with the specified geometric entities will be returned, regardless of type.
         Returns an array of PMIImportedGeometricTolerance objects that are associated with the specified entities and match the type filter (if provided)
@@ -27765,7 +28024,7 @@ class PMIImportedGraphicals(core.Base):
         
         This is useful for finding PMIImportedGraphical that reference specific geometric features.
         entities : An array of core.Base objects that represent the geometric entities to search for associated PMI. These can be BRepFace,
-        BRepEdge or BRepVertex objects. The function will return the PMIImportedGraphical that references any of these entities in their geometric associations.
+        BRepEdge, BRepVertex, or BRepBody objects. The function will return the PMIImportedGraphical that references any of these entities in their geometric associations.
         Returns an array of PMIImportedGraphical objects that are associated with the specified entities and match the type filter (if provided)
         or an empty array if no matching PMI were found.
         """
@@ -27816,7 +28075,7 @@ class PMIImportedNotes(core.Base):
         
         This is useful for finding PMIImportedNote that reference specific geometric features.
         entities : An array of core.Base objects that represent the geometric entities to search for associated PMI. These can be BRepFace,
-        BRepEdge or BRepVertex objects. The function will return the PMIImportedNote that references any of these entities in their geometric associations.
+        BRepEdge, BRepVertex, or BRepBody objects. The function will return the PMIImportedNote that references any of these entities in their geometric associations.
         Returns an array of PMIImportedNote objects that are associated with the specified entities and match the type filter (if provided)
         or an empty array if no matching PMI were found.
         """
@@ -27867,7 +28126,7 @@ class PMIImportedSurfaceTextures(core.Base):
         
         This is useful for finding PMIImportedSurfaceTexture that reference specific geometric features.
         entities : An array of core.Base objects that represent the geometric entities to search for associated PMI. These can be BRepFace,
-        BRepEdge or BRepVertex objects. The function will return the PMIImportedSurfaceTexture that references any of these entities in their geometric associations.
+        BRepEdge, BRepVertex, or BRepBody objects. The function will return the PMIImportedSurfaceTexture that references any of these entities in their geometric associations.
         Returns an array of PMIImportedSurfaceTexture objects that are associated with the specified entities and match the type filter (if provided)
         or an empty array if no matching PMI were found.
         """
@@ -27969,6 +28228,9 @@ class PMIInput(core.Base):
         Gets and sets the length of the leader line extension in cm.
         
         This value extends the leader line in the direction determined by the perpendicular setting.
+        
+        A positive value results in an obtuse angle between the leader line and the line to the geometry;
+        A negative value results in an acute angle.
         """
         return float()
     @leaderLineExtension.setter
@@ -27977,6 +28239,9 @@ class PMIInput(core.Base):
         Gets and sets the length of the leader line extension in cm.
         
         This value extends the leader line in the direction determined by the perpendicular setting.
+        
+        A positive value results in an obtuse angle between the leader line and the line to the geometry;
+        A negative value results in an acute angle.
         """
         pass
     @property
@@ -28055,7 +28320,7 @@ class PMILeaderLineNotes(core.Base):
         
         This is useful for finding PMILeaderLineNote that reference specific geometric features.
         entities : An array of core.Base objects that represent the geometric entities to search for associated PMI. These can be BRepFace,
-        BRepEdge or BRepVertex objects. The function will return the PMILeaderLineNote that references any of these entities in their geometric associations.
+        BRepEdge, BRepVertex, or BRepBody objects. The function will return the PMILeaderLineNote that references any of these entities in their geometric associations.
         Returns an array of PMILeaderLineNote objects that are associated with the specified entities and match the type filter (if provided)
         or an empty array if no matching PMI were found.
         """
@@ -35615,6 +35880,173 @@ class StitchFeatures(core.Base):
         """
         return int()
 
+class Storyboard(core.Base):
+    """
+    A storyboard consists of views and actions distributed along a timeline.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> Storyboard:
+        return Storyboard()
+    def activate(self) -> bool:
+        """
+        Sets this storyboard to be active.
+        Returns true if the storyboard was successfully activated.
+        """
+        return bool()
+    def copy(self, name: str = "", targetStoryboard: Storyboard = None, before: bool = False) -> Storyboard:
+        """
+        Method that copies the storyboard.
+        name : Optional specifies the name for the copied storyboard. If not specified, a default name will be created for it.
+        targetStoryboard : Optional specifies the target storyboard to copy this storyboard next to. If not specified, the current storyboard will be used.
+        before : Optional specifies boolean value that indicates whether to copy this storyboard before the target storyboard. If specified to true, the copy will be inserted before the target storyboard.
+        This defaults to false if not specified indicating that the copy will be placed after the target storyboard.
+        Returns copied Storyboard if the copy was successful, null otherwise.
+        """
+        return Storyboard()
+    def deleteMe(self) -> bool:
+        """
+        Method that deletes the storyboard.
+        Returns true if the deletion was successful.
+        """
+        return bool()
+    def moveTo(self, targetStoryboard: Storyboard, before: bool = False) -> bool:
+        """
+        Method that moves the storyboard to another position.
+        targetStoryboard : Specifies the target storyboard to move this storyboard next to.
+        before : Optional specifies boolean value that indicates whether to move this storyboard before the target storyboard. If specified to true, this storyboard will be moved before the target storyboard.
+        This defaults to false if not specified indicating this storyboard will be moved after the target storyboard.
+        Returns true if the move is successful.
+        """
+        return bool()
+    def reverse(self) -> bool:
+        """
+        Method that reverses the sequence of actions for the storyboard.
+        Returns true if the sequence of actions of the storyboard was reversed successfully, false otherwise.
+        """
+        return bool()
+    def play(self, fromCurrentPosition: bool = True, begin: float = 0, end: float = 0) -> bool:
+        """
+        Method that plays the storyboard.
+        fromCurrentPosition : Optional argument specifies whether to play the storyboard from current playhead position. Set this to false to specify the begin.
+        This defaults to true indicating that it plays from current playhead position.
+        begin : Specifies the begin time in seconds to start playback. This is ignored if the fromCurrentPosition is not set to false.
+        end : Specifies the end time in seconds to stop playback. This defaults to 0 indicating the Storyboard.end will be used.
+        If specified this should be larger than the Storyboard.playheadPosition if the fromCurrentPosition argument is set to true, or it should be larger than begin if the fromCurrentPosition argument is set to false.
+        This returns true if the playback is successfully started.
+        """
+        return bool()
+    @property
+    def isViewRecordingOn(self) -> bool:
+        """
+        Gets and sets whether the view recording is on or off.
+        When enabled, the view recording captures the camera change of the viewport and creates ViewAction accordingly.
+        """
+        return bool()
+    @isViewRecordingOn.setter
+    def isViewRecordingOn(self, value: bool):
+        """
+        Gets and sets whether the view recording is on or off.
+        When enabled, the view recording captures the camera change of the viewport and creates ViewAction accordingly.
+        """
+        pass
+    @property
+    def parent(self) -> AnimationManager:
+        """
+        Gets the parent AnimationManager of this storyboard.
+        """
+        return AnimationManager()
+    @property
+    def isActive(self) -> bool:
+        """
+        Returns true if this storyboard is the active storyboard.
+        """
+        return bool()
+    @property
+    def isInFullScreenMode(self) -> bool:
+        """
+        Gets and sets whether it is in full screen mode for animation playback.
+        """
+        return bool()
+    @isInFullScreenMode.setter
+    def isInFullScreenMode(self, value: bool):
+        """
+        Gets and sets whether it is in full screen mode for animation playback.
+        """
+        pass
+    @property
+    def end(self) -> float:
+        """
+        Gets the end time of the storyboard in seconds.
+        """
+        return float()
+    @property
+    def playheadPosition(self) -> float:
+        """
+        Gets and sets the position of the playhead on the timeline in seconds.
+        Sets to -1 will place the playhead to the scratch zone.
+        """
+        return float()
+    @playheadPosition.setter
+    def playheadPosition(self, value: float):
+        """
+        Gets and sets the position of the playhead on the timeline in seconds.
+        Sets to -1 will place the playhead to the scratch zone.
+        """
+        pass
+    @property
+    def isInPlayMode(self) -> bool:
+        """
+        Returns true if it is in play mode.
+        """
+        return bool()
+
+class Storyboards(core.Base):
+    """
+    Provides access to all the existing storyboards in this animation and supports the ability to create new storyboards.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> Storyboards:
+        return Storyboards()
+    def __len__(self) -> int:
+        return 0
+    def __getitem__(self, index: int) -> Storyboard:
+        return None
+    def __iter__(self) -> Iterator[Storyboard]:
+        return None
+    def item(self, index: int) -> Storyboard:
+        """
+        Function that returns the specified storyboard using an index into the collection.
+        index : The index of the item within the collection to return. The first item in the collection has an index of 0.
+        Returns the specified item or null if an invalid index was specified.
+        """
+        return Storyboard()
+    def itemByName(self, name: str) -> Storyboard:
+        """
+        Function that returns the specified storyboard by name.
+        name : The name of the storyboard within the collection to return.
+        Returns the specified storyboard or null if the name is not found.
+        """
+        return Storyboard()
+    def add(self, isCleanStoryboard: bool = True) -> Storyboard:
+        """
+        Creates a new storyboard object.
+        isCleanStoryboard : A boolean value for setting whether or not the new storyboard is clean. When specified to true the transformation is the same as that from the Design workspace.
+        When specified to false, the transformation for every part is kept in the new storyboard, and is derived from the previous storyboard.
+        It defaults to true if not specified.
+        Returns the newly created Storyboard object or null if the creation failed.
+        """
+        return Storyboard()
+    @property
+    def count(self) -> int:
+        """
+        The number of storyboards in the collection.
+        """
+        return int()
+
 class SurfaceDeleteFaceFeatures(core.Base):
     """
     Collection that provides access to all of the existing SurfaceDeleteFaceFeature features in a component
@@ -38310,6 +38742,655 @@ class UntrimFeatures(core.Base):
         """
         return int()
 
+class UserCoordinateSystem(core.Base):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Represents an existing User Coordinate System in a design.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> UserCoordinateSystem:
+        return UserCoordinateSystem()
+    def deleteMe(self) -> bool:
+        """
+        Deletes this User Coordinate System.
+        Returns true if successful.
+        """
+        return bool()
+    def createForAssemblyContext(self, occurrence: Occurrence) -> UserCoordinateSystem:
+        """
+        Creates or returns a proxy for the native object
+        - i.e. a new object that represents this object but adds the assembly context
+        defined by the input occurrence.
+        occurrence : The occurrence that defines the context to create the proxy in.
+        Returns the proxy object or null if this isn't the NativeObject.
+        """
+        return UserCoordinateSystem()
+    @property
+    def parentComponent(self) -> Component:
+        """
+        Returns the parent component that owns this User Coordinate System.
+        """
+        return Component()
+    @property
+    def name(self) -> str:
+        """
+        Gets and sets the name of this User Coordinate System. This is the name seen by the user in the timeline.
+        """
+        return str()
+    @name.setter
+    def name(self, value: str):
+        """
+        Gets and sets the name of this User Coordinate System. This is the name seen by the user in the timeline.
+        """
+        pass
+    @property
+    def geometry(self) -> UserCoordinateSystemGeometry:
+        """
+        Gets and sets the User Coordinate System geometry for this User Coordinate System input. This
+        defines the location of the User Coordinate System.
+        
+        To set this property, you need to position the timeline marker to immediately before this User Coordinate System.
+        This can be accomplished using the following code: ucs.timelineObject.rollTo(True)
+        """
+        return UserCoordinateSystemGeometry()
+    @geometry.setter
+    def geometry(self, value: UserCoordinateSystemGeometry):
+        """
+        Gets and sets the User Coordinate System geometry for this User Coordinate System input. This
+        defines the location of the User Coordinate System.
+        
+        To set this property, you need to position the timeline marker to immediately before this User Coordinate System.
+        This can be accomplished using the following code: ucs.timelineObject.rollTo(True)
+        """
+        pass
+    @property
+    def angleX(self) -> ModelParameter:
+        """
+        Gets the parameter that defines the rotation of the coordinate system around its X-Axis. The value can be changed
+        using the functionality of the returned ModelParameter object.
+        """
+        return ModelParameter()
+    @property
+    def angleY(self) -> ModelParameter:
+        """
+        Gets the parameter that defines the rotation of the coordinate system around its Y-Axis. The value can be changed
+        using the functionality of the returned ModelParameter object.
+        """
+        return ModelParameter()
+    @property
+    def angleZ(self) -> ModelParameter:
+        """
+        Gets the parameter that defines the rotation of the coordinate system around its Z-Axis. The value can be changed
+        using the functionality of the returned ModelParameter object.
+        """
+        return ModelParameter()
+    @property
+    def offsetX(self) -> ModelParameter:
+        """
+        Gets the parameter that controls the offset in the X-direction. The value can be changed
+        using the functionality of the returned ModelParameter object.
+        """
+        return ModelParameter()
+    @property
+    def offsetY(self) -> ModelParameter:
+        """
+        Gets the parameter that controls the offset in the Y-direction. The value can be changed
+        using the functionality of the returned ModelParameter object.
+        """
+        return ModelParameter()
+    @property
+    def offsetZ(self) -> ModelParameter:
+        """
+        Gets the parameter that controls the offset in the Z-direction. The value can be changed
+        using the functionality of the returned ModelParameter object.
+        """
+        return ModelParameter()
+    @property
+    def xAxisEntity(self) -> core.Base:
+        """
+        Gets and sets the entity that defines the X axis direction. This defaults
+        to null meaning the X axis is inferred from the input geometry.
+        
+        To set this property, you need to position the timeline marker to immediately before this User Coordinate System.
+        This can be accomplished using the following code: ucs.timelineObject.rollTo(True)
+        """
+        return core.Base()
+    @xAxisEntity.setter
+    def xAxisEntity(self, value: core.Base):
+        """
+        Gets and sets the entity that defines the X axis direction. This defaults
+        to null meaning the X axis is inferred from the input geometry.
+        
+        To set this property, you need to position the timeline marker to immediately before this User Coordinate System.
+        This can be accomplished using the following code: ucs.timelineObject.rollTo(True)
+        """
+        pass
+    @property
+    def zAxisEntity(self) -> core.Base:
+        """
+        Gets and sets the entity that defines the Z axis direction. This defaults
+        to null meaning the Z axis is inferred from the input geometry.
+        
+        To set this property, you need to position the timeline marker to immediately before this User Coordinate System.
+        This can be accomplished using the following code: ucs.timelineObject.rollTo(True)
+        """
+        return core.Base()
+    @zAxisEntity.setter
+    def zAxisEntity(self, value: core.Base):
+        """
+        Gets and sets the entity that defines the Z axis direction. This defaults
+        to null meaning the Z axis is inferred from the input geometry.
+        
+        To set this property, you need to position the timeline marker to immediately before this User Coordinate System.
+        This can be accomplished using the following code: ucs.timelineObject.rollTo(True)
+        """
+        pass
+    @property
+    def originConstructionPoint(self) -> ConstructionPoint:
+        """
+        Returns the construction point that represents the origin of the UCS.
+        """
+        return ConstructionPoint()
+    @property
+    def xConstructionAxis(self) -> ConstructionAxis:
+        """
+        Returns the construction axis that represent the x-axis of the UCS.
+        """
+        return ConstructionAxis()
+    @property
+    def yConstructionAxis(self) -> ConstructionAxis:
+        """
+        Returns the construction axis that represent the y-axis of the UCS.
+        """
+        return ConstructionAxis()
+    @property
+    def zConstructionAxis(self) -> ConstructionAxis:
+        """
+        Returns the construction axis that represent the z-axis of the UCS.
+        """
+        return ConstructionAxis()
+    @property
+    def xYConstructionPlane(self) -> ConstructionPlane:
+        """
+        Returns the XY construction plane that represent the of the UCS.
+        """
+        return ConstructionPlane()
+    @property
+    def xZConstructionPlane(self) -> ConstructionPlane:
+        """
+        Returns the XZ construction plane that represent the of the UCS.
+        """
+        return ConstructionPlane()
+    @property
+    def yZConstructionPlane(self) -> ConstructionPlane:
+        """
+        Returns the YZ construction plane that represent the of the UCS.
+        """
+        return ConstructionPlane()
+    @property
+    def timelineObject(self) -> TimelineObject:
+        """
+        Returns the timeline object associated with this User Coordinate System.
+        """
+        return TimelineObject()
+    @property
+    def nativeObject(self) -> UserCoordinateSystem:
+        """
+        The NativeObject is the object outside the context of an assembly and
+        in the context of it's parent component.
+        Returns null in the case where this object is not in the context of
+        an assembly but is already the native object.
+        """
+        return UserCoordinateSystem()
+    @property
+    def assemblyContext(self) -> Occurrence:
+        """
+        Returns the assembly occurrence (i.e. the occurrence) of this object
+        in an assembly. This is only valid in the case where this is acting
+        as a proxy in an assembly. Returns null in the case where the object
+        is not in the context of an assembly but is already the native object.
+        """
+        return Occurrence()
+    @property
+    def attributes(self) -> core.Attributes:
+        """
+        Returns the collection of attributes associated with this User Coordinate System.
+        """
+        return core.Attributes()
+    @property
+    def entityToken(self) -> str:
+        """
+        Returns a token for the User Coordinate System object. This can be saved and used at a later
+        time with the Design.findEntityByToken method to get back the same User Coordinate System.
+        
+        When using entity tokens it's important to understand that the token string returned for a
+        specific entity can be different over time. However, even if you have two different token
+        strings that were obtained from the same entity, when you use findEntityByToken they
+        will both return the same entity. Because of that you should never compare entity tokens
+        as way to determine what the token represents. Instead, you need to use the findEntityByToken
+        method to get the two entities identified by the tokens and then compare them.
+        """
+        return str()
+    @property
+    def isLightBulbOn(self) -> bool:
+        """
+        Gets and sets if the light bulb of this User Coordinate System as displayed in the browser is on or off.
+        A User Coordinate System will only be visible if the light bulb is switched on. However,
+        the light bulb can be on and the User Coordinate System still invisible if a higher level occurrence
+        in the assembly context is not visible because its light bulb is off or the constructions folder
+        light bulb is off.
+        """
+        return bool()
+    @isLightBulbOn.setter
+    def isLightBulbOn(self, value: bool):
+        """
+        Gets and sets if the light bulb of this User Coordinate System as displayed in the browser is on or off.
+        A User Coordinate System will only be visible if the light bulb is switched on. However,
+        the light bulb can be on and the User Coordinate System still invisible if a higher level occurrence
+        in the assembly context is not visible because its light bulb is off or the constructions folder
+        light bulb is off.
+        """
+        pass
+    @property
+    def isVisible(self) -> bool:
+        """
+        Indicates if the User Coordinate System is visible.
+        This property is affected by the AssemblyContext of the User Coordinate System.
+        """
+        return bool()
+    @property
+    def transform(self) -> core.Matrix3D:
+        """
+        Returns the position and orientation of the User Coordinate System geometry associated with this User Coordinate System.
+        This is returned as a 3D matrix which provides the origin and the X, Y, and Z axis vectors of the
+        coordinate system.
+        
+        This property is especially useful in cases where the UserCoordinateSystemGeometry cannot be obtained. This can
+        happen when the model has been modified in a way where the geometry used to create the joint is
+        no longer available.
+        """
+        return core.Matrix3D()
+
+class UserCoordinateSystemGeometry(core.Base):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    A transient object used to define and query the geometric input for a user coordinate system and the resulting coordinate
+    system it defines. New UserCoordinateSystemGeometry objects are created using the static create method and
+    are then used as input to the UserCoordinateSystems.createInput method.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> UserCoordinateSystemGeometry:
+        return UserCoordinateSystemGeometry()
+    @staticmethod
+    def createByPlanarFace(face: BRepFace, edge: BRepEdge, keyPointType: UserCoordinateSystemKeyPointTypes) -> UserCoordinateSystemGeometry:
+        """
+        Creates a new transient UserCoordinateSystemGeometry object based on a Profile and a curve defining that profile.
+        A UserCoordinateSystemGeometry object can be used to create a User Coordinate System.
+        face : The planar BRepFace object.
+        edge : A BRepEdge edge object that is one of the edges of the specified face. This argument can be
+        null in the case where the keyPointType is CenterKeypoint indicating the center of the face
+        is to be used. When an edge is used, the keyPointType specifies the position along the edge
+        for the keypoint.
+        keyPointType : Specifies the position along the edge where the joint keypoint will be located. For open edges
+        this can be StartKeyPoint, MiddleKeyPoint, or EndKeyPoint. For closed edges (i.e. circles), it
+        must be CenterKeyPoint. When no edge is specified, it must be CenterKeyPoint indicating the center
+        of area of the face is to be used.
+        Returns the transient UserCoordinateSystemGeometry object that can be used to create a User Coordinate System or null in the case of a failure.
+        """
+        return UserCoordinateSystemGeometry()
+    @staticmethod
+    def createByNonPlanarFace(face: BRepFace, keyPointType: UserCoordinateSystemKeyPointTypes) -> UserCoordinateSystemGeometry:
+        """
+        Creates a new transient UserCoordinateSystemGeometry object based on a non-planar analytical BRepFace object. This is limited
+        to cylinders, cones, spheres, and tori. A UserCoordinateSystemGeometry object can be used to create a User Coordinate System.
+        face : The cylindrical, conical, spherical, or toroidal BRepFace object.
+        keyPointType : Specifies the position relative to the input face where the joint keypoint will be located. For cylinders
+        and cones this can be StartKeyPoint, MiddleKeyPoint, or EndKeyPoint. For spheres and tori this must be
+        CenterKeyPoint.
+        Returns the transient UserCoordinateSystemGeometry object that can be used to create a User Coordinate System or null in the case of a failure.
+        """
+        return UserCoordinateSystemGeometry()
+    @staticmethod
+    def createByProfile(profile: Profile, sketchCurve: SketchCurve, keyPointType: UserCoordinateSystemKeyPointTypes) -> UserCoordinateSystemGeometry:
+        """
+        Creates a new transient UserCoordinateSystemGeometry object based on a Profile and a curve defining that profile. A UserCoordinateSystemGeometry
+        object can be used to create a User Coordinate System.
+        profile : The Profile object.
+        sketchCurve : A sketch curve that is part of the input profile. This argument can be
+        null in the case where the keyPointType is CenterKeypoint indicating the center of the profile
+        is to be used. When a curve is used, the keyPointType specifies the position along the curve
+        for the keypoint.
+        keyPointType : Specifies the position along the curve where the joint keypoint will be located. For open curves (lines, arcs, elliptical arcs, and open splines)
+        this can be StartKeyPoint, MiddleKeyPoint, or EndKeyPoint. For closed analytic (circles and ellipses), it
+        must be CenterKeyPoint. When no curve is specified, it must be CenterKeyPoint indicating the center
+        of area of the profile is to be used.
+        Returns the transient UserCoordinateSystemGeometry object that can be used to create a User Coordinate System or null in the case of a failure.
+        """
+        return UserCoordinateSystemGeometry()
+    @staticmethod
+    def createByCurve(curve: core.Base, keyPointType: UserCoordinateSystemKeyPointTypes) -> UserCoordinateSystemGeometry:
+        """
+        Creates a new transient UserCoordinateSystemGeometry object using a BRepEdge or SketchCurve as input. A UserCoordinateSystemGeometry
+        object can be used to create a User Coordinate System.
+        curve : Input BRepEdge or SketchCurve.
+        keyPointType : The position on the curve where to position the joint coordinate system. For any open curves
+        the valid types are StartKeyPoint, MiddleKeyPoint, CenterKeyPoint and EndKeyPoint. For circular and elliptical
+        shaped curves the option is CenterKeyPoint. For closed spline curves either StartKeyPoint or
+        EndKeyPoint can be used and the result is the same.
+        Returns the transient UserCoordinateSystemGeometry object that can be used to create a User Coordinate System or null in the case of a failure.
+        """
+        return UserCoordinateSystemGeometry()
+    @staticmethod
+    def createByPoint(point: core.Base) -> UserCoordinateSystemGeometry:
+        """
+        Creates a new transient UserCoordinateSystemGeometry object using a ConstructionPoint, SketchPoint or BRepVertex as input.
+        A UserCoordinateSystemGeometry object can be used to create a User Coordinate System.
+        point : The ConstructionPoint, SketchPoint or BRepVertex object.
+        Returns the transient UserCoordinateSystemGeometry object that can be used to create a User Coordinate System or null in the case of a failure.
+        """
+        return UserCoordinateSystemGeometry()
+    @property
+    def geometryType(self) -> UserCoordinateSystemGeometryTypes:
+        """
+        Returns the type of geometry this UserCoordinateSystemGeometry object represents.
+        """
+        return UserCoordinateSystemGeometryTypes()
+    @property
+    def keyPointType(self) -> UserCoordinateSystemKeyPointTypes:
+        """
+        Returns the keypoint type this UserCoordinateSystemGeometry is using.
+        """
+        return UserCoordinateSystemKeyPointTypes()
+    @property
+    def entity(self) -> core.Base:
+        """
+        The entity that's defining this user coordinate system geometry. This can be various types of geometry depending
+        on how this coordinate system geometry is defined. The geometryType property indicates the type of geometry.
+        """
+        return core.Base()
+    @property
+    def origin(self) -> core.Point3D:
+        """
+        Returns the origin point that's been calculated for this user coordinate system geometry.
+        """
+        return core.Point3D()
+
+class UserCoordinateSystemInput(core.Base):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Defines all of the information required to create a new User Coordinate System. This object provides
+    equivalent functionality to the User Coordinate System command dialog in that it gathers the required
+    information to create a User Coordinate System.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> UserCoordinateSystemInput:
+        return UserCoordinateSystemInput()
+    @property
+    def geometry(self) -> UserCoordinateSystemGeometry:
+        """
+        Gets and sets the User Coordinate System geometry for this User Coordinate System input. This
+        defines the location of the User Coordinate System.
+        """
+        return UserCoordinateSystemGeometry()
+    @geometry.setter
+    def geometry(self, value: UserCoordinateSystemGeometry):
+        """
+        Gets and sets the User Coordinate System geometry for this User Coordinate System input. This
+        defines the location of the User Coordinate System.
+        """
+        pass
+    @property
+    def angleX(self) -> core.ValueInput:
+        """
+        Gets and sets the value that defines the angle X for the user coordinate system. This defaults to zero
+        if it's not specified. The value defines an angle X and if the ValueInput is defined using
+        the createByReal method the value is assumed to be radians.
+        """
+        return core.ValueInput()
+    @angleX.setter
+    def angleX(self, value: core.ValueInput):
+        """
+        Gets and sets the value that defines the angle X for the user coordinate system. This defaults to zero
+        if it's not specified. The value defines an angle X and if the ValueInput is defined using
+        the createByReal method the value is assumed to be radians.
+        """
+        pass
+    @property
+    def angleY(self) -> core.ValueInput:
+        """
+        Gets and sets the value that defines the angle Y for the user coordinate system. This defaults to zero
+        if it's not specified. The value defines an angle Y and if the ValueInput is defined using
+        the createByReal method the value is assumed to be radians.
+        """
+        return core.ValueInput()
+    @angleY.setter
+    def angleY(self, value: core.ValueInput):
+        """
+        Gets and sets the value that defines the angle Y for the user coordinate system. This defaults to zero
+        if it's not specified. The value defines an angle Y and if the ValueInput is defined using
+        the createByReal method the value is assumed to be radians.
+        """
+        pass
+    @property
+    def angleZ(self) -> core.ValueInput:
+        """
+        Gets and sets the value that defines the angle Z for the user coordinate system. This defaults to zero
+        if it's not specified. The value defines an angle Z and if the ValueInput is defined using
+        the createByReal method the value is assumed to be radians.
+        """
+        return core.ValueInput()
+    @angleZ.setter
+    def angleZ(self, value: core.ValueInput):
+        """
+        Gets and sets the value that defines the angle Z for the user coordinate system. This defaults to zero
+        if it's not specified. The value defines an angle Z and if the ValueInput is defined using
+        the createByReal method the value is assumed to be radians.
+        """
+        pass
+    @property
+    def offsetX(self) -> core.ValueInput:
+        """
+        Gets and sets the value that defines the X offset direction. This defaults to zero
+        if it's not specified. The value defines a distance and if the ValueInput is defined using
+        the createByReal method the value is assumed to be centimeters.
+        """
+        return core.ValueInput()
+    @offsetX.setter
+    def offsetX(self, value: core.ValueInput):
+        """
+        Gets and sets the value that defines the X offset direction. This defaults to zero
+        if it's not specified. The value defines a distance and if the ValueInput is defined using
+        the createByReal method the value is assumed to be centimeters.
+        """
+        pass
+    @property
+    def offsetY(self) -> core.ValueInput:
+        """
+        Gets and sets the value that defines the Y offset direction. This defaults to zero
+        if it's not specified. The value defines a distance and if the ValueInput is defined using
+        the createByReal method the value is assumed to be centimeters.
+        """
+        return core.ValueInput()
+    @offsetY.setter
+    def offsetY(self, value: core.ValueInput):
+        """
+        Gets and sets the value that defines the Y offset direction. This defaults to zero
+        if it's not specified. The value defines a distance and if the ValueInput is defined using
+        the createByReal method the value is assumed to be centimeters.
+        """
+        pass
+    @property
+    def offsetZ(self) -> core.ValueInput:
+        """
+        Gets and sets the value that defines the Z offset direction. This defaults to zero
+        if it's not specified. The value defines a distance and if the ValueInput is defined using
+        the createByReal method the value is assumed to be centimeters.
+        """
+        return core.ValueInput()
+    @offsetZ.setter
+    def offsetZ(self, value: core.ValueInput):
+        """
+        Gets and sets the value that defines the Z offset direction. This defaults to zero
+        if it's not specified. The value defines a distance and if the ValueInput is defined using
+        the createByReal method the value is assumed to be centimeters.
+        """
+        pass
+    @property
+    def xAxisEntity(self) -> core.Base:
+        """
+        Gets and sets the entity that defines the X axis direction. This defaults
+        to null meaning the X axis is inferred from the input geometry.
+        """
+        return core.Base()
+    @xAxisEntity.setter
+    def xAxisEntity(self, value: core.Base):
+        """
+        Gets and sets the entity that defines the X axis direction. This defaults
+        to null meaning the X axis is inferred from the input geometry.
+        """
+        pass
+    @property
+    def zAxisEntity(self) -> core.Base:
+        """
+        Gets and sets the entity that defines the Z axis direction. This defaults
+        to null meaning the Z axis is inferred from the input geometry.
+        """
+        return core.Base()
+    @zAxisEntity.setter
+    def zAxisEntity(self, value: core.Base):
+        """
+        Gets and sets the entity that defines the Z axis direction. This defaults
+        to null meaning the Z axis is inferred from the input geometry.
+        """
+        pass
+    @property
+    def globalOrientParameterOne(self) -> core.ValueInput:
+        """
+        Gets and sets the value that defines the first global orient parameter for the User Coordinate System.
+        This defaults to zero if it's not specified.
+        For Cylinder or cone, it represents the angle around the center axis.
+        For Sphere and Torus, it represents the angle around the center axis.
+        For Spline, it represents the U parameter.
+        """
+        return core.ValueInput()
+    @globalOrientParameterOne.setter
+    def globalOrientParameterOne(self, value: core.ValueInput):
+        """
+        Gets and sets the value that defines the first global orient parameter for the User Coordinate System.
+        This defaults to zero if it's not specified.
+        For Cylinder or cone, it represents the angle around the center axis.
+        For Sphere and Torus, it represents the angle around the center axis.
+        For Spline, it represents the U parameter.
+        """
+        pass
+    @property
+    def globalOrientParameterTwo(self) -> core.ValueInput:
+        """
+        Gets and sets the value that defines the second global orient parameter for the User Coordinate System.
+        This defaults to zero if it's not specified.
+        For Cylinder or cone, it is not used.
+        For Sphere, it represents the polar angle, which is the angle between the radius line and the equator plane.
+        For Torus, it represents the angle around the center of the section circle.
+        For Spline, it represents the V parameter.
+        """
+        return core.ValueInput()
+    @globalOrientParameterTwo.setter
+    def globalOrientParameterTwo(self, value: core.ValueInput):
+        """
+        Gets and sets the value that defines the second global orient parameter for the User Coordinate System.
+        This defaults to zero if it's not specified.
+        For Cylinder or cone, it is not used.
+        For Sphere, it represents the polar angle, which is the angle between the radius line and the equator plane.
+        For Torus, it represents the angle around the center of the section circle.
+        For Spline, it represents the V parameter.
+        """
+        pass
+    @property
+    def creationOccurrence(self) -> Occurrence:
+        """
+        Gets and sets the occurrence this User Coordinate System will be created within.
+        This property is only needed when creating (the UserCoordinateSystem) with geometry
+        (e.g. a sketch point) in another component AND (the UserCoordinateSystem) is not in the
+        root component. The CreationOccurrence is analogous to the active occurrence in the UI
+        """
+        return Occurrence()
+    @creationOccurrence.setter
+    def creationOccurrence(self, value: Occurrence):
+        """
+        Gets and sets the occurrence this User Coordinate System will be created within.
+        This property is only needed when creating (the UserCoordinateSystem) with geometry
+        (e.g. a sketch point) in another component AND (the UserCoordinateSystem) is not in the
+        root component. The CreationOccurrence is analogous to the active occurrence in the UI
+        """
+        pass
+
+class UserCoordinateSystems(core.Base):
+    """
+    Provides access to the user coordinate systems within a component and provides
+    methods to create new user coordinate systems.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> UserCoordinateSystems:
+        return UserCoordinateSystems()
+    def __len__(self) -> int:
+        return 0
+    def __getitem__(self, index: int) -> UserCoordinateSystem:
+        return None
+    def __iter__(self) -> Iterator[UserCoordinateSystem]:
+        return None
+    def item(self, index: int) -> UserCoordinateSystem:
+        """
+        Function that returns the specified user coordinate system using an index into the collection.
+        index : The index of the item within the collection to return. The first item in the collection has an index of 0.
+        Returns the specified item or null if an invalid index was specified.
+        """
+        return UserCoordinateSystem()
+    def itemByName(self, name: str) -> UserCoordinateSystem:
+        """
+        Returns the specified user coordinate system using the name of the user coordinate system
+        as it is displayed in the browser.
+        name : The name of the user coordinate system as it is displayed in the browser
+        Returns the specified item or null if an invalid name was specified.
+        """
+        return UserCoordinateSystem()
+    def createInput(self, geometry: UserCoordinateSystemGeometry) -> UserCoordinateSystemInput:
+        """
+        Create a UserCoordinateSystemInput object that is in turn used to create a UserCoordinateSystem.
+        geometry : The UserCoordinateSystemGeometry object that defines the position and orientation of the user coordinate system.
+        Returns a UserCoordinateSystemInput object
+        """
+        return UserCoordinateSystemInput()
+    def add(self, input: UserCoordinateSystemInput) -> UserCoordinateSystem:
+        """
+        Creates and adds a new UserCoordinateSystem using the UserCoordinateSystemInput.
+        input : A UserCoordinateSystemInput object
+        Returns the newly created user coordinate system or null if the creation failed.
+        """
+        return UserCoordinateSystem()
+    @property
+    def count(self) -> int:
+        """
+        The number of user coordinate systems in the collection.
+        """
+        return int()
+
 class UserParameters(core.Base):
     """
     Provides access to the User Parameters within a design and provides
@@ -38360,18 +39441,29 @@ class UserParameters(core.Base):
         with the string "5", any unit type can be used and the result will be 5 of that unit.
         
         If the "units" argument is "Text" then a text parameter will be created using the value provided as the expression.
+        For text parameters, the expression must be a valid string literal enclosed in single quotes (e.g. "'Hello Fusion'")
+        or it can be an expression that combines string literals with other text parameters
+        (e.g. "'Length: ' + lengthParam"). An unquoted value like "Hello Fusion" will fail to parse because the tokens
+        are interpreted as symbols rather than literal text. After the parameter has been created, you can use the
+        textValue property on the resulting Parameter object to get or set the plain string value without having to
+        manage the surrounding quotes yourself.
         
         When using a ValueInput created using a string, it's the same as creating a parameter in the user-interface.
         You can specify any valid expression, i.e. "5", "5 in", "5 in / 2", "5 + Length", etc. and you can choose
         from many different types of units. The only requirement is that the units must match in type. For example,
         they must both be lengths, or they must both be angles.
         
-        When creating a Boolean parameter, you should use the createByBoolean method of the ValueInput object.
+        Boolean ValueInput objects (created via ValueInput.createByBoolean) are not supported by UserParameters.add
+        and attempting to use one will fail. Boolean-like behavior can be approximated by creating a unitless numeric
+        parameter (with an empty string for the "units" argument) using the expressions "true" or "false", which are
+        evaluated as 1 and 0 respectively.
         units : The units to use for the value of the parameter. The use of any of the measurement units will result in the
         creation of a numeric parameter. The units specified must match the units specified (if any) in the ValueInput object.
         
         To create a parameter with no units, you can specify an empty string as the units, which will also create a
-        numeric parameter. To create a text parameter, use "Text" as the unit type.
+        numeric parameter. To create a text parameter, use "Text" as the unit type; in this case the expression
+        supplied via the ValueInput must be a quoted string literal (see the "value" parameter description for
+        details). A Boolean ValueInput is not supported by this method.
         comment : The comment to display in the parameters dialog. Specify an empty string ("") for no comment
         Returns the newly created UserParameter or null if the creation failed.
         """
@@ -38514,6 +39606,93 @@ class VolumetricCustomFeatures(core.Base):
         Returns the newly created VolumetricCustomFeatureInput object or null if the creation failed.
         """
         return VolumetricCustomFeatureInput()
+    @property
+    def count(self) -> int:
+        """
+        The number of features in the collection.
+        """
+        return int()
+
+class VolumetricModelFeatureInput(core.Base):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    This class defines the methods and properties that pertain to the definition of a volumetric model
+    feature.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> VolumetricModelFeatureInput:
+        return VolumetricModelFeatureInput()
+    @property
+    def boundaryBody(self) -> core.Base:
+        """
+        The boundary body of the volumetric model.
+        """
+        return core.Base()
+    @boundaryBody.setter
+    def boundaryBody(self, value: core.Base):
+        """
+        The boundary body of the volumetric model.
+        """
+        pass
+
+class VolumetricModelFeatures(core.Base):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Collection that provides access to all of the existing volumetric model features in a component
+    and supports the ability to create new Volumetric Model features.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> VolumetricModelFeatures:
+        return VolumetricModelFeatures()
+    def __len__(self) -> int:
+        return 0
+    def __getitem__(self, index: int) -> VolumetricModelFeature:
+        return None
+    def __iter__(self) -> Iterator[VolumetricModelFeature]:
+        return None
+    def item(self, index: int) -> VolumetricModelFeature:
+        """
+        Function that returns the specified item using an index into the collection.
+        index : The index of the item within the collection to return. The first item in the collection has an index of 0.
+        Returns the specified item or null if an invalid index was specified.
+        """
+        return VolumetricModelFeature()
+    def itemByName(self, name: str) -> VolumetricModelFeature:
+        """
+        Returns the item with the specified name.
+        name : The name of the item.
+        Returns the specified item or null in the case where there is no item with the specified name.
+        """
+        return VolumetricModelFeature()
+    def createInput(self, boundaryBody: core.Base) -> VolumetricModelFeatureInput:
+        """
+        Creates a VolumetricModelFeatureInput object. Use properties and methods on this object
+        to define the volumetric model feature you want to create and then use the Add method,
+        passing in the VolumetricModelFeatureInput object.
+        boundaryBody : The boundary body for the volumetric model. Must be a BRepBody or MeshBody. Must have the same parent
+        component as the VolumetricModelFeatures.
+        Returns the newly created VolumetricModelFeatureInput object or null if the creation failed.
+        """
+        return VolumetricModelFeatureInput()
+    def add(self, input: VolumetricModelFeatureInput) -> VolumetricModelFeature:
+        """
+        Creates a new volumetric model feature.
+        input : A VolumetricModelFeatureInput object that defines the desired volumetric model feature. Use the createInput
+        method to create a new VolumetricModelFeatureInput object and then use methods on the VolumetricModelFeatureInput
+        object to define the volumetric model feature.
+        Returns the newly created VolumetricModelFeature object or null if the creation failed.
+        """
+        return VolumetricModelFeature()
     @property
     def count(self) -> int:
         """
@@ -41509,6 +42688,19 @@ class Component(BaseComponent):
         of the bitmap directly.
         """
         return core.DataObject()
+    def findMeshUsingRay(self, originPoint: core.Point3D, rayDirection: core.Vector3D, visibleEntitiesOnly: bool = True) -> tuple[list[MeshBody], list[core.Point3D]]:
+        """
+        Finds all mesh bodies that are intersected by the specified ray.
+        originPoint : Input point that defines the origin of the ray. The search for entities begins at this point.
+        rayDirection : Input vector that defines the direction of the ray. The ray is infinite so the length of the vector is ignored.
+        hitPoints : The output array of points that represent the coordinates where the ray hit the found entity. There will be the same number of hit points as returned entities.
+        In other words, hit point 1 corresponds with found entity 1, hit point 2 corresponds with found entity 2, and so on.
+        visibleEntitiesOnly : Optional argument that indicates whether or not invisible entities should be included in the search. Defaults to True indicating that invisible entities will be ignored.
+        Returns an array containing the mesh bodies found. The returned array can be empty indicating nothing was found. The points are returned
+        in an order where they are arranged based on their distance from the origin point where the closest point is first. If an mesh body is hit more than
+        once, the entity is returned once for the first intersection.
+        """
+        return ([MeshBody()], [core.Point3D()])
     @property
     def sketches(self) -> Sketches:
         """
@@ -43658,6 +44850,49 @@ class ConstructionPlaneAtAngleDefinition(ConstructionPlaneDefinition):
         """
         return core.Base()
 
+class ConstructionPlaneAtAngleOnCurvedFaceDefinition(ConstructionPlaneDefinition):
+    """
+    ConstructionPlaneAtAngleOnCurvedFaceDefinition defines a ConstructionPlane by an angle around
+    the axis inferred from a curved face.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> ConstructionPlaneAtAngleOnCurvedFaceDefinition:
+        return ConstructionPlaneAtAngleOnCurvedFaceDefinition()
+    def redefine(self, angle: core.ValueInput, curvedFace: core.Base, planarEntity: core.Base) -> bool:
+        """
+        Redefines the input geometry of the construction plane.
+        angle : A ValueInput object that defines the angle at which to create the construction plane.
+        curvedFace : The cylindrical or conical curved face that defines the axis of rotation.
+        planarEntity : A plane, planar face or construction plane the angle of the construction plane is
+        measured from. A zero angle creates a plane whose normal is aligned with this plane's normal.
+        Returns true if the redefinition of the plane is successful.
+        """
+        return bool()
+    @property
+    def angle(self) -> Parameter:
+        """
+        Returns a Parameter object that controls the value of the angle. You can use properties
+        of the returned Parameter object to modify the angle.
+        """
+        return Parameter()
+    @property
+    def curvedFace(self) -> core.Base:
+        """
+        Gets the cylindrical or conical curved face that defines
+        the axis of rotation for the construction plane.
+        """
+        return core.Base()
+    @property
+    def planarEntity(self) -> core.Base:
+        """
+        Gets the planar face or construction plane the angle for this
+        construction plane is measured from and is parametrically dependent on.
+        A zero angle creates a plane whose normal is aligned with this plane's normal.
+        """
+        return core.Base()
+
 class ConstructionPlaneByPlaneDefinition(ConstructionPlaneDefinition):
     """
     The definition for a non-parametric construction plane. All constructions planes will
@@ -44136,6 +45371,10 @@ class CopyPasteBody(Feature):
 
 class CornerClosureFeature(Feature):
     """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
     Defines a corner closure feature, providing methods to redefine the type of corner closure.
     """
     def __init__(self):
@@ -46139,6 +47378,13 @@ class Design(core.Product):
         document contains Fusion-authored PMI.
         """
         return PMISettings()
+    @property
+    def animationManager(self) -> AnimationManager:
+        """
+        Returns the AnimationManager object associated with this design. Using the AnimationManager you can access the
+        same functionality that is available in the Animation workspace.
+        """
+        return AnimationManager()
 
 class DistanceAndAngleChamferEdgeSet(ChamferEdgeSet):
     """
@@ -46236,10 +47482,6 @@ class DistanceExtentDefinition(ExtentDefinition):
 
 class DoubleHemFeatureDefinition(HemFeatureDefinition):
     """
-    !!!!! Warning !!!!!
-    ! This is in preview state; please see the help for more info
-    !!!!! Warning !!!!!
-    
     The definition for a double hem.
     """
     def __init__(self):
@@ -47378,10 +48620,6 @@ class FlangeFeature(Feature):
 
 class FlatHemFeatureDefinition(HemFeatureDefinition):
     """
-    !!!!! Warning !!!!!
-    ! This is in preview state; please see the help for more info
-    !!!!! Warning !!!!!
-    
     The definition for a flat hem.
     """
     def __init__(self):
@@ -50033,10 +51271,6 @@ class OnEdgeHolePositionDefinition(HolePositionDefinition):
 
 class OpenHemFeatureDefinition(HemFeatureDefinition):
     """
-    !!!!! Warning !!!!!
-    ! This is in preview state; please see the help for more info
-    !!!!! Warning !!!!!
-    
     The definition for an open hem.
     """
     def __init__(self):
@@ -51509,6 +52743,7 @@ class PMIHoleThreadNoteInput(PMIInput):
         """
         Gets and sets the PMIGeometricValue used to define the diameter of the annotated hole or boss in cm.
         It is possible to also add tolerances to the object set by setting the tolerance property of the PMIGeometricValue object.
+        Any shaft tolerance specified in the tolerance property of the PMIGeometricValue object will override any previously set value.
         
         Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).
         
@@ -51520,6 +52755,7 @@ class PMIHoleThreadNoteInput(PMIInput):
         """
         Gets and sets the PMIGeometricValue used to define the diameter of the annotated hole or boss in cm.
         It is possible to also add tolerances to the object set by setting the tolerance property of the PMIGeometricValue object.
+        Any shaft tolerance specified in the tolerance property of the PMIGeometricValue object will override any previously set value.
         
         Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).
         
@@ -51905,6 +53141,16 @@ class PMIImportedFolder(PMIAnnotation):
     Defines a container of other PMI objects (including sub-folders).
     
     A PMIAnnotations can contain multiple PMI of this type, and is typically used to group the PMI within a PMIAnnotations.
+    
+    Examples of Imported PMI Folders:
+    
+    - the default imported folder, which is a container expandable and has visible children in the browser
+    
+    - an imported Hole Note, which is not expandable, and contains PMI such as Imported Diameter Dimensions and Imported Notes.
+    
+    - an imported General Note
+    
+    - an imported Feature Control Frame
     """
     def __init__(self):
         pass
@@ -53009,6 +54255,14 @@ class RefoldFeature(Feature):
     @staticmethod
     def cast(arg) -> RefoldFeature:
         return RefoldFeature()
+    @property
+    def unfoldFeature(self) -> UnfoldFeature:
+        """
+        Returns the unfold feature associated with this refold feature.
+        A refold feature always has an associated unfold feature because
+        they are created together in a group.
+        """
+        return UnfoldFeature()
 
 class RemoveFeature(Feature):
     """
@@ -53633,10 +54887,6 @@ class RipFeature(Feature):
 
 class RolledHemFeatureDefinition(HemFeatureDefinition):
     """
-    !!!!! Warning !!!!!
-    ! This is in preview state; please see the help for more info
-    !!!!! Warning !!!!!
-    
     The definition for a rolled hem.
     """
     def __init__(self):
@@ -53659,10 +54909,6 @@ class RolledHemFeatureDefinition(HemFeatureDefinition):
 
 class RopeHemFeatureDefinition(HemFeatureDefinition):
     """
-    !!!!! Warning !!!!!
-    ! This is in preview state; please see the help for more info
-    !!!!! Warning !!!!!
-    
     The definition for a rope hem.
     """
     def __init__(self):
@@ -56310,10 +57556,6 @@ class TangentConstraint(GeometricConstraint):
 
 class TeardropHemFeatureDefinition(HemFeatureDefinition):
     """
-    !!!!! Warning !!!!!
-    ! This is in preview state; please see the help for more info
-    !!!!! Warning !!!!!
-    
     The definition for a teardrop hem.
     """
     def __init__(self):
@@ -57446,6 +58688,13 @@ class UnfoldFeature(Feature):
     @staticmethod
     def cast(arg) -> UnfoldFeature:
         return UnfoldFeature()
+    @property
+    def refoldFeature(self) -> RefoldFeature:
+        """
+        Returns the refold feature associated with this unfold feature, or null if there is no associated refold.
+        Unfold and refold features are often created together in a group.
+        """
+        return RefoldFeature()
 
 class UnstitchFeature(Feature):
     """
@@ -57901,6 +59150,47 @@ class VolumetricCustomFeature(Feature):
         an assembly but is already the native object.
         """
         return VolumetricCustomFeature()
+
+class VolumetricModelFeature(Feature):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Object that represents an existing volumetric model feature.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> VolumetricModelFeature:
+        return VolumetricModelFeature()
+    def createForAssemblyContext(self, occurrence: Occurrence) -> VolumetricModelFeature:
+        """
+        Creates or returns a proxy for the native object
+        - i.e. a new object that represents this object but adds the assembly context
+        defined by the input occurrence.
+        occurrence : The occurrence that defines the context to create the proxy in.
+        Returns the proxy object or null if this isn't the NativeObject.
+        """
+        return VolumetricModelFeature()
+    @property
+    def volumetricModel(self) -> core.Base:
+        """
+        Gets the volumetric model object. This property is typed as core.Base because the adsk.fusion
+        library does not reference the volume library where the VolumetricModel object is defined.
+        At runtime, this property will return a VolumetricModel object.
+        Returns the volumetric model object.
+        """
+        return core.Base()
+    @property
+    def nativeObject(self) -> VolumetricModelFeature:
+        """
+        The NativeObject is the object outside the context of an assembly and
+        in the context of its parent component.
+        Returns null in the case where this object is not in the context of
+        an assembly but is already the native object.
+        """
+        return VolumetricModelFeature()
 
 class VolumetricModelToMeshFeature(Feature):
     """

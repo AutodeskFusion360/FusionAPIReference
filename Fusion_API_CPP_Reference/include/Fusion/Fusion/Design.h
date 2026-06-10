@@ -37,6 +37,7 @@ namespace adsk { namespace core {
 }}
 namespace adsk { namespace fusion {
     class Analyses;
+    class AnimationManager;
     class AreaProperties;
     class Component;
     class Components;
@@ -357,6 +358,10 @@ public:
     /// document contains Fusion-authored PMI.
     core::Ptr<PMISettings> pmiSettings() const;
 
+    /// Returns the AnimationManager object associated with this design. Using the AnimationManager you can access the
+    /// same functionality that is available in the Animation workspace.
+    core::Ptr<AnimationManager> animationManager() const;
+
     ADSK_FUSION_DESIGN_API static const char* classType();
     ADSK_FUSION_DESIGN_API const char* objectType() const override;
     ADSK_FUSION_DESIGN_API void* queryInterface(const char* id) const override;
@@ -416,6 +421,7 @@ private:
     virtual DesignIntentTypes designIntent_raw() const = 0;
     virtual bool designIntent_raw(DesignIntentTypes value) = 0;
     virtual PMISettings* pmiSettings_raw() const = 0;
+    virtual AnimationManager* animationManager_raw() const = 0;
     virtual void placeholderDesign0() {}
     virtual void placeholderDesign1() {}
     virtual void placeholderDesign2() {}
@@ -492,7 +498,6 @@ private:
     virtual void placeholderDesign73() {}
     virtual void placeholderDesign74() {}
     virtual void placeholderDesign75() {}
-    virtual void placeholderDesign76() {}
 };
 
 // Inline wrappers
@@ -826,6 +831,12 @@ inline bool Design::designIntent(DesignIntentTypes value)
 inline core::Ptr<PMISettings> Design::pmiSettings() const
 {
     core::Ptr<PMISettings> res = pmiSettings_raw();
+    return res;
+}
+
+inline core::Ptr<AnimationManager> Design::animationManager() const
+{
+    core::Ptr<AnimationManager> res = animationManager_raw();
     return res;
 }
 }// namespace fusion

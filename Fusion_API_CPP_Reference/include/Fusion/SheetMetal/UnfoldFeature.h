@@ -26,10 +26,18 @@
 #endif
 
 namespace adsk { namespace fusion {
+    class RefoldFeature;
+}}
+
+namespace adsk { namespace fusion {
 
 /// Object that represents an existing unfold feature in a design.
 class UnfoldFeature : public Feature {
 public:
+
+    /// Returns the refold feature associated with this unfold feature, or null if there is no associated refold.
+    /// Unfold and refold features are often created together in a group.
+    core::Ptr<RefoldFeature> refoldFeature() const;
 
     ADSK_FUSION_UNFOLDFEATURE_API static const char* classType();
     ADSK_FUSION_UNFOLDFEATURE_API const char* objectType() const override;
@@ -39,12 +47,16 @@ public:
 private:
 
     // Raw interface
-
+    virtual RefoldFeature* refoldFeature_raw() const = 0;
 };
 
 // Inline wrappers
 
-
+inline core::Ptr<RefoldFeature> UnfoldFeature::refoldFeature() const
+{
+    core::Ptr<RefoldFeature> res = refoldFeature_raw();
+    return res;
+}
 }// namespace fusion
 }// namespace adsk
 

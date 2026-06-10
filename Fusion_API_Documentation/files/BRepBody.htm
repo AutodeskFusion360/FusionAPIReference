@@ -36,7 +36,9 @@
               Derived from: <a href="Base.htm">Base</a> Object
             <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/BRep/BRepBody.h&gt;<h2 class="api">
           Description
-        </h2>Represents a B-Rep (Boundary Representation) body.<h2 class="api">
+        </h2>
+    <p class="api">Represents a B-Rep (Boundary Representation) body.</p>
+    <h2 class="api">
             Methods
           </h2>
     <Table class="api-list">
@@ -50,51 +52,87 @@
       </tr>
       <tr>
         <td class="api-list"><a href="BRepBody_classType.htm">classType</a></td>
-        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+        <td class="api-list">
+          <p class="api">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="BRepBody_convert.htm">convert</a></td>
-        <td class="api-list">Creates a new body where the faces and edges are converted to different types of geometry based on the input options. This is particularly useful when you need a body made up entirely of NURBS surfaces.<br/><br/> The tempId on the faces, edges, and vertices on the new body will match with the corresponding tempId on the original body. In cases where faces are split as a result of the conversion there can be more than one face or edge in the new body that matches to a single face or edge in the original body. The findByTempId method will find the entity with the matching id.</td>
+        <td class="api-list">
+          <p class="api">Creates a new body where the faces and edges are converted to different types of geometry based on the input options. This is particularly useful when you need a body made up entirely of NURBS surfaces.<br/><br/> The tempId on the faces, edges, and vertices on the new body will match with the corresponding tempId on the original body. In cases where faces are split as a result of the conversion there can be more than one face or edge in the new body that matches to a single face or edge in the original body. The findByTempId method will find the entity with the matching id.</p>
+        </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BRepBody_convertToSheetMetal.htm">convertToSheetMetal</a></td>
+        <td class="api-list">
+          <p class="api"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Converts the current BRepBody to a sheet metal body. This is applicable only if the body is not already a sheet metal body (isSheetMetal is false).</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="BRepBody_copy.htm">copy</a></td>
-        <td class="api-list">Copies the body to the clipboard.<br/><br/> This property is only valid if the IsTransient property is false.</td>
+        <td class="api-list">
+          <p class="api">Copies the body to the clipboard.<br/><br/> This property is only valid if the IsTransient property is false.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="BRepBody_copyToComponent.htm">copyToComponent</a></td>
-        <td class="api-list">Creates a copy of this body into the specified target.</td>
+        <td class="api-list">
+          <p class="api">Creates a copy of this body into the specified target.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="BRepBody_createComponent.htm">createComponent</a></td>
-        <td class="api-list">Creates a new component and occurrence within the component that currently owns this body. This body is moved into the new component and returned. The newly created component can be obtained by using the parentComponent property of the BRepBody object.<br/><br/> This method is only valid if the IsTransient property is false.</td>
+        <td class="api-list">
+          <p class="api">Creates a new component and occurrence within the component that currently owns this body. This body is moved into the new component and returned. The newly created component can be obtained by using the parentComponent property of the BRepBody object.<br/><br/> This method is only valid if the IsTransient property is false.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="BRepBody_createForAssemblyContext.htm">createForAssemblyContext</a></td>
-        <td class="api-list">Returns a proxy for the native object - i.e. a new object that represents this object but adds the assembly context defined by the input occurrence.<br/><br/> This method is only valid if the IsTransient property is false.</td>
+        <td class="api-list">
+          <p class="api">Returns a proxy for the native object - i.e. a new object that represents this object but adds the assembly context defined by the input occurrence.<br/><br/> This method is only valid if the IsTransient property is false.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="BRepBody_cut.htm">cut</a></td>
-        <td class="api-list">Cuts the body to the clipboard.<br/><br/> This property is only valid if the IsTransient property is false.</td>
+        <td class="api-list">
+          <p class="api">Cuts the body to the clipboard.<br/><br/> This property is only valid if the IsTransient property is false.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="BRepBody_deleteMe.htm">deleteMe</a></td>
-        <td class="api-list">Deletes the body.<br/><br/> This property is only valid if the IsTransient property is false.</td>
+        <td class="api-list">
+          <p class="api">Deletes the body.<br/><br/> This property is only valid if the IsTransient property is false.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="BRepBody_findByTempId.htm">findByTempId</a></td>
-        <td class="api-list">Returns all of the faces, edges, or vertices that match the input ID.</td>
+        <td class="api-list">
+          <p class="api">Returns all of the faces, edges, or vertices that match the input ID.</p>
+        </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="BRepBody_findThicknessAtFace.htm">findThicknessAtFace</a></td>
+        <td class="api-list">
+          <p class="api"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Finds the thickness of the body at the specified face by casting a ray from the face along its inward normal and measuring the distance to the first opposite face of the body that is hit.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="BRepBody_getPhysicalProperties.htm">getPhysicalProperties</a></td>
-        <td class="api-list">Returns the PhysicalProperties object that has properties for getting the area, density, mass, volume, moments, etc of this body.</td>
+        <td class="api-list">
+          <p class="api">Returns the PhysicalProperties object that has properties for getting the area, density, mass, volume, moments, etc of this body.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="BRepBody_moveToComponent.htm">moveToComponent</a></td>
-        <td class="api-list">Moves this body from its current component into the root component or the component owned by the specified occurrence.</td>
+        <td class="api-list">
+          <p class="api">Moves this body from its current component into the root component or the component owned by the specified occurrence.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="BRepBody_pointContainment.htm">pointContainment</a></td>
-        <td class="api-list">Determines the relationship of the input point with respect to this body.</td>
+        <td class="api-list">
+          <p class="api">Determines the relationship of the input point with respect to this body.</p>
+        </td>
       </tr>
     </Table>
     <h2 class="api">
@@ -299,7 +337,7 @@
           <td align="left">
                 © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(BRepBody%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(BRepBody%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

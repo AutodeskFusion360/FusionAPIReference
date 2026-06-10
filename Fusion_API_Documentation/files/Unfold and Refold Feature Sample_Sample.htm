@@ -1,0 +1,209 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/Unfold and Refold Feature Sample.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="Unfold and Refold Feature Sample_Sample">
+    <meta name="description" content="Unfold and Refold Feature Sample Sample">
+    <meta name="topicid" content="GUID-b7e3a1f2-8c4d-4e5f-9a6b-1d2e3f4a5b6c">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Unfold and Refold Feature Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Unfold and Refold Feature Sample</h1>
+    <h2 class="api">
+          Description
+        </h2>Demonstrates accessing the association between unfold and refold features. Shows how to get the refold feature from an unfold, and the unfold feature from a refold.<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">import adsk.core, adsk.fusion, traceback
+
+def run(context):
+    ui = None
+    try:
+        app = adsk.core.Application.get()
+        ui  = app.userInterface
+
+        product = app.activeProduct
+        design = adsk.fusion.Design.cast(product)
+
+        rootComp = design.rootComponent
+        features = rootComp.features
+
+        <span style="color:blue"># Access the unfold and refold feature collections</span>
+        unfoldFeatures = features.unfoldFeatures
+        refoldFeatures = features.refoldFeatures
+
+        if unfoldFeatures.count == 0:
+            ui.messageBox('No unfold features found in this design.')
+
+        unfold = unfoldFeatures.item(0)
+
+        <span style="color:blue"># Get the associated refold feature from the unfold</span>
+        refold = unfold.refoldFeature
+        if refold:
+            ui.messageBox(
+                f'Unfold "{unfold.name}" is associated with refold "{refold.name}".'
+            )
+        else:
+            ui.messageBox(
+                f'Unfold "{unfold.name}" has no associated refold feature.'
+            )
+
+        <span style="color:blue"># Get the associated unfold feature from the refold (reverse direction)</span>
+        if refoldFeatures.count &gt; 0:
+            refold = refoldFeatures.item(0)
+            unfold = refold.unfoldFeature
+            if unfold:
+                ui.messageBox(
+                    f'Refold "{refold.name}" is associated with unfold "{unfold.name}".'
+                )
+
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code">#include &lt;Core/CoreAll.h&gt;
+#include &lt;Fusion/FusionAll.h&gt;
+
+
+using namespace adsk::core;
+using namespace adsk::fusion;
+
+Ptr&lt;UserInterface&gt; ui;
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    Ptr&lt;Application&gt; app = Application::get();
+    if (!app)
+        return false;
+
+    ui = app-&gt;userInterface();
+    if (!ui)
+        return false;
+
+
+    Ptr&lt;Product&gt; product = app-&gt;activeProduct();
+    if (!product)
+        return false;
+
+    Ptr&lt;Design&gt; design = product;
+    if (!design)
+        return false;
+
+    Ptr&lt;Component&gt; rootComp = design-&gt;rootComponent();
+    if (!rootComp)
+        return false;
+
+    Ptr&lt;Features&gt; features = rootComp-&gt;features();
+    if (!features)
+        return false;
+
+    <span style="color:blue">// Access unfold and refold feature collections</span>
+    Ptr&lt;UnfoldFeatures&gt; unfoldFeatures = features-&gt;unfoldFeatures();
+
+    Ptr&lt;RefoldFeatures&gt; refoldFeatures = features-&gt;refoldFeatures();
+
+    if (unfoldFeatures-&gt;count() == 0)
+        return false;
+
+    Ptr&lt;UnfoldFeature&gt; unfoldFeature = unfoldFeatures-&gt;item(0);
+
+    <span style="color:blue">// Get the refold feature associated with this unfold.</span>
+    <span style="color:blue">// Returns null if the unfold has no associated refold (e.g. user hasn't refolded yet).</span>
+    Ptr&lt;RefoldFeature&gt; associatedRefold = unfoldFeature-&gt;refoldFeature();
+    if (associatedRefold)
+    {
+         std::string msg = "Unfold \"" + unfoldFeature-&gt;name() + "\" is paired with refold \"" +
+
+        <span style="color:blue">// Get the unfold feature from the refold (reverse direction).</span>
+        <span style="color:blue">// A refold always has an associated unfold.</span>
+        Ptr&lt;UnfoldFeature&gt; associatedUnfold = associatedRefold-&gt;unfoldFeature();
+    }
+
+    <span style="color:blue">// Iterate all refold features and get their associated unfold</span>
+    for (size_t i = 0; i &lt; refoldFeatures-&gt;count(); ++i)
+    {
+        Ptr&lt;RefoldFeature&gt; refold = refoldFeatures-&gt;item(i);
+
+        Ptr&lt;UnfoldFeature&gt; unfold = refold-&gt;unfoldFeature();
+    }
+
+
+    return true;
+}</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2026 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(Unfold%20and%20Refold%20Feature%20Sample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

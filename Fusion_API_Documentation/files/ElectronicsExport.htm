@@ -1,0 +1,123 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/ElectronicsExport_UM.htm#!">
+    <meta name="contextid" content="ElectronicsExport_UM">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="5/8/2026">
+    <meta name="user-comments" content="enable">
+    <meta name="description" content="">
+    <meta name="topicid" content="GUID-99FF590D-0522-71A4-49CC-4978B57A76FF">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Exporting Electronics Documents</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+	<link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"/>
+	<script type="text/javascript" src="/view/clientframework/client.js"><!--filler--></script>
+	<script>
+	  window.onload = function() {
+		copyrightElement = document.getElementById('CopyrightNotice');
+		copyrightElement.style.display = 'block';
+	  };
+	</script>
+</head>
+<body>
+<link rel="stylesheet" href="../Style/APIHelp.css">
+<link rel="stylesheet" href="../Style/prism.css">
+<script src="../Scripts/prism.js"><!--filler--></script>
+<style>
+	pre.line-numbers [aria-hidden=true]
+	{
+		display: block!important;
+	}
+</style>
+
+<h2 class="api">Exporting electronics documents</h2>
+<h3 class="api">Overview</h3>
+<p Class="api">The <strong><code>ElectronicsExportManager</code></strong> type is how you write the current Electronics document to disk in <strong>EAGLE 9.6.2</strong>-compatible formats. You do not create the manager yourself; you read the <strong><code>exportManager</code></strong> property from the product you already have:</p>
+<ul>
+<li><strong><code>Board.exportManager</code></strong></li>
+<li><strong><code>Schematic.exportManager</code></strong></li>
+<li><strong><code>Library.exportManager</code></strong></li>
+</ul>
+<p Class="api">The workflow matches other Fusion automation that uses an “input object” style API (similar in spirit to CAM post-processing where you <strong>create an input object</strong>, set fields, then <strong>run</strong> an operation):</p>
+<ol>
+<li>Call the <strong>create…ExportOptions</strong> factory that matches your product and desired file type.  </li>
+<li>Optionally adjust <strong><code>outputPath</code></strong> (or other supported options in a future release).  </li>
+<li>Call <strong><code>execute(options)</code></strong> and check the <strong>boolean</strong> return value.</li>
+</ol>
+<p Class="api">You should already have a <strong><code>Board</code></strong>, <strong><code>Schematic</code></strong>, or <strong><code>Library</code></strong> reference from <strong><code>Application.activeProduct</code></strong> and <strong><code>cast</code></strong>, as described in <a href="./ElectronicsIntro_UM.htm">Introduction to the Electronics API</a>.</p>
+<h3 class="api">Supported export formats</h3>
+<p Class="api">Use the factory that matches both the <strong>product</strong> and the <strong>file extension</strong> you need. If you call a factory on the wrong <strong><code>exportManager</code></strong>, the method returns <strong><code>None</code></strong> (<code>null</code> in C++).</p>
+<table>
+<thead>
+<tr>
+<th>Product</th>
+<th>Factory on <code>exportManager</code></th>
+<th>File</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>Board</code></strong></td>
+<td><code>createEagleBrdExportOptions(outputPath)</code></td>
+<td>EAGLE 9.6.2 <strong><code>.brd</code></strong></td>
+</tr>
+<tr>
+<td><strong><code>Schematic</code></strong></td>
+<td><code>createEagleSchExportOptions(outputPath)</code></td>
+<td>EAGLE 9.6.2 <strong><code>.sch</code></strong></td>
+</tr>
+<tr>
+<td><strong><code>Library</code></strong></td>
+<td><code>createEagleLbrExportOptions(outputPath)</code></td>
+<td>EAGLE 9.6.2 <strong><code>.lbr</code></strong></td>
+</tr>
+</tbody>
+</table>
+<p Class="api"><code>outputPath</code> is the full path, including the file name and extension, for example <code>C:/export/design.brd</code>.</p>
+<h3 class="api">ElectronicsExportOptions</h3>
+<p Class="api"><strong><code>ElectronicsExportOptions</code></strong> is the object returned by the <strong><code>createEagle*ExportOptions</code></strong> methods. For this API surface, the important member is <strong><code>outputPath</code></strong>: you can read it or assign a new string if you need to change the destination after you create the options object and before you call <strong><code>execute</code></strong>.</p>
+<h3 class="api">Example: board (<code>.brd</code>)</h3>
+<p Class="api">The example below is a full script fragment: it obtains the <strong>application</strong>, casts <strong><code>activeProduct</code></strong> to a <strong>board</strong>, then creates <strong><code>.brd</code></strong> options, optionally overrides the path, and calls <strong><code>execute</code></strong>. Always test the return value of <strong><code>execute</code></strong>.</p>
+<pre><code class="language-python"># Get a board from the active product, then export to .brd.
+import adsk.core
+import adsk.electron
+
+app = adsk.core.Application.get()
+board = adsk.electron.Board.cast(app.activeProduct)
+if board is None:
+    return
+
+# Build options for a board export.
+options = board.exportManager.createEagleBrdExportOptions(&quot;C:/export/design.brd&quot;)
+if options is None:
+    return  # wrong product or internal failure
+# options.outputPath = &quot;C:/export/alternate.brd&quot;  # optional: change before execute
+
+# Run the export and check the result.
+if not board.exportManager.execute(options):
+    app.log(&quot;Board export failed.&quot;)
+</code></pre>
+<br />
+<br />
+<div id="CopyrightNotice" style="display:none;">
+  <hr />
+  <table width="100%" style="font-size:15">
+	<tr>
+	  <td align="left">
+		&copy; Copyright 2026 Autodesk, Inc.
+	  </td>
+	  <td align="right">
+		<a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(ElectronicsExport)">Comment on this page.</a>
+	  </td>
+	</tr>
+  </table>
+</div></body>
+</html>

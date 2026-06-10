@@ -217,6 +217,11 @@ public:
     /// 
     core::Ptr<AdditiveFEADeckBuilderCard> createMechanicalRelaxationCard(int isUsed, int maxIterations, double scalingFactor);
 
+    /// Creates the *INPU card.
+    /// type : The type of analysis for which the warp input is being created, e.g. Mechanical or Thermal.
+    /// 
+    core::Ptr<AdditiveFEADeckBuilderCard> createWarpInputCard(AdditiveFEAAnalysisType type);
+
     ADSK_CAM_ADDITIVEFEADECKBUILDER_API static const char* classType();
     ADSK_CAM_ADDITIVEFEADECKBUILDER_API const char* objectType() const override;
     ADSK_CAM_ADDITIVEFEADECKBUILDER_API void* queryInterface(const char* id) const override;
@@ -249,6 +254,7 @@ private:
     virtual AdditiveFEADeckBuilderCard* createRelaxationCard_raw(int iterations, double scalingFactor) = 0;
     virtual AdditiveFEADeckBuilderCard* createSolutionParametersCard_raw(int maxIterations, double tolerance, double maxResidual) = 0;
     virtual AdditiveFEADeckBuilderCard* createMechanicalRelaxationCard_raw(int isUsed, int maxIterations, double scalingFactor) = 0;
+    virtual AdditiveFEADeckBuilderCard* createWarpInputCard_raw(AdditiveFEAAnalysisType type) = 0;
 };
 
 // Inline wrappers
@@ -408,6 +414,12 @@ inline core::Ptr<AdditiveFEADeckBuilderCard> AdditiveFEADeckBuilder::createSolut
 inline core::Ptr<AdditiveFEADeckBuilderCard> AdditiveFEADeckBuilder::createMechanicalRelaxationCard(int isUsed, int maxIterations, double scalingFactor)
 {
     core::Ptr<AdditiveFEADeckBuilderCard> res = createMechanicalRelaxationCard_raw(isUsed, maxIterations, scalingFactor);
+    return res;
+}
+
+inline core::Ptr<AdditiveFEADeckBuilderCard> AdditiveFEADeckBuilder::createWarpInputCard(AdditiveFEAAnalysisType type)
+{
+    core::Ptr<AdditiveFEADeckBuilderCard> res = createWarpInputCard_raw(type);
     return res;
 }
 }// namespace cam

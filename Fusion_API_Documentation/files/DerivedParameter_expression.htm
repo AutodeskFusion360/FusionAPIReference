@@ -39,7 +39,7 @@
           Parent Object: <a href="DerivedParameter.htm">DerivedParameter</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Fusion/DerivedParameter.h&gt;<h2 class="api">
           Description
         </h2>
-    <p class="api">Gets and sets the expression used to calculate the value of the parameter. This is the equivalent of the "Expression" column in the Parameters dialog. Numeric parameters can be defined by a simple expression like "6.25", which will be interpreted based on whatever the default units are for the document. For example, if the units are set to millimeters, the value will be 6.25 mm; if the units are inches, it will be 6.25 inches. The expression can also contain the units so "6.25 in" will always be evaluated as inches regardless of the document units.<br/><br/> An expression can also contain references to other parameters and use equations. For example, the expression "Length / 2" is valid for a numeric parameter as long as there is a numeric parameter named "Length". Expressions can also be used for text parameters, such as concatenating two other text parameters. For example, if there are two existing text parameters named text1 and text2, the expression for another text parameter can be "text1 + text2". More complex equations can also be used with text parameters like "if (Length < 20 mm; 'Short'; 'Long')" where "Length" is a numeric parameter. The resulting string can be obtained using the textValue property.</p>
+    <p class="api">Gets and sets the expression used to calculate the value of the parameter. This is the equivalent of the "Expression" column in the Parameters dialog. Numeric parameters can be defined by a simple expression like "6.25", which will be interpreted based on whatever the default units are for the document. For example, if the units are set to millimeters, the value will be 6.25 mm; if the units are inches, it will be 6.25 inches. The expression can also contain the units so "6.25 in" will always be evaluated as inches regardless of the document units.<br/><br/> An expression can also contain references to other parameters and use equations. For example, the expression "Length / 2" is valid for a numeric parameter as long as there is a numeric parameter named "Length". Expressions can also be used for text parameters, such as concatenating two other text parameters. For example, if there are two existing text parameters named text1 and text2, the expression for another text parameter can be "text1 + text2". More complex equations can also be used with text parameters like "if (Length < 20 mm; 'Short'; 'Long')" where "Length" is a numeric parameter. The resulting string can be obtained using the textValue property.<br/><br/> When setting the expression of a text parameter to a literal string value, the string must be enclosed in single quotes (e.g. "'Hello Fusion'"). An unquoted value like "Hello Fusion" will fail to parse because the tokens are interpreted as symbols rather than literal text. If you want to set a plain string value without managing quotes, use the textValue property instead.</p>
     <h2 class="api">
           Syntax
         </h2>
@@ -55,7 +55,7 @@
       </div>
       <div id="C++" class="api-code">
         <table class="api-code">
-          <td>"derivedParameter_var" is a variable referencing a DerivedParameter object.<br /><code><pre class="api-code">#include &lt;Fusion/Fusion/DerivedParameter.h&gt;<br /><br /><span style="color:blue">// Get the value of the property.</span><br />string propertyValue = derivedParameter_var-&gt;<b>expression</b>();<br /><br /><span style="color:blue">// Set the value of the property, where value_var is a string.</span><br />bool returnValue = derivedParameter_var-&gt;<b>expression</b>(value_var);</pre></code></td>
+          <td>"derivedParameter_var" Is a variable referencing a DerivedParameter Object.<br /><code><pre Class="api-code">#include &lt;Fusion/Fusion/DerivedParameter.h&gt;<br /><br /><span style="color:blue">// Get the value of the property.</span><br />string propertyValue = derivedParameter_var-&gt;<b>expression</b>();<br /><br /><span style="color:blue">// Set the value of the property, where value_var is a string.</span><br />bool returnValue = derivedParameter_var-&gt;<b>expression</b>(value_var);</pre></code></td>
         </table>
       </div>
     </div>
@@ -71,7 +71,7 @@
           <td align="left">
                 © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(DerivedParameter.expression%20Function%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(DerivedParameter.expression%20Function%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

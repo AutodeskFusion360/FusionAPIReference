@@ -1,0 +1,202 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/UserCoordinateSystemUse.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="UserCoordinateSystemUse_Sample">
+    <meta name="description" content="Creates an I-Bream on a User Coordinate System Sample">
+    <meta name="topicid" content="GUID-2b70e721-e943-451f-9304-a35904388ceb">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Creates an I-Bream on a User Coordinate System</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Creates an I-Bream on a User Coordinate System</h1>
+    <h2 class="api">
+          Description
+        </h2>Demonstrates the use of an existing user coordinate system to create geometry dependent on it.<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">"""This file acts as the main module for this script."""
+
+import traceback
+import adsk.core
+import adsk.fusion
+
+<span style="color:blue"># Initialize the global variables for the Application and UserInterface objects.</span>
+app = adsk.core.Application.get()
+ui  = app.userInterface
+
+
+def run(_context: str):
+    """This function is called by Fusion when the script is run."""
+
+    try:
+        des = adsk.fusion.Design.cast(app.activeProduct)
+        if not des:
+            ui.messageBox('No active Fusion design', 'Error')
+            return
+
+        <span style="color:blue"># Have a user coordinate system (UCS) selected.</span>
+        sel = ui.selectEntity('Select a UCS.', 'UserCoordinateSystems')
+        if not sel: 
+            return
+
+        ucs: adsk.fusion.UserCoordinateSystem = sel.entity <span style="color:blue"># type: ignore</span>
+
+        <span style="color:blue"># Have the user specify the length of the I-Beam.</span>
+        (length, isCancelled) = ui.inputBox('Enter the length of the I-Beam.', 'I-Beam Length', '20')
+        if isCancelled:
+            return
+
+        <span style="color:blue"># Get the component the UCS is in.</span>
+        comp = ucs.parentComponent
+
+        <span style="color:blue"># Create a sketch on the XY plane of the UCS.</span>
+        sk = comp.sketches.add(ucs.xYConstructionPlane)
+
+        <span style="color:blue"># Draw an I-beam shape in the sketch. The sizes are hard-coded here.</span>
+        lines = sk.sketchCurves.sketchLines
+        width = 10
+        height = 15
+        thickness = 2
+
+        <span style="color:blue"># Calculate points for an I-Beam centered on the origin of the sketch.</span>
+        p1 = adsk.core.Point3D.create(-width/2, height/2, 0)
+        p2 = adsk.core.Point3D.create(width/2, height/2, 0)
+        p3 = adsk.core.Point3D.create(width/2, height/2 - thickness, 0) 
+        p4 = adsk.core.Point3D.create(thickness/2, height/2 - thickness, 0)
+        p5 = adsk.core.Point3D.create(thickness/2, thickness - height/2, 0)
+        p6 = adsk.core.Point3D.create(width/2, thickness - height/2, 0)
+        p7 = adsk.core.Point3D.create(width/2, -height/2, 0)
+        p8 = adsk.core.Point3D.create(-width/2, -height/2, 0)
+        p9 = adsk.core.Point3D.create(-width/2, -height/2 + thickness, 0)
+        p10 = adsk.core.Point3D.create(-thickness/2, -height/2 + thickness, 0)
+        p11 = adsk.core.Point3D.create(-thickness/2, height/2 - thickness, 0)
+        p12 = adsk.core.Point3D.create(-width/2, height/2 - thickness, 0)
+
+        <span style="color:blue"># Draw the lines of the I-Beam shape.</span>
+        l1 = lines.addByTwoPoints(p1, p2)
+        l2 = lines.addByTwoPoints(l1.endSketchPoint, p3)
+        l3 = lines.addByTwoPoints(l2.endSketchPoint, p4)
+        l4 = lines.addByTwoPoints(l3.endSketchPoint, p5)
+        l5 = lines.addByTwoPoints(l4.endSketchPoint, p6)
+        l6 = lines.addByTwoPoints(l5.endSketchPoint, p7)
+        l7 = lines.addByTwoPoints(l6.endSketchPoint, p8)
+        l8 = lines.addByTwoPoints(l7.endSketchPoint, p9)
+        l9 = lines.addByTwoPoints(l8.endSketchPoint, p10)
+        l10 = lines.addByTwoPoints(l9.endSketchPoint, p11)
+        l11 = lines.addByTwoPoints(l10.endSketchPoint, p12)
+        l12 = lines.addByTwoPoints(l11.endSketchPoint, l1.startSketchPoint)
+
+        <span style="color:blue"># Add a "center" line to use to position the center of the I-Beam.</span>
+        midline = lines.addByTwoPoints(adsk.core.Point3D.create(-thickness/2, 0, 0), adsk.core.Point3D.create(thickness/2, 0, 0))
+        midline.isConstruction = True
+
+        <span style="color:blue"># Constraint the line to the midpoints of the two long vertical lines.</span>
+        constraints = sk.geometricConstraints
+        constraints.addMidPoint(midline.startSketchPoint, l10)
+        constraints.addMidPoint(midline.endSketchPoint, l4)
+
+        <span style="color:blue"># Add geometric constraints to fully constrain the sketch.</span>
+        constraints.addHorizontal(l1)
+        constraints.addPerpendicular(l12, l1)
+        constraints.addPerpendicular(l3, l4)
+        constraints.addPerpendicular(l4, l5)
+        constraints.addPerpendicular(l5, l6)
+        constraints.addEqual(l1, l7)
+        constraints.addEqual(l12, l2)
+        constraints.addEqual(l12, l6)
+        constraints.addEqual(l11, l3)
+        constraints.addCollinear(l3, l11)
+        constraints.addCollinear(l5, l9)
+        constraints.addCollinear(l2, l6)
+        constraints.addCollinear(l8, l12)
+        constraints.addParallel(l4, l10)
+
+        dims = sk.sketchDimensions
+        dims.addOffsetDimension(l1, l7, adsk.core.Point3D.create(-width/2 - 1.5, 0, 0))
+        dims.addOffsetDimension(l12, l2, adsk.core.Point3D.create(0, height/2 + 1, 0))
+        offsetDim = dims.addOffsetDimension(l4, l10, adsk.core.Point3D.create(0, 0, 0))
+        distDim = dims.addDistanceDimension(l12.startSketchPoint, l12.endSketchPoint, adsk.fusion.DimensionOrientations.VerticalDimensionOrientation, adsk.core.Point3D.create(-width/2 - 1, height/2 + 1, 0)) <span style="color:blue"># type: ignore</span>
+        offsetDim.parameter.expression = distDim.parameter.name
+
+        <span style="color:blue"># Project the origin point of the UCS to the sketch and constrain the centerpoint of the midline to it.</span>
+        result = sk.project2([ucs.originConstructionPoint], True)
+        originPnt: adsk.fusion.SketchPoint = result[0] <span style="color:blue"># type: ignore</span>
+        constraints.addMidPoint(originPnt, midline)
+
+        <span style="color:blue"># Get the profile defined by the I-Beam sketch and extrude it to create a 3D body.  </span>
+        prof = sk.profiles.item(0)
+        extInput = comp.features.extrudeFeatures.addSimple(prof, adsk.core.ValueInput.createByString(length), adsk.fusion.FeatureOperations.NewBodyFeatureOperation) <span style="color:blue"># type: ignore</span>
+
+    except:  <span style="color:blue">#pylint:disable=bare-except</span>
+        <span style="color:blue"># Write the error message to the TEXT COMMANDS window.</span>
+        app.log(f'Failed:\n{traceback.format_exc()}')</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2026 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(UserCoordinateSystemUse%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

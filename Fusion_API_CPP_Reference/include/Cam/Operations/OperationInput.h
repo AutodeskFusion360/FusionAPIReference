@@ -70,10 +70,6 @@ public:
     AutomaticGenerationModes generationMode() const;
     bool generationMode(AutomaticGenerationModes value);
 
-    /// !!!!! Warning !!!!!
-    /// ! This is in preview state; please see the help for more info
-    /// !!!!! Warning !!!!!
-    /// 
     /// Optionally specify the reference tool used by the operation. The ToolLibraries allows the access to Local and Fusion tools.
     /// Setting the tool is only possible on operation strategies that support reference tools, an exception is thrown otherwise.
     /// Likewise null is returned if the operation strategy does not support reference tools.

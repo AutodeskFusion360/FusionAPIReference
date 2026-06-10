@@ -99,10 +99,6 @@ public:
     int volumetricDataResolution() const;
     bool volumetricDataResolution(int value);
 
-    /// !!!!! Warning !!!!!
-    /// ! This is in preview state; please see the help for more info
-    /// !!!!! Warning !!!!!
-    /// 
     /// Flag toggling if slice data which has been generated beforehand by generating the entire setup or the additive toolpath object should be included in the exported file.
     /// The default value is false.
     bool isSliceDataIncluded() const;

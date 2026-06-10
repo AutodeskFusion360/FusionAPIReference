@@ -1,0 +1,353 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/ConvertToSheetMetalSample.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="ConvertToSheetMetalSample_Sample">
+    <meta name="description" content="Convert To Sheet Metal Sample Sample">
+    <meta name="topicid" content="GUID-5edb7eb9-02a9-4765-b93c-c8f561e8d419">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Convert To Sheet Metal Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Convert To Sheet Metal Sample</h1>
+    <h2 class="api">
+          Description
+        </h2>Demonstrates finding the thickness of a body at a face and converting a BRepBody to sheet metal.<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">import adsk.core, adsk.fusion, traceback
+
+def run(context):
+    ui = None
+    try:
+        app = adsk.core.Application.get()
+        ui = app.userInterface
+
+        <span style="color:blue"># Create a document.</span>
+        doc = app.documents.add(adsk.core.DocumentTypes.FusionDesignDocumentType)
+
+        product = app.activeProduct
+        design = adsk.fusion.Design.cast(product)
+
+        <span style="color:blue"># Get the root component of the active design.</span>
+        rootComp = design.rootComponent
+
+        <span style="color:blue"># Create a sketch rectangle on the YZ plane.</span>
+        sketch = rootComp.sketches.add(rootComp.yZConstructionPlane)
+        sketchLines = sketch.sketchCurves.sketchLines
+        startPoint = adsk.core.Point3D.create(0, 0, 0)
+        endPoint = adsk.core.Point3D.create(5.0, 5.0, 0)
+        sketchLines.addTwoPointRectangle(startPoint, endPoint)
+
+        <span style="color:blue"># Extrude the profile as a solid slab (0.25 cm = 2.5 mm thick).</span>
+        prof = sketch.profiles.item(0)
+        extrudes = rootComp.features.extrudeFeatures
+        extInput = extrudes.createInput(prof, adsk.fusion.FeatureOperations.NewBodyFeatureOperation)
+        distance = adsk.core.ValueInput.createByReal(0.25)
+        extInput.setDistanceExtent(False, distance)
+        extInput.isSolid = True
+        ext = extrudes.add(extInput)
+
+        <span style="color:blue"># Get the body.</span>
+        body = ext.bodies.item(0)
+
+        <span style="color:blue"># Find the largest planar face on the body.</span>
+        largestFace = None
+        maxArea = 0.0
+        for face in body.faces:
+            if face.geometry.surfaceType == adsk.core.SurfaceTypes.PlaneSurfaceType:
+                if face.area &gt; maxArea:
+                    maxArea = face.area
+                    largestFace = face
+
+        <span style="color:blue"># Find the thickness of the body at the selected face.</span>
+        found, thickness = body.findThicknessAtFace(largestFace)
+
+        <span style="color:blue"># Search the library sheet metal rules for one whose thickness</span>
+        <span style="color:blue"># matches the detected body thickness.</span>
+        libraryRules = design.librarySheetMetalRules
+        matchingRule = None
+        for i in range(libraryRules.count):
+            rule = libraryRules.item(i)
+            ruleThickness = rule.thickness.value
+            if abs(ruleThickness - thickness) &lt; 1e-6:
+                matchingRule = rule
+                break
+
+        <span style="color:blue"># If no matching rule was found, fall back to the first available rule.</span>
+        if matchingRule is None:
+            matchingRule = libraryRules.item(0)
+
+        <span style="color:blue"># Convert the body to sheet metal using the chosen rule.</span>
+        body.convertToSheetMetal(largestFace, matchingRule)
+
+    except:
+        if ui:
+            ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))</pre>
+      </div>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code">#include &lt;Core/Application/Application.h&gt;
+#include &lt;Core/Application/Document.h&gt;
+#include &lt;Core/Application/Documents.h&gt;
+#include &lt;Core/Application/Product.h&gt;
+#include &lt;Core/Application/ValueInput.h&gt;
+#include &lt;Core/Geometry/Point3D.h&gt;
+#include &lt;Core/Geometry/Surface.h&gt;
+#include &lt;Core/UserInterface/UserInterface.h&gt;
+
+#include &lt;Fusion/BRep/BRepBodies.h&gt;
+#include &lt;Fusion/BRep/BRepBody.h&gt;
+#include &lt;Fusion/BRep/BRepFace.h&gt;
+#include &lt;Fusion/BRep/BRepFaces.h&gt;
+#include &lt;Fusion/Components/Component.h&gt;
+#include &lt;Fusion/Construction/ConstructionPlane.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeature.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeatureInput.h&gt;
+#include &lt;Fusion/Features/ExtrudeFeatures.h&gt;
+#include &lt;Fusion/Features/Features.h&gt;
+#include &lt;Fusion/Fusion/Design.h&gt;
+#include &lt;Fusion/SheetMetal/SheetMetalRule.h&gt;
+#include &lt;Fusion/SheetMetal/SheetMetalRules.h&gt;
+#include &lt;Fusion/SheetMetal/SheetMetalValue.h&gt;
+#include &lt;Fusion/Sketch/Profile.h&gt;
+#include &lt;Fusion/Sketch/Profiles.h&gt;
+#include &lt;Fusion/Sketch/Sketch.h&gt;
+#include &lt;Fusion/Sketch/SketchCurves.h&gt;
+#include &lt;Fusion/Sketch/SketchLines.h&gt;
+#include &lt;Fusion/Sketch/Sketches.h&gt;
+
+#include &lt;cmath&gt;
+
+
+using namespace adsk::core;
+using namespace adsk::fusion;
+
+Ptr&lt;UserInterface&gt; ui;
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    Ptr&lt;Application&gt; app = Application::get();
+    if (!app)
+        return false;
+
+    ui = app-&gt;userInterface();
+    if (!ui)
+        return false;
+
+    Ptr&lt;Documents&gt; docs = app-&gt;documents();
+    if (!docs)
+        return false;
+
+    <span style="color:blue">// Create a document.</span>
+    Ptr&lt;Document&gt; doc = docs-&gt;add(DocumentTypes::FusionDesignDocumentType);
+    if (!doc)
+        return false;
+
+    Ptr&lt;Product&gt; product = app-&gt;activeProduct();
+    if (!product)
+        return false;
+
+    Ptr&lt;Design&gt; design = product;
+    if (!design)
+        return false;
+
+    <span style="color:blue">// Get the root component of the active design.</span>
+    Ptr&lt;Component&gt; rootComp = design-&gt;rootComponent();
+    if (!rootComp)
+        return false;
+
+    <span style="color:blue">// Create a sketch rectangle on the YZ plane.</span>
+    Ptr&lt;Sketches&gt; sketches = rootComp-&gt;sketches();
+    if (!sketches)
+        return false;
+
+    Ptr&lt;ConstructionPlane&gt; yzPlane = rootComp-&gt;yZConstructionPlane();
+    if (!yzPlane)
+        return false;
+
+    Ptr&lt;Sketch&gt; sketch = sketches-&gt;add(yzPlane);
+    if (!sketch)
+        return false;
+
+    Ptr&lt;SketchCurves&gt; sketchCurves = sketch-&gt;sketchCurves();
+    if (!sketchCurves)
+        return false;
+
+    Ptr&lt;SketchLines&gt; sketchLines = sketchCurves-&gt;sketchLines();
+    if (!sketchLines)
+        return false;
+
+    Ptr&lt;Point3D&gt; startPoint = Point3D::create(0, 0, 0);
+    Ptr&lt;Point3D&gt; endPoint = Point3D::create(5.0, 5.0, 0);
+    sketchLines-&gt;addTwoPointRectangle(startPoint, endPoint);
+
+    <span style="color:blue">// Get the profile.</span>
+    Ptr&lt;Profiles&gt; profs = sketch-&gt;profiles();
+    if (!profs)
+        return false;
+
+    Ptr&lt;Profile&gt; prof = profs-&gt;item(0);
+    if (!prof)
+        return false;
+
+    <span style="color:blue">// Extrude the profile as a solid slab (0.25 cm = 2.5 mm thick).</span>
+    Ptr&lt;Features&gt; feats = rootComp-&gt;features();
+    if (!feats)
+        return false;
+
+    Ptr&lt;ExtrudeFeatures&gt; extrudes = feats-&gt;extrudeFeatures();
+    if (!extrudes)
+        return false;
+
+    Ptr&lt;ExtrudeFeatureInput&gt; extInput = extrudes-&gt;createInput(prof, FeatureOperations::NewBodyFeatureOperation);
+
+    Ptr&lt;ValueInput&gt; distance = ValueInput::createByReal(0.25);
+    extInput-&gt;setDistanceExtent(false, distance);
+    extInput-&gt;isSolid(true);
+
+    Ptr&lt;ExtrudeFeature&gt; ext = extrudes-&gt;add(extInput);
+    if (!ext)
+        return false;
+
+    <span style="color:blue">// Get the body.</span>
+    Ptr&lt;BRepBodies&gt; bodies = ext-&gt;bodies();
+    if (!bodies)
+        return false;
+
+    Ptr&lt;BRepBody&gt; body = bodies-&gt;item(0);
+    if (!body)
+        return false;
+
+    <span style="color:blue">// Find the largest planar face on the body.</span>
+    Ptr&lt;BRepFaces&gt; faces = body-&gt;faces();
+    if (!faces)
+        return false;
+
+    Ptr&lt;BRepFace&gt; largestFace;
+    double maxArea = 0.0;
+    for (size_t i = 0; i &lt; faces-&gt;count(); ++i)
+    {
+        Ptr&lt;BRepFace&gt; face = faces-&gt;item(i);
+        if (!face)
+            continue;
+        Ptr&lt;Surface&gt; geom = face-&gt;geometry();
+        if (geom && geom-&gt;surfaceType() == SurfaceTypes::PlaneSurfaceType)
+        {
+            double faceArea = face-&gt;area();
+            if (faceArea &gt; maxArea)
+            {
+                maxArea = faceArea;
+                largestFace = face;
+            }
+        }
+    }
+
+    <span style="color:blue">// Find the thickness of the body at the selected face.</span>
+    double thickness = 0.0;
+    bool found = body-&gt;findThicknessAtFace(largestFace, thickness);
+
+    <span style="color:blue">// Search the library sheet metal rules for one whose thickness</span>
+    <span style="color:blue">// matches the detected body thickness.</span>
+    Ptr&lt;SheetMetalRules&gt; libraryRules = design-&gt;librarySheetMetalRules();
+    if (!libraryRules)
+        return false;
+
+    Ptr&lt;SheetMetalRule&gt; matchingRule;
+    for (size_t i = 0; i &lt; libraryRules-&gt;count(); ++i)
+    {
+        Ptr&lt;SheetMetalRule&gt; rule = libraryRules-&gt;item(i);
+        if (!rule)
+            continue;
+        Ptr&lt;SheetMetalRuleValue&gt; ruleThickness = rule-&gt;thickness();
+        if (ruleThickness && std::fabs(ruleThickness-&gt;value() - thickness) &lt; 1e-6)
+        {
+            matchingRule = rule;
+            break;
+        }
+    }
+
+    <span style="color:blue">// If no matching rule was found, fall back to the first available rule.</span>
+    if (!matchingRule)
+        matchingRule = libraryRules-&gt;item(0);
+
+    <span style="color:blue">// Convert the body to sheet metal using the chosen rule.</span>
+    bool success = body-&gt;convertToSheetMetal(largestFace, matchingRule);
+
+
+    return true;
+}</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2026 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(ConvertToSheetMetalSample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -34,10 +34,6 @@ namespace adsk { namespace fusion {
 
 namespace adsk { namespace fusion {
 
-/// !!!!! Warning !!!!!
-/// ! This is in preview state; please see the help for more info
-/// !!!!! Warning !!!!!
-/// 
 /// Collection that provides access to all of the existing hem features in a design and supports the ability to create new hem features.
 class HemFeatures : public core::Base {
 public:

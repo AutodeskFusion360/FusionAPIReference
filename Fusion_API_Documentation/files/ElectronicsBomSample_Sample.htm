@@ -1,0 +1,436 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/ElectronicsBomSample.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="ElectronicsBomSample_Sample">
+    <meta name="description" content="Electronics Bill of Materials Sample Sample">
+    <meta name="topicid" content="GUID-8E1D5B42-9C0A-4F8E-B3D7-1A2E4F6C8B0D">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Electronics Bill of Materials Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Electronics Bill of Materials Sample</h1>
+    <h2 class="api">
+          Description
+        </h2><p>Prints a bill of materials to the Text Commands window: lines that share the same value, footprint, MPN, and manufacturer are merged—Part lists all designators (sorted), Qty is the count. Indented Value, Footprint, MPN, and Manufacturer lines follow. Empty value, MPN, or manufacturer shows (missing). Omits parts without a package, without a linked 3D footprint name, or not populated for the default assembly variant.</p><h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#C++">C++</a></li>
+        <li><a href="#Python">Python</a></li>
+      </ul>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code">#include &lt;Core/CoreAll.h&gt;
+#include &lt;Electron/ElectronAll.h&gt;
+
+#include &lt;algorithm&gt;
+#include &lt;cctype&gt;
+#include &lt;map&gt;
+#include &lt;sstream&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+
+using namespace adsk::core;
+using namespace adsk::electron;
+
+namespace
+{
+
+std::string trimOrMissing(const std::string& s)
+{
+    size_t a = 0;
+    size_t b = s.size();
+    while (a &lt; b && std::isspace(static_cast&lt;unsigned char&gt;(s[a])))
+        ++a;
+    while (b &gt; a && std::isspace(static_cast&lt;unsigned char&gt;(s[b - 1])))
+        --b;
+    if (a &gt;= b)
+        return "(missing)";
+    return s.substr(a, b - a);
+}
+
+std::string stripWhitespace(const std::string& s)
+{
+    size_t a = 0;
+    size_t b = s.size();
+    while (a &lt; b && std::isspace(static_cast&lt;unsigned char&gt;(s[a])))
+        ++a;
+    while (b &gt; a && std::isspace(static_cast&lt;unsigned char&gt;(s[b - 1])))
+        --b;
+    if (a &gt;= b)
+        return "";
+    return s.substr(a, b - a);
+}
+
+std::string bomKey(const std::string& val, const std::string& fp, const std::string& mpn, const std::string& mfr)
+{
+    return val + "\x1f" + fp + "\x1f" + mpn + "\x1f" + mfr;
+}
+
+} <span style="color:blue">// namespace</span>
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    Ptr&lt;Application&gt; app = Application::get();
+    if (!app)
+        return false;
+
+    Ptr&lt;Product&gt; product = app-&gt;activeProduct();
+    if (!product)
+    {
+        app-&gt;log("No active product.");
+        return false;
+    }
+
+    Ptr&lt;Schematic&gt; schematic = product-&gt;cast&lt;Schematic&gt;();
+    if (!schematic)
+    {
+        app-&gt;log("Active product is not a schematic.");
+        return false;
+    }
+
+    Ptr&lt;Parts&gt; parts = schematic-&gt;parts();
+    if (!parts)
+    {
+        app-&gt;log("No parts collection.");
+        return false;
+    }
+
+    struct Group
+    {
+        std::vector&lt;std::string&gt; names;
+        std::string val;
+        std::string fp;
+        std::string mpn;
+        std::string mfr;
+    };
+    std::map&lt;std::string, Group&gt; groups;
+    std::vector&lt;std::string&gt; keyOrder;
+
+    for (size_t i = 0; i &lt; parts-&gt;count(); ++i)
+    {
+        Ptr&lt;Part&gt; p = parts-&gt;item(i);
+        if (!p)
+            continue;
+        Ptr&lt;Device&gt; dev = p-&gt;device();
+        if (!dev)
+            continue;
+        Ptr&lt;Package&gt; pkg = dev-&gt;package();
+        if (!pkg)
+            continue;
+
+        Ptr&lt;Package3d&gt; p3 = p-&gt;package3d();
+        if (!p3)
+            continue;
+        std::string fp = stripWhitespace(p3-&gt;name());
+        if (fp.empty())
+            continue;
+
+        bool popOk = true;
+        Ptr&lt;VariantDefs&gt; vdefs = schematic-&gt;variantDefs();
+        if (vdefs && vdefs-&gt;count() &gt; 0)
+        {
+            Ptr&lt;Variants&gt; pv = p-&gt;variants();
+            if (!pv || pv-&gt;count() == 0)
+            {
+                popOk = true;
+            }
+            else
+            {
+                const std::string want;
+                popOk = false;
+                const size_t vn = pv-&gt;count();
+                for (size_t j = 0; j &lt; vn; ++j)
+                {
+                    Ptr&lt;Variant&gt; v = pv-&gt;item(j);
+                    if (!v)
+                        continue;
+                    Ptr&lt;VariantDef&gt; vdef = v-&gt;variantDef();
+                    if (!vdef)
+                        continue;
+                    const std::string nameStr = stripWhitespace(vdef-&gt;name());
+                    if (nameStr == want)
+                    {
+                        popOk = v-&gt;populate();
+                        break;
+                    }
+                }
+                if (!popOk && want.empty() && vn &gt; 0)
+                {
+                    Ptr&lt;Variant&gt; v0 = pv-&gt;item(0);
+                    if (v0)
+                        popOk = v0-&gt;populate();
+                }
+            }
+        }
+        if (!popOk)
+            continue;
+
+        std::string mpn;
+        std::string mfr;
+        Ptr&lt;EcadAttributes&gt; attrs = p-&gt;attributes();
+        if (attrs)
+        {
+            const size_t ac = attrs-&gt;count();
+            for (size_t j = 0; j &lt; ac; ++j)
+            {
+                Ptr&lt;EcadAttribute&gt; a = attrs-&gt;item(j);
+                if (!a)
+                    continue;
+                std::string an = stripWhitespace(a-&gt;name());
+                if (an.empty())
+                    continue;
+                std::string up = an;
+                for (char& c : up)
+                    c = static_cast&lt;char&gt;(std::toupper(static_cast&lt;unsigned char&gt;(c)));
+                if (up == "MPN")
+                    mpn = a-&gt;value();
+                else if (up == "MF")
+                    mfr = a-&gt;value();
+            }
+        }
+
+        std::string nm = trimOrMissing(p-&gt;name());
+        std::string val = trimOrMissing(p-&gt;value());
+        std::string mpnDisp = trimOrMissing(mpn);
+        std::string mfrDisp = trimOrMissing(mfr);
+        const std::string k = bomKey(val, fp, mpnDisp, mfrDisp);
+        if (groups.find(k) == groups.end())
+        {
+            keyOrder.push_back(k);
+            Group g;
+            g.val = val;
+            g.fp = fp;
+            g.mpn = mpnDisp;
+            g.mfr = mfrDisp;
+            g.names.push_back(nm);
+            groups[k] = std::move(g);
+        }
+        else
+        {
+            groups[k].names.push_back(nm);
+        }
+    }
+
+    app-&gt;log("Bill of materials");
+
+    const char* ind = "    ";
+    bool first = true;
+    for (const std::string& k : keyOrder)
+    {
+        Group& g = groups[k];
+        std::sort(g.names.begin(), g.names.end());
+        std::ostringstream partLine;
+        partLine &lt;&lt; "Part: ";
+        for (size_t i = 0; i &lt; g.names.size(); ++i)
+        {
+            if (i &gt; 0)
+                partLine &lt;&lt; ", ";
+            partLine &lt;&lt; g.names[i];
+        }
+        std::ostringstream qtyLine;
+        qtyLine &lt;&lt; ind &lt;&lt; "Qty: " &lt;&lt; g.names.size();
+
+        if (!first)
+            app-&gt;log(" ");
+        first = false;
+        app-&gt;log(partLine.str().c_str());
+        app-&gt;log((std::string(ind) + "Value: " + g.val).c_str());
+        app-&gt;log(qtyLine.str().c_str());
+        app-&gt;log((std::string(ind) + "Footprint: " + g.fp).c_str());
+        app-&gt;log((std::string(ind) + "MPN: " + g.mpn).c_str());
+        app-&gt;log((std::string(ind) + "Manufacturer: " + g.mfr).c_str());
+    }
+
+    return true;
+}</pre>
+      </div>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code"><span style="color:blue"># For this sample script to run, the active Fusion document must have an electronics schematic as the active product.</span>
+<span style="color:blue">#</span>
+<span style="color:blue"># Prints simple bill of material grouped by Value, Footprint, MPN, and Manufacturer: designators listed on Part, Qty is the group size.</span>
+<span style="color:blue"># Empty name, value, MPN, or manufacturer is (missing). Skips parts without package, 3D footprint name, or not populated for default variant.</span>
+
+import adsk.core, adsk.electron, traceback
+
+def _or_missing(s):
+    if s is None:
+        return "(missing)"
+    t = str(s).strip()
+    return t if t else "(missing)"
+
+
+def run(context):
+    app = adsk.core.Application.get()
+    try:
+        sch = adsk.electron.Schematic.cast(app.activeProduct)
+        if sch is None:
+            app.log("Active product is not a schematic.")
+            return
+
+        parts = sch.parts
+        if parts is None:
+            app.log("No parts collection.")
+            return
+
+        <span style="color:blue"># key -&gt; list of designator strings, preserve first-seen key order</span>
+        groups = {}
+        order = []
+
+        for i in range(parts.count):
+            p = parts.item(i)
+            if p is None or p.device is None or p.device.package is None:
+                continue
+
+            p3 = p.package3d
+            if p3 is None:
+                continue
+            fp = p3.name
+            if fp is None or str(fp).strip() == "":
+                continue
+
+            pop_ok = True
+            try:
+                vdefs = sch.variantDefs
+                if vdefs is not None and vdefs.count &gt; 0:
+                    pv = p.variants
+                    if pv is None or pv.count == 0:
+                        pop_ok = True
+                    else:
+                        want = ""
+                        pop_ok = False
+                        for j in range(pv.count):
+                            v = pv.item(j)
+                            if v is None:
+                                continue
+                            vd = v.variantDef
+                            if vd is None:
+                                continue
+                            nm = vd.name
+                            s = "" if nm is None else str(nm)
+                            if s == want:
+                                pop_ok = bool(v.populate)
+                                break
+                        if not pop_ok and want == "" and pv.count &gt; 0:
+                            v0 = pv.item(0)
+                            if v0 is not None:
+                                pop_ok = bool(v0.populate)
+            except Exception:
+                pop_ok = True
+            if not pop_ok:
+                continue
+
+            mpn = ""
+            mfr = ""
+            attrs = p.attributes
+            if attrs is not None:
+                for j in range(attrs.count):
+                    a = attrs.item(j)
+                    if a is None or a.name is None:
+                        continue
+                    up = str(a.name).upper()
+                    if up == "MPN":
+                        mpn = str(a.value) if a.value is not None else ""
+                    elif up == "MF":
+                        mfr = str(a.value) if a.value is not None else ""
+
+            nm = _or_missing(p.name)
+            val = _or_missing(p.value)
+            fp_s = str(fp).strip()
+            mpn_d = _or_missing(mpn)
+            mfr_d = _or_missing(mfr)
+            key = (val, fp_s, mpn_d, mfr_d)
+            if key not in groups:
+                groups[key] = []
+                order.append(key)
+            groups[key].append(nm)
+
+        app.log("Bill of materials")
+        ind = "    "
+        first = True
+        for key in order:
+            names = sorted(groups[key])
+            val, fp_s, mpn_d, mfr_d = key
+            qty = str(len(names))
+            if not first:
+                app.log(" ")
+            first = False
+            app.log("Part: " + ", ".join(names))
+            app.log(ind + "Value: " + val)
+            app.log(ind + "Qty: " + qty)
+            app.log(ind + "Footprint: " + fp_s)
+            app.log(ind + "MPN: " + mpn_d)
+            app.log(ind + "Manufacturer: " + mfr_d)
+
+    except Exception:
+        app.log(traceback.format_exc() or "Error")</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2026 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(ElectronicsBomSample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

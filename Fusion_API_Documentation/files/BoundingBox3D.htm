@@ -36,7 +36,9 @@
               Derived from: <a href="Base.htm">Base</a> Object
             <br>Defined in namespace "adsk::core" and the header file is &lt;Core/Geometry/BoundingBox3D.h&gt;<h2 class="api">
           Description
-        </h2>Transient object that represents a 3D bounding box. It defines a rectangular box whose sides are parallel to the model space x, y, and z planes. Because of the fixed orientation of the box, it can be fully defined by two points at opposing corners; the min and max points. This object is usually used to provide a rough approximation of the volume in space that an entity occupies. It also provides convenience functions such as expanding, checking containment, and getting dimensions when working with the bounding box data. They are created statically using the create method of the BoundingBox3D class.<h2 class="api">
+        </h2>
+    <p class="api">Transient object that represents a 3D bounding box. It defines a rectangular box whose sides are parallel to the model space x, y, and z planes. Because of the fixed orientation of the box, it can be fully defined by two points at opposing corners; the min and max points. This object is usually used to provide a rough approximation of the volume in space that an entity occupies. It also provides convenience functions such as expanding, checking containment, and getting dimensions when working with the bounding box data. They are created statically using the create method of the BoundingBox3D class.</p>
+    <h2 class="api">
             Methods
           </h2>
     <Table class="api-list">
@@ -50,31 +52,45 @@
       </tr>
       <tr>
         <td class="api-list"><a href="BoundingBox3D_classType.htm">classType</a></td>
-        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+        <td class="api-list">
+          <p class="api">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="BoundingBox3D_combine.htm">combine</a></td>
-        <td class="api-list">Combines this bounding box with the input bounding box. If the input bounding box extends outside this bounding box then this bounding box will be extended to encompass both of the original bounding boxes.</td>
+        <td class="api-list">
+          <p class="api">Combines this bounding box with the input bounding box. If the input bounding box extends outside this bounding box then this bounding box will be extended to encompass both of the original bounding boxes.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="BoundingBox3D_contains.htm">contains</a></td>
-        <td class="api-list">Determines if the specified point is within the bound box.</td>
+        <td class="api-list">
+          <p class="api">Determines if the specified point is within the bound box.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="BoundingBox3D_copy.htm">copy</a></td>
-        <td class="api-list">Creates an independent copy of this bounding box.</td>
+        <td class="api-list">
+          <p class="api">Creates an independent copy of this bounding box.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="BoundingBox3D_create.htm">create</a></td>
-        <td class="api-list">Creates a transient bounding box object. This object is created statically using the BoundingBox3D.create method.</td>
+        <td class="api-list">
+          <p class="api">Creates a transient bounding box object. This object is created statically using the BoundingBox3D.create method.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="BoundingBox3D_expand.htm">expand</a></td>
-        <td class="api-list">Expands the size of bounding box to include the specified point.</td>
+        <td class="api-list">
+          <p class="api">Expands the size of bounding box to include the specified point.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="BoundingBox3D_intersects.htm">intersects</a></td>
-        <td class="api-list">Determines if the two bounding boxes intersect.</td>
+        <td class="api-list">
+          <p class="api">Determines if the two bounding boxes intersect.</p>
+        </td>
       </tr>
     </Table>
     <h2 class="api">
@@ -135,7 +151,7 @@
           <td align="left">
                 © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(BoundingBox3D%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(BoundingBox3D%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

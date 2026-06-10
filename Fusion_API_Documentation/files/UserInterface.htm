@@ -36,7 +36,9 @@
               Derived from: <a href="Base.htm">Base</a> Object
             <br>Defined in namespace "adsk::core" and the header file is &lt;Core/UserInterface/UserInterface.h&gt;<h2 class="api">
           Description
-        </h2>Provides access to the user-interface related objects and functionality.<h2 class="api">
+        </h2>
+    <p class="api">Provides access to the user-interface related objects and functionality.</p>
+    <h2 class="api">
             Methods
           </h2>
     <Table class="api-list">
@@ -50,59 +52,87 @@
       </tr>
       <tr>
         <td class="api-list"><a href="UserInterface_classType.htm">classType</a></td>
-        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+        <td class="api-list">
+          <p class="api">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="UserInterface_createCloudFileDialog.htm">createCloudFileDialog</a></td>
-        <td class="api-list">Creates a new CloudFileDialog object which provides the ability to show a file selection dialog to the user that allows them to choose a file from Fusion web client.</td>
+        <td class="api-list">
+          <p class="api">Creates a new CloudFileDialog object which provides the ability to show a file selection dialog to the user that allows them to choose a file from Fusion web client.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="UserInterface_createCloudFolderDialog.htm">createCloudFolderDialog</a></td>
-        <td class="api-list">Creates a new CloudFolderDialog object which provides the ability to show a folder selection dialog to the user that allows them to choose a folder from Fusion web client.</td>
+        <td class="api-list">
+          <p class="api">Creates a new CloudFolderDialog object which provides the ability to show a folder selection dialog to the user that allows them to choose a folder from Fusion web client.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="UserInterface_createFileDialog.htm">createFileDialog</a></td>
-        <td class="api-list">Creates a new FileDialog object which provides the ability to show a standard file selection dialog to the user.</td>
+        <td class="api-list">
+          <p class="api">Creates a new FileDialog object which provides the ability to show a standard file selection dialog to the user.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="UserInterface_createFolderDialog.htm">createFolderDialog</a></td>
-        <td class="api-list">Creates a new FolderDialog object which provides the ability to show a standard folder selection dialog to the user.</td>
+        <td class="api-list">
+          <p class="api">Creates a new FolderDialog object which provides the ability to show a standard folder selection dialog to the user.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="UserInterface_createProgressDialog.htm">createProgressDialog</a></td>
-        <td class="api-list">Creates a new ProgressDialog object that you can use to display and control a progress dialog.</td>
+        <td class="api-list">
+          <p class="api">Creates a new ProgressDialog object that you can use to display and control a progress dialog.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="UserInterface_getText.htm">getText</a></td>
-        <td class="api-list">Get the localized text for a specific application text string. The strings used by Fusion are stored in localized XML files that are installed with Fusion. On Windows, you can find them here:<br/><br/> %LocalAppData%\Autodesk\webdeploy\production\VERSION_CODE\StringTable<br/><br/> And on Mac, you can find them here:<br/><br/> ~/Library/Application Support/Autodesk/webdeploy/production/VERSION_CODE/Autodesk Fusion.app/Contents/Libraries/Neutron/StringTable<br/><br/> There is a folder for each language that Fusion supports, and the strings for that language are defined in files within that folder. Fusion will use the language specified by the user in their preferences.</td>
+        <td class="api-list">
+          <p class="api">Get the localized text for a specific application text string. The strings used by Fusion are stored in localized XML files that are installed with Fusion. On Windows, you can find them here:<br/><br/> %LocalAppData%\Autodesk\webdeploy\production\VERSION_CODE\StringTable<br/><br/> And on Mac, you can find them here:<br/><br/> ~/Library/Application Support/Autodesk/webdeploy/production/VERSION_CODE/Autodesk Fusion.app/Contents/Libraries/Neutron/StringTable<br/><br/> There is a folder for each language that Fusion supports, and the strings for that language are defined in files within that folder. Fusion will use the language specified by the user in their preferences.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="UserInterface_inputBox.htm">inputBox</a></td>
-        <td class="api-list">Displays a modal dialog to get string input from the user.</td>
+        <td class="api-list">
+          <p class="api">Displays a modal dialog to get string input from the user.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="UserInterface_messageBox.htm">messageBox</a></td>
-        <td class="api-list">Display a modal message box with the provided text.</td>
+        <td class="api-list">
+          <p class="api">Display a modal message box with the provided text.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="UserInterface_selectEntity.htm">selectEntity</a></td>
-        <td class="api-list">Supports the selection of a single entity. This provides a simple way to prompt the user for for a selection in a script. If you need more control over the selection a command should be created and a SelectionCommandInput used.</td>
+        <td class="api-list">
+          <p class="api">Supports the selection of a single entity. This provides a simple way to prompt the user for for a selection in a script. If you need more control over the selection a command should be created and a SelectionCommandInput used.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="UserInterface_terminateActiveCommand.htm">terminateActiveCommand</a></td>
-        <td class="api-list">Method that causes the currently active (running) command to be terminated</td>
+        <td class="api-list">
+          <p class="api">Method that causes the currently active (running) command to be terminated</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="UserInterface_toolbarPanelsByProductType.htm">toolbarPanelsByProductType</a></td>
-        <td class="api-list">Gets all of the toolbar panels associated with the specified product.</td>
+        <td class="api-list">
+          <p class="api">Gets all of the toolbar panels associated with the specified product.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="UserInterface_toolbarTabsByProductType.htm">toolbarTabsByProductType</a></td>
-        <td class="api-list">Gets all of the toolbar tabs associated with the specified product.</td>
+        <td class="api-list">
+          <p class="api">Gets all of the toolbar tabs associated with the specified product.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="UserInterface_workspacesByProductType.htm">workspacesByProductType</a></td>
-        <td class="api-list">Returns all of the workspaces associated with the specified product.</td>
+        <td class="api-list">
+          <p class="api">Returns all of the workspaces associated with the specified product.</p>
+        </td>
       </tr>
     </Table>
     <h2 class="api">
@@ -328,7 +358,7 @@
           <td align="left">
                 © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(UserInterface%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(UserInterface%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

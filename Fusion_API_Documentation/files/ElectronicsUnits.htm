@@ -1,0 +1,135 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/ElectronicsUnits_UM.htm#!">
+    <meta name="contextid" content="ElectronicsUnits_UM">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="5/8/2026">
+    <meta name="user-comments" content="enable">
+    <meta name="description" content="">
+    <meta name="topicid" content="GUID-42087FA4-34B6-6B99-1F51-A7FE7ABF1105">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Unit conversion</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+	<link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"/>
+	<script type="text/javascript" src="/view/clientframework/client.js"><!--filler--></script>
+	<script>
+	  window.onload = function() {
+		copyrightElement = document.getElementById('CopyrightNotice');
+		copyrightElement.style.display = 'block';
+	  };
+	</script>
+</head>
+<body>
+<link rel="stylesheet" href="../Style/APIHelp.css">
+<link rel="stylesheet" href="../Style/prism.css">
+<script src="../Scripts/prism.js"><!--filler--></script>
+<style>
+	pre.line-numbers [aria-hidden=true]
+	{
+		display: block!important;
+	}
+</style>
+
+<h2 class="api">Unit conversion</h2>
+<h3 class="api">Internal units</h3>
+<p Class="api">Coordinate and size values in the Electronics API are stored as <strong>signed integers</strong> in <strong>internal editor units</strong>. This is the same convention as <strong>User Language Programs (ULP)</strong>. The resolution is <strong>1/320000 mm</strong> per count (0.003125 µm per count). Any property in the class reference that says “internal units” uses this representation.</p>
+<p Class="api">Static methods on <strong><code>adsk.electron.Units</code></strong> convert from those integers to <strong>millimeters</strong>, <strong>inches</strong>, <strong>mils</strong>, or <strong>microns</strong> for display, reporting, or math in physical units.</p>
+<h3 class="api">The Units class</h3>
+<p Class="api">All listed methods are <strong>static</strong>. In Python they take a single <strong><code>int</code></strong> and return a <strong><code>float</code></strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Argument</th>
+<th>Returns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Units.u2mm(n)</code></td>
+<td>Value in internal units</td>
+<td>Millimeters</td>
+</tr>
+<tr>
+<td><code>Units.u2inch(n)</code></td>
+<td>Value in internal units</td>
+<td>Inches</td>
+</tr>
+<tr>
+<td><code>Units.u2mil(n)</code></td>
+<td>Value in internal units</td>
+<td>Mils (1/1000 inch)</td>
+</tr>
+<tr>
+<td><code>Units.u2mic(n)</code></td>
+<td>Value in internal units</td>
+<td>Microns (1/1000 mm)</td>
+</tr>
+</tbody>
+</table>
+<h3 class="api">Example: board element positions in millimeters</h3>
+<p Class="api">The example below assumes the <strong>active product</strong> is a <strong><code>Board</code></strong>, as described in <a href="./ElectronicsIntro_UM.htm">Introduction to the Electronics API</a>. It iterates <strong>elements</strong> (placed components), converts <strong>x</strong> and <strong>y</strong> from internal units to millimeters, and writes a short line to the log for each one.</p>
+<pre><code class="language-python"># Get the application and cast the active product to a board.
+import adsk.core
+import adsk.electron
+
+app = adsk.core.Application.get()
+board = adsk.electron.Board.cast(app.activeProduct)
+if board is None:
+    app.log(&quot;Active product is not a board.&quot;)
+    return
+
+# Walk all placed elements and print origin in mm.
+for i in range(int(board.elements.count)):
+    el = board.elements.item(i)
+    x_mm = adsk.electron.Units.u2mm(el.x)
+    y_mm = adsk.electron.Units.u2mm(el.y)
+    app.log(&quot;{0}: ({1:.3f}, {2:.3f}) mm&quot;.format(el.name, x_mm, y_mm))
+</code></pre>
+<h3 class="api">Example: sheet area in millimeters</h3>
+<p Class="api">The example below reads the first sheet’s bounding <strong>area</strong> and converts all four corners to millimeters.</p>
+<pre><code class="language-python"># Cast to a schematic and read the first sheet's area box.
+import adsk.core
+import adsk.electron
+
+app = adsk.core.Application.get()
+schematic = adsk.electron.Schematic.cast(app.activeProduct)
+if schematic is None or int(schematic.sheets.count) &lt; 1:
+    return
+
+sheet = schematic.sheets.item(0)
+a = sheet.area
+x1 = adsk.electron.Units.u2mm(a.x1)
+y1 = adsk.electron.Units.u2mm(a.y1)
+x2 = adsk.electron.Units.u2mm(a.x2)
+y2 = adsk.electron.Units.u2mm(a.y2)
+app.log(
+    &quot;Sheet {0} mm bounds: ({1:.3f}, {2:.3f}) – ({3:.3f}, {4:.3f})&quot;.format(
+        sheet.name, x1, y1, x2, y2
+    )
+)
+</code></pre>
+<br />
+<br />
+<div id="CopyrightNotice" style="display:none;">
+  <hr />
+  <table width="100%" style="font-size:15">
+	<tr>
+	  <td align="left">
+		&copy; Copyright 2026 Autodesk, Inc.
+	  </td>
+	  <td align="right">
+		<a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(ElectronicsUnits)">Comment on this page.</a>
+	  </td>
+	</tr>
+  </table>
+</div></body>
+</html>

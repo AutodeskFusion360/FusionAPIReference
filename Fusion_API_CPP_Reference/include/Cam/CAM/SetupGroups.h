@@ -31,6 +31,7 @@
 namespace adsk { namespace cam {
     class Setup;
     class SetupGroup;
+    class SetupGroupInput;
 }}
 
 namespace adsk { namespace cam {
@@ -53,21 +54,40 @@ public:
 
     /// Returns the Setup Group with the specified name.
     /// name : The name (as it appears in the browser) of the operation.
-    /// Returns the specified setup or null in the case where there is no setup group with the specified name.
+    /// Returns the specified Setup Group, or null in the case where there is no Setup Group with the specified name.
     core::Ptr<SetupGroup> itemByName(const std::string& name) const;
 
     /// Returns the Setup Group with the specified operation id.
     /// id : The id of the operation.
-    /// Returns the specified Setup Group or null in the case where there is no setup group with the specified operation id.
+    /// Returns the specified Setup Group, or null in the case where there is no Setup Group with the specified operation id.
     core::Ptr<SetupGroup> itemByOperationId(int id) const;
 
+    /// !!!!! Warning !!!!!
+    /// ! This has been retired; please see the help for more info
+    /// !!!!! Warning !!!!!
+    /// 
+    /// !!!!! Warning !!!!!
+    /// ! This is hidden and not officially supported
+    /// !!!!! Warning !!!!!
+    /// 
     /// Creates a new SetupGroup.
+    /// Not Implemented.
     /// name : The name of the group. This must be unique with respect to other
     /// SetupGroup objects in the CAM object.
     /// setups : An array of setups to add to the group. This can be an empty array to create
     /// an empty group and you can add setups to it later.
     /// Returns the newly created SetupGroup or null in the case of failure.
     core::Ptr<SetupGroup> add(const std::string& name, const std::vector<core::Ptr<Setup>>& setups);
+
+    /// Creates a new SetupGroupInput object that is used to specify the input needed to create a new Setup Group.
+    /// type : The type specifies the type of the Setup Group that should be created.
+    /// Returns new SetupGroupInput object.
+    core::Ptr<SetupGroupInput> createInput(OperationTypes type);
+
+    /// Creates a new SetupGroup.
+    /// input : The input holds all the information needed to create a valid Setup Group.
+    /// Returns the newly created Setup Group instance.
+    core::Ptr<SetupGroup> addGroup(const core::Ptr<SetupGroupInput>& input);
 
     typedef SetupGroup iterable_type;
     template <class OutputIterator> void copyTo(OutputIterator result);
@@ -85,6 +105,8 @@ private:
     virtual SetupGroup* itemByName_raw(const char* name) const = 0;
     virtual SetupGroup* itemByOperationId_raw(int id) const = 0;
     virtual SetupGroup* add_raw(const char* name, Setup** setups, size_t setups_size) = 0;
+    virtual SetupGroupInput* createInput_raw(OperationTypes type) = 0;
+    virtual SetupGroup* addGroup_raw(SetupGroupInput* input) = 0;
 };
 
 // Inline wrappers
@@ -121,6 +143,18 @@ inline core::Ptr<SetupGroup> SetupGroups::add(const std::string& name, const std
 
     core::Ptr<SetupGroup> res = add_raw(name.c_str(), setups_, setups.size());
     delete[] setups_;
+    return res;
+}
+
+inline core::Ptr<SetupGroupInput> SetupGroups::createInput(OperationTypes type)
+{
+    core::Ptr<SetupGroupInput> res = createInput_raw(type);
+    return res;
+}
+
+inline core::Ptr<SetupGroup> SetupGroups::addGroup(const core::Ptr<SetupGroupInput>& input)
+{
+    core::Ptr<SetupGroup> res = addGroup_raw(input.get());
     return res;
 }
 

@@ -1,0 +1,173 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/Error.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="28/04/2026">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="Error">
+    <meta name="description" content="Error Object">
+    <meta name="topicid" content="GUID-F1C05530-0CFF-4360-BD53-5B417FEAA0CE">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>Error Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Error Object <img src="../images/TestTubeLarge.png" alt="Preview"></h1>
+              Derived from: <a href="Base.htm">Base</a> Object
+            <br>Defined in namespace "adsk::electron" and the header file is &lt;Electron/Errors/Error.h&gt;<p class="api-preview"><img src="../images/TestTubeSmall.png" alt="Preview">This functionality is provided as a preview
+				of intended future API capabilities. You are encouraged to use it and report any problems or suggestions using the
+				<a href="https://forums.autodesk.com/t5/fusion-360-api-and-scripts/bd-p/22">Fusion API and Scripts</a> forum.<br><br>
+	
+                Because this is a preview of future functionality, there is the possibility that it will change, which will possibly
+		        break any existing programs that use this functionality. Because of that, you should never deliver any programs that use
+		        any preview capabilities. For a distributed program, you should wait until it has moved from preview to released state.
+		    </p>
+    <h2 class="api">
+          Description
+        </h2>
+    <p class="api">Single design rule check (DRC) or electrical rule check (ERC) error.</p>
+    <h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Error_classType.htm">classType</a></td>
+        <td class="api-list">
+          <p class="api">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</p>
+        </td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Error_code.htm">code</a></td>
+        <td class="api-list">Numeric identifier for the rule or check that was violated (ERC/DRC error code).</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Error_description.htm">description</a></td>
+        <td class="api-list">Human-readable message describing this error.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Error_errorType.htm">errorType</a></td>
+        <td class="api-list">Severity or category of this error (warning, failure, consistency, or airwire).</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Error_id.htm">id</a></td>
+        <td class="api-list">Zero-based index of this error within the errors collection.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Error_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Error_layer.htm">layer</a></td>
+        <td class="api-list">Layer number (1-based) where the error occurs; 0 for ERC errors.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Error_moduleName.htm">moduleName</a></td>
+        <td class="api-list">Name of the schematic module (sheet or symbol) where the error occurs; empty for DRC.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Error_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Error_s1.htm">s1</a></td>
+        <td class="api-list">First string parameter substituted into the error message template (e.g., part name, net name); empty for DRC.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Error_s2.htm">s2</a></td>
+        <td class="api-list">Second string parameter substituted into the error message template; empty for DRC.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Error_s3.htm">s3</a></td>
+        <td class="api-list">Third string parameter substituted into the error message template; empty for DRC.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Error_s4.htm">s4</a></td>
+        <td class="api-list">Fourth string parameter substituted into the error message template; empty for DRC.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Error_s5.htm">s5</a></td>
+        <td class="api-list">Fifth string parameter substituted into the error message template; empty for DRC.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Error_s6.htm">s6</a></td>
+        <td class="api-list">Sixth string parameter substituted into the error message template; empty for DRC.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Error_sheet.htm">sheet</a></td>
+        <td class="api-list">Sheet number where the error occurs; 0 for DRC.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Error_signature.htm">signature</a></td>
+        <td class="api-list">Unique signature string for this error (used for matching, e.g., when approving).</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Error_state.htm">state</a></td>
+        <td class="api-list">Approval status of this error (active, processed, or approved).</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Error_x.htm">x</a></td>
+        <td class="api-list">X coordinate of the error location, in internal units.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Error_y.htm">y</a></td>
+        <td class="api-list">Y coordinate of the error location, in internal units.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="Errors_item.htm">Errors.item</a><h2 class="api">
+            Version
+          </h2>
+        Introduced in version May 2026<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2026 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(Error%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

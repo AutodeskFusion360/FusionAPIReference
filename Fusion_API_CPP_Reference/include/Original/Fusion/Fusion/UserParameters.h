@@ -77,18 +77,29 @@ public:
     /// with the string "5", any unit type can be used and the result will be 5 of that unit.
     /// 
     /// If the "units" argument is "Text" then a text parameter will be created using the value provided as the expression.
+    /// For text parameters, the expression must be a valid string literal enclosed in single quotes (e.g. "'Hello Fusion'")
+    /// or it can be an expression that combines string literals with other text parameters
+    /// (e.g. "'Length: ' + lengthParam"). An unquoted value like "Hello Fusion" will fail to parse because the tokens
+    /// are interpreted as symbols rather than literal text. After the parameter has been created, you can use the
+    /// textValue property on the resulting Parameter object to get or set the plain string value without having to
+    /// manage the surrounding quotes yourself.
     /// 
     /// When using a ValueInput created using a string, it's the same as creating a parameter in the user-interface.
     /// You can specify any valid expression, i.e. "5", "5 in", "5 in / 2", "5 + Length", etc. and you can choose
     /// from many different types of units. The only requirement is that the units must match in type. For example,
     /// they must both be lengths, or they must both be angles.
     /// 
-    /// When creating a Boolean parameter, you should use the createByBoolean method of the ValueInput object.
+    /// Boolean ValueInput objects (created via ValueInput.createByBoolean) are not supported by UserParameters.add
+    /// and attempting to use one will fail. Boolean-like behavior can be approximated by creating a unitless numeric
+    /// parameter (with an empty string for the "units" argument) using the expressions "true" or "false", which are
+    /// evaluated as 1 and 0 respectively.
     /// units : The units to use for the value of the parameter. The use of any of the measurement units will result in the
     /// creation of a numeric parameter. The units specified must match the units specified (if any) in the ValueInput object.
     /// 
     /// To create a parameter with no units, you can specify an empty string as the units, which will also create a
-    /// numeric parameter. To create a text parameter, use "Text" as the unit type.
+    /// numeric parameter. To create a text parameter, use "Text" as the unit type; in this case the expression
+    /// supplied via the ValueInput must be a quoted string literal (see the "value" parameter description for
+    /// details). A Boolean ValueInput is not supported by this method.
     /// comment : The comment to display in the parameters dialog. Specify an empty string ("") for no comment
     /// Returns the newly created UserParameter or null if the creation failed.
     core::Ptr<UserParameter> add(const std::string& name, const core::Ptr<core::ValueInput>& value, const std::string& units, const std::string& comment);

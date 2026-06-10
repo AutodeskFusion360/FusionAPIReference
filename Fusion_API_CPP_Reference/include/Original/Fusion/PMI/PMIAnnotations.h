@@ -80,7 +80,7 @@ public:
     /// 
     /// This is useful for finding PMI that reference specific geometric features.
     /// entities : An array of core.Base objects that represent the geometric entities to search for associated PMI. These can be BRepFace,
-    /// BRepEdge or BRepVertex objects. The function will return the PMI that references any of these entities in their geometric associations.
+    /// BRepEdge, BRepVertex, or BRepBody objects. The function will return the PMI that references any of these entities in their geometric associations.
     /// 
     /// For example, a Diameter Dimension PMI associated with a cylindrical face, a Hole/Thread Note PMI associated with faces that define a hole feature,
     /// or a Leader Line Note PMI associated with an edge or vertex.

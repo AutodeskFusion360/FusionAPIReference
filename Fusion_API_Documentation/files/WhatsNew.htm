@@ -9,7 +9,7 @@
     <meta name="release" content="NA">
     <meta name="book" content="Developer">
     <meta name="component" content="Fusion-360-API">
-    <meta name="created" content="08/04/2026">
+    <meta name="created" content="28/05/2026">
     <meta name="user-comments" content="enable">
     <meta name="contextid" content="APIWhatsNew">
     <meta name="description" content="">
@@ -34,56 +34,78 @@
     <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
     <div class="body">
       <h1 class="api">
-          What's New For the April 2026 Release
+          What's New For the May 2026 Release
         </h1><h3 class="API">Enhancements</h3>
 <ol>
 <li>
-<p class="Normal"><b><mark>New Zero Doc State</mark></b><br>
-The behavior of Fusion has changed in this release so there is now a "Zero Doc" state. This means that Fusion can be running with no open document. This wasn't possible before, because if you had a single document open and closed it, Fusion would automatically create a new document. Now, if no document is open, the Home page is shown. This could impact some existing programs that expect an active document or active design to always be available. The <a href="Application_activeDocument.htm">activeDocument</a>, <a href="Application_activeProduct.htm">activeProduct</a>, and <a href="Application_activeViewport.htm">activeViewport</a> properties on the Application object now return null when no document is open. You'll need to test your scripts and add-ins to make sure they handle this new case correctly. 
+<p class="Normal"><b>Electronics API</b><br>
+Fusion Electronics now provides initial Python API support for accessing core electronics design data, enabling programmatic access to schematic, board, and library content through the existing Fusion API framework. This first step introduces read-only support in the Fusion API, but stay tuned for more!
+</p>
+<p class="Normal">
+<ul>
+<li><b>Access core electronics data</b> from schematic, board, and library documents.</li>
+<li><b>Traverse hierarchical design structures</b> programmatically.</li>
+<li>Begin building <b>automation and scripting workflows</b> for Electronics using Python instead of relying solely on manual operations or ULP-based approaches.</li>
+</ul>
 </p>
 </li>
 
 <li>
-<p class="Normal"><b>API Support for Product Manufacturing Information (PMI)</b><br>
-PMI is Product Manufacturing Information, such as 3D annotations, GD&T (geometric dimensions and tolerances), and other manufacturing information, which gets added to a 3D CAD model. Fusion supports importing files from other CAD applications that contain PMI and now also supports adding PMI information to models. The new API supports querying imported PMI, and creating and editing PMI data. There are a significant number of new objects and functions listed below to support this.</p>
+<p class="Normal"><b>New API Help Layout</b><br>
+With the addition of more and more API functionality across Fusion, it became necessary to reorganize the Reference Manual into different namespaces. This improves organization and makes each section smaller, so it's quicker to find what you're looking for.
+</p>
+
+<p class="Normal">
+The previous single-list layout did have the advantage of allowing you to use the browser's find functionality to search for a name. To preserve that capability, a new "Index" topic has been added that opens a page listing all objects, methods, and properties.
+</p>
+
+<div align="center"><img src="../images/NewHelp1.png" border=0 align="middle" alt="New help layout"></div>
+
+<p class="Normal">
+To reduce the depth of the table of contents, there are no longer separate "Object" and "Enum" folders. Instead, they have been combined directly under each namespace folder.
+</p>
+
+<div align="center"><img src="../images/NewHelp2.png" border=0 align="middle" alt="New help layout"></div>
+
 </li>
 
 <li>
-<p class="Normal"><b>Cloud Folder Dialog</b><br>
-The API supports displaying several different dialogs to allow the user to select files and folders. One dialog that was missing supports the selection of a cloud folder. This is needed when you need to save a new file to the user's chosen folder. The new <a href="CloudFolderDialog.htm">CloudFolderDialog</a> object supports this capability.</p>
-</li>
-
-<li>
-<p class="Normal"><b>API Support for Isoparametric Sketch Curves</b><br>
-The API supports the new IsoParametric sketch curves. Through the <a href="SketchCurves_sketchIsoparametricCurves.htm">SketchCurves.sketchIsoparametricCurves</a> property, you can access the new <a href="SketchIsoparametricCurves.htm">SketchIsoparametricCurves</a> collection object, which supports the ability to create new isoparametric sketch curves and access and edit existing isoparametric sketch curves.</p>
-</li>
-
-<li>
-<p class="Normal"><b>Compatibility Preferences</b><br>
-There is a new category of preferences in the Preferences dialog: Compatibility. These are exposed by the API through the <a href="CompatibilityPreferences.htm">CompatibilityPreferences</a> object, which is accessed through the <a href="Preferences_compatibilityPreferences.htm">Application.preferences.compatibilityPreferences</a> property.</p>
-</li>
-
-<li>
-<p class="Normal"><b>Enhanced Mesh Functionality</b><br>
-There are two significant enhancements related to mesh bodies. The first is the addition of the <a href="Occurrence_meshBodies.htm">meshBodies</a> property to the Occurrence object. This lets you get a mesh body in the context of the occurrence. This means that when you get the mesh body, you are getting a proxy of the body that is transformed to provide its current position with respect to the root coordinate system. The other enhancement is the addition of the <a href="MeshBody_silhouette.htm">MeshBody.silhouette</a> method that returns the silhouette of a mesh body with respect to a specified direction.
+<p class="Normal"><b>More Sheet Metal API</b><br>
+API support for additional sheet metal functionality has been added, and more is coming. You can now convert a body into a sheet metal part and create fold and unfold features.
 </p>
 </li>
 
 <li>
-<p class="Normal"><b>Enhancements to Document Versions</b><br>
-Changes have been happening related to versions and milestones. Some new API functionality has been added to provide access to these new concepts. A new <a href="FileOpenContext.htm">FileOpenContext</a> object has been added that lets you define additional information about a document and then use that context when opening a document to get the specific document and associated information that you want. In addition to the document context, there is also the new <a href="Document_canAdvanceToLatest.htm">Document.canAdvanceToLatest</a> property and the <a href="Document_advanceToLatest.htm">Document.advanceToLatest</a> method to update an open document to the latest.
+<p class="Normal"><b>Construction Plane on Curved Face</b><br>
+The API now supports creating a construction plane through the axis of a curved face using the <a href="ConstructionPlaneInput_setByAngleOnCurvedFace.htm">ConstructionPlaneInput.setByAngleOnCurvedFace</a> method.
 </p>
 </li>
 
 <li>
-<p class="Normal"><b>CAM Additive FEA</b><br>
-You'll notice many new objects in the list related to additive FEA. This is preview functionality related to FEA analysis of additive metal parts.
+<p class="Normal"><b>Support for User Coordinate Systems</b><br>
+The API now fully supports <a href="UserCoordinateSystems.htm">user coordinate systems</a>. You can create, query, and edit user coordinate systems.
 </p>
 </li>
 
 <li>
-<p class="Normal"><b><mark>API For the New Assembly Constraint Functionality is Still in Progress</mark></b><br>
-The July release began introducing some of the API for the new assembly constraint functionality. It is a preview feature, and since July, the functionality has been modified in Fusion, necessitating an API change. The changes are still ongoing, so nothing has changed in the November release. However, they will change in January, so if you start using this API, be aware that your existing code will need to be updated to function correctly. 
+<p class="Normal"><b>Find Meshes Along a Ray</b><br>
+A new API method, <a href="Component_findMeshUsingRay.htm">Component.findMeshUsingRay</a>, allows you to detect meshes intersecting a ray. This enables new automation scenarios for analysis and selection workflows.
+</p>
+
+<p class="Normal">
+The new <a href="MeshBody_calculateCollisionsWithRay.htm">MeshBody.calculateCollisionsWithRay</a> method lets you find all intersections between a ray and a specific mesh body.
+</p>
+</li>
+
+<li>
+<p class="Normal"><b>Specify Units for STL Export</b><br>
+You can now specify the desired units when exporting STL files. Previously, STL export always used the document units. The <code>STLExportOptions</code> object now supports the <a href="STLExportOptions_unitType.htm">STLExportOptions.unitType</a> property.
+</p>
+</li>
+
+<li>
+<p class="Normal"><b><mark>API for the New Assembly Constraint Functionality Is Still in Progress</mark></b><br>
+Portions of the API for the new assembly constraint functionality were previously added. Because this is preview functionality and the underlying Fusion functionality continues to evolve, we need to make changes to the API. If you begin using this API now, be aware that your existing code will likely need to be updated in future releases.
 </p>
 </li>
 </ol>
@@ -92,26 +114,25 @@ The July release began introducing some of the API for the new assembly constrai
 <ol>
 <li>
 <p class="Normal">
-A problem was reported with changing the extent type of an existing hole. It now works as expected.</p>
-</li>
-
-<li>
-<p class="Normal">
-There were some problems reported with text box command inputs, where they weren't displaying correctly with the new display themes. This is now fixed.</p>
-</li>
-
-<li>
-<p class="Normal">
-Some issues were found with the motion links API. It should all be working correctly now.</p>
+There was a problem with the timeline when using the API to change a hole to a tapped hole. This issue has been fixed.
+</p>
 </li>
 </ol>
 
 <h3 class="API">Custom Features</h3>
+
 <p class="Normal">
-	Custom Features is new functionality that is currently in preview. This release includes no new custom feature functionality, but we still encourage you to try it and let us know your thoughts. You can learn more about it in the <a href="CustomFeatures_UM.htm">Custom Feature</a> topic in the API User Manual. There are also two add-in samples referenced in that document that you can use to see the functionality.</p>
-<p class="Normal">
-	<mark>This functionality is provided as a preview of intended future API capabilities. You are encouraged to use it and report any problems or suggestions using the <a href="https://forums.autodesk.com/t5/fusion-api-and-scripts-forum/bd-p/fusion-api-scripts-forum-en">Fusion API and Scripts Forum</a>. However, because this previews future functionality, it may change, breaking any existing programs that use it. Therefore, you should never deliver programs that utilize any preview capabilities.</mark>
+Custom Features is new functionality that is currently in preview. This release does not include any new Custom Features functionality, but we still encourage you to try it and let us know your thoughts.
 </p>
+
+<p class="Normal">
+You can learn more in the <a href="CustomFeatures_UM.htm">Custom Feature</a> topic in the API User Manual. That document also references two add-in samples you can use to explore the functionality.
+</p>
+
+<p class="Normal">
+<mark>This functionality is provided as a preview of intended future API capabilities. You are encouraged to use it and report any problems or suggestions using the <a href="https://forums.autodesk.com/t5/fusion-api-and-scripts-forum/bd-p/fusion-api-scripts-forum-en">Fusion API and Scripts Forum</a>. However, because this functionality is still in preview, it may change and could break existing programs that depend on it. Therefore, you should avoid shipping production programs that rely on preview capabilities.</mark>
+</p>
+
 <br><h2 class="api">
           New Objects
         </h2>
@@ -125,220 +146,460 @@ Some issues were found with the motion links API. It should all be working corre
             </td>
         </tr>
         <tr>
-          <td class="api-list"><a href="AdditiveFEAConvection.htm">AdditiveFEAConvection</a></td>
-          <td class="api-list">Convection defines the temperature-dependent heat loss boundary condition according to Newton's law of cooling.</td>
+          <td class="api-list"><a href="AdditiveFEAUtility.htm">AdditiveFEAUtility</a></td>
+          <td class="api-list">AdditiveFEAUtility provides functionality for additive FEA simulation operations.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="AdditiveFEADeckBuilder.htm">AdditiveFEADeckBuilder</a></td>
-          <td class="api-list">The AdditiveFEADeckBuilder supplies methods to generate cards to be used for generating an FEA simulation result.</td>
+          <td class="api-list"><a href="AdditiveInterferenceAnalysisResult.htm">AdditiveInterferenceAnalysisResult</a></td>
+          <td class="api-list">Result of an additive interference analysis operation.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="AdditiveFEADeckBuilderCard.htm">AdditiveFEADeckBuilderCard</a></td>
-          <td class="api-list">An AdditiveFEADeckBuilderCard is a single card in an additive FEA simulation input file.</td>
+          <td class="api-list"><a href="Arc.htm">Arc</a></td>
+          <td class="api-list">Circular arc in a PCB board, schematic sheet, symbol, or package.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="AdditiveFEAOperation.htm">AdditiveFEAOperation</a></td>
-          <td class="api-list">The AdditiveFEAOperation represents a finite element analysis for metal additive manufacturing processes.  The inherited generateToolpath() method can only be called if the Autodesk Fusion Manufacturing Extension is active.</td>
+          <td class="api-list"><a href="Area.htm">Area</a></td>
+          <td class="api-list">Rectangular bounding region defined by corner coordinates.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="AdditiveFEAOperationInput.htm">AdditiveFEAOperationInput</a></td>
-          <td class="api-list"></td>
+          <td class="api-list"><a href="Board.htm">Board</a></td>
+          <td class="api-list">Represents a PCB in an electronics design. Provides access to elements, signals, layers, and design-rule checks.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="AdditiveFEASTLMap.htm">AdditiveFEASTLMap</a></td>
-          <td class="api-list">The AdditiveFEASTLMap defines the relationship of geometries in STL format to parts, supports, materials, PRM files, and volume fractions or solidities.</td>
+          <td class="api-list"><a href="Bus.htm">Bus</a></td>
+          <td class="api-list">Group of related nets in a schematic; wires can be drawn as a bus and named with a pattern to derive net names.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="AssemblyComponentGeometry.htm">AssemblyComponentGeometry</a></td>
-          <td class="api-list">Represents the 3D geometry and attachment points for a tool component (such as a tool holder or tool block).<br/><br/> AssemblyComponentGeometry provides the ability to define custom 3D geometry for tool components using STEP file data, along with joint origins that specify how the component attaches to other parts of the tool assembly (machine side and cutting side).</td>
+          <td class="api-list"><a href="Busses.htm">Busses</a></td>
+          <td class="api-list">The Busses collection provides access to all of the buses within a sheet or schematic.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="CAM3MFExportStructure.htm">CAM3MFExportStructure</a></td>
-          <td class="api-list">Options for the 3MF structure and naming conventions.</td>
+          <td class="api-list"><a href="Circle.htm">Circle</a></td>
+          <td class="api-list">Circle primitive drawn on a PCB board, schematic sheet, symbol, or package.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="CloudFolderDialog.htm">CloudFolderDialog</a></td>
-          <td class="api-list">Represents a cloud folder dialog, which is a dialog that is used to prompt the user to select a folder on the Fusion web client. It is created by using the UserInterface.createCloudFolderDialog method.</td>
+          <td class="api-list"><a href="Circles.htm">Circles</a></td>
+          <td class="api-list">The Circles collection provides access to all of the circles within a board, sheet, symbol, or package.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="CompatibilityPreferences.htm">CompatibilityPreferences</a></td>
-          <td class="api-list">The CompatibilityPreferences object provides access to compatibility and troubleshooting related preferences.</td>
+          <td class="api-list"><a href="Class.htm">Class</a></td>
+          <td class="api-list">Net class definition (design rules configuration); assigns trace width, drill, and other constraints.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="FileOpenContext.htm">FileOpenContext</a></td>
-          <td class="api-list">An object that represents context information for opening a file.</td>
+          <td class="api-list"><a href="Classes.htm">Classes</a></td>
+          <td class="api-list">The Classes collection provides access to all of the net class definitions within a schematic or board.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="IsoparametricCurveInput.htm">IsoparametricCurveInput</a></td>
-          <td class="api-list">The input object that defines the required input to create an isoparametric curve when using the SketchIsoparametricCurves.add method. This object is created using the SketchIsoparametricCurves.createInput method.</td>
+          <td class="api-list"><a href="ConstructionPlaneAtAngleOnCurvedFaceDefinition.htm">ConstructionPlaneAtAngleOnCurvedFaceDefinition</a></td>
+          <td class="api-list">ConstructionPlaneAtAngleOnCurvedFaceDefinition defines a ConstructionPlane by an angle around the axis inferred from a curved face.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="PMIAnnotation.htm">PMIAnnotation</a></td>
-          <td class="api-list">A Base class representing a PMI (Product Manufacturing Information) annotation in a component.<br/><br/> This can either be PMI that was imported alongside the model, or Fusion specific PMI.</td>
+          <td class="api-list"><a href="Contact.htm">Contact</a></td>
+          <td class="api-list">Contact point (pad or SMD) in a package that connects to a signal.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="PMIAnnotations.htm">PMIAnnotations</a></td>
-          <td class="api-list">Provides access to the all the PMI (Product Manufacturing Information) in a component.</td>
+          <td class="api-list"><a href="ContactRef.htm">ContactRef</a></td>
+          <td class="api-list">Reference connecting a signal to a pad or SMD on a placed component.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="PMICreatedAnnotation.htm">PMICreatedAnnotation</a></td>
-          <td class="api-list">A Base class representing a PMI created in Fusion.</td>
+          <td class="api-list"><a href="ContactRefs.htm">ContactRefs</a></td>
+          <td class="api-list">The ContactRefs collection provides access to all of the contact references within a signal.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="PMIDatumModifier.htm">PMIDatumModifier</a></td>
-          <td class="api-list">Represents a datum modifier used in PMI datum references. A datum modifier provides additional information about how a datum is applied.</td>
+          <td class="api-list"><a href="Contacts.htm">Contacts</a></td>
+          <td class="api-list">The Contacts collection provides access to all of the contacts (pads and SMDs) within a package.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="PMIDatumReference.htm">PMIDatumReference</a></td>
-          <td class="api-list">Represents a datum reference used in PMI geometric tolerances. A datum reference identifies a datum feature and includes any modifiers that apply to it.</td>
+          <td class="api-list"><a href="Device.htm">Device</a></td>
+          <td class="api-list">Package variant within a device set; combines a symbol configuration with a specific package.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="PMIDatumTarget.htm">PMIDatumTarget</a></td>
-          <td class="api-list">Represents a datum target belonging to an PMIImportedGDTDatum. A datum target is used to define a specific location on a PMI GDT Datum.</td>
+          <td class="api-list"><a href="Devices.htm">Devices</a></td>
+          <td class="api-list">The Devices collection provides access to all of the devices within a device set.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="PMIDisplaySettings.htm">PMIDisplaySettings</a></td>
-          <td class="api-list">Represents display settings related to the PMIAnnotation display. Includes information such as unit and formatting.</td>
+          <td class="api-list"><a href="DeviceSet.htm">DeviceSet</a></td>
+          <td class="api-list">Definition of a device set in a library. Groups devices with different packages but the same symbol and gate configuration.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="PMIGeometricValue.htm">PMIGeometricValue</a></td>
-          <td class="api-list">Represents a value that can be associated with a PMIAnnotation, such as a diameter value.<br/><br/> Includes information about the value, whether it is overriden and any associated tolerance.<br/><br/> This class has two main uses:<br/><br/> - to retrieve the values from a PMIAnnotation (e.g. PMIImportedDimension)<br/><br/> - to define input values in PMI creation input objects (e.g. PMIHoleThreadNoteInput)</td>
+          <td class="api-list"><a href="DeviceSets.htm">DeviceSets</a></td>
+          <td class="api-list">The DeviceSets collection provides access to all of the device sets within a library.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="PMIGeometricValueTolerance.htm">PMIGeometricValueTolerance</a></td>
-          <td class="api-list">Represents a tolerance value that can be associated with a PMIGeometricValue.</td>
+          <td class="api-list"><a href="Dimension.htm">Dimension</a></td>
+          <td class="api-list">Dimension annotation on a PCB board or schematic sheet that displays measured distances, angles, or radius.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="PMIHoleThreadNote.htm">PMIHoleThreadNote</a></td>
-          <td class="api-list">Defines a created PMI which includes data corresponding to Hole/Thread Note PMI. Provides access to information such as tolerances, thread information, and units.</td>
+          <td class="api-list"><a href="Dimensions.htm">Dimensions</a></td>
+          <td class="api-list">The Dimensions collection provides access to all of the dimensions within a board or sheet.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="PMIHoleThreadNoteInput.htm">PMIHoleThreadNoteInput</a></td>
-          <td class="api-list">A class that defines the input used to create a Hole/Thread Note PMI.</td>
+          <td class="api-list"><a href="EcadAttribute.htm">EcadAttribute</a></td>
+          <td class="api-list">Attribute (name-value pair) on an element, instance, or part.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="PMIHoleThreadNotes.htm">PMIHoleThreadNotes</a></td>
-          <td class="api-list">Provides access to the all the PMIHoleThreadNote objects in a component.</td>
+          <td class="api-list"><a href="EcadAttributes.htm">EcadAttributes</a></td>
+          <td class="api-list">The EcadAttributes collection provides access to all of the attributes within a parent object.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="PMIImportedDimension.htm">PMIImportedDimension</a></td>
-          <td class="api-list">Defines an imported PMI which includes data related to dimensions.</td>
+          <td class="api-list"><a href="EcadDesign.htm">EcadDesign</a></td>
+          <td class="api-list">Represents an electronics design that contains both schematic and board representations.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="PMIImportedDimensions.htm">PMIImportedDimensions</a></td>
-          <td class="api-list">Provides access to the all the PMIImportedDimension objects in a component.</td>
+          <td class="api-list"><a href="EcadDocument.htm">EcadDocument</a></td>
+          <td class="api-list">Base class for electronics design documents that can be opened in the application (design, schematic, board, library).</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="PMIImportedFolder.htm">PMIImportedFolder</a></td>
-          <td class="api-list">Defines a container of other PMI objects (including sub-folders).<br/><br/> A PMIAnnotations can contain multiple PMI of this type, and is typically used to group the PMI within a PMIAnnotations.</td>
+          <td class="api-list"><a href="EcadObject.htm">EcadObject</a></td>
+          <td class="api-list">Base class for all electronics design objects.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="PMIImportedFolders.htm">PMIImportedFolders</a></td>
-          <td class="api-list">Provides access to the all the PMIImportedFolder objects in a component.</td>
+          <td class="api-list"><a href="ElectronicsExportManager.htm">ElectronicsExportManager</a></td>
+          <td class="api-list">Manages export of an electronics document to various formats. Obtain an instance via the exportManager property on Board, Schematic, or Library.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="PMIImportedGDTDatum.htm">PMIImportedGDTDatum</a></td>
-          <td class="api-list">Defines an imported PMI which includes data related to a GDT Datum.</td>
+          <td class="api-list"><a href="ElectronicsExportOptions.htm">ElectronicsExportOptions</a></td>
+          <td class="api-list">Options that control how an electronics document is exported. Obtain an instance from one of the factory methods on ElectronicsExportManager (e.g. board.exportManager.createEagleBrdExportOptions).</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="PMIImportedGDTDatums.htm">PMIImportedGDTDatums</a></td>
-          <td class="api-list">Provides access to the all the PMIImportedGDTDatum objects in a component.</td>
+          <td class="api-list"><a href="ElectronManager.htm">ElectronManager</a></td>
+          <td class="api-list">The main Electronics singleton.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="PMIImportedGeometricTolerance.htm">PMIImportedGeometricTolerance</a></td>
-          <td class="api-list">Defines an imported PMI which includes data related to geometric tolerances.</td>
+          <td class="api-list"><a href="Element.htm">Element</a></td>
+          <td class="api-list">Placed component instance on a PCB.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="PMIImportedGeometricTolerances.htm">PMIImportedGeometricTolerances</a></td>
-          <td class="api-list">Provides access to the all the PMIImportedGeometricTolerance objects in a component.</td>
+          <td class="api-list"><a href="Elements.htm">Elements</a></td>
+          <td class="api-list">The Elements collection provides access to all of the elements within a board.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="PMIImportedGraphical.htm">PMIImportedGraphical</a></td>
-          <td class="api-list">Defines an imported PMI which only includes graphical data.</td>
+          <td class="api-list"><a href="Error.htm">Error</a></td>
+          <td class="api-list">Single design rule check (DRC) or electrical rule check (ERC) error.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="PMIImportedGraphicals.htm">PMIImportedGraphicals</a></td>
-          <td class="api-list">Provides access to the all the PMIImportedGraphical objects in a component.</td>
+          <td class="api-list"><a href="Errors.htm">Errors</a></td>
+          <td class="api-list">The Errors collection provides access to all of the DRC or ERC errors within a board or schematic.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="PMIImportedNote.htm">PMIImportedNote</a></td>
-          <td class="api-list">Defines an imported PMI note.</td>
+          <td class="api-list"><a href="Frame.htm">Frame</a></td>
+          <td class="api-list">Frame element (drawing border or title block) on a board or sheet.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="PMIImportedNotes.htm">PMIImportedNotes</a></td>
-          <td class="api-list">Provides access to the all the PMIImportedNote objects in a component.</td>
+          <td class="api-list"><a href="Frames.htm">Frames</a></td>
+          <td class="api-list">The Frames collection provides access to all of the frames within a board or sheet.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="PMIImportedSurfaceTexture.htm">PMIImportedSurfaceTexture</a></td>
-          <td class="api-list">Defines an imported PMI which includes data related to surface texture.</td>
+          <td class="api-list"><a href="Gate.htm">Gate</a></td>
+          <td class="api-list">Gate (logical sub-unit) within a device; references a symbol and defines placement and add behavior.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="PMIImportedSurfaceTextures.htm">PMIImportedSurfaceTextures</a></td>
-          <td class="api-list">Provides access to the all the PMIImportedSurfaceTexture objects in a component.</td>
+          <td class="api-list"><a href="Gates.htm">Gates</a></td>
+          <td class="api-list">The Gates collection provides access to all of the gates within a device set.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="PMIInput.htm">PMIInput</a></td>
-          <td class="api-list">A Base class for all PMI creation input types. The different types of PMI creation inputs are derived from this base class.</td>
+          <td class="api-list"><a href="Grid.htm">Grid</a></td>
+          <td class="api-list">Represents the design grid settings for a board, schematic, or library.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="PMILeaderLineNote.htm">PMILeaderLineNote</a></td>
-          <td class="api-list">Defines a created PMI which includes data corresponding to Notes.</td>
+          <td class="api-list"><a href="Hole.htm">Hole</a></td>
+          <td class="api-list">Non-plated through-hole drill in a PCB board or package.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="PMILeaderLineNoteInput.htm">PMILeaderLineNoteInput</a></td>
-          <td class="api-list">A class that defines the input used to create a Note PMI.</td>
+          <td class="api-list"><a href="Holes.htm">Holes</a></td>
+          <td class="api-list">The Holes collection provides access to all of the through-holes within a board or package.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="PMILeaderLineNotes.htm">PMILeaderLineNotes</a></td>
-          <td class="api-list">Provides access to the all the PMILeaderLineNote objects in a component.</td>
+          <td class="api-list"><a href="Instance.htm">Instance</a></td>
+          <td class="api-list">Placed part instance (component reference) on a schematic sheet.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="PMILineBreakSegment.htm">PMILineBreakSegment</a></td>
-          <td class="api-list">Represents a segment defining a new line (or a line break). Used to define the text used by a PMI.</td>
+          <td class="api-list"><a href="Instances.htm">Instances</a></td>
+          <td class="api-list">The Instances collection provides access to all of the part instances within a schematic sheet.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="PMIRoughness.htm">PMIRoughness</a></td>
-          <td class="api-list">Represents roughness data used in surface texture PMI. Contains information about surface roughness parameters.</td>
+          <td class="api-list"><a href="Junction.htm">Junction</a></td>
+          <td class="api-list">Connection point where two or more net wires meet on a schematic sheet.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="PMISegment.htm">PMISegment</a></td>
-          <td class="api-list">A base class for all the segments used to define the text of a PMI.</td>
+          <td class="api-list"><a href="Junctions.htm">Junctions</a></td>
+          <td class="api-list">The Junctions collection provides access to all of the junctions within a segment.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="PMISettings.htm">PMISettings</a></td>
-          <td class="api-list">Provides access to the PMISettings of a document.</td>
+          <td class="api-list"><a href="Label.htm">Label</a></td>
+          <td class="api-list">Label (net name annotation) on a schematic sheet, net, or bus.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="PMISymbolSegment.htm">PMISymbolSegment</a></td>
-          <td class="api-list">Represents a segment containing a symbol used to define the text of a PMI.</td>
+          <td class="api-list"><a href="Labels.htm">Labels</a></td>
+          <td class="api-list">The Labels collection provides access to all of the labels within a net, segment, or sheet.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="PMITextSegment.htm">PMITextSegment</a></td>
-          <td class="api-list">Represents a segment of text used to define the text of a PMI. The text can include any number of characters.</td>
+          <td class="api-list"><a href="Layer.htm">Layer</a></td>
+          <td class="api-list">Layer in a board, schematic, or library.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="PRMExportOptions.htm">PRMExportOptions</a></td>
-          <td class="api-list">PRM export options for additive FEA.  A PRM file can only be exported if the Autodesk Fusion Manufacturing Extension is active.</td>
+          <td class="api-list"><a href="Layers.htm">Layers</a></td>
+          <td class="api-list">The Layers collection provides access to all of the layers within a board, schematic, or library.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="RecognizedPocketInput.htm">RecognizedPocketInput</a></td>
-          <td class="api-list">Input object containing properties used to recognize pockets. Includes bosses along open and closed pockets. The class is only available with the Machining Extension.</td>
+          <td class="api-list"><a href="Libraries.htm">Libraries</a></td>
+          <td class="api-list">The Libraries collection provides access to all of the libraries within a design (board or schematic).</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="SketchIsoparametricCurve.htm">SketchIsoparametricCurve</a></td>
-          <td class="api-list">This object represents the result of creating isoparametric curves. It contains the definition of how the curves are created and the resulting sketch curves.</td>
+          <td class="api-list"><a href="Library.htm">Library</a></td>
+          <td class="api-list">Represents a library document in an electronics design. Contains reusable components including symbols, packages, device sets, and devices. Can be opened as a standalone document or referenced within a design.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="SketchIsoparametricCurves.htm">SketchIsoparametricCurves</a></td>
-          <td class="api-list">The collection of isoparametric curves in a sketch. This provides access to the existing isoparametric curves and supports the method to create new isoparametric curves.</td>
+          <td class="api-list"><a href="Module.htm">Module</a></td>
+          <td class="api-list">Reusable block in a hierarchical schematic, containing parts, ports, and nested sheets.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="ToolBlock.htm">ToolBlock</a></td>
-          <td class="api-list">Represents a Tool Block.<br/><br/> A tool block is a type of tool that can have 3D geometry associated with it. 3D geometry can be supplied to represent the shape of the tool block instead of an auto-generated shape derived from parameters.</td>
+          <td class="api-list"><a href="ModuleInstance.htm">ModuleInstance</a></td>
+          <td class="api-list">Placed reference to a module on a schematic sheet.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="TurningTool.htm">TurningTool</a></td>
-          <td class="api-list">Represents a Turning Tool.<br/><br/> A turning tool is comprised of an insert and potentially a holder. 3D geometry can be supplied to represent the shape of the holder instead of the auto-generated shape derived from parameters.</td>
+          <td class="api-list"><a href="ModuleInstances.htm">ModuleInstances</a></td>
+          <td class="api-list">The ModuleInstances collection provides access to all of the module instances within a schematic or sheet.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="Modules.htm">Modules</a></td>
+          <td class="api-list">The Modules collection provides access to all of the modules within a schematic.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="Net.htm">Net</a></td>
+          <td class="api-list">Logical connection (net) in a schematic; groups pins and ports that are electrically connected.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="Nets.htm">Nets</a></td>
+          <td class="api-list">The Nets collection provides access to all of the nets within a sheet or schematic.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="Package.htm">Package</a></td>
+          <td class="api-list">Footprint definition in a library; defines pad layout and silk screen for PCB placement.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="Package3d.htm">Package3d</a></td>
+          <td class="api-list">3D model definition in a library; can be attached to footprints for 3D board visualization.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="Packages.htm">Packages</a></td>
+          <td class="api-list">The Packages collection provides access to all of the packages (footprints) within a library.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="Packages3d.htm">Packages3d</a></td>
+          <td class="api-list">The Packages3d collection provides access to all of the 3D packages within a library or device.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="Pad.htm">Pad</a></td>
+          <td class="api-list">Through-hole pad in a package.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="Pads.htm">Pads</a></td>
+          <td class="api-list">The Pads collection provides access to all of the pads within a package.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="Part.htm">Part</a></td>
+          <td class="api-list">Component definition in a schematic sheet or module; has a name, value, and references a device.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="Parts.htm">Parts</a></td>
+          <td class="api-list">The Parts collection provides access to all of the component definitions (parts) within a sheet or module.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="Pin.htm">Pin</a></td>
+          <td class="api-list">Electrical connection point in a symbol; defines position, direction, and display.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="PinRef.htm">PinRef</a></td>
+          <td class="api-list">Reference linking an instance, part, and pin in a net segment.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="PinRefs.htm">PinRefs</a></td>
+          <td class="api-list">The PinRefs collection provides access to all of the pin references within a net segment.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="Pins.htm">Pins</a></td>
+          <td class="api-list">The Pins collection provides access to all of the pins within a symbol.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="PolyCutout.htm">PolyCutout</a></td>
+          <td class="api-list">Polygon cutout region that subtracts from signal polygons in the same layer.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="PolyCutouts.htm">PolyCutouts</a></td>
+          <td class="api-list">The PolyCutouts collection provides access to all of the polygon cutouts within a board, symbol, or package.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="PolyPour.htm">PolyPour</a></td>
+          <td class="api-list">Copper pour polygon belonging to a signal; filled (solid or hatched) copper area.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="PolyPours.htm">PolyPours</a></td>
+          <td class="api-list">The PolyPours collection provides access to all of the copper pour polygons within a signal.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="PolyShape.htm">PolyShape</a></td>
+          <td class="api-list">Simple polygon shape on a board, schematic sheet, symbol, or package; no copper fill.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="PolyShapes.htm">PolyShapes</a></td>
+          <td class="api-list">The PolyShapes collection provides access to all of the polygon shapes within a board, sheet, symbol, or package.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="Port.htm">Port</a></td>
+          <td class="api-list">Connection point that exports a net from a module to the outside; defines the interface for hierarchical schematics.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="PortRef.htm">PortRef</a></td>
+          <td class="api-list">Reference that connects a net to a port on a module instance.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="PortRefs.htm">PortRefs</a></td>
+          <td class="api-list">The PortRefs collection provides access to all of the port references within a net or segment.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="Ports.htm">Ports</a></td>
+          <td class="api-list">The Ports collection provides access to all of the ports within a module.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="Rectangle.htm">Rectangle</a></td>
+          <td class="api-list">Rectangle primitive drawn on a PCB board, schematic sheet, symbol, or package.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="Rectangles.htm">Rectangles</a></td>
+          <td class="api-list">The Rectangles collection provides access to all of the rectangles within a board, sheet, symbol, or package.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="Schematic.htm">Schematic</a></td>
+          <td class="api-list">Represents a schematic in an electronics design.<br/><br/> Provides access to sheets, parts, nets, and electrical-rule checks.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="Segment.htm">Segment</a></td>
+          <td class="api-list">Wire segment group within a net or bus; connects pin references, port references, and wires.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="Segments.htm">Segments</a></td>
+          <td class="api-list">The Segments collection provides access to all of the segments within a net or bus.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="Sheet.htm">Sheet</a></td>
+          <td class="api-list">Represents one page of a multi-sheet schematic.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="Sheets.htm">Sheets</a></td>
+          <td class="api-list">The Sheets collection provides access to all of the sheets within a schematic.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="Signal.htm">Signal</a></td>
+          <td class="api-list">Copper trace network in a PCB board; connects pads and vias through wires and polygon pours.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="Signals.htm">Signals</a></td>
+          <td class="api-list">The Signals collection provides access to all of the copper trace networks (signals) within a board.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="Smd.htm">Smd</a></td>
+          <td class="api-list">Surface-mount (SMD) pad in a package.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="Smds.htm">Smds</a></td>
+          <td class="api-list">The Smds collection provides access to all of the SMD pads within a package.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="Spline.htm">Spline</a></td>
+          <td class="api-list">Spline curve on a PCB board, schematic sheet, symbol, or package.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="Splines.htm">Splines</a></td>
+          <td class="api-list">The Splines collection provides access to all of the splines within a board, sheet, symbol, or package.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="Symbol.htm">Symbol</a></td>
+          <td class="api-list">Schematic symbol definition from a library; contains pins, wires, circles, and other graphic primitives.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="Symbols.htm">Symbols</a></td>
+          <td class="api-list">The Symbols collection provides access to all of the symbols within a library.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="Technologies.htm">Technologies</a></td>
+          <td class="api-list">The Technologies collection provides access to all of the technology variants within a device.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="Technology.htm">Technology</a></td>
+          <td class="api-list">Technology variant of a device; each variant has a name and technology-specific attributes.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="Text.htm">Text</a></td>
+          <td class="api-list">Text annotation on a PCB board, schematic sheet, symbol, or package.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="Texts.htm">Texts</a></td>
+          <td class="api-list">The Texts collection provides access to all of the texts within a board, sheet, symbol, or package.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="Units.htm">Units</a></td>
+          <td class="api-list">Static methods that convert internal units to physical units (mm, inch, mil, micron).</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="UserCoordinateSystem.htm">UserCoordinateSystem</a></td>
+          <td class="api-list">Represents an existing User Coordinate System in a design.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="UserCoordinateSystemGeometry.htm">UserCoordinateSystemGeometry</a></td>
+          <td class="api-list">A transient object used to define and query the geometric input for a user coordinate system and the resulting coordinate system it defines. New UserCoordinateSystemGeometry objects are created using the static create method and are then used as input to the UserCoordinateSystems.createInput method.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="UserCoordinateSystemInput.htm">UserCoordinateSystemInput</a></td>
+          <td class="api-list">Defines all of the information required to create a new User Coordinate System. This object provides equivalent functionality to the User Coordinate System command dialog in that it gathers the required information to create a User Coordinate System.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="UserCoordinateSystems.htm">UserCoordinateSystems</a></td>
+          <td class="api-list">Provides access to the user coordinate systems within a component and provides methods to create new user coordinate systems.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="Variant.htm">Variant</a></td>
+          <td class="api-list">Per-assembly-variant configuration of a part; specifies populate, technology, and value for one variant definition.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="VariantDef.htm">VariantDef</a></td>
+          <td class="api-list">Assembly or build variant that controls which parts are populated in a schematic or board.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="VariantDefs.htm">VariantDefs</a></td>
+          <td class="api-list">The VariantDefs collection provides access to all of the variant definitions within the schematic.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="Variants.htm">Variants</a></td>
+          <td class="api-list">The Variants collection provides access to all of the per-assembly-variant configurations for a part.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="Via.htm">Via</a></td>
+          <td class="api-list">Plated through-hole or blind/buried via connecting layers in a PCB board.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="Vias.htm">Vias</a></td>
+          <td class="api-list">The Vias collection provides access to all of the vias within a signal or board.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="VolumetricModelFeature.htm">VolumetricModelFeature</a></td>
+          <td class="api-list">Object that represents an existing volumetric model feature.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="VolumetricModelFeatureInput.htm">VolumetricModelFeatureInput</a></td>
+          <td class="api-list">This class defines the methods and properties that pertain to the definition of a volumetric model feature.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="VolumetricModelFeatures.htm">VolumetricModelFeatures</a></td>
+          <td class="api-list">Collection that provides access to all of the existing volumetric model features in a component and supports the ability to create new Volumetric Model features.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="Wire.htm">Wire</a></td>
+          <td class="api-list">Straight or curved line segment in a PCB board, schematic sheet, symbol, or package.</td>
+        </tr>
+        <tr>
+          <td class="api-list"><a href="Wires.htm">Wires</a></td>
+          <td class="api-list">The Wires collection provides access to all of the wires within a board, sheet, signal, or polygon.</td>
         </tr>
       </Table>
       <h2 class="api">
@@ -354,176 +615,144 @@ Some issues were found with the motion links API. It should all be working corre
             </td>
         </tr>
         <tr>
-          <td class="api-list"><a href="ArrangeSelection_customMultiAxisRotationType.htm">ArrangeSelection.customMultiAxisRotationType</a></td>
-          <td class="api-list">Gets and sets the custom multi-axis rotation type. This function is not available in Fusion for Personal Use. To enable any rotation the parameter "arrange_rotation_group" of the operation must be set to true. Note: If customMultiAxisRotationType is called, isUsingCustomMultiAxisRotationType will be set to true automatically. The default value for this property is MultiAxisRotationType_SingleAxis.</td>
+          <td class="api-list"><a href="AdditiveFEADeckBuilder_createWarpInputCard.htm">AdditiveFEADeckBuilder.createWarpInputCard</a></td>
+          <td class="api-list">Creates the *INPU card.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="ArrangeSelection_isUsingCustomMultiAxisRotationType.htm">ArrangeSelection.isUsingCustomMultiAxisRotationType</a></td>
-          <td class="api-list">Gets and sets if custom multi-axis rotation type is used for this element. This function is not available in Fusion for Personal Use. Throws an exception when calling this function in Fusion for Personal Use. If isUsingCustomMultiAxisRotationType is false, the global property of the operation's parameter "arrange_multiaxis_rotation" is used. The default value for this property false.</td>
+          <td class="api-list"><a href="AdditiveFEAOperation_noteIconColor.htm">AdditiveFEAOperation.noteIconColor</a></td>
+          <td class="api-list">The color of the note icon. This represents the color of the note icon in the browser, which is displayed next to the operation name when the operation has notes.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="BaseComponent_pmiAnnotations.htm">BaseComponent.pmiAnnotations</a></td>
-          <td class="api-list">Returns the PMI collection associated with this component. This provides access to the existing PMI and supports the creation of new PMI.</td>
+          <td class="api-list"><a href="BaseComponent_userCoordinateSystems.htm">BaseComponent.userCoordinateSystems</a></td>
+          <td class="api-list">Returns the user coordinate systems collection associated with this component. This provides access to the existing user coordinate systems and supports the creation of new user coordinate systems.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="CAM3MFExportOptions_structure.htm">CAM3MFExportOptions.structure</a></td>
-          <td class="api-list">Sets the structure type and naming convention used for the exported 3MF file.</td>
+          <td class="api-list"><a href="BRepBody_convertToSheetMetal.htm">BRepBody.convertToSheetMetal</a></td>
+          <td class="api-list">Converts the current BRepBody to a sheet metal body. This is applicable only if the body is not already a sheet metal body (isSheetMetal is false).</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="CAMExportManager_createPRMExportOptions.htm">CAMExportManager.createPRMExportOptions</a></td>
-          <td class="api-list">Creates new PRM export options.</td>
+          <td class="api-list"><a href="BRepBody_findThicknessAtFace.htm">BRepBody.findThicknessAtFace</a></td>
+          <td class="api-list">Finds the thickness of the body at the specified face by casting a ray from the face along its inward normal and measuring the distance to the first opposite face of the body that is hit.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="Component_pmiAnnotations.htm">Component.pmiAnnotations</a></td>
-          <td class="api-list">Returns the PMI collection associated with this component. This provides access to the existing PMI and supports the creation of new PMI.</td>
+          <td class="api-list"><a href="CAM_analyses.htm">CAM.analyses</a></td>
+          <td class="api-list">Gets the collection of design analyses associated with this design, created in the Manufacture workspace.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="Design_pmiSettings.htm">Design.pmiSettings</a></td>
-          <td class="api-list">Returns a manager for settings associated with Product Manufacturing Information (PMI) in this design.</td>
+          <td class="api-list"><a href="CAMAdditiveContainer_noteIconColor.htm">CAMAdditiveContainer.noteIconColor</a></td>
+          <td class="api-list">The color of the note icon. This represents the color of the note icon in the browser, which is displayed next to the operation name when the operation has notes.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="Document_advanceToLatest.htm">Document.advanceToLatest</a></td>
-          <td class="api-list">Advance to Latest enables this capability to update assembly with all work-in-progress changes.</td>
+          <td class="api-list"><a href="CAMFolder_noteIconColor.htm">CAMFolder.noteIconColor</a></td>
+          <td class="api-list">The color of the note icon. This represents the color of the note icon in the browser, which is displayed next to the operation name when the operation has notes.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="Document_canAdvanceToLatest.htm">Document.canAdvanceToLatest</a></td>
-          <td class="api-list">Indicates if the document can be advanced to the latest change.</td>
+          <td class="api-list"><a href="CAMHoleRecognition_noteIconColor.htm">CAMHoleRecognition.noteIconColor</a></td>
+          <td class="api-list">The color of the note icon. This represents the color of the note icon in the browser, which is displayed next to the operation name when the operation has notes.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="Documents_openUsingContext.htm">Documents.openUsingContext</a></td>
-          <td class="api-list">Opens a previously saved document using additional context information to control how the file is opened. This method allows opening a specific version or state of a document based on the provided context, such as a timestamp that identifies a particular point in the document's history.</td>
+          <td class="api-list"><a href="CAMPattern_noteIconColor.htm">CAMPattern.noteIconColor</a></td>
+          <td class="api-list">The color of the note icon. This represents the color of the note icon in the browser, which is displayed next to the operation name when the operation has notes.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="DocumentToolLibrary_updateTool.htm">DocumentToolLibrary.updateTool</a></td>
-          <td class="api-list">Update the given tool in the tool library. Will error if the tool does not exist in the library or if the library URL is not set (library was not loaded from a URL).</td>
+          <td class="api-list"><a href="CAMTemplate_createEmptyHoleTemplate.htm">CAMTemplate.createEmptyHoleTemplate</a></td>
+          <td class="api-list">Create an empty CAMTemplate. This template will represent a hole template.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="DrawingDocument_advanceToLatest.htm">DrawingDocument.advanceToLatest</a></td>
-          <td class="api-list">Advance to Latest enables this capability to update assembly with all work-in-progress changes.</td>
+          <td class="api-list"><a href="CAMTemplate_isValidTemplate.htm">CAMTemplate.isValidTemplate</a></td>
+          <td class="api-list">Whether or not this template is in an appropriate state to be used. This means it has operations and, for hole templates, has an appropriate hole signature.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="DrawingDocument_canAdvanceToLatest.htm">DrawingDocument.canAdvanceToLatest</a></td>
-          <td class="api-list">Indicates if the document can be advanced to the latest change.</td>
+          <td class="api-list"><a href="Component_findMeshUsingRay.htm">Component.findMeshUsingRay</a></td>
+          <td class="api-list">Finds all mesh bodies that are intersected by the specified ray.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="FlatPatternComponent_pmiAnnotations.htm">FlatPatternComponent.pmiAnnotations</a></td>
-          <td class="api-list">Returns the PMI collection associated with this component. This provides access to the existing PMI and supports the creation of new PMI.</td>
+          <td class="api-list"><a href="Component_userCoordinateSystems.htm">Component.userCoordinateSystems</a></td>
+          <td class="api-list">Returns the user coordinate systems collection associated with this component. This provides access to the existing user coordinate systems and supports the creation of new user coordinate systems.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="FlatPatternProduct_pmiSettings.htm">FlatPatternProduct.pmiSettings</a></td>
-          <td class="api-list">Returns a manager for settings associated with Product Manufacturing Information (PMI) in this design.</td>
+          <td class="api-list"><a href="ConstructionAxis_isUCSGeometry.htm">ConstructionAxis.isUCSGeometry</a></td>
+          <td class="api-list">Returns true if this ConstructionAxis is part of a User Coordinate System (UCS).</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="FusionDocument_advanceToLatest.htm">FusionDocument.advanceToLatest</a></td>
-          <td class="api-list">Advance to Latest enables this capability to update assembly with all work-in-progress changes.</td>
+          <td class="api-list"><a href="ConstructionAxis_parentUCS.htm">ConstructionAxis.parentUCS</a></td>
+          <td class="api-list">Returns the UCS this ConstructionAxis is part of. Returns null if this axis is not part of a UCS.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="FusionDocument_canAdvanceToLatest.htm">FusionDocument.canAdvanceToLatest</a></td>
-          <td class="api-list">Indicates if the document can be advanced to the latest change.</td>
+          <td class="api-list"><a href="ConstructionPlane_isUCSGeometry.htm">ConstructionPlane.isUCSGeometry</a></td>
+          <td class="api-list">Returns true if this ConstructionPlane is part of a User Coordinate System (UCS).</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="LinearMachineAxis_resolutionStepSize.htm">LinearMachineAxis.resolutionStepSize</a></td>
-          <td class="api-list">Specifies the discrete step size used for axis movement. The step size should be greater than zero. Returns NaN if no step size is set or the axis move is configured for continuous rotation.</td>
+          <td class="api-list"><a href="ConstructionPlane_parentUCS.htm">ConstructionPlane.parentUCS</a></td>
+          <td class="api-list">Returns the UCS this ConstructionPlane is part of. Returns null if this plane is not part of a UCS.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="LinearMachineAxis_useContinuousResolution.htm">LinearMachineAxis.useContinuousResolution</a></td>
-          <td class="api-list">Specifies the axis moves continuously.</td>
+          <td class="api-list"><a href="ConstructionPlaneInput_setByAngleOnCurvedFace.htm">ConstructionPlaneInput.setByAngleOnCurvedFace</a></td>
+          <td class="api-list">This input method is for creating a construction plane through the axis inferred from a cylindrical or conical curved face at a specified angle. This can result in a parametric or non-parametric construction plane depending on whether the parent component is parametric or is a direct edit component.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="LinearMachineAxisInput_resolutionStepSize.htm">LinearMachineAxisInput.resolutionStepSize</a></td>
-          <td class="api-list">Specifies the discrete step size used for axis movement. The step size should be greater than zero. Returns NaN if no step size is set or the axis move is configured for continuous rotation.</td>
+          <td class="api-list"><a href="ConstructionPoint_isUCSGeometry.htm">ConstructionPoint.isUCSGeometry</a></td>
+          <td class="api-list">Returns true if this ConstructionPoint is part of a User Coordinate System (UCS).</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="LinearMachineAxisInput_useContinuousResolution.htm">LinearMachineAxisInput.useContinuousResolution</a></td>
-          <td class="api-list">Specifies the axis moves continuously.</td>
+          <td class="api-list"><a href="ConstructionPoint_parentUCS.htm">ConstructionPoint.parentUCS</a></td>
+          <td class="api-list">Returns the UCS this ConstructionPoint is part of. Returns null if this point is not part of a UCS.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="MachineAxis_resolutionStepSize.htm">MachineAxis.resolutionStepSize</a></td>
-          <td class="api-list">Specifies the discrete step size used for axis movement. The step size should be greater than zero. Returns NaN if no step size is set or the axis move is configured for continuous rotation.</td>
+          <td class="api-list"><a href="Features_volumetricModelFeatures.htm">Features.volumetricModelFeatures</a></td>
+          <td class="api-list">Returns the collection that provides access to volumetric model features within the component and supports the creation of new volumetric model features.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="MachineAxis_useContinuousResolution.htm">MachineAxis.useContinuousResolution</a></td>
-          <td class="api-list">Specifies the axis moves continuously.</td>
+          <td class="api-list"><a href="FlatPatternComponent_findMeshUsingRay.htm">FlatPatternComponent.findMeshUsingRay</a></td>
+          <td class="api-list">Finds all mesh bodies that are intersected by the specified ray.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="MachineAxisInput_resolutionStepSize.htm">MachineAxisInput.resolutionStepSize</a></td>
-          <td class="api-list">Specifies the discrete step size used for axis movement. The step size should be greater than zero. Returns NaN if no step size is set or the axis move is configured for continuous rotation.</td>
+          <td class="api-list"><a href="FlatPatternComponent_userCoordinateSystems.htm">FlatPatternComponent.userCoordinateSystems</a></td>
+          <td class="api-list">Returns the user coordinate systems collection associated with this component. This provides access to the existing user coordinate systems and supports the creation of new user coordinate systems.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="MachineAxisInput_useContinuousResolution.htm">MachineAxisInput.useContinuousResolution</a></td>
-          <td class="api-list">Specifies the axis moves continuously.</td>
+          <td class="api-list"><a href="MeshBody_calculateCollisionsWithRay.htm">MeshBody.calculateCollisionsWithRay</a></td>
+          <td class="api-list">Finds all points that are intersected by the specified ray.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="MeshBody_silhouette.htm">MeshBody.silhouette</a></td>
-          <td class="api-list">Calculates the silhouette of a mesh for a given orientation.</td>
+          <td class="api-list"><a href="NCProgram_noteIconColor.htm">NCProgram.noteIconColor</a></td>
+          <td class="api-list">The color of the note icon. This represents the color of the note icon in the browser, which is displayed next to the operation name when the operation has notes.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="MeshCombineFeatureInput_algorithmType.htm">MeshCombineFeatureInput.algorithmType</a></td>
-          <td class="api-list">Gets and sets the used algorithm for the join, cut and intersect operation types. Default value is LegacyMeshCombineAlgorithmType. This setting is only effective in non-parametric mode. In parametric mode the algorithm type is always LegacyMeshCombineAlgorithmType.</td>
+          <td class="api-list"><a href="Operation_noteIconColor.htm">Operation.noteIconColor</a></td>
+          <td class="api-list">The color of the note icon. This represents the color of the note icon in the browser, which is displayed next to the operation name when the operation has notes.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="MultiAxisMachineElement_isUsingTiltedWorkplane.htm">MultiAxisMachineElement.isUsingTiltedWorkplane</a></td>
-          <td class="api-list">Specifies if tilted workplane command (e.g., G68.2, G254, PLANE SPATIAL, CYCLE800) should be output for 3+2 operations.</td>
+          <td class="api-list"><a href="OperationBase_noteIconColor.htm">OperationBase.noteIconColor</a></td>
+          <td class="api-list">The color of the note icon. This represents the color of the note icon in the browser, which is displayed next to the operation name when the operation has notes.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="Occurrence_meshBodies.htm">Occurrence.meshBodies</a></td>
-          <td class="api-list">Returns the body proxies for the mesh bodies in the component referenced by this occurrence. For example if you get the occurrences from the root component and then use this property to get the bodies from those occurrences, the bodies returned will return information in the context of the root component, not the component they actually exist in.</td>
+          <td class="api-list"><a href="PMIGeometricValueTolerance_hasShaftToleranceClass.htm">PMIGeometricValueTolerance.hasShaftToleranceClass</a></td>
+          <td class="api-list">Gets whether there is a shaft tolerance class set.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="Operation_referenceTool.htm">Operation.referenceTool</a></td>
-          <td class="api-list">Get or set the tool for this operation. The document's tool library will be updated accordingly. The tool instance returned is a copy and therefore is not referenced by the operation. To change the reference tool of the operation, the new tool must be assigned to the operation, but once set it cannot be unset again. Setting the tool is only possible on operation strategies that support reference tools, an exception is thrown otherwise. Likewise null is returned if the operation strategy does not support reference tools.</td>
+          <td class="api-list"><a href="PMIGeometricValueTolerance_shaftToleranceClassDeviation.htm">PMIGeometricValueTolerance.shaftToleranceClassDeviation</a></td>
+          <td class="api-list">Gets the shaft tolerance class deviation value. Returns empty string if there is no tolerance class deviation value set.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="OperationInput_referenceTool.htm">OperationInput.referenceTool</a></td>
-          <td class="api-list">Optionally specify the reference tool used by the operation. The ToolLibraries allows the access to Local and Fusion tools. Setting the tool is only possible on operation strategies that support reference tools, an exception is thrown otherwise. Likewise null is returned if the operation strategy does not support reference tools.</td>
+          <td class="api-list"><a href="PMIGeometricValueTolerance_shaftToleranceClassGrade.htm">PMIGeometricValueTolerance.shaftToleranceClassGrade</a></td>
+          <td class="api-list">Gets the shaft tolerance class grade value. Returns empty string if there is no tolerance class grade value set.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="Preferences_compatibilityPreferences.htm">Preferences.compatibilityPreferences</a></td>
-          <td class="api-list">Gets the CompatibilityPreferences object, which provides access to the various compatibility and troubleshouting preferences.</td>
+          <td class="api-list"><a href="RefoldFeature_unfoldFeature.htm">RefoldFeature.unfoldFeature</a></td>
+          <td class="api-list">Returns the unfold feature associated with this refold feature. A refold feature always has an associated unfold feature because they are created together in a group.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="RecognizedPocket_attackVector.htm">RecognizedPocket.attackVector</a></td>
-          <td class="api-list">Returns the attack vector that was used to recognize this pocket.</td>
+          <td class="api-list"><a href="Setup_noteIconColor.htm">Setup.noteIconColor</a></td>
+          <td class="api-list">The color of the note icon. This represents the color of the note icon in the browser, which is displayed next to the operation name when the operation has notes.</td>
         </tr>
         <tr>
-          <td class="api-list"><a href="RecognizedPocket_recognizePocketsWithInput.htm">RecognizedPocket.recognizePocketsWithInput</a></td>
-          <td class="api-list">Gets all recognized pockets based on the properties in the given input object and returns them. The method is only available with the Machining Extension.</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="RotaryMachineAxis_resolutionStepSize.htm">RotaryMachineAxis.resolutionStepSize</a></td>
-          <td class="api-list">Specifies the discrete step size used for axis movement. The step size should be greater than zero. Returns NaN if no step size is set or the axis move is configured for continuous rotation.</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="RotaryMachineAxis_useContinuousResolution.htm">RotaryMachineAxis.useContinuousResolution</a></td>
-          <td class="api-list">Specifies the axis moves continuously.</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="RotaryMachineAxisInput_resolutionStepSize.htm">RotaryMachineAxisInput.resolutionStepSize</a></td>
-          <td class="api-list">Specifies the discrete step size used for axis movement. The step size should be greater than zero. Returns NaN if no step size is set or the axis move is configured for continuous rotation.</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="RotaryMachineAxisInput_useContinuousResolution.htm">RotaryMachineAxisInput.useContinuousResolution</a></td>
-          <td class="api-list">Specifies the axis moves continuously.</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="SketchCurves_sketchIsoparametricCurves.htm">SketchCurves.sketchIsoparametricCurves</a></td>
-          <td class="api-list">Returns the isoparametric curves collection associated with this sketch. This provides access to the existing isoparametric curves and supports the creation of new isoparametric curves.</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="ToolLibrary_updateTool.htm">ToolLibrary.updateTool</a></td>
-          <td class="api-list">Update the given tool in the tool library. Will error if the tool does not exist in the library or if the library URL is not set (library was not loaded from a URL).</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="UserInterface_createCloudFolderDialog.htm">UserInterface.createCloudFolderDialog</a></td>
-          <td class="api-list">Creates a new CloudFolderDialog object which provides the ability to show a folder selection dialog to the user that allows them to choose a folder from Fusion web client.</td>
-        </tr>
-        <tr>
-          <td class="api-list"><a href="WorkingModel_pmiSettings.htm">WorkingModel.pmiSettings</a></td>
-          <td class="api-list">Returns a manager for settings associated with Product Manufacturing Information (PMI) in this design.</td>
+          <td class="api-list"><a href="UnfoldFeature_refoldFeature.htm">UnfoldFeature.refoldFeature</a></td>
+          <td class="api-list">Returns the refold feature associated with this unfold feature, or null if there is no associated refold. Unfold and refold features are often created together in a group.</td>
         </tr>
       </Table><br><p>
         <font size="1">
-          Help created: Wednesday, April 8, 2026 2:37 PM</font>
+          Help created: Thursday, May 28, 2026 9:41 AM</font>
       </p><br><br><div id="CopyrightNotice" style="display:none;">
         <hr>
         <table width="100%" style="font-size:15">
@@ -531,7 +760,7 @@ Some issues were found with the motion links API. It should all be working corre
             <td align="left">
                 © Copyright 2026 Autodesk, Inc.
               </td>
-            <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(Whats%20New)">Comment on this page.</a></td>
+            <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(Whats%20New)">Comment on this page.</a></td>
           </tr>
         </table>
       </div>

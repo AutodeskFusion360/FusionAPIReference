@@ -36,7 +36,9 @@
               Derived from: <a href="Base.htm">Base</a> Object
             <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Construction/ConstructionPlane.h&gt;<h2 class="api">
           Description
-        </h2>ConstructionPlane Object<h2 class="api">
+        </h2>
+    <p class="api">ConstructionPlane Object</p>
+    <h2 class="api">
             Methods
           </h2>
     <Table class="api-list">
@@ -50,15 +52,21 @@
       </tr>
       <tr>
         <td class="api-list"><a href="ConstructionPlane_classType.htm">classType</a></td>
-        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+        <td class="api-list">
+          <p class="api">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="ConstructionPlane_createForAssemblyContext.htm">createForAssemblyContext</a></td>
-        <td class="api-list">Creates or returns a proxy for the native object - i.e. a new object that represents this object but adds the assembly context defined by the input occurrence.</td>
+        <td class="api-list">
+          <p class="api">Creates or returns a proxy for the native object - i.e. a new object that represents this object but adds the assembly context defined by the input occurrence.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="ConstructionPlane_deleteMe.htm">deleteMe</a></td>
-        <td class="api-list">Deletes the construction plane.</td>
+        <td class="api-list">
+          <p class="api">Deletes the construction plane.</p>
+        </td>
       </tr>
     </Table>
     <h2 class="api">
@@ -134,6 +142,10 @@
         <td class="api-list">Indicates if this construction plane is parametric or not.</td>
       </tr>
       <tr>
+        <td class="api-list"><a href="ConstructionPlane_isUCSGeometry.htm">isUCSGeometry</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Returns true if this ConstructionPlane is part of a User Coordinate System (UCS).</td>
+      </tr>
+      <tr>
         <td class="api-list"><a href="ConstructionPlane_isValid.htm">isValid</a></td>
         <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
       </tr>
@@ -158,6 +170,10 @@
         <td class="api-list">Returns the parent component or base feature. If both the design and the construction plane are parametric, the parent will be a component. If the design is parametric and the construction plane is not, the parent will be a base feature. If the design is not parametric the parent will be a component.</td>
       </tr>
       <tr>
+        <td class="api-list"><a href="ConstructionPlane_parentUCS.htm">parentUCS</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Returns the UCS this ConstructionPlane is part of. Returns null if this plane is not part of a UCS.</td>
+      </tr>
+      <tr>
         <td class="api-list"><a href="ConstructionPlane_timelineObject.htm">timelineObject</a></td>
         <td class="api-list">Returns the timeline object associated with this construction plane.</td>
       </tr>
@@ -168,7 +184,7 @@
     </Table>
     <h2 class="api">
             Accessed From
-          </h2><a href="Arrange2DPlaneEnvelopeInput_plane.htm">Arrange2DPlaneEnvelopeInput.plane</a>, <a href="Arrange3DEnvelopeDefinition_plane.htm">Arrange3DEnvelopeDefinition.plane</a>, <a href="Arrange3DEnvelopeInput_plane.htm">Arrange3DEnvelopeInput.plane</a>, <a href="ArrangePlaneEnvelopeDefinition_plane.htm">ArrangePlaneEnvelopeDefinition.plane</a>, <a href="BaseFeature_constructionPlanes.htm">BaseFeature.constructionPlanes</a>, <a href="Component_xYConstructionPlane.htm">Component.xYConstructionPlane</a>, <a href="Component_xZConstructionPlane.htm">Component.xZConstructionPlane</a>, <a href="Component_yZConstructionPlane.htm">Component.yZConstructionPlane</a>, <a href="ConstructionPlane_createForAssemblyContext.htm">ConstructionPlane.createForAssemblyContext</a>, <a href="ConstructionPlane_nativeObject.htm">ConstructionPlane.nativeObject</a>, <a href="ConstructionPlaneAtAngleDefinition_parentConstructionPlane.htm">ConstructionPlaneAtAngleDefinition.parentConstructionPlane</a>, <a href="ConstructionPlaneByPlaneDefinition_parentConstructionPlane.htm">ConstructionPlaneByPlaneDefinition.parentConstructionPlane</a>, <a href="ConstructionPlaneDefinition_parentConstructionPlane.htm">ConstructionPlaneDefinition.parentConstructionPlane</a>, <a href="ConstructionPlaneDistanceOnPathDefinition_parentConstructionPlane.htm">ConstructionPlaneDistanceOnPathDefinition.parentConstructionPlane</a>, <a href="ConstructionPlaneMidplaneDefinition_parentConstructionPlane.htm">ConstructionPlaneMidplaneDefinition.parentConstructionPlane</a>, <a href="ConstructionPlaneOffsetDefinition_parentConstructionPlane.htm">ConstructionPlaneOffsetDefinition.parentConstructionPlane</a>, <a href="ConstructionPlaneOffsetThroughPointDefinition_parentConstructionPlane.htm">ConstructionPlaneOffsetThroughPointDefinition.parentConstructionPlane</a>, <a href="ConstructionPlanes_add.htm">ConstructionPlanes.add</a>, <a href="ConstructionPlanes_item.htm">ConstructionPlanes.item</a>, <a href="ConstructionPlanes_itemByName.htm">ConstructionPlanes.itemByName</a>, <a href="ConstructionPlaneTangentAtPointDefinition_parentConstructionPlane.htm">ConstructionPlaneTangentAtPointDefinition.parentConstructionPlane</a>, <a href="ConstructionPlaneTangentDefinition_parentConstructionPlane.htm">ConstructionPlaneTangentDefinition.parentConstructionPlane</a>, <a href="ConstructionPlaneThreePointsDefinition_parentConstructionPlane.htm">ConstructionPlaneThreePointsDefinition.parentConstructionPlane</a>, <a href="ConstructionPlaneTwoEdgesDefinition_parentConstructionPlane.htm">ConstructionPlaneTwoEdgesDefinition.parentConstructionPlane</a>, <a href="FlatPatternComponent_xYConstructionPlane.htm">FlatPatternComponent.xYConstructionPlane</a>, <a href="FlatPatternComponent_xZConstructionPlane.htm">FlatPatternComponent.xZConstructionPlane</a>, <a href="FlatPatternComponent_yZConstructionPlane.htm">FlatPatternComponent.yZConstructionPlane</a><h2 class="api">
+          </h2><a href="Arrange2DPlaneEnvelopeInput_plane.htm">Arrange2DPlaneEnvelopeInput.plane</a>, <a href="Arrange3DEnvelopeDefinition_plane.htm">Arrange3DEnvelopeDefinition.plane</a>, <a href="Arrange3DEnvelopeInput_plane.htm">Arrange3DEnvelopeInput.plane</a>, <a href="ArrangePlaneEnvelopeDefinition_plane.htm">ArrangePlaneEnvelopeDefinition.plane</a>, <a href="BaseFeature_constructionPlanes.htm">BaseFeature.constructionPlanes</a>, <a href="Component_xYConstructionPlane.htm">Component.xYConstructionPlane</a>, <a href="Component_xZConstructionPlane.htm">Component.xZConstructionPlane</a>, <a href="Component_yZConstructionPlane.htm">Component.yZConstructionPlane</a>, <a href="ConstructionPlane_createForAssemblyContext.htm">ConstructionPlane.createForAssemblyContext</a>, <a href="ConstructionPlane_nativeObject.htm">ConstructionPlane.nativeObject</a>, <a href="ConstructionPlaneAtAngleDefinition_parentConstructionPlane.htm">ConstructionPlaneAtAngleDefinition.parentConstructionPlane</a>, <a href="ConstructionPlaneAtAngleOnCurvedFaceDefinition_parentConstructionPlane.htm">ConstructionPlaneAtAngleOnCurvedFaceDefinition.parentConstructionPlane</a>, <a href="ConstructionPlaneByPlaneDefinition_parentConstructionPlane.htm">ConstructionPlaneByPlaneDefinition.parentConstructionPlane</a>, <a href="ConstructionPlaneDefinition_parentConstructionPlane.htm">ConstructionPlaneDefinition.parentConstructionPlane</a>, <a href="ConstructionPlaneDistanceOnPathDefinition_parentConstructionPlane.htm">ConstructionPlaneDistanceOnPathDefinition.parentConstructionPlane</a>, <a href="ConstructionPlaneMidplaneDefinition_parentConstructionPlane.htm">ConstructionPlaneMidplaneDefinition.parentConstructionPlane</a>, <a href="ConstructionPlaneOffsetDefinition_parentConstructionPlane.htm">ConstructionPlaneOffsetDefinition.parentConstructionPlane</a>, <a href="ConstructionPlaneOffsetThroughPointDefinition_parentConstructionPlane.htm">ConstructionPlaneOffsetThroughPointDefinition.parentConstructionPlane</a>, <a href="ConstructionPlanes_add.htm">ConstructionPlanes.add</a>, <a href="ConstructionPlanes_item.htm">ConstructionPlanes.item</a>, <a href="ConstructionPlanes_itemByName.htm">ConstructionPlanes.itemByName</a>, <a href="ConstructionPlaneTangentAtPointDefinition_parentConstructionPlane.htm">ConstructionPlaneTangentAtPointDefinition.parentConstructionPlane</a>, <a href="ConstructionPlaneTangentDefinition_parentConstructionPlane.htm">ConstructionPlaneTangentDefinition.parentConstructionPlane</a>, <a href="ConstructionPlaneThreePointsDefinition_parentConstructionPlane.htm">ConstructionPlaneThreePointsDefinition.parentConstructionPlane</a>, <a href="ConstructionPlaneTwoEdgesDefinition_parentConstructionPlane.htm">ConstructionPlaneTwoEdgesDefinition.parentConstructionPlane</a>, <a href="FlatPatternComponent_xYConstructionPlane.htm">FlatPatternComponent.xYConstructionPlane</a>, <a href="FlatPatternComponent_xZConstructionPlane.htm">FlatPatternComponent.xZConstructionPlane</a>, <a href="FlatPatternComponent_yZConstructionPlane.htm">FlatPatternComponent.yZConstructionPlane</a>, <a href="UserCoordinateSystem_xYConstructionPlane.htm">UserCoordinateSystem.xYConstructionPlane</a>, <a href="UserCoordinateSystem_xZConstructionPlane.htm">UserCoordinateSystem.xZConstructionPlane</a>, <a href="UserCoordinateSystem_yZConstructionPlane.htm">UserCoordinateSystem.yZConstructionPlane</a><h2 class="api">
             Samples
           </h2>
     <Table class="api-list">
@@ -199,7 +215,7 @@
           <td align="left">
                 © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(ConstructionPlane%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(ConstructionPlane%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

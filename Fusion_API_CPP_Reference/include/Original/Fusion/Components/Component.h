@@ -38,6 +38,8 @@ namespace adsk { namespace core {
     class Material;
     class Matrix3D;
     class OrientedBoundingBox3D;
+    class Point3D;
+    class Vector3D;
 }}
 namespace adsk { namespace fusion {
     class AsBuiltJoint;
@@ -56,6 +58,7 @@ namespace adsk { namespace fusion {
     class JointOrigins;
     class Joints;
     class MeshBodies;
+    class MeshBody;
     class ModelParameters;
     class MotionLinks;
     class Occurrence;
@@ -433,6 +436,17 @@ public:
     /// Returns the collection of MotionLinks associated with this component.
     core::Ptr<MotionLinks> motionLinks() const;
 
+    /// Finds all mesh bodies that are intersected by the specified ray.
+    /// originPoint : Input point that defines the origin of the ray. The search for entities begins at this point.
+    /// rayDirection : Input vector that defines the direction of the ray. The ray is infinite so the length of the vector is ignored.
+    /// hitPoints : The output array of points that represent the coordinates where the ray hit the found entity. There will be the same number of hit points as returned entities.
+    /// In other words, hit point 1 corresponds with found entity 1, hit point 2 corresponds with found entity 2, and so on.
+    /// visibleEntitiesOnly : Optional argument that indicates whether or not invisible entities should be included in the search. Defaults to True indicating that invisible entities will be ignored.
+    /// Returns an array containing the mesh bodies found. The returned array can be empty indicating nothing was found. The points are returned
+    /// in an order where they are arranged based on their distance from the origin point where the closest point is first. If an mesh body is hit more than
+    /// once, the entity is returned once for the first intersection.
+    std::vector<core::Ptr<MeshBody>> findMeshUsingRay(const core::Ptr<core::Point3D>& originPoint, const core::Ptr<core::Vector3D>& rayDirection, std::vector<core::Ptr<core::Point3D>>& hitPoints, bool visibleEntitiesOnly = true);
+
     ADSK_FUSION_COMPONENT_API static const char* classType();
     ADSK_FUSION_COMPONENT_API const char* objectType() const override;
     ADSK_FUSION_COMPONENT_API void* queryInterface(const char* id) const override;
@@ -515,6 +529,7 @@ private:
     virtual bool isJointOriginsFolderLightBulbOn_raw() const = 0;
     virtual bool isJointOriginsFolderLightBulbOn_raw(bool value) = 0;
     virtual MotionLinks* motionLinks_raw() const = 0;
+    virtual MeshBody** findMeshUsingRay_raw(core::Point3D* originPoint, core::Vector3D* rayDirection, core::Point3D**& hitPoints, size_t& hitPoints_size, bool visibleEntitiesOnly, size_t& return_size) = 0;
     virtual void placeholderComponent0() {}
     virtual void placeholderComponent1() {}
     virtual void placeholderComponent2() {}
@@ -696,7 +711,6 @@ private:
     virtual void placeholderComponent178() {}
     virtual void placeholderComponent179() {}
     virtual void placeholderComponent180() {}
-    virtual void placeholderComponent181() {}
 };
 
 // Inline wrappers
@@ -1240,6 +1254,27 @@ inline bool Component::isJointOriginsFolderLightBulbOn(bool value)
 inline core::Ptr<MotionLinks> Component::motionLinks() const
 {
     core::Ptr<MotionLinks> res = motionLinks_raw();
+    return res;
+}
+
+inline std::vector<core::Ptr<MeshBody>> Component::findMeshUsingRay(const core::Ptr<core::Point3D>& originPoint, const core::Ptr<core::Vector3D>& rayDirection, std::vector<core::Ptr<core::Point3D>>& hitPoints, bool visibleEntitiesOnly)
+{
+    std::vector<core::Ptr<MeshBody>> res;
+    size_t s;
+    core::Point3D** hitPoints_ = nullptr;
+    size_t hitPoints_size;
+
+    MeshBody** p= findMeshUsingRay_raw(originPoint.get(), rayDirection.get(), hitPoints_, hitPoints_size, visibleEntitiesOnly, s);
+    if(hitPoints_)
+    {
+        hitPoints.assign(hitPoints_, hitPoints_ + hitPoints_size);
+        core::DeallocateArray(hitPoints_);
+    }
+    if(p)
+    {
+        res.assign(p, p+s);
+        core::DeallocateArray(p);
+    }
     return res;
 }
 }// namespace fusion

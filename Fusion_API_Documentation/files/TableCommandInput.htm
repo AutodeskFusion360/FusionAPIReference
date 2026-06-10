@@ -36,7 +36,9 @@
               Derived from: <a href="CommandInput.htm">CommandInput</a> Object
             <br>Defined in namespace "adsk::core" and the header file is &lt;Core/UserInterface/TableCommandInput.h&gt;<h2 class="api">
           Description
-        </h2>Represents a table within a command dialog. The table consists of rows and columns where each cell can contain another command input. The selection and button row command inputs cannot be used within a table. In addition to the rows and columns, each table can optionally have a toolbar of separate command inputs that is shown at the bottom of the table.<br/><br/> A table command input can conceptually be compared to an Excel table where you have an infinite number of rows and columns available but use a small portion. As you add inputs to the table, the table will adjust so all used columns are visible. The visible number of rows is controlled by you and if you create more rows than can be displayed a scroll bar becomes available.<br/><br/> For an example of this command input, see the loft command which uses it to show the selected profiles and rails.<h2 class="api">
+        </h2>
+    <p class="api">Represents a table within a command dialog. The table consists of rows and columns where each cell can contain another command input. The selection and button row command inputs cannot be used within a table. In addition to the rows and columns, each table can optionally have a toolbar of separate command inputs that is shown at the bottom of the table.<br/><br/> A table command input can conceptually be compared to an Excel table where you have an infinite number of rows and columns available but use a small portion. As you add inputs to the table, the table will adjust so all used columns are visible. The visible number of rows is controlled by you and if you create more rows than can be displayed a scroll bar becomes available.<br/><br/> For an example of this command input, see the loft command which uses it to show the selected profiles and rails.</p>
+    <h2 class="api">
             Methods
           </h2>
     <Table class="api-list">
@@ -50,39 +52,57 @@
       </tr>
       <tr>
         <td class="api-list"><a href="TableCommandInput_addCommandInput.htm">addCommandInput</a></td>
-        <td class="api-list">Adds a command input to a particular cell in the table. Rows are automatically added to the table to able to contain the command input. The command input can span multiple columns within a row and spanning across multiple rows is not currently supported.<br/><br/> The command input is created in the standard way but when it's added to the table using this method it will be displayed in the table instead of the main area of the dialog.</td>
+        <td class="api-list">
+          <p class="api">Adds a command input to a particular cell in the table. Rows are automatically added to the table to able to contain the command input. The command input can span multiple columns within a row and spanning across multiple rows is not currently supported.<br/><br/> The command input is created in the standard way but when it's added to the table using this method it will be displayed in the table instead of the main area of the dialog.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="TableCommandInput_addToolbarCommandInput.htm">addToolbarCommandInput</a></td>
-        <td class="api-list">Adds a new command input to the toolbar at the bottom of the table.</td>
+        <td class="api-list">
+          <p class="api">Adds a new command input to the toolbar at the bottom of the table.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="TableCommandInput_classType.htm">classType</a></td>
-        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+        <td class="api-list">
+          <p class="api">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="TableCommandInput_clear.htm">clear</a></td>
-        <td class="api-list">Removes all rows in the table and the toolbar.</td>
+        <td class="api-list">
+          <p class="api">Removes all rows in the table and the toolbar.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="TableCommandInput_deleteMe.htm">deleteMe</a></td>
-        <td class="api-list">Deletes this Command input.</td>
+        <td class="api-list">
+          <p class="api">Deletes this Command input.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="TableCommandInput_deleteRow.htm">deleteRow</a></td>
-        <td class="api-list">Deletes the specified row. The following rows will be shifted up. The row and the command inputs it contains are deleted. To temporarily hide a row you can set the visibility of all of the command inputs it contains to be invisible. If all inputs are invisible the row will automatically be hidden.</td>
+        <td class="api-list">
+          <p class="api">Deletes the specified row. The following rows will be shifted up. The row and the command inputs it contains are deleted. To temporarily hide a row you can set the visibility of all of the command inputs it contains to be invisible. If all inputs are invisible the row will automatically be hidden.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="TableCommandInput_getInputAtPosition.htm">getInputAtPosition</a></td>
-        <td class="api-list">Returns the command input that is in the specified row and column. In the case where a command input spans multiple columns, the same input can be returned from multiple positions.</td>
+        <td class="api-list">
+          <p class="api">Returns the command input that is in the specified row and column. In the case where a command input spans multiple columns, the same input can be returned from multiple positions.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="TableCommandInput_getPosition.htm">getPosition</a></td>
-        <td class="api-list">Gets the position of the specified command input within the table.</td>
+        <td class="api-list">
+          <p class="api">Gets the position of the specified command input within the table.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="TableCommandInput_removeInput.htm">removeInput</a></td>
-        <td class="api-list">Removes the command input that is at the specified row and column. This doesn't delete the command input from the collection of inputs associated with the command but just removes it from being displayed in the table.</td>
+        <td class="api-list">
+          <p class="api">Removes the command input that is at the specified row and column. This doesn't delete the command input from the collection of inputs associated with the command but just removes it from being displayed in the table.</p>
+        </td>
       </tr>
     </Table>
     <h2 class="api">
@@ -225,7 +245,7 @@
           <td align="left">
                 © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(TableCommandInput%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(TableCommandInput%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

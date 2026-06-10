@@ -59,14 +59,14 @@ public:
     /// Returns 0 if there is no upper tolerance value set.
     double upperTolerance() const;
 
-    /// Gets whether there is a tolerance class set.
+    /// Gets whether there is a hole tolerance class set.
     bool hasToleranceClass() const;
 
-    /// Gets the tolerance class deviation value.
+    /// Gets the hole tolerance class deviation value.
     /// Returns empty string if there is no tolerance class deviation value set.
     std::string toleranceClassDeviation() const;
 
-    /// Gets the tolerance class grade value.
+    /// Gets the hole tolerance class grade value.
     /// Returns empty string if there is no tolerance class grade value set.
     std::string toleranceClassGrade() const;
 
@@ -145,6 +145,17 @@ public:
     /// Returns true if the operation is successful, false otherwise.
     bool setLimitsFitsTolerance(double size, const std::string& holeFit, const std::string& shaftFit);
 
+    /// Gets whether there is a shaft tolerance class set.
+    bool hasShaftToleranceClass() const;
+
+    /// Gets the shaft tolerance class deviation value.
+    /// Returns empty string if there is no tolerance class deviation value set.
+    std::string shaftToleranceClassDeviation() const;
+
+    /// Gets the shaft tolerance class grade value.
+    /// Returns empty string if there is no tolerance class grade value set.
+    std::string shaftToleranceClassGrade() const;
+
     ADSK_FUSION_PMIGEOMETRICVALUETOLERANCE_API static const char* classType();
     ADSK_FUSION_PMIGEOMETRICVALUETOLERANCE_API const char* objectType() const override;
     ADSK_FUSION_PMIGEOMETRICVALUETOLERANCE_API void* queryInterface(const char* id) const override;
@@ -175,6 +186,9 @@ private:
     virtual bool setLimitsFitsLinear_raw(double size, const char* holeFit, const char* shaftFit) = 0;
     virtual bool setLimitsFitsSizeLimits_raw(double size, const char* holeFit, const char* shaftFit) = 0;
     virtual bool setLimitsFitsTolerance_raw(double size, const char* holeFit, const char* shaftFit) = 0;
+    virtual bool hasShaftToleranceClass_raw() const = 0;
+    virtual char* shaftToleranceClassDeviation_raw() const = 0;
+    virtual char* shaftToleranceClassGrade_raw() const = 0;
 };
 
 // Inline wrappers
@@ -321,6 +335,38 @@ inline bool PMIGeometricValueTolerance::setLimitsFitsSizeLimits(double size, con
 inline bool PMIGeometricValueTolerance::setLimitsFitsTolerance(double size, const std::string& holeFit, const std::string& shaftFit)
 {
     bool res = setLimitsFitsTolerance_raw(size, holeFit.c_str(), shaftFit.c_str());
+    return res;
+}
+
+inline bool PMIGeometricValueTolerance::hasShaftToleranceClass() const
+{
+    bool res = hasShaftToleranceClass_raw();
+    return res;
+}
+
+inline std::string PMIGeometricValueTolerance::shaftToleranceClassDeviation() const
+{
+    std::string res;
+
+    char* p= shaftToleranceClassDeviation_raw();
+    if (p)
+    {
+        res = p;
+        core::DeallocateArray(p);
+    }
+    return res;
+}
+
+inline std::string PMIGeometricValueTolerance::shaftToleranceClassGrade() const
+{
+    std::string res;
+
+    char* p= shaftToleranceClassGrade_raw();
+    if (p)
+    {
+        res = p;
+        core::DeallocateArray(p);
+    }
     return res;
 }
 }// namespace fusion

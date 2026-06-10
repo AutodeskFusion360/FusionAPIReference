@@ -40,6 +40,7 @@ namespace adsk { namespace fusion {
     class DeriveFeature;
     class Occurrence;
     class TimelineObject;
+    class UserCoordinateSystem;
 }}
 
 namespace adsk { namespace fusion {
@@ -157,6 +158,20 @@ public:
     /// This property returns null if the construction plane is not derived from another design (i.e. isDerived property returns false).
     core::Ptr<DeriveFeature> deriveFeature() const;
 
+    /// !!!!! Warning !!!!!
+    /// ! This is in preview state; please see the help for more info
+    /// !!!!! Warning !!!!!
+    /// 
+    /// Returns true if this ConstructionPlane is part of a User Coordinate System (UCS).
+    bool isUCSGeometry() const;
+
+    /// !!!!! Warning !!!!!
+    /// ! This is in preview state; please see the help for more info
+    /// !!!!! Warning !!!!!
+    /// 
+    /// Returns the UCS this ConstructionPlane is part of. Returns null if this plane is not part of a UCS.
+    core::Ptr<UserCoordinateSystem> parentUCS() const;
+
     ADSK_FUSION_CONSTRUCTIONPLANE_API static const char* classType();
     ADSK_FUSION_CONSTRUCTIONPLANE_API const char* objectType() const override;
     ADSK_FUSION_CONSTRUCTIONPLANE_API void* queryInterface(const char* id) const override;
@@ -192,6 +207,8 @@ private:
     virtual char* entityToken_raw() const = 0;
     virtual bool isDerived_raw() const = 0;
     virtual DeriveFeature* deriveFeature_raw() const = 0;
+    virtual bool isUCSGeometry_raw() const = 0;
+    virtual UserCoordinateSystem* parentUCS_raw() const = 0;
 };
 
 // Inline wrappers
@@ -372,6 +389,18 @@ inline bool ConstructionPlane::isDerived() const
 inline core::Ptr<DeriveFeature> ConstructionPlane::deriveFeature() const
 {
     core::Ptr<DeriveFeature> res = deriveFeature_raw();
+    return res;
+}
+
+inline bool ConstructionPlane::isUCSGeometry() const
+{
+    bool res = isUCSGeometry_raw();
+    return res;
+}
+
+inline core::Ptr<UserCoordinateSystem> ConstructionPlane::parentUCS() const
+{
+    core::Ptr<UserCoordinateSystem> res = parentUCS_raw();
     return res;
 }
 }// namespace fusion

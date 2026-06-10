@@ -90,19 +90,68 @@ enum ElementSizeDeterminationTypes
 /// ! This is hidden and not officially supported
 /// !!!!! Warning !!!!!
 /// 
-/// Load direction types.
-enum LoadDirectionTypes
+/// Valid force unit types for simulation studies.
+enum ForceUnits
 {
-    /// Unknown load direction type.
-    UnknownLoadDirectionType,
-    /// Load direction type default.
-    DefaultLoadDirectionType,
-    /// Load direction type cartesian.
-    CartesianLoadDirectionType,
-    /// Load direction type angles.
-    AnglesLoadDirectionType,
-    /// Load direction type reference.
-    ReferenceLoadDirectionType
+    /// Read-only value, resolves to the document's currently active force unit.
+    DefaultForceUnit,
+    /// Unknown force unit type.
+    UnknownForceUnit,
+    /// Newton (N).
+    NewtonForceUnit,
+    /// Dyne (dyne).
+    DyneForceUnit,
+    /// Pound-force (lbforce).
+    PoundForceUnit,
+    /// Ounce-force (ozforce).
+    OunceForceUnit,
+    /// Ton-force (tonforce).
+    TonForceUnit
+};
+
+/// !!!!! Warning !!!!!
+/// ! This is hidden and not officially supported
+/// !!!!! Warning !!!!!
+/// 
+/// Load types.
+enum LoadTypes
+{
+    /// Unknown load type.
+    UnknownLoadType,
+    /// Pressure load type.
+    PressureLoadType,
+    /// Hydrostatic pressure load type.
+    HydrostaticPressureLoadType,
+    /// Force load type.
+    ForceLoadType,
+    /// Moment load type.
+    MomentLoadType,
+    /// Bearing load type.
+    BearingLoadType,
+    /// Flow rate load type.
+    FlowRateLoadType,
+    /// Flow velocity load type.
+    FlowVelocityLoadType,
+    /// Fan attribute load type.
+    FanAttributeLoadType,
+    /// Heat sink load type.
+    HeatSinkLoadType,
+    /// Gravity load type.
+    GravityLoadType,
+    /// Linear global load type.
+    LinearGlobalLoadType,
+    /// Angular global load type.
+    AngularGlobalLoadType,
+    /// Temperature load type.
+    TemperatureLoadType,
+    /// Thermal convection load type.
+    ThermalConvectionLoadType,
+    /// Thermal emissivity load type.
+    RadiationLoadType,
+    /// Thermal internal heat load type.
+    ThermalInternalHeatLoadType,
+    /// Thermal surface heat load type.
+    ThermalSurfaceHeatLoadType
 };
 
 /// !!!!! Warning !!!!!
@@ -154,6 +203,27 @@ enum SafetyFactorTypes
 /// ! This is hidden and not officially supported
 /// !!!!! Warning !!!!!
 /// 
+/// Predefined unit systems available for simulation studies.
+enum SimulationUnitSystems
+{
+    /// Metric (SI) unit system:
+    /// Length: mm, Mass: kg, Time: s, Force: N, Pressure: MPa,
+    /// Temperature: K, Energy: J, Power: W, Acceleration: m/s^2, Flow Rate: CMH, Angle: deg,
+    /// Velocity: m/s, Viscosity: Ns/m^2.
+    MetricSIUnitSystem,
+    /// U.S. (in) unit system:
+    /// Length: in, Mass: lbmass, Time: s, Force: lbforce, Pressure: psi,
+    /// Temperature: F, Energy: Btu, Power: Btu/s, Acceleration: ft/s^2, Flow Rate: CFM, Angle: deg,
+    /// Velocity: ft/s, Viscosity: lbforce * s/ft^2.
+    ImperialUnitSystem,
+    /// Custom unit system that allows any combination of units per quantity.
+    CustomUnitSystem
+};
+
+/// !!!!! Warning !!!!!
+/// ! This is hidden and not officially supported
+/// !!!!! Warning !!!!!
+/// 
 /// Simulation study types.
 enum StudyTypes
 {
@@ -181,6 +251,25 @@ enum StudyTypes
     ShapeOptimizationStudyType,
     /// Injection molding simulation study type.
     InjectionMoldingStudyType
+};
+
+/// !!!!! Warning !!!!!
+/// ! This is hidden and not officially supported
+/// !!!!! Warning !!!!!
+/// 
+/// Load vector definition types.
+enum VectorDefinitionTypes
+{
+    /// Unknown vector definition type.
+    UnknownVectorDefinitionType,
+    /// Vector defined by the normal to the applied entity.
+    NormalVectorDefinitionType,
+    /// Vector defined directly by a vector.
+    VectorVectorDefinitionType,
+    /// Vector based on rotations around a reference geometry.
+    AnglesVectorDefinitionType,
+    /// Vector based on a reference geometry.
+    ReferenceVectorDefinitionType
 };
 
 }// namespace sim

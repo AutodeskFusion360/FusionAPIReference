@@ -101,10 +101,6 @@ public:
     /// Checks whether the print setting is usable with the given machine.
     bool isCompatibleWithMachine(const core::Ptr<Machine>& machine);
 
-    /// !!!!! Warning !!!!!
-    /// ! This is in preview state; please see the help for more info
-    /// !!!!! Warning !!!!!
-    /// 
     /// Generates and returns the print setting xml content string.
     /// Returns print setting xml content string.
     std::string toXML() const;

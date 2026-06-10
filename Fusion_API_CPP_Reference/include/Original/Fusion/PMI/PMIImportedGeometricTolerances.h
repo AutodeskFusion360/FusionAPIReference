@@ -65,7 +65,7 @@ public:
     /// 
     /// This is useful for finding PMIImportedGeometricTolerance that reference specific geometric features.
     /// entities : An array of core.Base objects that represent the geometric entities to search for associated PMI. These can be BRepFace,
-    /// BRepEdge or BRepVertex objects. The function will return the PMIImportedGeometricTolerance that references any of these entities in their geometric associations.
+    /// BRepEdge, BRepVertex, or BRepBody objects. The function will return the PMIImportedGeometricTolerance that references any of these entities in their geometric associations.
     /// types : An optional array of PMITypes that filters the results to include only PMI that matches the type presented in the specified types. If an empty array or null
     /// is passed, all the PMIImportedGeometricTolerance associated with the specified geometric entities will be returned, regardless of type.
     /// Returns an array of PMIImportedGeometricTolerance objects that are associated with the specified entities and match the type filter (if provided)

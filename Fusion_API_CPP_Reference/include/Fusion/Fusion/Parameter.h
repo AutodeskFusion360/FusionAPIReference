@@ -65,6 +65,11 @@ public:
     /// More complex equations can also be used with text parameters like
     /// "if (Length < 20 mm; 'Short'; 'Long')" where "Length" is a numeric parameter.
     /// The resulting string can be obtained using the textValue property.
+    /// 
+    /// When setting the expression of a text parameter to a literal string value, the string must be
+    /// enclosed in single quotes (e.g. "'Hello Fusion'"). An unquoted value like "Hello Fusion" will
+    /// fail to parse because the tokens are interpreted as symbols rather than literal text. If you
+    /// want to set a plain string value without managing quotes, use the textValue property instead.
     std::string expression() const;
     bool expression(const std::string& value);
 

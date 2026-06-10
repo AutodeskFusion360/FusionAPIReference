@@ -36,7 +36,9 @@
               Derived from: <a href="Base.htm">Base</a> Object
             <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Construction/ConstructionAxis.h&gt;<h2 class="api">
           Description
-        </h2>ConstructionAxis Object<h2 class="api">
+        </h2>
+    <p class="api">ConstructionAxis Object</p>
+    <h2 class="api">
             Methods
           </h2>
     <Table class="api-list">
@@ -50,15 +52,21 @@
       </tr>
       <tr>
         <td class="api-list"><a href="ConstructionAxis_classType.htm">classType</a></td>
-        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+        <td class="api-list">
+          <p class="api">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="ConstructionAxis_createForAssemblyContext.htm">createForAssemblyContext</a></td>
-        <td class="api-list">Creates or returns a proxy for the native object - i.e. a new object that represents this object but adds the assembly context defined by the input occurrence.</td>
+        <td class="api-list">
+          <p class="api">Creates or returns a proxy for the native object - i.e. a new object that represents this object but adds the assembly context defined by the input occurrence.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="ConstructionAxis_deleteMe.htm">deleteMe</a></td>
-        <td class="api-list">Deletes the construction axis.</td>
+        <td class="api-list">
+          <p class="api">Deletes the construction axis.</p>
+        </td>
       </tr>
     </Table>
     <h2 class="api">
@@ -130,6 +138,10 @@
         <td class="api-list">Indicates if this construction axis is parametric or not.</td>
       </tr>
       <tr>
+        <td class="api-list"><a href="ConstructionAxis_isUCSGeometry.htm">isUCSGeometry</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Returns true if this ConstructionAxis is part of a User Coordinate System (UCS).</td>
+      </tr>
+      <tr>
         <td class="api-list"><a href="ConstructionAxis_isValid.htm">isValid</a></td>
         <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
       </tr>
@@ -154,13 +166,17 @@
         <td class="api-list">Returns the parent component or base feature. If both the design and the construction axis are parametric, the parent will be a component. If the design is parametric and the construction axis is not, the parent will be a base feature. If the design is not parametric the parent will be a component.</td>
       </tr>
       <tr>
+        <td class="api-list"><a href="ConstructionAxis_parentUCS.htm">parentUCS</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Returns the UCS this ConstructionAxis is part of. Returns null if this axis is not part of a UCS.</td>
+      </tr>
+      <tr>
         <td class="api-list"><a href="ConstructionAxis_timelineObject.htm">timelineObject</a></td>
         <td class="api-list">Returns the timeline object associated with this construction axis.</td>
       </tr>
     </Table>
     <h2 class="api">
             Accessed From
-          </h2><a href="BaseFeature_constructionAxes.htm">BaseFeature.constructionAxes</a>, <a href="Component_xConstructionAxis.htm">Component.xConstructionAxis</a>, <a href="Component_yConstructionAxis.htm">Component.yConstructionAxis</a>, <a href="Component_zConstructionAxis.htm">Component.zConstructionAxis</a>, <a href="ConstructionAxes_add.htm">ConstructionAxes.add</a>, <a href="ConstructionAxes_item.htm">ConstructionAxes.item</a>, <a href="ConstructionAxes_itemByName.htm">ConstructionAxes.itemByName</a>, <a href="ConstructionAxis_createForAssemblyContext.htm">ConstructionAxis.createForAssemblyContext</a>, <a href="ConstructionAxis_nativeObject.htm">ConstructionAxis.nativeObject</a>, <a href="ConstructionAxisByLineDefinition_parentConstructionAxis.htm">ConstructionAxisByLineDefinition.parentConstructionAxis</a>, <a href="ConstructionAxisCircularFaceDefinition_parentConstructionAxis.htm">ConstructionAxisCircularFaceDefinition.parentConstructionAxis</a>, <a href="ConstructionAxisDefinition_parentConstructionAxis.htm">ConstructionAxisDefinition.parentConstructionAxis</a>, <a href="ConstructionAxisEdgeDefinition_parentConstructionAxis.htm">ConstructionAxisEdgeDefinition.parentConstructionAxis</a>, <a href="ConstructionAxisNormalToFaceAtPointDefinition_parentConstructionAxis.htm">ConstructionAxisNormalToFaceAtPointDefinition.parentConstructionAxis</a>, <a href="ConstructionAxisPerpendicularAtPointDefinition_parentConstructionAxis.htm">ConstructionAxisPerpendicularAtPointDefinition.parentConstructionAxis</a>, <a href="ConstructionAxisTwoPlaneDefinition_parentConstructionAxis.htm">ConstructionAxisTwoPlaneDefinition.parentConstructionAxis</a>, <a href="ConstructionAxisTwoPointDefinition_parentConstructionAxis.htm">ConstructionAxisTwoPointDefinition.parentConstructionAxis</a>, <a href="FlatPatternComponent_xConstructionAxis.htm">FlatPatternComponent.xConstructionAxis</a>, <a href="FlatPatternComponent_yConstructionAxis.htm">FlatPatternComponent.yConstructionAxis</a>, <a href="FlatPatternComponent_zConstructionAxis.htm">FlatPatternComponent.zConstructionAxis</a><h2 class="api">
+          </h2><a href="BaseFeature_constructionAxes.htm">BaseFeature.constructionAxes</a>, <a href="Component_xConstructionAxis.htm">Component.xConstructionAxis</a>, <a href="Component_yConstructionAxis.htm">Component.yConstructionAxis</a>, <a href="Component_zConstructionAxis.htm">Component.zConstructionAxis</a>, <a href="ConstructionAxes_add.htm">ConstructionAxes.add</a>, <a href="ConstructionAxes_item.htm">ConstructionAxes.item</a>, <a href="ConstructionAxes_itemByName.htm">ConstructionAxes.itemByName</a>, <a href="ConstructionAxis_createForAssemblyContext.htm">ConstructionAxis.createForAssemblyContext</a>, <a href="ConstructionAxis_nativeObject.htm">ConstructionAxis.nativeObject</a>, <a href="ConstructionAxisByLineDefinition_parentConstructionAxis.htm">ConstructionAxisByLineDefinition.parentConstructionAxis</a>, <a href="ConstructionAxisCircularFaceDefinition_parentConstructionAxis.htm">ConstructionAxisCircularFaceDefinition.parentConstructionAxis</a>, <a href="ConstructionAxisDefinition_parentConstructionAxis.htm">ConstructionAxisDefinition.parentConstructionAxis</a>, <a href="ConstructionAxisEdgeDefinition_parentConstructionAxis.htm">ConstructionAxisEdgeDefinition.parentConstructionAxis</a>, <a href="ConstructionAxisNormalToFaceAtPointDefinition_parentConstructionAxis.htm">ConstructionAxisNormalToFaceAtPointDefinition.parentConstructionAxis</a>, <a href="ConstructionAxisPerpendicularAtPointDefinition_parentConstructionAxis.htm">ConstructionAxisPerpendicularAtPointDefinition.parentConstructionAxis</a>, <a href="ConstructionAxisTwoPlaneDefinition_parentConstructionAxis.htm">ConstructionAxisTwoPlaneDefinition.parentConstructionAxis</a>, <a href="ConstructionAxisTwoPointDefinition_parentConstructionAxis.htm">ConstructionAxisTwoPointDefinition.parentConstructionAxis</a>, <a href="FlatPatternComponent_xConstructionAxis.htm">FlatPatternComponent.xConstructionAxis</a>, <a href="FlatPatternComponent_yConstructionAxis.htm">FlatPatternComponent.yConstructionAxis</a>, <a href="FlatPatternComponent_zConstructionAxis.htm">FlatPatternComponent.zConstructionAxis</a>, <a href="UserCoordinateSystem_xConstructionAxis.htm">UserCoordinateSystem.xConstructionAxis</a>, <a href="UserCoordinateSystem_yConstructionAxis.htm">UserCoordinateSystem.yConstructionAxis</a>, <a href="UserCoordinateSystem_zConstructionAxis.htm">UserCoordinateSystem.zConstructionAxis</a><h2 class="api">
             Samples
           </h2>
     <Table class="api-list">
@@ -191,7 +207,7 @@
           <td align="left">
                 © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(ConstructionAxis%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(ConstructionAxis%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

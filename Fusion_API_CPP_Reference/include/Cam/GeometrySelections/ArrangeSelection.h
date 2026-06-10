@@ -119,10 +119,6 @@ public:
     bool isUsingCustomQuantity() const;
     bool isUsingCustomQuantity(bool value);
 
-    /// !!!!! Warning !!!!!
-    /// ! This is in preview state; please see the help for more info
-    /// !!!!! Warning !!!!!
-    /// 
     /// Gets and sets the custom multi-axis rotation type.
     /// This function is not available in Fusion for Personal Use.
     /// To enable any rotation the parameter "arrange_rotation_group" of the operation must be set to true.
@@ -131,10 +127,6 @@ public:
     MultiAxisRotationTypes customMultiAxisRotationType() const;
     bool customMultiAxisRotationType(MultiAxisRotationTypes value);
 
-    /// !!!!! Warning !!!!!
-    /// ! This is in preview state; please see the help for more info
-    /// !!!!! Warning !!!!!
-    /// 
     /// Gets and sets if custom multi-axis rotation type is used for this element.
     /// This function is not available in Fusion for Personal Use.
     /// Throws an exception when calling this function in Fusion for Personal Use.

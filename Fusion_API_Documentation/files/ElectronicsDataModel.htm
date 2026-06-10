@@ -1,0 +1,126 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/ElectronicsDataModel_UM.htm#!">
+    <meta name="contextid" content="ElectronicsDataModel_UM">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="5/8/2026">
+    <meta name="user-comments" content="enable">
+    <meta name="description" content="">
+    <meta name="topicid" content="GUID-44F11445-EF4E-A22C-F041-E6228A23AA48">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Electronics data model</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+	<link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"/>
+	<script type="text/javascript" src="/view/clientframework/client.js"><!--filler--></script>
+	<script>
+	  window.onload = function() {
+		copyrightElement = document.getElementById('CopyrightNotice');
+		copyrightElement.style.display = 'block';
+	  };
+	</script>
+</head>
+<body>
+<link rel="stylesheet" href="../Style/APIHelp.css">
+<link rel="stylesheet" href="../Style/prism.css">
+<script src="../Scripts/prism.js"><!--filler--></script>
+<style>
+	pre.line-numbers [aria-hidden=true]
+	{
+		display: block!important;
+	}
+</style>
+
+<h2 class="api">Electronics data model</h2>
+<h3 class="api">Electronics object model basics</h3>
+<p Class="api">Once you have a reference to an Electronics <strong>product</strong>—for example, a <strong><code>Schematic</code></strong> or <strong><code>Board</code></strong> cast from <strong><code>Application.activeProduct</code></strong>—you <strong>traverse the object model</strong> the same way you do in the ULP: you move from the product, to the collections and properties on that product, to the child objects and their collections, until you reach the object you need. The API is structured so that <strong>nested design data</strong> (such as multiple schematic <strong>sheets</strong> or a library broken into <strong>device sets</strong> and <strong>devices</strong>) is exposed as <strong>properties and collections</strong> on those types.</p>
+<h3 class="api">Four top-level products</h3>
+<p Class="api">You get one of the following by casting a <strong><code>Product</code></strong> to the type that matches the document and workspace, as described in <a href="./ElectronicsIntro_UM.htm">Introduction to the Electronics API</a>.</p>
+<table>
+<thead>
+<tr>
+<th>Product</th>
+<th>Role in the design</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>EcadDesign</code></strong></td>
+<td>The <strong>design project</strong> that ties the <strong>schematic</strong> and <strong>board</strong> of one electronics design.</td>
+</tr>
+<tr>
+<td><strong><code>Schematic</code></strong></td>
+<td>The <strong>schematic</strong> side: pages (<strong>sheets</strong>), connectivity, and schematic-specific collections.</td>
+</tr>
+<tr>
+<td><strong><code>Board</code></strong></td>
+<td>The <strong>PCB</strong> side: <strong>elements</strong> (placements), <strong>signals</strong>, layers, and board geometry.</td>
+</tr>
+<tr>
+<td><strong><code>Library</code></strong></td>
+<td>A <strong>component library</strong> document: symbols, packages, <strong>device sets</strong>, <strong>devices</strong>, and related data.</td>
+</tr>
+</tbody>
+</table>
+<p Class="api"><strong>How these connect</strong></p>
+<ul>
+<li>From <strong><code>EcadDesign</code></strong>: use <strong><code>schematic</code></strong> and <strong><code>board</code></strong> to move between the two sides of the same project.</li>
+<li>From <strong><code>Schematic</code></strong>: use <strong><code>linkedBoard</code></strong> to reach the board in the same design (when it exists), and <strong><code>parentDesign</code></strong> when the schematic is part of a design.</li>
+<li>From <strong><code>Board</code></strong>: use <strong><code>linkedSchematic</code></strong> and <strong><code>parentDesign</code></strong> the same way.</li>
+<li>From <strong><code>Library</code></strong>: use <strong><code>parentDesign</code></strong> when the library is <strong>embedded in a design</strong>; it is <strong><code>None</code></strong> (or <code>null</code> in C++) for a <strong>standalone</strong> library document.</li>
+</ul>
+<h3 class="api">Walking the hierarchy</h3>
+<p Class="api">Every <strong>child set</strong> in the Electronics API is exposed as a <strong>collection</strong> with:</p>
+<ul>
+<li><strong><code>count</code></strong> — how many items are in the set  </li>
+<li><strong><code>item(i)</code></strong> — the item at index <strong><code>i</code></strong>, where <strong><code>i</code></strong> is <strong>0</strong> for the first item  </li>
+</ul>
+<p Class="api">You obtain a product, then read a property (such as <strong><code>sheets</code></strong>) to get a collection, then use <strong><code>item</code></strong> to get each child object, then read that object’s own properties and collections, and so on, until you are done.</p>
+<p Class="api">The example below walks <strong>sheets</strong> on a schematic, then <strong>instances</strong> on each sheet, using the same <code>count</code> / <code>item</code> pattern at both levels. Your own scripts can follow the same structure for other collections; see the object types reference for the exact property names on each type.</p>
+<pre><code class="language-python"># Get the application and cast to a schematic, as in the Introduction topic.
+import adsk.core
+import adsk.electron
+
+app = adsk.core.Application.get()
+schematic = adsk.electron.Schematic.cast(app.activeProduct)
+if schematic is None:
+    return
+
+# Outer collection: all sheets in the schematic.
+for si in range(schematic.sheets.count):
+    sheet = schematic.sheets.item(si)
+
+    # Inner collection: instances on this sheet; same count / item pattern.
+    for ii in range(sheet.instances.count):
+        inst = sheet.instances.item(ii)
+        # Print position of instance to Text Commands pannel
+        app.log(&quot;({inst.x}, {inst.y})&quot;)
+</code></pre>
+<p Class="api"><strong>Typical deeper nesting</strong></p>
+<ul>
+<li><strong>Schematic → Sheet</strong> — A schematic has a <strong><code>sheets</code></strong> collection. Each <strong>Sheet</strong> has its own child collections (geometry, <strong>instances</strong>, connectivity, and so on).  </li>
+<li><strong>Library → DeviceSet → Device</strong> — A <strong>Library</strong> has <strong><code>deviceSets</code></strong>, each <strong>DeviceSet</strong> has a <strong><code>devices</code></strong> collection, and each <strong>Device</strong> has further child data. The same <code>count</code> / <code>item</code> rule applies at every step.</li>
+</ul>
+<br />
+<br />
+<div id="CopyrightNotice" style="display:none;">
+  <hr />
+  <table width="100%" style="font-size:15">
+	<tr>
+	  <td align="left">
+		&copy; Copyright 2026 Autodesk, Inc.
+	  </td>
+	  <td align="right">
+		<a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(ElectronicsDataModel)">Comment on this page.</a>
+	  </td>
+	</tr>
+  </table>
+</div></body>
+</html>

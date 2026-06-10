@@ -194,7 +194,7 @@ public:
     bool removeReferences(const core::Ptr<core::Base>& entity, bool removeFromChildren);
 
     /// !!!!! Warning !!!!!
-    /// ! This is hidden and not officially supported
+    /// ! This is in preview state; please see the help for more info
     /// !!!!! Warning !!!!!
     /// 
     /// The color of the note icon. This represents the color of the note icon in the browser, which is displayed next to the operation name when the operation has notes.

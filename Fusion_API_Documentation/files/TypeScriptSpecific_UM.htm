@@ -1,0 +1,370 @@
+ <html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/TypeScriptSpecific_UM.htm#!">
+    <meta name="contextid" content="TypeScriptSpecific_UM">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="21/5/2026">
+    <meta name="user-comments" content="enable">
+    <meta name="description" content="">
+    <meta name="topicid" content="GUID-CBF3C8A9-0D9E-4BDF-8FCB-6483D19DC55E">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+	<link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"/>
+    <title>TypeScript Specific Issues</title>
+	<script type="text/javascript" src="/view/clientframework/client.js"><!--filler--></script>
+	<script>
+	  // This turns on the display of the copyright notice which is not visible by default.
+	  // Because the head is removed when used in the web help, this function will only exists
+	  // when the chm help is being created.
+	  window.onload = function() {
+		copyrightElement = document.getElementById('CopyrightNotice');
+		copyrightElement.style.display = 'block';
+	  };
+	</script>
+</head>
+<body>
+<link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+
+<h2 class="api">TypeScript Specific Issues</h2>
+
+<p Class="api">Fusion has a single API that can be used from Python, C++, or TypeScript. In most cases, the API is used in a very similar way regardless of the programming language with just small language-specific syntax changes. However, in some cases there are significant differences in how the API is used because of a particular language. This topic discusses the differences that are unique to TypeScript and covers the subjects listed below.</p>
+
+<ul>
+<li><a href="#Importing the API">Importing the API</a></li>
+<li><a href="#CreatingAddIns">Creating Scripts and Add-Ins with TypeScript</a></li>
+<li><a href="#Editing">Editing and Debugging</a></li>
+<li><a href="#Reference Arguments">Reference Arguments</a></li>
+<li><a href="#Events">Events</a></li>
+<li><a href="#Working with Collections">Working with Collections</a></li>
+<li><a href="#Object Types">Object Types</a></li>
+<li><a href="#Object Equality">Object Equality</a></li>
+<li><a href="#Additional Modules">Additional Modules</a></li>
+<li><a href="#Miscellaneous">Miscellaneous</a></li>
+</ul>
+
+<a name="Importing the API"></a>
+<h3 class="api">Importing the API</h3>
+
+<p Class="api">The Fusion TypeScript API is accessed by importing from one of two modules: <code>@adsk/fusion</code> for desktop scripts and add-ins, or <code>@adsk/fusion/automation</code> for scripts that run on the Automation Service. Both export the same <code>adsk</code> namespace object &mdash; the difference is in the permission model. <code>@adsk/fusion</code> carries Desktop permissions (network, file I/O, UI, canvas, text commands), while <code>@adsk/fusion/automation</code> carries Service permissions (network and file I/O only, no UI access).</p>
+
+<pre class="api-code">
+<span style="color:green">// Desktop script or add-in.</span>
+import { adsk } from "@adsk/fusion";
+</pre>
+<br/>
+
+<pre class="api-code">
+<span style="color:green">// Automation Service script.</span>
+import { adsk } from "@adsk/fusion/automation";
+</pre>
+<br/>
+
+<p Class="api">You can also import individual sub-namespaces directly:</p>
+
+<pre class="api-code">
+import { core } from "@adsk/fusion/core";
+import { fusion } from "@adsk/fusion/fusion";
+import { cam } from "@adsk/fusion/cam";
+</pre>
+<br/>
+
+<a name="CreatingAddIns"></a>
+<h3 class="api">Creating Scripts and Add-Ins with TypeScript</h3>
+
+<p Class="api">To create a new TypeScript script or add-in you use the "Create" button in the <b>Scripts and Add-Ins</b> dialog to display the "Create New Script or Add-In" dialog and choose "TypeScript" as the programming language.</p>
+
+<div align="center"><img src="../images/ScriptTypeScriptCreate.png" border=0 align="middle" alt="Scripts command"></div>
+
+<p Class="api">Creating a new TypeScript script will create a working script that you can immediately run. It provides a framework that you can edit to add the functionality your script requires.</p>
+
+<p Class="api">TypeScript scripts and add-ins follow a lifecycle based on exported functions. If your main module exports a function named <code>run</code>, it will be called automatically after the module is evaluated. If it exports a function named <code>stop</code>, it will be called when the script or add-in is stopped. Both receive a JSON string parameter with context information.</p>
+
+<p Class="api">For <b>scripts</b>, <code>run</code> is called, then <code>stop</code> is called immediately, and the script ends. The example below shows a basic TypeScript script:</p>
+
+<pre class="api-code">
+import { adsk } from "@adsk/fusion";
+
+<span style="color:green">// Initialize the global variables for the Application and UserInterface objects.</span>
+const app = adsk.core.Application.get();
+const ui = app!.userInterface;
+
+<span style="color:green">// This function is called by Fusion when the script is run.</span>
+export function run(_context: string): void {
+    try {
+        ui!.messageBox(`"${app!.activeDocument!.name}" is the active Document.`);
+        adsk.log(`"${app!.activeDocument!.name}" is the active Document.`);
+    } catch (e) {
+        app!.log(`Failed:\n${e}`);
+        adsk.log(`Failed:\n${e}`);
+    }
+}
+</pre>
+<br/>
+
+<p Class="api">For <b>add-ins</b> that need to stay running (for example, to respond to events or provide custom commands), the <code>stop</code> function is captured and called later when the user stops the add-in or the application shuts down:</p>
+
+<pre class="api-code">
+import { adsk } from "@adsk/fusion";
+
+export function run(context: string): void {
+    const app = adsk.core.Application.get();
+    const ui = app!.userInterface;
+    ui!.messageBox("Hello add-in!");
+}
+
+export function stop(context: string): void {
+    const app = adsk.core.Application.get();
+    const ui = app!.userInterface;
+    ui!.messageBox("Goodbye add-in!");
+}
+</pre>
+<br/>
+
+<p Class="api">If <code>run</code> or <code>stop</code> are not exported, they are simply not called &mdash; the module's top-level code still executes normally. This differs from Python where <code>run()</code> is called via convention and add-ins must explicitly call <code>adsk.autoTerminate(False)</code>.</p>
+
+<a name="Editing"></a>
+<h3 class="api">Editing and Debugging a TypeScript Script or Add-In</h3>
+
+<p Class="api">VS Code is the recommended IDE for editing and debugging TypeScript scripts and add-ins. To open a script directly from Fusion, run the <b>Scripts and Add-Ins</b> command, select the script or add-in, and click the "Edit" button.</p>
+
+<p Class="api">Because TypeScript is statically typed, VS Code provides rich code completion, inline error checking, and refactoring support out of the box. The API type definition files (<code>.d.ts</code>) included with the script template give you full IntelliSense coverage for the entire Fusion API.</p>
+
+<div align="center"><img src="../images/VSCodeTypeScriptHints.png" border=0 align="middle" alt="Scripts command"></div>
+
+<p Class="api">When you run a script, TypeScript files are transpiled to JavaScript before execution. Plain <code>.js</code> files skip transpilation and are executed directly, so you can also use the API from JavaScript without the TypeScript compiler.</p>
+
+<p Class="api">To debug a script locally, use the debug launch configuration in VS Code.</p>
+
+<a name="Reference Arguments"></a>
+<h3 class="api">Reference Arguments</h3>
+
+<p Class="api">TypeScript does not support output or 'by reference' arguments. For API methods that document <code>out</code> parameters, the TypeScript binding returns those values as elements of an array that can be destructured directly into named variables. When the method also has a documented return value, that return value is the first element of the array, followed by the <code>out</code> arguments in the order they appear in the documentation. You pass only the input arguments to the method.</p>
+
+<p Class="api">For example, the <a href="https://help.autodesk.com/view/fusion360/ENU/?guid=GUID-c03c0602-697c-4f73-968d-63fce87df9a7">CurveEvaluator2D.getCurvature</a> method takes an input <b><i>parameter</i></b> argument and is documented as returning a boolean along with two <code>out</code> arguments: a Vector2D <b><i>direction</i></b> and a double <b><i>curvature</i></b>. In TypeScript, you pass the input <b><i>parameter</i></b> and destructure the array of returned values:</p>
+
+<pre class="api-code">
+const [success, direction, curvature] = curveEval.getCurvature(parameter);
+if (success) {
+    adsk.log(`Curvature ${curvature} in direction (${direction.x}, ${direction.y}).`);
+}
+</pre>
+<br/>
+
+<a name="Events"></a>
+<h3 class="api">Events</h3>
+
+<p Class="api">To handle events in TypeScript, you create an object with a <code>notify</code> method and pass it to the event's <code>add</code> method. Remove it with the event's <code>remove</code> method when you no longer need it. This is different from Python, where you define a handler class that extends <code>adsk.core.XxxHandler</code>.</p>
+
+<pre class="api-code">
+import { adsk } from "@adsk/fusion";
+
+export function run(context: string): void {
+    const app = adsk.core.Application.get();
+
+    const documentCreatedHandler = {
+        notify: (args: adsk.core.DocumentEventArgs) => {
+            adsk.log("Document created!");
+        },
+    };
+    app!.documentCreated.add(documentCreatedHandler);
+}
+
+</pre>
+<br/>
+
+<p Class="api">Handlers left registered (added) are cleaned up (removed) automatically when the add-in stops.</p>
+
+<p Class="api">Custom events are also supported. You can register a custom event with <code>app.registerCustomEvent(id)</code> and fire it with <code>app.fireCustomEvent(id, data)</code>. Events fired from a different thread are automatically deferred to the main thread, preserving thread safety.</p>
+
+<a name="Working with Collections"></a>
+<h3 class="api">Working with Collections</h3>
+
+<p Class="api">In Python, you typically iterate over API collections using a range-based index loop. In TypeScript, API collections such as <code>BRepBodies</code>, <code>BRepFaces</code>, <code>Profiles</code>, and <code>ObjectCollection</code> implement the JavaScript iteration protocol, so you can use <code>for...of</code> loops directly:</p>
+
+<pre class="api-code">
+for (const face of body.faces) {
+    adsk.log(face.objectType);
+}
+</pre>
+<br/>
+
+<p Class="api">You can also copy collections into arrays:</p>
+
+<pre class="api-code">
+const allFaces: adsk.fusion.BRepFace[] = [];
+for (const face of body.faces) {
+    allFaces.push(face);
+}
+</pre>
+<br/>
+
+<p Class="api">Methods that accept array parameters also accept iterable API collections directly. This is more convenient than the Python approach where you typically need to build an <code>ObjectCollection</code> and add items to it one at a time.</p>
+
+<a name="Object Types"></a>
+<h3 class="api">Object Types</h3>
+
+<p Class="api">It is common when writing a script that you need to determine the type of an object. For example, when the user selects an entity, you may want to verify that they selected the right type of object. In TypeScript you can check the type of an object using the <code>instanceof</code> operator or by examining the <code>objectType</code> property.</p>
+
+<pre class="api-code">
+<span style="color:green">// Check if the selected entity is a BRep edge.</span>
+const selObj = ui!.selectEntity("Select an edge", "Edges").entity;
+if (selObj instanceof adsk.fusion.BRepEdge) {
+    adsk.log("Selected a BRep edge.");
+}
+</pre>
+<br/>
+
+<p Class="api">You can also use TypeScript's type narrowing with <code>instanceof</code> to get properly typed access to the derived class's methods and properties without needing a cast:</p>
+
+<pre class="api-code">
+const product = app!.activeProduct;
+if (product instanceof adsk.fusion.Design) {
+    <span style="color:green">// product is now typed as Design within this block.</span>
+    const rootComp = product.rootComponent;
+    adsk.log(rootComp.name);
+}
+</pre>
+<br/>
+
+<p Class="api">TypeScript also supports optional chaining (<code>?.</code>) and non-null assertion (<code>!</code>) for safely navigating nullable API properties:</p>
+
+<pre class="api-code">
+<span style="color:green">// Optional chaining returns undefined if any step is null.</span>
+const name = app?.activeDocument?.name;
+
+<span style="color:green">// Non-null assertion asserts the value is not null.</span>
+const ui = app!.userInterface;
+</pre>
+<br/>
+
+<a name="Object Equality"></a>
+<h3 class="api">Object Equality</h3>
+
+<p Class="api">It is common to need to compare whether two object variables are referencing the same Fusion object. In TypeScript you can use the strict equality operator <code>===</code>. The code below checks two variables to see if they reference the same face.</p>
+
+<pre class="api-code">
+<span style="color:green">// Compare the two variables to see if they reference the same face.</span>
+if (face1 === face2) {
+    adsk.log("Faces are the same.");
+}
+</pre>
+<br/>
+
+<p Class="api">The TypeScript API maintains an internal object cache so that when the same underlying Fusion object is returned from multiple API calls, you receive the same JavaScript object. This means <code>===</code> works reliably:</p>
+
+<pre class="api-code">
+const app1 = adsk.core.Application.get();
+const app2 = adsk.core.Application.get();
+<span style="color:green">// app1 === app2 is true.</span>
+
+const face = body.faces.item(3);
+let i = 0;
+for (const f of body.faces) {
+    if (i === 3) {
+        <span style="color:green">// face === f is true.</span>
+    }
+    i++;
+}
+</pre>
+<br/>
+
+<p Class="api">This differs from Python, where the identity operator <code>is</code> is not guaranteed to work for Fusion objects. In Python you must compare using properties like <code>entityToken</code>. In TypeScript, strict equality (<code>===</code>) is the correct and reliable way to compare API objects.</p>
+
+<a name="Additional Modules"></a>
+<h3 class="api">Additional Modules</h3>
+
+<p Class="api">TypeScript add-ins and scripts can include modules relative to, but not outside, their main directory.</p>
+
+<pre class="api-code">
+import { my_exported_function } from "./Folder/MyModule";
+my_exported_function();
+</pre>
+<br/>
+
+<p Class="api">The TypeScript API runtime provides a different set of built-in modules that cover the most common needs for scripting:</p>
+
+<pre class="api-code">
+<span style="color:green">// File system (synchronous).</span>
+import { readFileSync, writeFileSync } from "fs";
+
+<span style="color:green">// File system (promise-based).</span>
+import { readFile, writeFile } from "fs/promises";
+</pre>
+<br/>
+
+<p Class="api">The <code>fetch</code> function is available globally for making HTTP requests. It returns a <code>Promise&lt;Response&gt;</code> with <code>text()</code>, <code>json()</code>, and <code>arrayBuffer()</code> methods:</p>
+
+<pre class="api-code">
+const response = await fetch("https://example.com/api/data");
+const data = await response.json();
+adsk.log(JSON.stringify(data));
+</pre>
+<br/>
+
+<p Class="api">Timer functions (<code>setTimeout</code>, <code>setInterval</code>, <code>clearTimeout</code>, <code>clearInterval</code>) and Base64 utilities (<code>btoa</code>, <code>atob</code>) are also available globally.</p>
+
+<p Class="api">File system access is sandboxed to a special temporary directory. This applies to both Desktop and Service execution modes. Absolute paths and path traversal outside the sandbox are only available on the Desktop and read/write access must be explicitly enabled by the user. By default scripts and add-ins have read only access within their root directory.</p>
+
+<a name="Miscellaneous"></a>
+<h3 class="api">Miscellaneous</h3>
+
+<p Class="api">TypeScript runs within the Fusion process on the main Fusion thread, just like Python. Because of this, when your program is running most of Fusion appears frozen because it never gets a chance to react to messages. A common example of this is when your script is editing the model &mdash; even though your program is successfully making changes, you don't see them until your program completes because the messages to update the display are not handled while the script is running.</p>
+
+<p Class="api">The API supports a <code>doEvents</code> function which temporarily halts the execution of the script and gives Fusion a chance to handle any queued up messages. Below is an example that creates multiple occurrences of a component with the display updating after each one is added:</p>
+
+<pre class="api-code">
+import { adsk } from "@adsk/fusion";
+
+export function run(context: string): void {
+    const app = adsk.core.Application.get();
+    const ui = app!.userInterface;
+    const root = (app!.activeProduct as adsk.fusion.Design).rootComponent;
+
+    const occ = adsk.fusion.Occurrence.cast(
+        ui!.selectEntity("Select an occurrence", "Occurrences").entity
+    );
+
+    if (occ) {
+        const comp = occ.component;
+        const trans = occ.transform;
+        let offset = trans.getCell(0, 3);
+
+        for (let i = 0; i < 100; i++) {
+            offset += 5;
+            trans.setCell(0, 3, offset);
+            root.occurrences.addExistingComponent(comp, trans);
+
+            <span style="color:green">// Call doEvents to give Fusion a chance to react.</span>
+            adsk.doEvents();
+        }
+    }
+}
+</pre>
+<br />
+<br />
+
+<br />
+<br />
+<div id="CopyrightNotice" style="display:none;">
+  <hr />
+  <table width="100%" style="font-size:15">
+	<tr>
+	  <td align="left">
+		&copy; Copyright 2026 Autodesk, Inc.
+	  </td>
+	  <td align="right">
+		<a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(TypeScriptSpecific_UM)">Comment on this page.</a>
+	  </td>
+	</tr>
+  </table>
+</div>
+</body>
+</html>

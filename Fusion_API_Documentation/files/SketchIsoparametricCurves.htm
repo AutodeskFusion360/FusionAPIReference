@@ -36,7 +36,9 @@
               Derived from: <a href="Base.htm">Base</a> Object
             <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Sketch/SketchIsoparametricCurves.h&gt;<h2 class="api">
           Description
-        </h2>The collection of isoparametric curves in a sketch. This provides access to the existing isoparametric curves and supports the method to create new isoparametric curves.<h2 class="api">
+        </h2>
+    <p class="api">The collection of isoparametric curves in a sketch. This provides access to the existing isoparametric curves and supports the method to create new isoparametric curves.</p>
+    <h2 class="api">
             Methods
           </h2>
     <Table class="api-list">
@@ -50,23 +52,33 @@
       </tr>
       <tr>
         <td class="api-list"><a href="SketchIsoparametricCurves_add.htm">add</a></td>
-        <td class="api-list">Creates sketch geometry that represents isoparametric curves on a face. An isoparametric curve follows the surface in either the U or V parametric direction at a constant parameter value. This results in the creation of associative isoparametric curves, which means they remain associated with the face and will update if the model changes. You can create a non-associative result by using the addUnlinked method..<br/><br/> The created curves can be accessed through the returned SketchIsoparametricCurve object and they are also available in the appropriate collections. For example, any lines will also be in the SketchLines collection.</td>
+        <td class="api-list">
+          <p class="api">Creates sketch geometry that represents isoparametric curves on a face. An isoparametric curve follows the surface in either the U or V parametric direction at a constant parameter value. This results in the creation of associative isoparametric curves, which means they remain associated with the face and will update if the model changes. You can create a non-associative result by using the addUnlinked method..<br/><br/> The created curves can be accessed through the returned SketchIsoparametricCurve object and they are also available in the appropriate collections. For example, any lines will also be in the SketchLines collection.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="SketchIsoparametricCurves_addUnlinked.htm">addUnlinked</a></td>
-        <td class="api-list">Creates sketch geometry that represents isoparametric curves on a face. An isoparametric curve follows the surface in either the U or V parametric direction at a constant parameter value. This method calculates and creates sketch geometry that represents the isoparametric curves but all intelligence about how they were created is lost and the result is regular sketch curves.<br/><br/> To create parametric isoparametric curves, use the add method.</td>
+        <td class="api-list">
+          <p class="api">Creates sketch geometry that represents isoparametric curves on a face. An isoparametric curve follows the surface in either the U or V parametric direction at a constant parameter value. This method calculates and creates sketch geometry that represents the isoparametric curves but all intelligence about how they were created is lost and the result is regular sketch curves.<br/><br/> To create parametric isoparametric curves, use the add method.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="SketchIsoparametricCurves_classType.htm">classType</a></td>
-        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+        <td class="api-list">
+          <p class="api">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="SketchIsoparametricCurves_createInput.htm">createInput</a></td>
-        <td class="api-list">Creates a new IsoparametricCurveInput object that is used to specify the input needed to create new isoparametric curves.</td>
+        <td class="api-list">
+          <p class="api">Creates a new IsoparametricCurveInput object that is used to specify the input needed to create new isoparametric curves.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="SketchIsoparametricCurves_item.htm">item</a></td>
-        <td class="api-list">Function that returns the specified isoparametric curve using an index into the collection.</td>
+        <td class="api-list">
+          <p class="api">Function that returns the specified isoparametric curve using an index into the collection.</p>
+        </td>
       </tr>
     </Table>
     <h2 class="api">
@@ -106,7 +118,7 @@
           <td align="left">
                 © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(SketchIsoparametricCurves%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(SketchIsoparametricCurves%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

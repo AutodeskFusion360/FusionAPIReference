@@ -36,7 +36,9 @@
               Derived from: <a href="Base.htm">Base</a> Object
             <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Fusion/Parameter.h&gt;<h2 class="api">
           Description
-        </h2>The base class Parameter object that can represent model or user parameters.<h2 class="api">
+        </h2>
+    <p class="api">The base class Parameter object that can represent model or user parameters.</p>
+    <h2 class="api">
             Methods
           </h2>
     <Table class="api-list">
@@ -50,7 +52,9 @@
       </tr>
       <tr>
         <td class="api-list"><a href="Parameter_classType.htm">classType</a></td>
-        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+        <td class="api-list">
+          <p class="api">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</p>
+        </td>
       </tr>
     </Table>
     <h2 class="api">
@@ -87,7 +91,7 @@
       </tr>
       <tr>
         <td class="api-list"><a href="Parameter_expression.htm">expression</a></td>
-        <td class="api-list">Gets and sets the expression used to calculate the value of the parameter. This is the equivalent of the "Expression" column in the Parameters dialog. Numeric parameters can be defined by a simple expression like "6.25", which will be interpreted based on whatever the default units are for the document. For example, if the units are set to millimeters, the value will be 6.25 mm; if the units are inches, it will be 6.25 inches. The expression can also contain the units so "6.25 in" will always be evaluated as inches regardless of the document units.<br/><br/> An expression can also contain references to other parameters and use equations. For example, the expression "Length / 2" is valid for a numeric parameter as long as there is a numeric parameter named "Length". Expressions can also be used for text parameters, such as concatenating two other text parameters. For example, if there are two existing text parameters named text1 and text2, the expression for another text parameter can be "text1 + text2". More complex equations can also be used with text parameters like "if (Length < 20 mm; 'Short'; 'Long')" where "Length" is a numeric parameter. The resulting string can be obtained using the textValue property.</td>
+        <td class="api-list">Gets and sets the expression used to calculate the value of the parameter. This is the equivalent of the "Expression" column in the Parameters dialog. Numeric parameters can be defined by a simple expression like "6.25", which will be interpreted based on whatever the default units are for the document. For example, if the units are set to millimeters, the value will be 6.25 mm; if the units are inches, it will be 6.25 inches. The expression can also contain the units so "6.25 in" will always be evaluated as inches regardless of the document units.<br/><br/> An expression can also contain references to other parameters and use equations. For example, the expression "Length / 2" is valid for a numeric parameter as long as there is a numeric parameter named "Length". Expressions can also be used for text parameters, such as concatenating two other text parameters. For example, if there are two existing text parameters named text1 and text2, the expression for another text parameter can be "text1 + text2". More complex equations can also be used with text parameters like "if (Length < 20 mm; 'Short'; 'Long')" where "Length" is a numeric parameter. The resulting string can be obtained using the textValue property.<br/><br/> When setting the expression of a text parameter to a literal string value, the string must be enclosed in single quotes (e.g. "'Hello Fusion'"). An unquoted value like "Hello Fusion" will fail to parse because the tokens are interpreted as symbols rather than literal text. If you want to set a plain string value without managing quotes, use the textValue property instead.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="Parameter_isDeletable.htm">isDeletable</a></td>
@@ -128,7 +132,7 @@
     </Table>
     <h2 class="api">
             Accessed From
-          </h2><a href="ConfigurationParameterColumn_parameter.htm">ConfigurationParameterColumn.parameter</a>, <a href="ConstructionPlaneAtAngleDefinition_angle.htm">ConstructionPlaneAtAngleDefinition.angle</a>, <a href="ConstructionPlaneDistanceOnPathDefinition_distance.htm">ConstructionPlaneDistanceOnPathDefinition.distance</a>, <a href="ConstructionPlaneOffsetDefinition_offset.htm">ConstructionPlaneOffsetDefinition.offset</a>, <a href="ConstructionPlaneTangentDefinition_angle.htm">ConstructionPlaneTangentDefinition.angle</a>, <a href="ParameterList_item.htm">ParameterList.item</a>, <a href="ParameterList_itemByName.htm">ParameterList.itemByName</a><h2 class="api">
+          </h2><a href="ConfigurationParameterColumn_parameter.htm">ConfigurationParameterColumn.parameter</a>, <a href="ConstructionPlaneAtAngleDefinition_angle.htm">ConstructionPlaneAtAngleDefinition.angle</a>, <a href="ConstructionPlaneAtAngleOnCurvedFaceDefinition_angle.htm">ConstructionPlaneAtAngleOnCurvedFaceDefinition.angle</a>, <a href="ConstructionPlaneDistanceOnPathDefinition_distance.htm">ConstructionPlaneDistanceOnPathDefinition.distance</a>, <a href="ConstructionPlaneOffsetDefinition_offset.htm">ConstructionPlaneOffsetDefinition.offset</a>, <a href="ConstructionPlaneTangentDefinition_angle.htm">ConstructionPlaneTangentDefinition.angle</a>, <a href="ParameterList_item.htm">ParameterList.item</a>, <a href="ParameterList_itemByName.htm">ParameterList.itemByName</a><h2 class="api">
             Derived Classes
           </h2><a href="DerivedParameter.htm">DerivedParameter</a>, <a href="ModelParameter.htm">ModelParameter</a>, <a href="UserParameter.htm">UserParameter</a><h2 class="api">
             Samples
@@ -161,7 +165,7 @@
           <td align="left">
                 © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(Parameter%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(Parameter%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

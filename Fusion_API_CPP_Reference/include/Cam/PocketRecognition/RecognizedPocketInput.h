@@ -33,10 +33,6 @@ namespace adsk { namespace core {
 
 namespace adsk { namespace cam {
 
-/// !!!!! Warning !!!!!
-/// ! This is in preview state; please see the help for more info
-/// !!!!! Warning !!!!!
-/// 
 /// Input object containing properties used to recognize pockets. Includes bosses along open and closed pockets.
 /// The class is only available with the Machining Extension.
 class RecognizedPocketInput : public core::Base {

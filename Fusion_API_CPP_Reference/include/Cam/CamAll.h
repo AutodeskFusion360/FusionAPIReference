@@ -7,6 +7,7 @@
 #include <Cam/GeneratedData/OptimizedOrientationResult.h>
 #include <Cam/GeneratedData/AdditiveFEAResults.h>
 #include <Cam/GeneratedData/GeneratedDataCollection.h>
+#include <Cam/GeneratedData/AdditiveInterferenceAnalysisResult.h>
 #include <Cam/GeneratedData/GeneratedData.h>
 #include <Cam/MachineAvoidSelections/MachineAvoidSelectionBase.h>
 #include <Cam/MachineAvoidSelections/MachineAvoidDirectSelection.h>
@@ -21,6 +22,7 @@
 #include <Cam/PrintSetting/PrintSettingItem.h>
 #include <Cam/PrintSetting/PrintSettingQuery.h>
 #include <Cam/Tools/ToolQueryResult.h>
+#include <Cam/Tools/ToolReference.h>
 #include <Cam/Tools/ToolPreset.h>
 #include <Cam/Tools/ToolBlock.h>
 #include <Cam/Tools/TurningTool.h>
@@ -72,6 +74,7 @@
 #include <Cam/HoleRecognition/RecognizedHoles.h>
 #include <Cam/ModifyUtility/ModifyUtility.h>
 #include <Cam/ModifyUtility/AdditiveSetupUtility.h>
+#include <Cam/ModifyUtility/AdditiveFEAUtility.h>
 #include <Cam/ManufacturingModels/ManufacturingModel.h>
 #include <Cam/ManufacturingModels/ManufacturingModels.h>
 #include <Cam/ManufacturingModels/ManufacturingModelInput.h>
@@ -109,6 +112,7 @@
 #include <Cam/CAM/CAMFormlabsExportOptions.h>
 #include <Cam/CAM/SetupGroups.h>
 #include <Cam/CAM/CAMExportManager.h>
+#include <Cam/CAM/SetupGroupInput.h>
 #include <Cam/CAM/InspectionPathResult.h>
 #include <Cam/CAM/SetupInput.h>
 #include <Cam/CAM/Setups.h>

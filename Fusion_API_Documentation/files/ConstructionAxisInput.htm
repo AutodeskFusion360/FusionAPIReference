@@ -36,7 +36,9 @@
               Derived from: <a href="Base.htm">Base</a> Object
             <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Construction/ConstructionAxisInput.h&gt;<h2 class="api">
           Description
-        </h2>A ConstructionAxisInput is a throwaway object used to create a ConstructionAxis The usage pattern is: a. create a ConstructionAxisInput (ConstructionAxes.CreateInput) b. call one of the member functions to specify how the ConstructionAxis is created c. create the ConstructionAxis (call ConstructionAxes.Add) d. stop referencing the ConstructionAxisInput (so it gets deleted).<h2 class="api">
+        </h2>
+    <p class="api">A ConstructionAxisInput is a throwaway object used to create a ConstructionAxis The usage pattern is: a. create a ConstructionAxisInput (ConstructionAxes.CreateInput) b. call one of the member functions to specify how the ConstructionAxis is created c. create the ConstructionAxis (call ConstructionAxes.Add) d. stop referencing the ConstructionAxisInput (so it gets deleted).</p>
+    <h2 class="api">
             Methods
           </h2>
     <Table class="api-list">
@@ -50,35 +52,51 @@
       </tr>
       <tr>
         <td class="api-list"><a href="ConstructionAxisInput_classType.htm">classType</a></td>
-        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+        <td class="api-list">
+          <p class="api">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="ConstructionAxisInput_setByCircularFace.htm">setByCircularFace</a></td>
-        <td class="api-list">This input method is for creating an axis coincident with the axis of a cylindrical, conical or torus face.<br/><br/> This can result in a parametric or non-parametric construction axis depending on whether the parent component is parametric or is a direct edit component.</td>
+        <td class="api-list">
+          <p class="api">This input method is for creating an axis coincident with the axis of a cylindrical, conical or torus face.<br/><br/> This can result in a parametric or non-parametric construction axis depending on whether the parent component is parametric or is a direct edit component.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="ConstructionAxisInput_setByEdge.htm">setByEdge</a></td>
-        <td class="api-list">This input method is for creating a construction axis from a specified linear/circular edge or sketch curve. This can result in a parametric or non-parametric construction axis depending on whether the parent component is parametric or is a direct edit component.</td>
+        <td class="api-list">
+          <p class="api">This input method is for creating a construction axis from a specified linear/circular edge or sketch curve. This can result in a parametric or non-parametric construction axis depending on whether the parent component is parametric or is a direct edit component.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="ConstructionAxisInput_setByLine.htm">setByLine</a></td>
-        <td class="api-list">This input method is for creating a non-parametric construction axis whose position in space is defined by an InfiniteLine3D object.<br/><br/> This method of defining a construction axis is only valid when working in the direct modeling mode. This is not valid when working in the parametric modeling mode and will fail.</td>
+        <td class="api-list">
+          <p class="api">This input method is for creating a non-parametric construction axis whose position in space is defined by an InfiniteLine3D object.<br/><br/> This method of defining a construction axis is only valid when working in the direct modeling mode. This is not valid when working in the parametric modeling mode and will fail.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="ConstructionAxisInput_setByNormalToFaceAtPoint.htm">setByNormalToFaceAtPoint</a></td>
-        <td class="api-list">This input method if for creating a construction axis normal to a specified face or sketch profile and that passes through a specified point. This can result in a parametric or non-parametric construction axis depending on whether the parent component is parametric or is a direct edit component.</td>
+        <td class="api-list">
+          <p class="api">This input method if for creating a construction axis normal to a specified face or sketch profile and that passes through a specified point. This can result in a parametric or non-parametric construction axis depending on whether the parent component is parametric or is a direct edit component.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="ConstructionAxisInput_setByPerpendicularAtPoint.htm">setByPerpendicularAtPoint</a></td>
-        <td class="api-list">This input method is for creating an axis that is normal to a face at a specified point.</td>
+        <td class="api-list">
+          <p class="api">This input method is for creating an axis that is normal to a face at a specified point.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="ConstructionAxisInput_setByTwoPlanes.htm">setByTwoPlanes</a></td>
-        <td class="api-list">This input method is for creating a construction axis coincident with the intersection of two planes or planar faces. This will fail if the two planes are parallel. This can result in a parametric or non-parametric construction axis depending on whether the parent component is parametric or is a direct edit component.</td>
+        <td class="api-list">
+          <p class="api">This input method is for creating a construction axis coincident with the intersection of two planes or planar faces. This will fail if the two planes are parallel. This can result in a parametric or non-parametric construction axis depending on whether the parent component is parametric or is a direct edit component.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="ConstructionAxisInput_setByTwoPoints.htm">setByTwoPoints</a></td>
-        <td class="api-list">This input method is for creating a construction axis that passes through the two points (work points, sketch points or vertices). This will fail if the two points are coincident. This can result in a parametric or non-parametric construction axis depending on whether the parent component is parametric or is a direct edit component.</td>
+        <td class="api-list">
+          <p class="api">This input method is for creating a construction axis that passes through the two points (work points, sketch points or vertices). This will fail if the two points are coincident. This can result in a parametric or non-parametric construction axis depending on whether the parent component is parametric or is a direct edit component.</p>
+        </td>
       </tr>
     </Table>
     <h2 class="api">
@@ -139,7 +157,7 @@
           <td align="left">
                 © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(ConstructionAxisInput%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(ConstructionAxisInput%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

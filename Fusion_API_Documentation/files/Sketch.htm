@@ -36,7 +36,9 @@
               Derived from: <a href="Base.htm">Base</a> Object
             <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Sketch/Sketch.h&gt;<h2 class="api">
           Description
-        </h2>Represents a sketch within a component.<h2 class="api">
+        </h2>
+    <p class="api">Represents a sketch within a component.</p>
+    <h2 class="api">
             Methods
           </h2>
     <Table class="api-list">
@@ -50,111 +52,165 @@
       </tr>
       <tr>
         <td class="api-list"><a href="Sketch_addCenterPointSlot.htm">addCenterPointSlot</a></td>
-        <td class="api-list">Creates the geometry that represents a slot where the first point defines the center of the slot and the second point defines the direction and half-length. Geometric constraints are automatically added to the geometry to maintain the slot shape and optionally, dimensions to control the size can be added. The created geometry and constraints are returned.</td>
+        <td class="api-list">
+          <p class="api">Creates the geometry that represents a slot where the first point defines the center of the slot and the second point defines the direction and half-length. Geometric constraints are automatically added to the geometry to maintain the slot shape and optionally, dimensions to control the size can be added. The created geometry and constraints are returned.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Sketch_addCenterToCenterSlot.htm">addCenterToCenterSlot</a></td>
-        <td class="api-list">Creates the geometry that represents a slot. Geometric constraints are automatically added to the geometry to maintain the slot shape and optionally, dimensions to control the size can be added. The created geometry and constraints are returned.</td>
+        <td class="api-list">
+          <p class="api">Creates the geometry that represents a slot. Geometric constraints are automatically added to the geometry to maintain the slot shape and optionally, dimensions to control the size can be added. The created geometry and constraints are returned.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Sketch_addOverallSlot.htm">addOverallSlot</a></td>
-        <td class="api-list">Creates the geometry that represents an overall slot. Geometric constraints are automatically added to the geometry to maintain the slot shape and optionally, dimensions to control the size can be added. The created geometry and constraints are returned.</td>
+        <td class="api-list">
+          <p class="api">Creates the geometry that represents an overall slot. Geometric constraints are automatically added to the geometry to maintain the slot shape and optionally, dimensions to control the size can be added. The created geometry and constraints are returned.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Sketch_autoConstrain.htm">autoConstrain</a></td>
-        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Auto constrains the sketch using the information provided by the input object. This returns a single locally computed solution.</td>
+        <td class="api-list">
+          <p class="api"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Auto constrains the sketch using the information provided by the input object. This returns a single locally computed solution.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Sketch_classType.htm">classType</a></td>
-        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+        <td class="api-list">
+          <p class="api">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Sketch_copy.htm">copy</a></td>
-        <td class="api-list">Copies the specified sketch entities, applying the specified transform. Any geometric or dimension constraints associated with the entities will automatically be copied, if possible. For example, if there is a horizontal dimension and the transform defines a rotation then it will not be included in the result. This same behavior can be seen when performing a copy/paste operation in the user interface.</td>
+        <td class="api-list">
+          <p class="api">Copies the specified sketch entities, applying the specified transform. Any geometric or dimension constraints associated with the entities will automatically be copied, if possible. For example, if there is a horizontal dimension and the transform defines a rotation then it will not be included in the result. This same behavior can be seen when performing a copy/paste operation in the user interface.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Sketch_createAutoConstrainInput.htm">createAutoConstrainInput</a></td>
-        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Creates a new AutoConstrainInput object associated with this sketch. The input object is used to define the various options when adding dimension and geometric constraints to help constrain a sketch. The returned object has all options defined with default values and additional constraints can be applied by passing this into the autoConstrain method.</td>
+        <td class="api-list">
+          <p class="api"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Creates a new AutoConstrainInput object associated with this sketch. The input object is used to define the various options when adding dimension and geometric constraints to help constrain a sketch. The returned object has all options defined with default values and additional constraints can be applied by passing this into the autoConstrain method.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Sketch_createForAssemblyContext.htm">createForAssemblyContext</a></td>
-        <td class="api-list">Creates or returns a proxy for the native object - i.e. a new object that represents this object but adds the assembly context defined by the input occurrence.</td>
+        <td class="api-list">
+          <p class="api">Creates or returns a proxy for the native object - i.e. a new object that represents this object but adds the assembly context defined by the input occurrence.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Sketch_createSpunProfile.htm">createSpunProfile</a></td>
-        <td class="api-list">Creates sketch geometry that represents the spun profile. The spun profile is the silhouette of the entities as if they were spinning around an axis. The created spun profile is based on the information provided by the SpunProfileInput object.</td>
+        <td class="api-list">
+          <p class="api">Creates sketch geometry that represents the spun profile. The spun profile is the silhouette of the entities as if they were spinning around an axis. The created spun profile is based on the information provided by the SpunProfileInput object.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Sketch_createSpunProfileInput.htm">createSpunProfileInput</a></td>
-        <td class="api-list">Creates a new SpunProfileInput object that is used to specify the input needed to create a spun profile.</td>
+        <td class="api-list">
+          <p class="api">Creates a new SpunProfileInput object that is used to specify the input needed to create a spun profile.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Sketch_deleteMe.htm">deleteMe</a></td>
-        <td class="api-list">Deletes the sketch.</td>
+        <td class="api-list">
+          <p class="api">Deletes the sketch.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Sketch_findConnectedCurves.htm">findConnectedCurves</a></td>
-        <td class="api-list">Finds the sketch curves that are end connected to the input curve. This can be useful for many cases but is especially useful in gathering the input when creating an offset.</td>
+        <td class="api-list">
+          <p class="api">Finds the sketch curves that are end connected to the input curve. This can be useful for many cases but is especially useful in gathering the input when creating an offset.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Sketch_importSVG.htm">importSVG</a></td>
-        <td class="api-list">Imports the contents of an SVG file into the active sketch.</td>
+        <td class="api-list">
+          <p class="api">Imports the contents of an SVG file into the active sketch.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Sketch_include.htm">include</a></td>
-        <td class="api-list">Creates new sketch curves and points that represent the specified entity as sketch geometry. The sketch geometry is not projected but is created in the same location in space as the input geometry.</td>
+        <td class="api-list">
+          <p class="api">Creates new sketch curves and points that represent the specified entity as sketch geometry. The sketch geometry is not projected but is created in the same location in space as the input geometry.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Sketch_intersectWithSketchPlane.htm">intersectWithSketchPlane</a></td>
-        <td class="api-list">Intersects the specified entities (BRepBody, BRepFace, BRepEdge, BRepVertex, SketchCurve, ConstructionPoint, ConstructionAxis, and ConstructionPlane) with the sketch plane and creates sketch geometry that represents the intersection.</td>
+        <td class="api-list">
+          <p class="api">Intersects the specified entities (BRepBody, BRepFace, BRepEdge, BRepVertex, SketchCurve, ConstructionPoint, ConstructionAxis, and ConstructionPlane) with the sketch plane and creates sketch geometry that represents the intersection.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Sketch_modelToSketchSpace.htm">modelToSketchSpace</a></td>
-        <td class="api-list">A specified point in model space returns the equivalent point in sketch space. This is sensitive to the assembly context.</td>
+        <td class="api-list">
+          <p class="api">A specified point in model space returns the equivalent point in sketch space. This is sensitive to the assembly context.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Sketch_move.htm">move</a></td>
-        <td class="api-list">Moves the specified sketch entities using the specified transform. Transform respects any constraints that would normally prohibit the move.</td>
+        <td class="api-list">
+          <p class="api">Moves the specified sketch entities using the specified transform. Transform respects any constraints that would normally prohibit the move.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Sketch_offset.htm">offset</a></td>
-        <td class="api-list"><mark>**RETIRED**</mark> Creates offset curves for the set of input curves. If the offset distance is not provided, the offset distance is defined by the direction point.</td>
+        <td class="api-list">
+          <p class="api"><mark>**RETIRED**</mark> Creates offset curves for the set of input curves. If the offset distance is not provided, the offset distance is defined by the direction point.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Sketch_project.htm">project</a></td>
-        <td class="api-list"><mark>**RETIRED**</mark> This method has been replaced by the project2 method, which supports specifying if the result will be linked or not.</td>
+        <td class="api-list">
+          <p class="api"><mark>**RETIRED**</mark> This method has been replaced by the project2 method, which supports specifying if the result will be linked or not.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Sketch_project2.htm">project2</a></td>
-        <td class="api-list">Projects the specified entity or entities onto the X-Y plane of the sketch and returns the created sketch entity(s).</td>
+        <td class="api-list">
+          <p class="api">Projects the specified entity or entities onto the X-Y plane of the sketch and returns the created sketch entity(s).</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Sketch_projectCutEdges.htm">projectCutEdges</a></td>
-        <td class="api-list">Intersects the specified body with the sketch plane and creates new curves representing the intersection.</td>
+        <td class="api-list">
+          <p class="api">Intersects the specified body with the sketch plane and creates new curves representing the intersection.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Sketch_projectToSurface.htm">projectToSurface</a></td>
-        <td class="api-list">Projects the specified set of curves onto the specified set of faces using the specified method of projection. if the projection type is along a vector, then the directionEntity argument must be supplied. if the projectionType is the closest point method, the directionEntity argument is ignored.</td>
+        <td class="api-list">
+          <p class="api">Projects the specified set of curves onto the specified set of faces using the specified method of projection. if the projection type is along a vector, then the directionEntity argument must be supplied. if the projectionType is the closest point method, the directionEntity argument is ignored.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Sketch_redefine.htm">redefine</a></td>
-        <td class="api-list">Changes which plane the sketch is based on.</td>
+        <td class="api-list">
+          <p class="api">Changes which plane the sketch is based on.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Sketch_saveAsDXF.htm">saveAsDXF</a></td>
-        <td class="api-list"><mark>**RETIRED**</mark> Saves the contents of the sketch to a specified DXF file.</td>
+        <td class="api-list">
+          <p class="api"><mark>**RETIRED**</mark> Saves the contents of the sketch to a specified DXF file.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Sketch_setCenterlineState.htm">setCenterlineState</a></td>
-        <td class="api-list">Method that sets the Centerline state for an array of sketch lines.</td>
+        <td class="api-list">
+          <p class="api">Method that sets the Centerline state for an array of sketch lines.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Sketch_setConstructionState.htm">setConstructionState</a></td>
-        <td class="api-list">Method that sets the Construction state for an array of sketch curves.</td>
+        <td class="api-list">
+          <p class="api">Method that sets the Construction state for an array of sketch curves.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Sketch_sketchToModelSpace.htm">sketchToModelSpace</a></td>
-        <td class="api-list">A specified point in sketch space returns the equivalent point in model space. This is sensitive to the assembly context.</td>
+        <td class="api-list">
+          <p class="api">A specified point in sketch space returns the equivalent point in model space. This is sensitive to the assembly context.</p>
+        </td>
       </tr>
     </Table>
     <h2 class="api">
@@ -375,7 +431,7 @@
           <td align="left">
                 © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(Sketch%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(Sketch%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

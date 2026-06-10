@@ -213,6 +213,7 @@ class GraphicsDrivers():
     DesktopGLGraphicsDriver = 6
     OpenGLESGraphicsDriver = 7
     VulkanGraphicsDriver = 8
+    MetalGraphicsDriver = 9
 
 class GraphicsPresets():
     """
@@ -11486,6 +11487,7 @@ class SelectionFilters(Base):
     Operation = "Operation"
     NCProgram = "NCProgram"
     CAMFolder = "CAMFolder"
+    UserCoordinateSystems = "UserCoordinateSystems"
 
 class Selections(Base):
     """
@@ -19889,6 +19891,7 @@ class SelectionCommandInput(CommandInput):
     Operation = "Operation"
     NCProgram = "NCProgram"
     CAMFolder = "CAMFolder"
+    UserCoordinateSystems = "UserCoordinateSystems"
     def addSelectionFilter(self, filter: str) -> bool:
         """
         Adds an additional filter to the existing filter list.

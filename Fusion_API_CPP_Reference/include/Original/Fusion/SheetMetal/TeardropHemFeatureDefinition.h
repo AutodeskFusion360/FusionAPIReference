@@ -31,10 +31,6 @@ namespace adsk { namespace fusion {
 
 namespace adsk { namespace fusion {
 
-/// !!!!! Warning !!!!!
-/// ! This is in preview state; please see the help for more info
-/// !!!!! Warning !!!!!
-/// 
 /// The definition for a teardrop hem.
 class TeardropHemFeatureDefinition : public HemFeatureDefinition {
 public:

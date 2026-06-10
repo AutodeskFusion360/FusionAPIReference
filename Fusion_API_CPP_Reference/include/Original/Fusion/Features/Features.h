@@ -105,6 +105,7 @@ namespace adsk { namespace fusion {
     class UnstitchFeatures;
     class UntrimFeatures;
     class VolumetricCustomFeatures;
+    class VolumetricModelFeatures;
     class VolumetricModelToMeshFeatures;
     class WebFeatures;
 }}
@@ -519,6 +520,14 @@ public:
     /// Returns the collection that provides access to the existing Corner Closure features.
     core::Ptr<CornerClosureFeatures> cornerClosureFeatures() const;
 
+    /// !!!!! Warning !!!!!
+    /// ! This is in preview state; please see the help for more info
+    /// !!!!! Warning !!!!!
+    /// 
+    /// Returns the collection that provides access to volumetric model features within the component
+    /// and supports the creation of new volumetric model features.
+    core::Ptr<VolumetricModelFeatures> volumetricModelFeatures() const;
+
     typedef Feature iterable_type;
     template <class OutputIterator> void copyTo(OutputIterator result);
 
@@ -611,6 +620,7 @@ private:
     virtual MeshRemoveFeatures* meshRemoveFeatures_raw() const = 0;
     virtual DeriveFeatures* deriveFeatures_raw() const = 0;
     virtual CornerClosureFeatures* cornerClosureFeatures_raw() const = 0;
+    virtual VolumetricModelFeatures* volumetricModelFeatures_raw() const = 0;
 };
 
 // Inline wrappers
@@ -1098,6 +1108,12 @@ inline core::Ptr<DeriveFeatures> Features::deriveFeatures() const
 inline core::Ptr<CornerClosureFeatures> Features::cornerClosureFeatures() const
 {
     core::Ptr<CornerClosureFeatures> res = cornerClosureFeatures_raw();
+    return res;
+}
+
+inline core::Ptr<VolumetricModelFeatures> Features::volumetricModelFeatures() const
+{
+    core::Ptr<VolumetricModelFeatures> res = volumetricModelFeatures_raw();
     return res;
 }
 

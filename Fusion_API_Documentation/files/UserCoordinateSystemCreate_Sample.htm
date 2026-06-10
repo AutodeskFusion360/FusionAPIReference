@@ -1,0 +1,168 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/UserCoordinateSystemCreate.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="UserCoordinateSystemCreate_Sample">
+    <meta name="description" content="Create a User Coordinate System Sample">
+    <meta name="topicid" content="GUID-2b70e721-e943-451f-9304-a35904388ceb">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Create a User Coordinate System</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Create a User Coordinate System</h1>
+    <h2 class="api">
+          Description
+        </h2>Demonstrates the creation of a user coordinate system at the end of a selected sketch curve or edge.<h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code">"""This file acts as the main module for this script."""
+
+import traceback
+import adsk.core
+import adsk.fusion
+
+<span style="color:blue"># Initialize the global variables for the Application and UserInterface objects.</span>
+app = adsk.core.Application.get()
+ui  = app.userInterface
+
+
+def run(_context: str):
+    """This function is called by Fusion when the script is run."""
+
+    try:
+        des = adsk.fusion.Design.cast(app.activeProduct)
+        if not des:
+            ui.messageBox('No active Fusion design', 'Error')
+            return
+
+        root = des.rootComponent
+
+        <span style="color:blue"># Have a sketch curve selected by the user.</span>
+        sel = ui.selectEntity('Select a sketch curve or edge.', "SketchCurves, Edges")
+        if not sel:
+            return
+
+        <span style="color:blue"># Get the entity and its associated geometry.</span>
+        entity = sel.entity
+        geom = None
+        if isinstance(entity, adsk.fusion.BRepEdge):
+            edge: adsk.fusion.BRepEdge = entity
+            geom = edge.geometry    
+        elif isinstance(entity, adsk.fusion.SketchCurve):
+            curve: adsk.fusion.SketchCurve = entity
+            geom = curve.worldGeometry
+
+        <span style="color:blue"># Make sure the selected curve is not a circle or ellipse. Closed curves are not supported.</span>
+        if isinstance(geom, adsk.core.Circle3D) or isinstance(geom, adsk.core.Ellipse3D):
+            ui.messageBox('Please select a sketch curve that is not a circle or ellipse.', 'Error')
+            return
+        
+        <span style="color:blue"># Determine which end of the curve the selection was closest to.</span>
+        selPnt = sel.point
+        curveEval: adsk.core.CurveEvaluator3D = geom.evaluator <span style="color:blue"># type: ignore</span>
+        (_, selParam) = curveEval.getParameterAtPoint(selPnt)
+        (_, startParam, endParam) = curveEval.getParameterExtents()
+        (_, lengthToStart) = curveEval.getLengthAtParameter(startParam, selParam)
+        (_, lengthToEnd) = curveEval.getLengthAtParameter(selParam, endParam)
+        isAtStart = True
+        if lengthToStart &gt; lengthToEnd:
+            isAtStart = False
+
+        <span style="color:blue"># Set the ratio along the curve where the construction plane will be placed,</span>
+        <span style="color:blue"># either at the start (0) or the end (1) of the curve, depending on which end</span>
+        <span style="color:blue"># of the curve the user selected.</span>
+        if isAtStart:
+            distanceVal = 0
+        else:
+            distanceVal = 1
+
+        <span style="color:blue"># Add a construction plane normal to the curve at the specified ratio along the curve.</span>
+        planeInput = root.constructionPlanes.createInput()
+        planeInput.setByDistanceOnPath(entity, adsk.core.ValueInput.createByReal(distanceVal))
+        constPlane = root.constructionPlanes.add(planeInput)
+
+        <span style="color:blue"># Create a sketch on the construction plane.</span>
+        sk = root.sketches.add(constPlane)
+
+        <span style="color:blue"># Add a UCS using the origin point of the sketch, which will be</span>
+        <span style="color:blue"># at the end of the selected curve.</span>
+        geomInput = adsk.fusion.UserCoordinateSystemGeometry.createByPoint(sk.originPoint)
+        ucsInput = root.userCoordinateSystems.createInput(geomInput)
+        ucs = root.userCoordinateSystems.add(ucsInput)
+
+        <span style="color:blue"># Group the results in the timeline.</span>
+        group = des.timeline.timelineGroups.add(constPlane.timelineObject.index, ucs.timelineObject.index)
+        group.name = 'UCS Normal to Curve'
+            
+    except:  <span style="color:blue">#pylint:disable=bare-except</span>
+        <span style="color:blue"># Write the error message to the TEXT COMMANDS window.</span>
+        app.log(f'Failed:\n{traceback.format_exc()}')</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2026 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(UserCoordinateSystemCreate%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

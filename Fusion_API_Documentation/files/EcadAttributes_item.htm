@@ -1,0 +1,139 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/EcadAttributes_item.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="28/04/2026">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="EcadAttributes_item">
+    <meta name="description" content="EcadAttributes.item Method">
+    <meta name="topicid" content="GUID-C5F1877A-07BE-4D19-87F0-BF7EE3E41F20">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>EcadAttributes.item Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">EcadAttributes.item Method<img src="../images/TestTubeLarge.png"></h1>
+
+          Parent Object: <a href="EcadAttributes.htm">EcadAttributes</a><p class="api-preview"><img src="../images/TestTubeSmall.png" alt="Preview">This functionality is provided as a preview
+				  of intended future API capabilities. You are encouraged to use it and report any problems or suggestions using the
+				  <a href="https://forums.autodesk.com/t5/fusion-360-api-and-scripts/bd-p/22">Fusion API and Scripts</a> forum.<br><br>
+
+				  Because this is a preview of future functionality, there is the possibility that it will change, which will possibly
+				  break any existing programs that use this functionality. Because of that, you should never deliver any programs that use
+				  any preview capabilities. For a distributed program, you should wait until it has moved from preview to released state.
+			  </p><br>Defined in namespace "adsk::electron" and the header file is &lt;Electron/Attributes/EcadAttributes.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Function that returns the specified attribute using an index into the collection.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"ecadAttributes_var" is a variable referencing an <a href="EcadAttributes.htm">EcadAttributes</a> object.<code><pre class="api-code">returnValue = ecadAttributes_var.<b>item</b>(index)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td>"ecadAttributes_var" is a variable referencing an <a href="EcadAttributes.htm">EcadAttributes</a> object.<br /><br /><code><pre class="api-code">#include &lt;Electron/Attributes/EcadAttributes.h&gt;<br /><br />returnValue = ecadAttributes_var-&gt;<b>item</b>(index);<br /></pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;"><a href="EcadAttribute.htm">EcadAttribute</a></td>
+        <td class="api-list">Returns the specified item or null if an invalid index was specified.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">index</td>
+        <td class="api-list">uinteger</td>
+        <td class="api-list">The index of the item within the collection to return. The first item in the collection has an index of 0.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ElectronicsBomSample_Sample.htm">Electronics Bill of Materials Sample</a></td>
+        <td class="api-list"><p>Prints a bill of materials to the Text Commands window: lines that share the same value, footprint, MPN, and manufacturer are merged—Part lists all designators (sorted), Qty is the count. Indented Value, Footprint, MPN, and Manufacturer lines follow. Empty value, MPN, or manufacturer shows (missing). Omits parts without a package, without a linked 3D footprint name, or not populated for the default assembly variant.</p></td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version May 2026<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2026 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(EcadAttributes.item%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

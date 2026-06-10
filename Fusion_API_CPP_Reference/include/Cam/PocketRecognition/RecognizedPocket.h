@@ -78,19 +78,11 @@ public:
     /// Returns all faces making up the pocket, which are shared with other pockets.
     std::vector<core::Ptr<fusion::BRepFace>> sharedFaces() const;
 
-    /// !!!!! Warning !!!!!
-    /// ! This is in preview state; please see the help for more info
-    /// !!!!! Warning !!!!!
-    /// 
     /// Gets all recognized pockets based on the properties in the given input object and returns them.
     /// The method is only available with the Machining Extension.
     /// input : An input object defining the body and search parameters for recognizing pockets.
     static core::Ptr<RecognizedPockets> recognizePocketsWithInput(const core::Ptr<RecognizedPocketInput>& input);
 
-    /// !!!!! Warning !!!!!
-    /// ! This is in preview state; please see the help for more info
-    /// !!!!! Warning !!!!!
-    /// 
     /// Returns the attack vector that was used to recognize this pocket.
     core::Ptr<core::Vector3D> attackVector() const;
 

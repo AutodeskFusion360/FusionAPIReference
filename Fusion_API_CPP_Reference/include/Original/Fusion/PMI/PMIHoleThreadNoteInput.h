@@ -81,6 +81,7 @@ public:
 
     /// Gets and sets the PMIGeometricValue used to define the diameter of the annotated hole or boss in cm.
     /// It is possible to also add tolerances to the object set by setting the tolerance property of the PMIGeometricValue object.
+    /// Any shaft tolerance specified in the tolerance property of the PMIGeometricValue object will override any previously set value.
     /// 
     /// Setting this to an object with "hasValue" set to true and "value" set to 0 will result in the modeled value being set (if such value exists in the model).
     /// 

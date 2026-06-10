@@ -36,9 +36,12 @@
               Derived from: <a href="Palette.htm">Palette</a> Object
             <br>Defined in namespace "adsk::core" and the header file is &lt;Core/UserInterface/TextCommandPalette.h&gt;<h2 class="api">
           Description
-        </h2>Represents the palette that is the Text Command window in Fusion.<h2 class="api">
+        </h2>
+    <p class="api">Represents the palette that is the Text Command window in Fusion.</p>
+    <h2 class="api">
 		    Remarks
-		  </h2><p class="api">You can obtain the Text Command palette by using the itemById method of the Palettes object and using "TextCommands" as the ID. Below is some sample code that illustrates making sure the palette is visible and writing some text to it.</p> <pre class="api-code"><span style = "color:blue" ># Get the palette that represents the TEXT COMMANDS window.</span>
+		  </h2>
+    <p class="api"><p class="api">You can obtain the Text Command palette by using the itemById method of the Palettes object and using "TextCommands" as the ID. Below is some sample code that illustrates making sure the palette is visible and writing some text to it.</p> <pre class="api-code"><span style = "color:blue" ># Get the palette that represents the TEXT COMMANDS window.</span>
 textPalette = ui.palettes.itemById('TextCommands')
 
 <span style = "color:blue"># Make sure the palette is visible.</span>
@@ -46,7 +49,8 @@ if not textPalette.isVisible:
    textPalette.isVisible = True
 
 <span style= "color:blue" ># Write some text.</span>
-textPalette.writeText('This is a text message.') </pre><h2 class="api">
+textPalette.writeText('This is a text message.') </pre></p>
+    <h2 class="api">
             Methods
           </h2>
     <Table class="api-list">
@@ -60,39 +64,57 @@ textPalette.writeText('This is a text message.') </pre><h2 class="api">
       </tr>
       <tr>
         <td class="api-list"><a href="TextCommandPalette_classType.htm">classType</a></td>
-        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+        <td class="api-list">
+          <p class="api">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="TextCommandPalette_deleteMe.htm">deleteMe</a></td>
-        <td class="api-list">Deletes this palette. Fusion native palettes cannot be deleted. Use the isNative property to determine if this is a native or API created palette.</td>
+        <td class="api-list">
+          <p class="api">Deletes this palette. Fusion native palettes cannot be deleted. Use the isNative property to determine if this is a native or API created palette.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="TextCommandPalette_sendInfoToHTML.htm">sendInfoToHTML</a></td>
-        <td class="api-list">Sends the string to the JavaScript associated with the loaded HTML.</td>
+        <td class="api-list">
+          <p class="api">Sends the string to the JavaScript associated with the loaded HTML.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="TextCommandPalette_setMaximumSize.htm">setMaximumSize</a></td>
-        <td class="api-list">Sets the maximum size of the palette. The user cannot resize it to be larger than this size. This does not change the current size of the palette unless the palette is already larger than this size.<br/><br/> Calling this method and setting the width and height to zero, removes the maximum size restriction.</td>
+        <td class="api-list">
+          <p class="api">Sets the maximum size of the palette. The user cannot resize it to be larger than this size. This does not change the current size of the palette unless the palette is already larger than this size.<br/><br/> Calling this method and setting the width and height to zero, removes the maximum size restriction.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="TextCommandPalette_setMinimumSize.htm">setMinimumSize</a></td>
-        <td class="api-list">Sets the minimum size of the palette. The user cannot resize it to be smaller than this size. This does not change the current size of the palette unless the palette is already smaller than this size.<br/><br/> Calling this method and setting the width and height to zero, removes the minimum size restriction.</td>
+        <td class="api-list">
+          <p class="api">Sets the minimum size of the palette. The user cannot resize it to be smaller than this size. This does not change the current size of the palette unless the palette is already smaller than this size.<br/><br/> Calling this method and setting the width and height to zero, removes the minimum size restriction.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="TextCommandPalette_setPosition.htm">setPosition</a></td>
-        <td class="api-list">Sets the position of the palette. If the palette is docked or snapped, this will result in changing it to be floating.</td>
+        <td class="api-list">
+          <p class="api">Sets the position of the palette. If the palette is docked or snapped, this will result in changing it to be floating.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="TextCommandPalette_setSize.htm">setSize</a></td>
-        <td class="api-list">Sets the size of the palette. This is best used for a floating palette because either the width or height can be locked when a palette is docked.</td>
+        <td class="api-list">
+          <p class="api">Sets the size of the palette. This is best used for a floating palette because either the width or height can be locked when a palette is docked.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="TextCommandPalette_snapTo.htm">snapTo</a></td>
-        <td class="api-list">Snaps this palette to another palette.</td>
+        <td class="api-list">
+          <p class="api">Snaps this palette to another palette.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="TextCommandPalette_writeText.htm">writeText</a></td>
-        <td class="api-list">Write the specified text to the TEXT COMMAND window.</td>
+        <td class="api-list">
+          <p class="api">Write the specified text to the TEXT COMMAND window.</p>
+        </td>
       </tr>
     </Table>
     <h2 class="api">
@@ -216,7 +238,7 @@ textPalette.writeText('This is a text message.') </pre><h2 class="api">
           <td align="left">
                 © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(TextCommandPalette%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(TextCommandPalette%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

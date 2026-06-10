@@ -1,0 +1,149 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/BRepBody_findThicknessAtFace.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="28/04/2026">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="BRepBody_findThicknessAtFace">
+    <meta name="description" content="BRepBody.findThicknessAtFace Method">
+    <meta name="topicid" content="GUID-F4F1A07D-096F-469F-9604-F2E78A6113A2">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>BRepBody.findThicknessAtFace Method</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">BRepBody.findThicknessAtFace Method<img src="../images/TestTubeLarge.png"></h1>
+
+          Parent Object: <a href="BRepBody.htm">BRepBody</a><p class="api-preview"><img src="../images/TestTubeSmall.png" alt="Preview">This functionality is provided as a preview
+				  of intended future API capabilities. You are encouraged to use it and report any problems or suggestions using the
+				  <a href="https://forums.autodesk.com/t5/fusion-360-api-and-scripts/bd-p/22">Fusion API and Scripts</a> forum.<br><br>
+
+				  Because this is a preview of future functionality, there is the possibility that it will change, which will possibly
+				  break any existing programs that use this functionality. Because of that, you should never deliver any programs that use
+				  any preview capabilities. For a distributed program, you should wait until it has moved from preview to released state.
+			  </p><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/BRep/BRepBody.h&gt;<h2 class="api">
+          Description
+        </h2>
+    <p class="api">Finds the thickness of the body at the specified face by casting a ray from the face along its inward normal and measuring the distance to the first opposite face of the body that is hit.</p>
+    <h2 class="api">
+          Syntax
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#C++">C++</a></li>
+      </ul>
+      <div id="Python" class="api-code">
+        <table class="api-code">
+          <td>"bRepBody_var" is a variable referencing a <a href="BRepBody.htm">BRepBody</a> object.<br /><br /><code><pre class="api-code"><span style="color:blue"># Uses no optional arguments.</span><br />(returnValue, thickness) = bRepBody_var.<b>findThicknessAtFace</b>(face)<br /><br /><span style="color:blue"># Uses optional arguments.</span><br />(returnValue, thickness) = bRepBody_var.<b>findThicknessAtFace</b>(face, hitPoint)</pre></code></td>
+        </table>
+      </div>
+      <div id="C++" class="api-code">
+        <table class="api-code">
+          <td><code><pre class="api-code"><br >#include &lt;Fusion/BRep/BRepBody.h<br /><br /><span style="color:blue">// Uses no optional arguments.</span><br /><span style="color:blue">// Declare the output arguments.</span><br />Ptr&lt;BRepFace&gt; face;<br />double thickness;<br />boolean returnValue = bRepBody_var-&gt;<b>findThicknessAtFace</b>(face, thickness);<br /><br /><span style="color:blue">// Uses optional arguments.</span><br /><span style="color:blue">// Declare the output arguments.</span><br />Ptr&lt;Point3D&gt; hitPoint;<br /><br /><span style="color:blue">// Call the function.</span><br />Ptr&lt;BRepBody&gt; returnValue = bRepBody_var-&gt;<b>findThicknessAtFace</b>(face, thickness, hitPoint);</pre></code></td>
+        </table>
+      </div>
+    </div>
+    <h2 class="api">
+            Return Value
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list" style="white-space:nowrap;">boolean</td>
+        <td class="api-list">Returns true if the thickness was successfully determined. Returns false if it could not be determined, for example if the face is non-planar or has no parallel opposite face.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Parameters
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list" style="width:1%;">
+                Type
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list">face</td>
+        <td class="api-list"><a href="BRepFace.htm">BRepFace</a></td>
+        <td class="api-list">Specifies a planar BRepFace on the body from which to measure the thickness.</td>
+      </tr>
+      <tr>
+        <td class="api-list">thickness</td>
+        <td class="api-list">double</td>
+        <td class="api-list">The output thickness value in centimeters.</td>
+      </tr>
+      <tr>
+        <td class="api-list">hitPoint</td>
+        <td class="api-list"><a href="Point3D.htm">Point3D</a></td>
+        <td class="api-list">An optional Point3D that specifies the point on the face from which to cast the ray. The point must lie on the given face. If not specified, a point is automatically chosen on the face.<br /><br /> This is an optional argument whose default value is null.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ConvertToSheetMetalSample_Sample.htm">Convert To Sheet Metal Sample</a></td>
+        <td class="api-list">Demonstrates finding the thickness of a body at a face and converting a BRepBody to sheet metal.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version May 2026<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2026 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(BRepBody.findThicknessAtFace%20Function%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

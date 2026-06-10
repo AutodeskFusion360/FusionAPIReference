@@ -83,6 +83,11 @@ public:
     /// The StudyMaterials collection that provides access to the existing study materials in the study.
     core::Ptr<StudyMaterials> materials() const;
 
+    /// Deletes this study from the simulation model.
+    /// This operation is not undoable
+    /// Returns true if the delete was successful.
+    bool deleteMe();
+
     ADSK_SIM_STUDY_API static const char* classType();
     ADSK_SIM_STUDY_API const char* objectType() const override;
     ADSK_SIM_STUDY_API void* queryInterface(const char* id) const override;
@@ -103,6 +108,7 @@ private:
     virtual Contacts* contacts_raw() const = 0;
     virtual Study* clone_raw() const = 0;
     virtual StudyMaterials* materials_raw() const = 0;
+    virtual bool deleteMe_raw() = 0;
 };
 
 // Inline wrappers
@@ -190,6 +196,12 @@ inline core::Ptr<Study> Study::clone() const
 inline core::Ptr<StudyMaterials> Study::materials() const
 {
     core::Ptr<StudyMaterials> res = materials_raw();
+    return res;
+}
+
+inline bool Study::deleteMe()
+{
+    bool res = deleteMe_raw();
     return res;
 }
 }// namespace sim

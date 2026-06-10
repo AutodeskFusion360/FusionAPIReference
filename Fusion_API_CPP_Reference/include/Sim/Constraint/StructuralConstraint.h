@@ -9,8 +9,7 @@
 //////////////////////////////////////////////////////////////////////////////
 
 #pragma once
-#include "../Core/SimAttribute.h"
-#include "../SimTypeDefs.h"
+#include "Constraint.h"
 
 // THIS CLASS WILL BE VISIBLE TO AN API CLIENT.
 // THIS HEADER FILE WILL BE GENERATED FROM NIDL.
@@ -40,11 +39,8 @@ namespace adsk { namespace sim {
 /// !!!!! Warning !!!!!
 /// 
 /// Object that represents a structural constraint.
-class StructuralConstraint : public SimAttribute {
+class StructuralConstraint : public Constraint {
 public:
-
-    /// The type of constraint.
-    ConstraintTypes type() const;
 
     /// The constraint mask determines from the values in the displacement or rotation
     /// vectors which ones are (in)significant.
@@ -64,7 +60,6 @@ public:
 private:
 
     // Raw interface
-    virtual ConstraintTypes type_raw() const = 0;
     virtual ConstraintMaskDefinition* maskDefinition_raw() const = 0;
     virtual core::Vector3D* displacement_raw() const = 0;
     virtual core::Vector3D* rotation_raw() const = 0;
@@ -96,15 +91,10 @@ private:
     virtual void placeholderStructuralConstraint25() {}
     virtual void placeholderStructuralConstraint26() {}
     virtual void placeholderStructuralConstraint27() {}
+    virtual void placeholderStructuralConstraint28() {}
 };
 
 // Inline wrappers
-
-inline ConstraintTypes StructuralConstraint::type() const
-{
-    ConstraintTypes res = type_raw();
-    return res;
-}
 
 inline core::Ptr<ConstraintMaskDefinition> StructuralConstraint::maskDefinition() const
 {

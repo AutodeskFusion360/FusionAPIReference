@@ -28,7 +28,8 @@
 #endif
 
 namespace adsk { namespace sim {
-    class LoadCaseItems;
+    class Constraints;
+    class Loads;
 }}
 
 namespace adsk { namespace sim {
@@ -46,10 +47,10 @@ public:
     bool name(const std::string& value);
 
     /// The Constraints collection that provides access to existing constraints in the load case.
-    core::Ptr<LoadCaseItems> constraints() const;
+    core::Ptr<Constraints> constraints() const;
 
     /// The Loads collection that provides access to existing loads in the load case.
-    core::Ptr<LoadCaseItems> loads() const;
+    core::Ptr<Loads> loads() const;
 
     /// Gets whether this load case is the active load case in the study.
     bool isActive() const;
@@ -72,8 +73,8 @@ private:
     // Raw interface
     virtual char* name_raw() const = 0;
     virtual bool name_raw(const char* value) = 0;
-    virtual LoadCaseItems* constraints_raw() const = 0;
-    virtual LoadCaseItems* loads_raw() const = 0;
+    virtual Constraints* constraints_raw() const = 0;
+    virtual Loads* loads_raw() const = 0;
     virtual bool isActive_raw() const = 0;
     virtual bool activate_raw() = 0;
     virtual LoadCase* clone_raw() const = 0;
@@ -99,15 +100,15 @@ inline bool LoadCase::name(const std::string& value)
     return name_raw(value.c_str());
 }
 
-inline core::Ptr<LoadCaseItems> LoadCase::constraints() const
+inline core::Ptr<Constraints> LoadCase::constraints() const
 {
-    core::Ptr<LoadCaseItems> res = constraints_raw();
+    core::Ptr<Constraints> res = constraints_raw();
     return res;
 }
 
-inline core::Ptr<LoadCaseItems> LoadCase::loads() const
+inline core::Ptr<Loads> LoadCase::loads() const
 {
-    core::Ptr<LoadCaseItems> res = loads_raw();
+    core::Ptr<Loads> res = loads_raw();
     return res;
 }
 

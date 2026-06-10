@@ -39,6 +39,16 @@ namespace adsk { namespace fusion {
 /// Defines a container of other PMI objects (including sub-folders).
 /// 
 /// A PMIAnnotations can contain multiple PMI of this type, and is typically used to group the PMI within a PMIAnnotations.
+/// 
+/// Examples of Imported PMI Folders:
+/// 
+/// - the default imported folder, which is a container expandable and has visible children in the browser
+/// 
+/// - an imported Hole Note, which is not expandable, and contains PMI such as Imported Diameter Dimensions and Imported Notes.
+/// 
+/// - an imported General Note
+/// 
+/// - an imported Feature Control Frame
 class PMIImportedFolder : public PMIAnnotation {
 public:
 

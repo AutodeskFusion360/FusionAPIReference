@@ -36,7 +36,9 @@
               Derived from: <a href="Base.htm">Base</a> Object
             <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Components/JointGeometry.h&gt;<h2 class="api">
           Description
-        </h2>A transient object used to define and query the geometric input of a joint and the resulting coordinate system it defines. New JointGeometry objects are created using its various static create methods and are then used as input to the Joints.createInput method.<h2 class="api">
+        </h2>
+    <p class="api">A transient object used to define and query the geometric input of a joint and the resulting coordinate system it defines. New JointGeometry objects are created using its various static create methods and are then used as input to the Joints.createInput method.</p>
+    <h2 class="api">
             Methods
           </h2>
     <Table class="api-list">
@@ -50,55 +52,81 @@
       </tr>
       <tr>
         <td class="api-list"><a href="JointGeometry_classType.htm">classType</a></td>
-        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+        <td class="api-list">
+          <p class="api">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="JointGeometry_createByBetweenTwoPlanes.htm">createByBetweenTwoPlanes</a></td>
-        <td class="api-list">Creates a new transient JointGeometry object based on a plane bisecting the two input planes.</td>
+        <td class="api-list">
+          <p class="api">Creates a new transient JointGeometry object based on a plane bisecting the two input planes.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="JointGeometry_createByCurve.htm">createByCurve</a></td>
-        <td class="api-list">Creates a new transient JointGeometry object using a BRepEdge or SketchCurve as input. A JointGeometry object can be used to create a joint or joint origin.</td>
+        <td class="api-list">
+          <p class="api">Creates a new transient JointGeometry object using a BRepEdge or SketchCurve as input. A JointGeometry object can be used to create a joint or joint origin.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="JointGeometry_createByCylinderOrConeFace.htm">createByCylinderOrConeFace</a></td>
-        <td class="api-list">Creates a new transient JointGeometry object based on a cylinder or cone BRepFace object.</td>
+        <td class="api-list">
+          <p class="api">Creates a new transient JointGeometry object based on a cylinder or cone BRepFace object.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="JointGeometry_createByNonPlanarFace.htm">createByNonPlanarFace</a></td>
-        <td class="api-list">Creates a new transient JointGeometry object based on a non-planar analytical BRepFace object. This is limited to cylinders, cones, spheres, and tori. A JointGeometry object can be used to create a joint or joint origin.</td>
+        <td class="api-list">
+          <p class="api">Creates a new transient JointGeometry object based on a non-planar analytical BRepFace object. This is limited to cylinders, cones, spheres, and tori. A JointGeometry object can be used to create a joint or joint origin.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="JointGeometry_createByPlanarFace.htm">createByPlanarFace</a></td>
-        <td class="api-list">Creates a new transient JointGeometry object based on a planar BRepFace object. A JointGeometry object can be used to create a joint or joint origin.</td>
+        <td class="api-list">
+          <p class="api">Creates a new transient JointGeometry object based on a planar BRepFace object. A JointGeometry object can be used to create a joint or joint origin.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="JointGeometry_createByPoint.htm">createByPoint</a></td>
-        <td class="api-list">Creates a new transient JointGeometry object using a ConstructionPoint, SketchPoint or BRepVertex as input. A JointGeometry object can be used to create a joint or joint origin.</td>
+        <td class="api-list">
+          <p class="api">Creates a new transient JointGeometry object using a ConstructionPoint, SketchPoint or BRepVertex as input. A JointGeometry object can be used to create a joint or joint origin.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="JointGeometry_createByProfile.htm">createByProfile</a></td>
-        <td class="api-list">Creates a new transient JointGeometry object based on a planar BRepFace object. A JointGeometry object can be used to create a joint or joint origin.</td>
+        <td class="api-list">
+          <p class="api">Creates a new transient JointGeometry object based on a planar BRepFace object. A JointGeometry object can be used to create a joint or joint origin.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="JointGeometry_createBySphereFace.htm">createBySphereFace</a></td>
-        <td class="api-list">Creates a new transient JointGeometry object based on a sphere BRepFace object.</td>
+        <td class="api-list">
+          <p class="api">Creates a new transient JointGeometry object based on a sphere BRepFace object.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="JointGeometry_createBySplineFace.htm">createBySplineFace</a></td>
-        <td class="api-list">Creates a new transient JointGeometry object based on a spline BRepFace object.</td>
+        <td class="api-list">
+          <p class="api">Creates a new transient JointGeometry object based on a spline BRepFace object.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="JointGeometry_createByTangentFaceEdge.htm">createByTangentFaceEdge</a></td>
-        <td class="api-list">Creates a new transient JointGeometry object based on a BRepFace object as well as a BRepEdge object which is on the BRepFace.</td>
+        <td class="api-list">
+          <p class="api">Creates a new transient JointGeometry object based on a BRepFace object as well as a BRepEdge object which is on the BRepFace.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="JointGeometry_createByTorusFace.htm">createByTorusFace</a></td>
-        <td class="api-list">Creates a new transient JointGeometry object based on a torus BRepFace object.</td>
+        <td class="api-list">
+          <p class="api">Creates a new transient JointGeometry object based on a torus BRepFace object.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="JointGeometry_createByTwoEdgeIntersection.htm">createByTwoEdgeIntersection</a></td>
-        <td class="api-list">Creates a new transient JointGeometry object that is positioned at the intersection of the two input linear BRepEdge objects.</td>
+        <td class="api-list">
+          <p class="api">Creates a new transient JointGeometry object that is positioned at the intersection of the two input linear BRepEdge objects.</p>
+        </td>
       </tr>
     </Table>
     <h2 class="api">
@@ -235,7 +263,7 @@
           <td align="left">
                 © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(JointGeometry%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(JointGeometry%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

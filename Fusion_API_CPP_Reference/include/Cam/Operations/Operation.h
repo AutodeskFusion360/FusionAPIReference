@@ -91,10 +91,6 @@ public:
     core::Ptr<ToolPreset> toolPreset() const;
     bool toolPreset(const core::Ptr<ToolPreset>& value);
 
-    /// !!!!! Warning !!!!!
-    /// ! This is in preview state; please see the help for more info
-    /// !!!!! Warning !!!!!
-    /// 
     /// Get or set the tool for this operation. The document's tool library will be updated accordingly.
     /// The tool instance returned is a copy and therefore is not referenced by the operation.
     /// To change the reference tool of the operation, the new tool must be assigned to the operation, but once set it cannot be unset again.

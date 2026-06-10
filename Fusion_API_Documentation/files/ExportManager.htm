@@ -36,7 +36,9 @@
               Derived from: <a href="Base.htm">Base</a> Object
             <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Fusion/ExportManager.h&gt;<h2 class="api">
           Description
-        </h2>Provides support for exporting model data to various formats.<h2 class="api">
+        </h2>
+    <p class="api">Provides support for exporting model data to various formats.</p>
+    <h2 class="api">
             Methods
           </h2>
     <Table class="api-list">
@@ -50,55 +52,81 @@
       </tr>
       <tr>
         <td class="api-list"><a href="ExportManager_classType.htm">classType</a></td>
-        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+        <td class="api-list">
+          <p class="api">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="ExportManager_createC3MFExportOptions.htm">createC3MFExportOptions</a></td>
-        <td class="api-list">Creates a C3MFExportOptions object that's used to export a design in 3MF format. Creation of the C3MFExportOptions object does not perform the export. You must pass this object to the ExportManager.execute method to perform the export.</td>
+        <td class="api-list">
+          <p class="api">Creates a C3MFExportOptions object that's used to export a design in 3MF format. Creation of the C3MFExportOptions object does not perform the export. You must pass this object to the ExportManager.execute method to perform the export.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="ExportManager_createDXFFlatPatternExportOptions.htm">createDXFFlatPatternExportOptions</a></td>
-        <td class="api-list">Creates a DXFFlatPatternExport object that's used to export a flat pattern in DXF format. Creation of the DXFFlatPatternExport object does not perform the export. You must call the execute method. You can change any additional settings by setting properties on the returned object before calling the execute method.</td>
+        <td class="api-list">
+          <p class="api">Creates a DXFFlatPatternExport object that's used to export a flat pattern in DXF format. Creation of the DXFFlatPatternExport object does not perform the export. You must call the execute method. You can change any additional settings by setting properties on the returned object before calling the execute method.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="ExportManager_createDXFSketchExportOptions.htm">createDXFSketchExportOptions</a></td>
-        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Creates a DXFSketchExportOptions object that's used to export a sketch in DXF format. Creation of the DXFSketchExportOptions object does not perform the export. You must call the execute method after changing the settings to the desired values.</td>
+        <td class="api-list">
+          <p class="api"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Creates a DXFSketchExportOptions object that's used to export a sketch in DXF format. Creation of the DXFSketchExportOptions object does not perform the export. You must call the execute method after changing the settings to the desired values.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="ExportManager_createFusionArchiveExportOptions.htm">createFusionArchiveExportOptions</a></td>
-        <td class="api-list">Creates an FusionArchiveExportOptions object that's used to export a design in Fusion archive format. Creation of the FusionArchiveExportOptions object does not perform the export. You must pass this object to the ExportManager.execute method to perform the export. The FusionArchiveExportOptions supports any available options when exporting to Fusion archive format.</td>
+        <td class="api-list">
+          <p class="api">Creates an FusionArchiveExportOptions object that's used to export a design in Fusion archive format. Creation of the FusionArchiveExportOptions object does not perform the export. You must pass this object to the ExportManager.execute method to perform the export. The FusionArchiveExportOptions supports any available options when exporting to Fusion archive format.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="ExportManager_createIGESExportOptions.htm">createIGESExportOptions</a></td>
-        <td class="api-list">Creates an IGESExportOptions object that's used to export a design in IGES format. Creation of the IGESExportOptions object does not perform the export. You must pass this object to the ExportManager.execute method to perform the export. The IGESExportOptions supports any available options when exporting to IGES format.</td>
+        <td class="api-list">
+          <p class="api">Creates an IGESExportOptions object that's used to export a design in IGES format. Creation of the IGESExportOptions object does not perform the export. You must pass this object to the ExportManager.execute method to perform the export. The IGESExportOptions supports any available options when exporting to IGES format.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="ExportManager_createOBJExportOptions.htm">createOBJExportOptions</a></td>
-        <td class="api-list">Creates an OBJExportOptions object that's used to export a design in OBJ format. Creation of the OBJExportOptions object does not perform the export. You must pass this object to the ExportManager.execute method to perform the export.</td>
+        <td class="api-list">
+          <p class="api">Creates an OBJExportOptions object that's used to export a design in OBJ format. Creation of the OBJExportOptions object does not perform the export. You must pass this object to the ExportManager.execute method to perform the export.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="ExportManager_createSATExportOptions.htm">createSATExportOptions</a></td>
-        <td class="api-list">Creates an SATExportOptions object that's used to export a design in SAT format. Creation of the SATExportOptions object does not perform the export. You must pass this object to the ExportManager.execute method to perform the export. The SATExportOptions supports any available options when exporting to SAT format.</td>
+        <td class="api-list">
+          <p class="api">Creates an SATExportOptions object that's used to export a design in SAT format. Creation of the SATExportOptions object does not perform the export. You must pass this object to the ExportManager.execute method to perform the export. The SATExportOptions supports any available options when exporting to SAT format.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="ExportManager_createSMTExportOptions.htm">createSMTExportOptions</a></td>
-        <td class="api-list">Creates an SMTExportOptions object that's used to export a design in SMT format. Creation of the SMTExportOptions object does not perform the export. You must pass this object to the ExportManager.execute method to perform the export. The SMTExportOptions supports any available options when exporting to SMT format.</td>
+        <td class="api-list">
+          <p class="api">Creates an SMTExportOptions object that's used to export a design in SMT format. Creation of the SMTExportOptions object does not perform the export. You must pass this object to the ExportManager.execute method to perform the export. The SMTExportOptions supports any available options when exporting to SMT format.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="ExportManager_createSTEPExportOptions.htm">createSTEPExportOptions</a></td>
-        <td class="api-list">Creates an STEPExportOptions object that's used to export a design in STEP format. Creation of the STEPExportOptions object does not perform the export. You must pass this object to the ExportManager.execute method to perform the export. The STEPExportOptions supports any available options when exporting to STEP format.</td>
+        <td class="api-list">
+          <p class="api">Creates an STEPExportOptions object that's used to export a design in STEP format. Creation of the STEPExportOptions object does not perform the export. You must pass this object to the ExportManager.execute method to perform the export. The STEPExportOptions supports any available options when exporting to STEP format.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="ExportManager_createSTLExportOptions.htm">createSTLExportOptions</a></td>
-        <td class="api-list">Creates an STLExportOptions object that's used to export a design in STL format. Creation of the STLExportOptions object does not perform the export. You must pass this object to the ExportManager.execute method to perform the export.</td>
+        <td class="api-list">
+          <p class="api">Creates an STLExportOptions object that's used to export a design in STL format. Creation of the STLExportOptions object does not perform the export. You must pass this object to the ExportManager.execute method to perform the export.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="ExportManager_createUSDExportOptions.htm">createUSDExportOptions</a></td>
-        <td class="api-list">Creates an USDExportOptions object that's used to export a design in USD format. Creation of the USDExportOptions object does not perform the export. You must pass this object to the ExportManager.execute method to perform the export. The USDExportOptions supports any available options when exporting to USD format.</td>
+        <td class="api-list">
+          <p class="api">Creates an USDExportOptions object that's used to export a design in USD format. Creation of the USDExportOptions object does not perform the export. You must pass this object to the ExportManager.execute method to perform the export. The USDExportOptions supports any available options when exporting to USD format.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="ExportManager_execute.htm">execute</a></td>
-        <td class="api-list">Executes the export operation to create the file in the format specified by the provided ExportOptions object.</td>
+        <td class="api-list">
+          <p class="api">Executes the export operation to create the file in the format specified by the provided ExportOptions object.</p>
+        </td>
       </tr>
     </Table>
     <h2 class="api">
@@ -163,7 +191,7 @@
           <td align="left">
                 © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(ExportManager%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(ExportManager%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

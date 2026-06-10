@@ -34,16 +34,9 @@
         </script></head>
   <body>
     <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
-    <h1 class="api">OperationInput.referenceTool Property<img src="../images/TestTubeLarge.png"></h1>
+    <h1 class="api">OperationInput.referenceTool Property</h1>
 
-          Parent Object: <a href="OperationInput.htm">OperationInput</a><p class="api-preview"><img src="../images/TestTubeSmall.png" alt="Preview">This functionality is provided as a preview
-				  of intended future API capabilities. You are encouraged to use it and report any problems or suggestions using the
-				  <a href="https://forums.autodesk.com/t5/fusion-360-api-and-scripts/bd-p/22">Fusion API and Scripts</a> forum.<br><br>
-
-				  Because this is a preview of future functionality, there is the possibility that it will change, which will possibly
-				  break any existing programs that use this functionality. Because of that, you should never deliver any programs that use
-				  any preview capabilities. For a distributed program, you should wait until it has moved from preview to released state.
-			  </p><br>Defined in namespace "adsk::cam" and the header file is &lt;Cam/Operations/OperationInput.h&gt;<h2 class="api">
+          Parent Object: <a href="OperationInput.htm">OperationInput</a><br>Defined in namespace "adsk::cam" and the header file is &lt;Cam/Operations/OperationInput.h&gt;<h2 class="api">
           Description
         </h2>
     <p class="api">Optionally specify the reference tool used by the operation. The ToolLibraries allows the access to Local and Fusion tools. Setting the tool is only possible on operation strategies that support reference tools, an exception is thrown otherwise. Likewise null is returned if the operation strategy does not support reference tools.</p>
@@ -62,7 +55,7 @@
       </div>
       <div id="C++" class="api-code">
         <table class="api-code">
-          <td>"operationInput_var" is a variable referencing an OperationInput object.<br /><code><pre class="api-code">#include &lt;Cam/Operations/OperationInput.h&gt;<br /><br /><span style="color:blue">// Get the value of the property.</span><br />Ptr&lt;Tool&gt; propertyValue = operationInput_var-&gt;<b>referenceTool</b>();<br /><br /><span style="color:blue">// Set the value of the property, where value_var is a Tool.</span><br />bool returnValue = operationInput_var-&gt;<b>referenceTool</b>(value_var);</pre></code></td>
+          <td>"operationInput_var" Is a variable referencing an OperationInput Object.<br /><code><pre Class="api-code">#include &lt;Cam/Operations/OperationInput.h&gt;<br /><br /><span style="color:blue">// Get the value of the property.</span><br />Ptr&lt;Tool&gt; propertyValue = operationInput_var-&gt;<b>referenceTool</b>();<br /><br /><span style="color:blue">// Set the value of the property, where value_var is a Tool.</span><br />bool returnValue = operationInput_var-&gt;<b>referenceTool</b>(value_var);</pre></code></td>
         </table>
       </div>
     </div>
@@ -78,7 +71,7 @@
           <td align="left">
                 © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(OperationInput.referenceTool%20Function%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(OperationInput.referenceTool%20Function%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

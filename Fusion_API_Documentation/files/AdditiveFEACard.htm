@@ -35,8 +35,10 @@
         </h1>
     <h2 class="api">
           Description
-        </h2>The valid keyword card names for an AdditiveFEADeckBuilderCard in an AdditiveFEADeckBuilder.  Any cards not in this enum can still be made using createGenericCard.<br>Defined in namespace "adsk::cam" and the header file is &lt;Cam\CamTypeDefs.h&gt;<h2 class="api">
-          Methods
+        </h2>
+    <p class="api">The valid keyword card names for an AdditiveFEADeckBuilderCard in an AdditiveFEADeckBuilder.  Any cards not in this enum can still be made using createGenericCard.</p><br><p class="api">Defined in namespace "adsk::cam" and the header file is &lt;Cam\CamTypeDefs.h&gt;</p>
+    <h2 class="api">
+          Values
         </h2>
     <Table class="api-list">
       <tr class="header">
@@ -136,6 +138,11 @@
         <td class="api-list">The *GOLD card defines the shape of the heat source for Goldak's double ellipsoid model.</td>
       </tr>
       <tr>
+        <td class="api-list">IncrementOffsetCard</td>
+        <td class="api-list" align="right" style="padding-right:10px">41</td>
+        <td class="api-list">The *IOFF card defines the time increment offset.</td>
+      </tr>
+      <tr>
         <td class="api-list">InitialTemperatureCard</td>
         <td class="api-list" align="right" style="padding-right:10px">32</td>
         <td class="api-list">The *INIT card sets the initial temperature.</td>
@@ -154,6 +161,11 @@
         <td class="api-list">MaterialCard</td>
         <td class="api-list" align="right" style="padding-right:10px">19</td>
         <td class="api-list">The *MATE card defines material properties.</td>
+      </tr>
+      <tr>
+        <td class="api-list">MaxRefinementLevelCard</td>
+        <td class="api-list" align="right" style="padding-right:10px">39</td>
+        <td class="api-list">The *MAXR card defines the max number of triangle refinement levels for triangle mesh warping or result interpolation.</td>
       </tr>
       <tr>
         <td class="api-list">MechanicalRelaxationCard</td>
@@ -216,6 +228,11 @@
         <td class="api-list">The *SOLU card defines the convergence criteria for the Newton-Raphson method.</td>
       </tr>
       <tr>
+        <td class="api-list">STLIndexCard</td>
+        <td class="api-list" align="right" style="padding-right:10px">40</td>
+        <td class="api-list">The *ISTL card defines which STL, as listed in the STLsCard, is to be warped or interpolated.</td>
+      </tr>
+      <tr>
         <td class="api-list">STLMapCard</td>
         <td class="api-list" align="right" style="padding-right:10px">6</td>
         <td class="api-list">The *STLM card maps STL files to configurations, PRMs, materials, and volume fractions.</td>
@@ -240,6 +257,16 @@
         <td class="api-list" align="right" style="padding-right:10px">21</td>
         <td class="api-list">The *TRAN card defines transient analysis timing control.</td>
       </tr>
+      <tr>
+        <td class="api-list">WarpCard</td>
+        <td class="api-list" align="right" style="padding-right:10px">38</td>
+        <td class="api-list">The *WARP card defines the warpage magnification factor for triangle mesh warping, e.g. +1.0 for warpage or -1.0 for unrelaxed compensation.</td>
+      </tr>
+      <tr>
+        <td class="api-list">WarpInputCard</td>
+        <td class="api-list" align="right" style="padding-right:10px">42</td>
+        <td class="api-list">The *INPU card defines the FEA input for a warp operation.</td>
+      </tr>
     </Table>
     <h2 class="api">
           Version
@@ -251,7 +278,7 @@
           <td align="left">
                 © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(AdditiveFEACard%20Enum%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(AdditiveFEACard%20Enum%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

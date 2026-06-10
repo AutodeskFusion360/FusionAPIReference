@@ -36,7 +36,9 @@
               Derived from: <a href="Base.htm">Base</a> Object
             <br>Defined in namespace "adsk::core" and the header file is &lt;Core/Application/UnitsManager.h&gt;<h2 class="api">
           Description
-        </h2>Utility class used to work with Values and control default units. Internal values are held in SI units (e.g. seconds, radians, kg for time, angle, mass) with the exception that all lengths are in cm rather than meter and this affects derived units (e.g. velocity is cm/s, volume is cm^3). Units are specified flexibility via strings (e.g. "cm", "in", "inch", "cm^3", "cm*cm*cm", "mph", "mps" "m/s"). Units like length can be defaulted based on the design settings if the user does not explicitly specify units - so "3" can be 3 inches, mm or cm depending on what the design settings are.<h2 class="api">
+        </h2>
+    <p class="api">Utility class used to work with Values and control default units. Internal values are held in SI units (e.g. seconds, radians, kg for time, angle, mass) with the exception that all lengths are in cm rather than meter and this affects derived units (e.g. velocity is cm/s, volume is cm^3). Units are specified flexibility via strings (e.g. "cm", "in", "inch", "cm^3", "cm*cm*cm", "mph", "mps" "m/s"). Units like length can be defaulted based on the design settings if the user does not explicitly specify units - so "3" can be 3 inches, mm or cm depending on what the design settings are.</p>
+    <h2 class="api">
             Methods
           </h2>
     <Table class="api-list">
@@ -50,35 +52,51 @@
       </tr>
       <tr>
         <td class="api-list"><a href="UnitsManager_classType.htm">classType</a></td>
-        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+        <td class="api-list">
+          <p class="api">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="UnitsManager_convert.htm">convert</a></td>
-        <td class="api-list">Converts a value from one unit to another. The input and output unit specifiers must be compatible. For example, "in" (inches) and "cm" (centimeters) will work because they both define length. So Convert(1.5, "in", "ft") -> 0.125 Convert(1.5, unitsManager.defaultLengthUnits, "cm") -> depends on the current default distance units, with "mm" it gives 0.15 So Convert(1.5, "in", "kg") -> -1 and GetLastError returns ExpressionError (to denote error) So Convert(1, "in", "internalUnits") -> 2.54 So Convert(1, "internalUnits", "in") -> 0.3937...</td>
+        <td class="api-list">
+          <p class="api">Converts a value from one unit to another. The input and output unit specifiers must be compatible. For example, "in" (inches) and "cm" (centimeters) will work because they both define length. So Convert(1.5, "in", "ft") -> 0.125 Convert(1.5, unitsManager.defaultLengthUnits, "cm") -> depends on the current default distance units, with "mm" it gives 0.15 So Convert(1.5, "in", "kg") -> -1 and GetLastError returns ExpressionError (to denote error) So Convert(1, "in", "internalUnits") -> 2.54 So Convert(1, "internalUnits", "in") -> 0.3937...</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="UnitsManager_evaluateExpression.htm">evaluateExpression</a></td>
-        <td class="api-list">Gets the value (in internal units) of the expression.</td>
+        <td class="api-list">
+          <p class="api">Gets the value (in internal units) of the expression.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="UnitsManager_formatInternalValue.htm">formatInternalValue</a></td>
-        <td class="api-list"><mark>**RETIRED**</mark> Formats the internal value as a string. The output string is formatted using the current unit settings in preferences. The preferences control the number of decimal places, whether units are abbreviated and several other things. FormatInternalValue(1.5, "in") -> "0.591 in" FormatInternalValue(1.5, "in", false) -> "0.591" FormatInternalValue(1.5, "mm", true) -> "15.00 mm" FormatInternalValue(1.5) -> depends on DistanceUnits, might be "15.0 mm"</td>
+        <td class="api-list">
+          <p class="api"><mark>**RETIRED**</mark> Formats the internal value as a string. The output string is formatted using the current unit settings in preferences. The preferences control the number of decimal places, whether units are abbreviated and several other things. FormatInternalValue(1.5, "in") -> "0.591 in" FormatInternalValue(1.5, "in", false) -> "0.591" FormatInternalValue(1.5, "mm", true) -> "15.00 mm" FormatInternalValue(1.5) -> depends on DistanceUnits, might be "15.0 mm"</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="UnitsManager_formatUnits.htm">formatUnits</a></td>
-        <td class="api-list">Formats the unit according to the user preferences "centimeter" -> "cm" "inch" -> "in" "cm* cm *cm / s" -> , "cm^3 / s"</td>
+        <td class="api-list">
+          <p class="api">Formats the unit according to the user preferences "centimeter" -> "cm" "inch" -> "in" "cm* cm *cm / s" -> , "cm^3 / s"</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="UnitsManager_formatValue.htm">formatValue</a></td>
-        <td class="api-list">Given a floating point number this method evaluates it as a value of a specific unit type and returns an appropriate string. By default, the current unit settings defined in the user preferences is used, but you can set the method arguments to override the defaults to specify the formatting you want. The input value always uses internal units, which are centimeters for length, radians for angles, and mass is in kilograms.<br/><br/> This method is useful whenever you have a value you've gotten from Fusion or computed on your own and need to display it to the user as a string. This method does the conversion and also takes into account the units and the formatting the user has specified in their preferences.<br/><br/> Below are some examples of various formatting where the user preferences for general precision is four decimal places, and the angular precision is one decimal place. Also, trailing zeros are set to be hidden and the minimum precision is two decimal places when trailing zeros are turned off. The design units are specified to be "inch".<br/><br/> Here, only the value is supplied and the default is to assume the units are the current design length unit and use the preference settings to format it so there are four decimal places shown and the unit name is included. formatValue(1.5) -> "0.5906 in"<br/><br/> In this example, an angle is specified by using "deg" as the unit, and the result showing one decimal place, which is what's defined in the user preference, and it shows the unit name. formatValue(0.7853981633974483096, "deg") -> "45.0 deg"<br/><br/> This example converts the input value of 1.5 cm to mm where eight decimal places are shown, trailing zeros are shown, and the unit name is shown. The fourth argument of minimum precision is ignored, since it is only used when showTrailing zeros is False. formatValue(1.5, "mm", 8, BooleanOptions.TrueBooleanOption, 0, True) - > "15.00000000 mm"</td>
+        <td class="api-list">
+          <p class="api">Given a floating point number this method evaluates it as a value of a specific unit type and returns an appropriate string. By default, the current unit settings defined in the user preferences is used, but you can set the method arguments to override the defaults to specify the formatting you want. The input value always uses internal units, which are centimeters for length, radians for angles, and mass is in kilograms.<br/><br/> This method is useful whenever you have a value you've gotten from Fusion or computed on your own and need to display it to the user as a string. This method does the conversion and also takes into account the units and the formatting the user has specified in their preferences.<br/><br/> Below are some examples of various formatting where the user preferences for general precision is four decimal places, and the angular precision is one decimal place. Also, trailing zeros are set to be hidden and the minimum precision is two decimal places when trailing zeros are turned off. The design units are specified to be "inch".<br/><br/> Here, only the value is supplied and the default is to assume the units are the current design length unit and use the preference settings to format it so there are four decimal places shown and the unit name is included. formatValue(1.5) -> "0.5906 in"<br/><br/> In this example, an angle is specified by using "deg" as the unit, and the result showing one decimal place, which is what's defined in the user preference, and it shows the unit name. formatValue(0.7853981633974483096, "deg") -> "45.0 deg"<br/><br/> This example converts the input value of 1.5 cm to mm where eight decimal places are shown, trailing zeros are shown, and the unit name is shown. The fourth argument of minimum precision is ignored, since it is only used when showTrailing zeros is False. formatValue(1.5, "mm", 8, BooleanOptions.TrueBooleanOption, 0, True) - > "15.00000000 mm"</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="UnitsManager_isValidExpression.htm">isValidExpression</a></td>
-        <td class="api-list">Checks to see if the given expression is valid.</td>
+        <td class="api-list">
+          <p class="api">Checks to see if the given expression is valid.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="UnitsManager_standardizeExpression.htm">standardizeExpression</a></td>
-        <td class="api-list">Standardizes the expression in terms of spacing and user preferences. StandardizeExpression("1.5") -> depends on distance units, but with might be "1.5 mm" StandardizeExpression("1.5", "in") -> "1.5 in" StandardizeExpression("1.5 cm + 1.50001 centimeter") -> "1.5 cm + 1.50001 cm" StandardizeExpression("1.5", "m * m * m / s") -> "1.5 m^3 /s"</td>
+        <td class="api-list">
+          <p class="api">Standardizes the expression in terms of spacing and user preferences. StandardizeExpression("1.5") -> depends on distance units, but with might be "1.5 mm" StandardizeExpression("1.5", "in") -> "1.5 in" StandardizeExpression("1.5 cm + 1.50001 centimeter") -> "1.5 cm + 1.50001 cm" StandardizeExpression("1.5", "m * m * m / s") -> "1.5 m^3 /s"</p>
+        </td>
       </tr>
     </Table>
     <h2 class="api">
@@ -116,7 +134,7 @@
     </Table>
     <h2 class="api">
             Accessed From
-          </h2><a href="CAM_unitsManager.htm">CAM.unitsManager</a>, <a href="Design_unitsManager.htm">Design.unitsManager</a>, <a href="Drawing_unitsManager.htm">Drawing.unitsManager</a>, <a href="FlatPatternProduct_unitsManager.htm">FlatPatternProduct.unitsManager</a>, <a href="Product_unitsManager.htm">Product.unitsManager</a>, <a href="WorkingModel_unitsManager.htm">WorkingModel.unitsManager</a><h2 class="api">
+          </h2><a href="Board_unitsManager.htm">Board.unitsManager</a>, <a href="CAM_unitsManager.htm">CAM.unitsManager</a>, <a href="Design_unitsManager.htm">Design.unitsManager</a>, <a href="Drawing_unitsManager.htm">Drawing.unitsManager</a>, <a href="EcadDesign_unitsManager.htm">EcadDesign.unitsManager</a>, <a href="EcadDocument_unitsManager.htm">EcadDocument.unitsManager</a>, <a href="FlatPatternProduct_unitsManager.htm">FlatPatternProduct.unitsManager</a>, <a href="Library_unitsManager.htm">Library.unitsManager</a>, <a href="Product_unitsManager.htm">Product.unitsManager</a>, <a href="Schematic_unitsManager.htm">Schematic.unitsManager</a>, <a href="WorkingModel_unitsManager.htm">WorkingModel.unitsManager</a><h2 class="api">
             Derived Classes
           </h2><a href="FusionUnitsManager.htm">FusionUnitsManager</a><h2 class="api">
             Samples
@@ -149,7 +167,7 @@
           <td align="left">
                 © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(UnitsManager%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(UnitsManager%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

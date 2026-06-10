@@ -36,7 +36,7 @@ namespace adsk { namespace cam {
 
 namespace adsk { namespace cam {
 
-/// Object that represents an setup creation parameters.
+/// Object that represents setup creation parameters.
 /// The input-object can be used from the Setups.add method
 /// to instantiate a new setup
 class SetupInput : public core::Base {

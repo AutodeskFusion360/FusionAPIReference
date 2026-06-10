@@ -43,7 +43,9 @@
 		    </p>
     <h2 class="api">
           Description
-        </h2>API clients can implement subclasses of this handler to enable custom Signed Distance Field geometries.<h2 class="api">
+        </h2>
+    <p class="api">API clients can implement subclasses of this handler to enable custom Signed Distance Field geometries.</p>
+    <h2 class="api">
             Methods
           </h2>
     <Table class="api-list">
@@ -57,11 +59,15 @@
       </tr>
       <tr>
         <td class="api-list"><a href="CustomSDFCallbackEventHandler_boundingBox.htm">boundingBox</a></td>
-        <td class="api-list">This method should be implemented in the subclass of the handler to return the bounding box of the Signed Distance Field that it can provide. This method will be called infrequently by the system.</td>
+        <td class="api-list">
+          <p class="api">This method should be implemented in the subclass of the handler to return the bounding box of the Signed Distance Field that it can provide. This method will be called infrequently by the system.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="CustomSDFCallbackEventHandler_signedDistanceAt.htm">signedDistanceAt</a></td>
-        <td class="api-list">This method should be implemented in the subclass of the handler to return the Signed Distance value at the given coordinates within the bounding box. This method will be called very frequently and potentially from several differrent threads, it should be made as fast as possible</td>
+        <td class="api-list">
+          <p class="api">This method should be implemented in the subclass of the handler to return the Signed Distance value at the given coordinates within the bounding box. This method will be called very frequently and potentially from several differrent threads, it should be made as fast as possible</p>
+        </td>
       </tr>
     </Table>
     <h2 class="api">
@@ -74,7 +80,7 @@
           <td align="left">
                 © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(CustomSDFCallbackEventHandler%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(CustomSDFCallbackEventHandler%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

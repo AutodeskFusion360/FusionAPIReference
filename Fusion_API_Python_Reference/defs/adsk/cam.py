@@ -69,6 +69,11 @@ class AdditiveFEACard():
     OutputFileFrequencyCard = 35
     SolutionParametersCard = 36
     MechanicalRelaxationCard = 37
+    WarpCard = 38
+    MaxRefinementLevelCard = 39
+    STLIndexCard = 40
+    IncrementOffsetCard = 41
+    WarpInputCard = 42
 
 class AdditiveFEAGenerationType():
     """
@@ -266,6 +271,7 @@ class GeneratedDataType():
         pass
     OptimizedOrientationGeneratedDataType = 0
     AdditiveFEAGeneratedDataType = 1
+    AdditiveInterferenceAnalysisGeneratedDataType = 2
 
 class HoleSegmentType():
     """
@@ -449,6 +455,7 @@ class ModifyUtilityTypes():
     def __init__(self):
         pass
     AdditiveSetupModifyUtility = 0
+    AdditiveFEAModifyUtility = 1
 
 class MultiAxisDegreesPerMinuteType():
     """
@@ -916,6 +923,13 @@ class AdditiveFEADeckBuilder(core.Base):
         isUsed : 1 if mechanical numerical relaxation is used; otherwise, 0 (or other value).
         maxIterations : Number of relaxation iterations.
         scalingFactor : Relaxation scaling factor.
+        
+        """
+        return AdditiveFEADeckBuilderCard()
+    def createWarpInputCard(self, type: AdditiveFEAAnalysisType) -> AdditiveFEADeckBuilderCard:
+        """
+        Creates the *INPU card.
+        type : The type of analysis for which the warp input is being created, e.g. Mechanical or Thermal.
         
         """
         return AdditiveFEADeckBuilderCard()
@@ -1989,9 +2003,9 @@ class CAMTemplate(core.Base):
         """
         return CAMTemplate()
     @staticmethod
-    def createEmpty() -> CAMTemplate:
+    def createEmptyHoleTemplate() -> CAMTemplate:
         """
-        Create an empty CAMTemplate
+        Create an empty CAMTemplate. This template will represent a hole template.
         Returns the newly created template.
         """
         return CAMTemplate()
@@ -2044,6 +2058,14 @@ class CAMTemplate(core.Base):
     def isHoleTemplate(self) -> bool:
         """
         Whether or not this is a hole template
+        """
+        return bool()
+    @property
+    def isValidTemplate(self) -> bool:
+        """
+        Whether or not this template is in an appropriate state to be
+        used. This means it has operations and, for hole templates, has
+        an appropriate hole signature.
         """
         return bool()
     @property
@@ -2743,10 +2765,6 @@ class MachineAxis(core.Base):
         return MachineAxis()
     def useContinuousResolution(self) -> None:
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Specifies the axis moves continuously.
         """
         pass
@@ -2823,10 +2841,6 @@ class MachineAxis(core.Base):
     @property
     def resolutionStepSize(self) -> float:
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Specifies the discrete step size used for axis movement.
         The step size should be greater than zero.
         Returns NaN if no step size is set or the axis move is configured for
@@ -2836,10 +2850,6 @@ class MachineAxis(core.Base):
     @resolutionStepSize.setter
     def resolutionStepSize(self, value: float):
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Specifies the discrete step size used for axis movement.
         The step size should be greater than zero.
         Returns NaN if no step size is set or the axis move is configured for
@@ -2996,10 +3006,6 @@ class MachineAxisInput(core.Base):
         return MachineAxisInput()
     def useContinuousResolution(self) -> None:
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Specifies the axis moves continuously.
         """
         pass
@@ -3068,10 +3074,6 @@ class MachineAxisInput(core.Base):
     @property
     def resolutionStepSize(self) -> float:
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Specifies the discrete step size used for axis movement.
         The step size should be greater than zero.
         Returns NaN if no step size is set or the axis move is configured for
@@ -3081,10 +3083,6 @@ class MachineAxisInput(core.Base):
     @resolutionStepSize.setter
     def resolutionStepSize(self, value: float):
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Specifies the discrete step size used for axis movement.
         The step size should be greater than zero.
         Returns NaN if no step size is set or the axis move is configured for
@@ -4911,6 +4909,28 @@ class OperationBase(core.Base):
         null if the given object does not have available generated data, an instance in one of the child classes otherwise.
         """
         return GeneratedDataCollection()
+    @property
+    def noteIconColor(self) -> NoteIconColors:
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        The color of the note icon. This represents the color of the note icon in the browser, which is displayed next to the operation name when the operation has notes.
+        Returns the color of the note icon.
+        """
+        return NoteIconColors()
+    @noteIconColor.setter
+    def noteIconColor(self, value: NoteIconColors):
+        """
+        !!!!! Warning !!!!!
+        ! This is in preview state; please see the help for more info
+        !!!!! Warning !!!!!
+        
+        The color of the note icon. This represents the color of the note icon in the browser, which is displayed next to the operation name when the operation has notes.
+        Returns the color of the note icon.
+        """
+        pass
 
 class OperationInput(core.Base):
     """
@@ -5000,10 +5020,6 @@ class OperationInput(core.Base):
     @property
     def referenceTool(self) -> Tool:
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Optionally specify the reference tool used by the operation. The ToolLibraries allows the access to Local and Fusion tools.
         Setting the tool is only possible on operation strategies that support reference tools, an exception is thrown otherwise.
         Likewise null is returned if the operation strategy does not support reference tools.
@@ -5012,10 +5028,6 @@ class OperationInput(core.Base):
     @referenceTool.setter
     def referenceTool(self, value: Tool):
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Optionally specify the reference tool used by the operation. The ToolLibraries allows the access to Local and Fusion tools.
         Setting the tool is only possible on operation strategies that support reference tools, an exception is thrown otherwise.
         Likewise null is returned if the operation strategy does not support reference tools.
@@ -5469,10 +5481,6 @@ class PrintSetting(core.Base):
         return bool()
     def toXML(self) -> str:
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Generates and returns the print setting xml content string.
         Returns print setting xml content string.
         """
@@ -6001,10 +6009,6 @@ class RecognizedPocket(core.Base):
     @staticmethod
     def recognizePocketsWithInput(input: RecognizedPocketInput) -> RecognizedPockets:
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Gets all recognized pockets based on the properties in the given input object and returns them.
         The method is only available with the Machining Extension.
         input : An input object defining the body and search parameters for recognizing pockets.
@@ -6061,20 +6065,12 @@ class RecognizedPocket(core.Base):
     @property
     def attackVector(self) -> core.Vector3D:
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Returns the attack vector that was used to recognize this pocket.
         """
         return core.Vector3D()
 
 class RecognizedPocketInput(core.Base):
     """
-    !!!!! Warning !!!!!
-    ! This is in preview state; please see the help for more info
-    !!!!! Warning !!!!!
-    
     Input object containing properties used to recognize pockets. Includes bosses along open and closed pockets.
     The class is only available with the Machining Extension.
     """
@@ -6198,7 +6194,7 @@ class SetupEventHandler(core.EventHandler):
 
 class SetupInput(core.Base):
     """
-    Object that represents an setup creation parameters.
+    Object that represents setup creation parameters.
     The input-object can be used from the Setups.add method
     to instantiate a new setup
     """
@@ -6964,6 +6960,32 @@ class AdditiveFEAOperationInput(OperationInput):
         """
         pass
 
+class AdditiveFEAUtility(ModifyUtility):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    AdditiveFEAUtility provides functionality for additive FEA simulation operations.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> AdditiveFEAUtility:
+        return AdditiveFEAUtility()
+    def warpTriangleMesh(self, deck: AdditiveFEADeckBuilder) -> bool:
+        """
+        Generates a warped or compensated mesh from a completed mechanical FEA operation
+        and inserts it into the design. The direction of the warp (warpage vs. compensation)
+        is controlled by the sign of the WarpCard value in the deck.
+        deck : An AdditiveFEADeckBuilder containing the warp parameters. The WarpCard value's
+        sign determines the warp direction: use a positive value (e.g. +1.0) for warpage,
+        or a negative value (e.g. -1.0) for unrelaxed compensation. The magnitude acts
+        as a magnification factor.
+        True on success, false on failure.
+        """
+        return bool()
+
 class AdditiveFFFLimitsMachineElement(MachineElement):
     """
     Machine element representing limits for fused filament fabrication (FFF) machine motion and temperatures.
@@ -7065,6 +7087,26 @@ class AdditiveFFFLimitsMachineElement(MachineElement):
         Maximum supported acceleration for motion in the Z axis in cm/s^2.
         """
         pass
+
+class AdditiveInterferenceAnalysisResult(GeneratedData):
+    """
+    !!!!! Warning !!!!!
+    ! This is in preview state; please see the help for more info
+    !!!!! Warning !!!!!
+    
+    Result of an additive interference analysis operation.
+    """
+    def __init__(self):
+        pass
+    @staticmethod
+    def cast(arg) -> AdditiveInterferenceAnalysisResult:
+        return AdditiveInterferenceAnalysisResult()
+    @property
+    def interferingOccurrences(self) -> list[fusion.Occurrence]:
+        """
+        Gets a list of all interfering occurrences.
+        """
+        return [fusion.Occurrence()]
 
 class AdditivePlatformMachineElement(MachineElement):
     """
@@ -7428,10 +7470,6 @@ class ArrangeSelection(GeometrySelection):
     @property
     def customMultiAxisRotationType(self) -> MultiAxisRotationTypes:
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Gets and sets the custom multi-axis rotation type.
         This function is not available in Fusion for Personal Use.
         To enable any rotation the parameter "arrange_rotation_group" of the operation must be set to true.
@@ -7442,10 +7480,6 @@ class ArrangeSelection(GeometrySelection):
     @customMultiAxisRotationType.setter
     def customMultiAxisRotationType(self, value: MultiAxisRotationTypes):
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Gets and sets the custom multi-axis rotation type.
         This function is not available in Fusion for Personal Use.
         To enable any rotation the parameter "arrange_rotation_group" of the operation must be set to true.
@@ -7456,10 +7490,6 @@ class ArrangeSelection(GeometrySelection):
     @property
     def isUsingCustomMultiAxisRotationType(self) -> bool:
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Gets and sets if custom multi-axis rotation type is used for this element.
         This function is not available in Fusion for Personal Use.
         Throws an exception when calling this function in Fusion for Personal Use.
@@ -7470,10 +7500,6 @@ class ArrangeSelection(GeometrySelection):
     @isUsingCustomMultiAxisRotationType.setter
     def isUsingCustomMultiAxisRotationType(self, value: bool):
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Gets and sets if custom multi-axis rotation type is used for this element.
         This function is not available in Fusion for Personal Use.
         Throws an exception when calling this function in Fusion for Personal Use.
@@ -7811,6 +7837,12 @@ class CAM(core.Product):
         You can only get a valid DocumentStockMaterialLibrary when you have access to Stock Materials private preview feature and enable the feature flag.
         """
         return DocumentStockMaterialLibrary()
+    @property
+    def analyses(self) -> fusion.Analyses:
+        """
+        Gets the collection of design analyses associated with this design, created in the Manufacture workspace.
+        """
+        return fusion.Analyses()
 
 class CAM3MFExportOptions(CAMExportOptions):
     """
@@ -7958,10 +7990,6 @@ class CAM3MFExportOptions(CAMExportOptions):
     @property
     def isSliceDataIncluded(self) -> bool:
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Flag toggling if slice data which has been generated beforehand by generating the entire setup or the additive toolpath object should be included in the exported file.
         The default value is false.
         """
@@ -7969,10 +7997,6 @@ class CAM3MFExportOptions(CAMExportOptions):
     @isSliceDataIncluded.setter
     def isSliceDataIncluded(self, value: bool):
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Flag toggling if slice data which has been generated beforehand by generating the entire setup or the additive toolpath object should be included in the exported file.
         The default value is false.
         """
@@ -9147,20 +9171,12 @@ class MultiAxisMachineElement(MachineElement):
     @property
     def isUsingTiltedWorkplane(self) -> bool:
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Specifies if tilted workplane command (e.g., G68.2, G254, PLANE SPATIAL, CYCLE800) should be output for 3+2 operations.
         """
         return bool()
     @isUsingTiltedWorkplane.setter
     def isUsingTiltedWorkplane(self, value: bool):
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Specifies if tilted workplane command (e.g., G68.2, G254, PLANE SPATIAL, CYCLE800) should be output for 3+2 operations.
         """
         pass
@@ -9366,10 +9382,6 @@ class Operation(OperationBase):
     @property
     def referenceTool(self) -> Tool:
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Get or set the tool for this operation. The document's tool library will be updated accordingly.
         The tool instance returned is a copy and therefore is not referenced by the operation.
         To change the reference tool of the operation, the new tool must be assigned to the operation, but once set it cannot be unset again.
@@ -9380,10 +9392,6 @@ class Operation(OperationBase):
     @referenceTool.setter
     def referenceTool(self, value: Tool):
         """
-        !!!!! Warning !!!!!
-        ! This is in preview state; please see the help for more info
-        !!!!! Warning !!!!!
-        
         Get or set the tool for this operation. The document's tool library will be updated accordingly.
         The tool instance returned is a copy and therefore is not referenced by the operation.
         To change the reference tool of the operation, the new tool must be assigned to the operation, but once set it cannot be unset again.

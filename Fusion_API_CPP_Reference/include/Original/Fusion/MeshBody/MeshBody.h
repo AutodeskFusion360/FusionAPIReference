@@ -36,8 +36,10 @@ namespace adsk { namespace core {
     class Material;
     class OrientedBoundingBox3D;
     class Plane;
+    class Point3D;
     class Polyline3D;
     class TextureMapControl;
+    class Vector3D;
 }}
 namespace adsk { namespace fusion {
     class Component;
@@ -295,6 +297,13 @@ public:
     /// no polyline 3d objects are returned.
     std::vector<core::Ptr<core::Polyline3D>> silhouette(const core::Ptr<core::Plane>& plane);
 
+    /// Finds all points that are intersected by the specified ray.
+    /// originPoint : Input point that defines the origin of the ray. The search for entities begins at this point.
+    /// rayDirection : Input vector that defines the direction of the ray. The ray is infinite so the length of the vector is ignored.
+    /// The results are returned as a list of Point3D objects. If no collisions are found the list is empty. The points are sorted
+    /// by distance, i.e. the closest points to the origin are first.
+    std::vector<core::Ptr<core::Point3D>> calculateCollisionsWithRay(const core::Ptr<core::Point3D>& originPoint, const core::Ptr<core::Vector3D>& rayDirection);
+
     ADSK_FUSION_MESHBODY_API static const char* classType();
     ADSK_FUSION_MESHBODY_API const char* objectType() const override;
     ADSK_FUSION_MESHBODY_API void* queryInterface(const char* id) const override;
@@ -344,6 +353,7 @@ private:
     virtual MeshBody* moveToComponent_raw(core::Base* target) = 0;
     virtual MeshBody* copyToComponent_raw(core::Base* target) = 0;
     virtual core::Polyline3D** silhouette_raw(core::Plane* plane, size_t& return_size) = 0;
+    virtual core::Point3D** calculateCollisionsWithRay_raw(core::Point3D* originPoint, core::Vector3D* rayDirection, size_t& return_size) = 0;
 };
 
 // Inline wrappers
@@ -602,6 +612,20 @@ inline std::vector<core::Ptr<core::Polyline3D>> MeshBody::silhouette(const core:
     size_t s;
 
     core::Polyline3D** p= silhouette_raw(plane.get(), s);
+    if(p)
+    {
+        res.assign(p, p+s);
+        core::DeallocateArray(p);
+    }
+    return res;
+}
+
+inline std::vector<core::Ptr<core::Point3D>> MeshBody::calculateCollisionsWithRay(const core::Ptr<core::Point3D>& originPoint, const core::Ptr<core::Vector3D>& rayDirection)
+{
+    std::vector<core::Ptr<core::Point3D>> res;
+    size_t s;
+
+    core::Point3D** p= calculateCollisionsWithRay_raw(originPoint.get(), rayDirection.get(), s);
     if(p)
     {
         res.assign(p, p+s);

@@ -109,7 +109,21 @@ enum AdditiveFEACard
     /// The *SOLU card defines the convergence criteria for the Newton-Raphson method.
     SolutionParametersCard,
     /// The *RELM card defines parameters for numerical relaxation, similar to *RELA, but only for the mechanical analysis.
-    MechanicalRelaxationCard
+    MechanicalRelaxationCard,
+    /// The *WARP card defines the warpage magnification factor for
+    /// triangle mesh warping, e.g. +1.0 for warpage or -1.0 for
+    /// unrelaxed compensation.
+    WarpCard,
+    /// The *MAXR card defines the max number of triangle refinement
+    /// levels for triangle mesh warping or result interpolation.
+    MaxRefinementLevelCard,
+    /// The *ISTL card defines which STL, as listed in the STLsCard, is
+    /// to be warped or interpolated.
+    STLIndexCard,
+    /// The *IOFF card defines the time increment offset.
+    IncrementOffsetCard,
+    /// The *INPU card defines the FEA input for a warp operation.
+    WarpInputCard
 };
 
 /// !!!!! Warning !!!!!
@@ -378,7 +392,9 @@ enum GeneratedDataType
     /// Optimized orientation identifier
     OptimizedOrientationGeneratedDataType,
     /// Additive FEA identifier.
-    AdditiveFEAGeneratedDataType
+    AdditiveFEAGeneratedDataType,
+    /// Additive Interference identifier.
+    AdditiveInterferenceAnalysisGeneratedDataType
 };
 
 /// Represents the recognized geometric shape of a hole segment.
@@ -625,7 +641,9 @@ enum MachiningMode
 enum ModifyUtilityTypes
 {
     /// Utility for modifications of additive setups. Corresponds to AdditiveSetupUtility.
-    AdditiveSetupModifyUtility
+    AdditiveSetupModifyUtility,
+    /// Utility for additive FEA simulation operations. Corresponds to AdditiveFEAUtility.
+    AdditiveFEAModifyUtility
 };
 
 /// Enumeration of the multi-axis degrees per minute types that can be used in MultiAxisDPMFeedrateSettings and its specializations.

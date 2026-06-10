@@ -36,7 +36,9 @@
               Derived from: <a href="Base.htm">Base</a> Object
             <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Features/HoleFeatureInput.h&gt;<h2 class="api">
           Description
-        </h2>This class defines the methods and properties that pertain to the definition of a hole feature.<h2 class="api">
+        </h2>
+    <p class="api">This class defines the methods and properties that pertain to the definition of a hole feature.</p>
+    <h2 class="api">
             Methods
           </h2>
     <Table class="api-list">
@@ -50,59 +52,87 @@
       </tr>
       <tr>
         <td class="api-list"><a href="HoleFeatureInput_classType.htm">classType</a></td>
-        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+        <td class="api-list">
+          <p class="api">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="HoleFeatureInput_setAllExtent.htm">setAllExtent</a></td>
-        <td class="api-list">Defines the extent of the hole to be through-all. The direction can be either positive, negative.</td>
+        <td class="api-list">
+          <p class="api">Defines the extent of the hole to be through-all. The direction can be either positive, negative.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="HoleFeatureInput_setDistanceExtent.htm">setDistanceExtent</a></td>
-        <td class="api-list">Defines the depth of the hole using a specified distance.</td>
+        <td class="api-list">
+          <p class="api">Defines the depth of the hole using a specified distance.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="HoleFeatureInput_setLengthAndOffset.htm">setLengthAndOffset</a></td>
-        <td class="api-list">Sets the length and offset of the thread of a tapped hole.<br/><br/> This method is only used when creating a tapped hole, which means the setToTappedHole method has been called. Otherwise calling this method will fail.<br/><br/> By default the isFullLength property is true which means the thread is the full length of the hole and there is no offset. Calling this method will have the side effect of setting the isFullLength property to false.</td>
+        <td class="api-list">
+          <p class="api">Sets the length and offset of the thread of a tapped hole.<br/><br/> This method is only used when creating a tapped hole, which means the setToTappedHole method has been called. Otherwise calling this method will fail.<br/><br/> By default the isFullLength property is true which means the thread is the full length of the hole and there is no offset. Calling this method will have the side effect of setting the isFullLength property to false.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="HoleFeatureInput_setOneSideToExtent.htm">setOneSideToExtent</a></td>
-        <td class="api-list">Sets the extent of the hole to be from the sketch plane to the specified "to" face.</td>
+        <td class="api-list">
+          <p class="api">Sets the extent of the hole to be from the sketch plane to the specified "to" face.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="HoleFeatureInput_setPositionAtCenter.htm">setPositionAtCenter</a></td>
-        <td class="api-list">Defines the position of the hole at the center of a circular or elliptical edge of the face.</td>
+        <td class="api-list">
+          <p class="api">Defines the position of the hole at the center of a circular or elliptical edge of the face.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="HoleFeatureInput_setPositionByPlaneAndOffsets.htm">setPositionByPlaneAndOffsets</a></td>
-        <td class="api-list">Defines the orientation of the hole using a planar face or construction plane. The position of the hole is defined by the distance from one or two edges.</td>
+        <td class="api-list">
+          <p class="api">Defines the orientation of the hole using a planar face or construction plane. The position of the hole is defined by the distance from one or two edges.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="HoleFeatureInput_setPositionByPoint.htm">setPositionByPoint</a></td>
-        <td class="api-list">Defines the position of a the hole using a point. The point can be a vertex on the face or it can be a Point3D object to define any location on the face. If a Point3D object is provided it will be projected onto the plane along the planes normal. The orientation of the hole is defined by the planar face or construction plane. If a vertex is used, the position of the hole is associative to that vertex. If a Point3D object is used the position of the hole is not associative.</td>
+        <td class="api-list">
+          <p class="api">Defines the position of a the hole using a point. The point can be a vertex on the face or it can be a Point3D object to define any location on the face. If a Point3D object is provided it will be projected onto the plane along the planes normal. The orientation of the hole is defined by the planar face or construction plane. If a vertex is used, the position of the hole is associative to that vertex. If a Point3D object is used the position of the hole is not associative.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="HoleFeatureInput_setPositionBySketchPoint.htm">setPositionBySketchPoint</a></td>
-        <td class="api-list">Defines the position and orientation of the hole using a sketch point.</td>
+        <td class="api-list">
+          <p class="api">Defines the position and orientation of the hole using a sketch point.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="HoleFeatureInput_setPositionBySketchPoints.htm">setPositionBySketchPoints</a></td>
-        <td class="api-list">Defines the position and orientation of the hole using a set of sketch points.</td>
+        <td class="api-list">
+          <p class="api">Defines the position and orientation of the hole using a set of sketch points.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="HoleFeatureInput_setPositionOnEdge.htm">setPositionOnEdge</a></td>
-        <td class="api-list">Defines the position and orientation of the hole to be on the start, end or center of an edge.</td>
+        <td class="api-list">
+          <p class="api">Defines the position and orientation of the hole to be on the start, end or center of an edge.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="HoleFeatureInput_setToClearanceHole.htm">setToClearanceHole</a></td>
-        <td class="api-list">Sets the hole to be a clearance hole of the size specified by the ClearanceHoleInfo object.</td>
+        <td class="api-list">
+          <p class="api">Sets the hole to be a clearance hole of the size specified by the ClearanceHoleInfo object.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="HoleFeatureInput_setToSimpleHole.htm">setToSimpleHole</a></td>
-        <td class="api-list">This property sets the hole's tap to be "simple", which means that it will not have any tap and will be a simple hole. When a new input is created, it defaults to being a simple hole.</td>
+        <td class="api-list">
+          <p class="api">This property sets the hole's tap to be "simple", which means that it will not have any tap and will be a simple hole. When a new input is created, it defaults to being a simple hole.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="HoleFeatureInput_setToTappedHole.htm">setToTappedHole</a></td>
-        <td class="api-list">Sets the hole to be a straight or tapered tapped hole of the size specified by the ThreadInfo object.</td>
+        <td class="api-list">
+          <p class="api">Sets the hole to be a straight or tapered tapped hole of the size specified by the ThreadInfo object.</p>
+        </td>
       </tr>
     </Table>
     <h2 class="api">
@@ -195,7 +225,7 @@
           <td align="left">
                 © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(HoleFeatureInput%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(HoleFeatureInput%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

@@ -34,16 +34,9 @@
         </script></head>
   <body>
     <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
-    <h1 class="api">FlatPatternComponent.allAssemblyConstraints Property<img src="../images/TestTubeLarge.png"></h1>
+    <h1 class="api">FlatPatternComponent.allAssemblyConstraints Property</h1>
 
-          Parent Object: <a href="FlatPatternComponent.htm">FlatPatternComponent</a><p class="api-preview"><img src="../images/TestTubeSmall.png" alt="Preview">This functionality is provided as a preview
-				  of intended future API capabilities. You are encouraged to use it and report any problems or suggestions using the
-				  <a href="https://forums.autodesk.com/t5/fusion-360-api-and-scripts/bd-p/22">Fusion API and Scripts</a> forum.<br><br>
-
-				  Because this is a preview of future functionality, there is the possibility that it will change, which will possibly
-				  break any existing programs that use this functionality. Because of that, you should never deliver any programs that use
-				  any preview capabilities. For a distributed program, you should wait until it has moved from preview to released state.
-			  </p><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/SheetMetal/FlatPatternComponent.h&gt;<h2 class="api">
+          Parent Object: <a href="FlatPatternComponent.htm">FlatPatternComponent</a><br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/SheetMetal/FlatPatternComponent.h&gt;<h2 class="api">
           Description
         </h2>
     <p class="api">Returns all assembly constraints in this component and any sub components. The assembly constraints returned are all in the context of this component so any joints in sub components will be proxies. This is primarily useful when used from the root component because Fusion flattens the assembly structure, including joints, when manipulating an assembly.</p>
@@ -62,7 +55,7 @@
       </div>
       <div id="C++" class="api-code">
         <table class="api-code">
-          <td>"flatPatternComponent_var" is a variable referencing a FlatPatternComponent object.<br /><code><pre class="api-code">#include &lt;Fusion/SheetMetal/FlatPatternComponent.h&gt;<br /><br /><span style="color:blue">// Get the value of the property.</span><br />std::vector&lt;Ptr&lt;AssemblyConstraint&gt;&gt; propertyValue = flatPatternComponent_var-&gt;<b>allAssemblyConstraints</b>();<br /></pre></code></td>
+          <td>"flatPatternComponent_var" Is a variable referencing a FlatPatternComponent Object.<br /><code><pre Class="api-code">#include &lt;Fusion/SheetMetal/FlatPatternComponent.h&gt;<br /><br /><span style="color:blue">// Get the value of the property.</span><br />std::vector&lt;Ptr&lt;AssemblyConstraint&gt;&gt; propertyValue = flatPatternComponent_var-&gt;<b>allAssemblyConstraints</b>();<br /></pre></code></td>
         </table>
       </div>
     </div>
@@ -78,7 +71,7 @@
           <td align="left">
                 © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(FlatPatternComponent.allAssemblyConstraints%20Function%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(FlatPatternComponent.allAssemblyConstraints%20Function%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

@@ -59,7 +59,7 @@ public:
     /// 
     /// This is useful for finding PMIImportedNote that reference specific geometric features.
     /// entities : An array of core.Base objects that represent the geometric entities to search for associated PMI. These can be BRepFace,
-    /// BRepEdge or BRepVertex objects. The function will return the PMIImportedNote that references any of these entities in their geometric associations.
+    /// BRepEdge, BRepVertex, or BRepBody objects. The function will return the PMIImportedNote that references any of these entities in their geometric associations.
     /// Returns an array of PMIImportedNote objects that are associated with the specified entities and match the type filter (if provided)
     /// or an empty array if no matching PMI were found.
     std::vector<core::Ptr<PMIImportedNote>> itemsByEntities(const std::vector<core::Ptr<core::Base>>& entities) const;

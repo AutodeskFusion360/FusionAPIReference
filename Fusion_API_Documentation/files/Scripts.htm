@@ -36,7 +36,9 @@
               Derived from: <a href="Base.htm">Base</a> Object
             <br>Defined in namespace "adsk::core" and the header file is &lt;Core/Application/Scripts.h&gt;<h2 class="api">
           Description
-        </h2>API object that provides equivalent functionality of the "Scripts and Add-Ins" dialog. Provides access to the scripts and add-ins that Fusion is aware of. It also supports loading other unknown scripts and add-ins, and creating new scripts and add-ins.<h2 class="api">
+        </h2>
+    <p class="api">API object that provides equivalent functionality of the "Scripts and Add-Ins" dialog. Provides access to the scripts and add-ins that Fusion is aware of. It also supports loading other unknown scripts and add-ins, and creating new scripts and add-ins.</p>
+    <h2 class="api">
             Methods
           </h2>
     <Table class="api-list">
@@ -50,31 +52,45 @@
       </tr>
       <tr>
         <td class="api-list"><a href="Scripts_addExisting.htm">addExisting</a></td>
-        <td class="api-list">Fusion looks in specific folders for scripts and add-ins, but you can manually add other scripts and add-ins to the list of known scripts and add-ins so they will be listed in the "Scripts and Add-ins" dialog. This method does that.</td>
+        <td class="api-list">
+          <p class="api">Fusion looks in specific folders for scripts and add-ins, but you can manually add other scripts and add-ins to the list of known scripts and add-ins so they will be listed in the "Scripts and Add-ins" dialog. This method does that.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Scripts_addNew.htm">addNew</a></td>
-        <td class="api-list">Creates a new script or add-in. This uses the same internal template that's used when creating a new script or add-in using the "Scripts and Add-Ins" dialog. The provided ScriptInput object defines the information needed to create a new script or add-in.</td>
+        <td class="api-list">
+          <p class="api">Creates a new script or add-in. This uses the same internal template that's used when creating a new script or add-in using the "Scripts and Add-Ins" dialog. The provided ScriptInput object defines the information needed to create a new script or add-in.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Scripts_classType.htm">classType</a></td>
-        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+        <td class="api-list">
+          <p class="api">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Scripts_createScriptInput.htm">createScriptInput</a></td>
-        <td class="api-list">Creates a new ScriptInput object. Logically, this object is equivalent to the dialog that is shown when you click the "Create" button in the "Scripts and Add-Ins" command dialog. It collects the information needed to create a new script or add-in. To create the script or add-in, call the addNew method, passing in the ScriptInput object.</td>
+        <td class="api-list">
+          <p class="api">Creates a new ScriptInput object. Logically, this object is equivalent to the dialog that is shown when you click the "Create" button in the "Scripts and Add-Ins" command dialog. It collects the information needed to create a new script or add-in. To create the script or add-in, call the addNew method, passing in the ScriptInput object.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Scripts_item.htm">item</a></td>
-        <td class="api-list">Function that returns the specified script or add-in using an index into the collection.</td>
+        <td class="api-list">
+          <p class="api">Function that returns the specified script or add-in using an index into the collection.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Scripts_itemByPath.htm">itemByPath</a></td>
-        <td class="api-list">Function that returns the script that is located in the specified folder.</td>
+        <td class="api-list">
+          <p class="api">Function that returns the script that is located in the specified folder.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Scripts_itemsByName.htm">itemsByName</a></td>
-        <td class="api-list">Function that returns an array of scripts that have the specified name. In most cases this will return an array containing a single script, but it's possible to have more than one script with the same name in the case where the scripts are in different folders.</td>
+        <td class="api-list">
+          <p class="api">Function that returns an array of scripts that have the specified name. In most cases this will return an array containing a single script, but it's possible to have more than one script with the same name in the case where the scripts are in different folders.</p>
+        </td>
       </tr>
     </Table>
     <h2 class="api">
@@ -114,7 +130,7 @@
           <td align="left">
                 © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(Scripts%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(Scripts%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

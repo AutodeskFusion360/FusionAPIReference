@@ -46,6 +46,7 @@ namespace adsk { namespace fusion {
     class OccurrenceList;
     class Occurrences;
     class PMIAnnotations;
+    class UserCoordinateSystems;
 }}
 
 namespace adsk { namespace fusion {
@@ -167,6 +168,15 @@ public:
     /// This provides access to the existing PMI and supports the creation of new PMI.
     core::Ptr<PMIAnnotations> pmiAnnotations() const;
 
+    /// !!!!! Warning !!!!!
+    /// ! This is in preview state; please see the help for more info
+    /// !!!!! Warning !!!!!
+    /// 
+    /// Returns the user coordinate systems collection associated with this component.
+    /// This provides access to the existing user coordinate systems and supports
+    /// the creation of new user coordinate systems.
+    core::Ptr<UserCoordinateSystems> userCoordinateSystems() const;
+
     ADSK_FUSION_BASECOMPONENT_API static const char* classType();
     ADSK_FUSION_BASECOMPONENT_API const char* objectType() const override;
     ADSK_FUSION_BASECOMPONENT_API void* queryInterface(const char* id) const override;
@@ -193,6 +203,7 @@ private:
     virtual core::DataComponent* dataComponent_raw() const = 0;
     virtual Decals* decals_raw() const = 0;
     virtual PMIAnnotations* pmiAnnotations_raw() const = 0;
+    virtual UserCoordinateSystems* userCoordinateSystems_raw() const = 0;
     virtual void placeholderBaseComponent0() {}
     virtual void placeholderBaseComponent1() {}
     virtual void placeholderBaseComponent2() {}
@@ -238,7 +249,6 @@ private:
     virtual void placeholderBaseComponent42() {}
     virtual void placeholderBaseComponent43() {}
     virtual void placeholderBaseComponent44() {}
-    virtual void placeholderBaseComponent45() {}
 };
 
 // Inline wrappers
@@ -354,6 +364,12 @@ inline core::Ptr<Decals> BaseComponent::decals() const
 inline core::Ptr<PMIAnnotations> BaseComponent::pmiAnnotations() const
 {
     core::Ptr<PMIAnnotations> res = pmiAnnotations_raw();
+    return res;
+}
+
+inline core::Ptr<UserCoordinateSystems> BaseComponent::userCoordinateSystems() const
+{
+    core::Ptr<UserCoordinateSystems> res = userCoordinateSystems_raw();
     return res;
 }
 }// namespace fusion

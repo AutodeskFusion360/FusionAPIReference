@@ -36,7 +36,9 @@
               Derived from: <a href="CommandInput.htm">CommandInput</a> Object
             <br>Defined in namespace "adsk::core" and the header file is &lt;Core/UserInterface/SelectionCommandInput.h&gt;<h2 class="api">
           Description
-        </h2>Provides a command input to get a selection from the user.<h2 class="api">
+        </h2>
+    <p class="api">Provides a command input to get a selection from the user.</p>
+    <h2 class="api">
             Methods
           </h2>
     <Table class="api-list">
@@ -50,39 +52,57 @@
       </tr>
       <tr>
         <td class="api-list"><a href="SelectionCommandInput_addSelection.htm">addSelection</a></td>
-        <td class="api-list">Adds the selection to the list of selections associated with this input. This method is not valid within the commandCreated event but must be used later in the command lifetime. If you want to pre-populate the selection when the command is starting, you can use this method in the activate method of the Command. It's also valid to use in other events once the command is running, such as the validateInputs event.</td>
+        <td class="api-list">
+          <p class="api">Adds the selection to the list of selections associated with this input. This method is not valid within the commandCreated event but must be used later in the command lifetime. If you want to pre-populate the selection when the command is starting, you can use this method in the activate method of the Command. It's also valid to use in other events once the command is running, such as the validateInputs event.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="SelectionCommandInput_addSelectionFilter.htm">addSelectionFilter</a></td>
-        <td class="api-list">Adds an additional filter to the existing filter list.</td>
+        <td class="api-list">
+          <p class="api">Adds an additional filter to the existing filter list.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="SelectionCommandInput_classType.htm">classType</a></td>
-        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+        <td class="api-list">
+          <p class="api">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="SelectionCommandInput_clearSelection.htm">clearSelection</a></td>
-        <td class="api-list">Clears the current selection so no entities are in the selection.</td>
+        <td class="api-list">
+          <p class="api">Clears the current selection so no entities are in the selection.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="SelectionCommandInput_clearSelectionFilter.htm">clearSelectionFilter</a></td>
-        <td class="api-list">Clears the list of selection filters.</td>
+        <td class="api-list">
+          <p class="api">Clears the list of selection filters.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="SelectionCommandInput_deleteMe.htm">deleteMe</a></td>
-        <td class="api-list">Deletes this Command input.</td>
+        <td class="api-list">
+          <p class="api">Deletes this Command input.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="SelectionCommandInput_getSelectionLimits.htm">getSelectionLimits</a></td>
-        <td class="api-list">Get the limits currently defined for this input.</td>
+        <td class="api-list">
+          <p class="api">Get the limits currently defined for this input.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="SelectionCommandInput_selection.htm">selection</a></td>
-        <td class="api-list">Returns the selection at the specified index.</td>
+        <td class="api-list">
+          <p class="api">Returns the selection at the specified index.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="SelectionCommandInput_setSelectionLimits.htm">setSelectionLimits</a></td>
-        <td class="api-list">Defines the limits for the number of selections associated with this input. A maximum value of 0 indicates that there is no maximum.</td>
+        <td class="api-list">
+          <p class="api">Defines the limits for the number of selections associated with this input. A maximum value of 0 indicates that there is no maximum.</p>
+        </td>
       </tr>
     </Table>
     <h2 class="api">
@@ -171,6 +191,257 @@
       </tr>
     </Table>
     <h2 class="api">
+				  Values
+			  </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+						  Name
+					  </td>
+        <td class="api-list" style="width:1px;">
+						  Value
+					  </td>
+        <td class="api-list">
+						  Description
+					  </td>
+      </tr>
+      <tr>
+        <td class="api-list">Bodies</td>
+        <td class="api-list" align="right" style="padding-right:10px">"Bodies"</td>
+        <td class="api-list">Select bodies.</td>
+      </tr>
+      <tr>
+        <td class="api-list">CAMFolder</td>
+        <td class="api-list" align="right" style="padding-right:10px">"CAMFolder"</td>
+        <td class="api-list">Select CAMFolder.</td>
+      </tr>
+      <tr>
+        <td class="api-list">Canvases</td>
+        <td class="api-list" align="right" style="padding-right:10px">"Canvases"</td>
+        <td class="api-list">Select canvases.</td>
+      </tr>
+      <tr>
+        <td class="api-list">CircularEdges</td>
+        <td class="api-list" align="right" style="padding-right:10px">"CircularEdges"</td>
+        <td class="api-list">Select circular edges.</td>
+      </tr>
+      <tr>
+        <td class="api-list">ConicalFaces</td>
+        <td class="api-list" align="right" style="padding-right:10px">"ConicalFaces"</td>
+        <td class="api-list">Select conical faces.</td>
+      </tr>
+      <tr>
+        <td class="api-list">ConstructionLines</td>
+        <td class="api-list" align="right" style="padding-right:10px">"ConstructionLines"</td>
+        <td class="api-list">Select construction lines (axes).</td>
+      </tr>
+      <tr>
+        <td class="api-list">ConstructionPlanes</td>
+        <td class="api-list" align="right" style="padding-right:10px">"ConstructionPlanes"</td>
+        <td class="api-list">Select construction planes.</td>
+      </tr>
+      <tr>
+        <td class="api-list">ConstructionPoints</td>
+        <td class="api-list" align="right" style="padding-right:10px">"ConstructionPoints"</td>
+        <td class="api-list">Select construction points.</td>
+      </tr>
+      <tr>
+        <td class="api-list">CustomGraphics</td>
+        <td class="api-list" align="right" style="padding-right:10px">"CustomGraphics"</td>
+        <td class="api-list">Select custom graphics entities.</td>
+      </tr>
+      <tr>
+        <td class="api-list">CylindricalFaces</td>
+        <td class="api-list" align="right" style="padding-right:10px">"CylindricalFaces"</td>
+        <td class="api-list">Select cylindrical faces.</td>
+      </tr>
+      <tr>
+        <td class="api-list">Decals</td>
+        <td class="api-list" align="right" style="padding-right:10px">"Decals"</td>
+        <td class="api-list">Select decals.</td>
+      </tr>
+      <tr>
+        <td class="api-list">Edges</td>
+        <td class="api-list" align="right" style="padding-right:10px">"Edges"</td>
+        <td class="api-list">Select edges of any shape.</td>
+      </tr>
+      <tr>
+        <td class="api-list">EllipticalEdges</td>
+        <td class="api-list" align="right" style="padding-right:10px">"EllipticalEdges"</td>
+        <td class="api-list">Select elliptical edges.</td>
+      </tr>
+      <tr>
+        <td class="api-list">FaceGroups</td>
+        <td class="api-list" align="right" style="padding-right:10px">"FaceGroups"</td>
+        <td class="api-list">Select face groups of meshes.</td>
+      </tr>
+      <tr>
+        <td class="api-list">Faces</td>
+        <td class="api-list" align="right" style="padding-right:10px">"Faces"</td>
+        <td class="api-list">Select faces of any shape.</td>
+      </tr>
+      <tr>
+        <td class="api-list">Features</td>
+        <td class="api-list" align="right" style="padding-right:10px">"Features"</td>
+        <td class="api-list">Select any type of feature.</td>
+      </tr>
+      <tr>
+        <td class="api-list">JointOrigins</td>
+        <td class="api-list" align="right" style="padding-right:10px">"JointOrigins"</td>
+        <td class="api-list">Select joint origins.</td>
+      </tr>
+      <tr>
+        <td class="api-list">Joints</td>
+        <td class="api-list" align="right" style="padding-right:10px">"Joints"</td>
+        <td class="api-list">Select joints.</td>
+      </tr>
+      <tr>
+        <td class="api-list">LinearEdges</td>
+        <td class="api-list" align="right" style="padding-right:10px">"LinearEdges"</td>
+        <td class="api-list">Select linear edges.</td>
+      </tr>
+      <tr>
+        <td class="api-list">MeshBodies</td>
+        <td class="api-list" align="right" style="padding-right:10px">"MeshBodies"</td>
+        <td class="api-list">Select mesh bodies.</td>
+      </tr>
+      <tr>
+        <td class="api-list">NCProgram</td>
+        <td class="api-list" align="right" style="padding-right:10px">"NCProgram"</td>
+        <td class="api-list">Select NCProgram.</td>
+      </tr>
+      <tr>
+        <td class="api-list">NonTangentEdges</td>
+        <td class="api-list" align="right" style="padding-right:10px">"NonTangentEdges"</td>
+        <td class="api-list">Select edges that are not tangent.</td>
+      </tr>
+      <tr>
+        <td class="api-list">Occurrences</td>
+        <td class="api-list" align="right" style="padding-right:10px">"Occurrences"</td>
+        <td class="api-list">Select occurrences.</td>
+      </tr>
+      <tr>
+        <td class="api-list">Operation</td>
+        <td class="api-list" align="right" style="padding-right:10px">"Operation"</td>
+        <td class="api-list">Select Operation.</td>
+      </tr>
+      <tr>
+        <td class="api-list">OperationBase</td>
+        <td class="api-list" align="right" style="padding-right:10px">"OperationBase"</td>
+        <td class="api-list">Select OperationBase.</td>
+      </tr>
+      <tr>
+        <td class="api-list">PlanarFaces</td>
+        <td class="api-list" align="right" style="padding-right:10px">"PlanarFaces"</td>
+        <td class="api-list">Select planar faces.</td>
+      </tr>
+      <tr>
+        <td class="api-list">Profiles</td>
+        <td class="api-list" align="right" style="padding-right:10px">"Profiles"</td>
+        <td class="api-list">Select profiles.</td>
+      </tr>
+      <tr>
+        <td class="api-list">RootComponents</td>
+        <td class="api-list" align="right" style="padding-right:10px">"RootComponents"</td>
+        <td class="api-list">Select root components.</td>
+      </tr>
+      <tr>
+        <td class="api-list">Setup</td>
+        <td class="api-list" align="right" style="padding-right:10px">"Setup"</td>
+        <td class="api-list">Select Setup.</td>
+      </tr>
+      <tr>
+        <td class="api-list">SketchCircles</td>
+        <td class="api-list" align="right" style="padding-right:10px">"SketchCircles"</td>
+        <td class="api-list">Select sketch circles.</td>
+      </tr>
+      <tr>
+        <td class="api-list">SketchConstraints</td>
+        <td class="api-list" align="right" style="padding-right:10px">"SketchConstraints"</td>
+        <td class="api-list">Selects sketch geometric and dimensions constraints.</td>
+      </tr>
+      <tr>
+        <td class="api-list">SketchCurves</td>
+        <td class="api-list" align="right" style="padding-right:10px">"SketchCurves"</td>
+        <td class="api-list">Select sketch curves of any shape.</td>
+      </tr>
+      <tr>
+        <td class="api-list">Sketches</td>
+        <td class="api-list" align="right" style="padding-right:10px">"Sketches"</td>
+        <td class="api-list">Select sketches.</td>
+      </tr>
+      <tr>
+        <td class="api-list">SketchLines</td>
+        <td class="api-list" align="right" style="padding-right:10px">"SketchLines"</td>
+        <td class="api-list">Select sketch lines.</td>
+      </tr>
+      <tr>
+        <td class="api-list">SketchPoints</td>
+        <td class="api-list" align="right" style="padding-right:10px">"SketchPoints"</td>
+        <td class="api-list">Select sketch points.</td>
+      </tr>
+      <tr>
+        <td class="api-list">SolidBodies</td>
+        <td class="api-list" align="right" style="padding-right:10px">"SolidBodies"</td>
+        <td class="api-list">Select solid bodies (closed BRepBody).</td>
+      </tr>
+      <tr>
+        <td class="api-list">SolidFaces</td>
+        <td class="api-list" align="right" style="padding-right:10px">"SolidFaces"</td>
+        <td class="api-list">Select faces from a solid body.</td>
+      </tr>
+      <tr>
+        <td class="api-list">SphericalFaces</td>
+        <td class="api-list" align="right" style="padding-right:10px">"SphericalFaces"</td>
+        <td class="api-list">Select spherical faces.</td>
+      </tr>
+      <tr>
+        <td class="api-list">SplineFaces</td>
+        <td class="api-list" align="right" style="padding-right:10px">"SplineFaces"</td>
+        <td class="api-list">Select spline (NURBS) faces.</td>
+      </tr>
+      <tr>
+        <td class="api-list">SurfaceBodies</td>
+        <td class="api-list" align="right" style="padding-right:10px">"SurfaceBodies"</td>
+        <td class="api-list">Select surface bodies (open BRepBody)</td>
+      </tr>
+      <tr>
+        <td class="api-list">SurfaceFaces</td>
+        <td class="api-list" align="right" style="padding-right:10px">"SurfaceFaces"</td>
+        <td class="api-list">Select faces from a surface body.</td>
+      </tr>
+      <tr>
+        <td class="api-list">TangentEdges</td>
+        <td class="api-list" align="right" style="padding-right:10px">"TangentEdges"</td>
+        <td class="api-list">Select tangent edges.</td>
+      </tr>
+      <tr>
+        <td class="api-list">Texts</td>
+        <td class="api-list" align="right" style="padding-right:10px">"Texts"</td>
+        <td class="api-list">Select sketch text.</td>
+      </tr>
+      <tr>
+        <td class="api-list">ToroidalFaces</td>
+        <td class="api-list" align="right" style="padding-right:10px">"ToroidalFaces"</td>
+        <td class="api-list">Select toroidal faces.</td>
+      </tr>
+      <tr>
+        <td class="api-list">UserCoordinateSystems</td>
+        <td class="api-list" align="right" style="padding-right:10px">"UserCoordinateSystems"</td>
+        <td class="api-list">Select user coordinate systems.</td>
+      </tr>
+      <tr>
+        <td class="api-list">Vertices</td>
+        <td class="api-list" align="right" style="padding-right:10px">"Vertices"</td>
+        <td class="api-list">Select vertices.</td>
+      </tr>
+      <tr>
+        <td class="api-list">VolumetricModel</td>
+        <td class="api-list" align="right" style="padding-right:10px">"VolumetricModel"</td>
+        <td class="api-list">Select volumetric model.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
             Accessed From
           </h2><a href="CommandInputs_addSelectionInput.htm">CommandInputs.addSelectionInput</a>, <a href="SelectionEvent_activeInput.htm">SelectionEvent.activeInput</a>, <a href="SelectionEventArgs_activeInput.htm">SelectionEventArgs.activeInput</a><h2 class="api">
             Samples
@@ -201,7 +472,7 @@
           <td align="left">
                 © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(SelectionCommandInput%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(SelectionCommandInput%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

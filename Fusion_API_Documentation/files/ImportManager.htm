@@ -36,7 +36,9 @@
               Derived from: <a href="Base.htm">Base</a> Object
             <br>Defined in namespace "adsk::core" and the header file is &lt;Core/Application/ImportManager.h&gt;<h2 class="api">
           Description
-        </h2>Provides access to functionality to support importing various modeling formats into Fusion.<h2 class="api">
+        </h2>
+    <p class="api">Provides access to functionality to support importing various modeling formats into Fusion.</p>
+    <h2 class="api">
             Methods
           </h2>
     <Table class="api-list">
@@ -50,47 +52,69 @@
       </tr>
       <tr>
         <td class="api-list"><a href="ImportManager_classType.htm">classType</a></td>
-        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+        <td class="api-list">
+          <p class="api">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="ImportManager_createDXF2DImportOptions.htm">createDXF2DImportOptions</a></td>
-        <td class="api-list">Creates a DXF2DImportOptions object that is used to import 2D data to create sketches. Creation of the createDXF2DImportOptions object does not perform the import. You must pass this object to the ImportManager.importToTarget method to perform the import. The sketches created as a result of the import are available through the 'results' property of the DXF2DImportOptions.</td>
+        <td class="api-list">
+          <p class="api">Creates a DXF2DImportOptions object that is used to import 2D data to create sketches. Creation of the createDXF2DImportOptions object does not perform the import. You must pass this object to the ImportManager.importToTarget method to perform the import. The sketches created as a result of the import are available through the 'results' property of the DXF2DImportOptions.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="ImportManager_createFusionArchiveImportOptions.htm">createFusionArchiveImportOptions</a></td>
-        <td class="api-list">Creates a FusionArchiveImportOptions object that imports a design from a Fusion archive format. The creation of the FusionArchiveImportOptions object does not perform the import. You must pass this object to one of the ImportManager import methods to perform the import. The FusionArchiveImportOptions object supports the available options when importing from a Fusion archive format. This method only supports f3d files. For f3z files, you should use the DataFolder.uploadFile method.</td>
+        <td class="api-list">
+          <p class="api">Creates a FusionArchiveImportOptions object that imports a design from a Fusion archive format. The creation of the FusionArchiveImportOptions object does not perform the import. You must pass this object to one of the ImportManager import methods to perform the import. The FusionArchiveImportOptions object supports the available options when importing from a Fusion archive format. This method only supports f3d files. For f3z files, you should use the DataFolder.uploadFile method.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="ImportManager_createIGESImportOptions.htm">createIGESImportOptions</a></td>
-        <td class="api-list">Creates an IGESImportOptions object that is used to import a design from IGES format. Creation of the IGESImportOptions object does not perform the import. You must pass this object to one of the ImportManager import methods to perform the import. The IGESImportOptions supports any available options when importing from IGES format.</td>
+        <td class="api-list">
+          <p class="api">Creates an IGESImportOptions object that is used to import a design from IGES format. Creation of the IGESImportOptions object does not perform the import. You must pass this object to one of the ImportManager import methods to perform the import. The IGESImportOptions supports any available options when importing from IGES format.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="ImportManager_createSATImportOptions.htm">createSATImportOptions</a></td>
-        <td class="api-list">Creates an SATImportOptions object that's used to import a design from SAT format. Creation of the SATImportOptions object does not perform the import. You must pass this object to one of the ImportManager import methods to perform the import. The SATImportOptions supports any available options when importing from SAT format.</td>
+        <td class="api-list">
+          <p class="api">Creates an SATImportOptions object that's used to import a design from SAT format. Creation of the SATImportOptions object does not perform the import. You must pass this object to one of the ImportManager import methods to perform the import. The SATImportOptions supports any available options when importing from SAT format.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="ImportManager_createSMTImportOptions.htm">createSMTImportOptions</a></td>
-        <td class="api-list">Creates an SMTImportOptions object that's used to import a design from SMT format. Creation of the SMTImportOptions object does not perform the import. You must pass this object to one of the ImportManager import methods to perform the import. The SMTImportOptions supports any available options when importing from SMT format.</td>
+        <td class="api-list">
+          <p class="api">Creates an SMTImportOptions object that's used to import a design from SMT format. Creation of the SMTImportOptions object does not perform the import. You must pass this object to one of the ImportManager import methods to perform the import. The SMTImportOptions supports any available options when importing from SMT format.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="ImportManager_createSTEPImportOptions.htm">createSTEPImportOptions</a></td>
-        <td class="api-list">Creates an STEPImportOptions object that's used to import a design from STEP format. Creation of the STEPImportOptions object does not perform the import. You must pass this object to one of the ImportManager import methods to perform the import. The STEPImportOptions supports any available options when importing from STEP format.</td>
+        <td class="api-list">
+          <p class="api">Creates an STEPImportOptions object that's used to import a design from STEP format. Creation of the STEPImportOptions object does not perform the import. You must pass this object to one of the ImportManager import methods to perform the import. The STEPImportOptions supports any available options when importing from STEP format.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="ImportManager_createSVGImportOptions.htm">createSVGImportOptions</a></td>
-        <td class="api-list">Creates a SVGImportOptions object that is used to import SVG data into a sketch. Creation of the SVGImportOptions object does not perform the import. You must pass this object to the importToTarget or importToTarget2 methods to perform the import and provide the sketch you want to import to as the target.</td>
+        <td class="api-list">
+          <p class="api">Creates a SVGImportOptions object that is used to import SVG data into a sketch. Creation of the SVGImportOptions object does not perform the import. You must pass this object to the importToTarget or importToTarget2 methods to perform the import and provide the sketch you want to import to as the target.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="ImportManager_importToNewDocument.htm">importToNewDocument</a></td>
-        <td class="api-list">Executes the import operation to import a file (of the format specified by the input ImportOptions object) to a new document.<br/><br/> This method does not support the DXF2DImportOptions or SVGImportOptions objects. Use ImportToTarget or ImportToTarget2 for those types.</td>
+        <td class="api-list">
+          <p class="api">Executes the import operation to import a file (of the format specified by the input ImportOptions object) to a new document.<br/><br/> This method does not support the DXF2DImportOptions or SVGImportOptions objects. Use ImportToTarget or ImportToTarget2 for those types.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="ImportManager_importToTarget.htm">importToTarget</a></td>
-        <td class="api-list">Executes the import operation to import a file (of the format specified by the input ImportOptions object) into an existing component in an existing design.</td>
+        <td class="api-list">
+          <p class="api">Executes the import operation to import a file (of the format specified by the input ImportOptions object) into an existing component in an existing design.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="ImportManager_importToTarget2.htm">importToTarget2</a></td>
-        <td class="api-list">Executes the import operation to import a file (of the format specified by the input ImportOptions object) into an existing component in an existing design and returns the imported objects.</td>
+        <td class="api-list">
+          <p class="api">Executes the import operation to import a file (of the format specified by the input ImportOptions object) into an existing component in an existing design and returns the imported objects.</p>
+        </td>
       </tr>
     </Table>
     <h2 class="api">
@@ -143,7 +167,7 @@
           <td align="left">
                 © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(ImportManager%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(ImportManager%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

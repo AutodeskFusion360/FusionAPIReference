@@ -81,6 +81,11 @@ public:
     /// Whether or not this is a hole template
     bool isHoleTemplate() const;
 
+    /// Whether or not this template is in an appropriate state to be
+    /// used. This means it has operations and, for hole templates, has
+    /// an appropriate hole signature.
+    bool isValidTemplate() const;
+
     /// Convert hole signature to XML. This will be empty if this is not
     /// a hole template, or if there is no signature.
     std::string getHoleSignatureXML();
@@ -95,9 +100,21 @@ public:
     core::Ptr<CAMTemplateOperations> operations() const;
     bool operations(const core::Ptr<CAMTemplateOperations>& value);
 
-    /// Create an empty CAMTemplate
+    /// !!!!! Warning !!!!!
+    /// ! This has been retired; please see the help for more info
+    /// !!!!! Warning !!!!!
+    /// 
+    /// !!!!! Warning !!!!!
+    /// ! This is hidden and not officially supported
+    /// !!!!! Warning !!!!!
+    /// 
+    /// Create an empty CAMTemplate.
     /// Returns the newly created template.
     static core::Ptr<CAMTemplate> createEmpty();
+
+    /// Create an empty CAMTemplate. This template will represent a hole template.
+    /// Returns the newly created template.
+    static core::Ptr<CAMTemplate> createEmptyHoleTemplate();
 
     /// Returns the collection of attributes associated with this template.
     core::Ptr<core::Attributes> attributes() const;
@@ -120,11 +137,13 @@ private:
     virtual char* description_raw() const = 0;
     virtual bool description_raw(const char* value) = 0;
     virtual bool isHoleTemplate_raw() const = 0;
+    virtual bool isValidTemplate_raw() const = 0;
     virtual char* getHoleSignatureXML_raw() = 0;
     virtual bool setHoleSignatureXML_raw(const char* xmlSnippet) = 0;
     virtual CAMTemplateOperations* operations_raw() const = 0;
     virtual bool operations_raw(CAMTemplateOperations* value) = 0;
     ADSK_CAM_CAMTEMPLATE_API static CAMTemplate* createEmpty_raw();
+    ADSK_CAM_CAMTEMPLATE_API static CAMTemplate* createEmptyHoleTemplate_raw();
     virtual core::Attributes* attributes_raw() const = 0;
 };
 
@@ -212,6 +231,12 @@ inline bool CAMTemplate::isHoleTemplate() const
     return res;
 }
 
+inline bool CAMTemplate::isValidTemplate() const
+{
+    bool res = isValidTemplate_raw();
+    return res;
+}
+
 inline std::string CAMTemplate::getHoleSignatureXML()
 {
     std::string res;
@@ -245,6 +270,12 @@ inline bool CAMTemplate::operations(const core::Ptr<CAMTemplateOperations>& valu
 inline core::Ptr<CAMTemplate> CAMTemplate::createEmpty()
 {
     core::Ptr<CAMTemplate> res = createEmpty_raw();
+    return res;
+}
+
+inline core::Ptr<CAMTemplate> CAMTemplate::createEmptyHoleTemplate()
+{
+    core::Ptr<CAMTemplate> res = createEmptyHoleTemplate_raw();
     return res;
 }
 

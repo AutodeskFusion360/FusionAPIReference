@@ -49,6 +49,7 @@ namespace adsk { namespace core {
     class ObjectCollection;
 }}
 namespace adsk { namespace fusion {
+    class Analyses;
     class CustomGraphicsGroups;
     class Occurrence;
     class OccurrenceList;
@@ -271,6 +272,9 @@ public:
     /// A Setup Group is a collection of Setup objects that are intended to be machined at the same time.
     core::Ptr<SetupGroups> setupGroups() const;
 
+    /// Gets the collection of design analyses associated with this design, created in the Manufacture workspace.
+    core::Ptr<fusion::Analyses> analyses() const;
+
     ADSK_CAM_CAM_API static const char* classType();
     ADSK_CAM_CAM_API const char* objectType() const override;
     ADSK_CAM_CAM_API void* queryInterface(const char* id) const override;
@@ -318,6 +322,7 @@ private:
     virtual DocumentStockMaterialLibrary* documentStockMaterialLibrary_raw() const = 0;
     virtual CAMImportManager* importManager_raw() const = 0;
     virtual SetupGroups* setupGroups_raw() const = 0;
+    virtual fusion::Analyses* analyses_raw() const = 0;
 };
 
 // Inline wrappers
@@ -587,6 +592,12 @@ inline core::Ptr<CAMImportManager> CAM::importManager() const
 inline core::Ptr<SetupGroups> CAM::setupGroups() const
 {
     core::Ptr<SetupGroups> res = setupGroups_raw();
+    return res;
+}
+
+inline core::Ptr<fusion::Analyses> CAM::analyses() const
+{
+    core::Ptr<fusion::Analyses> res = analyses_raw();
     return res;
 }
 }// namespace cam

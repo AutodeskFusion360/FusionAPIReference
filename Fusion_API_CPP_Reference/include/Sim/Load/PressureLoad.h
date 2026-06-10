@@ -9,7 +9,7 @@
 //////////////////////////////////////////////////////////////////////////////
 
 #pragma once
-#include "../Core/SimAttribute.h"
+#include "Load.h"
 
 // THIS CLASS WILL BE VISIBLE TO AN API CLIENT.
 // THIS HEADER FILE WILL BE GENERATED FROM NIDL.
@@ -31,13 +31,13 @@ namespace adsk { namespace sim {
 /// ! This is hidden and not officially supported
 /// !!!!! Warning !!!!!
 /// 
-/// Object that represents a Pressure load.
-class PressureLoad : public SimAttribute {
+/// Object that represents a pressure load.
+class PressureLoad : public Load {
 public:
 
-    /// Load value as a double value.
-    double magnitude() const;
-    bool magnitude(double value);
+    /// Gets and sets the magnitude of the pressure load.
+    double pressure() const;
+    bool pressure(double value);
 
     ADSK_SIM_PRESSURELOAD_API static const char* classType();
     ADSK_SIM_PRESSURELOAD_API const char* objectType() const override;
@@ -47,21 +47,21 @@ public:
 private:
 
     // Raw interface
-    virtual double magnitude_raw() const = 0;
-    virtual bool magnitude_raw(double value) = 0;
+    virtual double pressure_raw() const = 0;
+    virtual bool pressure_raw(double value) = 0;
 };
 
 // Inline wrappers
 
-inline double PressureLoad::magnitude() const
+inline double PressureLoad::pressure() const
 {
-    double res = magnitude_raw();
+    double res = pressure_raw();
     return res;
 }
 
-inline bool PressureLoad::magnitude(double value)
+inline bool PressureLoad::pressure(double value)
 {
-    return magnitude_raw(value);
+    return pressure_raw(value);
 }
 }// namespace sim
 }// namespace adsk

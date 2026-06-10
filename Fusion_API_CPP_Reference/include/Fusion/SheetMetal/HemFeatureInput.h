@@ -35,10 +35,6 @@ namespace adsk { namespace fusion {
 
 namespace adsk { namespace fusion {
 
-/// !!!!! Warning !!!!!
-/// ! This is in preview state; please see the help for more info
-/// !!!!! Warning !!!!!
-/// 
 /// This class defines the methods and properties that pertain to the definition of a hem feature.
 class HemFeatureInput : public core::Base {
 public:

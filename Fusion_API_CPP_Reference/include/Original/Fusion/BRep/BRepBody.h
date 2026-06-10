@@ -41,6 +41,7 @@ namespace adsk { namespace core {
 namespace adsk { namespace fusion {
     class BaseFeature;
     class BRepEdges;
+    class BRepFace;
     class BRepFaces;
     class BRepLumps;
     class BRepShells;
@@ -51,6 +52,7 @@ namespace adsk { namespace fusion {
     class MeshManager;
     class Occurrence;
     class PhysicalProperties;
+    class SheetMetalRule;
 }}
 
 namespace adsk { namespace fusion {
@@ -339,6 +341,37 @@ public:
     /// This property returns null if the BRepBody is not derived from another design (i.e. isDerived property returns false).
     core::Ptr<DeriveFeature> deriveFeature() const;
 
+    /// !!!!! Warning !!!!!
+    /// ! This is in preview state; please see the help for more info
+    /// !!!!! Warning !!!!!
+    /// 
+    /// Finds the thickness of the body at the specified face by casting a ray from the
+    /// face along its inward normal and measuring the distance to the first opposite
+    /// face of the body that is hit.
+    /// face : Specifies a planar BRepFace on the body from which to measure the thickness.
+    /// thickness : The output thickness value in centimeters.
+    /// hitPoint : An optional Point3D that specifies the point on the face from which to cast the ray.
+    /// The point must lie on the given face. If not specified, a point is automatically
+    /// chosen on the face.
+    /// Returns true if the thickness was successfully determined. Returns false if it
+    /// could not be determined, for example if the face is non-planar or has no
+    /// parallel opposite face.
+    bool findThicknessAtFace(const core::Ptr<BRepFace>& face, double& thickness, const core::Ptr<core::Point3D>& hitPoint = NULL);
+
+    /// !!!!! Warning !!!!!
+    /// ! This is in preview state; please see the help for more info
+    /// !!!!! Warning !!!!!
+    /// 
+    /// Converts the current BRepBody to a sheet metal body.
+    /// This is applicable only if the body is not already a sheet metal body (isSheetMetal is false).
+    /// baseFace : Specifies a BRepFace that will be used to determine the thickness of the body.
+    /// sheetMetalRule : If the parent component is a standard component, this method will convert it to a sheet metal component.
+    /// The specified design or library sheet metal rule will be copied and applied as the active sheet metal rule of the sheet metal component.
+    /// The Thickness value of the copied sheet metal rule will be changed to the thickness determined by the baseFace of this BRepBody.
+    /// If the parent component is already a sheet metal component, this argument will be ignored and the active sheet metal rule will be used.
+    /// Returns true if the conversion was successful. Returns false in the case of failure.
+    bool convertToSheetMetal(const core::Ptr<BRepFace>& baseFace, const core::Ptr<SheetMetalRule>& sheetMetalRule);
+
     ADSK_FUSION_BREPBODY_API static const char* classType();
     ADSK_FUSION_BREPBODY_API const char* objectType() const override;
     ADSK_FUSION_BREPBODY_API void* queryInterface(const char* id) const override;
@@ -403,6 +436,8 @@ private:
     virtual core::BoundingBox3D* preciseBoundingBox_raw() const = 0;
     virtual bool isDerived_raw() const = 0;
     virtual DeriveFeature* deriveFeature_raw() const = 0;
+    virtual bool findThicknessAtFace_raw(BRepFace* face, double& thickness, core::Point3D* hitPoint) = 0;
+    virtual bool convertToSheetMetal_raw(BRepFace* baseFace, SheetMetalRule* sheetMetalRule) = 0;
 };
 
 // Inline wrappers
@@ -762,6 +797,18 @@ inline bool BRepBody::isDerived() const
 inline core::Ptr<DeriveFeature> BRepBody::deriveFeature() const
 {
     core::Ptr<DeriveFeature> res = deriveFeature_raw();
+    return res;
+}
+
+inline bool BRepBody::findThicknessAtFace(const core::Ptr<BRepFace>& face, double& thickness, const core::Ptr<core::Point3D>& hitPoint)
+{
+    bool res = findThicknessAtFace_raw(face.get(), thickness, hitPoint.get());
+    return res;
+}
+
+inline bool BRepBody::convertToSheetMetal(const core::Ptr<BRepFace>& baseFace, const core::Ptr<SheetMetalRule>& sheetMetalRule)
+{
+    bool res = convertToSheetMetal_raw(baseFace.get(), sheetMetalRule.get());
     return res;
 }
 }// namespace fusion

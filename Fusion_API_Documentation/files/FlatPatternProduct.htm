@@ -36,7 +36,9 @@
               Derived from: <a href="Design.htm">Design</a> Object
             <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/SheetMetal/FlatPatternProduct.h&gt;<h2 class="api">
           Description
-        </h2>Product that contains all of the information associated with a flat pattern.<br/><br/> A FlatPatternProduct object exists for each flat pattern created.<h2 class="api">
+        </h2>
+    <p class="api">Product that contains all of the information associated with a flat pattern.<br/><br/> A FlatPatternProduct object exists for each flat pattern created.</p>
+    <h2 class="api">
             Methods
           </h2>
     <Table class="api-list">
@@ -50,59 +52,87 @@
       </tr>
       <tr>
         <td class="api-list"><a href="FlatPatternProduct_activateRootComponent.htm">activateRootComponent</a></td>
-        <td class="api-list">Makes the root component the active component in the user interface. This is the same as enabling the radio button next to the root component in the browser.</td>
+        <td class="api-list">
+          <p class="api">Makes the root component the active component in the user interface. This is the same as enabling the radio button next to the root component in the browser.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="FlatPatternProduct_analyzeInterference.htm">analyzeInterference</a></td>
-        <td class="api-list">Calculates the interference between the input bodies and/or occurrences.</td>
+        <td class="api-list">
+          <p class="api">Calculates the interference between the input bodies and/or occurrences.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="FlatPatternProduct_areaProperties.htm">areaProperties</a></td>
-        <td class="api-list">Returns the AreaProperties object that has properties for getting the area, perimeter, centroid, etc for a collection of 2D sketch profiles and/or planar surfaces that all lie on the same plane.</td>
+        <td class="api-list">
+          <p class="api">Returns the AreaProperties object that has properties for getting the area, perimeter, centroid, etc for a collection of 2D sketch profiles and/or planar surfaces that all lie on the same plane.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="FlatPatternProduct_classType.htm">classType</a></td>
-        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+        <td class="api-list">
+          <p class="api">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="FlatPatternProduct_computeAll.htm">computeAll</a></td>
-        <td class="api-list">Forces a recompute of the entire design. This is the equivalent of the "Compute All" command.</td>
+        <td class="api-list">
+          <p class="api">Forces a recompute of the entire design. This is the equivalent of the "Compute All" command.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="FlatPatternProduct_createConfiguredDesign.htm">createConfiguredDesign</a></td>
-        <td class="api-list">Converts this design into a configured design. The returned ConfigurationTable has a single row and no columns. You can use it to add columns and rows to define the configuration.</td>
+        <td class="api-list">
+          <p class="api">Converts this design into a configured design. The returned ConfigurationTable has a single row and no columns. You can use it to add columns and rows to define the configuration.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="FlatPatternProduct_createInterferenceInput.htm">createInterferenceInput</a></td>
-        <td class="api-list">Creates an InterferenceInput object. This object collects the entities and options that are used when calculating interference. To analyze interference you first create an InterferenceInput supplying the entities and set any other settings and then provide this object as input to the analyzeInterference method.</td>
+        <td class="api-list">
+          <p class="api">Creates an InterferenceInput object. This object collects the entities and options that are used when calculating interference. To analyze interference you first create an InterferenceInput supplying the entities and set any other settings and then provide this object as input to the analyzeInterference method.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="FlatPatternProduct_deleteEntities.htm">deleteEntities</a></td>
-        <td class="api-list">Deletes the specified set of entities that are associated with this product.</td>
+        <td class="api-list">
+          <p class="api">Deletes the specified set of entities that are associated with this product.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="FlatPatternProduct_deleteMe.htm">deleteMe</a></td>
-        <td class="api-list">Deletes this FlatPatternProduct and the flat pattern it contains.</td>
+        <td class="api-list">
+          <p class="api">Deletes this FlatPatternProduct and the flat pattern it contains.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="FlatPatternProduct_findAttributes.htm">findAttributes</a></td>
-        <td class="api-list">Find attributes attached to objects in this product that match the group and or attribute name. This does not find attributes attached directly to the Product or Document objects but finds the attributes attached to entities within the product.<br/><br/> The search string for both the groupName and attributeName arguments can be either an absolute name value, or a regular expression. With an absolute name, the search string must match the entire groupName or attributeName, including case. An empty string will match everything. For example if you have an attribute group named "MyStuff" that contains the attribute "Length1", using the search string "MyStuff" as the group name and "Length1" as the attribute name will find the attributes with those names. Searching for "MyStuff" as the group name and "" as the attribute name will find all attributes that have "MyStuff" as the group name.<br/><br/> Regular expressions provide a more flexible way of searching. To use a regular expression, prefix the input string for the groupName or attributeName arguments with "re:". The regular expression much match the entire group or attribute name. For example, if you have a group that contains attributes named "Length1", "Length2", "Width1", and "Width2" and want to find any of the length attributes you can use a regular expression using the string "re:Length.*". For more information on attributes see the Attributes topic in the user manual.</td>
+        <td class="api-list">
+          <p class="api">Find attributes attached to objects in this product that match the group and or attribute name. This does not find attributes attached directly to the Product or Document objects but finds the attributes attached to entities within the product.<br/><br/> The search string for both the groupName and attributeName arguments can be either an absolute name value, or a regular expression. With an absolute name, the search string must match the entire groupName or attributeName, including case. An empty string will match everything. For example if you have an attribute group named "MyStuff" that contains the attribute "Length1", using the search string "MyStuff" as the group name and "Length1" as the attribute name will find the attributes with those names. Searching for "MyStuff" as the group name and "" as the attribute name will find all attributes that have "MyStuff" as the group name.<br/><br/> Regular expressions provide a more flexible way of searching. To use a regular expression, prefix the input string for the groupName or attributeName arguments with "re:". The regular expression much match the entire group or attribute name. For example, if you have a group that contains attributes named "Length1", "Length2", "Width1", and "Width2" and want to find any of the length attributes you can use a regular expression using the string "re:Length.*". For more information on attributes see the Attributes topic in the user manual.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="FlatPatternProduct_findEntityByToken.htm">findEntityByToken</a></td>
-        <td class="api-list">Returns the entities associated with the provided token. The return is an array of entities. In most cases an array containing a single entity will be returned but there are cases where more than one entity can be returned. An example of this is where a token is obtained from a face and subsequent modeling operations cause the face to be split into two or more pieces. All of the faces that represent the original face will be returned with the first face being the most logical match to the original face.</td>
+        <td class="api-list">
+          <p class="api">Returns the entities associated with the provided token. The return is an array of entities. In most cases an array containing a single entity will be returned but there are cases where more than one entity can be returned. An example of this is where a token is obtained from a face and subsequent modeling operations cause the face to be split into two or more pieces. All of the faces that represent the original face will be returned with the first face being the most logical match to the original face.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="FlatPatternProduct_modifyParameters.htm">modifyParameters</a></td>
-        <td class="api-list">Modifies the values of many parameters all at once. Changing them all at once is more efficient than modifying them one at a time.</td>
+        <td class="api-list">
+          <p class="api">Modifies the values of many parameters all at once. Changing them all at once is more efficient than modifying them one at a time.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="FlatPatternProduct_physicalProperties.htm">physicalProperties</a></td>
-        <td class="api-list">Returns the PhysicalProperties object that has properties for getting the area, density, mass, volume, moments, etc for a collection of 3D solid objects.</td>
+        <td class="api-list">
+          <p class="api">Returns the PhysicalProperties object that has properties for getting the area, density, mass, volume, moments, etc for a collection of 3D solid objects.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="FlatPatternProduct_setGroundPlaneOffset.htm">setGroundPlaneOffset</a></td>
-        <td class="api-list">Sets the offset of the ground plane. If the isAdpativeGroundPlane property is true, setting the offset will change isAdaptiveGroundPlane to false. The offset value is an offset relative to the current position of the ground plane.<br/><br/> One example of how this method can be used is to set the isAdaptiveGroundPlane property to true, which will position the ground plane at the bottom of the part. By doing this, you know the current position of the ground plane. Then calling this method with a value of -2.0 will reposition the ground plane 2 cm below the part. If you called this method again with a value of -1.0 the ground plane will be moved an additional 1 cm away from the geometry, since this is defining an offset relative to the current position.</td>
+        <td class="api-list">
+          <p class="api">Sets the offset of the ground plane. If the isAdpativeGroundPlane property is true, setting the offset will change isAdaptiveGroundPlane to false. The offset value is an offset relative to the current position of the ground plane.<br/><br/> One example of how this method can be used is to set the isAdaptiveGroundPlane property to true, which will position the ground plane at the bottom of the part. By doing this, you know the current position of the ground plane. Then calling this method with a value of -2.0 will reposition the ground plane 2 cm below the part. If you called this method again with a value of -1.0 the ground plane will be moved an additional 1 cm away from the geometry, since this is defining an offset relative to the current position.</p>
+        </td>
       </tr>
     </Table>
     <h2 class="api">
@@ -308,7 +338,7 @@
           <td align="left">
                 © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(FlatPatternProduct%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(FlatPatternProduct%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

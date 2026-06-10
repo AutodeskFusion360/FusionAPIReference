@@ -36,7 +36,9 @@
               Derived from: <a href="Feature.htm">Feature</a> Object
             <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Features/DeleteFaceFeature.h&gt;<h2 class="api">
           Description
-        </h2>Object that represents an existing DeleteFaceFeature object in a design.<br/><br/> The SurfaceDeleteFaceFeature and DeleteFaceFeature differ in that the SurfaceDeleteFaceFeature can delete any face without any restrictions. If the body is a solid, it will become a surface when the first face is deleted. The specified face is deleted without any other changes being made to the body. The DeleteFaceFeature deletes the specified face and also modifies the other faces in the body to heal or fill in the area of the deleted face. This means that a solid body will remain solid.<h2 class="api">
+        </h2>
+    <p class="api">Object that represents an existing DeleteFaceFeature object in a design.<br/><br/> The SurfaceDeleteFaceFeature and DeleteFaceFeature differ in that the SurfaceDeleteFaceFeature can delete any face without any restrictions. If the body is a solid, it will become a surface when the first face is deleted. The specified face is deleted without any other changes being made to the body. The DeleteFaceFeature deletes the specified face and also modifies the other faces in the body to heal or fill in the area of the deleted face. This means that a solid body will remain solid.</p>
+    <h2 class="api">
             Methods
           </h2>
     <Table class="api-list">
@@ -50,19 +52,27 @@
       </tr>
       <tr>
         <td class="api-list"><a href="DeleteFaceFeature_classType.htm">classType</a></td>
-        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+        <td class="api-list">
+          <p class="api">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="DeleteFaceFeature_createForAssemblyContext.htm">createForAssemblyContext</a></td>
-        <td class="api-list">Creates or returns a proxy for the native object - i.e. a new object that represents this object but adds the assembly context defined by the input occurrence.</td>
+        <td class="api-list">
+          <p class="api">Creates or returns a proxy for the native object - i.e. a new object that represents this object but adds the assembly context defined by the input occurrence.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="DeleteFaceFeature_deleteMe.htm">deleteMe</a></td>
-        <td class="api-list">Deletes the feature. This works for both parametric and non-parametric features.</td>
+        <td class="api-list">
+          <p class="api">Deletes the feature. This works for both parametric and non-parametric features.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="DeleteFaceFeature_dissolve.htm">dissolve</a></td>
-        <td class="api-list">Dissolves the feature so that the feature information is lost and only the B-Rep geometry defined by the feature remains. This is only valid for non-parametric features.</td>
+        <td class="api-list">
+          <p class="api">Dissolves the feature so that the feature information is lost and only the B-Rep geometry defined by the feature remains. This is only valid for non-parametric features.</p>
+        </td>
       </tr>
     </Table>
     <h2 class="api">
@@ -162,7 +172,7 @@
           <td align="left">
                 © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(DeleteFaceFeature%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(DeleteFaceFeature%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

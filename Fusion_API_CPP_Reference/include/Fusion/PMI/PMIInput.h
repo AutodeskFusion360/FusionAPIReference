@@ -78,6 +78,9 @@ public:
     /// Gets and sets the length of the leader line extension in cm.
     /// 
     /// This value extends the leader line in the direction determined by the perpendicular setting.
+    /// 
+    /// A positive value results in an obtuse angle between the leader line and the line to the geometry;
+    /// A negative value results in an acute angle.
     double leaderLineExtension() const;
     bool leaderLineExtension(double value);
 

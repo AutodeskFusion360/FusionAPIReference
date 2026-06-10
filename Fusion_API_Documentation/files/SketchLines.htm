@@ -36,7 +36,9 @@
               Derived from: <a href="Base.htm">Base</a> Object
             <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Sketch/SketchLines.h&gt;<h2 class="api">
           Description
-        </h2>The collection of lines in a sketch. This provides access to the existing lines and supports the methods to create new lines.<h2 class="api">
+        </h2>
+    <p class="api">The collection of lines in a sketch. This provides access to the existing lines and supports the methods to create new lines.</p>
+    <h2 class="api">
             Methods
           </h2>
     <Table class="api-list">
@@ -50,47 +52,69 @@
       </tr>
       <tr>
         <td class="api-list"><a href="SketchLines_addAngleChamfer.htm">addAngleChamfer</a></td>
-        <td class="api-list">Creates a chamfer between two sketch lines. In the case where the two input lines cross each other creating an "X" shape, this results in four quadrants where the chamfer can be placed. The point arguments are used to define which of the four quadrants the chamfer should be created in. The two points define which side of the two lines should be kept and the other end will be trimmed by the chamfer. The easiest way to use this is to use the end points of the lines on the side you want to keep. In the case where the lines don't intersect or connect at the end points, there is only one valid quadrant for the chamfer so the points are ignored.</td>
+        <td class="api-list">
+          <p class="api">Creates a chamfer between two sketch lines. In the case where the two input lines cross each other creating an "X" shape, this results in four quadrants where the chamfer can be placed. The point arguments are used to define which of the four quadrants the chamfer should be created in. The two points define which side of the two lines should be kept and the other end will be trimmed by the chamfer. The easiest way to use this is to use the end points of the lines on the side you want to keep. In the case where the lines don't intersect or connect at the end points, there is only one valid quadrant for the chamfer so the points are ignored.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="SketchLines_addByMidpoint.htm">addByMidpoint</a></td>
-        <td class="api-list">Creates a sketch line where the first point is the midpoint and the second point is one endpoint. The system automatically calculates the other endpoint to create a line where the first point is exactly at the midpoint.</td>
+        <td class="api-list">
+          <p class="api">Creates a sketch line where the first point is the midpoint and the second point is one endpoint. The system automatically calculates the other endpoint to create a line where the first point is exactly at the midpoint.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="SketchLines_addByTwoPoints.htm">addByTwoPoints</a></td>
-        <td class="api-list">Creates a sketch line between the two input points. The input points can be either existing SketchPoints or Point3D objects. If a SketchPoint is used the new line will be based on that sketch point and update if the sketch point is modified.</td>
+        <td class="api-list">
+          <p class="api">Creates a sketch line between the two input points. The input points can be either existing SketchPoints or Point3D objects. If a SketchPoint is used the new line will be based on that sketch point and update if the sketch point is modified.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="SketchLines_addCenterPointRectangle.htm">addCenterPointRectangle</a></td>
-        <td class="api-list">Creates four sketch lines representing a rectangle where the first point represents the center of the rectangle. The second point is the corner of the rectangle and can be either an existing SketchPoint or Point3D object. The four sketch lines are returned.</td>
+        <td class="api-list">
+          <p class="api">Creates four sketch lines representing a rectangle where the first point represents the center of the rectangle. The second point is the corner of the rectangle and can be either an existing SketchPoint or Point3D object. The four sketch lines are returned.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="SketchLines_addDistanceChamfer.htm">addDistanceChamfer</a></td>
-        <td class="api-list">Creates a chamfer between two sketch lines. In the case where the two input lines cross each other creating an "X" shape, this results in four quadrants where the chamfer can be placed. The point arguments are used to define which of the four quadrants the chamfer should be created in. The two points define which side of the two lines should be kept and the other end will be trimmed by the chamfer. The easiest way to use this is to use the end points of the lines on the side you want to keep. In the case where the lines don't intersect or connect at the end points, there is only one valid quadrant for the chamfer so the points are ignored.</td>
+        <td class="api-list">
+          <p class="api">Creates a chamfer between two sketch lines. In the case where the two input lines cross each other creating an "X" shape, this results in four quadrants where the chamfer can be placed. The point arguments are used to define which of the four quadrants the chamfer should be created in. The two points define which side of the two lines should be kept and the other end will be trimmed by the chamfer. The easiest way to use this is to use the end points of the lines on the side you want to keep. In the case where the lines don't intersect or connect at the end points, there is only one valid quadrant for the chamfer so the points are ignored.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="SketchLines_addEdgePolygon.htm">addEdgePolygon</a></td>
-        <td class="api-list">Creates a polygon where two points specify an edge of the polygon. By specifying an edge, the size and position of the polygon is also defined.</td>
+        <td class="api-list">
+          <p class="api">Creates a polygon where two points specify an edge of the polygon. By specifying an edge, the size and position of the polygon is also defined.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="SketchLines_addScribedPolygon.htm">addScribedPolygon</a></td>
-        <td class="api-list">Creates either an inscribed or circumscribed n-sided polygon.</td>
+        <td class="api-list">
+          <p class="api">Creates either an inscribed or circumscribed n-sided polygon.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="SketchLines_addThreePointRectangle.htm">addThreePointRectangle</a></td>
-        <td class="api-list">Creates four sketch lines representing a rectangle where the first two points are the base corners of the rectangle and the third point defines the height.</td>
+        <td class="api-list">
+          <p class="api">Creates four sketch lines representing a rectangle where the first two points are the base corners of the rectangle and the third point defines the height.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="SketchLines_addTwoPointRectangle.htm">addTwoPointRectangle</a></td>
-        <td class="api-list">Creates four sketch lines representing a rectangle where the two points are the opposing corners of the rectangle. The input points can be either existing SketchPoints or Point3D objects. If a SketchPoint is used the new lines will be based on that sketch point and update if the sketch point is modified.</td>
+        <td class="api-list">
+          <p class="api">Creates four sketch lines representing a rectangle where the two points are the opposing corners of the rectangle. The input points can be either existing SketchPoints or Point3D objects. If a SketchPoint is used the new lines will be based on that sketch point and update if the sketch point is modified.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="SketchLines_classType.htm">classType</a></td>
-        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+        <td class="api-list">
+          <p class="api">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="SketchLines_item.htm">item</a></td>
-        <td class="api-list">Function that returns the specified sketch line using an index into the collection.</td>
+        <td class="api-list">
+          <p class="api">Function that returns the specified sketch line using an index into the collection.</p>
+        </td>
       </tr>
     </Table>
     <h2 class="api">
@@ -175,7 +199,7 @@
           <td align="left">
                 © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(SketchLines%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(SketchLines%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

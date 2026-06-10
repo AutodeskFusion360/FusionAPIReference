@@ -28,7 +28,9 @@
 #endif
 
 namespace adsk { namespace sim {
+    class SimDefaultUnits;
     class SimulationModels;
+    class SimUnitsManager;
     class Studies;
     class Study;
 }}
@@ -56,6 +58,14 @@ public:
     /// Returns the newly created Study object or null if the creation failed.
     core::Ptr<Study> createStudy(const std::string& name, StudyTypes type) const;
 
+    /// Returns the simulation units manager for this simulations document. Use this to evaluate
+    /// expressions, convert between units, and format values.
+    core::Ptr<SimUnitsManager> simulationUnitsManager() const;
+
+    /// Returns object managing simulation default units for this simulations document.
+    /// Use this to read and modify the active unit system and individual default units.
+    core::Ptr<SimDefaultUnits> simulationDefaultUnits() const;
+
     ADSK_SIM_SIMULATIONS_API static const char* classType();
     ADSK_SIM_SIMULATIONS_API const char* objectType() const override;
     ADSK_SIM_SIMULATIONS_API void* queryInterface(const char* id) const override;
@@ -67,6 +77,8 @@ private:
     virtual SimulationModels* simulationModels_raw() const = 0;
     virtual Studies* studies_raw() const = 0;
     virtual Study* createStudy_raw(const char* name, StudyTypes type) const = 0;
+    virtual SimUnitsManager* simulationUnitsManager_raw() const = 0;
+    virtual SimDefaultUnits* simulationDefaultUnits_raw() const = 0;
 };
 
 // Inline wrappers
@@ -86,6 +98,18 @@ inline core::Ptr<Studies> Simulations::studies() const
 inline core::Ptr<Study> Simulations::createStudy(const std::string& name, StudyTypes type) const
 {
     core::Ptr<Study> res = createStudy_raw(name.c_str(), type);
+    return res;
+}
+
+inline core::Ptr<SimUnitsManager> Simulations::simulationUnitsManager() const
+{
+    core::Ptr<SimUnitsManager> res = simulationUnitsManager_raw();
+    return res;
+}
+
+inline core::Ptr<SimDefaultUnits> Simulations::simulationDefaultUnits() const
+{
+    core::Ptr<SimDefaultUnits> res = simulationDefaultUnits_raw();
     return res;
 }
 }// namespace sim

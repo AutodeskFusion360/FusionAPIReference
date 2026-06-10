@@ -36,7 +36,9 @@
               Derived from: <a href="Component.htm">Component</a> Object
             <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/SheetMetal/FlatPatternComponent.h&gt;<h2 class="api">
           Description
-        </h2>This object represent the root component of a FlatPatternProduct. The flatPattern property will return a FlatPattern object that provides access to the resulting flat pattern geometry.<h2 class="api">
+        </h2>
+    <p class="api">This object represent the root component of a FlatPatternProduct. The flatPattern property will return a FlatPattern object that provides access to the resulting flat pattern geometry.</p>
+    <h2 class="api">
             Methods
           </h2>
     <Table class="api-list">
@@ -50,55 +52,87 @@
       </tr>
       <tr>
         <td class="api-list"><a href="FlatPatternComponent_allOccurrencesByComponent.htm">allOccurrencesByComponent</a></td>
-        <td class="api-list">Returns all occurrences, at any level of the assembly, that reference the specified component. The returned list is read-only.</td>
+        <td class="api-list">
+          <p class="api">Returns all occurrences, at any level of the assembly, that reference the specified component. The returned list is read-only.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="FlatPatternComponent_boundingBox2.htm">boundingBox2</a></td>
-        <td class="api-list">Returns the bounding box of the specified entity types within the component.</td>
+        <td class="api-list">
+          <p class="api">Returns the bounding box of the specified entity types within the component.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="FlatPatternComponent_classType.htm">classType</a></td>
-        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+        <td class="api-list">
+          <p class="api">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="FlatPatternComponent_createBRepEdgeProfile.htm">createBRepEdgeProfile</a></td>
-        <td class="api-list">Creates a profile based on the outside open edges of a BRepFace.</td>
+        <td class="api-list">
+          <p class="api">Creates a profile based on the outside open edges of a BRepFace.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="FlatPatternComponent_createFlatPattern.htm">createFlatPattern</a></td>
-        <td class="api-list">Creates a flat pattern of the sheet metal folded body. The isSheetMetal property of the BRepBody object can be used to determine if a particular body can be flattened. Creating a flat pattern will fail if a flat pattern already exists in the component. You can determine if a flat pattern already exists by checking if the flatPattern property returns a FlatPattern object or null.</td>
+        <td class="api-list">
+          <p class="api">Creates a flat pattern of the sheet metal folded body. The isSheetMetal property of the BRepBody object can be used to determine if a particular body can be flattened. Creating a flat pattern will fail if a flat pattern already exists in the component. You can determine if a flat pattern already exists by checking if the flatPattern property returns a FlatPattern object or null.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="FlatPatternComponent_createOpenProfile.htm">createOpenProfile</a></td>
-        <td class="api-list">Creates an open profile based on the input curve(s).</td>
+        <td class="api-list">
+          <p class="api">Creates an open profile based on the input curve(s).</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="FlatPatternComponent_createThumbnail.htm">createThumbnail</a></td>
-        <td class="api-list">Creates a thumbnail for this component. This can be a root component to get a thumbnail that represents the associated file, or it can be any sub component to get a thumbnail of a subset of the complete assembly or individual parts.</td>
+        <td class="api-list">
+          <p class="api">Creates a thumbnail for this component. This can be a root component to get a thumbnail that represents the associated file, or it can be any sub component to get a thumbnail of a subset of the complete assembly or individual parts.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="FlatPatternComponent_findBRepUsingPoint.htm">findBRepUsingPoint</a></td>
-        <td class="api-list">Finds all the entities of the specified type at the specified location.</td>
+        <td class="api-list">
+          <p class="api">Finds all the entities of the specified type at the specified location.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="FlatPatternComponent_findBRepUsingRay.htm">findBRepUsingRay</a></td>
-        <td class="api-list">Finds all the B-Rep entities that are intersected by the specified ray. This can return BRepFace, BrepEdge, and BRepVertex objects.</td>
+        <td class="api-list">
+          <p class="api">Finds all the B-Rep entities that are intersected by the specified ray. This can return BRepFace, BrepEdge, and BRepVertex objects.</p>
+        </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="FlatPatternComponent_findMeshUsingRay.htm">findMeshUsingRay</a></td>
+        <td class="api-list">
+          <p class="api">Finds all mesh bodies that are intersected by the specified ray.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="FlatPatternComponent_getPhysicalProperties.htm">getPhysicalProperties</a></td>
-        <td class="api-list">Returns the PhysicalProperties object that has properties for getting the area, density, mass, volume, moments, etc. of this component.</td>
+        <td class="api-list">
+          <p class="api">Returns the PhysicalProperties object that has properties for getting the area, density, mass, volume, moments, etc. of this component.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="FlatPatternComponent_occurrencesByComponent.htm">occurrencesByComponent</a></td>
-        <td class="api-list">Returns all occurrences at the top-level of this component that reference the specified component. The returned list is read-only.</td>
+        <td class="api-list">
+          <p class="api">Returns all occurrences at the top-level of this component that reference the specified component. The returned list is read-only.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="FlatPatternComponent_saveCopyAs.htm">saveCopyAs</a></td>
-        <td class="api-list">Performs a Save Copy As on this component. This saves the specified component as a new document in the specified location.</td>
+        <td class="api-list">
+          <p class="api">Performs a Save Copy As on this component. This saves the specified component as a new document in the specified location.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="FlatPatternComponent_transformOccurrences.htm">transformOccurrences</a></td>
-        <td class="api-list">Transforms a set of occurrences in one step. This provides better performance than transforming them one at a time. This method is only valid when called on the root component because Fusion flattens the entire assembly structure when manipulating the assembly so all transforms are relative to the root component.</td>
+        <td class="api-list">
+          <p class="api">Transforms a set of occurrences in one step. This provides better performance than transforming them one at a time. This method is only valid when called on the root component because Fusion flattens the entire assembly structure when manipulating the assembly so all transforms are relative to the root component.</p>
+        </td>
       </tr>
     </Table>
     <h2 class="api">
@@ -123,7 +157,7 @@
       </tr>
       <tr>
         <td class="api-list"><a href="FlatPatternComponent_allAssemblyConstraints.htm">allAssemblyConstraints</a></td>
-        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Returns all assembly constraints in this component and any sub components. The assembly constraints returned are all in the context of this component so any joints in sub components will be proxies. This is primarily useful when used from the root component because Fusion flattens the assembly structure, including joints, when manipulating an assembly.</td>
+        <td class="api-list">Returns all assembly constraints in this component and any sub components. The assembly constraints returned are all in the context of this component so any joints in sub components will be proxies. This is primarily useful when used from the root component because Fusion flattens the assembly structure, including joints, when manipulating an assembly.</td>
       </tr>
       <tr>
         <td class="api-list"><a href="FlatPatternComponent_allJointOrigins.htm">allJointOrigins</a></td>
@@ -350,6 +384,10 @@
         <td class="api-list"><mark>**RETIRED**</mark> Returns the collection of tangent relationships associated with this component.</td>
       </tr>
       <tr>
+        <td class="api-list"><a href="FlatPatternComponent_userCoordinateSystems.htm">userCoordinateSystems</a></td>
+        <td class="api-list"><img src="../images/TestTubeSmall.png" alt="Preview"></img>Returns the user coordinate systems collection associated with this component. This provides access to the existing user coordinate systems and supports the creation of new user coordinate systems.</td>
+      </tr>
+      <tr>
         <td class="api-list"><a href="FlatPatternComponent_xConstructionAxis.htm">xConstructionAxis</a></td>
         <td class="api-list">Returns the X origin construction axis.</td>
       </tr>
@@ -384,7 +422,7 @@
           <td align="left">
                 © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(FlatPatternComponent%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(FlatPatternComponent%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

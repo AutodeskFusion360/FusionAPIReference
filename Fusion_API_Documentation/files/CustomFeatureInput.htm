@@ -43,7 +43,9 @@
 		    </p>
     <h2 class="api">
           Description
-        </h2>This class defines the methods and properties that pertain to the definition of a Ruled Surface feature.<h2 class="api">
+        </h2>
+    <p class="api">This class defines the methods and properties that pertain to the definition of a Ruled Surface feature.</p>
+    <h2 class="api">
             Methods
           </h2>
     <Table class="api-list">
@@ -57,19 +59,27 @@
       </tr>
       <tr>
         <td class="api-list"><a href="CustomFeatureInput_addCustomParameter.htm">addCustomParameter</a></td>
-        <td class="api-list">Defines the information needed to create a new custom parameter that will be associated with this feature. A custom parameter appears as a model parameter and will be listed as a child of the custom feature in the parameter dialog. The custom feature will automatically have a dependency on this parameter.</td>
+        <td class="api-list">
+          <p class="api">Defines the information needed to create a new custom parameter that will be associated with this feature. A custom parameter appears as a model parameter and will be listed as a child of the custom feature in the parameter dialog. The custom feature will automatically have a dependency on this parameter.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="CustomFeatureInput_addDependency.htm">addDependency</a></td>
-        <td class="api-list">Adds an entity or parameter this feature is dependent on. This is used by Fusion to know when to recompute this feature and to control the behavior of the feature's node in the timeline.</td>
+        <td class="api-list">
+          <p class="api">Adds an entity or parameter this feature is dependent on. This is used by Fusion to know when to recompute this feature and to control the behavior of the feature's node in the timeline.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="CustomFeatureInput_classType.htm">classType</a></td>
-        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+        <td class="api-list">
+          <p class="api">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="CustomFeatureInput_setStartAndEndFeatures.htm">setStartAndEndFeatures</a></td>
-        <td class="api-list">Sets the start and end features that the custom feature will group. A "feature" in this case is an object that is visible in the timeline, such as modeling features, sketches, and construction geometry. The custom feature will group the input start and end features and all features between them in the timeline.<br/><br/> You can determine the current start and end features using the features property and use the first and last features returned. If the custom feature contains a single feature, you can use the same feature for both the start and end feature arguments. You can also use null for both arguments to remove all features from a custom feature. The custom feature still exists but will be empty, and the features will be displayed individually within the timeline.</td>
+        <td class="api-list">
+          <p class="api">Sets the start and end features that the custom feature will group. A "feature" in this case is an object that is visible in the timeline, such as modeling features, sketches, and construction geometry. The custom feature will group the input start and end features and all features between them in the timeline.<br/><br/> You can determine the current start and end features using the features property and use the first and last features returned. If the custom feature contains a single feature, you can use the same feature for both the start and end feature arguments. You can also use null for both arguments to remove all features from a custom feature. The custom feature still exists but will be empty, and the features will be displayed individually within the timeline.</p>
+        </td>
       </tr>
     </Table>
     <h2 class="api">
@@ -109,7 +119,7 @@
           <td align="left">
                 © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(CustomFeatureInput%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(CustomFeatureInput%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

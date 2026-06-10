@@ -9,7 +9,7 @@
 //////////////////////////////////////////////////////////////////////////////
 
 #pragma once
-#include "StructuralLoadDirectional.h"
+#include "Load.h"
 
 // THIS CLASS WILL BE VISIBLE TO AN API CLIENT.
 // THIS HEADER FILE WILL BE GENERATED FROM NIDL.
@@ -26,14 +26,22 @@
 #endif
 
 namespace adsk { namespace sim {
+    class VectorDefinition;
+}}
+
+namespace adsk { namespace sim {
 
 /// !!!!! Warning !!!!!
 /// ! This is hidden and not officially supported
 /// !!!!! Warning !!!!!
 /// 
-/// Object that represents a Bearing load.
-class BearingLoad : public StructuralLoadDirectional {
+/// Object that represents a bearing load.
+class BearingLoad : public Load {
 public:
+
+    /// Gets and sets the force vector definition.
+    core::Ptr<VectorDefinition> force() const;
+    bool force(const core::Ptr<VectorDefinition>& value);
 
     ADSK_SIM_BEARINGLOAD_API static const char* classType();
     ADSK_SIM_BEARINGLOAD_API const char* objectType() const override;
@@ -43,12 +51,22 @@ public:
 private:
 
     // Raw interface
-
+    virtual VectorDefinition* force_raw() const = 0;
+    virtual bool force_raw(VectorDefinition* value) = 0;
 };
 
 // Inline wrappers
 
+inline core::Ptr<VectorDefinition> BearingLoad::force() const
+{
+    core::Ptr<VectorDefinition> res = force_raw();
+    return res;
+}
 
+inline bool BearingLoad::force(const core::Ptr<VectorDefinition>& value)
+{
+    return force_raw(value.get());
+}
 }// namespace sim
 }// namespace adsk
 

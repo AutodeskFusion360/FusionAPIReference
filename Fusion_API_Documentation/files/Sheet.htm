@@ -1,0 +1,194 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/Sheet.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="28/04/2026">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="Sheet">
+    <meta name="description" content="Sheet Object">
+    <meta name="topicid" content="GUID-E4CD4375-55E8-49C6-8D23-A4DAC245D250">
+    <meta name="language" content="ENU">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <title>Sheet Object
+			</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+				// This turns on the display of the copyright notice which is not visible by default.
+				// Because the head is removed when used in the web help, this function will only exists
+				// when the chm help is being created.
+				window.onload = function() {
+				copyrightElement = document.getElementById('CopyrightNotice');
+				copyrightElement.style.display = 'block';
+				};
+			</script></head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Sheet Object <img src="../images/TestTubeLarge.png" alt="Preview"></h1>
+              Derived from: <a href="EcadObject.htm">EcadObject</a> Object
+            <br>Defined in namespace "adsk::electron" and the header file is &lt;Electron/Sheets/Sheet.h&gt;<p class="api-preview"><img src="../images/TestTubeSmall.png" alt="Preview">This functionality is provided as a preview
+				of intended future API capabilities. You are encouraged to use it and report any problems or suggestions using the
+				<a href="https://forums.autodesk.com/t5/fusion-360-api-and-scripts/bd-p/22">Fusion API and Scripts</a> forum.<br><br>
+	
+                Because this is a preview of future functionality, there is the possibility that it will change, which will possibly
+		        break any existing programs that use this functionality. Because of that, you should never deliver any programs that use
+		        any preview capabilities. For a distributed program, you should wait until it has moved from preview to released state.
+		    </p>
+    <h2 class="api">
+          Description
+        </h2>
+    <p class="api">Represents one page of a multi-sheet schematic.</p>
+    <h2 class="api">
+            Methods
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sheet_classType.htm">classType</a></td>
+        <td class="api-list">
+          <p class="api">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</p>
+        </td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Properties
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list" style="width:1%;">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sheet_area.htm">area</a></td>
+        <td class="api-list">Area bounds of this sheet.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sheet_busses.htm">busses</a></td>
+        <td class="api-list">Buses on this sheet.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sheet_circles.htm">circles</a></td>
+        <td class="api-list">Circle shapes on this sheet.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sheet_description.htm">description</a></td>
+        <td class="api-list">Human-readable description of this sheet.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sheet_dimensions.htm">dimensions</a></td>
+        <td class="api-list">Dimension annotations on this sheet.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sheet_frames.htm">frames</a></td>
+        <td class="api-list">Frame elements on this sheet.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sheet_headline.htm">headline</a></td>
+        <td class="api-list">First line of the description, used as a short title.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sheet_id.htm">id</a></td>
+        <td class="api-list">Identifier of the object.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sheet_instances.htm">instances</a></td>
+        <td class="api-list">Placed instances (component references) on this sheet.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sheet_isValid.htm">isValid</a></td>
+        <td class="api-list">Indicates if this object is still valid, i.e. hasn't been deleted or some other action done to invalidate the reference.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sheet_moduleInstances.htm">moduleInstances</a></td>
+        <td class="api-list">Module instances (reusable circuit blocks) on this sheet.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sheet_name.htm">name</a></td>
+        <td class="api-list">Assigned name of this sheet.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sheet_nets.htm">nets</a></td>
+        <td class="api-list">Nets (logical connections) on this sheet.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sheet_number.htm">number</a></td>
+        <td class="api-list">Sequential sheet number (1-based).</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sheet_objectType.htm">objectType</a></td>
+        <td class="api-list">This property is supported by all objects in the API and returns a string that contains the full name (namespace::objecttype) describing the type of the object.<br/><br/> It's often useful to use this in combination with the classType method to see if an object is a certain type. For example: if obj.objectType == adsk.core.Point3D.classType():</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sheet_parts.htm">parts</a></td>
+        <td class="api-list">Component definitions (parts) on this sheet.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sheet_polyShapes.htm">polyShapes</a></td>
+        <td class="api-list">Polygon shapes on this sheet.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sheet_rectangles.htm">rectangles</a></td>
+        <td class="api-list">Rectangle shapes on this sheet.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sheet_texts.htm">texts</a></td>
+        <td class="api-list">Text annotations on this sheet.</td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="Sheet_wires.htm">wires</a></td>
+        <td class="api-list">Wire segments on this sheet.</td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Accessed From
+          </h2><a href="Sheets_item.htm">Sheets.item</a><h2 class="api">
+            Samples
+          </h2>
+    <Table class="api-list">
+      <tr class="header">
+        <td class="api-list">
+                Name
+              </td>
+        <td class="api-list">
+                Description
+              </td>
+      </tr>
+      <tr>
+        <td class="api-list"><a href="ElectronicsSchematicSummarySample_Sample.htm">Electronics Schematic Summary Sample</a></td>
+        <td class="api-list"><p>Demonstrates reading the open electronics schematic: document title, sheet and connectivity overview, per-sheet component and geometry counts, electrical rule check results, and the linked PCB when the design includes one.</p></td>
+      </tr>
+    </Table>
+    <h2 class="api">
+            Version
+          </h2>
+        Introduced in version May 2026<br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2026 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(Sheet%20Object%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

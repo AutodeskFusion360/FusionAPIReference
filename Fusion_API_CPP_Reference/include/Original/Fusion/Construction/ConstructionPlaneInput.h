@@ -167,6 +167,18 @@ public:
     /// Returns true if construction plane definition is successful.
     bool setByOffsetThroughPoint(const core::Ptr<core::Base>& planarEntity, const core::Ptr<core::Base>& point);
 
+    /// This input method is for creating a construction plane through the axis inferred
+    /// from a cylindrical or conical curved face at a specified angle. This can result in
+    /// a parametric or non-parametric construction plane depending on whether the parent
+    /// component is parametric or is a direct edit component.
+    /// curvedFace : The cylindrical or conical curved face from which the axis of rotation is inferred.
+    /// angle : The angle at which to create the plane.
+    /// planarEntity : The planar face or construction plane the angle is measured from.
+    /// A zero angle creates a plane whose normal is aligned with this plane's normal,
+    /// so the result is deterministic when an explicit planarEntity is provided.
+    /// Returns true if the construction plane definition is successful.
+    bool setByAngleOnCurvedFace(const core::Ptr<core::Base>& curvedFace, const core::Ptr<core::ValueInput>& angle, const core::Ptr<core::Base>& planarEntity);
+
     ADSK_FUSION_CONSTRUCTIONPLANEINPUT_API static const char* classType();
     ADSK_FUSION_CONSTRUCTIONPLANEINPUT_API const char* objectType() const override;
     ADSK_FUSION_CONSTRUCTIONPLANEINPUT_API void* queryInterface(const char* id) const override;
@@ -189,6 +201,7 @@ private:
     virtual core::Base* targetBaseOrFormFeature_raw() const = 0;
     virtual bool targetBaseOrFormFeature_raw(core::Base* value) = 0;
     virtual bool setByOffsetThroughPoint_raw(core::Base* planarEntity, core::Base* point) = 0;
+    virtual bool setByAngleOnCurvedFace_raw(core::Base* curvedFace, core::ValueInput* angle, core::Base* planarEntity) = 0;
 };
 
 // Inline wrappers
@@ -272,6 +285,12 @@ inline bool ConstructionPlaneInput::targetBaseOrFormFeature(const core::Ptr<core
 inline bool ConstructionPlaneInput::setByOffsetThroughPoint(const core::Ptr<core::Base>& planarEntity, const core::Ptr<core::Base>& point)
 {
     bool res = setByOffsetThroughPoint_raw(planarEntity.get(), point.get());
+    return res;
+}
+
+inline bool ConstructionPlaneInput::setByAngleOnCurvedFace(const core::Ptr<core::Base>& curvedFace, const core::Ptr<core::ValueInput>& angle, const core::Ptr<core::Base>& planarEntity)
+{
+    bool res = setByAngleOnCurvedFace_raw(curvedFace.get(), angle.get(), planarEntity.get());
     return res;
 }
 }// namespace fusion

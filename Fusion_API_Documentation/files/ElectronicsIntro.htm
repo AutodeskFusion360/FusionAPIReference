@@ -1,0 +1,108 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/ElectronicsIntro_UM.htm#!">
+    <meta name="contextid" content="ElectronicsIntro_UM">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="5/8/2026">
+    <meta name="user-comments" content="enable">
+    <meta name="description" content="">
+    <meta name="topicid" content="GUID-0FE1139D-E391-CED2-CB25-06840192E03E">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Introduction to the Electronics API</title>
+    <link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+	<link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"/>
+	<script type="text/javascript" src="/view/clientframework/client.js"><!--filler--></script>
+	<script>
+	  window.onload = function() {
+		copyrightElement = document.getElementById('CopyrightNotice');
+		copyrightElement.style.display = 'block';
+	  };
+	</script>
+</head>
+<body>
+<link rel="stylesheet" href="../Style/APIHelp.css">
+<link rel="stylesheet" href="../Style/prism.css">
+<script src="../Scripts/prism.js"><!--filler--></script>
+<style>
+	pre.line-numbers [aria-hidden=true]
+	{
+		display: block!important;
+	}
+</style>
+
+<h2 class="api">Introduction to the Electronics API</h2>
+<h3 class="api">Overview</h3>
+<p Class="api">The Fusion Electronics API is designed to give you a high level of automation over schematics, PCB layouts, and component libraries. Electronics functionality is defined in the <strong><code>adsk.electron</code></strong> library.</p>
+<p Class="api">This release of the Electronics API is in <strong>preview</strong> and is <strong>read-only</strong> for modifying the design: you can read design data, navigate the object model, convert coordinates, and export to supported formats. Write operations (creating or editing layout content) are not part of the public API surface in this release.</p>
+<p Class="api">The object model is based on <a href="https://help.autodesk.com/view/fusion360/ENU/?guid=ECD-USER-LANG-REF">User Language Programs (ULP)</a>—the same board, schematic, library, and connectivity concepts appear in both. The main differences are that you write <strong>Python</strong> or <strong>C++</strong> instead of the ULP language, and you obtain your context through the standard Fusion API pattern.</p>
+<p Class="api">For general scripting—creating scripts and add-ins, language behavior, and debugging—see the <a href="https://help.autodesk.com/cloudhelp/ENU/Fusion-360-API/">Fusion 360 API documentation</a>.</p>
+<a name="importing-the-electronics-api"></a>
+<h3 class="api">Importing the Electronics API</h3>
+<h4 class="api">Python</h4>
+<p Class="api">Import <code>adsk.electron</code> into your script or add-in. If you use <strong>Create</strong> in the <strong>Scripts and Add-Ins</strong> dialog, you will typically start from a template that already imports <code>adsk.core</code>; add the Electronics namespace.</p>
+<pre><code class="language-python"># Imports for an Electronics script.
+import adsk.core
+import adsk.electron
+import traceback
+</code></pre>
+<h4 class="api">C++</h4>
+<p Class="api">If you use <strong>Create</strong> from the Scripts and Add-Ins Manager to start a C++ add-in, your generated project includes the usual Fusion <strong>include</strong> paths and <code>using</code> directives for the namespaces you select. Add the <strong>Electronics</strong> headers and the <strong><code>adsk::electron</code></strong> types the same way as <code>adsk::core</code>, <code>adsk::fusion</code> or <code>adsk::cam</code></p>
+<a name="accessing-the-electronics-product-within-a-fusion-document"></a>
+<h3 class="api">Accessing the electronics products</h3>
+<p Class="api">The <strong>active</strong> product is what the current workspace is editing. For Electronics, the active product is a schematic, a board, a library, or an electronics design project, depending on which document and workspace the user has open.</p>
+<p Class="api">When you need data through the API, you first get the <strong><code>Product</code></strong> that holds that data, then <strong>cast</strong> it to the Electronics class you expect (<code>Schematic</code>, <code>Board</code>, <code>Library</code>, or <code>EcadDesign</code>).</p>
+<h4 class="api">When the correct workspace is active</h4>
+<p Class="api">If the user is already in the Electronics workspace that matches the data you need, <strong>Application.activeProduct</strong> is the right product. The example below casts <code>activeProduct</code> to each Electronics type in turn. Only the cast that matches the active product returns a non-<code>None</code> value.</p>
+<pre><code class="language-python"># Get the application.
+app = adsk.core.Application.get()
+ui = app.userInterface
+
+# Get the active product and try Electronics casts.
+product = app.activeProduct
+schematic = adsk.electron.Schematic.cast(product)
+board = adsk.electron.Board.cast(product)
+library = adsk.electron.Library.cast(product)
+ecadDesign = adsk.electron.EcadDesign.cast(product)
+
+# Only one of the four is non-None for a given active product, depending on document type and workspace.
+if board is None and schematic is None and library is None and ecadDesign is None:
+    ui.messageBox(&quot;The active product is not an Electronics type this script expects.&quot;)
+</code></pre>
+<h3 class="api">Electronics collections</h3>
+<p Class="api">The Electronics API uses the same collection pattern you see in CAM and elsewhere in Fusion: a <strong><code>count</code></strong> and an <strong><code>item(index)</code></strong> method, with a <strong>0-based</strong> index. For example, <strong><code>sheets</code></strong>, <strong><code>libraries</code></strong>, and <strong><code>variantDefs</code></strong> (among many others) all follow this shape.</p>
+<p Class="api">The example below walks every sheet in a schematic. The same <code>count</code> / <code>item</code> pattern applies to other collections on <strong><code>Schematic</code></strong>, <strong><code>Board</code></strong>, and <strong><code>Library</code></strong>.</p>
+<pre><code class="language-python"># Get the first sheet, then the next, until you have traversed the collection.
+for i in range(int(schematic.sheets.count)):
+    sheet = schematic.sheets.item(i)
+    # ... use sheet
+</code></pre>
+<h3 class="api">Related topics</h3>
+<ul>
+<li><a href="./ElectronicsDataModel_UM.htm">Electronics data model</a> — how the object hierarchy is organized and how to walk it</li>
+<li><a href="./ElectronicsUnits_UM.htm">Unit conversion</a> — internal editor units and the <strong><code>Units</code></strong> helpers</li>
+<li><a href="./ElectronicsExport_UM.htm">Export</a> — exporting to EAGLE 9.6.2 (<code>.brd</code>, <code>.sch</code>, <code>.lbr</code>)</li>
+</ul>
+<br />
+<br />
+<div id="CopyrightNotice" style="display:none;">
+  <hr />
+  <table width="100%" style="font-size:15">
+	<tr>
+	  <td align="left">
+		&copy; Copyright 2026 Autodesk, Inc.
+	  </td>
+	  <td align="right">
+		<a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(ElectronicsIntro)">Comment on this page.</a>
+	  </td>
+	</tr>
+  </table>
+</div></body>
+</html>

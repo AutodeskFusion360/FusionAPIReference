@@ -65,7 +65,7 @@ public:
     /// 
     /// This is useful for finding PMIImportedDimension that reference specific geometric features.
     /// entities : An array of core.Base objects that represent the geometric entities to search for associated PMI. These can be BRepFace,
-    /// BRepEdge or BRepVertex objects. The function will return the PMIImportedDimension that references any of these entities in their geometric associations.
+    /// BRepEdge, BRepVertex, or BRepBody objects. The function will return the PMIImportedDimension that references any of these entities in their geometric associations.
     /// 
     /// For example, a Diameter Dimension PMI associated with a cylindrical face.
     /// types : An optional array of PMITypes that filters the results to include only PMI that matches the type presented in the specified types. If an empty array or null

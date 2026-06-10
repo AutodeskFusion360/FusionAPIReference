@@ -366,6 +366,29 @@ enum ConfigurationFeatureAspectTypes
     ClearanceHoleFitFeatureAspectType
 };
 
+/// !!!!! Warning !!!!!
+/// ! This is hidden and not officially supported
+/// !!!!! Warning !!!!!
+/// 
+/// The different types of values that a ConfigurationRuleConstraint can be.
+enum ConfigurationRuleConstraintValueTypes
+{
+    /// Indicates the ConfigurationRuleConstraint is a string value.
+    StringConstraintValueType,
+    /// Indicates the ConfigurationRuleConstraint is a real value.
+    RealConstraintValueType,
+    /// Indicates the ConfigurationRuleConstraint is a boolean value.
+    BooleanConstraintValueType,
+    /// Indicates the ConfigurationRuleConstraint is an integer value.
+    IntegerConstraintValueType,
+    /// Indicates the ConfigurationRuleConstraint is a real number range.
+    RealRangeConstraintValueType,
+    /// Indicates the ConfigurationRuleConstraint is an integer range.
+    IntegerRangeConstraintValueType,
+    /// Indicates the ConfigurationRuleConstraint is an array of string values.
+    StringArrayConstraintValueType
+};
+
 /// Enum that defines the valid combinations of thread columns that can be configured.
 enum ConfigurationThreadColumns
 {
@@ -707,10 +730,6 @@ enum FilletFeatureTypes
     FullRoundFilletFeatureType = 2
 };
 
-/// !!!!! Warning !!!!!
-/// ! This is in preview state; please see the help for more info
-/// !!!!! Warning !!!!!
-/// 
 /// The different types of hems that can be created.
 enum HemFeatureDefinitionTypes
 {
@@ -1842,6 +1861,17 @@ enum PointContainment
     UnknownPointContainment
 };
 
+/// List of the various types of recording mode.
+enum RecordingModeTypes
+{
+    /// Start from time 0.
+    RecordingModeStartFromTime0,
+    /// Overlapped by 0.5 seconds.
+    RecordingModeOverlappedByHalfSeconds,
+    /// Sequential.
+    RecordingModeSequential
+};
+
 /// Types that indicate the output aspect ratio when rendering a scene. This is
 /// used with in-canvas rendering, to allow you to define a different aspect
 /// ratio than the current active viewport.
@@ -2343,6 +2373,44 @@ enum UntrimLoopTypes
     InternalLoopsUntrimType,
     /// Untrim manually selected loops
     ManualLoopsUntrimType
+};
+
+/// List of the different types of ways that geometry for a user coordinate system can be defined.
+enum UserCoordinateSystemGeometryTypes
+{
+    /// User coordinate system geometry defined by a construction point.
+    ConstructionPointUserCoordinateSystemGeometryType,
+    /// User coordinate system geometry defined by a sketch point.
+    SketchPointUserCoordinateSystemGeometryType,
+    /// User coordinate system geometry defined by a vertex.
+    VertexUserCoordinateSystemGeometryType,
+    /// User coordinate system geometry defined by an edge.
+    EdgeUserCoordinateSystemGeometryType,
+    /// User coordinate system geometry defined by a sketch curve.
+    SketchCurveUserCoordinateSystemGeometryType,
+    /// User coordinate system geometry defined by a profile.
+    ProfileUserCoordinateSystemGeometryType,
+    /// User coordinate system geometry defined by a planar face.
+    PlanarFaceUserCoordinateSystemGeometryType,
+    /// User coordinate system geometry defined by a non-planar face.
+    NonPlanarFaceUserCoordinateSystemGeometryType,
+    /// User coordinate system geometry defined by a construction plane.
+    ConstructionPlaneUserCoordinateSystemGeometryType,
+    /// User coordinate system geometry defined by a construction axis.
+    ConstructionAxisUserCoordinateSystemGeometryType
+};
+
+/// List of the different key point positions that can be used when defining the geometry for a user coordinate system.
+enum UserCoordinateSystemKeyPointTypes
+{
+    /// The keypoint is at the start of the edge or curve.
+    StartUserCoordinateSystemKeyPointType,
+    /// The keypoint is at the middle of the edge or curve.
+    MiddleUserCoordinateSystemKeyPointType,
+    /// The keypoint is at the end of the edge or curve.
+    EndUserCoordinateSystemKeyPointType,
+    /// The keypoint is at the center of a circular or elliptical edge or curve.
+    CenterUserCoordinateSystemKeyPointType
 };
 
 /// Specifies which of the four view corners custom graphics will be drawn in relation to. The

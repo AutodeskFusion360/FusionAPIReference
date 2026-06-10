@@ -36,7 +36,9 @@
               Derived from: <a href="Feature.htm">Feature</a> Object
             <br>Defined in namespace "adsk::fusion" and the header file is &lt;Fusion/Features/HoleFeature.h&gt;<h2 class="api">
           Description
-        </h2>Object that represents an existing hole feature in a design.<h2 class="api">
+        </h2>
+    <p class="api">Object that represents an existing hole feature in a design.</p>
+    <h2 class="api">
             Methods
           </h2>
     <Table class="api-list">
@@ -50,79 +52,117 @@
       </tr>
       <tr>
         <td class="api-list"><a href="HoleFeature_classType.htm">classType</a></td>
-        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+        <td class="api-list">
+          <p class="api">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="HoleFeature_createForAssemblyContext.htm">createForAssemblyContext</a></td>
-        <td class="api-list">Creates or returns a proxy for the native object - i.e. a new object that represents this object but adds the assembly context defined by the input occurrence.</td>
+        <td class="api-list">
+          <p class="api">Creates or returns a proxy for the native object - i.e. a new object that represents this object but adds the assembly context defined by the input occurrence.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="HoleFeature_deleteMe.htm">deleteMe</a></td>
-        <td class="api-list">Deletes the feature. This works for both parametric and non-parametric features.</td>
+        <td class="api-list">
+          <p class="api">Deletes the feature. This works for both parametric and non-parametric features.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="HoleFeature_dissolve.htm">dissolve</a></td>
-        <td class="api-list">Dissolves the feature so that the feature information is lost and only the B-Rep geometry defined by the feature remains. This is only valid for non-parametric features.</td>
+        <td class="api-list">
+          <p class="api">Dissolves the feature so that the feature information is lost and only the B-Rep geometry defined by the feature remains. This is only valid for non-parametric features.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="HoleFeature_setAllExtent.htm">setAllExtent</a></td>
-        <td class="api-list">Defines the extent of the hole to be through-all. The direction can be either positive, negative.<br/><br/> To use this method, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</td>
+        <td class="api-list">
+          <p class="api">Defines the extent of the hole to be through-all. The direction can be either positive, negative.<br/><br/> To use this method, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="HoleFeature_setDistanceExtent.htm">setDistanceExtent</a></td>
-        <td class="api-list">Defines the depth of the hole using a specific distance.<br/><br/> To use this method, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</td>
+        <td class="api-list">
+          <p class="api">Defines the depth of the hole using a specific distance.<br/><br/> To use this method, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="HoleFeature_setOneSideToExtent.htm">setOneSideToExtent</a></td>
-        <td class="api-list">Sets the extent of the hole to be from the sketch plane to the specified "to" face.<br/><br/> To use this method, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</td>
+        <td class="api-list">
+          <p class="api">Sets the extent of the hole to be from the sketch plane to the specified "to" face.<br/><br/> To use this method, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="HoleFeature_setPositionAtCenter.htm">setPositionAtCenter</a></td>
-        <td class="api-list">Redefines the position of the hole at the center of a circular or elliptical edge of the face.<br/><br/> To use this method, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</td>
+        <td class="api-list">
+          <p class="api">Redefines the position of the hole at the center of a circular or elliptical edge of the face.<br/><br/> To use this method, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="HoleFeature_setPositionByPlaneAndOffsets.htm">setPositionByPlaneAndOffsets</a></td>
-        <td class="api-list">Redefines the orientation of the hole using a planar face or construction plane. The position of the hole is defined by the distance from one or two edges.<br/><br/> To use this method, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</td>
+        <td class="api-list">
+          <p class="api">Redefines the orientation of the hole using a planar face or construction plane. The position of the hole is defined by the distance from one or two edges.<br/><br/> To use this method, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="HoleFeature_setPositionByPoint.htm">setPositionByPoint</a></td>
-        <td class="api-list">Redefines the position of a the hole using a point. The point can be a vertex on the face or it can be a Point3D object to define any location on the face. If a Point3D object is provided it will be projected onto the plane along the planes normal. The orientation of the hole is defined by the planar face or construction plane. If a vertex is used, the position of the hole is associative to that vertex. If a Point3D object is used the position of the hole is not associative.<br/><br/> To use this method, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</td>
+        <td class="api-list">
+          <p class="api">Redefines the position of a the hole using a point. The point can be a vertex on the face or it can be a Point3D object to define any location on the face. If a Point3D object is provided it will be projected onto the plane along the planes normal. The orientation of the hole is defined by the planar face or construction plane. If a vertex is used, the position of the hole is associative to that vertex. If a Point3D object is used the position of the hole is not associative.<br/><br/> To use this method, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="HoleFeature_setPositionBySketchPoint.htm">setPositionBySketchPoint</a></td>
-        <td class="api-list">Redefines the position and orientation of the hole using a sketch point.<br/><br/> To use this method, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</td>
+        <td class="api-list">
+          <p class="api">Redefines the position and orientation of the hole using a sketch point.<br/><br/> To use this method, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="HoleFeature_setPositionBySketchPoints.htm">setPositionBySketchPoints</a></td>
-        <td class="api-list">Redefines the position and orientation of the hole using a set of points.<br/><br/> To use this method, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</td>
+        <td class="api-list">
+          <p class="api">Redefines the position and orientation of the hole using a set of points.<br/><br/> To use this method, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="HoleFeature_setPositionOnEdge.htm">setPositionOnEdge</a></td>
-        <td class="api-list">Redefines the position and orientation of the hole to be on the start, end or center of an edge.<br/><br/> To use this method, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</td>
+        <td class="api-list">
+          <p class="api">Redefines the position and orientation of the hole to be on the start, end or center of an edge.<br/><br/> To use this method, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="HoleFeature_setToClearanceHole.htm">setToClearanceHole</a></td>
-        <td class="api-list">Sets the hole to be a clearance hole of the size specified by the ClearanceHoleInfo object.</td>
+        <td class="api-list">
+          <p class="api">Sets the hole to be a clearance hole of the size specified by the ClearanceHoleInfo object.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="HoleFeature_setToCounterbore.htm">setToCounterbore</a></td>
-        <td class="api-list">Calling this method will change the hole to a counterbore hole.<br/><br/> To use this method, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</td>
+        <td class="api-list">
+          <p class="api">Calling this method will change the hole to a counterbore hole.<br/><br/> To use this method, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="HoleFeature_setToCountersink.htm">setToCountersink</a></td>
-        <td class="api-list">Calling this method will change the hole to a countersink hole.<br/><br/> To use this method, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</td>
+        <td class="api-list">
+          <p class="api">Calling this method will change the hole to a countersink hole.<br/><br/> To use this method, you need to position the timeline marker to immediately before this feature. This can be accomplished using the following code: thisFeature.timelineObject.rollTo(True)</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="HoleFeature_setToSimple.htm">setToSimple</a></td>
-        <td class="api-list">Calling this method will change the hole to a simple hole.</td>
+        <td class="api-list">
+          <p class="api">Calling this method will change the hole to a simple hole.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="HoleFeature_setToSimpleHole.htm">setToSimpleHole</a></td>
-        <td class="api-list">This method sets the hole's tap to be "simple," which means that the hole will not have any tap and will be a simple hole.</td>
+        <td class="api-list">
+          <p class="api">This method sets the hole's tap to be "simple," which means that the hole will not have any tap and will be a simple hole.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="HoleFeature_setToTappedHole.htm">setToTappedHole</a></td>
-        <td class="api-list">Sets the hole to be a straight or tapered tapped hole of the size specified by the ThreadInfo object.</td>
+        <td class="api-list">
+          <p class="api">Sets the hole to be a straight or tapered tapped hole of the size specified by the ThreadInfo object.</p>
+        </td>
       </tr>
     </Table>
     <h2 class="api">
@@ -311,7 +351,7 @@
           <td align="left">
                 © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(HoleFeature%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(HoleFeature%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

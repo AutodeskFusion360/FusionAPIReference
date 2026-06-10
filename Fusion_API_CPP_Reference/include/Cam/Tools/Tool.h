@@ -30,6 +30,7 @@
 namespace adsk { namespace cam {
     class CAMParameters;
     class ToolPresets;
+    class ToolReference;
 }}
 
 namespace adsk { namespace cam {
@@ -77,6 +78,33 @@ public:
     /// In the UI, the same information is displayed in the operation tree or in the tool library table.
     std::string description() const;
 
+    /// !!!!! Warning !!!!!
+    /// ! This is hidden and not officially supported
+    /// !!!!! Warning !!!!!
+    /// 
+    /// True if the tool has an associated hub tool.
+    bool isReferencedTool() const;
+
+    /// !!!!! Warning !!!!!
+    /// ! This is hidden and not officially supported
+    /// !!!!! Warning !!!!!
+    /// 
+    /// When the tool has an associated hub tool (the isReferencedTool property returns true), this will
+    /// return the object that represents the relationship to the associated hub tool. Through this tool reference
+    /// object you can modify the version and get other information associated with the reference.
+    /// 
+    /// This property will fail if the tool has no associated hub tool.
+    core::Ptr<ToolReference> referenceTool() const;
+
+    /// !!!!! Warning !!!!!
+    /// ! This is hidden and not officially supported
+    /// !!!!! Warning !!!!!
+    /// 
+    /// Clears the association between this document tool and its hub tool.
+    /// Call updateTool on the document library to persist the change.
+    /// Returns true if the link was successfully cleared.
+    bool breakLink();
+
     ADSK_CAM_TOOL_API static const char* classType();
     ADSK_CAM_TOOL_API const char* objectType() const override;
     ADSK_CAM_TOOL_API void* queryInterface(const char* id) const override;
@@ -92,6 +120,9 @@ private:
     ADSK_CAM_TOOL_API static Tool* createFromP21_raw(const char* p21);
     ADSK_CAM_TOOL_API static Tool* createFromP21File_raw(const char* filename);
     virtual char* description_raw() const = 0;
+    virtual bool isReferencedTool_raw() const = 0;
+    virtual ToolReference* referenceTool_raw() const = 0;
+    virtual bool breakLink_raw() = 0;
     virtual void placeholderTool0() {}
     virtual void placeholderTool1() {}
     virtual void placeholderTool2() {}
@@ -117,9 +148,6 @@ private:
     virtual void placeholderTool22() {}
     virtual void placeholderTool23() {}
     virtual void placeholderTool24() {}
-    virtual void placeholderTool25() {}
-    virtual void placeholderTool26() {}
-    virtual void placeholderTool27() {}
 };
 
 // Inline wrappers
@@ -177,6 +205,24 @@ inline std::string Tool::description() const
         res = p;
         core::DeallocateArray(p);
     }
+    return res;
+}
+
+inline bool Tool::isReferencedTool() const
+{
+    bool res = isReferencedTool_raw();
+    return res;
+}
+
+inline core::Ptr<ToolReference> Tool::referenceTool() const
+{
+    core::Ptr<ToolReference> res = referenceTool_raw();
+    return res;
+}
+
+inline bool Tool::breakLink()
+{
+    bool res = breakLink_raw();
     return res;
 }
 }// namespace cam

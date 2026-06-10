@@ -1,0 +1,210 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="topic-type" content="reference-adsk">
+    <meta name="helpsystempath" content="/view/NINVFUS/ENU/">
+    <link rel="canonical" href="/cloudhelp/ENU/Fusion-360-API/files/ElectronicsBoardSummarySample.htm#!">
+    <meta name="product" content="NINVFUS">
+    <meta name="release" content="NA">
+    <meta name="book" content="Developer">
+    <meta name="component" content="Fusion-360-API">
+    <meta name="created" content="">
+    <meta name="user-comments" content="enable">
+    <meta name="contextid" content="ElectronicsBoardSummarySample_Sample">
+    <meta name="description" content="Electronics Board Summary Sample Sample">
+    <meta name="topicid" content="GUID-2F8C4E91-6A03-4D7B-B2E1-9C0D5A3F7E42">
+    <meta name="experiencelevel" content="expert">
+    <meta name="audience" content="programmer">
+    <meta name="language" content="ENU">
+    <title>Electronics Board Summary Sample</title>
+    <link rel="stylesheet" href="../Style/jquery-ui.css"><script src="../Scripts/jquery-1.11.1.js"></script><script src="../Scripts/jquery-ui.js"></script><link rel="stylesheet" type="text/css" href="../Style/APIHelp-chm.css">
+    <link rel="stylesheet" type="text/css" href="/view/clientframework/client.css"><script type="text/javascript" src="/view/clientframework/client.js"></script><script>
+          // This turns on the display of the copyright notice which is not visible by default.
+          // Because the head is removed when used in the web help, this function will only exists
+          // when the chm help is being created.
+          window.onload = function() {
+          copyrightElement = document.getElementById('CopyrightNotice');
+          copyrightElement.style.display = 'block';
+          };
+        </script><script>
+          $(function() {
+          $( "#tabs" ).tabs();
+          });
+        </script></head>
+  <body><script>
+          function copyCode(language) {
+          // Get the pre element for the specified language.
+          var preElement = document.getElementById(language);
+
+          // Get the text from the element and copy it to the clipboard.
+          var preText = preElement.innerText;
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+          if (isIE)
+          {
+            window.clipboardData.setData('Text', preText);
+          }
+          else
+          {
+            navigator.clipboard.writeText(preText);
+          }
+
+          //alert("Code copied to clipboard");
+          }
+        </script><link rel="stylesheet" type="text/css" href="../Style/APIHelp.css">
+    <h1 class="api">Electronics Board Summary Sample</h1>
+    <h2 class="api">
+          Description
+        </h2><p>Demonstrates reading the open PCB layout: board title, placed component and copper network overview, breakdown of geometry, layer stack, design rule check results, and the linked schematic when the design includes one.</p><h2 class="api">
+          Code Samples
+        </h2>
+    <div id="tabs">
+      <ul>
+        <li><a href="#C++">C++</a></li>
+        <li><a href="#Python">Python</a></li>
+      </ul>
+      <div id="C++" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('C++_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="C++_code">#include &lt;Core/CoreAll.h&gt;
+#include &lt;Electron/ElectronAll.h&gt;
+
+#include &lt;string&gt;
+
+using namespace adsk::core;
+using namespace adsk::electron;
+
+extern "C" XI_EXPORT bool run(const char* context)
+{
+    Ptr&lt;Application&gt; app = Application::get();
+    if (!app)
+        return false;
+
+    Ptr&lt;Product&gt; product = app-&gt;activeProduct();
+    if (!product)
+    {
+        app-&gt;log("No active product.");
+        return false;
+    }
+
+    Ptr&lt;Board&gt; board = product-&gt;cast&lt;Board&gt;();
+    if (!board)
+    {
+        app-&gt;log("Active product is not a board.");
+        return false;
+    }
+
+    app-&gt;log("Board: " + board-&gt;name());
+    app-&gt;log("  headline: " + board-&gt;headline());
+
+    app-&gt;log(
+        "  elements: " + std::to_string(board-&gt;elements()-&gt;count()) + "  copper networks: " +
+        std::to_string(board-&gt;signals()-&gt;count()) + "  layers: " + std::to_string(board-&gt;layers()-&gt;count()));
+
+    Ptr&lt;Signals&gt; sigs = board-&gt;signals();
+    app-&gt;log("  per copper network:");
+    for (size_t i = 0; i &lt; sigs-&gt;count(); ++i)
+    {
+        Ptr&lt;Signal&gt; sig = sigs-&gt;item(i);
+        const size_t traces = sig-&gt;wires()-&gt;count();
+        const size_t pours = sig-&gt;polyPours()-&gt;count();
+        const size_t v = sig-&gt;vias()-&gt;count();
+        const size_t contacts = sig-&gt;contactRefs()-&gt;count();
+        const size_t tot = traces + pours + v + contacts;
+        app-&gt;log("    " + sig-&gt;name());
+        app-&gt;log(
+            "      traces=" + std::to_string(traces) + " pours=" + std::to_string(pours) +
+            " vias=" + std::to_string(v) + " contacts=" + std::to_string(contacts) + " total=" + std::to_string(tot));
+    }
+
+    Ptr&lt;Layers&gt; lays = board-&gt;layers();
+    app-&gt;log("  per layer:");
+    for (size_t i = 0; i &lt; lays-&gt;count(); ++i)
+    {
+        Ptr&lt;Layer&gt; ly = lays-&gt;item(i);
+        app-&gt;log(
+            "    [" + std::to_string(ly-&gt;number()) + "] " + ly-&gt;name() + " used=" +
+            std::string(ly-&gt;used() ? "True" : "False") + " visible=" + std::string(ly-&gt;visible() ? "True" : "False"));
+    }
+
+    app-&gt;log("  design rule check errors: " + std::to_string(board-&gt;errors()-&gt;count()));
+
+    Ptr&lt;Schematic&gt; sch = board-&gt;linkedSchematic();
+    if (sch)
+        app-&gt;log("  linked schematic: " + sch-&gt;name());
+
+    return true;
+}</pre>
+      </div>
+      <div id="Python" class="api-code">
+        <table width="100%" style="font-size:15">
+          <tr>
+            <td align="right"><button onclick="copyCode('Python_code')" class="copy-code">Copy Code</button></td>
+          </tr>
+        </table>
+        <pre class="api-code" id="Python_code"><span style="color:blue"># For this sample script to run, the active Fusion document must have an electronics PCB layout as the active product.</span>
+
+import adsk.core, adsk.electron, traceback
+
+
+def run(context):
+    app = adsk.core.Application.get()
+    try:
+        board = adsk.electron.Board.cast(app.activeProduct)
+        if not board:
+            app.log("Active product is not a board.")
+            return
+
+        app.log("Board: {}".format(board.name))
+        app.log("  headline: {}".format(board.headline))
+
+        app.log("  components: {}  copper networks: {}  layers: {}".format(
+            board.elements.count, board.signals.count, board.layers.count))
+
+        sigs = board.signals
+        app.log("  per copper network:")
+        for i in range(sigs.count):
+            sig = sigs.item(i)
+            traces = sig.wires.count
+            pours = sig.polyPours.count
+            v = sig.vias.count
+            contacts = sig.contactRefs.count
+            tot = traces + pours + v + contacts
+            app.log("    {}".format(sig.name))
+            app.log(
+                "      traces={} pours={} vias={} contacts={} total={}".format(
+                    traces, pours, v, contacts, tot))
+
+        lays = board.layers
+        app.log("  per layer:")
+        for i in range(lays.count):
+            ly = lays.item(i)
+            app.log("    [{}] {} used={} visible={}".format(
+                ly.number, ly.name, ly.used, ly.visible))
+
+        app.log("  design rule check errors: {}".format(board.errors.count))
+
+        sch = board.linkedSchematic
+        if sch:
+            app.log("  linked schematic: {}".format(sch.name))
+    except Exception:
+        app.log("Failed:\n{}".format(traceback.format_exc()))</pre>
+      </div>
+    </div><br><br><div id="CopyrightNotice" style="display:none;">
+      <hr>
+      <table width="100%" style="font-size:15">
+        <tr>
+          <td align="left">
+                © Copyright 2026 Autodesk, Inc.
+              </td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(ElectronicsBoardSummarySample%20Sample%20Help%20Topic)">Comment on this page.</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

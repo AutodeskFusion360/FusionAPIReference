@@ -36,7 +36,9 @@
               Derived from: <a href="Base.htm">Base</a> Object
             <br>Defined in namespace "adsk::core" and the header file is &lt;Core/Application/Application.h&gt;<h2 class="api">
           Description
-        </h2>The top-level object that represents the Fusion application (all of Fusion). This provides access to the modeler and files.<h2 class="api">
+        </h2>
+    <p class="api">The top-level object that represents the Fusion application (all of Fusion). This provides access to the modeler and files.</p>
+    <h2 class="api">
             Methods
           </h2>
     <Table class="api-list">
@@ -50,35 +52,51 @@
       </tr>
       <tr>
         <td class="api-list"><a href="Application_classType.htm">classType</a></td>
-        <td class="api-list">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</td>
+        <td class="api-list">
+          <p class="api">Static function that all classes support that returns the type of the class as a string. The returned string matches the string returned by the objectType property. For example if you have a reference to an object and you want to check if it's a SketchLine you can use myObject.objectType == fusion.SketchLine.classType().</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Application_executeTextCommand.htm">executeTextCommand</a></td>
-        <td class="api-list">Executes the input text command.</td>
+        <td class="api-list">
+          <p class="api">Executes the input text command.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Application_fireCustomEvent.htm">fireCustomEvent</a></td>
-        <td class="api-list">Fires a previously registered custom event. This method is used by a worker thread or another add-in to fire an event to the add-in that registered the event and is running in the primary thread.<br/><br/> Firing a custom event does not immediately result in the event handler being called. When a custom event is fired the event is put on the queue and will be handled in the main thread when Fusion is idle.</td>
+        <td class="api-list">
+          <p class="api">Fires a previously registered custom event. This method is used by a worker thread or another add-in to fire an event to the add-in that registered the event and is running in the primary thread.<br/><br/> Firing a custom event does not immediately result in the event handler being called. When a custom event is fired the event is put on the queue and will be handled in the main thread when Fusion is idle.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Application_get.htm">get</a></td>
-        <td class="api-list">Access to the root Application object.</td>
+        <td class="api-list">
+          <p class="api">Access to the root Application object.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Application_getLastError.htm">getLastError</a></td>
-        <td class="api-list">Returns information about the last error that occurred.</td>
+        <td class="api-list">
+          <p class="api">Returns information about the last error that occurred.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Application_log.htm">log</a></td>
-        <td class="api-list">Logs messages to either the TEXT COMMAND window or the Fusion app log file.</td>
+        <td class="api-list">
+          <p class="api">Logs messages to either the TEXT COMMAND window or the Fusion app log file.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Application_registerCustomEvent.htm">registerCustomEvent</a></td>
-        <td class="api-list">This registers a new CustomEvent which is intended to be primarily used to send an event from a worker thread you've created back to your add-in running in the primary thread. It's also possible that two add-ins could be cooperating and another add-in can fire the event to your add-in.</td>
+        <td class="api-list">
+          <p class="api">This registers a new CustomEvent which is intended to be primarily used to send an event from a worker thread you've created back to your add-in running in the primary thread. It's also possible that two add-ins could be cooperating and another add-in can fire the event to your add-in.</p>
+        </td>
       </tr>
       <tr>
         <td class="api-list"><a href="Application_unregisterCustomEvent.htm">unregisterCustomEvent</a></td>
-        <td class="api-list">Unregisters an existing CustomEvent.</td>
+        <td class="api-list">
+          <p class="api">Unregisters an existing CustomEvent.</p>
+        </td>
       </tr>
     </Table>
     <h2 class="api">
@@ -323,7 +341,7 @@
           <td align="left">
                 © Copyright 2026 Autodesk, Inc.
               </td>
-          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20April 2026%20API%20Help%20(Application%20Object%20Help%20Topic)">Comment on this page.</a></td>
+          <td align="right"><a href="mailto:mfg.api.help.comments@autodesk.com?subject=Fusion%20May 2026%20API%20Help%20(Application%20Object%20Help%20Topic)">Comment on this page.</a></td>
         </tr>
       </table>
     </div>

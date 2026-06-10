@@ -89,17 +89,9 @@ public:
     double toolChangePosition() const;
     bool toolChangePosition(double value);
 
-    /// !!!!! Warning !!!!!
-    /// ! This is in preview state; please see the help for more info
-    /// !!!!! Warning !!!!!
-    /// 
     /// Specifies the axis moves continuously.
     void useContinuousResolution();
 
-    /// !!!!! Warning !!!!!
-    /// ! This is in preview state; please see the help for more info
-    /// !!!!! Warning !!!!!
-    /// 
     /// Specifies the discrete step size used for axis movement.
     /// The step size should be greater than zero.
     /// Returns NaN if no step size is set or the axis move is configured for

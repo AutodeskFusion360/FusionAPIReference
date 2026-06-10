@@ -40,6 +40,10 @@ public:
     bool removeRigidBodyModes() const;
     bool removeRigidBodyModes(bool value);
 
+    /// The value of contact detection tolerance for solids used for automatic contacts generation
+    double contactDetectionTolerance() const;
+    bool contactDetectionTolerance(double value);
+
     ADSK_SIM_GENERALSETTINGS_API static const char* classType();
     ADSK_SIM_GENERALSETTINGS_API const char* objectType() const override;
     ADSK_SIM_GENERALSETTINGS_API void* queryInterface(const char* id) const override;
@@ -50,6 +54,8 @@ private:
     // Raw interface
     virtual bool removeRigidBodyModes_raw() const = 0;
     virtual bool removeRigidBodyModes_raw(bool value) = 0;
+    virtual double contactDetectionTolerance_raw() const = 0;
+    virtual bool contactDetectionTolerance_raw(double value) = 0;
 };
 
 // Inline wrappers
@@ -63,6 +69,17 @@ inline bool GeneralSettings::removeRigidBodyModes() const
 inline bool GeneralSettings::removeRigidBodyModes(bool value)
 {
     return removeRigidBodyModes_raw(value);
+}
+
+inline double GeneralSettings::contactDetectionTolerance() const
+{
+    double res = contactDetectionTolerance_raw();
+    return res;
+}
+
+inline bool GeneralSettings::contactDetectionTolerance(double value)
+{
+    return contactDetectionTolerance_raw(value);
 }
 }// namespace sim
 }// namespace adsk
